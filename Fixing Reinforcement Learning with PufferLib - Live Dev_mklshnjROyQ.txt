@@ -1,0 +1,3479 @@
+Kind: captions
+Language: en
+okay we are
+okay we are
+live uh why am I streaming on a Sunday I
+live uh why am I streaming on a Sunday I
+have no idea
+have no idea
+but I felt like doing a bit of
+but I felt like doing a bit of
+work and I figured I may as well stream
+work and I figured I may as well stream
+it not going to be doing stuff all day
+it not going to be doing stuff all day
+today um just like want to start on a
+today um just like want to start on a
+few
+few
+things yeah
+things yeah
+so there's still some unsolved problems
+so there's still some unsolved problems
+here but I at the same time I want to
+here but I at the same time I want to
+start thinking
+about a minimal implementation of
+about a minimal implementation of
+carbs so I'm just going to start
+carbs so I'm just going to start
+scrolling through here and seeing what
+scrolling through here and seeing what
+stuff I think we w't
+stuff I think we w't
+need okay a million dumb Imports
+need okay a million dumb Imports
+that's dozen lines of imports at least
+that's dozen lines of imports at least
+it'll be gone
+okay crazy transformation
+weird a lot of that's not going to be
+needed search scales yes
+one be stuff can
+go okay this is just super convoluted
+go okay this is just super convoluted
+logic
+no idea why this is a thing
+over sampling here is kind of
+crazy can't sample a candidate
+uh so this is true
+actually what does this mean
+that that's
+bizarre okay s yeah
+bizarre okay s yeah
+fine
+get prefer groups with multi
+samples wait
+what single sample can only be better if
+what single sample can only be better if
+it is is better than the max the
+it is is better than the max the
+previous
+previous
+group multi- sample group can be higher
+group multi- sample group can be higher
+can be better if the mean is higher
+okay quantel
+transform herf
+transform herf
+plot duplicated all this code
+that's all that's in
+that's all that's in
+here these other ones we will
+here these other ones we will
+um oh actually there's yeah there's just
+um oh actually there's yeah there's just
+expect
+expect
+Improvement but this for instance
+these are not not terrible
+actually I think they're named poorly
+okay let's see what else I'm haven't
+okay let's see what else I'm haven't
+seen get
+resample non-conservative version so we
+resample non-conservative version so we
+can
+resample we specifically want I say
+and then let's see what they did here
+and then let's see what they did here
+they
+they
+[Music]
+[Music]
+did failed to count so they did do some
+did failed to count so they did do some
+good
+good
+logging for
+so you know they
+so you know they
+actually I got to give them some credit
+actually I got to give them some credit
+here because when I'm looking at what a
+here because when I'm looking at what a
+lot of the code is for uh it's not as
+lot of the code is for uh it's not as
+bad as I originally thought they still
+bad as I originally thought they still
+have way more code than they need and I
+have way more code than they need and I
+think that that's probably why they're
+think that that's probably why they're
+so confused here and why there are so
+so confused here and why there are so
+many things that are just like I don't
+many things that are just like I don't
+know
+know
+hazy
+hazy
+like things here don't make sense some
+like things here don't make sense some
+decisions seem poorly motivated and I
+decisions seem poorly motivated and I
+think it's just if you had half this
+think it's just if you had half this
+amount of code um you know things would
+amount of code um you know things would
+be clearer so I think that's what I'm
+be clearer so I think that's what I'm
+going to just start on doing
+I think we'll just do this directly in
+I think we'll just do this directly in
+puffer live as well so so what I'll do
+puffer live as well so so what I'll do
+then
+is oh
+actually one thing I want to do first
+actually one thing I want to do first
+here before we start
+this I want to see if we can
+this I want to see if we can
+um just real quick
+um just real quick
+grab some hypers from the latest sweep
+grab some hypers from the latest sweep
+so we run an experiment
+so we run an experiment
+while this is
+happening this is our latest sweep
+progress so we'll just take
+where's my quy
+what the
+what the
+hell
+hello
+hello
+environment oh
+still no all right I don't know what you
+still no all right I don't know what you
+doing Neptune I'll just click it like
+doing Neptune I'll just click it like
+this and hope it doesn't lag too bad
+think I like this one the
+best I really need to be able to filter
+best I really need to be able to filter
+this
+though is see the UI FES
+out there now it works
+896 there we
+896 there we
+are here's the chart for this
+are here's the chart for this
+one this is very
+one this is very
+good we'll just go grab the
+prams 14896
+there we are
+let's see how different the progams are
+let's see how different the progams are
+for
+for
+this okay substantially lower learning
+this okay substantially lower learning
+rate
+rate
+interesting the
+interesting the
+score uh let's not forget the N Pam
+score uh let's not forget the N Pam
+here even lower at 512 is
+interesting so that's a very slow uh
+interesting so that's a very slow uh
+very slow run it's still
+300K entropy coefficient has been taken
+300K entropy coefficient has been taken
+all the way down to the minimum
+value
+value
+Lambda is a little higher which is odd a
+Lambda is a little higher which is odd a
+gamma being higher oh no it's not odd
+gamma being higher oh no it's not odd
+yeah these are longer Maps this makes
+yeah these are longer Maps this makes
+perfect sense this is like a text
+perfect sense this is like a text
+book exactly what you would
+book exactly what you would
+expect mini batch
+expect mini batch
+size 16k but it says four mini batches I
+believe what do you pass in here you do
+believe what do you pass in here you do
+pass in mini batch size
+pass in mini batch size
+right yeah you pass in mini bat
+size yeah you don't passing num
+uh so we can actually get rid of
+that mini batch size gets passed in is
+that mini batch size gets passed in is
+this it's actually probably one of the
+this it's actually probably one of the
+things that made it difficult but we can
+things that made it difficult but we can
+get rid of
+get rid of
+that total time step this
+that total time step this
+is 180
+is 180
+mil upd dep box of
+four and I think that's about it
+B
+size I did it for the ones with
+size I did it for the ones with
+extremely low mini batches it looks
+like that's fine we'll leave it alone
+like that's fine we'll leave it alone
+for now we'll just not sweep this
+one okay
+one okay
+okay well hey
+welcome puffer grid
+crin and we'll let this run in the
+background while we work on other
+things so now we have this Baseline up
+things so now we have this Baseline up
+and running we can go work on our hyper
+and running we can go work on our hyper
+pram sweep
+pram sweep
+stuff I think I'm going to make
+stuff I think I'm going to make
+this yeah of
+this yeah of
+course
+course
+IG well what's
+IG if you're here for RL stuff then yeah
+sure for
+we're going to take all of
+these oops
+this is not getting
+imported puffer
+imported puffer
+lib so let's see the main uh the main
+lib so let's see the main uh the main
+stuff we're going to want
+this up to the
+top carbs
+top carbs
+prms basically done hugging face some of
+prms basically done hugging face some of
+the lectures of David
+the lectures of David
+Silvers let me see is the hugg and face
+Silvers let me see is the hugg and face
+course
+course
+good I think Costa was involved which
+good I think Costa was involved which
+means it should
+means it should
+be good cost is like the best he's
+be good cost is like the best he's
+awesome I've worked with him quite a bit
+awesome I've worked with him quite a bit
+in the
+in the
+past oh yeah this is
+good yeah this is very
+good yeah this is very
+nice okay so the only thing really
+nice okay so the only thing really
+missing from here
+missing from here
+is some
+is some
+formalism uh let me just ask you are you
+formalism uh let me just ask you are you
+for what purpose are you looking to get
+for what purpose are you looking to get
+into reinforcement learning are you
+into reinforcement learning are you
+interested in getting into the science
+interested in getting into the science
+side of RL are you trying to build stuff
+side of RL are you trying to build stuff
+are you trying to use this at work like
+are you trying to use this at work like
+what purpose and then I can tell you I
+what purpose and then I can tell you I
+can direct you from
+there cuz the answer is going to vary
+there cuz the answer is going to vary
+quite a bit depending on what you're
+quite a bit depending on what you're
+trying to do
+also your background is your background
+also your background is your background
+are you more mathematically inclined
+are you more mathematically inclined
+more engineering inclined you like both
+more engineering inclined you like both
+you like
+neither so this config
+okay this is just
+flattening F TL after
+flattening F TL after
+working quite some time in LM
+research fair enough I technically
+research fair enough I technically
+started in uh natural language
+started in uh natural language
+processing as well though that was
+processing as well though that was
+before Transformers EX justed
+so I guess the first thing
+here it's just going to be that um this
+here it's just going to be that um this
+is
+not hey what's going on just doing a
+not hey what's going on just doing a
+little bit of morning work on a Sunday I
+little bit of morning work on a Sunday I
+don't know probably going to do this for
+don't know probably going to do this for
+a bit then uh get breakfast go for a run
+a bit then uh get breakfast go for a run
+do a couple non RL things for a bit
+do a couple non RL things for a bit
+catch up on some other random admin and
+catch up on some other random admin and
+other work and then chill for a
+bit normally I do uh I'd be going for
+bit normally I do uh I'd be going for
+long runs on Sundays but
+long runs on Sundays but
+um it's going to take a little bit to
+um it's going to take a little bit to
+get back into that into the shape to be
+get back into that into the shape to be
+able to be running for like 3
+able to be running for like 3
+hours pneumonia is no joke
+so I don't know probably just do like
+so I don't know probably just do like
+five six miles
+today but currently I'm uh I'm just like
+today but currently I'm uh I'm just like
+it's this why it's going to be slow here
+it's this why it's going to be slow here
+I have an existing stack of crazy
+I have an existing stack of crazy
+abstractions and I'm trying to figure
+abstractions and I'm trying to figure
+out how to piece them apart and like
+out how to piece them apart and like
+simplify
+simplify
+everything want to get good at RLS a top
+everything want to get good at RLS a top
+up and also try to do something in
+up and also try to do something in
+agentic Ai and post training okay so
+agentic Ai and post training okay so
+that's going to be a
+that's going to be a
+very very different set of things from
+very very different set of things from
+what I'm usually doing because to give
+what I'm usually doing because to give
+you an idea right what I do in
+you an idea right what I do in
+RL uh we do like ultra high
+RL uh we do like ultra high
+performance training of small models for
+performance training of small models for
+the most part so like we have things
+the most part so like we have things
+like this we have things
+like this we have things
+like uh things like
+like uh things like
+this we've got you know things like this
+this we've got you know things like this
+and these all train hundreds of
+and these all train hundreds of
+thousands to a million steps per second
+thousands to a million steps per second
+on a single GPU so we're looking at perf
+on a single GPU so we're looking at perf
+optimizations of like way more than a
+optimizations of like way more than a
+th000 x maybe 10,000 or
+th000 x maybe 10,000 or
+100,000x um what you're looking at with
+100,000x um what you're looking at with
+language models because it actually
+language models because it actually
+matters
+um you're
+um you're
+probably I mean there are definitely
+probably I mean there are definitely
+some things in RL that will help you
+some things in RL that will help you
+though if you are trying to work in that
+though if you are trying to work in that
+space like getting good at General RL uh
+space like getting good at General RL uh
+will be useful the thing that's tricky
+will be useful the thing that's tricky
+at the moment is RL as a field has not
+at the moment is RL as a field has not
+received the level of
+received the level of
+investment um that the rest of AI has
+investment um that the rest of AI has
+received so a lot of stuff it's kind of
+received so a lot of stuff it's kind of
+just feels janky and like the thing
+just feels janky and like the thing
+that's tricky is I could tell you to see
+that's tricky is I could tell you to see
+uh I could tell you to just go through
+uh I could tell you to just go through
+my quick start guide and there are a
+my quick start guide and there are a
+bunch of papers here right there papers
+bunch of papers here right there papers
+here this is probably good perspective
+here this is probably good perspective
+at the very least and in fact this video
+at the very least and in fact this video
+is also good perspective not this one I
+is also good perspective not this one I
+have a video on it's I think it's pinned
+have a video on it's I think it's pinned
+on my homepage on x
+on my homepage on x
+it kind of lays out how I'm looking at
+it kind of lays out how I'm looking at
+RL right now and it's still pretty well
+current I know I pinned the
+current I know I pinned the
+trailer did I highlight it at least yeah
+trailer did I highlight it at least yeah
+here it is it's on highlight it's full
+here it is it's on highlight it's full
+RL Iceberg um that'll kind of give you
+RL Iceberg um that'll kind of give you
+some insight because the thing is the
+some insight because the thing is the
+papers paint a very different picture
+papers paint a very different picture
+from reality uh the vast majority of
+from reality uh the vast majority of
+papers in RL are just wrong or they
+papers in RL are just wrong or they
+present at least a misleading view
+present at least a misleading view
+because uh the results tend really not
+because uh the results tend really not
+to generalize very well from one
+to generalize very well from one
+environment to the next because RL
+environment to the next because RL
+researchers don't run enough experiments
+researchers don't run enough experiments
+because they don't have compute to run
+because they don't have compute to run
+enough experiments because their
+enough experiments because their
+environments are too slow so I'm working
+environments are too slow so I'm working
+on that tail under the loop we make
+on that tail under the loop we make
+things slow we run more experiments we
+things slow we run more experiments we
+do research correctly the science gets
+do research correctly the science gets
+corrected and RL actually makes sense
+corrected and RL actually makes sense
+again but if you're not going all the
+again but if you're not going all the
+way down to that end of the stack at
+way down to that end of the stack at
+least I think it'll be useful to have
+least I think it'll be useful to have
+some perspective while reading through
+some perspective while reading through
+and getting like a literature background
+and getting like a literature background
+in RL that a lot of these things are not
+in RL that a lot of these things are not
+as clear-cut as they are
+as clear-cut as they are
+presented get well soon oh no I'm better
+presented get well soon oh no I'm better
+I was I was in the hospital though for
+I was I was in the hospital though for
+you know several days it was a close
+you know several days it was a close
+call frankly um but the main thing is
+call frankly um but the main thing is
+it's just like yeah I lost close to 20
+it's just like yeah I lost close to 20
+lbs and a good chunk of my lung capacity
+lbs and a good chunk of my lung capacity
+so I was in fantastic shape beforehand
+so I was in fantastic shape beforehand
+luckily which is what saved me but um
+luckily which is what saved me but um
+it's going to be probably a good six
+it's going to be probably a good six
+months of training to get my weight back
+months of training to get my weight back
+to get my fitness back to be you know
+to get my fitness back to be you know
+marathoning and powerlifting properly
+again what's puffer lib doing I just
+again what's puffer lib doing I just
+scroll through channels and see a lot of
+scroll through channels and see a lot of
+streams on it so this is uh I mean I'm
+streams on it so this is uh I mean I'm
+an MIT PhD puffer AI is a startup it's
+an MIT PhD puffer AI is a startup it's
+all open source and free this is my
+all open source and free this is my
+effort to fix reinforcement learning
+effort to fix reinforcement learning
+this is me trying to make all of
+this is me trying to make all of
+reinforcement learning simple consistent
+reinforcement learning simple consistent
+and ridiculously high performance and
+and ridiculously high performance and
+it's all done as an open- source project
+it's all done as an open- source project
+with contributors developing new
+with contributors developing new
+environments people coming in and
+environments people coming in and
+picking up RL and helping out using
+picking up RL and helping out using
+their you know their engineering skills
+their you know their engineering skills
+so to give you an idea here all of these
+so to give you an idea here all of these
+are environments they're all playable
+are environments they're all playable
+online they're all written in C they're
+online they're all written in C they're
+all about a thousand times faster than
+all about a thousand times faster than
+what you'll find in most of the rest of
+what you'll find in most of the rest of
+reinforcement learning and we're
+reinforcement learning and we're
+developing more of these we're using
+developing more of these we're using
+these to do science very very
+these to do science very very
+efficiently uh to make reinforcement
+efficiently uh to make reinforcement
+learning sane and consistent this is my
+learning sane and consistent this is my
+attempt at revolutionizing an important
+attempt at revolutionizing an important
+subfield what I see is a probably one of
+subfield what I see is a probably one of
+the most underappreciated areas of AI
+the most underappreciated areas of AI
+and Tech that is what puffer is and
+and Tech that is what puffer is and
+there's lots of content around it
+there's lots of content around it
+there's this blog post I have lots of
+there's this blog post I have lots of
+stuff on X there's this whole community
+stuff on X there's this whole community
+on Discord and of course all the codes
+on Discord and of course all the codes
+open source
+open source
+so that is what this is
+and you know I stream all the work for
+and you know I stream all the work for
+various reasons but uh it's been uh it's
+various reasons but uh it's been uh it's
+been a good time for the most part
+here okay so this interface sucks
+um yeah this interface sucks
+um yeah this interface sucks
+so this we're going to keep puffer carbs
+carbs
+pin yeah this is kind of nuts if you're
+pin yeah this is kind of nuts if you're
+looking at
+this making a certain part of puffer lib
+this making a certain part of puffer lib
+puffer lib is my project so I mean this
+puffer lib is my project so I mean this
+is I just stream my development on it at
+is I just stream my development on it at
+the moment I'm working on uh improving
+the moment I'm working on uh improving
+hyperparameter sweeps so it's a
+hyperparameter sweeps so it's a
+combination of you know engineering new
+combination of you know engineering new
+environments uh I look at existing
+environments uh I look at existing
+research papers and I try to improve
+research papers and I try to improve
+things there we run way more rigorous
+things there we run way more rigorous
+tests than are done in the vast majority
+tests than are done in the vast majority
+of science right we're able to do that
+of science right we're able to do that
+because of the performance of puffer lib
+because of the performance of puffer lib
+it's just all around we try to fix
+it's just all around we try to fix
+various areas of uh of
+RL all the previous
+RL all the previous
+ones certain part all the previous ones
+ones certain part all the previous ones
+ones yeah I mean all the dev streams are
+ones yeah I mean all the dev streams are
+just me working on various things in
+just me working on various things in
+puffer lib um most of it is it's
+puffer lib um most of it is it's
+actually kind of split now most of it is
+actually kind of split now most of it is
+just me advancing the areas of core
+just me advancing the areas of core
+puffer development that I think are
+puffer development that I think are
+going to be important we have a couple
+going to be important we have a couple
+contracts with companies um so sometimes
+contracts with companies um so sometimes
+I do client stuff but the way it's set
+I do client stuff but the way it's set
+up is like the only thing that puffer
+up is like the only thing that puffer
+sells to companies is uh essentially a
+sells to companies is uh essentially a
+service package so it's like hey we want
+service package so it's like hey we want
+this thing to work better with puffer
+this thing to work better with puffer
+lib and then I'll go make it actually
+lib and then I'll go make it actually
+work with puffer lib and because
+work with puffer lib and because
+everything's open source it's still I'd
+everything's open source it's still I'd
+still do it on
+stream it's generally good time this is
+stream it's generally good time this is
+a relatively new company I just
+a relatively new company I just
+graduated this past
+spring and already the progress has been
+spring and already the progress has been
+absolutely nuts um you know we've made
+absolutely nuts um you know we've made
+our like a thousand times faster in 8
+our like a thousand times faster in 8
+months or
+months or
+whatever so it's definitely going well
+whatever so it's definitely going well
+there are few areas that I think need to
+there are few areas that I think need to
+be improved and this is one of the major
+be improved and this is one of the major
+ones at the moment this is a difficult
+ones at the moment this is a difficult
+area to improve but uh I'm working on it
+area to improve but uh I'm working on it
+it's hyper parameter sweeps
+LMS basically all the knowledge is in
+LMS basically all the knowledge is in
+the pre-train
+the pre-train
+model sftl does reformulates
+probability well because the pre-train
+probability well because the pre-train
+model is just it's a completion model
+model is just it's a completion model
+model right uh like Max probability of
+model right uh like Max probability of
+next token which is very far from from a
+next token which is very far from from a
+usability perspective that's very far
+usability perspective that's very far
+from how you would want to interact with
+from how you would want to interact with
+a model uh and how you would like it to
+a model uh and how you would like it to
+apply all that so basically you have a
+apply all that so basically you have a
+generic compression algorithm and you
+generic compression algorithm and you
+need to know how to steer it the
+need to know how to steer it the
+hypothesis right is that compression is
+hypothesis right is that compression is
+intelligence um and then the RL is how
+intelligence um and then the RL is how
+do you steer that because you know it
+do you steer that because you know it
+having the world's best zip program
+having the world's best zip program
+right is not on its own that doesn't
+right is not on its own that doesn't
+solve stuff on its own you have to steer
+solve stuff on its own you have to steer
+it do you think this kind of thank you
+it do you think this kind of thank you
+yeah uh do you think this kind of RL
+yeah uh do you think this kind of RL
+being done which is bringing up good
+being done which is bringing up good
+samples in topk will hit a limit yeah I
+samples in topk will hit a limit yeah I
+look that's like grpo I just saw um it's
+look that's like grpo I just saw um it's
+frankly really if I understand that
+frankly really if I understand that
+algorithm correctly and I only took a
+algorithm correctly and I only took a
+quick look at it um it's really
+quick look at it um it's really
+embarrassing say I think that the rest
+embarrassing say I think that the rest
+of the field didn't figure that out
+of the field didn't figure that out
+earlier because it's a very basic
+earlier because it's a very basic
+modification of PPO uh to add top K
+modification of PPO uh to add top K
+which is like something that they've
+which is like something that they've
+know everyone has known for years works
+know everyone has known for years works
+really well with language models it's
+really well with language models it's
+also something that I would have never
+also something that I would have never
+tried in what I do because like it just
+tried in what I do because like it just
+makes the algorithm way more
+makes the algorithm way more
+expensive um so yeah I don't
+expensive um so yeah I don't
+that's kind of weird I don't know if
+that's kind of weird I don't know if
+that hits limits or not uh do I think
+that hits limits or not uh do I think
+that RL I do I think that the current
+that RL I do I think that the current
+language models as they are right now
+language models as they are right now
+with grpo and R1 and everything do I
+with grpo and R1 and everything do I
+think that that's going to solve the set
+think that that's going to solve the set
+of all problems we ever care about no
+of all problems we ever care about no
+that's why I'm working on this
+that's why I'm working on this
+right I think RL is they're missing a
+right I think RL is they're missing a
+lot of pieces in RL because frankly
+lot of pieces in RL because frankly
+what's being done on language models in
+what's being done on language models in
+RL right now is very
+basic it has to be very basic they can't
+basic it has to be very basic they can't
+run any experiments their experiments
+run any experiments their experiments
+are too
+are too
+expensive you never try anything
+expensive you never try anything
+remotely crazy when your experiments
+remotely crazy when your experiments
+cost millions of dollars to
+run I guess a couple hundred thousand in
+run I guess a couple hundred thousand in
+the case of their um fine-tuning but
+still generating a lot of
+still generating a lot of
+samples yep well the funny thing is
+samples yep well the funny thing is
+you're not even generating that many
+you're not even generating that many
+samples you're doing RL with like no
+samples you're doing RL with like no
+data you know that uh in puffer we
+data you know that uh in puffer we
+actually can train on more data than all
+actually can train on more data than all
+of say gp4 on one GPU in a few
+days that's the difference in scale that
+days that's the difference in scale that
+we're looking at
+we're looking at
+here llms have crazy compute scale crazy
+here llms have crazy compute scale crazy
+numbers of parameters but actually very
+numbers of parameters but actually very
+little
+little
+data very very little data and we also
+data very very little data and we also
+have uh we also have some pretty good
+have uh we also have some pretty good
+empirical and theoretic medical evidence
+empirical and theoretic medical evidence
+that um reinforcement learning generally
+that um reinforcement learning generally
+requires more samples uh per model size
+requires more samples uh per model size
+like 10x more samples at least compared
+like 10x more samples at least compared
+to language
+to language
+models in generative learning which
+models in generative learning which
+makes sense because reinforcement
+makes sense because reinforcement
+learning uh the way that the loss is
+learning uh the way that the loss is
+constructed you get less
+constructed you get less
+information uh out of each sample so you
+information uh out of each sample so you
+need more
+samples for
+wer lip seems cool thank
+wer lip seems cool thank
+you it's really nice to be able to just
+you it's really nice to be able to just
+see all the environments on here like
+see all the environments on here like
+the thing that tells me that I think
+the thing that tells me that I think
+that we're on the right
+that we're on the right
+track I think this is just a render
+track I think this is just a render
+bug b
+ago that was weird
+ago that was weird
+um the thing that tells me that I think
+um the thing that tells me that I think
+that we're on the right track so this is
+that we're on the right track so this is
+basically I worked on neural MMO for my
+basically I worked on neural MMO for my
+whole PhD and then in like 3 months I
+whole PhD and then in like 3 months I
+built a version of it around you know
+built a version of it around you know
+using the ideas and the approaches of
+using the ideas and the approaches of
+puffer uh this
+version is way larger more complex more
+version is way larger more complex more
+visually impressive runs on web and is a
+visually impressive runs on web and is a
+thousand times faster than anything I
+thousand times faster than anything I
+built during my PhD with like less than
+built during my PhD with like less than
+a third of the
+code
+code
+so yeah it's an exciting time it's a lot
+so yeah it's an exciting time it's a lot
+of work mind you we've already shipped I
+of work mind you we've already shipped I
+think like puffer is about 30,000 lines
+think like puffer is about 30,000 lines
+of code right now and it's not 30,000
+of code right now and it's not 30,000
+lines of garbage either like it's 30,000
+lines of garbage either like it's 30,000
+lines pretty darn dense of of good stuff
+the core is only a few thousand lines
+the core is only a few thousand lines
+but then it's 20,000 lines of
+but then it's 20,000 lines of
+environments and that's growing
+rapidly we have all sorts of
+rapidly we have all sorts of
+contributors over 10,000 of that is from
+contributors over 10,000 of that is from
+contributors yeah so it's actually like
+contributors yeah so it's actually like
+a decent chunk of puffer Li is made by
+a decent chunk of puffer Li is made by
+contributors many of whom came in with
+contributors many of whom came in with
+zero prior RL experience basically
+zero prior RL experience basically
+anybody who's like can write decent code
+anybody who's like can write decent code
+and is willing to learn learn stuff um
+and is willing to learn learn stuff um
+and will like PR cool new environments I
+and will like PR cool new environments I
+just you know I train on the RL side um
+just you know I train on the RL side um
+as they go so now we have like you know
+as they go so now we have like you know
+multiple new people who are submitting
+multiple new people who are submitting
+awesome new environments and who are
+awesome new environments and who are
+getting pretty good at the RL side as
+well e
+we're going to take all this for now
+we're going to take all this for now
+we're not going to take all of it thanks
+we're not going to take all of it thanks
+look forward to maybe learn contribute
+look forward to maybe learn contribute
+yeah thank you stop by streams you know
+yeah thank you stop by streams you know
+join the Discord if you like we organize
+join the Discord if you like we organize
+all the stuff on
+there not for LM specifically but for uh
+there not for LM specifically but for uh
+for General RL this is the place to be
+for General RL this is the place to be
+at the moment I would not be doing this
+at the moment I would not be doing this
+full time unless I really thought that
+full time unless I really thought that
+there was uh was something there you
+know fortunately my job ends up
+know fortunately my job ends up
+including cleaning up thousands and
+including cleaning up thousands and
+thousands of lines of code from
+thousands of lines of code from
+Academia but uh you know we do a little
+housekeeping what in the
+heck for
+this oh you can seed it I doubt that's
+this oh you can seed it I doubt that's
+reproducible
+but also we're getting rid of these
+but also we're getting rid of these
+freaking annotations I hate type
+freaking annotations I hate type
+annotations in Python so
+annotations in Python so
+much they don't do
+much they don't do
+anything the only reason you need them
+anything the only reason you need them
+is because you're overbuilding
+is because you're overbuilding
+everything
+initial search
+radius look at all this like adder
+radius look at all this like adder
+validator
+did not prevent a single
+bug we're not going to need this
+perm actually this is very easy to
+perm actually this is very easy to
+paraliz as well the way I'm looking at
+paraliz as well the way I'm looking at
+it
+we're actually going to keep this
+we're actually going to keep this
+structured
+here uh this is going to be something
+here uh this is going to be something
+like samples for
+res sample
+frequency I like this comment
+Max suggestion
+cost minimum cost for prito
+cost minimum cost for prito
+set to be this percentile of cost data
+I don't know about that
+one I don't think I like that
+one we're not doing this
+one we're not doing this
+okay so this entire now this whole carbs
+okay so this entire now this whole carbs
+pram thing is just gone replaced with
+pram thing is just gone replaced with
+only a few lines
+only a few lines
+here and actually I think that that uh
+here and actually I think that that uh
+this comment will go where we actually
+this comment will go where we actually
+use
+it now we got to go look at what
+it now we got to go look at what
+actually is in carbs and their in nit
+actually is in carbs and their in nit
+function
+it's actually funny because I in my head
+it's actually funny because I in my head
+I have no idea how I'm planning on like
+I have no idea how I'm planning on like
+restructuring their code I just kind of
+restructuring their code I just kind of
+go through it and fix small things one
+go through it and fix small things one
+at a time but uh I've done this exact
+at a time but uh I've done this exact
+thing like four or five times this past
+thing like four or five times this past
+couple weeks with what I do here oh
+couple weeks with what I do here oh
+nothing um
+nothing um
+uh I did this like four or five times
+uh I did this like four or five times
+with different academic repos and
+with different academic repos and
+it's always produced like ridiculously
+it's always produced like ridiculously
+simplified code there's just so much to
+simplified code there's just so much to
+cut like what I'm doing now wouldn't do
+cut like what I'm doing now wouldn't do
+anything if the code were like within
+anything if the code were like within
+mostly reasonable bounds of complexity
+mostly reasonable bounds of complexity
+it's just so over complicated that
+it's just so over complicated that
+there's just so much to
+cut it's pretty basic as well
+cut it's pretty basic as well
+a lot of
+a lot of
+this I mean I say that but I
+this I mean I say that but I
+definitely there's definitely like I'm
+definitely there's definitely like I'm
+way better at this now than I would have
+way better at this now than I would have
+been
+been
+before decisions would have been made
+differently need
+this don't need
+this don't need
+this real number bace by name
+like
+this actually because these are objects
+this actually because these are objects
+I can get a flat
+view so I can do this
+this e
+why do they
+need I'd rather keep most of this in
+need I'd rather keep most of this in
+numpy you
+numpy you
+know it's not faster the way they're
+know it's not faster the way they're
+doing
+doing
+it in fact their code was horribly
+slow for
+there that's better right
+join the community looking forward to it
+join the community looking forward to it
+great thanks for dropping
+by oops I don't like when it tries to
+by oops I don't like when it tries to
+have complete too much for
+me this is fine except I don't like the
+me this is fine except I don't like the
+type annotation
+I don't need to annotate this as a list
+I don't need to annotate this as a list
+because it's obviously a list and you
+because it's obviously a list and you
+don't need to know what type of object
+don't need to know what type of object
+it is if I don't make some big fancy
+it is if I don't make some big fancy
+object it's probably just going to be a
+object it's probably just going to be a
+dictionary
+and this is act
+yes I think in a second yeah I'm going
+yes I think in a second yeah I'm going
+to
+to
+go do a couple quick things I'll be back
+go do a couple quick things I'll be back
+in uh I don't know 5 10 minutes
+in uh I don't know 5 10 minutes
+is then we'll do a little bit more on
+is then we'll do a little bit more on
+this another hour or so be right
+back
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e e
+I'm
+I'm
+back very eloquent Mr pepper
+that about matches what we wanted as
+that about matches what we wanted as
+well
+perfect let's see this real quick
+o
+oh it's actually not terrible at
+oh it's actually not terrible at
+exploring
+now got stuck all the way down that end
+now got stuck all the way down that end
+of the maze Holy look at
+that ah they got stuck
+that ah they got stuck
+there it's weird they get stuck there I
+there it's weird they get stuck there I
+wonder if there's no there's not a bug
+it took me quite some time to realize
+it took me quite some time to realize
+neural MMO with
+neural MMO with
+you
+you
+yeah well I mean I don't know I might
+yeah well I mean I don't know I might
+change it now the thing is that for a
+change it now the thing is that for a
+while right uh people knew me from
+while right uh people knew me from
+neural MMO more but now puffer lips
+neural MMO more but now puffer lips
+cotton I think bigger than neural MMO
+cotton I think bigger than neural MMO
+ever was at least if you look at like
+ever was at least if you look at like
+GitHub Stars contributors discords about
+GitHub Stars contributors discords about
+the same size or getting to be and uh
+the same size or getting to be and uh
+the neural Discord had like three
+the neural Discord had like three
+competitions worth of participants in
+it concerns me when the puffer just gets
+it concerns me when the puffer just gets
+fully stuck like that that's kind of
+fully stuck like that that's kind of
+weird so you can see here like this
+weird so you can see here like this
+thing is it's running around quite a bit
+thing is it's running around quite a bit
+um but it's still
+not it's not exploring the way that you
+not it's not exploring the way that you
+would want like a maze solver to explore
+would want like a maze solver to explore
+it's pretty decent
+that one actually took me a second to
+that one actually took me a second to
+see the path
+see the path
+on that's a hard maze for it it's got to
+on that's a hard maze for it it's got to
+go all the way
+back it's covering a decent chunk of it
+though yeah there you go
+yeah I even got that
+one you're so close come
+on
+oh memory is not very good
+some of the mazes are pretty hard for
+some of the mazes are pretty hard for
+it this one has like a very
+it this one has like a very
+clear backtrack all the
+way small ones it just instantly
+solves so you get this one
+oh yeah look at that it even figured out
+oh yeah look at that it even figured out
+that one that's good
+that one that's good
+whoa okay this is a pretty decent little
+whoa okay this is a pretty decent little
+model this model's like 170k parameters
+model this model's like 170k parameters
+by the way it's
+tiny this is the first sweep I ever ran
+tiny this is the first sweep I ever ran
+on uh on these uh bigger
+Maps okay we'll do some cars stuff now
+Maps okay we'll do some cars stuff now
+but there you
+go Ram from
+go Ram from
+basic
+for e
+do
+that let try
+that let try
+this search distribution
+no we're not doing a distribution we're
+no we're not doing a distribution we're
+not going to have that thingy
+around subjects or observe lock I hate
+around subjects or observe lock I hate
+this we're getting rid of this I don't
+this we're getting rid of this I don't
+think we need this either
+I see so they Ste everything there
+think we'll leave that alone
+numb dims with
+numb dims with
+bounds we don't
+care two to
+the that's kind of
+crazy
+e I wonder if there's some way to do
+e I wonder if there's some way to do
+this whole thing as one
+run I don't know if there's a way to do
+run I don't know if there's a way to do
+your whole hyperr sweep is like one
+your whole hyperr sweep is like one
+contiguous run
+that's another whole bunch of code gone
+now here is their suggest
+function
+function
+oops wrong
+button I mean these are both of the
+button I mean these are both of the
+functions that we
+functions that we
+need let's see how much
+need let's see how much
+uh how much smaller these can be
+made so what do they
+do
+for e
+random suggestion
+uh this is the
+resample was this config resample
+resample was this config resample
+frequency for
+so this is their
+so this is their
+basic sample logic right
+basic sample logic right
+here let me just finish the uh the full
+here let me just finish the uh the full
+chain
+first this is the rest of it
+and they do like this
+yeah so this
+yeah so this
+is this is fine this is like roughly
+is this is fine this is like roughly
+what it'll look like
+I wonder if I can
+um well I have an idea for how to return
+um well I have an idea for how to return
+it as a structured
+it as a structured
+value we'll get to
+value we'll get to
+that so it's really just implementing
+that so it's really just implementing
+this this logic
+this this logic
+here generate
+candidate basic space to param space
+okay so we can get rid of this function
+okay so we can get rid of this function
+cuz we no longer need this as a
+cuz we no longer need this as a
+template and we may as well just put the
+template and we may as well just put the
+observe stuff in
+observe stuff in
+here uh there's literally nothing
+here and observation yeah there's
+here and observation yeah there's
+nothing in here that's
+useful
+okay what I'm going to do real
+okay what I'm going to do real
+quick I don't I can actually navigate
+easier e
+sample search
+space holy hell look at like the how
+space holy hell look at like the how
+nested this is you see this
+nested this is you see this
+right I don't see how anybody codes like
+right I don't see how anybody codes like
+this like just how do you how do you
+this like just how do you how do you
+keep track of what you're doing when you
+keep track of what you're doing when you
+Nest everything this
+deep see this is the actual piece of
+deep see this is the actual piece of
+code that we want but it was five levels
+code that we want but it was five levels
+deep AI IDE
+why just like why
+it's very difficult for me to see a
+it's very difficult for me to see a
+point in which you are you as a
+point in which you are you as a
+programmer are using your skill
+programmer are using your skill
+productively somehow right you're
+productively somehow right you're
+actually adding something but you're
+actually adding something but you're
+letting an AI write like entire blocks
+letting an AI write like entire blocks
+of code for you
+I much prefer um single line complete
+I much prefer um single line complete
+which is basically just a better LSP
+which is basically just a better LSP
+it's just like a typing
+buff like you can see while I'm typing
+buff like you can see while I'm typing
+right I do have ai auto complete on but
+right I do have ai auto complete on but
+you see I use it for like on line
+you see I use it for like on line
+completes right like if I just do like
+completes right like if I just do like
+def you see right
+def you see right
+here it just it makes me type A about
+here it just it makes me type A about
+twice as fast that's all it
+does and prevents me from having to like
+does and prevents me from having to like
+allocate brain space to remembering uh
+allocate brain space to remembering uh
+to remembering my variable names and
+to remembering my variable names and
+such but I still do pay attention to my
+such but I still do pay attention to my
+variable
+names yeah but stuff like cursor and all
+names yeah but stuff like cursor and all
+these like people are not just tabing
+these like people are not just tabing
+like if you're just tabing you don't
+like if you're just tabing you don't
+need an IDE right you need a plugin for
+need an IDE right you need a plugin for
+whatever you're currently
+using people who are using whole IDE
+using people who are using whole IDE
+built around this are like filling in
+built around this are like filling in
+giant blocks and
+such it would be nice for this to have a
+such it would be nice for this to have a
+little bit more context you know it
+little bit more context you know it
+would be nice to be able to initialize
+would be nice to be able to initialize
+this with context of my code base so it
+this with context of my code base so it
+picks up more variable names and such um
+picks up more variable names and such um
+but that's like again that's still a
+plugin I see so they're using torch here
+plugin I see so they're using torch here
+for the sampling
+do
+sample
+sample
+huh
+wait how are they using this
+origin
+origin
+samples origins in
+basic does that make any
+sense how's this work
+oh I guess it's because they use this
+oh I guess it's because they use this
+for
+for
+um I see
+um I see
+so the reason it's like this is because
+so the reason it's like this is because
+they also use this function
+they also use this function
+for uh for their Paro
+sample that is kind of
+clever for
+I think that this is for this one is
+I think that this is for this one is
+just a
+oneliner it's probably something
+like e
+and then what is
+and then what is
+this search
+this search
+center plus search scale
+I could see why having this be separate
+I could see why having this be separate
+would be
+useful
+e e
+Sigma is not per sample
+standard normal
+random. generator what the hell is this
+what the hell is this thing why did they
+what the hell is this thing why did they
+make
+this oh they want you to control your
+this oh they want you to control your
+RNG but that's kind of silly by default
+I guess this kind of makes
+sense actually maybe this would
+sense actually maybe this would
+be maybe this would be
+useful right because probably your
+useful right because probably your
+seating
+seating
+issues your probably your seating issues
+issues your probably your seating issues
+do come from this
+but we're not going to worry about that
+but we're not going to worry about that
+for
+for
+now so this is Randon um
+I think this is the whole
+I think this is the whole
+thing I could be wrong but this is this
+thing I could be wrong but this is this
+should be your fantasy sampler
+like these long variable names
+all you need to do is pass the
+all you need to do is pass the
+um your parito points
+right
+for e
+it should be something
+it should be something
+like something like this
+oh actually you literally don't need to
+oh actually you literally don't need to
+do this I'm dumb this goes
+do this I'm dumb this goes
+here this is your uh
+yes
+and
+actually watch this
+the resample you can't do this for
+the resample you can't do this for
+actually so we'll leave it yeah it's
+actually so we'll leave it yeah it's
+only two of three that you can uh copy
+only two of three that you can uh copy
+the code for
+okay so that's the basic of
+it now there's going to have to be some
+it now there's going to have to be some
+sort of
+for
+amusingly enough this is uh not that far
+amusingly enough this is uh not that far
+off of already being a
+off of already being a
+complete uh implementation of I mean a
+complete uh implementation of I mean a
+substantially simplified one without any
+substantially simplified one without any
+of the
+of the
+models but this is like a Pito
+models but this is like a Pito
+optimal Pito optimal genetic search
+optimal Pito optimal genetic search
+essentially
+be funny if that actually worked very
+be funny if that actually worked very
+well wouldn't be surprised
+unnormalized happens at the very
+unnormalized happens at the very
+end which I guess her Baseline is right
+end which I guess her Baseline is right
+here
+hold on though what I can do
+is e
+just need a way to rebuild the
+just need a way to rebuild the
+dictionary as
+all I mean here's a really stupid
+all I mean here's a really stupid
+way
+right for
+no this doesn't work either
+okay we'll write something uh we'll
+okay we'll write something uh we'll
+write something quick for
+now
+e e
+something like that
+and then this just needs to get the
+and then this just needs to get the
+parito points from
+parito points from
+observations let's figure out how to do
+observations let's figure out how to do
+that
+oops hang on this is suggestion
+best let's just
+do for
+do for
+now just pick one of
+them you f okay
+success observations for
+and then parito
+points for
+lost
+for e
+yeah okay that is a basic burito
+computation and this is
+computation and this is
+a
+relatively uh well I got to go grab the
+relatively uh well I got to go grab the
+spaces and clean those
+up luckily that should be easier
+look at all this
+mess okay so there's nothing in here
+Adder dos where did they get this Adder
+Adder dos where did they get this Adder
+thing
+Auto
+atribs is this like a new data
+class or different data
+class oh this
+class oh this
+is this is uh that's funny yeah we're
+is this is uh that's funny yeah we're
+not using that
+howy okay we'll keep this pretty similar
+howy okay we'll keep this pretty similar
+to their thing for now though I I don't
+to their thing for now though I I don't
+like it so we're going to
+like it so we're going to
+probably uh we're probably going to
+probably uh we're probably going to
+change some
+change some
+stuff for
+so this is
+normal thing is so bad
+normal thing is so bad
+CL unnormalized
+we're cutting some fat off of
+we're cutting some fat off of
+carbs and by some I
+mean what's that famous uh
+mean what's that famous uh
+quote cutting off F if you uh if you
+quote cutting off F if you uh if you
+rendered it you could make soap to wash
+rendered it you could make soap to wash
+the world or
+the world or
+something it's one of
+those can't you just do this now wait on
+those can't you just do this now wait on
+class classes without having
+class classes without having
+to do anything
+else
+whatever go away horrible pipes
+really do not enjoy types in Python
+it's like look at how much extra clutter
+it's like look at how much extra clutter
+they add and they don't give you
+they add and they don't give you
+anything they're not even
+anything they're not even
+enforced all right and we'll clean up
+enforced all right and we'll clean up
+this math I'm sure as
+well I think I think that's about all
+well I think I think that's about all
+you need
+though and all you got to do
+is I think you just you add is integer
+is I think you just you add is integer
+at the top as
+well okay so better at least
+then what's this
+Pam uh completely redundant
+right mean equal search Center
+there you
+go so that is a
+go so that is a
+basic I'm sure not working but that is a
+basic I'm sure not working but that is a
+basic implement M
+ation I should
+ation I should
+go do what I need to do go for my run
+go do what I need to do go for my run
+and stuff before it gets too hot outside
+and stuff before it gets too hot outside
+today um we're going to see how I'm
+today um we're going to see how I'm
+feeling I might come back and do some of
+feeling I might come back and do some of
+this in the afternoon I'm enjoying this
+this in the afternoon I'm enjoying this
+uh I should also rest a little and do
+uh I should also rest a little and do
+catch up on a couple other little other
+catch up on a couple other little other
+work things but uh we'll see I think is
+work things but uh we'll see I think is
+is important so I might come back to
+is important so I might come back to
+this in the
+this in the
+afternoon um for folks
+watching all this stuff is free and open
+watching all this stuff is free and open
+source you can check out puff. for all
+source you can check out puff. for all
+of our demos here these all run on the
+of our demos here these all run on the
+web if you want to help us out for free
+web if you want to help us out for free
+just start the repository really really
+just start the repository really really
+helps really does and if you want to get
+helps really does and if you want to get
+involved with development or just
+involved with development or just
+following the
+following the
+project join the disc
+project join the disc
+support got a whole bunch of orl
+support got a whole bunch of orl
+Articles and stuff on the blog here and
+Articles and stuff on the blog here and
+if you want even more you can follow my
+if you want even more you can follow my
+X where there are some additional things
+X where there are some additional things
+you can't find anywhere else in the
+you can't find anywhere else in the
+Articles and I post a bunch about
+RL the uh the quotes from a US president
+RL the uh the quotes from a US president
+I forget which one was talking about the
+I forget which one was talking about the
+government but uh it's a funny quote
+government but uh it's a funny quote
+anyways thank you uh thanks folks and uh
+anyways thank you uh thanks folks and uh
+I I will
+
+Kind: captions
+Language: en
+okay we are
+okay we are
+live uh why am I streaming on a Sunday I
+live uh why am I streaming on a Sunday I
+have no idea
+have no idea
+but I felt like doing a bit of
+but I felt like doing a bit of
+work and I figured I may as well stream
+work and I figured I may as well stream
+it not going to be doing stuff all day
+it not going to be doing stuff all day
+today um just like want to start on a
+today um just like want to start on a
+few
+few
+things yeah
+things yeah
+so there's still some unsolved problems
+so there's still some unsolved problems
+here but I at the same time I want to
+here but I at the same time I want to
+start thinking
+about a minimal implementation of
+about a minimal implementation of
+carbs so I'm just going to start
+carbs so I'm just going to start
+scrolling through here and seeing what
+scrolling through here and seeing what
+stuff I think we w't
+stuff I think we w't
+need okay a million dumb Imports
+need okay a million dumb Imports
+that's dozen lines of imports at least
+that's dozen lines of imports at least
+it'll be gone
+okay crazy transformation
+weird a lot of that's not going to be
+needed search scales yes
+one be stuff can
+go okay this is just super convoluted
+go okay this is just super convoluted
+logic
+no idea why this is a thing
+over sampling here is kind of
+crazy can't sample a candidate
+uh so this is true
+actually what does this mean
+that that's
+bizarre okay s yeah
+bizarre okay s yeah
+fine
+get prefer groups with multi
+samples wait
+what single sample can only be better if
+what single sample can only be better if
+it is is better than the max the
+it is is better than the max the
+previous
+previous
+group multi- sample group can be higher
+group multi- sample group can be higher
+can be better if the mean is higher
+okay quantel
+transform herf
+transform herf
+plot duplicated all this code
+that's all that's in
+that's all that's in
+here these other ones we will
+here these other ones we will
+um oh actually there's yeah there's just
+um oh actually there's yeah there's just
+expect
+expect
+Improvement but this for instance
+these are not not terrible
+actually I think they're named poorly
+okay let's see what else I'm haven't
+okay let's see what else I'm haven't
+seen get
+resample non-conservative version so we
+resample non-conservative version so we
+can
+resample we specifically want I say
+and then let's see what they did here
+and then let's see what they did here
+they
+they
+[Music]
+[Music]
+did failed to count so they did do some
+did failed to count so they did do some
+good
+good
+logging for
+so you know they
+so you know they
+actually I got to give them some credit
+actually I got to give them some credit
+here because when I'm looking at what a
+here because when I'm looking at what a
+lot of the code is for uh it's not as
+lot of the code is for uh it's not as
+bad as I originally thought they still
+bad as I originally thought they still
+have way more code than they need and I
+have way more code than they need and I
+think that that's probably why they're
+think that that's probably why they're
+so confused here and why there are so
+so confused here and why there are so
+many things that are just like I don't
+many things that are just like I don't
+know
+know
+hazy
+hazy
+like things here don't make sense some
+like things here don't make sense some
+decisions seem poorly motivated and I
+decisions seem poorly motivated and I
+think it's just if you had half this
+think it's just if you had half this
+amount of code um you know things would
+amount of code um you know things would
+be clearer so I think that's what I'm
+be clearer so I think that's what I'm
+going to just start on doing
+I think we'll just do this directly in
+I think we'll just do this directly in
+puffer live as well so so what I'll do
+puffer live as well so so what I'll do
+then
+is oh
+actually one thing I want to do first
+actually one thing I want to do first
+here before we start
+this I want to see if we can
+this I want to see if we can
+um just real quick
+um just real quick
+grab some hypers from the latest sweep
+grab some hypers from the latest sweep
+so we run an experiment
+so we run an experiment
+while this is
+happening this is our latest sweep
+progress so we'll just take
+where's my quy
+what the
+what the
+hell
+hello
+hello
+environment oh
+still no all right I don't know what you
+still no all right I don't know what you
+doing Neptune I'll just click it like
+doing Neptune I'll just click it like
+this and hope it doesn't lag too bad
+think I like this one the
+best I really need to be able to filter
+best I really need to be able to filter
+this
+though is see the UI FES
+out there now it works
+896 there we
+896 there we
+are here's the chart for this
+are here's the chart for this
+one this is very
+one this is very
+good we'll just go grab the
+prams 14896
+there we are
+let's see how different the progams are
+let's see how different the progams are
+for
+for
+this okay substantially lower learning
+this okay substantially lower learning
+rate
+rate
+interesting the
+interesting the
+score uh let's not forget the N Pam
+score uh let's not forget the N Pam
+here even lower at 512 is
+interesting so that's a very slow uh
+interesting so that's a very slow uh
+very slow run it's still
+300K entropy coefficient has been taken
+300K entropy coefficient has been taken
+all the way down to the minimum
+value
+value
+Lambda is a little higher which is odd a
+Lambda is a little higher which is odd a
+gamma being higher oh no it's not odd
+gamma being higher oh no it's not odd
+yeah these are longer Maps this makes
+yeah these are longer Maps this makes
+perfect sense this is like a text
+perfect sense this is like a text
+book exactly what you would
+book exactly what you would
+expect mini batch
+expect mini batch
+size 16k but it says four mini batches I
+believe what do you pass in here you do
+believe what do you pass in here you do
+pass in mini batch size
+pass in mini batch size
+right yeah you pass in mini bat
+size yeah you don't passing num
+uh so we can actually get rid of
+that mini batch size gets passed in is
+that mini batch size gets passed in is
+this it's actually probably one of the
+this it's actually probably one of the
+things that made it difficult but we can
+things that made it difficult but we can
+get rid of
+get rid of
+that total time step this
+that total time step this
+is 180
+is 180
+mil upd dep box of
+four and I think that's about it
+B
+size I did it for the ones with
+size I did it for the ones with
+extremely low mini batches it looks
+like that's fine we'll leave it alone
+like that's fine we'll leave it alone
+for now we'll just not sweep this
+one okay
+one okay
+okay well hey
+welcome puffer grid
+crin and we'll let this run in the
+background while we work on other
+things so now we have this Baseline up
+things so now we have this Baseline up
+and running we can go work on our hyper
+and running we can go work on our hyper
+pram sweep
+pram sweep
+stuff I think I'm going to make
+stuff I think I'm going to make
+this yeah of
+this yeah of
+course
+course
+IG well what's
+IG if you're here for RL stuff then yeah
+sure for
+we're going to take all of
+these oops
+this is not getting
+imported puffer
+imported puffer
+lib so let's see the main uh the main
+lib so let's see the main uh the main
+stuff we're going to want
+this up to the
+top carbs
+top carbs
+prms basically done hugging face some of
+prms basically done hugging face some of
+the lectures of David
+the lectures of David
+Silvers let me see is the hugg and face
+Silvers let me see is the hugg and face
+course
+course
+good I think Costa was involved which
+good I think Costa was involved which
+means it should
+means it should
+be good cost is like the best he's
+be good cost is like the best he's
+awesome I've worked with him quite a bit
+awesome I've worked with him quite a bit
+in the
+in the
+past oh yeah this is
+good yeah this is very
+good yeah this is very
+nice okay so the only thing really
+nice okay so the only thing really
+missing from here
+missing from here
+is some
+is some
+formalism uh let me just ask you are you
+formalism uh let me just ask you are you
+for what purpose are you looking to get
+for what purpose are you looking to get
+into reinforcement learning are you
+into reinforcement learning are you
+interested in getting into the science
+interested in getting into the science
+side of RL are you trying to build stuff
+side of RL are you trying to build stuff
+are you trying to use this at work like
+are you trying to use this at work like
+what purpose and then I can tell you I
+what purpose and then I can tell you I
+can direct you from
+there cuz the answer is going to vary
+there cuz the answer is going to vary
+quite a bit depending on what you're
+quite a bit depending on what you're
+trying to do
+also your background is your background
+also your background is your background
+are you more mathematically inclined
+are you more mathematically inclined
+more engineering inclined you like both
+more engineering inclined you like both
+you like
+neither so this config
+okay this is just
+flattening F TL after
+flattening F TL after
+working quite some time in LM
+research fair enough I technically
+research fair enough I technically
+started in uh natural language
+started in uh natural language
+processing as well though that was
+processing as well though that was
+before Transformers EX justed
+so I guess the first thing
+here it's just going to be that um this
+here it's just going to be that um this
+is
+not hey what's going on just doing a
+not hey what's going on just doing a
+little bit of morning work on a Sunday I
+little bit of morning work on a Sunday I
+don't know probably going to do this for
+don't know probably going to do this for
+a bit then uh get breakfast go for a run
+a bit then uh get breakfast go for a run
+do a couple non RL things for a bit
+do a couple non RL things for a bit
+catch up on some other random admin and
+catch up on some other random admin and
+other work and then chill for a
+bit normally I do uh I'd be going for
+bit normally I do uh I'd be going for
+long runs on Sundays but
+long runs on Sundays but
+um it's going to take a little bit to
+um it's going to take a little bit to
+get back into that into the shape to be
+get back into that into the shape to be
+able to be running for like 3
+able to be running for like 3
+hours pneumonia is no joke
+so I don't know probably just do like
+so I don't know probably just do like
+five six miles
+today but currently I'm uh I'm just like
+today but currently I'm uh I'm just like
+it's this why it's going to be slow here
+it's this why it's going to be slow here
+I have an existing stack of crazy
+I have an existing stack of crazy
+abstractions and I'm trying to figure
+abstractions and I'm trying to figure
+out how to piece them apart and like
+out how to piece them apart and like
+simplify
+simplify
+everything want to get good at RLS a top
+everything want to get good at RLS a top
+up and also try to do something in
+up and also try to do something in
+agentic Ai and post training okay so
+agentic Ai and post training okay so
+that's going to be a
+that's going to be a
+very very different set of things from
+very very different set of things from
+what I'm usually doing because to give
+what I'm usually doing because to give
+you an idea right what I do in
+you an idea right what I do in
+RL uh we do like ultra high
+RL uh we do like ultra high
+performance training of small models for
+performance training of small models for
+the most part so like we have things
+the most part so like we have things
+like this we have things
+like this we have things
+like uh things like
+like uh things like
+this we've got you know things like this
+this we've got you know things like this
+and these all train hundreds of
+and these all train hundreds of
+thousands to a million steps per second
+thousands to a million steps per second
+on a single GPU so we're looking at perf
+on a single GPU so we're looking at perf
+optimizations of like way more than a
+optimizations of like way more than a
+th000 x maybe 10,000 or
+th000 x maybe 10,000 or
+100,000x um what you're looking at with
+100,000x um what you're looking at with
+language models because it actually
+language models because it actually
+matters
+um you're
+um you're
+probably I mean there are definitely
+probably I mean there are definitely
+some things in RL that will help you
+some things in RL that will help you
+though if you are trying to work in that
+though if you are trying to work in that
+space like getting good at General RL uh
+space like getting good at General RL uh
+will be useful the thing that's tricky
+will be useful the thing that's tricky
+at the moment is RL as a field has not
+at the moment is RL as a field has not
+received the level of
+received the level of
+investment um that the rest of AI has
+investment um that the rest of AI has
+received so a lot of stuff it's kind of
+received so a lot of stuff it's kind of
+just feels janky and like the thing
+just feels janky and like the thing
+that's tricky is I could tell you to see
+that's tricky is I could tell you to see
+uh I could tell you to just go through
+uh I could tell you to just go through
+my quick start guide and there are a
+my quick start guide and there are a
+bunch of papers here right there papers
+bunch of papers here right there papers
+here this is probably good perspective
+here this is probably good perspective
+at the very least and in fact this video
+at the very least and in fact this video
+is also good perspective not this one I
+is also good perspective not this one I
+have a video on it's I think it's pinned
+have a video on it's I think it's pinned
+on my homepage on x
+on my homepage on x
+it kind of lays out how I'm looking at
+it kind of lays out how I'm looking at
+RL right now and it's still pretty well
+current I know I pinned the
+current I know I pinned the
+trailer did I highlight it at least yeah
+trailer did I highlight it at least yeah
+here it is it's on highlight it's full
+here it is it's on highlight it's full
+RL Iceberg um that'll kind of give you
+RL Iceberg um that'll kind of give you
+some insight because the thing is the
+some insight because the thing is the
+papers paint a very different picture
+papers paint a very different picture
+from reality uh the vast majority of
+from reality uh the vast majority of
+papers in RL are just wrong or they
+papers in RL are just wrong or they
+present at least a misleading view
+present at least a misleading view
+because uh the results tend really not
+because uh the results tend really not
+to generalize very well from one
+to generalize very well from one
+environment to the next because RL
+environment to the next because RL
+researchers don't run enough experiments
+researchers don't run enough experiments
+because they don't have compute to run
+because they don't have compute to run
+enough experiments because their
+enough experiments because their
+environments are too slow so I'm working
+environments are too slow so I'm working
+on that tail under the loop we make
+on that tail under the loop we make
+things slow we run more experiments we
+things slow we run more experiments we
+do research correctly the science gets
+do research correctly the science gets
+corrected and RL actually makes sense
+corrected and RL actually makes sense
+again but if you're not going all the
+again but if you're not going all the
+way down to that end of the stack at
+way down to that end of the stack at
+least I think it'll be useful to have
+least I think it'll be useful to have
+some perspective while reading through
+some perspective while reading through
+and getting like a literature background
+and getting like a literature background
+in RL that a lot of these things are not
+in RL that a lot of these things are not
+as clear-cut as they are
+as clear-cut as they are
+presented get well soon oh no I'm better
+presented get well soon oh no I'm better
+I was I was in the hospital though for
+I was I was in the hospital though for
+you know several days it was a close
+you know several days it was a close
+call frankly um but the main thing is
+call frankly um but the main thing is
+it's just like yeah I lost close to 20
+it's just like yeah I lost close to 20
+lbs and a good chunk of my lung capacity
+lbs and a good chunk of my lung capacity
+so I was in fantastic shape beforehand
+so I was in fantastic shape beforehand
+luckily which is what saved me but um
+luckily which is what saved me but um
+it's going to be probably a good six
+it's going to be probably a good six
+months of training to get my weight back
+months of training to get my weight back
+to get my fitness back to be you know
+to get my fitness back to be you know
+marathoning and powerlifting properly
+again what's puffer lib doing I just
+again what's puffer lib doing I just
+scroll through channels and see a lot of
+scroll through channels and see a lot of
+streams on it so this is uh I mean I'm
+streams on it so this is uh I mean I'm
+an MIT PhD puffer AI is a startup it's
+an MIT PhD puffer AI is a startup it's
+all open source and free this is my
+all open source and free this is my
+effort to fix reinforcement learning
+effort to fix reinforcement learning
+this is me trying to make all of
+this is me trying to make all of
+reinforcement learning simple consistent
+reinforcement learning simple consistent
+and ridiculously high performance and
+and ridiculously high performance and
+it's all done as an open- source project
+it's all done as an open- source project
+with contributors developing new
+with contributors developing new
+environments people coming in and
+environments people coming in and
+picking up RL and helping out using
+picking up RL and helping out using
+their you know their engineering skills
+their you know their engineering skills
+so to give you an idea here all of these
+so to give you an idea here all of these
+are environments they're all playable
+are environments they're all playable
+online they're all written in C they're
+online they're all written in C they're
+all about a thousand times faster than
+all about a thousand times faster than
+what you'll find in most of the rest of
+what you'll find in most of the rest of
+reinforcement learning and we're
+reinforcement learning and we're
+developing more of these we're using
+developing more of these we're using
+these to do science very very
+these to do science very very
+efficiently uh to make reinforcement
+efficiently uh to make reinforcement
+learning sane and consistent this is my
+learning sane and consistent this is my
+attempt at revolutionizing an important
+attempt at revolutionizing an important
+subfield what I see is a probably one of
+subfield what I see is a probably one of
+the most underappreciated areas of AI
+the most underappreciated areas of AI
+and Tech that is what puffer is and
+and Tech that is what puffer is and
+there's lots of content around it
+there's lots of content around it
+there's this blog post I have lots of
+there's this blog post I have lots of
+stuff on X there's this whole community
+stuff on X there's this whole community
+on Discord and of course all the codes
+on Discord and of course all the codes
+open source
+open source
+so that is what this is
+and you know I stream all the work for
+and you know I stream all the work for
+various reasons but uh it's been uh it's
+various reasons but uh it's been uh it's
+been a good time for the most part
+here okay so this interface sucks
+um yeah this interface sucks
+um yeah this interface sucks
+so this we're going to keep puffer carbs
+carbs
+pin yeah this is kind of nuts if you're
+pin yeah this is kind of nuts if you're
+looking at
+this making a certain part of puffer lib
+this making a certain part of puffer lib
+puffer lib is my project so I mean this
+puffer lib is my project so I mean this
+is I just stream my development on it at
+is I just stream my development on it at
+the moment I'm working on uh improving
+the moment I'm working on uh improving
+hyperparameter sweeps so it's a
+hyperparameter sweeps so it's a
+combination of you know engineering new
+combination of you know engineering new
+environments uh I look at existing
+environments uh I look at existing
+research papers and I try to improve
+research papers and I try to improve
+things there we run way more rigorous
+things there we run way more rigorous
+tests than are done in the vast majority
+tests than are done in the vast majority
+of science right we're able to do that
+of science right we're able to do that
+because of the performance of puffer lib
+because of the performance of puffer lib
+it's just all around we try to fix
+it's just all around we try to fix
+various areas of uh of
+RL all the previous
+RL all the previous
+ones certain part all the previous ones
+ones certain part all the previous ones
+ones yeah I mean all the dev streams are
+ones yeah I mean all the dev streams are
+just me working on various things in
+just me working on various things in
+puffer lib um most of it is it's
+puffer lib um most of it is it's
+actually kind of split now most of it is
+actually kind of split now most of it is
+just me advancing the areas of core
+just me advancing the areas of core
+puffer development that I think are
+puffer development that I think are
+going to be important we have a couple
+going to be important we have a couple
+contracts with companies um so sometimes
+contracts with companies um so sometimes
+I do client stuff but the way it's set
+I do client stuff but the way it's set
+up is like the only thing that puffer
+up is like the only thing that puffer
+sells to companies is uh essentially a
+sells to companies is uh essentially a
+service package so it's like hey we want
+service package so it's like hey we want
+this thing to work better with puffer
+this thing to work better with puffer
+lib and then I'll go make it actually
+lib and then I'll go make it actually
+work with puffer lib and because
+work with puffer lib and because
+everything's open source it's still I'd
+everything's open source it's still I'd
+still do it on
+stream it's generally good time this is
+stream it's generally good time this is
+a relatively new company I just
+a relatively new company I just
+graduated this past
+spring and already the progress has been
+spring and already the progress has been
+absolutely nuts um you know we've made
+absolutely nuts um you know we've made
+our like a thousand times faster in 8
+our like a thousand times faster in 8
+months or
+months or
+whatever so it's definitely going well
+whatever so it's definitely going well
+there are few areas that I think need to
+there are few areas that I think need to
+be improved and this is one of the major
+be improved and this is one of the major
+ones at the moment this is a difficult
+ones at the moment this is a difficult
+area to improve but uh I'm working on it
+area to improve but uh I'm working on it
+it's hyper parameter sweeps
+LMS basically all the knowledge is in
+LMS basically all the knowledge is in
+the pre-train
+the pre-train
+model sftl does reformulates
+probability well because the pre-train
+probability well because the pre-train
+model is just it's a completion model
+model is just it's a completion model
+model right uh like Max probability of
+model right uh like Max probability of
+next token which is very far from from a
+next token which is very far from from a
+usability perspective that's very far
+usability perspective that's very far
+from how you would want to interact with
+from how you would want to interact with
+a model uh and how you would like it to
+a model uh and how you would like it to
+apply all that so basically you have a
+apply all that so basically you have a
+generic compression algorithm and you
+generic compression algorithm and you
+need to know how to steer it the
+need to know how to steer it the
+hypothesis right is that compression is
+hypothesis right is that compression is
+intelligence um and then the RL is how
+intelligence um and then the RL is how
+do you steer that because you know it
+do you steer that because you know it
+having the world's best zip program
+having the world's best zip program
+right is not on its own that doesn't
+right is not on its own that doesn't
+solve stuff on its own you have to steer
+solve stuff on its own you have to steer
+it do you think this kind of thank you
+it do you think this kind of thank you
+yeah uh do you think this kind of RL
+yeah uh do you think this kind of RL
+being done which is bringing up good
+being done which is bringing up good
+samples in topk will hit a limit yeah I
+samples in topk will hit a limit yeah I
+look that's like grpo I just saw um it's
+look that's like grpo I just saw um it's
+frankly really if I understand that
+frankly really if I understand that
+algorithm correctly and I only took a
+algorithm correctly and I only took a
+quick look at it um it's really
+quick look at it um it's really
+embarrassing say I think that the rest
+embarrassing say I think that the rest
+of the field didn't figure that out
+of the field didn't figure that out
+earlier because it's a very basic
+earlier because it's a very basic
+modification of PPO uh to add top K
+modification of PPO uh to add top K
+which is like something that they've
+which is like something that they've
+know everyone has known for years works
+know everyone has known for years works
+really well with language models it's
+really well with language models it's
+also something that I would have never
+also something that I would have never
+tried in what I do because like it just
+tried in what I do because like it just
+makes the algorithm way more
+makes the algorithm way more
+expensive um so yeah I don't
+expensive um so yeah I don't
+that's kind of weird I don't know if
+that's kind of weird I don't know if
+that hits limits or not uh do I think
+that hits limits or not uh do I think
+that RL I do I think that the current
+that RL I do I think that the current
+language models as they are right now
+language models as they are right now
+with grpo and R1 and everything do I
+with grpo and R1 and everything do I
+think that that's going to solve the set
+think that that's going to solve the set
+of all problems we ever care about no
+of all problems we ever care about no
+that's why I'm working on this
+that's why I'm working on this
+right I think RL is they're missing a
+right I think RL is they're missing a
+lot of pieces in RL because frankly
+lot of pieces in RL because frankly
+what's being done on language models in
+what's being done on language models in
+RL right now is very
+basic it has to be very basic they can't
+basic it has to be very basic they can't
+run any experiments their experiments
+run any experiments their experiments
+are too
+are too
+expensive you never try anything
+expensive you never try anything
+remotely crazy when your experiments
+remotely crazy when your experiments
+cost millions of dollars to
+run I guess a couple hundred thousand in
+run I guess a couple hundred thousand in
+the case of their um fine-tuning but
+still generating a lot of
+still generating a lot of
+samples yep well the funny thing is
+samples yep well the funny thing is
+you're not even generating that many
+you're not even generating that many
+samples you're doing RL with like no
+samples you're doing RL with like no
+data you know that uh in puffer we
+data you know that uh in puffer we
+actually can train on more data than all
+actually can train on more data than all
+of say gp4 on one GPU in a few
+days that's the difference in scale that
+days that's the difference in scale that
+we're looking at
+we're looking at
+here llms have crazy compute scale crazy
+here llms have crazy compute scale crazy
+numbers of parameters but actually very
+numbers of parameters but actually very
+little
+little
+data very very little data and we also
+data very very little data and we also
+have uh we also have some pretty good
+have uh we also have some pretty good
+empirical and theoretic medical evidence
+empirical and theoretic medical evidence
+that um reinforcement learning generally
+that um reinforcement learning generally
+requires more samples uh per model size
+requires more samples uh per model size
+like 10x more samples at least compared
+like 10x more samples at least compared
+to language
+to language
+models in generative learning which
+models in generative learning which
+makes sense because reinforcement
+makes sense because reinforcement
+learning uh the way that the loss is
+learning uh the way that the loss is
+constructed you get less
+constructed you get less
+information uh out of each sample so you
+information uh out of each sample so you
+need more
+samples for
+wer lip seems cool thank
+wer lip seems cool thank
+you it's really nice to be able to just
+you it's really nice to be able to just
+see all the environments on here like
+see all the environments on here like
+the thing that tells me that I think
+the thing that tells me that I think
+that we're on the right
+that we're on the right
+track I think this is just a render
+track I think this is just a render
+bug b
+ago that was weird
+ago that was weird
+um the thing that tells me that I think
+um the thing that tells me that I think
+that we're on the right track so this is
+that we're on the right track so this is
+basically I worked on neural MMO for my
+basically I worked on neural MMO for my
+whole PhD and then in like 3 months I
+whole PhD and then in like 3 months I
+built a version of it around you know
+built a version of it around you know
+using the ideas and the approaches of
+using the ideas and the approaches of
+puffer uh this
+version is way larger more complex more
+version is way larger more complex more
+visually impressive runs on web and is a
+visually impressive runs on web and is a
+thousand times faster than anything I
+thousand times faster than anything I
+built during my PhD with like less than
+built during my PhD with like less than
+a third of the
+code
+code
+so yeah it's an exciting time it's a lot
+so yeah it's an exciting time it's a lot
+of work mind you we've already shipped I
+of work mind you we've already shipped I
+think like puffer is about 30,000 lines
+think like puffer is about 30,000 lines
+of code right now and it's not 30,000
+of code right now and it's not 30,000
+lines of garbage either like it's 30,000
+lines of garbage either like it's 30,000
+lines pretty darn dense of of good stuff
+the core is only a few thousand lines
+the core is only a few thousand lines
+but then it's 20,000 lines of
+but then it's 20,000 lines of
+environments and that's growing
+rapidly we have all sorts of
+rapidly we have all sorts of
+contributors over 10,000 of that is from
+contributors over 10,000 of that is from
+contributors yeah so it's actually like
+contributors yeah so it's actually like
+a decent chunk of puffer Li is made by
+a decent chunk of puffer Li is made by
+contributors many of whom came in with
+contributors many of whom came in with
+zero prior RL experience basically
+zero prior RL experience basically
+anybody who's like can write decent code
+anybody who's like can write decent code
+and is willing to learn learn stuff um
+and is willing to learn learn stuff um
+and will like PR cool new environments I
+and will like PR cool new environments I
+just you know I train on the RL side um
+just you know I train on the RL side um
+as they go so now we have like you know
+as they go so now we have like you know
+multiple new people who are submitting
+multiple new people who are submitting
+awesome new environments and who are
+awesome new environments and who are
+getting pretty good at the RL side as
+well e
+we're going to take all this for now
+we're going to take all this for now
+we're not going to take all of it thanks
+we're not going to take all of it thanks
+look forward to maybe learn contribute
+look forward to maybe learn contribute
+yeah thank you stop by streams you know
+yeah thank you stop by streams you know
+join the Discord if you like we organize
+join the Discord if you like we organize
+all the stuff on
+there not for LM specifically but for uh
+there not for LM specifically but for uh
+for General RL this is the place to be
+for General RL this is the place to be
+at the moment I would not be doing this
+at the moment I would not be doing this
+full time unless I really thought that
+full time unless I really thought that
+there was uh was something there you
+know fortunately my job ends up
+know fortunately my job ends up
+including cleaning up thousands and
+including cleaning up thousands and
+thousands of lines of code from
+thousands of lines of code from
+Academia but uh you know we do a little
+housekeeping what in the
+heck for
+this oh you can seed it I doubt that's
+this oh you can seed it I doubt that's
+reproducible
+but also we're getting rid of these
+but also we're getting rid of these
+freaking annotations I hate type
+freaking annotations I hate type
+annotations in Python so
+annotations in Python so
+much they don't do
+much they don't do
+anything the only reason you need them
+anything the only reason you need them
+is because you're overbuilding
+is because you're overbuilding
+everything
+initial search
+radius look at all this like adder
+radius look at all this like adder
+validator
+did not prevent a single
+bug we're not going to need this
+perm actually this is very easy to
+perm actually this is very easy to
+paraliz as well the way I'm looking at
+paraliz as well the way I'm looking at
+it
+we're actually going to keep this
+we're actually going to keep this
+structured
+here uh this is going to be something
+here uh this is going to be something
+like samples for
+res sample
+frequency I like this comment
+Max suggestion
+cost minimum cost for prito
+cost minimum cost for prito
+set to be this percentile of cost data
+I don't know about that
+one I don't think I like that
+one we're not doing this
+one we're not doing this
+okay so this entire now this whole carbs
+okay so this entire now this whole carbs
+pram thing is just gone replaced with
+pram thing is just gone replaced with
+only a few lines
+only a few lines
+here and actually I think that that uh
+here and actually I think that that uh
+this comment will go where we actually
+this comment will go where we actually
+use
+it now we got to go look at what
+it now we got to go look at what
+actually is in carbs and their in nit
+actually is in carbs and their in nit
+function
+it's actually funny because I in my head
+it's actually funny because I in my head
+I have no idea how I'm planning on like
+I have no idea how I'm planning on like
+restructuring their code I just kind of
+restructuring their code I just kind of
+go through it and fix small things one
+go through it and fix small things one
+at a time but uh I've done this exact
+at a time but uh I've done this exact
+thing like four or five times this past
+thing like four or five times this past
+couple weeks with what I do here oh
+couple weeks with what I do here oh
+nothing um
+nothing um
+uh I did this like four or five times
+uh I did this like four or five times
+with different academic repos and
+with different academic repos and
+it's always produced like ridiculously
+it's always produced like ridiculously
+simplified code there's just so much to
+simplified code there's just so much to
+cut like what I'm doing now wouldn't do
+cut like what I'm doing now wouldn't do
+anything if the code were like within
+anything if the code were like within
+mostly reasonable bounds of complexity
+mostly reasonable bounds of complexity
+it's just so over complicated that
+it's just so over complicated that
+there's just so much to
+cut it's pretty basic as well
+cut it's pretty basic as well
+a lot of
+a lot of
+this I mean I say that but I
+this I mean I say that but I
+definitely there's definitely like I'm
+definitely there's definitely like I'm
+way better at this now than I would have
+way better at this now than I would have
+been
+been
+before decisions would have been made
+differently need
+this don't need
+this don't need
+this real number bace by name
+like
+this actually because these are objects
+this actually because these are objects
+I can get a flat
+view so I can do this
+this e
+why do they
+need I'd rather keep most of this in
+need I'd rather keep most of this in
+numpy you
+numpy you
+know it's not faster the way they're
+know it's not faster the way they're
+doing
+doing
+it in fact their code was horribly
+slow for
+there that's better right
+join the community looking forward to it
+join the community looking forward to it
+great thanks for dropping
+by oops I don't like when it tries to
+by oops I don't like when it tries to
+have complete too much for
+me this is fine except I don't like the
+me this is fine except I don't like the
+type annotation
+I don't need to annotate this as a list
+I don't need to annotate this as a list
+because it's obviously a list and you
+because it's obviously a list and you
+don't need to know what type of object
+don't need to know what type of object
+it is if I don't make some big fancy
+it is if I don't make some big fancy
+object it's probably just going to be a
+object it's probably just going to be a
+dictionary
+and this is act
+yes I think in a second yeah I'm going
+yes I think in a second yeah I'm going
+to
+to
+go do a couple quick things I'll be back
+go do a couple quick things I'll be back
+in uh I don't know 5 10 minutes
+in uh I don't know 5 10 minutes
+is then we'll do a little bit more on
+is then we'll do a little bit more on
+this another hour or so be right
+back
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e e
+I'm
+I'm
+back very eloquent Mr pepper
+that about matches what we wanted as
+that about matches what we wanted as
+well
+perfect let's see this real quick
+o
+oh it's actually not terrible at
+oh it's actually not terrible at
+exploring
+now got stuck all the way down that end
+now got stuck all the way down that end
+of the maze Holy look at
+that ah they got stuck
+that ah they got stuck
+there it's weird they get stuck there I
+there it's weird they get stuck there I
+wonder if there's no there's not a bug
+it took me quite some time to realize
+it took me quite some time to realize
+neural MMO with
+neural MMO with
+you
+you
+yeah well I mean I don't know I might
+yeah well I mean I don't know I might
+change it now the thing is that for a
+change it now the thing is that for a
+while right uh people knew me from
+while right uh people knew me from
+neural MMO more but now puffer lips
+neural MMO more but now puffer lips
+cotton I think bigger than neural MMO
+cotton I think bigger than neural MMO
+ever was at least if you look at like
+ever was at least if you look at like
+GitHub Stars contributors discords about
+GitHub Stars contributors discords about
+the same size or getting to be and uh
+the same size or getting to be and uh
+the neural Discord had like three
+the neural Discord had like three
+competitions worth of participants in
+it concerns me when the puffer just gets
+it concerns me when the puffer just gets
+fully stuck like that that's kind of
+fully stuck like that that's kind of
+weird so you can see here like this
+weird so you can see here like this
+thing is it's running around quite a bit
+thing is it's running around quite a bit
+um but it's still
+not it's not exploring the way that you
+not it's not exploring the way that you
+would want like a maze solver to explore
+would want like a maze solver to explore
+it's pretty decent
+that one actually took me a second to
+that one actually took me a second to
+see the path
+see the path
+on that's a hard maze for it it's got to
+on that's a hard maze for it it's got to
+go all the way
+back it's covering a decent chunk of it
+though yeah there you go
+yeah I even got that
+one you're so close come
+on
+oh memory is not very good
+some of the mazes are pretty hard for
+some of the mazes are pretty hard for
+it this one has like a very
+it this one has like a very
+clear backtrack all the
+way small ones it just instantly
+solves so you get this one
+oh yeah look at that it even figured out
+oh yeah look at that it even figured out
+that one that's good
+that one that's good
+whoa okay this is a pretty decent little
+whoa okay this is a pretty decent little
+model this model's like 170k parameters
+model this model's like 170k parameters
+by the way it's
+tiny this is the first sweep I ever ran
+tiny this is the first sweep I ever ran
+on uh on these uh bigger
+Maps okay we'll do some cars stuff now
+Maps okay we'll do some cars stuff now
+but there you
+go Ram from
+go Ram from
+basic
+for e
+do
+that let try
+that let try
+this search distribution
+no we're not doing a distribution we're
+no we're not doing a distribution we're
+not going to have that thingy
+around subjects or observe lock I hate
+around subjects or observe lock I hate
+this we're getting rid of this I don't
+this we're getting rid of this I don't
+think we need this either
+I see so they Ste everything there
+think we'll leave that alone
+numb dims with
+numb dims with
+bounds we don't
+care two to
+the that's kind of
+crazy
+e I wonder if there's some way to do
+e I wonder if there's some way to do
+this whole thing as one
+run I don't know if there's a way to do
+run I don't know if there's a way to do
+your whole hyperr sweep is like one
+your whole hyperr sweep is like one
+contiguous run
+that's another whole bunch of code gone
+now here is their suggest
+function
+function
+oops wrong
+button I mean these are both of the
+button I mean these are both of the
+functions that we
+functions that we
+need let's see how much
+need let's see how much
+uh how much smaller these can be
+made so what do they
+do
+for e
+random suggestion
+uh this is the
+resample was this config resample
+resample was this config resample
+frequency for
+so this is their
+so this is their
+basic sample logic right
+basic sample logic right
+here let me just finish the uh the full
+here let me just finish the uh the full
+chain
+first this is the rest of it
+and they do like this
+yeah so this
+yeah so this
+is this is fine this is like roughly
+is this is fine this is like roughly
+what it'll look like
+I wonder if I can
+um well I have an idea for how to return
+um well I have an idea for how to return
+it as a structured
+it as a structured
+value we'll get to
+value we'll get to
+that so it's really just implementing
+that so it's really just implementing
+this this logic
+this this logic
+here generate
+candidate basic space to param space
+okay so we can get rid of this function
+okay so we can get rid of this function
+cuz we no longer need this as a
+cuz we no longer need this as a
+template and we may as well just put the
+template and we may as well just put the
+observe stuff in
+observe stuff in
+here uh there's literally nothing
+here and observation yeah there's
+here and observation yeah there's
+nothing in here that's
+useful
+okay what I'm going to do real
+okay what I'm going to do real
+quick I don't I can actually navigate
+easier e
+sample search
+space holy hell look at like the how
+space holy hell look at like the how
+nested this is you see this
+nested this is you see this
+right I don't see how anybody codes like
+right I don't see how anybody codes like
+this like just how do you how do you
+this like just how do you how do you
+keep track of what you're doing when you
+keep track of what you're doing when you
+Nest everything this
+deep see this is the actual piece of
+deep see this is the actual piece of
+code that we want but it was five levels
+code that we want but it was five levels
+deep AI IDE
+why just like why
+it's very difficult for me to see a
+it's very difficult for me to see a
+point in which you are you as a
+point in which you are you as a
+programmer are using your skill
+programmer are using your skill
+productively somehow right you're
+productively somehow right you're
+actually adding something but you're
+actually adding something but you're
+letting an AI write like entire blocks
+letting an AI write like entire blocks
+of code for you
+I much prefer um single line complete
+I much prefer um single line complete
+which is basically just a better LSP
+which is basically just a better LSP
+it's just like a typing
+buff like you can see while I'm typing
+buff like you can see while I'm typing
+right I do have ai auto complete on but
+right I do have ai auto complete on but
+you see I use it for like on line
+you see I use it for like on line
+completes right like if I just do like
+completes right like if I just do like
+def you see right
+def you see right
+here it just it makes me type A about
+here it just it makes me type A about
+twice as fast that's all it
+does and prevents me from having to like
+does and prevents me from having to like
+allocate brain space to remembering uh
+allocate brain space to remembering uh
+to remembering my variable names and
+to remembering my variable names and
+such but I still do pay attention to my
+such but I still do pay attention to my
+variable
+names yeah but stuff like cursor and all
+names yeah but stuff like cursor and all
+these like people are not just tabing
+these like people are not just tabing
+like if you're just tabing you don't
+like if you're just tabing you don't
+need an IDE right you need a plugin for
+need an IDE right you need a plugin for
+whatever you're currently
+using people who are using whole IDE
+using people who are using whole IDE
+built around this are like filling in
+built around this are like filling in
+giant blocks and
+such it would be nice for this to have a
+such it would be nice for this to have a
+little bit more context you know it
+little bit more context you know it
+would be nice to be able to initialize
+would be nice to be able to initialize
+this with context of my code base so it
+this with context of my code base so it
+picks up more variable names and such um
+picks up more variable names and such um
+but that's like again that's still a
+plugin I see so they're using torch here
+plugin I see so they're using torch here
+for the sampling
+do
+sample
+sample
+huh
+wait how are they using this
+origin
+origin
+samples origins in
+basic does that make any
+sense how's this work
+oh I guess it's because they use this
+oh I guess it's because they use this
+for
+for
+um I see
+um I see
+so the reason it's like this is because
+so the reason it's like this is because
+they also use this function
+they also use this function
+for uh for their Paro
+sample that is kind of
+clever for
+I think that this is for this one is
+I think that this is for this one is
+just a
+oneliner it's probably something
+like e
+and then what is
+and then what is
+this search
+this search
+center plus search scale
+I could see why having this be separate
+I could see why having this be separate
+would be
+useful
+e e
+Sigma is not per sample
+standard normal
+random. generator what the hell is this
+what the hell is this thing why did they
+what the hell is this thing why did they
+make
+this oh they want you to control your
+this oh they want you to control your
+RNG but that's kind of silly by default
+I guess this kind of makes
+sense actually maybe this would
+sense actually maybe this would
+be maybe this would be
+useful right because probably your
+useful right because probably your
+seating
+seating
+issues your probably your seating issues
+issues your probably your seating issues
+do come from this
+but we're not going to worry about that
+but we're not going to worry about that
+for
+for
+now so this is Randon um
+I think this is the whole
+I think this is the whole
+thing I could be wrong but this is this
+thing I could be wrong but this is this
+should be your fantasy sampler
+like these long variable names
+all you need to do is pass the
+all you need to do is pass the
+um your parito points
+right
+for e
+it should be something
+it should be something
+like something like this
+oh actually you literally don't need to
+oh actually you literally don't need to
+do this I'm dumb this goes
+do this I'm dumb this goes
+here this is your uh
+yes
+and
+actually watch this
+the resample you can't do this for
+the resample you can't do this for
+actually so we'll leave it yeah it's
+actually so we'll leave it yeah it's
+only two of three that you can uh copy
+only two of three that you can uh copy
+the code for
+okay so that's the basic of
+it now there's going to have to be some
+it now there's going to have to be some
+sort of
+for
+amusingly enough this is uh not that far
+amusingly enough this is uh not that far
+off of already being a
+off of already being a
+complete uh implementation of I mean a
+complete uh implementation of I mean a
+substantially simplified one without any
+substantially simplified one without any
+of the
+of the
+models but this is like a Pito
+models but this is like a Pito
+optimal Pito optimal genetic search
+optimal Pito optimal genetic search
+essentially
+be funny if that actually worked very
+be funny if that actually worked very
+well wouldn't be surprised
+unnormalized happens at the very
+unnormalized happens at the very
+end which I guess her Baseline is right
+end which I guess her Baseline is right
+here
+hold on though what I can do
+is e
+just need a way to rebuild the
+just need a way to rebuild the
+dictionary as
+all I mean here's a really stupid
+all I mean here's a really stupid
+way
+right for
+no this doesn't work either
+okay we'll write something uh we'll
+okay we'll write something uh we'll
+write something quick for
+now
+e e
+something like that
+and then this just needs to get the
+and then this just needs to get the
+parito points from
+parito points from
+observations let's figure out how to do
+observations let's figure out how to do
+that
+oops hang on this is suggestion
+best let's just
+do for
+do for
+now just pick one of
+them you f okay
+success observations for
+and then parito
+points for
+lost
+for e
+yeah okay that is a basic burito
+computation and this is
+computation and this is
+a
+relatively uh well I got to go grab the
+relatively uh well I got to go grab the
+spaces and clean those
+up luckily that should be easier
+look at all this
+mess okay so there's nothing in here
+Adder dos where did they get this Adder
+Adder dos where did they get this Adder
+thing
+Auto
+atribs is this like a new data
+class or different data
+class oh this
+class oh this
+is this is uh that's funny yeah we're
+is this is uh that's funny yeah we're
+not using that
+howy okay we'll keep this pretty similar
+howy okay we'll keep this pretty similar
+to their thing for now though I I don't
+to their thing for now though I I don't
+like it so we're going to
+like it so we're going to
+probably uh we're probably going to
+probably uh we're probably going to
+change some
+change some
+stuff for
+so this is
+normal thing is so bad
+normal thing is so bad
+CL unnormalized
+we're cutting some fat off of
+we're cutting some fat off of
+carbs and by some I
+mean what's that famous uh
+mean what's that famous uh
+quote cutting off F if you uh if you
+quote cutting off F if you uh if you
+rendered it you could make soap to wash
+rendered it you could make soap to wash
+the world or
+the world or
+something it's one of
+those can't you just do this now wait on
+those can't you just do this now wait on
+class classes without having
+class classes without having
+to do anything
+else
+whatever go away horrible pipes
+really do not enjoy types in Python
+it's like look at how much extra clutter
+it's like look at how much extra clutter
+they add and they don't give you
+they add and they don't give you
+anything they're not even
+anything they're not even
+enforced all right and we'll clean up
+enforced all right and we'll clean up
+this math I'm sure as
+well I think I think that's about all
+well I think I think that's about all
+you need
+though and all you got to do
+is I think you just you add is integer
+is I think you just you add is integer
+at the top as
+well okay so better at least
+then what's this
+Pam uh completely redundant
+right mean equal search Center
+there you
+go so that is a
+go so that is a
+basic I'm sure not working but that is a
+basic I'm sure not working but that is a
+basic implement M
+ation I should
+ation I should
+go do what I need to do go for my run
+go do what I need to do go for my run
+and stuff before it gets too hot outside
+and stuff before it gets too hot outside
+today um we're going to see how I'm
+today um we're going to see how I'm
+feeling I might come back and do some of
+feeling I might come back and do some of
+this in the afternoon I'm enjoying this
+this in the afternoon I'm enjoying this
+uh I should also rest a little and do
+uh I should also rest a little and do
+catch up on a couple other little other
+catch up on a couple other little other
+work things but uh we'll see I think is
+work things but uh we'll see I think is
+is important so I might come back to
+is important so I might come back to
+this in the
+this in the
+afternoon um for folks
+watching all this stuff is free and open
+watching all this stuff is free and open
+source you can check out puff. for all
+source you can check out puff. for all
+of our demos here these all run on the
+of our demos here these all run on the
+web if you want to help us out for free
+web if you want to help us out for free
+just start the repository really really
+just start the repository really really
+helps really does and if you want to get
+helps really does and if you want to get
+involved with development or just
+involved with development or just
+following the
+following the
+project join the disc
+project join the disc
+support got a whole bunch of orl
+support got a whole bunch of orl
+Articles and stuff on the blog here and
+Articles and stuff on the blog here and
+if you want even more you can follow my
+if you want even more you can follow my
+X where there are some additional things
+X where there are some additional things
+you can't find anywhere else in the
+you can't find anywhere else in the
+Articles and I post a bunch about
+RL the uh the quotes from a US president
+RL the uh the quotes from a US president
+I forget which one was talking about the
+I forget which one was talking about the
+government but uh it's a funny quote
+government but uh it's a funny quote
+anyways thank you uh thanks folks and uh
+anyways thank you uh thanks folks and uh
+I I will

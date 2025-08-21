@@ -1,0 +1,3251 @@
+Kind: captions
+Language: en
+We are back live.
+We are back live.
+Hi. Here's the plan. I'm be all day
+Hi. Here's the plan. I'm be all day
+minus minus breakfast in an hour.
+minus minus breakfast in an hour.
+Um, we want to get pretty dang close to
+Um, we want to get pretty dang close to
+the release today. I think we can start
+the release today. I think we can start
+running almost some of the final
+running almost some of the final
+experiments.
+experiments.
+pretty close to final
+experiments and
+experiments and
+um generally looking at the remaining
+um generally looking at the remaining
+items that need to be done before
+release. The fact that neural MMO is
+release. The fact that neural MMO is
+just not learning stuff is a little
+just not learning stuff is a little
+weird.
+How about
+this? I mean, this is a really good one,
+this? I mean, this is a really good one,
+right?
+I mean, our sweep code definitely works.
+I mean, our sweep code definitely works.
+I think neural MMO is just
+hard. Take a quick look at the to-dos.
+I mean to be fair there are like a lot
+I mean to be fair there are like a lot
+of small things we can just like start
+of small things we can just like start
+doing one by
+one. Minor M should work on one hyperp
+set. Why don't we see if we can get
+Did we do like breakout and
+then like triple triad or one of
+those? Those would be like two pretty
+those? Those would be like two pretty
+different M's,
+right? Or do we want to see if we can
+right? Or do we want to see if we can
+get mini batch size actually sweepable?
+get mini batch size actually sweepable?
+That might be
+That might be
+better. Let's just like let's just start
+better. Let's just like let's just start
+doing like a few things on this. Playing
+doing like a few things on this. Playing
+around with
+this breakout
+trains break out here.
+And I have some like custom coefficients
+And I have some like custom coefficients
+on here. It looks
+like that pushes it over 3 mil like
+like that pushes it over 3 mil like
+immediately.
+Oh, it's just going to keep getting
+Oh, it's just going to keep getting
+faster,
+huh? Okay,
+huh? Okay,
+let's let's fix
+let's let's fix
+um the speed reporting so I can actually
+um the speed reporting so I can actually
+see what's going on.
+see what's going on.
+If we ship like 5 mil SPS train demo,
+If we ship like 5 mil SPS train demo,
+that would be pretty
+cool. Even know if that's feasible.
+cool. Even know if that's feasible.
+We'll see.
+What did I do that would have messed
+What did I do that would have messed
+this up?
+I guess like the fact that this is time
+I guess like the fact that this is time
+based
+want to append.
+want to append.
+No, we want to do like
+still don't Now,
+Okay, whatever. We'll leave it like this
+Okay, whatever. We'll leave it like this
+for now. We'll see if we can come up
+for now. We'll see if we can come up
+with something better after, but this is
+decent. So, how does BPT Horizon work
+decent. So, how does BPT Horizon work
+now in the latest
+version? Batch size over total agents.
+That's not
+bad. Well, apparently we can just do
+this. This like
+V RAM at 20 is actually kind of
+correct. What change that I am allowed
+correct. What change that I am allowed
+to do
+this? Can I just keep making this
+this? Can I just keep making this
+larger?
+Can I just do batch gradient descent on
+this? Like, does this actually just
+this? Like, does this actually just
+work?
+Well, that's
+weird.
+4.3. Okay. But you kind of saturate the
+4.3. Okay. But you kind of saturate the
+games like before then, right?
+Is this actually like
+train? Not really.
+Right. But then if I do
+I mean, what would this be? Just like
+I mean, what would this be? Just like
+way bigger learning
+rate.
+Yeah. I mean, it's cool to see though
+Yeah. I mean, it's cool to see though
+that we can actually
+that we can actually
+like we can actually play with this
+like we can actually play with this
+variable now.
+variable now.
+I don't actually know what
+I don't actually know what
+changed before. You know in the earlier
+changed before. You know in the earlier
+code when I would do this you would get
+code when I would do this you would get
+a diminishing returns like it would go
+a diminishing returns like it would go
+negative after some
+point I guess. Why don't we try to
+point I guess. Why don't we try to
+like why don't we see if we can like max
+like why don't we see if we can like max
+perf on neural MMO uh on neural MMO then
+perf on neural MMO uh on neural MMO then
+Okay.
+So, this box that I'm using
+So, this box that I'm using
+here is uh sitting on the shelf behind
+here is uh sitting on the shelf behind
+me,
+me,
+right? You can see it right there above
+right? You can see it right there above
+my
+thumb. This is a pretty nice config. I
+thumb. This is a pretty nice config. I
+wish I'd gotten more of these, but uh
+wish I'd gotten more of these, but uh
+they're on tariffs
+now.
+Okay. So, this was just not sweeping
+Okay. So, this was just not sweeping
+mini batch size.
+Very
+nice. You could say I've been doing some
+nice. You could say I've been doing some
+refactoring on
+this. And then we go here.
+Okay.
+Interesting. Oh, I just have to rebuild
+this. I did modify a bunch of CUDA.
+Okay, let's just um let's have a little
+Okay, let's just um let's have a little
+bit of fun until breakfast and figure
+bit of fun until breakfast and figure
+out what is the like ludicrously fastest
+out what is the like ludicrously fastest
+we can get stuff to train with puffer
+now. So, out of the box, we're close to
+now. So, out of the box, we're close to
+three mil steps per second with default
+three mil steps per second with default
+settings.
+I do
+this. Holy
+this. Holy
+hell. Over 5 mil SPS training.
+Now, it doesn't learn anything with
+Now, it doesn't learn anything with
+these settings, and I have no idea if
+these settings, and I have no idea if
+it's even possible to learn anything
+it's even possible to learn anything
+with settings that look like
+that. Hang on. So, what does that imply?
+Does that imply like way more
+Does that imply like way more
+environments would be
+better cuz like the way that this works
+better cuz like the way that this works
+right it's mini batch divide by total
+right it's mini batch divide by total
+agents. So the way like I generally set
+agents. So the way like I generally set
+this up it's
+this up it's
+524 288 divide by
+524 288 divide by
+uh 81
+uh 81
+92 agents is 64
+92 agents is 64
+horizon. So then like
+horizon. So then like
+131072ide by
+131072ide by
+64. It's actually only a 2048 batched
+64. It's actually only a 2048 batched
+board pass. I
+board pass. I
+guess let's see if I can get the N to
+guess let's see if I can get the N to
+bottleneck it by messing with these
+bottleneck it by messing with these
+settings a little bit. So like
+Let's go to like some ridiculous batch
+size. Wait, what do I need to multiply
+size. Wait, what do I need to multiply
+this by? I think just
+this by? I think just
+um this will satisfy
+um this will satisfy
+it.
+it.
+290. Yeah, this
+290. Yeah, this
+one. All right. All right. And now I
+one. All right. All right. And now I
+have to multiply this
+have to multiply this
+by
+16 something like this.
+Six million steps per second.
+I go one
+more. It gets slower.
+Oh, because the Hang on. That's because
+Oh, because the Hang on. That's because
+the BPD horizon though. I did
+the BPD horizon though. I did
+I I mess up something.
+The board pass got faster.
+do eight
+workers. Actually, it's a
+workers. Actually, it's a
+16 like this.
+M's must be divisible.
+So we get hit by like massive copy
+So we get hit by like massive copy
+overhead,
+huh? I mean there are two things that
+huh? I mean there are two things that
+are a little weird here, right? One is
+are a little weird here, right? One is
+that the M is way faster than this. The
+that the M is way faster than this. The
+M should be running at like tens of
+M should be running at like tens of
+millions per second. It shouldn't be
+millions per second. It shouldn't be
+this like really any amount of the
+compute. And the second is the copy
+compute. And the second is the copy
+overhead shouldn't be that high
+either. Like if we just look up like
+um Okay, this is
+um Okay, this is
+literally like almost two
+terabytes. So then why is this are these
+terabytes. So then why is this are these
+like
+Is this like copy overhead or something?
+Is this like copy overhead or something?
+Like
+Like
+what? What is
+this? Let's go look at some things
+this? Let's go look at some things
+here. First of all, let's like try to
+here. First of all, let's like try to
+get this into a state
+get this into a state
+where we expect this to do something.
+where we expect this to do something.
+more reasonable. So
+more reasonable. So
+9% massive number of M's
+9% massive number of M's
+here. I was going for 32. Can you check
+here. I was going for 32. Can you check
+out my sweep? Yes, Spencer. I am uh I'm
+out my sweep? Yes, Spencer. I am uh I'm
+trying to see if we can hit like some
+trying to see if we can hit like some
+ludicrous speedrun on on Breakout. But
+ludicrous speedrun on on Breakout. But
+yeah, I can totally check out sweeps.
+yeah, I can totally check out sweeps.
+Just link them in the Discord.
+It's not that
+I think I should kill the run and
+I think I should kill the run and
+switch. Let me
+switch. Let me
+look. Getting collision below
+look. Getting collision below
+1%. Is this with
+immunity? Okay. So, this Prito run is
+immunity? Okay. So, this Prito run is
+not
+not
+like like you're getting all the perk
+like like you're getting all the perk
+very quickly. Here, we'll do a little
+very quickly. Here, we'll do a little
+live analysis.
+live analysis.
+It'll be good for you and for folks
+It'll be good for you and for folks
+watching so you can see how I look at
+watching so you can see how I look at
+these
+things. Okay, so this is capped out.
+Um, this ended up actually being a
+Um, this ended up actually being a
+pretty
+pretty
+good length here. Is this Wait, is this
+good length here. Is this Wait, is this
+mil? This is 100 million steps at the
+mil? This is 100 million steps at the
+high end,
+high end,
+right? Oh, 150
+right? Oh, 150
+mil.
+Okay. I mean, but you're really you're
+Okay. I mean, but you're really you're
+getting capped out PF in literally like
+getting capped out PF in literally like
+no steps at all here.
+Um, so I mean that suggests that it's
+Um, so I mean that suggests that it's
+not just like I don't know why a
+not just like I don't know why a
+kneeling would help you then because you
+kneeling would help you then because you
+still have plenty you have plenty
+still have plenty you have plenty
+learning right here. You have a few
+learning right here. You have a few
+unstable runs which is
+unstable runs which is
+interesting. It improves slowly. Does
+it? That looks flat to me at the
+it? That looks flat to me at the
+top. So this is on log scale and it's
+top. So this is on log scale and it's
+still flat at the top.
+You
+You
+see, unless there's some in here that
+see, unless there's some in here that
+are like, but the best ones seem
+capped.
+Interesting. Let's see what you did on
+sweep. You have your own
+The one annoying thing here is just
+The one annoying thing here is just
+these plots are not going to be fun for
+these plots are not going to be fun for
+um because these are like percentages.
+um because these are like percentages.
+It's really tough to do analysis on
+It's really tough to do analysis on
+scores that have like percentages like
+scores that have like percentages like
+this. You can't really do a ton about
+this. You can't really do a ton about
+that. That's kind of
+that. That's kind of
+um a Neptune problem, but like you have
+um a Neptune problem, but like you have
+to kind of like know what difference
+to kind of like know what difference
+actually matters when you get up here. I
+actually matters when you get up here. I
+mean, these are
+actually these are still not to 99. You
+actually these are still not to 99. You
+can still kind of look at the relative
+can still kind of look at the relative
+differences
+here.
+95. Well, this seems pretty good, right?
+95. Well, this seems pretty good, right?
+There's like a little bit of a curve to
+There's like a little bit of a curve to
+this with the vehicle
+this with the vehicle
+collision. So, this seems to have an
+effect. Maybe a small one, right? Like
+effect. Maybe a small one, right? Like
+this. This looks like a pretty
+this. This looks like a pretty
+consistent line here.
+this off-road
+collision. If there is an effect, it's
+collision. If there is an effect, it's
+less because yeah, we've got 0.95 and
+less because yeah, we've got 0.95 and
+0.948. So, this doesn't seem like it
+0.948. So, this doesn't seem like it
+actually matters anywhere near as much
+actually matters anywhere near as much
+as like over here.
+as like over here.
+0.95
+0.95
+93 93. Yeah. So, there's like this does
+93 93. Yeah. So, there's like this does
+something.
+completion rate is not is completion
+completion rate is not is completion
+rate not
+score. The point of having the score
+score. The point of having the score
+variable or I guess the perf variable
+variable or I guess the perf variable
+now either of those is that it should be
+now either of those is that it should be
+the metric that you care about when you
+the metric that you care about when you
+plot stuff so that regardless of what
+plot stuff so that regardless of what
+experiments you're running you can apply
+experiments you're running you can apply
+those plots and you'll actually get the
+those plots and you'll actually get the
+plots you care
+about. Well, do any of these have
+about. Well, do any of these have
+completion rate plotted or no?
+Yes. In here or
+where? It's in there. Okay.
+I mean I see one plot with it.
+If this is the metric that you care
+If this is the metric that you care
+about, then this should be the y axis
+about, then this should be the y axis
+for
+for
+everything,
+right? Score is more important than
+right? Score is more important than
+completion. Okay. Well, then if this is
+completion. Okay. Well, then if this is
+the metric we care
+about, let's see if I see anything.
+These are some ridiculous learning
+rates. I see.
+Well, high value function coefficients
+Well, high value function coefficients
+consistent with what I've seen.
+I'm arguing over like 3%
+I'm arguing over like 3%
+here. Well, but like you're not arguing
+here. Well, but like you're not arguing
+over 3%. Like 3 percentage points from
+over 3%. Like 3 percentage points from
+51 to 54 is very different from 3
+51 to 54 is very different from 3
+percentage points from like 97 to 100,
+percentage points from like 97 to 100,
+right? Like if you look at relative
+right? Like if you look at relative
+improvement or relative error
+reduction like 99.9 is 10 times better
+reduction like 99.9 is 10 times better
+than 99.
+You're games
+with Why do you think that you should
+get Wait, why do you think it should be
+get Wait, why do you think it should be
+better without a kneeling?
+I have had runs that had episode return
+I have had runs that had episode return
+greater than
+eight. Have you had runs like on this
+eight. Have you had runs like on this
+version that have done that?
+This seems hardbound at eight. Like what
+This seems hardbound at eight. Like what
+does eight signify? Is there like a
+does eight signify? Is there like a
+significance to the number
+eight? It just happens to
+eight? It just happens to
+be. Oh man, that there looks like
+be. Oh man, that there looks like
+there's a significance to the number
+there's a significance to the number
+eight when I'm seeing 9 like 9 7.991 and
+eight when I'm seeing 9 like 9 7.991 and
+nothing is above eight. Oh, I guess
+nothing is above eight. Oh, I guess
+there's an
+there's an
+8.0027
+8.0027
+here. Okay, so it's not impossible to
+here. Okay, so it's not impossible to
+get above
+get above
+eight, but that's like suspiciously
+eight, but that's like suspiciously
+close to a whole number
+boundary for that like to signify
+boundary for that like to signify
+something, you know?
+5% vehicle collision. Okay, we can look
+5% vehicle collision. Okay, we can look
+at
+collision. Okay. I mean, here's
+like it kind of levels off
+though. Completion is basically 100 and
+though. Completion is basically 100 and
+off-road
+off-road
+is.3, but like this collision stuff
+is.3, but like this collision stuff
+could still be from things. I guess it
+could still be from things. I guess it
+can't be from respawning anymore,
+can't be from respawning anymore,
+right? Cuz that's no longer a thing.
+Clean collision is the better
+one. I mean, but these are like
+flat, right?
+here. Let me stop making you type
+here. Let me stop making you type
+stuff if you're not in
+stuff if you're not in
+uh if this is easier.
+Yep.
+Yep.
+Hey. All right. All right. So basically
+Hey. All right. All right. So basically
+my assumption and this you this could be
+my assumption and this you this could be
+wrong is that if you have like a small
+wrong is that if you have like a small
+enough learning rate
+enough learning rate
+or that of which I've seen in the
+or that of which I've seen in the
+experiments on the analing ones like
+experiments on the analing ones like
+it's still making like tiny tiny
+it's still making like tiny tiny
+improvements on one of the configs on
+improvements on one of the configs on
+one like the parameter sets I had
+one like the parameter sets I had
+yesterday but you know then it just dies
+yesterday but you know then it just dies
+because I only said it's like 100
+because I only said it's like 100
+million steps right? So yeah. So why
+million steps right? So yeah. So why
+don't you go longer with the kneeling
+don't you go longer with the kneeling
+on?
+on?
+Well, I I could. I mean, then it's just
+Well, I I could. I mean, then it's just
+a matter of like do I just set like a
+a matter of like do I just set like a
+fixed point further down the road? Like
+fixed point further down the road? Like
+set like a fixed like 300 million in
+set like a fixed like 300 million in
+reweep that would
+reweep that would
+Oh, I see what you mean. Yeah, you would
+Oh, I see what you mean. Yeah, you would
+just set a a longer a log a longer max
+just set a a longer a log a longer max
+and it would have to figure out the
+and it would have to figure out the
+analing coefficient
+analing coefficient
+because I mean at this point now there's
+because I mean at this point now there's
+like a ton of parameters, right? So it's
+like a ton of parameters, right? So it's
+hard for me to kind of gauge like if
+hard for me to kind of gauge like if
+it's actually
+it's actually
+explored tail end our sweep stuff is
+explored tail end our sweep stuff is
+pretty damn good at this point I will
+pretty damn good at this point I will
+say like it's not perfect but the sweep
+say like it's not perfect but the sweep
+algorithm is pretty damn good at finding
+algorithm is pretty damn good at finding
+hypers um and you do understand how a
+hypers um and you do understand how a
+kneeling works right like I mean it just
+kneeling works right like I mean it just
+slowly reduces the the learning rate but
+slowly reduces the the learning rate but
+do you like understand how much of a
+do you like understand how much of a
+difference that
+difference that
+makes like where is this trapezoidal
+makes like where is this trapezoidal
+LR this
+LR this
+Okay. So
+Okay. So
+like so this is cosine and he kneeling.
+like so this is cosine and he kneeling.
+Okay. Yeah. And then this is like this
+Okay. Yeah. And then this is like this
+trapezoidal thing which is like this
+trapezoidal thing which is like this
+other one that they introduced. So the
+other one that they introduced. So the
+point is that it has like this cool down
+point is that it has like this cool down
+here. Mhm.
+here. Mhm.
+Okay. Look at what a difference this
+Okay. Look at what a difference this
+makes in the
+makes in the
+graphs. So this is the annealed portion
+graphs. So this is the annealed portion
+right here in the loss.
+right here in the loss.
+Okay. So like your curves are going to
+Okay. So like your curves are going to
+be smooth with cosine. So you can't
+be smooth with cosine. So you can't
+really appreciate how much the annealing
+really appreciate how much the annealing
+is doing. But like literally just like
+is doing. But like literally just like
+pulling down the learning rate at the
+pulling down the learning rate at the
+end. This is how much better you do
+end. This is how much better you do
+versus having one fixed learning rate.
+And this graph is going is the y-axis
+And this graph is going is the y-axis
+going lower good or bad? Good. Okay. So
+going lower good or bad? Good. Okay. So
+this is like language model stuff. I I
+this is like language model stuff. I I
+guess the thing is you weren't around
+guess the thing is you weren't around
+when like
+when like
+um
+um
+Like let's
+Like let's
+see, you probably weren't around to like
+see, you probably weren't around to like
+see the early like reduce learning rate
+see the early like reduce learning rate
+on plateau or whatever graphs, but
+on plateau or whatever graphs, but
+basically we used to have graphs in ML
+basically we used to have graphs in ML
+that would look like this and they would
+that would look like this and they would
+like be like saw tooth or whatever
+like be like saw tooth or whatever
+because you would reduce the learning
+because you would reduce the learning
+rate like several times throughout
+rate like several times throughout
+training. Mhm. So like reducing the
+training. Mhm. So like reducing the
+learning rate makes it learn
+learning rate makes it learn
+way faster uh in certain cases. So like
+way faster uh in certain cases. So like
+you don't see it because cosine is a
+you don't see it because cosine is a
+smooth schedule. Um and so is like
+smooth schedule. Um and so is like
+linear. But like yeah it I don't think
+linear. But like yeah it I don't think
+just disabling like you could just break
+just disabling like you could just break
+stuff basically by turning a kneeling
+stuff basically by turning a kneeling
+off. It's worth trying once in a while
+off. It's worth trying once in a while
+because like yeah sometimes m just they
+because like yeah sometimes m just they
+work like that whatever. But uh often
+work like that whatever. But uh often
+it's like yeah you want to keep a
+it's like yeah you want to keep a
+kneeling and then just have it be able
+kneeling and then just have it be able
+to run for longer. And that's like one
+to run for longer. And that's like one
+of the things we discovered with
+of the things we discovered with
+breakout right like anal like without a
+breakout right like anal like without a
+kneeling we totally broke it. Yeah. I
+kneeling we totally broke it. Yeah. I
+mean that was something for breakout. Uh
+mean that was something for breakout. Uh
+but like for neural MMO, don't you do a
+but like for neural MMO, don't you do a
+linear learning rate for like two
+linear learning rate for like two
+billion steps? Well, why do I do that
+billion steps? Well, why do I do that
+though, right? I do that because the
+though, right? I do that because the
+full
+full
+run is a 100
+run is a 100
+bill. So like me analing over two
+bill. So like me analing over two
+billion, I do it so that if I Okay, I
+billion, I do it so that if I Okay, I
+guess here's the one thing I do. If I'm
+guess here's the one thing I do. If I'm
+going to do a like a sweep run and then
+going to do a like a sweep run and then
+I'm going to do like a 50x longer run
+I'm going to do like a 50x longer run
+afterwards, then yeah, you can disable a
+afterwards, then yeah, you can disable a
+kneeling because it's a better chance
+kneeling because it's a better chance
+that the hyperparameters will
+that the hyperparameters will
+transfer. Is that what you were going
+transfer. Is that what you were going
+for?
+I mean, I assume that when you're going
+I mean, I assume that when you're going
+from a linear learning, no mean just a
+from a linear learning, no mean just a
+flat a fixed learning rate versus using
+flat a fixed learning rate versus using
+co using some form of a kneeling that
+co using some form of a kneeling that
+you have to have entirely different
+you have to have entirely different
+parameter sets.
+parameter sets.
+Um possibly the main thing is
+like usually you do it on there are a
+like usually you do it on there are a
+few variables you usually do it on Jason
+few variables you usually do it on Jason
+but yes um so like the reason I do it
+but yes um so like the reason I do it
+and I think that I think we're getting
+and I think that I think we're getting
+at the same thing here I can't quite
+at the same thing here I can't quite
+tell so like let's say that you're going
+tell so like let's say that you're going
+to run some experiments uh and you just
+to run some experiments uh and you just
+want the best performance right uh and
+want the best performance right uh and
+higher is better so like and then you
+higher is better so like and then you
+anneal Right? Then you'll get something
+anneal Right? Then you'll get something
+that's like this and like this, right?
+that's like this and like this, right?
+You get your curves or whatever. And
+You get your curves or whatever. And
+then but the thing is like if you keep
+then but the thing is like if you keep
+running these, these are already at like
+running these, these are already at like
+zero learning rate here,
+zero learning rate here,
+right? So like you can just set them
+right? So like you can just set them
+longer and you can like hope that you do
+longer and you can like hope that you do
+this or whatever, but like it's not
+this or whatever, but like it's not
+really guaranteed because the analing is
+really guaranteed because the analing is
+kind of a different factor, right? Which
+kind of a different factor, right? Which
+actually to be fair, this is actually
+actually to be fair, this is actually
+the reason that this thing
+exists because you can just keep
+exists because you can just keep
+extending it and then just at the end is
+extending it and then just at the end is
+when it it cools
+when it it cools
+down. Um,
+down. Um,
+but the annoying thing about this is
+but the annoying thing about this is
+that you have to wait all the way for
+that you have to wait all the way for
+the end of training to see if your
+the end of training to see if your
+experiment's any good, right? Isn't
+experiment's any good, right? Isn't
+there something to say about a kneeling?
+there something to say about a kneeling?
+If like so say right now like right like
+If like so say right now like right like
+it's basically getting to like its peak
+it's basically getting to like its peak
+performance within like effectively you
+performance within like effectively you
+know anywhere from 50 to 70 million
+know anywhere from 50 to 70 million
+steps right now right
+steps right now right
+um is there not an argument that like
+um is there not an argument that like
+the time of which it is at a certain
+the time of which it is at a certain
+learning rate it could learn better if
+learning rate it could learn better if
+it was exposed to that learning rate for
+it was exposed to that learning rate for
+an extended period of time versus
+an extended period of time versus
+continuously dropping through that. So
+continuously dropping through that. So
+this is that right? So this is a
+this is that right? So this is a
+constant learning rate. So this is a
+constant learning rate. So this is a
+warm-up which we're not doing warm-ups
+warm-up which we're not doing warm-ups
+at the moment so ignore that. Um this is
+at the moment so ignore that. Um this is
+constant learning rate and then it drops
+constant learning rate and then it drops
+it at the
+it at the
+end. And this is the difference right
+end. And this is the difference right
+like this is how these the curves tend
+like this is how these the curves tend
+to look when you do this.
+Okay. So like cosine actually it does
+Okay. So like cosine actually it does
+better when you tune and anneal the
+better when you tune and anneal the
+learning rate typically. But then when
+learning rate typically. But then when
+you do the cool down at the end you
+you do the cool down at the end you
+actually match like the graphs pretty
+actually match like the graphs pretty
+well match. to pretty much the same
+well match. to pretty much the same
+thing at the end of the day. So
+thing at the end of the day. So
+basically like it doesn't seem like
+basically like it doesn't seem like
+there's really a huge amount of magic in
+there's really a huge amount of magic in
+here like that these two totally
+here like that these two totally
+different methods do the same. It's just
+different methods do the same. It's just
+like experimental
+like experimental
+um convenience with like you know do you
+um convenience with like you know do you
+want to be able to have the same
+want to be able to have the same
+learning rate so you can just run it for
+learning rate so you can just run it for
+way longer and see if it just keeps
+way longer and see if it just keeps
+going but then you have to wait for the
+going but then you have to wait for the
+very end versus with cosine you probably
+very end versus with cosine you probably
+have to retune a little more but at
+have to retune a little more but at
+least you get the experimental results
+least you get the experimental results
+like as they happen you get the cleaner
+curves. So given the current setup, is
+curves. So given the current setup, is
+there not an argument for saying that?
+there not an argument for saying that?
+Okay, right now I think my cap is 200,
+Okay, right now I think my cap is 200,
+but I think it never even tried that. I
+but I think it never even tried that. I
+think it stopped at like 150 as the high
+think it stopped at like 150 as the high
+for whatever reason. Well, it stops when
+for whatever reason. Well, it stops when
+it can't make progress, right?
+it can't make progress, right?
+It has to have a optimal point, right?
+It has to have a optimal point, right?
+Is that like a guaranteed assumption
+Is that like a guaranteed assumption
+though? Because like could you not have
+though? Because like could you not have
+a set of parameters at like the 500
+a set of parameters at like the 500
+million step range that are so
+million step range that are so
+dramatically superior? If it can't make
+dramatically superior? If it can't make
+if it can't do any better with 150
+if it can't do any better with 150
+versus like 100, there's not going to be
+versus like 100, there's not going to be
+a PTO optimal point at 150. So it'll
+a PTO optimal point at 150. So it'll
+just keep sampling around 100. The way
+just keep sampling around 100. The way
+it does it, it only expands to longer
+it does it, it only expands to longer
+runs when it gets when it finds a run
+runs when it gets when it finds a run
+that does better than a previous shorter
+that does better than a previous shorter
+run.
+run.
+Okay, sure. Following that
+Okay, sure. Following that
+logic, that depends on the luck of the
+logic, that depends on the luck of the
+parameters chosen on the longer run,
+parameters chosen on the longer run,
+right? Like if you if you happen to not
+right? Like if you if you happen to not
+find a good one, you're going to be
+find a good one, you're going to be
+stuck in like a shorter time step land.
+stuck in like a shorter time step land.
+Well, not entirely until you find it
+Well, not entirely until you find it
+suggests a big a better one, right? But
+suggests a big a better one, right? But
+like what it does, right? Like let's say
+like what it does, right? Like let's say
+that you like you run some experiments
+that you like you run some experiments
+and this is like time and this is like
+and this is like time and this is like
+you know score. Sure. Sure. Then like
+you know score. Sure. Sure. Then like
+you get you tend to get like stuff that
+you get you tend to get like stuff that
+looks like this, right? And let's say
+looks like this, right? And let's say
+that this is your best point. Then what
+that this is your best point. Then what
+it does is it looks for any it's going
+it does is it looks for any it's going
+to look like between roughly like here
+to look like between roughly like here
+and here as the max
+and here as the max
+around this point. I mean technically
+around this point. I mean technically
+what it can uh what it like it can do is
+what it can uh what it like it can do is
+it the way that the algorithm actually
+it the way that the algorithm actually
+works is it picks a time interval from
+works is it picks a time interval from
+like here to
+like here to
+here and then it's going to pick a
+here and then it's going to pick a
+point like at it's going to try to pick
+point like at it's going to try to pick
+a point that it thinks is going to take
+a point that it thinks is going to take
+this much time. So like it could pick
+this much time. So like it could pick
+one here and then it's going to get a
+one here and then it's going to get a
+whole bunch of candidate points and
+whole bunch of candidate points and
+it'll pick whatever it thinks is the
+it'll pick whatever it thinks is the
+best point. So like it's going to try to
+best point. So like it's going to try to
+put points over here some fraction of
+put points over here some fraction of
+the time. But if it can't do better than
+the time. But if it can't do better than
+this point, it's not going to waste the
+this point, it's not going to waste the
+compute.
+But like it's generating a ton of
+But like it's generating a ton of
+different candidates and using
+different candidates and using
+predictive models to score like what it
+predictive models to score like what it
+thinks the best point is over here.
+All right. So going back to my setup of
+All right. So going back to my setup of
+the latest run
+the latest run
+would the proper analysis be of it okay
+would the proper analysis be of it okay
+it's just capped performance and it's
+it's just capped performance and it's
+now down to like bug in data set or some
+now down to like bug in data set or some
+type of like map related issue well I
+type of like map related issue well I
+mean I can't say for sure there are many
+mean I can't say for sure there are many
+things it could be um some things that
+things it could be um some things that
+you could do to test it right you could
+you could do to test it right you could
+pick the best set of parameters uh just
+pick the best set of parameters uh just
+increase the model size, maybe fiddle
+increase the model size, maybe fiddle
+with the learning rate a little bit and
+with the learning rate a little bit and
+see if you get anything that like breaks
+see if you get anything that like breaks
+past. It seems hard stuck at eight,
+past. It seems hard stuck at eight,
+which is suspicious to me. It would seem
+which is suspicious to me. It would seem
+like there's some significance to the
+like there's some significance to the
+value of eight.
+value of eight.
+Um, let's see. You can definitely
+Um, let's see. You can definitely
+run Well, yeah, longer sweep is it's not
+run Well, yeah, longer sweep is it's not
+finding anything, right? So it's just
+finding anything, right? So it's just
+like not
+and I only suspicious because I have the
+and I only suspicious because I have the
+the current set of params that are in
+the current set of params that are in
+the release branch that I have which
+the release branch that I have which
+honestly I think may even be I don't
+honestly I think may even be I don't
+remember if one of your sets or a set I
+remember if one of your sets or a set I
+found on a different suite but anyways
+um one run on a short round of like 80
+um one run on a short round of like 80
+million everything else stays the same
+million everything else stays the same
+gets you know still 99 completion rate,
+gets you know still 99 completion rate,
+like basically zero off-road rate, and
+like basically zero off-road rate, and
+then anywhere in the range of like 4%
+then anywhere in the range of like 4%
+vehicle
+vehicle
+collision. When I pump it to like 150
+collision. When I pump it to like 150
+million on the same steps, it seemed as
+million on the same steps, it seemed as
+if it went down to like
+if it went down to like
+3.3, giving me hope that like there is
+3.3, giving me hope that like there is
+there does exist some form of parameters
+there does exist some form of parameters
+that could get it down to like one or
+that could get it down to like one or
+you know, below one if you just either
+you know, below one if you just either
+continue extending it some way somehow.
+continue extending it some way somehow.
+collision rate or clean collision rate.
+collision rate or clean collision rate.
+Clean collision rate.
+So on this version, the sweep did not
+So on this version, the sweep did not
+discover it. Like the sweep did not
+discover it. Like the sweep did not
+discover something that aligned with
+discover something that aligned with
+that particular one I just did on my
+that particular one I just did on my
+computer.
+computer.
+What is this one right here? I Neptune's
+What is this one right here? I Neptune's
+really got to make it Oh, here. Yes, it
+really got to make it Oh, here. Yes, it
+did.
+did.
+0.27. 0.027. It also sacrificed other
+0.27. 0.027. It also sacrificed other
+parameters to get
+parameters to get
+there on that run.
+So, if you find that run and you click
+So, if you find that run and you click
+into I don't remember. Let me see if I
+into I don't remember. Let me see if I
+can just find the number of that run.
+can just find the number of that run.
+2059,
+95% score.
+95% score.
+Yeah. And then if you go to off-road
+Yeah. And then if you go to off-road
+rate, you'll see this is actually higher
+rate, you'll see this is actually higher
+than the majority of the other ones.
+O0036.
+Hold up. Is it off road? No. Something
+Hold up. Is it off road? No. Something
+was funky with this one. Is it
+was funky with this one. Is it
+completion rate?
+97.8. Yeah,
+97.8. Yeah,
+it has not gone to 99 like the other
+ones. Um, well, what are the
+ones. Um, well, what are the
+coefficients on the rewards? I
+coefficients on the rewards? I
+wonder. It's probably just down to that.
+I mean, it's playing scared. It's
+I mean, it's playing scared. It's
+probably playing scared, right?
+Sure. And like that's the only one that
+Sure. And like that's the only one that
+was able to get basically
+was able to get basically
+sub3 collision rate
+sub3 collision rate
+and the collision rate that's not
+and the collision rate that's not
+including the it's not just because the
+including the it's not just because the
+spawn immunity timer is really high,
+spawn immunity timer is really high,
+right? It's like Yeah. So there's two
+right? It's like Yeah. So there's two
+things. Clean collision rate will always
+things. Clean collision rate will always
+be first
+be first
+life. So irrelevant of the timer. The
+life. So irrelevant of the timer. The
+collision
+collision
+rate collision rate basically equals
+rate collision rate basically equals
+clean collision rate at a very high
+clean collision rate at a very high
+spawn immunity timer. The lower spawn
+spawn immunity timer. The lower spawn
+immunity timer is collision rate
+immunity timer is collision rate
+diverges from clean collision rate to be
+diverges from clean collision rate to be
+higher because of the situation where
+higher because of the situation where
+you spawn into other cars.
+So like yeah I mean this thing it just
+So like yeah I mean this thing it just
+must be it must just be playing scared
+must be it must just be playing scared
+right? Mhm.
+Which is like now for the purposes of
+Which is like now for the purposes of
+like moving forward at what point do we
+like moving forward at what point do we
+say that these quote 72 maps are solved?
+say that these quote 72 maps are solved?
+because you know it's possible one of
+because you know it's possible one of
+these maps is just so out of
+these maps is just so out of
+distribution from the other maps that
+distribution from the other maps that
+it's difficult for it to solve relative
+it's difficult for it to solve relative
+to its learning if you were to do 100
+to its learning if you were to do 100
+maps or 10,000 maps or whatever. Well, I
+maps or 10,000 maps or whatever. Well, I
+would think it's definitely worth
+would think it's definitely worth
+getting more maps in because we're going
+getting more maps in because we're going
+to want to do that anyways and it'll be
+to want to do that anyways and it'll be
+better for experiments. like the just
+better for experiments. like the just
+the padding thing that I would suggest,
+the padding thing that I would suggest,
+right, that I suggested um would let you
+right, that I suggested um would let you
+load random maps per worker, which would
+load random maps per worker, which would
+already give you a bunch.
+Okay, so let's talk through that one
+Okay, so let's talk through that one
+because conceptually I had a hard time
+because conceptually I had a hard time
+trying to think about implementing it.
+trying to think about implementing it.
+Mhm.
+Mhm.
+Um you're going off picking number of
+Um you're going off picking number of
+agents, which let's just assume 4096,
+agents, which let's just assume 4096,
+right?
+right?
+Mhm. If you have 496 agents and you want
+Mhm. If you have 496 agents and you want
+to make it pretty dynamic on your map
+to make it pretty dynamic on your map
+choice, whether you're choosing one map
+choice, whether you're choosing one map
+or 4,96 maps, you just randomly select
+or 4,96 maps, you just randomly select
+maps until you get close to that.
+maps until you get close to that.
+So, you randomly select maps as with in
+So, you randomly select maps as with in
+your innit and resampling, right?
+your innit and resampling, right?
+Because you have to recalculate your
+Because you have to recalculate your
+agent offsets within that thing. Well,
+agent offsets within that thing. Well,
+if you reample, so that's the thing
+if you reample, so that's the thing
+where they like they switch the maps
+where they like they switch the maps
+every so often and it's kind of slow.
+every so often and it's kind of slow.
+Um, okay. We're going to do that, but I
+Um, okay. We're going to do that, but I
+wouldn't even say bother doing it just
+wouldn't even say bother doing it just
+yet. Just like initially, can we at
+yet. Just like initially, can we at
+least get each worker to have
+least get each worker to have
+independent maps because we have 16
+independent maps because we have 16
+workers or eight workers, whatever it
+workers or eight workers, whatever it
+is, and like they're all on the same
+is, and like they're all on the same
+maps right now,
+right? Yeah. Okay. So, you're saying
+right? Yeah. Okay. So, you're saying
+each worker to have because each worker
+each worker to have because each worker
+picks a random set so them to have
+picks a random set so them to have
+different ones.
+different ones.
+Um, okay. Talking let's talk about
+Um, okay. Talking let's talk about
+padding then. you you know you padding
+padding then. you you know you padding
+it's it should be the opposite. It would
+it's it should be the opposite. It would
+be do you you pick maps until you go you
+be do you you pick maps until you go you
+go over, right? Yeah, you go over and
+go over, right? Yeah, you go over and
+then you just drop the last few cars,
+then you just drop the last few cars,
+whatever, so that you have exactly 4096
+whatever, so that you have exactly 4096
+uh in the
+obs, but that's not anything to do with
+obs, but that's not anything to do with
+the actual.h file, right? because you're
+the actual.h file, right? because you're
+just cutting off the edge of it and
+just cutting off the edge of it and
+you're just saying, "Okay, this is now
+you're just saying, "Okay, this is now
+the end of the offset and it's just
+the end of the offset and it's just
+going to Yep. I guess that's a little
+going to Yep. I guess that's a little
+awkward, but it it's a tiny bit awkward,
+awkward, but it it's a tiny bit awkward,
+but not really, right?
+but not really, right?
+I guess some cars are going
+I guess some cars are going
+to get no actions. Yeah, some cars are
+to get no actions. Yeah, some cars are
+just going to park in the middle of the
+just going to park in the middle of the
+road. Or you could remove them, which
+road. Or you could remove them, which
+would be better.
+Okay, so there will be I guess possibly
+Okay, so there will be I guess possibly
+a little bit of logic. How is that going
+a little bit of logic. How is that going
+to get passed in? Uh I guess from
+to get passed in? Uh I guess from
+actions, right? I could go based off the
+actions, right? I could go based off the
+shape of actions and then cut off
+shape of actions and then cut off
+anything past.
+anything past.
+Well, you don't have shapes in the in
+Well, you don't have shapes in the in
+the uh the C. It would be well you can
+the uh the C. It would be well you can
+have the length though because you
+have the length though because you
+you're gonna have you're going to be
+you're gonna have you're going to be
+given an array of actions.
+given an array of actions.
+Uh the C is just a pointer.
+You still have the number you still know
+You still have the number you still know
+the number of cars and stuff total,
+the number of cars and stuff total,
+right?
+right?
+There's no reason why you wouldn't know
+There's no reason why you wouldn't know
+the total number of cars. Remember you
+the total number of cars. Remember you
+also can pass stuff to the init function
+also can pass stuff to the init function
+of binding.
+of binding.
+But like you can just pass numb you can
+But like you can just pass numb you can
+pass numbum cars, right? And just like
+pass numbum cars, right? And just like
+on the last one you can just like cut
+on the last one you can just like cut
+the max lower.
+I mean technically there's no reason you
+I mean technically there's no reason you
+can't load you can load any of these
+can't load you can load any of these
+maps with any number of the cars from
+maps with any number of the cars from
+like zero to however many they actually
+like zero to however many they actually
+have, right?
+There's a little bit of funkiness in
+There's a little bit of funkiness in
+that,
+that,
+[Music]
+[Music]
+but should generally be doable because
+but should generally be doable because
+if you're lowering it from inside of one
+if you're lowering it from inside of one
+of the init functions
+of the init functions
+after the fact
+doesn't have to be after the fact.
+doesn't have to be after the fact.
+I think I'd rather find a way to do it
+I think I'd rather find a way to do it
+inside of step
+inside of step
+somehow.
+somehow.
+Um, like maybe if you don't get an
+Um, like maybe if you don't get an
+action for a cards out like if you
+action for a cards out like if you
+override the active agent count variable
+override the active agent count variable
+via the binding.
+via the binding.
+Mhm. I mean, whatever way makes sense
+Mhm. I mean, whatever way makes sense
+with it, but like know you have the M
+with it, but like know you have the M
+binding now and you have debugging that
+binding now and you have debugging that
+runs through Python. So
+okay but we're and okay so but in the
+okay but we're and okay so but in the
+condition
+condition
+of less maps than total agent count Mhm.
+of less maps than total agent count Mhm.
+or I guess in this case that's our num
+or I guess in this case that's our num
+m's
+variable just modulo it.
+Yeah or max or whatever it is. Yeah.
+Yeah or max or whatever it is. Yeah.
+Whatever the right mathematical
+Whatever the right mathematical
+operation is to get a unique number that
+operation is to get a unique number that
+fits in the that's divisible or
+fits in the that's divisible or
+whatever. Yep.
+And no resampling. So each round will
+And no resampling. So each round will
+continuously just replay the level it's
+continuously just replay the level it's
+given on that set of
+given on that set of
+levels at the moment.
+levels at the moment.
+Like when it dies, it's not going to
+Like when it dies, it's not going to
+it's not going to pick a different
+it's not going to pick a different
+random map. It's gonna in the set of
+random map. It's gonna in the set of
+random that it's been given. Yeah,
+random that it's been given. Yeah,
+initially. And then the way that they
+initially. And then the way that they
+did is just every so often they resample
+did is just every so often they resample
+everything,
+which I don't think should be that bad.
+which I don't think should be that bad.
+I mean, the initialization isn't too
+I mean, the initialization isn't too
+slow, but I mean,
+slow, but I mean,
+yeah, if you do it for that many maps,
+yeah, if you do it for that many maps,
+maybe it's a little slow. So, I mean,
+maybe it's a little slow. So, I mean,
+we'll see with this, right?
+we'll see with this, right?
+Okay. So, for max paralization, should I
+Okay. So, for max paralization, should I
+start with doing like the 4096 or should
+start with doing like the 4096 or should
+I just do like a thousand or 100 or, you
+I just do like a thousand or 100 or, you
+know, some just a number that works? Uh,
+know, some just a number that works? Uh,
+just whatever is close to the number of
+just whatever is close to the number of
+cards you have at the moment. I think
+cards you have at the moment. I think
+it's like 512 per worker.
+Oh, okay. Just get Okay, I see what you
+Oh, okay. Just get Okay, I see what you
+mean. You're literally all you're doing
+mean. You're literally all you're doing
+is just trying to make it round off to
+is just trying to make it round off to
+something clean so we can actually like
+something clean so we can actually like
+do stuff with it.
+do stuff with it.
+Okay. Um, I will get to work on that.
+Okay. Um, I will get to work on that.
+Cool. Thank you. And, uh, I will be
+Cool. Thank you. And, uh, I will be
+after breakfast back here for the whole
+after breakfast back here for the whole
+rest of the day. So, yep. All right.
+rest of the day. So, yep. All right.
+Thanks,
+Spencer. Cool. So, I've got to go for
+Spencer. Cool. So, I've got to go for
+breakfast in a few here.
+So to folks on Twitch and YouTube, uh I
+So to folks on Twitch and YouTube, uh I
+will be back after I'm going to do a
+will be back after I'm going to do a
+couple last things on this, but I will
+couple last things on this, but I will
+have to go in a minute. So, uh after
+have to go in a minute. So, uh after
+breakfast, I will be back for the whole
+breakfast, I will be back for the whole
+rest of the day working
+rest of the day working
+on probably seeing if we can get some
+on probably seeing if we can get some
+really high perf demos here. Clean up a
+really high perf demos here. Clean up a
+whole bunch of stuff in Puffer Lib.
+whole bunch of stuff in Puffer Lib.
+Really just get all this stuff ready for
+Really just get all this stuff ready for
+release.
+release.
+Um, all my stuff is on puffer.ai. It's
+Um, all my stuff is on puffer.ai. It's
+all free and open source code. If you
+all free and open source code. If you
+want to support this work for free,
+want to support this work for free,
+start the GitHub. If you want to get
+start the GitHub. If you want to get
+involved with development, you can join
+involved with development, you can join
+us on Discord. You can also follow me on
+us on Discord. You can also follow me on
+X for more RL
+X for more RL
+content. But we will stay here for
+content. But we will stay here for
+another couple of minutes just to
+another couple of minutes just to
+see. Hey, Boxing.
+Are you going for breakfast? Yeah, I'm
+Are you going for breakfast? Yeah, I'm
+going for breakfast in a minute, but
+going for breakfast in a minute, but
+then I'm back for the whole rest of the
+then I'm back for the whole rest of the
+day
+after. Usually food breaks at 10 and 6.
+It's a massive copy
+It's a massive copy
+overhead. Would you mind answering some
+overhead. Would you mind answering some
+questions? Of course. I'm going to have
+questions? Of course. I'm going to have
+to go in a second, but uh yeah, after
+to go in a second, but uh yeah, after
+breakfast, of course.
+45% copy overhead is ridiculous.
+How much of it is in
+How much of it is in
+here? Is it still 45%? If I do
+this 44, it is literally all just in
+this 44, it is literally all just in
+write that function.
+It's probably literally all in right
+It's probably literally all in right
+here,
+right? Yep.
+right? Yep.
+If I take this one line out.
+Ridiculous. How much data is this?
+megabytes. And that is for 131. So if we
+megabytes. And that is for 131. So if we
+do like 8.1 million
+um
+times
+times
+four that is 3 gigabytes 3.8 8 GB per
+second which is nothing for a CUDA
+device.
+device.
+So why is it that long? It's these are
+So why is it that long? It's these are
+like goodsized blocks too, right? This
+like goodsized blocks too, right? This
+is these are not tiny little
+transfers. Well, I think what we'll do
+transfers. Well, I think what we'll do
+is uh we'll check out what we'll do is
+is uh we'll check out what we'll do is
+we'll look at like the difference
+we'll look at like the difference
+between the me if the memory is pinned
+between the me if the memory is pinned
+or not after breakfast and then we will
+or not after breakfast and then we will
+go from there. So, uh, yeah.
+
+Kind: captions
+Language: en
+We are back live.
+We are back live.
+Hi. Here's the plan. I'm be all day
+Hi. Here's the plan. I'm be all day
+minus minus breakfast in an hour.
+minus minus breakfast in an hour.
+Um, we want to get pretty dang close to
+Um, we want to get pretty dang close to
+the release today. I think we can start
+the release today. I think we can start
+running almost some of the final
+running almost some of the final
+experiments.
+experiments.
+pretty close to final
+experiments and
+experiments and
+um generally looking at the remaining
+um generally looking at the remaining
+items that need to be done before
+release. The fact that neural MMO is
+release. The fact that neural MMO is
+just not learning stuff is a little
+just not learning stuff is a little
+weird.
+How about
+this? I mean, this is a really good one,
+this? I mean, this is a really good one,
+right?
+I mean, our sweep code definitely works.
+I mean, our sweep code definitely works.
+I think neural MMO is just
+hard. Take a quick look at the to-dos.
+I mean to be fair there are like a lot
+I mean to be fair there are like a lot
+of small things we can just like start
+of small things we can just like start
+doing one by
+one. Minor M should work on one hyperp
+set. Why don't we see if we can get
+Did we do like breakout and
+then like triple triad or one of
+those? Those would be like two pretty
+those? Those would be like two pretty
+different M's,
+right? Or do we want to see if we can
+right? Or do we want to see if we can
+get mini batch size actually sweepable?
+get mini batch size actually sweepable?
+That might be
+That might be
+better. Let's just like let's just start
+better. Let's just like let's just start
+doing like a few things on this. Playing
+doing like a few things on this. Playing
+around with
+this breakout
+trains break out here.
+And I have some like custom coefficients
+And I have some like custom coefficients
+on here. It looks
+like that pushes it over 3 mil like
+like that pushes it over 3 mil like
+immediately.
+Oh, it's just going to keep getting
+Oh, it's just going to keep getting
+faster,
+huh? Okay,
+huh? Okay,
+let's let's fix
+let's let's fix
+um the speed reporting so I can actually
+um the speed reporting so I can actually
+see what's going on.
+see what's going on.
+If we ship like 5 mil SPS train demo,
+If we ship like 5 mil SPS train demo,
+that would be pretty
+cool. Even know if that's feasible.
+cool. Even know if that's feasible.
+We'll see.
+What did I do that would have messed
+What did I do that would have messed
+this up?
+I guess like the fact that this is time
+I guess like the fact that this is time
+based
+want to append.
+want to append.
+No, we want to do like
+still don't Now,
+Okay, whatever. We'll leave it like this
+Okay, whatever. We'll leave it like this
+for now. We'll see if we can come up
+for now. We'll see if we can come up
+with something better after, but this is
+decent. So, how does BPT Horizon work
+decent. So, how does BPT Horizon work
+now in the latest
+version? Batch size over total agents.
+That's not
+bad. Well, apparently we can just do
+this. This like
+V RAM at 20 is actually kind of
+correct. What change that I am allowed
+correct. What change that I am allowed
+to do
+this? Can I just keep making this
+this? Can I just keep making this
+larger?
+Can I just do batch gradient descent on
+this? Like, does this actually just
+this? Like, does this actually just
+work?
+Well, that's
+weird.
+4.3. Okay. But you kind of saturate the
+4.3. Okay. But you kind of saturate the
+games like before then, right?
+Is this actually like
+train? Not really.
+Right. But then if I do
+I mean, what would this be? Just like
+I mean, what would this be? Just like
+way bigger learning
+rate.
+Yeah. I mean, it's cool to see though
+Yeah. I mean, it's cool to see though
+that we can actually
+that we can actually
+like we can actually play with this
+like we can actually play with this
+variable now.
+variable now.
+I don't actually know what
+I don't actually know what
+changed before. You know in the earlier
+changed before. You know in the earlier
+code when I would do this you would get
+code when I would do this you would get
+a diminishing returns like it would go
+a diminishing returns like it would go
+negative after some
+point I guess. Why don't we try to
+point I guess. Why don't we try to
+like why don't we see if we can like max
+like why don't we see if we can like max
+perf on neural MMO uh on neural MMO then
+perf on neural MMO uh on neural MMO then
+Okay.
+So, this box that I'm using
+So, this box that I'm using
+here is uh sitting on the shelf behind
+here is uh sitting on the shelf behind
+me,
+me,
+right? You can see it right there above
+right? You can see it right there above
+my
+thumb. This is a pretty nice config. I
+thumb. This is a pretty nice config. I
+wish I'd gotten more of these, but uh
+wish I'd gotten more of these, but uh
+they're on tariffs
+now.
+Okay. So, this was just not sweeping
+Okay. So, this was just not sweeping
+mini batch size.
+Very
+nice. You could say I've been doing some
+nice. You could say I've been doing some
+refactoring on
+this. And then we go here.
+Okay.
+Interesting. Oh, I just have to rebuild
+this. I did modify a bunch of CUDA.
+Okay, let's just um let's have a little
+Okay, let's just um let's have a little
+bit of fun until breakfast and figure
+bit of fun until breakfast and figure
+out what is the like ludicrously fastest
+out what is the like ludicrously fastest
+we can get stuff to train with puffer
+now. So, out of the box, we're close to
+now. So, out of the box, we're close to
+three mil steps per second with default
+three mil steps per second with default
+settings.
+I do
+this. Holy
+this. Holy
+hell. Over 5 mil SPS training.
+Now, it doesn't learn anything with
+Now, it doesn't learn anything with
+these settings, and I have no idea if
+these settings, and I have no idea if
+it's even possible to learn anything
+it's even possible to learn anything
+with settings that look like
+that. Hang on. So, what does that imply?
+Does that imply like way more
+Does that imply like way more
+environments would be
+better cuz like the way that this works
+better cuz like the way that this works
+right it's mini batch divide by total
+right it's mini batch divide by total
+agents. So the way like I generally set
+agents. So the way like I generally set
+this up it's
+this up it's
+524 288 divide by
+524 288 divide by
+uh 81
+uh 81
+92 agents is 64
+92 agents is 64
+horizon. So then like
+horizon. So then like
+131072ide by
+131072ide by
+64. It's actually only a 2048 batched
+64. It's actually only a 2048 batched
+board pass. I
+board pass. I
+guess let's see if I can get the N to
+guess let's see if I can get the N to
+bottleneck it by messing with these
+bottleneck it by messing with these
+settings a little bit. So like
+Let's go to like some ridiculous batch
+size. Wait, what do I need to multiply
+size. Wait, what do I need to multiply
+this by? I think just
+this by? I think just
+um this will satisfy
+um this will satisfy
+it.
+it.
+290. Yeah, this
+290. Yeah, this
+one. All right. All right. And now I
+one. All right. All right. And now I
+have to multiply this
+have to multiply this
+by
+16 something like this.
+Six million steps per second.
+I go one
+more. It gets slower.
+Oh, because the Hang on. That's because
+Oh, because the Hang on. That's because
+the BPD horizon though. I did
+the BPD horizon though. I did
+I I mess up something.
+The board pass got faster.
+do eight
+workers. Actually, it's a
+workers. Actually, it's a
+16 like this.
+M's must be divisible.
+So we get hit by like massive copy
+So we get hit by like massive copy
+overhead,
+huh? I mean there are two things that
+huh? I mean there are two things that
+are a little weird here, right? One is
+are a little weird here, right? One is
+that the M is way faster than this. The
+that the M is way faster than this. The
+M should be running at like tens of
+M should be running at like tens of
+millions per second. It shouldn't be
+millions per second. It shouldn't be
+this like really any amount of the
+compute. And the second is the copy
+compute. And the second is the copy
+overhead shouldn't be that high
+either. Like if we just look up like
+um Okay, this is
+um Okay, this is
+literally like almost two
+terabytes. So then why is this are these
+terabytes. So then why is this are these
+like
+Is this like copy overhead or something?
+Is this like copy overhead or something?
+Like
+Like
+what? What is
+this? Let's go look at some things
+this? Let's go look at some things
+here. First of all, let's like try to
+here. First of all, let's like try to
+get this into a state
+get this into a state
+where we expect this to do something.
+where we expect this to do something.
+more reasonable. So
+more reasonable. So
+9% massive number of M's
+9% massive number of M's
+here. I was going for 32. Can you check
+here. I was going for 32. Can you check
+out my sweep? Yes, Spencer. I am uh I'm
+out my sweep? Yes, Spencer. I am uh I'm
+trying to see if we can hit like some
+trying to see if we can hit like some
+ludicrous speedrun on on Breakout. But
+ludicrous speedrun on on Breakout. But
+yeah, I can totally check out sweeps.
+yeah, I can totally check out sweeps.
+Just link them in the Discord.
+It's not that
+I think I should kill the run and
+I think I should kill the run and
+switch. Let me
+switch. Let me
+look. Getting collision below
+look. Getting collision below
+1%. Is this with
+immunity? Okay. So, this Prito run is
+immunity? Okay. So, this Prito run is
+not
+not
+like like you're getting all the perk
+like like you're getting all the perk
+very quickly. Here, we'll do a little
+very quickly. Here, we'll do a little
+live analysis.
+live analysis.
+It'll be good for you and for folks
+It'll be good for you and for folks
+watching so you can see how I look at
+watching so you can see how I look at
+these
+things. Okay, so this is capped out.
+Um, this ended up actually being a
+Um, this ended up actually being a
+pretty
+pretty
+good length here. Is this Wait, is this
+good length here. Is this Wait, is this
+mil? This is 100 million steps at the
+mil? This is 100 million steps at the
+high end,
+high end,
+right? Oh, 150
+right? Oh, 150
+mil.
+Okay. I mean, but you're really you're
+Okay. I mean, but you're really you're
+getting capped out PF in literally like
+getting capped out PF in literally like
+no steps at all here.
+Um, so I mean that suggests that it's
+Um, so I mean that suggests that it's
+not just like I don't know why a
+not just like I don't know why a
+kneeling would help you then because you
+kneeling would help you then because you
+still have plenty you have plenty
+still have plenty you have plenty
+learning right here. You have a few
+learning right here. You have a few
+unstable runs which is
+unstable runs which is
+interesting. It improves slowly. Does
+it? That looks flat to me at the
+it? That looks flat to me at the
+top. So this is on log scale and it's
+top. So this is on log scale and it's
+still flat at the top.
+You
+You
+see, unless there's some in here that
+see, unless there's some in here that
+are like, but the best ones seem
+capped.
+Interesting. Let's see what you did on
+sweep. You have your own
+The one annoying thing here is just
+The one annoying thing here is just
+these plots are not going to be fun for
+these plots are not going to be fun for
+um because these are like percentages.
+um because these are like percentages.
+It's really tough to do analysis on
+It's really tough to do analysis on
+scores that have like percentages like
+scores that have like percentages like
+this. You can't really do a ton about
+this. You can't really do a ton about
+that. That's kind of
+that. That's kind of
+um a Neptune problem, but like you have
+um a Neptune problem, but like you have
+to kind of like know what difference
+to kind of like know what difference
+actually matters when you get up here. I
+actually matters when you get up here. I
+mean, these are
+actually these are still not to 99. You
+actually these are still not to 99. You
+can still kind of look at the relative
+can still kind of look at the relative
+differences
+here.
+95. Well, this seems pretty good, right?
+95. Well, this seems pretty good, right?
+There's like a little bit of a curve to
+There's like a little bit of a curve to
+this with the vehicle
+this with the vehicle
+collision. So, this seems to have an
+effect. Maybe a small one, right? Like
+effect. Maybe a small one, right? Like
+this. This looks like a pretty
+this. This looks like a pretty
+consistent line here.
+this off-road
+collision. If there is an effect, it's
+collision. If there is an effect, it's
+less because yeah, we've got 0.95 and
+less because yeah, we've got 0.95 and
+0.948. So, this doesn't seem like it
+0.948. So, this doesn't seem like it
+actually matters anywhere near as much
+actually matters anywhere near as much
+as like over here.
+as like over here.
+0.95
+0.95
+93 93. Yeah. So, there's like this does
+93 93. Yeah. So, there's like this does
+something.
+completion rate is not is completion
+completion rate is not is completion
+rate not
+score. The point of having the score
+score. The point of having the score
+variable or I guess the perf variable
+variable or I guess the perf variable
+now either of those is that it should be
+now either of those is that it should be
+the metric that you care about when you
+the metric that you care about when you
+plot stuff so that regardless of what
+plot stuff so that regardless of what
+experiments you're running you can apply
+experiments you're running you can apply
+those plots and you'll actually get the
+those plots and you'll actually get the
+plots you care
+about. Well, do any of these have
+about. Well, do any of these have
+completion rate plotted or no?
+Yes. In here or
+where? It's in there. Okay.
+I mean I see one plot with it.
+If this is the metric that you care
+If this is the metric that you care
+about, then this should be the y axis
+about, then this should be the y axis
+for
+for
+everything,
+right? Score is more important than
+right? Score is more important than
+completion. Okay. Well, then if this is
+completion. Okay. Well, then if this is
+the metric we care
+about, let's see if I see anything.
+These are some ridiculous learning
+rates. I see.
+Well, high value function coefficients
+Well, high value function coefficients
+consistent with what I've seen.
+I'm arguing over like 3%
+I'm arguing over like 3%
+here. Well, but like you're not arguing
+here. Well, but like you're not arguing
+over 3%. Like 3 percentage points from
+over 3%. Like 3 percentage points from
+51 to 54 is very different from 3
+51 to 54 is very different from 3
+percentage points from like 97 to 100,
+percentage points from like 97 to 100,
+right? Like if you look at relative
+right? Like if you look at relative
+improvement or relative error
+reduction like 99.9 is 10 times better
+reduction like 99.9 is 10 times better
+than 99.
+You're games
+with Why do you think that you should
+get Wait, why do you think it should be
+get Wait, why do you think it should be
+better without a kneeling?
+I have had runs that had episode return
+I have had runs that had episode return
+greater than
+eight. Have you had runs like on this
+eight. Have you had runs like on this
+version that have done that?
+This seems hardbound at eight. Like what
+This seems hardbound at eight. Like what
+does eight signify? Is there like a
+does eight signify? Is there like a
+significance to the number
+eight? It just happens to
+eight? It just happens to
+be. Oh man, that there looks like
+be. Oh man, that there looks like
+there's a significance to the number
+there's a significance to the number
+eight when I'm seeing 9 like 9 7.991 and
+eight when I'm seeing 9 like 9 7.991 and
+nothing is above eight. Oh, I guess
+nothing is above eight. Oh, I guess
+there's an
+there's an
+8.0027
+8.0027
+here. Okay, so it's not impossible to
+here. Okay, so it's not impossible to
+get above
+get above
+eight, but that's like suspiciously
+eight, but that's like suspiciously
+close to a whole number
+boundary for that like to signify
+boundary for that like to signify
+something, you know?
+5% vehicle collision. Okay, we can look
+5% vehicle collision. Okay, we can look
+at
+collision. Okay. I mean, here's
+like it kind of levels off
+though. Completion is basically 100 and
+though. Completion is basically 100 and
+off-road
+off-road
+is.3, but like this collision stuff
+is.3, but like this collision stuff
+could still be from things. I guess it
+could still be from things. I guess it
+can't be from respawning anymore,
+can't be from respawning anymore,
+right? Cuz that's no longer a thing.
+Clean collision is the better
+one. I mean, but these are like
+flat, right?
+here. Let me stop making you type
+here. Let me stop making you type
+stuff if you're not in
+stuff if you're not in
+uh if this is easier.
+Yep.
+Yep.
+Hey. All right. All right. So basically
+Hey. All right. All right. So basically
+my assumption and this you this could be
+my assumption and this you this could be
+wrong is that if you have like a small
+wrong is that if you have like a small
+enough learning rate
+enough learning rate
+or that of which I've seen in the
+or that of which I've seen in the
+experiments on the analing ones like
+experiments on the analing ones like
+it's still making like tiny tiny
+it's still making like tiny tiny
+improvements on one of the configs on
+improvements on one of the configs on
+one like the parameter sets I had
+one like the parameter sets I had
+yesterday but you know then it just dies
+yesterday but you know then it just dies
+because I only said it's like 100
+because I only said it's like 100
+million steps right? So yeah. So why
+million steps right? So yeah. So why
+don't you go longer with the kneeling
+don't you go longer with the kneeling
+on?
+on?
+Well, I I could. I mean, then it's just
+Well, I I could. I mean, then it's just
+a matter of like do I just set like a
+a matter of like do I just set like a
+fixed point further down the road? Like
+fixed point further down the road? Like
+set like a fixed like 300 million in
+set like a fixed like 300 million in
+reweep that would
+reweep that would
+Oh, I see what you mean. Yeah, you would
+Oh, I see what you mean. Yeah, you would
+just set a a longer a log a longer max
+just set a a longer a log a longer max
+and it would have to figure out the
+and it would have to figure out the
+analing coefficient
+analing coefficient
+because I mean at this point now there's
+because I mean at this point now there's
+like a ton of parameters, right? So it's
+like a ton of parameters, right? So it's
+hard for me to kind of gauge like if
+hard for me to kind of gauge like if
+it's actually
+it's actually
+explored tail end our sweep stuff is
+explored tail end our sweep stuff is
+pretty damn good at this point I will
+pretty damn good at this point I will
+say like it's not perfect but the sweep
+say like it's not perfect but the sweep
+algorithm is pretty damn good at finding
+algorithm is pretty damn good at finding
+hypers um and you do understand how a
+hypers um and you do understand how a
+kneeling works right like I mean it just
+kneeling works right like I mean it just
+slowly reduces the the learning rate but
+slowly reduces the the learning rate but
+do you like understand how much of a
+do you like understand how much of a
+difference that
+difference that
+makes like where is this trapezoidal
+makes like where is this trapezoidal
+LR this
+LR this
+Okay. So
+Okay. So
+like so this is cosine and he kneeling.
+like so this is cosine and he kneeling.
+Okay. Yeah. And then this is like this
+Okay. Yeah. And then this is like this
+trapezoidal thing which is like this
+trapezoidal thing which is like this
+other one that they introduced. So the
+other one that they introduced. So the
+point is that it has like this cool down
+point is that it has like this cool down
+here. Mhm.
+here. Mhm.
+Okay. Look at what a difference this
+Okay. Look at what a difference this
+makes in the
+makes in the
+graphs. So this is the annealed portion
+graphs. So this is the annealed portion
+right here in the loss.
+right here in the loss.
+Okay. So like your curves are going to
+Okay. So like your curves are going to
+be smooth with cosine. So you can't
+be smooth with cosine. So you can't
+really appreciate how much the annealing
+really appreciate how much the annealing
+is doing. But like literally just like
+is doing. But like literally just like
+pulling down the learning rate at the
+pulling down the learning rate at the
+end. This is how much better you do
+end. This is how much better you do
+versus having one fixed learning rate.
+And this graph is going is the y-axis
+And this graph is going is the y-axis
+going lower good or bad? Good. Okay. So
+going lower good or bad? Good. Okay. So
+this is like language model stuff. I I
+this is like language model stuff. I I
+guess the thing is you weren't around
+guess the thing is you weren't around
+when like
+when like
+um
+um
+Like let's
+Like let's
+see, you probably weren't around to like
+see, you probably weren't around to like
+see the early like reduce learning rate
+see the early like reduce learning rate
+on plateau or whatever graphs, but
+on plateau or whatever graphs, but
+basically we used to have graphs in ML
+basically we used to have graphs in ML
+that would look like this and they would
+that would look like this and they would
+like be like saw tooth or whatever
+like be like saw tooth or whatever
+because you would reduce the learning
+because you would reduce the learning
+rate like several times throughout
+rate like several times throughout
+training. Mhm. So like reducing the
+training. Mhm. So like reducing the
+learning rate makes it learn
+learning rate makes it learn
+way faster uh in certain cases. So like
+way faster uh in certain cases. So like
+you don't see it because cosine is a
+you don't see it because cosine is a
+smooth schedule. Um and so is like
+smooth schedule. Um and so is like
+linear. But like yeah it I don't think
+linear. But like yeah it I don't think
+just disabling like you could just break
+just disabling like you could just break
+stuff basically by turning a kneeling
+stuff basically by turning a kneeling
+off. It's worth trying once in a while
+off. It's worth trying once in a while
+because like yeah sometimes m just they
+because like yeah sometimes m just they
+work like that whatever. But uh often
+work like that whatever. But uh often
+it's like yeah you want to keep a
+it's like yeah you want to keep a
+kneeling and then just have it be able
+kneeling and then just have it be able
+to run for longer. And that's like one
+to run for longer. And that's like one
+of the things we discovered with
+of the things we discovered with
+breakout right like anal like without a
+breakout right like anal like without a
+kneeling we totally broke it. Yeah. I
+kneeling we totally broke it. Yeah. I
+mean that was something for breakout. Uh
+mean that was something for breakout. Uh
+but like for neural MMO, don't you do a
+but like for neural MMO, don't you do a
+linear learning rate for like two
+linear learning rate for like two
+billion steps? Well, why do I do that
+billion steps? Well, why do I do that
+though, right? I do that because the
+though, right? I do that because the
+full
+full
+run is a 100
+run is a 100
+bill. So like me analing over two
+bill. So like me analing over two
+billion, I do it so that if I Okay, I
+billion, I do it so that if I Okay, I
+guess here's the one thing I do. If I'm
+guess here's the one thing I do. If I'm
+going to do a like a sweep run and then
+going to do a like a sweep run and then
+I'm going to do like a 50x longer run
+I'm going to do like a 50x longer run
+afterwards, then yeah, you can disable a
+afterwards, then yeah, you can disable a
+kneeling because it's a better chance
+kneeling because it's a better chance
+that the hyperparameters will
+that the hyperparameters will
+transfer. Is that what you were going
+transfer. Is that what you were going
+for?
+I mean, I assume that when you're going
+I mean, I assume that when you're going
+from a linear learning, no mean just a
+from a linear learning, no mean just a
+flat a fixed learning rate versus using
+flat a fixed learning rate versus using
+co using some form of a kneeling that
+co using some form of a kneeling that
+you have to have entirely different
+you have to have entirely different
+parameter sets.
+parameter sets.
+Um possibly the main thing is
+like usually you do it on there are a
+like usually you do it on there are a
+few variables you usually do it on Jason
+few variables you usually do it on Jason
+but yes um so like the reason I do it
+but yes um so like the reason I do it
+and I think that I think we're getting
+and I think that I think we're getting
+at the same thing here I can't quite
+at the same thing here I can't quite
+tell so like let's say that you're going
+tell so like let's say that you're going
+to run some experiments uh and you just
+to run some experiments uh and you just
+want the best performance right uh and
+want the best performance right uh and
+higher is better so like and then you
+higher is better so like and then you
+anneal Right? Then you'll get something
+anneal Right? Then you'll get something
+that's like this and like this, right?
+that's like this and like this, right?
+You get your curves or whatever. And
+You get your curves or whatever. And
+then but the thing is like if you keep
+then but the thing is like if you keep
+running these, these are already at like
+running these, these are already at like
+zero learning rate here,
+zero learning rate here,
+right? So like you can just set them
+right? So like you can just set them
+longer and you can like hope that you do
+longer and you can like hope that you do
+this or whatever, but like it's not
+this or whatever, but like it's not
+really guaranteed because the analing is
+really guaranteed because the analing is
+kind of a different factor, right? Which
+kind of a different factor, right? Which
+actually to be fair, this is actually
+actually to be fair, this is actually
+the reason that this thing
+exists because you can just keep
+exists because you can just keep
+extending it and then just at the end is
+extending it and then just at the end is
+when it it cools
+when it it cools
+down. Um,
+down. Um,
+but the annoying thing about this is
+but the annoying thing about this is
+that you have to wait all the way for
+that you have to wait all the way for
+the end of training to see if your
+the end of training to see if your
+experiment's any good, right? Isn't
+experiment's any good, right? Isn't
+there something to say about a kneeling?
+there something to say about a kneeling?
+If like so say right now like right like
+If like so say right now like right like
+it's basically getting to like its peak
+it's basically getting to like its peak
+performance within like effectively you
+performance within like effectively you
+know anywhere from 50 to 70 million
+know anywhere from 50 to 70 million
+steps right now right
+steps right now right
+um is there not an argument that like
+um is there not an argument that like
+the time of which it is at a certain
+the time of which it is at a certain
+learning rate it could learn better if
+learning rate it could learn better if
+it was exposed to that learning rate for
+it was exposed to that learning rate for
+an extended period of time versus
+an extended period of time versus
+continuously dropping through that. So
+continuously dropping through that. So
+this is that right? So this is a
+this is that right? So this is a
+constant learning rate. So this is a
+constant learning rate. So this is a
+warm-up which we're not doing warm-ups
+warm-up which we're not doing warm-ups
+at the moment so ignore that. Um this is
+at the moment so ignore that. Um this is
+constant learning rate and then it drops
+constant learning rate and then it drops
+it at the
+it at the
+end. And this is the difference right
+end. And this is the difference right
+like this is how these the curves tend
+like this is how these the curves tend
+to look when you do this.
+Okay. So like cosine actually it does
+Okay. So like cosine actually it does
+better when you tune and anneal the
+better when you tune and anneal the
+learning rate typically. But then when
+learning rate typically. But then when
+you do the cool down at the end you
+you do the cool down at the end you
+actually match like the graphs pretty
+actually match like the graphs pretty
+well match. to pretty much the same
+well match. to pretty much the same
+thing at the end of the day. So
+thing at the end of the day. So
+basically like it doesn't seem like
+basically like it doesn't seem like
+there's really a huge amount of magic in
+there's really a huge amount of magic in
+here like that these two totally
+here like that these two totally
+different methods do the same. It's just
+different methods do the same. It's just
+like experimental
+like experimental
+um convenience with like you know do you
+um convenience with like you know do you
+want to be able to have the same
+want to be able to have the same
+learning rate so you can just run it for
+learning rate so you can just run it for
+way longer and see if it just keeps
+way longer and see if it just keeps
+going but then you have to wait for the
+going but then you have to wait for the
+very end versus with cosine you probably
+very end versus with cosine you probably
+have to retune a little more but at
+have to retune a little more but at
+least you get the experimental results
+least you get the experimental results
+like as they happen you get the cleaner
+curves. So given the current setup, is
+curves. So given the current setup, is
+there not an argument for saying that?
+there not an argument for saying that?
+Okay, right now I think my cap is 200,
+Okay, right now I think my cap is 200,
+but I think it never even tried that. I
+but I think it never even tried that. I
+think it stopped at like 150 as the high
+think it stopped at like 150 as the high
+for whatever reason. Well, it stops when
+for whatever reason. Well, it stops when
+it can't make progress, right?
+it can't make progress, right?
+It has to have a optimal point, right?
+It has to have a optimal point, right?
+Is that like a guaranteed assumption
+Is that like a guaranteed assumption
+though? Because like could you not have
+though? Because like could you not have
+a set of parameters at like the 500
+a set of parameters at like the 500
+million step range that are so
+million step range that are so
+dramatically superior? If it can't make
+dramatically superior? If it can't make
+if it can't do any better with 150
+if it can't do any better with 150
+versus like 100, there's not going to be
+versus like 100, there's not going to be
+a PTO optimal point at 150. So it'll
+a PTO optimal point at 150. So it'll
+just keep sampling around 100. The way
+just keep sampling around 100. The way
+it does it, it only expands to longer
+it does it, it only expands to longer
+runs when it gets when it finds a run
+runs when it gets when it finds a run
+that does better than a previous shorter
+that does better than a previous shorter
+run.
+run.
+Okay, sure. Following that
+Okay, sure. Following that
+logic, that depends on the luck of the
+logic, that depends on the luck of the
+parameters chosen on the longer run,
+parameters chosen on the longer run,
+right? Like if you if you happen to not
+right? Like if you if you happen to not
+find a good one, you're going to be
+find a good one, you're going to be
+stuck in like a shorter time step land.
+stuck in like a shorter time step land.
+Well, not entirely until you find it
+Well, not entirely until you find it
+suggests a big a better one, right? But
+suggests a big a better one, right? But
+like what it does, right? Like let's say
+like what it does, right? Like let's say
+that you like you run some experiments
+that you like you run some experiments
+and this is like time and this is like
+and this is like time and this is like
+you know score. Sure. Sure. Then like
+you know score. Sure. Sure. Then like
+you get you tend to get like stuff that
+you get you tend to get like stuff that
+looks like this, right? And let's say
+looks like this, right? And let's say
+that this is your best point. Then what
+that this is your best point. Then what
+it does is it looks for any it's going
+it does is it looks for any it's going
+to look like between roughly like here
+to look like between roughly like here
+and here as the max
+and here as the max
+around this point. I mean technically
+around this point. I mean technically
+what it can uh what it like it can do is
+what it can uh what it like it can do is
+it the way that the algorithm actually
+it the way that the algorithm actually
+works is it picks a time interval from
+works is it picks a time interval from
+like here to
+like here to
+here and then it's going to pick a
+here and then it's going to pick a
+point like at it's going to try to pick
+point like at it's going to try to pick
+a point that it thinks is going to take
+a point that it thinks is going to take
+this much time. So like it could pick
+this much time. So like it could pick
+one here and then it's going to get a
+one here and then it's going to get a
+whole bunch of candidate points and
+whole bunch of candidate points and
+it'll pick whatever it thinks is the
+it'll pick whatever it thinks is the
+best point. So like it's going to try to
+best point. So like it's going to try to
+put points over here some fraction of
+put points over here some fraction of
+the time. But if it can't do better than
+the time. But if it can't do better than
+this point, it's not going to waste the
+this point, it's not going to waste the
+compute.
+But like it's generating a ton of
+But like it's generating a ton of
+different candidates and using
+different candidates and using
+predictive models to score like what it
+predictive models to score like what it
+thinks the best point is over here.
+All right. So going back to my setup of
+All right. So going back to my setup of
+the latest run
+the latest run
+would the proper analysis be of it okay
+would the proper analysis be of it okay
+it's just capped performance and it's
+it's just capped performance and it's
+now down to like bug in data set or some
+now down to like bug in data set or some
+type of like map related issue well I
+type of like map related issue well I
+mean I can't say for sure there are many
+mean I can't say for sure there are many
+things it could be um some things that
+things it could be um some things that
+you could do to test it right you could
+you could do to test it right you could
+pick the best set of parameters uh just
+pick the best set of parameters uh just
+increase the model size, maybe fiddle
+increase the model size, maybe fiddle
+with the learning rate a little bit and
+with the learning rate a little bit and
+see if you get anything that like breaks
+see if you get anything that like breaks
+past. It seems hard stuck at eight,
+past. It seems hard stuck at eight,
+which is suspicious to me. It would seem
+which is suspicious to me. It would seem
+like there's some significance to the
+like there's some significance to the
+value of eight.
+value of eight.
+Um, let's see. You can definitely
+Um, let's see. You can definitely
+run Well, yeah, longer sweep is it's not
+run Well, yeah, longer sweep is it's not
+finding anything, right? So it's just
+finding anything, right? So it's just
+like not
+and I only suspicious because I have the
+and I only suspicious because I have the
+the current set of params that are in
+the current set of params that are in
+the release branch that I have which
+the release branch that I have which
+honestly I think may even be I don't
+honestly I think may even be I don't
+remember if one of your sets or a set I
+remember if one of your sets or a set I
+found on a different suite but anyways
+um one run on a short round of like 80
+um one run on a short round of like 80
+million everything else stays the same
+million everything else stays the same
+gets you know still 99 completion rate,
+gets you know still 99 completion rate,
+like basically zero off-road rate, and
+like basically zero off-road rate, and
+then anywhere in the range of like 4%
+then anywhere in the range of like 4%
+vehicle
+vehicle
+collision. When I pump it to like 150
+collision. When I pump it to like 150
+million on the same steps, it seemed as
+million on the same steps, it seemed as
+if it went down to like
+if it went down to like
+3.3, giving me hope that like there is
+3.3, giving me hope that like there is
+there does exist some form of parameters
+there does exist some form of parameters
+that could get it down to like one or
+that could get it down to like one or
+you know, below one if you just either
+you know, below one if you just either
+continue extending it some way somehow.
+continue extending it some way somehow.
+collision rate or clean collision rate.
+collision rate or clean collision rate.
+Clean collision rate.
+So on this version, the sweep did not
+So on this version, the sweep did not
+discover it. Like the sweep did not
+discover it. Like the sweep did not
+discover something that aligned with
+discover something that aligned with
+that particular one I just did on my
+that particular one I just did on my
+computer.
+computer.
+What is this one right here? I Neptune's
+What is this one right here? I Neptune's
+really got to make it Oh, here. Yes, it
+really got to make it Oh, here. Yes, it
+did.
+did.
+0.27. 0.027. It also sacrificed other
+0.27. 0.027. It also sacrificed other
+parameters to get
+parameters to get
+there on that run.
+So, if you find that run and you click
+So, if you find that run and you click
+into I don't remember. Let me see if I
+into I don't remember. Let me see if I
+can just find the number of that run.
+can just find the number of that run.
+2059,
+95% score.
+95% score.
+Yeah. And then if you go to off-road
+Yeah. And then if you go to off-road
+rate, you'll see this is actually higher
+rate, you'll see this is actually higher
+than the majority of the other ones.
+O0036.
+Hold up. Is it off road? No. Something
+Hold up. Is it off road? No. Something
+was funky with this one. Is it
+was funky with this one. Is it
+completion rate?
+97.8. Yeah,
+97.8. Yeah,
+it has not gone to 99 like the other
+ones. Um, well, what are the
+ones. Um, well, what are the
+coefficients on the rewards? I
+coefficients on the rewards? I
+wonder. It's probably just down to that.
+I mean, it's playing scared. It's
+I mean, it's playing scared. It's
+probably playing scared, right?
+Sure. And like that's the only one that
+Sure. And like that's the only one that
+was able to get basically
+was able to get basically
+sub3 collision rate
+sub3 collision rate
+and the collision rate that's not
+and the collision rate that's not
+including the it's not just because the
+including the it's not just because the
+spawn immunity timer is really high,
+spawn immunity timer is really high,
+right? It's like Yeah. So there's two
+right? It's like Yeah. So there's two
+things. Clean collision rate will always
+things. Clean collision rate will always
+be first
+be first
+life. So irrelevant of the timer. The
+life. So irrelevant of the timer. The
+collision
+collision
+rate collision rate basically equals
+rate collision rate basically equals
+clean collision rate at a very high
+clean collision rate at a very high
+spawn immunity timer. The lower spawn
+spawn immunity timer. The lower spawn
+immunity timer is collision rate
+immunity timer is collision rate
+diverges from clean collision rate to be
+diverges from clean collision rate to be
+higher because of the situation where
+higher because of the situation where
+you spawn into other cars.
+So like yeah I mean this thing it just
+So like yeah I mean this thing it just
+must be it must just be playing scared
+must be it must just be playing scared
+right? Mhm.
+Which is like now for the purposes of
+Which is like now for the purposes of
+like moving forward at what point do we
+like moving forward at what point do we
+say that these quote 72 maps are solved?
+say that these quote 72 maps are solved?
+because you know it's possible one of
+because you know it's possible one of
+these maps is just so out of
+these maps is just so out of
+distribution from the other maps that
+distribution from the other maps that
+it's difficult for it to solve relative
+it's difficult for it to solve relative
+to its learning if you were to do 100
+to its learning if you were to do 100
+maps or 10,000 maps or whatever. Well, I
+maps or 10,000 maps or whatever. Well, I
+would think it's definitely worth
+would think it's definitely worth
+getting more maps in because we're going
+getting more maps in because we're going
+to want to do that anyways and it'll be
+to want to do that anyways and it'll be
+better for experiments. like the just
+better for experiments. like the just
+the padding thing that I would suggest,
+the padding thing that I would suggest,
+right, that I suggested um would let you
+right, that I suggested um would let you
+load random maps per worker, which would
+load random maps per worker, which would
+already give you a bunch.
+Okay, so let's talk through that one
+Okay, so let's talk through that one
+because conceptually I had a hard time
+because conceptually I had a hard time
+trying to think about implementing it.
+trying to think about implementing it.
+Mhm.
+Mhm.
+Um you're going off picking number of
+Um you're going off picking number of
+agents, which let's just assume 4096,
+agents, which let's just assume 4096,
+right?
+right?
+Mhm. If you have 496 agents and you want
+Mhm. If you have 496 agents and you want
+to make it pretty dynamic on your map
+to make it pretty dynamic on your map
+choice, whether you're choosing one map
+choice, whether you're choosing one map
+or 4,96 maps, you just randomly select
+or 4,96 maps, you just randomly select
+maps until you get close to that.
+maps until you get close to that.
+So, you randomly select maps as with in
+So, you randomly select maps as with in
+your innit and resampling, right?
+your innit and resampling, right?
+Because you have to recalculate your
+Because you have to recalculate your
+agent offsets within that thing. Well,
+agent offsets within that thing. Well,
+if you reample, so that's the thing
+if you reample, so that's the thing
+where they like they switch the maps
+where they like they switch the maps
+every so often and it's kind of slow.
+every so often and it's kind of slow.
+Um, okay. We're going to do that, but I
+Um, okay. We're going to do that, but I
+wouldn't even say bother doing it just
+wouldn't even say bother doing it just
+yet. Just like initially, can we at
+yet. Just like initially, can we at
+least get each worker to have
+least get each worker to have
+independent maps because we have 16
+independent maps because we have 16
+workers or eight workers, whatever it
+workers or eight workers, whatever it
+is, and like they're all on the same
+is, and like they're all on the same
+maps right now,
+right? Yeah. Okay. So, you're saying
+right? Yeah. Okay. So, you're saying
+each worker to have because each worker
+each worker to have because each worker
+picks a random set so them to have
+picks a random set so them to have
+different ones.
+different ones.
+Um, okay. Talking let's talk about
+Um, okay. Talking let's talk about
+padding then. you you know you padding
+padding then. you you know you padding
+it's it should be the opposite. It would
+it's it should be the opposite. It would
+be do you you pick maps until you go you
+be do you you pick maps until you go you
+go over, right? Yeah, you go over and
+go over, right? Yeah, you go over and
+then you just drop the last few cars,
+then you just drop the last few cars,
+whatever, so that you have exactly 4096
+whatever, so that you have exactly 4096
+uh in the
+obs, but that's not anything to do with
+obs, but that's not anything to do with
+the actual.h file, right? because you're
+the actual.h file, right? because you're
+just cutting off the edge of it and
+just cutting off the edge of it and
+you're just saying, "Okay, this is now
+you're just saying, "Okay, this is now
+the end of the offset and it's just
+the end of the offset and it's just
+going to Yep. I guess that's a little
+going to Yep. I guess that's a little
+awkward, but it it's a tiny bit awkward,
+awkward, but it it's a tiny bit awkward,
+but not really, right?
+but not really, right?
+I guess some cars are going
+I guess some cars are going
+to get no actions. Yeah, some cars are
+to get no actions. Yeah, some cars are
+just going to park in the middle of the
+just going to park in the middle of the
+road. Or you could remove them, which
+road. Or you could remove them, which
+would be better.
+Okay, so there will be I guess possibly
+Okay, so there will be I guess possibly
+a little bit of logic. How is that going
+a little bit of logic. How is that going
+to get passed in? Uh I guess from
+to get passed in? Uh I guess from
+actions, right? I could go based off the
+actions, right? I could go based off the
+shape of actions and then cut off
+shape of actions and then cut off
+anything past.
+anything past.
+Well, you don't have shapes in the in
+Well, you don't have shapes in the in
+the uh the C. It would be well you can
+the uh the C. It would be well you can
+have the length though because you
+have the length though because you
+you're gonna have you're going to be
+you're gonna have you're going to be
+given an array of actions.
+given an array of actions.
+Uh the C is just a pointer.
+You still have the number you still know
+You still have the number you still know
+the number of cars and stuff total,
+the number of cars and stuff total,
+right?
+right?
+There's no reason why you wouldn't know
+There's no reason why you wouldn't know
+the total number of cars. Remember you
+the total number of cars. Remember you
+also can pass stuff to the init function
+also can pass stuff to the init function
+of binding.
+of binding.
+But like you can just pass numb you can
+But like you can just pass numb you can
+pass numbum cars, right? And just like
+pass numbum cars, right? And just like
+on the last one you can just like cut
+on the last one you can just like cut
+the max lower.
+I mean technically there's no reason you
+I mean technically there's no reason you
+can't load you can load any of these
+can't load you can load any of these
+maps with any number of the cars from
+maps with any number of the cars from
+like zero to however many they actually
+like zero to however many they actually
+have, right?
+There's a little bit of funkiness in
+There's a little bit of funkiness in
+that,
+that,
+[Music]
+[Music]
+but should generally be doable because
+but should generally be doable because
+if you're lowering it from inside of one
+if you're lowering it from inside of one
+of the init functions
+of the init functions
+after the fact
+doesn't have to be after the fact.
+doesn't have to be after the fact.
+I think I'd rather find a way to do it
+I think I'd rather find a way to do it
+inside of step
+inside of step
+somehow.
+somehow.
+Um, like maybe if you don't get an
+Um, like maybe if you don't get an
+action for a cards out like if you
+action for a cards out like if you
+override the active agent count variable
+override the active agent count variable
+via the binding.
+via the binding.
+Mhm. I mean, whatever way makes sense
+Mhm. I mean, whatever way makes sense
+with it, but like know you have the M
+with it, but like know you have the M
+binding now and you have debugging that
+binding now and you have debugging that
+runs through Python. So
+okay but we're and okay so but in the
+okay but we're and okay so but in the
+condition
+condition
+of less maps than total agent count Mhm.
+of less maps than total agent count Mhm.
+or I guess in this case that's our num
+or I guess in this case that's our num
+m's
+variable just modulo it.
+Yeah or max or whatever it is. Yeah.
+Yeah or max or whatever it is. Yeah.
+Whatever the right mathematical
+Whatever the right mathematical
+operation is to get a unique number that
+operation is to get a unique number that
+fits in the that's divisible or
+fits in the that's divisible or
+whatever. Yep.
+And no resampling. So each round will
+And no resampling. So each round will
+continuously just replay the level it's
+continuously just replay the level it's
+given on that set of
+given on that set of
+levels at the moment.
+levels at the moment.
+Like when it dies, it's not going to
+Like when it dies, it's not going to
+it's not going to pick a different
+it's not going to pick a different
+random map. It's gonna in the set of
+random map. It's gonna in the set of
+random that it's been given. Yeah,
+random that it's been given. Yeah,
+initially. And then the way that they
+initially. And then the way that they
+did is just every so often they resample
+did is just every so often they resample
+everything,
+which I don't think should be that bad.
+which I don't think should be that bad.
+I mean, the initialization isn't too
+I mean, the initialization isn't too
+slow, but I mean,
+slow, but I mean,
+yeah, if you do it for that many maps,
+yeah, if you do it for that many maps,
+maybe it's a little slow. So, I mean,
+maybe it's a little slow. So, I mean,
+we'll see with this, right?
+we'll see with this, right?
+Okay. So, for max paralization, should I
+Okay. So, for max paralization, should I
+start with doing like the 4096 or should
+start with doing like the 4096 or should
+I just do like a thousand or 100 or, you
+I just do like a thousand or 100 or, you
+know, some just a number that works? Uh,
+know, some just a number that works? Uh,
+just whatever is close to the number of
+just whatever is close to the number of
+cards you have at the moment. I think
+cards you have at the moment. I think
+it's like 512 per worker.
+Oh, okay. Just get Okay, I see what you
+Oh, okay. Just get Okay, I see what you
+mean. You're literally all you're doing
+mean. You're literally all you're doing
+is just trying to make it round off to
+is just trying to make it round off to
+something clean so we can actually like
+something clean so we can actually like
+do stuff with it.
+do stuff with it.
+Okay. Um, I will get to work on that.
+Okay. Um, I will get to work on that.
+Cool. Thank you. And, uh, I will be
+Cool. Thank you. And, uh, I will be
+after breakfast back here for the whole
+after breakfast back here for the whole
+rest of the day. So, yep. All right.
+rest of the day. So, yep. All right.
+Thanks,
+Spencer. Cool. So, I've got to go for
+Spencer. Cool. So, I've got to go for
+breakfast in a few here.
+So to folks on Twitch and YouTube, uh I
+So to folks on Twitch and YouTube, uh I
+will be back after I'm going to do a
+will be back after I'm going to do a
+couple last things on this, but I will
+couple last things on this, but I will
+have to go in a minute. So, uh after
+have to go in a minute. So, uh after
+breakfast, I will be back for the whole
+breakfast, I will be back for the whole
+rest of the day working
+rest of the day working
+on probably seeing if we can get some
+on probably seeing if we can get some
+really high perf demos here. Clean up a
+really high perf demos here. Clean up a
+whole bunch of stuff in Puffer Lib.
+whole bunch of stuff in Puffer Lib.
+Really just get all this stuff ready for
+Really just get all this stuff ready for
+release.
+release.
+Um, all my stuff is on puffer.ai. It's
+Um, all my stuff is on puffer.ai. It's
+all free and open source code. If you
+all free and open source code. If you
+want to support this work for free,
+want to support this work for free,
+start the GitHub. If you want to get
+start the GitHub. If you want to get
+involved with development, you can join
+involved with development, you can join
+us on Discord. You can also follow me on
+us on Discord. You can also follow me on
+X for more RL
+X for more RL
+content. But we will stay here for
+content. But we will stay here for
+another couple of minutes just to
+another couple of minutes just to
+see. Hey, Boxing.
+Are you going for breakfast? Yeah, I'm
+Are you going for breakfast? Yeah, I'm
+going for breakfast in a minute, but
+going for breakfast in a minute, but
+then I'm back for the whole rest of the
+then I'm back for the whole rest of the
+day
+after. Usually food breaks at 10 and 6.
+It's a massive copy
+It's a massive copy
+overhead. Would you mind answering some
+overhead. Would you mind answering some
+questions? Of course. I'm going to have
+questions? Of course. I'm going to have
+to go in a second, but uh yeah, after
+to go in a second, but uh yeah, after
+breakfast, of course.
+45% copy overhead is ridiculous.
+How much of it is in
+How much of it is in
+here? Is it still 45%? If I do
+this 44, it is literally all just in
+this 44, it is literally all just in
+write that function.
+It's probably literally all in right
+It's probably literally all in right
+here,
+right? Yep.
+right? Yep.
+If I take this one line out.
+Ridiculous. How much data is this?
+megabytes. And that is for 131. So if we
+megabytes. And that is for 131. So if we
+do like 8.1 million
+um
+times
+times
+four that is 3 gigabytes 3.8 8 GB per
+second which is nothing for a CUDA
+device.
+device.
+So why is it that long? It's these are
+So why is it that long? It's these are
+like goodsized blocks too, right? This
+like goodsized blocks too, right? This
+is these are not tiny little
+transfers. Well, I think what we'll do
+transfers. Well, I think what we'll do
+is uh we'll check out what we'll do is
+is uh we'll check out what we'll do is
+we'll look at like the difference
+we'll look at like the difference
+between the me if the memory is pinned
+between the me if the memory is pinned
+or not after breakfast and then we will
+or not after breakfast and then we will
+go from there. So, uh, yeah.

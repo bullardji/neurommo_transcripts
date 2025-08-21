@@ -1,0 +1,2893 @@
+Kind: captions
+Language: en
+Okay, we are
+Okay, we are
+live.
+Morning. I think what we're going to do
+Morning. I think what we're going to do
+today here, I'm going to check on some
+today here, I'm going to check on some
+experiments real quick and then for the
+experiments real quick and then for the
+next hour, hour and a half or so, uh I'm
+next hour, hour and a half or so, uh I'm
+going to just go through all of our
+going to just go through all of our
+environments, get some nice clean
+environments, get some nice clean
+configs for them. run some experiments,
+configs for them. run some experiments,
+kind of work towards having a very easy
+kind of work towards having a very easy
+benchmark suite for the next release and
+benchmark suite for the next release and
+we'll see from
+there. Let's check back in on this. Ah,
+there. Let's check back in on this. Ah,
+okay. So, look at
+okay. So, look at
+this. And this is interesting, right?
+this. And this is interesting, right?
+So, is this curve
+So, is this curve
+shallower? It looks to me like this
+shallower? It looks to me like this
+might eventually intersect.
+might eventually intersect.
+So, we'll have to see about
+So, we'll have to see about
+that. And then right
+here, these two are like virtually on
+here, these two are like virtually on
+top of each other. I
+think. Yeah, virtually on top of each
+think. Yeah, virtually on top of each
+other.
+other.
+Okay. So, it was a little better early
+Okay. So, it was a little better early
+on. No big deal. It's about the same.
+Let me think what the best way to do
+Let me think what the best way to do
+this
+is. I think we push this
+So we can do uh
+So we can do uh
+multiple multiple runs at the same time
+multiple multiple runs at the same time
+on different boxes.
+So this is now up there. And what we're
+So this is now up there. And what we're
+going to do is we're going to just pull
+going to do is we're going to just pull
+this on a couple different boxes and I
+this on a couple different boxes and I
+think in parallel we're just going to go
+think in parallel we're just going to go
+through a few different environments,
+through a few different environments,
+try to run some good baselines and uh
+try to run some good baselines and uh
+see if we can get like good trained
+see if we can get like good trained
+models just one right right after the
+models just one right right after the
+another for most of our
+another for most of our
+tasks. So I've got puffer box four here.
+tasks. So I've got puffer box four here.
+I think this is free. Yeah, this is
+free. We also give access to these boxes
+free. We also give access to these boxes
+to uh contributors by the way. So if any
+to uh contributors by the way. So if any
+folks are interested in contributing,
+folks are interested in contributing,
+working on some cool stuff, that is a
+working on some cool stuff, that is a
+thing that we
+thing that we
+do. Uh I got to pull this first and then
+do. Uh I got to pull this first and then
+we can push that.
+zero.
+Where did our box
+go? And then we will get our our sweep
+go? And then we will get our our sweep
+crafts
+crafts
+up and uh I think we'll just start like
+up and uh I think we'll just start like
+recording on here.
+And okay, there's our first one right
+there. So, this one is pretty much fine
+there. So, this one is pretty much fine
+out of the box. maybe log interval so we
+out of the box. maybe log interval so we
+get a cleaner curve or something. But
+get a cleaner curve or something. But
+this is pretty much fine out of the
+box. See if this works.
+Okay, so this one doesn't work. There's
+Okay, so this one doesn't work. There's
+some sort of bug
+some sort of bug
+here. This is probably a batch size
+here. This is probably a batch size
+shenanigans, I would
+imagine. Uh, I want to see what happens
+imagine. Uh, I want to see what happens
+if I just like do this.
+Okay, that's
+running
+multiprocessing. Enduro is such a cool
+multiprocessing. Enduro is such a cool
+end. It doesn't make any sense for us to
+end. It doesn't make any sense for us to
+have it in the state where uh we're not
+have it in the state where uh we're not
+actively using
+it. Okay. So, this is not optimizing or
+it. Okay. So, this is not optimizing or
+anything here.
+If I do this, it should work,
+right? See if that
+trains. Got breakout. Breakout seems to
+trains. Got breakout. Breakout seems to
+be running.
+This is
+Enduro breakout here.
+Enduro breakout here.
+Enduro just to
+Enduro just to
+pass. Enduro score variable is not good.
+pass. Enduro score variable is not good.
+it
+it
+uh you want like days completed or
+uh you want like days completed or
+whatever. So there it is. You can see
+whatever. So there it is. You can see
+it's completing uh the first day right
+it's completing uh the first day right
+here.
+should go straight up.
+snake as
+well. Okay, so this is training. It's
+well. Okay, so this is training. It's
+just not
+just not
+uh we'll have to get bet on uh optimal
+uh we'll have to get bet on uh optimal
+hypers and stuff. I mean, I'm sure he
+hypers and stuff. I mean, I'm sure he
+has them.
+has them.
+I probably just removed him from there,
+I probably just removed him from there,
+huh? What do you have gamma as? That's
+huh? What do you have gamma as? That's
+the only one that really
+the only one that really
+matters. He has gamma as
+matters. He has gamma as
+N7. So, we might want to retry that with
+N7. So, we might want to retry that with
+slightly lower gamma.
+So this is working like uh these days
+So this is working like uh these days
+completed this is already very good
+per we'll get all of these running first
+per we'll get all of these running first
+and then I think what we'll do is we'll
+and then I think what we'll do is we'll
+go through and I want to get like a
+go through and I want to get like a
+normalized score variable for every
+normalized score variable for every
+single end so you can get them all on
+single end so you can get them all on
+one plot as like 0 to one or whatever.
+stays completed. Graph is
+good. Uh is this breakout? This looks
+good. Uh is this breakout? This looks
+like breakout crashing back down a
+like breakout crashing back down a
+little
+little
+bit. So, not ideal here. I think that
+bit. So, not ideal here. I think that
+there is still some uh something to fix
+there is still some uh something to fix
+with our experience buffer, though. I
+with our experience buffer, though. I
+just don't want to do that first thing
+just don't want to do that first thing
+in the morning here because that's
+in the morning here because that's
+actually going to be like really fiddly.
+actually going to be like really fiddly.
+So, I'd rather just run a bunch of these
+So, I'd rather just run a bunch of these
+experiments, get all of these in
+experiments, get all of these in
+generally a good spot. Um, we'll see if
+generally a good spot. Um, we'll see if
+we can get that normalized score
+we can get that normalized score
+variable, get like a nice run script,
+variable, get like a nice run script,
+and then we will have a much more
+and then we will have a much more
+powerful way to check
+powerful way to check
+on potential
+issues. We're at 93 mil, 94. That's
+issues. We're at 93 mil, 94. That's
+decent. Thing we're looking at with
+decent. Thing we're looking at with
+Snake is whether it keeps going up to
+Snake is whether it keeps going up to
+like 100ish or 97
+maybe. Okay. So, Enduro continuing to
+maybe. Okay. So, Enduro continuing to
+clear more and more days is good.
+clear more and more days is good.
+Um, the collisions are going to keep
+Um, the collisions are going to keep
+going up because it's living for longer.
+going up because it's living for longer.
+I believe this is a 40,000 step episode.
+I believe this is a 40,000 step episode.
+Enduro is actually a very long
+Enduro is actually a very long
+game. It's self similar, but it's very
+long. Okay, so far so good
+long. Okay, so far so good
+there. This will be done in a minute.
+there. This will be done in a minute.
+Um, we can also kind of just start on
+Um, we can also kind of just start on
+the normalized score stuff while we
+the normalized score stuff while we
+wait. So, my idea
+there my idea there is to just add
+like normalized score. Um,
+Yeah, that's
+good. Is there a max
+good. Is there a max
+score? Where does max score get set? I
+score? Where does max score get set? I
+don't think this thing gets set.
+Oh yeah. Okay. It gets set really janky
+Oh yeah. Okay. It gets set really janky
+right now, but it does get
+set. This should up. This should cast a
+set. This should up. This should cast a
+float, right?
+Same thing
+here. And we do have a max score there
+here. And we do have a max score there
+as
+well. All
+right. How we doing on
+right. How we doing on
+snake? Okay. We take a dip towards the
+snake? Okay. We take a dip towards the
+end here, which is not
+good. So, I definitely think that
+good. So, I definitely think that
+there's something screwy with um our
+there's something screwy with um our
+episode index
+episode index
+logic, and that's definitely going to be
+logic, and that's definitely going to be
+one of the main things we'll have to
+one of the main things we'll have to
+test. It's not like totally crashing
+test. It's not like totally crashing
+runs, it seems. Um but it's not ideal.
+Now it's a bit tough to figure
+Now it's a bit tough to figure
+out like max length in snake right.
+I think what we have to do with the ones
+I think what we have to do with the ones
+that have like no technical max is we
+that have like no technical max is we
+just pick a score we think is really
+just pick a score we think is really
+good and then we clip at that score and
+good and then we clip at that score and
+when we eventually beat that then we
+when we eventually beat that then we
+just keep going up with that
+just keep going up with that
+clip. Does that make sense?
+So, we just like pick a score with some
+So, we just like pick a score with some
+headroom.
+This is on the old logging uh branch as
+This is on the old logging uh branch as
+well. Bet has been working on updating
+well. Bet has been working on updating
+all the ends to the new
+all the ends to the new
+logging. I actually shouldn't touch this
+logging. I actually shouldn't touch this
+one in particular because bet has a PR
+one in particular because bet has a PR
+on this.
+do
+enduro. Uh, okay. This doesn't get used.
+enduro. Uh, okay. This doesn't get used.
+This was from earlier.
+Day is
+Day is
+completed. What do we expect that this
+completed. What do we expect that this
+is going to
+is going to
+be? Oh, this is like perfect linear,
+be? Oh, this is like perfect linear,
+isn't it?
+Yeah. 10. We'll give it 10. Hey,
+Yeah. 10. We'll give it 10. Hey,
+welcome. So, we'll just arbitrarily say
+welcome. So, we'll just arbitrarily say
+that if you complete 10 days, then
+that if you complete 10 days, then
+you've won because there's no win
+you've won because there's no win
+condition in this game.
+Yeah, we'll just arbitrarily say that
+Yeah, we'll just arbitrarily say that
+this is the uh the
+max because we need something we need
+max because we need something we need
+some way to put all these uh all these m
+some way to put all these uh all these m
+on the same
+on the same
+graph and 10 days is pretty
+good. Okay, what other ends do we have
+good. Okay, what other ends do we have
+here? Uh, cart pull. Cart pull super
+here? Uh, cart pull. Cart pull super
+easy.
+Max steps termination. And then where's
+Max steps termination. And then where's
+score? Bet. Did you not add
+score? Bet. Did you not add
+score? Dang it. Bet.
+Is there a max where is it termination
+Is there a max where is it termination
+steps or
+something? Max steps.
+probably need to
+probably need to
+cast. All right. So, we'll do something
+cast. All right. So, we'll do something
+like this for
+now. This one's done. Let's run. Let me
+now. This one's done. Let's run. Let me
+make sure carpole actually is a working
+make sure carpole actually is a working
+end.
+It should train like
+instantly. Oh, bed is already on here.
+That's
+That's
+weird. Oh, it's cuz he doesn't have the
+weird. Oh, it's cuz he doesn't have the
+CUDA colonel. That's fine.
+How's it not have
+Okay, so this needs a few
+things
+seed. Uh yeah, this is on the wrong
+seed. Uh yeah, this is on the wrong
+process. There we go.
+Oh, I know what that is.
+Oh, I know what that is.
+Okay. Yeah, this is jank.
+Um, yeah, this is super jank, but there
+Um, yeah, this is super jank, but there
+are limitations right now on how many
+are limitations right now on how many
+M's you can run because I have to fix
+M's you can run because I have to fix
+some CUDA
+kernels. Uh, however, that should have
+worked. That definitely should have
+worked. That definitely should have
+worked. Oh, but he has all these
+worked. Oh, but he has all these
+freaking separate params on here. Yeah,
+freaking separate params on here. Yeah,
+you don't need any of these, my guy. The
+you don't need any of these, my guy. The
+only one you need is total time
+steps, which is what's this?
+130 13
+million. That's funny.
+million. That's funny.
+20 million step cart pull
+run. So that doesn't look like it trans.
+Fix
+gamma. There we go. It's always just
+gamma. There we go. It's always just
+gamma.
+We should be happy with
+that. Get out of here,
+bot. All right.
+Next up will
+Next up will
+be we can probably do connect four,
+right? Needs to be fixed.
+Hang on. That should have worked,
+Hang on. That should have worked,
+shouldn't it
+shouldn't it
+have? Oh, I bet it's this thing,
+right? Oh, no. No, I'm dumb here. I'm
+right? Oh, no. No, I'm dumb here. I'm
+dumb. I'm really dumb. Okay, this
+dumb. I'm really dumb. Okay, this
+is
+is
+88 4 and then if they're eight M's, each
+88 4 and then if they're eight M's, each
+one should get 512
+mobile. We need to fix action space for,
+mobile. We need to fix action space for,
+right?
+There's like something I did screwy with
+There's like something I did screwy with
+action
+space. This runs
+and connect 4 seems like it trains as
+well. Totally
+fine. Now, this is uh this is going to
+fine. Now, this is uh this is going to
+be really crappy gamma,
+be really crappy gamma,
+though. So, let's do
+though. So, let's do
+gamma. Let's do that. That should make
+gamma. Let's do that. That should make
+it way easier to learn.
+Wrong block,
+dummy. Moa just takes forever to report
+dummy. Moa just takes forever to report
+stats. Otherwise, it should be fine.
+Connect four is training
+nicely radiant victory. Yep. This is in
+nicely radiant victory. Yep. This is in
+30 mil step. This is now winning.
+Perfect. Now, are we going to get stuck
+Perfect. Now, are we going to get stuck
+here? Are we going to actually full self
+That's a full solve. We're happy with
+That's a full solve. We're happy with
+that. Over
+99. This can be 30
+99. This can be 30
+mil. Cool. Uh moa
+mil. Cool. Uh moa
+is Yeah. I don't need to even have it
+is Yeah. I don't need to even have it
+run this
+long. Okay, we're happy with
+that hardware.
+Maybe don't really need these on
+Maybe don't really need these on
+Neptune.
+Neptune.
+Let's get ourware to
+work. T 2048 should be
+fine. Wait, isn't
+2048? Uh, okay. Now I'm curious why this
+2048? Uh, okay. Now I'm curious why this
+is broken because Oh, each of these has
+is broken because Oh, each of these has
+a ton of agents though,
+right? See have four agents each. So,
+right? See have four agents each. So,
+this should be 512.
+I thought
+Um yeah, this just doesn't
+recompile. Okay, so here's our
+That's optimizing.
+and do tower climb.
+Maybe 2048
+MS. Oh, hang
+on. Pretty epic you do these live
+on. Pretty epic you do these live
+streams. Thank
+streams. Thank
+you. Hey, Olivia.
+you. Hey, Olivia.
+Uh, pretty epic. Yeah. So, I It's just
+Uh, pretty epic. Yeah. So, I It's just
+do all the dev streams live. I don't
+do all the dev streams live. I don't
+know why not,
+right? It's kind of just good all
+right? It's kind of just good all
+around. Um, people getting into
+around. Um, people getting into
+programming get to see like a lot of the
+programming get to see like a lot of the
+decisions I make live. People getting
+decisions I make live. People getting
+into RL get a lot of information. People
+into RL get a lot of information. People
+who have questions about Puffer Lib get
+who have questions about Puffer Lib get
+stuff answered live. Support gets done
+stuff answered live. Support gets done
+live. people get interested in
+live. people get interested in
+contributing, I review uh contributions
+contributing, I review uh contributions
+live. So like if you PR stuff and want
+live. So like if you PR stuff and want
+code review, I do that
+code review, I do that
+live. It's just good all around. And you
+live. It's just good all around. And you
+kind of just get used to live streaming
+kind of just get used to live streaming
+everything very quickly.
+Hey, welcome
+a we are currently just attempting
+a we are currently just attempting
+to get all of the M's training
+to get all of the M's training
+um with like reasonable per and then I'm
+um with like reasonable per and then I'm
+going to get it so that all the M's
+going to get it so that all the M's
+report a normalized score from 0 to one
+report a normalized score from 0 to one
+so that I can just have like fun script
+so that I can just have like fun script
+to launch all the different training
+to launch all the different training
+runs and then give me back perf on all
+runs and then give me back perf on all
+of
+of
+them, which really shouldn't take that
+them, which really shouldn't take that
+long. I think the only uh the only
+long. I think the only uh the only
+environment that takes a really long
+environment that takes a really long
+time to train is neural 3. Everything
+time to train is neural 3. Everything
+else is like pretty good. And that's
+else is like pretty good. And that's
+just neurommo3 is hard. That's all it
+just neurommo3 is hard. That's all it
+is.
+This should be
+2048. Now, there's still a whole bunch
+2048. Now, there's still a whole bunch
+of like bugs and limitations and things
+of like bugs and limitations and things
+in the dev branch that I have to
+in the dev branch that I have to
+address, but I've kind of been doing
+address, but I've kind of been doing
+that for the last couple weeks, and I'm
+that for the last couple weeks, and I'm
+a little tired of it. So, uh, I figured
+a little tired of it. So, uh, I figured
+we'd have a little fun today with this.
+we'd have a little fun today with this.
+So, I'm going to do this until 10,
+So, I'm going to do this until 10,
+another 40 minutes or whatever, and then
+another 40 minutes or whatever, and then
+I'm going to get breakfast, get some
+I'm going to get breakfast, get some
+exercise, and then I'm going to come
+exercise, and then I'm going to come
+back. And hopefully the goal today is
+back. And hopefully the goal today is
+that we have like good, nice performance
+that we have like good, nice performance
+on all of these different runs. We have
+on all of these different runs. We have
+all the plots on uh we have like all the
+all the plots on uh we have like all the
+different metrics on one plot or
+different metrics on one plot or
+whatever. Maybe not all of them. Maybe
+whatever. Maybe not all of them. Maybe
+we don't put neural MMO 3 on just cuz
+we don't put neural MMO 3 on just cuz
+it's
+it's
+like all the experiments take 5 minutes
+like all the experiments take 5 minutes
+and then neural MMO 3 takes 3
+days. So, we'll see about that one.
+I just do this. Does it just
+work? Thank
+you. Okay, so this just works now. So
+you. Okay, so this just works now. So
+squared didn't work before, which was
+squared didn't work before, which was
+really concerning because squared's a
+really concerning because squared's a
+very easy end. And now it just
+very easy end. And now it just
+works. Hey Nant, welcome.
+Man, I like getting the regular streams
+Man, I like getting the regular streams
+in as well cuz then people realize that
+in as well cuz then people realize that
+I'm like always live and we get regular
+I'm like always live and we get regular
+viewers. I've seen uh Nishant and Aash
+viewers. I've seen uh Nishant and Aash
+have been here quite a while it
+have been here quite a while it
+seems. I do actually have plans for
+seems. I do actually have plans for
+um there's a there's a new puffer
+um there's a there's a new puffer
+facility uh and I I'm going to have a
+facility uh and I I'm going to have a
+very nice streaming setup there.
+Shoot. I do I am realizing I'm going to
+Shoot. I do I am realizing I'm going to
+have to reinstall this server to do
+have to reinstall this server to do
+that, but it'll
+work. Then we'll have like very regular
+work. Then we'll have like very regular
+streams
+streams
+because the whole schedule is like zero
+because the whole schedule is like zero
+friction.
+Okay. So, tower
+Okay. So, tower
+climb is not working. Everything else is
+climb is not working. Everything else is
+working. Tower climb is not
+working. I think that it was working and
+working. I think that it was working and
+crashed though,
+right? Let's log this. And
+then let's just see if we do better than
+then let's just see if we do better than
+Spencer's default grams just by like
+Spencer's default grams just by like
+deleting them. just using our defaults.
+deleting them. just using our defaults.
+And then what did he have as
+And then what did he have as
+gamma
+gamma
+98? So we'll give him
+98? So we'll give him
+gamma we'll give him that actually seems
+gamma we'll give him that actually seems
+high. Let's do
+that. Okay. So now we'll have two
+that. Okay. So now we'll have two
+different tower climb runs going.
+Yeah, I think this is a stability issue,
+Yeah, I think this is a stability issue,
+not like a learning issue because this
+not like a learning issue because this
+is 82% solve and then I'm pretty sure
+is 82% solve and then I'm pretty sure
+this will crash down.
+Discord Discord uh
+Discord Discord uh
+discord.gg/puffer. I am open to
+discord.gg/puffer. I am open to
+commissioning um like basically stream
+commissioning um like basically stream
+overlay like you know the things where
+overlay like you know the things where
+you just like partition all the windows
+you just like partition all the windows
+nicely. But uh I mean as you can see
+nicely. But uh I mean as you can see
+this is more technical stream. It's not
+this is more technical stream. It's not
+like gaming themed. But hey, if you do
+like gaming themed. But hey, if you do
+stuff that would make sense for that,
+stuff that would make sense for that,
+then
+sure. I am interested in getting like a
+sure. I am interested in getting like a
+couple nice scene um like scene
+overlays. I usually have like this one
+overlays. I usually have like this one
+and then like a vertical one for
+and then like a vertical one for
+reviewing papers, but whatever really
+reviewing papers, but whatever really
+makes sense with uh screen
+space. Okay, so this is pretty funny.
+space. Okay, so this is pretty funny.
+Um, I just pasted my default
+hyperp and we outperform Spencer's
+hyperp and we outperform Spencer's
+defaults like that are manually tuned
+defaults like that are manually tuned
+for this.
+for this.
+Um, we'll see whether this is stable or
+Um, we'll see whether this is stable or
+not. We may as well let this finish
+not. We may as well let this finish
+running for the two
+running for the two
+minutes. But yeah, I think the new Muan
+minutes. But yeah, I think the new Muan
+stuff is really, really good.
+Like I've had a few people tell me that
+Like I've had a few people tell me that
+um they didn't see very much out of
+um they didn't see very much out of
+Muan, but I honestly just don't think
+Muan, but I honestly just don't think
+that they're like they bothered retuning
+that they're like they bothered retuning
+hypers. Like people have over optimized
+hypers. Like people have over optimized
+to Adam because with puffer right we can
+to Adam because with puffer right we can
+run so many experiments and we can
+run so many experiments and we can
+retune stuff. Like we got a massive
+retune stuff. Like we got a massive
+massive difference with the new
+massive difference with the new
+optimizer. It literally makes RL feel
+optimizer. It literally makes RL feel
+like a different field. Like me just
+like a different field. Like me just
+deleting all the tuned hyperparameters
+deleting all the tuned hyperparameters
+and using whatever defaults and having
+and using whatever defaults and having
+stuff still train that is unheard of in
+stuff still train that is unheard of in
+RL.
+Yeah. So, actually you can see this one
+Yeah. So, actually you can see this one
+is crashing back down. We'll see how
+is crashing back down. We'll see how
+this one does. If this actually crashes
+this one does. If this actually crashes
+later or not, but so far this has been
+later or not, but so far this has been
+fine. It's like stable 92.
+What else do we need? We haven't
+What else do we need? We haven't
+done triple triad, right?
+this and then gamma
+this and then gamma
+five. Honestly, the only thing that's
+five. Honestly, the only thing that's
+really left as the main impediment is uh
+really left as the main impediment is uh
+gamma's kind of evil.
+gamma's kind of evil.
+It's not even that bad because it's like
+It's not even that bad because it's like
+it's pretty stable now. But um if you
+it's pretty stable now. But um if you
+have like a very long horizon continuous
+have like a very long horizon continuous
+end where you have like a card game, you
+end where you have like a card game, you
+do have to set gamma or it just won't
+do have to set gamma or it just won't
+work. That's really nowhere near as big
+work. That's really nowhere near as big
+of a limitation though as it used to be.
+of a limitation though as it used to be.
+I guess we'll have to do sensitivity
+I guess we'll have to do sensitivity
+analysis to see like do you really have
+analysis to see like do you really have
+to fine-tune gamma or do you just kind
+to fine-tune gamma or do you just kind
+of have to set it to something
+of have to set it to something
+reasonable?
+But yeah, look, just changing this gamma
+But yeah, look, just changing this gamma
+and like these hypers. This is pretty
+and like these hypers. This is pretty
+good. Oh, are we
+crashing? I can't
+crashing? I can't
+tell. No, we're
+tell. No, we're
+fine. We're fine.
+Oh, we we did crash a little bit
+here. Yeah. Okay. So, there is
+here. Yeah. Okay. So, there is
+instability for sure. There is
+instability. We're going to have to see
+instability. We're going to have to see
+how this works.
+Um, we will have to see how this works
+Um, we will have to see how this works
+once I fix experience buffer
+once I fix experience buffer
+stuff. Yeah, this is like fully crashed,
+stuff. Yeah, this is like fully crashed,
+but we get 92% for quite a good while
+but we get 92% for quite a good while
+before
+that. How is triple triad?
+Okay, that's a very nice smooth curve,
+right? It's a very smooth curve.
+Do I have art stuff in my Discord
+Do I have art stuff in my Discord
+here? No.
+I presume that I presume that means
+I presume that I presume that means
+actually was bought because if not bot
+actually was bought because if not bot
+would have heard discord channel and
+would have heard discord channel and
+posted most
+likely. That's
+funny. Does anybody know if um because
+funny. Does anybody know if um because
+I've had like a lot of these. Does
+I've had like a lot of these. Does
+anybody know if it's like actually
+anybody know if it's like actually
+artists just trying to automate their
+artists just trying to automate their
+advertising or if it's a
+scam? Because I've definitely gotten
+scam? Because I've definitely gotten
+ones that seem like it was literally
+ones that seem like it was literally
+just artists trying to advertise, which
+just artists trying to advertise, which
+is like that's chill, right?
+Okay, so this is nice. We still have
+Okay, so this is nice. We still have
+this instability. See, I think that this
+this instability. See, I think that this
+is probably down to the experience
+is probably down to the experience
+buffer being screwy, though. I think
+buffer being screwy, though. I think
+that's probably down to that because
+that's probably down to that because
+we've never seen this type of a thing
+we've never seen this type of a thing
+happen before. And uh it's probably the
+happen before. And uh it's probably the
+way that we redid the experience
+way that we redid the experience
+buffer. Okay. Did I miss any
+buffer. Okay. Did I miss any
+environments? Blastar. I did miss
+environments? Blastar. I did miss
+Blaster.
+last hour. I probably do both of these.
+This little break. 2048.
+The main thing is the gamma. I bet this
+The main thing is the gamma. I bet this
+will work. I bet it'll just work. Um,
+will work. I bet it'll just work. Um,
+we'll run it two
+ways. All right.
+Olivia, if you're not a bot, it's
+discord.gg/puffer. You can feel free to
+discord.gg/puffer. You can feel free to
+drop stuff in there.
+because I am actually in the market for
+because I am actually in the market for
+uh some new overlays. Well, some
+uh some new overlays. Well, some
+overlays. I don't really have any
+I guess it's BP
+Does this not give us
+Does this not give us
+stats or does it just take a while?
+Uh, this doesn't give us
+Uh, this doesn't give us
+stats.
+Bet. Hey, bro. Can you tell me how I can
+Bet. Hey, bro. Can you tell me how I can
+prepare for MLA AI? If it's general ML
+prepare for MLA AI? If it's general ML
+and AI, go take CS231N with the lectures
+and AI, go take CS231N with the lectures
+by either Justin or Andre
+by either Justin or Andre
+uh and Andred. And if you are interested
+uh and Andred. And if you are interested
+in RL specifically, I have a quick start
+in RL specifically, I have a quick start
+guide on puffer.ai. It's just in the
+guide on puffer.ai. It's just in the
+blog.
+This is a lot more accessible for RL
+This is a lot more accessible for RL
+specifically than a lot of the content
+specifically than a lot of the content
+out there. Though it does assume that
+out there. Though it does assume that
+you have uh enough basic uh deep
+you have uh enough basic uh deep
+learning background to be able to read
+learning background to be able to read
+some blogs and
+papers. Okay, so this one doesn't print
+papers. Okay, so this one doesn't print
+and this one does print. Oh, no it does.
+and this one does print. Oh, no it does.
+It just takes forever. zero knowledge of
+It just takes forever. zero knowledge of
+ML. Uh
+CS231N and if CS231N is too hard, then
+CS231N and if CS231N is too hard, then
+you're going to have to start from like
+you're going to have to start from like
+a lot of basics. It really depends on
+a lot of basics. It really depends on
+where you are and like where you are in
+where you are and like where you are in
+life and stuff, right? Because I don't
+life and stuff, right? Because I don't
+know if I'm talking to um you know,
+know if I'm talking to um you know,
+somebody pivoting in their 30s or if I'm
+somebody pivoting in their 30s or if I'm
+talking to somebody who's in high
+talking to somebody who's in high
+school, right?
+school, right?
+Um if you're relatively early on and you
+Um if you're relatively early on and you
+haven't gotten the math background or
+haven't gotten the math background or
+anything like you just need uh
+anything like you just need uh
+basic really only different derivative
+basic really only different derivative
+you don't even need integral calculus
+you don't even need integral calculus
+but um multivariable differential
+but um multivariable differential
+calculus and linear algebra and you need
+calculus and linear algebra and you need
+to be very comfortable working with
+to be very comfortable working with
+matrices and tensors and then
+matrices and tensors and then
+CS231m followed by specialization to
+CS231m followed by specialization to
+whatever specific sub area of
+whatever specific sub area of
+AI. If you have some math background, if
+AI. If you have some math background, if
+you've, you know, done some sort of
+you've, you know, done some sort of
+university engineering math or whatever,
+university engineering math or whatever,
+and you have some good programming
+and you have some good programming
+background, then just 231 in into
+background, then just 231 in into
+whatever you want to work
+whatever you want to work
+on, knowledge of C and C++, two years in
+on, knowledge of C and C++, two years in
+webdev. I depending on how much math
+webdev. I depending on how much math
+you've taken, then you can probably just
+you've taken, then you can probably just
+do CS231N and start working on some
+do CS231N and start working on some
+projects.
+That's the usual
+go-to. Having a low-level engineering
+go-to. Having a low-level engineering
+background actually will help you a lot
+background actually will help you a lot
+though because most like AI researchers
+though because most like AI researchers
+are very very bad with low-level
+are very very bad with low-level
+development. It's actually uh one of my
+development. It's actually uh one of my
+strongest assets at the moment and
+strongest assets at the moment and
+something I just picked up fairly
+recently. You do at least need to have
+recently. You do at least need to have
+some understanding though of the math
+some understanding though of the math
+behind it. It's not that much math,
+behind it. It's not that much math,
+especially for like an engineering
+especially for like an engineering
+discipline. It's really not that much
+discipline. It's really not that much
+math, but you do need to pick up a
+math, but you do need to pick up a
+little bit of it.
+You'll want to catch up in morning or
+You'll want to catch up in morning or
+afternoon tomorrow. Yes, Spencer. I'm
+afternoon tomorrow. Yes, Spencer. I'm
+around tonight. I'm around all day
+around tonight. I'm around all day
+tomorrow.
+Also, I got um I don't know what like
+Also, I got um I don't know what like
+good solve rate is on tower climb and
+good solve rate is on tower climb and
+there's some bugs with the experience
+there's some bugs with the experience
+buffer and dev that make it occasionally
+buffer and dev that make it occasionally
+crash all the way, but I literally just
+crash all the way, but I literally just
+deleted all your hyper params, pasted in
+deleted all your hyper params, pasted in
+the defaults, and got
+92%. It was at like 89 with uh with your
+92%. It was at like 89 with uh with your
+hypers before that.
+I think that you probably had it full
+I think that you probably had it full
+solved at some point. Um, but we're
+solved at some point. Um, but we're
+going to just have to like fix some
+going to just have to like fix some
+stuff with the experience
+buffer. Never had full self. Okay. I
+buffer. Never had full self. Okay. I
+don't know what your best was then, but
+don't know what your best was then, but
+um, literally like the default hypers
+um, literally like the default hypers
+are pretty damn good for almost
+are pretty damn good for almost
+everything. The only thing I haven't
+everything. The only thing I haven't
+seen them work on is neural MMO
+seen them work on is neural MMO
+3, but yeah, we have a lot of cool stuff
+3, but yeah, we have a lot of cool stuff
+we can chat about doing here. Um, I'm
+we can chat about doing here. Um, I'm
+really happy with all the new stuff in
+really happy with all the new stuff in
+dev. They're just like a few rough edges
+dev. They're just like a few rough edges
+I got to sand off, but we're really well
+I got to sand off, but we're really well
+positioned to do a lot of cool stuff uh
+positioned to do a lot of cool stuff uh
+for Puffer on the open source side and
+for Puffer on the open source side and
+also
+professionally. High8s for easy. Is it
+professionally. High8s for easy. Is it
+on easy by default?
+on easy by default?
+cuz whatever it is on default I got
+cuz whatever it is on default I got
+92. Okay. Well, we got 92 and we got 92
+92. Okay. Well, we got 92 and we got 92
+very quickly into
+training. Blast star kind of works. It
+training. Blast star kind of works. It
+looks like kind
+of I'll have to ask about this.
+of I'll have to ask about this.
+Um, is that all the
+Um, is that all the
+M's? CPR. We don't really have good
+M's? CPR. We don't really have good
+baselines on yet. Grid I have to fix,
+baselines on yet. Grid I have to fix,
+but other than that,
+but other than that,
+yeah,
+42, I think I just start going through
+42, I think I just start going through
+all of these and adding normalized score
+all of these and adding normalized score
+variables to everything. So, I just go
+variables to everything. So, I just go
+commit whatever I put on
+here. Yeah.
+Actually, I might even have
+Actually, I might even have
+details this going to mess with my box
+details this going to mess with my box
+day and I think this evening should be
+day and I think this evening should be
+fine. 8 8:30
+fine. 8 8:30
+ET. Uh, that's about the latest I can
+ET. Uh, that's about the latest I can
+do, but yeah, that should work.
+I also have to reinstall mine because I
+I also have to reinstall mine because I
+put Abuntu server on it. Um, and this
+put Abuntu server on it. Um, and this
+box is going to end up being my probably
+box is going to end up being my probably
+going to end up being my personal
+going to end up being my personal
+desktop at the new
+desktop at the new
+facility. Unless I just take the box
+facility. Unless I just take the box
+that I'm on currently for
+that I'm on currently for
+that. I'll have to see.
+Worst case tomorrow afternoon praying I
+Worst case tomorrow afternoon praying I
+can get mine working. So the thing that
+can get mine working. So the thing that
+you got to know with that Spencer right
+you got to know with that Spencer right
+it's the Nvidia open drivers. So when
+it's the Nvidia open drivers. So when
+you go you have to add the PPA right and
+you go you have to add the PPA right and
+then you'll uh Ubuntu drivers should
+then you'll uh Ubuntu drivers should
+pick it up should pick up like Nvidia
+pick it up should pick up like Nvidia
+whatever and then there are two options.
+whatever and then there are two options.
+One is not open and the other is open.
+One is not open and the other is open.
+It says that it's compatible with not
+It says that it's compatible with not
+open, but it's not. It's only works with
+open, but it's not. It's only works with
+open. Otherwise, you just black like
+open. Otherwise, you just black like
+everything just screws up. If you're in
+everything just screws up. If you're in
+a if you're in a Windows setup, then
+a if you're in a Windows setup, then
+completely different
+completely different
+story. I uh I forgot about that. Yeah.
+story. I uh I forgot about that. Yeah.
+No, I just stuck two on mine. I got sick
+No, I just stuck two on mine. I got sick
+of dealing with Windows, so I just
+of dealing with Windows, so I just
+stripped Windows off of everything.
+stripped Windows off of everything.
+Heck, I got my new laptop in. I haven't
+Heck, I got my new laptop in. I haven't
+even opened my new laptop yet, but I'm
+even opened my new laptop yet, but I'm
+thinking I'm going to even just stick a
+thinking I'm going to even just stick a
+buntu on
+that Windows. I'm surprised that there
+that Windows. I'm surprised that there
+aren't drivers like just working for
+aren't drivers like just working for
+that's really weird.
+But yeah, I figured out that if I uh if
+But yeah, I figured out that if I uh if
+I don't have Windows on my PC, then I
+I don't have Windows on my PC, then I
+can't play the most addicting games that
+can't play the most addicting games that
+are the most likely to cause me to
+are the most likely to cause me to
+spiral out of working good
+spiral out of working good
+hours. No League, no
+hours. No League, no
+Valerant. I don't know. I got hit with
+Valerant. I don't know. I got hit with
+an Overwatch bug for a few weeks. Um but
+an Overwatch bug for a few weeks. Um but
+then like aside from that, it's been
+then like aside from that, it's been
+pretty consistent on the work. are great
+pretty consistent on the work. are great
+cookie rewards. Yeah, the problem though
+cookie rewards. Yeah, the problem though
+is I can't stop playing
+them. Like, there's been a ton of cool
+them. Like, there's been a ton of cool
+new stuff added to Runescape, but if I
+new stuff added to Runescape, but if I
+start playing that, there goes all of
+start playing that, there goes all of
+2025.
+2025.
+Literally, it's freaking
+heroin. All right, see you, Spencer.
+the heck.
+Huh? Token must have
+Huh? Token must have
+expired. One moment.
+Oh yeah, it literally just expired.
+Get me a new token.
+Okay, we are good with that.
+Oh, eight.
+this. All
+this. All
+right. So
+right. So
+now though I probably only have a few
+now though I probably only have a few
+minutes here
+minutes here
+uh though I will be back after breakfast
+uh though I will be back after breakfast
+and exercise and all that.
+Um we really want to start getting
+Um we really want to start getting
+normalized uh normalized score data into
+stuff. So let's just do
+Dude, I'm realizing I so I got to order
+Dude, I'm realizing I so I got to order
+my
+my
+full stream setup stuff to the new
+place. So, I'll have to do a little
+place. So, I'll have to do a little
+looking into if I want to buy the same
+looking into if I want to buy the same
+stuff or not, or if I want to upgrade
+stuff or not, or if I want to upgrade
+even more.
+Okay, so this does not print out
+Okay, so this does not print out
+normalized
+for even though it's there because I
+for even though it's there because I
+didn't add to the
+didn't add to the
+binding.
+binding.
+Let's fix that.
+It seems
+It seems
+nice. We might want to reorder these
+nice. We might want to reorder these
+metrics and stuff, but like
+Cool. We like this.
+same thing with
+enduro normalized score
+uh normalized score should not be zero.
+uh normalized score should not be zero.
+Oh,
+I think that this is what I'm going to
+I think that this is what I'm going to
+do for um a good chunk of today though
+do for um a good chunk of today though
+is I'm just going to like get all this
+is I'm just going to like get all this
+stuff playing
+stuff playing
+nicely and uh like have nice stats, have
+nicely and uh like have nice stats, have
+all the M's just like good, consistent,
+all the M's just like good, consistent,
+all
+all
+that. And I got to sync up with Bet on
+that. And I got to sync up with Bet on
+what he's done so I don't duplicate any
+what he's done so I don't duplicate any
+of his
+of his
+work. Bet's been great for like doing
+work. Bet's been great for like doing
+these types of things.
+Yeah, look at that. So now you have like
+Yeah, look at that. So now you have like
+this nice norm score. So if I like run a
+this nice norm score. So if I like run a
+bunch of these M's, I can put them all
+bunch of these M's, I can put them all
+in the same plot and it'll just work.
+So this normalized score here should be
+So this normalized score here should be
+linked
+linked
+to days
+to days
+completed and at a ratio of 1 to 10 I
+completed and at a ratio of 1 to 10 I
+believe.
+Oh, there it is. That's
+Oh, there it is. That's
+correct. Okay.
+Yeah, captain. I got it working very
+Yeah, captain. I got it working very
+nicely. Let me What do you Let's see
+nicely. Let me What do you Let's see
+what you think about
+what you think about
+this. So, before we had all these width
+this. So, before we had all these width
+statements, right? And it was nice
+statements, right? And it was nice
+because you could clearly see like what
+because you could clearly see like what
+block is profiling what, but it also
+block is profiling what, but it also
+really interrupted your ability to read
+really interrupted your ability to read
+the core code. It was like really
+the core code. It was like really
+disruptive. And also there was just a
+disruptive. And also there was just a
+lot of profiling code. So what I did now
+lot of profiling code. So what I did now
+is you just add uh profile tags like
+is you just add uh profile tags like
+this. Note there's not even a decorator
+this. Note there's not even a decorator
+here
+here
+anymore. Uh so you just do profile here.
+anymore. Uh so you just do profile here.
+And the only little wrinkle is you have
+And the only little wrinkle is you have
+to add this nest equals true to the
+to add this nest equals true to the
+first one after it so that you tell it
+first one after it so that you tell it
+that hey we're going to keep using this
+that hey we're going to keep using this
+one. But after that you just uh every
+one. But after that you just uh every
+time you switch to a new profiling block
+time you switch to a new profiling block
+you just switch the tag and every single
+you just switch the tag and every single
+line gets profiled. It's actually a
+line gets profiled. It's actually a
+little faster little lower overhead than
+little faster little lower overhead than
+the previous one because it only has to
+the previous one because it only has to
+call synchronize once, not at the start
+call synchronize once, not at the start
+and at the end of each
+and at the end of each
+block. And the code is not all indented
+block. And the code is not all indented
+under a profile block anymore. It looks
+under a profile block anymore. It looks
+like very reasonable code, very normal
+like very reasonable code, very normal
+code. And uh yeah, that's what I have.
+code. And uh yeah, that's what I have.
+And the whole code for this is right
+And the whole code for this is right
+here. This is this is the entire
+here. This is this is the entire
+profiler. It just basically makes a
+profiler. It just basically makes a
+stack of profilers. And then you can
+stack of profilers. And then you can
+tell it every time you profile whether
+tell it every time you profile whether
+you want to switch the profiler, which
+you want to switch the profiler, which
+is the default, or whether you want to
+is the default, or whether you want to
+keep profiling under the current thing,
+keep profiling under the current thing,
+but also now add a subprofiler.
+So this replaces like I don't know 3x
+So this replaces like I don't know 3x
+this amount of profiling mode.
+It's
+It's
+completed. Yeah,
+completed. Yeah,
+perfect. More readable code, easier to
+perfect. More readable code, easier to
+follow since you don't need decorators.
+follow since you don't need decorators.
+Yeah, I think it makes it like very
+Yeah, I think it makes it like very
+marginally more difficult to see which
+marginally more difficult to see which
+profile tag is applying to which code.
+profile tag is applying to which code.
+Um, but it makes the whole code way
+Um, but it makes the whole code way
+easier to
+read. And that is my uh my call. So, I'm
+read. And that is my uh my call. So, I'm
+going to go get breakfast. I'll be back
+going to go get breakfast. I'll be back
+doing this for the whole rest of the day
+doing this for the whole rest of the day
+as soon as I get some food and get some
+as soon as I get some food and get some
+exercise. For folks watching, puffer.ai
+exercise. For folks watching, puffer.ai
+for all the things. Please star the
+for all the things. Please star the
+GitHub. We are like a few stars away
+GitHub. We are like a few stars away
+from it going up to 2K, so that would be
+from it going up to 2K, so that would be
+awesome. Join the Discord to get
+awesome. Join the Discord to get
+involved. All that. And uh I'll be back
+involved. All that. And uh I'll be back
+with more devs
+
+Kind: captions
+Language: en
+Okay, we are
+Okay, we are
+live.
+Morning. I think what we're going to do
+Morning. I think what we're going to do
+today here, I'm going to check on some
+today here, I'm going to check on some
+experiments real quick and then for the
+experiments real quick and then for the
+next hour, hour and a half or so, uh I'm
+next hour, hour and a half or so, uh I'm
+going to just go through all of our
+going to just go through all of our
+environments, get some nice clean
+environments, get some nice clean
+configs for them. run some experiments,
+configs for them. run some experiments,
+kind of work towards having a very easy
+kind of work towards having a very easy
+benchmark suite for the next release and
+benchmark suite for the next release and
+we'll see from
+there. Let's check back in on this. Ah,
+there. Let's check back in on this. Ah,
+okay. So, look at
+okay. So, look at
+this. And this is interesting, right?
+this. And this is interesting, right?
+So, is this curve
+So, is this curve
+shallower? It looks to me like this
+shallower? It looks to me like this
+might eventually intersect.
+might eventually intersect.
+So, we'll have to see about
+So, we'll have to see about
+that. And then right
+here, these two are like virtually on
+here, these two are like virtually on
+top of each other. I
+think. Yeah, virtually on top of each
+think. Yeah, virtually on top of each
+other.
+other.
+Okay. So, it was a little better early
+Okay. So, it was a little better early
+on. No big deal. It's about the same.
+Let me think what the best way to do
+Let me think what the best way to do
+this
+is. I think we push this
+So we can do uh
+So we can do uh
+multiple multiple runs at the same time
+multiple multiple runs at the same time
+on different boxes.
+So this is now up there. And what we're
+So this is now up there. And what we're
+going to do is we're going to just pull
+going to do is we're going to just pull
+this on a couple different boxes and I
+this on a couple different boxes and I
+think in parallel we're just going to go
+think in parallel we're just going to go
+through a few different environments,
+through a few different environments,
+try to run some good baselines and uh
+try to run some good baselines and uh
+see if we can get like good trained
+see if we can get like good trained
+models just one right right after the
+models just one right right after the
+another for most of our
+another for most of our
+tasks. So I've got puffer box four here.
+tasks. So I've got puffer box four here.
+I think this is free. Yeah, this is
+free. We also give access to these boxes
+free. We also give access to these boxes
+to uh contributors by the way. So if any
+to uh contributors by the way. So if any
+folks are interested in contributing,
+folks are interested in contributing,
+working on some cool stuff, that is a
+working on some cool stuff, that is a
+thing that we
+thing that we
+do. Uh I got to pull this first and then
+do. Uh I got to pull this first and then
+we can push that.
+zero.
+Where did our box
+go? And then we will get our our sweep
+go? And then we will get our our sweep
+crafts
+crafts
+up and uh I think we'll just start like
+up and uh I think we'll just start like
+recording on here.
+And okay, there's our first one right
+there. So, this one is pretty much fine
+there. So, this one is pretty much fine
+out of the box. maybe log interval so we
+out of the box. maybe log interval so we
+get a cleaner curve or something. But
+get a cleaner curve or something. But
+this is pretty much fine out of the
+box. See if this works.
+Okay, so this one doesn't work. There's
+Okay, so this one doesn't work. There's
+some sort of bug
+some sort of bug
+here. This is probably a batch size
+here. This is probably a batch size
+shenanigans, I would
+imagine. Uh, I want to see what happens
+imagine. Uh, I want to see what happens
+if I just like do this.
+Okay, that's
+running
+multiprocessing. Enduro is such a cool
+multiprocessing. Enduro is such a cool
+end. It doesn't make any sense for us to
+end. It doesn't make any sense for us to
+have it in the state where uh we're not
+have it in the state where uh we're not
+actively using
+it. Okay. So, this is not optimizing or
+it. Okay. So, this is not optimizing or
+anything here.
+If I do this, it should work,
+right? See if that
+trains. Got breakout. Breakout seems to
+trains. Got breakout. Breakout seems to
+be running.
+This is
+Enduro breakout here.
+Enduro breakout here.
+Enduro just to
+Enduro just to
+pass. Enduro score variable is not good.
+pass. Enduro score variable is not good.
+it
+it
+uh you want like days completed or
+uh you want like days completed or
+whatever. So there it is. You can see
+whatever. So there it is. You can see
+it's completing uh the first day right
+it's completing uh the first day right
+here.
+should go straight up.
+snake as
+well. Okay, so this is training. It's
+well. Okay, so this is training. It's
+just not
+just not
+uh we'll have to get bet on uh optimal
+uh we'll have to get bet on uh optimal
+hypers and stuff. I mean, I'm sure he
+hypers and stuff. I mean, I'm sure he
+has them.
+has them.
+I probably just removed him from there,
+I probably just removed him from there,
+huh? What do you have gamma as? That's
+huh? What do you have gamma as? That's
+the only one that really
+the only one that really
+matters. He has gamma as
+matters. He has gamma as
+N7. So, we might want to retry that with
+N7. So, we might want to retry that with
+slightly lower gamma.
+So this is working like uh these days
+So this is working like uh these days
+completed this is already very good
+per we'll get all of these running first
+per we'll get all of these running first
+and then I think what we'll do is we'll
+and then I think what we'll do is we'll
+go through and I want to get like a
+go through and I want to get like a
+normalized score variable for every
+normalized score variable for every
+single end so you can get them all on
+single end so you can get them all on
+one plot as like 0 to one or whatever.
+stays completed. Graph is
+good. Uh is this breakout? This looks
+good. Uh is this breakout? This looks
+like breakout crashing back down a
+like breakout crashing back down a
+little
+little
+bit. So, not ideal here. I think that
+bit. So, not ideal here. I think that
+there is still some uh something to fix
+there is still some uh something to fix
+with our experience buffer, though. I
+with our experience buffer, though. I
+just don't want to do that first thing
+just don't want to do that first thing
+in the morning here because that's
+in the morning here because that's
+actually going to be like really fiddly.
+actually going to be like really fiddly.
+So, I'd rather just run a bunch of these
+So, I'd rather just run a bunch of these
+experiments, get all of these in
+experiments, get all of these in
+generally a good spot. Um, we'll see if
+generally a good spot. Um, we'll see if
+we can get that normalized score
+we can get that normalized score
+variable, get like a nice run script,
+variable, get like a nice run script,
+and then we will have a much more
+and then we will have a much more
+powerful way to check
+powerful way to check
+on potential
+issues. We're at 93 mil, 94. That's
+issues. We're at 93 mil, 94. That's
+decent. Thing we're looking at with
+decent. Thing we're looking at with
+Snake is whether it keeps going up to
+Snake is whether it keeps going up to
+like 100ish or 97
+maybe. Okay. So, Enduro continuing to
+maybe. Okay. So, Enduro continuing to
+clear more and more days is good.
+clear more and more days is good.
+Um, the collisions are going to keep
+Um, the collisions are going to keep
+going up because it's living for longer.
+going up because it's living for longer.
+I believe this is a 40,000 step episode.
+I believe this is a 40,000 step episode.
+Enduro is actually a very long
+Enduro is actually a very long
+game. It's self similar, but it's very
+long. Okay, so far so good
+long. Okay, so far so good
+there. This will be done in a minute.
+there. This will be done in a minute.
+Um, we can also kind of just start on
+Um, we can also kind of just start on
+the normalized score stuff while we
+the normalized score stuff while we
+wait. So, my idea
+there my idea there is to just add
+like normalized score. Um,
+Yeah, that's
+good. Is there a max
+good. Is there a max
+score? Where does max score get set? I
+score? Where does max score get set? I
+don't think this thing gets set.
+Oh yeah. Okay. It gets set really janky
+Oh yeah. Okay. It gets set really janky
+right now, but it does get
+set. This should up. This should cast a
+set. This should up. This should cast a
+float, right?
+Same thing
+here. And we do have a max score there
+here. And we do have a max score there
+as
+well. All
+right. How we doing on
+right. How we doing on
+snake? Okay. We take a dip towards the
+snake? Okay. We take a dip towards the
+end here, which is not
+good. So, I definitely think that
+good. So, I definitely think that
+there's something screwy with um our
+there's something screwy with um our
+episode index
+episode index
+logic, and that's definitely going to be
+logic, and that's definitely going to be
+one of the main things we'll have to
+one of the main things we'll have to
+test. It's not like totally crashing
+test. It's not like totally crashing
+runs, it seems. Um but it's not ideal.
+Now it's a bit tough to figure
+Now it's a bit tough to figure
+out like max length in snake right.
+I think what we have to do with the ones
+I think what we have to do with the ones
+that have like no technical max is we
+that have like no technical max is we
+just pick a score we think is really
+just pick a score we think is really
+good and then we clip at that score and
+good and then we clip at that score and
+when we eventually beat that then we
+when we eventually beat that then we
+just keep going up with that
+just keep going up with that
+clip. Does that make sense?
+So, we just like pick a score with some
+So, we just like pick a score with some
+headroom.
+This is on the old logging uh branch as
+This is on the old logging uh branch as
+well. Bet has been working on updating
+well. Bet has been working on updating
+all the ends to the new
+all the ends to the new
+logging. I actually shouldn't touch this
+logging. I actually shouldn't touch this
+one in particular because bet has a PR
+one in particular because bet has a PR
+on this.
+do
+enduro. Uh, okay. This doesn't get used.
+enduro. Uh, okay. This doesn't get used.
+This was from earlier.
+Day is
+Day is
+completed. What do we expect that this
+completed. What do we expect that this
+is going to
+is going to
+be? Oh, this is like perfect linear,
+be? Oh, this is like perfect linear,
+isn't it?
+Yeah. 10. We'll give it 10. Hey,
+Yeah. 10. We'll give it 10. Hey,
+welcome. So, we'll just arbitrarily say
+welcome. So, we'll just arbitrarily say
+that if you complete 10 days, then
+that if you complete 10 days, then
+you've won because there's no win
+you've won because there's no win
+condition in this game.
+Yeah, we'll just arbitrarily say that
+Yeah, we'll just arbitrarily say that
+this is the uh the
+max because we need something we need
+max because we need something we need
+some way to put all these uh all these m
+some way to put all these uh all these m
+on the same
+on the same
+graph and 10 days is pretty
+good. Okay, what other ends do we have
+good. Okay, what other ends do we have
+here? Uh, cart pull. Cart pull super
+here? Uh, cart pull. Cart pull super
+easy.
+Max steps termination. And then where's
+Max steps termination. And then where's
+score? Bet. Did you not add
+score? Bet. Did you not add
+score? Dang it. Bet.
+Is there a max where is it termination
+Is there a max where is it termination
+steps or
+something? Max steps.
+probably need to
+probably need to
+cast. All right. So, we'll do something
+cast. All right. So, we'll do something
+like this for
+now. This one's done. Let's run. Let me
+now. This one's done. Let's run. Let me
+make sure carpole actually is a working
+make sure carpole actually is a working
+end.
+It should train like
+instantly. Oh, bed is already on here.
+That's
+That's
+weird. Oh, it's cuz he doesn't have the
+weird. Oh, it's cuz he doesn't have the
+CUDA colonel. That's fine.
+How's it not have
+Okay, so this needs a few
+things
+seed. Uh yeah, this is on the wrong
+seed. Uh yeah, this is on the wrong
+process. There we go.
+Oh, I know what that is.
+Oh, I know what that is.
+Okay. Yeah, this is jank.
+Um, yeah, this is super jank, but there
+Um, yeah, this is super jank, but there
+are limitations right now on how many
+are limitations right now on how many
+M's you can run because I have to fix
+M's you can run because I have to fix
+some CUDA
+kernels. Uh, however, that should have
+worked. That definitely should have
+worked. That definitely should have
+worked. Oh, but he has all these
+worked. Oh, but he has all these
+freaking separate params on here. Yeah,
+freaking separate params on here. Yeah,
+you don't need any of these, my guy. The
+you don't need any of these, my guy. The
+only one you need is total time
+steps, which is what's this?
+130 13
+million. That's funny.
+million. That's funny.
+20 million step cart pull
+run. So that doesn't look like it trans.
+Fix
+gamma. There we go. It's always just
+gamma. There we go. It's always just
+gamma.
+We should be happy with
+that. Get out of here,
+bot. All right.
+Next up will
+Next up will
+be we can probably do connect four,
+right? Needs to be fixed.
+Hang on. That should have worked,
+Hang on. That should have worked,
+shouldn't it
+shouldn't it
+have? Oh, I bet it's this thing,
+right? Oh, no. No, I'm dumb here. I'm
+right? Oh, no. No, I'm dumb here. I'm
+dumb. I'm really dumb. Okay, this
+dumb. I'm really dumb. Okay, this
+is
+is
+88 4 and then if they're eight M's, each
+88 4 and then if they're eight M's, each
+one should get 512
+mobile. We need to fix action space for,
+mobile. We need to fix action space for,
+right?
+There's like something I did screwy with
+There's like something I did screwy with
+action
+space. This runs
+and connect 4 seems like it trains as
+well. Totally
+fine. Now, this is uh this is going to
+fine. Now, this is uh this is going to
+be really crappy gamma,
+be really crappy gamma,
+though. So, let's do
+though. So, let's do
+gamma. Let's do that. That should make
+gamma. Let's do that. That should make
+it way easier to learn.
+Wrong block,
+dummy. Moa just takes forever to report
+dummy. Moa just takes forever to report
+stats. Otherwise, it should be fine.
+Connect four is training
+nicely radiant victory. Yep. This is in
+nicely radiant victory. Yep. This is in
+30 mil step. This is now winning.
+Perfect. Now, are we going to get stuck
+Perfect. Now, are we going to get stuck
+here? Are we going to actually full self
+That's a full solve. We're happy with
+That's a full solve. We're happy with
+that. Over
+99. This can be 30
+99. This can be 30
+mil. Cool. Uh moa
+mil. Cool. Uh moa
+is Yeah. I don't need to even have it
+is Yeah. I don't need to even have it
+run this
+long. Okay, we're happy with
+that hardware.
+Maybe don't really need these on
+Maybe don't really need these on
+Neptune.
+Neptune.
+Let's get ourware to
+work. T 2048 should be
+fine. Wait, isn't
+2048? Uh, okay. Now I'm curious why this
+2048? Uh, okay. Now I'm curious why this
+is broken because Oh, each of these has
+is broken because Oh, each of these has
+a ton of agents though,
+right? See have four agents each. So,
+right? See have four agents each. So,
+this should be 512.
+I thought
+Um yeah, this just doesn't
+recompile. Okay, so here's our
+That's optimizing.
+and do tower climb.
+Maybe 2048
+MS. Oh, hang
+on. Pretty epic you do these live
+on. Pretty epic you do these live
+streams. Thank
+streams. Thank
+you. Hey, Olivia.
+you. Hey, Olivia.
+Uh, pretty epic. Yeah. So, I It's just
+Uh, pretty epic. Yeah. So, I It's just
+do all the dev streams live. I don't
+do all the dev streams live. I don't
+know why not,
+right? It's kind of just good all
+right? It's kind of just good all
+around. Um, people getting into
+around. Um, people getting into
+programming get to see like a lot of the
+programming get to see like a lot of the
+decisions I make live. People getting
+decisions I make live. People getting
+into RL get a lot of information. People
+into RL get a lot of information. People
+who have questions about Puffer Lib get
+who have questions about Puffer Lib get
+stuff answered live. Support gets done
+stuff answered live. Support gets done
+live. people get interested in
+live. people get interested in
+contributing, I review uh contributions
+contributing, I review uh contributions
+live. So like if you PR stuff and want
+live. So like if you PR stuff and want
+code review, I do that
+code review, I do that
+live. It's just good all around. And you
+live. It's just good all around. And you
+kind of just get used to live streaming
+kind of just get used to live streaming
+everything very quickly.
+Hey, welcome
+a we are currently just attempting
+a we are currently just attempting
+to get all of the M's training
+to get all of the M's training
+um with like reasonable per and then I'm
+um with like reasonable per and then I'm
+going to get it so that all the M's
+going to get it so that all the M's
+report a normalized score from 0 to one
+report a normalized score from 0 to one
+so that I can just have like fun script
+so that I can just have like fun script
+to launch all the different training
+to launch all the different training
+runs and then give me back perf on all
+runs and then give me back perf on all
+of
+of
+them, which really shouldn't take that
+them, which really shouldn't take that
+long. I think the only uh the only
+long. I think the only uh the only
+environment that takes a really long
+environment that takes a really long
+time to train is neural 3. Everything
+time to train is neural 3. Everything
+else is like pretty good. And that's
+else is like pretty good. And that's
+just neurommo3 is hard. That's all it
+just neurommo3 is hard. That's all it
+is.
+This should be
+2048. Now, there's still a whole bunch
+2048. Now, there's still a whole bunch
+of like bugs and limitations and things
+of like bugs and limitations and things
+in the dev branch that I have to
+in the dev branch that I have to
+address, but I've kind of been doing
+address, but I've kind of been doing
+that for the last couple weeks, and I'm
+that for the last couple weeks, and I'm
+a little tired of it. So, uh, I figured
+a little tired of it. So, uh, I figured
+we'd have a little fun today with this.
+we'd have a little fun today with this.
+So, I'm going to do this until 10,
+So, I'm going to do this until 10,
+another 40 minutes or whatever, and then
+another 40 minutes or whatever, and then
+I'm going to get breakfast, get some
+I'm going to get breakfast, get some
+exercise, and then I'm going to come
+exercise, and then I'm going to come
+back. And hopefully the goal today is
+back. And hopefully the goal today is
+that we have like good, nice performance
+that we have like good, nice performance
+on all of these different runs. We have
+on all of these different runs. We have
+all the plots on uh we have like all the
+all the plots on uh we have like all the
+different metrics on one plot or
+different metrics on one plot or
+whatever. Maybe not all of them. Maybe
+whatever. Maybe not all of them. Maybe
+we don't put neural MMO 3 on just cuz
+we don't put neural MMO 3 on just cuz
+it's
+it's
+like all the experiments take 5 minutes
+like all the experiments take 5 minutes
+and then neural MMO 3 takes 3
+days. So, we'll see about that one.
+I just do this. Does it just
+work? Thank
+you. Okay, so this just works now. So
+you. Okay, so this just works now. So
+squared didn't work before, which was
+squared didn't work before, which was
+really concerning because squared's a
+really concerning because squared's a
+very easy end. And now it just
+very easy end. And now it just
+works. Hey Nant, welcome.
+Man, I like getting the regular streams
+Man, I like getting the regular streams
+in as well cuz then people realize that
+in as well cuz then people realize that
+I'm like always live and we get regular
+I'm like always live and we get regular
+viewers. I've seen uh Nishant and Aash
+viewers. I've seen uh Nishant and Aash
+have been here quite a while it
+have been here quite a while it
+seems. I do actually have plans for
+seems. I do actually have plans for
+um there's a there's a new puffer
+um there's a there's a new puffer
+facility uh and I I'm going to have a
+facility uh and I I'm going to have a
+very nice streaming setup there.
+Shoot. I do I am realizing I'm going to
+Shoot. I do I am realizing I'm going to
+have to reinstall this server to do
+have to reinstall this server to do
+that, but it'll
+work. Then we'll have like very regular
+work. Then we'll have like very regular
+streams
+streams
+because the whole schedule is like zero
+because the whole schedule is like zero
+friction.
+Okay. So, tower
+Okay. So, tower
+climb is not working. Everything else is
+climb is not working. Everything else is
+working. Tower climb is not
+working. I think that it was working and
+working. I think that it was working and
+crashed though,
+right? Let's log this. And
+then let's just see if we do better than
+then let's just see if we do better than
+Spencer's default grams just by like
+Spencer's default grams just by like
+deleting them. just using our defaults.
+deleting them. just using our defaults.
+And then what did he have as
+And then what did he have as
+gamma
+gamma
+98? So we'll give him
+98? So we'll give him
+gamma we'll give him that actually seems
+gamma we'll give him that actually seems
+high. Let's do
+that. Okay. So now we'll have two
+that. Okay. So now we'll have two
+different tower climb runs going.
+Yeah, I think this is a stability issue,
+Yeah, I think this is a stability issue,
+not like a learning issue because this
+not like a learning issue because this
+is 82% solve and then I'm pretty sure
+is 82% solve and then I'm pretty sure
+this will crash down.
+Discord Discord uh
+Discord Discord uh
+discord.gg/puffer. I am open to
+discord.gg/puffer. I am open to
+commissioning um like basically stream
+commissioning um like basically stream
+overlay like you know the things where
+overlay like you know the things where
+you just like partition all the windows
+you just like partition all the windows
+nicely. But uh I mean as you can see
+nicely. But uh I mean as you can see
+this is more technical stream. It's not
+this is more technical stream. It's not
+like gaming themed. But hey, if you do
+like gaming themed. But hey, if you do
+stuff that would make sense for that,
+stuff that would make sense for that,
+then
+sure. I am interested in getting like a
+sure. I am interested in getting like a
+couple nice scene um like scene
+overlays. I usually have like this one
+overlays. I usually have like this one
+and then like a vertical one for
+and then like a vertical one for
+reviewing papers, but whatever really
+reviewing papers, but whatever really
+makes sense with uh screen
+space. Okay, so this is pretty funny.
+space. Okay, so this is pretty funny.
+Um, I just pasted my default
+hyperp and we outperform Spencer's
+hyperp and we outperform Spencer's
+defaults like that are manually tuned
+defaults like that are manually tuned
+for this.
+for this.
+Um, we'll see whether this is stable or
+Um, we'll see whether this is stable or
+not. We may as well let this finish
+not. We may as well let this finish
+running for the two
+running for the two
+minutes. But yeah, I think the new Muan
+minutes. But yeah, I think the new Muan
+stuff is really, really good.
+Like I've had a few people tell me that
+Like I've had a few people tell me that
+um they didn't see very much out of
+um they didn't see very much out of
+Muan, but I honestly just don't think
+Muan, but I honestly just don't think
+that they're like they bothered retuning
+that they're like they bothered retuning
+hypers. Like people have over optimized
+hypers. Like people have over optimized
+to Adam because with puffer right we can
+to Adam because with puffer right we can
+run so many experiments and we can
+run so many experiments and we can
+retune stuff. Like we got a massive
+retune stuff. Like we got a massive
+massive difference with the new
+massive difference with the new
+optimizer. It literally makes RL feel
+optimizer. It literally makes RL feel
+like a different field. Like me just
+like a different field. Like me just
+deleting all the tuned hyperparameters
+deleting all the tuned hyperparameters
+and using whatever defaults and having
+and using whatever defaults and having
+stuff still train that is unheard of in
+stuff still train that is unheard of in
+RL.
+Yeah. So, actually you can see this one
+Yeah. So, actually you can see this one
+is crashing back down. We'll see how
+is crashing back down. We'll see how
+this one does. If this actually crashes
+this one does. If this actually crashes
+later or not, but so far this has been
+later or not, but so far this has been
+fine. It's like stable 92.
+What else do we need? We haven't
+What else do we need? We haven't
+done triple triad, right?
+this and then gamma
+this and then gamma
+five. Honestly, the only thing that's
+five. Honestly, the only thing that's
+really left as the main impediment is uh
+really left as the main impediment is uh
+gamma's kind of evil.
+gamma's kind of evil.
+It's not even that bad because it's like
+It's not even that bad because it's like
+it's pretty stable now. But um if you
+it's pretty stable now. But um if you
+have like a very long horizon continuous
+have like a very long horizon continuous
+end where you have like a card game, you
+end where you have like a card game, you
+do have to set gamma or it just won't
+do have to set gamma or it just won't
+work. That's really nowhere near as big
+work. That's really nowhere near as big
+of a limitation though as it used to be.
+of a limitation though as it used to be.
+I guess we'll have to do sensitivity
+I guess we'll have to do sensitivity
+analysis to see like do you really have
+analysis to see like do you really have
+to fine-tune gamma or do you just kind
+to fine-tune gamma or do you just kind
+of have to set it to something
+of have to set it to something
+reasonable?
+But yeah, look, just changing this gamma
+But yeah, look, just changing this gamma
+and like these hypers. This is pretty
+and like these hypers. This is pretty
+good. Oh, are we
+crashing? I can't
+crashing? I can't
+tell. No, we're
+tell. No, we're
+fine. We're fine.
+Oh, we we did crash a little bit
+here. Yeah. Okay. So, there is
+here. Yeah. Okay. So, there is
+instability for sure. There is
+instability. We're going to have to see
+instability. We're going to have to see
+how this works.
+Um, we will have to see how this works
+Um, we will have to see how this works
+once I fix experience buffer
+once I fix experience buffer
+stuff. Yeah, this is like fully crashed,
+stuff. Yeah, this is like fully crashed,
+but we get 92% for quite a good while
+but we get 92% for quite a good while
+before
+that. How is triple triad?
+Okay, that's a very nice smooth curve,
+right? It's a very smooth curve.
+Do I have art stuff in my Discord
+Do I have art stuff in my Discord
+here? No.
+I presume that I presume that means
+I presume that I presume that means
+actually was bought because if not bot
+actually was bought because if not bot
+would have heard discord channel and
+would have heard discord channel and
+posted most
+likely. That's
+funny. Does anybody know if um because
+funny. Does anybody know if um because
+I've had like a lot of these. Does
+I've had like a lot of these. Does
+anybody know if it's like actually
+anybody know if it's like actually
+artists just trying to automate their
+artists just trying to automate their
+advertising or if it's a
+scam? Because I've definitely gotten
+scam? Because I've definitely gotten
+ones that seem like it was literally
+ones that seem like it was literally
+just artists trying to advertise, which
+just artists trying to advertise, which
+is like that's chill, right?
+Okay, so this is nice. We still have
+Okay, so this is nice. We still have
+this instability. See, I think that this
+this instability. See, I think that this
+is probably down to the experience
+is probably down to the experience
+buffer being screwy, though. I think
+buffer being screwy, though. I think
+that's probably down to that because
+that's probably down to that because
+we've never seen this type of a thing
+we've never seen this type of a thing
+happen before. And uh it's probably the
+happen before. And uh it's probably the
+way that we redid the experience
+way that we redid the experience
+buffer. Okay. Did I miss any
+buffer. Okay. Did I miss any
+environments? Blastar. I did miss
+environments? Blastar. I did miss
+Blaster.
+last hour. I probably do both of these.
+This little break. 2048.
+The main thing is the gamma. I bet this
+The main thing is the gamma. I bet this
+will work. I bet it'll just work. Um,
+will work. I bet it'll just work. Um,
+we'll run it two
+ways. All right.
+Olivia, if you're not a bot, it's
+discord.gg/puffer. You can feel free to
+discord.gg/puffer. You can feel free to
+drop stuff in there.
+because I am actually in the market for
+because I am actually in the market for
+uh some new overlays. Well, some
+uh some new overlays. Well, some
+overlays. I don't really have any
+I guess it's BP
+Does this not give us
+Does this not give us
+stats or does it just take a while?
+Uh, this doesn't give us
+Uh, this doesn't give us
+stats.
+Bet. Hey, bro. Can you tell me how I can
+Bet. Hey, bro. Can you tell me how I can
+prepare for MLA AI? If it's general ML
+prepare for MLA AI? If it's general ML
+and AI, go take CS231N with the lectures
+and AI, go take CS231N with the lectures
+by either Justin or Andre
+by either Justin or Andre
+uh and Andred. And if you are interested
+uh and Andred. And if you are interested
+in RL specifically, I have a quick start
+in RL specifically, I have a quick start
+guide on puffer.ai. It's just in the
+guide on puffer.ai. It's just in the
+blog.
+This is a lot more accessible for RL
+This is a lot more accessible for RL
+specifically than a lot of the content
+specifically than a lot of the content
+out there. Though it does assume that
+out there. Though it does assume that
+you have uh enough basic uh deep
+you have uh enough basic uh deep
+learning background to be able to read
+learning background to be able to read
+some blogs and
+papers. Okay, so this one doesn't print
+papers. Okay, so this one doesn't print
+and this one does print. Oh, no it does.
+and this one does print. Oh, no it does.
+It just takes forever. zero knowledge of
+It just takes forever. zero knowledge of
+ML. Uh
+CS231N and if CS231N is too hard, then
+CS231N and if CS231N is too hard, then
+you're going to have to start from like
+you're going to have to start from like
+a lot of basics. It really depends on
+a lot of basics. It really depends on
+where you are and like where you are in
+where you are and like where you are in
+life and stuff, right? Because I don't
+life and stuff, right? Because I don't
+know if I'm talking to um you know,
+know if I'm talking to um you know,
+somebody pivoting in their 30s or if I'm
+somebody pivoting in their 30s or if I'm
+talking to somebody who's in high
+talking to somebody who's in high
+school, right?
+school, right?
+Um if you're relatively early on and you
+Um if you're relatively early on and you
+haven't gotten the math background or
+haven't gotten the math background or
+anything like you just need uh
+anything like you just need uh
+basic really only different derivative
+basic really only different derivative
+you don't even need integral calculus
+you don't even need integral calculus
+but um multivariable differential
+but um multivariable differential
+calculus and linear algebra and you need
+calculus and linear algebra and you need
+to be very comfortable working with
+to be very comfortable working with
+matrices and tensors and then
+matrices and tensors and then
+CS231m followed by specialization to
+CS231m followed by specialization to
+whatever specific sub area of
+whatever specific sub area of
+AI. If you have some math background, if
+AI. If you have some math background, if
+you've, you know, done some sort of
+you've, you know, done some sort of
+university engineering math or whatever,
+university engineering math or whatever,
+and you have some good programming
+and you have some good programming
+background, then just 231 in into
+background, then just 231 in into
+whatever you want to work
+whatever you want to work
+on, knowledge of C and C++, two years in
+on, knowledge of C and C++, two years in
+webdev. I depending on how much math
+webdev. I depending on how much math
+you've taken, then you can probably just
+you've taken, then you can probably just
+do CS231N and start working on some
+do CS231N and start working on some
+projects.
+That's the usual
+go-to. Having a low-level engineering
+go-to. Having a low-level engineering
+background actually will help you a lot
+background actually will help you a lot
+though because most like AI researchers
+though because most like AI researchers
+are very very bad with low-level
+are very very bad with low-level
+development. It's actually uh one of my
+development. It's actually uh one of my
+strongest assets at the moment and
+strongest assets at the moment and
+something I just picked up fairly
+recently. You do at least need to have
+recently. You do at least need to have
+some understanding though of the math
+some understanding though of the math
+behind it. It's not that much math,
+behind it. It's not that much math,
+especially for like an engineering
+especially for like an engineering
+discipline. It's really not that much
+discipline. It's really not that much
+math, but you do need to pick up a
+math, but you do need to pick up a
+little bit of it.
+You'll want to catch up in morning or
+You'll want to catch up in morning or
+afternoon tomorrow. Yes, Spencer. I'm
+afternoon tomorrow. Yes, Spencer. I'm
+around tonight. I'm around all day
+around tonight. I'm around all day
+tomorrow.
+Also, I got um I don't know what like
+Also, I got um I don't know what like
+good solve rate is on tower climb and
+good solve rate is on tower climb and
+there's some bugs with the experience
+there's some bugs with the experience
+buffer and dev that make it occasionally
+buffer and dev that make it occasionally
+crash all the way, but I literally just
+crash all the way, but I literally just
+deleted all your hyper params, pasted in
+deleted all your hyper params, pasted in
+the defaults, and got
+92%. It was at like 89 with uh with your
+92%. It was at like 89 with uh with your
+hypers before that.
+I think that you probably had it full
+I think that you probably had it full
+solved at some point. Um, but we're
+solved at some point. Um, but we're
+going to just have to like fix some
+going to just have to like fix some
+stuff with the experience
+buffer. Never had full self. Okay. I
+buffer. Never had full self. Okay. I
+don't know what your best was then, but
+don't know what your best was then, but
+um, literally like the default hypers
+um, literally like the default hypers
+are pretty damn good for almost
+are pretty damn good for almost
+everything. The only thing I haven't
+everything. The only thing I haven't
+seen them work on is neural MMO
+seen them work on is neural MMO
+3, but yeah, we have a lot of cool stuff
+3, but yeah, we have a lot of cool stuff
+we can chat about doing here. Um, I'm
+we can chat about doing here. Um, I'm
+really happy with all the new stuff in
+really happy with all the new stuff in
+dev. They're just like a few rough edges
+dev. They're just like a few rough edges
+I got to sand off, but we're really well
+I got to sand off, but we're really well
+positioned to do a lot of cool stuff uh
+positioned to do a lot of cool stuff uh
+for Puffer on the open source side and
+for Puffer on the open source side and
+also
+professionally. High8s for easy. Is it
+professionally. High8s for easy. Is it
+on easy by default?
+on easy by default?
+cuz whatever it is on default I got
+cuz whatever it is on default I got
+92. Okay. Well, we got 92 and we got 92
+92. Okay. Well, we got 92 and we got 92
+very quickly into
+training. Blast star kind of works. It
+training. Blast star kind of works. It
+looks like kind
+of I'll have to ask about this.
+of I'll have to ask about this.
+Um, is that all the
+Um, is that all the
+M's? CPR. We don't really have good
+M's? CPR. We don't really have good
+baselines on yet. Grid I have to fix,
+baselines on yet. Grid I have to fix,
+but other than that,
+but other than that,
+yeah,
+42, I think I just start going through
+42, I think I just start going through
+all of these and adding normalized score
+all of these and adding normalized score
+variables to everything. So, I just go
+variables to everything. So, I just go
+commit whatever I put on
+here. Yeah.
+Actually, I might even have
+Actually, I might even have
+details this going to mess with my box
+details this going to mess with my box
+day and I think this evening should be
+day and I think this evening should be
+fine. 8 8:30
+fine. 8 8:30
+ET. Uh, that's about the latest I can
+ET. Uh, that's about the latest I can
+do, but yeah, that should work.
+I also have to reinstall mine because I
+I also have to reinstall mine because I
+put Abuntu server on it. Um, and this
+put Abuntu server on it. Um, and this
+box is going to end up being my probably
+box is going to end up being my probably
+going to end up being my personal
+going to end up being my personal
+desktop at the new
+desktop at the new
+facility. Unless I just take the box
+facility. Unless I just take the box
+that I'm on currently for
+that I'm on currently for
+that. I'll have to see.
+Worst case tomorrow afternoon praying I
+Worst case tomorrow afternoon praying I
+can get mine working. So the thing that
+can get mine working. So the thing that
+you got to know with that Spencer right
+you got to know with that Spencer right
+it's the Nvidia open drivers. So when
+it's the Nvidia open drivers. So when
+you go you have to add the PPA right and
+you go you have to add the PPA right and
+then you'll uh Ubuntu drivers should
+then you'll uh Ubuntu drivers should
+pick it up should pick up like Nvidia
+pick it up should pick up like Nvidia
+whatever and then there are two options.
+whatever and then there are two options.
+One is not open and the other is open.
+One is not open and the other is open.
+It says that it's compatible with not
+It says that it's compatible with not
+open, but it's not. It's only works with
+open, but it's not. It's only works with
+open. Otherwise, you just black like
+open. Otherwise, you just black like
+everything just screws up. If you're in
+everything just screws up. If you're in
+a if you're in a Windows setup, then
+a if you're in a Windows setup, then
+completely different
+completely different
+story. I uh I forgot about that. Yeah.
+story. I uh I forgot about that. Yeah.
+No, I just stuck two on mine. I got sick
+No, I just stuck two on mine. I got sick
+of dealing with Windows, so I just
+of dealing with Windows, so I just
+stripped Windows off of everything.
+stripped Windows off of everything.
+Heck, I got my new laptop in. I haven't
+Heck, I got my new laptop in. I haven't
+even opened my new laptop yet, but I'm
+even opened my new laptop yet, but I'm
+thinking I'm going to even just stick a
+thinking I'm going to even just stick a
+buntu on
+that Windows. I'm surprised that there
+that Windows. I'm surprised that there
+aren't drivers like just working for
+aren't drivers like just working for
+that's really weird.
+But yeah, I figured out that if I uh if
+But yeah, I figured out that if I uh if
+I don't have Windows on my PC, then I
+I don't have Windows on my PC, then I
+can't play the most addicting games that
+can't play the most addicting games that
+are the most likely to cause me to
+are the most likely to cause me to
+spiral out of working good
+spiral out of working good
+hours. No League, no
+hours. No League, no
+Valerant. I don't know. I got hit with
+Valerant. I don't know. I got hit with
+an Overwatch bug for a few weeks. Um but
+an Overwatch bug for a few weeks. Um but
+then like aside from that, it's been
+then like aside from that, it's been
+pretty consistent on the work. are great
+pretty consistent on the work. are great
+cookie rewards. Yeah, the problem though
+cookie rewards. Yeah, the problem though
+is I can't stop playing
+them. Like, there's been a ton of cool
+them. Like, there's been a ton of cool
+new stuff added to Runescape, but if I
+new stuff added to Runescape, but if I
+start playing that, there goes all of
+start playing that, there goes all of
+2025.
+2025.
+Literally, it's freaking
+heroin. All right, see you, Spencer.
+the heck.
+Huh? Token must have
+Huh? Token must have
+expired. One moment.
+Oh yeah, it literally just expired.
+Get me a new token.
+Okay, we are good with that.
+Oh, eight.
+this. All
+this. All
+right. So
+right. So
+now though I probably only have a few
+now though I probably only have a few
+minutes here
+minutes here
+uh though I will be back after breakfast
+uh though I will be back after breakfast
+and exercise and all that.
+Um we really want to start getting
+Um we really want to start getting
+normalized uh normalized score data into
+stuff. So let's just do
+Dude, I'm realizing I so I got to order
+Dude, I'm realizing I so I got to order
+my
+my
+full stream setup stuff to the new
+place. So, I'll have to do a little
+place. So, I'll have to do a little
+looking into if I want to buy the same
+looking into if I want to buy the same
+stuff or not, or if I want to upgrade
+stuff or not, or if I want to upgrade
+even more.
+Okay, so this does not print out
+Okay, so this does not print out
+normalized
+for even though it's there because I
+for even though it's there because I
+didn't add to the
+didn't add to the
+binding.
+binding.
+Let's fix that.
+It seems
+It seems
+nice. We might want to reorder these
+nice. We might want to reorder these
+metrics and stuff, but like
+Cool. We like this.
+same thing with
+enduro normalized score
+uh normalized score should not be zero.
+uh normalized score should not be zero.
+Oh,
+I think that this is what I'm going to
+I think that this is what I'm going to
+do for um a good chunk of today though
+do for um a good chunk of today though
+is I'm just going to like get all this
+is I'm just going to like get all this
+stuff playing
+stuff playing
+nicely and uh like have nice stats, have
+nicely and uh like have nice stats, have
+all the M's just like good, consistent,
+all the M's just like good, consistent,
+all
+all
+that. And I got to sync up with Bet on
+that. And I got to sync up with Bet on
+what he's done so I don't duplicate any
+what he's done so I don't duplicate any
+of his
+of his
+work. Bet's been great for like doing
+work. Bet's been great for like doing
+these types of things.
+Yeah, look at that. So now you have like
+Yeah, look at that. So now you have like
+this nice norm score. So if I like run a
+this nice norm score. So if I like run a
+bunch of these M's, I can put them all
+bunch of these M's, I can put them all
+in the same plot and it'll just work.
+So this normalized score here should be
+So this normalized score here should be
+linked
+linked
+to days
+to days
+completed and at a ratio of 1 to 10 I
+completed and at a ratio of 1 to 10 I
+believe.
+Oh, there it is. That's
+Oh, there it is. That's
+correct. Okay.
+Yeah, captain. I got it working very
+Yeah, captain. I got it working very
+nicely. Let me What do you Let's see
+nicely. Let me What do you Let's see
+what you think about
+what you think about
+this. So, before we had all these width
+this. So, before we had all these width
+statements, right? And it was nice
+statements, right? And it was nice
+because you could clearly see like what
+because you could clearly see like what
+block is profiling what, but it also
+block is profiling what, but it also
+really interrupted your ability to read
+really interrupted your ability to read
+the core code. It was like really
+the core code. It was like really
+disruptive. And also there was just a
+disruptive. And also there was just a
+lot of profiling code. So what I did now
+lot of profiling code. So what I did now
+is you just add uh profile tags like
+is you just add uh profile tags like
+this. Note there's not even a decorator
+this. Note there's not even a decorator
+here
+here
+anymore. Uh so you just do profile here.
+anymore. Uh so you just do profile here.
+And the only little wrinkle is you have
+And the only little wrinkle is you have
+to add this nest equals true to the
+to add this nest equals true to the
+first one after it so that you tell it
+first one after it so that you tell it
+that hey we're going to keep using this
+that hey we're going to keep using this
+one. But after that you just uh every
+one. But after that you just uh every
+time you switch to a new profiling block
+time you switch to a new profiling block
+you just switch the tag and every single
+you just switch the tag and every single
+line gets profiled. It's actually a
+line gets profiled. It's actually a
+little faster little lower overhead than
+little faster little lower overhead than
+the previous one because it only has to
+the previous one because it only has to
+call synchronize once, not at the start
+call synchronize once, not at the start
+and at the end of each
+and at the end of each
+block. And the code is not all indented
+block. And the code is not all indented
+under a profile block anymore. It looks
+under a profile block anymore. It looks
+like very reasonable code, very normal
+like very reasonable code, very normal
+code. And uh yeah, that's what I have.
+code. And uh yeah, that's what I have.
+And the whole code for this is right
+And the whole code for this is right
+here. This is this is the entire
+here. This is this is the entire
+profiler. It just basically makes a
+profiler. It just basically makes a
+stack of profilers. And then you can
+stack of profilers. And then you can
+tell it every time you profile whether
+tell it every time you profile whether
+you want to switch the profiler, which
+you want to switch the profiler, which
+is the default, or whether you want to
+is the default, or whether you want to
+keep profiling under the current thing,
+keep profiling under the current thing,
+but also now add a subprofiler.
+So this replaces like I don't know 3x
+So this replaces like I don't know 3x
+this amount of profiling mode.
+It's
+It's
+completed. Yeah,
+completed. Yeah,
+perfect. More readable code, easier to
+perfect. More readable code, easier to
+follow since you don't need decorators.
+follow since you don't need decorators.
+Yeah, I think it makes it like very
+Yeah, I think it makes it like very
+marginally more difficult to see which
+marginally more difficult to see which
+profile tag is applying to which code.
+profile tag is applying to which code.
+Um, but it makes the whole code way
+Um, but it makes the whole code way
+easier to
+read. And that is my uh my call. So, I'm
+read. And that is my uh my call. So, I'm
+going to go get breakfast. I'll be back
+going to go get breakfast. I'll be back
+doing this for the whole rest of the day
+doing this for the whole rest of the day
+as soon as I get some food and get some
+as soon as I get some food and get some
+exercise. For folks watching, puffer.ai
+exercise. For folks watching, puffer.ai
+for all the things. Please star the
+for all the things. Please star the
+GitHub. We are like a few stars away
+GitHub. We are like a few stars away
+from it going up to 2K, so that would be
+from it going up to 2K, so that would be
+awesome. Join the Discord to get
+awesome. Join the Discord to get
+involved. All that. And uh I'll be back
+involved. All that. And uh I'll be back
+with more devs

@@ -1,0 +1,3289 @@
+Kind: captions
+Language: en
+We are live. Good
+morning. Heck of a
+weekend. I was uh I believe I had around
+weekend. I was uh I believe I had around
+10 hours 40 minutes streamed on
+Saturday and then on Sunday we ended up
+Saturday and then on Sunday we ended up
+with a whole bunch of issues to fix with
+with a whole bunch of issues to fix with
+the internet
+wiring. We at least have our cluster
+wiring. We at least have our cluster
+machines back up now. so we can get back
+machines back up now. so we can get back
+to doing some experiments. I'm going to
+to doing some experiments. I'm going to
+fix the last two that are still offline
+today. But I wanted to start my morning
+today. But I wanted to start my morning
+with um at least a little bit of dev and
+with um at least a little bit of dev and
+a little bit of
+research. So the plan for
+research. So the plan for
+today, I've got hour and a half now. Uh
+today, I've got hour and a half now. Uh
+I'm probably going to look at a new
+I'm probably going to look at a new
+paper I've been sent.
+paper I've been sent.
+to see if it's useful for
+to see if it's useful for
+RL uses test time training. So, we're
+RL uses test time training. So, we're
+going to look at that, possibly
+going to look at that, possibly
+implement
+implement
+it. And then after that, we've got stuff
+it. And then after that, we've got stuff
+to do on Vrace probably after
+to do on Vrace probably after
+breakfast. Got stuff to do on diversity
+breakfast. Got stuff to do on diversity
+is all you need. That
+is all you need. That
+algorithm, we got stuff to do on a bunch
+algorithm, we got stuff to do on a bunch
+of
+different Okay.
+Let's get the paper
+first. What on
+earth? People close weird stuff, man.
+earth? People close weird stuff, man.
+All right, let's go. So, let me go grab
+All right, let's go. So, let me go grab
+that paper
+that paper
+thing. Hang on. Let me not show too many
+DMs. Just grab this
+DMs. Just grab this
+paper.
+paper.
+Okay. Apparently, this is not the
+Okay. Apparently, this is not the
+original, but this has a clearer
+original, but this has a clearer
+description of the
+algorithm. So, it's this thing right
+algorithm. So, it's this thing right
+here. This is a supposed replacement for
+here. This is a supposed replacement for
+LSTMs. Oops, I also should have my chat
+LSTMs. Oops, I also should have my chat
+up. Morning
+up. Morning
+Fox.
+Fox.
+Um, so this thing is apparently like a
+Um, so this thing is apparently like a
+successor to LSTM sort of. A lot of
+successor to LSTM sort of. A lot of
+those have been tried.
+those have been tried.
+I've also looked into like state based
+I've also looked into like state based
+stuff like Mamba before and I didn't
+stuff like Mamba before and I didn't
+know if it would be useful, but this
+know if it would be useful, but this
+does seem like something that is
+does seem like something that is
+fundamentally different and hasn't
+fundamentally different and hasn't
+really been explored before because they
+really been explored before because they
+take gradient steps during the forward
+take gradient steps during the forward
+pass. It's kind of
+pass. It's kind of
+wonky. So, they've got this like input
+wonky. So, they've got this like input
+hidden output, right? But,
+hidden output, right? But,
+uh, they actually do gradient steps in
+uh, they actually do gradient steps in
+the forward pass. It's kind of weird.
+the forward pass. It's kind of weird.
+And this was used recently in I don't
+And this was used recently in I don't
+know if you've seen the Tom and Jerry
+know if you've seen the Tom and Jerry
+videos that have been going
+videos that have been going
+around. The videos are like I don't know
+around. The videos are like I don't know
+what the state of the art in video gen
+what the state of the art in video gen
+is like. They don't look good compared
+is like. They don't look good compared
+to the original cartoons at all. They
+to the original cartoons at all. They
+don't really make any sense. But I think
+don't really make any sense. But I think
+for a coming out of a model this is kind
+for a coming out of a model this is kind
+of insane. This is Nvidia
+of insane. This is Nvidia
+paper it seems. What's the Stanford
+paper it seems. What's the Stanford
+Nvidia? Oh, all the universities.
+Nvidia? Oh, all the universities.
+I guess it's just Nvidia and everyone
+I guess it's just Nvidia and everyone
+interning or
+whatever. Okay, let's see
+if I think they they're supposed to have
+if I think they they're supposed to have
+like a code block for this somewhere.
+like a code block for this somewhere.
+I was told there was like a very simple
+I was told there was like a very simple
+code
+block. The heck is this
+thing? Is this code on GitHub?
+Yeah. Okay. There's just a lot of stuff
+Yeah. Okay. There's just a lot of stuff
+in there. So, I don't know
+in there. So, I don't know
+where David got this. I don't know where
+where David got this. I don't know where
+this thing came from, but I was sent
+this thing came from, but I was sent
+this. This is like a lot easier,
+this. This is like a lot easier,
+right? I tried looking at this
+right? I tried looking at this
+yesterday, but I was like totally
+yesterday, but I was like totally
+exhausted. So, let me see what this is.
+exhausted. So, let me see what this is.
+They have
+Okay, so this thing has a persistent
+Okay, so this thing has a persistent
+task which has parameter
+KQB. This
+KQB. This
+[Music]
+is where's Q get
+is where's Q get
+used? Oh, it gets in there. Okay, so
+used? Oh, it gets in there. Okay, so
+this is this attention or is this not
+this is this attention or is this not
+attention?
+attention?
+I don't think this is attention though.
+I don't think this is attention though.
+Even though
+um really love the hustle, keep up and
+um really love the hustle, keep up and
+one day hi will it be achieved. Thank
+one day hi will it be achieved. Thank
+you. I mean my goal with puffer is quite
+you. I mean my goal with puffer is quite
+lofty, right? The the point of what I'm
+lofty, right? The the point of what I'm
+doing here is I saw what reinforcement
+doing here is I saw what reinforcement
+learning could do in 2019 and 2020. I
+learning could do in 2019 and 2020. I
+saw where it was going and then everyone
+saw where it was going and then everyone
+just stopped and started working on
+just stopped and started working on
+language models.
+language models.
+And like there's nobody doing this work
+And like there's nobody doing this work
+if I don't do it. So my hope is that I
+if I don't do it. So my hope is that I
+make reinforcement learning stable,
+make reinforcement learning stable,
+consistent, successful, and there's a
+consistent, successful, and there's a
+good chance we will need this on the
+good chance we will need this on the
+path to
+path to
+AGI. So I want to make sure we don't
+AGI. So I want to make sure we don't
+lose because we didn't actually do this
+lose because we didn't actually do this
+stuff.
+If you'd asked me a year ago, I didn't
+If you'd asked me a year ago, I didn't
+expect that to involve writing like
+expect that to involve writing like
+30,000 lines of C, but here we are. A
+30,000 lines of C, but here we are. A
+senior PhD thesis believe you're on the
+senior PhD thesis believe you're on the
+right path. Amongst the pioneers of RL
+right path. Amongst the pioneers of RL
+definitely agree. Thank you very
+definitely agree. Thank you very
+much. I mean, the progress has really
+much. I mean, the progress has really
+been there. I don't know if you've seen
+been there. I don't know if you've seen
+a lot of the stuff since the thesis
+a lot of the stuff since the thesis
+video, but
+video, but
+um I mean this is our 2 release and
+um I mean this is our 2 release and
+we're already way ahead of this in dev,
+we're already way ahead of this in dev,
+but like we've got all these
+but like we've got all these
+environments. They all run like a
+environments. They all run like a
+thousand plus times faster than
+thousand plus times faster than
+everything else out there. All these
+everything else out there. All these
+games and you can just train RL on these
+games and you can just train RL on these
+at like a thousand times the speed of
+at like a thousand times the speed of
+before. It's getting more stable and
+before. It's getting more stable and
+more consistent as well. We've run like
+more consistent as well. We've run like
+20 30,000 experiments in the last few
+20 30,000 experiments in the last few
+months. Um really really the pace of
+months. Um really really the pace of
+research is picking up because we can
+research is picking up because we can
+just do everything fast now.
+just do everything fast now.
+So currently we're the thing that we
+So currently we're the thing that we
+hadn't done in this release that we're
+hadn't done in this release that we're
+now doing in dev is we're going back to
+now doing in dev is we're going back to
+all the old algorithmic advancements
+all the old algorithmic advancements
+that weren't properly tested from like
+that weren't properly tested from like
+2015 through 2022ish.
+2015 through 2022ish.
+And um we are actually extensively
+And um we are actually extensively
+validating them and seeing what works
+validating them and seeing what works
+and seeing what doesn't. It's pretty
+cool. This is just one potential thing.
+cool. This is just one potential thing.
+I was just linked to this the other day.
+I was just linked to this the other day.
+This is like a much newer This just came
+This is like a much newer This just came
+out, right? I just saw this on Twitter.
+out, right? I just saw this on Twitter.
+Do I know any of these
+people? No.
+So they remake this learner single
+So they remake this learner single
+forward pass. That's kind of
+weird. And
+Starting from current
+pars and this has a loss.
+Do you actually train this layer like
+Do you actually train this layer like
+this? Hang on. Train view label
+view. They have out
+sequence and then they have
+task. Oh no, they use the task. This is
+task. Oh no, they use the task. This is
+just written weirdly as all. Yeah, this
+just written weirdly as all. Yeah, this
+is just written weirdly. So they
+is just written weirdly. So they
+optimize this boss here and then this is
+optimize this boss here and then this is
+just standard. This one is just
+just standard. This one is just
+standard. So I think you can kind of
+standard. So I think you can kind of
+just slot this in, can't you?
+I'm looking at this and this does look
+I'm looking at this and this does look
+obscenely
+slow. So, what is this thing supposed to
+slow. So, what is this thing supposed to
+do?
+do?
+Um, state train
+Train on token and then they
+predict. This is such a weird paper.
+predict. This is such a weird paper.
+Like how the heck did they come up with
+Like how the heck did they come up with
+this? This is like
+Like what's even the idea here, right?
+state
+state
+equals
+equals
+wait this
+is this is not the same as like the
+is this is not the same as like the
+state as it's defined in an LSTM right
+state as it's defined in an LSTM right
+so the state is this model okay and then
+I guess we could try
+this. There's no reason we can't try
+this. There's no reason we can't try
+this. But then if you're replacing the
+this. But then if you're replacing the
+LSTM
+And I guess it works as a drop in,
+And I guess it works as a drop in,
+doesn't
+it? Yeah, it
+it? Yeah, it
+should. Okay, we can just do this. I
+should. Okay, we can just do this. I
+don't see why
+not. We'll just do this.
+I think we just have to make a ttt
+I think we just have to make a ttt
+wrapper,
+wrapper,
+right? It shouldn't even be bad bad at
+right? It shouldn't even be bad bad at
+this.
+This LSTM. Okay, this doesn't need a
+This LSTM. Okay, this doesn't need a
+base class, so we don't need to
+I could just implement it the way that
+they have it
+here. Kind of don't want to though.
+Oh yeah. How do we do
+um it's supposed to be that the learner
+um it's supposed to be that the learner
+gets reset on each sequence,
+right? Yeah. On each sequence.
+right? Yeah. On each sequence.
+So I guess that's going to be
+like trajectory
+segment. I guess we'll have to do it
+segment. I guess we'll have to do it
+that way. Yeah.
+that way. Yeah.
+So let's not do task. Let's do solve.
+So let's not do task. Let's do solve.
+K
+parameter. Oh, it's just
+param. How does param get initialized by
+param. How does param get initialized by
+default? I don't see any sort of
+default? I don't see any sort of
+initialization. Is this pseudo code?
+Hang on. I think this is pseudo
+code. Yeah, you need to give it data.
+layer in
+it. Yeah. So our default is orthogonal
+it. Yeah. So our default is orthogonal
+and constant. I see.
+Is there no
+Is there no
+um initial orthogonal
+Yeah, it's kind of weird how this pie
+Yeah, it's kind of weird how this pie
+portrait does this, but it's no big
+portrait does this, but it's no big
+deal. It's just a little bit silly and
+deal. It's just a little bit silly and
+redundant. Okay.
+my own rule
+my own rule
+here. We never group that way. Do it
+here. We never group that way. Do it
+this
+way. Okay, that's
+way. Okay, that's
+fine. So, we have these parameters.
+fine. So, we have these parameters.
+Now we define forward which should be
+Now we define forward which should be
+the same as forward training.
+Define forward.
+Oh, I don't think you can. Wait. Yeah,
+Oh, I don't think you can. Wait. Yeah,
+you don't want to have That's
+sketchy. Talking with another student.
+sketchy. Talking with another student.
+Hopefully I can bring them on board. E
+Hopefully I can bring them on board. E
+code somewhere else, right?
+Okay, I think I know how you can do
+Okay, I think I know how you can do
+this.
+this.
+So state can
+be and one
+Hypo
+Hypo
+hyperothermia magnetic nano particle
+optimizations. Yep, that sounds like it
+optimizations. Yep, that sounds like it
+would be hard to run fast.
+I will tell you it is very hard to do RL
+I will tell you it is very hard to do RL
+with slow sims. It is much much much
+with slow sims. It is much much much
+easier when you have fast Sims.
+I almost don't know what to do with this
+I almost don't know what to do with this
+state thing here because
+um man
+How to
+How to
+simulate fluids like a
+circuit? I do not know about
+circuit? I do not know about
+that. Figuring out how to make Sims
+that. Figuring out how to make Sims
+really fast though is useful for a lot
+really fast though is useful for a lot
+of stuff.
+Hypothermia is good early cancer
+treatment
+particles. Man, sometimes I wish I had a
+particles. Man, sometimes I wish I had a
+physics background. Physics is cool.
+It's so much harder to just be like
+It's so much harder to just be like
+random indie physics researcher though.
+like random like AI is one of the only
+like random like AI is one of the only
+things where random indie researcher is
+things where random indie researcher is
+actually a legit thing to Okay.
+Ah, that's so unfortunate. I can't even
+Ah, that's so unfortunate. I can't even
+get rid of that bot cuz freaking reream
+get rid of that bot cuz freaking reream
+chat broke.
+now works. I still can't get rid of
+now works. I still can't get rid of
+it. If you have RL
+it. If you have RL
+background, well, there's no need to
+background, well, there's no need to
+pivot when I'm solving
+Laurel. Let me solve this deal first.
+Laurel. Let me solve this deal first.
+Thank you very much.
+What is
+F? Oh, model.
+Have you thought about the ethics of
+Have you thought about the ethics of
+popular being used in defense
+popular being used in defense
+sims? I
+sims? I
+mean, it's just standard dual use,
+mean, it's just standard dual use,
+right? There's no specific
+consideration. That's like
+consideration. That's like
+pretty as far as things that have dual
+pretty as far as things that have dual
+use go.
+use go.
+It's like pretty far out
+there. I'm also not inherently opposed
+there. I'm also not inherently opposed
+to defense work
+to defense work
+either. It depends what it's on, right?
+like from that one vine. Oh, wait. By
+like from that one vine. Oh, wait. By
+the way, the mug is amazing. It's
+the way, the mug is amazing. It's
+comically
+comically
+large. I have I published on X at one
+large. I have I published on X at one
+point. I was doing this thing. I came up
+point. I was doing this thing. I came up
+with a thousand calorie recipe where you
+with a thousand calorie recipe where you
+could make a mug this size of hot
+could make a mug this size of hot
+chocolate that had 1,000 calories and 70
+chocolate that had 1,000 calories and 70
+grams of protein.
+But for now, it's just T
+Okay. So, I just have to add to this the
+Okay. So, I just have to add to this the
+LSTM wrapper
+stuff. Probably should have thought
+stuff. Probably should have thought
+about that,
+huh? I mean, I can probably just copy.
+We'll clean it up if uh if this ends up
+We'll clean it up if uh if this ends up
+getting capped.
+There's like no way in hell this is
+There's like no way in hell this is
+going to be fast, right? I mean,
+actually, I take that back. So
+actually, I take that back. So
+theoretically,
+right, this could be made to be like
+right, this could be made to be like
+decently
+decently
+fast. It's one gradient
+step. Okay, it's technically possible
+step. Okay, it's technically possible
+that this thing could be
+made decently fastish.
+get the output of
+this. It's going to be something like
+this. It's going to be something like
+this, right?
+So any chance you can post
+So any chance you can post
+the See, everyone's like, "Oh, that's so
+the See, everyone's like, "Oh, that's so
+stupid." Actually, can I get the recipe
+stupid." Actually, can I get the recipe
+for that? Yeah, sure. I got you.
+I will say it was not the best on my
+I will say it was not the best on my
+stomach, but I have a very sensitive
+stomach, but I have a very sensitive
+stomach and it wasn't even that
+stomach and it wasn't even that
+bad. I actually might even start doing
+bad. I actually might even start doing
+that again. The the main reason I'm not
+that again. The the main reason I'm not
+at the moment is one, it's a lot of
+at the moment is one, it's a lot of
+heavy cream and uh two, I'm just not
+heavy cream and uh two, I'm just not
+training hard enough right now where
+training hard enough right now where
+it's not going to just make me fat. I've
+it's not going to just make me fat. I've
+been just doing a lot of work lately. I
+been just doing a lot of work lately. I
+you really kind of need to be like going
+you really kind of need to be like going
+to the gym and doing a hard hour and a
+to the gym and doing a hard hour and a
+half workout for it to make sense to be
+half workout for it to make sense to be
+having this thing. Let me find
+having this thing. Let me find
+it. Where's the search button on?
+it. Where's the search button on?
+Uh there's supposed to be a search
+Uh there's supposed to be a search
+button here, isn't
+there? There is one on the mobile app.
+Like cuz this just searches everyone's
+crap. The heck is
+it? Go find a thousand
+Wait, wait, wait. Does this thing
+Wait, wait, wait. Does this thing
+actually
+actually
+summarize? Oh, no. This was just some
+summarize? Oh, no. This was just some
+random post I
+made. Yeah, I can't find it either.
+made. Yeah, I can't find it either.
+Where the hell is
+Where the hell is
+it? Hang on. Maybe I can get it on my
+it? Hang on. Maybe I can get it on my
+phone. Let me find it. I swear the UI is
+phone. Let me find it. I swear the UI is
+different. Like there's
+a Yeah. So, when I click the search on
+a Yeah. So, when I click the search on
+my profile
+my profile
+here, it actually it gives you a
+here, it actually it gives you a
+different search. It lets me search my
+different search. It lets me search my
+posts.
+Okay. You know what I'm going to do? I'm
+Okay. You know what I'm going to do? I'm
+going to put it on the
+going to put it on the
+Discord. You can get it
+Discord. You can get it
+there. Here we
+go.
+go.
+Discord.gg/puffer. Where Where did it
+Discord.gg/puffer. Where Where did it
+go?
+And we get back to
+code. I don't know why my Discord is not
+code. I don't know why my Discord is not
+opening. Oh, cuz I'm
+opening. Oh, cuz I'm
+dumb. There you
+go. It's a whole thread. You scroll down
+go. It's a whole thread. You scroll down
+to the bottom of it. Scroll down to the
+to the bottom of it. Scroll down to the
+bottom of it. Like I did I made like
+bottom of it. Like I did I made like
+several versions of
+several versions of
+it. I was actually like seriously doing
+it. I was actually like seriously doing
+that for a while. It was pretty funny.
+that for a while. It was pretty funny.
+It did work. I will tell you it did
+It did work. I will tell you it did
+work. It's like the only thing I've ever
+work. It's like the only thing I've ever
+come up with to consistently put weight
+come up with to consistently put weight
+on without stuffing
+myself. Bananas, oats,
+myself. Bananas, oats,
+walnuts. I tried stuff like that and it
+walnuts. I tried stuff like that and it
+wasn't calorie dense enough, right?
+wasn't calorie dense enough, right?
+because like I'd make a 1,200 calorie
+because like I'd make a 1,200 calorie
+shake or whatever and then I would skip
+shake or whatever and then I would skip
+the next meal because I wouldn't be
+the next meal because I wouldn't be
+hungry enough. So, this is like I could
+hungry enough. So, this is like I could
+literally have this thing and then be
+literally have this thing and then be
+hungry in an hour and a
+half. So, I specifically made this
+half. So, I specifically made this
+recipe for people who it's like you have
+recipe for people who it's like you have
+trouble putting on weight because you
+trouble putting on weight because you
+don't have the
+don't have the
+appetite. I actually should totally
+appetite. I actually should totally
+start doing that again. I'm like six
+start doing that again. I'm like six
+pounds underweight right now. I'm trying
+pounds underweight right now. I'm trying
+to get back up to 190, but I will have
+to get back up to 190, but I will have
+to actually start like lifting way more
+to actually start like lifting way more
+seriously again. Otherwise, it just goes
+seriously again. Otherwise, it just goes
+on as
+fat. Very soon, very, very soon, we get
+fat. Very soon, very, very soon, we get
+to start that arc. But for now, we've
+to start that arc. But for now, we've
+got to make sure we get the puffer
+got to make sure we get the puffer
+update shipped. This next update is
+update shipped. This next update is
+going to be amazing, but uh it's a heck
+going to be amazing, but uh it's a heck
+of a lot of work.
+The only warning I will give you on that
+The only warning I will give you on that
+shake is I don't know. I I still could
+shake is I don't know. I I still could
+not find a verdict of whether having a
+not find a verdict of whether having a
+huge amount of heavy cream is terrible
+huge amount of heavy cream is terrible
+for you or
+for you or
+not. Like compared to other calorie
+not. Like compared to other calorie
+sources, I couldn't tell. So, you can go
+sources, I couldn't tell. So, you can go
+figure that out for yourself.
+figure that out for yourself.
+It was of all the things I could have
+It was of all the things I could have
+used though as the main calorie source.
+used though as the main calorie source.
+It was the best thing that I found for
+you. You're not going to make like a
+you. You're not going to make like a
+It's not like you're going to just drink
+It's not like you're going to just drink
+a bottle of olive oil,
+a bottle of olive oil,
+right? All right, enough on
+right? All right, enough on
+that. Keto that felt really
+that. Keto that felt really
+different. I've never really bought into
+different. I've never really bought into
+that stuff, honestly.
+that stuff, honestly.
+I don't know how the hell ke
+I don't know how the hell ke
+like do any elite athletes do
+like do any elite athletes do
+keto? I don't think so.
+Right. Carbs are just a really good fuel
+source. I don't know what that is.
+source. I don't know what that is.
+Caffeine's
+energy. To be fair, I'm not like I'm
+energy. To be fair, I'm not like I'm
+usually doing my cardio fasted these
+usually doing my cardio fasted these
+days just like out of convenience more
+days just like out of convenience more
+than anything. Coconut oil. Yeah, I
+than anything. Coconut oil. Yeah, I
+didn't try coconut oil.
+didn't try coconut oil.
+It's You do kind of need something if
+It's You do kind of need something if
+you're doing like a thousand calorie
+you're doing like a thousand calorie
+version, you need something that you can
+version, you need something that you can
+actually put into a beverage.
+actually put into a beverage.
+Um, I don't think you would want to just
+Um, I don't think you would want to just
+drink like 500 calories of coconut oil.
+drink like 500 calories of coconut oil.
+I think that would probably wreak havoc
+I think that would probably wreak havoc
+way more than the uh heavy
+cream. But yeah, I don't know. I So, I
+cream. But yeah, I don't know. I So, I
+had I was in the hospital for pneumonia
+had I was in the hospital for pneumonia
+at the start of the year. It like I lost
+at the start of the year. It like I lost
+like 18 pounds. It was really bad. And I
+like 18 pounds. It was really bad. And I
+couldn't train for like two months. So,
+couldn't train for like two months. So,
+I'm trying to get my body weight back
+I'm trying to get my body weight back
+up. Um, I developed that mug before that
+up. Um, I developed that mug before that
+from when I was trying to get from like
+from when I was trying to get from like
+175 up to 190 lbs. And I did. It worked.
+175 up to 190 lbs. And I did. It worked.
+Um, but I just I haven't been training
+Um, but I just I haven't been training
+hard enough to need it again yet. But I
+hard enough to need it again yet. But I
+think I will probably do some revisions
+think I will probably do some revisions
+on it the next time I try to uh really
+on it the next time I try to uh really
+get seriously back to that level.
+get seriously back to that level.
+But I can't I can't do that while I'm
+But I can't I can't do that while I'm
+working the hours that I'm working at
+working the hours that I'm working at
+the moment, right? Like I can't go do a
+the moment, right? Like I can't go do a
+two hour workout and then immediately be
+two hour workout and then immediately be
+back on it. It's going to take me like
+back on it. It's going to take me like
+another hour and a half to recover. So
+another hour and a half to recover. So
+it ends up being like four hours out of
+it ends up being like four hours out of
+my day. So I'm kind of just doing like
+my day. So I'm kind of just doing like
+I'm going for like a pretty decently
+I'm going for like a pretty decently
+good run a few times a week. I'm doing
+good run a few times a week. I'm doing
+some intervals. I'm getting my V2 max
+some intervals. I'm getting my V2 max
+back. I'm doing a 10K on the weekend.
+back. I'm doing a 10K on the weekend.
+And then I'm doing like a few lifting
+And then I'm doing like a few lifting
+sessions, mostly compounds throughout
+sessions, mostly compounds throughout
+the week.
+the week.
+Takes two weeks for your body to get
+Takes two weeks for your body to get
+back on
+back on
+it. Back on
+what? On like heavy exercise routine.
+what? On like heavy exercise routine.
+No. No. Cuz even when I was adapted, it
+No. No. Cuz even when I was adapted, it
+was still it was a part-time job. It was
+was still it was a part-time job. It was
+literally a part-time job. I mean, it
+literally a part-time job. I mean, it
+saved my life. Like I would have been
+saved my life. Like I would have been
+dead to pneumonia. So, it was absolutely
+dead to pneumonia. So, it was absolutely
+worth it, but it's literally a part-time
+worth it, but it's literally a part-time
+job. I was doing like depending on the
+job. I was doing like depending on the
+this like cycle I was doing anywhere
+this like cycle I was doing anywhere
+from like 25 to 45 miles a week and then
+from like 25 to 45 miles a week and then
+I was doing on top of that like probably
+I was doing on top of that like probably
+eight hours of mostly eight hours maybe
+eight hours of mostly eight hours maybe
+more like six hours worth of probably
+more like six hours worth of probably
+eight hours of like hard mostly heavy
+eight hours of like hard mostly heavy
+compound lifts powerlifting style
+compound lifts powerlifting style
+training. So it was it was literally a
+training. So it was it was literally a
+parttime job.
+Because it's not you can't just time all
+Because it's not you can't just time all
+the exercise together, right? You also
+the exercise together, right? You also
+have to time
+have to time
+like like the recovery like you just
+like like the recovery like you just
+move slower for the next hour and a half
+move slower for the next hour and a half
+after you finish like a hard
+workout. I am looking forward to getting
+workout. I am looking forward to getting
+back into that. But that will be the
+back into that. But that will be the
+goal is to ship one like to ship the
+goal is to ship one like to ship the
+next update first and then I get to take
+next update first and then I get to take
+a little bit of a taper back, you know,
+a little bit of a taper back, you know,
+get myself some fitness, get my head
+get myself some fitness, get my head
+clear, and then think about what to do
+clear, and then think about what to do
+next with
+next with
+puffer. Don't do much cardio trying to
+puffer. Don't do much cardio trying to
+do six
+do six
+days. Push below twice end of the day.
+days. Push below twice end of the day.
+So the thing that made it click for me
+So the thing that made it click for me
+with the cardio
+with the cardio
+um I didn't run at all. So, I hit I hit
+um I didn't run at all. So, I hit I hit
+my for plate deadlift for the first time
+my for plate deadlift for the first time
+two three years ago
+two three years ago
+and I realized I could not run a
+and I realized I could not run a
+mile and it only takes six months to
+mile and it only takes six months to
+train for a marathon at most. So, it's
+train for a marathon at most. So, it's
+like okay, I've trained to the point
+like okay, I've trained to the point
+where it takes I know it takes like the
+where it takes I know it takes like the
+average person who doesn't have who's
+average person who doesn't have who's
+not like genetically gifted as an
+not like genetically gifted as an
+athlete. It takes like two or three
+athlete. It takes like two or three
+years to hit a four plate deadlift if
+years to hit a four plate deadlift if
+you're like under 200 lb. It only takes
+you're like under 200 lb. It only takes
+six months to train for a marathon.
+six months to train for a marathon.
+you should probably just put in the
+you should probably just put in the
+investment and like get your health
+investment and like get your health
+where it needs to be. So, I did two
+where it needs to be. So, I did two
+marathons. I did a 50k. I have the
+marathons. I did a 50k. I have the
+article on the 50k, training for that
+article on the 50k, training for that
+and stuff on X. That was hard. It was
+and stuff on X. That was hard. It was
+kind of like a big personal
+kind of like a big personal
+accomplishment for me over the summer.
+accomplishment for me over the summer.
+And then, uh, I started doing, you know,
+And then, uh, I started doing, you know,
+trying to get my 5K time back better
+trying to get my 5K time back better
+because that's like way easier to train
+because that's like way easier to train
+for. It's like way less time to train
+for. It's like way less time to train
+for a good 5K. You still feel really
+for a good 5K. You still feel really
+good. you know, it's like you're not
+good. you know, it's like you're not
+going to be super out of breath during
+going to be super out of breath during
+your longer sets lifting. Um, and then I
+your longer sets lifting. Um, and then I
+got pneumonia.
+So, so I try to keep I try to keep the
+So, so I try to keep I try to keep the
+stuff I talk about on the stream and on
+stuff I talk about on the stream and on
+X almost all about just AI. That's what
+X almost all about just AI. That's what
+I do almost all of my time. But when I'm
+I do almost all of my time. But when I'm
+not doing AI, it's usually fitness stuff
+not doing AI, it's usually fitness stuff
+because it's really, really worth it.
+because it's really, really worth it.
+And I do try to get people around here
+And I do try to get people around here
+to make sure that they're staying in
+to make sure that they're staying in
+shape because, you know,
+shape because, you know,
+you spend 12 hours a day at your desk
+you spend 12 hours a day at your desk
+that you better be keeping in shape. And
+that you better be keeping in shape. And
+it was it was literally it was 10 hours
+it was it was literally it was 10 hours
+and 40 minutes streamed on
+Saturday. It was literally like get up,
+Saturday. It was literally like get up,
+stream breakfast, stream dinner, stream
+stream breakfast, stream dinner, stream
+bed.
+I will say that when I do resume that
+I will say that when I do resume that
+mug though, I am going to look a little
+mug though, I am going to look a little
+bit more seriously into
+bit more seriously into
+um cream versus other fat sources for
+um cream versus other fat sources for
+that because I don't know if that's
+that because I don't know if that's
+really bad for you long term or
+really bad for you long term or
+not. It's better than a lot of the other
+not. It's better than a lot of the other
+stuff, but might be able to do better
+still. Probably could be half cream,
+still. Probably could be half cream,
+half coconut oil or something like that.
+half coconut oil or something like that.
+That would also work and be less
+That would also work and be less
+terrible maybe. I don't
+know. Okay, let's actually let's
+know. Okay, let's actually let's
+actually do a little bit of depth here.
+actually do a little bit of depth here.
+Let's actually do a little bit of depth
+Let's actually do a little bit of depth
+here.
+here.
+Um, I'm like thinking about this thing
+Um, I'm like thinking about this thing
+and I'm a little sketched out with the
+and I'm a little sketched out with the
+way that this is supposed to work. It
+way that this is supposed to work. It
+seems like
+seems like
+it's I know what I'm going to do though.
+it's I know what I'm going to do though.
+I'm going to implement it. I'm going to
+I'm going to implement it. I'm going to
+get it to work in puffer.
+get it to work in puffer.
+If it gives us good like sample
+If it gives us good like sample
+efficiency
+efficiency
+performance, I will think about how fast
+performance, I will think about how fast
+I could theoretically make this
+thing and then we'll do the trade-offs
+thing and then we'll do the trade-offs
+for it. If it if the slow implementation
+for it. If it if the slow implementation
+done correctly isn't much better than
+done correctly isn't much better than
+what we have now, which is also faster,
+what we have now, which is also faster,
+then it's going to be a no.
+It does have the potential though to be
+It does have the potential though to be
+a substantially better I would
+a substantially better I would
+say and it doesn't have the
+say and it doesn't have the
+um it kind of has like a
+um it kind of has like a
+constant it has a constant cost to it.
+constant it has a constant cost to it.
+This is not like quadratic attention or
+This is not like quadratic attention or
+anything, but the fact that they say
+anything, but the fact that they say
+this is comparable to attention based
+this is comparable to attention based
+mechanisms is weird to me because it
+mechanisms is weird to me because it
+doesn't seem like it should be able to
+be. Uh, you put this in the wrong spot,
+be. Uh, you put this in the wrong spot,
+dummy. This goes
+here. This gets
+there.
+this. Yeah, like this.
+probably messed this up as well, didn't
+probably messed this up as well, didn't
+you? Yes.
+Self
+Self
+equals that's all I wanted to do. Now I
+equals that's all I wanted to do. Now I
+will be able to get this thing
+will be able to get this thing
+from
+from
+config. Uh we just use breakout as our
+config. Uh we just use breakout as our
+test here, right? That's the
+play. So we just put TTPT
+play. So we just put TTPT
+uh so that we don't have to deal with
+uh so that we don't have to deal with
+crazy state
+crazy state
+shenanigans. I'm going to make this one
+shenanigans. I'm going to make this one
+process.
+They should still absolutely train if we
+They should still absolutely train if we
+do this
+right. This is not going to run at all.
+right. This is not going to run at all.
+But we will uh you
+know
+change when we get to
+there. Oh, I guess you don't even need
+there. Oh, I guess you don't even need
+Hang
+Hang
+on. Yeah, you can actually be a little
+on. Yeah, you can actually be a little
+bit different with this. So this has got
+bit different with this. So this has got
+to be forward
+frame
+frame
+forward. For forward, you can kind of
+forward. For forward, you can kind of
+just take this piece, can't you?
+The only thing I don't know here is how
+The only thing I don't know here is how
+I'm going to get this
+I'm going to get this
+state. I mean, I can kind of just
+state. I mean, I can kind of just
+special case this initially, right?
+special case this initially, right?
+Like if I just do
+Like if I just do
+this, we'll just do like
+this, we'll just do like
+um initial was it was
+state we'll do like Yes.
+like that.
+Let's just
+Let's just
+do
+like thing is this needs to be
+like thing is this needs to be
+continually updated,
+right? So we can just do um
+right? So we can just do um
+[Music]
+And then if we just call it TTT
+state
+state then this is has observations.
+state then this is has observations.
+So I believe you just call
+So I believe you just call
+encode. Yeah, you literally just call
+encode. Yeah, you literally just call
+encode,
+encode,
+right? Like this. This gives you hidden
+right? Like this. This gives you hidden
+and then you call
+and then you call
+decode. This should be easy enough to
+decode. This should be easy enough to
+get working.
+like
+this cannot be multiplied.
+is the multiplication backwards.
+Wait, or does it just need a
+transpose? The multiplication seems
+transpose? The multiplication seems
+backwards to
+backwards to
+me. Maybe this is they did it for batch
+me. Maybe this is they did it for batch
+size
+one. I think they probably did it for
+one. I think they probably did it for
+batch size one, right? Because it
+batch size one, right? Because it
+doesn't make any sense.
+I don't know why I'm using the stupid
+I don't know why I'm using the stupid
+app symbol
+app symbol
+uh notation either. I really don't like
+it. Two
+devices. Okay.
+Is there a torch with Brad or something?
+Can you just do with torchenable
+Can you just do with torchenable
+grad? You probably can do torch
+grad? You probably can do torch
+with torch.
+Let me see what this uh needs to be
+Let me see what this uh needs to be
+fiddled with.
+So the task loss depends on
+So the task loss depends on
+K
+V. You're supposed to back propagate
+through graph function with respect to
+through graph function with respect to
+the first
+the first
+R which is model.
+So, are they only back propagating this
+So, are they only back propagating this
+linear layer? Is that the
+idea? I think that's what this is saying
+idea? I think that's what this is saying
+that you're only back propagating the
+that you're only back propagating the
+linear layer. That would make sense,
+linear layer. That would make sense,
+right? I think that's the point of this.
+So, can I just do like with enable
+So, can I just do like with enable
+grad like can I just do
+this because then the only thing that's
+this because then the only thing that's
+getting back is the linear layer, right?
+getting back is the linear layer, right?
+That should be the only thing that has
+That should be the only thing that has
+radiance.
+That does give you a valid output,
+That does give you a valid output,
+right? That kind of just
+runs. All right. I mean, we're happy
+runs. All right. I mean, we're happy
+with that. That does like that is valid
+with that. That does like that is valid
+code
+technically. And then we just have to
+technically. And then we just have to
+figure this out for
+uh for training. We also have to get
+uh for training. We also have to get
+the instantiation
+correct. Not really. This will update in
+correct. Not really. This will update in
+place,
+place,
+right? Yeah, this will update in place.
+right? Yeah, this will update in place.
+So, we don't even have to touch
+this.
+Okay. You know, I'm sort of warming up
+Okay. You know, I'm sort of warming up
+to this. This is not this is not
+to this. This is not this is not
+terrible. Like I've seen far far worse
+terrible. Like I've seen far far worse
+stuff. So let's just
+stuff. So let's just
+say we take this piece of
+say we take this piece of
+code, we replace this
+here like that.
+Maybe. And now all this needs
+Maybe. And now all this needs
+is
+is
+state.tt
+state. That's all this needs, right?
+And you just call in its
+state probably per sequence,
+right? So you probably do this
+right? So you probably do this
+like well this is already a sequence
+like well this is already a sequence
+model. So like you can do this
+model. So like you can do this
+here. Hang on. There's a bunch of messy
+here. Hang on. There's a bunch of messy
+code from me
+code from me
+yesterday. Probably like right here,
+yesterday. Probably like right here,
+right? Because it has to get reset every
+right? Because it has to get reset every
+sequence. Uh, and then this
+is and then this gets forward trained
+on like this.
+Okay. And then this works except that
+Okay. And then this works except that
+you're missing a for loop now.
+you're missing a for loop now.
+Right. So,
+Right. So,
+right. The only place that I expect this
+right. The only place that I expect this
+to get
+is right
+here. No attribute
+state. Oh, wait. Yeah, you already did
+state. Oh, wait. Yeah, you already did
+this.
+Yeah. So I think
+Yeah. So I think
+only the only place you need the for
+only the only place you need the for
+loop is on this model, right?
+Uh,
+what? How's this one time
+what? How's this one time
+step? Please
+explain. Okay, let me go figure that
+explain. Okay, let me go figure that
+out.
+All
+right. Oh, right. Here.
+rapper. There we
+go. Yeah. So, the thing that's going to
+go. Yeah. So, the thing that's going to
+kill the per here is that we need to
+kill the per here is that we need to
+write a for
+Don't we just have
+TT?
+So yeah, we don't use any of this. This
+So yeah, we don't use any of this. This
+is just for
+Oh, wait. But then we
+want look at the freaking code
+again. No, it is the way that this is
+again. No, it is the way that this is
+written. You do want this inside the
+written. You do want this inside the
+loop as well.
+So this is
+So this is
+now model of train
+view. Oh, but now this is really
+view. Oh, but now this is really
+awkward, isn't it?
+Because you need like a stop bra or
+Because you need like a stop bra or
+something.
+Does PyTorch have
+stopped? Is it just
+detach? Detach doesn't do in place.
+detach? Detach doesn't do in place.
+Right.
+New
+New
+tensor detached.
+tensor detached.
+Okay. Will never
+require. So this could just be detach
+require. So this could just be detach
+here,
+right? Train view. Detach.
+And it's train
+view of T specifically
+view of T specifically
+detach. And then this is model output
+detach. And then this is model output
+with test
+view. This is like
+dec. And then you zero grad step
+whatever. Uh something I I did something
+whatever. Uh something I I did something
+wrong
+here. Train view. This is supposed to be
+here. Train view. This is supposed to be
+label
+view. Yeah, this is label view.
+I messed it
+I messed it
+up. I must have messed up up top then.
+up. I must have messed up up top then.
+Right. So this
+is All right. So now we
+have test view.
+or actually it should just be
+this not something like this
+this not something like this
+thing. Okay. Okay. And then you just do
+thing. Okay. Okay. And then you just do
+hidden equals to forge step
+hidden. No weird model. No weird weird
+model. It does run
+Oh, is that how it
+works? Yes, it is.
+trying to backward through a graph a
+trying to backward through a graph a
+second time.
+Really?
+Can you not like detach it here? Does it
+Can you not like detach it here? Does it
+have to be something else?
+I thought
+I thought
+like surely model output should require
+like surely model output should require
+a gradient,
+right? Yeah, this requires a
+gradient. Yeah, that works.
+Okay. So,
+Okay. So,
+um Oh, you
+um Oh, you
+[ __ ]
+[ __ ]
+Uh yeah,
+Uh yeah,
+[ __ ] All right.
+Yeah, now we just get some reshape
+bugs.
+Shape. Yeah, I don't know about that one
+Shape. Yeah, I don't know about that one
+here. I don't know about that shape.
+here. I don't know about that shape.
+That seems a little
+wrong. That still seems a little
+wrong. This
+is still wrong.
+Oh, no. Is
+it? I think that it is correct now,
+it? I think that it is correct now,
+right? Yeah. No, I think this is
+right? Yeah. No, I think this is
+correct. It just so happens that both
+correct. It just so happens that both
+dims are 128. I thought it was like some
+dims are 128. I thought it was like some
+weird matrix bug.
+Time
+Time
+batch
+samples. One of these. What does it say?
+samples. One of these. What does it say?
+Been modified by an in place operation.
+Porch. Auto grad.
+It's saying that it's like one of these,
+right? This
+right? This
+gets train
+view
+view
+train. This can just
+train. This can just
+be attached train of h that's probably
+be attached train of h that's probably
+faster as well.
+You zero the gradient
+here.
+Steps test
+view hidden of
+T at Q.
+And then it's linear. Is this this is
+And then it's linear. Is this this is
+correct?
+Right. When we append
+this, I don't do any in place
+this, I don't do any in place
+ops unless I'm leaking a variable here
+ops unless I'm leaking a variable here
+somehow. But
+um you don't use model output.
+Right. Hidden of
+Right. Hidden of
+T at
+Q. Oh, well, the model's going to
+Q. Oh, well, the model's going to
+change,
+right? Oh, that's really bad.
+right? Oh, that's really bad.
+Hang on.
+How are you supposed to back propagate
+How are you supposed to back propagate
+through the model
+through the model
+now? Like this thing here gets changed
+now? Like this thing here gets changed
+in place. That's the issue.
+Are you just
+screwed? I think the way this thing is
+screwed? I think the way this thing is
+written, you're just screwed.
+You can't back prop this forward pass,
+You can't back prop this forward pass,
+right?
+Can you clone a model?
+I do something like this.
+Okay. Like this technically runs
+Let before I run like this and track it,
+Let before I run like this and track it,
+let me just make sure I'm not being
+let me just make sure I'm not being
+stupid. Let me just make sure I'm not
+stupid. Let me just make sure I'm not
+being stupid here.
+The first of these is none.
+Yeah, I'm concerned that this is
+Yeah, I'm concerned that this is
+breaking our our linear layer.
+Oh no, that is getting
+framed. Weight is
+different. I guess we can run it.
+the way I did this makes
+sense. I think it does, right?
+We'll see if it trains and just trains
+We'll see if it trains and just trains
+slowly or
+slowly or
+whatever. But
+whatever. But
+um I think that this should make sense.
+This thing doesn't have any
+This thing doesn't have any
+nonlinearities in it at all.
+Right.
+Yeah. Not the narrative at all.
+The thing that's weird to me about this
+The thing that's weird to me about this
+model, right, is this predict
+here. The way that this thing is
+written, this model changes, right?
+The whole point of this is that the
+The whole point of this is that the
+model updates every
+step. Yeah, that's really wonky.
+So this guy seems to think that you can
+So this guy seems to think that you can
+parallelize this over time.
+Okay, I'm I'm going to have to like chat
+Okay, I'm I'm going to have to like chat
+through this one because this doesn't
+through this one because this doesn't
+make sense to
+make sense to
+me. Uh, this is going up. It is just
+me. Uh, this is going up. It is just
+going up incredibly slowly, it seems.
+going up incredibly slowly, it seems.
+So, here's what I'm going to do. I'm
+So, here's what I'm going to do. I'm
+going to set this to run for like way
+going to set this to run for like way
+longer. Yes. I'm going to give it a rel
+longer. Yes. I'm going to give it a rel
+as
+as
+well. We give it two relu
+well. We give it two relu
+maybe. I think it has a yellow already,
+maybe. I think it has a yellow already,
+doesn't
+it? I think it Yeah, it does have a
+it? I think it Yeah, it does have a
+yellow there. Okay. So, we're going to
+yellow there. Okay. So, we're going to
+give it an extra
+give it an extra
+[Music]
+yellow on the decoder, I guess.
+yellow on the decoder, I guess.
+Just give it an extra yellow on the
+decoder. And make sure I do that right.
+Just got to make sure I do the same
+Just got to make sure I do the same
+thing over
+here.
+Let's think 800 million step because why
+not? And then we will see what that
+not? And then we will see what that
+does. Let me make sure it
+does. Let me make sure it
+runs. And then uh the plan here, I'm
+runs. And then uh the plan here, I'm
+going to get breakfast. I'm going to get
+going to get breakfast. I'm going to get
+some exercise. I'm going to do a few
+some exercise. I'm going to do a few
+things.
+Um, I guess I don't
+have this. So, I'm guess they don't have
+have this. So, I'm guess they don't have
+it for everything.
+Whatever.
+Whatever.
+Okay. Should do
+Okay. Should do
+something. Oh, this model is tiny now.
+something. Oh, this model is tiny now.
+64k
+per. Do we have to scale it?
+You kind of
+You kind of
+can't. Okay. Well, we'll leave it alone
+can't. Okay. Well, we'll leave it alone
+for now. We'll see what this does. Um,
+for now. We'll see what this does. Um,
+I'm going to get some breakfast. I'm
+I'm going to get some breakfast. I'm
+going to get some exercise. Uh, then I
+going to get some exercise. Uh, then I
+will be back in the
+will be back in the
+probably early
+probably early
+afternoon, a couple hours, two, three
+afternoon, a couple hours, two, three
+hours. Uh, and then I will be
+hours. Uh, and then I will be
+doing maybe more on this. I've got a few
+doing maybe more on this. I've got a few
+other things to work on. We've got VRays
+other things to work on. We've got VRays
+to finish. We've got Diane to work on.
+to finish. We've got Diane to work on.
+We've got infrastructure to do. We've
+We've got infrastructure to do. We've
+got a lot a lot of things to do today.
+got a lot a lot of things to do today.
+So, uh, thanks for tuning into the
+So, uh, thanks for tuning into the
+morning
+morning
+session. All my stuff's at puffer.ai.
+session. All my stuff's at puffer.ai.
+This is all open source. If you'd like
+This is all open source. If you'd like
+to help me out for free, just start the
+to help me out for free, just start the
+repo. If you want to get involved with
+repo. If you want to get involved with
+development, join the Discord. And you
+development, join the Discord. And you
+can find more RL content from me on X as
+can find more RL content from me on X as
+well, offer.ai. So, thanks. So,
+
+Kind: captions
+Language: en
+We are live. Good
+morning. Heck of a
+weekend. I was uh I believe I had around
+weekend. I was uh I believe I had around
+10 hours 40 minutes streamed on
+Saturday and then on Sunday we ended up
+Saturday and then on Sunday we ended up
+with a whole bunch of issues to fix with
+with a whole bunch of issues to fix with
+the internet
+wiring. We at least have our cluster
+wiring. We at least have our cluster
+machines back up now. so we can get back
+machines back up now. so we can get back
+to doing some experiments. I'm going to
+to doing some experiments. I'm going to
+fix the last two that are still offline
+today. But I wanted to start my morning
+today. But I wanted to start my morning
+with um at least a little bit of dev and
+with um at least a little bit of dev and
+a little bit of
+research. So the plan for
+research. So the plan for
+today, I've got hour and a half now. Uh
+today, I've got hour and a half now. Uh
+I'm probably going to look at a new
+I'm probably going to look at a new
+paper I've been sent.
+paper I've been sent.
+to see if it's useful for
+to see if it's useful for
+RL uses test time training. So, we're
+RL uses test time training. So, we're
+going to look at that, possibly
+going to look at that, possibly
+implement
+implement
+it. And then after that, we've got stuff
+it. And then after that, we've got stuff
+to do on Vrace probably after
+to do on Vrace probably after
+breakfast. Got stuff to do on diversity
+breakfast. Got stuff to do on diversity
+is all you need. That
+is all you need. That
+algorithm, we got stuff to do on a bunch
+algorithm, we got stuff to do on a bunch
+of
+different Okay.
+Let's get the paper
+first. What on
+earth? People close weird stuff, man.
+earth? People close weird stuff, man.
+All right, let's go. So, let me go grab
+All right, let's go. So, let me go grab
+that paper
+that paper
+thing. Hang on. Let me not show too many
+DMs. Just grab this
+DMs. Just grab this
+paper.
+paper.
+Okay. Apparently, this is not the
+Okay. Apparently, this is not the
+original, but this has a clearer
+original, but this has a clearer
+description of the
+algorithm. So, it's this thing right
+algorithm. So, it's this thing right
+here. This is a supposed replacement for
+here. This is a supposed replacement for
+LSTMs. Oops, I also should have my chat
+LSTMs. Oops, I also should have my chat
+up. Morning
+up. Morning
+Fox.
+Fox.
+Um, so this thing is apparently like a
+Um, so this thing is apparently like a
+successor to LSTM sort of. A lot of
+successor to LSTM sort of. A lot of
+those have been tried.
+those have been tried.
+I've also looked into like state based
+I've also looked into like state based
+stuff like Mamba before and I didn't
+stuff like Mamba before and I didn't
+know if it would be useful, but this
+know if it would be useful, but this
+does seem like something that is
+does seem like something that is
+fundamentally different and hasn't
+fundamentally different and hasn't
+really been explored before because they
+really been explored before because they
+take gradient steps during the forward
+take gradient steps during the forward
+pass. It's kind of
+pass. It's kind of
+wonky. So, they've got this like input
+wonky. So, they've got this like input
+hidden output, right? But,
+hidden output, right? But,
+uh, they actually do gradient steps in
+uh, they actually do gradient steps in
+the forward pass. It's kind of weird.
+the forward pass. It's kind of weird.
+And this was used recently in I don't
+And this was used recently in I don't
+know if you've seen the Tom and Jerry
+know if you've seen the Tom and Jerry
+videos that have been going
+videos that have been going
+around. The videos are like I don't know
+around. The videos are like I don't know
+what the state of the art in video gen
+what the state of the art in video gen
+is like. They don't look good compared
+is like. They don't look good compared
+to the original cartoons at all. They
+to the original cartoons at all. They
+don't really make any sense. But I think
+don't really make any sense. But I think
+for a coming out of a model this is kind
+for a coming out of a model this is kind
+of insane. This is Nvidia
+of insane. This is Nvidia
+paper it seems. What's the Stanford
+paper it seems. What's the Stanford
+Nvidia? Oh, all the universities.
+Nvidia? Oh, all the universities.
+I guess it's just Nvidia and everyone
+I guess it's just Nvidia and everyone
+interning or
+whatever. Okay, let's see
+if I think they they're supposed to have
+if I think they they're supposed to have
+like a code block for this somewhere.
+like a code block for this somewhere.
+I was told there was like a very simple
+I was told there was like a very simple
+code
+block. The heck is this
+thing? Is this code on GitHub?
+Yeah. Okay. There's just a lot of stuff
+Yeah. Okay. There's just a lot of stuff
+in there. So, I don't know
+in there. So, I don't know
+where David got this. I don't know where
+where David got this. I don't know where
+this thing came from, but I was sent
+this thing came from, but I was sent
+this. This is like a lot easier,
+this. This is like a lot easier,
+right? I tried looking at this
+right? I tried looking at this
+yesterday, but I was like totally
+yesterday, but I was like totally
+exhausted. So, let me see what this is.
+exhausted. So, let me see what this is.
+They have
+Okay, so this thing has a persistent
+Okay, so this thing has a persistent
+task which has parameter
+KQB. This
+KQB. This
+[Music]
+is where's Q get
+is where's Q get
+used? Oh, it gets in there. Okay, so
+used? Oh, it gets in there. Okay, so
+this is this attention or is this not
+this is this attention or is this not
+attention?
+attention?
+I don't think this is attention though.
+I don't think this is attention though.
+Even though
+um really love the hustle, keep up and
+um really love the hustle, keep up and
+one day hi will it be achieved. Thank
+one day hi will it be achieved. Thank
+you. I mean my goal with puffer is quite
+you. I mean my goal with puffer is quite
+lofty, right? The the point of what I'm
+lofty, right? The the point of what I'm
+doing here is I saw what reinforcement
+doing here is I saw what reinforcement
+learning could do in 2019 and 2020. I
+learning could do in 2019 and 2020. I
+saw where it was going and then everyone
+saw where it was going and then everyone
+just stopped and started working on
+just stopped and started working on
+language models.
+language models.
+And like there's nobody doing this work
+And like there's nobody doing this work
+if I don't do it. So my hope is that I
+if I don't do it. So my hope is that I
+make reinforcement learning stable,
+make reinforcement learning stable,
+consistent, successful, and there's a
+consistent, successful, and there's a
+good chance we will need this on the
+good chance we will need this on the
+path to
+path to
+AGI. So I want to make sure we don't
+AGI. So I want to make sure we don't
+lose because we didn't actually do this
+lose because we didn't actually do this
+stuff.
+If you'd asked me a year ago, I didn't
+If you'd asked me a year ago, I didn't
+expect that to involve writing like
+expect that to involve writing like
+30,000 lines of C, but here we are. A
+30,000 lines of C, but here we are. A
+senior PhD thesis believe you're on the
+senior PhD thesis believe you're on the
+right path. Amongst the pioneers of RL
+right path. Amongst the pioneers of RL
+definitely agree. Thank you very
+definitely agree. Thank you very
+much. I mean, the progress has really
+much. I mean, the progress has really
+been there. I don't know if you've seen
+been there. I don't know if you've seen
+a lot of the stuff since the thesis
+a lot of the stuff since the thesis
+video, but
+video, but
+um I mean this is our 2 release and
+um I mean this is our 2 release and
+we're already way ahead of this in dev,
+we're already way ahead of this in dev,
+but like we've got all these
+but like we've got all these
+environments. They all run like a
+environments. They all run like a
+thousand plus times faster than
+thousand plus times faster than
+everything else out there. All these
+everything else out there. All these
+games and you can just train RL on these
+games and you can just train RL on these
+at like a thousand times the speed of
+at like a thousand times the speed of
+before. It's getting more stable and
+before. It's getting more stable and
+more consistent as well. We've run like
+more consistent as well. We've run like
+20 30,000 experiments in the last few
+20 30,000 experiments in the last few
+months. Um really really the pace of
+months. Um really really the pace of
+research is picking up because we can
+research is picking up because we can
+just do everything fast now.
+just do everything fast now.
+So currently we're the thing that we
+So currently we're the thing that we
+hadn't done in this release that we're
+hadn't done in this release that we're
+now doing in dev is we're going back to
+now doing in dev is we're going back to
+all the old algorithmic advancements
+all the old algorithmic advancements
+that weren't properly tested from like
+that weren't properly tested from like
+2015 through 2022ish.
+2015 through 2022ish.
+And um we are actually extensively
+And um we are actually extensively
+validating them and seeing what works
+validating them and seeing what works
+and seeing what doesn't. It's pretty
+cool. This is just one potential thing.
+cool. This is just one potential thing.
+I was just linked to this the other day.
+I was just linked to this the other day.
+This is like a much newer This just came
+This is like a much newer This just came
+out, right? I just saw this on Twitter.
+out, right? I just saw this on Twitter.
+Do I know any of these
+people? No.
+So they remake this learner single
+So they remake this learner single
+forward pass. That's kind of
+weird. And
+Starting from current
+pars and this has a loss.
+Do you actually train this layer like
+Do you actually train this layer like
+this? Hang on. Train view label
+view. They have out
+sequence and then they have
+task. Oh no, they use the task. This is
+task. Oh no, they use the task. This is
+just written weirdly as all. Yeah, this
+just written weirdly as all. Yeah, this
+is just written weirdly. So they
+is just written weirdly. So they
+optimize this boss here and then this is
+optimize this boss here and then this is
+just standard. This one is just
+just standard. This one is just
+standard. So I think you can kind of
+standard. So I think you can kind of
+just slot this in, can't you?
+I'm looking at this and this does look
+I'm looking at this and this does look
+obscenely
+slow. So, what is this thing supposed to
+slow. So, what is this thing supposed to
+do?
+do?
+Um, state train
+Train on token and then they
+predict. This is such a weird paper.
+predict. This is such a weird paper.
+Like how the heck did they come up with
+Like how the heck did they come up with
+this? This is like
+Like what's even the idea here, right?
+state
+state
+equals
+equals
+wait this
+is this is not the same as like the
+is this is not the same as like the
+state as it's defined in an LSTM right
+state as it's defined in an LSTM right
+so the state is this model okay and then
+I guess we could try
+this. There's no reason we can't try
+this. There's no reason we can't try
+this. But then if you're replacing the
+this. But then if you're replacing the
+LSTM
+And I guess it works as a drop in,
+And I guess it works as a drop in,
+doesn't
+it? Yeah, it
+it? Yeah, it
+should. Okay, we can just do this. I
+should. Okay, we can just do this. I
+don't see why
+not. We'll just do this.
+I think we just have to make a ttt
+I think we just have to make a ttt
+wrapper,
+wrapper,
+right? It shouldn't even be bad bad at
+right? It shouldn't even be bad bad at
+this.
+This LSTM. Okay, this doesn't need a
+This LSTM. Okay, this doesn't need a
+base class, so we don't need to
+I could just implement it the way that
+they have it
+here. Kind of don't want to though.
+Oh yeah. How do we do
+um it's supposed to be that the learner
+um it's supposed to be that the learner
+gets reset on each sequence,
+right? Yeah. On each sequence.
+right? Yeah. On each sequence.
+So I guess that's going to be
+like trajectory
+segment. I guess we'll have to do it
+segment. I guess we'll have to do it
+that way. Yeah.
+that way. Yeah.
+So let's not do task. Let's do solve.
+So let's not do task. Let's do solve.
+K
+parameter. Oh, it's just
+param. How does param get initialized by
+param. How does param get initialized by
+default? I don't see any sort of
+default? I don't see any sort of
+initialization. Is this pseudo code?
+Hang on. I think this is pseudo
+code. Yeah, you need to give it data.
+layer in
+it. Yeah. So our default is orthogonal
+it. Yeah. So our default is orthogonal
+and constant. I see.
+Is there no
+Is there no
+um initial orthogonal
+Yeah, it's kind of weird how this pie
+Yeah, it's kind of weird how this pie
+portrait does this, but it's no big
+portrait does this, but it's no big
+deal. It's just a little bit silly and
+deal. It's just a little bit silly and
+redundant. Okay.
+my own rule
+my own rule
+here. We never group that way. Do it
+here. We never group that way. Do it
+this
+way. Okay, that's
+way. Okay, that's
+fine. So, we have these parameters.
+fine. So, we have these parameters.
+Now we define forward which should be
+Now we define forward which should be
+the same as forward training.
+Define forward.
+Oh, I don't think you can. Wait. Yeah,
+Oh, I don't think you can. Wait. Yeah,
+you don't want to have That's
+sketchy. Talking with another student.
+sketchy. Talking with another student.
+Hopefully I can bring them on board. E
+Hopefully I can bring them on board. E
+code somewhere else, right?
+Okay, I think I know how you can do
+Okay, I think I know how you can do
+this.
+this.
+So state can
+be and one
+Hypo
+Hypo
+hyperothermia magnetic nano particle
+optimizations. Yep, that sounds like it
+optimizations. Yep, that sounds like it
+would be hard to run fast.
+I will tell you it is very hard to do RL
+I will tell you it is very hard to do RL
+with slow sims. It is much much much
+with slow sims. It is much much much
+easier when you have fast Sims.
+I almost don't know what to do with this
+I almost don't know what to do with this
+state thing here because
+um man
+How to
+How to
+simulate fluids like a
+circuit? I do not know about
+circuit? I do not know about
+that. Figuring out how to make Sims
+that. Figuring out how to make Sims
+really fast though is useful for a lot
+really fast though is useful for a lot
+of stuff.
+Hypothermia is good early cancer
+treatment
+particles. Man, sometimes I wish I had a
+particles. Man, sometimes I wish I had a
+physics background. Physics is cool.
+It's so much harder to just be like
+It's so much harder to just be like
+random indie physics researcher though.
+like random like AI is one of the only
+like random like AI is one of the only
+things where random indie researcher is
+things where random indie researcher is
+actually a legit thing to Okay.
+Ah, that's so unfortunate. I can't even
+Ah, that's so unfortunate. I can't even
+get rid of that bot cuz freaking reream
+get rid of that bot cuz freaking reream
+chat broke.
+now works. I still can't get rid of
+now works. I still can't get rid of
+it. If you have RL
+it. If you have RL
+background, well, there's no need to
+background, well, there's no need to
+pivot when I'm solving
+Laurel. Let me solve this deal first.
+Laurel. Let me solve this deal first.
+Thank you very much.
+What is
+F? Oh, model.
+Have you thought about the ethics of
+Have you thought about the ethics of
+popular being used in defense
+popular being used in defense
+sims? I
+sims? I
+mean, it's just standard dual use,
+mean, it's just standard dual use,
+right? There's no specific
+consideration. That's like
+consideration. That's like
+pretty as far as things that have dual
+pretty as far as things that have dual
+use go.
+use go.
+It's like pretty far out
+there. I'm also not inherently opposed
+there. I'm also not inherently opposed
+to defense work
+to defense work
+either. It depends what it's on, right?
+like from that one vine. Oh, wait. By
+like from that one vine. Oh, wait. By
+the way, the mug is amazing. It's
+the way, the mug is amazing. It's
+comically
+comically
+large. I have I published on X at one
+large. I have I published on X at one
+point. I was doing this thing. I came up
+point. I was doing this thing. I came up
+with a thousand calorie recipe where you
+with a thousand calorie recipe where you
+could make a mug this size of hot
+could make a mug this size of hot
+chocolate that had 1,000 calories and 70
+chocolate that had 1,000 calories and 70
+grams of protein.
+But for now, it's just T
+Okay. So, I just have to add to this the
+Okay. So, I just have to add to this the
+LSTM wrapper
+stuff. Probably should have thought
+stuff. Probably should have thought
+about that,
+huh? I mean, I can probably just copy.
+We'll clean it up if uh if this ends up
+We'll clean it up if uh if this ends up
+getting capped.
+There's like no way in hell this is
+There's like no way in hell this is
+going to be fast, right? I mean,
+actually, I take that back. So
+actually, I take that back. So
+theoretically,
+right, this could be made to be like
+right, this could be made to be like
+decently
+decently
+fast. It's one gradient
+step. Okay, it's technically possible
+step. Okay, it's technically possible
+that this thing could be
+made decently fastish.
+get the output of
+this. It's going to be something like
+this. It's going to be something like
+this, right?
+So any chance you can post
+So any chance you can post
+the See, everyone's like, "Oh, that's so
+the See, everyone's like, "Oh, that's so
+stupid." Actually, can I get the recipe
+stupid." Actually, can I get the recipe
+for that? Yeah, sure. I got you.
+I will say it was not the best on my
+I will say it was not the best on my
+stomach, but I have a very sensitive
+stomach, but I have a very sensitive
+stomach and it wasn't even that
+stomach and it wasn't even that
+bad. I actually might even start doing
+bad. I actually might even start doing
+that again. The the main reason I'm not
+that again. The the main reason I'm not
+at the moment is one, it's a lot of
+at the moment is one, it's a lot of
+heavy cream and uh two, I'm just not
+heavy cream and uh two, I'm just not
+training hard enough right now where
+training hard enough right now where
+it's not going to just make me fat. I've
+it's not going to just make me fat. I've
+been just doing a lot of work lately. I
+been just doing a lot of work lately. I
+you really kind of need to be like going
+you really kind of need to be like going
+to the gym and doing a hard hour and a
+to the gym and doing a hard hour and a
+half workout for it to make sense to be
+half workout for it to make sense to be
+having this thing. Let me find
+having this thing. Let me find
+it. Where's the search button on?
+it. Where's the search button on?
+Uh there's supposed to be a search
+Uh there's supposed to be a search
+button here, isn't
+there? There is one on the mobile app.
+Like cuz this just searches everyone's
+crap. The heck is
+it? Go find a thousand
+Wait, wait, wait. Does this thing
+Wait, wait, wait. Does this thing
+actually
+actually
+summarize? Oh, no. This was just some
+summarize? Oh, no. This was just some
+random post I
+made. Yeah, I can't find it either.
+made. Yeah, I can't find it either.
+Where the hell is
+Where the hell is
+it? Hang on. Maybe I can get it on my
+it? Hang on. Maybe I can get it on my
+phone. Let me find it. I swear the UI is
+phone. Let me find it. I swear the UI is
+different. Like there's
+a Yeah. So, when I click the search on
+a Yeah. So, when I click the search on
+my profile
+my profile
+here, it actually it gives you a
+here, it actually it gives you a
+different search. It lets me search my
+different search. It lets me search my
+posts.
+Okay. You know what I'm going to do? I'm
+Okay. You know what I'm going to do? I'm
+going to put it on the
+going to put it on the
+Discord. You can get it
+Discord. You can get it
+there. Here we
+go.
+go.
+Discord.gg/puffer. Where Where did it
+Discord.gg/puffer. Where Where did it
+go?
+And we get back to
+code. I don't know why my Discord is not
+code. I don't know why my Discord is not
+opening. Oh, cuz I'm
+opening. Oh, cuz I'm
+dumb. There you
+go. It's a whole thread. You scroll down
+go. It's a whole thread. You scroll down
+to the bottom of it. Scroll down to the
+to the bottom of it. Scroll down to the
+bottom of it. Like I did I made like
+bottom of it. Like I did I made like
+several versions of
+several versions of
+it. I was actually like seriously doing
+it. I was actually like seriously doing
+that for a while. It was pretty funny.
+that for a while. It was pretty funny.
+It did work. I will tell you it did
+It did work. I will tell you it did
+work. It's like the only thing I've ever
+work. It's like the only thing I've ever
+come up with to consistently put weight
+come up with to consistently put weight
+on without stuffing
+myself. Bananas, oats,
+myself. Bananas, oats,
+walnuts. I tried stuff like that and it
+walnuts. I tried stuff like that and it
+wasn't calorie dense enough, right?
+wasn't calorie dense enough, right?
+because like I'd make a 1,200 calorie
+because like I'd make a 1,200 calorie
+shake or whatever and then I would skip
+shake or whatever and then I would skip
+the next meal because I wouldn't be
+the next meal because I wouldn't be
+hungry enough. So, this is like I could
+hungry enough. So, this is like I could
+literally have this thing and then be
+literally have this thing and then be
+hungry in an hour and a
+half. So, I specifically made this
+half. So, I specifically made this
+recipe for people who it's like you have
+recipe for people who it's like you have
+trouble putting on weight because you
+trouble putting on weight because you
+don't have the
+don't have the
+appetite. I actually should totally
+appetite. I actually should totally
+start doing that again. I'm like six
+start doing that again. I'm like six
+pounds underweight right now. I'm trying
+pounds underweight right now. I'm trying
+to get back up to 190, but I will have
+to get back up to 190, but I will have
+to actually start like lifting way more
+to actually start like lifting way more
+seriously again. Otherwise, it just goes
+seriously again. Otherwise, it just goes
+on as
+fat. Very soon, very, very soon, we get
+fat. Very soon, very, very soon, we get
+to start that arc. But for now, we've
+to start that arc. But for now, we've
+got to make sure we get the puffer
+got to make sure we get the puffer
+update shipped. This next update is
+update shipped. This next update is
+going to be amazing, but uh it's a heck
+going to be amazing, but uh it's a heck
+of a lot of work.
+The only warning I will give you on that
+The only warning I will give you on that
+shake is I don't know. I I still could
+shake is I don't know. I I still could
+not find a verdict of whether having a
+not find a verdict of whether having a
+huge amount of heavy cream is terrible
+huge amount of heavy cream is terrible
+for you or
+for you or
+not. Like compared to other calorie
+not. Like compared to other calorie
+sources, I couldn't tell. So, you can go
+sources, I couldn't tell. So, you can go
+figure that out for yourself.
+figure that out for yourself.
+It was of all the things I could have
+It was of all the things I could have
+used though as the main calorie source.
+used though as the main calorie source.
+It was the best thing that I found for
+you. You're not going to make like a
+you. You're not going to make like a
+It's not like you're going to just drink
+It's not like you're going to just drink
+a bottle of olive oil,
+a bottle of olive oil,
+right? All right, enough on
+right? All right, enough on
+that. Keto that felt really
+that. Keto that felt really
+different. I've never really bought into
+different. I've never really bought into
+that stuff, honestly.
+that stuff, honestly.
+I don't know how the hell ke
+I don't know how the hell ke
+like do any elite athletes do
+like do any elite athletes do
+keto? I don't think so.
+Right. Carbs are just a really good fuel
+source. I don't know what that is.
+source. I don't know what that is.
+Caffeine's
+energy. To be fair, I'm not like I'm
+energy. To be fair, I'm not like I'm
+usually doing my cardio fasted these
+usually doing my cardio fasted these
+days just like out of convenience more
+days just like out of convenience more
+than anything. Coconut oil. Yeah, I
+than anything. Coconut oil. Yeah, I
+didn't try coconut oil.
+didn't try coconut oil.
+It's You do kind of need something if
+It's You do kind of need something if
+you're doing like a thousand calorie
+you're doing like a thousand calorie
+version, you need something that you can
+version, you need something that you can
+actually put into a beverage.
+actually put into a beverage.
+Um, I don't think you would want to just
+Um, I don't think you would want to just
+drink like 500 calories of coconut oil.
+drink like 500 calories of coconut oil.
+I think that would probably wreak havoc
+I think that would probably wreak havoc
+way more than the uh heavy
+cream. But yeah, I don't know. I So, I
+cream. But yeah, I don't know. I So, I
+had I was in the hospital for pneumonia
+had I was in the hospital for pneumonia
+at the start of the year. It like I lost
+at the start of the year. It like I lost
+like 18 pounds. It was really bad. And I
+like 18 pounds. It was really bad. And I
+couldn't train for like two months. So,
+couldn't train for like two months. So,
+I'm trying to get my body weight back
+I'm trying to get my body weight back
+up. Um, I developed that mug before that
+up. Um, I developed that mug before that
+from when I was trying to get from like
+from when I was trying to get from like
+175 up to 190 lbs. And I did. It worked.
+175 up to 190 lbs. And I did. It worked.
+Um, but I just I haven't been training
+Um, but I just I haven't been training
+hard enough to need it again yet. But I
+hard enough to need it again yet. But I
+think I will probably do some revisions
+think I will probably do some revisions
+on it the next time I try to uh really
+on it the next time I try to uh really
+get seriously back to that level.
+get seriously back to that level.
+But I can't I can't do that while I'm
+But I can't I can't do that while I'm
+working the hours that I'm working at
+working the hours that I'm working at
+the moment, right? Like I can't go do a
+the moment, right? Like I can't go do a
+two hour workout and then immediately be
+two hour workout and then immediately be
+back on it. It's going to take me like
+back on it. It's going to take me like
+another hour and a half to recover. So
+another hour and a half to recover. So
+it ends up being like four hours out of
+it ends up being like four hours out of
+my day. So I'm kind of just doing like
+my day. So I'm kind of just doing like
+I'm going for like a pretty decently
+I'm going for like a pretty decently
+good run a few times a week. I'm doing
+good run a few times a week. I'm doing
+some intervals. I'm getting my V2 max
+some intervals. I'm getting my V2 max
+back. I'm doing a 10K on the weekend.
+back. I'm doing a 10K on the weekend.
+And then I'm doing like a few lifting
+And then I'm doing like a few lifting
+sessions, mostly compounds throughout
+sessions, mostly compounds throughout
+the week.
+the week.
+Takes two weeks for your body to get
+Takes two weeks for your body to get
+back on
+back on
+it. Back on
+what? On like heavy exercise routine.
+what? On like heavy exercise routine.
+No. No. Cuz even when I was adapted, it
+No. No. Cuz even when I was adapted, it
+was still it was a part-time job. It was
+was still it was a part-time job. It was
+literally a part-time job. I mean, it
+literally a part-time job. I mean, it
+saved my life. Like I would have been
+saved my life. Like I would have been
+dead to pneumonia. So, it was absolutely
+dead to pneumonia. So, it was absolutely
+worth it, but it's literally a part-time
+worth it, but it's literally a part-time
+job. I was doing like depending on the
+job. I was doing like depending on the
+this like cycle I was doing anywhere
+this like cycle I was doing anywhere
+from like 25 to 45 miles a week and then
+from like 25 to 45 miles a week and then
+I was doing on top of that like probably
+I was doing on top of that like probably
+eight hours of mostly eight hours maybe
+eight hours of mostly eight hours maybe
+more like six hours worth of probably
+more like six hours worth of probably
+eight hours of like hard mostly heavy
+eight hours of like hard mostly heavy
+compound lifts powerlifting style
+compound lifts powerlifting style
+training. So it was it was literally a
+training. So it was it was literally a
+parttime job.
+Because it's not you can't just time all
+Because it's not you can't just time all
+the exercise together, right? You also
+the exercise together, right? You also
+have to time
+have to time
+like like the recovery like you just
+like like the recovery like you just
+move slower for the next hour and a half
+move slower for the next hour and a half
+after you finish like a hard
+workout. I am looking forward to getting
+workout. I am looking forward to getting
+back into that. But that will be the
+back into that. But that will be the
+goal is to ship one like to ship the
+goal is to ship one like to ship the
+next update first and then I get to take
+next update first and then I get to take
+a little bit of a taper back, you know,
+a little bit of a taper back, you know,
+get myself some fitness, get my head
+get myself some fitness, get my head
+clear, and then think about what to do
+clear, and then think about what to do
+next with
+next with
+puffer. Don't do much cardio trying to
+puffer. Don't do much cardio trying to
+do six
+do six
+days. Push below twice end of the day.
+days. Push below twice end of the day.
+So the thing that made it click for me
+So the thing that made it click for me
+with the cardio
+with the cardio
+um I didn't run at all. So, I hit I hit
+um I didn't run at all. So, I hit I hit
+my for plate deadlift for the first time
+my for plate deadlift for the first time
+two three years ago
+two three years ago
+and I realized I could not run a
+and I realized I could not run a
+mile and it only takes six months to
+mile and it only takes six months to
+train for a marathon at most. So, it's
+train for a marathon at most. So, it's
+like okay, I've trained to the point
+like okay, I've trained to the point
+where it takes I know it takes like the
+where it takes I know it takes like the
+average person who doesn't have who's
+average person who doesn't have who's
+not like genetically gifted as an
+not like genetically gifted as an
+athlete. It takes like two or three
+athlete. It takes like two or three
+years to hit a four plate deadlift if
+years to hit a four plate deadlift if
+you're like under 200 lb. It only takes
+you're like under 200 lb. It only takes
+six months to train for a marathon.
+six months to train for a marathon.
+you should probably just put in the
+you should probably just put in the
+investment and like get your health
+investment and like get your health
+where it needs to be. So, I did two
+where it needs to be. So, I did two
+marathons. I did a 50k. I have the
+marathons. I did a 50k. I have the
+article on the 50k, training for that
+article on the 50k, training for that
+and stuff on X. That was hard. It was
+and stuff on X. That was hard. It was
+kind of like a big personal
+kind of like a big personal
+accomplishment for me over the summer.
+accomplishment for me over the summer.
+And then, uh, I started doing, you know,
+And then, uh, I started doing, you know,
+trying to get my 5K time back better
+trying to get my 5K time back better
+because that's like way easier to train
+because that's like way easier to train
+for. It's like way less time to train
+for. It's like way less time to train
+for a good 5K. You still feel really
+for a good 5K. You still feel really
+good. you know, it's like you're not
+good. you know, it's like you're not
+going to be super out of breath during
+going to be super out of breath during
+your longer sets lifting. Um, and then I
+your longer sets lifting. Um, and then I
+got pneumonia.
+So, so I try to keep I try to keep the
+So, so I try to keep I try to keep the
+stuff I talk about on the stream and on
+stuff I talk about on the stream and on
+X almost all about just AI. That's what
+X almost all about just AI. That's what
+I do almost all of my time. But when I'm
+I do almost all of my time. But when I'm
+not doing AI, it's usually fitness stuff
+not doing AI, it's usually fitness stuff
+because it's really, really worth it.
+because it's really, really worth it.
+And I do try to get people around here
+And I do try to get people around here
+to make sure that they're staying in
+to make sure that they're staying in
+shape because, you know,
+shape because, you know,
+you spend 12 hours a day at your desk
+you spend 12 hours a day at your desk
+that you better be keeping in shape. And
+that you better be keeping in shape. And
+it was it was literally it was 10 hours
+it was it was literally it was 10 hours
+and 40 minutes streamed on
+Saturday. It was literally like get up,
+Saturday. It was literally like get up,
+stream breakfast, stream dinner, stream
+stream breakfast, stream dinner, stream
+bed.
+I will say that when I do resume that
+I will say that when I do resume that
+mug though, I am going to look a little
+mug though, I am going to look a little
+bit more seriously into
+bit more seriously into
+um cream versus other fat sources for
+um cream versus other fat sources for
+that because I don't know if that's
+that because I don't know if that's
+really bad for you long term or
+really bad for you long term or
+not. It's better than a lot of the other
+not. It's better than a lot of the other
+stuff, but might be able to do better
+still. Probably could be half cream,
+still. Probably could be half cream,
+half coconut oil or something like that.
+half coconut oil or something like that.
+That would also work and be less
+That would also work and be less
+terrible maybe. I don't
+know. Okay, let's actually let's
+know. Okay, let's actually let's
+actually do a little bit of depth here.
+actually do a little bit of depth here.
+Let's actually do a little bit of depth
+Let's actually do a little bit of depth
+here.
+here.
+Um, I'm like thinking about this thing
+Um, I'm like thinking about this thing
+and I'm a little sketched out with the
+and I'm a little sketched out with the
+way that this is supposed to work. It
+way that this is supposed to work. It
+seems like
+seems like
+it's I know what I'm going to do though.
+it's I know what I'm going to do though.
+I'm going to implement it. I'm going to
+I'm going to implement it. I'm going to
+get it to work in puffer.
+get it to work in puffer.
+If it gives us good like sample
+If it gives us good like sample
+efficiency
+efficiency
+performance, I will think about how fast
+performance, I will think about how fast
+I could theoretically make this
+thing and then we'll do the trade-offs
+thing and then we'll do the trade-offs
+for it. If it if the slow implementation
+for it. If it if the slow implementation
+done correctly isn't much better than
+done correctly isn't much better than
+what we have now, which is also faster,
+what we have now, which is also faster,
+then it's going to be a no.
+It does have the potential though to be
+It does have the potential though to be
+a substantially better I would
+a substantially better I would
+say and it doesn't have the
+say and it doesn't have the
+um it kind of has like a
+um it kind of has like a
+constant it has a constant cost to it.
+constant it has a constant cost to it.
+This is not like quadratic attention or
+This is not like quadratic attention or
+anything, but the fact that they say
+anything, but the fact that they say
+this is comparable to attention based
+this is comparable to attention based
+mechanisms is weird to me because it
+mechanisms is weird to me because it
+doesn't seem like it should be able to
+be. Uh, you put this in the wrong spot,
+be. Uh, you put this in the wrong spot,
+dummy. This goes
+here. This gets
+there.
+this. Yeah, like this.
+probably messed this up as well, didn't
+probably messed this up as well, didn't
+you? Yes.
+Self
+Self
+equals that's all I wanted to do. Now I
+equals that's all I wanted to do. Now I
+will be able to get this thing
+will be able to get this thing
+from
+from
+config. Uh we just use breakout as our
+config. Uh we just use breakout as our
+test here, right? That's the
+play. So we just put TTPT
+play. So we just put TTPT
+uh so that we don't have to deal with
+uh so that we don't have to deal with
+crazy state
+crazy state
+shenanigans. I'm going to make this one
+shenanigans. I'm going to make this one
+process.
+They should still absolutely train if we
+They should still absolutely train if we
+do this
+right. This is not going to run at all.
+right. This is not going to run at all.
+But we will uh you
+know
+change when we get to
+there. Oh, I guess you don't even need
+there. Oh, I guess you don't even need
+Hang
+Hang
+on. Yeah, you can actually be a little
+on. Yeah, you can actually be a little
+bit different with this. So this has got
+bit different with this. So this has got
+to be forward
+frame
+frame
+forward. For forward, you can kind of
+forward. For forward, you can kind of
+just take this piece, can't you?
+The only thing I don't know here is how
+The only thing I don't know here is how
+I'm going to get this
+I'm going to get this
+state. I mean, I can kind of just
+state. I mean, I can kind of just
+special case this initially, right?
+special case this initially, right?
+Like if I just do
+Like if I just do
+this, we'll just do like
+this, we'll just do like
+um initial was it was
+state we'll do like Yes.
+like that.
+Let's just
+Let's just
+do
+like thing is this needs to be
+like thing is this needs to be
+continually updated,
+right? So we can just do um
+right? So we can just do um
+[Music]
+And then if we just call it TTT
+state
+state then this is has observations.
+state then this is has observations.
+So I believe you just call
+So I believe you just call
+encode. Yeah, you literally just call
+encode. Yeah, you literally just call
+encode,
+encode,
+right? Like this. This gives you hidden
+right? Like this. This gives you hidden
+and then you call
+and then you call
+decode. This should be easy enough to
+decode. This should be easy enough to
+get working.
+like
+this cannot be multiplied.
+is the multiplication backwards.
+Wait, or does it just need a
+transpose? The multiplication seems
+transpose? The multiplication seems
+backwards to
+backwards to
+me. Maybe this is they did it for batch
+me. Maybe this is they did it for batch
+size
+one. I think they probably did it for
+one. I think they probably did it for
+batch size one, right? Because it
+batch size one, right? Because it
+doesn't make any sense.
+I don't know why I'm using the stupid
+I don't know why I'm using the stupid
+app symbol
+app symbol
+uh notation either. I really don't like
+it. Two
+devices. Okay.
+Is there a torch with Brad or something?
+Can you just do with torchenable
+Can you just do with torchenable
+grad? You probably can do torch
+grad? You probably can do torch
+with torch.
+Let me see what this uh needs to be
+Let me see what this uh needs to be
+fiddled with.
+So the task loss depends on
+So the task loss depends on
+K
+V. You're supposed to back propagate
+through graph function with respect to
+through graph function with respect to
+the first
+the first
+R which is model.
+So, are they only back propagating this
+So, are they only back propagating this
+linear layer? Is that the
+idea? I think that's what this is saying
+idea? I think that's what this is saying
+that you're only back propagating the
+that you're only back propagating the
+linear layer. That would make sense,
+linear layer. That would make sense,
+right? I think that's the point of this.
+So, can I just do like with enable
+So, can I just do like with enable
+grad like can I just do
+this because then the only thing that's
+this because then the only thing that's
+getting back is the linear layer, right?
+getting back is the linear layer, right?
+That should be the only thing that has
+That should be the only thing that has
+radiance.
+That does give you a valid output,
+That does give you a valid output,
+right? That kind of just
+runs. All right. I mean, we're happy
+runs. All right. I mean, we're happy
+with that. That does like that is valid
+with that. That does like that is valid
+code
+technically. And then we just have to
+technically. And then we just have to
+figure this out for
+uh for training. We also have to get
+uh for training. We also have to get
+the instantiation
+correct. Not really. This will update in
+correct. Not really. This will update in
+place,
+place,
+right? Yeah, this will update in place.
+right? Yeah, this will update in place.
+So, we don't even have to touch
+this.
+Okay. You know, I'm sort of warming up
+Okay. You know, I'm sort of warming up
+to this. This is not this is not
+to this. This is not this is not
+terrible. Like I've seen far far worse
+terrible. Like I've seen far far worse
+stuff. So let's just
+stuff. So let's just
+say we take this piece of
+say we take this piece of
+code, we replace this
+here like that.
+Maybe. And now all this needs
+Maybe. And now all this needs
+is
+is
+state.tt
+state. That's all this needs, right?
+And you just call in its
+state probably per sequence,
+right? So you probably do this
+right? So you probably do this
+like well this is already a sequence
+like well this is already a sequence
+model. So like you can do this
+model. So like you can do this
+here. Hang on. There's a bunch of messy
+here. Hang on. There's a bunch of messy
+code from me
+code from me
+yesterday. Probably like right here,
+yesterday. Probably like right here,
+right? Because it has to get reset every
+right? Because it has to get reset every
+sequence. Uh, and then this
+is and then this gets forward trained
+on like this.
+Okay. And then this works except that
+Okay. And then this works except that
+you're missing a for loop now.
+you're missing a for loop now.
+Right. So,
+Right. So,
+right. The only place that I expect this
+right. The only place that I expect this
+to get
+is right
+here. No attribute
+state. Oh, wait. Yeah, you already did
+state. Oh, wait. Yeah, you already did
+this.
+Yeah. So I think
+Yeah. So I think
+only the only place you need the for
+only the only place you need the for
+loop is on this model, right?
+Uh,
+what? How's this one time
+what? How's this one time
+step? Please
+explain. Okay, let me go figure that
+explain. Okay, let me go figure that
+out.
+All
+right. Oh, right. Here.
+rapper. There we
+go. Yeah. So, the thing that's going to
+go. Yeah. So, the thing that's going to
+kill the per here is that we need to
+kill the per here is that we need to
+write a for
+Don't we just have
+TT?
+So yeah, we don't use any of this. This
+So yeah, we don't use any of this. This
+is just for
+Oh, wait. But then we
+want look at the freaking code
+again. No, it is the way that this is
+again. No, it is the way that this is
+written. You do want this inside the
+written. You do want this inside the
+loop as well.
+So this is
+So this is
+now model of train
+view. Oh, but now this is really
+view. Oh, but now this is really
+awkward, isn't it?
+Because you need like a stop bra or
+Because you need like a stop bra or
+something.
+Does PyTorch have
+stopped? Is it just
+detach? Detach doesn't do in place.
+detach? Detach doesn't do in place.
+Right.
+New
+New
+tensor detached.
+tensor detached.
+Okay. Will never
+require. So this could just be detach
+require. So this could just be detach
+here,
+right? Train view. Detach.
+And it's train
+view of T specifically
+view of T specifically
+detach. And then this is model output
+detach. And then this is model output
+with test
+view. This is like
+dec. And then you zero grad step
+whatever. Uh something I I did something
+whatever. Uh something I I did something
+wrong
+here. Train view. This is supposed to be
+here. Train view. This is supposed to be
+label
+view. Yeah, this is label view.
+I messed it
+I messed it
+up. I must have messed up up top then.
+up. I must have messed up up top then.
+Right. So this
+is All right. So now we
+have test view.
+or actually it should just be
+this not something like this
+this not something like this
+thing. Okay. Okay. And then you just do
+thing. Okay. Okay. And then you just do
+hidden equals to forge step
+hidden. No weird model. No weird weird
+model. It does run
+Oh, is that how it
+works? Yes, it is.
+trying to backward through a graph a
+trying to backward through a graph a
+second time.
+Really?
+Can you not like detach it here? Does it
+Can you not like detach it here? Does it
+have to be something else?
+I thought
+I thought
+like surely model output should require
+like surely model output should require
+a gradient,
+right? Yeah, this requires a
+gradient. Yeah, that works.
+Okay. So,
+Okay. So,
+um Oh, you
+um Oh, you
+[ __ ]
+[ __ ]
+Uh yeah,
+Uh yeah,
+[ __ ] All right.
+Yeah, now we just get some reshape
+bugs.
+Shape. Yeah, I don't know about that one
+Shape. Yeah, I don't know about that one
+here. I don't know about that shape.
+here. I don't know about that shape.
+That seems a little
+wrong. That still seems a little
+wrong. This
+is still wrong.
+Oh, no. Is
+it? I think that it is correct now,
+it? I think that it is correct now,
+right? Yeah. No, I think this is
+right? Yeah. No, I think this is
+correct. It just so happens that both
+correct. It just so happens that both
+dims are 128. I thought it was like some
+dims are 128. I thought it was like some
+weird matrix bug.
+Time
+Time
+batch
+samples. One of these. What does it say?
+samples. One of these. What does it say?
+Been modified by an in place operation.
+Porch. Auto grad.
+It's saying that it's like one of these,
+right? This
+right? This
+gets train
+view
+view
+train. This can just
+train. This can just
+be attached train of h that's probably
+be attached train of h that's probably
+faster as well.
+You zero the gradient
+here.
+Steps test
+view hidden of
+T at Q.
+And then it's linear. Is this this is
+And then it's linear. Is this this is
+correct?
+Right. When we append
+this, I don't do any in place
+this, I don't do any in place
+ops unless I'm leaking a variable here
+ops unless I'm leaking a variable here
+somehow. But
+um you don't use model output.
+Right. Hidden of
+Right. Hidden of
+T at
+Q. Oh, well, the model's going to
+Q. Oh, well, the model's going to
+change,
+right? Oh, that's really bad.
+right? Oh, that's really bad.
+Hang on.
+How are you supposed to back propagate
+How are you supposed to back propagate
+through the model
+through the model
+now? Like this thing here gets changed
+now? Like this thing here gets changed
+in place. That's the issue.
+Are you just
+screwed? I think the way this thing is
+screwed? I think the way this thing is
+written, you're just screwed.
+You can't back prop this forward pass,
+You can't back prop this forward pass,
+right?
+Can you clone a model?
+I do something like this.
+Okay. Like this technically runs
+Let before I run like this and track it,
+Let before I run like this and track it,
+let me just make sure I'm not being
+let me just make sure I'm not being
+stupid. Let me just make sure I'm not
+stupid. Let me just make sure I'm not
+being stupid here.
+The first of these is none.
+Yeah, I'm concerned that this is
+Yeah, I'm concerned that this is
+breaking our our linear layer.
+Oh no, that is getting
+framed. Weight is
+different. I guess we can run it.
+the way I did this makes
+sense. I think it does, right?
+We'll see if it trains and just trains
+We'll see if it trains and just trains
+slowly or
+slowly or
+whatever. But
+whatever. But
+um I think that this should make sense.
+This thing doesn't have any
+This thing doesn't have any
+nonlinearities in it at all.
+Right.
+Yeah. Not the narrative at all.
+The thing that's weird to me about this
+The thing that's weird to me about this
+model, right, is this predict
+here. The way that this thing is
+written, this model changes, right?
+The whole point of this is that the
+The whole point of this is that the
+model updates every
+step. Yeah, that's really wonky.
+So this guy seems to think that you can
+So this guy seems to think that you can
+parallelize this over time.
+Okay, I'm I'm going to have to like chat
+Okay, I'm I'm going to have to like chat
+through this one because this doesn't
+through this one because this doesn't
+make sense to
+make sense to
+me. Uh, this is going up. It is just
+me. Uh, this is going up. It is just
+going up incredibly slowly, it seems.
+going up incredibly slowly, it seems.
+So, here's what I'm going to do. I'm
+So, here's what I'm going to do. I'm
+going to set this to run for like way
+going to set this to run for like way
+longer. Yes. I'm going to give it a rel
+longer. Yes. I'm going to give it a rel
+as
+as
+well. We give it two relu
+well. We give it two relu
+maybe. I think it has a yellow already,
+maybe. I think it has a yellow already,
+doesn't
+it? I think it Yeah, it does have a
+it? I think it Yeah, it does have a
+yellow there. Okay. So, we're going to
+yellow there. Okay. So, we're going to
+give it an extra
+give it an extra
+[Music]
+yellow on the decoder, I guess.
+yellow on the decoder, I guess.
+Just give it an extra yellow on the
+decoder. And make sure I do that right.
+Just got to make sure I do the same
+Just got to make sure I do the same
+thing over
+here.
+Let's think 800 million step because why
+not? And then we will see what that
+not? And then we will see what that
+does. Let me make sure it
+does. Let me make sure it
+runs. And then uh the plan here, I'm
+runs. And then uh the plan here, I'm
+going to get breakfast. I'm going to get
+going to get breakfast. I'm going to get
+some exercise. I'm going to do a few
+some exercise. I'm going to do a few
+things.
+Um, I guess I don't
+have this. So, I'm guess they don't have
+have this. So, I'm guess they don't have
+it for everything.
+Whatever.
+Whatever.
+Okay. Should do
+Okay. Should do
+something. Oh, this model is tiny now.
+something. Oh, this model is tiny now.
+64k
+per. Do we have to scale it?
+You kind of
+You kind of
+can't. Okay. Well, we'll leave it alone
+can't. Okay. Well, we'll leave it alone
+for now. We'll see what this does. Um,
+for now. We'll see what this does. Um,
+I'm going to get some breakfast. I'm
+I'm going to get some breakfast. I'm
+going to get some exercise. Uh, then I
+going to get some exercise. Uh, then I
+will be back in the
+will be back in the
+probably early
+probably early
+afternoon, a couple hours, two, three
+afternoon, a couple hours, two, three
+hours. Uh, and then I will be
+hours. Uh, and then I will be
+doing maybe more on this. I've got a few
+doing maybe more on this. I've got a few
+other things to work on. We've got VRays
+other things to work on. We've got VRays
+to finish. We've got Diane to work on.
+to finish. We've got Diane to work on.
+We've got infrastructure to do. We've
+We've got infrastructure to do. We've
+got a lot a lot of things to do today.
+got a lot a lot of things to do today.
+So, uh, thanks for tuning into the
+So, uh, thanks for tuning into the
+morning
+morning
+session. All my stuff's at puffer.ai.
+session. All my stuff's at puffer.ai.
+This is all open source. If you'd like
+This is all open source. If you'd like
+to help me out for free, just start the
+to help me out for free, just start the
+repo. If you want to get involved with
+repo. If you want to get involved with
+development, join the Discord. And you
+development, join the Discord. And you
+can find more RL content from me on X as
+can find more RL content from me on X as
+well, offer.ai. So, thanks. So,

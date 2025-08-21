@@ -1,0 +1,5125 @@
+Kind: captions
+Language: en
+okay we are back
+live it has been a heck of a few days
+live it has been a heck of a few days
+here Pokemon result is finally
+here Pokemon result is finally
+out we've got The Hacker News
+out we've got The Hacker News
+Post and it is also on X right
+Post and it is also on X right
+now so come check this
+now so come check this
+out I'll answer some questions on here
+out I'll answer some questions on here
+probably if people jump in but um for
+probably if people jump in but um for
+the
+the
+meantime we have two main things that we
+meantime we have two main things that we
+need to catch up on
+need to catch up on
+today a little bit of porting
+work or some
+work or some
+collaborators and we need to oops let's
+collaborators and we need to oops let's
+not lead to
+not lead to
+that hang on let me just flip this so I
+that hang on let me just flip this so I
+can move
+that close all the boring
+that close all the boring
+windows and and
+windows and and
+there
+there
+so the other thing we had to do is look
+so the other thing we had to do is look
+at the new oblations and figure out what
+at the new oblations and figure out what
+is going on with
+these actually I'm just drop one thing
+these actually I'm just drop one thing
+in Discord as well
+let me just drop this
+in so I figure this is funny this has
+in so I figure this is funny this has
+been taking up a lot of spare time
+been taking up a lot of spare time
+lately but we finally got this put
+lately but we finally got this put
+together
+together
+so cluster garage gym setup happy with
+so cluster garage gym setup happy with
+this anyways what we're going to do
+this anyways what we're going to do
+today uh first thing is going to be to
+today uh first thing is going to be to
+figure out some stuff with the
+figure out some stuff with the
+experiments that I haven't had time to
+experiments that I haven't had time to
+do lately and then after that we're
+do lately and then after that we're
+going to have to do some porting of some
+going to have to do some porting of some
+of the optimizations we came up
+of the optimizations we came up
+with so let me see here we
+with so let me see here we
+have this is the current
+have this is the current
+best parito front on breakout right
+and not sure what this is I think I was
+and not sure what this is I think I was
+just testing some stuff here close
+this this 200 run is our best and then
+this this 200 run is our best and then
+187 okay so this is I think before we
+187 okay so this is I think before we
+made the perk
+made the perk
+enhancements we were at 200
+seconds for
+seconds for
+solve now
+and now
+what we've got these
+runs okay so these run this is a 180ish
+runs okay so these run this is a 180ish
+I
+I
+believe and then
+these ones are 220 is there any
+these ones are 220 is there any
+difference between these I thought I
+difference between these I thought I
+literally just ran the same
+literally just ran the same
+thing uh the same thing
+twice let me go double check on that
+I believe this
+I believe this
+is oh this is still going
+hang on if this is still going it
+hang on if this is still going it
+shouldn't be right I
+uh
+okay how is this possible it gets up to
+okay how is this possible it gets up to
+like
+800 800
+cost this one's also
+it's up to 800
+it's up to 800
+cost and this one's
+cheaper maybe it just takes a while
+cheaper maybe it just takes a while
+longer I mean it's not fully optimized
+longer I mean it's not fully optimized
+yet but then why are these qualitatively
+yet but then why are these qualitatively
+different they are qualitatively
+different they are qualitatively
+different
+right visualizing the wrong ones this is
+right visualizing the wrong ones this is
+our previous best this is with 187
+our previous best this is with 187
+samples okay so this has had more time
+samples okay so this has had more time
+to
+to
+optimize so now the difference that
+optimize so now the difference that
+we're interested in here is the 118
+we're interested in here is the 118
+versus 127 so with
+versus 127 so with
+118 we're getting some solves in the
+118 we're getting some solves in the
+180s and then here we're at
+250 that does seem odd
+okay is there any
+difference
+difference
+here your branch is
+ahead by two
+commits oh this is not autoscaled
+commits oh this is not autoscaled
+okay this is with a manual scale
+okay this is with a manual scale
+so this actually does have some
+so this actually does have some
+substantial sweep differences
+cool already up to
+date put this
+here put this somewhere can get to it
+all
+right no I have this Auto SK
+I'm
+confused what is in Dev right
+confused what is in Dev right
+now I think we're going to want to have
+now I think we're going to want to have
+Auto scale in Dev
+okay we do have Auto scale in depth
+right oh I see it just it's gotten desin
+so we're solving but it's taking way too
+so we're solving but it's taking way too
+long
+silly yes I did just delete the repo and
+silly yes I did just delete the repo and
+reclone it instead of bothering with
+it we
+will leave
+will leave
+that and otherwise we'll just delete all
+that and otherwise we'll just delete all
+these scale terms
+now we still have some issues here
+now we still have some issues here
+right I want to see not this one this
+right I want to see not this one this
+one got screwed up
+one got screwed up
+right we have
+187 aut scale P30 okay so we want
+187 aut scale P30 okay so we want
+this there one
+this there one
+comparison it's the other comparison
+comparison it's the other comparison
+here right
+I believe this was
+I believe this was
+pre optimization though wasn't it so we
+pre optimization though wasn't it so we
+have was it 192 is
+here about
+here there we go so slightly slightly
+here there we go so slightly slightly
+faster but it's also fewer runs so we
+faster but it's also fewer runs so we
+expect this to come down even
+expect this to come down even
+more
+and we go
+and we go
+to think
+to think
+sample I want to see what the SPs is
+sample I want to see what the SPs is
+looking
+looking
+like yeah okay so there's this massive
+like yeah okay so there's this massive
+Gap
+Gap
+essentially I want to understand why so
+essentially I want to understand why so
+we have mini batch of 8192 here this
+we have mini batch of 8192 here this
+thing is still using two small mini
+thing is still using two small mini
+batches uh which is further slowing it
+batches uh which is further slowing it
+down five I think what's Just Happening
+down five I think what's Just Happening
+generally is that there is more
+generally is that there is more
+overhead in the new algorithm Branch
+overhead in the new algorithm Branch
+because it's not as well
+because it's not as well
+optimized which is then preventing the
+optimized which is then preventing the
+algorithm from taking advantage
+algorithm from taking advantage
+of larger batch sizes and stuff because
+of larger batch sizes and stuff because
+they're they cost more and then the the
+they're they cost more and then the the
+smaller batch sizes are also slower in
+smaller batch sizes are also slower in
+wall clock so you're kind of just
+wall clock so you're kind of just
+screwed on multiple different angles
+screwed on multiple different angles
+when you have
+that so I think what we want to do
+that so I think what we want to do
+here is we want to actually evaluate
+here is we want to actually evaluate
+speed differences
+speed differences
+with some reasonable
+with some reasonable
+settings yeah let's do
+settings yeah let's do
+that I want to do this on
+that I want to do this on
+zero on my local I think we'll do this
+zero on my local I think we'll do this
+on my local so I can play with
+it by the window
+Bel so no Cuda GPU is available lovely I
+Bel so no Cuda GPU is available lovely I
+got to reboot my container I guess
+happens once in a while
+okayer break down mode
+train okay so here we have our default
+train okay so here we have our default
+puffer breakout parameters here uh these
+puffer breakout parameters here uh these
+are not the parameters that I think we
+are not the parameters that I think we
+want
+want
+so what we should do
+here there a few things we should
+do first thing I think we want
+is did I already do
+is did I already do
+it I think I might have already done it
+that
+size
+size
+gamma yeah I think we need to combon all
+gamma yeah I think we need to combon all
+this this
+this this
+slower then we do these
+ones what happens when we do this
+yeah this is still nowhere near as fast
+yeah this is still nowhere near as fast
+though
+though
+as as we're expecting
+as as we're expecting
+right we're expecting even
+right we're expecting even
+faster or are we
+faster or are we
+not I think we should
+not I think we should
+be we take like
+21414 let's try
+21414 I really have to make uh
+21414 I really have to make uh
+a better way of copying hyper
+a better way of copying hyper
+parameters rather than having to do it
+manually how is this one hang I'm
+manually how is this one hang I'm
+confused here so this is
+confused here so this is
+seconds
+right oh it is almost a million SPS
+but
+but
+then something doesn't add up here
+then something doesn't add up here
+because if you can
+get how about 21536
+it's a bit faster right and it probably
+it's a bit faster right and it probably
+has more
+has more
+M only 48
+M look
+M look
+like oh
+yeah very clean
+ah it runs for more steps I
+ah it runs for more steps I
+see I thought I said a Max
+see I thought I said a Max
+though maybe these are eval
+though maybe these are eval
+steps okay maybe it's slightly different
+steps okay maybe it's slightly different
+well this is fine
+though this is 106
+mil 1024m
+this is not the previous run though I
+this is not the previous run though I
+think this is a new one so we'll just
+think this is a new one so we'll just
+copy
+copy
+these these
+these these
+parameters this should give us 94
+parameters this should give us 94
+seconds is it 94 seconds all the other
+seconds is it 94 seconds all the other
+one's kind of better isn't it though
+one's kind of better isn't it though
+yeah
+yeah
+84 I think we'll do this one
+84 I think we'll do this one
+instead this one's pretty
+instead this one's pretty
+cool and will'll also let us test
+cool and will'll also let us test
+overhead a lot better
+overhead a lot better
+26 we'll give it 130
+mil so this should be sub 992
+solve luckily this learning rate doesn't
+solve luckily this learning rate doesn't
+matter this is just whatever should
+matter this is just whatever should
+double check on that at some point
+double check on that at some point
+though
+okay larger bat size which is you would
+okay larger bat size which is you would
+expect a larger batch size
+right 32
+Horizon entropy
+is higher just a little bit higher it's
+is higher just a little bit higher it's
+pretty close to default
+actually we do need
+Lambda surprisingly pretty close to what
+Lambda surprisingly pretty close to what
+you would
+you would
+expect uh by
+defaults learning
+defaults learning
+rate o6
+mini batch
+size and I can confirm that these are
+size and I can confirm that these are
+way closer to Hardware optimal
+settings but two update EPO is wipes get
+settings but two update EPO is wipes get
+slowed
+down two update EPO is why I just
+down two update EPO is why I just
+slowed let's do get rid of this
+248 okay so let's see what this
+does
+e e
+very smooth
+very smooth
+learning very smooth
+learning 1.1
+mil just a little tiny bit slower than
+mil just a little tiny bit slower than
+anticipated but still very
+good definitely within what we would
+good definitely within what we would
+expect
+all right
+all right
+perfect now we can compare this
+one uh oh are we going to have uh
+one uh oh are we going to have uh
+instability
+here okay it's
+here okay it's
+good why is it so much longer
+this is two minutes now
+right maybe I gave it too many
+right maybe I gave it too many
+steps hang on yeah I think I gave it too
+steps hang on yeah I think I gave it too
+many
+many
+steps maybe it wasn't
+uh 126 but yeah this this is not going
+uh 126 but yeah this this is not going
+to
+be yeah it's 100 Mil not 130 mil that's
+be yeah it's 100 Mil not 130 mil that's
+why it does solve you can
+why it does solve you can
+see then we
+see then we
+will do one more just to see if uh we
+will do one more just to see if uh we
+get
+confirmation
+confirmation
+so okay we did this this gives
+us so yep solved
+us so yep solved
+here and then we'll see if this makes
+here and then we'll see if this makes
+any
+any
+difference there is expected to be a
+difference there is expected to be a
+little bit of instability so if it
+little bit of instability so if it
+doesn't fully solve if it gets stuck
+doesn't fully solve if it gets stuck
+like somewhere it's within a
+reason we'll end up having to do like
+reason we'll end up having to do like
+average or
+average or
+something ex seed average
+and see the amount of
+variance this is my better this is a lot
+variance this is my better this is a lot
+closer to the original solve time
+closer to the original solve time
+there's a slight difference in
+there's a slight difference in
+the the train speed I believe
+here
+so we also actually have decent uh en
+so we also actually have decent uh en
+overhead now it's worth fixing
+definitely going to be worth
+fixing this
+one 1100 okay yeah so there's like a 10%
+one 1100 okay yeah so there's like a 10%
+speed difference or whatever no big deal
+speed difference or whatever no big deal
+I think my single cor slightly slower
+I think my single cor slightly slower
+here multicore slightly faster than the
+here multicore slightly faster than the
+other machine something like that so
+other machine something like that so
+very very close in terms of
+very very close in terms of
+time
+841 856 okay very very
+841 856 okay very very
+simpar very very similar
+simpar very very similar
+here now if I do if I do nothing
+here now if I do if I do nothing
+but
+but
+train.
+train.
+p3o
+p3o
+through what
+happens okay so what happens is that the
+happens okay so what happens is that the
+speed takes a
+speed takes a
+25 plus almost 30%
+25 plus almost 30%
+haircut this is 27%
+Miss so that's all of the overhead right
+Miss so that's all of the overhead right
+there is probably in
+there is probably in
+MK so we need to make that thing
+MK so we need to make that thing
+faster but I want to see how the
+faster but I want to see how the
+learning curves themselves compare I
+learning curves themselves compare I
+these hyper parameters are not optimized
+these hyper parameters are not optimized
+for this they're optimized for po not
+for this they're optimized for po not
+this
+this
+algorithm I want to
+algorithm I want to
+see how they
+compare little bit of
+instability for
+that jump at the end
+okay so there is some
+instability but without even like
+instability but without even like
+retuning the hyper
+retuning the hyper
+parameters I mean this to me is
+parameters I mean this to me is
+potential right this is massive massive
+potential right this is massive massive
+potential
+oh yeah that is massive massive
+oh yeah that is massive massive
+potential right so in
+samples again little bit of weirdness
+samples again little bit of weirdness
+but it looks like especially if we were
+but it looks like especially if we were
+to retune parameters we are on par with
+to retune parameters we are on par with
+GPO but we are taking
+GPO but we are taking
+a 21% compute
+a 21% compute
+there hang on forward Ming
+mostly looks like the haircut is
+in MK right
+here this is very very good like
+here this is very very good like
+promising good
+news e
+there's so much potential with
+there's so much potential with
+this I was starting to get worried that
+this I was starting to get worried that
+like maybe I had it wrong maybe this new
+like maybe I had it wrong maybe this new
+algorithm wasn't like all I thought it
+algorithm wasn't like all I thought it
+was but actually I really like this is
+was but actually I really like this is
+this is worth pursuing this is really
+this is worth pursuing this is really
+really strong evidence for
+it this isn't even using gamma and
+it this isn't even using gamma and
+Lambda so this is two hyper Prem is
+Lambda so this is two hyper Prem is
+totally ignored and there there's
+totally ignored and there there's
+several things I think that we could
+several things I think that we could
+improve as well so the first thing then
+improve as well so the first thing then
+with this m I want to
+do I'm going to leave myself a good hour
+do I'm going to leave myself a good hour
+and a half for porting work so I'm going
+and a half for porting work so I'm going
+to do this for another hour and a half
+to do this for another hour and a half
+and then I'll leave the time after that
+and then I'll leave the time after that
+for porting
+work actually let me send the quick
+thing e
+be major if we get this to
+work let's go figure out where to be
+work let's go figure out where to be
+slow down
+slow down
+this 28% is a lot
+Neptune
+off five so we're leaking about 8% of
+off five so we're leaking about 8% of
+the compute
+here we
+leaking none of the confute
+here pretty cool to see you have this
+here pretty cool to see you have this
+much promise doesn't it add a new
+much promise doesn't it add a new
+parameter Net One nope so at the moment
+parameter Net One nope so at the moment
+kind of because it sort of is a hyper
+kind of because it sort of is a hyper
+parameter but um longer term uh you just
+parameter but um longer term uh you just
+set that to your hidden size and you're
+done it's not like like it so once we
+done it's not like like it so once we
+fix a couple weird things with how we're
+fix a couple weird things with how we're
+calculating Horizons it should end up
+calculating Horizons it should end up
+being the case that more will be
+being the case that more will be
+strictly
+strictly
+better and uh in practice you'll just
+better and uh in practice you'll just
+set it to whatever your hidden size is
+set it to whatever your hidden size is
+so at the moment there's a quirk with it
+so at the moment there's a quirk with it
+where you need to set it small because I
+where you need to set it small because I
+haven't done masking fully correctly but
+haven't done masking fully correctly but
+uh that will go away
+it's pretty cool
+what would
+happen um it would just work slightly
+happen um it would just work slightly
+better or the same no difference
+and we're leaking just a little bit of
+and we're leaking just a little bit of
+per here a little bit of per there a
+per here a little bit of per there a
+little bit of per everywhere that very
+little bit of per everywhere that very
+obnoxious
+we just need to make it like 30%
+we just need to make it like 30%
+faster actually you know there's
+faster actually you know there's
+something I want to check as well
+something I want to check as well
+because we might even have to I want to
+because we might even have to I want to
+see how much more we have to optimize it
+see how much more we have to optimize it
+than I currently think
+than I currently think
+so if I
+so if I
+do that P3
+do that P3
+Horizon how much lower does it get if I
+Horizon how much lower does it get if I
+do this
+in theory it really shouldn't have much
+effect practice has a massive
+effect practice has a massive
+effect is it all in misk
+though it looks to me like it is all a
+MK you see that mass of MK overhead
+let's optimize for this
+let's optimize for this
+case and then we'll go from
+case and then we'll go from
+there we don't want to do little
+there we don't want to do little
+optimizations if we need to do big
+optimizations if we need to do big
+optimizations
+first how much of it is right here
+there it is right
+here no 10% is in here
+here no 10% is in here
+okay how about
+here just like leaks a little bit of per
+here just like leaks a little bit of per
+here a little bit of per there a little
+here a little bit of per there a little
+bit of per
+bit of per
+everywhere really
+obnoxious and then how about this block
+is this one longer as
+well no this one's actually fine okay so
+well no this one's actually fine okay so
+this loss you know maybe we can compile
+this loss you know maybe we can compile
+this to make it a little bit
+this to make it a little bit
+faster but it looks like we are mainly
+faster but it looks like we are mainly
+leaking perf
+think we're mainly leaking perf in
+here hang on how is this not all of
+here hang on how is this not all of
+it how is this not all of it where are
+it how is this not all of it where are
+we leaking 20% additional per
+did that barely adds
+anything where's the other 15%
+there it
+is that should not take any time so
+is that should not take any time so
+let's figure out what's
+wrong buffer is going to e even faster
+wrong buffer is going to e even faster
+isn't that crazy
+yeah okay so somehow this stupid block
+yeah okay so somehow this stupid block
+of code that should not be taking up
+of code that should not be taking up
+anything is taking up
+anything is taking up
+133% that is a lot
+see if it's in
+here oh yeah there it is
+values mean
+I don't know if you saw on Discord but I
+I don't know if you saw on Discord but I
+tried
+tried
+TCH 2.6 and I get a 60k speed
+up already did it my
+up already did it my
+friend uh did you change anything on the
+friend uh did you change anything on the
+box I didn't change anything on any of I
+box I didn't change anything on any of I
+don't think I changed anything on box
+don't think I changed anything on box
+two or anything for you but I did ship I
+two or anything for you but I did ship I
+shipped like a Dev uh new Dev build
+shipped like a Dev uh new Dev build
+puffer tank files for uh torch
+26 I think that that's specific though
+26 I think that that's specific though
+to action sampling so that's not going
+to action sampling so that's not going
+to be across everything that's just
+to be across everything that's just
+going to be across like specific types
+going to be across like specific types
+of
+ends for
+any reason not to merge what PR yeah the
+any reason not to merge what PR yeah the
+reason not to merge a PR is I haven't
+reason not to merge a PR is I haven't
+seen a PR oh look at
+this this is doing
+this this is doing
+okay for
+let me get that PR open
+does this
+work pad wait what the hell
+does this help with your thing
+I'm sketched merging that into
+I'm sketched merging that into
+2 if you merge if you do it to Dev I'll
+2 if you merge if you do it to Dev I'll
+PR if you do it to Dev I'll merge it
+PR if you do it to Dev I'll merge it
+instantly
+generally merging stuff just like YOLO
+generally merging stuff just like YOLO
+merging stuff to the main branch just
+merging stuff to the main branch just
+makes my life hard because inevitably
+makes my life hard because inevitably
+there's like some case where it crashes
+there's like some case where it crashes
+an M or something and then I have to
+an M or something and then I have to
+stop what I'm doing and like go fix 20
+stop what I'm doing and like go fix 20
+frantically before like it impacts
+frantically before like it impacts
+somebody who really should not be
+somebody who really should not be
+impacted by it
+hang on
+we've got lots of cool discussion in
+we've got lots of cool discussion in
+group chats now private group Chats on
+Pokemon e
+I'll leave set up to reply to some
+people e
+just juggling things with all the the
+just juggling things with all the the
+release stuff it's cool I think the post
+release stuff it's cool I think the post
+will at least do pretty well for Pokemon
+will at least do pretty well for Pokemon
+which is nice to see I think
+which is nice to see I think
+uh that guy will
+uh that guy will
+have see the problem is now even though
+have see the problem is now even though
+I have his name and it's all public like
+I have his name and it's all public like
+it's still going to be that guy forever
+it's still going to be that guy forever
+cuz it's what the freaking Discord is
+cuz it's what the freaking Discord is
+um yeah this is
+um yeah this is
+awesome do he have followers yet oh yeah
+awesome do he have followers yet oh yeah
+he's getting some followers he started
+he's getting some followers he started
+at zero today it's at
+at zero today it's at
+45 that's a little start on
+45 that's a little start on
+X I always say that X is mandatory for
+X I always say that X is mandatory for
+ML researchers
+so cool
+release
+for e
+all
+all
+right that's enough chatting for a bit
+so it's so obnoxious the way that this
+so it's so obnoxious the way that this
+is so reward block
+is so reward block
+MP reward
+MP reward
+Block
+B word
+block do I really want to copy
+I guess I have to
+right e
+now we have reward
+block now we can do this computation on
+block now we can do this computation on
+the
+the
+GPU and uh we will not be stuck
+perfect
+see if this does
+it expected all
+tensors what did I mess up
+exp. reward
+exp. reward
+block values
+mean
+okay
+aning why do I do this
+again I think there was some index IND
+again I think there was some index IND
+in
+crap shouldn't
+crap shouldn't
+be shouldn't be any indexing
+be shouldn't be any indexing
+crap contiguous block
+I guess we just start putting stuff on
+I guess we just start putting stuff on
+GPU we going have to test a couple
+GPU we going have to test a couple
+things
+self.
+actions the thing is these are already
+actions the thing is these are already
+on on the GPU aren't
+on on the GPU aren't
+they believe
+so e
+I don't know if this is going to be
+worse I actually kind of want to test
+worse I actually kind of want to test
+this separately before I do this because
+this separately before I do this because
+this could be this could be a big
+this could be this could be a big
+mistake if I screw this up
+the 708 on the
+retweet and mostly converting to the
+retweet and mostly converting to the
+original as
+well okay so this is a 1.1 1.1 mil right
+well okay so this is a 1.1 1.1 mil right
+and remember we we're going to
+and remember we we're going to
+try we're going to try putting all this
+try we're going to try putting all this
+stuff on the GPU and we're going to see
+stuff on the GPU and we're going to see
+what
+happens e
+he's on the GPU was
+well e
+where's device
+okay that is a
+problem I'm almost sure the torch
+problem I'm almost sure the torch
+doesn't have that
+I'm going to just borrow this for now
+I'm going to just borrow this for now
+and then we'll hope that we don't break
+[ __ ] e
+I think this will be the wrong
+I think this will be the wrong
+order but
+order but
+uh F
+order
+order
+has no attribute andem Che itself
+oh
+no invalid for input size
+three
+what that didn't help at all now did it
+and this is slow as
+and this is slow as
+[ __ ] that is so slow God that is awful
+[ __ ] that is so slow God that is awful
+why why does that even exist if it's
+why why does that even exist if it's
+going to be that slow
+I don't think there's a fast GPU sword
+I don't think there's a fast GPU sword
+right is that a
+thing e
+much
+better we'll do this St
+two does this thing have a device
+perfect we actually do have a
+device do like
+this two
+this two
+right let's just add them this
+below
+below
+nump lovely
+in in in but
+received
+received
+okay
+apparently this is not happy
+just
+do B idx is
+OB B idx is
+obs for
+H the transpose function is different
+H the transpose function is different
+this is do
+permute the idx
+is for
+is there a reason for
+this I guess there kind of is
+right yeah I guess there kind of
+is so let's just go back
+okay 1.1 million still
+right same speed as before
+bxs do2 self.
+bxs do2 self.
+device that's CU we're are indexing the
+device that's CU we're are indexing the
+same
+same
+way
+right so next
+right so next
+what we do
+next got reward
+block is it
+oops for
+0% custom here
+expected all tensors to be on same
+device values mean and reward
+block right this is the thing that I
+block right this is the thing that I
+wanted to try
+profile training
+MK
+so put these on
+so put these on
+device put these on
+devid reward block
+what happened to train
+custom is this now
+faster oh was this faster
+oh
+oh
+yeah it's faster
+okay okay
+okay so that's an immediate boost
+right just taking this off of the just
+right just taking this off of the just
+doing this on GPU this is now
+0% and
+now let's see where the other P the
+now let's see where the other P the
+other uh computers leaking I think it's
+other uh computers leaking I think it's
+all here now
+right I think 7% or whatever in the uh
+right I think 7% or whatever in the uh
+the main loss
+function and then the rest of it here
+function and then the rest of it here
+right yeah about there 7 percentage 8%
+right yeah about there 7 percentage 8%
+something like that now all of our
+something like that now all of our
+leaking all the leak is right
+here of course we're going to break some
+here of course we're going to break some
+synchronization but we'll have to fix
+synchronization but we'll have to fix
+that finally got around to working on
+that finally got around to working on
+graphics for impulse Warriors added some
+graphics for impulse Warriors added some
+Trails for players and projectiles
+Trails for players and projectiles
+having trouble making edges the map have
+having trouble making edges the map have
+a bloom glowing effect but maybe icons
+a bloom glowing effect but maybe icons
+for weapons all I need to add what do
+for weapons all I need to add what do
+you think and you made a website let's
+see
+o
+o
+okay hey these projectile icons are a
+okay hey these projectile icons are a
+nice Edition
+it's got something some fancy weapon it
+it's got something some fancy weapon it
+looks
+like where are the weapon
+like where are the weapon
+icons oh maybe I need to add those okay
+I don't know I
+I don't know I
+mean I still think you could come up
+mean I still think you could come up
+with some sort of creative Shader for
+with some sort of creative Shader for
+this that would make it look really
+good like pretty much all of these
+good like pretty much all of these
+weapons are just going to be like
+weapons are just going to be like
+particle effects
+particle effects
+like you can probably just find some
+like you can probably just find some
+cool
+shaders couldn't find any icons where
+shaders couldn't find any icons where
+are you looking
+I mean there's all sorts of stuff like
+this I think you want the ones without
+this I think you want the ones without
+backgrounds on
+them it's just generally where you look
+them it's just generally where you look
+you kind of have to do some digging
+you kind of have to do some digging
+around to find artists that you like and
+around to find artists that you like and
+then see like what stuff they have
+something like this also
+works not
+bad Graphics definitely a pin
+oh man we're leaking 6% just in
+indexing okay I'm going to have to look
+indexing okay I'm going to have to look
+at
+this map should look pretty here
+somehow I mean there are a lot of things
+somehow I mean there are a lot of things
+you can do there right
+I mean look what they do right they
+I mean look what they do right they
+literally just did
+literally just did
+like they just have some Bloom on stuff
+like they just have some Bloom on stuff
+with a bunch of shard sharp angles and
+with a bunch of shard sharp angles and
+render the uh and render stuff using
+render the uh and render stuff using
+outlines
+right I think that you could probably do
+right I think that you could probably do
+something pretty similar to this without
+something pretty similar to this without
+too too much difficulty I mean there's
+too too much difficulty I mean there's
+all sorts of stuff you can do like um
+all sorts of stuff you can do like um
+for instance you can do shaders to like
+for instance you can do shaders to like
+Ripple the environment when shots hit
+Ripple the environment when shots hit
+and
+stuff I'm going to be right back back
+stuff I'm going to be right back back
+let me use the restroom I got to ban
+let me use the restroom I got to ban
+this bot
+this bot
+first I'll be right
+back
+e
+e
+e e
+we're
+back 35%
+back 35%
+leak 8% just an index
+leak 8% just an index
+in which means
+okay let me try
+something for. ca. synchron what
+something for. ca. synchron what
+happens nothing
+right it's still going to be
+right it's still going to be
+8% 7%
+what if we do it like
+this
+this
+slower much
+slower much
+slower interesting
+torch indexing is
+slower maybe not hang
+slower maybe not hang
+on experience. sort training
+data B idx is obs
+maybe you just have to do to
+maybe you just have to do to
+them let's see I remember pych having
+them let's see I remember pych having
+this issue before but I want to see if
+this issue before but I want to see if
+they fixed it
+since.
+idx okay still of data to transfer
+idx okay still of data to transfer
+ideally you don't want to do
+this yeah still just a slow okay you
+this yeah still just a slow okay you
+don't want to you do not want to do
+this because this is on the CPU
+anyways how do we get around
+this it's a massive freaking am amount
+this it's a massive freaking am amount
+of
+data why doesn't this totally Crush
+data why doesn't this totally Crush
+performance with the observations
+performance with the observations
+actually you would think it would
+actually you would think it would
+right e
+OBS of
+MB that doesn't Crush
+curve
+right be obs
+patch Ops are much bigger than the
+patch Ops are much bigger than the
+values and we have to do the same
+values and we have to do the same
+indexing operation don't
+indexing operation don't
+we how does that somehow not Crush
+we how does that somehow not Crush
+performance when this does crush
+performance right
+ex
+is I guess maybe the answer is that it
+is I guess maybe the answer is that it
+kind of
+kind of
+does that's probably where most of the
+does that's probably where most of the
+overhead comes from right
+overhead comes from right
+comes from
+this we're just at a point where um
+this we're just at a point where um
+things are so so fast that this indexing
+things are so so fast that this indexing
+operation is
+slow I wonder is there a faster
+way e
+and what we can do for this
+is there a
+fast
+fastest where's something more modern
+here e
+just doing what I think it's
+just doing what I think it's
+doing I'm pretty darn sure that this is
+doing I'm pretty darn sure that this is
+literally just
+um
+here might be time to pay the piper on
+here might be time to pay the piper on
+this design
+this design
+decision okay so here we have our IND
+see that is
+rough I mean I guess um
+okay first of
+all kind of have to figure out the
+all kind of have to figure out the
+trajectory segments thing now don't
+trajectory segments thing now don't
+we I've been putting this off for like a
+we I've been putting this off for like a
+year it's a pain in the
+ass e
+I guess we'll draw this out this will be
+I guess we'll draw this out this will be
+pretty informative anyways a couple
+pretty informative anyways a couple
+people
+watching not draw right was it draw
+online
+online
+so it's a
+blueprint so the problem that we have at
+blueprint so the problem that we have at
+the moment
+the moment
+right when we collect
+right when we collect
+observations let's do the full thing we
+observations let's do the full thing we
+get
+like we get
+like we get
+indices like Z One 2
+indices like Z One 2
+three
+three
+four okay and then this is at time
+four okay and then this is at time
+T this is the environment
+T this is the environment
+index and what's the other thing that we
+index and what's the other thing that we
+store
+I think that's it isn't
+it oh yeah we also Store Flat
+it oh yeah we also Store Flat
+index so the sample
+index so the sample
+order so what we do with
+order so what we do with
+this is we
+this is we
+go 0 one two
+go 0 one two
+three actually let me just let's just
+three actually let me just let's just
+make this
+make this
+better so let's do instead of zero we do
+better so let's do instead of zero we do
+one five three
+one five three
+seven
+this
+this
+okay and
+okay and
+then just do
+then just do
+like we get
+like
+like
+zero three one
+4 okay now when we store these we make
+initially we make a big table like
+initially we make a big table like
+this and now this has eight numbers 0
+this and now this has eight numbers 0
+one two
+I guess it only goes up to seven
+huh and then it's G to have
+huh and then it's G to have
+the uh environment
+the uh environment
+index so this is going to
+be
+one
+one
+three
+three
+3 1 4 and then we put up the end we put
+3 1 4 and then we put up the end we put
+t
+t
+t
+t
+t
+t
+Okay and then what we can do is we can
+Okay and then what we can do is we can
+sort this
+sort this
+thing uh we can sort this thing
+thing uh we can sort this thing
+basically
+[Music]
+by believe it's this row and then this
+by believe it's this row and then this
+row
+row
+right yeah we sort this by this row and
+right yeah we sort this by this row and
+this row so what we want to get out of
+this row so what we want to get out of
+this
+this
+is that data at the end of the
+is that data at the end of the
+day so we
+day so we
+get what we do
+get what we do
+zero one t
+Z
+Z
+one we
+do I guess it should have been Z
+do I guess it should have been Z
+0 why it's so confusing Z T
+on we do Z
+three
+three
+one Z or
+t t okay so now we have these in
+t t okay so now we have these in
+order by environment ID and clearly uh
+order by environment ID and clearly uh
+the important thing here is that these
+the important thing here is that these
+are grouped up
+right these are grouped up
+so technically if we give if we keep
+so technically if we give if we keep
+these indices we should be able to to
+these indices we should be able to to
+detect these
+detect these
+boundaries and uh and use
+this still tricky because with the
+this still tricky because with the
+lsdm you have to go across
+bounds right
+so I mean we split this up into
+so I mean we split this up into
+segments oh but we the key assumption
+segments oh but we the key assumption
+here is that the segments are going to
+here is that the segments are going to
+end up being pretty
+end up being pretty
+long
+long
+right at least reasonably so
+I think if we just pass this indices
+array the sorted indices
+array the sorted indices
+array I think we get it don't we
+oh and I messed this up as well didn't
+oh and I messed this up as well didn't
+I where's the is there an
+I where's the is there an
+eraser yeah this should not be like this
+eraser yeah this should not be like this
+this is you have to actually Arc sort
+this is you have to actually Arc sort
+the
+the
+indices
+indices
+so what it this is
+so what it this is
+actually
+Four this is
+Four this is
+zero is
+I
+I
+stupid
+stupid
+[Music]
+zero no this is fine
+zero no this is fine
+or this initial one
+or this initial one
+is
+zero six and so on and so forth so you
+zero six and so on and so forth so you
+do have the indices in here the indices
+do have the indices in here the indices
+tell you where to get your data
+from how much
+from how much
+of this indexing is coming from each of
+of this indexing is coming from each of
+these other
+these other
+things much of this indexing is coming
+things much of this indexing is coming
+from each of these other things
+like can I just do
+this like is this expensive right
+now still expensive that's still 11%
+now still expensive that's still 11%
+compute 12%
+compute it's a
+lot what is this doing
+okay this is not doing very much
+either still a lot of
+compute mean we can't do this on the GPU
+compute mean we can't do this on the GPU
+right now there's iteration
+right now there's iteration
+here that actually screws us over for
+here that actually screws us over for
+the values as well doesn't
+it
+does very difficult to make this thing
+does very difficult to make this thing
+fast
+but should it
+be it shouldn't be
+be it shouldn't be
+right the observations in the network
+right the observations in the network
+are doing way more work than
+this so it's really just about
+this so it's really just about
+optimizing this thing because I the
+optimizing this thing because I the
+fundamental amount of work being done
+fundamental amount of work being done
+here is not very large
+kind of a few different problems with
+kind of a few different problems with
+how we're doing this isn't there aren't
+how we're doing this isn't there aren't
+there
+so and there are a few different
+so and there are a few different
+problems
+ah this driving me
+nuts kind of want to solve both of these
+nuts kind of want to solve both of these
+in one Fell Swoop
+all you have to do you're looking for
+all you have to do you're looking for
+boundaries
+right what are my options
+right what are my options
+here I already have do I have all these
+here I already have do I have all these
+quanties on the GPU
+quanties on the GPU
+already or do I
+not I have everything but the index
+not I have everything but the index
+tensor on GPU and the index tensor needs
+tensor on GPU and the index tensor needs
+to go to GPU anyways
+there's no way to store this stuff
+there's no way to store this stuff
+continuously in the first place
+right no you'd have to make additional
+right no you'd have to make additional
+assumptions how many additional
+assumptions how many additional
+assumptions would you have to
+make it's kind of
+make it's kind of
+tough like me supporting the
+tough like me supporting the
+asynchronous is starting to
+asynchronous is starting to
+limit the ways in which I can collect
+limit the ways in which I can collect
+data
+right for something like GPU Drive
+right for something like GPU Drive
+you're going to get all these little
+you're going to get all these little
+segments
+you don't know from the GetGo how you're
+you don't know from the GetGo how you're
+going to want to
+going to want to
+batch so the best thing you can do is
+batch so the best thing you can do is
+store them flat to begin
+with right I think I kind of already
+with right I think I kind of already
+have the
+optimal optimal thing here
+don't
+I I mean how else would you do
+this you could have a per agent buff
+this you could have a per agent buff
+that doesn't help you though because
+that doesn't help you though because
+there's a map size to that that can be
+there's a map size to that that can be
+highly
+highly
+variable it can be highly variable for
+variable it can be highly variable for
+every type of M usually not even just
+every type of M usually not even just
+for specialized ones that doesn't help
+you so yeah you can really only
+hang
+on environment no you really can't
+on environment no you really can't
+improve on this very much at
+improve on this very much at
+all what this indexing
+all what this indexing
+operation that has to happen
+you would think this operation should be
+you would think this operation should be
+able to be
+fast fast f
+I think we need to go check this out
+I think we need to go check this out
+don't
+we okay let's just go get some data
+so here's our
+data
+and B
+just
+do
+synchronize
+e
+e e
+long as there a substantial difference
+here about
+2x it
+2x it
+is let's just make sure there's not a
+bias oh I'm stupid hold on
+how about we not be stupid about this
+huh same
+speed make sure but yeah that's
+speed make sure but yeah that's
+fine same speed
+hang on is this something
+is this
+is this
+flat viewed as 1 D
+tenser Ah that's
+why
+e
+e
+e e
+I think that there you're unlikely to be
+I think that there you're unlikely to be
+able to improve this
+right it should already be paralyzed
+right it should already be paralyzed
+efficiently
+there nothing you can really do here
+oh numpy is taking numpy takes forever
+huh e
+doesn't matter if you use an intro long
+doesn't matter if you use an intro long
+it seems
+NPI indexing very very slow for large
+NPI indexing very very slow for large
+tensors uh if by comparison though if we
+tensors uh if by comparison though if we
+were to
+were to
+do if we did
+this would the result be
+this would the result be
+different yes they
+different yes they
+would GPU is
+would GPU is
+faster for large
+faster for large
+tensors is slower for small tensors
+what about
+this hi that is interesting so the big
+this hi that is interesting so the big
+batches it is faster on the
+batches it is faster on the
+GPU by an order of magnitude
+GPU by an order of magnitude
+still it goes down if you have smaller
+still it goes down if you have smaller
+batches
+batches
+this is still
+faster what do I do with this
+information have some ideas I'll be
+information have some ideas I'll be
+right
+back
+e
+e e
+keep on this for a little bit
+here I think that what happened with
+here I think that what happened with
+this is before I was measuring indexing
+this is before I was measuring indexing
+for and uh I had smaller
+batches so it was more uh effective to
+batches so it was more uh effective to
+do it
+do it
+on in numpy but now it's faster to do
+on in numpy but now it's faster to do
+it in p in P torch it looks
+like oh yeah what if we do
+on what if it's not
+fed fast these
+go ah this was the this was the kicker
+so they still have this problem it looks
+like maybe not
+it's actually
+it's actually
+faster it is actually
+faster it is actually
+faster and index select is faster than
+faster and index select is faster than
+slice here as
+slice here as
+well but it's not that that is not the
+well but it's not that that is not the
+case
+for majority of
+these so uh let's just do this one real
+these so uh let's just do this one real
+quick
+four okay uh torches cleaned up their
+four okay uh torches cleaned up their
+indexing a whole
+indexing a whole
+bunch it looks to me like torches
+bunch it looks to me like torches
+actually improved their indexing a whole
+actually improved their indexing a whole
+bunch so we
+bunch so we
+[Music]
+[Music]
+can possibly rely on that
+650k
+right sample
+Logics
+Logics
+device and you do store right
+we just do
+we just do
+this we do
+this we don't have to do any of this
+stuff e
+okay what's this
+do return
+do return
+action
+action
+you you do have to
+you you do have to
+pass actions back of CPU
+pass actions back of CPU
+T float
+T float
+has no attribute item
+aha we get speed
+aha we get speed
+increase we do get a speed increase
+increase we do get a speed increase
+here but we will see what that is from I
+here but we will see what that is from I
+think that is good news
+okay
+how's the uh the post doing by the way
+how's the uh the post doing by the way
+on uh the Pokemon post doing
+is it done for
+tonight
+tonight
+95 not
+95 not
+bad definitely not
+bad few new followers as well
+34% in MK right
+NP uh and then actually I think we can
+NP uh and then actually I think we can
+delete all
+delete all
+this
+right doesn't need any of this oh that's
+right doesn't need any of this oh that's
+way way nice
+right yeah that's way
+nice Advantage MP I think we still need
+nice Advantage MP I think we still need
+that
+that
+one otherwise reward block
+I think that we still need these but the
+I think that we still need these but the
+rest of them are gone get rid of
+this hang on we do need to know we still
+this hang on we do need to know we still
+need to have buffers allocated right for
+nonblocking
+copy other
+is there a way to cut the memory
+is there a way to cut the memory
+allocations
+allocations
+out we can look at that potentially
+out we can look at that potentially
+after um um I think we'll just do this
+after um um I think we'll just do this
+for
+for
+now so I'm sure this
+breaks DS
+NP we do DS of indices
+just
+okay about the
+same we now have
+same we now have
+28% of this overhead inside of
+custom
+custom
+28% how would we do
+here we now have this index on GPU we
+here we now have this index on GPU we
+need to do
+need to do
+torch
+synchronize
+lovely this no longer takes any time at
+lovely this no longer takes any time at
+all this indexing no longer takes any
+time so we are making forward progress
+time so we are making forward progress
+here
+adj just this transfer how much does it
+adj just this transfer how much does it
+take
+so let's just do for
+so let's just do for
+synchronize I think we need it here for
+synchronize I think we need it here for
+a device transfer that's blocking
+but okay so this
+here
+133% 14% so this it's a lot of compute
+133% 14% so this it's a lot of compute
+right here
+right
+e e
+let's try this
+about
+this
+this
+aha that is faster by a
+aha that is faster by a
+lot freaking pie
+torch see
+torch see
+something nice
+probably doesn't do anything
+probably doesn't do anything
+right no that doesn't do anything we can
+right no that doesn't do anything we can
+just leave it as a
+just leave it as a
+string it's a single call it's not in
+string it's a single call it's not in
+the
+the
+loop it's not going to have any overhead
+there we go so three % total right here
+there we go so three % total right here
+3%
+total that's big
+progress
+okay now how about
+this this is 15
+this this is 15
+16 lot of compute wasted here
+16 lot of compute wasted here
+lot of compute wasted how about flatten
+batch about flat B
+right noticeable small but noticeable
+mostly but mostly now we have it down to
+mostly but mostly now we have it down to
+this we've gotten rid of a lot of
+the there are a couple problems
+the there are a couple problems
+here so
+this is just too much data to process I
+this is just too much data to process I
+think on
+think on
+um this is just too much data
+um this is just too much data
+fundamentally to process on a
+fundamentally to process on a
+CPU isn't
+it let me think is this too much data to
+it let me think is this too much data to
+process should it
+process should it
+be should it be too much data to process
+what type of steps per second do I think
+what type of steps per second do I think
+I should be able to get on this
+I should be able to get on this
+operation 128
+operation 128
+numbers I do this all the time for
+numbers I do this all the time for
+puffer Libs
+puffer Libs
+environments I'm able to get this at
+environments I'm able to get this at
+millions of steps per
+millions of steps per
+second there's no way that this is
+second there's no way that this is
+slower than breakout that one it's like
+slower than breakout that one it's like
+10 million steps for
+the problem is it's done
+the problem is it's done
+synchronously so even if I get 10
+synchronously so even if I get 10
+million steps per
+second yeah that's still going to be
+second yeah that's still going to be
+rough like this n here is 10 million
+rough like this n here is 10 million
+steps per second actually right that's
+steps per second actually right that's
+still going to be rough
+okay what other options do I
+okay what other options do I
+have so blocking
+operation I actually need to call Cuda
+operation I actually need to call Cuda
+synchronize
+synchronize
+here for safety right
+ay it's tough I think you've probably
+ay it's tough I think you've probably
+seen by now the
+seen by now the
+uh Pokemon stuff is
+uh Pokemon stuff is
+live we
+go there you go he's probably gotten
+go there you go he's probably gotten
+some followers right yeah there we go
+some followers right yeah there we go
+73 perfect
+what do we do with
+what do we do with
+this there's no way in hell we can do
+this there's no way in hell we can do
+this on the GPU right unless I write a
+chal uh
+chal uh
+ah hold
+ah hold
+on hold on does it even make sense to do
+on hold on does it even make sense to do
+that
+wait this might be the thing that
+wait this might be the thing that
+finally makes puffer need a custom thrn
+this thing is going to compute
+this thing is going to compute
+advantages the size of advantages
+how big is this
+thing yeah this was a kernel I
+thing yeah this was a kernel I
+think I think this is finally the thing
+think I think this is finally the thing
+I've not actually done any
+I've not actually done any
+Cuda I've not done any Cuda at
+Cuda I've not done any Cuda at
+all I mean I've been this is also kind
+all I mean I've been this is also kind
+of a really bad time for me to have to
+of a really bad time for me to have to
+pick something new up like that I'd like
+pick something new up like that I'd like
+to
+to
+actually this is a really bad time to
+actually this is a really bad time to
+have to do this
+have to do this
+with all the other stuff going
+on let me think what I can do in the
+meantime well I'm not totally screwed
+meantime well I'm not totally screwed
+here
+right hang on I'm not totally screwed
+right hang on I'm not totally screwed
+this is the pessimistic
+this is the pessimistic
+case right here
+if I run regular breakout right
+if I run regular breakout right
+now what do we
+now what do we
+get let
+run e
+where's this
+here has no
+here has no
+attribute
+ter B Advantage B
+values returns
+try
+this okay that's a little faster than
+this okay that's a little faster than
+before isn't
+before isn't
+it just a little bit but it is a little
+it just a little bit but it is a little
+just a little hair
+faster than
+before just a hair
+now
+now
+what now we
+check 32 Horizon
+it's a much smaller Gap than
+before close it a little bit
+more two M two
+more two M two
+workers 24 m per work
+a little Annoying to have to use
+uh
+multiprocessing
+million that's slower than before the
+million that's slower than before the
+hell that doesn't make sense
+right no no no that does not make
+sense one
+one
+one
+oh let see
+1.4 mil
+1.1
+1.1
+mil let's look at the distributions
+mil let's look at the distributions
+here forward
+9% 9%
+9% 9%
+M 29 uh 20%
+M 29 uh 20%
+Miss spend the extra time
+learn it's just a little bit of
+learn it's just a little bit of
+overhead 10% here we have a bit more
+overhead 10% here we have a bit more
+than 10% overhead which is a bit
+than 10% overhead which is a bit
+concerning though
+right so let's just run these both for
+right so let's just run these both for
+seconds I'm going to run them both for
+seconds I'm going to run them both for
+seconds and just going to do a little
+seconds and just going to do a little
+bit of just janky manual
+profiling same thing here and then we'll
+profiling same thing here and then we'll
+compare
+so we spent 5 seconds in forward six
+so we spent 5 seconds in forward six
+seconds and
+seconds and
+forward 4 seconds and copy 3 seconds and
+forward 4 seconds and copy 3 seconds and
+copy seconds and train 18
+copy seconds and train 18
+seconds board is 4 seconds 13% 3 seconds
+seconds board is 4 seconds 13% 3 seconds
+very good seconds learn 11 seconds learn
+very good seconds learn 11 seconds learn
+Miss is 3
+Miss is 3
+seconds 2 seconds Miss
+seconds 2 seconds Miss
+we
+we
+spent just 3 seconds in
+spent just 3 seconds in
+Miss 6 seconds in
+this this would seem then there's only
+this this would seem then there's only
+10% overhead so why is it slower than
+10% second
+I don't see anything else it would
+be all just about matches
+up so I guess we'll just have to fix
+up so I guess we'll just have to fix
+that and then we'll see
+that and then we'll see
+uh 6 seconds
+same thing now with Neptune
+very
+good uhoh
+good uhoh
+well this does way
+worse let's see if I've broken data or
+worse let's see if I've broken data or
+if it's just the parameters the double
+if it's just the parameters the double
+number
+ofs those very fast now though
+I don't think we can have completely
+I don't think we can have completely
+broken
+broken
+learning that is still doing
+something maybe
+processing
+processing
+off 20 48m 1
+off 20 48m 1
+one do this for comparison
+that makes a huge difference doesn't
+that makes a huge difference doesn't
+it it's
+crazy e
+pretty small speed increase verus what I
+pretty small speed increase verus what I
+had before on this but still noticeable
+and this one matches right yeah this one
+and this one matches right yeah this one
+matches very
+matches very
+nicely
+nicely
+so now the only difference is P30
+so now the only difference is P30
+also I believe before it
+also I believe before it
+was we can see the
+SPs can see SPS
+we'll see the SPs
+difference
+so yeah we took it up from 700k to over
+900k same code pretty well
+700 to 900 so we've
+700 to 900 so we've
+mostly mostly closed the
+Gap oh we should run this just for the
+Gap oh we should run this just for the
+heck of it though just to make sure we
+heck of it though just to make sure we
+didn't break it
+it's looking
+similar another 14% that we can save off
+similar another 14% that we can save off
+the environment if we get a bigger end
+the environment if we get a bigger end
+batch size working
+or lower overhead
+or lower overhead
+bindings 14% is kind of surprisingly
+bindings 14% is kind of surprisingly
+large for how fast breakout should
+be yeah similar Dynamic to before
+d8
+d8
+perfect boom
+matches see what did we just squeeze out
+matches see what did we just squeeze out
+of this thing
+oh yeah we squeezed a little out of
+oh yeah we squeezed a little out of
+it
+it
+extra
+5% an extra what's this like 30ish
+perc
+perc
+5% very
+nice
+e e
+a
+a
+900k 900k
+not fast enough 900k too
+not fast enough 900k too
+slow 900k is way too
+slow e
+time is it
+time is it
+5:18
+5:18 maybe I just fiddle with this a
+5:18 maybe I just fiddle with this a
+little bit I can throw it into Gro to
+little bit I can throw it into Gro to
+just see what it would do I have no
+just see what it would do I have no
+experience writing
+experience writing
+Fels I've been wanting to get into that
+Fels I've been wanting to get into that
+at some
+at some
+point I do plenty of lowle Dev
+basic okay you have a kernel
+and
+then you write a little python
+wrapper
+wrapper
+okay is that
+it it's not that bad
+extern
+CX block
+idx so presumably
+okay these are provided by
+Cuda interesting
+ah I see actually so this is a problem
+ah I see actually so this is a problem
+because if you don't have a
+because if you don't have a
+GPU it doesn't run correctly
+okay there's no fall back
+pile
+pile
+both is
+interesting yeah so
+me look at this function
+this
+right oh wait do I have profiling
+right oh wait do I have profiling
+on hang on I just saw that
+I just saw the profile decorator
+that custom is
+that custom is
+lower lower overhead
+lower lower overhead
+here but uh still there's a
+problem e
+is this fully parallel across hold
+on I think it is fully parallel across
+on I think it is fully parallel across
+row isn't it
+almost fully parallel to
+Crossroads yeah cuz the Min and the max
+Crossroads yeah cuz the Min and the max
+I can
+I can
+compute uh I can compute these cleanly
+yes e
+this code actually doesn't look that bad
+this code actually doesn't look that bad
+this looks fairly similar to what I'm
+this looks fairly similar to what I'm
+doing
+doing
+already which is kind of what I figured
+already which is kind of what I figured
+you have to be a little careful with the
+you have to be a little careful with the
+parallelism and I'm sure debugging is a
+parallelism and I'm sure debugging is a
+pain in the ass thought debugging is
+pain in the ass thought debugging is
+already a pain in the ass what I'm
+already a pain in the ass what I'm
+doing yeah this was kind of what I was
+doing yeah this was kind of what I was
+expecting though like when you're
+expecting though like when you're
+already doing low-l
+already doing low-l
+Dev it doesn't really matter if it's
+Dev it doesn't really matter if it's
+like you're doing CPU or GPU or what
+like you're doing CPU or GPU or what
+like you're using really the same
+stuff it's
+stuff it's
+527 what you guys think we write a
+527 what you guys think we write a
+through to Colonel or we attempt
+through to Colonel or we attempt
+to never written these
+to never written these
+before I this would be kind of cool
+before I this would be kind of cool
+though I think we do
+though I think we do
+it rest one more time real quick and
+it rest one more time real quick and
+then um we back in a minute we'll have a
+then um we back in a minute we'll have a
+good half hour 40 minutes I think let me
+good half hour 40 minutes I think let me
+just double check on uh they do have to
+just double check on uh they do have to
+go to dinner at some point so let me
+go to dinner at some point so let me
+double check on that and then uh if I
+double check on that and then uh if I
+have time we will write this Colonel
+have time we will write this Colonel
+right now and if not we'll write it
+right now and if not we'll write it
+later tonight or tomorrow right be right
+later tonight or tomorrow right be right
+back
+by
+e e
+all right I got like 20 30 minutes to
+all right I got like 20 30 minutes to
+just start on this I want to make this
+just start on this I want to make this
+as easy on myself as possible though
+as easy on myself as possible though
+before I start so we're going to
+before I start so we're going to
+do we're going to do
+do we're going to do
+float BD
+float BD
+Max Min and Max
+Max Min and Max
+okay min
+let's do this on vpu as
+let's do this on vpu as
+well
+Min an
+Min an
+item Max
+item Max
+okay just do bstd min bstd max
+heck
+float there we
+go yeah that's about the same speed as
+go yeah that's about the same speed as
+before as it should be so good now we
+before as it should be so good now we
+have
+all
+did they do this in the first one
+I bind 11
+we need pie bind
+implicit binding
+okay okay let's see there's an implicit
+okay okay let's see there's an implicit
+bind that's fine
+and.
+C I'm going to have to check all this
+C I'm going to have to check all this
+mess I'm sure
+okay this
+synchronize
+synchronize
+and let me try this
+return
+return
+something it does
+something it does
+W
+block word
+block buff
+DS
+onwards Andes
+zeros
+there we
+go experience bounds we also need bounds
+basically all these are going to go to
+basically all these are going to go to
+uh Duda I guess
+and uh you don't have to pass this
+and uh you don't have to pass this
+because you compute this in the other
+because you compute this in the other
+function
+right
+right
+advantages advantages
+equals
+CPU or whatever something like
+CPU or whatever something like
+that syron
+okay now we'll be able to fix a lot of
+okay now we'll be able to fix a lot of
+this as
+this as
+well Middle with
+this and you don't have to compile this
+this and you don't have to compile this
+or anything it just uh
+loads me
+see error building extension
+nvcc not found
+H you need
+Cuda you need to C A toolkit don't
+Cuda you need to C A toolkit don't
+you that sucks
+we can do that for
+now we can do that for
+now
+e e
+I think it's going to be easier to just
+I think it's going to be easier to just
+get the
+get the
+um the container I'll just pytch ship
+um the container I'll just pytch ship
+these so that they're
+pre-built I don't know
+pre-built I don't know
+actually but we are going to have to
+actually but we are going to have to
+deal with this
+oops
+hi that's fine
+Co
+kind of annoying that um we'll have to
+kind of annoying that um we'll have to
+redo some setup but it's
+fine good to run time
+you can go back to 124
+where's the darn list of them where you
+where's the darn list of them where you
+can find these
+can find these
+easily I guess I just swap it to deel
+easily I guess I just swap it to deel
+instead of
+instead of
+[Music]
+runtime they're not that big of uh
+runtime they're not that big of uh
+there's not that big of a size
+there's not that big of a size
+difference is there oh no there is adds
+difference is there oh no there is adds
+a couple gigs that's
+a couple gigs that's
+annoying we should have this in our
+annoying we should have this in our
+container anyways though I've gotten
+container anyways though I've gotten
+burned by this before I don't know why I
+burned by this before I don't know why I
+did why I decided to get
+clever than
+so we'll just fiddle with this for now
+so we'll just fiddle with this for now
+I'll come back later I'm going to have
+I'll come back later I'm going to have
+to do a little bit of porting stuff and
+to do a little bit of porting stuff and
+then we'll go from there
+i' say we've gotten like reasonably
+i' say we've gotten like reasonably
+decent performance on first day tweet of
+decent performance on first day tweet of
+Pokemon 107 5.7k
+Pokemon 107 5.7k
+views has it done anything on
+here now
+sadly that
+not what
+happens e
+honestly I could see myself just jamming
+honestly I could see myself just jamming
+some
+some
+Cuda on some point here
+wouldn't that be funny if we just like
+wouldn't that be funny if we just like
+ludicrously
+ludicrously
+optimized we like figure out what puffer
+optimized we like figure out what puffer
+model we like to use for everything and
+model we like to use for everything and
+we just ludicrously optimized
+we just ludicrously optimized
+it 10 million step per second
+it 10 million step per second
+training I think for that we'd have to
+training I think for that we'd have to
+literally like yeah the the whole
+literally like yeah the the whole
+training Loop would have to go to cudar
+training Loop would have to go to cudar
+though the
+though the
+thing any of the Python looping is just
+thing any of the Python looping is just
+slow
+I don't think it's worth the effort to
+I don't think it's worth the effort to
+really do that though because very
+really do that though because very
+quickly our models are going to get
+quickly our models are going to get
+bigger little bit bigger no not even
+bigger little bit bigger no not even
+huge just like as soon as you go to a
+huge just like as soon as you go to a
+million maybe there's still performance
+million maybe there's still performance
+benefits I don't
+know e
+all right and then it's
+all right and then it's
+puffer
+puffer
+depths puffer depths right
+this is a quick
+one e
+fun we break um oh yeah
+fun we break um oh yeah
+7,000 look at that that's kind of nice
+all right there's puffer deps
+built I should have done this a while
+ago
+e
+e
+e e
+basically all I want to do for right now
+basically all I want to do for right now
+is get this container to run and then
+is get this container to run and then
+see if we have
+nbcc make sure we get
+nbcc make sure we get
+something for
+yay we have
+nbcc check out
+oh
+friend dynamic
+does not define export
+function c advantage.
+function c advantage.
+c
+u e
+and
+and
+my plugins back
+there we
+go all
+go all
+right let's
+do that run something
+canot
+canot
+access
+bandages don't need idx
+either the array has no attribute is
+either the array has no attribute is
+Cuda what did I screw
+up and I gotta
+go this is
+go this is
+Cuda good
+that should be on
+Cuda there we
+go try
+that oh
+that oh
+there incompatible
+there incompatible
+arcs oh yeah also we forgot to do
+arcs oh yeah also we forgot to do
+well the Min and the max are
+well the Min and the max are
+backwards let's fix that before we
+backwards let's fix that before we
+forget and have L to pay for
+it the following AR
+types are
+types are
+supported tensor tensor
+incompatible hang on
+incompatible hang on
+what incompatible function
+what incompatible function
+arguments all right I got to run I will
+arguments all right I got to run I will
+fix this after dinner um for folks
+fix this after dinner um for folks
+watching if you're interested in all the
+watching if you're interested in all the
+stuff I do you want to get involved with
+stuff I do you want to get involved with
+RL you're interested in puffer
+RL you're interested in puffer
+everything's on puffer doai star the
+everything's on puffer doai star the
+repo to help us out really helps a ton
+repo to help us out really helps a ton
+join the Discord if you want to get
+join the Discord if you want to get
+involved and follow on X for more RL
+involved and follow on X for more RL
+news and content thanks and
+
+Kind: captions
+Language: en
+okay we are back
+live it has been a heck of a few days
+live it has been a heck of a few days
+here Pokemon result is finally
+here Pokemon result is finally
+out we've got The Hacker News
+out we've got The Hacker News
+Post and it is also on X right
+Post and it is also on X right
+now so come check this
+now so come check this
+out I'll answer some questions on here
+out I'll answer some questions on here
+probably if people jump in but um for
+probably if people jump in but um for
+the
+the
+meantime we have two main things that we
+meantime we have two main things that we
+need to catch up on
+need to catch up on
+today a little bit of porting
+work or some
+work or some
+collaborators and we need to oops let's
+collaborators and we need to oops let's
+not lead to
+not lead to
+that hang on let me just flip this so I
+that hang on let me just flip this so I
+can move
+that close all the boring
+that close all the boring
+windows and and
+windows and and
+there
+there
+so the other thing we had to do is look
+so the other thing we had to do is look
+at the new oblations and figure out what
+at the new oblations and figure out what
+is going on with
+these actually I'm just drop one thing
+these actually I'm just drop one thing
+in Discord as well
+let me just drop this
+in so I figure this is funny this has
+in so I figure this is funny this has
+been taking up a lot of spare time
+been taking up a lot of spare time
+lately but we finally got this put
+lately but we finally got this put
+together
+together
+so cluster garage gym setup happy with
+so cluster garage gym setup happy with
+this anyways what we're going to do
+this anyways what we're going to do
+today uh first thing is going to be to
+today uh first thing is going to be to
+figure out some stuff with the
+figure out some stuff with the
+experiments that I haven't had time to
+experiments that I haven't had time to
+do lately and then after that we're
+do lately and then after that we're
+going to have to do some porting of some
+going to have to do some porting of some
+of the optimizations we came up
+of the optimizations we came up
+with so let me see here we
+with so let me see here we
+have this is the current
+have this is the current
+best parito front on breakout right
+and not sure what this is I think I was
+and not sure what this is I think I was
+just testing some stuff here close
+this this 200 run is our best and then
+this this 200 run is our best and then
+187 okay so this is I think before we
+187 okay so this is I think before we
+made the perk
+made the perk
+enhancements we were at 200
+seconds for
+seconds for
+solve now
+and now
+what we've got these
+runs okay so these run this is a 180ish
+runs okay so these run this is a 180ish
+I
+I
+believe and then
+these ones are 220 is there any
+these ones are 220 is there any
+difference between these I thought I
+difference between these I thought I
+literally just ran the same
+literally just ran the same
+thing uh the same thing
+twice let me go double check on that
+I believe this
+I believe this
+is oh this is still going
+hang on if this is still going it
+hang on if this is still going it
+shouldn't be right I
+uh
+okay how is this possible it gets up to
+okay how is this possible it gets up to
+like
+800 800
+cost this one's also
+it's up to 800
+it's up to 800
+cost and this one's
+cheaper maybe it just takes a while
+cheaper maybe it just takes a while
+longer I mean it's not fully optimized
+longer I mean it's not fully optimized
+yet but then why are these qualitatively
+yet but then why are these qualitatively
+different they are qualitatively
+different they are qualitatively
+different
+right visualizing the wrong ones this is
+right visualizing the wrong ones this is
+our previous best this is with 187
+our previous best this is with 187
+samples okay so this has had more time
+samples okay so this has had more time
+to
+to
+optimize so now the difference that
+optimize so now the difference that
+we're interested in here is the 118
+we're interested in here is the 118
+versus 127 so with
+versus 127 so with
+118 we're getting some solves in the
+118 we're getting some solves in the
+180s and then here we're at
+250 that does seem odd
+okay is there any
+difference
+difference
+here your branch is
+ahead by two
+commits oh this is not autoscaled
+commits oh this is not autoscaled
+okay this is with a manual scale
+okay this is with a manual scale
+so this actually does have some
+so this actually does have some
+substantial sweep differences
+cool already up to
+date put this
+here put this somewhere can get to it
+all
+right no I have this Auto SK
+I'm
+confused what is in Dev right
+confused what is in Dev right
+now I think we're going to want to have
+now I think we're going to want to have
+Auto scale in Dev
+okay we do have Auto scale in depth
+right oh I see it just it's gotten desin
+so we're solving but it's taking way too
+so we're solving but it's taking way too
+long
+silly yes I did just delete the repo and
+silly yes I did just delete the repo and
+reclone it instead of bothering with
+it we
+will leave
+will leave
+that and otherwise we'll just delete all
+that and otherwise we'll just delete all
+these scale terms
+now we still have some issues here
+now we still have some issues here
+right I want to see not this one this
+right I want to see not this one this
+one got screwed up
+one got screwed up
+right we have
+187 aut scale P30 okay so we want
+187 aut scale P30 okay so we want
+this there one
+this there one
+comparison it's the other comparison
+comparison it's the other comparison
+here right
+I believe this was
+I believe this was
+pre optimization though wasn't it so we
+pre optimization though wasn't it so we
+have was it 192 is
+here about
+here there we go so slightly slightly
+here there we go so slightly slightly
+faster but it's also fewer runs so we
+faster but it's also fewer runs so we
+expect this to come down even
+expect this to come down even
+more
+and we go
+and we go
+to think
+to think
+sample I want to see what the SPs is
+sample I want to see what the SPs is
+looking
+looking
+like yeah okay so there's this massive
+like yeah okay so there's this massive
+Gap
+Gap
+essentially I want to understand why so
+essentially I want to understand why so
+we have mini batch of 8192 here this
+we have mini batch of 8192 here this
+thing is still using two small mini
+thing is still using two small mini
+batches uh which is further slowing it
+batches uh which is further slowing it
+down five I think what's Just Happening
+down five I think what's Just Happening
+generally is that there is more
+generally is that there is more
+overhead in the new algorithm Branch
+overhead in the new algorithm Branch
+because it's not as well
+because it's not as well
+optimized which is then preventing the
+optimized which is then preventing the
+algorithm from taking advantage
+algorithm from taking advantage
+of larger batch sizes and stuff because
+of larger batch sizes and stuff because
+they're they cost more and then the the
+they're they cost more and then the the
+smaller batch sizes are also slower in
+smaller batch sizes are also slower in
+wall clock so you're kind of just
+wall clock so you're kind of just
+screwed on multiple different angles
+screwed on multiple different angles
+when you have
+that so I think what we want to do
+that so I think what we want to do
+here is we want to actually evaluate
+here is we want to actually evaluate
+speed differences
+speed differences
+with some reasonable
+with some reasonable
+settings yeah let's do
+settings yeah let's do
+that I want to do this on
+that I want to do this on
+zero on my local I think we'll do this
+zero on my local I think we'll do this
+on my local so I can play with
+it by the window
+Bel so no Cuda GPU is available lovely I
+Bel so no Cuda GPU is available lovely I
+got to reboot my container I guess
+happens once in a while
+okayer break down mode
+train okay so here we have our default
+train okay so here we have our default
+puffer breakout parameters here uh these
+puffer breakout parameters here uh these
+are not the parameters that I think we
+are not the parameters that I think we
+want
+want
+so what we should do
+here there a few things we should
+do first thing I think we want
+is did I already do
+is did I already do
+it I think I might have already done it
+that
+size
+size
+gamma yeah I think we need to combon all
+gamma yeah I think we need to combon all
+this this
+this this
+slower then we do these
+ones what happens when we do this
+yeah this is still nowhere near as fast
+yeah this is still nowhere near as fast
+though
+though
+as as we're expecting
+as as we're expecting
+right we're expecting even
+right we're expecting even
+faster or are we
+faster or are we
+not I think we should
+not I think we should
+be we take like
+21414 let's try
+21414 I really have to make uh
+21414 I really have to make uh
+a better way of copying hyper
+a better way of copying hyper
+parameters rather than having to do it
+manually how is this one hang I'm
+manually how is this one hang I'm
+confused here so this is
+confused here so this is
+seconds
+right oh it is almost a million SPS
+but
+but
+then something doesn't add up here
+then something doesn't add up here
+because if you can
+get how about 21536
+it's a bit faster right and it probably
+it's a bit faster right and it probably
+has more
+has more
+M only 48
+M look
+M look
+like oh
+yeah very clean
+ah it runs for more steps I
+ah it runs for more steps I
+see I thought I said a Max
+see I thought I said a Max
+though maybe these are eval
+though maybe these are eval
+steps okay maybe it's slightly different
+steps okay maybe it's slightly different
+well this is fine
+though this is 106
+mil 1024m
+this is not the previous run though I
+this is not the previous run though I
+think this is a new one so we'll just
+think this is a new one so we'll just
+copy
+copy
+these these
+these these
+parameters this should give us 94
+parameters this should give us 94
+seconds is it 94 seconds all the other
+seconds is it 94 seconds all the other
+one's kind of better isn't it though
+one's kind of better isn't it though
+yeah
+yeah
+84 I think we'll do this one
+84 I think we'll do this one
+instead this one's pretty
+instead this one's pretty
+cool and will'll also let us test
+cool and will'll also let us test
+overhead a lot better
+overhead a lot better
+26 we'll give it 130
+mil so this should be sub 992
+solve luckily this learning rate doesn't
+solve luckily this learning rate doesn't
+matter this is just whatever should
+matter this is just whatever should
+double check on that at some point
+double check on that at some point
+though
+okay larger bat size which is you would
+okay larger bat size which is you would
+expect a larger batch size
+right 32
+Horizon entropy
+is higher just a little bit higher it's
+is higher just a little bit higher it's
+pretty close to default
+actually we do need
+Lambda surprisingly pretty close to what
+Lambda surprisingly pretty close to what
+you would
+you would
+expect uh by
+defaults learning
+defaults learning
+rate o6
+mini batch
+size and I can confirm that these are
+size and I can confirm that these are
+way closer to Hardware optimal
+settings but two update EPO is wipes get
+settings but two update EPO is wipes get
+slowed
+down two update EPO is why I just
+down two update EPO is why I just
+slowed let's do get rid of this
+248 okay so let's see what this
+does
+e e
+very smooth
+very smooth
+learning very smooth
+learning 1.1
+mil just a little tiny bit slower than
+mil just a little tiny bit slower than
+anticipated but still very
+good definitely within what we would
+good definitely within what we would
+expect
+all right
+all right
+perfect now we can compare this
+one uh oh are we going to have uh
+one uh oh are we going to have uh
+instability
+here okay it's
+here okay it's
+good why is it so much longer
+this is two minutes now
+right maybe I gave it too many
+right maybe I gave it too many
+steps hang on yeah I think I gave it too
+steps hang on yeah I think I gave it too
+many
+many
+steps maybe it wasn't
+uh 126 but yeah this this is not going
+uh 126 but yeah this this is not going
+to
+be yeah it's 100 Mil not 130 mil that's
+be yeah it's 100 Mil not 130 mil that's
+why it does solve you can
+why it does solve you can
+see then we
+see then we
+will do one more just to see if uh we
+will do one more just to see if uh we
+get
+confirmation
+confirmation
+so okay we did this this gives
+us so yep solved
+us so yep solved
+here and then we'll see if this makes
+here and then we'll see if this makes
+any
+any
+difference there is expected to be a
+difference there is expected to be a
+little bit of instability so if it
+little bit of instability so if it
+doesn't fully solve if it gets stuck
+doesn't fully solve if it gets stuck
+like somewhere it's within a
+reason we'll end up having to do like
+reason we'll end up having to do like
+average or
+average or
+something ex seed average
+and see the amount of
+variance this is my better this is a lot
+variance this is my better this is a lot
+closer to the original solve time
+closer to the original solve time
+there's a slight difference in
+there's a slight difference in
+the the train speed I believe
+here
+so we also actually have decent uh en
+so we also actually have decent uh en
+overhead now it's worth fixing
+definitely going to be worth
+fixing this
+one 1100 okay yeah so there's like a 10%
+one 1100 okay yeah so there's like a 10%
+speed difference or whatever no big deal
+speed difference or whatever no big deal
+I think my single cor slightly slower
+I think my single cor slightly slower
+here multicore slightly faster than the
+here multicore slightly faster than the
+other machine something like that so
+other machine something like that so
+very very close in terms of
+very very close in terms of
+time
+841 856 okay very very
+841 856 okay very very
+simpar very very similar
+simpar very very similar
+here now if I do if I do nothing
+here now if I do if I do nothing
+but
+but
+train.
+train.
+p3o
+p3o
+through what
+happens okay so what happens is that the
+happens okay so what happens is that the
+speed takes a
+speed takes a
+25 plus almost 30%
+25 plus almost 30%
+haircut this is 27%
+Miss so that's all of the overhead right
+Miss so that's all of the overhead right
+there is probably in
+there is probably in
+MK so we need to make that thing
+MK so we need to make that thing
+faster but I want to see how the
+faster but I want to see how the
+learning curves themselves compare I
+learning curves themselves compare I
+these hyper parameters are not optimized
+these hyper parameters are not optimized
+for this they're optimized for po not
+for this they're optimized for po not
+this
+this
+algorithm I want to
+algorithm I want to
+see how they
+compare little bit of
+instability for
+that jump at the end
+okay so there is some
+instability but without even like
+instability but without even like
+retuning the hyper
+retuning the hyper
+parameters I mean this to me is
+parameters I mean this to me is
+potential right this is massive massive
+potential right this is massive massive
+potential
+oh yeah that is massive massive
+oh yeah that is massive massive
+potential right so in
+samples again little bit of weirdness
+samples again little bit of weirdness
+but it looks like especially if we were
+but it looks like especially if we were
+to retune parameters we are on par with
+to retune parameters we are on par with
+GPO but we are taking
+GPO but we are taking
+a 21% compute
+a 21% compute
+there hang on forward Ming
+mostly looks like the haircut is
+in MK right
+here this is very very good like
+here this is very very good like
+promising good
+news e
+there's so much potential with
+there's so much potential with
+this I was starting to get worried that
+this I was starting to get worried that
+like maybe I had it wrong maybe this new
+like maybe I had it wrong maybe this new
+algorithm wasn't like all I thought it
+algorithm wasn't like all I thought it
+was but actually I really like this is
+was but actually I really like this is
+this is worth pursuing this is really
+this is worth pursuing this is really
+really strong evidence for
+it this isn't even using gamma and
+it this isn't even using gamma and
+Lambda so this is two hyper Prem is
+Lambda so this is two hyper Prem is
+totally ignored and there there's
+totally ignored and there there's
+several things I think that we could
+several things I think that we could
+improve as well so the first thing then
+improve as well so the first thing then
+with this m I want to
+do I'm going to leave myself a good hour
+do I'm going to leave myself a good hour
+and a half for porting work so I'm going
+and a half for porting work so I'm going
+to do this for another hour and a half
+to do this for another hour and a half
+and then I'll leave the time after that
+and then I'll leave the time after that
+for porting
+work actually let me send the quick
+thing e
+be major if we get this to
+work let's go figure out where to be
+work let's go figure out where to be
+slow down
+slow down
+this 28% is a lot
+Neptune
+off five so we're leaking about 8% of
+off five so we're leaking about 8% of
+the compute
+here we
+leaking none of the confute
+here pretty cool to see you have this
+here pretty cool to see you have this
+much promise doesn't it add a new
+much promise doesn't it add a new
+parameter Net One nope so at the moment
+parameter Net One nope so at the moment
+kind of because it sort of is a hyper
+kind of because it sort of is a hyper
+parameter but um longer term uh you just
+parameter but um longer term uh you just
+set that to your hidden size and you're
+done it's not like like it so once we
+done it's not like like it so once we
+fix a couple weird things with how we're
+fix a couple weird things with how we're
+calculating Horizons it should end up
+calculating Horizons it should end up
+being the case that more will be
+being the case that more will be
+strictly
+strictly
+better and uh in practice you'll just
+better and uh in practice you'll just
+set it to whatever your hidden size is
+set it to whatever your hidden size is
+so at the moment there's a quirk with it
+so at the moment there's a quirk with it
+where you need to set it small because I
+where you need to set it small because I
+haven't done masking fully correctly but
+haven't done masking fully correctly but
+uh that will go away
+it's pretty cool
+what would
+happen um it would just work slightly
+happen um it would just work slightly
+better or the same no difference
+and we're leaking just a little bit of
+and we're leaking just a little bit of
+per here a little bit of per there a
+per here a little bit of per there a
+little bit of per everywhere that very
+little bit of per everywhere that very
+obnoxious
+we just need to make it like 30%
+we just need to make it like 30%
+faster actually you know there's
+faster actually you know there's
+something I want to check as well
+something I want to check as well
+because we might even have to I want to
+because we might even have to I want to
+see how much more we have to optimize it
+see how much more we have to optimize it
+than I currently think
+than I currently think
+so if I
+so if I
+do that P3
+do that P3
+Horizon how much lower does it get if I
+Horizon how much lower does it get if I
+do this
+in theory it really shouldn't have much
+effect practice has a massive
+effect practice has a massive
+effect is it all in misk
+though it looks to me like it is all a
+MK you see that mass of MK overhead
+let's optimize for this
+let's optimize for this
+case and then we'll go from
+case and then we'll go from
+there we don't want to do little
+there we don't want to do little
+optimizations if we need to do big
+optimizations if we need to do big
+optimizations
+first how much of it is right here
+there it is right
+here no 10% is in here
+here no 10% is in here
+okay how about
+here just like leaks a little bit of per
+here just like leaks a little bit of per
+here a little bit of per there a little
+here a little bit of per there a little
+bit of per
+bit of per
+everywhere really
+obnoxious and then how about this block
+is this one longer as
+well no this one's actually fine okay so
+well no this one's actually fine okay so
+this loss you know maybe we can compile
+this loss you know maybe we can compile
+this to make it a little bit
+this to make it a little bit
+faster but it looks like we are mainly
+faster but it looks like we are mainly
+leaking perf
+think we're mainly leaking perf in
+here hang on how is this not all of
+here hang on how is this not all of
+it how is this not all of it where are
+it how is this not all of it where are
+we leaking 20% additional per
+did that barely adds
+anything where's the other 15%
+there it
+is that should not take any time so
+is that should not take any time so
+let's figure out what's
+wrong buffer is going to e even faster
+wrong buffer is going to e even faster
+isn't that crazy
+yeah okay so somehow this stupid block
+yeah okay so somehow this stupid block
+of code that should not be taking up
+of code that should not be taking up
+anything is taking up
+anything is taking up
+133% that is a lot
+see if it's in
+here oh yeah there it is
+values mean
+I don't know if you saw on Discord but I
+I don't know if you saw on Discord but I
+tried
+tried
+TCH 2.6 and I get a 60k speed
+up already did it my
+up already did it my
+friend uh did you change anything on the
+friend uh did you change anything on the
+box I didn't change anything on any of I
+box I didn't change anything on any of I
+don't think I changed anything on box
+don't think I changed anything on box
+two or anything for you but I did ship I
+two or anything for you but I did ship I
+shipped like a Dev uh new Dev build
+shipped like a Dev uh new Dev build
+puffer tank files for uh torch
+26 I think that that's specific though
+26 I think that that's specific though
+to action sampling so that's not going
+to action sampling so that's not going
+to be across everything that's just
+to be across everything that's just
+going to be across like specific types
+going to be across like specific types
+of
+ends for
+any reason not to merge what PR yeah the
+any reason not to merge what PR yeah the
+reason not to merge a PR is I haven't
+reason not to merge a PR is I haven't
+seen a PR oh look at
+this this is doing
+this this is doing
+okay for
+let me get that PR open
+does this
+work pad wait what the hell
+does this help with your thing
+I'm sketched merging that into
+I'm sketched merging that into
+2 if you merge if you do it to Dev I'll
+2 if you merge if you do it to Dev I'll
+PR if you do it to Dev I'll merge it
+PR if you do it to Dev I'll merge it
+instantly
+generally merging stuff just like YOLO
+generally merging stuff just like YOLO
+merging stuff to the main branch just
+merging stuff to the main branch just
+makes my life hard because inevitably
+makes my life hard because inevitably
+there's like some case where it crashes
+there's like some case where it crashes
+an M or something and then I have to
+an M or something and then I have to
+stop what I'm doing and like go fix 20
+stop what I'm doing and like go fix 20
+frantically before like it impacts
+frantically before like it impacts
+somebody who really should not be
+somebody who really should not be
+impacted by it
+hang on
+we've got lots of cool discussion in
+we've got lots of cool discussion in
+group chats now private group Chats on
+Pokemon e
+I'll leave set up to reply to some
+people e
+just juggling things with all the the
+just juggling things with all the the
+release stuff it's cool I think the post
+release stuff it's cool I think the post
+will at least do pretty well for Pokemon
+will at least do pretty well for Pokemon
+which is nice to see I think
+which is nice to see I think
+uh that guy will
+uh that guy will
+have see the problem is now even though
+have see the problem is now even though
+I have his name and it's all public like
+I have his name and it's all public like
+it's still going to be that guy forever
+it's still going to be that guy forever
+cuz it's what the freaking Discord is
+cuz it's what the freaking Discord is
+um yeah this is
+um yeah this is
+awesome do he have followers yet oh yeah
+awesome do he have followers yet oh yeah
+he's getting some followers he started
+he's getting some followers he started
+at zero today it's at
+at zero today it's at
+45 that's a little start on
+45 that's a little start on
+X I always say that X is mandatory for
+X I always say that X is mandatory for
+ML researchers
+so cool
+release
+for e
+all
+all
+right that's enough chatting for a bit
+so it's so obnoxious the way that this
+so it's so obnoxious the way that this
+is so reward block
+is so reward block
+MP reward
+MP reward
+Block
+B word
+block do I really want to copy
+I guess I have to
+right e
+now we have reward
+block now we can do this computation on
+block now we can do this computation on
+the
+the
+GPU and uh we will not be stuck
+perfect
+see if this does
+it expected all
+tensors what did I mess up
+exp. reward
+exp. reward
+block values
+mean
+okay
+aning why do I do this
+again I think there was some index IND
+again I think there was some index IND
+in
+crap shouldn't
+crap shouldn't
+be shouldn't be any indexing
+be shouldn't be any indexing
+crap contiguous block
+I guess we just start putting stuff on
+I guess we just start putting stuff on
+GPU we going have to test a couple
+GPU we going have to test a couple
+things
+self.
+actions the thing is these are already
+actions the thing is these are already
+on on the GPU aren't
+on on the GPU aren't
+they believe
+so e
+I don't know if this is going to be
+worse I actually kind of want to test
+worse I actually kind of want to test
+this separately before I do this because
+this separately before I do this because
+this could be this could be a big
+this could be this could be a big
+mistake if I screw this up
+the 708 on the
+retweet and mostly converting to the
+retweet and mostly converting to the
+original as
+well okay so this is a 1.1 1.1 mil right
+well okay so this is a 1.1 1.1 mil right
+and remember we we're going to
+and remember we we're going to
+try we're going to try putting all this
+try we're going to try putting all this
+stuff on the GPU and we're going to see
+stuff on the GPU and we're going to see
+what
+happens e
+he's on the GPU was
+well e
+where's device
+okay that is a
+problem I'm almost sure the torch
+problem I'm almost sure the torch
+doesn't have that
+I'm going to just borrow this for now
+I'm going to just borrow this for now
+and then we'll hope that we don't break
+[ __ ] e
+I think this will be the wrong
+I think this will be the wrong
+order but
+order but
+uh F
+order
+order
+has no attribute andem Che itself
+oh
+no invalid for input size
+three
+what that didn't help at all now did it
+and this is slow as
+and this is slow as
+[ __ ] that is so slow God that is awful
+[ __ ] that is so slow God that is awful
+why why does that even exist if it's
+why why does that even exist if it's
+going to be that slow
+I don't think there's a fast GPU sword
+I don't think there's a fast GPU sword
+right is that a
+thing e
+much
+better we'll do this St
+two does this thing have a device
+perfect we actually do have a
+device do like
+this two
+this two
+right let's just add them this
+below
+below
+nump lovely
+in in in but
+received
+received
+okay
+apparently this is not happy
+just
+do B idx is
+OB B idx is
+obs for
+H the transpose function is different
+H the transpose function is different
+this is do
+permute the idx
+is for
+is there a reason for
+this I guess there kind of is
+right yeah I guess there kind of
+is so let's just go back
+okay 1.1 million still
+right same speed as before
+bxs do2 self.
+bxs do2 self.
+device that's CU we're are indexing the
+device that's CU we're are indexing the
+same
+same
+way
+right so next
+right so next
+what we do
+next got reward
+block is it
+oops for
+0% custom here
+expected all tensors to be on same
+device values mean and reward
+block right this is the thing that I
+block right this is the thing that I
+wanted to try
+profile training
+MK
+so put these on
+so put these on
+device put these on
+devid reward block
+what happened to train
+custom is this now
+faster oh was this faster
+oh
+oh
+yeah it's faster
+okay okay
+okay so that's an immediate boost
+right just taking this off of the just
+right just taking this off of the just
+doing this on GPU this is now
+0% and
+now let's see where the other P the
+now let's see where the other P the
+other uh computers leaking I think it's
+other uh computers leaking I think it's
+all here now
+right I think 7% or whatever in the uh
+right I think 7% or whatever in the uh
+the main loss
+function and then the rest of it here
+function and then the rest of it here
+right yeah about there 7 percentage 8%
+right yeah about there 7 percentage 8%
+something like that now all of our
+something like that now all of our
+leaking all the leak is right
+here of course we're going to break some
+here of course we're going to break some
+synchronization but we'll have to fix
+synchronization but we'll have to fix
+that finally got around to working on
+that finally got around to working on
+graphics for impulse Warriors added some
+graphics for impulse Warriors added some
+Trails for players and projectiles
+Trails for players and projectiles
+having trouble making edges the map have
+having trouble making edges the map have
+a bloom glowing effect but maybe icons
+a bloom glowing effect but maybe icons
+for weapons all I need to add what do
+for weapons all I need to add what do
+you think and you made a website let's
+see
+o
+o
+okay hey these projectile icons are a
+okay hey these projectile icons are a
+nice Edition
+it's got something some fancy weapon it
+it's got something some fancy weapon it
+looks
+like where are the weapon
+like where are the weapon
+icons oh maybe I need to add those okay
+I don't know I
+I don't know I
+mean I still think you could come up
+mean I still think you could come up
+with some sort of creative Shader for
+with some sort of creative Shader for
+this that would make it look really
+good like pretty much all of these
+good like pretty much all of these
+weapons are just going to be like
+weapons are just going to be like
+particle effects
+particle effects
+like you can probably just find some
+like you can probably just find some
+cool
+shaders couldn't find any icons where
+shaders couldn't find any icons where
+are you looking
+I mean there's all sorts of stuff like
+this I think you want the ones without
+this I think you want the ones without
+backgrounds on
+them it's just generally where you look
+them it's just generally where you look
+you kind of have to do some digging
+you kind of have to do some digging
+around to find artists that you like and
+around to find artists that you like and
+then see like what stuff they have
+something like this also
+works not
+bad Graphics definitely a pin
+oh man we're leaking 6% just in
+indexing okay I'm going to have to look
+indexing okay I'm going to have to look
+at
+this map should look pretty here
+somehow I mean there are a lot of things
+somehow I mean there are a lot of things
+you can do there right
+I mean look what they do right they
+I mean look what they do right they
+literally just did
+literally just did
+like they just have some Bloom on stuff
+like they just have some Bloom on stuff
+with a bunch of shard sharp angles and
+with a bunch of shard sharp angles and
+render the uh and render stuff using
+render the uh and render stuff using
+outlines
+right I think that you could probably do
+right I think that you could probably do
+something pretty similar to this without
+something pretty similar to this without
+too too much difficulty I mean there's
+too too much difficulty I mean there's
+all sorts of stuff you can do like um
+all sorts of stuff you can do like um
+for instance you can do shaders to like
+for instance you can do shaders to like
+Ripple the environment when shots hit
+Ripple the environment when shots hit
+and
+stuff I'm going to be right back back
+stuff I'm going to be right back back
+let me use the restroom I got to ban
+let me use the restroom I got to ban
+this bot
+this bot
+first I'll be right
+back
+e
+e
+e e
+we're
+back 35%
+back 35%
+leak 8% just an index
+leak 8% just an index
+in which means
+okay let me try
+something for. ca. synchron what
+something for. ca. synchron what
+happens nothing
+right it's still going to be
+right it's still going to be
+8% 7%
+what if we do it like
+this
+this
+slower much
+slower much
+slower interesting
+torch indexing is
+slower maybe not hang
+slower maybe not hang
+on experience. sort training
+data B idx is obs
+maybe you just have to do to
+maybe you just have to do to
+them let's see I remember pych having
+them let's see I remember pych having
+this issue before but I want to see if
+this issue before but I want to see if
+they fixed it
+since.
+idx okay still of data to transfer
+idx okay still of data to transfer
+ideally you don't want to do
+this yeah still just a slow okay you
+this yeah still just a slow okay you
+don't want to you do not want to do
+this because this is on the CPU
+anyways how do we get around
+this it's a massive freaking am amount
+this it's a massive freaking am amount
+of
+data why doesn't this totally Crush
+data why doesn't this totally Crush
+performance with the observations
+performance with the observations
+actually you would think it would
+actually you would think it would
+right e
+OBS of
+MB that doesn't Crush
+curve
+right be obs
+patch Ops are much bigger than the
+patch Ops are much bigger than the
+values and we have to do the same
+values and we have to do the same
+indexing operation don't
+indexing operation don't
+we how does that somehow not Crush
+we how does that somehow not Crush
+performance when this does crush
+performance right
+ex
+is I guess maybe the answer is that it
+is I guess maybe the answer is that it
+kind of
+kind of
+does that's probably where most of the
+does that's probably where most of the
+overhead comes from right
+overhead comes from right
+comes from
+this we're just at a point where um
+this we're just at a point where um
+things are so so fast that this indexing
+things are so so fast that this indexing
+operation is
+slow I wonder is there a faster
+way e
+and what we can do for this
+is there a
+fast
+fastest where's something more modern
+here e
+just doing what I think it's
+just doing what I think it's
+doing I'm pretty darn sure that this is
+doing I'm pretty darn sure that this is
+literally just
+um
+here might be time to pay the piper on
+here might be time to pay the piper on
+this design
+this design
+decision okay so here we have our IND
+see that is
+rough I mean I guess um
+okay first of
+all kind of have to figure out the
+all kind of have to figure out the
+trajectory segments thing now don't
+trajectory segments thing now don't
+we I've been putting this off for like a
+we I've been putting this off for like a
+year it's a pain in the
+ass e
+I guess we'll draw this out this will be
+I guess we'll draw this out this will be
+pretty informative anyways a couple
+pretty informative anyways a couple
+people
+watching not draw right was it draw
+online
+online
+so it's a
+blueprint so the problem that we have at
+blueprint so the problem that we have at
+the moment
+the moment
+right when we collect
+right when we collect
+observations let's do the full thing we
+observations let's do the full thing we
+get
+like we get
+like we get
+indices like Z One 2
+indices like Z One 2
+three
+three
+four okay and then this is at time
+four okay and then this is at time
+T this is the environment
+T this is the environment
+index and what's the other thing that we
+index and what's the other thing that we
+store
+I think that's it isn't
+it oh yeah we also Store Flat
+it oh yeah we also Store Flat
+index so the sample
+index so the sample
+order so what we do with
+order so what we do with
+this is we
+this is we
+go 0 one two
+go 0 one two
+three actually let me just let's just
+three actually let me just let's just
+make this
+make this
+better so let's do instead of zero we do
+better so let's do instead of zero we do
+one five three
+one five three
+seven
+this
+this
+okay and
+okay and
+then just do
+then just do
+like we get
+like
+like
+zero three one
+4 okay now when we store these we make
+initially we make a big table like
+initially we make a big table like
+this and now this has eight numbers 0
+this and now this has eight numbers 0
+one two
+I guess it only goes up to seven
+huh and then it's G to have
+huh and then it's G to have
+the uh environment
+the uh environment
+index so this is going to
+be
+one
+one
+three
+three
+3 1 4 and then we put up the end we put
+3 1 4 and then we put up the end we put
+t
+t
+t
+t
+t
+t
+Okay and then what we can do is we can
+Okay and then what we can do is we can
+sort this
+sort this
+thing uh we can sort this thing
+thing uh we can sort this thing
+basically
+[Music]
+by believe it's this row and then this
+by believe it's this row and then this
+row
+row
+right yeah we sort this by this row and
+right yeah we sort this by this row and
+this row so what we want to get out of
+this row so what we want to get out of
+this
+this
+is that data at the end of the
+is that data at the end of the
+day so we
+day so we
+get what we do
+get what we do
+zero one t
+Z
+Z
+one we
+do I guess it should have been Z
+do I guess it should have been Z
+0 why it's so confusing Z T
+on we do Z
+three
+three
+one Z or
+t t okay so now we have these in
+t t okay so now we have these in
+order by environment ID and clearly uh
+order by environment ID and clearly uh
+the important thing here is that these
+the important thing here is that these
+are grouped up
+right these are grouped up
+so technically if we give if we keep
+so technically if we give if we keep
+these indices we should be able to to
+these indices we should be able to to
+detect these
+detect these
+boundaries and uh and use
+this still tricky because with the
+this still tricky because with the
+lsdm you have to go across
+bounds right
+so I mean we split this up into
+so I mean we split this up into
+segments oh but we the key assumption
+segments oh but we the key assumption
+here is that the segments are going to
+here is that the segments are going to
+end up being pretty
+end up being pretty
+long
+long
+right at least reasonably so
+I think if we just pass this indices
+array the sorted indices
+array the sorted indices
+array I think we get it don't we
+oh and I messed this up as well didn't
+oh and I messed this up as well didn't
+I where's the is there an
+I where's the is there an
+eraser yeah this should not be like this
+eraser yeah this should not be like this
+this is you have to actually Arc sort
+this is you have to actually Arc sort
+the
+the
+indices
+indices
+so what it this is
+so what it this is
+actually
+Four this is
+Four this is
+zero is
+I
+I
+stupid
+stupid
+[Music]
+zero no this is fine
+zero no this is fine
+or this initial one
+or this initial one
+is
+zero six and so on and so forth so you
+zero six and so on and so forth so you
+do have the indices in here the indices
+do have the indices in here the indices
+tell you where to get your data
+from how much
+from how much
+of this indexing is coming from each of
+of this indexing is coming from each of
+these other
+these other
+things much of this indexing is coming
+things much of this indexing is coming
+from each of these other things
+like can I just do
+this like is this expensive right
+now still expensive that's still 11%
+now still expensive that's still 11%
+compute 12%
+compute it's a
+lot what is this doing
+okay this is not doing very much
+either still a lot of
+compute mean we can't do this on the GPU
+compute mean we can't do this on the GPU
+right now there's iteration
+right now there's iteration
+here that actually screws us over for
+here that actually screws us over for
+the values as well doesn't
+it
+does very difficult to make this thing
+does very difficult to make this thing
+fast
+but should it
+be it shouldn't be
+be it shouldn't be
+right the observations in the network
+right the observations in the network
+are doing way more work than
+this so it's really just about
+this so it's really just about
+optimizing this thing because I the
+optimizing this thing because I the
+fundamental amount of work being done
+fundamental amount of work being done
+here is not very large
+kind of a few different problems with
+kind of a few different problems with
+how we're doing this isn't there aren't
+how we're doing this isn't there aren't
+there
+so and there are a few different
+so and there are a few different
+problems
+ah this driving me
+nuts kind of want to solve both of these
+nuts kind of want to solve both of these
+in one Fell Swoop
+all you have to do you're looking for
+all you have to do you're looking for
+boundaries
+right what are my options
+right what are my options
+here I already have do I have all these
+here I already have do I have all these
+quanties on the GPU
+quanties on the GPU
+already or do I
+not I have everything but the index
+not I have everything but the index
+tensor on GPU and the index tensor needs
+tensor on GPU and the index tensor needs
+to go to GPU anyways
+there's no way to store this stuff
+there's no way to store this stuff
+continuously in the first place
+right no you'd have to make additional
+right no you'd have to make additional
+assumptions how many additional
+assumptions how many additional
+assumptions would you have to
+make it's kind of
+make it's kind of
+tough like me supporting the
+tough like me supporting the
+asynchronous is starting to
+asynchronous is starting to
+limit the ways in which I can collect
+limit the ways in which I can collect
+data
+right for something like GPU Drive
+right for something like GPU Drive
+you're going to get all these little
+you're going to get all these little
+segments
+you don't know from the GetGo how you're
+you don't know from the GetGo how you're
+going to want to
+going to want to
+batch so the best thing you can do is
+batch so the best thing you can do is
+store them flat to begin
+with right I think I kind of already
+with right I think I kind of already
+have the
+optimal optimal thing here
+don't
+I I mean how else would you do
+this you could have a per agent buff
+this you could have a per agent buff
+that doesn't help you though because
+that doesn't help you though because
+there's a map size to that that can be
+there's a map size to that that can be
+highly
+highly
+variable it can be highly variable for
+variable it can be highly variable for
+every type of M usually not even just
+every type of M usually not even just
+for specialized ones that doesn't help
+you so yeah you can really only
+hang
+on environment no you really can't
+on environment no you really can't
+improve on this very much at
+improve on this very much at
+all what this indexing
+all what this indexing
+operation that has to happen
+you would think this operation should be
+you would think this operation should be
+able to be
+fast fast f
+I think we need to go check this out
+I think we need to go check this out
+don't
+we okay let's just go get some data
+so here's our
+data
+and B
+just
+do
+synchronize
+e
+e e
+long as there a substantial difference
+here about
+2x it
+2x it
+is let's just make sure there's not a
+bias oh I'm stupid hold on
+how about we not be stupid about this
+huh same
+speed make sure but yeah that's
+speed make sure but yeah that's
+fine same speed
+hang on is this something
+is this
+is this
+flat viewed as 1 D
+tenser Ah that's
+why
+e
+e
+e e
+I think that there you're unlikely to be
+I think that there you're unlikely to be
+able to improve this
+right it should already be paralyzed
+right it should already be paralyzed
+efficiently
+there nothing you can really do here
+oh numpy is taking numpy takes forever
+huh e
+doesn't matter if you use an intro long
+doesn't matter if you use an intro long
+it seems
+NPI indexing very very slow for large
+NPI indexing very very slow for large
+tensors uh if by comparison though if we
+tensors uh if by comparison though if we
+were to
+were to
+do if we did
+this would the result be
+this would the result be
+different yes they
+different yes they
+would GPU is
+would GPU is
+faster for large
+faster for large
+tensors is slower for small tensors
+what about
+this hi that is interesting so the big
+this hi that is interesting so the big
+batches it is faster on the
+batches it is faster on the
+GPU by an order of magnitude
+GPU by an order of magnitude
+still it goes down if you have smaller
+still it goes down if you have smaller
+batches
+batches
+this is still
+faster what do I do with this
+information have some ideas I'll be
+information have some ideas I'll be
+right
+back
+e
+e e
+keep on this for a little bit
+here I think that what happened with
+here I think that what happened with
+this is before I was measuring indexing
+this is before I was measuring indexing
+for and uh I had smaller
+batches so it was more uh effective to
+batches so it was more uh effective to
+do it
+do it
+on in numpy but now it's faster to do
+on in numpy but now it's faster to do
+it in p in P torch it looks
+like oh yeah what if we do
+on what if it's not
+fed fast these
+go ah this was the this was the kicker
+so they still have this problem it looks
+like maybe not
+it's actually
+it's actually
+faster it is actually
+faster it is actually
+faster and index select is faster than
+faster and index select is faster than
+slice here as
+slice here as
+well but it's not that that is not the
+well but it's not that that is not the
+case
+for majority of
+these so uh let's just do this one real
+these so uh let's just do this one real
+quick
+four okay uh torches cleaned up their
+four okay uh torches cleaned up their
+indexing a whole
+indexing a whole
+bunch it looks to me like torches
+bunch it looks to me like torches
+actually improved their indexing a whole
+actually improved their indexing a whole
+bunch so we
+bunch so we
+[Music]
+[Music]
+can possibly rely on that
+650k
+right sample
+Logics
+Logics
+device and you do store right
+we just do
+we just do
+this we do
+this we don't have to do any of this
+stuff e
+okay what's this
+do return
+do return
+action
+action
+you you do have to
+you you do have to
+pass actions back of CPU
+pass actions back of CPU
+T float
+T float
+has no attribute item
+aha we get speed
+aha we get speed
+increase we do get a speed increase
+increase we do get a speed increase
+here but we will see what that is from I
+here but we will see what that is from I
+think that is good news
+okay
+how's the uh the post doing by the way
+how's the uh the post doing by the way
+on uh the Pokemon post doing
+is it done for
+tonight
+tonight
+95 not
+95 not
+bad definitely not
+bad few new followers as well
+34% in MK right
+NP uh and then actually I think we can
+NP uh and then actually I think we can
+delete all
+delete all
+this
+right doesn't need any of this oh that's
+right doesn't need any of this oh that's
+way way nice
+right yeah that's way
+nice Advantage MP I think we still need
+nice Advantage MP I think we still need
+that
+that
+one otherwise reward block
+I think that we still need these but the
+I think that we still need these but the
+rest of them are gone get rid of
+this hang on we do need to know we still
+this hang on we do need to know we still
+need to have buffers allocated right for
+nonblocking
+copy other
+is there a way to cut the memory
+is there a way to cut the memory
+allocations
+allocations
+out we can look at that potentially
+out we can look at that potentially
+after um um I think we'll just do this
+after um um I think we'll just do this
+for
+for
+now so I'm sure this
+breaks DS
+NP we do DS of indices
+just
+okay about the
+same we now have
+same we now have
+28% of this overhead inside of
+custom
+custom
+28% how would we do
+here we now have this index on GPU we
+here we now have this index on GPU we
+need to do
+need to do
+torch
+synchronize
+lovely this no longer takes any time at
+lovely this no longer takes any time at
+all this indexing no longer takes any
+time so we are making forward progress
+time so we are making forward progress
+here
+adj just this transfer how much does it
+adj just this transfer how much does it
+take
+so let's just do for
+so let's just do for
+synchronize I think we need it here for
+synchronize I think we need it here for
+a device transfer that's blocking
+but okay so this
+here
+133% 14% so this it's a lot of compute
+133% 14% so this it's a lot of compute
+right here
+right
+e e
+let's try this
+about
+this
+this
+aha that is faster by a
+aha that is faster by a
+lot freaking pie
+torch see
+torch see
+something nice
+probably doesn't do anything
+probably doesn't do anything
+right no that doesn't do anything we can
+right no that doesn't do anything we can
+just leave it as a
+just leave it as a
+string it's a single call it's not in
+string it's a single call it's not in
+the
+the
+loop it's not going to have any overhead
+there we go so three % total right here
+there we go so three % total right here
+3%
+total that's big
+progress
+okay now how about
+this this is 15
+this this is 15
+16 lot of compute wasted here
+16 lot of compute wasted here
+lot of compute wasted how about flatten
+batch about flat B
+right noticeable small but noticeable
+mostly but mostly now we have it down to
+mostly but mostly now we have it down to
+this we've gotten rid of a lot of
+the there are a couple problems
+the there are a couple problems
+here so
+this is just too much data to process I
+this is just too much data to process I
+think on
+think on
+um this is just too much data
+um this is just too much data
+fundamentally to process on a
+fundamentally to process on a
+CPU isn't
+it let me think is this too much data to
+it let me think is this too much data to
+process should it
+process should it
+be should it be too much data to process
+what type of steps per second do I think
+what type of steps per second do I think
+I should be able to get on this
+I should be able to get on this
+operation 128
+operation 128
+numbers I do this all the time for
+numbers I do this all the time for
+puffer Libs
+puffer Libs
+environments I'm able to get this at
+environments I'm able to get this at
+millions of steps per
+millions of steps per
+second there's no way that this is
+second there's no way that this is
+slower than breakout that one it's like
+slower than breakout that one it's like
+10 million steps for
+the problem is it's done
+the problem is it's done
+synchronously so even if I get 10
+synchronously so even if I get 10
+million steps per
+second yeah that's still going to be
+second yeah that's still going to be
+rough like this n here is 10 million
+rough like this n here is 10 million
+steps per second actually right that's
+steps per second actually right that's
+still going to be rough
+okay what other options do I
+okay what other options do I
+have so blocking
+operation I actually need to call Cuda
+operation I actually need to call Cuda
+synchronize
+synchronize
+here for safety right
+ay it's tough I think you've probably
+ay it's tough I think you've probably
+seen by now the
+seen by now the
+uh Pokemon stuff is
+uh Pokemon stuff is
+live we
+go there you go he's probably gotten
+go there you go he's probably gotten
+some followers right yeah there we go
+some followers right yeah there we go
+73 perfect
+what do we do with
+what do we do with
+this there's no way in hell we can do
+this there's no way in hell we can do
+this on the GPU right unless I write a
+chal uh
+chal uh
+ah hold
+ah hold
+on hold on does it even make sense to do
+on hold on does it even make sense to do
+that
+wait this might be the thing that
+wait this might be the thing that
+finally makes puffer need a custom thrn
+this thing is going to compute
+this thing is going to compute
+advantages the size of advantages
+how big is this
+thing yeah this was a kernel I
+thing yeah this was a kernel I
+think I think this is finally the thing
+think I think this is finally the thing
+I've not actually done any
+I've not actually done any
+Cuda I've not done any Cuda at
+Cuda I've not done any Cuda at
+all I mean I've been this is also kind
+all I mean I've been this is also kind
+of a really bad time for me to have to
+of a really bad time for me to have to
+pick something new up like that I'd like
+pick something new up like that I'd like
+to
+to
+actually this is a really bad time to
+actually this is a really bad time to
+have to do this
+have to do this
+with all the other stuff going
+on let me think what I can do in the
+meantime well I'm not totally screwed
+meantime well I'm not totally screwed
+here
+right hang on I'm not totally screwed
+right hang on I'm not totally screwed
+this is the pessimistic
+this is the pessimistic
+case right here
+if I run regular breakout right
+if I run regular breakout right
+now what do we
+now what do we
+get let
+run e
+where's this
+here has no
+here has no
+attribute
+ter B Advantage B
+values returns
+try
+this okay that's a little faster than
+this okay that's a little faster than
+before isn't
+before isn't
+it just a little bit but it is a little
+it just a little bit but it is a little
+just a little hair
+faster than
+before just a hair
+now
+now
+what now we
+check 32 Horizon
+it's a much smaller Gap than
+before close it a little bit
+more two M two
+more two M two
+workers 24 m per work
+a little Annoying to have to use
+uh
+multiprocessing
+million that's slower than before the
+million that's slower than before the
+hell that doesn't make sense
+right no no no that does not make
+sense one
+one
+one
+oh let see
+1.4 mil
+1.1
+1.1
+mil let's look at the distributions
+mil let's look at the distributions
+here forward
+9% 9%
+9% 9%
+M 29 uh 20%
+M 29 uh 20%
+Miss spend the extra time
+learn it's just a little bit of
+learn it's just a little bit of
+overhead 10% here we have a bit more
+overhead 10% here we have a bit more
+than 10% overhead which is a bit
+than 10% overhead which is a bit
+concerning though
+right so let's just run these both for
+right so let's just run these both for
+seconds I'm going to run them both for
+seconds I'm going to run them both for
+seconds and just going to do a little
+seconds and just going to do a little
+bit of just janky manual
+profiling same thing here and then we'll
+profiling same thing here and then we'll
+compare
+so we spent 5 seconds in forward six
+so we spent 5 seconds in forward six
+seconds and
+seconds and
+forward 4 seconds and copy 3 seconds and
+forward 4 seconds and copy 3 seconds and
+copy seconds and train 18
+copy seconds and train 18
+seconds board is 4 seconds 13% 3 seconds
+seconds board is 4 seconds 13% 3 seconds
+very good seconds learn 11 seconds learn
+very good seconds learn 11 seconds learn
+Miss is 3
+Miss is 3
+seconds 2 seconds Miss
+seconds 2 seconds Miss
+we
+we
+spent just 3 seconds in
+spent just 3 seconds in
+Miss 6 seconds in
+this this would seem then there's only
+this this would seem then there's only
+10% overhead so why is it slower than
+10% second
+I don't see anything else it would
+be all just about matches
+up so I guess we'll just have to fix
+up so I guess we'll just have to fix
+that and then we'll see
+that and then we'll see
+uh 6 seconds
+same thing now with Neptune
+very
+good uhoh
+good uhoh
+well this does way
+worse let's see if I've broken data or
+worse let's see if I've broken data or
+if it's just the parameters the double
+if it's just the parameters the double
+number
+ofs those very fast now though
+I don't think we can have completely
+I don't think we can have completely
+broken
+broken
+learning that is still doing
+something maybe
+processing
+processing
+off 20 48m 1
+off 20 48m 1
+one do this for comparison
+that makes a huge difference doesn't
+that makes a huge difference doesn't
+it it's
+crazy e
+pretty small speed increase verus what I
+pretty small speed increase verus what I
+had before on this but still noticeable
+and this one matches right yeah this one
+and this one matches right yeah this one
+matches very
+matches very
+nicely
+nicely
+so now the only difference is P30
+so now the only difference is P30
+also I believe before it
+also I believe before it
+was we can see the
+SPs can see SPS
+we'll see the SPs
+difference
+so yeah we took it up from 700k to over
+900k same code pretty well
+700 to 900 so we've
+700 to 900 so we've
+mostly mostly closed the
+Gap oh we should run this just for the
+Gap oh we should run this just for the
+heck of it though just to make sure we
+heck of it though just to make sure we
+didn't break it
+it's looking
+similar another 14% that we can save off
+similar another 14% that we can save off
+the environment if we get a bigger end
+the environment if we get a bigger end
+batch size working
+or lower overhead
+or lower overhead
+bindings 14% is kind of surprisingly
+bindings 14% is kind of surprisingly
+large for how fast breakout should
+be yeah similar Dynamic to before
+d8
+d8
+perfect boom
+matches see what did we just squeeze out
+matches see what did we just squeeze out
+of this thing
+oh yeah we squeezed a little out of
+oh yeah we squeezed a little out of
+it
+it
+extra
+5% an extra what's this like 30ish
+perc
+perc
+5% very
+nice
+e e
+a
+a
+900k 900k
+not fast enough 900k too
+not fast enough 900k too
+slow 900k is way too
+slow e
+time is it
+time is it
+5:18
+5:18 maybe I just fiddle with this a
+5:18 maybe I just fiddle with this a
+little bit I can throw it into Gro to
+little bit I can throw it into Gro to
+just see what it would do I have no
+just see what it would do I have no
+experience writing
+experience writing
+Fels I've been wanting to get into that
+Fels I've been wanting to get into that
+at some
+at some
+point I do plenty of lowle Dev
+basic okay you have a kernel
+and
+then you write a little python
+wrapper
+wrapper
+okay is that
+it it's not that bad
+extern
+CX block
+idx so presumably
+okay these are provided by
+Cuda interesting
+ah I see actually so this is a problem
+ah I see actually so this is a problem
+because if you don't have a
+because if you don't have a
+GPU it doesn't run correctly
+okay there's no fall back
+pile
+pile
+both is
+interesting yeah so
+me look at this function
+this
+right oh wait do I have profiling
+right oh wait do I have profiling
+on hang on I just saw that
+I just saw the profile decorator
+that custom is
+that custom is
+lower lower overhead
+lower lower overhead
+here but uh still there's a
+problem e
+is this fully parallel across hold
+on I think it is fully parallel across
+on I think it is fully parallel across
+row isn't it
+almost fully parallel to
+Crossroads yeah cuz the Min and the max
+Crossroads yeah cuz the Min and the max
+I can
+I can
+compute uh I can compute these cleanly
+yes e
+this code actually doesn't look that bad
+this code actually doesn't look that bad
+this looks fairly similar to what I'm
+this looks fairly similar to what I'm
+doing
+doing
+already which is kind of what I figured
+already which is kind of what I figured
+you have to be a little careful with the
+you have to be a little careful with the
+parallelism and I'm sure debugging is a
+parallelism and I'm sure debugging is a
+pain in the ass thought debugging is
+pain in the ass thought debugging is
+already a pain in the ass what I'm
+already a pain in the ass what I'm
+doing yeah this was kind of what I was
+doing yeah this was kind of what I was
+expecting though like when you're
+expecting though like when you're
+already doing low-l
+already doing low-l
+Dev it doesn't really matter if it's
+Dev it doesn't really matter if it's
+like you're doing CPU or GPU or what
+like you're doing CPU or GPU or what
+like you're using really the same
+stuff it's
+stuff it's
+527 what you guys think we write a
+527 what you guys think we write a
+through to Colonel or we attempt
+through to Colonel or we attempt
+to never written these
+to never written these
+before I this would be kind of cool
+before I this would be kind of cool
+though I think we do
+though I think we do
+it rest one more time real quick and
+it rest one more time real quick and
+then um we back in a minute we'll have a
+then um we back in a minute we'll have a
+good half hour 40 minutes I think let me
+good half hour 40 minutes I think let me
+just double check on uh they do have to
+just double check on uh they do have to
+go to dinner at some point so let me
+go to dinner at some point so let me
+double check on that and then uh if I
+double check on that and then uh if I
+have time we will write this Colonel
+have time we will write this Colonel
+right now and if not we'll write it
+right now and if not we'll write it
+later tonight or tomorrow right be right
+later tonight or tomorrow right be right
+back
+by
+e e
+all right I got like 20 30 minutes to
+all right I got like 20 30 minutes to
+just start on this I want to make this
+just start on this I want to make this
+as easy on myself as possible though
+as easy on myself as possible though
+before I start so we're going to
+before I start so we're going to
+do we're going to do
+do we're going to do
+float BD
+float BD
+Max Min and Max
+Max Min and Max
+okay min
+let's do this on vpu as
+let's do this on vpu as
+well
+Min an
+Min an
+item Max
+item Max
+okay just do bstd min bstd max
+heck
+float there we
+go yeah that's about the same speed as
+go yeah that's about the same speed as
+before as it should be so good now we
+before as it should be so good now we
+have
+all
+did they do this in the first one
+I bind 11
+we need pie bind
+implicit binding
+okay okay let's see there's an implicit
+okay okay let's see there's an implicit
+bind that's fine
+and.
+C I'm going to have to check all this
+C I'm going to have to check all this
+mess I'm sure
+okay this
+synchronize
+synchronize
+and let me try this
+return
+return
+something it does
+something it does
+W
+block word
+block buff
+DS
+onwards Andes
+zeros
+there we
+go experience bounds we also need bounds
+basically all these are going to go to
+basically all these are going to go to
+uh Duda I guess
+and uh you don't have to pass this
+and uh you don't have to pass this
+because you compute this in the other
+because you compute this in the other
+function
+right
+right
+advantages advantages
+equals
+CPU or whatever something like
+CPU or whatever something like
+that syron
+okay now we'll be able to fix a lot of
+okay now we'll be able to fix a lot of
+this as
+this as
+well Middle with
+this and you don't have to compile this
+this and you don't have to compile this
+or anything it just uh
+loads me
+see error building extension
+nvcc not found
+H you need
+Cuda you need to C A toolkit don't
+Cuda you need to C A toolkit don't
+you that sucks
+we can do that for
+now we can do that for
+now
+e e
+I think it's going to be easier to just
+I think it's going to be easier to just
+get the
+get the
+um the container I'll just pytch ship
+um the container I'll just pytch ship
+these so that they're
+pre-built I don't know
+pre-built I don't know
+actually but we are going to have to
+actually but we are going to have to
+deal with this
+oops
+hi that's fine
+Co
+kind of annoying that um we'll have to
+kind of annoying that um we'll have to
+redo some setup but it's
+fine good to run time
+you can go back to 124
+where's the darn list of them where you
+where's the darn list of them where you
+can find these
+can find these
+easily I guess I just swap it to deel
+easily I guess I just swap it to deel
+instead of
+instead of
+[Music]
+runtime they're not that big of uh
+runtime they're not that big of uh
+there's not that big of a size
+there's not that big of a size
+difference is there oh no there is adds
+difference is there oh no there is adds
+a couple gigs that's
+a couple gigs that's
+annoying we should have this in our
+annoying we should have this in our
+container anyways though I've gotten
+container anyways though I've gotten
+burned by this before I don't know why I
+burned by this before I don't know why I
+did why I decided to get
+clever than
+so we'll just fiddle with this for now
+so we'll just fiddle with this for now
+I'll come back later I'm going to have
+I'll come back later I'm going to have
+to do a little bit of porting stuff and
+to do a little bit of porting stuff and
+then we'll go from there
+i' say we've gotten like reasonably
+i' say we've gotten like reasonably
+decent performance on first day tweet of
+decent performance on first day tweet of
+Pokemon 107 5.7k
+Pokemon 107 5.7k
+views has it done anything on
+here now
+sadly that
+not what
+happens e
+honestly I could see myself just jamming
+honestly I could see myself just jamming
+some
+some
+Cuda on some point here
+wouldn't that be funny if we just like
+wouldn't that be funny if we just like
+ludicrously
+ludicrously
+optimized we like figure out what puffer
+optimized we like figure out what puffer
+model we like to use for everything and
+model we like to use for everything and
+we just ludicrously optimized
+we just ludicrously optimized
+it 10 million step per second
+it 10 million step per second
+training I think for that we'd have to
+training I think for that we'd have to
+literally like yeah the the whole
+literally like yeah the the whole
+training Loop would have to go to cudar
+training Loop would have to go to cudar
+though the
+though the
+thing any of the Python looping is just
+thing any of the Python looping is just
+slow
+I don't think it's worth the effort to
+I don't think it's worth the effort to
+really do that though because very
+really do that though because very
+quickly our models are going to get
+quickly our models are going to get
+bigger little bit bigger no not even
+bigger little bit bigger no not even
+huge just like as soon as you go to a
+huge just like as soon as you go to a
+million maybe there's still performance
+million maybe there's still performance
+benefits I don't
+know e
+all right and then it's
+all right and then it's
+puffer
+puffer
+depths puffer depths right
+this is a quick
+one e
+fun we break um oh yeah
+fun we break um oh yeah
+7,000 look at that that's kind of nice
+all right there's puffer deps
+built I should have done this a while
+ago
+e
+e
+e e
+basically all I want to do for right now
+basically all I want to do for right now
+is get this container to run and then
+is get this container to run and then
+see if we have
+nbcc make sure we get
+nbcc make sure we get
+something for
+yay we have
+nbcc check out
+oh
+friend dynamic
+does not define export
+function c advantage.
+function c advantage.
+c
+u e
+and
+and
+my plugins back
+there we
+go all
+go all
+right let's
+do that run something
+canot
+canot
+access
+bandages don't need idx
+either the array has no attribute is
+either the array has no attribute is
+Cuda what did I screw
+up and I gotta
+go this is
+go this is
+Cuda good
+that should be on
+Cuda there we
+go try
+that oh
+that oh
+there incompatible
+there incompatible
+arcs oh yeah also we forgot to do
+arcs oh yeah also we forgot to do
+well the Min and the max are
+well the Min and the max are
+backwards let's fix that before we
+backwards let's fix that before we
+forget and have L to pay for
+it the following AR
+types are
+types are
+supported tensor tensor
+incompatible hang on
+incompatible hang on
+what incompatible function
+what incompatible function
+arguments all right I got to run I will
+arguments all right I got to run I will
+fix this after dinner um for folks
+fix this after dinner um for folks
+watching if you're interested in all the
+watching if you're interested in all the
+stuff I do you want to get involved with
+stuff I do you want to get involved with
+RL you're interested in puffer
+RL you're interested in puffer
+everything's on puffer doai star the
+everything's on puffer doai star the
+repo to help us out really helps a ton
+repo to help us out really helps a ton
+join the Discord if you want to get
+join the Discord if you want to get
+involved and follow on X for more RL
+involved and follow on X for more RL
+news and content thanks and

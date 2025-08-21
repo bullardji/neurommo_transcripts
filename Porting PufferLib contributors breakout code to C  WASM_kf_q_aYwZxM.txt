@@ -1,0 +1,3071 @@
+Kind: captions
+Language: en
+okay we should be live
+here let me make sure yeah our filters
+here let me make sure yeah our filters
+are good
+are good
+so happy
+so happy
+Monday uh let me switch this
+over so
+over so
+today we're going to finish something I
+today we're going to finish something I
+started late on Friday um the code was
+started late on Friday um the code was
+like in a crazy mids spot but uh what
+like in a crazy mids spot but uh what
+we're doing here I have a few different
+we're doing here I have a few different
+contributors that have made scyon
+contributors that have made scyon
+environments at this point I'll show one
+environments at this point I'll show one
+of these that I've ported so
+of these that I've ported so
+far you can check this on
+puff. so we had a contributor who made
+puff. so we had a contributor who made
+this like this pong game really hard um
+this like this pong game really hard um
+and it was sub submitted in
+and it was sub submitted in
+scyon and I ported it to Native C so
+scyon and I ported it to Native C so
+that we could compile for web assembly
+that we could compile for web assembly
+there's no real performance reason to do
+there's no real performance reason to do
+this um but it is very nice to be able
+this um but it is very nice to be able
+to have like a standalone in uh in web
+to have like a standalone in uh in web
+assembly so that you can do this with it
+assembly so that you can do this with it
+so what we're going to do is we're going
+so what we're going to do is we're going
+to Port finish porting breakout to this
+to Port finish porting breakout to this
+we're going to put breakout online and
+we're going to put breakout online and
+then the thing that I want to also get
+then the thing that I want to also get
+done this week which is going to be a
+done this week which is going to be a
+little bit harder uh right now there is
+little bit harder uh right now there is
+this very obnoxious pain point in that
+this very obnoxious pain point in that
+you have to in order to go oops I
+you have to in order to go oops I
+realized I don't have the chat up on
+realized I don't have the chat up on
+screen either uh let me fix that hey
+screen either uh let me fix that hey
+linky but uh I realized that in order to
+linky but uh I realized that in order to
+go from python to scon to
+go from python to scon to
+C it's a little bit tricky uh and there
+C it's a little bit tricky uh and there
+tends to be a lot of boiler plate
+tends to be a lot of boiler plate
+associated with that so I'm going to
+associated with that so I'm going to
+look for places that we can reduce and
+look for places that we can reduce and
+eliminate boiler plate so that we can
+eliminate boiler plate so that we can
+just have a lot of nice clean C files
+just have a lot of nice clean C files
+the one other thing I have not figured
+the one other thing I have not figured
+out yet is whether I want each
+out yet is whether I want each
+environment to be a pure single file c
+environment to be a pure single file c
+stand alone or if I want to share some
+stand alone or if I want to share some
+render and utility tools um I kind of
+render and utility tools um I kind of
+like the idea of having each environment
+like the idea of having each environment
+be self-contained because
+like in my head like yeah they're
+like in my head like yeah they're
+probably some common utilities that I
+probably some common utilities that I
+could factor out and then it would be
+could factor out and then it would be
+it's kind of cool right cuz like oh yeah
+it's kind of cool right cuz like oh yeah
+you can use puffer for this stuff but I
+you can use puffer for this stuff but I
+think that the correct design decision
+think that the correct design decision
+is probably going to be to make these
+is probably going to be to make these
+completely or almost entirely uh
+completely or almost entirely uh
+independent the one thing that we will
+independent the one thing that we will
+reuse are the custom uh the neural net
+reuse are the custom uh the neural net
+architecture code because that's a
+architecture code because that's a
+little tricky to redo every time and see
+little tricky to redo every time and see
+but yeah we're going to start with this
+but yeah we're going to start with this
+today
+today
+and we'll see where this goes
+uh where are
+we breakout okay so here's our breakout
+stuff this is what I had started on
+stuff this is what I had started on
+yesterday or Friday uh this is like a
+yesterday or Friday uh this is like a
+very quick hacky Port of the game
+and I'm pretty sure this just seg fault
+and I'm pretty sure this just seg fault
+so let's go fix
+that uh right so there was like a whole
+that uh right so there was like a whole
+bunch of stuff that I guess I just
+bunch of stuff that I guess I just
+didn't Port
+correctly out.
+yeah so I I remember now there was like
+yeah so I I remember now there was like
+this really obnoxious thing uh where the
+this really obnoxious thing uh where the
+signatures are gigantic this is one of
+signatures are gigantic this is one of
+the things that we're going to have to
+the things that we're going to have to
+fix but essentially this is an artifact
+fix but essentially this is an artifact
+of having to have bindings for Python
+of having to have bindings for Python
+syon and C is you get these really
+syon and C is you get these really
+obnoxious call signatures uh this is one
+obnoxious call signatures uh this is one
+of the things we're going to end up
+of the things we're going to end up
+having to figure out how to fix but for
+having to figure out how to fix but for
+now I think all I have to do
+is probably need to go pull up the the
+is probably need to go pull up the the
+scon code for
+this yeah so here's Noah's original code
+this yeah so here's Noah's original code
+Noah is a contributor to puffer so when
+Noah is a contributor to puffer so when
+this is done we're going to put on this
+this is done we're going to put on this
+and pong we're going to put attribution
+and pong we're going to put attribution
+to the original uh the devs of the scon
+to the original uh the devs of the scon
+versions
+you know it'll be like code by so and so
+you know it'll be like code by so and so
+forth by
+me yeah you can see this ridiculous
+me yeah you can see this ridiculous
+signature
+signature
+right they're like a
+right they're like a
+wrap yeah we'll just we'll side by side
+wrap yeah we'll just we'll side by side
+it CU basically we just need this to
+it CU basically we just need this to
+have the same
+have the same
+signature yeah look at that
+signature yeah look at that
+so uh I don't know why the order is
+so uh I don't know why the order is
+wrong so we're going to
+wrong so we're going to
+do float
+do float
+DT frame
+DT frame
+Skip and
+then the allocate function you can skip
+then the allocate function you can skip
+all the numpy stuff the design of this
+all the numpy stuff the design of this
+is such
+is such
+that so you have an init function and an
+that so you have an init function and an
+allocate function and they are different
+allocate function and they are different
+and the reason for that is that the
+and the reason for that is that the
+allocate function has to construct all
+allocate function has to construct all
+these buffers
+these buffers
+um but when you create a a Breakout game
+um but when you create a a Breakout game
+from python you actually do all the
+from python you actually do all the
+memory allocations in Python and you
+memory allocations in Python and you
+pass that memory into c as a buffer and
+pass that memory into c as a buffer and
+the reason for that is that means you
+the reason for that is that means you
+have shared memory across Python and c
+have shared memory across Python and c
+and then if you do that then you can get
+and then if you do that then you can get
+transparent access to all the state data
+transparent access to all the state data
+of the game in uh in Python and in C so
+of the game in uh in Python and in C so
+you get this nice mirrored effect that
+you get this nice mirrored effect that
+said I don't think that this is the way
+said I don't think that this is the way
+to do it this is just like way too much
+to do it this is just like way too much
+stuff to pass this probably should be
+stuff to pass this probably should be
+like one big contiguous struct or
+like one big contiguous struct or
+something uh but we will figure that out
+something uh but we will figure that out
+later welcome YouTube
+folks okay so rewards scores episodic
+folks okay so rewards scores episodic
+returns uh the first thing here that we
+returns uh the first thing here that we
+need
+is counters numb agents where did num
+is counters numb agents where did num
+substeps come
+from that's
+awkward yeah I don't know what this is
+awkward yeah I don't know what this is
+but we don't need
+this oh hey
+this oh hey
+Noah well welcome I'm porting your stuff
+Noah well welcome I'm porting your stuff
+um yeah I if you I don't know if you're
+um yeah I if you I don't know if you're
+around here but I'm going to show you
+around here but I'm going to show you
+exactly how I'm going to manage all this
+exactly how I'm going to manage all this
+stuff today and I'm going to come up
+stuff today and I'm going to come up
+with some cool ways to uh to improve on
+with some cool ways to uh to improve on
+this cuz actually this is not just a u
+this cuz actually this is not just a u
+problem I've had this problem with my
+problem I've had this problem with my
+stuff as well and uh I think we're going
+stuff as well and uh I think we're going
+to do some cool design to get around
+to do some cool design to get around
+this today but yeah you're going to have
+this today but yeah you're going to have
+your Breakout game online and playable
+your Breakout game online and playable
+on puffer GG today so that's probably
+on puffer GG today so that's probably
+pretty cool right
+and like I told you not to worry about
+and like I told you not to worry about
+it because like I said uh I I told you I
+it because like I said uh I I told you I
+would like just do this stuff and help
+would like just do this stuff and help
+fix stuff on stream and that's what I'm
+fix stuff on stream and that's what I'm
+doing promise
+kept for folks watching if you submit uh
+kept for folks watching if you submit uh
+environment code like if you're going to
+environment code like if you're going to
+submit like some of the other Atari
+submit like some of the other Atari
+games or like other environments I will
+games or like other environments I will
+do this with you as well and you'll get
+do this with you as well and you'll get
+to see how this type of stuff
+to see how this type of stuff
+works can't stay very long as I have it
+works can't stay very long as I have it
+work and no worries the VOD will be up
+work and no worries the VOD will be up
+if you want to see this stuff later and
+if you want to see this stuff later and
+so will the final
+code but absolutely thank you for the uh
+code but absolutely thank you for the uh
+the environment here it's going to be
+the environment here it's going to be
+really cool to have Ultra fast break out
+online okay that's a good
+signature I just have to adjust this
+I also think that the uh the
+I also think that the uh the
+vectorization while like internal
+vectorization while like internal
+vectorization was a cool idea initially
+vectorization was a cool idea initially
+I think it only makes sense for
+I think it only makes sense for
+environments that are actually natively
+environments that are actually natively
+multi-agent um I think what we're going
+multi-agent um I think what we're going
+to do is we're going to have we're going
+to do is we're going to have we're going
+to have each environment only have the
+to have each environment only have the
+one agent but then we're going to
+one agent but then we're going to
+parallelize in C so we'll have like you
+parallelize in C so we'll have like you
+know uh we'll have a way to allocate
+know uh we'll have a way to allocate
+like the array of environments in C so
+like the array of environments in C so
+that you can do step vectorized
+that you can do step vectorized
+operation but uh you don't have to have
+operation but uh you don't have to have
+the logic of the M itself have that
+the logic of the M itself have that
+extra Dimension cuz that extra Dimension
+extra Dimension cuz that extra Dimension
+is pretty
+is pretty
+gross really doesn't do anything for
+gross really doesn't do anything for
+cash
+cash
+cercy really doesn't help you with very
+cercy really doesn't help you with very
+much I could be wrong about that we'll
+much I could be wrong about that we'll
+say it doesn't degrade performance I
+say it doesn't degrade performance I
+think it'll only degrade performance if
+think it'll only degrade performance if
+you put that whole Loop in Python uh I
+you put that whole Loop in Python uh I
+think that if you just have like the
+think that if you just have like the
+loop over environments in C
+loop over environments in C
+you should be
+you should be
+fine oh yeah the other big idea I had
+fine oh yeah the other big idea I had
+lately that uh I just talked with
+lately that uh I just talked with
+somebody who would really like it if we
+somebody who would really like it if we
+had this um I don't want to commit to
+had this um I don't want to commit to
+this just yet but I'm thinking that I
+this just yet but I'm thinking that I
+might do a custom memory allocator for
+might do a custom memory allocator for
+uh all the environments in puffer lib
+uh all the environments in puffer lib
+where it just gives you a Big Blob of
+where it just gives you a Big Blob of
+memory right and then it takes the
+memory right and then it takes the
+memory segments that it needs for each
+memory segments that it needs for each
+individual piece of data out of that
+individual piece of data out of that
+because what that would let you do is it
+because what that would let you do is it
+would let you do um really fast State
+would let you do um really fast State
+reset and set operations which would
+reset and set operations which would
+allow you to do like MCTS and stuff
+allow you to do like MCTS and stuff
+incredibly incredibly quickly because
+incredibly incredibly quickly because
+essentially set state is just mem copy
+essentially set state is just mem copy
+at that
+at that
+point that was the other idea I had
+point that was the other idea I had
+recently well to be fair I've had that
+recently well to be fair I've had that
+one for a while but um you know I just
+one for a while but um you know I just
+thought about it I just started
+thought about it I just started
+considering it seriously just now based
+considering it seriously just now based
+on a meeting I had
+okay
+so
+so
+63 uh assuming
+63 uh assuming
+here nit C
+breakout
+breakout
+[Music]
+actions I think this is actions is
+actions I think this is actions is
+unsigned charar
+recently um the Raab Dev rayon said that
+recently um the Raab Dev rayon said that
+he wished that uh C didn't have C didn't
+he wished that uh C didn't have C didn't
+have signed versus unsigned types just
+have signed versus unsigned types just
+everything was signed and maybe we have
+everything was signed and maybe we have
+an extra type for
+an extra type for
+bites I thought about it and he's
+bites I thought about it and he's
+totally
+right um
+uh okay so why does this not
+exist there should be numb
+exist there should be numb
+balls
+ah crazy function
+signature we'll get this right now and
+signature we'll get this right now and
+then we'll simplify
+then we'll simplify
+it so this
+is actions
+observations
+rewards
+scores episode
+scores episode
+returns we don't have numb balls
+here I think this is
+instar number of
+instar number of
+balls then we get paddle
+balls then we get paddle
+positions uh ball positions
+all velocities brick
+all velocities brick
+positions brick
+states
+guns and then we
+get in Star balls
+fired the wall positions yeah so I guess
+fired the wall positions yeah so I guess
+the signature just got messed up somehow
+the signature just got messed up somehow
+when I
+when I
+ported uh wall positions then we do
+ported uh wall positions then we do
+paddle widths paddle
+paddle widths paddle
+Heights uh ball speeds is not
+Heights uh ball speeds is not
+here ball speeds hit
+here ball speeds hit
+counters um agents width height ball
+counters um agents width height ball
+width ball
+height brick width brick height OB
+height brick width brick height OB
+size no bricks yeah there you
+size no bricks yeah there you
+go that that's the whole
+signature get rid of this
+death P
+death P
+Heights I guess did I miss one here
+are there actually any industry jobs in
+are there actually any industry jobs in
+reinforcement
+reinforcement
+learning of
+learning of
+course yes
+course yes
+like also um being in any area of ml you
+like also um being in any area of ml you
+can be in any other area of ml in like a
+can be in any other area of ml in like a
+month like if I wanted to be working on
+month like if I wanted to be working on
+like if I wanted to be working on
+like if I wanted to be working on
+Transformers
+Transformers
+uh on that side of things it would
+uh on that side of things it would
+literally take me a month to catch up
+literally take me a month to catch up
+with all of the latest literature from
+with all of the latest literature from
+the past several years and to just be
+the past several years and to just be
+doing that it's like the exact same set
+doing that it's like the exact same set
+of
+of
+skills
+skills
+um but yeah there's like a lot of stuff
+um but yeah there's like a lot of stuff
+in robotics there's some random stuff in
+in robotics there's some random stuff in
+Industry as well like there's some like
+Industry as well like there's some like
+random stuff in like optimization of
+random stuff in like optimization of
+layouts and
+layouts and
+whatnot it's not like nobody does RL I
+whatnot it's not like nobody does RL I
+mean like if you think about it right
+mean like if you think about it right
+like you're not solving every problem
+like you're not solving every problem
+with a 400 billion parameter model that
+with a 400 billion parameter model that
+you can only access via an
+you can only access via an
+API that only knows about language and
+API that only knows about language and
+can't like adapt quickly to new not
+can't like adapt quickly to new not
+unintuitive problems right that's what
+unintuitive problems right that's what
+RL is for
+I don't know how I missed this
+one duplicate member
+did I not pass width and height
+did I not pass width and height
+somehow I could have sworn I did oh
+somehow I could have sworn I did oh
+right here it's
+missing ridiculously Long Function
+missing ridiculously Long Function
+signatures
+and then okay so right here I just have
+and then okay so right here I just have
+to call this correctly
+so we have oops
+so we have oops
+P frame
+skip
+actions uh observations right yeah that
+actions uh observations right yeah that
+exists
+exists
+Rewards or I'm just checking to make
+Rewards or I'm just checking to make
+sure each of these
+sure each of these
+exists on
+exists on
+balls did we not allocate number of
+balls did we not allocate number of
+balls
+yeah we didn't allocate number of balls
+yeah we didn't allocate number of balls
+here pic
+returns in Star
+nums pattle
+nums pattle
+positions all
+positions all
+velocities States
+uh duns has To
+Go's
+DS also missing balls
+fired then paddle wids
+Heights all
+speeds hit counters and then numb agents
+speeds hit counters and then numb agents
+gets passed in this is correct with
+gets passed in this is correct with
+height all All Height brick width and
+height all All Height brick width and
+brick
+brick
+height of
+height of
+size
+size
+bricks row calls didn't you define done
+bricks row calls didn't you define done
+twice
+twice
+uh duns looks like you are
+uh duns looks like you are
+correct let's apparently this is
+correct let's apparently this is
+unsigned Char as well good
+unsigned Char as well good
+catch yeah this function signature is
+catch yeah this function signature is
+way too long to keep track of basically
+way too long to keep track of basically
+like half of this stuff is going to end
+like half of this stuff is going to end
+up getting packed into a um like a game
+up getting packed into a um like a game
+state struct or something
+uh
+uh
+okay Falls
+fired should be in
+star oops this is
+int and
+int and
+actions is is supposed to be unsign
+Char
+Direction
+float and then these are just defined in
+float and then these are just defined in
+the wrong
+the wrong
+order uh usually what we do here is cuz
+order uh usually what we do here is cuz
+this is one pass compiler I put reset
+this is one pass compiler I put reset
+and step at the
+and step at the
+bottom and that normally just handles
+bottom and that normally just handles
+everything well I don't put it at the
+everything well I don't put it at the
+all the way at the bottom I put it at
+all the way at the bottom I put it at
+the bottom of the um the logic which is
+the bottom of the um the logic which is
+right
+here uh is p not a built-in
+mcore
+pi and now we have legitimate bugs on
+pi and now we have legitimate bugs on
+the port to fix float and
+int hit counters I assume this is
+int hit counters I assume this is
+supposed to be an INT
+right star hit
+counters oh we double
+counters oh we double
+assigned that doesn't matter but it's
+assigned that doesn't matter but it's
+weird
+okay that jumps us down to
+okay that jumps us down to
+here subscripted
+here subscripted
+value Bri
+value Bri
+positions I think this is a 2d array
+right uh apparently brick positions
+right uh apparently brick positions
+is a 2d
+array where's this get set
+this might get set from python in the
+this might get set from python in the
+original code
+right Rick positions cuz I don't see
+right Rick positions cuz I don't see
+where this is getting
+where this is getting
+set like where are they populating
+this nowhere right it would be in reset
+this nowhere right it would be in reset
+if it would be anywhere and it's not
+if it would be anywhere and it's not
+here so I'm assuming what this is
+here so I'm assuming what this is
+happening is that this is using the
+happening is that this is using the
+python
+logic I don't see it in here though oh
+logic I don't see it in here though oh
+wait here it is right
+here populate it once in python yep I
+here populate it once in python yep I
+see
+it
+it
+cool put this in C
+uh and
+then where should we put
+this I guess
+this I guess
+we'll make a a function somewhere
+it's probably got to be up
+it's probably got to be up
+here
+oops
+this and then we just
+this and then we just
+do void uh generate brick
+do void uh generate brick
+positions the breakout star n
+oops positions and then this gets
+oops positions and then this gets
+allocated to zeros
+right and I think that this now has to
+right and I think that this now has to
+be brick
+positions yeah but num bricks is this
+positions yeah but num bricks is this
+variable this is kind of awkward
+it's very awkward
+actually I think the easiest
+actually I think the easiest
+way
+well it depends if I want to have this
+well it depends if I want to have this
+be like a weird breakout very varant
+be like a weird breakout very varant
+where you can have like different
+where you can have like different
+breakout games or
+breakout games or
+whatever
+whatever
+um probably I shouldn't be caring about
+um probably I shouldn't be caring about
+that at the
+that at the
+moment
+so it's just kind of gross because like
+so it's just kind of gross because like
+with the number of bricks not being a
+with the number of bricks not being a
+constant
+I can do it like
+this
+yeah I generally don't do 2D arrays for
+yeah I generally don't do 2D arrays for
+position Are you purposely avoiding
+position Are you purposely avoiding
+something like vectors yes yes I
+am we just use Simple
+arrays we're also writing c not
+C++ this is ultra high performance Sim
+C++ this is ultra high performance Sim
+right we don't need Dynamic length we
+right we don't need Dynamic length we
+don't need all these
+things the goal is not just to implement
+things the goal is not just to implement
+breakout right that's easy the goal is
+breakout right that's easy the goal is
+to implement stupidly High performing
+to implement stupidly High performing
+breakout or reinforcement
+breakout or reinforcement
+learning all the Sims have to run a bare
+learning all the Sims have to run a bare
+minimum of a a million steps per second
+minimum of a a million steps per second
+at the very
+least we'll just
+least we'll just
+do
+do
+X continuous memory yeah in fact I want
+X continuous memory yeah in fact I want
+it to be more continuous than it already
+it to be more continuous than it already
+is I think eventually the way we're
+is I think eventually the way we're
+going to go is we're going to have a
+going to go is we're going to have a
+custom mem allocator that just gives you
+custom mem allocator that just gives you
+one giant block of memory for your
+one giant block of memory for your
+entire Sim state so that you can very
+entire Sim state so that you can very
+easily set and like reset states which
+easily set and like reset states which
+would then allow you to do like MCTS and
+would then allow you to do like MCTS and
+stuff be
+nice it's actually very funny to me that
+nice it's actually very funny to me that
+like I've seen some very bizarre
+like I've seen some very bizarre
+functional stuff like for trying to do
+functional stuff like for trying to do
+this like just functional State stuff
+this like just functional State stuff
+like you don't need any of that you just
+like you don't need any of that you just
+need contiguous allocated memory um and
+need contiguous allocated memory um and
+then you can be way faster because
+then you can be way faster because
+functional code is very
+slow memory
+slow memory
+Arena
+Arena
+yeah when running a sweep oh I just
+yeah when running a sweep oh I just
+realized this is not visible over my
+realized this is not visible over my
+camera there we go
+camera there we go
+when running a sweep can it happen that
+when running a sweep can it happen that
+the solution of hyper parameters
+the solution of hyper parameters
+overfits to the set seed but doesn't
+overfits to the set seed but doesn't
+perform well for other seeds yes I'm
+perform well for other seeds yes I'm
+aware of that that is a limitation of
+aware of that that is a limitation of
+wand B uh not of like what I of my
+wand B uh not of like what I of my
+Approach so w b doesn't make it as far
+Approach so w b doesn't make it as far
+as I can tell w b does not make it easy
+as I can tell w b does not make it easy
+to run multiple seeds and collect data
+to run multiple seeds and collect data
+across them so uh the way that I do it
+across them so uh the way that I do it
+with wand B sweeps um I don't actually
+with wand B sweeps um I don't actually
+like save the model from the best run so
+like save the model from the best run so
+you end up having to retrain anyways and
+you end up having to retrain anyways and
+it's not fully deterministic so uh you
+it's not fully deterministic so uh you
+basically end up having to reverifying
+largest variance that we
+get if I may repeat a question I asked
+get if I may repeat a question I asked
+on disc if I missed a question on
+on disc if I missed a question on
+Discord my bad uh in your opinion is
+Discord my bad uh in your opinion is
+carbs that much more computer efficient
+carbs that much more computer efficient
+that it is worth dealing with the
+that it is worth dealing with the
+growing pains it may still have versus
+growing pains it may still have versus
+just using
+just using
+optuna uh I don't think anybody has good
+optuna uh I don't think anybody has good
+optuna Integrations with RL either
+optuna Integrations with RL either
+unless I'm mistaken I guess actually
+unless I'm mistaken I guess actually
+clean RL kind of does right clean RL
+clean RL kind of does right clean RL
+does a thing with us
+does a thing with us
+optuna um it depends what algorithms
+optuna um it depends what algorithms
+you're using from optuna carbs really
+you're using from optuna carbs really
+really nice because it's like it's like
+really nice because it's like it's like
+this really fancy gaussian process
+this really fancy gaussian process
+based thing that maintains a set of Paro
+based thing that maintains a set of Paro
+optimal points and is comput aware so it
+optimal points and is comput aware so it
+looks for it looks for longer Solutions
+looks for it looks for longer Solutions
+as it becomes more confident in its
+as it becomes more confident in its
+predictions over shorter Solutions so
+predictions over shorter Solutions so
+it's pretty interesting um as for
+it's pretty interesting um as for
+whether the growing pains are worth that
+whether the growing pains are worth that
+that's up to you but I'm the one
+that's up to you but I'm the one
+currently dealing with the growing pains
+currently dealing with the growing pains
+right like I deal with that by
+right like I deal with that by
+integrating with puffer so stuff doesn't
+integrating with puffer so stuff doesn't
+work you just let me know and I fix it
+work you just let me know and I fix it
+in puffer right
+Noah brick positions are X and Y right
+Noah brick positions are X and Y right
+you did like X comma
+you did like X comma
+Y is what it looks
+like I'm pretty
+sure perfect
+why
+why
+would
+why I'm not going to Alta
+for roll
+this brick y yeah exra ask you're going
+this brick y yeah exra ask you're going
+to ask me if I can cat up some ligma
+oops I got to pay attention almost
+oops I got to pay attention almost
+messed up the indices
+positions ah right we need to we didn't
+positions ah right we need to we didn't
+finish porting this yet so
+finish porting this yet so
+so this is already
+allocated
+allocated
+uh y
+uh y
+offset
+oops
+oops
+[Music]
+[Music]
+r or we can do row and call like
+r or we can do row and call like
+this and we have
+index do you use idx here
+index do you use idx here
+you do use
+idx call times brick width row brick
+idx call times brick width row brick
+height y
+height y
+offset this is good the only thing I
+offset this is good the only thing I
+want to change is I want to do
+want to change is I want to do
+this and there we
+go and now when you in it Breakout
+you should
+do generate brick
+positions this is M
+Pi
+F and
+F and
+all
+right oh because this I was for agents
+right oh because this I was for agents
+right you don't need this eye
+right you don't need this eye
+anymore wait no this is frame skip
+anymore wait no this is frame skip
+uh do I mess up
+here I don't think so hold
+on
+oops oh it is Agent ID X so we don't
+oops oh it is Agent ID X so we don't
+care about
+this we can just fix these function
+signatures uh I forgot semicolons
+here x
+is this correct it's changing the uh the
+is this correct it's changing the uh the
+loop variable in the
+loop this doesn't look
+right where the heck did this line come
+right where the heck did this line come
+from
+I think I can just delete this line I
+I think I can just delete this line I
+don't know where that came
+from ble whip
+uh do we need we need paddle withth here
+right no I think it was fine I think
+right no I think it was fine I think
+that you uh you did it correct and I
+that you uh you did it correct and I
+probably like tabbed the dumb super
+probably like tabbed the dumb super
+Maven
+Maven
+suggestion don't use llms
+suggestion don't use llms
+kids say no to
+llms I swear even like the very small
+llms I swear even like the very small
+amount that I use them for like saving
+amount that I use them for like saving
+typing occasionally I screw up and like
+typing occasionally I screw up and like
+tab too
+quickly defition of
+height e
+yeah we're totally going to make like
+yeah we're totally going to make like
+some struct base State thing for this
+some struct base State thing for this
+because this is ridiculous all these
+because this is ridiculous all these
+variables
+okay which of these variables are
+okay which of these variables are
+correct let's figure this
+out break out
+out break out
+Pi 576 these ones are correct
+right
+right
+so paddle
+WID paddle width
+yeah it looks like these ones are
+yeah it looks like these ones are
+correct so we get rid of this this this
+correct so we get rid of this this this
+this
+paddle paddle
+paddle paddle
+speed there's no such thing as paddle
+speed I like where the heck did these
+speed I like where the heck did these
+things even come from I don't know
+hardcoded the
+hardcoded the
+speed well then I'll have to figure out
+speed well then I'll have to figure out
+where I uh I'm missing
+that 2 + 2 plus number x +
+that 2 + 2 plus number x +
+one OBS size 2
+one OBS size 2
+plus two plus
+plus two plus
+num
+RS
+okay yeah so Noah the way that that uh
+okay yeah so Noah the way that that uh
+we should do this like when these
+we should do this like when these
+variables get to be ridiculous like this
+variables get to be ridiculous like this
+the way that you're going to see that
+the way that you're going to see that
+we'll do it is we'll make a
+we'll do it is we'll make a
+struct in C or scon that has all the
+struct in C or scon that has all the
+data in it um like all of the the stuff
+data in it um like all of the the stuff
+that has to get passed from
+that has to get passed from
+Python and then uh you'll have a numpy
+Python and then uh you'll have a numpy
+return type basically that gives you a
+return type basically that gives you a
+numpy structured array so you'll load
+numpy structured array so you'll load
+the data into the numpy structured array
+the data into the numpy structured array
+and then that gets unpacked from C and
+and then that gets unpacked from C and
+that prevents you from having to have
+that prevents you from having to have
+all this intermediate garbage and it
+all this intermediate garbage and it
+also results in you having con is memory
+also results in you having con is memory
+for state so that's probably what we're
+for state so that's probably what we're
+going to end up
+doing now I don't know there are a few
+doing now I don't know there are a few
+things I'm not positive on how to do
+things I'm not positive on how to do
+with that uh I think there's a little
+with that uh I think there's a little
+bit of pointer Shenanigans but we'll
+bit of pointer Shenanigans but we'll
+figure that out
+PL
+equals three
+and I have the signature wrong here
+somehow DT frame skip agents withth
+somehow DT frame skip agents withth
+height uh this is backward so it's got
+height uh this is backward so it's got
+to be ball width ball
+height wait ball
+height wait ball
+width ball
+width ball
+height oh I my brain just did something
+height oh I my brain just did something
+weird no that's correct quick
+weird no that's correct quick
+width height OB
+size I don't know why it needs no bricks
+size I don't know why it needs no bricks
+like
+like
+this
+um let's just do
+this
+this
+uh undefined okay
+uh undefined okay
+references
+handle
+handle
+ball
+three
+three
+step t
+and
+function collisions
+discreet that's weird it doesn't like
+discreet that's weird it doesn't like
+this is inlined
+I don't know why that
+I don't know why that
+is that's fine for now
+is that's fine for now
+so uh LD Library path
+equals Li and now I'm sure we're going
+equals Li and now I'm sure we're going
+to have to debug a bunch of runtime
+to have to debug a bunch of runtime
+stuff
+stuff
+here
+here
+um where's the a Breakout
+break so we get our first uh seg
+fault
+fault
+320 paddle
+positions this is supposed to be two
+anything
+else well
+uh not sure what's going on here this is
+uh not sure what's going on here this is
+kind of a
+thing let's see if there's uh do we have
+thing let's see if there's uh do we have
+input on this
+input on this
+yet yeah we don't have input on this so
+yet yeah we don't have input on this so
+we need
+that yeah but we need to
+input
+long how we do input here I think we do
+long how we do input here I think we do
+like
+like
+get
+get
+is e down
+it oh I think we did we do input in the
+it oh I think we did we do input in the
+demo file right the only thing that we
+demo file right the only thing that we
+do in the render is we do
+do in the render is we do
+this
+this
+right make or
+right make or
+pong.
+pong.
+H Spong dot I mean c yeah so you can see
+H Spong dot I mean c yeah so you can see
+we do the input right here this is how
+we do the input right here this is how
+we do the
+input that's a nice way of doing
+input that's a nice way of doing
+it oh interesting I actually already
+it oh interesting I actually already
+have it working here and actions zero
+uh okay so it's not actually working
+uh okay so it's not actually working
+then see why that
+is
+allocate
+allocate
+balls so this these allocators need to
+balls so this these allocators need to
+be fixed first because that'll give me
+be fixed first because that'll give me
+some better
+some better
+errors obervations done reward
+errors obervations done reward
+scores
+scores
+three
+three
+balls
+balls
+positions
+positions
+States balls fired wall paddle with
+States balls fired wall paddle with
+paddle height TI counters that's
+paddle height TI counters that's
+it but now when I close this those three
+it but now when I close this those three
+memory leaks are system level RB always
+memory leaks are system level RB always
+has those um they're like below RB
+has those um they're like below RB
+itself apparently they're like in
+itself apparently they're like in
+open gel or something I don't
+open gel or something I don't
+know but we don't have any extra memory
+know but we don't have any extra memory
+leaks
+since I see we have a lot of folks on
+since I see we have a lot of folks on
+YouTube
+YouTube
+now just quick little thing for uh for
+now just quick little thing for uh for
+new folks
+here this breakout Port is going to be
+here this breakout Port is going to be
+on this website later today it's a ultra
+on this website later today it's a ultra
+high performance breakout version for
+high performance breakout version for
+reinforcement learning written by Noah
+reinforcement learning written by Noah
+currently being ported by me and it's
+currently being ported by me and it's
+all free and open source it is
+all free and open source it is
+on puffer a/p puffer lib which is right
+on puffer a/p puffer lib which is right
+here
+here
+all this code it's in the dev Branch at
+all this code it's in the dev Branch at
+the moment and if you want to help me
+the moment and if you want to help me
+out for free go ahead and St the repo
+out for free go ahead and St the repo
+helps me out a ton back to
+Dev let's see how actions is getting
+used we allocate it here
+it gets set here right where does it get
+used we get fire left and
+right those all look correct to
+right those all look correct to
+me so
+let's see is it actually recording
+let's see is it actually recording
+actions
+oops print
+okay so you can see that I'm when I
+okay so you can see that I'm when I
+press the
+press the
+buttons things
+buttons things
+happen but nothing happens on the
+screen so apparently the paddle position
+screen so apparently the paddle position
+doesn't get
+doesn't get
+set the bricks don't get drawn either
+H hold
+on nothing
+let me think about what could be wrong
+let me think about what could be wrong
+here
+so this
+reset I bet that this reset is not
+reset I bet that this reset is not
+getting called correctly
+get
+set what if we set this to negative one
+set what if we set this to negative one
+I bet we're just not initializing
+correctly we do reach at the
+end let see do we actually get prints
+end let see do we actually get prints
+here you can see we do we get all the
+here you can see we do we get all the
+prints for all the bricks
+right
+right
+oops and then we do print
+oops and then we do print
+f r position
+we can see that these are
+wrong why are these wrong I called this
+wrong why are these wrong I called this
+right here didn't
+I brick position
+I assume something is just not getting
+I assume something is just not getting
+set correctly here one of these
+set correctly here one of these
+variables let's see which one it
+is r with
+oh wait it's right here
+right yeah so this this call needs to go
+right yeah so this this call needs to go
+after I initialize all the
+stuff so now we see that we have correct
+stuff so now we see that we have correct
+positions here or what look like correct
+positions and we have the states
+and we have
+actions and it says if brick state is
+actions and it says if brick state is
+one print F
+one print F
+brick we'll just do state
+ah I think that this needs to be
+n brick colors okay apparently there are
+n brick colors okay apparently there are
+too many
+rows brick is
+six and we don't have enough
+colors let's figure out what colors
+colors let's figure out what colors
+we're
+used red orange yellow sky blue and
+used red orange yellow sky blue and
+blue that's easy
+blue that's easy
+enough six is going to be equal
+enough six is going to be equal
+to uh
+to uh
+red
+red
+orange yellow green sky
+orange yellow green sky
+blue
+blue I also I don't know if you're still
+blue I also I don't know if you're still
+here Noah but I really like your idea to
+here Noah but I really like your idea to
+make the puffer Li the ball I think
+make the puffer Li the ball I think
+that's hilarious we're totally going to
+that's hilarious we're totally going to
+do
+that okay this did not seem to
+that okay this did not seem to
+help uh these are still not being
+rendered we will
+simply
+F Breck
+I
+State okay all the states are
+State okay all the states are
+zero so
+and see it's drawing all these different
+and see it's drawing all these different
+bricks right but nothing is
+happening drawing brick
+at I think we're just not setting these
+right I thought that's pretty funny can
+right I thought that's pretty funny can
+get to be a good size where you see at
+get to be a good size where you see at
+the puffer while the bar ball is still
+the puffer while the bar ball is still
+hard to
+hard to
+hit yeah well we'll just make the game
+hit yeah well we'll just make the game
+render bigger
+right I really like that idea that's
+right I really like that idea that's
+awesome marketing so thank you for the
+awesome marketing so thank you for the
+free
+marketing I mean it takes a lot to get
+marketing I mean it takes a lot to get
+um you know really specific tools like
+um you know really specific tools like
+this out there and fun stuff like that
+this out there and fun stuff like that
+actually goes quite a long
+way you know you just have these
+way you know you just have these
+environments but the puffer fish is the
+environments but the puffer fish is the
+ball we should do it for pong as
+well here's one uh one row of
+well here's one uh one row of
+bricks I don't know why the rest of them
+bricks I don't know why the rest of them
+aren't drawing let's figure that out
+probably because of the
+client there you go so not processing
+client there you go so not processing
+the actions for some
+the actions for some
+reason and figure out why that is the
+reason and figure out why that is the
+case
+step should
+be yeah right here
+right okay so it's getting actions but
+right okay so it's getting actions but
+the substep
+thing for
+okay so it's moving units of zero for
+okay so it's moving units of zero for
+some
+reason .0 oh cuz this is an
+reason .0 oh cuz this is an
+INT this is
+why very good so now we have the paddle
+moves oh look at that wait does it
+moves oh look at that wait does it
+work uh nope
+nope that was interesting let's play
+nope that was interesting let's play
+that
+that
+again
+so yeah something in the
+collisions very close now though to
+collisions very close now though to
+having it
+having it
+working we'll probably put it online as
+working we'll probably put it online as
+soon as it works and then we'll clean it
+soon as it works and then we'll clean it
+up after so people can play with it
+[Music]
+the wall position
+positions assumedly wall positions
+positions assumedly wall positions
+doesn't get
+initialized yeah you can totally see
+initialized yeah you can totally see
+that this is
+um so wall position
+um so wall position
+has six
+has six
+numbers
+numbers
+apparently 0
+apparently 0
+Z how is this structured wall positions
+here oh left top right I see
+yep I got you
+actually I only need to set one of these
+actually I only need to set one of these
+right it's end wall positions
+right it's end wall positions
+of
+of
+four
+four
+one where is uh with I I
+suppose I guess this is not allocated to
+suppose I guess this is not allocated to
+be big enough
+right
+right
+okay here's your
+game this is definitely breakout Yep
+game this is definitely breakout Yep
+this is how breakout Works guys
+it's actually hard to play because
+it's actually hard to play because
+there's like no way to tell what the
+there's like no way to tell what the
+heck the ball is
+doing I think it also goes through the
+doing I think it also goes through the
+paddle
+now this gets a little trickier because
+um we got to figure out the brick
+um we got to figure out the brick
+collisions
+substeps
+one where does this get
+set really want to
+see if someone can balance double
+see if someone can balance double
+pendulum let me see
+why is there so much stuff here for a
+why is there so much stuff here for a
+simple project
+that's a bizarre amount of
+files what the
+this is very bizarrely written code
+
+Kind: captions
+Language: en
+okay we should be live
+here let me make sure yeah our filters
+here let me make sure yeah our filters
+are good
+are good
+so happy
+so happy
+Monday uh let me switch this
+over so
+over so
+today we're going to finish something I
+today we're going to finish something I
+started late on Friday um the code was
+started late on Friday um the code was
+like in a crazy mids spot but uh what
+like in a crazy mids spot but uh what
+we're doing here I have a few different
+we're doing here I have a few different
+contributors that have made scyon
+contributors that have made scyon
+environments at this point I'll show one
+environments at this point I'll show one
+of these that I've ported so
+of these that I've ported so
+far you can check this on
+puff. so we had a contributor who made
+puff. so we had a contributor who made
+this like this pong game really hard um
+this like this pong game really hard um
+and it was sub submitted in
+and it was sub submitted in
+scyon and I ported it to Native C so
+scyon and I ported it to Native C so
+that we could compile for web assembly
+that we could compile for web assembly
+there's no real performance reason to do
+there's no real performance reason to do
+this um but it is very nice to be able
+this um but it is very nice to be able
+to have like a standalone in uh in web
+to have like a standalone in uh in web
+assembly so that you can do this with it
+assembly so that you can do this with it
+so what we're going to do is we're going
+so what we're going to do is we're going
+to Port finish porting breakout to this
+to Port finish porting breakout to this
+we're going to put breakout online and
+we're going to put breakout online and
+then the thing that I want to also get
+then the thing that I want to also get
+done this week which is going to be a
+done this week which is going to be a
+little bit harder uh right now there is
+little bit harder uh right now there is
+this very obnoxious pain point in that
+this very obnoxious pain point in that
+you have to in order to go oops I
+you have to in order to go oops I
+realized I don't have the chat up on
+realized I don't have the chat up on
+screen either uh let me fix that hey
+screen either uh let me fix that hey
+linky but uh I realized that in order to
+linky but uh I realized that in order to
+go from python to scon to
+go from python to scon to
+C it's a little bit tricky uh and there
+C it's a little bit tricky uh and there
+tends to be a lot of boiler plate
+tends to be a lot of boiler plate
+associated with that so I'm going to
+associated with that so I'm going to
+look for places that we can reduce and
+look for places that we can reduce and
+eliminate boiler plate so that we can
+eliminate boiler plate so that we can
+just have a lot of nice clean C files
+just have a lot of nice clean C files
+the one other thing I have not figured
+the one other thing I have not figured
+out yet is whether I want each
+out yet is whether I want each
+environment to be a pure single file c
+environment to be a pure single file c
+stand alone or if I want to share some
+stand alone or if I want to share some
+render and utility tools um I kind of
+render and utility tools um I kind of
+like the idea of having each environment
+like the idea of having each environment
+be self-contained because
+like in my head like yeah they're
+like in my head like yeah they're
+probably some common utilities that I
+probably some common utilities that I
+could factor out and then it would be
+could factor out and then it would be
+it's kind of cool right cuz like oh yeah
+it's kind of cool right cuz like oh yeah
+you can use puffer for this stuff but I
+you can use puffer for this stuff but I
+think that the correct design decision
+think that the correct design decision
+is probably going to be to make these
+is probably going to be to make these
+completely or almost entirely uh
+completely or almost entirely uh
+independent the one thing that we will
+independent the one thing that we will
+reuse are the custom uh the neural net
+reuse are the custom uh the neural net
+architecture code because that's a
+architecture code because that's a
+little tricky to redo every time and see
+little tricky to redo every time and see
+but yeah we're going to start with this
+but yeah we're going to start with this
+today
+today
+and we'll see where this goes
+uh where are
+we breakout okay so here's our breakout
+stuff this is what I had started on
+stuff this is what I had started on
+yesterday or Friday uh this is like a
+yesterday or Friday uh this is like a
+very quick hacky Port of the game
+and I'm pretty sure this just seg fault
+and I'm pretty sure this just seg fault
+so let's go fix
+that uh right so there was like a whole
+that uh right so there was like a whole
+bunch of stuff that I guess I just
+bunch of stuff that I guess I just
+didn't Port
+correctly out.
+yeah so I I remember now there was like
+yeah so I I remember now there was like
+this really obnoxious thing uh where the
+this really obnoxious thing uh where the
+signatures are gigantic this is one of
+signatures are gigantic this is one of
+the things that we're going to have to
+the things that we're going to have to
+fix but essentially this is an artifact
+fix but essentially this is an artifact
+of having to have bindings for Python
+of having to have bindings for Python
+syon and C is you get these really
+syon and C is you get these really
+obnoxious call signatures uh this is one
+obnoxious call signatures uh this is one
+of the things we're going to end up
+of the things we're going to end up
+having to figure out how to fix but for
+having to figure out how to fix but for
+now I think all I have to do
+is probably need to go pull up the the
+is probably need to go pull up the the
+scon code for
+this yeah so here's Noah's original code
+this yeah so here's Noah's original code
+Noah is a contributor to puffer so when
+Noah is a contributor to puffer so when
+this is done we're going to put on this
+this is done we're going to put on this
+and pong we're going to put attribution
+and pong we're going to put attribution
+to the original uh the devs of the scon
+to the original uh the devs of the scon
+versions
+you know it'll be like code by so and so
+you know it'll be like code by so and so
+forth by
+me yeah you can see this ridiculous
+me yeah you can see this ridiculous
+signature
+signature
+right they're like a
+right they're like a
+wrap yeah we'll just we'll side by side
+wrap yeah we'll just we'll side by side
+it CU basically we just need this to
+it CU basically we just need this to
+have the same
+have the same
+signature yeah look at that
+signature yeah look at that
+so uh I don't know why the order is
+so uh I don't know why the order is
+wrong so we're going to
+wrong so we're going to
+do float
+do float
+DT frame
+DT frame
+Skip and
+then the allocate function you can skip
+then the allocate function you can skip
+all the numpy stuff the design of this
+all the numpy stuff the design of this
+is such
+is such
+that so you have an init function and an
+that so you have an init function and an
+allocate function and they are different
+allocate function and they are different
+and the reason for that is that the
+and the reason for that is that the
+allocate function has to construct all
+allocate function has to construct all
+these buffers
+these buffers
+um but when you create a a Breakout game
+um but when you create a a Breakout game
+from python you actually do all the
+from python you actually do all the
+memory allocations in Python and you
+memory allocations in Python and you
+pass that memory into c as a buffer and
+pass that memory into c as a buffer and
+the reason for that is that means you
+the reason for that is that means you
+have shared memory across Python and c
+have shared memory across Python and c
+and then if you do that then you can get
+and then if you do that then you can get
+transparent access to all the state data
+transparent access to all the state data
+of the game in uh in Python and in C so
+of the game in uh in Python and in C so
+you get this nice mirrored effect that
+you get this nice mirrored effect that
+said I don't think that this is the way
+said I don't think that this is the way
+to do it this is just like way too much
+to do it this is just like way too much
+stuff to pass this probably should be
+stuff to pass this probably should be
+like one big contiguous struct or
+like one big contiguous struct or
+something uh but we will figure that out
+something uh but we will figure that out
+later welcome YouTube
+folks okay so rewards scores episodic
+folks okay so rewards scores episodic
+returns uh the first thing here that we
+returns uh the first thing here that we
+need
+is counters numb agents where did num
+is counters numb agents where did num
+substeps come
+from that's
+awkward yeah I don't know what this is
+awkward yeah I don't know what this is
+but we don't need
+this oh hey
+this oh hey
+Noah well welcome I'm porting your stuff
+Noah well welcome I'm porting your stuff
+um yeah I if you I don't know if you're
+um yeah I if you I don't know if you're
+around here but I'm going to show you
+around here but I'm going to show you
+exactly how I'm going to manage all this
+exactly how I'm going to manage all this
+stuff today and I'm going to come up
+stuff today and I'm going to come up
+with some cool ways to uh to improve on
+with some cool ways to uh to improve on
+this cuz actually this is not just a u
+this cuz actually this is not just a u
+problem I've had this problem with my
+problem I've had this problem with my
+stuff as well and uh I think we're going
+stuff as well and uh I think we're going
+to do some cool design to get around
+to do some cool design to get around
+this today but yeah you're going to have
+this today but yeah you're going to have
+your Breakout game online and playable
+your Breakout game online and playable
+on puffer GG today so that's probably
+on puffer GG today so that's probably
+pretty cool right
+and like I told you not to worry about
+and like I told you not to worry about
+it because like I said uh I I told you I
+it because like I said uh I I told you I
+would like just do this stuff and help
+would like just do this stuff and help
+fix stuff on stream and that's what I'm
+fix stuff on stream and that's what I'm
+doing promise
+kept for folks watching if you submit uh
+kept for folks watching if you submit uh
+environment code like if you're going to
+environment code like if you're going to
+submit like some of the other Atari
+submit like some of the other Atari
+games or like other environments I will
+games or like other environments I will
+do this with you as well and you'll get
+do this with you as well and you'll get
+to see how this type of stuff
+to see how this type of stuff
+works can't stay very long as I have it
+works can't stay very long as I have it
+work and no worries the VOD will be up
+work and no worries the VOD will be up
+if you want to see this stuff later and
+if you want to see this stuff later and
+so will the final
+code but absolutely thank you for the uh
+code but absolutely thank you for the uh
+the environment here it's going to be
+the environment here it's going to be
+really cool to have Ultra fast break out
+online okay that's a good
+signature I just have to adjust this
+I also think that the uh the
+I also think that the uh the
+vectorization while like internal
+vectorization while like internal
+vectorization was a cool idea initially
+vectorization was a cool idea initially
+I think it only makes sense for
+I think it only makes sense for
+environments that are actually natively
+environments that are actually natively
+multi-agent um I think what we're going
+multi-agent um I think what we're going
+to do is we're going to have we're going
+to do is we're going to have we're going
+to have each environment only have the
+to have each environment only have the
+one agent but then we're going to
+one agent but then we're going to
+parallelize in C so we'll have like you
+parallelize in C so we'll have like you
+know uh we'll have a way to allocate
+know uh we'll have a way to allocate
+like the array of environments in C so
+like the array of environments in C so
+that you can do step vectorized
+that you can do step vectorized
+operation but uh you don't have to have
+operation but uh you don't have to have
+the logic of the M itself have that
+the logic of the M itself have that
+extra Dimension cuz that extra Dimension
+extra Dimension cuz that extra Dimension
+is pretty
+is pretty
+gross really doesn't do anything for
+gross really doesn't do anything for
+cash
+cash
+cercy really doesn't help you with very
+cercy really doesn't help you with very
+much I could be wrong about that we'll
+much I could be wrong about that we'll
+say it doesn't degrade performance I
+say it doesn't degrade performance I
+think it'll only degrade performance if
+think it'll only degrade performance if
+you put that whole Loop in Python uh I
+you put that whole Loop in Python uh I
+think that if you just have like the
+think that if you just have like the
+loop over environments in C
+loop over environments in C
+you should be
+you should be
+fine oh yeah the other big idea I had
+fine oh yeah the other big idea I had
+lately that uh I just talked with
+lately that uh I just talked with
+somebody who would really like it if we
+somebody who would really like it if we
+had this um I don't want to commit to
+had this um I don't want to commit to
+this just yet but I'm thinking that I
+this just yet but I'm thinking that I
+might do a custom memory allocator for
+might do a custom memory allocator for
+uh all the environments in puffer lib
+uh all the environments in puffer lib
+where it just gives you a Big Blob of
+where it just gives you a Big Blob of
+memory right and then it takes the
+memory right and then it takes the
+memory segments that it needs for each
+memory segments that it needs for each
+individual piece of data out of that
+individual piece of data out of that
+because what that would let you do is it
+because what that would let you do is it
+would let you do um really fast State
+would let you do um really fast State
+reset and set operations which would
+reset and set operations which would
+allow you to do like MCTS and stuff
+allow you to do like MCTS and stuff
+incredibly incredibly quickly because
+incredibly incredibly quickly because
+essentially set state is just mem copy
+essentially set state is just mem copy
+at that
+at that
+point that was the other idea I had
+point that was the other idea I had
+recently well to be fair I've had that
+recently well to be fair I've had that
+one for a while but um you know I just
+one for a while but um you know I just
+thought about it I just started
+thought about it I just started
+considering it seriously just now based
+considering it seriously just now based
+on a meeting I had
+okay
+so
+so
+63 uh assuming
+63 uh assuming
+here nit C
+breakout
+breakout
+[Music]
+actions I think this is actions is
+actions I think this is actions is
+unsigned charar
+recently um the Raab Dev rayon said that
+recently um the Raab Dev rayon said that
+he wished that uh C didn't have C didn't
+he wished that uh C didn't have C didn't
+have signed versus unsigned types just
+have signed versus unsigned types just
+everything was signed and maybe we have
+everything was signed and maybe we have
+an extra type for
+an extra type for
+bites I thought about it and he's
+bites I thought about it and he's
+totally
+right um
+uh okay so why does this not
+exist there should be numb
+exist there should be numb
+balls
+ah crazy function
+signature we'll get this right now and
+signature we'll get this right now and
+then we'll simplify
+then we'll simplify
+it so this
+is actions
+observations
+rewards
+scores episode
+scores episode
+returns we don't have numb balls
+here I think this is
+instar number of
+instar number of
+balls then we get paddle
+balls then we get paddle
+positions uh ball positions
+all velocities brick
+all velocities brick
+positions brick
+states
+guns and then we
+get in Star balls
+fired the wall positions yeah so I guess
+fired the wall positions yeah so I guess
+the signature just got messed up somehow
+the signature just got messed up somehow
+when I
+when I
+ported uh wall positions then we do
+ported uh wall positions then we do
+paddle widths paddle
+paddle widths paddle
+Heights uh ball speeds is not
+Heights uh ball speeds is not
+here ball speeds hit
+here ball speeds hit
+counters um agents width height ball
+counters um agents width height ball
+width ball
+height brick width brick height OB
+height brick width brick height OB
+size no bricks yeah there you
+size no bricks yeah there you
+go that that's the whole
+signature get rid of this
+death P
+death P
+Heights I guess did I miss one here
+are there actually any industry jobs in
+are there actually any industry jobs in
+reinforcement
+reinforcement
+learning of
+learning of
+course yes
+course yes
+like also um being in any area of ml you
+like also um being in any area of ml you
+can be in any other area of ml in like a
+can be in any other area of ml in like a
+month like if I wanted to be working on
+month like if I wanted to be working on
+like if I wanted to be working on
+like if I wanted to be working on
+Transformers
+Transformers
+uh on that side of things it would
+uh on that side of things it would
+literally take me a month to catch up
+literally take me a month to catch up
+with all of the latest literature from
+with all of the latest literature from
+the past several years and to just be
+the past several years and to just be
+doing that it's like the exact same set
+doing that it's like the exact same set
+of
+of
+skills
+skills
+um but yeah there's like a lot of stuff
+um but yeah there's like a lot of stuff
+in robotics there's some random stuff in
+in robotics there's some random stuff in
+Industry as well like there's some like
+Industry as well like there's some like
+random stuff in like optimization of
+random stuff in like optimization of
+layouts and
+layouts and
+whatnot it's not like nobody does RL I
+whatnot it's not like nobody does RL I
+mean like if you think about it right
+mean like if you think about it right
+like you're not solving every problem
+like you're not solving every problem
+with a 400 billion parameter model that
+with a 400 billion parameter model that
+you can only access via an
+you can only access via an
+API that only knows about language and
+API that only knows about language and
+can't like adapt quickly to new not
+can't like adapt quickly to new not
+unintuitive problems right that's what
+unintuitive problems right that's what
+RL is for
+I don't know how I missed this
+one duplicate member
+did I not pass width and height
+did I not pass width and height
+somehow I could have sworn I did oh
+somehow I could have sworn I did oh
+right here it's
+missing ridiculously Long Function
+missing ridiculously Long Function
+signatures
+and then okay so right here I just have
+and then okay so right here I just have
+to call this correctly
+so we have oops
+so we have oops
+P frame
+skip
+actions uh observations right yeah that
+actions uh observations right yeah that
+exists
+exists
+Rewards or I'm just checking to make
+Rewards or I'm just checking to make
+sure each of these
+sure each of these
+exists on
+exists on
+balls did we not allocate number of
+balls did we not allocate number of
+balls
+yeah we didn't allocate number of balls
+yeah we didn't allocate number of balls
+here pic
+returns in Star
+nums pattle
+nums pattle
+positions all
+positions all
+velocities States
+uh duns has To
+Go's
+DS also missing balls
+fired then paddle wids
+Heights all
+speeds hit counters and then numb agents
+speeds hit counters and then numb agents
+gets passed in this is correct with
+gets passed in this is correct with
+height all All Height brick width and
+height all All Height brick width and
+brick
+brick
+height of
+height of
+size
+size
+bricks row calls didn't you define done
+bricks row calls didn't you define done
+twice
+twice
+uh duns looks like you are
+uh duns looks like you are
+correct let's apparently this is
+correct let's apparently this is
+unsigned Char as well good
+unsigned Char as well good
+catch yeah this function signature is
+catch yeah this function signature is
+way too long to keep track of basically
+way too long to keep track of basically
+like half of this stuff is going to end
+like half of this stuff is going to end
+up getting packed into a um like a game
+up getting packed into a um like a game
+state struct or something
+uh
+uh
+okay Falls
+fired should be in
+star oops this is
+int and
+int and
+actions is is supposed to be unsign
+Char
+Direction
+float and then these are just defined in
+float and then these are just defined in
+the wrong
+the wrong
+order uh usually what we do here is cuz
+order uh usually what we do here is cuz
+this is one pass compiler I put reset
+this is one pass compiler I put reset
+and step at the
+and step at the
+bottom and that normally just handles
+bottom and that normally just handles
+everything well I don't put it at the
+everything well I don't put it at the
+all the way at the bottom I put it at
+all the way at the bottom I put it at
+the bottom of the um the logic which is
+the bottom of the um the logic which is
+right
+here uh is p not a built-in
+mcore
+pi and now we have legitimate bugs on
+pi and now we have legitimate bugs on
+the port to fix float and
+int hit counters I assume this is
+int hit counters I assume this is
+supposed to be an INT
+right star hit
+counters oh we double
+counters oh we double
+assigned that doesn't matter but it's
+assigned that doesn't matter but it's
+weird
+okay that jumps us down to
+okay that jumps us down to
+here subscripted
+here subscripted
+value Bri
+value Bri
+positions I think this is a 2d array
+right uh apparently brick positions
+right uh apparently brick positions
+is a 2d
+array where's this get set
+this might get set from python in the
+this might get set from python in the
+original code
+right Rick positions cuz I don't see
+right Rick positions cuz I don't see
+where this is getting
+where this is getting
+set like where are they populating
+this nowhere right it would be in reset
+this nowhere right it would be in reset
+if it would be anywhere and it's not
+if it would be anywhere and it's not
+here so I'm assuming what this is
+here so I'm assuming what this is
+happening is that this is using the
+happening is that this is using the
+python
+logic I don't see it in here though oh
+logic I don't see it in here though oh
+wait here it is right
+here populate it once in python yep I
+here populate it once in python yep I
+see
+it
+it
+cool put this in C
+uh and
+then where should we put
+this I guess
+this I guess
+we'll make a a function somewhere
+it's probably got to be up
+it's probably got to be up
+here
+oops
+this and then we just
+this and then we just
+do void uh generate brick
+do void uh generate brick
+positions the breakout star n
+oops positions and then this gets
+oops positions and then this gets
+allocated to zeros
+right and I think that this now has to
+right and I think that this now has to
+be brick
+positions yeah but num bricks is this
+positions yeah but num bricks is this
+variable this is kind of awkward
+it's very awkward
+actually I think the easiest
+actually I think the easiest
+way
+well it depends if I want to have this
+well it depends if I want to have this
+be like a weird breakout very varant
+be like a weird breakout very varant
+where you can have like different
+where you can have like different
+breakout games or
+breakout games or
+whatever
+whatever
+um probably I shouldn't be caring about
+um probably I shouldn't be caring about
+that at the
+that at the
+moment
+so it's just kind of gross because like
+so it's just kind of gross because like
+with the number of bricks not being a
+with the number of bricks not being a
+constant
+I can do it like
+this
+yeah I generally don't do 2D arrays for
+yeah I generally don't do 2D arrays for
+position Are you purposely avoiding
+position Are you purposely avoiding
+something like vectors yes yes I
+am we just use Simple
+arrays we're also writing c not
+C++ this is ultra high performance Sim
+C++ this is ultra high performance Sim
+right we don't need Dynamic length we
+right we don't need Dynamic length we
+don't need all these
+things the goal is not just to implement
+things the goal is not just to implement
+breakout right that's easy the goal is
+breakout right that's easy the goal is
+to implement stupidly High performing
+to implement stupidly High performing
+breakout or reinforcement
+breakout or reinforcement
+learning all the Sims have to run a bare
+learning all the Sims have to run a bare
+minimum of a a million steps per second
+minimum of a a million steps per second
+at the very
+least we'll just
+least we'll just
+do
+do
+X continuous memory yeah in fact I want
+X continuous memory yeah in fact I want
+it to be more continuous than it already
+it to be more continuous than it already
+is I think eventually the way we're
+is I think eventually the way we're
+going to go is we're going to have a
+going to go is we're going to have a
+custom mem allocator that just gives you
+custom mem allocator that just gives you
+one giant block of memory for your
+one giant block of memory for your
+entire Sim state so that you can very
+entire Sim state so that you can very
+easily set and like reset states which
+easily set and like reset states which
+would then allow you to do like MCTS and
+would then allow you to do like MCTS and
+stuff be
+nice it's actually very funny to me that
+nice it's actually very funny to me that
+like I've seen some very bizarre
+like I've seen some very bizarre
+functional stuff like for trying to do
+functional stuff like for trying to do
+this like just functional State stuff
+this like just functional State stuff
+like you don't need any of that you just
+like you don't need any of that you just
+need contiguous allocated memory um and
+need contiguous allocated memory um and
+then you can be way faster because
+then you can be way faster because
+functional code is very
+slow memory
+slow memory
+Arena
+Arena
+yeah when running a sweep oh I just
+yeah when running a sweep oh I just
+realized this is not visible over my
+realized this is not visible over my
+camera there we go
+camera there we go
+when running a sweep can it happen that
+when running a sweep can it happen that
+the solution of hyper parameters
+the solution of hyper parameters
+overfits to the set seed but doesn't
+overfits to the set seed but doesn't
+perform well for other seeds yes I'm
+perform well for other seeds yes I'm
+aware of that that is a limitation of
+aware of that that is a limitation of
+wand B uh not of like what I of my
+wand B uh not of like what I of my
+Approach so w b doesn't make it as far
+Approach so w b doesn't make it as far
+as I can tell w b does not make it easy
+as I can tell w b does not make it easy
+to run multiple seeds and collect data
+to run multiple seeds and collect data
+across them so uh the way that I do it
+across them so uh the way that I do it
+with wand B sweeps um I don't actually
+with wand B sweeps um I don't actually
+like save the model from the best run so
+like save the model from the best run so
+you end up having to retrain anyways and
+you end up having to retrain anyways and
+it's not fully deterministic so uh you
+it's not fully deterministic so uh you
+basically end up having to reverifying
+largest variance that we
+get if I may repeat a question I asked
+get if I may repeat a question I asked
+on disc if I missed a question on
+on disc if I missed a question on
+Discord my bad uh in your opinion is
+Discord my bad uh in your opinion is
+carbs that much more computer efficient
+carbs that much more computer efficient
+that it is worth dealing with the
+that it is worth dealing with the
+growing pains it may still have versus
+growing pains it may still have versus
+just using
+just using
+optuna uh I don't think anybody has good
+optuna uh I don't think anybody has good
+optuna Integrations with RL either
+optuna Integrations with RL either
+unless I'm mistaken I guess actually
+unless I'm mistaken I guess actually
+clean RL kind of does right clean RL
+clean RL kind of does right clean RL
+does a thing with us
+does a thing with us
+optuna um it depends what algorithms
+optuna um it depends what algorithms
+you're using from optuna carbs really
+you're using from optuna carbs really
+really nice because it's like it's like
+really nice because it's like it's like
+this really fancy gaussian process
+this really fancy gaussian process
+based thing that maintains a set of Paro
+based thing that maintains a set of Paro
+optimal points and is comput aware so it
+optimal points and is comput aware so it
+looks for it looks for longer Solutions
+looks for it looks for longer Solutions
+as it becomes more confident in its
+as it becomes more confident in its
+predictions over shorter Solutions so
+predictions over shorter Solutions so
+it's pretty interesting um as for
+it's pretty interesting um as for
+whether the growing pains are worth that
+whether the growing pains are worth that
+that's up to you but I'm the one
+that's up to you but I'm the one
+currently dealing with the growing pains
+currently dealing with the growing pains
+right like I deal with that by
+right like I deal with that by
+integrating with puffer so stuff doesn't
+integrating with puffer so stuff doesn't
+work you just let me know and I fix it
+work you just let me know and I fix it
+in puffer right
+Noah brick positions are X and Y right
+Noah brick positions are X and Y right
+you did like X comma
+you did like X comma
+Y is what it looks
+like I'm pretty
+sure perfect
+why
+why
+would
+why I'm not going to Alta
+for roll
+this brick y yeah exra ask you're going
+this brick y yeah exra ask you're going
+to ask me if I can cat up some ligma
+oops I got to pay attention almost
+oops I got to pay attention almost
+messed up the indices
+positions ah right we need to we didn't
+positions ah right we need to we didn't
+finish porting this yet so
+finish porting this yet so
+so this is already
+allocated
+allocated
+uh y
+uh y
+offset
+oops
+oops
+[Music]
+[Music]
+r or we can do row and call like
+r or we can do row and call like
+this and we have
+index do you use idx here
+index do you use idx here
+you do use
+idx call times brick width row brick
+idx call times brick width row brick
+height y
+height y
+offset this is good the only thing I
+offset this is good the only thing I
+want to change is I want to do
+want to change is I want to do
+this and there we
+go and now when you in it Breakout
+you should
+do generate brick
+positions this is M
+Pi
+F and
+F and
+all
+right oh because this I was for agents
+right oh because this I was for agents
+right you don't need this eye
+right you don't need this eye
+anymore wait no this is frame skip
+anymore wait no this is frame skip
+uh do I mess up
+here I don't think so hold
+on
+oops oh it is Agent ID X so we don't
+oops oh it is Agent ID X so we don't
+care about
+this we can just fix these function
+signatures uh I forgot semicolons
+here x
+is this correct it's changing the uh the
+is this correct it's changing the uh the
+loop variable in the
+loop this doesn't look
+right where the heck did this line come
+right where the heck did this line come
+from
+I think I can just delete this line I
+I think I can just delete this line I
+don't know where that came
+from ble whip
+uh do we need we need paddle withth here
+right no I think it was fine I think
+right no I think it was fine I think
+that you uh you did it correct and I
+that you uh you did it correct and I
+probably like tabbed the dumb super
+probably like tabbed the dumb super
+Maven
+Maven
+suggestion don't use llms
+suggestion don't use llms
+kids say no to
+llms I swear even like the very small
+llms I swear even like the very small
+amount that I use them for like saving
+amount that I use them for like saving
+typing occasionally I screw up and like
+typing occasionally I screw up and like
+tab too
+quickly defition of
+height e
+yeah we're totally going to make like
+yeah we're totally going to make like
+some struct base State thing for this
+some struct base State thing for this
+because this is ridiculous all these
+because this is ridiculous all these
+variables
+okay which of these variables are
+okay which of these variables are
+correct let's figure this
+out break out
+out break out
+Pi 576 these ones are correct
+right
+right
+so paddle
+WID paddle width
+yeah it looks like these ones are
+yeah it looks like these ones are
+correct so we get rid of this this this
+correct so we get rid of this this this
+this
+paddle paddle
+paddle paddle
+speed there's no such thing as paddle
+speed I like where the heck did these
+speed I like where the heck did these
+things even come from I don't know
+hardcoded the
+hardcoded the
+speed well then I'll have to figure out
+speed well then I'll have to figure out
+where I uh I'm missing
+that 2 + 2 plus number x +
+that 2 + 2 plus number x +
+one OBS size 2
+one OBS size 2
+plus two plus
+plus two plus
+num
+RS
+okay yeah so Noah the way that that uh
+okay yeah so Noah the way that that uh
+we should do this like when these
+we should do this like when these
+variables get to be ridiculous like this
+variables get to be ridiculous like this
+the way that you're going to see that
+the way that you're going to see that
+we'll do it is we'll make a
+we'll do it is we'll make a
+struct in C or scon that has all the
+struct in C or scon that has all the
+data in it um like all of the the stuff
+data in it um like all of the the stuff
+that has to get passed from
+that has to get passed from
+Python and then uh you'll have a numpy
+Python and then uh you'll have a numpy
+return type basically that gives you a
+return type basically that gives you a
+numpy structured array so you'll load
+numpy structured array so you'll load
+the data into the numpy structured array
+the data into the numpy structured array
+and then that gets unpacked from C and
+and then that gets unpacked from C and
+that prevents you from having to have
+that prevents you from having to have
+all this intermediate garbage and it
+all this intermediate garbage and it
+also results in you having con is memory
+also results in you having con is memory
+for state so that's probably what we're
+for state so that's probably what we're
+going to end up
+doing now I don't know there are a few
+doing now I don't know there are a few
+things I'm not positive on how to do
+things I'm not positive on how to do
+with that uh I think there's a little
+with that uh I think there's a little
+bit of pointer Shenanigans but we'll
+bit of pointer Shenanigans but we'll
+figure that out
+PL
+equals three
+and I have the signature wrong here
+somehow DT frame skip agents withth
+somehow DT frame skip agents withth
+height uh this is backward so it's got
+height uh this is backward so it's got
+to be ball width ball
+height wait ball
+height wait ball
+width ball
+width ball
+height oh I my brain just did something
+height oh I my brain just did something
+weird no that's correct quick
+weird no that's correct quick
+width height OB
+size I don't know why it needs no bricks
+size I don't know why it needs no bricks
+like
+like
+this
+um let's just do
+this
+this
+uh undefined okay
+uh undefined okay
+references
+handle
+handle
+ball
+three
+three
+step t
+and
+function collisions
+discreet that's weird it doesn't like
+discreet that's weird it doesn't like
+this is inlined
+I don't know why that
+I don't know why that
+is that's fine for now
+is that's fine for now
+so uh LD Library path
+equals Li and now I'm sure we're going
+equals Li and now I'm sure we're going
+to have to debug a bunch of runtime
+to have to debug a bunch of runtime
+stuff
+stuff
+here
+here
+um where's the a Breakout
+break so we get our first uh seg
+fault
+fault
+320 paddle
+positions this is supposed to be two
+anything
+else well
+uh not sure what's going on here this is
+uh not sure what's going on here this is
+kind of a
+thing let's see if there's uh do we have
+thing let's see if there's uh do we have
+input on this
+input on this
+yet yeah we don't have input on this so
+yet yeah we don't have input on this so
+we need
+that yeah but we need to
+input
+long how we do input here I think we do
+long how we do input here I think we do
+like
+like
+get
+get
+is e down
+it oh I think we did we do input in the
+it oh I think we did we do input in the
+demo file right the only thing that we
+demo file right the only thing that we
+do in the render is we do
+do in the render is we do
+this
+this
+right make or
+right make or
+pong.
+pong.
+H Spong dot I mean c yeah so you can see
+H Spong dot I mean c yeah so you can see
+we do the input right here this is how
+we do the input right here this is how
+we do the
+input that's a nice way of doing
+input that's a nice way of doing
+it oh interesting I actually already
+it oh interesting I actually already
+have it working here and actions zero
+uh okay so it's not actually working
+uh okay so it's not actually working
+then see why that
+is
+allocate
+allocate
+balls so this these allocators need to
+balls so this these allocators need to
+be fixed first because that'll give me
+be fixed first because that'll give me
+some better
+some better
+errors obervations done reward
+errors obervations done reward
+scores
+scores
+three
+three
+balls
+balls
+positions
+positions
+States balls fired wall paddle with
+States balls fired wall paddle with
+paddle height TI counters that's
+paddle height TI counters that's
+it but now when I close this those three
+it but now when I close this those three
+memory leaks are system level RB always
+memory leaks are system level RB always
+has those um they're like below RB
+has those um they're like below RB
+itself apparently they're like in
+itself apparently they're like in
+open gel or something I don't
+open gel or something I don't
+know but we don't have any extra memory
+know but we don't have any extra memory
+leaks
+since I see we have a lot of folks on
+since I see we have a lot of folks on
+YouTube
+YouTube
+now just quick little thing for uh for
+now just quick little thing for uh for
+new folks
+here this breakout Port is going to be
+here this breakout Port is going to be
+on this website later today it's a ultra
+on this website later today it's a ultra
+high performance breakout version for
+high performance breakout version for
+reinforcement learning written by Noah
+reinforcement learning written by Noah
+currently being ported by me and it's
+currently being ported by me and it's
+all free and open source it is
+all free and open source it is
+on puffer a/p puffer lib which is right
+on puffer a/p puffer lib which is right
+here
+here
+all this code it's in the dev Branch at
+all this code it's in the dev Branch at
+the moment and if you want to help me
+the moment and if you want to help me
+out for free go ahead and St the repo
+out for free go ahead and St the repo
+helps me out a ton back to
+Dev let's see how actions is getting
+used we allocate it here
+it gets set here right where does it get
+used we get fire left and
+right those all look correct to
+right those all look correct to
+me so
+let's see is it actually recording
+let's see is it actually recording
+actions
+oops print
+okay so you can see that I'm when I
+okay so you can see that I'm when I
+press the
+press the
+buttons things
+buttons things
+happen but nothing happens on the
+screen so apparently the paddle position
+screen so apparently the paddle position
+doesn't get
+doesn't get
+set the bricks don't get drawn either
+H hold
+on nothing
+let me think about what could be wrong
+let me think about what could be wrong
+here
+so this
+reset I bet that this reset is not
+reset I bet that this reset is not
+getting called correctly
+get
+set what if we set this to negative one
+set what if we set this to negative one
+I bet we're just not initializing
+correctly we do reach at the
+end let see do we actually get prints
+end let see do we actually get prints
+here you can see we do we get all the
+here you can see we do we get all the
+prints for all the bricks
+right
+right
+oops and then we do print
+oops and then we do print
+f r position
+we can see that these are
+wrong why are these wrong I called this
+wrong why are these wrong I called this
+right here didn't
+I brick position
+I assume something is just not getting
+I assume something is just not getting
+set correctly here one of these
+set correctly here one of these
+variables let's see which one it
+is r with
+oh wait it's right here
+right yeah so this this call needs to go
+right yeah so this this call needs to go
+after I initialize all the
+stuff so now we see that we have correct
+stuff so now we see that we have correct
+positions here or what look like correct
+positions and we have the states
+and we have
+actions and it says if brick state is
+actions and it says if brick state is
+one print F
+one print F
+brick we'll just do state
+ah I think that this needs to be
+n brick colors okay apparently there are
+n brick colors okay apparently there are
+too many
+rows brick is
+six and we don't have enough
+colors let's figure out what colors
+colors let's figure out what colors
+we're
+used red orange yellow sky blue and
+used red orange yellow sky blue and
+blue that's easy
+blue that's easy
+enough six is going to be equal
+enough six is going to be equal
+to uh
+to uh
+red
+red
+orange yellow green sky
+orange yellow green sky
+blue
+blue I also I don't know if you're still
+blue I also I don't know if you're still
+here Noah but I really like your idea to
+here Noah but I really like your idea to
+make the puffer Li the ball I think
+make the puffer Li the ball I think
+that's hilarious we're totally going to
+that's hilarious we're totally going to
+do
+that okay this did not seem to
+that okay this did not seem to
+help uh these are still not being
+rendered we will
+simply
+F Breck
+I
+State okay all the states are
+State okay all the states are
+zero so
+and see it's drawing all these different
+and see it's drawing all these different
+bricks right but nothing is
+happening drawing brick
+at I think we're just not setting these
+right I thought that's pretty funny can
+right I thought that's pretty funny can
+get to be a good size where you see at
+get to be a good size where you see at
+the puffer while the bar ball is still
+the puffer while the bar ball is still
+hard to
+hard to
+hit yeah well we'll just make the game
+hit yeah well we'll just make the game
+render bigger
+right I really like that idea that's
+right I really like that idea that's
+awesome marketing so thank you for the
+awesome marketing so thank you for the
+free
+marketing I mean it takes a lot to get
+marketing I mean it takes a lot to get
+um you know really specific tools like
+um you know really specific tools like
+this out there and fun stuff like that
+this out there and fun stuff like that
+actually goes quite a long
+way you know you just have these
+way you know you just have these
+environments but the puffer fish is the
+environments but the puffer fish is the
+ball we should do it for pong as
+well here's one uh one row of
+well here's one uh one row of
+bricks I don't know why the rest of them
+bricks I don't know why the rest of them
+aren't drawing let's figure that out
+probably because of the
+client there you go so not processing
+client there you go so not processing
+the actions for some
+the actions for some
+reason and figure out why that is the
+reason and figure out why that is the
+case
+step should
+be yeah right here
+right okay so it's getting actions but
+right okay so it's getting actions but
+the substep
+thing for
+okay so it's moving units of zero for
+okay so it's moving units of zero for
+some
+reason .0 oh cuz this is an
+reason .0 oh cuz this is an
+INT this is
+why very good so now we have the paddle
+moves oh look at that wait does it
+moves oh look at that wait does it
+work uh nope
+nope that was interesting let's play
+nope that was interesting let's play
+that
+that
+again
+so yeah something in the
+collisions very close now though to
+collisions very close now though to
+having it
+having it
+working we'll probably put it online as
+working we'll probably put it online as
+soon as it works and then we'll clean it
+soon as it works and then we'll clean it
+up after so people can play with it
+[Music]
+the wall position
+positions assumedly wall positions
+positions assumedly wall positions
+doesn't get
+initialized yeah you can totally see
+initialized yeah you can totally see
+that this is
+um so wall position
+um so wall position
+has six
+has six
+numbers
+numbers
+apparently 0
+apparently 0
+Z how is this structured wall positions
+here oh left top right I see
+yep I got you
+actually I only need to set one of these
+actually I only need to set one of these
+right it's end wall positions
+right it's end wall positions
+of
+of
+four
+four
+one where is uh with I I
+suppose I guess this is not allocated to
+suppose I guess this is not allocated to
+be big enough
+right
+right
+okay here's your
+game this is definitely breakout Yep
+game this is definitely breakout Yep
+this is how breakout Works guys
+it's actually hard to play because
+it's actually hard to play because
+there's like no way to tell what the
+there's like no way to tell what the
+heck the ball is
+doing I think it also goes through the
+doing I think it also goes through the
+paddle
+now this gets a little trickier because
+um we got to figure out the brick
+um we got to figure out the brick
+collisions
+substeps
+one where does this get
+set really want to
+see if someone can balance double
+see if someone can balance double
+pendulum let me see
+why is there so much stuff here for a
+why is there so much stuff here for a
+simple project
+that's a bizarre amount of
+files what the
+this is very bizarrely written code

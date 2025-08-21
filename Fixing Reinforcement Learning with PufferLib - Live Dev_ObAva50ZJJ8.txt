@@ -1,0 +1,4249 @@
+Kind: captions
+Language: en
+okay we are
+live morning
+hey how's it going
+I think we're going to do some outgo
+I think we're going to do some outgo
+side work just for the morning on uh on
+side work just for the morning on uh on
+this new thing I've been trying
+out warning the
+shot new Alo you're testing against
+shot new Alo you're testing against
+generalized advant Vantage estimation so
+generalized advant Vantage estimation so
+the goal is to kind of learn a form of
+the goal is to kind of learn a form of
+discounting by uh expanding the value
+discounting by uh expanding the value
+head to be like 32 dimensional or 64
+head to be like 32 dimensional or 64
+dimensional or whatnot and predict the
+dimensional or whatnot and predict the
+reward for future time
+steps I suspect something is still wrong
+steps I suspect something is still wrong
+though because it's not learning the way
+though because it's not learning the way
+I would expect
+finally lost
+yeah but there's only one head so it
+yeah but there's only one head so it
+predicts future discounted return and
+predicts future discounted return and
+then you have to tune a discount Factor
+then you have to tune a discount Factor
+whereas if you were to just predict all
+whereas if you were to just predict all
+the future rewards directly you
+the future rewards directly you
+shouldn't have
+to e
+try something real quick
+I just want to
+see if I can get it to learn
+something okay so the mean tense are
+something okay so the mean tense are
+learned
+learned
+perfectly and then standard deviation
+perfectly and then standard deviation
+tensor
+okay good so this does actually do what
+okay good so this does actually do what
+we
+we
+expect it is learning a random a
+expect it is learning a random a
+reasonable standard deviation and a
+reasonable standard deviation and a
+reasonable mean so then the only thing
+reasonable mean so then the only thing
+that could be screwy
+that could be screwy
+here is the data could be wrong
+somehow
+e e
+he have to be the right ones right
+because for
+yeah so reward block is already indexed
+yeah so reward block is already indexed
+right
+hang on I don't think that this is
+hang on I don't think that this is
+correct is
+it no hold on I might have something
+it no hold on I might have something
+here let me see if this is actually
+here let me see if this is actually
+correct so
+self.
+self.
+values so anything that gets passed in
+values so anything that gets passed in
+is already sorted
+yeah this is already sorted
+but now this is going to be the wrong
+but now this is going to be the wrong
+shape isn't
+it so
+think the obvious thing here
+I hate when my extension just breaks for
+I hate when my extension just breaks for
+no
+reason for
+there we go
+experience no attribute Horizon really
+I
+I
+forgot this one
+one of these times this is going to do
+one of these times this is going to do
+something eventually this is going to do
+something e
+oh wait yeah it's doing
+oh wait yeah it's doing
+it look at
+that mean is going to take a little
+that mean is going to take a little
+longer I think but uh actually no mean
+longer I think but uh actually no mean
+should be that way standard Devi ation
+should be that way standard Devi ation
+tensor though look at that it's learned
+tensor though look at that it's learned
+uh it's going to learn its own
+discounting
+beautiful now this we're going to track
+beautiful now this we're going to track
+this
+this
+thing and it will learn its own
+discounting we'll see whether it learns
+discounting we'll see whether it learns
+it any quick any uh quicker
+it any quick any uh quicker
+but we do have the thing
+apparently there's a bug with some NS at
+apparently there's a bug with some NS at
+some
+point
+yeah it's weird that we have this we're
+yeah it's weird that we have this we're
+going to have to F uh figure this out
+going to have to F uh figure this out
+separately
+okay so something is definitely we need
+okay so something is definitely we need
+to fix this first before we can do
+to fix this first before we can do
+anything I
+guess of course the second you don't log
+guess of course the second you don't log
+it it works
+somehow the standard deviation can
+somehow the standard deviation can
+become Nan
+I don't understand how this can
+overflow
+e e
+bar
+y this literally just be for
+logging for
+weird that it only happens sometimes as
+well e
+okay
+how'd that
+happen for
+something's very
+screwy we had seen the time of life
+screwy we had seen the time of life
+though it does it is able to learn some
+though it does it is able to learn some
+sort of BD
+sort of BD
+distribution so there is a chance that
+distribution so there is a chance that
+if we fix this we actually get something
+if we fix this we actually get something
+good out of this
+approach
+okay yeah why does it do
+this for
+can't possibly be this right
+I mean that is technically an out of
+I mean that is technically an out of
+bounds right
+non-deterministic errors are
+annoying maybe that was all
+just an
+overflow looks like it
+I
+standard deviation clipping screwing
+standard deviation clipping screwing
+this one I think
+what's the issue with
+what's the issue with
+G that it has two hyper parameters that
+G that it has two hyper parameters that
+are environment
+are environment
+specific so you can't run the same thing
+specific so you can't run the same thing
+on multiple different environments and
+on multiple different environments and
+if you wanted to say train um on
+if you wanted to say train um on
+multiple environments at the same time
+multiple environments at the same time
+or something you wouldn't be able to
+so it's a
+so it's a
+fundamental problem with the
+algorithm here we go
+it
+could I mean G is a hard Baseline to
+could I mean G is a hard Baseline to
+beat right
+but I do see that it is learning
+but I do see that it is learning
+appropriate variance terms so that's
+appropriate variance terms so that's
+pretty cool
+the mean term should actually be roughly
+even so that's fine and then the
+even so that's fine and then the
+variances should be approximating a
+variances should be approximating a
+discounting factor
+discounting factor
+it looks like they are
+it's not getting calculated at the
+moment there were a couple terms that
+moment there were a couple terms that
+were
+were
+broken we'll fix those I just want to
+broken we'll fix those I just want to
+see if we have the method doing anything
+see if we have the method doing anything
+reasonable
+yeah so far this is doing better than
+yeah so far this is doing better than
+any of the previous trials where I had
+any of the previous trials where I had
+some stuff
+some stuff
+broken um but it's nowhere near the uh
+broken um but it's nowhere near the uh
+the J the tune J run yet
+should at least do better than the
+should at least do better than the
+previous runs you would hope
+do we get stable value loss
+now oh yeah we get stable value
+loss so that's fixed the other the
+loss so that's fixed the other the
+previous
+issues e
+not stable
+H it's weird that it's not
+stable
+e
+e e
+well that has done better at least than
+well that has done better at least than
+the other ones
+okay so 500
+next one will
+be 32
+steps cuz I think there's still an issue
+steps cuz I think there's still an issue
+with the way that we're Computing things
+with the way that we're Computing things
+here
+here
+but this could do something I'm going to
+but this could do something I'm going to
+go up I'm going to do a couple things
+go up I'm going to do a couple things
+while this
+while this
+runs and I'll be back in a few and uh we
+runs and I'll be back in a few and uh we
+will continue on this for another hour
+will continue on this for another hour
+and a half or whatever be right
+back
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e e
+okay
+uh had the Neptune on where's my
+run oh look at
+that it's hard to say which of these is
+that it's hard to say which of these is
+going to be better because like it's a
+going to be better because like it's a
+weird shaped graph but uh that's a way
+weird shaped graph but uh that's a way
+higher amount than I've seen on any of
+higher amount than I've seen on any of
+the previous ones and it looks like
+the previous ones and it looks like
+you're getting a pretty reasonably
+you're getting a pretty reasonably
+learned discounting as
+well oh
+I think I did a sweep before as well so
+I think I did a sweep before as well so
+this is
+this is
+definitely this is definitely a
+definitely this is definitely a
+reasonable
+Baseline here we go oh actually yeah
+Baseline here we go oh actually yeah
+this is substantially better thank you I
+this is substantially better thank you I
+was looking at episode length
+was looking at episode length
+so uh blue is 32 Max Horizon or 64 Max
+so uh blue is 32 Max Horizon or 64 Max
+Horizon this is 32 Max Horizon and then
+Horizon this is 32 Max Horizon and then
+this is the g8e
+this is the g8e
+Baseline now the thing is it should get
+Baseline now the thing is it should get
+strictly better over a longer Horizon um
+strictly better over a longer Horizon um
+we just need to come up with a better
+we just need to come up with a better
+Advantage function is my
+guess e
+yeah this is totally fine
+yeah this is totally fine
+here this loss is good
+here this loss is good
+so it's got to be the other
+so it's got to be the other
+loss is the advantage
+loss is the advantage
+calculation which is right
+calculation which is right
+here I'm just dividing by the standard
+here I'm just dividing by the standard
+deviation right
+now yeah this thing's got got to get
+now yeah this thing's got got to get
+normalized
+somehow yeah that's just a bad Advantage
+function
+okay
+e e
+scun
+do I make the advantage
+do I make the advantage
+function reward minus mean over 1 plus
+function reward minus mean over 1 plus
+standard deviation
+wrote out the RLC
+game wait you already wrote an
+game wait you already wrote an
+environment there's no way
+right Pi all the DMs
+oh you wrote out
+oh you wrote out
+the
+the
+okay I shouldn't put this on stream
+okay I shouldn't put this on stream
+right let me see
+Okay cool so I mean I can look at this
+Okay cool so I mean I can look at this
+with you
+then you got a
+capacitor there are only two knobs here
+capacitor there are only two knobs here
+right
+oh yeah when you have two knobs like
+oh yeah when you have two knobs like
+this see these aren't even actions right
+this see these aren't even actions right
+it's a one-step problem you're just
+it's a one-step problem you're just
+setting these and then running the whole
+setting these and then running the whole
+simulator like you could even it's
+simulator like you could even it's
+honestly easier to think of those as
+honestly easier to think of those as
+just like you could like use a hyper
+just like you could like use a hyper
+parameter optimization algorithm for
+parameter optimization algorithm for
+this frankly this is like so incredibly
+this frankly this is like so incredibly
+simple cuz it's a one-step problem
+right yeah so that's pretty easy
+like yeah you literally like the new
+like yeah you literally like the new
+hyper parameter algorithm that I have
+hyper parameter algorithm that I have
+you can like throw just the hyper
+you can like throw just the hyper
+parameter algorithm on without the RL
+parameter algorithm on without the RL
+and that'll still work
+well yeah the thing that's missing here
+well yeah the thing that's missing here
+right is usually there's an interactive
+right is usually there's an interactive
+element in RL
+um but I mean it's I have tools for this
+um but I mean it's I have tools for this
+sure that's
+fine well I mean you're you hit like you
+fine well I mean you're you hit like you
+make one decision you hit simulate and
+make one decision you hit simulate and
+that's the whole thing
+that's the whole thing
+right if you're playing pong you're
+right if you're playing pong you're
+moving the paddle at every single
+moving the paddle at every single
+step it's not like a step simulator
+mhm well it's just like it's not bad
+mhm well it's just like it's not bad
+it's just easy right it's just it's an
+it's just easy right it's just it's an
+easy
+problem yeah yeah you have a
+problem yeah yeah you have a
+two-dimensional optimization problem one
+step for
+well yeah this is just good enough for
+well yeah this is just good enough for
+now
+no it's
+no it's
+40 but the thing is it's not 40 just for
+40 but the thing is it's not 40 just for
+um
+um
+Brock they doubled the price so
+Brock they doubled the price so
+presumably it was 20 for Twitter premium
+presumably it was 20 for Twitter premium
+before right and then they added 20 for
+before right and then they added 20 for
+Rock so it's the same price as the
+Rock so it's the same price as the
+others
+this is still incredibly stupid the
+this is still incredibly stupid the
+suggestion I just gave
+suggestion I just gave
+me
+for e
+but oh that's screwy
+all right that's good enough that's some
+all right that's good enough that's some
+data um
+we could try this
+the standard
+deviations what are you looking for I'm
+deviations what are you looking for I'm
+just trying to find a nice way to scale
+just trying to find a nice way to scale
+the
+data
+for
+e
+e e
+huh I guess that
+works for
+so this is now going to scale the
+so this is now going to scale the
+advantages a little
+better and this should actually make it
+better and this should actually make it
+robust to longer Horizons as
+well essentially what this now does is
+well essentially what this now does is
+the expected shape of the advantage
+the expected shape of the advantage
+curve or the uh rather the standard
+curve or the uh rather the standard
+deviation
+deviation
+here stream go so the expected uh shape
+here stream go so the expected uh shape
+of this curve
+right it's going to be something like
+drawing is
+hard
+hard
+Flatline and this is like
+0.1 something like
+0.1 something like
+this okay so this needs to
+this okay so this needs to
+contribute zero and then this should
+contribute zero and then this should
+contribute like
+contribute like
+one we just needed a normalization
+one we just needed a normalization
+factor
+now we'll see if the one I came up with
+now we'll see if the one I came up with
+is any good you know there's no
+is any good you know there's no
+guarantee that the one I came up with is
+guarantee that the one I came up with is
+any
+any
+good even though it makes
+sense seems like it's under performing
+sense seems like it's under performing
+for now maybe it catches up we'll
+see e
+just a little bit behind I
+just a little bit behind I
+think oh maybe it catches up
+we can see it's learned the standard
+deviation e
+and then we also have one more
+and then we also have one more
+normalization scheme to try after this
+normalization scheme to try after this
+as
+well e
+H they should have like totally crushed
+H they should have like totally crushed
+the
+the
+um no
+h
+there's something I guess just with the
+there's something I guess just with the
+uh the learning rate and heing that it
+uh the learning rate and heing that it
+just can take off at some
+point e
+man that is so close to having it
+solved that is so freaking close
+816 can try normalizing I don't think
+816 can try normalizing I don't think
+normalizing is going to do a ton for
+normalizing is going to do a ton for
+this honestly but we'll try it just to
+see
+e
+e
+e
+e e
+I'm out of thinking field for the time
+I'm out of thinking field for the time
+being
+being
+let me just
+let me just
+see I mean I really this is like so
+see I mean I really this is like so
+freaking basic but
+wa can't I uh just
+wa can't I uh just
+initialize the parameter
+initialize the parameter
+better log standard deviation
+no it's because it sets the log standard
+no it's because it sets the log standard
+deviation to one to start
+with wait but why should
+I it's just going to tell me to add
+I it's just going to tell me to add
+Epsilon as
+no I don't want to do this why would I
+no I don't want to do this why would I
+do this
+that's not
+it e
+the
+hell oh
+can I just do this
+first e
+this whenever I'm doing like basic math
+this whenever I'm doing like basic math
+you'll watch like it takes me way longer
+you'll watch like it takes me way longer
+and then it
+and then it
+should
+should
+because I don't do it very often
+because I don't do it very often
+frankly but
+frankly but
+uh that's fine we get through it we make
+uh that's fine we get through it we make
+the algorithm and then we make up for it
+the algorithm and then we make up for it
+in engineering
+so we can't remove them in
+first
+for e
+so
+so
+silly stuck on something like
+this e
+here's what we'll
+do for
+isn't this just the way easier version
+isn't this just the way easier version
+of
+of
+it if we're deciding to not be stupid
+yeah it looks like
+it and now this one can be a sum can
+it that draw to be
+it that draw to be
+stable
+stable
+okay again we have no idea if this even
+helps but we'll run this and then we'll
+helps but we'll run this and then we'll
+run a longer Horizon and longer Horizon
+run a longer Horizon and longer Horizon
+should be strictly better so the trick
+should be strictly better so the trick
+here right is that a property of this
+here right is that a property of this
+algorithm should be that increasing
+algorithm should be that increasing
+The Horizon should uh cause it to do
+The Horizon should uh cause it to do
+strictly better it should not be getting
+strictly better it should not be getting
+confused by longer Horizon because the
+confused by longer Horizon because the
+standard
+standard
+deviation will be flatlined at the point
+deviation will be flatlined at the point
+where it can no longer have any
+where it can no longer have any
+effective prediction that far into the
+effective prediction that far into the
+future and that gets subtracted out so
+future and that gets subtracted out so
+that has no effect on the
+that has no effect on the
+advantage a lot of problems are defined
+advantage a lot of problems are defined
+by less than 100K parameters
+uh what do you mean by
+uh what do you mean by
+that
+that
+problems I don't know what you mean by
+problems I don't know what you mean by
+defined it would be are they solvable
+defined it would be are they solvable
+with less than 100K parameters
+with less than 100K parameters
+right yeah okay so how large of a model
+right yeah okay so how large of a model
+to solve it depends I think you'd be
+to solve it depends I think you'd be
+surprised what you can do with less than
+surprised what you can do with less than
+10 million parameters and uh you know
+10 million parameters and uh you know
+100K is perfectly good for doing very
+100K is perfectly good for doing very
+very fast research we do a little larger
+very fast research we do a little larger
+than this we go up to a million at
+times
+times
+H it's promising
+how does model SK size scale with IO
+how does model SK size scale with IO
+well that doesn't really tell you
+well that doesn't really tell you
+anything either
+anything either
+right because there is a scaling factor
+right because there is a scaling factor
+with that but you know 999 of those
+with that but you know 999 of those
+inputs could be worthless or they could
+inputs could be worthless or they could
+just be linearly related in which case
+just be linearly related in which case
+you just need one layer to sort that
+you just need one layer to sort that
+relationship out right so it really it
+relationship out right so it really it
+depends it depends mostly on the
+depends it depends mostly on the
+fundamental complexity of the problem
+fundamental complexity of the problem
+not just the
+dimensionality right yeah
+it's just how hard is the problem to
+it's just how hard is the problem to
+solve that's pretty that's it like the
+solve that's pretty that's it like the
+neural net is learning a function that's
+neural net is learning a function that's
+mapping uh that's mapping inputs to
+mapping uh that's mapping inputs to
+actions how hard like how complex is the
+actions how hard like how complex is the
+function required to solve the problem
+function required to solve the problem
+that's all it is
+virgin
+yeah but it's
+yeah but it's
+not there's not like
+a you can't just fit Big O to it
+a you can't just fit Big O to it
+right first of all there's no end to
+right first of all there's no end to
+scale it with it's like if you have one
+scale it with it's like if you have one
+simulation or another simulation one
+simulation or another simulation one
+problem or another like there's no
+problem or another like there's no
+scaling complexity factor to a lot of
+scaling complexity factor to a lot of
+these things
+these things
+it's just it's a constant it's a big
+it's just it's a constant it's a big
+constant you're trying to estimate the
+constant you're trying to estimate the
+big
+constant yeah of course each Sim scales
+constant yeah of course each Sim scales
+differently like the thing to look at
+differently like the thing to look at
+this is just like think about it at a
+this is just like think about it at a
+high level right they each different
+high level right they each different
+problems some problems are easy some
+problems some problems are easy some
+problems are hard some problems are easy
+problems are hard some problems are easy
+for people to solve some problems are
+for people to solve some problems are
+hard for people to solve well some
+hard for people to solve well some
+problems are going to be easy for neuron
+problems are going to be easy for neuron
+Nets to solve and some problems are
+Nets to solve and some problems are
+going to be hard there's not going to be
+going to be hard there's not going to be
+a onetoone mapping of which ones are
+a onetoone mapping of which ones are
+hard for which
+either but gen generally right I can
+either but gen generally right I can
+look at something like Atari and say
+look at something like Atari and say
+yeah that's going to be an easier
+yeah that's going to be an easier
+problem to solve than DOTA and it's
+problem to solve than DOTA and it's
+going to require a much smaller neurom
+going to require a much smaller neurom
+man
+but there's nothing to quantify over
+but there's nothing to quantify over
+right like you don't have any input
+right like you don't have any input
+variables that describe the problem
+variables that describe the problem
+they're each completely
+different this is not like an algorithm
+different this is not like an algorithm
+where you're scaling in and seeing how
+where you're scaling in and seeing how
+you know how the complexity
+changes
+e e
+oh yeah yeah yeah okay if you have an
+oh yeah yeah yeah okay if you have an
+existing problem right if you have an
+existing problem right if you have an
+existing problem that has an existing
+existing problem that has an existing
+known solve complexity or an algorithm
+known solve complexity or an algorithm
+with a known solve complexity yes you
+with a known solve complexity yes you
+can use RL as a fast approximate
+can use RL as a fast approximate
+algorithm in some
+cases that makes
+sense yeah that's
+valid that may that is
+valid that may that is
+valid this is so freaking close for
+I know right it's so
+close isn't that kind of cool though
+close isn't that kind of cool though
+with puffer though that like I uh I am
+with puffer though that like I uh I am
+designing an algorithm to potentially
+designing an algorithm to potentially
+replace one of the most widely used
+replace one of the most widely used
+things in the field in the span of about
+things in the field in the span of about
+two days of work
+XA scale level XA scale was big back in
+XA scale level XA scale was big back in
+2018 it's not huge
+nowadays you can just go buy yourself a
+nowadays you can just go buy yourself a
+pedop flop your
+pedop flop your
+company what's it now uh 20
+million they probably have overhead 100
+million they probably have overhead 100
+million
+just go buy it
+there's no way this is going to
+there's no way this is going to
+seriously do worse
+right if this is going to do worse we're
+right if this is going to do worse we're
+going to have to take a look at our uh
+going to have to take a look at our uh
+our
+formula I mean it should do better in
+formula I mean it should do better in
+the sense that um
+the sense that um
+it should at least be trying to estimate
+it should at least be trying to estimate
+values that are farther
+values that are farther
+out it's getting more training
+data
+e e
+we also haven't tried um
+learned uh learned parameter yet
+learned uh learned parameter yet
+either layer we should try that
+next
+e e
+there we
+go
+yeah yeah not per not amazingly stable
+yeah yeah not per not amazingly stable
+yet it's untuned though
+and let's remember it is quite possible
+and let's remember it is quite possible
+though that we just run tuning and uh
+though that we just run tuning and uh
+you know just the optimal learning rate
+you know just the optimal learning rate
+has changed and stuff it's possible that
+has changed and stuff it's possible that
+we match just off of tuning
+and mind you the tuning will also be
+and mind you the tuning will also be
+quicker or or fewer samples rather
+quicker or or fewer samples rather
+because we no longer have to tune Lambda
+because we no longer have to tune Lambda
+and Gamma they no longer
+exist this is irritating me that this
+exist this is irritating me that this
+doesn't seem to match quite well
+though and there takes off
+though and there takes off
+right little bit
+well this is the whole algorithm right
+well this is the whole algorithm right
+is that you're predicting all the values
+is that you're predicting all the values
+you don't need to learn a discount
+you don't need to learn a discount
+Factor over values if you just predict
+Factor over values if you just predict
+all of them
+okay so this definitely does
+worse I don't know why this would do
+worse that's the issue
+I mean these curves though are so
+I mean these curves though are so
+chaotic like it's hard to say
+right yeah I'm not going to be confident
+right yeah I'm not going to be confident
+saying one of these is way better or way
+saying one of these is way better or way
+worse than the other
+worse than the other
+here curves are pretty
+chaotic do you have suggestions coming
+chaotic do you have suggestions coming
+to RL I have a full guide for
+to RL I have a full guide for
+you I put all my suggestions for
+you I put all my suggestions for
+newcomers to RL in one quick easy
+blog there you go
+blog there you go
+we've trained uh several people actually
+we've trained uh several people actually
+in RL that came in with no AI background
+in RL that came in with no AI background
+let alone you know uh deep learning
+let alone you know uh deep learning
+anything
+anything
+else RL used to be incredibly incredibly
+else RL used to be incredibly incredibly
+difficult to get into like really
+difficult to get into like really
+freaking hard but we've made it a lot
+easier it's only going to get easier as
+easier it's only going to get easier as
+well we're working on simplifying a lot
+well we're working on simplifying a lot
+of the algorithms out a bunch of old
+crap okay we're going to try this next
+crap okay we're going to try this next
+which is going to be learned standard
+deviation except am I dumb here wait
+yeah yeah yeah you
+stupid there do
+this this is so darn
+clo input not linear must be tensor not
+clo input not linear must be tensor not
+linear
+which conferences do you try to
+which conferences do you try to
+attend well I went to
+attend well I went to
+NPS um this January it nearly killed me
+NPS um this January it nearly killed me
+so I think we're going to be a little
+so I think we're going to be a little
+bit more selective
+yeah
+NS I mean we're going to be more
+NS I mean we're going to be more
+selective about going to conferences at
+all as I can tell you that was not worth
+all as I can tell you that was not worth
+what I uh that was not worth it
+your conferences don't have peer review
+your conferences don't have peer review
+that sounds great
+that sounds great
+yeah we have notoriously terrible peer
+yeah we have notoriously terrible peer
+review just
+awful well I don't know what's happening
+awful well I don't know what's happening
+with the standard deviation of this
+with the standard deviation of this
+tensor
+here
+broken what didn't you oh uh I got
+broken what didn't you oh uh I got
+pneumonia at nurs and nearly died in the
+pneumonia at nurs and nearly died in the
+hospital two weeks later that's what I
+hospital two weeks later that's what I
+didn't like about
+didn't like about
+it conference was
+it conference was
+fine but
+why is this doing
+this
+parameter bad
+initialization
+e e
+something is weird here
+how is it pushing this one to be crazy
+how is it pushing this one to be crazy
+negative
+and wait how is it it can't have a
+and wait how is it it can't have a
+negative standard deviation that doesn't
+negative standard deviation that doesn't
+make sense oh wait cuz I
+make sense oh wait cuz I
+didn't maybe I'm just being stupid hold
+didn't maybe I'm just being stupid hold
+on yeah yeah so it's got to
+on yeah yeah so it's got to
+be for. X
+yeah yeah I Sugg just checking out that
+yeah yeah I Sugg just checking out that
+link if you're interested in getting
+link if you're interested in getting
+involved in RL honestly building stuff
+involved in RL honestly building stuff
+in puffer lib is the best way now to
+in puffer lib is the best way now to
+give you an idea
+give you an idea
+all these environments are made by
+all these environments are made by
+contributors or most of them are I made
+contributors or most of them are I made
+this one this one and this one the rest
+this one this one and this one the rest
+are other open source contributors many
+are other open source contributors many
+of them came in with no RL experience
+of them came in with no RL experience
+let alone AI
+let alone AI
+experience
+experience
+um yeah and they're all super fast
+um yeah and they're all super fast
+they're playable you can watch the
+they're playable you can watch the
+agents playing
+agents playing
+them so it's a really good way to get
+them so it's a really good way to get
+involved is just like building an rln
+involved is just like building an rln
+and training on it from scratch
+and training on it from scratch
+okay this is way more reasonable
+looking
+okay there we
+okay there we
+go how do you make the most of your
+go how do you make the most of your
+graphics what do you
+mean I don't know what that means
+Game Dev Game Dev is fun Game Dev is
+Game Dev Game Dev is fun Game Dev is
+just that's just engineering X
+just that's just engineering X
+right some of these are very very
+right some of these are very very
+simple the only asset here is a
+simple the only asset here is a
+puffer and then uh we also have we've
+puffer and then uh we also have we've
+got stuff like this right that's a
+got stuff like this right that's a
+little
+little
+prettier made an enin puffer puffer took
+prettier made an enin puffer puffer took
+a little bit to get used to scon
+a little bit to get used to scon
+integration sorry I'm looking for a way
+integration sorry I'm looking for a way
+around that but the problem is there are
+around that but the problem is there are
+really no good like binding options from
+really no good like binding options from
+uh python to C I'm trying to find better
+uh python to C I'm trying to find better
+ones and is running over a million steps
+ones and is running over a million steps
+that's what we like based on the ocean
+that's what we like based on the ocean
+example still need to figure out how to
+example still need to figure out how to
+get it training yeah so that's going to
+get it training yeah so that's going to
+be the uh learning curve bit uh the most
+be the uh learning curve bit uh the most
+common problems are incorrectly computed
+common problems are incorrectly computed
+observations uh like not populating a
+observations uh like not populating a
+buffer correctly or like not handling
+buffer correctly or like not handling
+reset the way you think they are usually
+reset the way you think they are usually
+those are the most common
+ones oh that's what you meant Ray lib
+yeah I don't know why this thing doesn't
+yeah I don't know why this thing doesn't
+seem to be training at all now with a
+seem to be training at all now with a
+learned
+learned
+standard deviation
+standard deviation
+tensor because the standard deviation
+tensor because the standard deviation
+tensor looks good to
+me and we'll let it see maybe it just
+me and we'll let it see maybe it just
+takes longer to take
+takes longer to take
+off regardless
+off regardless
+though I'm very very close
+here what do you guys think does it make
+here what do you guys think does it make
+sense
+sense
+for the standard deviation of the
+for the standard deviation of the
+output to
+output to
+be learned per instance or should it
+be learned per instance or should it
+just be a a
+just be a a
+parameter so like basically should it
+parameter so like basically should it
+learn a per time step variance or should
+learn a per time step variance or should
+it learn a per observation per time step
+it learn a per observation per time step
+variance
+instance how those two different well
+instance how those two different well
+you can either Define it as a neural
+you can either Define it as a neural
+net. parameter so if there're 32 time
+net. parameter so if there're 32 time
+steps you're just going to learn 32
+steps you're just going to learn 32
+variables and then for every observation
+variables and then for every observation
+you know you're going to get the same
+you know you're going to get the same
+standard deviation on them or you can
+standard deviation on them or you can
+have the variance actually be predicted
+have the variance actually be predicted
+by an extra head on the net Network and
+by an extra head on the net Network and
+then you can actually have the network
+then you can actually have the network
+learn to predict when it's confident and
+learn to predict when it's confident and
+when it's not on each time step um it
+when it's not on each time step um it
+doesn't seem to train though which is
+doesn't seem to train though which is
+odd because I'm looking at the standard
+odd because I'm looking at the standard
+deviation tensor and it's pretty
+deviation tensor and it's pretty
+reasonable looking to
+me like that's a very reasonable looking
+me like that's a very reasonable looking
+standard deviation
+tensor so I don't know why it wouldn't
+tensor so I don't know why it wouldn't
+be learning e
+oh it is learning it just took forever
+oh it is learning it just took forever
+to take like to start
+to take like to start
+huh that's
+weird what are they used for the value
+net CRI standard deviation one for the
+net CRI standard deviation one for the
+value
+it collapsed again
+it collapsed again
+H very
+awkward 01 on the action head then one
+awkward 01 on the action head then one
+on the value
+doesn't learn at all
+right make sure I didn't break anything
+else otherwise it's the same
+right this one
+whoops
+go
+for e
+it's
+it's
+crazy it
+crazy it
+learns much
+better and that standard deviation is
+better and that standard deviation is
+really important as
+really important as
+well it's being a lot more conservative
+well it's being a lot more conservative
+here where it's like not trying to use
+here where it's like not trying to use
+predictions too far
+predictions too far
+out that's interesting
+where the heck are these
+things e
+fine I don't know why this wouldn't
+fine I don't know why this wouldn't
+train the other one wouldn't train at
+train the other one wouldn't train at
+all it's very weird
+what that's not how that
+works yeah this thing fundamentally does
+works yeah this thing fundamentally does
+not understand I don't know
+yeah that doesn't make any freaking
+sense good
+job you shouldn't be anything
+job you shouldn't be anything
+fundamental I don't
+think e
+the per instance would be really
+nice
+for e
+hi
+welcome I mean at some point you've got
+welcome I mean at some point you've got
+to assume there's just a bit of variance
+to assume there's just a bit of variance
+in the curves right I mean breakout is
+in the curves right I mean breakout is
+known to have um a ton of
+known to have um a ton of
+variance obviously it's there's still a
+variance obviously it's there's still a
+gap to G but uh these little tiny
+gap to G but uh these little tiny
+tweaks I don't know if we're really
+tweaks I don't know if we're really
+measuring differences between them very
+much I do want to try uh I think 128
+much I do want to try uh I think 128
+Horizon that would be a good data point
+Horizon that would be a good data point
+to have just to
+to have just to
+see the idea is that with the current
+see the idea is that with the current
+implementation you should be able to
+implementation you should be able to
+expand the Horizon and you should not
+expand the Horizon and you should not
+suffer performance penalty it should be
+suffer performance penalty it should be
+able to help if you're able to learn it
+able to help if you're able to learn it
+but if you're not it should not hurt
+but if you're not it should not hurt
+because the variant should essentially
+because the variant should essentially
+be
+zero 720
+zero 720
+me yeah okay that's not far off that's
+fine those are all fine
+can I fix
+can I fix
+this I forget one of them yeah I
+this I forget one of them yeah I
+did we'll make that a learnable
+did we'll make that a learnable
+parameter as well
+parameter as well
+maybe or sweet parameter
+and I'm just going to do this so we can
+and I'm just going to do this so we can
+see
+it it does look like it slows the
+it it does look like it slows the
+algorithm down which is not
+great I don't think it
+great I don't think it
+should finally your undergrad I want to
+should finally your undergrad I want to
+create finally your project in RL very
+create finally your project in RL very
+confused still I heard RL is still far
+confused still I heard RL is still far
+away from being used in real life no it
+away from being used in real life no it
+is used in real life the thing is it's
+is used in real life the thing is it's
+not used out of the box in real life
+not used out of the box in real life
+life it's kind of at a point where if
+life it's kind of at a point where if
+you have an application you got to go
+you have an application you got to go
+hire some smart RL people um and you
+hire some smart RL people um and you
+know give them a couple years to make
+know give them a couple years to make
+sure they really get it working
+sure they really get it working
+but uh so it's not out of the box but it
+but uh so it's not out of the box but it
+is used now if you're trying to do like
+is used now if you're trying to do like
+you know a cool project that scale of a
+you know a cool project that scale of a
+thing yeah we have a lot of these things
+thing yeah we have a lot of these things
+so puffer AI here right we have all
+so puffer AI here right we have all
+these different environments that are
+these different environments that are
+built for uh really fast training in RL
+built for uh really fast training in RL
+you can watch the agents playing them
+you can watch the agents playing them
+live they go from very very simple like
+live they go from very very simple like
+this up to very very complex like this
+this up to very very complex like this
+miniature
+miniature
+MMO and uh you can kind of watch the
+MMO and uh you can kind of watch the
+agents run around here and do different
+agents run around here and do different
+things sometimes they get stuck but they
+things sometimes they get stuck but they
+actually will if you watch them they'll
+actually will if you watch them they'll
+do some pretty impressive
+stuff same with this
+stuff same with this
+MOA you know we have it working in a
+MOA you know we have it working in a
+variety of different areas
+variety of different areas
+won't get any job from RL well it's not
+won't get any job from RL well it's not
+really an un like it's not really an
+really an un like it's not really an
+undergrad job is the thing right like
+undergrad job is the thing right like
+where RL is right now it's you're mostly
+where RL is right now it's you're mostly
+hiring RL
+hiring RL
+phds that's the tricky thing but
+phds that's the tricky thing but
+um General ml there's tons right like
+um General ml there's tons right like
+it's all the same stuff there's tons and
+it's all the same stuff there's tons and
+tons of stuff in general machine
+tons of stuff in general machine
+learning
+learning
+it's pretty easy to just float around
+it's pretty easy to just float around
+from one sub field to the
+next I mean I don't know your background
+next I mean I don't know your background
+level right but if like we have some of
+level right but if like we have some of
+the simplest RL code out there so you
+the simplest RL code out there so you
+can look at some of the example
+can look at some of the example
+environments and the way we do stuff and
+environments and the way we do stuff and
+if you say oh yeah that looks like that
+if you say oh yeah that looks like that
+looks like something I can deal with
+looks like something I can deal with
+then you know you're set
+I like this one this is massively
+I like this one this is massively
+multi-agent
+snake we can definitely get working it's
+snake we can definitely get working it's
+just a little takes a little
+work right so here's the latest
+work right so here's the latest
+one and yeah I so there is definitely
+one and yeah I so there is definitely
+something going on with the longer
+Horizon longer Horizon should not hurt
+Horizon longer Horizon should not hurt
+learnability but it looks like it is
+I'm trying to think why that would
+be it must just be the noise
+right unless this thing is going to take
+right unless this thing is going to take
+off massively
+maybe it's just that you're getting a
+maybe it's just that you're getting a
+little bit of
+noise and
+noise and
+um we'll have to actually go look at how
+um we'll have to actually go look at how
+much of the training how much of the
+much of the training how much of the
+data is
+data is
+noise I could clip it
+noise I could clip it
+maybe kindly suggest a cool project I've
+maybe kindly suggest a cool project I've
+done specialization in
+done specialization in
+RL from course I didn't even know they
+RL from course I didn't even know they
+had one of
+had one of
+those I mean generally what you do is
+those I mean generally what you do is
+you pick
+you pick
+you pick a simple game right you pick
+you pick a simple game right you pick
+like a simple game that we don't already
+like a simple game that we don't already
+have you implement it take a look at the
+have you implement it take a look at the
+way that we do stuff because you know we
+way that we do stuff because you know we
+do stuff in a specific way to make sure
+do stuff in a specific way to make sure
+it's very fast it's very simple the way
+it's very fast it's very simple the way
+we do it um and then get RL training on
+we do it um and then get RL training on
+a new M so pretty much like showing you
+a new M so pretty much like showing you
+can do the whole end to end process of
+can do the whole end to end process of
+here's a new environment I implement the
+here's a new environment I implement the
+environment I get the RL training on it
+environment I get the RL training on it
+here's the agent that is trained on it
+here's the agent that is trained on it
+that's kind of what we uh what we
+that's kind of what we uh what we
+suggest to people who are relatively new
+suggest to people who are relatively new
+in
+RL I mean a lot of these are not a
+RL I mean a lot of these are not a
+tremendous amount of
+tremendous amount of
+code I think that this whole thing is
+code I think that this whole thing is
+less than 500 lines
+I mean the core logic is
+really 1
+32 yeah like 200
+32 yeah like 200
+lines doesn't take a lot to do some
+lines doesn't take a lot to do some
+pretty cool stuff in
+pretty cool stuff in
+RL puffer Li tries to make it pretty
+RL puffer Li tries to make it pretty
+easy
+idea in
+Finance the one that people always want
+Finance the one that people always want
+to do is they always want to do like
+to do is they always want to do like
+Market
+Market
+Sims I wouldn't say I wouldn't try to
+Sims I wouldn't say I wouldn't try to
+simulate the actual stock market but I
+simulate the actual stock market but I
+will tell you that
+will tell you that
+like you can definitely do some sorts of
+like you can definitely do some sorts of
+like trading type
+like trading type
+simulators um I can show you like a a
+simulators um I can show you like a a
+very small thing that I've done in that
+very small thing that I've done in that
+area well it's not a small thing it's
+area well it's not a small thing it's
+small because it's embedded in a much
+small because it's embedded in a much
+larger
+larger
+thing but here
+thing but here
+like these agents if I just take over
+like these agents if I just take over
+for this guy real
+for this guy real
+quick I can like buy and sell stuff on
+quick I can like buy and sell stuff on
+the
+the
+market um just like with key
+market um just like with key
+presses so this agent can buy and sell
+presses so this agent can buy and sell
+stuff with like hundred to ,000 other
+stuff with like hundred to ,000 other
+agents in the same
+environment so you can Implement some
+environment so you can Implement some
+sorts of like basic trading simulators
+sorts of like basic trading simulators
+like that and then track uh track prices
+like that and then track uh track prices
+track supply and demand that type of a
+track supply and demand that type of a
+thing I think Salesforce had a thing on
+thing I think Salesforce had a thing on
+this that was kind of
+this that was kind of
+ridiculous RL
+I mean they were doing it for tax policy
+I mean they were doing it for tax policy
+which was kind of
+which was kind of
+stupid um but where is
+it where the hell did this the all the
+it where the hell did this the all the
+images for this thing
+images for this thing
+go yeah so they were doing stuff like
+go yeah so they were doing stuff like
+this where they had the simulation and
+this where they had the simulation and
+the Agents like could trade and stuff I
+the Agents like could trade and stuff I
+wouldn't try to embed them inside of an
+wouldn't try to embed them inside of an
+environment I would just do the trading
+environment I would just do the trading
+portion you know like agents have
+portion you know like agents have
+certain amounts of
+certain amounts of
+goods agents you know produce different
+goods agents you know produce different
+quantities of different Goods agents all
+quantities of different Goods agents all
+need a certain quantity of different
+need a certain quantity of different
+goods and then see if they can learn to
+goods and then see if they can learn to
+trade with each other
+efficiently that type of thing is pretty
+efficiently that type of thing is pretty
+straightforward e
+okay so this definitely hurt
+okay so this definitely hurt
+performance I question is
+why it's got to be noise it can't really
+why it's got to be noise it can't really
+be anything but noise right
+ah and actually it's not slowing stuff
+ah and actually it's not slowing stuff
+down either it's just the uh the wrapper
+down either it's just the uh the wrapper
+is apparently
+is apparently
+slow that's fine we'll fix that that's
+slow that's fine we'll fix that that's
+no
+problem e
+I wonder if we can just
+see I want if we can just see it
+here going to have to hit continue a
+here going to have to hit continue a
+whole bunch of times
+until uh the standard
+until uh the standard
+deviations get to a reasonable
+distribution I'm trying to think in the
+distribution I'm trying to think in the
+meantime what else it could
+meantime what else it could
+be I would think it would have to just
+be I would think it would have to just
+be it would have to be the
+be it would have to be the
+advantages I mean there's just nothing
+advantages I mean there's just nothing
+else right
+okay ah shoot it's going to eat all
+okay ah shoot it's going to eat all
+those continues isn't
+it I didn't think you could buffer
+those
+for e
+there we are
+there we are
+okay so
+Z we're capturing
+Z we're capturing
+90% about the first half
+uh which is not enough because clearly
+uh which is not enough because clearly
+there's nothing else after
+that yeah that's just noise so
+what
+you can't clip it is the problem can you
+oh no you could clip
+it but the thing is how do you how would
+it but the thing is how do you how would
+you clip it
+to 0.02 or
+[Music]
+something for
+all right we'll see how that goes be
+all right we'll see how that goes be
+right
+back
+e
+e e
+well this is weird isn't
+well this is weird isn't
+it is this still not doing well
+I clipped it
+could also figure out the miscellaneous
+could also figure out the miscellaneous
+time what's going wrong there
+I mean the standard deviation tens are
+I mean the standard deviation tens are
+here right
+here right
+like it's only maybe the first
+like it's only maybe the first
+16 somewhere between 16 and 32
+16 somewhere between 16 and 32
+elements that actually are are
+significant
+e e
+h e
+we'll let this run
+finish but this doesn't seem to be doing
+finish but this doesn't seem to be doing
+what we
+want we could just test this at uh
+want we could just test this at uh
+32 length but I think that we're leaving
+32 length but I think that we're leaving
+performance on the table
+here
+e e
+thing is I can't think of why that
+thing is I can't think of why that
+wouldn't
+work
+um clip clipping this
+um clip clipping this
+should
+should
+prevent anything SC from happening in
+prevent anything SC from happening in
+the advantage I guess it could just also
+the advantage I guess it could just also
+be the loss is really noisy the uh the
+be the loss is really noisy the uh the
+value function loss is really noisy but
+value function loss is really noisy but
+I don't think that makes
+I don't think that makes
+sense if I look at the value
+loss right so this is our value loss
+loss right so this is our value loss
+here and yeah it's going to be higher
+here and yeah it's going to be higher
+but it's not
+noisy it's actually very
+stable for
+I could also just zero the second where
+I could also just zero the second where
+everything after 32 is a
+everything after 32 is a
+comparison because that should
+comparison because that should
+definitely work right and if that
+definitely work right and if that
+doesn't work then there's definitely
+doesn't work then there's definitely
+something
+broken I'd also just like to know why
+uh why the Mis script takes so
+long for
+we'll double check that to speed up our
+we'll double check that to speed up our
+training
+training
+RS but this is going to be about the
+RS but this is going to be about the
+same if not a little
+worse be done in a second
+is there not an HTML
+here I want to see the uh the
+HTML un
+HTML un
+[Music]
+at the
+top isn't there an annotate flag
+H hold
+on yes this is it here
+interestingly this is
+interestingly this is
+fine for
+should not take that long
+right
+e e
+maybe this just gets ported to see or
+maybe this just gets ported to see or
+something I don't know this is weird
+regardless though
+regardless though
+right we should be able to
+do we should be able to do
+this and if this doesn't fix it then
+this and if this doesn't fix it then
+there's there something else I'm
+there's there something else I'm
+missing cuz this should make it the same
+missing cuz this should make it the same
+as the 32 one
+the heck is
+this D
+it what you doing in my Dev
+shots I think this is still
+shots I think this is still
+underperforming isn't
+it
+say I mean we're not going to be able to
+say I mean we're not going to be able to
+tell for a while
+if this matches at least then we'll know
+if this matches at least then we'll know
+that the issue is
+that the issue is
+in the way that we're handling uh
+in the way that we're handling uh
+clipping or whatever
+else what
+function would be suitable for
+that and also why clipping doesn't seem
+that and also why clipping doesn't seem
+to do enough
+still doesn't match right
+crash back down
+oh no maybe it is I okay we'll let it
+oh no maybe it is I okay we'll let it
+we'll uh we'll
+we'll uh we'll
+see if this matches then it tells us
+see if this matches then it tells us
+directly
+directly
+that the issue is just uh the variance
+that the issue is just uh the variance
+post processing
+looks like it's the
+case take this as an opportunity to
+case take this as an opportunity to
+commit the current
+stuff for
+is there a reason to expect this to do
+is there a reason to expect this to do
+better than
+better than
+previous I think not
+previous I think not
+really I think it should just about
+match
+for
+e e
+I wonder what actually causes that narl
+I mean that actually seems like there's
+I mean that actually seems like there's
+policy damage right that's not just
+policy damage right that's not just
+random
+random
+variation in getting a bunch of bad
+variation in getting a bunch of bad
+samples I would
+expect that actually would be another
+expect that actually would be another
+good topic for uh for research why the
+good topic for uh for research why the
+hell our curves are such a
+hell our curves are such a
+mess e
+no that would that gives you these
+no that would that gives you these
+little squiggles down here right these
+little squiggles down here right these
+are just sample by sample squiggles but
+are just sample by sample squiggles but
+when you get stuff like this this is
+when you get stuff like this this is
+actual policy damage right like these
+actual policy damage right like these
+are not random action sampling this is
+are not random action sampling this is
+like it's like something screwy
+like it's like something screwy
+happened hey
+welcome for
+fact that it's not m what we had before
+fact that it's not m what we had before
+concerns
+me
+me
+oh okay maybe it is just end
+behavior with one un monkey Spike yeah
+behavior with one un monkey Spike yeah
+okay
+fine at the very least there is a
+fine at the very least there is a
+substantial Gap just caused by the way
+substantial Gap just caused by the way
+that we're handling
+variant we know
+that I think we can
+that I think we can
+probably handle these things separately
+probably handle these things separately
+though
+though
+right CU if all I do is here I think so
+right CU if all I do is here I think so
+I want to go get lunch and do some
+I want to go get lunch and do some
+exercise so I think what we're going to
+do we're going to set this to
+be uh
+be uh
+32 and 32 this should be the stable one
+and now we no longer care about Gamma
+and now we no longer care about Gamma
+and Lambda
+and Lambda
+right take these out
+entirely now we're just tuning this
+entirely now we're just tuning this
+stuff really the one that matters the
+stuff really the one that matters the
+most is going to be like learning rate B
+size
+size
+okay little time steps do we have in
+okay little time steps do we have in
+here
+yeah this is
+fine yeah this is
+fine we will just leave this on as is
+fine we will just leave this on as is
+let's make sure that this actually
+let's make sure that this actually
+trains
+just get rid of
+just get rid of
+this so like leave this scale like this
+maybe and this will be committed as
+well I think what I'm going to do from
+well I think what I'm going to do from
+now on
+now on
+is when I have like cool new research
+is when I have like cool new research
+like this I might not share it on
+like this I might not share it on
+Twitter like in post form uh so you know
+Twitter like in post form uh so you know
+there will still be a decent little
+there will still be a decent little
+surprise for the general audience but
+surprise for the general audience but
+yeah if you're on the stream you just
+yeah if you're on the stream you just
+get to see whatever the heck I'm
+get to see whatever the heck I'm
+currently
+doing because I think this will be a
+doing because I think this will be a
+really cool result if we can get this to
+really cool result if we can get this to
+match this would be huge
+there's still some quirks
+definitely still some
+quirks
+e
+e e
+and let's go take a look at this one
+and let's go take a look at this one
+here oh yeah that's way closer to the
+here oh yeah that's way closer to the
+original curve now it's got this this
+original curve now it's got this this
+dip but yeah there's definitely
+dip but yeah there's definitely
+something screw with the longer Horizons
+something screw with the longer Horizons
+we'll figure that out though there's no
+we'll figure that out though there's no
+big deal there we'll figure that out for
+big deal there we'll figure that out for
+sure and then it'll just do even better
+I think I want to set this up
+already do you get a bunch of
+already do you get a bunch of
+emails uh yeah they just go to spam
+emails uh yeah they just go to spam
+though
+right e
+I mean even then it's just not a good
+I mean even then it's just not a good
+use of
+time okay cool so quick summary of what
+time okay cool so quick summary of what
+we have right now we have a stable
+we have right now we have a stable
+implementation of this generalized
+implementation of this generalized
+Advantage estimation free po
+Advantage estimation free po
+that with completely untuned
+that with completely untuned
+hyperparameters uh gets pretty
+hyperparameters uh gets pretty
+close to the original with
+close to the original with
+j and well not completely untuned it was
+j and well not completely untuned it was
+the old ones that were tuned for J so
+the old ones that were tuned for J so
+then the question is going to be whether
+then the question is going to be whether
+we can match this via hyper Prem sweep
+we can match this via hyper Prem sweep
+alone or if we need to keep working on
+alone or if we need to keep working on
+the algorithm quite a bit
+I I'd honestly be surprised if peer
+I I'd honestly be surprised if peer
+review is even directionally correct in
+AI is
+AI is
+this I don't think I could have broken
+this I don't think I could have broken
+anything here okay I think we're just
+anything here okay I think we're just
+going to leave this to run because we're
+going to leave this to run because we're
+probably just spending time analyzing
+probably just spending time analyzing
+random noise
+here yeah if we're able to do this then
+here yeah if we're able to do this then
+basically we will have we'll have
+basically we will have we'll have
+removed two hyper parameters which you
+removed two hyper parameters which you
+always have to sweep which are really
+always have to sweep which are really
+annoying uh it will have the potential
+annoying uh it will have the potential
+to do better because it will be able to
+to do better because it will be able to
+have a flexible Horizon that changes
+have a flexible Horizon that changes
+over the course of learning which should
+over the course of learning which should
+be important in more complex
+be important in more complex
+tasks
+tasks
+um and it will allow the algorithm to
+um and it will allow the algorithm to
+work more robustly uh across multiple
+environments so I'd say pretty
+good and yeah this is close to on par as
+good and yeah this is close to on par as
+well now with before you can see yeah
+well now with before you can see yeah
+look at
+that
+perfect cool so I'm going to go get some
+perfect cool so I'm going to go get some
+food what do you decide to do I just ran
+food what do you decide to do I just ran
+shorter Horizon for now for the sweep
+shorter Horizon for now for the sweep
+what current ocean M can we use to test
+what current ocean M can we use to test
+learning over an Adaptive Horizon any of
+learning over an Adaptive Horizon any of
+the more complex ones your one
+the more complex ones your one
+potentially Spencer's one neural MMO MOA
+potentially Spencer's one neural MMO MOA
+any of the more complex
+ones in fact I know how to uh Captain I
+ones in fact I know how to uh Captain I
+have a a perfectly good way to to track
+have a a perfectly good way to to track
+that as well uh it will be very easy
+that as well uh it will be very easy
+we'll add a metric for logging it like
+we'll add a metric for logging it like
+literally all I have to do is get this
+literally all I have to do is get this
+thing to be about on par with G and then
+thing to be about on par with G and then
+we can do lots of cool stuff well when I
+we can do lots of cool stuff well when I
+say all I have to do it that would be
+say all I have to do it that would be
+like that would be like a giant RL
+like that would be like a giant RL
+contribution so we'll see how hard it is
+contribution so we'll see how hard it is
+but uh it's going pretty well I think we
+but uh it's going pretty well I think we
+need to run the sweep to see how much
+need to run the sweep to see how much
+we're missing out on
+we're missing out on
+that will
+that will
+be nicely set up for
+us I think this is our sweep
+right so this will be our sweep
+and we'll see how this
+goes you could initialize new tensors
+goes you could initialize new tensors
+yeah there's a lot of stuff we can
+yeah there's a lot of stuff we can
+fiddle with same policy for all not
+fiddle with same policy for all not
+exactly same policy it's just that this
+exactly same policy it's just that this
+will these are two of the hyper
+will these are two of the hyper
+parameters that are the most
+parameters that are the most
+fiddling right and that vary the most
+fiddling right and that vary the most
+across environments so if we remove this
+across environments so if we remove this
+then it means that we'll have a PO will
+then it means that we'll have a PO will
+work way more out of the box than it
+work way more out of the box than it
+currently
+currently
+does I think we'll have to change the
+does I think we'll have to change the
+name from pop to P30 puffer proximal
+name from pop to P30 puffer proximal
+policy
+policy
+optimization but uh I'm going to go
+optimization but uh I'm going to go
+while this sweep runs I'm going to go
+while this sweep runs I'm going to go
+get some exercise I'm going to go get
+get some exercise I'm going to go get
+some food and then I'll come back in the
+some food and then I'll come back in the
+afternoon we'll look at this we'll
+afternoon we'll look at this we'll
+probably have to work on a few other
+probably have to work on a few other
+things as well because you know I have
+things as well because you know I have
+contracts that Demand work as well but
+contracts that Demand work as well but
+uh this is this is pretty
+uh this is this is pretty
+solid uh so thanks folks and and uh if
+solid uh so thanks folks and and uh if
+you're interested in any of this
+you're interested in any of this
+stuff that I work on here it's all open
+stuff that I work on here it's all open
+source
+source
+puff. start the GitHub really helps us
+puff. start the GitHub really helps us
+when people start the GitHub two more
+when people start the GitHub two more
+people join the Discord to hit a
+people join the Discord to hit a
+thousand that'll be pretty nice and you
+thousand that'll be pretty nice and you
+can also follow on X where I post a lot
+can also follow on X where I post a lot
+of RL content got a Blog as
+of RL content got a Blog as
+well so yeah other
+
+Kind: captions
+Language: en
+okay we are
+live morning
+hey how's it going
+I think we're going to do some outgo
+I think we're going to do some outgo
+side work just for the morning on uh on
+side work just for the morning on uh on
+this new thing I've been trying
+out warning the
+shot new Alo you're testing against
+shot new Alo you're testing against
+generalized advant Vantage estimation so
+generalized advant Vantage estimation so
+the goal is to kind of learn a form of
+the goal is to kind of learn a form of
+discounting by uh expanding the value
+discounting by uh expanding the value
+head to be like 32 dimensional or 64
+head to be like 32 dimensional or 64
+dimensional or whatnot and predict the
+dimensional or whatnot and predict the
+reward for future time
+steps I suspect something is still wrong
+steps I suspect something is still wrong
+though because it's not learning the way
+though because it's not learning the way
+I would expect
+finally lost
+yeah but there's only one head so it
+yeah but there's only one head so it
+predicts future discounted return and
+predicts future discounted return and
+then you have to tune a discount Factor
+then you have to tune a discount Factor
+whereas if you were to just predict all
+whereas if you were to just predict all
+the future rewards directly you
+the future rewards directly you
+shouldn't have
+to e
+try something real quick
+I just want to
+see if I can get it to learn
+something okay so the mean tense are
+something okay so the mean tense are
+learned
+learned
+perfectly and then standard deviation
+perfectly and then standard deviation
+tensor
+okay good so this does actually do what
+okay good so this does actually do what
+we
+we
+expect it is learning a random a
+expect it is learning a random a
+reasonable standard deviation and a
+reasonable standard deviation and a
+reasonable mean so then the only thing
+reasonable mean so then the only thing
+that could be screwy
+that could be screwy
+here is the data could be wrong
+somehow
+e e
+he have to be the right ones right
+because for
+yeah so reward block is already indexed
+yeah so reward block is already indexed
+right
+hang on I don't think that this is
+hang on I don't think that this is
+correct is
+it no hold on I might have something
+it no hold on I might have something
+here let me see if this is actually
+here let me see if this is actually
+correct so
+self.
+self.
+values so anything that gets passed in
+values so anything that gets passed in
+is already sorted
+yeah this is already sorted
+but now this is going to be the wrong
+but now this is going to be the wrong
+shape isn't
+it so
+think the obvious thing here
+I hate when my extension just breaks for
+I hate when my extension just breaks for
+no
+reason for
+there we go
+experience no attribute Horizon really
+I
+I
+forgot this one
+one of these times this is going to do
+one of these times this is going to do
+something eventually this is going to do
+something e
+oh wait yeah it's doing
+oh wait yeah it's doing
+it look at
+that mean is going to take a little
+that mean is going to take a little
+longer I think but uh actually no mean
+longer I think but uh actually no mean
+should be that way standard Devi ation
+should be that way standard Devi ation
+tensor though look at that it's learned
+tensor though look at that it's learned
+uh it's going to learn its own
+discounting
+beautiful now this we're going to track
+beautiful now this we're going to track
+this
+this
+thing and it will learn its own
+discounting we'll see whether it learns
+discounting we'll see whether it learns
+it any quick any uh quicker
+it any quick any uh quicker
+but we do have the thing
+apparently there's a bug with some NS at
+apparently there's a bug with some NS at
+some
+point
+yeah it's weird that we have this we're
+yeah it's weird that we have this we're
+going to have to F uh figure this out
+going to have to F uh figure this out
+separately
+okay so something is definitely we need
+okay so something is definitely we need
+to fix this first before we can do
+to fix this first before we can do
+anything I
+guess of course the second you don't log
+guess of course the second you don't log
+it it works
+somehow the standard deviation can
+somehow the standard deviation can
+become Nan
+I don't understand how this can
+overflow
+e e
+bar
+y this literally just be for
+logging for
+weird that it only happens sometimes as
+well e
+okay
+how'd that
+happen for
+something's very
+screwy we had seen the time of life
+screwy we had seen the time of life
+though it does it is able to learn some
+though it does it is able to learn some
+sort of BD
+sort of BD
+distribution so there is a chance that
+distribution so there is a chance that
+if we fix this we actually get something
+if we fix this we actually get something
+good out of this
+approach
+okay yeah why does it do
+this for
+can't possibly be this right
+I mean that is technically an out of
+I mean that is technically an out of
+bounds right
+non-deterministic errors are
+annoying maybe that was all
+just an
+overflow looks like it
+I
+standard deviation clipping screwing
+standard deviation clipping screwing
+this one I think
+what's the issue with
+what's the issue with
+G that it has two hyper parameters that
+G that it has two hyper parameters that
+are environment
+are environment
+specific so you can't run the same thing
+specific so you can't run the same thing
+on multiple different environments and
+on multiple different environments and
+if you wanted to say train um on
+if you wanted to say train um on
+multiple environments at the same time
+multiple environments at the same time
+or something you wouldn't be able to
+so it's a
+so it's a
+fundamental problem with the
+algorithm here we go
+it
+could I mean G is a hard Baseline to
+could I mean G is a hard Baseline to
+beat right
+but I do see that it is learning
+but I do see that it is learning
+appropriate variance terms so that's
+appropriate variance terms so that's
+pretty cool
+the mean term should actually be roughly
+even so that's fine and then the
+even so that's fine and then the
+variances should be approximating a
+variances should be approximating a
+discounting factor
+discounting factor
+it looks like they are
+it's not getting calculated at the
+moment there were a couple terms that
+moment there were a couple terms that
+were
+were
+broken we'll fix those I just want to
+broken we'll fix those I just want to
+see if we have the method doing anything
+see if we have the method doing anything
+reasonable
+yeah so far this is doing better than
+yeah so far this is doing better than
+any of the previous trials where I had
+any of the previous trials where I had
+some stuff
+some stuff
+broken um but it's nowhere near the uh
+broken um but it's nowhere near the uh
+the J the tune J run yet
+should at least do better than the
+should at least do better than the
+previous runs you would hope
+do we get stable value loss
+now oh yeah we get stable value
+loss so that's fixed the other the
+loss so that's fixed the other the
+previous
+issues e
+not stable
+H it's weird that it's not
+stable
+e
+e e
+well that has done better at least than
+well that has done better at least than
+the other ones
+okay so 500
+next one will
+be 32
+steps cuz I think there's still an issue
+steps cuz I think there's still an issue
+with the way that we're Computing things
+with the way that we're Computing things
+here
+here
+but this could do something I'm going to
+but this could do something I'm going to
+go up I'm going to do a couple things
+go up I'm going to do a couple things
+while this
+while this
+runs and I'll be back in a few and uh we
+runs and I'll be back in a few and uh we
+will continue on this for another hour
+will continue on this for another hour
+and a half or whatever be right
+back
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e e
+okay
+uh had the Neptune on where's my
+run oh look at
+that it's hard to say which of these is
+that it's hard to say which of these is
+going to be better because like it's a
+going to be better because like it's a
+weird shaped graph but uh that's a way
+weird shaped graph but uh that's a way
+higher amount than I've seen on any of
+higher amount than I've seen on any of
+the previous ones and it looks like
+the previous ones and it looks like
+you're getting a pretty reasonably
+you're getting a pretty reasonably
+learned discounting as
+well oh
+I think I did a sweep before as well so
+I think I did a sweep before as well so
+this is
+this is
+definitely this is definitely a
+definitely this is definitely a
+reasonable
+Baseline here we go oh actually yeah
+Baseline here we go oh actually yeah
+this is substantially better thank you I
+this is substantially better thank you I
+was looking at episode length
+was looking at episode length
+so uh blue is 32 Max Horizon or 64 Max
+so uh blue is 32 Max Horizon or 64 Max
+Horizon this is 32 Max Horizon and then
+Horizon this is 32 Max Horizon and then
+this is the g8e
+this is the g8e
+Baseline now the thing is it should get
+Baseline now the thing is it should get
+strictly better over a longer Horizon um
+strictly better over a longer Horizon um
+we just need to come up with a better
+we just need to come up with a better
+Advantage function is my
+guess e
+yeah this is totally fine
+yeah this is totally fine
+here this loss is good
+here this loss is good
+so it's got to be the other
+so it's got to be the other
+loss is the advantage
+loss is the advantage
+calculation which is right
+calculation which is right
+here I'm just dividing by the standard
+here I'm just dividing by the standard
+deviation right
+now yeah this thing's got got to get
+now yeah this thing's got got to get
+normalized
+somehow yeah that's just a bad Advantage
+function
+okay
+e e
+scun
+do I make the advantage
+do I make the advantage
+function reward minus mean over 1 plus
+function reward minus mean over 1 plus
+standard deviation
+wrote out the RLC
+game wait you already wrote an
+game wait you already wrote an
+environment there's no way
+right Pi all the DMs
+oh you wrote out
+oh you wrote out
+the
+the
+okay I shouldn't put this on stream
+okay I shouldn't put this on stream
+right let me see
+Okay cool so I mean I can look at this
+Okay cool so I mean I can look at this
+with you
+then you got a
+capacitor there are only two knobs here
+capacitor there are only two knobs here
+right
+oh yeah when you have two knobs like
+oh yeah when you have two knobs like
+this see these aren't even actions right
+this see these aren't even actions right
+it's a one-step problem you're just
+it's a one-step problem you're just
+setting these and then running the whole
+setting these and then running the whole
+simulator like you could even it's
+simulator like you could even it's
+honestly easier to think of those as
+honestly easier to think of those as
+just like you could like use a hyper
+just like you could like use a hyper
+parameter optimization algorithm for
+parameter optimization algorithm for
+this frankly this is like so incredibly
+this frankly this is like so incredibly
+simple cuz it's a one-step problem
+right yeah so that's pretty easy
+like yeah you literally like the new
+like yeah you literally like the new
+hyper parameter algorithm that I have
+hyper parameter algorithm that I have
+you can like throw just the hyper
+you can like throw just the hyper
+parameter algorithm on without the RL
+parameter algorithm on without the RL
+and that'll still work
+well yeah the thing that's missing here
+well yeah the thing that's missing here
+right is usually there's an interactive
+right is usually there's an interactive
+element in RL
+um but I mean it's I have tools for this
+um but I mean it's I have tools for this
+sure that's
+fine well I mean you're you hit like you
+fine well I mean you're you hit like you
+make one decision you hit simulate and
+make one decision you hit simulate and
+that's the whole thing
+that's the whole thing
+right if you're playing pong you're
+right if you're playing pong you're
+moving the paddle at every single
+moving the paddle at every single
+step it's not like a step simulator
+mhm well it's just like it's not bad
+mhm well it's just like it's not bad
+it's just easy right it's just it's an
+it's just easy right it's just it's an
+easy
+problem yeah yeah you have a
+problem yeah yeah you have a
+two-dimensional optimization problem one
+step for
+well yeah this is just good enough for
+well yeah this is just good enough for
+now
+no it's
+no it's
+40 but the thing is it's not 40 just for
+40 but the thing is it's not 40 just for
+um
+um
+Brock they doubled the price so
+Brock they doubled the price so
+presumably it was 20 for Twitter premium
+presumably it was 20 for Twitter premium
+before right and then they added 20 for
+before right and then they added 20 for
+Rock so it's the same price as the
+Rock so it's the same price as the
+others
+this is still incredibly stupid the
+this is still incredibly stupid the
+suggestion I just gave
+suggestion I just gave
+me
+for e
+but oh that's screwy
+all right that's good enough that's some
+all right that's good enough that's some
+data um
+we could try this
+the standard
+deviations what are you looking for I'm
+deviations what are you looking for I'm
+just trying to find a nice way to scale
+just trying to find a nice way to scale
+the
+data
+for
+e
+e e
+huh I guess that
+works for
+so this is now going to scale the
+so this is now going to scale the
+advantages a little
+better and this should actually make it
+better and this should actually make it
+robust to longer Horizons as
+well essentially what this now does is
+well essentially what this now does is
+the expected shape of the advantage
+the expected shape of the advantage
+curve or the uh rather the standard
+curve or the uh rather the standard
+deviation
+deviation
+here stream go so the expected uh shape
+here stream go so the expected uh shape
+of this curve
+right it's going to be something like
+drawing is
+hard
+hard
+Flatline and this is like
+0.1 something like
+0.1 something like
+this okay so this needs to
+this okay so this needs to
+contribute zero and then this should
+contribute zero and then this should
+contribute like
+contribute like
+one we just needed a normalization
+one we just needed a normalization
+factor
+now we'll see if the one I came up with
+now we'll see if the one I came up with
+is any good you know there's no
+is any good you know there's no
+guarantee that the one I came up with is
+guarantee that the one I came up with is
+any
+any
+good even though it makes
+sense seems like it's under performing
+sense seems like it's under performing
+for now maybe it catches up we'll
+see e
+just a little bit behind I
+just a little bit behind I
+think oh maybe it catches up
+we can see it's learned the standard
+deviation e
+and then we also have one more
+and then we also have one more
+normalization scheme to try after this
+normalization scheme to try after this
+as
+well e
+H they should have like totally crushed
+H they should have like totally crushed
+the
+the
+um no
+h
+there's something I guess just with the
+there's something I guess just with the
+uh the learning rate and heing that it
+uh the learning rate and heing that it
+just can take off at some
+point e
+man that is so close to having it
+solved that is so freaking close
+816 can try normalizing I don't think
+816 can try normalizing I don't think
+normalizing is going to do a ton for
+normalizing is going to do a ton for
+this honestly but we'll try it just to
+see
+e
+e
+e
+e e
+I'm out of thinking field for the time
+I'm out of thinking field for the time
+being
+being
+let me just
+let me just
+see I mean I really this is like so
+see I mean I really this is like so
+freaking basic but
+wa can't I uh just
+wa can't I uh just
+initialize the parameter
+initialize the parameter
+better log standard deviation
+no it's because it sets the log standard
+no it's because it sets the log standard
+deviation to one to start
+with wait but why should
+I it's just going to tell me to add
+I it's just going to tell me to add
+Epsilon as
+no I don't want to do this why would I
+no I don't want to do this why would I
+do this
+that's not
+it e
+the
+hell oh
+can I just do this
+first e
+this whenever I'm doing like basic math
+this whenever I'm doing like basic math
+you'll watch like it takes me way longer
+you'll watch like it takes me way longer
+and then it
+and then it
+should
+should
+because I don't do it very often
+because I don't do it very often
+frankly but
+frankly but
+uh that's fine we get through it we make
+uh that's fine we get through it we make
+the algorithm and then we make up for it
+the algorithm and then we make up for it
+in engineering
+so we can't remove them in
+first
+for e
+so
+so
+silly stuck on something like
+this e
+here's what we'll
+do for
+isn't this just the way easier version
+isn't this just the way easier version
+of
+of
+it if we're deciding to not be stupid
+yeah it looks like
+it and now this one can be a sum can
+it that draw to be
+it that draw to be
+stable
+stable
+okay again we have no idea if this even
+helps but we'll run this and then we'll
+helps but we'll run this and then we'll
+run a longer Horizon and longer Horizon
+run a longer Horizon and longer Horizon
+should be strictly better so the trick
+should be strictly better so the trick
+here right is that a property of this
+here right is that a property of this
+algorithm should be that increasing
+algorithm should be that increasing
+The Horizon should uh cause it to do
+The Horizon should uh cause it to do
+strictly better it should not be getting
+strictly better it should not be getting
+confused by longer Horizon because the
+confused by longer Horizon because the
+standard
+standard
+deviation will be flatlined at the point
+deviation will be flatlined at the point
+where it can no longer have any
+where it can no longer have any
+effective prediction that far into the
+effective prediction that far into the
+future and that gets subtracted out so
+future and that gets subtracted out so
+that has no effect on the
+that has no effect on the
+advantage a lot of problems are defined
+advantage a lot of problems are defined
+by less than 100K parameters
+uh what do you mean by
+uh what do you mean by
+that
+that
+problems I don't know what you mean by
+problems I don't know what you mean by
+defined it would be are they solvable
+defined it would be are they solvable
+with less than 100K parameters
+with less than 100K parameters
+right yeah okay so how large of a model
+right yeah okay so how large of a model
+to solve it depends I think you'd be
+to solve it depends I think you'd be
+surprised what you can do with less than
+surprised what you can do with less than
+10 million parameters and uh you know
+10 million parameters and uh you know
+100K is perfectly good for doing very
+100K is perfectly good for doing very
+very fast research we do a little larger
+very fast research we do a little larger
+than this we go up to a million at
+times
+times
+H it's promising
+how does model SK size scale with IO
+how does model SK size scale with IO
+well that doesn't really tell you
+well that doesn't really tell you
+anything either
+anything either
+right because there is a scaling factor
+right because there is a scaling factor
+with that but you know 999 of those
+with that but you know 999 of those
+inputs could be worthless or they could
+inputs could be worthless or they could
+just be linearly related in which case
+just be linearly related in which case
+you just need one layer to sort that
+you just need one layer to sort that
+relationship out right so it really it
+relationship out right so it really it
+depends it depends mostly on the
+depends it depends mostly on the
+fundamental complexity of the problem
+fundamental complexity of the problem
+not just the
+dimensionality right yeah
+it's just how hard is the problem to
+it's just how hard is the problem to
+solve that's pretty that's it like the
+solve that's pretty that's it like the
+neural net is learning a function that's
+neural net is learning a function that's
+mapping uh that's mapping inputs to
+mapping uh that's mapping inputs to
+actions how hard like how complex is the
+actions how hard like how complex is the
+function required to solve the problem
+function required to solve the problem
+that's all it is
+virgin
+yeah but it's
+yeah but it's
+not there's not like
+a you can't just fit Big O to it
+a you can't just fit Big O to it
+right first of all there's no end to
+right first of all there's no end to
+scale it with it's like if you have one
+scale it with it's like if you have one
+simulation or another simulation one
+simulation or another simulation one
+problem or another like there's no
+problem or another like there's no
+scaling complexity factor to a lot of
+scaling complexity factor to a lot of
+these things
+these things
+it's just it's a constant it's a big
+it's just it's a constant it's a big
+constant you're trying to estimate the
+constant you're trying to estimate the
+big
+constant yeah of course each Sim scales
+constant yeah of course each Sim scales
+differently like the thing to look at
+differently like the thing to look at
+this is just like think about it at a
+this is just like think about it at a
+high level right they each different
+high level right they each different
+problems some problems are easy some
+problems some problems are easy some
+problems are hard some problems are easy
+problems are hard some problems are easy
+for people to solve some problems are
+for people to solve some problems are
+hard for people to solve well some
+hard for people to solve well some
+problems are going to be easy for neuron
+problems are going to be easy for neuron
+Nets to solve and some problems are
+Nets to solve and some problems are
+going to be hard there's not going to be
+going to be hard there's not going to be
+a onetoone mapping of which ones are
+a onetoone mapping of which ones are
+hard for which
+either but gen generally right I can
+either but gen generally right I can
+look at something like Atari and say
+look at something like Atari and say
+yeah that's going to be an easier
+yeah that's going to be an easier
+problem to solve than DOTA and it's
+problem to solve than DOTA and it's
+going to require a much smaller neurom
+going to require a much smaller neurom
+man
+but there's nothing to quantify over
+but there's nothing to quantify over
+right like you don't have any input
+right like you don't have any input
+variables that describe the problem
+variables that describe the problem
+they're each completely
+different this is not like an algorithm
+different this is not like an algorithm
+where you're scaling in and seeing how
+where you're scaling in and seeing how
+you know how the complexity
+changes
+e e
+oh yeah yeah yeah okay if you have an
+oh yeah yeah yeah okay if you have an
+existing problem right if you have an
+existing problem right if you have an
+existing problem that has an existing
+existing problem that has an existing
+known solve complexity or an algorithm
+known solve complexity or an algorithm
+with a known solve complexity yes you
+with a known solve complexity yes you
+can use RL as a fast approximate
+can use RL as a fast approximate
+algorithm in some
+cases that makes
+sense yeah that's
+valid that may that is
+valid that may that is
+valid this is so freaking close for
+I know right it's so
+close isn't that kind of cool though
+close isn't that kind of cool though
+with puffer though that like I uh I am
+with puffer though that like I uh I am
+designing an algorithm to potentially
+designing an algorithm to potentially
+replace one of the most widely used
+replace one of the most widely used
+things in the field in the span of about
+things in the field in the span of about
+two days of work
+XA scale level XA scale was big back in
+XA scale level XA scale was big back in
+2018 it's not huge
+nowadays you can just go buy yourself a
+nowadays you can just go buy yourself a
+pedop flop your
+pedop flop your
+company what's it now uh 20
+million they probably have overhead 100
+million they probably have overhead 100
+million
+just go buy it
+there's no way this is going to
+there's no way this is going to
+seriously do worse
+right if this is going to do worse we're
+right if this is going to do worse we're
+going to have to take a look at our uh
+going to have to take a look at our uh
+our
+formula I mean it should do better in
+formula I mean it should do better in
+the sense that um
+the sense that um
+it should at least be trying to estimate
+it should at least be trying to estimate
+values that are farther
+values that are farther
+out it's getting more training
+data
+e e
+we also haven't tried um
+learned uh learned parameter yet
+learned uh learned parameter yet
+either layer we should try that
+next
+e e
+there we
+go
+yeah yeah not per not amazingly stable
+yeah yeah not per not amazingly stable
+yet it's untuned though
+and let's remember it is quite possible
+and let's remember it is quite possible
+though that we just run tuning and uh
+though that we just run tuning and uh
+you know just the optimal learning rate
+you know just the optimal learning rate
+has changed and stuff it's possible that
+has changed and stuff it's possible that
+we match just off of tuning
+and mind you the tuning will also be
+and mind you the tuning will also be
+quicker or or fewer samples rather
+quicker or or fewer samples rather
+because we no longer have to tune Lambda
+because we no longer have to tune Lambda
+and Gamma they no longer
+exist this is irritating me that this
+exist this is irritating me that this
+doesn't seem to match quite well
+though and there takes off
+though and there takes off
+right little bit
+well this is the whole algorithm right
+well this is the whole algorithm right
+is that you're predicting all the values
+is that you're predicting all the values
+you don't need to learn a discount
+you don't need to learn a discount
+Factor over values if you just predict
+Factor over values if you just predict
+all of them
+okay so this definitely does
+worse I don't know why this would do
+worse that's the issue
+I mean these curves though are so
+I mean these curves though are so
+chaotic like it's hard to say
+right yeah I'm not going to be confident
+right yeah I'm not going to be confident
+saying one of these is way better or way
+saying one of these is way better or way
+worse than the other
+worse than the other
+here curves are pretty
+chaotic do you have suggestions coming
+chaotic do you have suggestions coming
+to RL I have a full guide for
+to RL I have a full guide for
+you I put all my suggestions for
+you I put all my suggestions for
+newcomers to RL in one quick easy
+blog there you go
+blog there you go
+we've trained uh several people actually
+we've trained uh several people actually
+in RL that came in with no AI background
+in RL that came in with no AI background
+let alone you know uh deep learning
+let alone you know uh deep learning
+anything
+anything
+else RL used to be incredibly incredibly
+else RL used to be incredibly incredibly
+difficult to get into like really
+difficult to get into like really
+freaking hard but we've made it a lot
+easier it's only going to get easier as
+easier it's only going to get easier as
+well we're working on simplifying a lot
+well we're working on simplifying a lot
+of the algorithms out a bunch of old
+crap okay we're going to try this next
+crap okay we're going to try this next
+which is going to be learned standard
+deviation except am I dumb here wait
+yeah yeah yeah you
+stupid there do
+this this is so darn
+clo input not linear must be tensor not
+clo input not linear must be tensor not
+linear
+which conferences do you try to
+which conferences do you try to
+attend well I went to
+attend well I went to
+NPS um this January it nearly killed me
+NPS um this January it nearly killed me
+so I think we're going to be a little
+so I think we're going to be a little
+bit more selective
+yeah
+NS I mean we're going to be more
+NS I mean we're going to be more
+selective about going to conferences at
+all as I can tell you that was not worth
+all as I can tell you that was not worth
+what I uh that was not worth it
+your conferences don't have peer review
+your conferences don't have peer review
+that sounds great
+that sounds great
+yeah we have notoriously terrible peer
+yeah we have notoriously terrible peer
+review just
+awful well I don't know what's happening
+awful well I don't know what's happening
+with the standard deviation of this
+with the standard deviation of this
+tensor
+here
+broken what didn't you oh uh I got
+broken what didn't you oh uh I got
+pneumonia at nurs and nearly died in the
+pneumonia at nurs and nearly died in the
+hospital two weeks later that's what I
+hospital two weeks later that's what I
+didn't like about
+didn't like about
+it conference was
+it conference was
+fine but
+why is this doing
+this
+parameter bad
+initialization
+e e
+something is weird here
+how is it pushing this one to be crazy
+how is it pushing this one to be crazy
+negative
+and wait how is it it can't have a
+and wait how is it it can't have a
+negative standard deviation that doesn't
+negative standard deviation that doesn't
+make sense oh wait cuz I
+make sense oh wait cuz I
+didn't maybe I'm just being stupid hold
+didn't maybe I'm just being stupid hold
+on yeah yeah so it's got to
+on yeah yeah so it's got to
+be for. X
+yeah yeah I Sugg just checking out that
+yeah yeah I Sugg just checking out that
+link if you're interested in getting
+link if you're interested in getting
+involved in RL honestly building stuff
+involved in RL honestly building stuff
+in puffer lib is the best way now to
+in puffer lib is the best way now to
+give you an idea
+give you an idea
+all these environments are made by
+all these environments are made by
+contributors or most of them are I made
+contributors or most of them are I made
+this one this one and this one the rest
+this one this one and this one the rest
+are other open source contributors many
+are other open source contributors many
+of them came in with no RL experience
+of them came in with no RL experience
+let alone AI
+let alone AI
+experience
+experience
+um yeah and they're all super fast
+um yeah and they're all super fast
+they're playable you can watch the
+they're playable you can watch the
+agents playing
+agents playing
+them so it's a really good way to get
+them so it's a really good way to get
+involved is just like building an rln
+involved is just like building an rln
+and training on it from scratch
+and training on it from scratch
+okay this is way more reasonable
+looking
+okay there we
+okay there we
+go how do you make the most of your
+go how do you make the most of your
+graphics what do you
+mean I don't know what that means
+Game Dev Game Dev is fun Game Dev is
+Game Dev Game Dev is fun Game Dev is
+just that's just engineering X
+just that's just engineering X
+right some of these are very very
+right some of these are very very
+simple the only asset here is a
+simple the only asset here is a
+puffer and then uh we also have we've
+puffer and then uh we also have we've
+got stuff like this right that's a
+got stuff like this right that's a
+little
+little
+prettier made an enin puffer puffer took
+prettier made an enin puffer puffer took
+a little bit to get used to scon
+a little bit to get used to scon
+integration sorry I'm looking for a way
+integration sorry I'm looking for a way
+around that but the problem is there are
+around that but the problem is there are
+really no good like binding options from
+really no good like binding options from
+uh python to C I'm trying to find better
+uh python to C I'm trying to find better
+ones and is running over a million steps
+ones and is running over a million steps
+that's what we like based on the ocean
+that's what we like based on the ocean
+example still need to figure out how to
+example still need to figure out how to
+get it training yeah so that's going to
+get it training yeah so that's going to
+be the uh learning curve bit uh the most
+be the uh learning curve bit uh the most
+common problems are incorrectly computed
+common problems are incorrectly computed
+observations uh like not populating a
+observations uh like not populating a
+buffer correctly or like not handling
+buffer correctly or like not handling
+reset the way you think they are usually
+reset the way you think they are usually
+those are the most common
+ones oh that's what you meant Ray lib
+yeah I don't know why this thing doesn't
+yeah I don't know why this thing doesn't
+seem to be training at all now with a
+seem to be training at all now with a
+learned
+learned
+standard deviation
+standard deviation
+tensor because the standard deviation
+tensor because the standard deviation
+tensor looks good to
+me and we'll let it see maybe it just
+me and we'll let it see maybe it just
+takes longer to take
+takes longer to take
+off regardless
+off regardless
+though I'm very very close
+here what do you guys think does it make
+here what do you guys think does it make
+sense
+sense
+for the standard deviation of the
+for the standard deviation of the
+output to
+output to
+be learned per instance or should it
+be learned per instance or should it
+just be a a
+just be a a
+parameter so like basically should it
+parameter so like basically should it
+learn a per time step variance or should
+learn a per time step variance or should
+it learn a per observation per time step
+it learn a per observation per time step
+variance
+instance how those two different well
+instance how those two different well
+you can either Define it as a neural
+you can either Define it as a neural
+net. parameter so if there're 32 time
+net. parameter so if there're 32 time
+steps you're just going to learn 32
+steps you're just going to learn 32
+variables and then for every observation
+variables and then for every observation
+you know you're going to get the same
+you know you're going to get the same
+standard deviation on them or you can
+standard deviation on them or you can
+have the variance actually be predicted
+have the variance actually be predicted
+by an extra head on the net Network and
+by an extra head on the net Network and
+then you can actually have the network
+then you can actually have the network
+learn to predict when it's confident and
+learn to predict when it's confident and
+when it's not on each time step um it
+when it's not on each time step um it
+doesn't seem to train though which is
+doesn't seem to train though which is
+odd because I'm looking at the standard
+odd because I'm looking at the standard
+deviation tensor and it's pretty
+deviation tensor and it's pretty
+reasonable looking to
+me like that's a very reasonable looking
+me like that's a very reasonable looking
+standard deviation
+tensor so I don't know why it wouldn't
+tensor so I don't know why it wouldn't
+be learning e
+oh it is learning it just took forever
+oh it is learning it just took forever
+to take like to start
+to take like to start
+huh that's
+weird what are they used for the value
+net CRI standard deviation one for the
+net CRI standard deviation one for the
+value
+it collapsed again
+it collapsed again
+H very
+awkward 01 on the action head then one
+awkward 01 on the action head then one
+on the value
+doesn't learn at all
+right make sure I didn't break anything
+else otherwise it's the same
+right this one
+whoops
+go
+for e
+it's
+it's
+crazy it
+crazy it
+learns much
+better and that standard deviation is
+better and that standard deviation is
+really important as
+really important as
+well it's being a lot more conservative
+well it's being a lot more conservative
+here where it's like not trying to use
+here where it's like not trying to use
+predictions too far
+predictions too far
+out that's interesting
+where the heck are these
+things e
+fine I don't know why this wouldn't
+fine I don't know why this wouldn't
+train the other one wouldn't train at
+train the other one wouldn't train at
+all it's very weird
+what that's not how that
+works yeah this thing fundamentally does
+works yeah this thing fundamentally does
+not understand I don't know
+yeah that doesn't make any freaking
+sense good
+job you shouldn't be anything
+job you shouldn't be anything
+fundamental I don't
+think e
+the per instance would be really
+nice
+for e
+hi
+welcome I mean at some point you've got
+welcome I mean at some point you've got
+to assume there's just a bit of variance
+to assume there's just a bit of variance
+in the curves right I mean breakout is
+in the curves right I mean breakout is
+known to have um a ton of
+known to have um a ton of
+variance obviously it's there's still a
+variance obviously it's there's still a
+gap to G but uh these little tiny
+gap to G but uh these little tiny
+tweaks I don't know if we're really
+tweaks I don't know if we're really
+measuring differences between them very
+much I do want to try uh I think 128
+much I do want to try uh I think 128
+Horizon that would be a good data point
+Horizon that would be a good data point
+to have just to
+to have just to
+see the idea is that with the current
+see the idea is that with the current
+implementation you should be able to
+implementation you should be able to
+expand the Horizon and you should not
+expand the Horizon and you should not
+suffer performance penalty it should be
+suffer performance penalty it should be
+able to help if you're able to learn it
+able to help if you're able to learn it
+but if you're not it should not hurt
+but if you're not it should not hurt
+because the variant should essentially
+because the variant should essentially
+be
+zero 720
+zero 720
+me yeah okay that's not far off that's
+fine those are all fine
+can I fix
+can I fix
+this I forget one of them yeah I
+this I forget one of them yeah I
+did we'll make that a learnable
+did we'll make that a learnable
+parameter as well
+parameter as well
+maybe or sweet parameter
+and I'm just going to do this so we can
+and I'm just going to do this so we can
+see
+it it does look like it slows the
+it it does look like it slows the
+algorithm down which is not
+great I don't think it
+great I don't think it
+should finally your undergrad I want to
+should finally your undergrad I want to
+create finally your project in RL very
+create finally your project in RL very
+confused still I heard RL is still far
+confused still I heard RL is still far
+away from being used in real life no it
+away from being used in real life no it
+is used in real life the thing is it's
+is used in real life the thing is it's
+not used out of the box in real life
+not used out of the box in real life
+life it's kind of at a point where if
+life it's kind of at a point where if
+you have an application you got to go
+you have an application you got to go
+hire some smart RL people um and you
+hire some smart RL people um and you
+know give them a couple years to make
+know give them a couple years to make
+sure they really get it working
+sure they really get it working
+but uh so it's not out of the box but it
+but uh so it's not out of the box but it
+is used now if you're trying to do like
+is used now if you're trying to do like
+you know a cool project that scale of a
+you know a cool project that scale of a
+thing yeah we have a lot of these things
+thing yeah we have a lot of these things
+so puffer AI here right we have all
+so puffer AI here right we have all
+these different environments that are
+these different environments that are
+built for uh really fast training in RL
+built for uh really fast training in RL
+you can watch the agents playing them
+you can watch the agents playing them
+live they go from very very simple like
+live they go from very very simple like
+this up to very very complex like this
+this up to very very complex like this
+miniature
+miniature
+MMO and uh you can kind of watch the
+MMO and uh you can kind of watch the
+agents run around here and do different
+agents run around here and do different
+things sometimes they get stuck but they
+things sometimes they get stuck but they
+actually will if you watch them they'll
+actually will if you watch them they'll
+do some pretty impressive
+stuff same with this
+stuff same with this
+MOA you know we have it working in a
+MOA you know we have it working in a
+variety of different areas
+variety of different areas
+won't get any job from RL well it's not
+won't get any job from RL well it's not
+really an un like it's not really an
+really an un like it's not really an
+undergrad job is the thing right like
+undergrad job is the thing right like
+where RL is right now it's you're mostly
+where RL is right now it's you're mostly
+hiring RL
+hiring RL
+phds that's the tricky thing but
+phds that's the tricky thing but
+um General ml there's tons right like
+um General ml there's tons right like
+it's all the same stuff there's tons and
+it's all the same stuff there's tons and
+tons of stuff in general machine
+tons of stuff in general machine
+learning
+learning
+it's pretty easy to just float around
+it's pretty easy to just float around
+from one sub field to the
+next I mean I don't know your background
+next I mean I don't know your background
+level right but if like we have some of
+level right but if like we have some of
+the simplest RL code out there so you
+the simplest RL code out there so you
+can look at some of the example
+can look at some of the example
+environments and the way we do stuff and
+environments and the way we do stuff and
+if you say oh yeah that looks like that
+if you say oh yeah that looks like that
+looks like something I can deal with
+looks like something I can deal with
+then you know you're set
+I like this one this is massively
+I like this one this is massively
+multi-agent
+snake we can definitely get working it's
+snake we can definitely get working it's
+just a little takes a little
+work right so here's the latest
+work right so here's the latest
+one and yeah I so there is definitely
+one and yeah I so there is definitely
+something going on with the longer
+Horizon longer Horizon should not hurt
+Horizon longer Horizon should not hurt
+learnability but it looks like it is
+I'm trying to think why that would
+be it must just be the noise
+right unless this thing is going to take
+right unless this thing is going to take
+off massively
+maybe it's just that you're getting a
+maybe it's just that you're getting a
+little bit of
+noise and
+noise and
+um we'll have to actually go look at how
+um we'll have to actually go look at how
+much of the training how much of the
+much of the training how much of the
+data is
+data is
+noise I could clip it
+noise I could clip it
+maybe kindly suggest a cool project I've
+maybe kindly suggest a cool project I've
+done specialization in
+done specialization in
+RL from course I didn't even know they
+RL from course I didn't even know they
+had one of
+had one of
+those I mean generally what you do is
+those I mean generally what you do is
+you pick
+you pick
+you pick a simple game right you pick
+you pick a simple game right you pick
+like a simple game that we don't already
+like a simple game that we don't already
+have you implement it take a look at the
+have you implement it take a look at the
+way that we do stuff because you know we
+way that we do stuff because you know we
+do stuff in a specific way to make sure
+do stuff in a specific way to make sure
+it's very fast it's very simple the way
+it's very fast it's very simple the way
+we do it um and then get RL training on
+we do it um and then get RL training on
+a new M so pretty much like showing you
+a new M so pretty much like showing you
+can do the whole end to end process of
+can do the whole end to end process of
+here's a new environment I implement the
+here's a new environment I implement the
+environment I get the RL training on it
+environment I get the RL training on it
+here's the agent that is trained on it
+here's the agent that is trained on it
+that's kind of what we uh what we
+that's kind of what we uh what we
+suggest to people who are relatively new
+suggest to people who are relatively new
+in
+RL I mean a lot of these are not a
+RL I mean a lot of these are not a
+tremendous amount of
+tremendous amount of
+code I think that this whole thing is
+code I think that this whole thing is
+less than 500 lines
+I mean the core logic is
+really 1
+32 yeah like 200
+32 yeah like 200
+lines doesn't take a lot to do some
+lines doesn't take a lot to do some
+pretty cool stuff in
+pretty cool stuff in
+RL puffer Li tries to make it pretty
+RL puffer Li tries to make it pretty
+easy
+idea in
+Finance the one that people always want
+Finance the one that people always want
+to do is they always want to do like
+to do is they always want to do like
+Market
+Market
+Sims I wouldn't say I wouldn't try to
+Sims I wouldn't say I wouldn't try to
+simulate the actual stock market but I
+simulate the actual stock market but I
+will tell you that
+will tell you that
+like you can definitely do some sorts of
+like you can definitely do some sorts of
+like trading type
+like trading type
+simulators um I can show you like a a
+simulators um I can show you like a a
+very small thing that I've done in that
+very small thing that I've done in that
+area well it's not a small thing it's
+area well it's not a small thing it's
+small because it's embedded in a much
+small because it's embedded in a much
+larger
+larger
+thing but here
+thing but here
+like these agents if I just take over
+like these agents if I just take over
+for this guy real
+for this guy real
+quick I can like buy and sell stuff on
+quick I can like buy and sell stuff on
+the
+the
+market um just like with key
+market um just like with key
+presses so this agent can buy and sell
+presses so this agent can buy and sell
+stuff with like hundred to ,000 other
+stuff with like hundred to ,000 other
+agents in the same
+environment so you can Implement some
+environment so you can Implement some
+sorts of like basic trading simulators
+sorts of like basic trading simulators
+like that and then track uh track prices
+like that and then track uh track prices
+track supply and demand that type of a
+track supply and demand that type of a
+thing I think Salesforce had a thing on
+thing I think Salesforce had a thing on
+this that was kind of
+this that was kind of
+ridiculous RL
+I mean they were doing it for tax policy
+I mean they were doing it for tax policy
+which was kind of
+which was kind of
+stupid um but where is
+it where the hell did this the all the
+it where the hell did this the all the
+images for this thing
+images for this thing
+go yeah so they were doing stuff like
+go yeah so they were doing stuff like
+this where they had the simulation and
+this where they had the simulation and
+the Agents like could trade and stuff I
+the Agents like could trade and stuff I
+wouldn't try to embed them inside of an
+wouldn't try to embed them inside of an
+environment I would just do the trading
+environment I would just do the trading
+portion you know like agents have
+portion you know like agents have
+certain amounts of
+certain amounts of
+goods agents you know produce different
+goods agents you know produce different
+quantities of different Goods agents all
+quantities of different Goods agents all
+need a certain quantity of different
+need a certain quantity of different
+goods and then see if they can learn to
+goods and then see if they can learn to
+trade with each other
+efficiently that type of thing is pretty
+efficiently that type of thing is pretty
+straightforward e
+okay so this definitely hurt
+okay so this definitely hurt
+performance I question is
+why it's got to be noise it can't really
+why it's got to be noise it can't really
+be anything but noise right
+ah and actually it's not slowing stuff
+ah and actually it's not slowing stuff
+down either it's just the uh the wrapper
+down either it's just the uh the wrapper
+is apparently
+is apparently
+slow that's fine we'll fix that that's
+slow that's fine we'll fix that that's
+no
+problem e
+I wonder if we can just
+see I want if we can just see it
+here going to have to hit continue a
+here going to have to hit continue a
+whole bunch of times
+until uh the standard
+until uh the standard
+deviations get to a reasonable
+distribution I'm trying to think in the
+distribution I'm trying to think in the
+meantime what else it could
+meantime what else it could
+be I would think it would have to just
+be I would think it would have to just
+be it would have to be the
+be it would have to be the
+advantages I mean there's just nothing
+advantages I mean there's just nothing
+else right
+okay ah shoot it's going to eat all
+okay ah shoot it's going to eat all
+those continues isn't
+it I didn't think you could buffer
+those
+for e
+there we are
+there we are
+okay so
+Z we're capturing
+Z we're capturing
+90% about the first half
+uh which is not enough because clearly
+uh which is not enough because clearly
+there's nothing else after
+that yeah that's just noise so
+what
+you can't clip it is the problem can you
+oh no you could clip
+it but the thing is how do you how would
+it but the thing is how do you how would
+you clip it
+to 0.02 or
+[Music]
+something for
+all right we'll see how that goes be
+all right we'll see how that goes be
+right
+back
+e
+e e
+well this is weird isn't
+well this is weird isn't
+it is this still not doing well
+I clipped it
+could also figure out the miscellaneous
+could also figure out the miscellaneous
+time what's going wrong there
+I mean the standard deviation tens are
+I mean the standard deviation tens are
+here right
+here right
+like it's only maybe the first
+like it's only maybe the first
+16 somewhere between 16 and 32
+16 somewhere between 16 and 32
+elements that actually are are
+significant
+e e
+h e
+we'll let this run
+finish but this doesn't seem to be doing
+finish but this doesn't seem to be doing
+what we
+want we could just test this at uh
+want we could just test this at uh
+32 length but I think that we're leaving
+32 length but I think that we're leaving
+performance on the table
+here
+e e
+thing is I can't think of why that
+thing is I can't think of why that
+wouldn't
+work
+um clip clipping this
+um clip clipping this
+should
+should
+prevent anything SC from happening in
+prevent anything SC from happening in
+the advantage I guess it could just also
+the advantage I guess it could just also
+be the loss is really noisy the uh the
+be the loss is really noisy the uh the
+value function loss is really noisy but
+value function loss is really noisy but
+I don't think that makes
+I don't think that makes
+sense if I look at the value
+loss right so this is our value loss
+loss right so this is our value loss
+here and yeah it's going to be higher
+here and yeah it's going to be higher
+but it's not
+noisy it's actually very
+stable for
+I could also just zero the second where
+I could also just zero the second where
+everything after 32 is a
+everything after 32 is a
+comparison because that should
+comparison because that should
+definitely work right and if that
+definitely work right and if that
+doesn't work then there's definitely
+doesn't work then there's definitely
+something
+broken I'd also just like to know why
+uh why the Mis script takes so
+long for
+we'll double check that to speed up our
+we'll double check that to speed up our
+training
+training
+RS but this is going to be about the
+RS but this is going to be about the
+same if not a little
+worse be done in a second
+is there not an HTML
+here I want to see the uh the
+HTML un
+HTML un
+[Music]
+at the
+top isn't there an annotate flag
+H hold
+on yes this is it here
+interestingly this is
+interestingly this is
+fine for
+should not take that long
+right
+e e
+maybe this just gets ported to see or
+maybe this just gets ported to see or
+something I don't know this is weird
+regardless though
+regardless though
+right we should be able to
+do we should be able to do
+this and if this doesn't fix it then
+this and if this doesn't fix it then
+there's there something else I'm
+there's there something else I'm
+missing cuz this should make it the same
+missing cuz this should make it the same
+as the 32 one
+the heck is
+this D
+it what you doing in my Dev
+shots I think this is still
+shots I think this is still
+underperforming isn't
+it
+say I mean we're not going to be able to
+say I mean we're not going to be able to
+tell for a while
+if this matches at least then we'll know
+if this matches at least then we'll know
+that the issue is
+that the issue is
+in the way that we're handling uh
+in the way that we're handling uh
+clipping or whatever
+else what
+function would be suitable for
+that and also why clipping doesn't seem
+that and also why clipping doesn't seem
+to do enough
+still doesn't match right
+crash back down
+oh no maybe it is I okay we'll let it
+oh no maybe it is I okay we'll let it
+we'll uh we'll
+we'll uh we'll
+see if this matches then it tells us
+see if this matches then it tells us
+directly
+directly
+that the issue is just uh the variance
+that the issue is just uh the variance
+post processing
+looks like it's the
+case take this as an opportunity to
+case take this as an opportunity to
+commit the current
+stuff for
+is there a reason to expect this to do
+is there a reason to expect this to do
+better than
+better than
+previous I think not
+previous I think not
+really I think it should just about
+match
+for
+e e
+I wonder what actually causes that narl
+I mean that actually seems like there's
+I mean that actually seems like there's
+policy damage right that's not just
+policy damage right that's not just
+random
+random
+variation in getting a bunch of bad
+variation in getting a bunch of bad
+samples I would
+expect that actually would be another
+expect that actually would be another
+good topic for uh for research why the
+good topic for uh for research why the
+hell our curves are such a
+hell our curves are such a
+mess e
+no that would that gives you these
+no that would that gives you these
+little squiggles down here right these
+little squiggles down here right these
+are just sample by sample squiggles but
+are just sample by sample squiggles but
+when you get stuff like this this is
+when you get stuff like this this is
+actual policy damage right like these
+actual policy damage right like these
+are not random action sampling this is
+are not random action sampling this is
+like it's like something screwy
+like it's like something screwy
+happened hey
+welcome for
+fact that it's not m what we had before
+fact that it's not m what we had before
+concerns
+me
+me
+oh okay maybe it is just end
+behavior with one un monkey Spike yeah
+behavior with one un monkey Spike yeah
+okay
+fine at the very least there is a
+fine at the very least there is a
+substantial Gap just caused by the way
+substantial Gap just caused by the way
+that we're handling
+variant we know
+that I think we can
+that I think we can
+probably handle these things separately
+probably handle these things separately
+though
+though
+right CU if all I do is here I think so
+right CU if all I do is here I think so
+I want to go get lunch and do some
+I want to go get lunch and do some
+exercise so I think what we're going to
+do we're going to set this to
+be uh
+be uh
+32 and 32 this should be the stable one
+and now we no longer care about Gamma
+and now we no longer care about Gamma
+and Lambda
+and Lambda
+right take these out
+entirely now we're just tuning this
+entirely now we're just tuning this
+stuff really the one that matters the
+stuff really the one that matters the
+most is going to be like learning rate B
+size
+size
+okay little time steps do we have in
+okay little time steps do we have in
+here
+yeah this is
+fine yeah this is
+fine we will just leave this on as is
+fine we will just leave this on as is
+let's make sure that this actually
+let's make sure that this actually
+trains
+just get rid of
+just get rid of
+this so like leave this scale like this
+maybe and this will be committed as
+well I think what I'm going to do from
+well I think what I'm going to do from
+now on
+now on
+is when I have like cool new research
+is when I have like cool new research
+like this I might not share it on
+like this I might not share it on
+Twitter like in post form uh so you know
+Twitter like in post form uh so you know
+there will still be a decent little
+there will still be a decent little
+surprise for the general audience but
+surprise for the general audience but
+yeah if you're on the stream you just
+yeah if you're on the stream you just
+get to see whatever the heck I'm
+get to see whatever the heck I'm
+currently
+doing because I think this will be a
+doing because I think this will be a
+really cool result if we can get this to
+really cool result if we can get this to
+match this would be huge
+there's still some quirks
+definitely still some
+quirks
+e
+e e
+and let's go take a look at this one
+and let's go take a look at this one
+here oh yeah that's way closer to the
+here oh yeah that's way closer to the
+original curve now it's got this this
+original curve now it's got this this
+dip but yeah there's definitely
+dip but yeah there's definitely
+something screw with the longer Horizons
+something screw with the longer Horizons
+we'll figure that out though there's no
+we'll figure that out though there's no
+big deal there we'll figure that out for
+big deal there we'll figure that out for
+sure and then it'll just do even better
+I think I want to set this up
+already do you get a bunch of
+already do you get a bunch of
+emails uh yeah they just go to spam
+emails uh yeah they just go to spam
+though
+right e
+I mean even then it's just not a good
+I mean even then it's just not a good
+use of
+time okay cool so quick summary of what
+time okay cool so quick summary of what
+we have right now we have a stable
+we have right now we have a stable
+implementation of this generalized
+implementation of this generalized
+Advantage estimation free po
+Advantage estimation free po
+that with completely untuned
+that with completely untuned
+hyperparameters uh gets pretty
+hyperparameters uh gets pretty
+close to the original with
+close to the original with
+j and well not completely untuned it was
+j and well not completely untuned it was
+the old ones that were tuned for J so
+the old ones that were tuned for J so
+then the question is going to be whether
+then the question is going to be whether
+we can match this via hyper Prem sweep
+we can match this via hyper Prem sweep
+alone or if we need to keep working on
+alone or if we need to keep working on
+the algorithm quite a bit
+I I'd honestly be surprised if peer
+I I'd honestly be surprised if peer
+review is even directionally correct in
+AI is
+AI is
+this I don't think I could have broken
+this I don't think I could have broken
+anything here okay I think we're just
+anything here okay I think we're just
+going to leave this to run because we're
+going to leave this to run because we're
+probably just spending time analyzing
+probably just spending time analyzing
+random noise
+here yeah if we're able to do this then
+here yeah if we're able to do this then
+basically we will have we'll have
+basically we will have we'll have
+removed two hyper parameters which you
+removed two hyper parameters which you
+always have to sweep which are really
+always have to sweep which are really
+annoying uh it will have the potential
+annoying uh it will have the potential
+to do better because it will be able to
+to do better because it will be able to
+have a flexible Horizon that changes
+have a flexible Horizon that changes
+over the course of learning which should
+over the course of learning which should
+be important in more complex
+be important in more complex
+tasks
+tasks
+um and it will allow the algorithm to
+um and it will allow the algorithm to
+work more robustly uh across multiple
+environments so I'd say pretty
+good and yeah this is close to on par as
+good and yeah this is close to on par as
+well now with before you can see yeah
+well now with before you can see yeah
+look at
+that
+perfect cool so I'm going to go get some
+perfect cool so I'm going to go get some
+food what do you decide to do I just ran
+food what do you decide to do I just ran
+shorter Horizon for now for the sweep
+shorter Horizon for now for the sweep
+what current ocean M can we use to test
+what current ocean M can we use to test
+learning over an Adaptive Horizon any of
+learning over an Adaptive Horizon any of
+the more complex ones your one
+the more complex ones your one
+potentially Spencer's one neural MMO MOA
+potentially Spencer's one neural MMO MOA
+any of the more complex
+ones in fact I know how to uh Captain I
+ones in fact I know how to uh Captain I
+have a a perfectly good way to to track
+have a a perfectly good way to to track
+that as well uh it will be very easy
+that as well uh it will be very easy
+we'll add a metric for logging it like
+we'll add a metric for logging it like
+literally all I have to do is get this
+literally all I have to do is get this
+thing to be about on par with G and then
+thing to be about on par with G and then
+we can do lots of cool stuff well when I
+we can do lots of cool stuff well when I
+say all I have to do it that would be
+say all I have to do it that would be
+like that would be like a giant RL
+like that would be like a giant RL
+contribution so we'll see how hard it is
+contribution so we'll see how hard it is
+but uh it's going pretty well I think we
+but uh it's going pretty well I think we
+need to run the sweep to see how much
+need to run the sweep to see how much
+we're missing out on
+we're missing out on
+that will
+that will
+be nicely set up for
+us I think this is our sweep
+right so this will be our sweep
+and we'll see how this
+goes you could initialize new tensors
+goes you could initialize new tensors
+yeah there's a lot of stuff we can
+yeah there's a lot of stuff we can
+fiddle with same policy for all not
+fiddle with same policy for all not
+exactly same policy it's just that this
+exactly same policy it's just that this
+will these are two of the hyper
+will these are two of the hyper
+parameters that are the most
+parameters that are the most
+fiddling right and that vary the most
+fiddling right and that vary the most
+across environments so if we remove this
+across environments so if we remove this
+then it means that we'll have a PO will
+then it means that we'll have a PO will
+work way more out of the box than it
+work way more out of the box than it
+currently
+currently
+does I think we'll have to change the
+does I think we'll have to change the
+name from pop to P30 puffer proximal
+name from pop to P30 puffer proximal
+policy
+policy
+optimization but uh I'm going to go
+optimization but uh I'm going to go
+while this sweep runs I'm going to go
+while this sweep runs I'm going to go
+get some exercise I'm going to go get
+get some exercise I'm going to go get
+some food and then I'll come back in the
+some food and then I'll come back in the
+afternoon we'll look at this we'll
+afternoon we'll look at this we'll
+probably have to work on a few other
+probably have to work on a few other
+things as well because you know I have
+things as well because you know I have
+contracts that Demand work as well but
+contracts that Demand work as well but
+uh this is this is pretty
+uh this is this is pretty
+solid uh so thanks folks and and uh if
+solid uh so thanks folks and and uh if
+you're interested in any of this
+you're interested in any of this
+stuff that I work on here it's all open
+stuff that I work on here it's all open
+source
+source
+puff. start the GitHub really helps us
+puff. start the GitHub really helps us
+when people start the GitHub two more
+when people start the GitHub two more
+people join the Discord to hit a
+people join the Discord to hit a
+thousand that'll be pretty nice and you
+thousand that'll be pretty nice and you
+can also follow on X where I post a lot
+can also follow on X where I post a lot
+of RL content got a Blog as
+of RL content got a Blog as
+well so yeah other

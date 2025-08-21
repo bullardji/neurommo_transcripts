@@ -1,0 +1,5085 @@
+Kind: captions
+Language: en
+okay we are back
+okay we are back
+live and we've got some stuff to
+do I really want to do this uh this
+do I really want to do this uh this
+hyper pram sweep stuff but I got a
+hyper pram sweep stuff but I got a
+couple things to do first I think
+couple things to do first I think
+probably hyper pram sweeps are going to
+probably hyper pram sweeps are going to
+be for
+be for
+tomorrow we'll start on carbs tomorrow
+tomorrow we'll start on carbs tomorrow
+what's today it Friday it is Friday so
+what's today it Friday it is Friday so
+we're going to start on I pram stuff
+we're going to start on I pram stuff
+tomorrow um right now I need to
+tomorrow um right now I need to
+do I need to start on this other thing
+do I need to start on this other thing
+here where's the paper this
+thing this really shouldn't be that hard
+thing this really shouldn't be that hard
+to
+implement so let's just do
+that and puffer
+tank yeah so we're going to
+do E3 B
+and there shouldn't be that much to
+and there shouldn't be that much to
+change here to support
+change here to support
+this I need to
+add I need to add a buffer for a matrix
+add I need to add a buffer for a matrix
+as
+well yeah
+I think we're going to just do this
+I think we're going to just do this
+single
+purpose so we we kind of just do this in
+purpose so we we kind of just do this in
+a branch and if it's good we'll add it
+a branch and if it's good we'll add it
+to the implementation if it's not we're
+to the implementation if it's not we're
+not we
+not we
+won't all right
+won't all right
+so
+so
+lstm state
+experience this goes into experience
+experience this goes into experience
+right and then this is going to
+be we'll call
+this e3b
+this e3b
+Matrix or
+covariance how about e3b mat
+e3b
+at where's hidden
+dem. hidden size
+is there no
+um there's no hidden
+them that seems weird to
+them that seems weird to
+me where's didn't
+him uhoh
+could have
+could have
+broken I hope
+not we were messing around with um Isaac
+not we were messing around with um Isaac
+Jim and
+Jim and
+stuff why is my why my overlays not work
+I'll get the chat up
+I'll get the chat up
+here
+cool
+uh how's
+uh how's
+it I thought I branched off 2.0
+puffer Li does not
+require okay I don't know what the [ __ ]
+require okay I don't know what the [ __ ]
+is up with this because this
+makes that doesn't make
+sense this is just a container being scy
+this should be a fairly small
+this should be a fairly small
+change I'm hopeful we can just get this
+change I'm hopeful we can just get this
+done
+done
+today and then I can start on hyper pram
+today and then I can start on hyper pram
+stuff
+okay puffer Li does not require three
+okay puffer Li does not require three
+points so I don't know what the hell's
+points so I don't know what the hell's
+up with this
+um oh hold
+on yeah okay
+on yeah okay
+python yeah this is it it's I don't know
+python yeah this is it it's I don't know
+what the heck's going with
+P also let me go check for status update
+P also let me go check for status update
+from
+NYU no
+NYU no
+updates I'm good with that
+that I got a plenty of work to do is
+this really just huge amounts of work to
+do what's what's up here it's still
+do what's what's up here it's still
+going
+okay so we're going to implement this
+okay so we're going to implement this
+like this exploration bonus algorithm um
+like this exploration bonus algorithm um
+without the inverse Dynamics model to
+without the inverse Dynamics model to
+start and see if it you know just see if
+start and see if it you know just see if
+it does
+it does
+anything okay so this now
+works ah
+lovely let's hope that we haven't
+lovely let's hope that we haven't
+completely destroyed Ruda
+drivers I can run this on the remote box
+drivers I can run this on the remote box
+but I'd rather
+not okay there it goes
+yeah so
+here do we have hidden size somewhere
+is there nothing in
+here size
+so this has it um
+I didn't know the hidden
+size I guess you just make sure that it
+size I guess you just make sure that it
+actually has it
+think this
+works well that works
+size
+size
+Co experience
+yeah so this is the e3b
+map then we do
+map then we do
+this now we have storage
+and do we need to do anything with this
+and do we need to do anything with this
+map I actually don't think we need to
+map I actually don't think we need to
+give a damn about any of the other stuff
+give a damn about any of the other stuff
+it's not used in the loss
+it's not used in the loss
+function it's only used in the
+function it's only used in the
+reward yeah so I think we can just I
+reward yeah so I think we can just I
+don't even think we need the do numpy
+don't even think we need the do numpy
+version I think literally we just need
+E3 BM
+E3 BM
+here okay
+and
+and
+yes and this just gets returned
+yes and this just gets returned
+basically as an extra State variable
+so like action log
+prob E3 B
+mat inic I think this is what it is and
+mat inic I think this is what it is and
+then what you have to do
+then what you have to do
+is um where's
+this
+this
+map and then you do e3b
+mat
+mat
+this
+this
+okay then same thing here
+this and then all you have to do is you
+this and then all you have to do is you
+have to
+have to
+add uh you have to add the intrinsic
+add uh you have to add the intrinsic
+reward to the rewards so let me think
+reward to the rewards so let me think
+how to do
+how to do
+this
+device
+device
+nid right because you could be getting
+nid right because you could be getting
+different nids
+but the rewards we just add to I
+but the rewards we just add to I
+think I think we just add to the rewards
+think I think we just add to the rewards
+so we do
+so we do
+reward plus equal in or reward like
+this and then you have to
+this and then you have to
+pass
+E3 you have to get this
+E3 you have to get this
+here like so
+here like so
+and actually this is has to be done uh
+and actually this is has to be done uh
+regardless of if you have an lstm or not
+regardless of if you have an lstm or not
+so this goes up
+here okay and
+here okay and
+then this goes
+e3b E3
+e3b E3
+B cool and now this has to
+B cool and now this has to
+get propagated into the
+get propagated into the
+policy um
+policy um
+yeah this has to go into the
+policy uh let's just make this explicit
+just so we make sure there's no
+just so we make sure there's no
+surprises
+here I really wish my stream overlays
+here I really wish my stream overlays
+actually
+worked welcome YouTube
+folks okay so what we have to do here is
+folks okay so what we have to do here is
+prop
+we have to add
+we have to add
+e3b to here this is going to be State
+e3b to here this is going to be State
+action uh and we'll just add
+action uh and we'll just add
+here
+here
+okay this 3 is
+okay this 3 is
+none X State
+3B and this should be
+3B and this should be
+good now this also returns inic
+reward action value
+reward action value
+State uh now this has to return us new
+State uh now this has to return us new
+e3b new intrinsic
+reward
+oops see yeah new
+oops see yeah new
+e3b and new intrinsic
+e3b and new intrinsic
+reward so so this is now going to
+return State
+return State
+E3
+E3
+this this is be an intrinsic reward now
+this this is be an intrinsic reward now
+this is fine this is this is now
+correct and this is self. policy so then
+correct and this is self. policy so then
+we'll have to adjust that there let's do
+we'll have to adjust that there let's do
+the same thing over here
+we add
+we add
+e3b we add
+e3b we add
+e3b there's no state for this
+one
+one
+ISB and now this is going to return an
+ISB and now this is going to return an
+additional e3b and intrinsic
+additional e3b and intrinsic
+reward course
+e3b so now this is this is everything
+e3b so now this is this is everything
+for the clean RL binding
+for the clean RL binding
+uh now we have to
+uh now we have to
+modify our
+modify our
+models and I think that by default all
+models and I think that by default all
+we
+we
+really need to do is modify our
+really need to do is modify our
+recurrent rapper and our default would
+recurrent rapper and our default would
+be a good starting
+point so lstm wrapper of
+point so lstm wrapper of
+policy this needs to
+policy this needs to
+take e3b
+okay and this is going to
+be en code
+observations it's going to be in decode
+observations it's going to be in decode
+actions that we use
+e3b I'm using this is a nice time to get
+e3b I'm using this is a nice time to get
+rid of this look
+up I think I'll leave it
+up I think I'll leave it
+though
+so the thing with the lookup Ram is I
+so the thing with the lookup Ram is I
+think you actually need it for
+think you actually need it for
+um I think you actually need it for
+um I think you actually need it for
+entity based models captain
+entity based models captain
+I think you actually need it for entity
+I think you actually need it for entity
+based
+models maybe it should just be star like
+models maybe it should just be star like
+qus or like qus or something I don't
+qus or like qus or something I don't
+know this is just on a separate Branch
+know this is just on a separate Branch
+anyways this makes such a mess of all
+anyways this makes such a mess of all
+the policy code that this is only going
+the policy code that this is only going
+to end up getting merged to the main if
+to end up getting merged to the main if
+it's really
+it's really
+good isn't used yeah that's
+good isn't used yeah that's
+fair we're going to end up adding it
+fair we're going to end up adding it
+back if we ever want to do entity
+back if we ever want to do entity
+anything though I used it in the old
+anything though I used it in the old
+neur MMO
+policies basically without it you don't
+policies basically without it you don't
+get to use the encode decode
+get to use the encode decode
+API like the a the encode decode API
+API like the a the encode decode API
+doesn't work if you don't have that or
+doesn't work if you don't have that or
+entity base
+models I mean I'm going to redo a bunch
+models I mean I'm going to redo a bunch
+of this policy stuff anyways at some
+of this policy stuff anyways at some
+point it's just it's on the Queue of
+point it's just it's on the Queue of
+stuff to do right
+it's always a million things to do okay
+it's always a million things to do okay
+so this should be enough for the lstm
+so this should be enough for the lstm
+rapper uh now I just want to add this to
+rapper uh now I just want to add this to
+the default
+the default
+policy and this should be enough for us
+policy and this should be enough for us
+to run
+to run
+experiments once I know debug
+everything oh actually hold on this
+everything oh actually hold on this
+needs to
+needs to
+go forward yeah okay this goes into
+go forward yeah okay this goes into
+decode and that's
+decode and that's
+fine all I have to do is I add it
+fine all I have to do is I add it
+here we just do
+here we just do
+e3b n like
+this and then here we're going to return
+this and then here we're going to return
+actions value e3b intrinsic rewards now
+actions value e3b intrinsic rewards now
+uh we have to actually compute this so
+uh we have to actually compute this so
+what we're going to do
+what we're going to do
+is add the
+formula and this is the tricky
+part here's the
+formula so we do I equal hidden
+attach and then we do
+intrinsic or
+equals
+equals
+T like
+this and then we do
+how do we do
+how do we do
+exponential
+decay oh I think it's just going to
+decay oh I think it's just going to
+be yeah it's literally
+be yeah it's literally
+just um
+e3b next
+equals then it has to get initialized to
+equals then it has to get initialized to
+something doesn't
+it one over Lambda
+I so it's Lambda I to start
+I so it's Lambda I to start
+with what's Lambda
+with what's Lambda
+I they give you
+I they give you
+Lambda they said it was pretty robust to
+Lambda they said it was pretty robust to
+Lambda
+final value
+final value
+.1 is what they
+use so we'll just add 3B
+use so we'll just add 3B
+and this
+well I think we'll hard code it for now
+well I think we'll hard code it for now
+it's a pain in the ass
+so it's going to be
+so it's going to be
+1 *
+1 *
+torch.
+torch.
+I hiden
+size there we
+go that's pretty
+clean and now for
+this I get their formula
+okay right
+okay right
+here e3b next is going to
+here e3b next is going to
+be
+0.9
+0.9
+times
+B each step t
+0.9 5 *
+0.9 5 *
+3B
+plus
+[Music]
+[Music]
+outer
+outer
+plus
+1 e
+how do you like make a torch constant
+how do you like make a torch constant
+that gets moved to
+device register buffer
+there we go
+that seems pretty
+that seems pretty
+good that seems pretty
+good
+yeah actually just do
+e3b okay um
+e3b okay um
+what are the odds that this
+what are the odds that this
+runs oops not this
+runs oops not this
+one this
+one good out of memory
+holy try to
+allocate okay
+is this
+gigantic it's probably kind of gigantic
+right not really it's just the batch
+right not really it's just the batch
+size it's
+size it's
+gigantic but wait you don't need these
+gigantic but wait you don't need these
+in a batch do
+in a batch do
+you you don't need these in a batch you
+you you don't need these in a batch you
+need these
+in you need number environments of these
+in you need number environments of these
+okay so I have the storage from
+okay so I have the storage from
+all luckily
+I guess this is just too
+I guess this is just too
+big I don't
+big I don't
+know um
+and we'll do
+this still out of
+this still out of
+memory I don't understand how this is
+memory I don't understand how this is
+possibly out of memory
+E3
+E3
+B that
+shape so is like not that much data at
+all something screwy
+oh that's
+why it's just
+this there you
+this there you
+go default no e3b
+expected okay so we just have to fix
+expected okay so we just have to fix
+some math here
+so this
+is this hurts my head a little bit
+so this is 128 by
+128 so if you were to get rid of
+128 so if you were to get rid of
+these it would be
+it's F un
+squeeze so it's 5
+squeeze so it's 5
+do
+do
+unze
+one and times five is that it
+this is GPT I'm it's screw this it's
+this is GPT I'm it's screw this it's
+been too long since I've done
+been too long since I've done
+this uh I
+this uh I
+have a times
+see
+see
+see do
+isn't Ein some slow
+the hell
+solve oh
+solve oh
+interesting hey Joseph love your work
+interesting hey Joseph love your work
+wondering if you have any suggestions
+wondering if you have any suggestions
+for more accessible projects for someone
+for more accessible projects for someone
+new to RL looking to do some original
+new to RL looking to do some original
+research uh for new RL people I always
+research uh for new RL people I always
+recommend that you implement a simple uh
+recommend that you implement a simple uh
+high performance environment yourself
+high performance environment yourself
+end to end and uh get something training
+end to end and uh get something training
+on it this is what I've had like all the
+on it this is what I've had like all the
+new puffer contributors do you can pick
+new puffer contributors do you can pick
+something that will have like
+something that will have like
+interesting science on it for sure but
+interesting science on it for sure but
+that's what I would suggest give you an
+that's what I would suggest give you an
+idea of all these
+idea of all these
+environments I implemented neural MMO 3
+environments I implemented neural MMO 3
+MOA and snake obviously have code
+MOA and snake obviously have code
+reviewed and edited all the rest of them
+reviewed and edited all the rest of them
+but like the rest of these are all by
+but like the rest of these are all by
+contributors that are mostly new to RL
+contributors that are mostly new to RL
+um and like implemented these as a way
+um and like implemented these as a way
+to get involved in it so anything as
+to get involved in it so anything as
+simple as you know as simple as pong all
+simple as you know as simple as pong all
+the way up to like you know this is a
+the way up to like you know this is a
+more complex environment to implement so
+more complex environment to implement so
+is
+is
+go right any of
+go right any of
+these as would be my suggestion
+we have lots of examples like all the
+we have lots of examples like all the
+code for those is open source and it's
+code for those is open source and it's
+fairly
+fairly
+simple I mean it's in C but it's very
+simple I mean it's in C but it's very
+very simple see
+is this correct here
+what are your thoughts on Lex Freedman I
+what are your thoughts on Lex Freedman I
+have no thoughts on Lex Freedman I
+have no thoughts on Lex Freedman I
+haven't seen any of his
+haven't seen any of his
+podcasts what are you trying to do
+podcasts what are you trying to do
+currently I am implementing
+currently I am implementing
+uh e3b or most of it which is a RL
+uh e3b or most of it which is a RL
+exploration
+exploration
+algorithm and uh there's some funky math
+algorithm and uh there's some funky math
+that I'm looking at
+wait this is stupid
+right okay so this thing is better
+interesting
+okay so let's just implement it this way
+then so restoring the inverse M I
+then so restoring the inverse M I
+guess can you give me a learning path
+guess can you give me a learning path
+who wants to learn yeah I have a guide
+who wants to learn yeah I have a guide
+on this on my ex it's also on the puffer
+on this on my ex it's also on the puffer
+blog
+here RL quick start guide right
+here I have a very simple approach to
+here I have a very simple approach to
+most things that I think you'll find
+most things that I think you'll find
+pretty accessible
+pretty accessible
+um the stuff I do involves you know very
+um the stuff I do involves you know very
+little math very little like complex
+little math very little like complex
+stuff to think about it's mostly just
+stuff to think about it's mostly just
+getting the basics down and doing them
+getting the basics down and doing them
+very very
+very very
+well the best stuff in my toolkit is
+well the best stuff in my toolkit is
+honestly being able to write simple high
+honestly being able to write simple high
+performance
+performance
+code that ends up being more useful than
+code that ends up being more useful than
+most other
+things for new people I always just I
+things for new people I always just I
+suggest like building an environment end
+suggest like building an environment end
+to end from scratch and contributing it
+to end from scratch and contributing it
+to puffer lib just go through that
+to puffer lib just go through that
+process of building an end for puffer
+process of building an end for puffer
+and also training RL on it because you
+and also training RL on it because you
+get the process of like what goes into
+get the process of like what goes into
+making a brand new problem work with
+making a brand new problem work with
+reinforcement
+reinforcement
+learning it's the best thing you can do
+learning it's the best thing you can do
+and it can be done
+and it can be done
+in simple environment can be done in a
+in simple environment can be done in a
+few days if even if you're brand new if
+few days if even if you're brand new if
+you just have decent software
+you just have decent software
+engineering
+engineering
+are you a PhD student no I'm a grad I'm
+are you a PhD student no I'm a grad I'm
+graduated I'm a MIT PhD I finished up
+graduated I'm a MIT PhD I finished up
+last
+spring now I work full-time on
+puffer okay so I definitely want to
+puffer okay so I definitely want to
+implement this this way
+e3b call this iners
+one over
+one over
+Lambda this is
+Lambda this is
+10 which is kind of
+sketchy but I guess that's what it is
+is buffer something like gymnasium no
+is buffer something like gymnasium no
+because gymnasium is just an API for RL
+because gymnasium is just an API for RL
+environments um puffer is a lot more
+environments um puffer is a lot more
+than that so puffer has way higher
+than that so puffer has way higher
+performance distributed simulation
+performance distributed simulation
+compared to
+compared to
+gymnasia um we don't have as much API
+gymnasia um we don't have as much API
+overhead we have our own environments
+overhead we have our own environments
+that we have made that are like a
+that we have made that are like a
+thousand times faster than basically
+thousand times faster than basically
+anything in
+anything in
+gymnasium uh we have high performance
+gymnasium uh we have high performance
+training code gymnasium doesn't do
+training code gymnasium doesn't do
+training we have ultra high performance
+training we have ultra high performance
+training code we have really nice
+training code we have really nice
+logging we have automated hyper
+logging we have automated hyper
+parameter sweeps puffer is the project
+parameter sweeps puffer is the project
+that I am building to make RL simple
+that I am building to make RL simple
+fast and
+easy it's everything you can see our
+easy it's everything you can see our
+demo is on
+demo is on
+puff. they'll run live in your browser
+so this thing
+here e3b
+okay so I think this is good for
+okay so I think this is good for
+intrinsic reward and then we have to do
+intrinsic reward and then we have to do
+this
+this
+update to e3b which is going to
+update to e3b which is going to
+be e3b
+minus holy hell
+what's the what's the most efficient way
+what's the what's the most efficient way
+to implement this
+to implement this
+[Music]
+thing e
+this is
+this is
+[Music]
+[Music]
+U one plus
+plus obviously
+this so yeah you compute
+this I think this is a [ __ ]
+this I think this is a [ __ ]
+implementation that it just gave
+implementation that it just gave
+me am I Frozen on
+stream no I'm not okay
+good welcome YouTube
+good welcome YouTube
+folks what we are currently doing we're
+folks what we are currently doing we're
+implementing e3b which is an exploration
+implementing e3b which is an exploration
+algorithm for
+algorithm for
+RL um and there's a little bit of fun
+RL um and there's a little bit of fun
+math here German
+math here German
+Morrison rank one
+Morrison rank one
+update and I'm just trying to make sure
+update and I'm just trying to make sure
+I do this correctly and I do this the
+I do this correctly and I do this the
+most efficient way possible I think that
+most efficient way possible I think that
+this is giving me garbage
+because so C inverse U so this is
+because so C inverse U so this is
+fine but
+fine but
+then compute the scaler
+denominator outer
+product yeah so this should be cash
+right CU this
+right CU this
+is UT and yeah okay
+so let's just let's just make a little
+so let's just let's just make a little
+like
+German
+so
+you let's do this
+you let's do this
+so return
+T
+CN what the heck is
+CN what the heck is
+that what
+VT so we do this
+VT so we do this
+and
+and
+then so that's now
+then so that's now
+CED and then we'll
+do do
+do do
+this I don't think this needs n
+squeeze
+squeeze
+CN minus
+CN BT
+at divided by one
+plus should I focus to solve problem or
+plus should I focus to solve problem or
+anything else would be I I'm not sure
+anything else would be I I'm not sure
+what you mean by that
+what you mean by that
+like learning
+algorithm you're going to get confused
+algorithm you're going to get confused
+if you just start doing like learning
+if you just start doing like learning
+algorithm ablations and stuff
+algorithm ablations and stuff
+immediately I generally think the best
+immediately I generally think the best
+way to get into reinforcement learning
+way to get into reinforcement learning
+is to go through the process of making a
+is to go through the process of making a
+new environment and then going through
+new environment and then going through
+the process of getting reinforcement
+the process of getting reinforcement
+learning to solve that new simple
+learning to solve that new simple
+environment because that will teach you
+environment because that will teach you
+um that shows you how to structure
+um that shows you how to structure
+observations how to get data through the
+observations how to get data through the
+network you're probably going to have to
+network you're probably going to have to
+do a little bit of hyperparameter tuning
+do a little bit of hyperparameter tuning
+you're going to have to like understand
+you're going to have to like understand
+the process by which uh environment's
+the process by which uh environment's
+compute observations and rewards and
+compute observations and rewards and
+similar and and parse actions and all of
+similar and and parse actions and all of
+that so like that's kind of the whole
+that so like that's kind of the whole
+end to end thing there's very little on
+end to end thing there's very little on
+the algorithm side of RL that really
+the algorithm side of RL that really
+matters like everyone loves to go
+matters like everyone loves to go
+straight into all the fancy math and
+straight into all the fancy math and
+algorithms like Po kind of just solves
+algorithms like Po kind of just solves
+everything if you do it right and yeah
+everything if you do it right and yeah
+that's kind of limiting and there are
+that's kind of limiting and there are
+some probably some things out there but
+some probably some things out there but
+like 90% of the people in RL are just
+like 90% of the people in RL are just
+spinning their wheels on algorithms
+spinning their wheels on algorithms
+right now um I would way way way more
+right now um I would way way way more
+recommend just like going through the
+recommend just like going through the
+process of making and fully solving a
+process of making and fully solving a
+problem building an M yeah so you're
+problem building an M yeah so you're
+going to build an environment and you're
+going to build an environment and you're
+going to solve it with reinforcement
+going to solve it with reinforcement
+learning so I would just I'd pick
+learning so I would just I'd pick
+something that is like relatively simple
+something that is like relatively simple
+you know people have done pong people
+you know people have done pong people
+have done breakout right people have
+have done breakout right people have
+done simple grid type environments so
+done simple grid type environments so
+pick like some simple little game that
+pick like some simple little game that
+you're going to have fun building
+you're going to have fun building
+something that's going to only be a few
+something that's going to only be a few
+hundred lines of code you can do in like
+hundred lines of code you can do in like
+a couple of days and you know then look
+a couple of days and you know then look
+at our puffer examples look at how we've
+at our puffer examples look at how we've
+built them and match that and then go
+built them and match that and then go
+through the process know for your
+through the process know for your
+environment of extracting and Computing
+environment of extracting and Computing
+observations Computing
+observations Computing
+rewards uh getting data you know for
+rewards uh getting data you know for
+many parallel copies together into the
+many parallel copies together into the
+storage tensors
+storage tensors
+running training you know doing hypercam
+running training you know doing hypercam
+optimization all of that that's what I
+optimization all of that that's what I
+suggest it's a very good way to get
+involved we've had people do this that
+involved we've had people do this that
+are you know brand new to reinforcement
+are you know brand new to reinforcement
+learning you have Discord y discord.gg
+learning you have Discord y discord.gg
+puffer there are like 900 people in
+there lots of helpful folks
+there lots of helpful folks
+well I mean this is all on our website
+well I mean this is all on our website
+proper. we got GitHub Discord and X all
+proper. we got GitHub Discord and X all
+these
+these
+things you can see all of our uh you
+things you can see all of our uh you
+know all of our environments here as
+know all of our environments here as
+well if you just go to Ocean like you
+well if you just go to Ocean like you
+can literally play all of these in your
+can literally play all of these in your
+browser and watch Agents play them so
+browser and watch Agents play them so
+like here this is an agent playing pong
+like here this is an agent playing pong
+RL agent playing pong in your browser
+RL agent playing pong in your browser
+and if I hold shift if I hold a shift
+and if I hold shift if I hold a shift
+then I take over and now I'm playing the
+then I take over and now I'm playing the
+game for the agent right I'm taking over
+game for the agent right I'm taking over
+the agent and now I take my hand off the
+the agent and now I take my hand off the
+keyboard and it plays again and this
+keyboard and it plays again and this
+works with all of our environments you
+works with all of our environments you
+can play around with they're all open
+can play around with they're all open
+source they're all on the on the GitHub
+source they're all on the on the GitHub
+pretty much they're all like one file
+pretty much they're all like one file
+each very nice and self-contained
+each very nice and self-contained
+they're very very very
+they're very very very
+fast we make it very easy for people to
+fast we make it very easy for people to
+get onboarded
+okay so here
+is Sherman
+Morrison let's see if I've done this
+correctly for w
+that's correct isn't
+that's correct isn't
+it e
+okay that's pretty
+okay that's pretty
+good are you using multi-agent for pong
+good are you using multi-agent for pong
+no pong is single agent um it's like the
+no pong is single agent um it's like the
+original Atari game uh the opponent is
+original Atari game uh the opponent is
+uh the opponent is a scripted bot we do
+uh the opponent is a scripted bot we do
+have multi-agent environments though
+have multi-agent environments though
+we've got lots of
+we've got lots of
+them like uh here we use snake as
+them like uh here we use snake as
+multi-agent each of these is an
+multi-agent each of these is an
+independently controlled uh
+independently controlled uh
+independently
+independently
+controlled the this will train in like 2
+controlled the this will train in like 2
+minutes on a one
+minutes on a one
+GPU uh we've got neural MMO this is
+GPU uh we've got neural MMO this is
+massively
+massively
+multi-agent tons of different things
+multi-agent tons of different things
+this the scripted box you know these are
+this the scripted box you know these are
+scripted but there are uh like 100 some
+scripted but there are uh like 100 some
+OD trained agents for
+environment m is multi-agent each of
+environment m is multi-agent each of
+these is a different agent
+and I think there a couple others like
+and I think there a couple others like
+rware and trash pickup are both
+rware and trash pickup are both
+multi-agent so yeah we got lots of
+multi-agent it's the exact same thing as
+multi-agent it's the exact same thing as
+single agent except when you have like
+single agent except when you have like
+highly competitive
+highly competitive
+environments it's not any harder with
+environments it's not any harder with
+puffer at
+least I mean my PhD is in multi-agent
+least I mean my PhD is in multi-agent
+like many agent learning
+so
+for e
+really some elements
+oh yeah yeah yeah hold on
+there we
+go
+e e
+oh hold on
+oh hold on
+um am I screwed here
+no
+because you don't need this at train
+because you don't need this at train
+time it's already computed the rewards
+time it's already computed the rewards
+you don't need it at train
+time for
+so
+so
+here we
+here we
+got entropy
+got entropy
+value TM State we don't give a [ __ ]
+value TM State we don't give a [ __ ]
+about
+about
+this right we do not care
+and this should be
+it's just a reward
+Edition
+okay device
+side probability tensor
+contains okay so
+contains okay so
+let's back up
+ooh
+n well that's
+funky let's see why is this s
+table one over Lambda inverse
+table one over Lambda inverse
+right but they say that their Lambda
+is they got like a Lambda of
+is they got like a Lambda of
+10 I don't see how that's
+10 I don't see how that's
+possible but that's what they say
+Ridge regularizer is this a different
+Ridge regularizer is this a different
+Lambda hyper parameters for
+Lambda hyper parameters for
+e3b and they do
+0.1 so I don't know how that's
+possible yeah they got 01 everywhere
+possible yeah they got 01 everywhere
+did they clip or
+something I don't understand how this
+something I don't understand how this
+thing
+thing
+works because they're
+clearly I mean they're adding a giant
+Matrix so how's the thing work
+does my Sherman whatever formula
+wrong
+no
+minus this
+thing with one
+over oh this is clever hold on
+they uh they have a different
+they uh they have a different
+formulation of it
+here so we do
+B
+e3b would be minus
+this
+is oh
+is oh
+message I'm a third year hold
+message I'm a third year hold
+on I'm a third-year college student I'll
+on I'm a third-year college student I'll
+be getting into a seventh month long
+be getting into a seventh month long
+internship soon we have less workload
+internship soon we have less workload
+I've been thinking of learning
+I've been thinking of learning
+neim I still use my mouse a lot right
+neim I still use my mouse a lot right
+now it takes all of 10
+minutes it really it takes all of 10
+minutes it really it takes all of 10
+minutes
+minutes
+um here
+this is my whole config here okay I got
+this is my whole config here okay I got
+super
+super
+Maven I got semi that's it I got two
+Maven I got semi that's it I got two
+plugins the rest of this stuff is just
+plugins the rest of this stuff is just
+um color theme this is just custom color
+um color theme this is just custom color
+thing I got like a couple little options
+thing I got like a couple little options
+set and that's
+set and that's
+it that's literally it I don't do
+it that's literally it I don't do
+anything fancy
+[Music]
+I just stick this into uh my base Docker
+I just stick this into uh my base Docker
+container and then I have my whole my
+container and then I have my whole my
+whole work setup in a container wherever
+whole work setup in a container wherever
+I go it's
+great so this is a clever little trick
+great so this is a clever little trick
+that they have
+um I think I can do outer b
+um I think I can do outer b
+b and then I can do divide by 1 +
+B getting used to it I don't use that
+B getting used to it I don't use that
+many HJ K move around I use maybe like
+many HJ K move around I use maybe like
+10 shortcuts total I really don't do I I
+10 shortcuts total I really don't do I I
+mean there are people that get way way
+mean there are people that get way way
+fancier than I do I I use very simple
+fancier than I do I I use very simple
+things
+you'll honestly you'll be used to it
+you'll honestly you'll be used to it
+within a couple of
+days I used um I used just like Vim with
+days I used um I used just like Vim with
+no plugins for six 78 years I don't know
+okay so let's see what's wrong with this
+okay so let's see what's wrong with this
+thing
+I mean the questions if you want to get
+I mean the questions if you want to get
+into RL right like whatever editor is
+into RL right like whatever editor is
+whatever
+editor RL is
+fun at least it's fun now it used to not
+fun at least it's fun now it used to not
+be too much fun
+so it's got to
+so it's got to
+be uh row so UNS squeeze so UNS squeeze
+be uh row so UNS squeeze so UNS squeeze
+two un squeeze
+two un squeeze
+one do you do freelance for work
+one do you do freelance for work
+assuming this is not a passion project
+assuming this is not a passion project
+well I guess it kind of is puffer is a
+well I guess it kind of is puffer is a
+company as well we sell we sell uh
+company as well we sell we sell uh
+support contracts to companies that are
+support contracts to companies that are
+doing RL and having a hard time of
+doing RL and having a hard time of
+it technically what I'm doing right now
+it technically what I'm doing right now
+is part of one of
+those so all our stuff is free uh all of
+those so all our stuff is free uh all of
+our stuff is free in open source but uh
+our stuff is free in open source but uh
+you know we sell we sell like support
+you know we sell we sell like support
+priority service stuff starting 10K a
+priority service stuff starting 10K a
+month for companies
+we do it I do it for free for uh for
+we do it I do it for free for uh for
+academic Labs so I've got like three
+academic Labs so I've got like three
+academic lab collaborations and you know
+academic lab collaborations and you know
+some
+clients we're definitely looking to
+clients we're definitely looking to
+expand puffer over the next few months I
+expand puffer over the next few months I
+mean this is only I've been doing this
+mean this is only I've been doing this
+since last spring it's less than a year
+old and progress has been really great
+a lot of work definitely a lot of work
+creative
+creative
+idea yeah I mean it's like this is not
+idea yeah I mean it's like this is not
+how I would monetize puffer if uh if
+how I would monetize puffer if uh if
+that were the primary goal but I think
+that were the primary goal but I think
+that this is a perfectly good way to
+that this is a perfectly good way to
+revolutionize reinforcement learning and
+revolutionize reinforcement learning and
+I think it can be plenty profitable like
+I think it can be plenty profitable like
+this as well the goal is really just to
+this as well the goal is really just to
+have like a small to midsize uh industry
+have like a small to midsize uh industry
+lab that's just turning out awesome RL
+lab that's just turning out awesome RL
+work
+constantly we're well on our way I mean
+constantly we're well on our way I mean
+puffer is probably the fastest growing
+puffer is probably the fastest growing
+RL project out
+there now this is some good growth
+this is when I went fulltime right
+there I don't know why I have these on
+there I don't know why I have these on
+still I just left them on from my last
+meeting okay outer product um
+this UNS squeeze two UNS squeeze
+one should be UNS squeeze two UNS
+one should be UNS squeeze two UNS
+squeeze one
+okay now
+okay now
+really I'm
+sweet well that's not good
+right or is
+right or is
+it but maybe that is correct
+maybe that is
+correct I'll just look and see how
+correct I'll just look and see how
+problem solves favorite thing good luck
+problem solves favorite thing good luck
+on your stream sure thing thank you
+I mean stuff like this takes me forever
+I mean stuff like this takes me forever
+because like I don't mess around I like
+because like I don't mess around I like
+I used to be pretty darn quick at this
+I used to be pretty darn quick at this
+stuff um when I was doing a lot of
+stuff um when I was doing a lot of
+architecture work but now it takes a
+architecture work but now it takes a
+while but then if you like it when I'm
+while but then if you like it when I'm
+like going through a code basis and
+like going through a code basis and
+fixing stuff it's like super super
+fixing stuff it's like super super
+fast some stuff's slow some stuff's fast
+fast some stuff's slow some stuff's fast
+I still get everything done
+and then what is
+and then what is
+this maybe this is do squeeze maybe we
+this maybe this is do squeeze maybe we
+get rid of this do
+get rid of this do
+squeeze B do
+squeeze maybe this
+I don't like cling this
+bait there we go
+this the heck broke my
+this the heck broke my
+terminal broke my terminal
+try
+try
+this hey there it
+goes value
+goes value
+loss yeah
+okay so this now
+okay so this now
+runs massively slows down the uh the
+runs massively slows down the uh the
+forward
+pass cuz they're inverting a bloody
+pass cuz they're inverting a bloody
+Matrix
+um let me think
+here I mean this makes sense that this
+here I mean this makes sense that this
+is massive to me I don't know how it's
+is massive to me I don't know how it's
+possible that they have Lambos what they
+possible that they have Lambos what they
+say
+is let me see unless I have it
+Implement cuz they say Lambda is 01 I
+Implement cuz they say Lambda is 01 I
+mean they say lambda's
+mean they say lambda's
+0.1 so then Lambda
+0.1 so then Lambda
+inverse is going to be the is 10 times
+inverse is going to be the is 10 times
+the identity Matrix and then they add 10
+the identity Matrix and then they add 10
+times the freaking identity Matrix to
+times the freaking identity Matrix to
+every single
+every single
+iteration so I don't see how that's
+possible oh wait see yeah no they add 10
+possible oh wait see yeah no they add 10
+times the
+times the
+just popping in to say I really enjoy
+just popping in to say I really enjoy
+your work been following for a few years
+your work been following for a few years
+thank
+thank
+you we're currently implementing e3b
+you we're currently implementing e3b
+into puffer lip seeing if this
+into puffer lip seeing if this
+exploration algorithm does
+exploration algorithm does
+anything my prediction is it's just
+anything my prediction is it's just
+going to be too
+going to be too
+slow um but there's some weird things
+slow um but there's some weird things
+with
+with
+it this is for a client um the thing I
+it this is for a client um the thing I
+really want to do which I'm going to
+really want to do which I'm going to
+probably do if I finish this soon I'll
+probably do if I finish this soon I'll
+I'll just start on that but um the next
+I'll just start on that but um the next
+thing I want to do is look at carbs and
+thing I want to do is look at carbs and
+really fix that hyper parameter tuning
+really fix that hyper parameter tuning
+algorithm that's going to be huge for
+algorithm that's going to be huge for
+puffer and for RL
+puffer and for RL
+overall cuz I found some bugs with carbs
+overall cuz I found some bugs with carbs
+or some design issues rather with carbs
+or some design issues rather with carbs
+earlier today
+how is this possible
+how is this possible
+like I'm going to just drop this PDF and
+like I'm going to just drop this PDF and
+plaw and see like I don't expect
+plaw and see like I don't expect
+anything out of it but
+like usually it's like a confirmation
+like usually it's like a confirmation
+that yes in fact you know this paper
+that yes in fact you know this paper
+like this is insane and it doesn't make
+like this is insane and it doesn't make
+any
+sense yeah
+so adding
+so adding
+10x Matrix
+[Music]
+inverse there's no
+is added
+is added
+once not
+once not
+accumulated
+oh okay so yay Claud for once is
+oh okay so yay Claud for once is
+actually helpful I got it did I get it
+actually helpful I got it did I get it
+wrong huh yeah I did get it wrong okay
+wrong huh yeah I did get it wrong okay
+me
+me
+stupid me very stupid
+stupid me very stupid
+hey Captain finish some M optimization
+hey Captain finish some M optimization
+now 170k training verse 130 very well
+now 170k training verse 130 very well
+done very
+done very
+good M speed is
+everything M speed is everything I'm
+everything M speed is everything I'm
+interested to take a look at the
+interested to take a look at the
+uh you know the way that box 2D handles
+uh you know the way that box 2D handles
+cuz apparently there is a tree you said
+cuz apparently there is a tree you said
+for
+for
+collisions yeah the rest is mainly box
+collisions yeah the rest is mainly box
+2D so the question is basically going to
+2D so the question is basically going to
+be when we strip down box 2D is there
+be when we strip down box 2D is there
+anything we can find that's slow there
+anything we can find that's slow there
+okay I actually don't know what the hell
+okay I actually don't know what the hell
+an AABB tree is I don't know is
+an AABB tree is I don't know is
+that I would think you would just want
+that I would think you would just want
+like a quad tree or something or even
+like a quad tree or something or even
+just like a fixed grid but I don't know
+oh wait I didn't even add this did
+I I didn't even add this I and it's
+I I didn't even add this I and it's
+still blowing
+up it's fairly well optimized as
+up it's fairly well optimized as
+is don't know how much we'll be able to
+is don't know how much we'll be able to
+speed it
+up
+interesting I mean the physics CS in
+interesting I mean the physics CS in
+your environment though they don't seem
+your environment though they don't seem
+like they would be capped to 100 like
+like they would be capped to 100 like
+they don't seem that they would be
+they don't seem that they would be
+capped that
+capped that
+slow you're
+slow you're
+handling like on average a sing single
+handling like on average a sing single
+digit number of moving
+digit number of moving
+things
+right yeah mental MTH doesn't check out
+right yeah mental MTH doesn't check out
+Captain there's got to be
+Captain there's got to be
+redundancy if you had like thousands of
+redundancy if you had like thousands of
+entities then sure but you
+don't yeah and all we care about is the
+don't yeah and all we care about is the
+average because you have enough parall L
+average because you have enough parall L
+that it's going to
+that it's going to
+[Music]
+smooth what if I do this
+floating value loss
+completely insane
+I don't know
+why
+e
+e e
+how's that
+happen e
+how's the value lost that
+bad I don't understand
+why is the value lost immediately
+why is the value lost immediately
+garbage
+I just do
+this okay the L definitely being screwed
+this okay the L definitely being screwed
+up
+up
+by this Cal
+okay so this is training a little bit
+okay so this is training a little bit
+without the bonus
+just adding and the intrinsic reward
+yeah so this learned something but it's
+yeah so this learned something but it's
+very slow
+right but the value loss is stable
+value loss is stable so then what
+value loss is stable so then what
+happens is you add this thing
+on what if I do
+on what if I do
+0.01 maybe just need to be
+scale now the value L immediately
+scale now the value L immediately
+freaking explodes
+still not as badly but still it's
+still not as badly but still it's
+crazy 01 yeah no it's still
+crazy 01 yeah no it's still
+expe
+expe
+um is it like on the graph or something
+um is it like on the graph or something
+weird
+no it still
+explodes how is this still
+exploding do they have a coefficient on
+exploding do they have a coefficient on
+this thing or
+something
+something
+B okay they do have this beta
+so let's see what they set beta
+to one
+to one
+they set it to
+they set it to
+one
+jeez they said this to 01 and this to
+one I don't know how this even
+works e
+now look at the values it's just
+exploded I imagine that
+exploded I imagine that
+this this Decay is not the problem
+this this Decay is not the problem
+right yeah that's way worse immediately
+I'm pretty sure this implemented
+correctly I'm pretty sure
+so and what do they do here they
+so and what do they do here they
+[Music]
+[Music]
+do they do this B
+term 1 over 1+ this
+term 1 over 1+ this
+at one over 1 plus
+intrinsic and they
+intrinsic and they
+do this outer
+product minus
+that which is fine
+and how can the value loss possibly be
+and how can the value loss possibly be
+that
+that
+big when the intrinsic reward should be
+big when the intrinsic reward should be
+clipped let's go look at
+that it could just be hypers to be fair
+could just be
+hypers
+so I don't really like the fact that I
+so I don't really like the fact that I
+have to clip
+have to clip
+here I'd rather clip the iate M Rewards
+right okay so let's try
+right okay so let's try
+this
+this
+next let's try this
+next let's try this
+next okay so the value loss is still
+next okay so the value loss is still
+crazy but less
+crazy yeah way less
+crazy yeah way less
+crazy now is this sued or something
+like why is the
+like why is the
+value function like that
+insane it shouldn't be
+okay so break point
+okay so break point
+here can you move the puffer it's
+here can you move the puffer it's
+blocking the
+blocking the
+losses oh this guy yeah he likes to
+losses oh this guy yeah he likes to
+block
+losses he likes to block
+losses we'll find a nice uh stream
+losses we'll find a nice uh stream
+overlay thing
+overlay thing
+soon I'm going to be streaming way more
+let's see
+train where's value loss get
+computed I'm
+flipped what the
+flipped what the
+heck well that'll do
+it oh because it's it's uh it's
+it oh because it's it's uh it's
+discounted returns is why okay so yeah
+discounted returns is why okay so yeah
+if you have one reward per step
+if you have one reward per step
+value is going to
+explode I don't understand how this
+explode I don't understand how this
+thing of theirs
+thing of theirs
+works
+like unless this improves
+why is the SPs so low
+this stupid
+thing let me think if it makes sense
+thing let me think if it makes sense
+that it's this
+low yeah Mel
+should be about a
+should be about a
+m i can test real quick maybe this is
+m i can test real quick maybe this is
+not an optimal config
+not an optimal config
+right um we can
+do where's the damn thing
+oh
+oh
+interesting so how is that not what's
+interesting so how is that not what's
+making it slow
+making it slow
+that doesn't make sense to me
+try
+this okay there you go there's
+600k and
+is still
+600k and now with
+this oh that's
+this oh that's
+funny I guess it was the numpy is Nan
+funny I guess it was the numpy is Nan
+the bug
+the bug
+check okay so it does take a perfit a
+check okay so it does take a perfit a
+pretty big perf hit
+um let's
+see it's value loss is just way too high
+this I guess it's the really big values
+this I guess it's the really big values
+that are the
+problem clamp and then
+problem clamp and then
+scale oops
+there we go
+doesn't train at
+all can run a full sweep I
+guess okay we will probably do that
+guess okay we will probably do that
+let me commment this for
+now e
+we need like a nice exploration
+we need like a nice exploration
+environment I'd like to have like a maze
+environment I'd like to have like a maze
+or something for
+this you just send this over on Discord
+okay me see
+me just send this over and then uh we'll
+me just send this over and then uh we'll
+see what we do from here it's only five
+left
+e e
+okay so that's set
+okay so that's set
+um let me see here
+um let me see here
+next
+thing next
+thing I'd like to go get myself some tea
+thing I'd like to go get myself some tea
+or something but it's a little
+or something but it's a little
+late I think we're going to do hyper
+late I think we're going to do hyper
+pram stuff
+pram stuff
+next I need to get
+next I need to get
+myself woken up a little bit
+myself woken up a little bit
+and yeah so
+so I know roughly what I want to do so
+so I know roughly what I want to do so
+let me let me give you the outline real
+let me let me give you the outline real
+quick and then um I will come back in a
+quick and then um I will come back in a
+few minutes and uh and start working on
+few minutes and uh and start working on
+it so there's this algorithm called
+it so there's this algorithm called
+carbs from muu it's a really good
+carbs from muu it's a really good
+hyperparameter tuning algorithm it's
+hyperparameter tuning algorithm it's
+cost aware the goal is it launches a
+cost aware the goal is it launches a
+bunch of fast experiments in order to
+bunch of fast experiments in order to
+build up a good predictive model of what
+build up a good predictive model of what
+hyperparameters are going to give you
+hyperparameters are going to give you
+what performance and then it launches
+what performance and then it launches
+slower experiments over time that give
+slower experiments over time that give
+you higher per uh but I found some
+you higher per uh but I found some
+issues with the way that it
+issues with the way that it
+samples uh parameters specifically that
+samples uh parameters specifically that
+prevent it
+prevent it
+from essentially affect essentially
+from essentially affect essentially
+prevent it from exploring outside the
+prevent it from exploring outside the
+initial space of hyper parameters that
+initial space of hyper parameters that
+you give it very effectively so the code
+you give it very effectively so the code
+base is very complex very overly complex
+base is very complex very overly complex
+I'd say for what the algorithm is
+I'd say for what the algorithm is
+and I'm probably going to go through and
+and I'm probably going to go through and
+try to simplify it and see if I can get
+try to simplify it and see if I can get
+perf before and perf after uh to be you
+perf before and perf after uh to be you
+know substantially better I have a
+know substantially better I have a
+synthetic Benchmark that's really quick
+synthetic Benchmark that's really quick
+to run and I'm probably going to play
+to run and I'm probably going to play
+around with that a little
+around with that a little
+bit that's going to be the goal I'm I'm
+bit that's going to be the goal I'm I'm
+going to
+going to
+have about an hour or so to do
+this yeah I'm going to have about an
+this yeah I'm going to have about an
+hour to do
+hour to do
+this before dinner and then I'll
+this before dinner and then I'll
+probably be back after as
+probably be back after as
+well I'm going to go grab myself a drink
+well I'm going to go grab myself a drink
+real quick take a couple minutes and
+real quick take a couple minutes and
+then we will uh we will get implementing
+then we will uh we will get implementing
+that and this should be pretty good
+that and this should be pretty good
+because this is uh this will be a major
+because this is uh this will be a major
+major major thing for our
+yeah I'll be right back don't let me
+yeah I'll be right back don't let me
+forget to unmute my
+mic
+e
+e
+e
+e
+e e
+okay
+okay here's what we're doing
+okay here's what we're doing
+next well first of all I got to check to
+next well first of all I got to check to
+make sure I don't
+make sure I don't
+have anything missing because I was
+have anything missing because I was
+expecting an update
+expecting an update
+from NYU
+from NYU
+on their
+stuff but they don't have it
+stuff but they don't have it
+now let's
+now let's
+see let me just check this on the side
+see let me just check this on the side
+real quick might have to do GPU Drive
+real quick might have to do GPU Drive
+stuff
+depending okay didn't get to it cool
+depending okay didn't get to it cool
+we get to do cool
+we get to do cool
+stuff I have finished the log of work
+stuff I have finished the log of work
+for
+for
+today so we get to do cool stuff for a
+today so we get to do cool stuff for a
+little bit
+um here's the
+deal here
+deal here
+is the
+is the
+deal this is a synthetic
+deal this is a synthetic
+test the max score is like 2
+test the max score is like 2
+50 carbs does not get
+50 carbs does not get
+there some parameters it fits nicely
+there some parameters it fits nicely
+some parameters it completely
+some parameters it completely
+fails we're going to now look at
+fails we're going to now look at
+carbs
+carbs
+and uh look at some of the stuff that I
+and uh look at some of the stuff that I
+found earlier and see if we can fix some
+found earlier and see if we can fix some
+things so
+arms
+this is the generate candidate
+this is the generate candidate
+function sample around origins in
+basic get all Pito
+OBS Pito
+groups in
+basic Creo
+basic Creo
+groups so this is going to this samples
+around your Paro
+group okay and then right
+group okay and then right
+here search distribution in
+basic you have right here
+so there are
+so there are
+two two issues with this
+there really a few issues with
+this quite a few to be
+fair issue number one is the way that
+fair issue number one is the way that
+it is
+it is
+converting hyper parameters into a
+converting hyper parameters into a
+normalized
+normalized
+space that is not correct the way it is
+space that is not correct the way it is
+doing
+doing
+that issue number two is the way it is
+that issue number two is the way it is
+sampling
+sampling
+around the hyper parameters in that
+around the hyper parameters in that
+normalized
+space let me think about how I want to
+space let me think about how I want to
+do
+do
+this it's very important that I get this
+this it's very important that I get this
+right
+also wrong branch
+so we
+so we
+got right here
+some of these are easier than
+others let's think about parameters in
+others let's think about parameters in
+log space first
+this is what that parameter looks like
+this is what that parameter looks like
+transforming into long space
+interesting so you would actually like
+interesting so you would actually like
+to
+to
+transform your
+space okay so I see why I'm not getting
+space okay so I see why I'm not getting
+this right now I have a transformation
+this right now I have a transformation
+into a good space for
+into a good space for
+sampling so what I do is I take log of
+sampling so what I do is I take log of
+this right and then I do plus one for
+this right and then I do plus one for
+instance and then you do 10 to this
+instance and then you do 10 to this
+and lo and behold you get
+and lo and behold you get
+0.05 so if you take you take the log and
+0.05 so if you take you take the log and
+then let's say you grab some standard
+then let's say you grab some standard
+noise
+right you can see that this gives you
+right you can see that this gives you
+some good samples
+some good samples
+right because the standard deviation of
+one in log space is one order of
+one in log space is one order of
+magnitude
+and then there's a clip Factor so you
+and then there's a clip Factor so you
+can prevent it from sampling crazy
+can prevent it from sampling crazy
+things so it's going to go up to two
+things so it's going to go up to two
+orders of magnitude in either direction
+orders of magnitude in either direction
+this is a very very good thing for
+sampling
+sampling
+however this is not perfect yet for
+however this is not perfect yet for
+fitting
+fitting
+parameters for
+parameters you would like the entire
+parameters you would like the entire
+thing to be in the range
+thing to be in the range
+of let's say -1 to one or 0 to one
+of let's say -1 to one or 0 to one
+either
+way so what does that transformation
+way so what does that transformation
+look like
+well I think it's just like you
+well I think it's just like you
+subtract the
+subtract the
+midpoint which is the
+-2.3 and then you
+-2.3 and then you
+probably just divide by two whatever
+probably just divide by two whatever
+sample you
+sample you
+get and you
+clip it's a little bit sophisticated
+so do I make my
+so do I make my
+own version of
+this do I modify the carbs version of
+this like to have my own
+if I have my own version of this I can
+if I have my own version of this I can
+make my own
+algorithms to be fair carbs will
+algorithms to be fair carbs will
+probably
+win I'm trying to think
+though so pretty much I think carbs
+though so pretty much I think carbs
+actually has the
+actually has the
+right they have the right API for this
+right they have the right API for this
+their fun names kind of
+their fun names kind of
+suck but they're not that far
+suck but they're not that far
+off so like if we look at their spaces
+off so like if we look at their spaces
+oops in
+oops in
+utils look at like log space or linear
+utils look at like log space or linear
+space so they've got param from
+space so they've got param from
+basic which is if you give it a
+basic which is if you give it a
+value like a value of the hyper pram it
+value like a value of the hyper pram it
+transforms it
+transforms it
+into a nicely normal space now their
+into a nicely normal space now their
+Transformations aren't correct but
+Transformations aren't correct but
+that's the
+that's the
+idea and then if you get a sample from
+idea and then if you get a sample from
+from that
+space uh they send it back to you
+and then when they do dot
+and then when they do dot
+observe let me
+see add
+observation see they convert it to basic
+observation see they convert it to basic
+space again
+how much code is in this
+repo like we don't really care about
+repo like we don't really care about
+this serialization stuff
+right there's this
+model it's a giant ass
+model it's a giant ass
+utils maybe 2,000 L total in this
+utils maybe 2,000 L total in this
+repo I think we could get it to a
+th000 the first thing I want to do is
+th000 the first thing I want to do is
+figure how to fix it
+though so maybe what I'll do is I'll
+though so maybe what I'll do is I'll
+leave everything
+leave everything
+alone but I'll fix their transformations
+to
+start I'll fix their
+start I'll fix their
+Transformations and I'll fix their the
+Transformations and I'll fix their the
+way that they're sampling around their
+way that they're sampling around their
+transform
+data for
+it should have a sample on
+it oh you know
+it oh you know
+what I kind of see what they're trying
+what I kind of see what they're trying
+to do with this
+scale I actually kind of see it
+this makes sense actually to
+me yeah no they're correct
+me yeah no they're correct
+so the idea is that all the samp are
+so the idea is that all the samp are
+normal
+um see for a uniform space does this
+um see for a uniform space does this
+make
+make
+sense it still kind of does make sense
+right if you have some prior on like
+right if you have some prior on like
+what what the mean should be
+but their values are not
+correct okay so basic from foram
+this should be like
+return value
+minus that's 0 to one
+okay so this should
+okay so this should
+be
+that so that gets you
+that so that gets you
+to to
+to to
+this and
+this and
+[Music]
+[Music]
+then foram from
+then foram from
+basic value is going to be equal
+to what the
+heck +
+heck +
+1 over 2
+so this is going to undo
+it if is integer and is
+rounded
+rounded
+okay this rounds
+and then they need to round operation in
+and then they need to round operation in
+basic which is kind of
+weird do they use this round
+weird do they use this round
+tensor basic
+kind of weird that they do
+kind of weird that they do
+that I guess it's they want
+that I guess it's they want
+the the
+rounded whatever
+why don't we just
+why don't we just
+do
+lules
+lules
+Pam self. param from
+Pam self. param from
+Basic Value and then this round
+right
+right
+through and then we do value
+through and then we do value
+equals self. base from
+pan isn't this just
+work yeah that should just
+work much easier
+and then we can do the same exact thing
+and then we can do the same exact thing
+here
+right okay basic from
+Pam basic from param
+little trick
+here so we're going to log the value
+we do mean
+equals is there no mean on this
+search
+center why don't we do search center
+center why don't we do search center
+right
+S search
+S search
+center and then we
+do
+do
+Dot and this is clip not scale
+and you should never be able to sample
+and you should never be able to sample
+zero
+yes a param from basic
+I think this
+works and then if it's rounded you round
+works and then if it's rounded you round
+and you
+return not bad
+there's only really two more spaces
+here and then we'll be able to test
+this you know even with
+um even with their search ter this
+um even with their search ter this
+actually should
+work if I do it this
+work if I do it this
+way it should work even with their
+way it should work even with their
+search term
+we're going to have to clip as well
+but basic from
+pan let us think
+value equal
+value equal
+1us value
+ma.
+ma.
+log one minus
+value
+value
+base base is 10
+we shall see about
+we shall see about
+this that's zero to one scale still so
+this that's zero to one scale still so
+I'll have to fix that
+and then there's never any rounding
+and then there's never any rounding
+here so you just return the value
+then Pam from basic
+me see so multiply by
+clip and you add search
+clip and you add search
+center you
+take I'm getting really
+take I'm getting really
+tired this is stupid but I'm going to do
+tired this is stupid but I'm going to do
+this
+I'm going to hope I don't get bitten by
+I'm going to hope I don't get bitten by
+PPT failing something the simple
+there we
+there we
+go the one minus goes at the start
+go the one minus goes at the start
+obviously just
+tired there you go turn
+cool
+cool
+so this is
+so this is
+good where's our power
+good where's our power
+two P
+two P
+two I thought I had a
+PO there po to space or whatever
+I put this to a new branch
+this a new
+this a new
+container
+ah e
+H this
+so basic from
+foram so we
+do
+scale min max
+that's not quite
+right I think it's actually very similar
+right I think it's actually very similar
+to the log space and it's scaling
+isn't it just this
+wait I think it's just
+wait I think it's just
+this search center think of search
+center yeah but the search center is off
+but it'll be
+but it'll be
+fun I
+do e
+right I'm
+oh yeah I
+see it's going to get rounded though
+so I see so you do
+so I see so you do
+value
+value
+value mean is going to
+value mean is going to
+be 2 to the
+Max okay so we
+doal
+value the log 2
+value the log 2
+value minus mean
+and then what
+something like
+this
+integer surrounded
+well this is supposed to be basic from
+well this is supposed to be basic from
+foram first of
+all and then Pam from basic
+get your
+value
+times
+times
+and we're going to fix all this stuff up
+and we're going to fix all this stuff up
+later tonight just a prototype
+and then now you round
+it then you return two times
+value the round tensor in basic is just
+value the round tensor in basic is just
+going to be we get to eliminate all
+going to be we get to eliminate all
+these obnoxious functions
+these obnoxious functions
+okay
+okay
+so that's all of
+so that's all of
+them and all I have to
+them and all I have to
+do is clean these up a
+do is clean these up a
+bit I actually don't like the way that
+bit I actually don't like the way that
+I've
+I've
+specified
+parameters I think I don't like the way
+parameters I think I don't like the way
+that I've specified
+clip I think mean scale Min and Max are
+clip I think mean scale Min and Max are
+going to
+going to
+be the parameters
+yeah going to be a little bit of
+work the way they use scale is currently
+work the way they use scale is currently
+confusing yes it very much
+is the thing is their stuff is wrong
+is the thing is their stuff is wrong
+Captain
+Captain
+um it's confusing because it's wrong
+shoot also
+you can't
+do the mean doesn't have to be
+do the mean doesn't have to be
+zero actually the mean can't be zero the
+zero actually the mean can't be zero the
+way I'm thinking about it
+so
+confusing it's kind of difficult to
+confusing it's kind of difficult to
+explain this Stu I'm thinking about at
+explain this Stu I'm thinking about at
+the moment but basically I'm trying to
+the moment but basically I'm trying to
+figure out a good space to transform I'm
+figure out a good space to transform I'm
+basically trying to figure out how I
+basically trying to figure out how I
+want to parameterize each hyperparameter
+want to parameterize each hyperparameter
+and then what latent space I want to
+and then what latent space I want to
+transform them into that's going to be
+transform them into that's going to be
+good for learning a predictive model as
+good for learning a predictive model as
+well as for
+sampling let's say that we have a log
+parameter actually let's go even simple
+parameter actually let's go even simple
+let's say that we have a uniform
+let's say that we have a uniform
+parameter as a min
+parameter as a min
+a
+a
+Max and a
+Max and a
+mean the mean is not exactly between the
+mean the mean is not exactly between the
+Min and the
+Min and the
+max so that means we want a sample
+max so that means we want a sample
+around the mean and we want to get
+around the mean and we want to get
+values from the Min to the
+values from the Min to the
+max how do you transform that
+max how do you transform that
+parameter easiest would just be to
+parameter easiest would just be to
+rescale it between1 and one
+then what you would do is you'd
+then what you would do is you'd
+search you would sample from the surf
+search you would sample from the surf
+Center doesn't have to be zero that's
+Center doesn't have to be zero that's
+fine you'd have a
+fine you'd have a
+scale parameter
+and we'll think about how the scale pram
+and we'll think about how the scale pram
+works but it like you can have a scale
+works but it like you can have a scale
+pram so you sample normal distribution
+pram so you sample normal distribution
+around
+around
+that you clip to Min and
+Max and you transform back
+I think I know how to do
+I think I know how to do
+that
+that
+so me and men and Max are
+so me and men and Max are
+obvious what about scale
+scale is going to be kind of confusing
+so for symmetric
+distribution
+distribution
+three it scills pretty
+good is there default actually good
+I think their default might actually be
+good I mean it kind of
+good I mean it kind of
+depends on the
+parameter 0.3
+it's kind of
+good might not even need a scale
+good might not even need a scale
+parameter with this
+I guess hold on do you
+need you might need it for something
+need you might need it for something
+like total time
+steps I'm GNA have to think about
+that I think uh let me check I think I
+okay I got to go I'll be back in uh like
+okay I got to go I'll be back in uh like
+an hour
+
+Kind: captions
+Language: en
+okay we are back
+okay we are back
+live and we've got some stuff to
+do I really want to do this uh this
+do I really want to do this uh this
+hyper pram sweep stuff but I got a
+hyper pram sweep stuff but I got a
+couple things to do first I think
+couple things to do first I think
+probably hyper pram sweeps are going to
+probably hyper pram sweeps are going to
+be for
+be for
+tomorrow we'll start on carbs tomorrow
+tomorrow we'll start on carbs tomorrow
+what's today it Friday it is Friday so
+what's today it Friday it is Friday so
+we're going to start on I pram stuff
+we're going to start on I pram stuff
+tomorrow um right now I need to
+tomorrow um right now I need to
+do I need to start on this other thing
+do I need to start on this other thing
+here where's the paper this
+thing this really shouldn't be that hard
+thing this really shouldn't be that hard
+to
+implement so let's just do
+that and puffer
+tank yeah so we're going to
+do E3 B
+and there shouldn't be that much to
+and there shouldn't be that much to
+change here to support
+change here to support
+this I need to
+add I need to add a buffer for a matrix
+add I need to add a buffer for a matrix
+as
+well yeah
+I think we're going to just do this
+I think we're going to just do this
+single
+purpose so we we kind of just do this in
+purpose so we we kind of just do this in
+a branch and if it's good we'll add it
+a branch and if it's good we'll add it
+to the implementation if it's not we're
+to the implementation if it's not we're
+not we
+not we
+won't all right
+won't all right
+so
+so
+lstm state
+experience this goes into experience
+experience this goes into experience
+right and then this is going to
+be we'll call
+this e3b
+this e3b
+Matrix or
+covariance how about e3b mat
+e3b
+at where's hidden
+dem. hidden size
+is there no
+um there's no hidden
+them that seems weird to
+them that seems weird to
+me where's didn't
+him uhoh
+could have
+could have
+broken I hope
+not we were messing around with um Isaac
+not we were messing around with um Isaac
+Jim and
+Jim and
+stuff why is my why my overlays not work
+I'll get the chat up
+I'll get the chat up
+here
+cool
+uh how's
+uh how's
+it I thought I branched off 2.0
+puffer Li does not
+require okay I don't know what the [ __ ]
+require okay I don't know what the [ __ ]
+is up with this because this
+makes that doesn't make
+sense this is just a container being scy
+this should be a fairly small
+this should be a fairly small
+change I'm hopeful we can just get this
+change I'm hopeful we can just get this
+done
+done
+today and then I can start on hyper pram
+today and then I can start on hyper pram
+stuff
+okay puffer Li does not require three
+okay puffer Li does not require three
+points so I don't know what the hell's
+points so I don't know what the hell's
+up with this
+um oh hold
+on yeah okay
+on yeah okay
+python yeah this is it it's I don't know
+python yeah this is it it's I don't know
+what the heck's going with
+P also let me go check for status update
+P also let me go check for status update
+from
+NYU no
+NYU no
+updates I'm good with that
+that I got a plenty of work to do is
+this really just huge amounts of work to
+do what's what's up here it's still
+do what's what's up here it's still
+going
+okay so we're going to implement this
+okay so we're going to implement this
+like this exploration bonus algorithm um
+like this exploration bonus algorithm um
+without the inverse Dynamics model to
+without the inverse Dynamics model to
+start and see if it you know just see if
+start and see if it you know just see if
+it does
+it does
+anything okay so this now
+works ah
+lovely let's hope that we haven't
+lovely let's hope that we haven't
+completely destroyed Ruda
+drivers I can run this on the remote box
+drivers I can run this on the remote box
+but I'd rather
+not okay there it goes
+yeah so
+here do we have hidden size somewhere
+is there nothing in
+here size
+so this has it um
+I didn't know the hidden
+size I guess you just make sure that it
+size I guess you just make sure that it
+actually has it
+think this
+works well that works
+size
+size
+Co experience
+yeah so this is the e3b
+map then we do
+map then we do
+this now we have storage
+and do we need to do anything with this
+and do we need to do anything with this
+map I actually don't think we need to
+map I actually don't think we need to
+give a damn about any of the other stuff
+give a damn about any of the other stuff
+it's not used in the loss
+it's not used in the loss
+function it's only used in the
+function it's only used in the
+reward yeah so I think we can just I
+reward yeah so I think we can just I
+don't even think we need the do numpy
+don't even think we need the do numpy
+version I think literally we just need
+E3 BM
+E3 BM
+here okay
+and
+and
+yes and this just gets returned
+yes and this just gets returned
+basically as an extra State variable
+so like action log
+prob E3 B
+mat inic I think this is what it is and
+mat inic I think this is what it is and
+then what you have to do
+then what you have to do
+is um where's
+this
+this
+map and then you do e3b
+mat
+mat
+this
+this
+okay then same thing here
+this and then all you have to do is you
+this and then all you have to do is you
+have to
+have to
+add uh you have to add the intrinsic
+add uh you have to add the intrinsic
+reward to the rewards so let me think
+reward to the rewards so let me think
+how to do
+how to do
+this
+device
+device
+nid right because you could be getting
+nid right because you could be getting
+different nids
+but the rewards we just add to I
+but the rewards we just add to I
+think I think we just add to the rewards
+think I think we just add to the rewards
+so we do
+so we do
+reward plus equal in or reward like
+this and then you have to
+this and then you have to
+pass
+E3 you have to get this
+E3 you have to get this
+here like so
+here like so
+and actually this is has to be done uh
+and actually this is has to be done uh
+regardless of if you have an lstm or not
+regardless of if you have an lstm or not
+so this goes up
+here okay and
+here okay and
+then this goes
+e3b E3
+e3b E3
+B cool and now this has to
+B cool and now this has to
+get propagated into the
+get propagated into the
+policy um
+policy um
+yeah this has to go into the
+policy uh let's just make this explicit
+just so we make sure there's no
+just so we make sure there's no
+surprises
+here I really wish my stream overlays
+here I really wish my stream overlays
+actually
+worked welcome YouTube
+folks okay so what we have to do here is
+folks okay so what we have to do here is
+prop
+we have to add
+we have to add
+e3b to here this is going to be State
+e3b to here this is going to be State
+action uh and we'll just add
+action uh and we'll just add
+here
+here
+okay this 3 is
+okay this 3 is
+none X State
+3B and this should be
+3B and this should be
+good now this also returns inic
+reward action value
+reward action value
+State uh now this has to return us new
+State uh now this has to return us new
+e3b new intrinsic
+reward
+oops see yeah new
+oops see yeah new
+e3b and new intrinsic
+e3b and new intrinsic
+reward so so this is now going to
+return State
+return State
+E3
+E3
+this this is be an intrinsic reward now
+this this is be an intrinsic reward now
+this is fine this is this is now
+correct and this is self. policy so then
+correct and this is self. policy so then
+we'll have to adjust that there let's do
+we'll have to adjust that there let's do
+the same thing over here
+we add
+we add
+e3b we add
+e3b we add
+e3b there's no state for this
+one
+one
+ISB and now this is going to return an
+ISB and now this is going to return an
+additional e3b and intrinsic
+additional e3b and intrinsic
+reward course
+e3b so now this is this is everything
+e3b so now this is this is everything
+for the clean RL binding
+for the clean RL binding
+uh now we have to
+uh now we have to
+modify our
+modify our
+models and I think that by default all
+models and I think that by default all
+we
+we
+really need to do is modify our
+really need to do is modify our
+recurrent rapper and our default would
+recurrent rapper and our default would
+be a good starting
+point so lstm wrapper of
+point so lstm wrapper of
+policy this needs to
+policy this needs to
+take e3b
+okay and this is going to
+be en code
+observations it's going to be in decode
+observations it's going to be in decode
+actions that we use
+e3b I'm using this is a nice time to get
+e3b I'm using this is a nice time to get
+rid of this look
+up I think I'll leave it
+up I think I'll leave it
+though
+so the thing with the lookup Ram is I
+so the thing with the lookup Ram is I
+think you actually need it for
+think you actually need it for
+um I think you actually need it for
+um I think you actually need it for
+entity based models captain
+entity based models captain
+I think you actually need it for entity
+I think you actually need it for entity
+based
+models maybe it should just be star like
+models maybe it should just be star like
+qus or like qus or something I don't
+qus or like qus or something I don't
+know this is just on a separate Branch
+know this is just on a separate Branch
+anyways this makes such a mess of all
+anyways this makes such a mess of all
+the policy code that this is only going
+the policy code that this is only going
+to end up getting merged to the main if
+to end up getting merged to the main if
+it's really
+it's really
+good isn't used yeah that's
+good isn't used yeah that's
+fair we're going to end up adding it
+fair we're going to end up adding it
+back if we ever want to do entity
+back if we ever want to do entity
+anything though I used it in the old
+anything though I used it in the old
+neur MMO
+policies basically without it you don't
+policies basically without it you don't
+get to use the encode decode
+get to use the encode decode
+API like the a the encode decode API
+API like the a the encode decode API
+doesn't work if you don't have that or
+doesn't work if you don't have that or
+entity base
+models I mean I'm going to redo a bunch
+models I mean I'm going to redo a bunch
+of this policy stuff anyways at some
+of this policy stuff anyways at some
+point it's just it's on the Queue of
+point it's just it's on the Queue of
+stuff to do right
+it's always a million things to do okay
+it's always a million things to do okay
+so this should be enough for the lstm
+so this should be enough for the lstm
+rapper uh now I just want to add this to
+rapper uh now I just want to add this to
+the default
+the default
+policy and this should be enough for us
+policy and this should be enough for us
+to run
+to run
+experiments once I know debug
+everything oh actually hold on this
+everything oh actually hold on this
+needs to
+needs to
+go forward yeah okay this goes into
+go forward yeah okay this goes into
+decode and that's
+decode and that's
+fine all I have to do is I add it
+fine all I have to do is I add it
+here we just do
+here we just do
+e3b n like
+this and then here we're going to return
+this and then here we're going to return
+actions value e3b intrinsic rewards now
+actions value e3b intrinsic rewards now
+uh we have to actually compute this so
+uh we have to actually compute this so
+what we're going to do
+what we're going to do
+is add the
+formula and this is the tricky
+part here's the
+formula so we do I equal hidden
+attach and then we do
+intrinsic or
+equals
+equals
+T like
+this and then we do
+how do we do
+how do we do
+exponential
+decay oh I think it's just going to
+decay oh I think it's just going to
+be yeah it's literally
+be yeah it's literally
+just um
+e3b next
+equals then it has to get initialized to
+equals then it has to get initialized to
+something doesn't
+it one over Lambda
+I so it's Lambda I to start
+I so it's Lambda I to start
+with what's Lambda
+with what's Lambda
+I they give you
+I they give you
+Lambda they said it was pretty robust to
+Lambda they said it was pretty robust to
+Lambda
+final value
+final value
+.1 is what they
+use so we'll just add 3B
+use so we'll just add 3B
+and this
+well I think we'll hard code it for now
+well I think we'll hard code it for now
+it's a pain in the ass
+so it's going to be
+so it's going to be
+1 *
+1 *
+torch.
+torch.
+I hiden
+size there we
+go that's pretty
+clean and now for
+this I get their formula
+okay right
+okay right
+here e3b next is going to
+here e3b next is going to
+be
+0.9
+0.9
+times
+B each step t
+0.9 5 *
+0.9 5 *
+3B
+plus
+[Music]
+[Music]
+outer
+outer
+plus
+1 e
+how do you like make a torch constant
+how do you like make a torch constant
+that gets moved to
+device register buffer
+there we go
+that seems pretty
+that seems pretty
+good that seems pretty
+good
+yeah actually just do
+e3b okay um
+e3b okay um
+what are the odds that this
+what are the odds that this
+runs oops not this
+runs oops not this
+one this
+one good out of memory
+holy try to
+allocate okay
+is this
+gigantic it's probably kind of gigantic
+right not really it's just the batch
+right not really it's just the batch
+size it's
+size it's
+gigantic but wait you don't need these
+gigantic but wait you don't need these
+in a batch do
+in a batch do
+you you don't need these in a batch you
+you you don't need these in a batch you
+need these
+in you need number environments of these
+in you need number environments of these
+okay so I have the storage from
+okay so I have the storage from
+all luckily
+I guess this is just too
+I guess this is just too
+big I don't
+big I don't
+know um
+and we'll do
+this still out of
+this still out of
+memory I don't understand how this is
+memory I don't understand how this is
+possibly out of memory
+E3
+E3
+B that
+shape so is like not that much data at
+all something screwy
+oh that's
+why it's just
+this there you
+this there you
+go default no e3b
+expected okay so we just have to fix
+expected okay so we just have to fix
+some math here
+so this
+is this hurts my head a little bit
+so this is 128 by
+128 so if you were to get rid of
+128 so if you were to get rid of
+these it would be
+it's F un
+squeeze so it's 5
+squeeze so it's 5
+do
+do
+unze
+one and times five is that it
+this is GPT I'm it's screw this it's
+this is GPT I'm it's screw this it's
+been too long since I've done
+been too long since I've done
+this uh I
+this uh I
+have a times
+see
+see
+see do
+isn't Ein some slow
+the hell
+solve oh
+solve oh
+interesting hey Joseph love your work
+interesting hey Joseph love your work
+wondering if you have any suggestions
+wondering if you have any suggestions
+for more accessible projects for someone
+for more accessible projects for someone
+new to RL looking to do some original
+new to RL looking to do some original
+research uh for new RL people I always
+research uh for new RL people I always
+recommend that you implement a simple uh
+recommend that you implement a simple uh
+high performance environment yourself
+high performance environment yourself
+end to end and uh get something training
+end to end and uh get something training
+on it this is what I've had like all the
+on it this is what I've had like all the
+new puffer contributors do you can pick
+new puffer contributors do you can pick
+something that will have like
+something that will have like
+interesting science on it for sure but
+interesting science on it for sure but
+that's what I would suggest give you an
+that's what I would suggest give you an
+idea of all these
+idea of all these
+environments I implemented neural MMO 3
+environments I implemented neural MMO 3
+MOA and snake obviously have code
+MOA and snake obviously have code
+reviewed and edited all the rest of them
+reviewed and edited all the rest of them
+but like the rest of these are all by
+but like the rest of these are all by
+contributors that are mostly new to RL
+contributors that are mostly new to RL
+um and like implemented these as a way
+um and like implemented these as a way
+to get involved in it so anything as
+to get involved in it so anything as
+simple as you know as simple as pong all
+simple as you know as simple as pong all
+the way up to like you know this is a
+the way up to like you know this is a
+more complex environment to implement so
+more complex environment to implement so
+is
+is
+go right any of
+go right any of
+these as would be my suggestion
+we have lots of examples like all the
+we have lots of examples like all the
+code for those is open source and it's
+code for those is open source and it's
+fairly
+fairly
+simple I mean it's in C but it's very
+simple I mean it's in C but it's very
+very simple see
+is this correct here
+what are your thoughts on Lex Freedman I
+what are your thoughts on Lex Freedman I
+have no thoughts on Lex Freedman I
+have no thoughts on Lex Freedman I
+haven't seen any of his
+haven't seen any of his
+podcasts what are you trying to do
+podcasts what are you trying to do
+currently I am implementing
+currently I am implementing
+uh e3b or most of it which is a RL
+uh e3b or most of it which is a RL
+exploration
+exploration
+algorithm and uh there's some funky math
+algorithm and uh there's some funky math
+that I'm looking at
+wait this is stupid
+right okay so this thing is better
+interesting
+okay so let's just implement it this way
+then so restoring the inverse M I
+then so restoring the inverse M I
+guess can you give me a learning path
+guess can you give me a learning path
+who wants to learn yeah I have a guide
+who wants to learn yeah I have a guide
+on this on my ex it's also on the puffer
+on this on my ex it's also on the puffer
+blog
+here RL quick start guide right
+here I have a very simple approach to
+here I have a very simple approach to
+most things that I think you'll find
+most things that I think you'll find
+pretty accessible
+pretty accessible
+um the stuff I do involves you know very
+um the stuff I do involves you know very
+little math very little like complex
+little math very little like complex
+stuff to think about it's mostly just
+stuff to think about it's mostly just
+getting the basics down and doing them
+getting the basics down and doing them
+very very
+very very
+well the best stuff in my toolkit is
+well the best stuff in my toolkit is
+honestly being able to write simple high
+honestly being able to write simple high
+performance
+performance
+code that ends up being more useful than
+code that ends up being more useful than
+most other
+things for new people I always just I
+things for new people I always just I
+suggest like building an environment end
+suggest like building an environment end
+to end from scratch and contributing it
+to end from scratch and contributing it
+to puffer lib just go through that
+to puffer lib just go through that
+process of building an end for puffer
+process of building an end for puffer
+and also training RL on it because you
+and also training RL on it because you
+get the process of like what goes into
+get the process of like what goes into
+making a brand new problem work with
+making a brand new problem work with
+reinforcement
+reinforcement
+learning it's the best thing you can do
+learning it's the best thing you can do
+and it can be done
+and it can be done
+in simple environment can be done in a
+in simple environment can be done in a
+few days if even if you're brand new if
+few days if even if you're brand new if
+you just have decent software
+you just have decent software
+engineering
+engineering
+are you a PhD student no I'm a grad I'm
+are you a PhD student no I'm a grad I'm
+graduated I'm a MIT PhD I finished up
+graduated I'm a MIT PhD I finished up
+last
+spring now I work full-time on
+puffer okay so I definitely want to
+puffer okay so I definitely want to
+implement this this way
+e3b call this iners
+one over
+one over
+Lambda this is
+Lambda this is
+10 which is kind of
+sketchy but I guess that's what it is
+is buffer something like gymnasium no
+is buffer something like gymnasium no
+because gymnasium is just an API for RL
+because gymnasium is just an API for RL
+environments um puffer is a lot more
+environments um puffer is a lot more
+than that so puffer has way higher
+than that so puffer has way higher
+performance distributed simulation
+performance distributed simulation
+compared to
+compared to
+gymnasia um we don't have as much API
+gymnasia um we don't have as much API
+overhead we have our own environments
+overhead we have our own environments
+that we have made that are like a
+that we have made that are like a
+thousand times faster than basically
+thousand times faster than basically
+anything in
+anything in
+gymnasium uh we have high performance
+gymnasium uh we have high performance
+training code gymnasium doesn't do
+training code gymnasium doesn't do
+training we have ultra high performance
+training we have ultra high performance
+training code we have really nice
+training code we have really nice
+logging we have automated hyper
+logging we have automated hyper
+parameter sweeps puffer is the project
+parameter sweeps puffer is the project
+that I am building to make RL simple
+that I am building to make RL simple
+fast and
+easy it's everything you can see our
+easy it's everything you can see our
+demo is on
+demo is on
+puff. they'll run live in your browser
+so this thing
+here e3b
+okay so I think this is good for
+okay so I think this is good for
+intrinsic reward and then we have to do
+intrinsic reward and then we have to do
+this
+this
+update to e3b which is going to
+update to e3b which is going to
+be e3b
+minus holy hell
+what's the what's the most efficient way
+what's the what's the most efficient way
+to implement this
+to implement this
+[Music]
+thing e
+this is
+this is
+[Music]
+[Music]
+U one plus
+plus obviously
+this so yeah you compute
+this I think this is a [ __ ]
+this I think this is a [ __ ]
+implementation that it just gave
+implementation that it just gave
+me am I Frozen on
+stream no I'm not okay
+good welcome YouTube
+good welcome YouTube
+folks what we are currently doing we're
+folks what we are currently doing we're
+implementing e3b which is an exploration
+implementing e3b which is an exploration
+algorithm for
+algorithm for
+RL um and there's a little bit of fun
+RL um and there's a little bit of fun
+math here German
+math here German
+Morrison rank one
+Morrison rank one
+update and I'm just trying to make sure
+update and I'm just trying to make sure
+I do this correctly and I do this the
+I do this correctly and I do this the
+most efficient way possible I think that
+most efficient way possible I think that
+this is giving me garbage
+because so C inverse U so this is
+because so C inverse U so this is
+fine but
+fine but
+then compute the scaler
+denominator outer
+product yeah so this should be cash
+right CU this
+right CU this
+is UT and yeah okay
+so let's just let's just make a little
+so let's just let's just make a little
+like
+German
+so
+you let's do this
+you let's do this
+so return
+T
+CN what the heck is
+CN what the heck is
+that what
+VT so we do this
+VT so we do this
+and
+and
+then so that's now
+then so that's now
+CED and then we'll
+do do
+do do
+this I don't think this needs n
+squeeze
+squeeze
+CN minus
+CN BT
+at divided by one
+plus should I focus to solve problem or
+plus should I focus to solve problem or
+anything else would be I I'm not sure
+anything else would be I I'm not sure
+what you mean by that
+what you mean by that
+like learning
+algorithm you're going to get confused
+algorithm you're going to get confused
+if you just start doing like learning
+if you just start doing like learning
+algorithm ablations and stuff
+algorithm ablations and stuff
+immediately I generally think the best
+immediately I generally think the best
+way to get into reinforcement learning
+way to get into reinforcement learning
+is to go through the process of making a
+is to go through the process of making a
+new environment and then going through
+new environment and then going through
+the process of getting reinforcement
+the process of getting reinforcement
+learning to solve that new simple
+learning to solve that new simple
+environment because that will teach you
+environment because that will teach you
+um that shows you how to structure
+um that shows you how to structure
+observations how to get data through the
+observations how to get data through the
+network you're probably going to have to
+network you're probably going to have to
+do a little bit of hyperparameter tuning
+do a little bit of hyperparameter tuning
+you're going to have to like understand
+you're going to have to like understand
+the process by which uh environment's
+the process by which uh environment's
+compute observations and rewards and
+compute observations and rewards and
+similar and and parse actions and all of
+similar and and parse actions and all of
+that so like that's kind of the whole
+that so like that's kind of the whole
+end to end thing there's very little on
+end to end thing there's very little on
+the algorithm side of RL that really
+the algorithm side of RL that really
+matters like everyone loves to go
+matters like everyone loves to go
+straight into all the fancy math and
+straight into all the fancy math and
+algorithms like Po kind of just solves
+algorithms like Po kind of just solves
+everything if you do it right and yeah
+everything if you do it right and yeah
+that's kind of limiting and there are
+that's kind of limiting and there are
+some probably some things out there but
+some probably some things out there but
+like 90% of the people in RL are just
+like 90% of the people in RL are just
+spinning their wheels on algorithms
+spinning their wheels on algorithms
+right now um I would way way way more
+right now um I would way way way more
+recommend just like going through the
+recommend just like going through the
+process of making and fully solving a
+process of making and fully solving a
+problem building an M yeah so you're
+problem building an M yeah so you're
+going to build an environment and you're
+going to build an environment and you're
+going to solve it with reinforcement
+going to solve it with reinforcement
+learning so I would just I'd pick
+learning so I would just I'd pick
+something that is like relatively simple
+something that is like relatively simple
+you know people have done pong people
+you know people have done pong people
+have done breakout right people have
+have done breakout right people have
+done simple grid type environments so
+done simple grid type environments so
+pick like some simple little game that
+pick like some simple little game that
+you're going to have fun building
+you're going to have fun building
+something that's going to only be a few
+something that's going to only be a few
+hundred lines of code you can do in like
+hundred lines of code you can do in like
+a couple of days and you know then look
+a couple of days and you know then look
+at our puffer examples look at how we've
+at our puffer examples look at how we've
+built them and match that and then go
+built them and match that and then go
+through the process know for your
+through the process know for your
+environment of extracting and Computing
+environment of extracting and Computing
+observations Computing
+observations Computing
+rewards uh getting data you know for
+rewards uh getting data you know for
+many parallel copies together into the
+many parallel copies together into the
+storage tensors
+storage tensors
+running training you know doing hypercam
+running training you know doing hypercam
+optimization all of that that's what I
+optimization all of that that's what I
+suggest it's a very good way to get
+involved we've had people do this that
+involved we've had people do this that
+are you know brand new to reinforcement
+are you know brand new to reinforcement
+learning you have Discord y discord.gg
+learning you have Discord y discord.gg
+puffer there are like 900 people in
+there lots of helpful folks
+there lots of helpful folks
+well I mean this is all on our website
+well I mean this is all on our website
+proper. we got GitHub Discord and X all
+proper. we got GitHub Discord and X all
+these
+these
+things you can see all of our uh you
+things you can see all of our uh you
+know all of our environments here as
+know all of our environments here as
+well if you just go to Ocean like you
+well if you just go to Ocean like you
+can literally play all of these in your
+can literally play all of these in your
+browser and watch Agents play them so
+browser and watch Agents play them so
+like here this is an agent playing pong
+like here this is an agent playing pong
+RL agent playing pong in your browser
+RL agent playing pong in your browser
+and if I hold shift if I hold a shift
+and if I hold shift if I hold a shift
+then I take over and now I'm playing the
+then I take over and now I'm playing the
+game for the agent right I'm taking over
+game for the agent right I'm taking over
+the agent and now I take my hand off the
+the agent and now I take my hand off the
+keyboard and it plays again and this
+keyboard and it plays again and this
+works with all of our environments you
+works with all of our environments you
+can play around with they're all open
+can play around with they're all open
+source they're all on the on the GitHub
+source they're all on the on the GitHub
+pretty much they're all like one file
+pretty much they're all like one file
+each very nice and self-contained
+each very nice and self-contained
+they're very very very
+they're very very very
+fast we make it very easy for people to
+fast we make it very easy for people to
+get onboarded
+okay so here
+is Sherman
+Morrison let's see if I've done this
+correctly for w
+that's correct isn't
+that's correct isn't
+it e
+okay that's pretty
+okay that's pretty
+good are you using multi-agent for pong
+good are you using multi-agent for pong
+no pong is single agent um it's like the
+no pong is single agent um it's like the
+original Atari game uh the opponent is
+original Atari game uh the opponent is
+uh the opponent is a scripted bot we do
+uh the opponent is a scripted bot we do
+have multi-agent environments though
+have multi-agent environments though
+we've got lots of
+we've got lots of
+them like uh here we use snake as
+them like uh here we use snake as
+multi-agent each of these is an
+multi-agent each of these is an
+independently controlled uh
+independently controlled uh
+independently
+independently
+controlled the this will train in like 2
+controlled the this will train in like 2
+minutes on a one
+minutes on a one
+GPU uh we've got neural MMO this is
+GPU uh we've got neural MMO this is
+massively
+massively
+multi-agent tons of different things
+multi-agent tons of different things
+this the scripted box you know these are
+this the scripted box you know these are
+scripted but there are uh like 100 some
+scripted but there are uh like 100 some
+OD trained agents for
+environment m is multi-agent each of
+environment m is multi-agent each of
+these is a different agent
+and I think there a couple others like
+and I think there a couple others like
+rware and trash pickup are both
+rware and trash pickup are both
+multi-agent so yeah we got lots of
+multi-agent it's the exact same thing as
+multi-agent it's the exact same thing as
+single agent except when you have like
+single agent except when you have like
+highly competitive
+highly competitive
+environments it's not any harder with
+environments it's not any harder with
+puffer at
+least I mean my PhD is in multi-agent
+least I mean my PhD is in multi-agent
+like many agent learning
+so
+for e
+really some elements
+oh yeah yeah yeah hold on
+there we
+go
+e e
+oh hold on
+oh hold on
+um am I screwed here
+no
+because you don't need this at train
+because you don't need this at train
+time it's already computed the rewards
+time it's already computed the rewards
+you don't need it at train
+time for
+so
+so
+here we
+here we
+got entropy
+got entropy
+value TM State we don't give a [ __ ]
+value TM State we don't give a [ __ ]
+about
+about
+this right we do not care
+and this should be
+it's just a reward
+Edition
+okay device
+side probability tensor
+contains okay so
+contains okay so
+let's back up
+ooh
+n well that's
+funky let's see why is this s
+table one over Lambda inverse
+table one over Lambda inverse
+right but they say that their Lambda
+is they got like a Lambda of
+is they got like a Lambda of
+10 I don't see how that's
+10 I don't see how that's
+possible but that's what they say
+Ridge regularizer is this a different
+Ridge regularizer is this a different
+Lambda hyper parameters for
+Lambda hyper parameters for
+e3b and they do
+0.1 so I don't know how that's
+possible yeah they got 01 everywhere
+possible yeah they got 01 everywhere
+did they clip or
+something I don't understand how this
+something I don't understand how this
+thing
+thing
+works because they're
+clearly I mean they're adding a giant
+Matrix so how's the thing work
+does my Sherman whatever formula
+wrong
+no
+minus this
+thing with one
+over oh this is clever hold on
+they uh they have a different
+they uh they have a different
+formulation of it
+here so we do
+B
+e3b would be minus
+this
+is oh
+is oh
+message I'm a third year hold
+message I'm a third year hold
+on I'm a third-year college student I'll
+on I'm a third-year college student I'll
+be getting into a seventh month long
+be getting into a seventh month long
+internship soon we have less workload
+internship soon we have less workload
+I've been thinking of learning
+I've been thinking of learning
+neim I still use my mouse a lot right
+neim I still use my mouse a lot right
+now it takes all of 10
+minutes it really it takes all of 10
+minutes it really it takes all of 10
+minutes
+minutes
+um here
+this is my whole config here okay I got
+this is my whole config here okay I got
+super
+super
+Maven I got semi that's it I got two
+Maven I got semi that's it I got two
+plugins the rest of this stuff is just
+plugins the rest of this stuff is just
+um color theme this is just custom color
+um color theme this is just custom color
+thing I got like a couple little options
+thing I got like a couple little options
+set and that's
+set and that's
+it that's literally it I don't do
+it that's literally it I don't do
+anything fancy
+[Music]
+I just stick this into uh my base Docker
+I just stick this into uh my base Docker
+container and then I have my whole my
+container and then I have my whole my
+whole work setup in a container wherever
+whole work setup in a container wherever
+I go it's
+great so this is a clever little trick
+great so this is a clever little trick
+that they have
+um I think I can do outer b
+um I think I can do outer b
+b and then I can do divide by 1 +
+B getting used to it I don't use that
+B getting used to it I don't use that
+many HJ K move around I use maybe like
+many HJ K move around I use maybe like
+10 shortcuts total I really don't do I I
+10 shortcuts total I really don't do I I
+mean there are people that get way way
+mean there are people that get way way
+fancier than I do I I use very simple
+fancier than I do I I use very simple
+things
+you'll honestly you'll be used to it
+you'll honestly you'll be used to it
+within a couple of
+days I used um I used just like Vim with
+days I used um I used just like Vim with
+no plugins for six 78 years I don't know
+okay so let's see what's wrong with this
+okay so let's see what's wrong with this
+thing
+I mean the questions if you want to get
+I mean the questions if you want to get
+into RL right like whatever editor is
+into RL right like whatever editor is
+whatever
+editor RL is
+fun at least it's fun now it used to not
+fun at least it's fun now it used to not
+be too much fun
+so it's got to
+so it's got to
+be uh row so UNS squeeze so UNS squeeze
+be uh row so UNS squeeze so UNS squeeze
+two un squeeze
+two un squeeze
+one do you do freelance for work
+one do you do freelance for work
+assuming this is not a passion project
+assuming this is not a passion project
+well I guess it kind of is puffer is a
+well I guess it kind of is puffer is a
+company as well we sell we sell uh
+company as well we sell we sell uh
+support contracts to companies that are
+support contracts to companies that are
+doing RL and having a hard time of
+doing RL and having a hard time of
+it technically what I'm doing right now
+it technically what I'm doing right now
+is part of one of
+those so all our stuff is free uh all of
+those so all our stuff is free uh all of
+our stuff is free in open source but uh
+our stuff is free in open source but uh
+you know we sell we sell like support
+you know we sell we sell like support
+priority service stuff starting 10K a
+priority service stuff starting 10K a
+month for companies
+we do it I do it for free for uh for
+we do it I do it for free for uh for
+academic Labs so I've got like three
+academic Labs so I've got like three
+academic lab collaborations and you know
+academic lab collaborations and you know
+some
+clients we're definitely looking to
+clients we're definitely looking to
+expand puffer over the next few months I
+expand puffer over the next few months I
+mean this is only I've been doing this
+mean this is only I've been doing this
+since last spring it's less than a year
+old and progress has been really great
+a lot of work definitely a lot of work
+creative
+creative
+idea yeah I mean it's like this is not
+idea yeah I mean it's like this is not
+how I would monetize puffer if uh if
+how I would monetize puffer if uh if
+that were the primary goal but I think
+that were the primary goal but I think
+that this is a perfectly good way to
+that this is a perfectly good way to
+revolutionize reinforcement learning and
+revolutionize reinforcement learning and
+I think it can be plenty profitable like
+I think it can be plenty profitable like
+this as well the goal is really just to
+this as well the goal is really just to
+have like a small to midsize uh industry
+have like a small to midsize uh industry
+lab that's just turning out awesome RL
+lab that's just turning out awesome RL
+work
+constantly we're well on our way I mean
+constantly we're well on our way I mean
+puffer is probably the fastest growing
+puffer is probably the fastest growing
+RL project out
+there now this is some good growth
+this is when I went fulltime right
+there I don't know why I have these on
+there I don't know why I have these on
+still I just left them on from my last
+meeting okay outer product um
+this UNS squeeze two UNS squeeze
+one should be UNS squeeze two UNS
+one should be UNS squeeze two UNS
+squeeze one
+okay now
+okay now
+really I'm
+sweet well that's not good
+right or is
+right or is
+it but maybe that is correct
+maybe that is
+correct I'll just look and see how
+correct I'll just look and see how
+problem solves favorite thing good luck
+problem solves favorite thing good luck
+on your stream sure thing thank you
+I mean stuff like this takes me forever
+I mean stuff like this takes me forever
+because like I don't mess around I like
+because like I don't mess around I like
+I used to be pretty darn quick at this
+I used to be pretty darn quick at this
+stuff um when I was doing a lot of
+stuff um when I was doing a lot of
+architecture work but now it takes a
+architecture work but now it takes a
+while but then if you like it when I'm
+while but then if you like it when I'm
+like going through a code basis and
+like going through a code basis and
+fixing stuff it's like super super
+fixing stuff it's like super super
+fast some stuff's slow some stuff's fast
+fast some stuff's slow some stuff's fast
+I still get everything done
+and then what is
+and then what is
+this maybe this is do squeeze maybe we
+this maybe this is do squeeze maybe we
+get rid of this do
+get rid of this do
+squeeze B do
+squeeze maybe this
+I don't like cling this
+bait there we go
+this the heck broke my
+this the heck broke my
+terminal broke my terminal
+try
+try
+this hey there it
+goes value
+goes value
+loss yeah
+okay so this now
+okay so this now
+runs massively slows down the uh the
+runs massively slows down the uh the
+forward
+pass cuz they're inverting a bloody
+pass cuz they're inverting a bloody
+Matrix
+um let me think
+here I mean this makes sense that this
+here I mean this makes sense that this
+is massive to me I don't know how it's
+is massive to me I don't know how it's
+possible that they have Lambos what they
+possible that they have Lambos what they
+say
+is let me see unless I have it
+Implement cuz they say Lambda is 01 I
+Implement cuz they say Lambda is 01 I
+mean they say lambda's
+mean they say lambda's
+0.1 so then Lambda
+0.1 so then Lambda
+inverse is going to be the is 10 times
+inverse is going to be the is 10 times
+the identity Matrix and then they add 10
+the identity Matrix and then they add 10
+times the freaking identity Matrix to
+times the freaking identity Matrix to
+every single
+every single
+iteration so I don't see how that's
+possible oh wait see yeah no they add 10
+possible oh wait see yeah no they add 10
+times the
+times the
+just popping in to say I really enjoy
+just popping in to say I really enjoy
+your work been following for a few years
+your work been following for a few years
+thank
+thank
+you we're currently implementing e3b
+you we're currently implementing e3b
+into puffer lip seeing if this
+into puffer lip seeing if this
+exploration algorithm does
+exploration algorithm does
+anything my prediction is it's just
+anything my prediction is it's just
+going to be too
+going to be too
+slow um but there's some weird things
+slow um but there's some weird things
+with
+with
+it this is for a client um the thing I
+it this is for a client um the thing I
+really want to do which I'm going to
+really want to do which I'm going to
+probably do if I finish this soon I'll
+probably do if I finish this soon I'll
+I'll just start on that but um the next
+I'll just start on that but um the next
+thing I want to do is look at carbs and
+thing I want to do is look at carbs and
+really fix that hyper parameter tuning
+really fix that hyper parameter tuning
+algorithm that's going to be huge for
+algorithm that's going to be huge for
+puffer and for RL
+puffer and for RL
+overall cuz I found some bugs with carbs
+overall cuz I found some bugs with carbs
+or some design issues rather with carbs
+or some design issues rather with carbs
+earlier today
+how is this possible
+how is this possible
+like I'm going to just drop this PDF and
+like I'm going to just drop this PDF and
+plaw and see like I don't expect
+plaw and see like I don't expect
+anything out of it but
+like usually it's like a confirmation
+like usually it's like a confirmation
+that yes in fact you know this paper
+that yes in fact you know this paper
+like this is insane and it doesn't make
+like this is insane and it doesn't make
+any
+sense yeah
+so adding
+so adding
+10x Matrix
+[Music]
+inverse there's no
+is added
+is added
+once not
+once not
+accumulated
+oh okay so yay Claud for once is
+oh okay so yay Claud for once is
+actually helpful I got it did I get it
+actually helpful I got it did I get it
+wrong huh yeah I did get it wrong okay
+wrong huh yeah I did get it wrong okay
+me
+me
+stupid me very stupid
+stupid me very stupid
+hey Captain finish some M optimization
+hey Captain finish some M optimization
+now 170k training verse 130 very well
+now 170k training verse 130 very well
+done very
+done very
+good M speed is
+everything M speed is everything I'm
+everything M speed is everything I'm
+interested to take a look at the
+interested to take a look at the
+uh you know the way that box 2D handles
+uh you know the way that box 2D handles
+cuz apparently there is a tree you said
+cuz apparently there is a tree you said
+for
+for
+collisions yeah the rest is mainly box
+collisions yeah the rest is mainly box
+2D so the question is basically going to
+2D so the question is basically going to
+be when we strip down box 2D is there
+be when we strip down box 2D is there
+anything we can find that's slow there
+anything we can find that's slow there
+okay I actually don't know what the hell
+okay I actually don't know what the hell
+an AABB tree is I don't know is
+an AABB tree is I don't know is
+that I would think you would just want
+that I would think you would just want
+like a quad tree or something or even
+like a quad tree or something or even
+just like a fixed grid but I don't know
+oh wait I didn't even add this did
+I I didn't even add this I and it's
+I I didn't even add this I and it's
+still blowing
+up it's fairly well optimized as
+up it's fairly well optimized as
+is don't know how much we'll be able to
+is don't know how much we'll be able to
+speed it
+up
+interesting I mean the physics CS in
+interesting I mean the physics CS in
+your environment though they don't seem
+your environment though they don't seem
+like they would be capped to 100 like
+like they would be capped to 100 like
+they don't seem that they would be
+they don't seem that they would be
+capped that
+capped that
+slow you're
+slow you're
+handling like on average a sing single
+handling like on average a sing single
+digit number of moving
+digit number of moving
+things
+right yeah mental MTH doesn't check out
+right yeah mental MTH doesn't check out
+Captain there's got to be
+Captain there's got to be
+redundancy if you had like thousands of
+redundancy if you had like thousands of
+entities then sure but you
+don't yeah and all we care about is the
+don't yeah and all we care about is the
+average because you have enough parall L
+average because you have enough parall L
+that it's going to
+that it's going to
+[Music]
+smooth what if I do this
+floating value loss
+completely insane
+I don't know
+why
+e
+e e
+how's that
+happen e
+how's the value lost that
+bad I don't understand
+why is the value lost immediately
+why is the value lost immediately
+garbage
+I just do
+this okay the L definitely being screwed
+this okay the L definitely being screwed
+up
+up
+by this Cal
+okay so this is training a little bit
+okay so this is training a little bit
+without the bonus
+just adding and the intrinsic reward
+yeah so this learned something but it's
+yeah so this learned something but it's
+very slow
+right but the value loss is stable
+value loss is stable so then what
+value loss is stable so then what
+happens is you add this thing
+on what if I do
+on what if I do
+0.01 maybe just need to be
+scale now the value L immediately
+scale now the value L immediately
+freaking explodes
+still not as badly but still it's
+still not as badly but still it's
+crazy 01 yeah no it's still
+crazy 01 yeah no it's still
+expe
+expe
+um is it like on the graph or something
+um is it like on the graph or something
+weird
+no it still
+explodes how is this still
+exploding do they have a coefficient on
+exploding do they have a coefficient on
+this thing or
+something
+something
+B okay they do have this beta
+so let's see what they set beta
+to one
+to one
+they set it to
+they set it to
+one
+jeez they said this to 01 and this to
+one I don't know how this even
+works e
+now look at the values it's just
+exploded I imagine that
+exploded I imagine that
+this this Decay is not the problem
+this this Decay is not the problem
+right yeah that's way worse immediately
+I'm pretty sure this implemented
+correctly I'm pretty sure
+so and what do they do here they
+so and what do they do here they
+[Music]
+[Music]
+do they do this B
+term 1 over 1+ this
+term 1 over 1+ this
+at one over 1 plus
+intrinsic and they
+intrinsic and they
+do this outer
+product minus
+that which is fine
+and how can the value loss possibly be
+and how can the value loss possibly be
+that
+that
+big when the intrinsic reward should be
+big when the intrinsic reward should be
+clipped let's go look at
+that it could just be hypers to be fair
+could just be
+hypers
+so I don't really like the fact that I
+so I don't really like the fact that I
+have to clip
+have to clip
+here I'd rather clip the iate M Rewards
+right okay so let's try
+right okay so let's try
+this
+this
+next let's try this
+next let's try this
+next okay so the value loss is still
+next okay so the value loss is still
+crazy but less
+crazy yeah way less
+crazy yeah way less
+crazy now is this sued or something
+like why is the
+like why is the
+value function like that
+insane it shouldn't be
+okay so break point
+okay so break point
+here can you move the puffer it's
+here can you move the puffer it's
+blocking the
+blocking the
+losses oh this guy yeah he likes to
+losses oh this guy yeah he likes to
+block
+losses he likes to block
+losses we'll find a nice uh stream
+losses we'll find a nice uh stream
+overlay thing
+overlay thing
+soon I'm going to be streaming way more
+let's see
+train where's value loss get
+computed I'm
+flipped what the
+flipped what the
+heck well that'll do
+it oh because it's it's uh it's
+it oh because it's it's uh it's
+discounted returns is why okay so yeah
+discounted returns is why okay so yeah
+if you have one reward per step
+if you have one reward per step
+value is going to
+explode I don't understand how this
+explode I don't understand how this
+thing of theirs
+thing of theirs
+works
+like unless this improves
+why is the SPs so low
+this stupid
+thing let me think if it makes sense
+thing let me think if it makes sense
+that it's this
+low yeah Mel
+should be about a
+should be about a
+m i can test real quick maybe this is
+m i can test real quick maybe this is
+not an optimal config
+not an optimal config
+right um we can
+do where's the damn thing
+oh
+oh
+interesting so how is that not what's
+interesting so how is that not what's
+making it slow
+making it slow
+that doesn't make sense to me
+try
+this okay there you go there's
+600k and
+is still
+600k and now with
+this oh that's
+this oh that's
+funny I guess it was the numpy is Nan
+funny I guess it was the numpy is Nan
+the bug
+the bug
+check okay so it does take a perfit a
+check okay so it does take a perfit a
+pretty big perf hit
+um let's
+see it's value loss is just way too high
+this I guess it's the really big values
+this I guess it's the really big values
+that are the
+problem clamp and then
+problem clamp and then
+scale oops
+there we go
+doesn't train at
+all can run a full sweep I
+guess okay we will probably do that
+guess okay we will probably do that
+let me commment this for
+now e
+we need like a nice exploration
+we need like a nice exploration
+environment I'd like to have like a maze
+environment I'd like to have like a maze
+or something for
+this you just send this over on Discord
+okay me see
+me just send this over and then uh we'll
+me just send this over and then uh we'll
+see what we do from here it's only five
+left
+e e
+okay so that's set
+okay so that's set
+um let me see here
+um let me see here
+next
+thing next
+thing I'd like to go get myself some tea
+thing I'd like to go get myself some tea
+or something but it's a little
+or something but it's a little
+late I think we're going to do hyper
+late I think we're going to do hyper
+pram stuff
+pram stuff
+next I need to get
+next I need to get
+myself woken up a little bit
+myself woken up a little bit
+and yeah so
+so I know roughly what I want to do so
+so I know roughly what I want to do so
+let me let me give you the outline real
+let me let me give you the outline real
+quick and then um I will come back in a
+quick and then um I will come back in a
+few minutes and uh and start working on
+few minutes and uh and start working on
+it so there's this algorithm called
+it so there's this algorithm called
+carbs from muu it's a really good
+carbs from muu it's a really good
+hyperparameter tuning algorithm it's
+hyperparameter tuning algorithm it's
+cost aware the goal is it launches a
+cost aware the goal is it launches a
+bunch of fast experiments in order to
+bunch of fast experiments in order to
+build up a good predictive model of what
+build up a good predictive model of what
+hyperparameters are going to give you
+hyperparameters are going to give you
+what performance and then it launches
+what performance and then it launches
+slower experiments over time that give
+slower experiments over time that give
+you higher per uh but I found some
+you higher per uh but I found some
+issues with the way that it
+issues with the way that it
+samples uh parameters specifically that
+samples uh parameters specifically that
+prevent it
+prevent it
+from essentially affect essentially
+from essentially affect essentially
+prevent it from exploring outside the
+prevent it from exploring outside the
+initial space of hyper parameters that
+initial space of hyper parameters that
+you give it very effectively so the code
+you give it very effectively so the code
+base is very complex very overly complex
+base is very complex very overly complex
+I'd say for what the algorithm is
+I'd say for what the algorithm is
+and I'm probably going to go through and
+and I'm probably going to go through and
+try to simplify it and see if I can get
+try to simplify it and see if I can get
+perf before and perf after uh to be you
+perf before and perf after uh to be you
+know substantially better I have a
+know substantially better I have a
+synthetic Benchmark that's really quick
+synthetic Benchmark that's really quick
+to run and I'm probably going to play
+to run and I'm probably going to play
+around with that a little
+around with that a little
+bit that's going to be the goal I'm I'm
+bit that's going to be the goal I'm I'm
+going to
+going to
+have about an hour or so to do
+this yeah I'm going to have about an
+this yeah I'm going to have about an
+hour to do
+hour to do
+this before dinner and then I'll
+this before dinner and then I'll
+probably be back after as
+probably be back after as
+well I'm going to go grab myself a drink
+well I'm going to go grab myself a drink
+real quick take a couple minutes and
+real quick take a couple minutes and
+then we will uh we will get implementing
+then we will uh we will get implementing
+that and this should be pretty good
+that and this should be pretty good
+because this is uh this will be a major
+because this is uh this will be a major
+major major thing for our
+yeah I'll be right back don't let me
+yeah I'll be right back don't let me
+forget to unmute my
+mic
+e
+e
+e
+e
+e e
+okay
+okay here's what we're doing
+okay here's what we're doing
+next well first of all I got to check to
+next well first of all I got to check to
+make sure I don't
+make sure I don't
+have anything missing because I was
+have anything missing because I was
+expecting an update
+expecting an update
+from NYU
+from NYU
+on their
+stuff but they don't have it
+stuff but they don't have it
+now let's
+now let's
+see let me just check this on the side
+see let me just check this on the side
+real quick might have to do GPU Drive
+real quick might have to do GPU Drive
+stuff
+depending okay didn't get to it cool
+depending okay didn't get to it cool
+we get to do cool
+we get to do cool
+stuff I have finished the log of work
+stuff I have finished the log of work
+for
+for
+today so we get to do cool stuff for a
+today so we get to do cool stuff for a
+little bit
+um here's the
+deal here
+deal here
+is the
+is the
+deal this is a synthetic
+deal this is a synthetic
+test the max score is like 2
+test the max score is like 2
+50 carbs does not get
+50 carbs does not get
+there some parameters it fits nicely
+there some parameters it fits nicely
+some parameters it completely
+some parameters it completely
+fails we're going to now look at
+fails we're going to now look at
+carbs
+carbs
+and uh look at some of the stuff that I
+and uh look at some of the stuff that I
+found earlier and see if we can fix some
+found earlier and see if we can fix some
+things so
+arms
+this is the generate candidate
+this is the generate candidate
+function sample around origins in
+basic get all Pito
+OBS Pito
+groups in
+basic Creo
+basic Creo
+groups so this is going to this samples
+around your Paro
+group okay and then right
+group okay and then right
+here search distribution in
+basic you have right here
+so there are
+so there are
+two two issues with this
+there really a few issues with
+this quite a few to be
+fair issue number one is the way that
+fair issue number one is the way that
+it is
+it is
+converting hyper parameters into a
+converting hyper parameters into a
+normalized
+normalized
+space that is not correct the way it is
+space that is not correct the way it is
+doing
+doing
+that issue number two is the way it is
+that issue number two is the way it is
+sampling
+sampling
+around the hyper parameters in that
+around the hyper parameters in that
+normalized
+space let me think about how I want to
+space let me think about how I want to
+do
+do
+this it's very important that I get this
+this it's very important that I get this
+right
+also wrong branch
+so we
+so we
+got right here
+some of these are easier than
+others let's think about parameters in
+others let's think about parameters in
+log space first
+this is what that parameter looks like
+this is what that parameter looks like
+transforming into long space
+interesting so you would actually like
+interesting so you would actually like
+to
+to
+transform your
+space okay so I see why I'm not getting
+space okay so I see why I'm not getting
+this right now I have a transformation
+this right now I have a transformation
+into a good space for
+into a good space for
+sampling so what I do is I take log of
+sampling so what I do is I take log of
+this right and then I do plus one for
+this right and then I do plus one for
+instance and then you do 10 to this
+instance and then you do 10 to this
+and lo and behold you get
+and lo and behold you get
+0.05 so if you take you take the log and
+0.05 so if you take you take the log and
+then let's say you grab some standard
+then let's say you grab some standard
+noise
+right you can see that this gives you
+right you can see that this gives you
+some good samples
+some good samples
+right because the standard deviation of
+one in log space is one order of
+one in log space is one order of
+magnitude
+and then there's a clip Factor so you
+and then there's a clip Factor so you
+can prevent it from sampling crazy
+can prevent it from sampling crazy
+things so it's going to go up to two
+things so it's going to go up to two
+orders of magnitude in either direction
+orders of magnitude in either direction
+this is a very very good thing for
+sampling
+sampling
+however this is not perfect yet for
+however this is not perfect yet for
+fitting
+fitting
+parameters for
+parameters you would like the entire
+parameters you would like the entire
+thing to be in the range
+thing to be in the range
+of let's say -1 to one or 0 to one
+of let's say -1 to one or 0 to one
+either
+way so what does that transformation
+way so what does that transformation
+look like
+well I think it's just like you
+well I think it's just like you
+subtract the
+subtract the
+midpoint which is the
+-2.3 and then you
+-2.3 and then you
+probably just divide by two whatever
+probably just divide by two whatever
+sample you
+sample you
+get and you
+clip it's a little bit sophisticated
+so do I make my
+so do I make my
+own version of
+this do I modify the carbs version of
+this like to have my own
+if I have my own version of this I can
+if I have my own version of this I can
+make my own
+algorithms to be fair carbs will
+algorithms to be fair carbs will
+probably
+win I'm trying to think
+though so pretty much I think carbs
+though so pretty much I think carbs
+actually has the
+actually has the
+right they have the right API for this
+right they have the right API for this
+their fun names kind of
+their fun names kind of
+suck but they're not that far
+suck but they're not that far
+off so like if we look at their spaces
+off so like if we look at their spaces
+oops in
+oops in
+utils look at like log space or linear
+utils look at like log space or linear
+space so they've got param from
+space so they've got param from
+basic which is if you give it a
+basic which is if you give it a
+value like a value of the hyper pram it
+value like a value of the hyper pram it
+transforms it
+transforms it
+into a nicely normal space now their
+into a nicely normal space now their
+Transformations aren't correct but
+Transformations aren't correct but
+that's the
+that's the
+idea and then if you get a sample from
+idea and then if you get a sample from
+from that
+space uh they send it back to you
+and then when they do dot
+and then when they do dot
+observe let me
+see add
+observation see they convert it to basic
+observation see they convert it to basic
+space again
+how much code is in this
+repo like we don't really care about
+repo like we don't really care about
+this serialization stuff
+right there's this
+model it's a giant ass
+model it's a giant ass
+utils maybe 2,000 L total in this
+utils maybe 2,000 L total in this
+repo I think we could get it to a
+th000 the first thing I want to do is
+th000 the first thing I want to do is
+figure how to fix it
+though so maybe what I'll do is I'll
+though so maybe what I'll do is I'll
+leave everything
+leave everything
+alone but I'll fix their transformations
+to
+start I'll fix their
+start I'll fix their
+Transformations and I'll fix their the
+Transformations and I'll fix their the
+way that they're sampling around their
+way that they're sampling around their
+transform
+data for
+it should have a sample on
+it oh you know
+it oh you know
+what I kind of see what they're trying
+what I kind of see what they're trying
+to do with this
+scale I actually kind of see it
+this makes sense actually to
+me yeah no they're correct
+me yeah no they're correct
+so the idea is that all the samp are
+so the idea is that all the samp are
+normal
+um see for a uniform space does this
+um see for a uniform space does this
+make
+make
+sense it still kind of does make sense
+right if you have some prior on like
+right if you have some prior on like
+what what the mean should be
+but their values are not
+correct okay so basic from foram
+this should be like
+return value
+minus that's 0 to one
+okay so this should
+okay so this should
+be
+that so that gets you
+that so that gets you
+to to
+to to
+this and
+this and
+[Music]
+[Music]
+then foram from
+then foram from
+basic value is going to be equal
+to what the
+heck +
+heck +
+1 over 2
+so this is going to undo
+it if is integer and is
+rounded
+rounded
+okay this rounds
+and then they need to round operation in
+and then they need to round operation in
+basic which is kind of
+weird do they use this round
+weird do they use this round
+tensor basic
+kind of weird that they do
+kind of weird that they do
+that I guess it's they want
+that I guess it's they want
+the the
+rounded whatever
+why don't we just
+why don't we just
+do
+lules
+lules
+Pam self. param from
+Pam self. param from
+Basic Value and then this round
+right
+right
+through and then we do value
+through and then we do value
+equals self. base from
+pan isn't this just
+work yeah that should just
+work much easier
+and then we can do the same exact thing
+and then we can do the same exact thing
+here
+right okay basic from
+Pam basic from param
+little trick
+here so we're going to log the value
+we do mean
+equals is there no mean on this
+search
+center why don't we do search center
+center why don't we do search center
+right
+S search
+S search
+center and then we
+do
+do
+Dot and this is clip not scale
+and you should never be able to sample
+and you should never be able to sample
+zero
+yes a param from basic
+I think this
+works and then if it's rounded you round
+works and then if it's rounded you round
+and you
+return not bad
+there's only really two more spaces
+here and then we'll be able to test
+this you know even with
+um even with their search ter this
+um even with their search ter this
+actually should
+work if I do it this
+work if I do it this
+way it should work even with their
+way it should work even with their
+search term
+we're going to have to clip as well
+but basic from
+pan let us think
+value equal
+value equal
+1us value
+ma.
+ma.
+log one minus
+value
+value
+base base is 10
+we shall see about
+we shall see about
+this that's zero to one scale still so
+this that's zero to one scale still so
+I'll have to fix that
+and then there's never any rounding
+and then there's never any rounding
+here so you just return the value
+then Pam from basic
+me see so multiply by
+clip and you add search
+clip and you add search
+center you
+take I'm getting really
+take I'm getting really
+tired this is stupid but I'm going to do
+tired this is stupid but I'm going to do
+this
+I'm going to hope I don't get bitten by
+I'm going to hope I don't get bitten by
+PPT failing something the simple
+there we
+there we
+go the one minus goes at the start
+go the one minus goes at the start
+obviously just
+tired there you go turn
+cool
+cool
+so this is
+so this is
+good where's our power
+good where's our power
+two P
+two P
+two I thought I had a
+PO there po to space or whatever
+I put this to a new branch
+this a new
+this a new
+container
+ah e
+H this
+so basic from
+foram so we
+do
+scale min max
+that's not quite
+right I think it's actually very similar
+right I think it's actually very similar
+to the log space and it's scaling
+isn't it just this
+wait I think it's just
+wait I think it's just
+this search center think of search
+center yeah but the search center is off
+but it'll be
+but it'll be
+fun I
+do e
+right I'm
+oh yeah I
+see it's going to get rounded though
+so I see so you do
+so I see so you do
+value
+value
+value mean is going to
+value mean is going to
+be 2 to the
+Max okay so we
+doal
+value the log 2
+value the log 2
+value minus mean
+and then what
+something like
+this
+integer surrounded
+well this is supposed to be basic from
+well this is supposed to be basic from
+foram first of
+all and then Pam from basic
+get your
+value
+times
+times
+and we're going to fix all this stuff up
+and we're going to fix all this stuff up
+later tonight just a prototype
+and then now you round
+it then you return two times
+value the round tensor in basic is just
+value the round tensor in basic is just
+going to be we get to eliminate all
+going to be we get to eliminate all
+these obnoxious functions
+these obnoxious functions
+okay
+okay
+so that's all of
+so that's all of
+them and all I have to
+them and all I have to
+do is clean these up a
+do is clean these up a
+bit I actually don't like the way that
+bit I actually don't like the way that
+I've
+I've
+specified
+parameters I think I don't like the way
+parameters I think I don't like the way
+that I've specified
+clip I think mean scale Min and Max are
+clip I think mean scale Min and Max are
+going to
+going to
+be the parameters
+yeah going to be a little bit of
+work the way they use scale is currently
+work the way they use scale is currently
+confusing yes it very much
+is the thing is their stuff is wrong
+is the thing is their stuff is wrong
+Captain
+Captain
+um it's confusing because it's wrong
+shoot also
+you can't
+do the mean doesn't have to be
+do the mean doesn't have to be
+zero actually the mean can't be zero the
+zero actually the mean can't be zero the
+way I'm thinking about it
+so
+confusing it's kind of difficult to
+confusing it's kind of difficult to
+explain this Stu I'm thinking about at
+explain this Stu I'm thinking about at
+the moment but basically I'm trying to
+the moment but basically I'm trying to
+figure out a good space to transform I'm
+figure out a good space to transform I'm
+basically trying to figure out how I
+basically trying to figure out how I
+want to parameterize each hyperparameter
+want to parameterize each hyperparameter
+and then what latent space I want to
+and then what latent space I want to
+transform them into that's going to be
+transform them into that's going to be
+good for learning a predictive model as
+good for learning a predictive model as
+well as for
+sampling let's say that we have a log
+parameter actually let's go even simple
+parameter actually let's go even simple
+let's say that we have a uniform
+let's say that we have a uniform
+parameter as a min
+parameter as a min
+a
+a
+Max and a
+Max and a
+mean the mean is not exactly between the
+mean the mean is not exactly between the
+Min and the
+Min and the
+max so that means we want a sample
+max so that means we want a sample
+around the mean and we want to get
+around the mean and we want to get
+values from the Min to the
+values from the Min to the
+max how do you transform that
+max how do you transform that
+parameter easiest would just be to
+parameter easiest would just be to
+rescale it between1 and one
+then what you would do is you'd
+then what you would do is you'd
+search you would sample from the surf
+search you would sample from the surf
+Center doesn't have to be zero that's
+Center doesn't have to be zero that's
+fine you'd have a
+fine you'd have a
+scale parameter
+and we'll think about how the scale pram
+and we'll think about how the scale pram
+works but it like you can have a scale
+works but it like you can have a scale
+pram so you sample normal distribution
+pram so you sample normal distribution
+around
+around
+that you clip to Min and
+Max and you transform back
+I think I know how to do
+I think I know how to do
+that
+that
+so me and men and Max are
+so me and men and Max are
+obvious what about scale
+scale is going to be kind of confusing
+so for symmetric
+distribution
+distribution
+three it scills pretty
+good is there default actually good
+I think their default might actually be
+good I mean it kind of
+good I mean it kind of
+depends on the
+parameter 0.3
+it's kind of
+good might not even need a scale
+good might not even need a scale
+parameter with this
+I guess hold on do you
+need you might need it for something
+need you might need it for something
+like total time
+steps I'm GNA have to think about
+that I think uh let me check I think I
+okay I got to go I'll be back in uh like
+okay I got to go I'll be back in uh like
+an hour

@@ -1,0 +1,3079 @@
+Kind: captions
+Language: en
+Okay, for a
+Okay, for a
+bit hoping to be back here a little
+bit hoping to be back here a little
+earlier, but I got held up with uh some
+earlier, but I got held up with uh some
+cluster maintenance stuff. At least one
+cluster maintenance stuff. At least one
+of the boxes is back online now. So,
+of the boxes is back online now. So,
+this one is going to be off until I get
+this one is going to be off until I get
+an extra cable for it. So, um I think
+an extra cable for it. So, um I think
+what we're going to do now is we're
+what we're going to do now is we're
+going to do a little bit of stuff on
+going to do a little bit of stuff on
+TTT. We are going
+TTT. We are going
+to probably look at VRays and have a
+to probably look at VRays and have a
+meeting at some point here. I think
+meeting at some point here. I think
+those are the two main things I really
+those are the two main things I really
+want to get today is TTT and B
+want to get today is TTT and B
+trace. All
+right. Well, I'm just sitting down
+right. Well, I'm just sitting down
+here. I got to say that
+uh Florida, this time of year, you do
+uh Florida, this time of year, you do
+not want to walk outside and open your
+not want to walk outside and open your
+mouth. You eat a whole mouth full of
+mouth. You eat a whole mouth full of
+bugs.
+Time to get out of Florida
+soon. Just in time for the new puffer
+soon. Just in time for the new puffer
+facility. All right,
+facility. All right,
+TTT. So, this
+one. So, I'd like to know where this
+one. So, I'd like to know where this
+graphic came
+graphic came
+from. Me find the graphic.
+from. Me find the graphic.
+This is how it
+was
+described. Is this on the website or
+something? That's a funny
+website. Um
+joint first and joint second. It's all
+joint first and joint second. It's all
+right
+guys. Yeah, I don't see where this uh
+guys. Yeah, I don't see where this uh
+particular graphic came
+particular graphic came
+from. Assuming that this thing is
+from. Assuming that this thing is
+correct
+though, let me just read through it
+though, let me just read through it
+fresh now and see if I messed anything
+fresh now and see if I messed anything
+up. So,
+You initialize task which is K Q and V.
+You initialize task which is K Q and V.
+This does not get reset. K QB and extra
+get. Then on the forward you make a
+get. Then on the forward you make a
+learner which we have in it state here
+learner which we have in it state here
+to give you model and optim
+right. So you
+right. So you
+encode and then
+state.train train
+state.train train
+token and then this is supposed I think
+token and then this is supposed I think
+this is just pseudo code right because
+this is just pseudo code right because
+Brad is not a thing. So this is supposed
+Brad is not a thing. So this is supposed
+to be tap
+to be tap
+loss gradient with respect to the
+input which is self
+model. Do I have the stop grad in the
+model. Do I have the stop grad in the
+correct spot?
+gradient with
+respect to
+self.mod.
+self.mod.
+So inner loop
+gradient we make sure these match as
+gradient we make sure these match as
+well because we have forward and forward
+well because we have forward and forward
+And they need to be the
+same, you know. I think I might have
+same, you know. I think I might have
+made I might have broken this
+thing.
+thing.
+No, cuz the only thing that has a
+No, cuz the only thing that has a
+gradient here is the uh the model
+gradient here is the uh the model
+output, right?
+I think that's the only thing that gets
+I think that's the only thing that gets
+a gradient is the model
+output. And either way, the optimizer is
+output. And either way, the optimizer is
+only defined on the model parameters,
+only defined on the model parameters,
+right?
+So is it that the default learning rate
+So is it that the default learning rate
+is too high for the uh for the
+is too high for the uh for the
+optimizer? Could
+be. Let me go check the original papers
+code
+that's it's this thing
+that's it's this thing
+right and they have PyTorch
+right and they have PyTorch
+code which is like massive
+We do not recommend training with this
+We do not recommend training with this
+codebase.
+I mean, how are they going to write400
+I mean, how are they going to write400
+lines and then say that this is the slow
+word? Okay, this is clearly not just a
+word? Okay, this is clearly not just a
+TTT layer, right? This is so this is
+TTT layer, right? This is so this is
+yeah, TTT lm. This is not just TTT.
+I don't know what the heck they're doing
+I don't know what the heck they're doing
+there.
+Um, last hidden states and gradients for
+Um, last hidden states and gradients for
+PTT layer.
+Yeah, this is just insanity. Um, do I
+Yeah, this is just insanity. Um, do I
+risk looking at the jack
+Okay, I think this
+is the
+layer get QKV
+projections. Um, this is not how it's
+projections. Um, this is not how it's
+described here.
+What the heck is this?
+GTT linear
+base. This
+is somehow it's not
+Yeah, this code base makes zero sense
+whatsoever. I have no idea why it's like
+whatsoever. I have no idea why it's like
+that. And the thing is that the like the
+that. And the thing is that the like the
+simple pipe which is also not simple.
+The thing that annoys me here is I can't
+The thing that annoys me here is I can't
+even like see how this is supposed to
+even like see how this is supposed to
+work because it's it's too much of a
+mess like this here. Okay, so this is
+mess like this here. Okay, so this is
+they have
+they have
+weight and bias
+initialized and then they do compute
+initialized and then they do compute
+mini back in
+mini back in
+here
+xq. Yeah, I don't know how this is
+xq. Yeah, I don't know how this is
+supposed to be premputed either. This
+supposed to be premputed either. This
+doesn't make sense.
+Oh, they're
+Oh, they're
+doing they're not using autograd
+doing they're not using autograd
+here. They're manually computing
+here. They're manually computing
+gradients. That's why
+Okay, maybe I can get something out of
+Okay, maybe I can get something out of
+it now.
+x qx dx
+k. Now the thing I don't understand is
+k. Now the thing I don't understand is
+like
+why why have they done this
+already? That's not how this thing
+already? That's not how this thing
+works, right?
+Q KV
+Q. Oh, that is totally how this works.
+Q. Oh, that is totally how this works.
+I'm
+I'm
+done. That is totally how this
+done. That is totally how this
+works. Okay.
+So
+then I'm going to have to check those
+then I'm going to have to check those
+gradients. Let me at least make this
+gradients. Let me at least make this
+modification before I
+forget because
+uh you can do this
+right that can go there.
+That doesn't magically solve
+it,
+it,
+right? So, we look at
+And just make sure this isn't the
+And just make sure this isn't the
+learning rate
+thing. Doesn't seem like
+it. All right, let's see their
+code. I kind of see how they have it
+code. I kind of see how they have it
+written this way now
+written this way now
+because this model breaks autograph. So,
+because this model breaks autograph. So,
+they just didn't use
+autograph. Wait, what's trill
+do? Lower triangular.
+Why the heck do they have
+this
+inputs? Okay, let's read this whole
+inputs? Okay, let's read this whole
+thing.
+batch numbum
+batch numbum
+heads num mini batch mini batch
+heads num mini batch mini batch
+size I don't see time
+size I don't see time
+there I do not see
+time for prefilling we always use dual
+form I have no idea what that
+form I have no idea what that
+is I have no idea what dual Like I don't
+is I have no idea what dual Like I don't
+know what they're doing with that.
+What is this
+layer? So, we're not going to be able to
+layer? So, we're not going to be able to
+read this because this is not going to
+read this because this is not going to
+match what they have otherwise. So this
+match what they have otherwise. So this
+is the normal
+form.
+Um, this is some weirdo
+trill. I also really can't tell if they
+trill. I also really can't tell if they
+have a time
+have a time
+dimension. I think we ignored this
+dimension. I think we ignored this
+because I think that this is because
+because I think that this is because
+it's like multi head data. This is not
+it's like multi head data. This is not
+what's described
+what's described
+here. The key here though is they
+here. The key here though is they
+compute the
+compute the
+gradient with respect to W1 and the
+gradient with respect to W1 and the
+bias.
+They apply the
+step token ETA
+step token ETA
+mini. So we should see what they use for
+mini. So we should see what they use for
+this parameter, right?
+this parameter, right?
+token ETA
+mini and then they
+mini and then they
+store the last
+store the last
+states the last gradient I don't know
+states the last gradient I don't know
+what they do with the last gradient
+al. So when does this thing get
+al. So when does this thing get
+initialized? This
+initialized? This
+W1 they have in it here.
+Are we going to be able to follow
+Are we going to be able to follow
+this TTT
+linear? This is the only file. Do they
+linear? This is the only file. Do they
+have a train in
+have a train in
+here or is this just
+here or is this just
+um massive crazy demo?
+TTT layer. There.
+Okay. What about the original
+paper? Okay, let's see.
+paper? Okay, let's see.
+TT
+layer. Oh, D. He got it from
+layer. Oh, D. He got it from
+here. Okay.
+What is this paper? This is a really
+What is this paper? This is a really
+wonky paper that was recently used in
+wonky paper that was recently used in
+the Nvidia one minute video generation
+the Nvidia one minute video generation
+with the Tom and Jerry clips. Uh it is a
+with the Tom and Jerry clips. Uh it is a
+replacement for an LSTM that trains the
+replacement for an LSTM that trains the
+hidden state as part of the forward
+hidden state as part of the forward
+pass. It's very weird.
+I have it implemented and it doesn't do
+I have it implemented and it doesn't do
+anything so far.
+Okay, let me actually start going
+Okay, let me actually start going
+through this slide because I want to
+through this slide because I want to
+make sure I didn't miss
+make sure I didn't miss
+anything.
+anything.
+Our idea is to use self-supervised
+Our idea is to use self-supervised
+learning to compress the historic
+learning to compress the historic
+context X1 through XT into a hidden
+context X1 through XT into a hidden
+state
+state
+ST by making the context an unlabelled
+ST by making the context an unlabelled
+data set and the state a
+model. Concretely, the hidden state ST
+model. Concretely, the hidden state ST
+is now equivalent to
+is now equivalent to
+WT, the weights of a model F, which can
+WT, the weights of a model F, which can
+be a linear model, a small neural net or
+be a linear model, a small neural net or
+anything else.
+anything else.
+The output rule is
+simply call the
+model. Okay.
+model. Okay.
+Output token is just the prediction on
+Output token is just the prediction on
+X made by with the updated weights
+X made by with the updated weights
+WT update rule is a is a single step one
+WT update rule is a is a single step one
+step of gradient descent on some
+step of gradient descent on some
+self-supervised loss with rate learning
+self-supervised loss with rate learning
+rate
+ADA. Why did that citation take me to
+ADA. Why did that citation take me to
+here?
+It was supposed to be two,
+right? They initialized the initial
+right? They initialized the initial
+weights to
+zero. How does that do anything?
+Every decide which input to remember or
+Every decide which input to remember or
+forget. RW remembers inputs that produce
+forget. RW remembers inputs that produce
+large
+gradients. One choice of L is
+gradients. One choice of L is
+reconstructing X itself.
+The forward pass of ATT layer has a
+The forward pass of ATT layer has a
+corresponding backward pass. Our forward
+corresponding backward pass. Our forward
+pass only consists of standard
+pass only consists of standard
+differentable operators except the
+differentable operators except the
+gradient operator.
+calling backward on delta L means taking
+calling backward on delta L means taking
+the gradient of
+the gradient of
+gradients. Ah shoot. So this is this
+gradients. Ah shoot. So this is this
+actually I might have implemented this
+actually I might have implemented this
+wrong
+wrong
+then TTT layers have the same inference
+then TTT layers have the same inference
+as RNN
+as RNN
+layers and self
+attention outer loop parameters areated
+attention outer loop parameters areated
+by
+theta. Hang on. An important difference
+theta. Hang on. An important difference
+between the two nested learning problems
+between the two nested learning problems
+is that the inner loop gradient is taken
+is that the inner loop gradient is taken
+with respect to W the parameters of F
+with respect to W the parameters of F
+while the outer loop gradient is taking
+while the outer loop gradient is taking
+with respect to the parameters of the
+with respect to the parameters of the
+rest of the
+rest of the
+network. Okay.
+So where do they take radian? Brilliant.
+Since both W and various datas appear
+Since both W and various datas appear
+together in equation
+together in equation
+4, we emphasize their difference in
+4, we emphasize their difference in
+nature. In the inner loop, only W is off
+nature. In the inner loop, only W is off
+much.
+Yes. In the outer loop, theta K, V, and
+Yes. In the outer loop, theta K, V, and
+Q are optimized alongside theta rest.
+Q are optimized alongside theta rest.
+And W is merely a hidden state, not a
+And W is merely a hidden state, not a
+parameter. That's how I implemented it.
+The naive TTT layer developed so far is
+The naive TTT layer developed so far is
+already efficient in the number of
+already efficient in the number of
+floating point operations. However, its
+floating point operations. However, its
+update
+update
+rule cannot be parallelized because WT
+rule cannot be parallelized because WT
+depends on WT minus one in two places
+depends on WT minus one in two places
+before the minus sign and inside
+before the minus sign and inside
+gradient of L. Yes, since gradient of L
+gradient of L. Yes, since gradient of L
+contains the bulk of the computation, we
+contains the bulk of the computation, we
+focus on making this second part
+focus on making this second part
+parallel.
+Wait. The general update role can be
+Wait. The general update role can be
+expressed as this.
+The general update rule of GD can be
+The general update rule of GD can be
+expressed like that where GT is the
+expressed like that where GT is the
+descent direction. Once we have
+descent direction. Once we have
+calculated GT for 1 through
+calculated GT for 1 through
+T, we can then obtain all the
+T, we can then obtain all the
+WTF through a [ __ ] of the second half of
+WTF through a [ __ ] of the second half of
+equation six.
+To parallelize gt is 1 through
+To parallelize gt is 1 through
+t, we can take all of them with respect
+t, we can take all of them with respect
+to w0.
+What? That's completely
+different. To parallelize
+GT, we can take all them with respect to
+GT, we can take all them with respect to
+W0. This variant is known as batch
+W0. This variant is known as batch
+gradient
+descent. Since the sum is the same as
+descent. Since the sum is the same as
+the gradient with respect to
+the gradient with respect to
+w0 over x1 through t as a
+batch that is an incredibly stupid
+batch that is an incredibly stupid
+analog that is not remotely close to
+analog that is not remotely close to
+correct.
+correct.
+Okay, I was wondering why I was getting
+Okay, I was wondering why I was getting
+weirdo messages about this paper that
+weirdo messages about this paper that
+made absolutely no sense. It's because
+made absolutely no sense. It's because
+the paper makes absolutely no
+sense. No, when you're doing like batch
+sense. No, when you're doing like batch
+versus mini batch gradient descent,
+versus mini batch gradient descent,
+you're going through different samples
+you're going through different samples
+of the same data set that don't depend
+of the same data set that don't depend
+on each other. When you're doing a
+on each other. When you're doing a
+sequence modeling problem in which the
+sequence modeling problem in which the
+state directly depends on the previous
+state directly depends on the previous
+state, it's not batch versus mini batch
+state, it's not batch versus mini batch
+gradient
+gradient
+descent. If you do it all at once or
+descent. If you do it all at once or
+not, it's a completely different
+not, it's a completely different
+algorithm.
+for a proposed solution. Mini bath
+for a proposed solution. Mini bath
+gradient descent is shown in figure
+gradient descent is shown in figure
+six. Denote the TTT bath size by B.
+Okay, that's not mini B. That's not
+Okay, that's not mini B. That's not
+how
+whatever. What is that sound?
+Oh, this is the
+Oh, this is the
+entire entire update. Sure. Whatever.
+Hang on, let me make sure I didn't miss
+Hang on, let me make sure I didn't miss
+anything. There are two potential
+anything. There are two potential
+channels for propagate information from
+channels for propagate information from
+WS to WT or as the less than [ __ ] and the
+WS to WT or as the less than [ __ ] and the
+gradient
+operator. The [ __ ] sum is always active,
+operator. The [ __ ] sum is always active,
+but the gradient channel is only active
+but the gradient channel is only active
+when
+when
+WS is from a previous mini.
+Okay, it's a really weird little
+Okay, it's a really weird little
+approximation.
+Fine. Yeah, Ryan, it's a stupid They're
+Fine. Yeah, Ryan, it's a stupid They're
+describing it really stupidly. They're
+describing it really stupidly. They're
+drawing an analogy to they like they
+drawing an analogy to they like they
+made some wacko approximation to like
+made some wacko approximation to like
+batch state updates over segments of
+batch state updates over segments of
+time and they drew some like wacko
+time and they drew some like wacko
+analogy to mini batch SGD that doesn't
+analogy to mini batch SGD that doesn't
+make any bloody sense. That's
+make any bloody sense. That's
+all. There's nothing to understand. It's
+all. There's nothing to understand. It's
+just
+just
+stupid. Like the technique is kind kind
+stupid. Like the technique is kind kind
+of
+of
+okayish.
+okayish.
+Um, the description is just stupid.
+Um, the description is just stupid.
+That's all it is.
+What the hell is this?
+I've been reviewing MLM math for
+I've been reviewing MLM math for
+interviews and I can never tell if I'm a
+interviews and I can never tell if I'm a
+[ __ ] if the math in these papers is
+random. You know, the math in these
+random. You know, the math in these
+papers is usually pretty [ __ ] on
+papers is usually pretty [ __ ] on
+average.
+Like they clearly just hacked a thing
+Like they clearly just hacked a thing
+and then like posttop came up with a
+and then like posttop came up with a
+bunch of math to justify it, but if you
+bunch of math to justify it, but if you
+actually like read it bit by bit, it's
+actually like read it bit by bit, it's
+just like it clearly doesn't make any
+just like it clearly doesn't make any
+bloody
+sense. Well, the thing is like I'm going
+sense. Well, the thing is like I'm going
+through enough of these lately that I'm
+through enough of these lately that I'm
+actually like getting that. So, I'm
+actually like getting that. So, I'm
+getting better and better quickly at
+getting better and better quickly at
+evaluating like which of these is likely
+evaluating like which of these is likely
+to be [ __ ] or not. So, before I was
+to be [ __ ] or not. So, before I was
+going mostly off of
+going mostly off of
+experiments, right? But now I'm also
+experiments, right? But now I'm also
+looking at papers from the math and I'm
+looking at papers from the math and I'm
+seeing whether I think that it's likely
+seeing whether I think that it's likely
+that the technique would be good when
+that the technique would be good when
+applied ex exhaustively to a bunch of
+applied ex exhaustively to a bunch of
+environments or not as well.
+Also, the code for this is
+horrendous. This is what I'm doing on my
+horrendous. This is what I'm doing on my
+stream. I streamed 10 hours and 40
+stream. I streamed 10 hours and 40
+minutes to this on
+Saturday. We implemented a CUDA kernel
+Saturday. We implemented a CUDA kernel
+for Brix.
+[ __ ] is
+this? Oh, this is just writing out the
+this? Oh, this is just writing out the
+gradient. Okay, whatever.
+We cannot
+We cannot
+compute all
+compute all
+B of the
+B of the
+GTS through a single
+M. We need B outer products and comput
+M. We need B outer products and comput
+them one by one.
+Okay,
+fine. Yeah, there's this dual
+fine. Yeah, there's this dual
+form. Okay,
+form. Okay,
+whatever. Is there an official an
+whatever. Is there an official an
+official definition of a dual form? Is
+official definition of a dual form? Is
+this even correct use of this term?
+this even correct use of this term?
+Primal
+dual. Yeah, I thought this was more
+dual. Yeah, I thought this was more
+precise.
+Okay. So, this is not a
+duel. Okay, this is not actually a dual
+duel. Okay, this is not actually a dual
+form. They're just like adopt using it
+form. They're just like adopt using it
+because it's like I don't know, we made
+because it's like I don't know, we made
+a duel to the problem.
+a duel to the problem.
+This is like peak academic
+horit number has nothing to do with the
+horit number has nothing to do with the
+number of
+number of
+dimensions. This is literally just
+dimensions. This is literally just
+saying look there's an alternative form
+saying look there's an alternative form
+of the problem so we're going to call it
+of the problem so we're going to call it
+a
+a
+duel. That's not what a duel is.
+duel. That's not what a duel is.
+I'm not even a math guy at this time.
+Okay, so I see what they did. Uh, this
+Okay, so I see what they did. Uh, this
+is not even a like this is not a this is
+is not even a like this is not a this is
+not even the same problem by the way.
+not even the same problem by the way.
+This is a efficiency
+This is a efficiency
+hack for an approximation of the problem
+hack for an approximation of the problem
+and a pretty severe one at
+that. Look, this thing decays
+Like yeah, this thing decays like
+that. Let me get the implementation
+that. Let me get the implementation
+details to see if there's anything I
+details to see if there's anything I
+missed because this thing just doesn't
+missed because this thing just doesn't
+work at all right
+now. Right. Yeah. Three on
+breakout. Oh, wait. Learnable. Wo.
+breakout. Oh, wait. Learnable. Wo.
+The initialization WO is shared between
+The initialization WO is shared between
+all
+all
+sequences even though subsequent weights
+sequences even though subsequent weights
+are different for each input
+sequence.
+sequence.
+Oh, and welcome boxing
+byes. Subsequent weights are different
+byes. Subsequent weights are different
+for each input sequence. I think I threw
+for each input sequence. I think I threw
+that up royally, didn't I?
+Instead of setting W equals Z, we can
+Instead of setting W equals Z, we can
+learn it as part of the outer
+learn it as part of the outer
+loop. Since outer loop
+loop. Since outer loop
+parameters are always denoted by thetas
+parameters are always denoted by thetas
+instead of
+instead of
+W's, assign alias theta and it equal
+W0 significantly improves training
+W0 significantly improves training
+stability.
+stability.
+Learnable learnable learning
+rate. Base learning rate is set to one
+rate. Base learning rate is set to one
+for TTT linear.
+Okay. Um, how does this thing work with
+Okay. Um, how does this thing work with
+initial weight
+zero? So, this is why they they don't
+zero? So, this is why they they don't
+use autograd for this thing. So, we're
+use autograd for this thing. So, we're
+not allowed to use autograd.
+in
+it. They have a bias, don't they?
+They do have a lights,
+right? Maybe they don't have a butts.
+right? Maybe they don't have a butts.
+I could have sworn I saw one in
+there. Maybe they describe it as like an
+there. Maybe they describe it as like an
+efficiency optimization or like a
+something. They
+don't the code has bias, right?
+Or am I done? No, look. Grab B1 right
+there. You see right here that this is
+there. You see right here that this is
+their initialization. We can use
+this in TTMLP. No, not TTMLP. We're
+this in TTMLP. No, not TTMLP. We're
+doing TT linear right now. TT
+linear. Why did they make this a
+linear. Why did they make this a
+parameter?
+If they're not using an optimizer
+directly bit confus confusing why they
+directly bit confus confusing why they
+do that.
+We do
+this head
+dim. Presumably this is per example or
+dim. Presumably this is per example or
+something.
+Oh, I see. Because this gets like
+Oh, I see. Because this gets like
+broadcast expanded or some weird thing.
+broadcast expanded or some weird thing.
+That's
+fine. So, this is just self.input size.
+You don't need an optimizer, I
+guess. Are they learning X?
+guess. Are they learning X?
+they're learning this this weight matrix
+they're learning this this weight matrix
+gets learned per example per
+gets learned per example per
+trajectory. So you start with this and
+trajectory. So you start with this and
+then
+then
+this these params are learned as the
+this these params are learned as the
+state. So the state that usually comes
+state. So the state that usually comes
+out of the neural net uh like out of an
+out of the neural net uh like out of an
+LSTM they've made this state a
+LSTM they've made this state a
+network. It's
+network. It's
+weird.
+Very very weird.
+Can I not use Wait, if I do make this a
+Can I not use Wait, if I do make this a
+parameter, I can use autograph,
+parameter, I can use autograph,
+right? If I can use autograph, it's not
+right? If I can use autograph, it's not
+terrible.
+If I have to do it without, I'll do it
+without. I'd like to at least not have
+without. I'd like to at least not have
+the chance of screwing up the autograd
+initially because it is learnable,
+initially because it is learnable,
+right? We want this to
+right? We want this to
+be learned.
+So I can actually just do this. This is
+So I can actually just do this. This is
+W0,
+right? It's even
+right? It's even
+easier. And
+now output equals
+That's not right either, though.
+How do they say that you should learn
+Wing MLP? It is self-supervised. Yes.
+These are learned in the outer loop this
+time.
+Wait. So this only gets learned in the
+Wait. So this only gets learned in the
+algorith.
+Okay.
+So I think then what you do
+Yes. It's got to be It's never the
+Yes. It's got to be It's never the
+simple paper. It's never the simple
+simple paper. It's never the simple
+paper. It's always got to be the most
+paper. It's always got to be the most
+complicated possible [ __ ]
+complicated possible [ __ ]
+thing. I guess I did get to do
+thing. I guess I did get to do
+prioritize replay the other day and that
+prioritize replay the other day and that
+was pretty easy, huh?
+state
+train. Pretty much every single
+train. Pretty much every single
+descriptive piece of this paper sucks.
+descriptive piece of this paper sucks.
+Like the method's actually pretty novel
+Like the method's actually pretty novel
+and interesting, but the description of
+and interesting, but the description of
+the method, including the pseudo code,
+the method, including the pseudo code,
+the code, the text, the map, every
+the code, the text, the map, every
+single part of it just sucks.
+So you give it let's say we're going to
+So you give it let's say we're going to
+get W in the state, right?
+So we're going to get W equals
+statewt W and then we're going to
+statewt W and then we're going to
+get B stateb
+right model
+anymore. And then this is going to be at
+anymore. And then this is going to be at
+hidden at
+hidden at
+W plus
+W plus
+B like this.
+Let's add something here so I can
+Let's add something here so I can
+actually freaking Okay.
+Think I can do
+this. Yeah, there we go. Just needed the
+this. Yeah, there we go. Just needed the
+app signs to be highlighted so I can
+app signs to be highlighted so I can
+freaking tell them apart.
+I never use
+I never use
+these. Um I guess I could just
+whatever. Okay, so now the loss the loss
+whatever. Okay, so now the loss the loss
+we can still use this on,
+right? So this is model output. We'll
+right? So this is model output. We'll
+call this
+call this
+TTT output.
+This gets label
+view. And then
+view. And then
+[Music]
+you you kind of do want an optimizer
+you you kind of do want an optimizer
+with this, don't you?
+Pretty good.
+I think we can
+leave
+turn. Okay, we're going to take these
+turn. Okay, we're going to take these
+variables. These have to be detached.
+variables. These have to be detached.
+It's very tricky because you have to be
+It's very tricky because you have to be
+tracking which variables get detached or
+not. They do a learning rate
+one. Something like this.
+Okay. So now you have your
+output
+output
+optim you zero the gradient you backward
+optim you zero the gradient you backward
+through
+through
+this almost forgot
+detach.
+Uh, wait. Is it
+detached? This is so It's so sketchy. I
+detached? This is so It's so sketchy. I
+think it's technically like
+think it's technically like
+attach.expand
+That's I'm going to just do
+clone for now.
+The the thing that's really difficult
+The the thing that's really difficult
+about this whole thing, right, is this
+about this whole thing, right, is this
+is like this is pushing what autograd
+is like this is pushing what autograd
+was designed for. And you have to be
+was designed for. And you have to be
+really really careful about like what is
+really really careful about like what is
+going to be taken a derivative of versus
+going to be taken a derivative of versus
+not.
+Otherwise you break the whole thing
+silently. Okay.
+silently. Okay.
+So hidden at W +
+B. This should be the only operation
+B. This should be the only operation
+that has a gradient because and forward
+that has a gradient because and forward
+all this is going to get called inside
+all this is going to get called inside
+of for no graph. So this enables
+of for no graph. So this enables
+gradient just for this
+gradient just for this
+op you optimize
+op you optimize
+this and you're should be okay and then
+this and you're should be okay and then
+output is just going to
+output is just going to
+be
+be
+hidden at W +
+B like this you decode the output and
+B like this you decode the output and
+you're good.
+you're good.
+Okay, let's bring this code down to the
+Okay, let's bring this code down to the
+train pass and
+train pass and
+see if it's hopefully not terrible here
+either. Okay, so first of all, this
+either. Okay, so first of all, this
+state
+state
+stuff, this goes up here,
+right? I guess there's no reason to have
+right? I guess there's no reason to have
+to
+We can do
+We can do
+this. Probably cleaner to do
+this. Uh we still don't need we don't
+this. Uh we still don't need we don't
+need this until we actually do this
+need this until we actually do this
+move.
+Right. So now this has to be
+Right. So now this has to be
+here hidden.
+here hidden.
+at the m +
+at the m +
+v. This goes this is
+v. This goes this is
+ttt
+output step this gradient or step this
+output step this gradient or step this
+model and
+then now this is where I think this the
+then now this is where I think this the
+thing that we just did is uh paid
+thing that we just did is uh paid
+off. Hidden
+at plus. I'm pretty sure that just
+at plus. I'm pretty sure that just
+works and then you append
+this and that's it. And then you do your
+yellow. We could just do yellow here
+yellow. We could just do yellow here
+just so we don't screw it up.
+just so we don't screw it up.
+probably slightly slower, but it's
+probably slightly slower, but it's
+probably worth it to not break
+it. So now all we have to do is figure
+it. So now all we have to do is figure
+out this new initial state
+out this new initial state
+shenanigans. Does it W be an
+optimum
+state? Oh yeah, it's totally fine
+state? Oh yeah, it's totally fine
+there. I think actually this might be
+there. I think actually this might be
+okay.
+It shall
+state missing batch size. Okay, it's
+state missing batch size. Okay, it's
+fine. I did forget that.
+Uh, do I
+Uh, do I
+know do I know the batch
+know do I know the batch
+size or pass batch That's
+Oh, I see how we can even paralyze this
+Oh, I see how we can even paralyze this
+nicely. Okay, I see how we're going to
+nicely. Okay, I see how we're going to
+be able to do this as
+well. data.
+agents.
+That's
+That's
+in backwards
+paths. It's going to be n samples.
+cannot optimize a non-leaf tensor.
+Lovely. Uh where did we get this? In
+224 seriously break autograph.
+224 seriously break autograph.
+I mean, we don't technically need it,
+right? What's the gradient of
+right? What's the gradient of
+this? It's like it's something super
+this? It's like it's something super
+basic, right? It's like the weight
+basic, right? It's like the weight
+matrix or know the input, I
+matrix or know the input, I
+think. See how they do this?
+Yeah, it should just be like the input
+and you just absorb the
+two. Yeah. Gradient with respect to
+two. Yeah. Gradient with respect to
+weight should just be hidden.
+Oh yeah, you have to you do multiply by
+Oh yeah, you have to you do multiply by
+the difference,
+right? It's the loss.
+Can you seriously not just autograph
+Can you seriously not just autograph
+this
+this
+thing? Like even if I do it here, it's
+thing? Like even if I do it here, it's
+going to make it such a pain in the ass
+going to make it such a pain in the ass
+to try the other version of it, right?
+to try the other version of it, right?
+Because like if I want to swap this into
+Because like if I want to swap this into
+an MLP, I'm like writing my own freaking
+an MLP, I'm like writing my own freaking
+autograd again. Like what do I need to
+autograd again. Like what do I need to
+for? I'm writing my own autograd,
+for? I'm writing my own autograd,
+right? It's like I've done it before.
+right? It's like I've done it before.
+It's not fun.
+Let me see if there's like a way around
+Let me see if there's like a way around
+this.
+That's perfect timing.
+Okay, so this is just not picking up
+Okay, so this is just not picking up
+that there's been any optimization
+whatsoever. Let me
+whatsoever. Let me
+see. Hidden at W + B.
+This fail on the first
+pass or does it fail when making
+Is it because of the clone or whatever?
+and optimize a non Trip.
+and probably just do this. Maybe clone
+and probably just do this. Maybe clone
+keeps grab
+information. Yeah, there you
+go. Element
+zero. Uh, how do I detach it?
+How do I keep required Brad but detach
+How do I keep required Brad but detach
+the earlier
+computation? I just do this.
+It looks like I can
+right and then it becomes deeply unhappy
+right and then it becomes deeply unhappy
+with me.
+Okay, that's better. Now we just have
+Okay, that's better. Now we just have
+some shape mismatch shenanigans,
+right? Yet that was not the intent.
+Oh, we get to get rid of the stupid app
+Oh, we get to get rid of the stupid app
+symbol syntax,
+right? Size of tensor.
+This just needs to be
+That looks good, right?
+And then this one is just going to
+be okay.
+Okay. So, we uh apply that to the
+Okay. So, we uh apply that to the
+backwards and
+backwards and
+hopefully we can kind of do
+something with this, right?
+Okay. So, we do hidden unsqueeze two
+Okay. So, we do hidden unsqueeze two
+here.
+This should just be hidden as zero,
+This should just be hidden as zero,
+isn't it? Or up t. I mean, it's one step
+isn't it? Or up t. I mean, it's one step
+at a time.
+Now
+what? What happened to hidden?
+This needs to be
+This needs to be
+unsqueeze
+unsqueeze
+three. Actually, I think we should just
+three. Actually, I think we should just
+do it this way,
+do it this way,
+right?
+Star. Does that work?
+Yeah. Yeah. All right. It's a W times
+hidden plus a bias.
+Oh, because you have
+Oh, because you have
+it, dummy.
+something like
+this.
+Yeah. A lot of um honestly like a lot of
+Yeah. A lot of um honestly like a lot of
+my first few years in ML was just
+my first few years in ML was just
+getting really really comfortable
+getting really really comfortable
+screwing around with tensors.
+That's all it
+is. How do I do this?
+Got the yellow Thank you.
+So, um, yeah, we're going to have some
+So, um, yeah, we're going to have some
+issues here with this
+bus stop
+backward. Where'd my optim step
+go? Be there.
+Okay. So, that actually
+Okay. So, that actually
+works. And then I'm assuming that it
+works. And then I'm assuming that it
+fails the
+fails the
+second. Yep. So,
+uh do wals.
+I think that's it. To be honest, I'm not
+I think that's it. To be honest, I'm not
+sure
+though really.
+state
+optim. Oh, cuz this is going to copy
+I think that if you do it with the
+underscore, it'll
+work. It'll do it in
+place.
+place.
+No, can't have nice things today.
+No, can't have nice things today.
+Okay.
+Torch.
+Torch.
+Okay. Let's see how it
+is. So, why you do
+this? I figured that this would
+tttw and they only get
+tttw and they only get
+modified by the optimizer,
+right? So when you do
+this like this should be the first
+this like this should be the first
+gradient creating
+operation, right?
+Heck, it actually shouldn't even be a
+Heck, it actually shouldn't even be a
+problem.
+Oh, also what the heck are you doing
+Oh, also what the heck are you doing
+with your bias
+with your bias
+here? The bias should not be index label
+here? The bias should not be index label
+t like that. Hang
+on. Yeah, the bias should not
+on. Yeah, the bias should not
+be indexed with T.
+1281. Yeah. So, I don't know what the
+1281. Yeah. So, I don't know what the
+heck happened
+heck happened
+there, but this does not get indexed
+there, but this does not get indexed
+with
+with
+T. It's only a hidden index with T.
+Okay. So, the first one is
+fine. Oh, you know what it probably
+fine. Oh, you know what it probably
+is? It's probably
+is? It's probably
+this this computation here,
+this this computation here,
+right? I don't find any loss over this
+right? I don't find any loss over this
+thing though, do I?
+Hang on. How does this work? Because I
+Hang on. How does this work? Because I
+don't define a loss over this. So, it
+don't define a loss over this. So, it
+shouldn't have a gradient, right? Or is
+shouldn't have a gradient, right? Or is
+torch not work that
+way? It shouldn't work that way,
+right? Let's uh let's just see.
+So that doesn't
+help. So this is already with just this
+help. So this is already with just this
+saying that I'm doing a double
+Prompt
+step
+loss. Second backward fill.
+This variable gets
+This variable gets
+redefined. So this only depends on
+W
+W
+hidden
+hidden
+B. This is detached.
+It's got to be trying to back prop
+It's got to be trying to back prop
+through multiple steps of this for some
+through multiple steps of this for some
+reason,
+right? I would have thought that just
+right? I would have thought that just
+detaching it
+Maybe it is
+copying. Return tensor shares the same
+copying. Return tensor shares the same
+storage with the original one.
+So that probably is just not getting set
+So that probably is just not getting set
+in the optimizer one,
+in the optimizer one,
+right? But the detach underscore should
+right? But the detach underscore should
+have done
+have done
+it. Maybe you're not supposed to use
+it. Maybe you're not supposed to use
+that.
+This is just an annoying
+pietorch. Detaches in place.
+It should
+be attach the source tensor.
+I would think that this is correct to be
+I would think that this is correct to be
+honest. Like
+honest. Like
+this this seems like that could work to
+this this seems like that could work to
+detach the
+detach the
+breath, but it doesn't
+Is there anything else this could
+Is there anything else this could
+be? Oh, I'm probably back propagating
+be? Oh, I'm probably back propagating
+through hidden here,
+through hidden here,
+right? Yeah, I'm probably back
+right? Yeah, I'm probably back
+propagating through
+propagating through
+hidden. Yeah, that's that's not me.
+Ten. This is what I mean when I say you
+Ten. This is what I mean when I say you
+have to be so so careful with this
+method. Yep. So now it doesn't break
+method. Yep. So now it doesn't break
+anymore.
+anymore.
+We'll see if when I do this it
+We'll see if when I do this it
+breaks because now what you do
+is do you want
+um this one you detach here
+um this one you detach here
+right now it's wd detach
+This is
+This is
+like ridiculously
+ridiculously careful. Like this is like
+ridiculously careful. Like this is like
+the autograd's honestly hurting you
+the autograd's honestly hurting you
+here. I see why they just did it without
+here. I see why they just did it without
+autograd. The autograd just hurts you.
+But the problem is like if you do it
+But the problem is like if you do it
+without the autograd like the MLP
+without the autograd like the MLP
+implementation is just going to
+implementation is just going to
+suck. Single linear is kind of
+fine. But yeah the problem of not using
+fine. But yeah the problem of not using
+auto right is you don't have auto
+Where's the shape
+mismatch? Uh,
+encoder. That seems a weird place to
+encoder. That seems a weird place to
+fail.
+Wait, why is that here? That should not
+Wait, why is that here? That should not
+be
+be
+there. Just an
+error. One of the variables has been
+modified by an in place operation.
+Lovely. Do you need this uh these W
+Lovely. Do you need this uh these W
+patches or not. You might not need
+these.
+these.
+Okay, then this should be on the main
+Okay, then this should be on the main
+train backwards,
+train backwards,
+right? Yeah. Lost
+backwards. So, this is new
+backwards. So, this is new
+hidden stack.
+This is the right shape, isn't
+it? Looks fine.
+Yeah. So,
+um, maybe I'm doing this part
+um, maybe I'm doing this part
+wrong.
+Here use the detached
+Here use the detached
+hidden and the trainable forms of
+hidden and the trainable forms of
+W. And here you use the hidden and then
+W. And here you use the hidden and then
+the detached
+the detached
+forms of W and B. Right?
+forms of W and B. Right?
+do a pattern together of
+this. I'm freaking
+Maybe we'll just do the anomaly.
+Whatever. Does that give us
+anything? So it is this line.
+Yeah. Here.
+Yeah. Here.
+Bot. Does it expect both of these things
+Bot. Does it expect both of these things
+to be differentiable or
+something? Okay, we're going to try I'm
+something? Okay, we're going to try I'm
+pretty sure the original is the correct
+pretty sure the original is the correct
+operation, but we are going to try this
+operation, but we are going to try this
+for the hell of it.
+for the hell of it.
+It's not going to work, I don't
+It's not going to work, I don't
+think. I mean, we can try this though.
+I guess it's the W's that it's like
+I guess it's the W's that it's like
+annoyed. The W's are being modified,
+annoyed. The W's are being modified,
+right? Yeah, the W's are being modified.
+Now this is going to be like giga slow,
+right? Oh
+right? Oh
+yeah. Take anomaly detection off. See if
+yeah. Take anomaly detection off. See if
+that does
+anything. Oh yeah. Okay.
+This
+This
+learns a little
+bit. Let's just uh track
+bit. Let's just uh track
+it as we'll put it on
+Neptune. We got it to run.
+We can go put this to 80 mil as
+We can go put this to 80 mil as
+well. I added a
+zero. Okay, put that to 80 mil. Let me
+zero. Okay, put that to 80 mil. Let me
+use your bathroom real quick. I'll be
+use your bathroom real quick. I'll be
+right back. We're going to run some
+right back. We're going to run some
+experiments on this and then maybe we'll
+experiments on this and then maybe we'll
+do V trace. Maybe we'll do some other
+do V trace. Maybe we'll do some other
+stuff. I'll be back.
+Whoops. Camera
+broke. So,
+um, that doesn't look amazing.
+um, that doesn't look amazing.
+I think I'm going to go chat with this
+I think I'm going to go chat with this
+guy about this method real quick and uh
+guy about this method real quick and uh
+and then I'll be back shortly and then
+and then I'll be back shortly and then
+we'll work on VRays.
+we'll work on VRays.
+So me do
+that.
+that.
+Okay. So uh for folks for folks watching
+Okay. So uh for folks for folks watching
+there'll be more back pretty soon. Um
+there'll be more back pretty soon. Um
+all my stuff is here. This will be open
+all my stuff is here. This will be open
+sourced if it's useful as
+sourced if it's useful as
+well. So if you want to support my work
+well. So if you want to support my work
+for free, puffer.ai, start the GitHub.
+for free, puffer.ai, start the GitHub.
+We're trying to get to 2K. Other than
+We're trying to get to 2K. Other than
+that, you can get involved with dev or
+that, you can get involved with dev or
+just chat with the community on the
+just chat with the community on the
+Discord here. And you can follow me on X
+Discord here. And you can follow me on X
+for more RL content. Thanks.
+
+Kind: captions
+Language: en
+Okay, for a
+Okay, for a
+bit hoping to be back here a little
+bit hoping to be back here a little
+earlier, but I got held up with uh some
+earlier, but I got held up with uh some
+cluster maintenance stuff. At least one
+cluster maintenance stuff. At least one
+of the boxes is back online now. So,
+of the boxes is back online now. So,
+this one is going to be off until I get
+this one is going to be off until I get
+an extra cable for it. So, um I think
+an extra cable for it. So, um I think
+what we're going to do now is we're
+what we're going to do now is we're
+going to do a little bit of stuff on
+going to do a little bit of stuff on
+TTT. We are going
+TTT. We are going
+to probably look at VRays and have a
+to probably look at VRays and have a
+meeting at some point here. I think
+meeting at some point here. I think
+those are the two main things I really
+those are the two main things I really
+want to get today is TTT and B
+want to get today is TTT and B
+trace. All
+right. Well, I'm just sitting down
+right. Well, I'm just sitting down
+here. I got to say that
+uh Florida, this time of year, you do
+uh Florida, this time of year, you do
+not want to walk outside and open your
+not want to walk outside and open your
+mouth. You eat a whole mouth full of
+mouth. You eat a whole mouth full of
+bugs.
+Time to get out of Florida
+soon. Just in time for the new puffer
+soon. Just in time for the new puffer
+facility. All right,
+facility. All right,
+TTT. So, this
+one. So, I'd like to know where this
+one. So, I'd like to know where this
+graphic came
+graphic came
+from. Me find the graphic.
+from. Me find the graphic.
+This is how it
+was
+described. Is this on the website or
+something? That's a funny
+website. Um
+joint first and joint second. It's all
+joint first and joint second. It's all
+right
+guys. Yeah, I don't see where this uh
+guys. Yeah, I don't see where this uh
+particular graphic came
+particular graphic came
+from. Assuming that this thing is
+from. Assuming that this thing is
+correct
+though, let me just read through it
+though, let me just read through it
+fresh now and see if I messed anything
+fresh now and see if I messed anything
+up. So,
+You initialize task which is K Q and V.
+You initialize task which is K Q and V.
+This does not get reset. K QB and extra
+get. Then on the forward you make a
+get. Then on the forward you make a
+learner which we have in it state here
+learner which we have in it state here
+to give you model and optim
+right. So you
+right. So you
+encode and then
+state.train train
+state.train train
+token and then this is supposed I think
+token and then this is supposed I think
+this is just pseudo code right because
+this is just pseudo code right because
+Brad is not a thing. So this is supposed
+Brad is not a thing. So this is supposed
+to be tap
+to be tap
+loss gradient with respect to the
+input which is self
+model. Do I have the stop grad in the
+model. Do I have the stop grad in the
+correct spot?
+gradient with
+respect to
+self.mod.
+self.mod.
+So inner loop
+gradient we make sure these match as
+gradient we make sure these match as
+well because we have forward and forward
+well because we have forward and forward
+And they need to be the
+same, you know. I think I might have
+same, you know. I think I might have
+made I might have broken this
+thing.
+thing.
+No, cuz the only thing that has a
+No, cuz the only thing that has a
+gradient here is the uh the model
+gradient here is the uh the model
+output, right?
+I think that's the only thing that gets
+I think that's the only thing that gets
+a gradient is the model
+output. And either way, the optimizer is
+output. And either way, the optimizer is
+only defined on the model parameters,
+only defined on the model parameters,
+right?
+So is it that the default learning rate
+So is it that the default learning rate
+is too high for the uh for the
+is too high for the uh for the
+optimizer? Could
+be. Let me go check the original papers
+code
+that's it's this thing
+that's it's this thing
+right and they have PyTorch
+right and they have PyTorch
+code which is like massive
+We do not recommend training with this
+We do not recommend training with this
+codebase.
+I mean, how are they going to write400
+I mean, how are they going to write400
+lines and then say that this is the slow
+word? Okay, this is clearly not just a
+word? Okay, this is clearly not just a
+TTT layer, right? This is so this is
+TTT layer, right? This is so this is
+yeah, TTT lm. This is not just TTT.
+I don't know what the heck they're doing
+I don't know what the heck they're doing
+there.
+Um, last hidden states and gradients for
+Um, last hidden states and gradients for
+PTT layer.
+Yeah, this is just insanity. Um, do I
+Yeah, this is just insanity. Um, do I
+risk looking at the jack
+Okay, I think this
+is the
+layer get QKV
+projections. Um, this is not how it's
+projections. Um, this is not how it's
+described here.
+What the heck is this?
+GTT linear
+base. This
+is somehow it's not
+Yeah, this code base makes zero sense
+whatsoever. I have no idea why it's like
+whatsoever. I have no idea why it's like
+that. And the thing is that the like the
+that. And the thing is that the like the
+simple pipe which is also not simple.
+The thing that annoys me here is I can't
+The thing that annoys me here is I can't
+even like see how this is supposed to
+even like see how this is supposed to
+work because it's it's too much of a
+mess like this here. Okay, so this is
+mess like this here. Okay, so this is
+they have
+they have
+weight and bias
+initialized and then they do compute
+initialized and then they do compute
+mini back in
+mini back in
+here
+xq. Yeah, I don't know how this is
+xq. Yeah, I don't know how this is
+supposed to be premputed either. This
+supposed to be premputed either. This
+doesn't make sense.
+Oh, they're
+Oh, they're
+doing they're not using autograd
+doing they're not using autograd
+here. They're manually computing
+here. They're manually computing
+gradients. That's why
+Okay, maybe I can get something out of
+Okay, maybe I can get something out of
+it now.
+x qx dx
+k. Now the thing I don't understand is
+k. Now the thing I don't understand is
+like
+why why have they done this
+already? That's not how this thing
+already? That's not how this thing
+works, right?
+Q KV
+Q. Oh, that is totally how this works.
+Q. Oh, that is totally how this works.
+I'm
+I'm
+done. That is totally how this
+done. That is totally how this
+works. Okay.
+So
+then I'm going to have to check those
+then I'm going to have to check those
+gradients. Let me at least make this
+gradients. Let me at least make this
+modification before I
+forget because
+uh you can do this
+right that can go there.
+That doesn't magically solve
+it,
+it,
+right? So, we look at
+And just make sure this isn't the
+And just make sure this isn't the
+learning rate
+thing. Doesn't seem like
+it. All right, let's see their
+code. I kind of see how they have it
+code. I kind of see how they have it
+written this way now
+written this way now
+because this model breaks autograph. So,
+because this model breaks autograph. So,
+they just didn't use
+autograph. Wait, what's trill
+do? Lower triangular.
+Why the heck do they have
+this
+inputs? Okay, let's read this whole
+inputs? Okay, let's read this whole
+thing.
+batch numbum
+batch numbum
+heads num mini batch mini batch
+heads num mini batch mini batch
+size I don't see time
+size I don't see time
+there I do not see
+time for prefilling we always use dual
+form I have no idea what that
+form I have no idea what that
+is I have no idea what dual Like I don't
+is I have no idea what dual Like I don't
+know what they're doing with that.
+What is this
+layer? So, we're not going to be able to
+layer? So, we're not going to be able to
+read this because this is not going to
+read this because this is not going to
+match what they have otherwise. So this
+match what they have otherwise. So this
+is the normal
+form.
+Um, this is some weirdo
+trill. I also really can't tell if they
+trill. I also really can't tell if they
+have a time
+have a time
+dimension. I think we ignored this
+dimension. I think we ignored this
+because I think that this is because
+because I think that this is because
+it's like multi head data. This is not
+it's like multi head data. This is not
+what's described
+what's described
+here. The key here though is they
+here. The key here though is they
+compute the
+compute the
+gradient with respect to W1 and the
+gradient with respect to W1 and the
+bias.
+They apply the
+step token ETA
+step token ETA
+mini. So we should see what they use for
+mini. So we should see what they use for
+this parameter, right?
+this parameter, right?
+token ETA
+mini and then they
+mini and then they
+store the last
+store the last
+states the last gradient I don't know
+states the last gradient I don't know
+what they do with the last gradient
+al. So when does this thing get
+al. So when does this thing get
+initialized? This
+initialized? This
+W1 they have in it here.
+Are we going to be able to follow
+Are we going to be able to follow
+this TTT
+linear? This is the only file. Do they
+linear? This is the only file. Do they
+have a train in
+have a train in
+here or is this just
+here or is this just
+um massive crazy demo?
+TTT layer. There.
+Okay. What about the original
+paper? Okay, let's see.
+paper? Okay, let's see.
+TT
+layer. Oh, D. He got it from
+layer. Oh, D. He got it from
+here. Okay.
+What is this paper? This is a really
+What is this paper? This is a really
+wonky paper that was recently used in
+wonky paper that was recently used in
+the Nvidia one minute video generation
+the Nvidia one minute video generation
+with the Tom and Jerry clips. Uh it is a
+with the Tom and Jerry clips. Uh it is a
+replacement for an LSTM that trains the
+replacement for an LSTM that trains the
+hidden state as part of the forward
+hidden state as part of the forward
+pass. It's very weird.
+I have it implemented and it doesn't do
+I have it implemented and it doesn't do
+anything so far.
+Okay, let me actually start going
+Okay, let me actually start going
+through this slide because I want to
+through this slide because I want to
+make sure I didn't miss
+make sure I didn't miss
+anything.
+anything.
+Our idea is to use self-supervised
+Our idea is to use self-supervised
+learning to compress the historic
+learning to compress the historic
+context X1 through XT into a hidden
+context X1 through XT into a hidden
+state
+state
+ST by making the context an unlabelled
+ST by making the context an unlabelled
+data set and the state a
+model. Concretely, the hidden state ST
+model. Concretely, the hidden state ST
+is now equivalent to
+is now equivalent to
+WT, the weights of a model F, which can
+WT, the weights of a model F, which can
+be a linear model, a small neural net or
+be a linear model, a small neural net or
+anything else.
+anything else.
+The output rule is
+simply call the
+model. Okay.
+model. Okay.
+Output token is just the prediction on
+Output token is just the prediction on
+X made by with the updated weights
+X made by with the updated weights
+WT update rule is a is a single step one
+WT update rule is a is a single step one
+step of gradient descent on some
+step of gradient descent on some
+self-supervised loss with rate learning
+self-supervised loss with rate learning
+rate
+ADA. Why did that citation take me to
+ADA. Why did that citation take me to
+here?
+It was supposed to be two,
+right? They initialized the initial
+right? They initialized the initial
+weights to
+zero. How does that do anything?
+Every decide which input to remember or
+Every decide which input to remember or
+forget. RW remembers inputs that produce
+forget. RW remembers inputs that produce
+large
+gradients. One choice of L is
+gradients. One choice of L is
+reconstructing X itself.
+The forward pass of ATT layer has a
+The forward pass of ATT layer has a
+corresponding backward pass. Our forward
+corresponding backward pass. Our forward
+pass only consists of standard
+pass only consists of standard
+differentable operators except the
+differentable operators except the
+gradient operator.
+calling backward on delta L means taking
+calling backward on delta L means taking
+the gradient of
+the gradient of
+gradients. Ah shoot. So this is this
+gradients. Ah shoot. So this is this
+actually I might have implemented this
+actually I might have implemented this
+wrong
+wrong
+then TTT layers have the same inference
+then TTT layers have the same inference
+as RNN
+as RNN
+layers and self
+attention outer loop parameters areated
+attention outer loop parameters areated
+by
+theta. Hang on. An important difference
+theta. Hang on. An important difference
+between the two nested learning problems
+between the two nested learning problems
+is that the inner loop gradient is taken
+is that the inner loop gradient is taken
+with respect to W the parameters of F
+with respect to W the parameters of F
+while the outer loop gradient is taking
+while the outer loop gradient is taking
+with respect to the parameters of the
+with respect to the parameters of the
+rest of the
+rest of the
+network. Okay.
+So where do they take radian? Brilliant.
+Since both W and various datas appear
+Since both W and various datas appear
+together in equation
+together in equation
+4, we emphasize their difference in
+4, we emphasize their difference in
+nature. In the inner loop, only W is off
+nature. In the inner loop, only W is off
+much.
+Yes. In the outer loop, theta K, V, and
+Yes. In the outer loop, theta K, V, and
+Q are optimized alongside theta rest.
+Q are optimized alongside theta rest.
+And W is merely a hidden state, not a
+And W is merely a hidden state, not a
+parameter. That's how I implemented it.
+The naive TTT layer developed so far is
+The naive TTT layer developed so far is
+already efficient in the number of
+already efficient in the number of
+floating point operations. However, its
+floating point operations. However, its
+update
+update
+rule cannot be parallelized because WT
+rule cannot be parallelized because WT
+depends on WT minus one in two places
+depends on WT minus one in two places
+before the minus sign and inside
+before the minus sign and inside
+gradient of L. Yes, since gradient of L
+gradient of L. Yes, since gradient of L
+contains the bulk of the computation, we
+contains the bulk of the computation, we
+focus on making this second part
+focus on making this second part
+parallel.
+Wait. The general update role can be
+Wait. The general update role can be
+expressed as this.
+The general update rule of GD can be
+The general update rule of GD can be
+expressed like that where GT is the
+expressed like that where GT is the
+descent direction. Once we have
+descent direction. Once we have
+calculated GT for 1 through
+calculated GT for 1 through
+T, we can then obtain all the
+T, we can then obtain all the
+WTF through a [ __ ] of the second half of
+WTF through a [ __ ] of the second half of
+equation six.
+To parallelize gt is 1 through
+To parallelize gt is 1 through
+t, we can take all of them with respect
+t, we can take all of them with respect
+to w0.
+What? That's completely
+different. To parallelize
+GT, we can take all them with respect to
+GT, we can take all them with respect to
+W0. This variant is known as batch
+W0. This variant is known as batch
+gradient
+descent. Since the sum is the same as
+descent. Since the sum is the same as
+the gradient with respect to
+the gradient with respect to
+w0 over x1 through t as a
+batch that is an incredibly stupid
+batch that is an incredibly stupid
+analog that is not remotely close to
+analog that is not remotely close to
+correct.
+correct.
+Okay, I was wondering why I was getting
+Okay, I was wondering why I was getting
+weirdo messages about this paper that
+weirdo messages about this paper that
+made absolutely no sense. It's because
+made absolutely no sense. It's because
+the paper makes absolutely no
+sense. No, when you're doing like batch
+sense. No, when you're doing like batch
+versus mini batch gradient descent,
+versus mini batch gradient descent,
+you're going through different samples
+you're going through different samples
+of the same data set that don't depend
+of the same data set that don't depend
+on each other. When you're doing a
+on each other. When you're doing a
+sequence modeling problem in which the
+sequence modeling problem in which the
+state directly depends on the previous
+state directly depends on the previous
+state, it's not batch versus mini batch
+state, it's not batch versus mini batch
+gradient
+gradient
+descent. If you do it all at once or
+descent. If you do it all at once or
+not, it's a completely different
+not, it's a completely different
+algorithm.
+for a proposed solution. Mini bath
+for a proposed solution. Mini bath
+gradient descent is shown in figure
+gradient descent is shown in figure
+six. Denote the TTT bath size by B.
+Okay, that's not mini B. That's not
+Okay, that's not mini B. That's not
+how
+whatever. What is that sound?
+Oh, this is the
+Oh, this is the
+entire entire update. Sure. Whatever.
+Hang on, let me make sure I didn't miss
+Hang on, let me make sure I didn't miss
+anything. There are two potential
+anything. There are two potential
+channels for propagate information from
+channels for propagate information from
+WS to WT or as the less than [ __ ] and the
+WS to WT or as the less than [ __ ] and the
+gradient
+operator. The [ __ ] sum is always active,
+operator. The [ __ ] sum is always active,
+but the gradient channel is only active
+but the gradient channel is only active
+when
+when
+WS is from a previous mini.
+Okay, it's a really weird little
+Okay, it's a really weird little
+approximation.
+Fine. Yeah, Ryan, it's a stupid They're
+Fine. Yeah, Ryan, it's a stupid They're
+describing it really stupidly. They're
+describing it really stupidly. They're
+drawing an analogy to they like they
+drawing an analogy to they like they
+made some wacko approximation to like
+made some wacko approximation to like
+batch state updates over segments of
+batch state updates over segments of
+time and they drew some like wacko
+time and they drew some like wacko
+analogy to mini batch SGD that doesn't
+analogy to mini batch SGD that doesn't
+make any bloody sense. That's
+make any bloody sense. That's
+all. There's nothing to understand. It's
+all. There's nothing to understand. It's
+just
+just
+stupid. Like the technique is kind kind
+stupid. Like the technique is kind kind
+of
+of
+okayish.
+okayish.
+Um, the description is just stupid.
+Um, the description is just stupid.
+That's all it is.
+What the hell is this?
+I've been reviewing MLM math for
+I've been reviewing MLM math for
+interviews and I can never tell if I'm a
+interviews and I can never tell if I'm a
+[ __ ] if the math in these papers is
+random. You know, the math in these
+random. You know, the math in these
+papers is usually pretty [ __ ] on
+papers is usually pretty [ __ ] on
+average.
+Like they clearly just hacked a thing
+Like they clearly just hacked a thing
+and then like posttop came up with a
+and then like posttop came up with a
+bunch of math to justify it, but if you
+bunch of math to justify it, but if you
+actually like read it bit by bit, it's
+actually like read it bit by bit, it's
+just like it clearly doesn't make any
+just like it clearly doesn't make any
+bloody
+sense. Well, the thing is like I'm going
+sense. Well, the thing is like I'm going
+through enough of these lately that I'm
+through enough of these lately that I'm
+actually like getting that. So, I'm
+actually like getting that. So, I'm
+getting better and better quickly at
+getting better and better quickly at
+evaluating like which of these is likely
+evaluating like which of these is likely
+to be [ __ ] or not. So, before I was
+to be [ __ ] or not. So, before I was
+going mostly off of
+going mostly off of
+experiments, right? But now I'm also
+experiments, right? But now I'm also
+looking at papers from the math and I'm
+looking at papers from the math and I'm
+seeing whether I think that it's likely
+seeing whether I think that it's likely
+that the technique would be good when
+that the technique would be good when
+applied ex exhaustively to a bunch of
+applied ex exhaustively to a bunch of
+environments or not as well.
+Also, the code for this is
+horrendous. This is what I'm doing on my
+horrendous. This is what I'm doing on my
+stream. I streamed 10 hours and 40
+stream. I streamed 10 hours and 40
+minutes to this on
+Saturday. We implemented a CUDA kernel
+Saturday. We implemented a CUDA kernel
+for Brix.
+[ __ ] is
+this? Oh, this is just writing out the
+this? Oh, this is just writing out the
+gradient. Okay, whatever.
+We cannot
+We cannot
+compute all
+compute all
+B of the
+B of the
+GTS through a single
+M. We need B outer products and comput
+M. We need B outer products and comput
+them one by one.
+Okay,
+fine. Yeah, there's this dual
+fine. Yeah, there's this dual
+form. Okay,
+form. Okay,
+whatever. Is there an official an
+whatever. Is there an official an
+official definition of a dual form? Is
+official definition of a dual form? Is
+this even correct use of this term?
+this even correct use of this term?
+Primal
+dual. Yeah, I thought this was more
+dual. Yeah, I thought this was more
+precise.
+Okay. So, this is not a
+duel. Okay, this is not actually a dual
+duel. Okay, this is not actually a dual
+form. They're just like adopt using it
+form. They're just like adopt using it
+because it's like I don't know, we made
+because it's like I don't know, we made
+a duel to the problem.
+a duel to the problem.
+This is like peak academic
+horit number has nothing to do with the
+horit number has nothing to do with the
+number of
+number of
+dimensions. This is literally just
+dimensions. This is literally just
+saying look there's an alternative form
+saying look there's an alternative form
+of the problem so we're going to call it
+of the problem so we're going to call it
+a
+a
+duel. That's not what a duel is.
+duel. That's not what a duel is.
+I'm not even a math guy at this time.
+Okay, so I see what they did. Uh, this
+Okay, so I see what they did. Uh, this
+is not even a like this is not a this is
+is not even a like this is not a this is
+not even the same problem by the way.
+not even the same problem by the way.
+This is a efficiency
+This is a efficiency
+hack for an approximation of the problem
+hack for an approximation of the problem
+and a pretty severe one at
+that. Look, this thing decays
+Like yeah, this thing decays like
+that. Let me get the implementation
+that. Let me get the implementation
+details to see if there's anything I
+details to see if there's anything I
+missed because this thing just doesn't
+missed because this thing just doesn't
+work at all right
+now. Right. Yeah. Three on
+breakout. Oh, wait. Learnable. Wo.
+breakout. Oh, wait. Learnable. Wo.
+The initialization WO is shared between
+The initialization WO is shared between
+all
+all
+sequences even though subsequent weights
+sequences even though subsequent weights
+are different for each input
+sequence.
+sequence.
+Oh, and welcome boxing
+byes. Subsequent weights are different
+byes. Subsequent weights are different
+for each input sequence. I think I threw
+for each input sequence. I think I threw
+that up royally, didn't I?
+Instead of setting W equals Z, we can
+Instead of setting W equals Z, we can
+learn it as part of the outer
+learn it as part of the outer
+loop. Since outer loop
+loop. Since outer loop
+parameters are always denoted by thetas
+parameters are always denoted by thetas
+instead of
+instead of
+W's, assign alias theta and it equal
+W0 significantly improves training
+W0 significantly improves training
+stability.
+stability.
+Learnable learnable learning
+rate. Base learning rate is set to one
+rate. Base learning rate is set to one
+for TTT linear.
+Okay. Um, how does this thing work with
+Okay. Um, how does this thing work with
+initial weight
+zero? So, this is why they they don't
+zero? So, this is why they they don't
+use autograd for this thing. So, we're
+use autograd for this thing. So, we're
+not allowed to use autograd.
+in
+it. They have a bias, don't they?
+They do have a lights,
+right? Maybe they don't have a butts.
+right? Maybe they don't have a butts.
+I could have sworn I saw one in
+there. Maybe they describe it as like an
+there. Maybe they describe it as like an
+efficiency optimization or like a
+something. They
+don't the code has bias, right?
+Or am I done? No, look. Grab B1 right
+there. You see right here that this is
+there. You see right here that this is
+their initialization. We can use
+this in TTMLP. No, not TTMLP. We're
+this in TTMLP. No, not TTMLP. We're
+doing TT linear right now. TT
+linear. Why did they make this a
+linear. Why did they make this a
+parameter?
+If they're not using an optimizer
+directly bit confus confusing why they
+directly bit confus confusing why they
+do that.
+We do
+this head
+dim. Presumably this is per example or
+dim. Presumably this is per example or
+something.
+Oh, I see. Because this gets like
+Oh, I see. Because this gets like
+broadcast expanded or some weird thing.
+broadcast expanded or some weird thing.
+That's
+fine. So, this is just self.input size.
+You don't need an optimizer, I
+guess. Are they learning X?
+guess. Are they learning X?
+they're learning this this weight matrix
+they're learning this this weight matrix
+gets learned per example per
+gets learned per example per
+trajectory. So you start with this and
+trajectory. So you start with this and
+then
+then
+this these params are learned as the
+this these params are learned as the
+state. So the state that usually comes
+state. So the state that usually comes
+out of the neural net uh like out of an
+out of the neural net uh like out of an
+LSTM they've made this state a
+LSTM they've made this state a
+network. It's
+network. It's
+weird.
+Very very weird.
+Can I not use Wait, if I do make this a
+Can I not use Wait, if I do make this a
+parameter, I can use autograph,
+parameter, I can use autograph,
+right? If I can use autograph, it's not
+right? If I can use autograph, it's not
+terrible.
+If I have to do it without, I'll do it
+without. I'd like to at least not have
+without. I'd like to at least not have
+the chance of screwing up the autograd
+initially because it is learnable,
+initially because it is learnable,
+right? We want this to
+right? We want this to
+be learned.
+So I can actually just do this. This is
+So I can actually just do this. This is
+W0,
+right? It's even
+right? It's even
+easier. And
+now output equals
+That's not right either, though.
+How do they say that you should learn
+Wing MLP? It is self-supervised. Yes.
+These are learned in the outer loop this
+time.
+Wait. So this only gets learned in the
+Wait. So this only gets learned in the
+algorith.
+Okay.
+So I think then what you do
+Yes. It's got to be It's never the
+Yes. It's got to be It's never the
+simple paper. It's never the simple
+simple paper. It's never the simple
+paper. It's always got to be the most
+paper. It's always got to be the most
+complicated possible [ __ ]
+complicated possible [ __ ]
+thing. I guess I did get to do
+thing. I guess I did get to do
+prioritize replay the other day and that
+prioritize replay the other day and that
+was pretty easy, huh?
+state
+train. Pretty much every single
+train. Pretty much every single
+descriptive piece of this paper sucks.
+descriptive piece of this paper sucks.
+Like the method's actually pretty novel
+Like the method's actually pretty novel
+and interesting, but the description of
+and interesting, but the description of
+the method, including the pseudo code,
+the method, including the pseudo code,
+the code, the text, the map, every
+the code, the text, the map, every
+single part of it just sucks.
+So you give it let's say we're going to
+So you give it let's say we're going to
+get W in the state, right?
+So we're going to get W equals
+statewt W and then we're going to
+statewt W and then we're going to
+get B stateb
+right model
+anymore. And then this is going to be at
+anymore. And then this is going to be at
+hidden at
+hidden at
+W plus
+W plus
+B like this.
+Let's add something here so I can
+Let's add something here so I can
+actually freaking Okay.
+Think I can do
+this. Yeah, there we go. Just needed the
+this. Yeah, there we go. Just needed the
+app signs to be highlighted so I can
+app signs to be highlighted so I can
+freaking tell them apart.
+I never use
+I never use
+these. Um I guess I could just
+whatever. Okay, so now the loss the loss
+whatever. Okay, so now the loss the loss
+we can still use this on,
+right? So this is model output. We'll
+right? So this is model output. We'll
+call this
+call this
+TTT output.
+This gets label
+view. And then
+view. And then
+[Music]
+you you kind of do want an optimizer
+you you kind of do want an optimizer
+with this, don't you?
+Pretty good.
+I think we can
+leave
+turn. Okay, we're going to take these
+turn. Okay, we're going to take these
+variables. These have to be detached.
+variables. These have to be detached.
+It's very tricky because you have to be
+It's very tricky because you have to be
+tracking which variables get detached or
+not. They do a learning rate
+one. Something like this.
+Okay. So now you have your
+output
+output
+optim you zero the gradient you backward
+optim you zero the gradient you backward
+through
+through
+this almost forgot
+detach.
+Uh, wait. Is it
+detached? This is so It's so sketchy. I
+detached? This is so It's so sketchy. I
+think it's technically like
+think it's technically like
+attach.expand
+That's I'm going to just do
+clone for now.
+The the thing that's really difficult
+The the thing that's really difficult
+about this whole thing, right, is this
+about this whole thing, right, is this
+is like this is pushing what autograd
+is like this is pushing what autograd
+was designed for. And you have to be
+was designed for. And you have to be
+really really careful about like what is
+really really careful about like what is
+going to be taken a derivative of versus
+going to be taken a derivative of versus
+not.
+Otherwise you break the whole thing
+silently. Okay.
+silently. Okay.
+So hidden at W +
+B. This should be the only operation
+B. This should be the only operation
+that has a gradient because and forward
+that has a gradient because and forward
+all this is going to get called inside
+all this is going to get called inside
+of for no graph. So this enables
+of for no graph. So this enables
+gradient just for this
+gradient just for this
+op you optimize
+op you optimize
+this and you're should be okay and then
+this and you're should be okay and then
+output is just going to
+output is just going to
+be
+be
+hidden at W +
+B like this you decode the output and
+B like this you decode the output and
+you're good.
+you're good.
+Okay, let's bring this code down to the
+Okay, let's bring this code down to the
+train pass and
+train pass and
+see if it's hopefully not terrible here
+either. Okay, so first of all, this
+either. Okay, so first of all, this
+state
+state
+stuff, this goes up here,
+right? I guess there's no reason to have
+right? I guess there's no reason to have
+to
+We can do
+We can do
+this. Probably cleaner to do
+this. Uh we still don't need we don't
+this. Uh we still don't need we don't
+need this until we actually do this
+need this until we actually do this
+move.
+Right. So now this has to be
+Right. So now this has to be
+here hidden.
+here hidden.
+at the m +
+at the m +
+v. This goes this is
+v. This goes this is
+ttt
+output step this gradient or step this
+output step this gradient or step this
+model and
+then now this is where I think this the
+then now this is where I think this the
+thing that we just did is uh paid
+thing that we just did is uh paid
+off. Hidden
+at plus. I'm pretty sure that just
+at plus. I'm pretty sure that just
+works and then you append
+this and that's it. And then you do your
+yellow. We could just do yellow here
+yellow. We could just do yellow here
+just so we don't screw it up.
+just so we don't screw it up.
+probably slightly slower, but it's
+probably slightly slower, but it's
+probably worth it to not break
+it. So now all we have to do is figure
+it. So now all we have to do is figure
+out this new initial state
+out this new initial state
+shenanigans. Does it W be an
+optimum
+state? Oh yeah, it's totally fine
+state? Oh yeah, it's totally fine
+there. I think actually this might be
+there. I think actually this might be
+okay.
+It shall
+state missing batch size. Okay, it's
+state missing batch size. Okay, it's
+fine. I did forget that.
+Uh, do I
+Uh, do I
+know do I know the batch
+know do I know the batch
+size or pass batch That's
+Oh, I see how we can even paralyze this
+Oh, I see how we can even paralyze this
+nicely. Okay, I see how we're going to
+nicely. Okay, I see how we're going to
+be able to do this as
+well. data.
+agents.
+That's
+That's
+in backwards
+paths. It's going to be n samples.
+cannot optimize a non-leaf tensor.
+Lovely. Uh where did we get this? In
+224 seriously break autograph.
+224 seriously break autograph.
+I mean, we don't technically need it,
+right? What's the gradient of
+right? What's the gradient of
+this? It's like it's something super
+this? It's like it's something super
+basic, right? It's like the weight
+basic, right? It's like the weight
+matrix or know the input, I
+matrix or know the input, I
+think. See how they do this?
+Yeah, it should just be like the input
+and you just absorb the
+two. Yeah. Gradient with respect to
+two. Yeah. Gradient with respect to
+weight should just be hidden.
+Oh yeah, you have to you do multiply by
+Oh yeah, you have to you do multiply by
+the difference,
+right? It's the loss.
+Can you seriously not just autograph
+Can you seriously not just autograph
+this
+this
+thing? Like even if I do it here, it's
+thing? Like even if I do it here, it's
+going to make it such a pain in the ass
+going to make it such a pain in the ass
+to try the other version of it, right?
+to try the other version of it, right?
+Because like if I want to swap this into
+Because like if I want to swap this into
+an MLP, I'm like writing my own freaking
+an MLP, I'm like writing my own freaking
+autograd again. Like what do I need to
+autograd again. Like what do I need to
+for? I'm writing my own autograd,
+for? I'm writing my own autograd,
+right? It's like I've done it before.
+right? It's like I've done it before.
+It's not fun.
+Let me see if there's like a way around
+Let me see if there's like a way around
+this.
+That's perfect timing.
+Okay, so this is just not picking up
+Okay, so this is just not picking up
+that there's been any optimization
+whatsoever. Let me
+whatsoever. Let me
+see. Hidden at W + B.
+This fail on the first
+pass or does it fail when making
+Is it because of the clone or whatever?
+and optimize a non Trip.
+and probably just do this. Maybe clone
+and probably just do this. Maybe clone
+keeps grab
+information. Yeah, there you
+go. Element
+zero. Uh, how do I detach it?
+How do I keep required Brad but detach
+How do I keep required Brad but detach
+the earlier
+computation? I just do this.
+It looks like I can
+right and then it becomes deeply unhappy
+right and then it becomes deeply unhappy
+with me.
+Okay, that's better. Now we just have
+Okay, that's better. Now we just have
+some shape mismatch shenanigans,
+right? Yet that was not the intent.
+Oh, we get to get rid of the stupid app
+Oh, we get to get rid of the stupid app
+symbol syntax,
+right? Size of tensor.
+This just needs to be
+That looks good, right?
+And then this one is just going to
+be okay.
+Okay. So, we uh apply that to the
+Okay. So, we uh apply that to the
+backwards and
+backwards and
+hopefully we can kind of do
+something with this, right?
+Okay. So, we do hidden unsqueeze two
+Okay. So, we do hidden unsqueeze two
+here.
+This should just be hidden as zero,
+This should just be hidden as zero,
+isn't it? Or up t. I mean, it's one step
+isn't it? Or up t. I mean, it's one step
+at a time.
+Now
+what? What happened to hidden?
+This needs to be
+This needs to be
+unsqueeze
+unsqueeze
+three. Actually, I think we should just
+three. Actually, I think we should just
+do it this way,
+do it this way,
+right?
+Star. Does that work?
+Yeah. Yeah. All right. It's a W times
+hidden plus a bias.
+Oh, because you have
+Oh, because you have
+it, dummy.
+something like
+this.
+Yeah. A lot of um honestly like a lot of
+Yeah. A lot of um honestly like a lot of
+my first few years in ML was just
+my first few years in ML was just
+getting really really comfortable
+getting really really comfortable
+screwing around with tensors.
+That's all it
+is. How do I do this?
+Got the yellow Thank you.
+So, um, yeah, we're going to have some
+So, um, yeah, we're going to have some
+issues here with this
+bus stop
+backward. Where'd my optim step
+go? Be there.
+Okay. So, that actually
+Okay. So, that actually
+works. And then I'm assuming that it
+works. And then I'm assuming that it
+fails the
+fails the
+second. Yep. So,
+uh do wals.
+I think that's it. To be honest, I'm not
+I think that's it. To be honest, I'm not
+sure
+though really.
+state
+optim. Oh, cuz this is going to copy
+I think that if you do it with the
+underscore, it'll
+work. It'll do it in
+place.
+place.
+No, can't have nice things today.
+No, can't have nice things today.
+Okay.
+Torch.
+Torch.
+Okay. Let's see how it
+is. So, why you do
+this? I figured that this would
+tttw and they only get
+tttw and they only get
+modified by the optimizer,
+right? So when you do
+this like this should be the first
+this like this should be the first
+gradient creating
+operation, right?
+Heck, it actually shouldn't even be a
+Heck, it actually shouldn't even be a
+problem.
+Oh, also what the heck are you doing
+Oh, also what the heck are you doing
+with your bias
+with your bias
+here? The bias should not be index label
+here? The bias should not be index label
+t like that. Hang
+on. Yeah, the bias should not
+on. Yeah, the bias should not
+be indexed with T.
+1281. Yeah. So, I don't know what the
+1281. Yeah. So, I don't know what the
+heck happened
+heck happened
+there, but this does not get indexed
+there, but this does not get indexed
+with
+with
+T. It's only a hidden index with T.
+Okay. So, the first one is
+fine. Oh, you know what it probably
+fine. Oh, you know what it probably
+is? It's probably
+is? It's probably
+this this computation here,
+this this computation here,
+right? I don't find any loss over this
+right? I don't find any loss over this
+thing though, do I?
+Hang on. How does this work? Because I
+Hang on. How does this work? Because I
+don't define a loss over this. So, it
+don't define a loss over this. So, it
+shouldn't have a gradient, right? Or is
+shouldn't have a gradient, right? Or is
+torch not work that
+way? It shouldn't work that way,
+right? Let's uh let's just see.
+So that doesn't
+help. So this is already with just this
+help. So this is already with just this
+saying that I'm doing a double
+Prompt
+step
+loss. Second backward fill.
+This variable gets
+This variable gets
+redefined. So this only depends on
+W
+W
+hidden
+hidden
+B. This is detached.
+It's got to be trying to back prop
+It's got to be trying to back prop
+through multiple steps of this for some
+through multiple steps of this for some
+reason,
+right? I would have thought that just
+right? I would have thought that just
+detaching it
+Maybe it is
+copying. Return tensor shares the same
+copying. Return tensor shares the same
+storage with the original one.
+So that probably is just not getting set
+So that probably is just not getting set
+in the optimizer one,
+in the optimizer one,
+right? But the detach underscore should
+right? But the detach underscore should
+have done
+have done
+it. Maybe you're not supposed to use
+it. Maybe you're not supposed to use
+that.
+This is just an annoying
+pietorch. Detaches in place.
+It should
+be attach the source tensor.
+I would think that this is correct to be
+I would think that this is correct to be
+honest. Like
+honest. Like
+this this seems like that could work to
+this this seems like that could work to
+detach the
+detach the
+breath, but it doesn't
+Is there anything else this could
+Is there anything else this could
+be? Oh, I'm probably back propagating
+be? Oh, I'm probably back propagating
+through hidden here,
+through hidden here,
+right? Yeah, I'm probably back
+right? Yeah, I'm probably back
+propagating through
+propagating through
+hidden. Yeah, that's that's not me.
+Ten. This is what I mean when I say you
+Ten. This is what I mean when I say you
+have to be so so careful with this
+method. Yep. So now it doesn't break
+method. Yep. So now it doesn't break
+anymore.
+anymore.
+We'll see if when I do this it
+We'll see if when I do this it
+breaks because now what you do
+is do you want
+um this one you detach here
+um this one you detach here
+right now it's wd detach
+This is
+This is
+like ridiculously
+ridiculously careful. Like this is like
+ridiculously careful. Like this is like
+the autograd's honestly hurting you
+the autograd's honestly hurting you
+here. I see why they just did it without
+here. I see why they just did it without
+autograd. The autograd just hurts you.
+But the problem is like if you do it
+But the problem is like if you do it
+without the autograd like the MLP
+without the autograd like the MLP
+implementation is just going to
+implementation is just going to
+suck. Single linear is kind of
+fine. But yeah the problem of not using
+fine. But yeah the problem of not using
+auto right is you don't have auto
+Where's the shape
+mismatch? Uh,
+encoder. That seems a weird place to
+encoder. That seems a weird place to
+fail.
+Wait, why is that here? That should not
+Wait, why is that here? That should not
+be
+be
+there. Just an
+error. One of the variables has been
+modified by an in place operation.
+Lovely. Do you need this uh these W
+Lovely. Do you need this uh these W
+patches or not. You might not need
+these.
+these.
+Okay, then this should be on the main
+Okay, then this should be on the main
+train backwards,
+train backwards,
+right? Yeah. Lost
+backwards. So, this is new
+backwards. So, this is new
+hidden stack.
+This is the right shape, isn't
+it? Looks fine.
+Yeah. So,
+um, maybe I'm doing this part
+um, maybe I'm doing this part
+wrong.
+Here use the detached
+Here use the detached
+hidden and the trainable forms of
+hidden and the trainable forms of
+W. And here you use the hidden and then
+W. And here you use the hidden and then
+the detached
+the detached
+forms of W and B. Right?
+forms of W and B. Right?
+do a pattern together of
+this. I'm freaking
+Maybe we'll just do the anomaly.
+Whatever. Does that give us
+anything? So it is this line.
+Yeah. Here.
+Yeah. Here.
+Bot. Does it expect both of these things
+Bot. Does it expect both of these things
+to be differentiable or
+something? Okay, we're going to try I'm
+something? Okay, we're going to try I'm
+pretty sure the original is the correct
+pretty sure the original is the correct
+operation, but we are going to try this
+operation, but we are going to try this
+for the hell of it.
+for the hell of it.
+It's not going to work, I don't
+It's not going to work, I don't
+think. I mean, we can try this though.
+I guess it's the W's that it's like
+I guess it's the W's that it's like
+annoyed. The W's are being modified,
+annoyed. The W's are being modified,
+right? Yeah, the W's are being modified.
+Now this is going to be like giga slow,
+right? Oh
+right? Oh
+yeah. Take anomaly detection off. See if
+yeah. Take anomaly detection off. See if
+that does
+anything. Oh yeah. Okay.
+This
+This
+learns a little
+bit. Let's just uh track
+bit. Let's just uh track
+it as we'll put it on
+Neptune. We got it to run.
+We can go put this to 80 mil as
+We can go put this to 80 mil as
+well. I added a
+zero. Okay, put that to 80 mil. Let me
+zero. Okay, put that to 80 mil. Let me
+use your bathroom real quick. I'll be
+use your bathroom real quick. I'll be
+right back. We're going to run some
+right back. We're going to run some
+experiments on this and then maybe we'll
+experiments on this and then maybe we'll
+do V trace. Maybe we'll do some other
+do V trace. Maybe we'll do some other
+stuff. I'll be back.
+Whoops. Camera
+broke. So,
+um, that doesn't look amazing.
+um, that doesn't look amazing.
+I think I'm going to go chat with this
+I think I'm going to go chat with this
+guy about this method real quick and uh
+guy about this method real quick and uh
+and then I'll be back shortly and then
+and then I'll be back shortly and then
+we'll work on VRays.
+we'll work on VRays.
+So me do
+that.
+that.
+Okay. So uh for folks for folks watching
+Okay. So uh for folks for folks watching
+there'll be more back pretty soon. Um
+there'll be more back pretty soon. Um
+all my stuff is here. This will be open
+all my stuff is here. This will be open
+sourced if it's useful as
+sourced if it's useful as
+well. So if you want to support my work
+well. So if you want to support my work
+for free, puffer.ai, start the GitHub.
+for free, puffer.ai, start the GitHub.
+We're trying to get to 2K. Other than
+We're trying to get to 2K. Other than
+that, you can get involved with dev or
+that, you can get involved with dev or
+just chat with the community on the
+just chat with the community on the
+Discord here. And you can follow me on X
+Discord here. And you can follow me on X
+for more RL content. Thanks.

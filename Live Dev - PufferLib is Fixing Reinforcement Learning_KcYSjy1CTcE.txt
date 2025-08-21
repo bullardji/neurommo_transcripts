@@ -1,0 +1,3381 @@
+Kind: captions
+Language: en
+morning we are back
+live this is a little unfortunate this
+live this is a little unfortunate this
+experiment goes like
+experiment goes like
+this we're going to have to figure this
+this we're going to have to figure this
+out a little
+bit let me get set up
+bit let me get set up
+here and we're going to look at all the
+here and we're going to look at all the
+uh the experiment results
+oops I'm going to kill this because this
+oops I'm going to kill this because this
+is not working and it's eating all the
+is not working and it's eating all the
+memory let's see what we have here
+yeah so this
+crashed not too happy about
+that let's just do
+this was definitely promising
+this was definitely promising
+stuff right
+this one looks even better than that but
+this one looks even better than that but
+it
+it
+doesn't converge the same it looks
+like and this one has been still
+like and this one has been still
+training and look if you see it was here
+training and look if you see it was here
+before
+now it's up at
+4 it's like this pretty smooth log
+curve e
+okay so this is just a Precision
+thing just that's unfortunate
+and I wasn't sure if I should have done
+and I wasn't sure if I should have done
+0.0 I probably just should have done
+thats
+thats
+there that'll run
+I think this is zeroed right yeah this
+I think this is zeroed right yeah this
+is zeroed
+you know it is interesting that they are
+you know it is interesting that they are
+selling
+stuff and they're buying stuff as
+stuff and they're buying stuff as
+well
+well
+H there is actually Market use going
+H there is actually Market use going
+on that's pretty
+on that's pretty
+cool so I mean this thing is
+working I would really like to
+working I would really like to
+understand though what is going on
+with with this discrepancy right here
+with with this discrepancy right here
+right
+how was it working compared with
+how was it working compared with
+previous well it's better than Adam mu's
+previous well it's better than Adam mu's
+doing great we're just looking at psgd
+doing great we're just looking at psgd
+and if we can get this to do better than
+and if we can get this to do better than
+muan here let me show you
+this so this is muon right here that's a
+this so this is muon right here that's a
+clean learning curve right that's a
+clean learning curve right that's a
+really clean learning curve it's just a
+really clean learning curve it's just a
+log just straight up a log function
+but then I'm trying psgd and you can see
+but then I'm trying psgd and you can see
+if I go uh zoom in here right it looks
+if I go uh zoom in here right it looks
+really promising and then it intersects
+really promising and then it intersects
+and it's done that with basically every
+and it's done that with basically every
+one of the experiments so far
+an episode return as well as
+consistent they just say sweep more
+consistent they just say sweep more
+hyper
+hyper
+prams and like they're probably
+prams and like they're probably
+right we do need to just sweep more
+right we do need to just sweep more
+hyper prams
+the runs are kind of expensive you know
+the runs are kind of expensive you know
+they take a while to go I tried to do
+they take a while to go I tried to do
+these last night and uh the Run crash
+these last night and uh the Run crash
+partway through I mean you can see
+partway through I mean you can see
+like there's a lot of variant in
+here
+e
+e
+for for
+big
+issue I me just give him this
+graph maybe one of these guys will
+graph maybe one of these guys will
+um figure this piece
+out for
+all
+right that's going to take forever to
+right that's going to take forever to
+run so we're going to have to figure out
+run so we're going to have to figure out
+some stuff to do in the
+some stuff to do in the
+meanwhile um I think I'm just going to
+meanwhile um I think I'm just going to
+go through some of my thoughts on what
+go through some of my thoughts on what
+I've been doing with this optimization
+I've been doing with this optimization
+stuff lately
+stuff lately
+and maybe some of the remaining problems
+and maybe some of the remaining problems
+so I was looking at a whole bunch of
+so I was looking at a whole bunch of
+different
+different
+techniques for just general purpose RL
+techniques for just general purpose RL
+improvements right like how do we
+improvements right like how do we
+modernize uh the RL stack and I don't
+modernize uh the RL stack and I don't
+mean like add a bunch of fanasy tools I
+mean like add a bunch of fanasy tools I
+mean like why don't we go check out the
+mean like why don't we go check out the
+optimizers that llm people have been
+optimizers that llm people have been
+using for the past while right why don't
+using for the past while right why don't
+we go check out like the learning rate
+we go check out like the learning rate
+schedules for inance nobody uses linear
+schedules for inance nobody uses linear
+learning rate Decay they use cosine and
+learning rate Decay they use cosine and
+kneeling all right so I grabbed a few
+kneeling all right so I grabbed a few
+things like
+this
+this
+and I think the optimizer was the
+and I think the optimizer was the
+biggest one but the other ones
+biggest one but the other ones
+definitely helped as
+definitely helped as
+well and basically
+well and basically
+overnight uh the breakout speedrun time
+overnight uh the breakout speedrun time
+was cut in
+was cut in
+half
+half
+and every single environment is is
+and every single environment is is
+essentially solvable now with the same
+essentially solvable now with the same
+set of parameters not optimal mind you
+set of parameters not optimal mind you
+uh but pretty much way way way more
+uh but pretty much way way way more
+hyperr stability than
+before definitely not optimal so bigger
+before definitely not optimal so bigger
+problems you're still going to want
+problems you're still going to want
+stuff
+tuned so then I was looking at okay well
+tuned so then I was looking at okay well
+what can we do from here cuz there's
+what can we do from here cuz there's
+still a few things that are a little bit
+still a few things that are a little bit
+janky um
+janky um
+first of all I wanted to say okay can we
+first of all I wanted to say okay can we
+make the learning rate pretty stable
+make the learning rate pretty stable
+because that parameter usually varies
+because that parameter usually varies
+with model size had a long conversation
+with model size had a long conversation
+with the optimization folks and uh
+with the optimization folks and uh
+looked at the math and yes it turns out
+looked at the math and yes it turns out
+that actually any of these new
+that actually any of these new
+optimization methods are going to give
+optimization methods are going to give
+you invariant learning rate with respect
+you invariant learning rate with respect
+to model size so that's M what that used
+to model size so that's M what that used
+to do this is kind of just built in now
+to do this is kind of just built in now
+which is really really
+which is really really
+nice um
+now there are a few additional sources
+now there are a few additional sources
+of need to change hyper parameters per M
+of need to change hyper parameters per M
+right one is that some Ms just have way
+right one is that some Ms just have way
+way way more of a gradient noise than
+way way more of a gradient noise than
+other
+other
+Ms that's something to look
+at and uh that requires you to use you
+at and uh that requires you to use you
+know larger mini batch size or lower
+know larger mini batch size or lower
+learning
+learning
+rate in order to solve the same task
+rate in order to solve the same task
+and then uh the other
+one uh the other one is effective
+one uh the other one is effective
+Horizon which you know possibly these
+Horizon which you know possibly these
+could be related as
+could be related as
+well but gamma and Lambda the GAE
+parameters now it's interesting that you
+parameters now it's interesting that you
+know stuff does kind of work
+know stuff does kind of work
+um with the same set of
+frams on a lot of different
+frams on a lot of different
+mends um but there were there was at
+mends um but there were there was at
+least one where I had to change it to
+least one where I had to change it to
+make that work and ideally we wouldn't
+make that work and ideally we wouldn't
+have Gamma or Lambda at all so that's
+have Gamma or Lambda at all so that's
+what I was doing with
+what I was doing with
+P30 so I think what we're going to do
+P30 so I think what we're going to do
+today
+today
+then I have a couple of environments to
+then I have a couple of environments to
+play with that I need to like start
+play with that I need to like start
+getting some more results on with
+getting some more results on with
+puffer um and then I also I just want to
+puffer um and then I also I just want to
+play around with p3o with the new
+play around with p3o with the new
+Optimizer stuff to see if it makes it
+Optimizer stuff to see if it makes it
+work better
+now because it should be a lot easier to
+now because it should be a lot easier to
+experiment now that the hyper parameter
+experiment now that the hyper parameter
+should be a fair bit more
+should be a fair bit more
+robust we should be able to make some
+robust we should be able to make some
+progress and then in the meantime you
+progress and then in the meantime you
+know these experiment will run in the
+know these experiment will run in the
+background
+so I guess then today we'll look at
+so I guess then today we'll look at
+gradient
+gradient
+noise we'll look at P30 run a few
+noise we'll look at P30 run a few
+experiments on that we'll look at that
+experiments on that we'll look at that
+new environment and we'll see where we
+new environment and we'll see where we
+get from there and sounds like a
+plan me move this off to where I can
+plan me move this off to where I can
+keep tabs on it
+okay let's make sure break app still
+works and I believe this learning rate
+works and I believe this learning rate
+is too high for it as well isn't it
+same we Neptune a few of these
+where's the
+Run
+Run
+oh okay
+let me go check what the default
+let me go check what the default
+learning rate
+was I think it was 0.01 or something
+o1 o1
+so this learning rate should be way too
+so this learning rate should be way too
+high by
+high by
+uh by those standards
+it doesn't completely fail though which
+it doesn't completely fail though which
+is interesting even with like a
+is interesting even with like a
+ridiculously high learning rate for this
+ridiculously high learning rate for this
+algorithm
+try it with their default
+okay something's wrong then with these
+okay something's wrong then with these
+defaults because uh this was working
+defaults because uh this was working
+really really well
+really really well
+before about
+precondition e
+so everybody tells me to drop the
+so everybody tells me to drop the
+preconditioned learning rate I'm pretty
+preconditioned learning rate I'm pretty
+sure though I had uh I had it in the
+sure though I had uh I had it in the
+sweep
+yes see it's in the
+sweep the hell is this plasticity
+sweep the hell is this plasticity
+annoyance that everybody keeps talking
+annoyance that everybody keeps talking
+about
+about
+do I have to actually go look at this
+do I have to actually go look at this
+stuff oh hey Captain uh Dev Branch
+stuff oh hey Captain uh Dev Branch
+attempting to train impulse
+attempting to train impulse
+Wars what should I set F I never set
+Wars what should I set F I never set
+that
+variable should not have to mess with
+variable should not have to mess with
+that for
+I'm getting that when trying to load new
+I'm getting that when trying to load new
+Cuda files yes you are I tell you what
+Cuda files yes you are I tell you what
+you're
+you're
+missing so are you on puffer
+tank is this one the Box
+okay so I can show you you you don't
+okay so I can show you you you don't
+have the right version of Cuda um let me
+have the right version of Cuda um let me
+show
+show
+you it's not a pip
+package so if you even if you're not
+package so if you even if you're not
+going to use this if you just look at
+going to use this if you just look at
+our files once in a while in here uh you
+our files once in a while in here uh you
+need the Cuda developer uh you need Cuda
+need the Cuda developer uh you need Cuda
+development
+development
+version without Dev you can't build um
+you can't build like the new extensions
+you can't build like the new extensions
+and
+and
+stuff though I don't actually know why
+stuff though I don't actually know why
+that would be a problem in your case if
+that would be a problem in your case if
+you're not if you don't have like our
+you're not if you don't have like our
+advantage estimation
+stuff but this is what we have at the
+stuff but this is what we have at the
+moment yeah you can probably get like
+moment yeah you can probably get like
+Cuda Dev or whatever I have to see the
+Cuda Dev or whatever I have to see the
+exact error
+thought 4 each psgd cron
+worked e
+yeah so something weird happened here
+yeah so something weird happened here
+because
+because
+the learning rate
+the learning rate
+there oh it's because break out has its
+there oh it's because break out has its
+own learning rate I'm
+dumb
+dumb
+there so this does
+there so this does
+work we'll double check this
+d e
+somebody's linking me plasticity stuff e
+L2 regularization does just as
+well for
+maybe we do need
+maybe we do need
+L2 maybe we do need
+L2
+e e
+nothing private with these
+nothing private with these
+DMS be more interesting than me just
+DMS be more interesting than me just
+like sitting here typing stuff on the
+like sitting here typing stuff on the
+side
+something like pre-training for any epox
+something like pre-training for any epox
+in the first 50 class from fine tuning
+in the first 50 class from fine tuning
+on
+51 it learned but it never reaches the
+51 it learned but it never reaches the
+same
+same
+accuracy or loss
+h
+fortunately this doesn't seem to work
+fortunately this doesn't seem to work
+either
+here this trains but it doesn't train
+well I just do Mo on
+oh it's train.
+opum without
+activations e
+looks like he's done some stuff on this
+m
+m
+I'm trying to think what we do with that
+under the hoping this isn't some dumb
+under the hoping this isn't some dumb
+nerd snipe like exploration is but it
+nerd snipe like exploration is but it
+seems like this is potentially
+seems like this is potentially
+legitimate at least it's
+quantifiable
+for
+e e
+23385 I just want to see if the hypers
+23385 I just want to see if the hypers
+are like way different
+okay so bigger gradient
+norm and
+entropy oh this thing is screwing with
+entropy oh this thing is screwing with
+the value coefficient completely isn't
+it this thing is like totally screwing
+it this thing is like totally screwing
+with the value coefficient
+I mean that shouldn't work
+I mean that shouldn't work
+though that shouldn't
+though that shouldn't
+work if that does work then that tells
+work if that does work then that tells
+us there's a big problem
+my Cuda just
+crashed zero oh that's going to just grw
+crashed zero oh that's going to just grw
+up the value function I guess
+it's funny it can't back propop zero
+this is not even training a value
+this is not even training a value
+function so what does that even do
+I mean this should just basically be
+I mean this should just basically be
+reinforced
+reinforced
+right yeah this has got to just be
+reinforced it's interesting though
+reinforced it's interesting though
+because um I think GAE without a value
+because um I think GAE without a value
+function doesn't give you reinforce I'm
+function doesn't give you reinforce I'm
+going to have to look at
+that the fact that that does better it's
+that the fact that that does better it's
+concerning okay I'm I'm going to be back
+concerning okay I'm I'm going to be back
+in a little bit here I'm going to think
+in a little bit here I'm going to think
+about this I'll be back I don't know 5
+about this I'll be back I don't know 5
+10 minutes whatever I do a couple quick
+10 minutes whatever I do a couple quick
+things and uh we will definitely look
+things and uh we will definitely look
+more at this algorithm and see what we
+more at this algorithm and see what we
+can do about
+can do about
+it right
+back
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e e
+okay
+okay let's first see if
+okay let's first see if
+uh our sweep is still
+uh our sweep is still
+working looks like it
+is yeah we got some runs here
+kind of crazy to reinforce out of the
+kind of crazy to reinforce out of the
+box basically reinforce will do
+box basically reinforce will do
+uh 3 400
+score well I mean I know for sure that
+score well I mean I know for sure that
+uh you can get way higher score with
+uh you can get way higher score with
+this
+this
+algorithm question is
+algorithm question is
+why it should need to be tuned
+separately let's take a
+look yeah so it was this run right here
+look yeah so it was this run right here
+with this pretty low value function
+coefficient and I wonder if there's
+coefficient and I wonder if there's
+something to
+that you know maybe there is actually
+that you know maybe there is actually
+something to that it has a whole bunch
+something to that it has a whole bunch
+of different heads on
+of different heads on
+it I just want to see if this learns
+it I just want to see if this learns
+better than before
+there might be something about like slow
+there might be something about like slow
+learning
+value I mean and other than that
+value I mean and other than that
+like slight entropy
+difference but we have what we have
+difference but we have what we have
+entropy 01 yes see these are like all
+entropy 01 yes see these are like all
+pretty
+pretty
+dang reasonable
+these are all like reasonable
+defaults what did we get this is Lambda
+defaults what did we get this is Lambda
+Gamma 996 and
+83 oh you know the other thing we could
+try yeah hang on I know the other thing
+try yeah hang on I know the other thing
+we can try
+here yeah so there's nothing magic about
+here yeah so there's nothing magic about
+um like small but nonzero value function
+um like small but nonzero value function
+coefficient it's just
+coefficient it's just
+weird so the other thing we
+try um let's try
+try um let's try
+this with
+this with
+muon or with uh what I
+muon or with uh what I
+mean with just
+mean with just
+PPL so this should now just turn into
+PPL so this should now just turn into
+like
+discounting for
+interesting that this act looks like it
+interesting that this act looks like it
+does way
+worse it really is then the value
+worse it really is then the value
+function
+h
+yeah what about um can I find like the
+yeah what about um can I find like the
+best best results I had on
+this cuz I don't think that one was
+this cuz I don't think that one was
+particularly good
+nine
+I guess this one
+I guess this one
+maybe this was probably the best two4
+93 this is pretty well on par with the
+93 this is pretty well on par with the
+PO solve time I believe before um before
+PO solve time I believe before um before
+mu
+mu
+on so we should maybe be able to get
+on so we should maybe be able to get
+something out of
+something out of
+this 24 m
+okay so there you see there is a
+okay so there you see there is a
+reasonable value function coefficient on
+reasonable value function coefficient on
+this a
+point6 so I think what we'll do is we'll
+point6 so I think what we'll do is we'll
+try that
+try that
+next could just be it could just be
+next could just be it could just be
+something with the magnitude there
+arm of
+arm of
+one that shouldn't matter these two
+one that shouldn't matter these two
+explicitly don't
+matter did I yeah I forgot this one usp3
+that's interesting for
+look this is our Baseline right
+it's better than before but still not
+it's better than before but still not
+there
+low clipping so gradient Norm shouldn't
+low clipping so gradient Norm shouldn't
+matter learning rate of 05
+do you think these could have different
+do you think these could have different
+learning rate
+learning rate
+requirements the thing is it's just
+requirements the thing is it's just
+default now it's literally just the
+default also noticing this was two epoch
+should be able to get something working
+should be able to get something working
+better than this at
+better than this at
+least if this algorithm's any
+good are we learning the value function
+good are we learning the value function
+here let me see
+I mean
+it's
+yeah there a stupid green
+yeah there a stupid green
+one of
+this for
+I don't want to just sit here manually
+I don't want to just sit here manually
+tuning hyper prams all day that's a huge
+tuning hyper prams all day that's a huge
+waste of
+waste of
+time but I do want to develop some
+time but I do want to develop some
+understanding
+understanding
+of of this problem and how we can fix
+of of this problem and how we can fix
+this thing
+I mean this could literally just be as
+I mean this could literally just be as
+simple as
+simple as
+retuning is the thing as
+well I think the smartest thing to do
+well I think the smartest thing to do
+would just be to
+would just be to
+like keep queuing up more experiments on
+like keep queuing up more experiments on
+this stuff cuz there's just a lot of
+this stuff cuz there's just a lot of
+stuff to
+stuff to
+test I think the smartest thing is going
+test I think the smartest thing is going
+to be to just keep queuing up
+to be to just keep queuing up
+experiments and then do the stuff I know
+experiments and then do the stuff I know
+I can make progress on in the meanwhile
+I can make progress on in the meanwhile
+I'll let this one run though since we
+I'll let this one run though since we
+already have this this just to see if
+already have this this just to see if
+there's any
+difference got impulse warning
+difference got impulse warning
+on dev perf is same trying to bit slower
+on dev perf is same trying to bit slower
+uh it's slower because the optimizer
+uh it's slower because the optimizer
+muan has 10% overhead and uh cron has
+muan has 10% overhead and uh cron has
+about
+20% they work way better
+20% they work way better
+though I'd start with muan for now until
+though I'd start with muan for now until
+I figure out if there's something weird
+I figure out if there's something weird
+weird with
+cron okay well I can definitely convince
+cron okay well I can definitely convince
+myself from this that the value
+myself from this that the value
+function uh the value function magnitude
+function uh the value function magnitude
+is definitely important here let put 0.3
+is definitely important here let put 0.3
+last experiment while I just think about
+last experiment while I just think about
+what else to do I think we're going to
+what else to do I think we're going to
+probably want to do gradient
+probably want to do gradient
+noise uh if we can do gradient noise
+noise uh if we can do gradient noise
+next that would be
+cool
+for
+e e
+if you put
+if you put
+import reduce overhead speeds up oh
+import reduce overhead speeds up oh
+perfect yeah that's what I wanted to
+perfect yeah that's what I wanted to
+do that's what I was looking
+for it's been annoying the hell out of
+for it's been annoying the hell out of
+me
+mhm
+much
+appreciated oh because I refactored that
+appreciated oh because I refactored that
+thing
+thing
+recently I have to fix that every time
+recently I have to fix that every time
+you have to fix that every time you use
+you have to fix that every time you use
+puffer because you haven't fully updated
+puffer because you haven't fully updated
+yet I don't even think that's getting
+yet I don't even think that's getting
+imported as the
+thing like if you look we don't use
+thing like if you look we don't use
+these at the
+these at the
+moment right there used to be this
+moment right there used to be this
+additional layer where you had to wrap
+additional layer where you had to wrap
+you had to wrap everything in this and I
+you had to wrap everything in this and I
+got rid of that so I made the stack
+got rid of that so I made the stack
+thinner
+I've been meaning to refactor those for
+I've been meaning to refactor those for
+um compatibility with cleanar the idea
+um compatibility with cleanar the idea
+is that we make the main code path
+is that we make the main code path
+simpler so that you don't have to wrap
+simpler so that you don't have to wrap
+anything in order to use our demo code
+anything in order to use our demo code
+and then maybe you have to slightly wrap
+and then maybe you have to slightly wrap
+something if you want to use it with
+something if you want to use it with
+clean
+clean
+RL don't use recurrent wrapper you just
+RL don't use recurrent wrapper you just
+use the um the lstm
+use the um the lstm
+wrapper you just directly use the lstm
+wrapper you just directly use the lstm
+wrapper now
+wrapper now
+it's easier
+all right so what we're going to do for
+all right so what we're going to do for
+this then
+interesting default
+yeah that is what we found
+yeah that is what we found
+Captain so this was the major
+Captain so this was the major
+breakthrough
+breakthrough
+right I swept this with
+right I swept this with
+breakout those uh those prams are
+breakout those uh those prams are
+roughly tuned for
+roughly tuned for
+breakout and they work just about as
+breakout and they work just about as
+well as tuned atam on everything
+else sometimes better sometimes a little
+else sometimes better sometimes a little
+worse
+we're not done yet though
+you should definitely do a comparison
+you should definitely do a comparison
+against uh you know your
+original oh yeah
+original oh yeah
+Captain can I see your uh your sweep
+Captain can I see your uh your sweep
+config real
+config real
+quick I want to check
+something I guess it's just in here
+somewhere custom
+one thing I would
+one thing I would
+try just immediately and this is not a
+try just immediately and this is not a
+good idea this is a hack until uh I
+good idea this is a hack until uh I
+implement this correctly but just up
+implement this correctly but just up
+your mini batch size what do you have it
+your mini batch size what do you have it
+at right
+now where's mini badge oh you already
+now where's mini badge oh you already
+have this massive never mind yeah then
+have this massive never mind yeah then
+this is
+fine yeah they should already be
+good um yeah but you can try to keep
+good um yeah but you can try to keep
+this big mini batch
+this big mini batch
+size uh I noticed with neural MMO it
+size uh I noticed with neural MMO it
+doesn't seem to work on small mini
+doesn't seem to work on small mini
+batches
+what shouldn't shouldn't I sweep
+what shouldn't shouldn't I sweep
+over you can kind of sweep whatever I
+over you can kind of sweep whatever I
+have in the defaults if you want to it's
+have in the defaults if you want to it's
+just a lot of stuff to
+just a lot of stuff to
+sweep um you still need to do gamma
+sweep um you still need to do gamma
+Lambda entropy you still need the
+Lambda entropy you still need the
+learning rate's the biggest one probably
+learning rate's the biggest one probably
+at this
+at this
+point mini batch size is important uh
+point mini batch size is important uh
+big batch size has been
+big batch size has been
+helpful you know we have 500k default
+helpful you know we have 500k default
+mini batch has been useful for pretty
+mini batch has been useful for pretty
+much everything you might just even want
+much everything you might just even want
+to just keep
+to just keep
+that we're also able to use more
+that we're also able to use more
+environments now and Tim's training with
+environments now and Tim's training with
+more m is
+stable
+for
+e e
+not like
+that would you bother sweeping
+updox no you don't really have to
+bother I think we did increase the BPT
+bother I think we did increase the BPT
+Horizon
+default
+for
+e e
+how do you compute the gradient over
+how do you compute the gradient over
+multiple elements
+they do a [ __ ]
+Loop oh what's this n this doesn't work
+Loop oh what's this n this doesn't work
+either does it
+h
+I also use the trick you do in nuro
+3 how do you get it to work in a sweep
+3 how do you get it to work in a sweep
+since the backat size
+since the backat size
+changes there doesn't seem to wait to be
+changes there doesn't seem to wait to be
+a way to past custom ARS policies there
+a way to past custom ARS policies there
+is if you just give if you just do
+is if you just give if you just do
+policies here
+you
+you
+see if you just put a policy Block in
+see if you just put a policy Block in
+the any and you can put sweep as well it
+the any and you can put sweep as well it
+just passes
+it like there's not even an API for this
+it like there's not even an API for this
+or anything it's literally you just put
+or anything it's literally you just put
+stuff into the any file and you just
+stuff into the any file and you just
+pass it in and you're
+good I think what we're going to do for
+good I think what we're going to do for
+the gradient stuff here is
+I actually can't I
+just I can't actually do this I'm dumb
+just I can't actually do this I'm dumb
+hold
+hold
+on yeah I just I've been really dumb
+isn't it just divided I think it's
+linear for
+there might be a square
+there might be a square
+root or might be
+root or might be
+uh I see to easily pass bat size to the
+uh I see to easily pass bat size to the
+policy based on what the sweep algorithm
+policy based on what the sweep algorithm
+suggested just in your demo code
+suggested just in your demo code
+right in your demo
+right in your demo
+code if you want to do
+code if you want to do
+that
+oops just pass it here
+right ises this only get train
+right ises this only get train
+args well this has ARS args is hang on
+args well this has ARS args is hang on
+make
+policy yeah so you can just pass args of
+policy yeah so you can just pass args of
+train you can literally just do this
+train you can literally just do this
+right args
+right args
+train of what did you say batch size you
+train of what did you say batch size you
+can just do this
+it'll be
+good
+for e
+14 Ram samples is 50 it's not 50
+14 Ram samples is 50 it's not 50
+experiments though
+experiments though
+if you look at the way we do it that's
+if you look at the way we do it that's
+five
+five
+experiments you get the entire
+experiments you get the entire
+trajectory history at the moment so we
+trajectory history at the moment so we
+take the whole loss curve or the whole
+take the whole loss curve or the whole
+training curve we uh we subsample so we
+training curve we uh we subsample so we
+get 10 samples from
+get 10 samples from
+it and then you give 10 samples per
+it and then you give 10 samples per
+experiment to protein
+wanted to make it the number of
+wanted to make it the number of
+pams uh yes assuming that you actually
+pams uh yes assuming that you actually
+have my sub sampling code because you do
+have my sub sampling code because you do
+have a custom demo file
+right for
+because it was originally demo. because
+because it was originally demo. because
+it was originally just
+it was originally just
+demo and changing the name of the main
+demo and changing the name of the main
+file too often pisses people
+file too often pisses people
+off so we might change it for next
+release I mean what should I call it
+release I mean what should I call it
+inflate
+oh
+e e
+is it this
+is it this
+slow the
+heck really
+you wouldn't expect it to be that slow
+oh train mini bats you
+oh train mini bats you
+dummy yeah
+dummy yeah
+dummy there we
+go there we go
+all right let's put this on
+Neptune and then get a run of this and
+Neptune and then get a run of this and
+then we'll try neuro main dopie I don't
+then we'll try neuro main dopie I don't
+know sounds
+lame
+e e
+okay so here's our gradient
+variance
+for e
+h
+looks like it has way lower variant
+looks like it has way lower variant
+right long
+does what other end should I use for
+does what other end should I use for
+this snake
+and poer snake
+and then we try neural MMO and we see
+and then we try neural MMO and we see
+the questions going to be if um gradient
+the questions going to be if um gradient
+variance lines up with like rough
+variance lines up with like rough
+perception of
+difficulty e
+increases
+that solves really really fast now
+that solves really really fast now
+doesn't it
+Let It Go for a little longer cuz I know
+Let It Go for a little longer cuz I know
+the training Dynamics are kind of
+the training Dynamics are kind of
+interesting for this
+I wonder if they had uh reports for some
+I wonder if they had uh reports for some
+of their Ms I think that they
+did
+e e
+okay that's good enough for this
+one and then what about neuro mod three
+well there was a huge amount of gradient
+well there was a huge amount of gradient
+noise at the start right there for a
+noise at the start right there for a
+second
+yeah it was way up
+there e
+starting to optimize a little bit so
+starting to optimize a little bit so
+we'll see if uh that translates to
+we'll see if uh that translates to
+gradient noise going back
+up I guess it's gradient noise is low
+up I guess it's gradient noise is low
+because it's just not finding anything
+because it's just not finding anything
+for a while
+have a few more of these in here as well
+how did they compute this actually this
+variance for
+well the other thing here with this
+well the other thing here with this
+prediction is that
+prediction is that
+um you should be able to train with
+um you should be able to train with
+smaller batch size
+right and lower learning
+right and lower learning
+rate just getting around to fixing
+projectiles projectile ABS 120
+projectiles projectile ABS 120
+floats so
+floats so
+linear 128 torch Max
+and then yeah concatenate to encoder or
+and then yeah concatenate to encoder or
+whatever
+whatever
+yeah that would be the suggestion
+this doesn't seem like a super clear
+this doesn't seem like a super clear
+metric to me this gradient noise
+scale I wonder if this is just a proxy
+scale I wonder if this is just a proxy
+for reward sparsity
+honestly or reward
+variance e
+I guess with like muan in particular we
+I guess with like muan in particular we
+should be able to do some sort of
+should be able to do some sort of
+experiment to demonstrate bze mini bat
+experiment to demonstrate bze mini bat
+size and variance you would
+size and variance you would
+hope that's a good thing to do
+yeah the fact that this variance is so
+yeah the fact that this variance is so
+low is odd to
+me I mean the vast majority of these are
+me I mean the vast majority of these are
+getting no reward though so this is
+getting no reward though so this is
+probably just a measure of sparity and
+probably just a measure of sparity and
+more than
+more than
+any
+anything
+anything
+yeah that's
+interesting so I don't know about this
+interesting so I don't know about this
+as a this gradient variance is a a
+as a this gradient variance is a a
+useful
+measure I mean it's nice to log but I
+measure I mean it's nice to log but I
+don't know if it just tells you much on
+don't know if it just tells you much on
+its own know
+I think it is
+I think it is
+increasing but the scale is very
+low oh wait unless did I do this
+low oh wait unless did I do this
+wrong on times mini batch size
+wrong on times mini batch size
+yeah this is correct it should be times
+yeah this is correct it should be times
+mini bat
+size so yeah the gradient scale doesn't
+size so yeah the gradient scale doesn't
+I mean it is increasing
+I'll let this run a little longer just
+I'll let this run a little longer just
+because it's going to increase pretty
+because it's going to increase pretty
+quickly maybe here but like the absolute
+quickly maybe here but like the absolute
+scale doesn't seem to have anything to
+scale doesn't seem to have anything to
+do with the task difficulty and
+do with the task difficulty and
+definitely is not predictive of the um
+definitely is not predictive of the um
+backat size that you would
+need it's a little odd that they
+need it's a little odd that they
+actually found that in that it works
+actually found that in that it works
+because I don't see it
+here I suppose it could be that this
+here I suppose it could be that this
+just increases very high over the course
+just increases very high over the course
+of training if you train a good
+model so at least I can confirm that
+model so at least I can confirm that
+result that for some environments or
+result that for some environments or
+many environments it looks like uh the
+many environments it looks like uh the
+gradient noise does increase over the
+gradient noise does increase over the
+course of training
+the actual magnitude is lower than the
+the actual magnitude is lower than the
+magnitude of breakout
+magnitude of breakout
+Noise by a lot
+I wonder if there is any theoretical
+I wonder if there is any theoretical
+basis then for
+basis then for
+like if you made the gradient
+like if you made the gradient
+accumulation proportional to the
+accumulation proportional to the
+variance
+the problem is
+the problem is
+like I think gradient variant zero could
+like I think gradient variant zero could
+either mean that you have a perfect
+signal
+well I think you also have no gradient
+well I think you also have no gradient
+variance if you're stuck and aren't
+variance if you're stuck and aren't
+getting any
+getting any
+reward
+reward
+right yeah then you have no signal so I
+right yeah then you have no signal so I
+think that this thing is kind of brittle
+okay let's try a couple just quick
+okay let's try a couple just quick
+experiments on
+breakout so I want to test some
+breakout so I want to test some
+stuff I want to see if we can
+stuff I want to see if we can
+actually uh get
+actually uh get
+the behavior that we predict in
+practice e
+okay so we're going to do
+so divide by
+1024 I'm going to see if this curve
+1024 I'm going to see if this curve
+matches
+roughly
+oops e
+definitely slower wall clock but that's
+expected e
+and there is still potentially a little
+and there is still potentially a little
+more Jitter right in the smaller
+updates though they should be matched
+updates though they should be matched
+for the most part they should
+for the most part they should
+match and then we're going to check
+match and then we're going to check
+we're going to check a few things around
+we're going to check a few things around
+the learning right here
+so I think there is something with
+DotA e
+this is hardware scaling
+so when they say really big batch size
+so when they say really big batch size
+is essential
+oh wait do they have something on
+oh wait do they have something on
+learning right
+here do they just use the same learning
+here do they just use the same learning
+rate
+okay so we get to 790 which is not quite
+okay so we get to 790 which is not quite
+as
+as
+good a little bit of a gap
+good a little bit of a gap
+there now what we do
+is go back to the original earn rate run
+is go back to the original earn rate run
+this again keep looking at the
+this again keep looking at the
+paper not this one for the paper
+go think I'm doing something wrong there
+go think I'm doing something wrong there
+are 30 projections with four
+are 30 projections with four
+floats there are 30 projectiles with
+floats there are 30 projectiles with
+four floats per projectile Ops
+in that case 128 seems really
+in that case 128 seems really
+high for an input of
+four well yeah and that's where it can
+four well yeah and that's where it can
+be potentially slower um the issue that
+be potentially slower um the issue that
+you're going to run into though is it's
+you're going to run into though is it's
+not just 128 for an input of four 128 is
+not just 128 for an input of four 128 is
+the total embedding Dimension that
+the total embedding Dimension that
+you're going to compress all those
+you're going to compress all those
+projectiles
+projectiles
+into right so it's actually 120 going
+into right so it's actually 120 going
+into
+128 it could be that this is very slow
+128 it could be that this is very slow
+and then we have to fiddle with
+and then we have to fiddle with
+something
+else e
+so I mean this does not behave perfectly
+so I mean this does not behave perfectly
+predictably
+this staleness thing is crazy
+the Stillness thing is really crazy
+so I'm pretty sure this is
+so I'm pretty sure this is
+wrong this is what I used as my uh I
+wrong this is what I used as my uh I
+used this as a for a very very long time
+used this as a for a very very long time
+but recently I took another look at GAE
+but recently I took another look at GAE
+and I think it's really gamma time
+Lambda maybe it is gamma it's hard to
+Lambda maybe it is gamma it's hard to
+say from the
+formula I don't know about this though
+okay so we have our
+okay so we have our
+new
+ah so this actually
+ah so this actually
+matches this matches the original pretty
+matches this matches the original pretty
+well right
+what if we do
+16k does it still
+work
+e
+e e
+okay but this is half the number of
+okay but this is half the number of
+gradient updates as well
+gradient updates as well
+right so would be like Kish was it
+right so would be like Kish was it
+halfway to here is 40 so it would be
+halfway to here is 40 so it would be
+right there these match very
+closely
+96 need to try to puffer
+96 need to try to puffer
+box my desktop doing this drops 100K
+box my desktop doing this drops 100K
+SPS well yeah a lot of encoders
+SPS well yeah a lot of encoders
+right um You can try 64 for
+instance I mean the alternative right
+instance I mean the alternative right
+the alternative would be you do some
+the alternative would be you do some
+pre-processing on them you know you'd
+pre-processing on them you know you'd
+have to like order them or sort them or
+have to like order them or sort them or
+or
+something cuz right now it doesn't know
+something cuz right now it doesn't know
+what like it's got to learn what
+what like it's got to learn what
+projectiles wear as well
+oh look at
+oh look at
+that so we'll see whether in wall clock
+that so we'll see whether in wall clock
+this is better but look at that in
+steps
+e
+e e
+okay another version of this
+okay another version of this
+right another version of this is just
+right another version of this is just
+that the learning rate doesn't vary
+that the learning rate doesn't vary
+linearly right
+like there should exist some learning
+like there should exist some learning
+rate for which smaller batch does better
+rate for which smaller batch does better
+than bigger batch
+and but now look at
+this it's not bad but
+back this 4096 one here
+speed question is fast
+speed question is fast
+compile is fast compile that much
+compile is fast compile that much
+different than
+different than
+normal when
+normal when
+testing M Speed wa what is fast
+testing M Speed wa what is fast
+compile I is that much is fast compile
+compile I is that much is fast compile
+that much different I have the 6X yes
+that much different I have the 6X yes
+that's completely normal
+Spencer so
+Spencer so
+basically
+basically
+like you know how in Python if you try
+like you know how in Python if you try
+to access an element of an array that's
+to access an element of an array that's
+out of bounds you get an
+out of bounds you get an
+error and like there a whole bunch of
+error and like there a whole bunch of
+safeguards like that so those compile
+safeguards like that so those compile
+Flags inject all that stuff into
+Flags inject all that stuff into
+C so you essentially have like a modern
+C so you essentially have like a modern
+site like safe language right
+site like safe language right
+but it's way
+slower and there's not really any effort
+slower and there's not really any effort
+to make those checks fast either because
+to make those checks fast either because
+it's meant for debug mode
+anyways
+e e
+kind of very a little right these like
+kind of very a little right these like
+vary a
+vary a
+bit I don't see like a clear Trend
+though
+e e
+so I mean this is like
+better let see how this goes longer
+better let see how this goes longer
+term but still doesn't seem like it's it
+term but still doesn't seem like it's it
+doesn't seem like you get anything out
+doesn't seem like you get anything out
+of the smaller mini badges
+right that could be related to other
+right that could be related to other
+properties of the optimizer
+properties of the optimizer
+though right maybe it holds for SGD only
+though right maybe it holds for SGD only
+or whatever
+it didn't do better than uh than before
+though I did a about on pars the one
+though I did a about on pars the one
+where we just kept the learning rate the
+where we just kept the learning rate the
+same
+yeah out here a
+bot full block list of twitch Bots at
+bot full block list of twitch Bots at
+this point
+thought for a while M was way slower
+thought for a while M was way slower
+because I was only checking speed on
+because I was only checking speed on
+debug
+debug
+yeah that'll
+happen I added the compile Flags like I
+happen I added the compile Flags like I
+added those modes for a reason right not
+added those modes for a reason right not
+just to show
+off for
+I think I got to implement gradient
+I think I got to implement gradient
+accumulation
+accumulation
+next is what I've got to do because
+um yeah right here this
+um yeah right here this
+is this is kind of showing me that mini
+is this is kind of showing me that mini
+batch does not behave exactly the way
+batch does not behave exactly the way
+that you would
+that you would
+expect you know
+you always get better
+you always get better
+results a per step
+results a per step
+basis so there is a critical size it
+basis so there is a critical size it
+seems and what they were calling a
+seems and what they were calling a
+critical batch size is really a CR
+critical batch size is really a CR
+critical mini batch
+size and then batch size to mini batch
+size and then batch size to mini batch
+size gives you salness
+size gives you salness
+oo okay I see how this
+oo okay I see how this
+is time is it
+is time is it
+11 I think what I'm going to do is I'm
+11 I think what I'm going to do is I'm
+going to go think about this for a bit
+going to go think about this for a bit
+I'm going to get some exercise in get
+I'm going to get some exercise in get
+some food and then we're going to come
+some food and then we're going to come
+back we're going to implement gradient
+back we're going to implement gradient
+accumulation and we're going to try that
+accumulation and we're going to try that
+out so that'll be a new
+out so that'll be a new
+feature and uh let me just make sure
+feature and uh let me just make sure
+that these other sweeps are still
+that these other sweeps are still
+running correctly
+running correctly
+these have crashed a bunch of times and
+these have crashed a bunch of times and
+it's a total pain they seem like they're
+it's a total pain they seem like they're
+good this time
+good this time
+though see do we have anything
+cool oh yeah we've got some cool stuff
+cool oh yeah we've got some cool stuff
+here look at that
+boom first run that beats uh first few
+boom first run that beats uh first few
+runs actually that beat the
+runs actually that beat the
+previous previous winner
+previous previous winner
+this is still nice and steep as well up
+this is still nice and steep as well up
+here so we'll keep going on this for a
+here so we'll keep going on this for a
+little
+little
+bit what did this run do
+differently didn't drop like M's or
+differently didn't drop like M's or
+something M this is good
+yep fixed gamma
+yep fixed gamma
+Lambda Max Mini batch size you can see
+Lambda Max Mini batch size you can see
+right
+right
+here change precondition learning
+here change precondition learning
+rate drop this by a factor of
+two learning rate's pretty near the
+two learning rate's pretty near the
+default it's upped it by a little
+default it's upped it by a little
+bit a few other things but this is like
+bit a few other things but this is like
+reasonable I'm happy with
+reasonable I'm happy with
+that okay cool
+yeah I'm going to go uh get my exercise
+yeah I'm going to go uh get my exercise
+and stuff and then we will uh we'll see
+and stuff and then we will uh we'll see
+where we go from there so for the couple
+where we go from there so for the couple
+folks
+folks
+watching buffer. for all my stuff here
+watching buffer. for all my stuff here
+you want to follow all this
+you want to follow all this
+reinforcement learning
+reinforcement learning
+Dev Go Star the repo on GitHub really
+Dev Go Star the repo on GitHub really
+helps us
+helps us
+out other than that you can join the
+out other than that you can join the
+Discord to get involved Dev and follow
+Discord to get involved Dev and follow
+me on X for more content thanks
+
+Kind: captions
+Language: en
+morning we are back
+live this is a little unfortunate this
+live this is a little unfortunate this
+experiment goes like
+experiment goes like
+this we're going to have to figure this
+this we're going to have to figure this
+out a little
+bit let me get set up
+bit let me get set up
+here and we're going to look at all the
+here and we're going to look at all the
+uh the experiment results
+oops I'm going to kill this because this
+oops I'm going to kill this because this
+is not working and it's eating all the
+is not working and it's eating all the
+memory let's see what we have here
+yeah so this
+crashed not too happy about
+that let's just do
+this was definitely promising
+this was definitely promising
+stuff right
+this one looks even better than that but
+this one looks even better than that but
+it
+it
+doesn't converge the same it looks
+like and this one has been still
+like and this one has been still
+training and look if you see it was here
+training and look if you see it was here
+before
+now it's up at
+4 it's like this pretty smooth log
+curve e
+okay so this is just a Precision
+thing just that's unfortunate
+and I wasn't sure if I should have done
+and I wasn't sure if I should have done
+0.0 I probably just should have done
+thats
+thats
+there that'll run
+I think this is zeroed right yeah this
+I think this is zeroed right yeah this
+is zeroed
+you know it is interesting that they are
+you know it is interesting that they are
+selling
+stuff and they're buying stuff as
+stuff and they're buying stuff as
+well
+well
+H there is actually Market use going
+H there is actually Market use going
+on that's pretty
+on that's pretty
+cool so I mean this thing is
+working I would really like to
+working I would really like to
+understand though what is going on
+with with this discrepancy right here
+with with this discrepancy right here
+right
+how was it working compared with
+how was it working compared with
+previous well it's better than Adam mu's
+previous well it's better than Adam mu's
+doing great we're just looking at psgd
+doing great we're just looking at psgd
+and if we can get this to do better than
+and if we can get this to do better than
+muan here let me show you
+this so this is muon right here that's a
+this so this is muon right here that's a
+clean learning curve right that's a
+clean learning curve right that's a
+really clean learning curve it's just a
+really clean learning curve it's just a
+log just straight up a log function
+but then I'm trying psgd and you can see
+but then I'm trying psgd and you can see
+if I go uh zoom in here right it looks
+if I go uh zoom in here right it looks
+really promising and then it intersects
+really promising and then it intersects
+and it's done that with basically every
+and it's done that with basically every
+one of the experiments so far
+an episode return as well as
+consistent they just say sweep more
+consistent they just say sweep more
+hyper
+hyper
+prams and like they're probably
+prams and like they're probably
+right we do need to just sweep more
+right we do need to just sweep more
+hyper prams
+the runs are kind of expensive you know
+the runs are kind of expensive you know
+they take a while to go I tried to do
+they take a while to go I tried to do
+these last night and uh the Run crash
+these last night and uh the Run crash
+partway through I mean you can see
+partway through I mean you can see
+like there's a lot of variant in
+here
+e
+e
+for for
+big
+issue I me just give him this
+graph maybe one of these guys will
+graph maybe one of these guys will
+um figure this piece
+out for
+all
+right that's going to take forever to
+right that's going to take forever to
+run so we're going to have to figure out
+run so we're going to have to figure out
+some stuff to do in the
+some stuff to do in the
+meanwhile um I think I'm just going to
+meanwhile um I think I'm just going to
+go through some of my thoughts on what
+go through some of my thoughts on what
+I've been doing with this optimization
+I've been doing with this optimization
+stuff lately
+stuff lately
+and maybe some of the remaining problems
+and maybe some of the remaining problems
+so I was looking at a whole bunch of
+so I was looking at a whole bunch of
+different
+different
+techniques for just general purpose RL
+techniques for just general purpose RL
+improvements right like how do we
+improvements right like how do we
+modernize uh the RL stack and I don't
+modernize uh the RL stack and I don't
+mean like add a bunch of fanasy tools I
+mean like add a bunch of fanasy tools I
+mean like why don't we go check out the
+mean like why don't we go check out the
+optimizers that llm people have been
+optimizers that llm people have been
+using for the past while right why don't
+using for the past while right why don't
+we go check out like the learning rate
+we go check out like the learning rate
+schedules for inance nobody uses linear
+schedules for inance nobody uses linear
+learning rate Decay they use cosine and
+learning rate Decay they use cosine and
+kneeling all right so I grabbed a few
+kneeling all right so I grabbed a few
+things like
+this
+this
+and I think the optimizer was the
+and I think the optimizer was the
+biggest one but the other ones
+biggest one but the other ones
+definitely helped as
+definitely helped as
+well and basically
+well and basically
+overnight uh the breakout speedrun time
+overnight uh the breakout speedrun time
+was cut in
+was cut in
+half
+half
+and every single environment is is
+and every single environment is is
+essentially solvable now with the same
+essentially solvable now with the same
+set of parameters not optimal mind you
+set of parameters not optimal mind you
+uh but pretty much way way way more
+uh but pretty much way way way more
+hyperr stability than
+before definitely not optimal so bigger
+before definitely not optimal so bigger
+problems you're still going to want
+problems you're still going to want
+stuff
+tuned so then I was looking at okay well
+tuned so then I was looking at okay well
+what can we do from here cuz there's
+what can we do from here cuz there's
+still a few things that are a little bit
+still a few things that are a little bit
+janky um
+janky um
+first of all I wanted to say okay can we
+first of all I wanted to say okay can we
+make the learning rate pretty stable
+make the learning rate pretty stable
+because that parameter usually varies
+because that parameter usually varies
+with model size had a long conversation
+with model size had a long conversation
+with the optimization folks and uh
+with the optimization folks and uh
+looked at the math and yes it turns out
+looked at the math and yes it turns out
+that actually any of these new
+that actually any of these new
+optimization methods are going to give
+optimization methods are going to give
+you invariant learning rate with respect
+you invariant learning rate with respect
+to model size so that's M what that used
+to model size so that's M what that used
+to do this is kind of just built in now
+to do this is kind of just built in now
+which is really really
+which is really really
+nice um
+now there are a few additional sources
+now there are a few additional sources
+of need to change hyper parameters per M
+of need to change hyper parameters per M
+right one is that some Ms just have way
+right one is that some Ms just have way
+way way more of a gradient noise than
+way way more of a gradient noise than
+other
+other
+Ms that's something to look
+at and uh that requires you to use you
+at and uh that requires you to use you
+know larger mini batch size or lower
+know larger mini batch size or lower
+learning
+learning
+rate in order to solve the same task
+rate in order to solve the same task
+and then uh the other
+one uh the other one is effective
+one uh the other one is effective
+Horizon which you know possibly these
+Horizon which you know possibly these
+could be related as
+could be related as
+well but gamma and Lambda the GAE
+parameters now it's interesting that you
+parameters now it's interesting that you
+know stuff does kind of work
+know stuff does kind of work
+um with the same set of
+frams on a lot of different
+frams on a lot of different
+mends um but there were there was at
+mends um but there were there was at
+least one where I had to change it to
+least one where I had to change it to
+make that work and ideally we wouldn't
+make that work and ideally we wouldn't
+have Gamma or Lambda at all so that's
+have Gamma or Lambda at all so that's
+what I was doing with
+what I was doing with
+P30 so I think what we're going to do
+P30 so I think what we're going to do
+today
+today
+then I have a couple of environments to
+then I have a couple of environments to
+play with that I need to like start
+play with that I need to like start
+getting some more results on with
+getting some more results on with
+puffer um and then I also I just want to
+puffer um and then I also I just want to
+play around with p3o with the new
+play around with p3o with the new
+Optimizer stuff to see if it makes it
+Optimizer stuff to see if it makes it
+work better
+now because it should be a lot easier to
+now because it should be a lot easier to
+experiment now that the hyper parameter
+experiment now that the hyper parameter
+should be a fair bit more
+should be a fair bit more
+robust we should be able to make some
+robust we should be able to make some
+progress and then in the meantime you
+progress and then in the meantime you
+know these experiment will run in the
+know these experiment will run in the
+background
+so I guess then today we'll look at
+so I guess then today we'll look at
+gradient
+gradient
+noise we'll look at P30 run a few
+noise we'll look at P30 run a few
+experiments on that we'll look at that
+experiments on that we'll look at that
+new environment and we'll see where we
+new environment and we'll see where we
+get from there and sounds like a
+plan me move this off to where I can
+plan me move this off to where I can
+keep tabs on it
+okay let's make sure break app still
+works and I believe this learning rate
+works and I believe this learning rate
+is too high for it as well isn't it
+same we Neptune a few of these
+where's the
+Run
+Run
+oh okay
+let me go check what the default
+let me go check what the default
+learning rate
+was I think it was 0.01 or something
+o1 o1
+so this learning rate should be way too
+so this learning rate should be way too
+high by
+high by
+uh by those standards
+it doesn't completely fail though which
+it doesn't completely fail though which
+is interesting even with like a
+is interesting even with like a
+ridiculously high learning rate for this
+ridiculously high learning rate for this
+algorithm
+try it with their default
+okay something's wrong then with these
+okay something's wrong then with these
+defaults because uh this was working
+defaults because uh this was working
+really really well
+really really well
+before about
+precondition e
+so everybody tells me to drop the
+so everybody tells me to drop the
+preconditioned learning rate I'm pretty
+preconditioned learning rate I'm pretty
+sure though I had uh I had it in the
+sure though I had uh I had it in the
+sweep
+yes see it's in the
+sweep the hell is this plasticity
+sweep the hell is this plasticity
+annoyance that everybody keeps talking
+annoyance that everybody keeps talking
+about
+about
+do I have to actually go look at this
+do I have to actually go look at this
+stuff oh hey Captain uh Dev Branch
+stuff oh hey Captain uh Dev Branch
+attempting to train impulse
+attempting to train impulse
+Wars what should I set F I never set
+Wars what should I set F I never set
+that
+variable should not have to mess with
+variable should not have to mess with
+that for
+I'm getting that when trying to load new
+I'm getting that when trying to load new
+Cuda files yes you are I tell you what
+Cuda files yes you are I tell you what
+you're
+you're
+missing so are you on puffer
+tank is this one the Box
+okay so I can show you you you don't
+okay so I can show you you you don't
+have the right version of Cuda um let me
+have the right version of Cuda um let me
+show
+show
+you it's not a pip
+package so if you even if you're not
+package so if you even if you're not
+going to use this if you just look at
+going to use this if you just look at
+our files once in a while in here uh you
+our files once in a while in here uh you
+need the Cuda developer uh you need Cuda
+need the Cuda developer uh you need Cuda
+development
+development
+version without Dev you can't build um
+you can't build like the new extensions
+you can't build like the new extensions
+and
+and
+stuff though I don't actually know why
+stuff though I don't actually know why
+that would be a problem in your case if
+that would be a problem in your case if
+you're not if you don't have like our
+you're not if you don't have like our
+advantage estimation
+stuff but this is what we have at the
+stuff but this is what we have at the
+moment yeah you can probably get like
+moment yeah you can probably get like
+Cuda Dev or whatever I have to see the
+Cuda Dev or whatever I have to see the
+exact error
+thought 4 each psgd cron
+worked e
+yeah so something weird happened here
+yeah so something weird happened here
+because
+because
+the learning rate
+the learning rate
+there oh it's because break out has its
+there oh it's because break out has its
+own learning rate I'm
+dumb
+dumb
+there so this does
+there so this does
+work we'll double check this
+d e
+somebody's linking me plasticity stuff e
+L2 regularization does just as
+well for
+maybe we do need
+maybe we do need
+L2 maybe we do need
+L2
+e e
+nothing private with these
+nothing private with these
+DMS be more interesting than me just
+DMS be more interesting than me just
+like sitting here typing stuff on the
+like sitting here typing stuff on the
+side
+something like pre-training for any epox
+something like pre-training for any epox
+in the first 50 class from fine tuning
+in the first 50 class from fine tuning
+on
+51 it learned but it never reaches the
+51 it learned but it never reaches the
+same
+same
+accuracy or loss
+h
+fortunately this doesn't seem to work
+fortunately this doesn't seem to work
+either
+here this trains but it doesn't train
+well I just do Mo on
+oh it's train.
+opum without
+activations e
+looks like he's done some stuff on this
+m
+m
+I'm trying to think what we do with that
+under the hoping this isn't some dumb
+under the hoping this isn't some dumb
+nerd snipe like exploration is but it
+nerd snipe like exploration is but it
+seems like this is potentially
+seems like this is potentially
+legitimate at least it's
+quantifiable
+for
+e e
+23385 I just want to see if the hypers
+23385 I just want to see if the hypers
+are like way different
+okay so bigger gradient
+norm and
+entropy oh this thing is screwing with
+entropy oh this thing is screwing with
+the value coefficient completely isn't
+it this thing is like totally screwing
+it this thing is like totally screwing
+with the value coefficient
+I mean that shouldn't work
+I mean that shouldn't work
+though that shouldn't
+though that shouldn't
+work if that does work then that tells
+work if that does work then that tells
+us there's a big problem
+my Cuda just
+crashed zero oh that's going to just grw
+crashed zero oh that's going to just grw
+up the value function I guess
+it's funny it can't back propop zero
+this is not even training a value
+this is not even training a value
+function so what does that even do
+I mean this should just basically be
+I mean this should just basically be
+reinforced
+reinforced
+right yeah this has got to just be
+reinforced it's interesting though
+reinforced it's interesting though
+because um I think GAE without a value
+because um I think GAE without a value
+function doesn't give you reinforce I'm
+function doesn't give you reinforce I'm
+going to have to look at
+that the fact that that does better it's
+that the fact that that does better it's
+concerning okay I'm I'm going to be back
+concerning okay I'm I'm going to be back
+in a little bit here I'm going to think
+in a little bit here I'm going to think
+about this I'll be back I don't know 5
+about this I'll be back I don't know 5
+10 minutes whatever I do a couple quick
+10 minutes whatever I do a couple quick
+things and uh we will definitely look
+things and uh we will definitely look
+more at this algorithm and see what we
+more at this algorithm and see what we
+can do about
+can do about
+it right
+back
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e e
+okay
+okay let's first see if
+okay let's first see if
+uh our sweep is still
+uh our sweep is still
+working looks like it
+is yeah we got some runs here
+kind of crazy to reinforce out of the
+kind of crazy to reinforce out of the
+box basically reinforce will do
+box basically reinforce will do
+uh 3 400
+score well I mean I know for sure that
+score well I mean I know for sure that
+uh you can get way higher score with
+uh you can get way higher score with
+this
+this
+algorithm question is
+algorithm question is
+why it should need to be tuned
+separately let's take a
+look yeah so it was this run right here
+look yeah so it was this run right here
+with this pretty low value function
+coefficient and I wonder if there's
+coefficient and I wonder if there's
+something to
+that you know maybe there is actually
+that you know maybe there is actually
+something to that it has a whole bunch
+something to that it has a whole bunch
+of different heads on
+of different heads on
+it I just want to see if this learns
+it I just want to see if this learns
+better than before
+there might be something about like slow
+there might be something about like slow
+learning
+value I mean and other than that
+value I mean and other than that
+like slight entropy
+difference but we have what we have
+difference but we have what we have
+entropy 01 yes see these are like all
+entropy 01 yes see these are like all
+pretty
+pretty
+dang reasonable
+these are all like reasonable
+defaults what did we get this is Lambda
+defaults what did we get this is Lambda
+Gamma 996 and
+83 oh you know the other thing we could
+try yeah hang on I know the other thing
+try yeah hang on I know the other thing
+we can try
+here yeah so there's nothing magic about
+here yeah so there's nothing magic about
+um like small but nonzero value function
+um like small but nonzero value function
+coefficient it's just
+coefficient it's just
+weird so the other thing we
+try um let's try
+try um let's try
+this with
+this with
+muon or with uh what I
+muon or with uh what I
+mean with just
+mean with just
+PPL so this should now just turn into
+PPL so this should now just turn into
+like
+discounting for
+interesting that this act looks like it
+interesting that this act looks like it
+does way
+worse it really is then the value
+worse it really is then the value
+function
+h
+yeah what about um can I find like the
+yeah what about um can I find like the
+best best results I had on
+this cuz I don't think that one was
+this cuz I don't think that one was
+particularly good
+nine
+I guess this one
+I guess this one
+maybe this was probably the best two4
+93 this is pretty well on par with the
+93 this is pretty well on par with the
+PO solve time I believe before um before
+PO solve time I believe before um before
+mu
+mu
+on so we should maybe be able to get
+on so we should maybe be able to get
+something out of
+something out of
+this 24 m
+okay so there you see there is a
+okay so there you see there is a
+reasonable value function coefficient on
+reasonable value function coefficient on
+this a
+point6 so I think what we'll do is we'll
+point6 so I think what we'll do is we'll
+try that
+try that
+next could just be it could just be
+next could just be it could just be
+something with the magnitude there
+arm of
+arm of
+one that shouldn't matter these two
+one that shouldn't matter these two
+explicitly don't
+matter did I yeah I forgot this one usp3
+that's interesting for
+look this is our Baseline right
+it's better than before but still not
+it's better than before but still not
+there
+low clipping so gradient Norm shouldn't
+low clipping so gradient Norm shouldn't
+matter learning rate of 05
+do you think these could have different
+do you think these could have different
+learning rate
+learning rate
+requirements the thing is it's just
+requirements the thing is it's just
+default now it's literally just the
+default also noticing this was two epoch
+should be able to get something working
+should be able to get something working
+better than this at
+better than this at
+least if this algorithm's any
+good are we learning the value function
+good are we learning the value function
+here let me see
+I mean
+it's
+yeah there a stupid green
+yeah there a stupid green
+one of
+this for
+I don't want to just sit here manually
+I don't want to just sit here manually
+tuning hyper prams all day that's a huge
+tuning hyper prams all day that's a huge
+waste of
+waste of
+time but I do want to develop some
+time but I do want to develop some
+understanding
+understanding
+of of this problem and how we can fix
+of of this problem and how we can fix
+this thing
+I mean this could literally just be as
+I mean this could literally just be as
+simple as
+simple as
+retuning is the thing as
+well I think the smartest thing to do
+well I think the smartest thing to do
+would just be to
+would just be to
+like keep queuing up more experiments on
+like keep queuing up more experiments on
+this stuff cuz there's just a lot of
+this stuff cuz there's just a lot of
+stuff to
+stuff to
+test I think the smartest thing is going
+test I think the smartest thing is going
+to be to just keep queuing up
+to be to just keep queuing up
+experiments and then do the stuff I know
+experiments and then do the stuff I know
+I can make progress on in the meanwhile
+I can make progress on in the meanwhile
+I'll let this one run though since we
+I'll let this one run though since we
+already have this this just to see if
+already have this this just to see if
+there's any
+difference got impulse warning
+difference got impulse warning
+on dev perf is same trying to bit slower
+on dev perf is same trying to bit slower
+uh it's slower because the optimizer
+uh it's slower because the optimizer
+muan has 10% overhead and uh cron has
+muan has 10% overhead and uh cron has
+about
+20% they work way better
+20% they work way better
+though I'd start with muan for now until
+though I'd start with muan for now until
+I figure out if there's something weird
+I figure out if there's something weird
+weird with
+cron okay well I can definitely convince
+cron okay well I can definitely convince
+myself from this that the value
+myself from this that the value
+function uh the value function magnitude
+function uh the value function magnitude
+is definitely important here let put 0.3
+is definitely important here let put 0.3
+last experiment while I just think about
+last experiment while I just think about
+what else to do I think we're going to
+what else to do I think we're going to
+probably want to do gradient
+probably want to do gradient
+noise uh if we can do gradient noise
+noise uh if we can do gradient noise
+next that would be
+cool
+for
+e e
+if you put
+if you put
+import reduce overhead speeds up oh
+import reduce overhead speeds up oh
+perfect yeah that's what I wanted to
+perfect yeah that's what I wanted to
+do that's what I was looking
+for it's been annoying the hell out of
+for it's been annoying the hell out of
+me
+mhm
+much
+appreciated oh because I refactored that
+appreciated oh because I refactored that
+thing
+thing
+recently I have to fix that every time
+recently I have to fix that every time
+you have to fix that every time you use
+you have to fix that every time you use
+puffer because you haven't fully updated
+puffer because you haven't fully updated
+yet I don't even think that's getting
+yet I don't even think that's getting
+imported as the
+thing like if you look we don't use
+thing like if you look we don't use
+these at the
+these at the
+moment right there used to be this
+moment right there used to be this
+additional layer where you had to wrap
+additional layer where you had to wrap
+you had to wrap everything in this and I
+you had to wrap everything in this and I
+got rid of that so I made the stack
+got rid of that so I made the stack
+thinner
+I've been meaning to refactor those for
+I've been meaning to refactor those for
+um compatibility with cleanar the idea
+um compatibility with cleanar the idea
+is that we make the main code path
+is that we make the main code path
+simpler so that you don't have to wrap
+simpler so that you don't have to wrap
+anything in order to use our demo code
+anything in order to use our demo code
+and then maybe you have to slightly wrap
+and then maybe you have to slightly wrap
+something if you want to use it with
+something if you want to use it with
+clean
+clean
+RL don't use recurrent wrapper you just
+RL don't use recurrent wrapper you just
+use the um the lstm
+use the um the lstm
+wrapper you just directly use the lstm
+wrapper you just directly use the lstm
+wrapper now
+wrapper now
+it's easier
+all right so what we're going to do for
+all right so what we're going to do for
+this then
+interesting default
+yeah that is what we found
+yeah that is what we found
+Captain so this was the major
+Captain so this was the major
+breakthrough
+breakthrough
+right I swept this with
+right I swept this with
+breakout those uh those prams are
+breakout those uh those prams are
+roughly tuned for
+roughly tuned for
+breakout and they work just about as
+breakout and they work just about as
+well as tuned atam on everything
+else sometimes better sometimes a little
+else sometimes better sometimes a little
+worse
+we're not done yet though
+you should definitely do a comparison
+you should definitely do a comparison
+against uh you know your
+original oh yeah
+original oh yeah
+Captain can I see your uh your sweep
+Captain can I see your uh your sweep
+config real
+config real
+quick I want to check
+something I guess it's just in here
+somewhere custom
+one thing I would
+one thing I would
+try just immediately and this is not a
+try just immediately and this is not a
+good idea this is a hack until uh I
+good idea this is a hack until uh I
+implement this correctly but just up
+implement this correctly but just up
+your mini batch size what do you have it
+your mini batch size what do you have it
+at right
+now where's mini badge oh you already
+now where's mini badge oh you already
+have this massive never mind yeah then
+have this massive never mind yeah then
+this is
+fine yeah they should already be
+good um yeah but you can try to keep
+good um yeah but you can try to keep
+this big mini batch
+this big mini batch
+size uh I noticed with neural MMO it
+size uh I noticed with neural MMO it
+doesn't seem to work on small mini
+doesn't seem to work on small mini
+batches
+what shouldn't shouldn't I sweep
+what shouldn't shouldn't I sweep
+over you can kind of sweep whatever I
+over you can kind of sweep whatever I
+have in the defaults if you want to it's
+have in the defaults if you want to it's
+just a lot of stuff to
+just a lot of stuff to
+sweep um you still need to do gamma
+sweep um you still need to do gamma
+Lambda entropy you still need the
+Lambda entropy you still need the
+learning rate's the biggest one probably
+learning rate's the biggest one probably
+at this
+at this
+point mini batch size is important uh
+point mini batch size is important uh
+big batch size has been
+big batch size has been
+helpful you know we have 500k default
+helpful you know we have 500k default
+mini batch has been useful for pretty
+mini batch has been useful for pretty
+much everything you might just even want
+much everything you might just even want
+to just keep
+to just keep
+that we're also able to use more
+that we're also able to use more
+environments now and Tim's training with
+environments now and Tim's training with
+more m is
+stable
+for
+e e
+not like
+that would you bother sweeping
+updox no you don't really have to
+bother I think we did increase the BPT
+bother I think we did increase the BPT
+Horizon
+default
+for
+e e
+how do you compute the gradient over
+how do you compute the gradient over
+multiple elements
+they do a [ __ ]
+Loop oh what's this n this doesn't work
+Loop oh what's this n this doesn't work
+either does it
+h
+I also use the trick you do in nuro
+3 how do you get it to work in a sweep
+3 how do you get it to work in a sweep
+since the backat size
+since the backat size
+changes there doesn't seem to wait to be
+changes there doesn't seem to wait to be
+a way to past custom ARS policies there
+a way to past custom ARS policies there
+is if you just give if you just do
+is if you just give if you just do
+policies here
+you
+you
+see if you just put a policy Block in
+see if you just put a policy Block in
+the any and you can put sweep as well it
+the any and you can put sweep as well it
+just passes
+it like there's not even an API for this
+it like there's not even an API for this
+or anything it's literally you just put
+or anything it's literally you just put
+stuff into the any file and you just
+stuff into the any file and you just
+pass it in and you're
+good I think what we're going to do for
+good I think what we're going to do for
+the gradient stuff here is
+I actually can't I
+just I can't actually do this I'm dumb
+just I can't actually do this I'm dumb
+hold
+hold
+on yeah I just I've been really dumb
+isn't it just divided I think it's
+linear for
+there might be a square
+there might be a square
+root or might be
+root or might be
+uh I see to easily pass bat size to the
+uh I see to easily pass bat size to the
+policy based on what the sweep algorithm
+policy based on what the sweep algorithm
+suggested just in your demo code
+suggested just in your demo code
+right in your demo
+right in your demo
+code if you want to do
+code if you want to do
+that
+oops just pass it here
+right ises this only get train
+right ises this only get train
+args well this has ARS args is hang on
+args well this has ARS args is hang on
+make
+policy yeah so you can just pass args of
+policy yeah so you can just pass args of
+train you can literally just do this
+train you can literally just do this
+right args
+right args
+train of what did you say batch size you
+train of what did you say batch size you
+can just do this
+it'll be
+good
+for e
+14 Ram samples is 50 it's not 50
+14 Ram samples is 50 it's not 50
+experiments though
+experiments though
+if you look at the way we do it that's
+if you look at the way we do it that's
+five
+five
+experiments you get the entire
+experiments you get the entire
+trajectory history at the moment so we
+trajectory history at the moment so we
+take the whole loss curve or the whole
+take the whole loss curve or the whole
+training curve we uh we subsample so we
+training curve we uh we subsample so we
+get 10 samples from
+get 10 samples from
+it and then you give 10 samples per
+it and then you give 10 samples per
+experiment to protein
+wanted to make it the number of
+wanted to make it the number of
+pams uh yes assuming that you actually
+pams uh yes assuming that you actually
+have my sub sampling code because you do
+have my sub sampling code because you do
+have a custom demo file
+right for
+because it was originally demo. because
+because it was originally demo. because
+it was originally just
+it was originally just
+demo and changing the name of the main
+demo and changing the name of the main
+file too often pisses people
+file too often pisses people
+off so we might change it for next
+release I mean what should I call it
+release I mean what should I call it
+inflate
+oh
+e e
+is it this
+is it this
+slow the
+heck really
+you wouldn't expect it to be that slow
+oh train mini bats you
+oh train mini bats you
+dummy yeah
+dummy yeah
+dummy there we
+go there we go
+all right let's put this on
+Neptune and then get a run of this and
+Neptune and then get a run of this and
+then we'll try neuro main dopie I don't
+then we'll try neuro main dopie I don't
+know sounds
+lame
+e e
+okay so here's our gradient
+variance
+for e
+h
+looks like it has way lower variant
+looks like it has way lower variant
+right long
+does what other end should I use for
+does what other end should I use for
+this snake
+and poer snake
+and then we try neural MMO and we see
+and then we try neural MMO and we see
+the questions going to be if um gradient
+the questions going to be if um gradient
+variance lines up with like rough
+variance lines up with like rough
+perception of
+difficulty e
+increases
+that solves really really fast now
+that solves really really fast now
+doesn't it
+Let It Go for a little longer cuz I know
+Let It Go for a little longer cuz I know
+the training Dynamics are kind of
+the training Dynamics are kind of
+interesting for this
+I wonder if they had uh reports for some
+I wonder if they had uh reports for some
+of their Ms I think that they
+did
+e e
+okay that's good enough for this
+one and then what about neuro mod three
+well there was a huge amount of gradient
+well there was a huge amount of gradient
+noise at the start right there for a
+noise at the start right there for a
+second
+yeah it was way up
+there e
+starting to optimize a little bit so
+starting to optimize a little bit so
+we'll see if uh that translates to
+we'll see if uh that translates to
+gradient noise going back
+up I guess it's gradient noise is low
+up I guess it's gradient noise is low
+because it's just not finding anything
+because it's just not finding anything
+for a while
+have a few more of these in here as well
+how did they compute this actually this
+variance for
+well the other thing here with this
+well the other thing here with this
+prediction is that
+prediction is that
+um you should be able to train with
+um you should be able to train with
+smaller batch size
+right and lower learning
+right and lower learning
+rate just getting around to fixing
+projectiles projectile ABS 120
+projectiles projectile ABS 120
+floats so
+floats so
+linear 128 torch Max
+and then yeah concatenate to encoder or
+and then yeah concatenate to encoder or
+whatever
+whatever
+yeah that would be the suggestion
+this doesn't seem like a super clear
+this doesn't seem like a super clear
+metric to me this gradient noise
+scale I wonder if this is just a proxy
+scale I wonder if this is just a proxy
+for reward sparsity
+honestly or reward
+variance e
+I guess with like muan in particular we
+I guess with like muan in particular we
+should be able to do some sort of
+should be able to do some sort of
+experiment to demonstrate bze mini bat
+experiment to demonstrate bze mini bat
+size and variance you would
+size and variance you would
+hope that's a good thing to do
+yeah the fact that this variance is so
+yeah the fact that this variance is so
+low is odd to
+me I mean the vast majority of these are
+me I mean the vast majority of these are
+getting no reward though so this is
+getting no reward though so this is
+probably just a measure of sparity and
+probably just a measure of sparity and
+more than
+more than
+any
+anything
+anything
+yeah that's
+interesting so I don't know about this
+interesting so I don't know about this
+as a this gradient variance is a a
+as a this gradient variance is a a
+useful
+measure I mean it's nice to log but I
+measure I mean it's nice to log but I
+don't know if it just tells you much on
+don't know if it just tells you much on
+its own know
+I think it is
+I think it is
+increasing but the scale is very
+low oh wait unless did I do this
+low oh wait unless did I do this
+wrong on times mini batch size
+wrong on times mini batch size
+yeah this is correct it should be times
+yeah this is correct it should be times
+mini bat
+size so yeah the gradient scale doesn't
+size so yeah the gradient scale doesn't
+I mean it is increasing
+I'll let this run a little longer just
+I'll let this run a little longer just
+because it's going to increase pretty
+because it's going to increase pretty
+quickly maybe here but like the absolute
+quickly maybe here but like the absolute
+scale doesn't seem to have anything to
+scale doesn't seem to have anything to
+do with the task difficulty and
+do with the task difficulty and
+definitely is not predictive of the um
+definitely is not predictive of the um
+backat size that you would
+need it's a little odd that they
+need it's a little odd that they
+actually found that in that it works
+actually found that in that it works
+because I don't see it
+here I suppose it could be that this
+here I suppose it could be that this
+just increases very high over the course
+just increases very high over the course
+of training if you train a good
+model so at least I can confirm that
+model so at least I can confirm that
+result that for some environments or
+result that for some environments or
+many environments it looks like uh the
+many environments it looks like uh the
+gradient noise does increase over the
+gradient noise does increase over the
+course of training
+the actual magnitude is lower than the
+the actual magnitude is lower than the
+magnitude of breakout
+magnitude of breakout
+Noise by a lot
+I wonder if there is any theoretical
+I wonder if there is any theoretical
+basis then for
+basis then for
+like if you made the gradient
+like if you made the gradient
+accumulation proportional to the
+accumulation proportional to the
+variance
+the problem is
+the problem is
+like I think gradient variant zero could
+like I think gradient variant zero could
+either mean that you have a perfect
+signal
+well I think you also have no gradient
+well I think you also have no gradient
+variance if you're stuck and aren't
+variance if you're stuck and aren't
+getting any
+getting any
+reward
+reward
+right yeah then you have no signal so I
+right yeah then you have no signal so I
+think that this thing is kind of brittle
+okay let's try a couple just quick
+okay let's try a couple just quick
+experiments on
+breakout so I want to test some
+breakout so I want to test some
+stuff I want to see if we can
+stuff I want to see if we can
+actually uh get
+actually uh get
+the behavior that we predict in
+practice e
+okay so we're going to do
+so divide by
+1024 I'm going to see if this curve
+1024 I'm going to see if this curve
+matches
+roughly
+oops e
+definitely slower wall clock but that's
+expected e
+and there is still potentially a little
+and there is still potentially a little
+more Jitter right in the smaller
+updates though they should be matched
+updates though they should be matched
+for the most part they should
+for the most part they should
+match and then we're going to check
+match and then we're going to check
+we're going to check a few things around
+we're going to check a few things around
+the learning right here
+so I think there is something with
+DotA e
+this is hardware scaling
+so when they say really big batch size
+so when they say really big batch size
+is essential
+oh wait do they have something on
+oh wait do they have something on
+learning right
+here do they just use the same learning
+here do they just use the same learning
+rate
+okay so we get to 790 which is not quite
+okay so we get to 790 which is not quite
+as
+as
+good a little bit of a gap
+good a little bit of a gap
+there now what we do
+is go back to the original earn rate run
+is go back to the original earn rate run
+this again keep looking at the
+this again keep looking at the
+paper not this one for the paper
+go think I'm doing something wrong there
+go think I'm doing something wrong there
+are 30 projections with four
+are 30 projections with four
+floats there are 30 projectiles with
+floats there are 30 projectiles with
+four floats per projectile Ops
+in that case 128 seems really
+in that case 128 seems really
+high for an input of
+four well yeah and that's where it can
+four well yeah and that's where it can
+be potentially slower um the issue that
+be potentially slower um the issue that
+you're going to run into though is it's
+you're going to run into though is it's
+not just 128 for an input of four 128 is
+not just 128 for an input of four 128 is
+the total embedding Dimension that
+the total embedding Dimension that
+you're going to compress all those
+you're going to compress all those
+projectiles
+projectiles
+into right so it's actually 120 going
+into right so it's actually 120 going
+into
+128 it could be that this is very slow
+128 it could be that this is very slow
+and then we have to fiddle with
+and then we have to fiddle with
+something
+else e
+so I mean this does not behave perfectly
+so I mean this does not behave perfectly
+predictably
+this staleness thing is crazy
+the Stillness thing is really crazy
+so I'm pretty sure this is
+so I'm pretty sure this is
+wrong this is what I used as my uh I
+wrong this is what I used as my uh I
+used this as a for a very very long time
+used this as a for a very very long time
+but recently I took another look at GAE
+but recently I took another look at GAE
+and I think it's really gamma time
+Lambda maybe it is gamma it's hard to
+Lambda maybe it is gamma it's hard to
+say from the
+formula I don't know about this though
+okay so we have our
+okay so we have our
+new
+ah so this actually
+ah so this actually
+matches this matches the original pretty
+matches this matches the original pretty
+well right
+what if we do
+16k does it still
+work
+e
+e e
+okay but this is half the number of
+okay but this is half the number of
+gradient updates as well
+gradient updates as well
+right so would be like Kish was it
+right so would be like Kish was it
+halfway to here is 40 so it would be
+halfway to here is 40 so it would be
+right there these match very
+closely
+96 need to try to puffer
+96 need to try to puffer
+box my desktop doing this drops 100K
+box my desktop doing this drops 100K
+SPS well yeah a lot of encoders
+SPS well yeah a lot of encoders
+right um You can try 64 for
+instance I mean the alternative right
+instance I mean the alternative right
+the alternative would be you do some
+the alternative would be you do some
+pre-processing on them you know you'd
+pre-processing on them you know you'd
+have to like order them or sort them or
+have to like order them or sort them or
+or
+something cuz right now it doesn't know
+something cuz right now it doesn't know
+what like it's got to learn what
+what like it's got to learn what
+projectiles wear as well
+oh look at
+oh look at
+that so we'll see whether in wall clock
+that so we'll see whether in wall clock
+this is better but look at that in
+steps
+e
+e e
+okay another version of this
+okay another version of this
+right another version of this is just
+right another version of this is just
+that the learning rate doesn't vary
+that the learning rate doesn't vary
+linearly right
+like there should exist some learning
+like there should exist some learning
+rate for which smaller batch does better
+rate for which smaller batch does better
+than bigger batch
+and but now look at
+this it's not bad but
+back this 4096 one here
+speed question is fast
+speed question is fast
+compile is fast compile that much
+compile is fast compile that much
+different than
+different than
+normal when
+normal when
+testing M Speed wa what is fast
+testing M Speed wa what is fast
+compile I is that much is fast compile
+compile I is that much is fast compile
+that much different I have the 6X yes
+that much different I have the 6X yes
+that's completely normal
+Spencer so
+Spencer so
+basically
+basically
+like you know how in Python if you try
+like you know how in Python if you try
+to access an element of an array that's
+to access an element of an array that's
+out of bounds you get an
+out of bounds you get an
+error and like there a whole bunch of
+error and like there a whole bunch of
+safeguards like that so those compile
+safeguards like that so those compile
+Flags inject all that stuff into
+Flags inject all that stuff into
+C so you essentially have like a modern
+C so you essentially have like a modern
+site like safe language right
+site like safe language right
+but it's way
+slower and there's not really any effort
+slower and there's not really any effort
+to make those checks fast either because
+to make those checks fast either because
+it's meant for debug mode
+anyways
+e e
+kind of very a little right these like
+kind of very a little right these like
+vary a
+vary a
+bit I don't see like a clear Trend
+though
+e e
+so I mean this is like
+better let see how this goes longer
+better let see how this goes longer
+term but still doesn't seem like it's it
+term but still doesn't seem like it's it
+doesn't seem like you get anything out
+doesn't seem like you get anything out
+of the smaller mini badges
+right that could be related to other
+right that could be related to other
+properties of the optimizer
+properties of the optimizer
+though right maybe it holds for SGD only
+though right maybe it holds for SGD only
+or whatever
+it didn't do better than uh than before
+though I did a about on pars the one
+though I did a about on pars the one
+where we just kept the learning rate the
+where we just kept the learning rate the
+same
+yeah out here a
+bot full block list of twitch Bots at
+bot full block list of twitch Bots at
+this point
+thought for a while M was way slower
+thought for a while M was way slower
+because I was only checking speed on
+because I was only checking speed on
+debug
+debug
+yeah that'll
+happen I added the compile Flags like I
+happen I added the compile Flags like I
+added those modes for a reason right not
+added those modes for a reason right not
+just to show
+off for
+I think I got to implement gradient
+I think I got to implement gradient
+accumulation
+accumulation
+next is what I've got to do because
+um yeah right here this
+um yeah right here this
+is this is kind of showing me that mini
+is this is kind of showing me that mini
+batch does not behave exactly the way
+batch does not behave exactly the way
+that you would
+that you would
+expect you know
+you always get better
+you always get better
+results a per step
+results a per step
+basis so there is a critical size it
+basis so there is a critical size it
+seems and what they were calling a
+seems and what they were calling a
+critical batch size is really a CR
+critical batch size is really a CR
+critical mini batch
+size and then batch size to mini batch
+size and then batch size to mini batch
+size gives you salness
+size gives you salness
+oo okay I see how this
+oo okay I see how this
+is time is it
+is time is it
+11 I think what I'm going to do is I'm
+11 I think what I'm going to do is I'm
+going to go think about this for a bit
+going to go think about this for a bit
+I'm going to get some exercise in get
+I'm going to get some exercise in get
+some food and then we're going to come
+some food and then we're going to come
+back we're going to implement gradient
+back we're going to implement gradient
+accumulation and we're going to try that
+accumulation and we're going to try that
+out so that'll be a new
+out so that'll be a new
+feature and uh let me just make sure
+feature and uh let me just make sure
+that these other sweeps are still
+that these other sweeps are still
+running correctly
+running correctly
+these have crashed a bunch of times and
+these have crashed a bunch of times and
+it's a total pain they seem like they're
+it's a total pain they seem like they're
+good this time
+good this time
+though see do we have anything
+cool oh yeah we've got some cool stuff
+cool oh yeah we've got some cool stuff
+here look at that
+boom first run that beats uh first few
+boom first run that beats uh first few
+runs actually that beat the
+runs actually that beat the
+previous previous winner
+previous previous winner
+this is still nice and steep as well up
+this is still nice and steep as well up
+here so we'll keep going on this for a
+here so we'll keep going on this for a
+little
+little
+bit what did this run do
+differently didn't drop like M's or
+differently didn't drop like M's or
+something M this is good
+yep fixed gamma
+yep fixed gamma
+Lambda Max Mini batch size you can see
+Lambda Max Mini batch size you can see
+right
+right
+here change precondition learning
+here change precondition learning
+rate drop this by a factor of
+two learning rate's pretty near the
+two learning rate's pretty near the
+default it's upped it by a little
+default it's upped it by a little
+bit a few other things but this is like
+bit a few other things but this is like
+reasonable I'm happy with
+reasonable I'm happy with
+that okay cool
+yeah I'm going to go uh get my exercise
+yeah I'm going to go uh get my exercise
+and stuff and then we will uh we'll see
+and stuff and then we will uh we'll see
+where we go from there so for the couple
+where we go from there so for the couple
+folks
+folks
+watching buffer. for all my stuff here
+watching buffer. for all my stuff here
+you want to follow all this
+you want to follow all this
+reinforcement learning
+reinforcement learning
+Dev Go Star the repo on GitHub really
+Dev Go Star the repo on GitHub really
+helps us
+helps us
+out other than that you can join the
+out other than that you can join the
+Discord to get involved Dev and follow
+Discord to get involved Dev and follow
+me on X for more content thanks

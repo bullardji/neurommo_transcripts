@@ -1,0 +1,3941 @@
+Kind: captions
+Language: en
+Good
+Good
+morning. We're back live.
+Hi. I'm on a bit early
+today. May I be forgiven for skipping
+today. May I be forgiven for skipping
+leg
+leg
+day, at least temporarily.
+Uh, okay. Let's take a look at some of
+Uh, okay. Let's take a look at some of
+the experiments that we ran
+overnight. Looks like it crashed at 167.
+overnight. Looks like it crashed at 167.
+So, that is
+So, that is
+odd. We We will check on that.
+Looks like we have a number of
+Looks like we have a number of
+reasonable runs
+here. Check
+score. Low is 45 mil for a
+solve. And then
+solve. And then
+oops, got relative times.
+oops, got relative times.
+uh that
+uh that
+are about
+are about
+23 23 seconds or so. 23 25 seconds for a
+23 23 seconds or so. 23 25 seconds for a
+solve. Pretty
+solve. Pretty
+good. Pretty pretty
+good. And then before we go into the
+good. And then before we go into the
+uh actual real analysis for
+uh actual real analysis for
+this. Oh yeah.
+this. Oh yeah.
+Okay. That's pretty damn good.
+So our sweep algorithm is really doing
+So our sweep algorithm is really doing
+things once
+things once
+again. These are quite nice
+results almost
+80%. So I think then what we will do
+80%. So I think then what we will do
+today we're going to start off with a
+today we're going to start off with a
+bit of analysis of these experiments.
+bit of analysis of these experiments.
+We're going to see if uh optimal
+We're going to see if uh optimal
+hyperparameters have changed quite a bit
+hyperparameters have changed quite a bit
+or not. See what has happened in that
+or not. See what has happened in that
+area.
+area.
+and then we will see where we go from
+and then we will see where we go from
+there. A lot of different potential
+there. A lot of different potential
+things to do
+today. I've not actually used this
+today. I've not actually used this
+interface in quite a while. Good to be
+interface in quite a while. Good to be
+back to this. So, yeah, here if we see
+back to this. So, yeah, here if we see
+this, this chart shows us how well runs
+this, this chart shows us how well runs
+we're doing uh over the course of the
+we're doing uh over the course of the
+sweep. You can see we get some middling
+sweep. You can see we get some middling
+ones early on, then we kind of latch on
+ones early on, then we kind of latch on
+and they get really good by the
+and they get really good by the
+end. We're still running a range of
+end. We're still running a range of
+different costs of experiments, which is
+different costs of experiments, which is
+what we would want.
+Good to little time
+Good to little time
+steps ranging
+steps ranging
+from like 40ome mil or no 50some mil up
+from like 40ome mil or no 50some mil up
+to 100 mil.
+to 100 mil.
+And with batch sizes not really being
+And with batch sizes not really being
+explored very much, which is a little
+odd. I'm just looking if there's
+odd. I'm just looking if there's
+anything super weird
+anything super weird
+here before we uh we go to the other
+view up here.
+lambda. We've got horizon num ms. We
+lambda. We've got horizon num ms. We
+didn't sweep this at all intentionally.
+didn't sweep this at all intentionally.
+So, this is going to stay
+So, this is going to stay
+here. Yeah. Then the costs are actually
+here. Yeah. Then the costs are actually
+quite well
+distributed. We get value
+distributed. We get value
+coefficient. So, these sweeps all look
+coefficient. So, these sweeps all look
+reasonable. Now, if we can get the uh
+reasonable. Now, if we can get the uh
+where is it? Sample. This one.
+where is it? Sample. This one.
+This is going to show us like hyperp
+This is going to show us like hyperp
+robustness. So this looks quite good,
+robustness. So this looks quite good,
+right? That we have these
+right? That we have these
+runs. We can solve with a pretty wide
+runs. We can solve with a pretty wide
+range. But you know, I actually I think
+range. But you know, I actually I think
+I want to filter this to be under 40
+I want to filter this to be under 40
+seconds
+seconds
+maybe because the thing is like you
+maybe because the thing is like you
+could have really good runs that still
+could have really good runs that still
+just take forever. But why don't we
+just take forever. But why don't we
+filter this to
+filter this to
+be I think that there are plenty of runs
+be I think that there are plenty of runs
+here under 35 seconds,
+right? Even under 30 seconds.
+right? Even under 30 seconds.
+No, cuz they take a while to eval. So,
+No, cuz they take a while to eval. So,
+we'll do 40
+seconds. So, we'll just do
+like time
+less than equal
+item. Really?
+do 45 since there's a startup time with
+do 45 since there's a startup time with
+All
+right.
+right.
+97 results that are less than 45
+seconds. Let's see if we're happy with
+seconds. Let's see if we're happy with
+this filter.
+I think we could be a little bit more
+I think we could be a little bit more
+aggressive on this,
+right? I mean, it's kind of hard to say
+right? I mean, it's kind of hard to say
+cuz some of these eval are so
+long. Maybe we'll go with this for
+long. Maybe we'll go with this for
+now. Okay.
+MIT has finals this week. No
+MIT has finals this week. No
+idea. Uh MIT is semester system, I
+idea. Uh MIT is semester system, I
+believe. Uh Stanford is quarter system,
+though. Their schedules are a bit
+different. I much preferred the um the
+different. I much preferred the um the
+trimester system. I will
+trimester system. I will
+say like the the quarter system.
+semester is just too
+semester is just too
+long. Like if you get behind in anything
+long. Like if you get behind in anything
+on week eight, you're screwed.
+Okay, so this still looks relatively
+Okay, so this still looks relatively
+like
+like
+stable and like the gamma range is still
+stable and like the gamma range is still
+relatively
+relatively
+stable and lambda is so like I this is
+stable and lambda is so like I this is
+confirming what I was thinking of like
+confirming what I was thinking of like
+it seems like the hyper pram ranges are
+it seems like the hyper pram ranges are
+just way more stable
+just way more stable
+uh than they used to
+uh than they used to
+be with the new optimizer and all the
+be with the new optimizer and all the
+new stuff we've
+done. There are some new parameters we
+done. There are some new parameters we
+have to check. Okay, so here's Adam beta
+have to check. Okay, so here's Adam beta
+1. Again, we're getting good runs
+1. Again, we're getting good runs
+anywhere from 0.9 to
+anywhere from 0.9 to
+0.98 beta
+2. This one stays quite high.
+So we're seeing like not much
+So we're seeing like not much
+dependence at all on
+dependence at all on
+these. Let's add some new scatters for
+these. Let's add some new scatters for
+the new
+the new
+metrics. IO
+alpha and then this will
+be train total time steps.
+be train total time steps.
+Why does this not have Yeah, there it
+Why does this not have Yeah, there it
+is.
+is.
+Last
+four. So, here's pryo
+four. So, here's pryo
+alpha. Uh, I totally messed up this
+alpha. Uh, I totally messed up this
+axis. Hang on.
+axis. Hang on.
+The x- axis should supposed to
+be alpha. There we
+be alpha. There we
+go. Doesn't look like there's a huge
+go. Doesn't look like there's a huge
+amount of dependence on
+this. We didn't really expect it to for
+this. We didn't really expect it to for
+this end.
+And interestingly, there doesn't seem to
+And interestingly, there doesn't seem to
+be very much dependence here
+be very much dependence here
+either. You solve with
+both. That's kind of weird actually
+because these do uh very different
+because these do uh very different
+things.
+Well, I suppose what we can do now,
+Well, I suppose what we can do now,
+right, is we can really just tune this
+right, is we can really just tune this
+into
+like we can go like 40
+seconds. Okay, so now we're at 65 items.
+seconds. Okay, so now we're at 65 items.
+These are now like the better
+experiments. We still don't really see
+experiments. We still don't really see
+any
+dependence kind of
+anywhere. So I guess it means that like
+anywhere. So I guess it means that like
+any of these hyperparameters
+any of these hyperparameters
+individually can be
+individually can be
+robust. So like kind of any value of any
+robust. So like kind of any value of any
+of these hyperparams individually is not
+of these hyperparams individually is not
+enough to break it. which is kind of
+enough to break it. which is kind of
+weird because this is definitely not how
+weird because this is definitely not how
+RL worked a few months ago. So, this has
+RL worked a few months ago. So, this has
+got to be a result of um all the new
+got to be a result of um all the new
+tuning that we did. I mean, all the new
+tuning that we did. I mean, all the new
+algorithm stuff that we did to enable
+algorithm stuff that we did to enable
+the
+tuning is quite good.
+tuning is quite good.
+So,
+um, what I think we do next
+um, what I think we do next
+is let's pick like a few good runs that
+is let's pick like a few good runs that
+we we know we like
+here. Actually, I don't necessarily even
+here. Actually, I don't necessarily even
+want this filter anymore,
+right? Yeah, because like they're
+right? Yeah, because like they're
+actually they're runs up here or
+actually they're runs up here or
+whatever that they stretch
+whatever that they stretch
+farther. But this one is
+good. Uh the I really wish you could
+good. Uh the I really wish you could
+click on a
+run. Can we get that uh Neptune? It's
+run. Can we get that uh Neptune? It's
+like very silly that we can't do that.
+Like there's not a good way to sort
+Like there's not a good way to sort
+through these at all.
+Well, this I found one. This is one run.
+27346. Here's what we're going to do.
+27346 is a very good one. Right.
+27346 is a very good one. Right.
+mil 20
+seconds. So, this is the right
+one. And do we
+one. And do we
+have guess there's like this purple one
+have guess there's like this purple one
+underneath of it? That looks pretty
+underneath of it? That looks pretty
+good. Oh, yeah. There's this green one
+good. Oh, yeah. There's this green one
+here. This like
+here. This like
+lime green. We probably want this one.
+Yeah, it's this one. 27
+385. So, we get two different runs
+here. The purple one actually looks
+here. The purple one actually looks
+higher in this
+This one's good as well. 375 27
+375. I'm just trying to get like a few
+375. I'm just trying to get like a few
+of the
+better the better runs
+better the better runs
+here. And let's get like one more
+I guess this one's good enough.
+27371. Just a little bit under.
+27371. Just a little bit under.
+Yeah. So, these are the runs we're going
+Yeah. So, these are the runs we're going
+to pick for our little bit of analysis
+here. And I just want to see like of the
+here. And I just want to see like of the
+top runs kind of like what's the spread
+top runs kind of like what's the spread
+in uh in hypers.
+in uh in hypers.
+Like the idea is any of these do pretty
+Like the idea is any of these do pretty
+well
+well
+individually? Like do they have similar
+individually? Like do they have similar
+hypers? Is this still a
+hypers? Is this still a
+range or what's going on here? And then
+range or what's going on here? And then
+we'll see if we can reproduce all of
+we'll see if we can reproduce all of
+these or if they're like no tricky to do
+these or if they're like no tricky to do
+that. Okay, so learning rate anywhere
+that. Okay, so learning rate anywhere
+from
+from
+01 to
+01 to
+07. So that's like a 2x range. It's
+07. So that's like a 2x range. It's
+pretty reasonable.
+pretty reasonable.
+Oh, I don't like this one actually. Hang
+Oh, I don't like this one actually. Hang
+on. Let's get a different run. I don't
+on. Let's get a different run. I don't
+like I don't like this run that didn't
+like I don't like this run that didn't
+quite converge.
+Get something
+better. We did this
+one one page. Next
+27346. Do we not have this one
+yet? We have this one. This was the best
+yet? We have this one. This was the best
+one.
+I wish um this is just like a missing
+I wish um this is just like a missing
+Neptune feature that should like you
+Neptune feature that should like you
+should just be able to click on
+should just be able to click on
+this or at least see the names correctly
+this or at least see the names correctly
+when you hover over them.
+This one's not
+This one's not
+bad.
+297. And this converges nicely. Okay,
+297. And this converges nicely. Okay,
+cool. I'm happy with this. And uh you
+cool. I'm happy with this. And uh you
+know what I'm going to do? I'm going to
+know what I'm going to do? I'm going to
+just post this real quick.
+So what's this? This is like 50x
+200. Is that 10 billion steps of
+200. Is that 10 billion steps of
+breakout? Hang on. 50 mil five bill like
+breakout? Hang on. 50 mil five bill like
+10 bill steps of breakout.
+All
+right. The learning rate
+right. The learning rate
+here is anywhere from 0.01 to 0.017.
+here is anywhere from 0.01 to 0.017.
+you actually you get like a reasonable
+you actually you get like a reasonable
+range
+here. And actually, I'm going to take
+here. And actually, I'm going to take
+some notes down to like do these
+again because um this is kind of what
+again because um this is kind of what
+I'm going to do for the
+I'm going to do for the
+final
+final
+analysis of all this stuff for the
+analysis of all this stuff for the
+release.
+release.
+You'll get a quick preview then
+You'll get a quick preview then
+of of
+this re-release
+this re-release
+analysis run
+sweeps pick
+sweeps pick
+top
+top
+best
+best
+curves
+curves
+wise ram ranges for
+wise ram ranges for
+these. Uh probably
+do breakout snake
+do breakout snake
+maze
+maze
+three like one more tower
+climb maybe something like
+climb maybe something like
+that. We'll see which ones we use. I
+that. We'll see which ones we use. I
+think that's going to be a good
+think that's going to be a good
+start. Okay.
+start. Okay.
+The learning rate has roughly stable
+The learning rate has roughly stable
+regime factor of almost
+two. Uh gamma
+is gamma is actually pretty
+is gamma is actually pretty
+tight. Gamma is actually pretty tight
+tight. Gamma is actually pretty tight
+here if you know you look at it this
+here if you know you look at it this
+way. I guess we did only take like the
+way. I guess we did only take like the
+top
+few, but like there really only are a
+few, but like there really only are a
+few like really good ones in here. So
+few like really good ones in here. So
+gamma is constrained from
+gamma is constrained from
+974 to
+974 to
+985. So there's like a pretty narrow
+985. So there's like a pretty narrow
+range for that.
+range for that.
+Actually, we could also ablate these,
+Actually, we could also ablate these,
+right? That's actually another idea.
+I think we're going to have to do two
+I think we're going to have to do two
+M's for
+that maze. I'm glad I made that maze
+that maze. I'm glad I made that maze
+environment. It's been very, very
+environment. It's been very, very
+useful.
+Okay, so lambda lambda is way way more
+Okay, so lambda lambda is way way more
+robust as we expect here, right? So this
+robust as we expect here, right? So this
+is 84 to 96. Lambda doesn't really seem
+is 84 to 96. Lambda doesn't really seem
+to matter that
+to matter that
+much. We did not sweep up to 80
+pucks. Value coefficient is actually
+pucks. Value coefficient is actually
+these runs are all in a pretty narrow
+these runs are all in a pretty narrow
+range as well.
+one.135 radorm there's a bigger range
+here and
+here and
+then entropy
+coefficient. Okay, it actually does get
+coefficient. Okay, it actually does get
+some entropy now. I didn't do this
+some entropy now. I didn't do this
+before. I don't
+think we did not sweep Horizon
+here. And then we have sweep
+here. And then we have sweep
+progress. Oh, that's
+nothing. This batch size didn't get
+nothing. This batch size didn't get
+changed. Total time steps. Okay, this is
+changed. Total time steps. Okay, this is
+interesting. Anywhere from 65 million to
+interesting. Anywhere from 65 million to
+100 million.
+So some of these would just be slower
+So some of these would just be slower
+than others,
+right? I guess what we can do is we can
+right? I guess what we can do is we can
+like
+look. Oh, it's just the analysis at the
+look. Oh, it's just the analysis at the
+end. You see there's like this massive
+end. You see there's like this massive
+post
+analysis like it's not really doing
+analysis like it's not really doing
+anything here. It's already trained.
+anything here. It's already trained.
+Yeah. So these are actually like these
+Yeah. So these are actually like these
+are all done
+are all done
+at about the same time, right? This is
+at about the same time, right? This is
+where they're done. And if we do
+where they're done. And if we do
+like real time here, right? If we do
+like real time here, right? If we do
+real time and we just check here, it's
+real time and we just check here, it's
+they're done at 25 seconds. Definitely
+they're done at 25 seconds. Definitely
+by 30
+I am curious on Okay, they all use the
+I am curious on Okay, they all use the
+same mini batch
+same mini batch
+size. We did sweep mini batch size,
+size. We did sweep mini batch size,
+didn't
+we? If I check mini
+batch. Yeah, we totally swept mini
+batch. Yeah, we totally swept mini
+batch, right? It's just this is the best
+one. It's up to 16K, which is twice what
+one. It's up to 16K, which is twice what
+it used to be in our old version. And
+it used to be in our old version. And
+you could not get better than uh 8192
+you could not get better than uh 8192
+for breakout. So this is
+faster and better
+overall. One second.
+Okay.
+Okay.
+Um ah this tells a different story here.
+Um ah this tells a different story here.
+All right. Now we have a pretty narrow
+All right. Now we have a pretty narrow
+range
+range
+of atom beta
+of atom beta
+1 narrowish range and atom beta
+2 and the epsilons as
+well.
+Alpha. Okay. Pryo doesn't seem to
+Alpha. Okay. Pryo doesn't seem to
+be mattering a ton here or here. It's a
+be mattering a ton here or here. It's a
+little
+interesting. Little interesting how that
+works. Uh I didn't expect it to matter a
+works. Uh I didn't expect it to matter a
+ton here though. I'm a little surprised
+ton here though. I'm a little surprised
+at how much it doesn't matter, but we
+at how much it doesn't matter, but we
+will see. I'm not going to judge this
+will see. I'm not going to judge this
+until we see the maze results. The maze
+until we see the maze results. The maze
+results are the ones where we would
+results are the ones where we would
+expect this to really matter. If it
+expect this to really matter. If it
+doesn't matter there then something is
+up. Mind you this prioritize replay is
+up. Mind you this prioritize replay is
+one small portion of the sampling
+one small portion of the sampling
+algorithm.
+So, so a couple things we want to do
+here. The first thing is we're going to
+here. The first thing is we're going to
+pick one of
+pick one of
+these. I think we are going to pick the
+probably this dark one here which is
+probably this dark one here which is
+what's this
+what's this
+numbered
+27346. All right.
+What I want to do is first see if this
+What I want to do is first see if this
+run uh replicates appropriately. I
+run uh replicates appropriately. I
+really need to make a better way of
+really need to make a better way of
+copying settings over.
+So, this thing actually has a
+So, this thing actually has a
+ridiculously high learning rate now,
+ridiculously high learning rate now,
+right?
+I am curious to see if this works for
+I am curious to see if this works for
+other M. This is like a ludicrously high
+other M. This is like a ludicrously high
+learning
+rate. That is not changed.
+This is like maxed out
+alpha actually. That does wait. O no,
+alpha actually. That does wait. O no,
+this is mind alpha. Okay, that's
+this is mind alpha. Okay, that's
+actually interesting,
+actually interesting,
+right? I think I read the chart wrong
+then. Where's pry alpha?
+Two of these have minned
+alpha.
+Interesting. I mean, that does tell you
+Interesting. I mean, that does tell you
+something,
+something,
+right? Because
+right? Because
+um it's basically trying to not use this
+um it's basically trying to not use this
+parameter, but the other runs where it
+parameter, but the other runs where it
+is using it still work.
+Total time steps we'll do 75
+mil. So doesn't really do any more uh
+mil. So doesn't really do any more uh
+sample efficiency, but that's fine. We
+sample efficiency, but that's fine. We
+did not tune it for sample
+efficiency. We do have the ability to
+efficiency. We do have the ability to
+tune for sample efficiency with the
+tune for sample efficiency with the
+exact same algorithm.
+And then we did not sweep any NFS. So if
+And then we did not sweep any NFS. So if
+I let if I did not miss anything here,
+I let if I did not miss anything here,
+this should work. Hey,
+this should work. Hey,
+welcome. How's it going,
+man? Neptune key.
+question
+mark.
+mark.
+Um, it's just not
+running. I know something's weird.
+Wrong
+Wrong
+branch. That's
+annoying. Call
+this I've seen you in here.
+this I've seen you in here.
+Welcome
+back. Okay, there we
+back. Okay, there we
+go. Now we just
+go. Now we just
+grab token and we see if we basically
+grab token and we see if we basically
+just see if this run matches.
+So, 25 second solve on a slightly faster
+So, 25 second solve on a slightly faster
+machine. We're training 2.3 mil steps
+machine. We're training 2.3 mil steps
+per second.
+Yeah. So, 26 27 on the slightly slower
+Yeah. So, 26 27 on the slightly slower
+machine. Very reasonable. And then done
+machine. Very reasonable. And then done
+training in
+30-ish.
+30-ish.
+Mhm. Okay. Those are good
+Mhm. Okay. Those are good
+settings. Yeah, those are good settings.
+I guess
+I guess
+like how robust is this
+like how robust is this
+thing? If I just like start grabbing
+thing? If I just like start grabbing
+parameters from
+parameters from
+other other runs like are they all
+other other runs like are they all
+highly correlated or not?
+like there were training uh learning
+like there were training uh learning
+rates up
+rates up
+to.17 right so if I just do this is this
+to.17 right so if I just do this is this
+still
+Yeah, that's about the exact like almost
+Yeah, that's about the exact like almost
+exactly the same as before,
+right? Final eval is almost
+right? Final eval is almost
+identical. And
+identical. And
+then if I go like outside of this range
+then if I go like outside of this range
+maybe
+I'm just trying to get a sense of how
+I'm just trying to get a sense of how
+correlated these all
+correlated these all
+are. There's probably a way better way
+are. There's probably a way better way
+to do this automatically, which I should
+to do this automatically, which I should
+do for release.
+Okay. So, this does do worse, right? So,
+Okay. So, this does do worse, right? So,
+if I go outside of the range of the
+if I go outside of the range of the
+sweeps, you see here, it's not like it's
+sweeps, you see here, it's not like it's
+not working. It is working, but it's
+not working. It is working, but it's
+going to take longer. So, anything in
+going to take longer. So, anything in
+the range uh specified is fine, which
+the range uh specified is fine, which
+actually is interesting
+actually is interesting
+because this uh this range like the low
+because this uh this range like the low
+end of this range is twice as high as I
+end of this range is twice as high as I
+had previously. Probably because of the
+had previously. Probably because of the
+mini batch size. It doubles mini batch
+mini batch size. It doubles mini batch
+size, so it doubles learning
+rate. What about
+gamma 8.985? Does this do stuff?
+Yep, that
+works. Slightly
+works. Slightly
+lower. Are these general sweeps? You're
+lower. Are these general sweeps? You're
+trying to sort of get a strong baseline.
+trying to sort of get a strong baseline.
+Captain, I'm trying to see ascertain
+Captain, I'm trying to see ascertain
+hyper pram robustness in general. So,
+hyper pram robustness in general. So,
+first thing is we didn't really do a
+first thing is we didn't really do a
+proper sweep for the uh the latest
+proper sweep for the uh the latest
+version of the code. So, I'm doing that.
+version of the code. So, I'm doing that.
+See if anything has uh has shifted. And
+See if anything has uh has shifted. And
+then from there,
+then from there,
+um, we're going to see like diff across
+um, we're going to see like diff across
+different M's if the optimals are
+different M's if the optimals are
+substantially different. So I have this
+substantially different. So I have this
+sweep to analyze right now and then I
+sweep to analyze right now and then I
+have the maze sweep to analyze and we're
+have the maze sweep to analyze and we're
+going to see how those two are
+different. Okay. So like
+This one was higher, right?
+This one was higher, right?
+973. What if I do
+that? Maybe. I just want to see how like
+that? Maybe. I just want to see how like
+how accurate these counts
+how accurate these counts
+are. Like, does it go higher if I go
+are. Like, does it go higher if I go
+towards this end of the pram range?
+I don't mind really. I don't mind just
+I don't mind really. I don't mind just
+playing around with a bunch of
+playing around with a bunch of
+experiments when they're this fast,
+experiments when they're this fast,
+right?
+Okay, that actually replicates like
+Okay, that actually replicates like
+really really well. This is slightly
+better. Like if I were looking for
+better. Like if I were looking for
+defaults that don't look insane, right?
+defaults that don't look insane, right?
+I could do something like
+I could do something like
+this. And then where's
+this. And then where's
+gamma? Where was it?
+lambda
+or what's this do?
+We're going to just test like the major
+We're going to just test like the major
+ones like entropy and stuff like that
+ones like entropy and stuff like that
+out.
+about the
+same. Is it robust in this range?
+doesn't seem like it
+doesn't seem like it
+is. This is
+worse. I restore
+this. We want to make sure we're not
+this. We want to make sure we're not
+also just looking at seed varants here,
+right? We're not going to do this level
+right? We're not going to do this level
+of manual fiddling for the maze that
+of manual fiddling for the maze that
+takes forever.
+takes forever.
+But it is useful once in a while to like
+But it is useful once in a while to like
+get a sense of how robust your RL
+feels. Okay. 860. So yeah, that is back
+feels. Okay. 860. So yeah, that is back
+to being correct. So let's see now if I
+to being correct. So let's see now if I
+just make a very small adjustment. So
+just make a very small adjustment. So
+this will change like the seating and
+this will change like the seating and
+very little
+very little
+else. I do 85. This
+else. I do 85. This
+should not have a big swing in it. If we
+should not have a big swing in it. If we
+have a consistent amp and a consistent
+have a consistent amp and a consistent
+training setup and we are
+robust, then I don't have to give hyper
+robust, then I don't have to give hyper
+pram defaults to like giant string of
+pram defaults to like giant string of
+digits.
+Okay. Yeah, this is very consistent,
+Okay. Yeah, this is very consistent,
+which is cool because breakout didn't
+which is cool because breakout didn't
+used to be, but this is very
+consistent. And uh the params aren't
+consistent. And uh the params aren't
+like if you change it a little bit, it
+like if you change it a little bit, it
+breaks. It's like it's pretty robust
+breaks. It's like it's pretty robust
+now. Now,
+now. Now,
+entropy. Actually interested to see
+entropy. Actually interested to see
+entropy. This is way more entropy than
+entropy. This is way more entropy than
+we've seen
+we've seen
+before. Do I not have entropy on
+before. Do I not have entropy on
+here? I saw it right there. Okay. So,
+here? I saw it right there. Okay. So,
+anywhere
+anywhere
+from
+from
+02, like
+02, like
+025ish all the way up to
+054. So what happens if I use
+054. So what happens if I use
+the first of all what happens if I do
+zero? Does this thing train without
+entropy? It's actually kind of better if
+entropy? It's actually kind of better if
+it doesn't because then uh we'll have
+it doesn't because then uh we'll have
+this as a nice test net for like when we
+this as a nice test net for like when we
+try to go replace entropy in the next
+try to go replace entropy in the next
+algorithm block.
+algorithm block.
+we'll have something to go off
+we'll have something to go off
+of. Okay, you can see that there is a
+um that's a pretty
+decent a pretty decent difference,
+decent a pretty decent difference,
+right?
+I mean, they get to very similar places,
+I mean, they get to very similar places,
+but where's the where did the other
+but where's the where did the other
+curve
+curve
+go? Yeah. So, this is the new
+one. Would it work if you made the
+one. Would it work if you made the
+entropy coefficient
+entropy coefficient
+negative? I don't know.
+I could imagine that messing stuff up
+I could imagine that messing stuff up
+quite
+easily. The entropy actually made like
+easily. The entropy actually made like
+it made it like these curves are
+it made it like these curves are
+different. It's not hugely important,
+different. It's not hugely important,
+but that is a
+but that is a
+distinction. That's not just random
+distinction. That's not just random
+noise.
+Breakout isn't an M where you'd expect
+Breakout isn't an M where you'd expect
+it to be super important
+though. So, it's going to be interesting
+though. So, it's going to be interesting
+to compare these results to the maze. I
+to compare these results to the maze. I
+do want to paste this because we got
+do want to paste this because we got
+about an hour before breakfast. So, I
+about an hour before breakfast. So, I
+want to get both of these analysis
+want to get both of these analysis
+results done before then. Okay. Yeah.
+results done before then. Okay. Yeah.
+So, it doesn't work with negative
+So, it doesn't work with negative
+entropy because it just determinizes the
+entropy because it just determinizes the
+policy, right?
+So like you get positive point plus 005
+So like you get positive point plus 005
+0 and
+negative.05. But now between point the
+negative.05. But now between point the
+low end of the range here and the high
+low end of the range here and the high
+end of the range can we tell the
+difference? See
+Low end is slightly
+better. Low end is slightly better
+actually. Like less exploration at the
+actually. Like less exploration at the
+start but better convergence. That's
+start but better convergence. That's
+about what we'd
+about what we'd
+expect. Keep this
+In some sweeps I did impulse wars train
+In some sweeps I did impulse wars train
+much better with very low
+entropy. Yeah, I mean I've seen that
+entropy. Yeah, I mean I've seen that
+too. It's going to it
+too. It's going to it
+depends like it just it depends.
+These things used to make no sense and
+These things used to make no sense and
+now they're starting to make more sense.
+now they're starting to make more sense.
+Right?
+the general
+vibe. Slightly worse.
+Yeah, entropy isn't really exploration
+Yeah, entropy isn't really exploration
+though is the thing.
+I mean, it's like dollar store
+I mean, it's like dollar store
+exploration, dime store
+explanation. It literally just
+explanation. It literally just
+encourages the agent to flail about a
+encourages the agent to flail about a
+bit.
+bit.
+Like, it's not exploration in any
+Like, it's not exploration in any
+meaningful sense of the word.
+So that made a big difference actually
+So that made a big difference actually
+that little tweak to G to uh that made a
+that little tweak to G to uh that made a
+big
+difference. So this pram actually
+difference. So this pram actually
+matters. We go to 99.
+Well, that's interesting. This atom
+term. I bet I didn't sweep it fully,
+right? No, I wait. I have a mass
+right? No, I wait. I have a mass
+of.99 on atom beta
+of.99 on atom beta
+1. It doesn't use it, though.
+What happens if I go to point uh
+What happens if I go to point uh
+99? Does this like do worse or
+There. Okay. So, this is worse,
+There. Okay. So, this is worse,
+right? That's why it doesn't go
+above. Yeah, that param matters a
+above. Yeah, that param matters a
+lot. Adam beta, but.99 seems
+good. Max gradient
+norm. This is one. This one is
+norm. This is one. This one is
+potentially interesting, right?
+What happens if we clip this a
+ton? So if it's using
+ton? So if it's using
+this. Okay. So clip track
+this. Okay. So clip track
+here. It's clipping a lot of the
+updates. We should suspect this hurts PF
+updates. We should suspect this hurts PF
+maybe.
+very marginal if anything at
+all. Okay.
+50. What if we're not clipping reds at
+all? Actually, that clip track term is
+all? Actually, that clip track term is
+based on KL, I
+believe, separate from the grad clip.
+Yeah. So this pram like doesn't matter
+Yeah. So this pram like doesn't matter
+at
+all. So like
+highly we know this one's highly
+highly we know this one's highly
+sensitive.
+This one's highly
+sensitive. And we'll do
+uh we'll do the value function after we
+uh we'll do the value function after we
+confirm this still works.
+And I do want to mess with the
+And I do want to mess with the
+um prioritize Replay.
+We recover
+weighted important sampling
+weighted important sampling
+with alpha equals 0 and beta equals
+1.
+Okay. But we need to look at this at
+Okay. But we need to look at this at
+some point. Then it makes sense I guess
+some point. Then it makes sense I guess
+that it
+that it
+did set this parameter
+zero
+here. I want to see if uh if it changes
+here. I want to see if uh if it changes
+if I set beta equal to one.
+Interestingly, o uh zero is a little
+Interestingly, o uh zero is a little
+worse than
+0.1. Oh, no. The eval is the same.
+0.1. Oh, no. The eval is the same.
+Okay. Logging
+Okay. Logging
+differences. What happens if I set this
+differences. What happens if I set this
+equal to one?
+That seems
+better. That is
+better. Yeah. And if I set it to zero
+literally doesn't matter.
+and then a value function coefficient.
+and then a value function coefficient.
+This one should have uh something to it,
+right? Five
+value function should have some
+sensitivity. Me actually see what the
+sensitivity. Me actually see what the
+range was from
+this value function in
+here 1.1. Okay, this actually has some
+here 1.1. Okay, this actually has some
+sensitivity to it, right?
+sensitivity to it, right?
+This performs substantially
+worse. That's way worse. And if I set
+worse. That's way worse. And if I set
+this to like 2.5
+amusingly still works very well at
+2.5, but I guess it just can't be too
+2.5, but I guess it just can't be too
+low. Value loss gets clipped anyways, so
+low. Value loss gets clipped anyways, so
+that's probably what's happening
+that's probably what's happening
+there. Yeah, it works very well at 2.5.
+Okay, though. With all this, we have
+Okay, though. With all this, we have
+a we have a good set of
+hypers. Got a good set of hypers.
+So next we will go to uh the
+So next we will go to uh the
+maze and we will
+maze and we will
+see how the results over there are
+see how the results over there are
+different.
+Oops. This next end can show it real
+Oops. This next end can show it real
+quick.
+So this is puffer grid the big maze
+So this is puffer grid the big maze
+environment. It will generate randomized
+environment. It will generate randomized
+mazes from very small to the size of
+mazes from very small to the size of
+this
+this
+window. And this is a very hard
+window. And this is a very hard
+environment for RL and only see a small
+environment for RL and only see a small
+window around itself. Um this is
+window around itself. Um this is
+generally a very difficult benchmark for
+generally a very difficult benchmark for
+RL to solve.
+But we've been getting very very good
+results. Uh and I can actually see that
+results. Uh and I can actually see that
+this this kept running. Yeah, this is
+this this kept running. Yeah, this is
+still running stuff. Cool. It did not
+still running stuff. Cool. It did not
+crash. Even better. Uh so now this is
+crash. Even better. Uh so now this is
+what we were more expecting, right? Now
+what we were more expecting, right? Now
+this like we actually get some way
+this like we actually get some way
+stronger looking dependence. So for a
+stronger looking dependence. So for a
+more complex N it seems that we get a a
+more complex N it seems that we get a a
+way clearer correlation with the hyper
+way clearer correlation with the hyper
+prams and we see
+prams and we see
+gamma here we see our learning rate
+gamma here we see our learning rate
+banded
+banded
+there learning rate's very different
+there learning rate's very different
+from um breakout but also the network
+from um breakout but also the network
+size is very different
+size is very different
+so
+lambda value function way higher. Okay,
+lambda value function way higher. Okay,
+so this is actually in line with what we
+so this is actually in line with what we
+were seeing with the higher value
+were seeing with the higher value
+function
+function
+coefficient max gradient
+coefficient max gradient
+norm seem to
+matter lower
+entropy. This is a super nice graph.
+We do go up and up in total time steps
+We do go up and up in total time steps
+potentially
+here. Best results obtained at very
+here. Best results obtained at very
+small mini batch
+small mini batch
+size.
+Interesting. We have our atom beta
+Interesting. We have our atom beta
+1 which actually this is a different
+1 which actually this is a different
+range than uh the other
+one. 87 for the best.
+Uh, and
+Uh, and
+here here this matters a ton, right?
+here here this matters a ton, right?
+Look at that. The prioritized replay
+Look at that. The prioritized replay
+matters a
+ton. That's a beautiful result right
+there. All right. So, so far this sweep
+there. All right. So, so far this sweep
+is like the best thing I could have
+is like the best thing I could have
+possibly asked
+possibly asked
+for. We're very happy with
+for. We're very happy with
+this. So, we have these scores like
+this. So, we have these scores like
+this. Not very many good runs. If you
+this. Not very many good runs. If you
+look at it in this way, we go on a uh
+look at it in this way, we go on a uh
+relative time axis
+instead. Changes quite a bit.
+where does it show priority buffer helps
+where does it show priority buffer helps
+a ton. So what you do for that captain
+a ton. So what you do for that captain
+is you look at these graphs and then you
+is you look at these graphs and then you
+look at uh you plot on the x-axis the
+look at uh you plot on the x-axis the
+hyperp and on the y- axis the score and
+hyperp and on the y- axis the score and
+then you can see across 170 some odd
+then you can see across 170 some odd
+runs the only good runs ever had very
+runs the only good runs ever had very
+high uh priority alpha coefficient. You
+high uh priority alpha coefficient. You
+see so this is one of the sensitivity
+see so this is one of the sensitivity
+analysis tools I like to use.
+Like similarly, right? You can
+Like similarly, right? You can
+see like the correlation here with
+see like the correlation here with
+um like the value function coefficient
+um like the value function coefficient
+for
+instance. Now what we do is we go grab a
+instance. Now what we do is we go grab a
+few runs and uh we look more closely
+Yeah, that's a new thing I added.
+Captain, I've been making progress.
+Captain, I've been making progress.
+We've been making heck of a lot of
+We've been making heck of a lot of
+progress in
+here. Better be with the amount I work
+here. Better be with the amount I work
+on this stuff.
+I think this is going to take me longer
+I think this is going to take me longer
+than the next 35 minutes though to
+than the next 35 minutes though to
+finish. We will
+see. We need this brown curve.
+see. We need this brown curve.
+But we need this brown curve.
+Maybe this one we can just filter.
+Dude, this is literally reminding me of
+Dude, this is literally reminding me of
+the
+um the Uncle Bob like closure isn't
+um the Uncle Bob like closure isn't
+fast. I was able to hit 20 frames per
+fast. I was able to hit 20 frames per
+second on my little game I built with
+it. Like Neptune is really fast. It's
+it. Like Neptune is really fast. It's
+like so many times faster than wanni.
+like so many times faster than wanni.
+Yeah, it's still
+Yeah, it's still
+slow. Still freaking
+slow. We should be sad that software is
+slow. We should be sad that software is
+like this
+nowadays. All right, so these actually
+nowadays. All right, so these actually
+these are pretty
+nice. Why don't we like just tune this
+nice. Why don't we like just tune this
+to like
+Perfect. Five
+items. These will be our runs that we
+use. It's 300 million steps of training.
+use. It's 300 million steps of training.
+You can see we get pretty good
+You can see we get pretty good
+performance from 200
+performance from 200
+mil. And on a relative time
+mil. And on a relative time
+axis, these
+axis, these
+are six to 10 minute
+experiments. Put sleep tariffs on Python
+experiments. Put sleep tariffs on Python
+imports. That's funny.
+You don't need the thing is the sad
+You don't need the thing is the sad
+thing is you don't need to put sleep
+thing is you don't need to put sleep
+tariffs on Python imports cuz some of
+tariffs on Python imports cuz some of
+them already take two seconds to import
+them already take two seconds to import
+a damn
+package. It's like crazy that like
+package. It's like crazy that like
+people do not realize that software
+people do not realize that software
+literally used to be a thousand times
+literally used to be a thousand times
+faster. Like I opened on um brand new
+faster. Like I opened on um brand new
+like Windows machine, highest end specs
+like Windows machine, highest end specs
+possible. Open a any application takes
+possible. Open a any application takes
+three seconds. Open like brand new Mac,
+three seconds. Open like brand new Mac,
+you know, new app, open an application
+you know, new app, open an application
+takes 3 seconds.
+takes 3 seconds.
+Like it's
+Like it's
+ridiculous. One, two. That's at least
+ridiculous. One, two. That's at least
+better, but that's still embarrassing.
+better, but that's still embarrassing.
+Should be instantaneous. No reason it
+Should be instantaneous. No reason it
+shouldn't be.
+30 seconds if it's intentional
+30 seconds if it's intentional
+software. No, it feels to me like most
+software. No, it feels to me like most
+developers are trying to do
+that. Okay. So, we get this nice band
+that. Okay. So, we get this nice band
+range
+range
+here. Band range here. very close gamma
+here. Band range here. very close gamma
+to what we happen to have for breakout
+to what we happen to have for breakout
+which is kind of
+interesting and
+lambda. Uh the tax for Electron is um if
+lambda. Uh the tax for Electron is um if
+you write an Electron app, you're just
+you write an Electron app, you're just
+like banned from writing software
+like banned from writing software
+because like what are you doing?
+You're just banned. Ah, shoot. You know,
+You're just banned. Ah, shoot. You know,
+I didn't realize that we had update
+I didn't realize that we had update
+epoch set to
+epoch set to
+two. So, I got to rerun this sweep with
+two. So, I got to rerun this sweep with
+update epox one. It'll probably be
+faster. Oh, actually, this looks like it
+faster. Oh, actually, this looks like it
+swept update epochs.
+H I guess the swept update epox.
+I think we just grab this policy to
+I think we just grab this policy to
+start
+start
+with. We just like grab this
+with. We just like grab this
+policy and then we
+uh we go from there.
+Like honestly, if I wanted to make a
+Like honestly, if I wanted to make a
+competitor for like either of these
+competitor for like either of these
+apps, Captain, I'd just be like, "What
+apps, Captain, I'd just be like, "What
+if we wrote the front end in array lib
+if we wrote the front end in array lib
+in
+C?" Congratulations. All your stuff
+C?" Congratulations. All your stuff
+responds
+instantly. Almost as if you didn't need
+instantly. Almost as if you didn't need
+that massive stack of dependencies.
+There's actually like a kind of a crazy
+There's actually like a kind of a crazy
+amount of
+amount of
+um there's like kind of a crazy amount
+um there's like kind of a crazy amount
+of upside these days in just like
+of upside these days in just like
+knowing what you're doing and
+knowing what you're doing and
+um and writing stuff super lowle because
+um and writing stuff super lowle because
+like think about it, you're going to be
+like think about it, you're going to be
+a thousand times faster than anyone
+a thousand times faster than anyone
+else. It's literally all I did with
+else. It's literally all I did with
+Puffer.
+Puffer.
+uh nobody else is going to be able to
+uh nobody else is going to be able to
+like remotely do what you're doing
+like remotely do what you're doing
+because freaking nobody knows how to
+because freaking nobody knows how to
+write anything that isn't like
+write anything that isn't like
+Typescript
+anymore. So like pretty much no matter
+anymore. So like pretty much no matter
+what you do in your fancy framework,
+what you do in your fancy framework,
+you're never going to match perfwise and
+you're never going to match perfwise and
+you're going to spend a ton of effort
+you're going to spend a ton of effort
+trying to match that
+trying to match that
+perf. kind of like a reasonable thing to
+perf. kind of like a reasonable thing to
+do these days, especially with people
+do these days, especially with people
+like just making more and more bad
+like just making more and more bad
+software like quicker and quicker with
+software like quicker and quicker with
+AI. It's like kind of the way to go is
+AI. It's like kind of the way to go is
+to actually build stuff correctly and
+to actually build stuff correctly and
+then you know you just you get the
+then you know you just you get the
+massive quality
+difference. This is max.
+Uh, this was actually only two four.
+Uh, this was actually only two four.
+This is only 250 mil
+This is only 250 mil
+steps. I think it didn't even need to be
+steps. I think it didn't even need to be
+that long,
+right? We don't forget update
+right? We don't forget update
+epochs two.
+epochs two.
+And then EF coefficient is
+And then EF coefficient is
+massive massive value function
+coefficient. Cool. Don't think I forgot
+coefficient. Cool. Don't think I forgot
+anything. I kind of just went down the
+anything. I kind of just went down the
+line so it should be
+line so it should be
+good.
+good.
+Yep. Cool. So we will see
+Yep. Cool. So we will see
+uh whether this does anything
+interesting. 47x 47 max size
+mazes. So 80% solve.
+mazes. So 80% solve.
+If you're assuming that you're always
+If you're assuming that you're always
+solving like the easiest like the
+solving like the easiest like the
+smallest mazes first, I believe
+smallest mazes first, I believe
+66% would be that you're solving always
+66% would be that you're solving always
+like 32 by 32. So this is better than an
+like 32 by 32. So this is better than an
+algorithm that just solves like 32x 32
+algorithm that just solves like 32x 32
+mazes. This is probably a very very very
+mazes. This is probably a very very very
+good
+good
+agent. Kind of cool.
+Okay, so this is already at 7.
+Okay, so this is already at 7.
+That's kind of
+That's kind of
+crazy to have
+crazy to have
+um this 100 million steps and that's
+um this 100 million steps and that's
+like wrecking our previous best policy
+like wrecking our previous best policy
+by a
+mile. And I shouldn't I should say more
+mile. And I shouldn't I should say more
+than this is just better than our
+than this is just better than our
+previous best policy. Uh I don't think
+previous best policy. Uh I don't think
+anything else is remotely close on any
+anything else is remotely close on any
+similar task in RL overall.
+Um, yeah, this is a very good
+result. So, I guess what I want to do
+result. So, I guess what I want to do
+while we're waiting for this, we got
+while we're waiting for this, we got
+another 20
+minutes. This was the best one
+minutes. This was the best one
+here. Best one
+here. Best one
+had this learning
+had this learning
+rate. I'm just looking for like anywhere
+rate. I'm just looking for like anywhere
+where one of these params seems like the
+where one of these params seems like the
+other ones suggest it could be done
+better. Value function coefficient just
+better. Value function coefficient just
+keeps going up and
+up. Actually suggest that like the
+up. Actually suggest that like the
+clipping param would be the one to look
+clipping param would be the one to look
+at.
+Axrad
+norm.
+Oops. The beta actually made a big
+Oops. The beta actually made a big
+difference over here.
+Right. I do wonder if we increase this
+epsilon as well.
+Interesting.
+Alpha zero.
+So, the two things I'm seeing
+So, the two things I'm seeing
+potentially are the atom beta
+1 and the
+1 and the
+um clipping
+Amazing RL.
+That's
+So, this actually does look like pretty
+So, this actually does look like pretty
+stable, pretty stable training. It's not
+stable, pretty stable training. It's not
+quite log
+quite log
+linear. Um, it does increase though.8
+88 would
+be up to like 40 by 40
+mapsish on average being solved.
+Well, I guess it's actually a little
+Well, I guess it's actually a little
+harder to
+say cuz you can complete several short
+say cuz you can complete several short
+maps uh in the time that it takes like
+maps uh in the time that it takes like
+to fail on one long
+to fail on one long
+map. But this should be pretty cool
+map. But this should be pretty cool
+policy to look at.
+Hey Tyler,
+Hey Tyler,
+welcome. We are analyzing a very large
+welcome. We are analyzing a very large
+number of
+experiments. We got new hypers for
+experiments. We got new hypers for
+breakout. We solve in about
+breakout. We solve in about
+seconds and we have new state-of-the-art
+seconds and we have new state-of-the-art
+maze
+maze
+results. Maze being just
+results. Maze being just
+um stand in ludicrously hard RL
+task. Well, should be state of the art.
+task. Well, should be state of the art.
+We'll see when we look at this policy in
+We'll see when we look at this policy in
+a
+a
+second. 82%
+Very clean train
+curve. Any cool drone stuff on your end?
+on
+board. Oh, I see what you mean.
+board. Oh, I see what you mean.
+Gotcha.
+Gotcha.
+Cool. Something similar. We should have
+Cool. Something similar. We should have
+something similar to Montazuma's
+something similar to Montazuma's
+revenge. I mean, you could go implement
+revenge. I mean, you could go implement
+it to be fair. It would take a bit.
+I mean, honestly, like
+I mean, honestly, like
+just you know who you should chat with?
+just you know who you should chat with?
+You should chat with Ryan cuz
+You should chat with Ryan cuz
+like Ryan wants to really get Net Hack
+like Ryan wants to really get Net Hack
+working. Um, they're just some really
+working. Um, they're just some really
+obnoxious infrastructure problems with
+obnoxious infrastructure problems with
+like getting Net Hack to run really
+like getting Net Hack to run really
+well. Um, and the thing is like you're
+well. Um, and the thing is like you're
+never going to make like a rogike
+never going to make like a rogike
+dungeon crawler type thing that's
+dungeon crawler type thing that's
+anywhere near the complexity of Net
+anywhere near the complexity of Net
+Hack. But I wonder if like just the
+Hack. But I wonder if like just the
+exploration art of Net Hack of like
+exploration art of Net Hack of like
+having to get through like a big rogike
+having to get through like a big rogike
+dungeon if we could add that to Puffer
+dungeon if we could add that to Puffer
+Grid. It would just be like a new map
+Grid. It would just be like a new map
+gengo, right? Like if you made like um
+gengo, right? Like if you made like um
+connect interconnected rooms
+connect interconnected rooms
+uh terrain gen algorithm, then instead
+uh terrain gen algorithm, then instead
+of explore maze, it could be explore
+of explore maze, it could be explore
+like maze of rooms or
+like maze of rooms or
+whatever. And then that would be
+whatever. And then that would be
+interesting to see if you get like
+interesting to see if you get like
+coherent roomto room travel just
+coherent roomto room travel just
+emergent like it learns to never just
+emergent like it learns to never just
+run around in the middle of a room for
+run around in the middle of a room for
+no reason.
+Okay. Well, that doesn't seem amazing,
+Okay. Well, that doesn't seem amazing,
+but this is a really unlucky seed. Look
+but this is a really unlucky seed. Look
+at this. You go down here and then
+at this. You go down here and then
+you're just totally
+stuck. Come on. There you
+stuck. Come on. There you
+go. Oh, that was good backtracking.
+The really long-term backtracking is
+The really long-term backtracking is
+still
+hard. This is like a really Some of
+hard. This is like a really Some of
+these bigger mazes have really hard
+these bigger mazes have really hard
+seeds. Look, this one is all wrong. And
+seeds. Look, this one is all wrong. And
+like this one should be easy enough,
+like this one should be easy enough,
+right? It'll get this one. Yeah.
+scattered. This does actually have keys
+scattered. This does actually have keys
+implemented, captain. You can do locked
+implemented, captain. You can do locked
+rooms in this
+rooms in this
+maison. It'd be actually pretty easy to
+maison. It'd be actually pretty easy to
+build stuff on top of this. I was trying
+build stuff on top of this. I was trying
+to make like
+to make like
+a decent like grid thing without making
+a decent like grid thing without making
+it too
+it too
+enginey. This policy can still
+enginey. This policy can still
+definitely be better though.
+We can definitely still do better than
+this. Not bad though. It's just like
+this. Not bad though. It's just like
+sucks that it has to go all the way back
+here. It's kind of doing like local
+here. It's kind of doing like local
+backtracking, right?
+backtracking, right?
+Like it'll backtrack 10 20
+Like it'll backtrack 10 20
+steps. But if it's on the other side of
+steps. But if it's on the other side of
+the map, it's just not going to do
+it. Like fair play. That's really hard
+it. Like fair play. That's really hard
+to
+to
+learn. Oh, wait. It got it. I didn't
+learn. Oh, wait. It got it. I didn't
+even see the
+even see the
+solution. Nope. No reason, Captain. We
+solution. Nope. No reason, Captain. We
+should uh we should randomize it. I just
+should uh we should randomize it. I just
+haven't
+haven't
+bothered. This is actually if you want
+bothered. This is actually if you want
+to do well you should absolutely get
+to do well you should absolutely get
+impulse force thing first but like this
+impulse force thing first but like this
+is a really good M if you want to like
+is a really good M if you want to like
+just a solid research task like this is
+just a solid research task like this is
+a really good M to do stuff
+with. Okay.
+with. Okay.
+So, get a couple ideas with
+this. See what happens if I do this.
+It is possible the combination of very
+It is possible the combination of very
+high value coefficient and clip is going
+high value coefficient and clip is going
+to screw it
+to screw it
+up. I had some earlier tests suggesting
+up. I had some earlier tests suggesting
+that VF clip was that way too low.
+This curve seems to be very similar
+This curve seems to be very similar
+though is somewhat disappointing.
+What did we say? This was pryo
+alpha. Hang on.
+alpha. Hang on.
+We had pryo alpha. Oh yeah, the atom
+beta.92. I think I had something else
+for.99 was better for
+for.99 was better for
+this. Let's try
+that. First of all, let's see is this
+that. First of all, let's see is this
+doing
+doing
+anything? Nope. Same curve. So, we don't
+anything? Nope. Same curve. So, we don't
+need to mess with the value function
+need to mess with the value function
+clip coefficient
+clip coefficient
+here. We do want to mess with this
+here. We do want to mess with this
+optimizer
+optimizer
+coefficient. So, we'll run this for a
+coefficient. So, we'll run this for a
+couple minutes and then I will go grab
+couple minutes and then I will go grab
+breakfast and then I will be back
+breakfast and then I will be back
+afterwards and we will be continuing to
+afterwards and we will be continuing to
+work
+work
+on probably getting a bunch of new
+on probably getting a bunch of new
+sweeps launched, sweeps analysis.
+Um, general cleanup, GPU drive, new M's
+Um, general cleanup, GPU drive, new M's
+cabin. It would be a good idea to start
+cabin. It would be a good idea to start
+getting uh Impulse Wars stuff training
+getting uh Impulse Wars stuff training
+nicely in a release soon as
+nicely in a release soon as
+well. We should definitely do
+well. We should definitely do
+that because like in my
+that because like in my
+mind, we need good end
+mind, we need good end
+benchmarks. We need good sweeps. I need
+benchmarks. We need good sweeps. I need
+to keep cleaning up the code a little
+to keep cleaning up the code a little
+bit more. And then we're pretty close to
+bit more. And then we're pretty close to
+release. I'm just doing that
+stuff. It's a different one.
+Okay, this seems
+Okay, this seems
+um seems
+um seems
+worse. It makes sense. You trust the
+worse. It makes sense. You trust the
+sweep,
+right? If you
+right? If you
+do take off
+do take off
+streams, sweeps on impulse. Yeah, I it's
+streams, sweeps on impulse. Yeah, I it's
+worth sweeping for
+sure. I don't know. It's It's pretty
+sure. I don't know. It's It's pretty
+likely at this point that we just like
+likely at this point that we just like
+just sweeping stuff kind of solves a lot
+just sweeping stuff kind of solves a lot
+of
+of
+it. You
+know, it's fairly likely, I'd say.
+Okay, I'm going to go for uh for
+Okay, I'm going to go for uh for
+breakfast and I will be back afterwards
+breakfast and I will be back afterwards
+working on all sorts of RL stuff for the
+working on all sorts of RL stuff for the
+whole rest of the day thereafter. So uh
+whole rest of the day thereafter. So uh
+for the folks watching this is all free
+for the folks watching this is all free
+and open source software. You can help
+and open source software. You can help
+me out for free just by starting the
+me out for free just by starting the
+repo. Are we at 2K or is it rounded
+repo. Are we at 2K or is it rounded
+still? I really would like to hit 2K
+today. Two stars. If two people watching
+today. Two stars. If two people watching
+this star it, we'll hit 2K right now,
+this star it, we'll hit 2K right now,
+which would be
+awesome. Puffer.ai/puffer on GitHub. Uh,
+awesome. Puffer.ai/puffer on GitHub. Uh,
+also linked from puffer.ai.
+also linked from puffer.ai.
+If you want to get involved with
+If you want to get involved with
+development, join the Discord. It's
+development, join the Discord. It's
+discord.gg/puffer. It's also on here.
+discord.gg/puffer. It's also on here.
+And um most of our top contributors came
+And um most of our top contributors came
+in with zero RL background whatsoever.
+in with zero RL background whatsoever.
+So, we make it pretty easy to get on
+So, we make it pretty easy to get on
+board and it's a great way to learn
+board and it's a great way to learn
+stuff in AI and RL specifically. Other
+stuff in AI and RL specifically. Other
+than that, you can follow me on X for
+than that, you can follow me on X for
+more RL content. So, thanks and I will
+more RL content. So, thanks and I will
+be back after breakfast, probably about
+be back after breakfast, probably about
+an hour. Five.
+
+Kind: captions
+Language: en
+Good
+Good
+morning. We're back live.
+Hi. I'm on a bit early
+today. May I be forgiven for skipping
+today. May I be forgiven for skipping
+leg
+leg
+day, at least temporarily.
+Uh, okay. Let's take a look at some of
+Uh, okay. Let's take a look at some of
+the experiments that we ran
+overnight. Looks like it crashed at 167.
+overnight. Looks like it crashed at 167.
+So, that is
+So, that is
+odd. We We will check on that.
+Looks like we have a number of
+Looks like we have a number of
+reasonable runs
+here. Check
+score. Low is 45 mil for a
+solve. And then
+solve. And then
+oops, got relative times.
+oops, got relative times.
+uh that
+uh that
+are about
+are about
+23 23 seconds or so. 23 25 seconds for a
+23 23 seconds or so. 23 25 seconds for a
+solve. Pretty
+solve. Pretty
+good. Pretty pretty
+good. And then before we go into the
+good. And then before we go into the
+uh actual real analysis for
+uh actual real analysis for
+this. Oh yeah.
+this. Oh yeah.
+Okay. That's pretty damn good.
+So our sweep algorithm is really doing
+So our sweep algorithm is really doing
+things once
+things once
+again. These are quite nice
+results almost
+80%. So I think then what we will do
+80%. So I think then what we will do
+today we're going to start off with a
+today we're going to start off with a
+bit of analysis of these experiments.
+bit of analysis of these experiments.
+We're going to see if uh optimal
+We're going to see if uh optimal
+hyperparameters have changed quite a bit
+hyperparameters have changed quite a bit
+or not. See what has happened in that
+or not. See what has happened in that
+area.
+area.
+and then we will see where we go from
+and then we will see where we go from
+there. A lot of different potential
+there. A lot of different potential
+things to do
+today. I've not actually used this
+today. I've not actually used this
+interface in quite a while. Good to be
+interface in quite a while. Good to be
+back to this. So, yeah, here if we see
+back to this. So, yeah, here if we see
+this, this chart shows us how well runs
+this, this chart shows us how well runs
+we're doing uh over the course of the
+we're doing uh over the course of the
+sweep. You can see we get some middling
+sweep. You can see we get some middling
+ones early on, then we kind of latch on
+ones early on, then we kind of latch on
+and they get really good by the
+and they get really good by the
+end. We're still running a range of
+end. We're still running a range of
+different costs of experiments, which is
+different costs of experiments, which is
+what we would want.
+Good to little time
+Good to little time
+steps ranging
+steps ranging
+from like 40ome mil or no 50some mil up
+from like 40ome mil or no 50some mil up
+to 100 mil.
+to 100 mil.
+And with batch sizes not really being
+And with batch sizes not really being
+explored very much, which is a little
+odd. I'm just looking if there's
+odd. I'm just looking if there's
+anything super weird
+anything super weird
+here before we uh we go to the other
+view up here.
+lambda. We've got horizon num ms. We
+lambda. We've got horizon num ms. We
+didn't sweep this at all intentionally.
+didn't sweep this at all intentionally.
+So, this is going to stay
+So, this is going to stay
+here. Yeah. Then the costs are actually
+here. Yeah. Then the costs are actually
+quite well
+distributed. We get value
+distributed. We get value
+coefficient. So, these sweeps all look
+coefficient. So, these sweeps all look
+reasonable. Now, if we can get the uh
+reasonable. Now, if we can get the uh
+where is it? Sample. This one.
+where is it? Sample. This one.
+This is going to show us like hyperp
+This is going to show us like hyperp
+robustness. So this looks quite good,
+robustness. So this looks quite good,
+right? That we have these
+right? That we have these
+runs. We can solve with a pretty wide
+runs. We can solve with a pretty wide
+range. But you know, I actually I think
+range. But you know, I actually I think
+I want to filter this to be under 40
+I want to filter this to be under 40
+seconds
+seconds
+maybe because the thing is like you
+maybe because the thing is like you
+could have really good runs that still
+could have really good runs that still
+just take forever. But why don't we
+just take forever. But why don't we
+filter this to
+filter this to
+be I think that there are plenty of runs
+be I think that there are plenty of runs
+here under 35 seconds,
+right? Even under 30 seconds.
+right? Even under 30 seconds.
+No, cuz they take a while to eval. So,
+No, cuz they take a while to eval. So,
+we'll do 40
+seconds. So, we'll just do
+like time
+less than equal
+item. Really?
+do 45 since there's a startup time with
+do 45 since there's a startup time with
+All
+right.
+right.
+97 results that are less than 45
+seconds. Let's see if we're happy with
+seconds. Let's see if we're happy with
+this filter.
+I think we could be a little bit more
+I think we could be a little bit more
+aggressive on this,
+right? I mean, it's kind of hard to say
+right? I mean, it's kind of hard to say
+cuz some of these eval are so
+long. Maybe we'll go with this for
+long. Maybe we'll go with this for
+now. Okay.
+MIT has finals this week. No
+MIT has finals this week. No
+idea. Uh MIT is semester system, I
+idea. Uh MIT is semester system, I
+believe. Uh Stanford is quarter system,
+though. Their schedules are a bit
+different. I much preferred the um the
+different. I much preferred the um the
+trimester system. I will
+trimester system. I will
+say like the the quarter system.
+semester is just too
+semester is just too
+long. Like if you get behind in anything
+long. Like if you get behind in anything
+on week eight, you're screwed.
+Okay, so this still looks relatively
+Okay, so this still looks relatively
+like
+like
+stable and like the gamma range is still
+stable and like the gamma range is still
+relatively
+relatively
+stable and lambda is so like I this is
+stable and lambda is so like I this is
+confirming what I was thinking of like
+confirming what I was thinking of like
+it seems like the hyper pram ranges are
+it seems like the hyper pram ranges are
+just way more stable
+just way more stable
+uh than they used to
+uh than they used to
+be with the new optimizer and all the
+be with the new optimizer and all the
+new stuff we've
+done. There are some new parameters we
+done. There are some new parameters we
+have to check. Okay, so here's Adam beta
+have to check. Okay, so here's Adam beta
+1. Again, we're getting good runs
+1. Again, we're getting good runs
+anywhere from 0.9 to
+anywhere from 0.9 to
+0.98 beta
+2. This one stays quite high.
+So we're seeing like not much
+So we're seeing like not much
+dependence at all on
+dependence at all on
+these. Let's add some new scatters for
+these. Let's add some new scatters for
+the new
+the new
+metrics. IO
+alpha and then this will
+be train total time steps.
+be train total time steps.
+Why does this not have Yeah, there it
+Why does this not have Yeah, there it
+is.
+is.
+Last
+four. So, here's pryo
+four. So, here's pryo
+alpha. Uh, I totally messed up this
+alpha. Uh, I totally messed up this
+axis. Hang on.
+axis. Hang on.
+The x- axis should supposed to
+be alpha. There we
+be alpha. There we
+go. Doesn't look like there's a huge
+go. Doesn't look like there's a huge
+amount of dependence on
+this. We didn't really expect it to for
+this. We didn't really expect it to for
+this end.
+And interestingly, there doesn't seem to
+And interestingly, there doesn't seem to
+be very much dependence here
+be very much dependence here
+either. You solve with
+both. That's kind of weird actually
+because these do uh very different
+because these do uh very different
+things.
+Well, I suppose what we can do now,
+Well, I suppose what we can do now,
+right, is we can really just tune this
+right, is we can really just tune this
+into
+like we can go like 40
+seconds. Okay, so now we're at 65 items.
+seconds. Okay, so now we're at 65 items.
+These are now like the better
+experiments. We still don't really see
+experiments. We still don't really see
+any
+dependence kind of
+anywhere. So I guess it means that like
+anywhere. So I guess it means that like
+any of these hyperparameters
+any of these hyperparameters
+individually can be
+individually can be
+robust. So like kind of any value of any
+robust. So like kind of any value of any
+of these hyperparams individually is not
+of these hyperparams individually is not
+enough to break it. which is kind of
+enough to break it. which is kind of
+weird because this is definitely not how
+weird because this is definitely not how
+RL worked a few months ago. So, this has
+RL worked a few months ago. So, this has
+got to be a result of um all the new
+got to be a result of um all the new
+tuning that we did. I mean, all the new
+tuning that we did. I mean, all the new
+algorithm stuff that we did to enable
+algorithm stuff that we did to enable
+the
+tuning is quite good.
+tuning is quite good.
+So,
+um, what I think we do next
+um, what I think we do next
+is let's pick like a few good runs that
+is let's pick like a few good runs that
+we we know we like
+here. Actually, I don't necessarily even
+here. Actually, I don't necessarily even
+want this filter anymore,
+right? Yeah, because like they're
+right? Yeah, because like they're
+actually they're runs up here or
+actually they're runs up here or
+whatever that they stretch
+whatever that they stretch
+farther. But this one is
+good. Uh the I really wish you could
+good. Uh the I really wish you could
+click on a
+run. Can we get that uh Neptune? It's
+run. Can we get that uh Neptune? It's
+like very silly that we can't do that.
+Like there's not a good way to sort
+Like there's not a good way to sort
+through these at all.
+Well, this I found one. This is one run.
+27346. Here's what we're going to do.
+27346 is a very good one. Right.
+27346 is a very good one. Right.
+mil 20
+seconds. So, this is the right
+one. And do we
+one. And do we
+have guess there's like this purple one
+have guess there's like this purple one
+underneath of it? That looks pretty
+underneath of it? That looks pretty
+good. Oh, yeah. There's this green one
+good. Oh, yeah. There's this green one
+here. This like
+here. This like
+lime green. We probably want this one.
+Yeah, it's this one. 27
+385. So, we get two different runs
+here. The purple one actually looks
+here. The purple one actually looks
+higher in this
+This one's good as well. 375 27
+375. I'm just trying to get like a few
+375. I'm just trying to get like a few
+of the
+better the better runs
+better the better runs
+here. And let's get like one more
+I guess this one's good enough.
+27371. Just a little bit under.
+27371. Just a little bit under.
+Yeah. So, these are the runs we're going
+Yeah. So, these are the runs we're going
+to pick for our little bit of analysis
+here. And I just want to see like of the
+here. And I just want to see like of the
+top runs kind of like what's the spread
+top runs kind of like what's the spread
+in uh in hypers.
+in uh in hypers.
+Like the idea is any of these do pretty
+Like the idea is any of these do pretty
+well
+well
+individually? Like do they have similar
+individually? Like do they have similar
+hypers? Is this still a
+hypers? Is this still a
+range or what's going on here? And then
+range or what's going on here? And then
+we'll see if we can reproduce all of
+we'll see if we can reproduce all of
+these or if they're like no tricky to do
+these or if they're like no tricky to do
+that. Okay, so learning rate anywhere
+that. Okay, so learning rate anywhere
+from
+from
+01 to
+01 to
+07. So that's like a 2x range. It's
+07. So that's like a 2x range. It's
+pretty reasonable.
+pretty reasonable.
+Oh, I don't like this one actually. Hang
+Oh, I don't like this one actually. Hang
+on. Let's get a different run. I don't
+on. Let's get a different run. I don't
+like I don't like this run that didn't
+like I don't like this run that didn't
+quite converge.
+Get something
+better. We did this
+one one page. Next
+27346. Do we not have this one
+yet? We have this one. This was the best
+yet? We have this one. This was the best
+one.
+I wish um this is just like a missing
+I wish um this is just like a missing
+Neptune feature that should like you
+Neptune feature that should like you
+should just be able to click on
+should just be able to click on
+this or at least see the names correctly
+this or at least see the names correctly
+when you hover over them.
+This one's not
+This one's not
+bad.
+297. And this converges nicely. Okay,
+297. And this converges nicely. Okay,
+cool. I'm happy with this. And uh you
+cool. I'm happy with this. And uh you
+know what I'm going to do? I'm going to
+know what I'm going to do? I'm going to
+just post this real quick.
+So what's this? This is like 50x
+200. Is that 10 billion steps of
+200. Is that 10 billion steps of
+breakout? Hang on. 50 mil five bill like
+breakout? Hang on. 50 mil five bill like
+10 bill steps of breakout.
+All
+right. The learning rate
+right. The learning rate
+here is anywhere from 0.01 to 0.017.
+here is anywhere from 0.01 to 0.017.
+you actually you get like a reasonable
+you actually you get like a reasonable
+range
+here. And actually, I'm going to take
+here. And actually, I'm going to take
+some notes down to like do these
+again because um this is kind of what
+again because um this is kind of what
+I'm going to do for the
+I'm going to do for the
+final
+final
+analysis of all this stuff for the
+analysis of all this stuff for the
+release.
+release.
+You'll get a quick preview then
+You'll get a quick preview then
+of of
+this re-release
+this re-release
+analysis run
+sweeps pick
+sweeps pick
+top
+top
+best
+best
+curves
+curves
+wise ram ranges for
+wise ram ranges for
+these. Uh probably
+do breakout snake
+do breakout snake
+maze
+maze
+three like one more tower
+climb maybe something like
+climb maybe something like
+that. We'll see which ones we use. I
+that. We'll see which ones we use. I
+think that's going to be a good
+think that's going to be a good
+start. Okay.
+start. Okay.
+The learning rate has roughly stable
+The learning rate has roughly stable
+regime factor of almost
+two. Uh gamma
+is gamma is actually pretty
+is gamma is actually pretty
+tight. Gamma is actually pretty tight
+tight. Gamma is actually pretty tight
+here if you know you look at it this
+here if you know you look at it this
+way. I guess we did only take like the
+way. I guess we did only take like the
+top
+few, but like there really only are a
+few, but like there really only are a
+few like really good ones in here. So
+few like really good ones in here. So
+gamma is constrained from
+gamma is constrained from
+974 to
+974 to
+985. So there's like a pretty narrow
+985. So there's like a pretty narrow
+range for that.
+range for that.
+Actually, we could also ablate these,
+Actually, we could also ablate these,
+right? That's actually another idea.
+I think we're going to have to do two
+I think we're going to have to do two
+M's for
+that maze. I'm glad I made that maze
+that maze. I'm glad I made that maze
+environment. It's been very, very
+environment. It's been very, very
+useful.
+Okay, so lambda lambda is way way more
+Okay, so lambda lambda is way way more
+robust as we expect here, right? So this
+robust as we expect here, right? So this
+is 84 to 96. Lambda doesn't really seem
+is 84 to 96. Lambda doesn't really seem
+to matter that
+to matter that
+much. We did not sweep up to 80
+pucks. Value coefficient is actually
+pucks. Value coefficient is actually
+these runs are all in a pretty narrow
+these runs are all in a pretty narrow
+range as well.
+one.135 radorm there's a bigger range
+here and
+here and
+then entropy
+coefficient. Okay, it actually does get
+coefficient. Okay, it actually does get
+some entropy now. I didn't do this
+some entropy now. I didn't do this
+before. I don't
+think we did not sweep Horizon
+here. And then we have sweep
+here. And then we have sweep
+progress. Oh, that's
+nothing. This batch size didn't get
+nothing. This batch size didn't get
+changed. Total time steps. Okay, this is
+changed. Total time steps. Okay, this is
+interesting. Anywhere from 65 million to
+interesting. Anywhere from 65 million to
+100 million.
+So some of these would just be slower
+So some of these would just be slower
+than others,
+right? I guess what we can do is we can
+right? I guess what we can do is we can
+like
+look. Oh, it's just the analysis at the
+look. Oh, it's just the analysis at the
+end. You see there's like this massive
+end. You see there's like this massive
+post
+analysis like it's not really doing
+analysis like it's not really doing
+anything here. It's already trained.
+anything here. It's already trained.
+Yeah. So these are actually like these
+Yeah. So these are actually like these
+are all done
+are all done
+at about the same time, right? This is
+at about the same time, right? This is
+where they're done. And if we do
+where they're done. And if we do
+like real time here, right? If we do
+like real time here, right? If we do
+real time and we just check here, it's
+real time and we just check here, it's
+they're done at 25 seconds. Definitely
+they're done at 25 seconds. Definitely
+by 30
+I am curious on Okay, they all use the
+I am curious on Okay, they all use the
+same mini batch
+same mini batch
+size. We did sweep mini batch size,
+size. We did sweep mini batch size,
+didn't
+we? If I check mini
+batch. Yeah, we totally swept mini
+batch. Yeah, we totally swept mini
+batch, right? It's just this is the best
+one. It's up to 16K, which is twice what
+one. It's up to 16K, which is twice what
+it used to be in our old version. And
+it used to be in our old version. And
+you could not get better than uh 8192
+you could not get better than uh 8192
+for breakout. So this is
+faster and better
+overall. One second.
+Okay.
+Okay.
+Um ah this tells a different story here.
+Um ah this tells a different story here.
+All right. Now we have a pretty narrow
+All right. Now we have a pretty narrow
+range
+range
+of atom beta
+of atom beta
+1 narrowish range and atom beta
+2 and the epsilons as
+well.
+Alpha. Okay. Pryo doesn't seem to
+Alpha. Okay. Pryo doesn't seem to
+be mattering a ton here or here. It's a
+be mattering a ton here or here. It's a
+little
+interesting. Little interesting how that
+works. Uh I didn't expect it to matter a
+works. Uh I didn't expect it to matter a
+ton here though. I'm a little surprised
+ton here though. I'm a little surprised
+at how much it doesn't matter, but we
+at how much it doesn't matter, but we
+will see. I'm not going to judge this
+will see. I'm not going to judge this
+until we see the maze results. The maze
+until we see the maze results. The maze
+results are the ones where we would
+results are the ones where we would
+expect this to really matter. If it
+expect this to really matter. If it
+doesn't matter there then something is
+up. Mind you this prioritize replay is
+up. Mind you this prioritize replay is
+one small portion of the sampling
+one small portion of the sampling
+algorithm.
+So, so a couple things we want to do
+here. The first thing is we're going to
+here. The first thing is we're going to
+pick one of
+pick one of
+these. I think we are going to pick the
+probably this dark one here which is
+probably this dark one here which is
+what's this
+what's this
+numbered
+27346. All right.
+What I want to do is first see if this
+What I want to do is first see if this
+run uh replicates appropriately. I
+run uh replicates appropriately. I
+really need to make a better way of
+really need to make a better way of
+copying settings over.
+So, this thing actually has a
+So, this thing actually has a
+ridiculously high learning rate now,
+ridiculously high learning rate now,
+right?
+I am curious to see if this works for
+I am curious to see if this works for
+other M. This is like a ludicrously high
+other M. This is like a ludicrously high
+learning
+rate. That is not changed.
+This is like maxed out
+alpha actually. That does wait. O no,
+alpha actually. That does wait. O no,
+this is mind alpha. Okay, that's
+this is mind alpha. Okay, that's
+actually interesting,
+actually interesting,
+right? I think I read the chart wrong
+then. Where's pry alpha?
+Two of these have minned
+alpha.
+Interesting. I mean, that does tell you
+Interesting. I mean, that does tell you
+something,
+something,
+right? Because
+right? Because
+um it's basically trying to not use this
+um it's basically trying to not use this
+parameter, but the other runs where it
+parameter, but the other runs where it
+is using it still work.
+Total time steps we'll do 75
+mil. So doesn't really do any more uh
+mil. So doesn't really do any more uh
+sample efficiency, but that's fine. We
+sample efficiency, but that's fine. We
+did not tune it for sample
+efficiency. We do have the ability to
+efficiency. We do have the ability to
+tune for sample efficiency with the
+tune for sample efficiency with the
+exact same algorithm.
+And then we did not sweep any NFS. So if
+And then we did not sweep any NFS. So if
+I let if I did not miss anything here,
+I let if I did not miss anything here,
+this should work. Hey,
+this should work. Hey,
+welcome. How's it going,
+man? Neptune key.
+question
+mark.
+mark.
+Um, it's just not
+running. I know something's weird.
+Wrong
+Wrong
+branch. That's
+annoying. Call
+this I've seen you in here.
+this I've seen you in here.
+Welcome
+back. Okay, there we
+back. Okay, there we
+go. Now we just
+go. Now we just
+grab token and we see if we basically
+grab token and we see if we basically
+just see if this run matches.
+So, 25 second solve on a slightly faster
+So, 25 second solve on a slightly faster
+machine. We're training 2.3 mil steps
+machine. We're training 2.3 mil steps
+per second.
+Yeah. So, 26 27 on the slightly slower
+Yeah. So, 26 27 on the slightly slower
+machine. Very reasonable. And then done
+machine. Very reasonable. And then done
+training in
+30-ish.
+30-ish.
+Mhm. Okay. Those are good
+Mhm. Okay. Those are good
+settings. Yeah, those are good settings.
+I guess
+I guess
+like how robust is this
+like how robust is this
+thing? If I just like start grabbing
+thing? If I just like start grabbing
+parameters from
+parameters from
+other other runs like are they all
+other other runs like are they all
+highly correlated or not?
+like there were training uh learning
+like there were training uh learning
+rates up
+rates up
+to.17 right so if I just do this is this
+to.17 right so if I just do this is this
+still
+Yeah, that's about the exact like almost
+Yeah, that's about the exact like almost
+exactly the same as before,
+right? Final eval is almost
+right? Final eval is almost
+identical. And
+identical. And
+then if I go like outside of this range
+then if I go like outside of this range
+maybe
+I'm just trying to get a sense of how
+I'm just trying to get a sense of how
+correlated these all
+correlated these all
+are. There's probably a way better way
+are. There's probably a way better way
+to do this automatically, which I should
+to do this automatically, which I should
+do for release.
+Okay. So, this does do worse, right? So,
+Okay. So, this does do worse, right? So,
+if I go outside of the range of the
+if I go outside of the range of the
+sweeps, you see here, it's not like it's
+sweeps, you see here, it's not like it's
+not working. It is working, but it's
+not working. It is working, but it's
+going to take longer. So, anything in
+going to take longer. So, anything in
+the range uh specified is fine, which
+the range uh specified is fine, which
+actually is interesting
+actually is interesting
+because this uh this range like the low
+because this uh this range like the low
+end of this range is twice as high as I
+end of this range is twice as high as I
+had previously. Probably because of the
+had previously. Probably because of the
+mini batch size. It doubles mini batch
+mini batch size. It doubles mini batch
+size, so it doubles learning
+rate. What about
+gamma 8.985? Does this do stuff?
+Yep, that
+works. Slightly
+works. Slightly
+lower. Are these general sweeps? You're
+lower. Are these general sweeps? You're
+trying to sort of get a strong baseline.
+trying to sort of get a strong baseline.
+Captain, I'm trying to see ascertain
+Captain, I'm trying to see ascertain
+hyper pram robustness in general. So,
+hyper pram robustness in general. So,
+first thing is we didn't really do a
+first thing is we didn't really do a
+proper sweep for the uh the latest
+proper sweep for the uh the latest
+version of the code. So, I'm doing that.
+version of the code. So, I'm doing that.
+See if anything has uh has shifted. And
+See if anything has uh has shifted. And
+then from there,
+then from there,
+um, we're going to see like diff across
+um, we're going to see like diff across
+different M's if the optimals are
+different M's if the optimals are
+substantially different. So I have this
+substantially different. So I have this
+sweep to analyze right now and then I
+sweep to analyze right now and then I
+have the maze sweep to analyze and we're
+have the maze sweep to analyze and we're
+going to see how those two are
+different. Okay. So like
+This one was higher, right?
+This one was higher, right?
+973. What if I do
+that? Maybe. I just want to see how like
+that? Maybe. I just want to see how like
+how accurate these counts
+how accurate these counts
+are. Like, does it go higher if I go
+are. Like, does it go higher if I go
+towards this end of the pram range?
+I don't mind really. I don't mind just
+I don't mind really. I don't mind just
+playing around with a bunch of
+playing around with a bunch of
+experiments when they're this fast,
+experiments when they're this fast,
+right?
+Okay, that actually replicates like
+Okay, that actually replicates like
+really really well. This is slightly
+better. Like if I were looking for
+better. Like if I were looking for
+defaults that don't look insane, right?
+defaults that don't look insane, right?
+I could do something like
+I could do something like
+this. And then where's
+this. And then where's
+gamma? Where was it?
+lambda
+or what's this do?
+We're going to just test like the major
+We're going to just test like the major
+ones like entropy and stuff like that
+ones like entropy and stuff like that
+out.
+about the
+same. Is it robust in this range?
+doesn't seem like it
+doesn't seem like it
+is. This is
+worse. I restore
+this. We want to make sure we're not
+this. We want to make sure we're not
+also just looking at seed varants here,
+right? We're not going to do this level
+right? We're not going to do this level
+of manual fiddling for the maze that
+of manual fiddling for the maze that
+takes forever.
+takes forever.
+But it is useful once in a while to like
+But it is useful once in a while to like
+get a sense of how robust your RL
+feels. Okay. 860. So yeah, that is back
+feels. Okay. 860. So yeah, that is back
+to being correct. So let's see now if I
+to being correct. So let's see now if I
+just make a very small adjustment. So
+just make a very small adjustment. So
+this will change like the seating and
+this will change like the seating and
+very little
+very little
+else. I do 85. This
+else. I do 85. This
+should not have a big swing in it. If we
+should not have a big swing in it. If we
+have a consistent amp and a consistent
+have a consistent amp and a consistent
+training setup and we are
+robust, then I don't have to give hyper
+robust, then I don't have to give hyper
+pram defaults to like giant string of
+pram defaults to like giant string of
+digits.
+Okay. Yeah, this is very consistent,
+Okay. Yeah, this is very consistent,
+which is cool because breakout didn't
+which is cool because breakout didn't
+used to be, but this is very
+consistent. And uh the params aren't
+consistent. And uh the params aren't
+like if you change it a little bit, it
+like if you change it a little bit, it
+breaks. It's like it's pretty robust
+breaks. It's like it's pretty robust
+now. Now,
+now. Now,
+entropy. Actually interested to see
+entropy. Actually interested to see
+entropy. This is way more entropy than
+entropy. This is way more entropy than
+we've seen
+we've seen
+before. Do I not have entropy on
+before. Do I not have entropy on
+here? I saw it right there. Okay. So,
+here? I saw it right there. Okay. So,
+anywhere
+anywhere
+from
+from
+02, like
+02, like
+025ish all the way up to
+054. So what happens if I use
+054. So what happens if I use
+the first of all what happens if I do
+zero? Does this thing train without
+entropy? It's actually kind of better if
+entropy? It's actually kind of better if
+it doesn't because then uh we'll have
+it doesn't because then uh we'll have
+this as a nice test net for like when we
+this as a nice test net for like when we
+try to go replace entropy in the next
+try to go replace entropy in the next
+algorithm block.
+algorithm block.
+we'll have something to go off
+we'll have something to go off
+of. Okay, you can see that there is a
+um that's a pretty
+decent a pretty decent difference,
+decent a pretty decent difference,
+right?
+I mean, they get to very similar places,
+I mean, they get to very similar places,
+but where's the where did the other
+but where's the where did the other
+curve
+curve
+go? Yeah. So, this is the new
+one. Would it work if you made the
+one. Would it work if you made the
+entropy coefficient
+entropy coefficient
+negative? I don't know.
+I could imagine that messing stuff up
+I could imagine that messing stuff up
+quite
+easily. The entropy actually made like
+easily. The entropy actually made like
+it made it like these curves are
+it made it like these curves are
+different. It's not hugely important,
+different. It's not hugely important,
+but that is a
+but that is a
+distinction. That's not just random
+distinction. That's not just random
+noise.
+Breakout isn't an M where you'd expect
+Breakout isn't an M where you'd expect
+it to be super important
+though. So, it's going to be interesting
+though. So, it's going to be interesting
+to compare these results to the maze. I
+to compare these results to the maze. I
+do want to paste this because we got
+do want to paste this because we got
+about an hour before breakfast. So, I
+about an hour before breakfast. So, I
+want to get both of these analysis
+want to get both of these analysis
+results done before then. Okay. Yeah.
+results done before then. Okay. Yeah.
+So, it doesn't work with negative
+So, it doesn't work with negative
+entropy because it just determinizes the
+entropy because it just determinizes the
+policy, right?
+So like you get positive point plus 005
+So like you get positive point plus 005
+0 and
+negative.05. But now between point the
+negative.05. But now between point the
+low end of the range here and the high
+low end of the range here and the high
+end of the range can we tell the
+difference? See
+Low end is slightly
+better. Low end is slightly better
+actually. Like less exploration at the
+actually. Like less exploration at the
+start but better convergence. That's
+start but better convergence. That's
+about what we'd
+about what we'd
+expect. Keep this
+In some sweeps I did impulse wars train
+In some sweeps I did impulse wars train
+much better with very low
+entropy. Yeah, I mean I've seen that
+entropy. Yeah, I mean I've seen that
+too. It's going to it
+too. It's going to it
+depends like it just it depends.
+These things used to make no sense and
+These things used to make no sense and
+now they're starting to make more sense.
+now they're starting to make more sense.
+Right?
+the general
+vibe. Slightly worse.
+Yeah, entropy isn't really exploration
+Yeah, entropy isn't really exploration
+though is the thing.
+I mean, it's like dollar store
+I mean, it's like dollar store
+exploration, dime store
+explanation. It literally just
+explanation. It literally just
+encourages the agent to flail about a
+encourages the agent to flail about a
+bit.
+bit.
+Like, it's not exploration in any
+Like, it's not exploration in any
+meaningful sense of the word.
+So that made a big difference actually
+So that made a big difference actually
+that little tweak to G to uh that made a
+that little tweak to G to uh that made a
+big
+difference. So this pram actually
+difference. So this pram actually
+matters. We go to 99.
+Well, that's interesting. This atom
+term. I bet I didn't sweep it fully,
+right? No, I wait. I have a mass
+right? No, I wait. I have a mass
+of.99 on atom beta
+of.99 on atom beta
+1. It doesn't use it, though.
+What happens if I go to point uh
+What happens if I go to point uh
+99? Does this like do worse or
+There. Okay. So, this is worse,
+There. Okay. So, this is worse,
+right? That's why it doesn't go
+above. Yeah, that param matters a
+above. Yeah, that param matters a
+lot. Adam beta, but.99 seems
+good. Max gradient
+norm. This is one. This one is
+norm. This is one. This one is
+potentially interesting, right?
+What happens if we clip this a
+ton? So if it's using
+ton? So if it's using
+this. Okay. So clip track
+this. Okay. So clip track
+here. It's clipping a lot of the
+updates. We should suspect this hurts PF
+updates. We should suspect this hurts PF
+maybe.
+very marginal if anything at
+all. Okay.
+50. What if we're not clipping reds at
+all? Actually, that clip track term is
+all? Actually, that clip track term is
+based on KL, I
+believe, separate from the grad clip.
+Yeah. So this pram like doesn't matter
+Yeah. So this pram like doesn't matter
+at
+all. So like
+highly we know this one's highly
+highly we know this one's highly
+sensitive.
+This one's highly
+sensitive. And we'll do
+uh we'll do the value function after we
+uh we'll do the value function after we
+confirm this still works.
+And I do want to mess with the
+And I do want to mess with the
+um prioritize Replay.
+We recover
+weighted important sampling
+weighted important sampling
+with alpha equals 0 and beta equals
+1.
+Okay. But we need to look at this at
+Okay. But we need to look at this at
+some point. Then it makes sense I guess
+some point. Then it makes sense I guess
+that it
+that it
+did set this parameter
+zero
+here. I want to see if uh if it changes
+here. I want to see if uh if it changes
+if I set beta equal to one.
+Interestingly, o uh zero is a little
+Interestingly, o uh zero is a little
+worse than
+0.1. Oh, no. The eval is the same.
+0.1. Oh, no. The eval is the same.
+Okay. Logging
+Okay. Logging
+differences. What happens if I set this
+differences. What happens if I set this
+equal to one?
+That seems
+better. That is
+better. Yeah. And if I set it to zero
+literally doesn't matter.
+and then a value function coefficient.
+and then a value function coefficient.
+This one should have uh something to it,
+right? Five
+value function should have some
+sensitivity. Me actually see what the
+sensitivity. Me actually see what the
+range was from
+this value function in
+here 1.1. Okay, this actually has some
+here 1.1. Okay, this actually has some
+sensitivity to it, right?
+sensitivity to it, right?
+This performs substantially
+worse. That's way worse. And if I set
+worse. That's way worse. And if I set
+this to like 2.5
+amusingly still works very well at
+2.5, but I guess it just can't be too
+2.5, but I guess it just can't be too
+low. Value loss gets clipped anyways, so
+low. Value loss gets clipped anyways, so
+that's probably what's happening
+that's probably what's happening
+there. Yeah, it works very well at 2.5.
+Okay, though. With all this, we have
+Okay, though. With all this, we have
+a we have a good set of
+hypers. Got a good set of hypers.
+So next we will go to uh the
+So next we will go to uh the
+maze and we will
+maze and we will
+see how the results over there are
+see how the results over there are
+different.
+Oops. This next end can show it real
+Oops. This next end can show it real
+quick.
+So this is puffer grid the big maze
+So this is puffer grid the big maze
+environment. It will generate randomized
+environment. It will generate randomized
+mazes from very small to the size of
+mazes from very small to the size of
+this
+this
+window. And this is a very hard
+window. And this is a very hard
+environment for RL and only see a small
+environment for RL and only see a small
+window around itself. Um this is
+window around itself. Um this is
+generally a very difficult benchmark for
+generally a very difficult benchmark for
+RL to solve.
+But we've been getting very very good
+results. Uh and I can actually see that
+results. Uh and I can actually see that
+this this kept running. Yeah, this is
+this this kept running. Yeah, this is
+still running stuff. Cool. It did not
+still running stuff. Cool. It did not
+crash. Even better. Uh so now this is
+crash. Even better. Uh so now this is
+what we were more expecting, right? Now
+what we were more expecting, right? Now
+this like we actually get some way
+this like we actually get some way
+stronger looking dependence. So for a
+stronger looking dependence. So for a
+more complex N it seems that we get a a
+more complex N it seems that we get a a
+way clearer correlation with the hyper
+way clearer correlation with the hyper
+prams and we see
+prams and we see
+gamma here we see our learning rate
+gamma here we see our learning rate
+banded
+banded
+there learning rate's very different
+there learning rate's very different
+from um breakout but also the network
+from um breakout but also the network
+size is very different
+size is very different
+so
+lambda value function way higher. Okay,
+lambda value function way higher. Okay,
+so this is actually in line with what we
+so this is actually in line with what we
+were seeing with the higher value
+were seeing with the higher value
+function
+function
+coefficient max gradient
+coefficient max gradient
+norm seem to
+matter lower
+entropy. This is a super nice graph.
+We do go up and up in total time steps
+We do go up and up in total time steps
+potentially
+here. Best results obtained at very
+here. Best results obtained at very
+small mini batch
+small mini batch
+size.
+Interesting. We have our atom beta
+Interesting. We have our atom beta
+1 which actually this is a different
+1 which actually this is a different
+range than uh the other
+one. 87 for the best.
+Uh, and
+Uh, and
+here here this matters a ton, right?
+here here this matters a ton, right?
+Look at that. The prioritized replay
+Look at that. The prioritized replay
+matters a
+ton. That's a beautiful result right
+there. All right. So, so far this sweep
+there. All right. So, so far this sweep
+is like the best thing I could have
+is like the best thing I could have
+possibly asked
+possibly asked
+for. We're very happy with
+for. We're very happy with
+this. So, we have these scores like
+this. So, we have these scores like
+this. Not very many good runs. If you
+this. Not very many good runs. If you
+look at it in this way, we go on a uh
+look at it in this way, we go on a uh
+relative time axis
+instead. Changes quite a bit.
+where does it show priority buffer helps
+where does it show priority buffer helps
+a ton. So what you do for that captain
+a ton. So what you do for that captain
+is you look at these graphs and then you
+is you look at these graphs and then you
+look at uh you plot on the x-axis the
+look at uh you plot on the x-axis the
+hyperp and on the y- axis the score and
+hyperp and on the y- axis the score and
+then you can see across 170 some odd
+then you can see across 170 some odd
+runs the only good runs ever had very
+runs the only good runs ever had very
+high uh priority alpha coefficient. You
+high uh priority alpha coefficient. You
+see so this is one of the sensitivity
+see so this is one of the sensitivity
+analysis tools I like to use.
+Like similarly, right? You can
+Like similarly, right? You can
+see like the correlation here with
+see like the correlation here with
+um like the value function coefficient
+um like the value function coefficient
+for
+instance. Now what we do is we go grab a
+instance. Now what we do is we go grab a
+few runs and uh we look more closely
+Yeah, that's a new thing I added.
+Captain, I've been making progress.
+Captain, I've been making progress.
+We've been making heck of a lot of
+We've been making heck of a lot of
+progress in
+here. Better be with the amount I work
+here. Better be with the amount I work
+on this stuff.
+I think this is going to take me longer
+I think this is going to take me longer
+than the next 35 minutes though to
+than the next 35 minutes though to
+finish. We will
+see. We need this brown curve.
+see. We need this brown curve.
+But we need this brown curve.
+Maybe this one we can just filter.
+Dude, this is literally reminding me of
+Dude, this is literally reminding me of
+the
+um the Uncle Bob like closure isn't
+um the Uncle Bob like closure isn't
+fast. I was able to hit 20 frames per
+fast. I was able to hit 20 frames per
+second on my little game I built with
+it. Like Neptune is really fast. It's
+it. Like Neptune is really fast. It's
+like so many times faster than wanni.
+like so many times faster than wanni.
+Yeah, it's still
+Yeah, it's still
+slow. Still freaking
+slow. We should be sad that software is
+slow. We should be sad that software is
+like this
+nowadays. All right, so these actually
+nowadays. All right, so these actually
+these are pretty
+nice. Why don't we like just tune this
+nice. Why don't we like just tune this
+to like
+Perfect. Five
+items. These will be our runs that we
+use. It's 300 million steps of training.
+use. It's 300 million steps of training.
+You can see we get pretty good
+You can see we get pretty good
+performance from 200
+performance from 200
+mil. And on a relative time
+mil. And on a relative time
+axis, these
+axis, these
+are six to 10 minute
+experiments. Put sleep tariffs on Python
+experiments. Put sleep tariffs on Python
+imports. That's funny.
+You don't need the thing is the sad
+You don't need the thing is the sad
+thing is you don't need to put sleep
+thing is you don't need to put sleep
+tariffs on Python imports cuz some of
+tariffs on Python imports cuz some of
+them already take two seconds to import
+them already take two seconds to import
+a damn
+package. It's like crazy that like
+package. It's like crazy that like
+people do not realize that software
+people do not realize that software
+literally used to be a thousand times
+literally used to be a thousand times
+faster. Like I opened on um brand new
+faster. Like I opened on um brand new
+like Windows machine, highest end specs
+like Windows machine, highest end specs
+possible. Open a any application takes
+possible. Open a any application takes
+three seconds. Open like brand new Mac,
+three seconds. Open like brand new Mac,
+you know, new app, open an application
+you know, new app, open an application
+takes 3 seconds.
+takes 3 seconds.
+Like it's
+Like it's
+ridiculous. One, two. That's at least
+ridiculous. One, two. That's at least
+better, but that's still embarrassing.
+better, but that's still embarrassing.
+Should be instantaneous. No reason it
+Should be instantaneous. No reason it
+shouldn't be.
+30 seconds if it's intentional
+30 seconds if it's intentional
+software. No, it feels to me like most
+software. No, it feels to me like most
+developers are trying to do
+that. Okay. So, we get this nice band
+that. Okay. So, we get this nice band
+range
+range
+here. Band range here. very close gamma
+here. Band range here. very close gamma
+to what we happen to have for breakout
+to what we happen to have for breakout
+which is kind of
+interesting and
+lambda. Uh the tax for Electron is um if
+lambda. Uh the tax for Electron is um if
+you write an Electron app, you're just
+you write an Electron app, you're just
+like banned from writing software
+like banned from writing software
+because like what are you doing?
+You're just banned. Ah, shoot. You know,
+You're just banned. Ah, shoot. You know,
+I didn't realize that we had update
+I didn't realize that we had update
+epoch set to
+epoch set to
+two. So, I got to rerun this sweep with
+two. So, I got to rerun this sweep with
+update epox one. It'll probably be
+faster. Oh, actually, this looks like it
+faster. Oh, actually, this looks like it
+swept update epochs.
+H I guess the swept update epox.
+I think we just grab this policy to
+I think we just grab this policy to
+start
+start
+with. We just like grab this
+with. We just like grab this
+policy and then we
+uh we go from there.
+Like honestly, if I wanted to make a
+Like honestly, if I wanted to make a
+competitor for like either of these
+competitor for like either of these
+apps, Captain, I'd just be like, "What
+apps, Captain, I'd just be like, "What
+if we wrote the front end in array lib
+if we wrote the front end in array lib
+in
+C?" Congratulations. All your stuff
+C?" Congratulations. All your stuff
+responds
+instantly. Almost as if you didn't need
+instantly. Almost as if you didn't need
+that massive stack of dependencies.
+There's actually like a kind of a crazy
+There's actually like a kind of a crazy
+amount of
+amount of
+um there's like kind of a crazy amount
+um there's like kind of a crazy amount
+of upside these days in just like
+of upside these days in just like
+knowing what you're doing and
+knowing what you're doing and
+um and writing stuff super lowle because
+um and writing stuff super lowle because
+like think about it, you're going to be
+like think about it, you're going to be
+a thousand times faster than anyone
+a thousand times faster than anyone
+else. It's literally all I did with
+else. It's literally all I did with
+Puffer.
+Puffer.
+uh nobody else is going to be able to
+uh nobody else is going to be able to
+like remotely do what you're doing
+like remotely do what you're doing
+because freaking nobody knows how to
+because freaking nobody knows how to
+write anything that isn't like
+write anything that isn't like
+Typescript
+anymore. So like pretty much no matter
+anymore. So like pretty much no matter
+what you do in your fancy framework,
+what you do in your fancy framework,
+you're never going to match perfwise and
+you're never going to match perfwise and
+you're going to spend a ton of effort
+you're going to spend a ton of effort
+trying to match that
+trying to match that
+perf. kind of like a reasonable thing to
+perf. kind of like a reasonable thing to
+do these days, especially with people
+do these days, especially with people
+like just making more and more bad
+like just making more and more bad
+software like quicker and quicker with
+software like quicker and quicker with
+AI. It's like kind of the way to go is
+AI. It's like kind of the way to go is
+to actually build stuff correctly and
+to actually build stuff correctly and
+then you know you just you get the
+then you know you just you get the
+massive quality
+difference. This is max.
+Uh, this was actually only two four.
+Uh, this was actually only two four.
+This is only 250 mil
+This is only 250 mil
+steps. I think it didn't even need to be
+steps. I think it didn't even need to be
+that long,
+right? We don't forget update
+right? We don't forget update
+epochs two.
+epochs two.
+And then EF coefficient is
+And then EF coefficient is
+massive massive value function
+coefficient. Cool. Don't think I forgot
+coefficient. Cool. Don't think I forgot
+anything. I kind of just went down the
+anything. I kind of just went down the
+line so it should be
+line so it should be
+good.
+good.
+Yep. Cool. So we will see
+Yep. Cool. So we will see
+uh whether this does anything
+interesting. 47x 47 max size
+mazes. So 80% solve.
+mazes. So 80% solve.
+If you're assuming that you're always
+If you're assuming that you're always
+solving like the easiest like the
+solving like the easiest like the
+smallest mazes first, I believe
+smallest mazes first, I believe
+66% would be that you're solving always
+66% would be that you're solving always
+like 32 by 32. So this is better than an
+like 32 by 32. So this is better than an
+algorithm that just solves like 32x 32
+algorithm that just solves like 32x 32
+mazes. This is probably a very very very
+mazes. This is probably a very very very
+good
+good
+agent. Kind of cool.
+Okay, so this is already at 7.
+Okay, so this is already at 7.
+That's kind of
+That's kind of
+crazy to have
+crazy to have
+um this 100 million steps and that's
+um this 100 million steps and that's
+like wrecking our previous best policy
+like wrecking our previous best policy
+by a
+mile. And I shouldn't I should say more
+mile. And I shouldn't I should say more
+than this is just better than our
+than this is just better than our
+previous best policy. Uh I don't think
+previous best policy. Uh I don't think
+anything else is remotely close on any
+anything else is remotely close on any
+similar task in RL overall.
+Um, yeah, this is a very good
+result. So, I guess what I want to do
+result. So, I guess what I want to do
+while we're waiting for this, we got
+while we're waiting for this, we got
+another 20
+minutes. This was the best one
+minutes. This was the best one
+here. Best one
+here. Best one
+had this learning
+had this learning
+rate. I'm just looking for like anywhere
+rate. I'm just looking for like anywhere
+where one of these params seems like the
+where one of these params seems like the
+other ones suggest it could be done
+better. Value function coefficient just
+better. Value function coefficient just
+keeps going up and
+up. Actually suggest that like the
+up. Actually suggest that like the
+clipping param would be the one to look
+clipping param would be the one to look
+at.
+Axrad
+norm.
+Oops. The beta actually made a big
+Oops. The beta actually made a big
+difference over here.
+Right. I do wonder if we increase this
+epsilon as well.
+Interesting.
+Alpha zero.
+So, the two things I'm seeing
+So, the two things I'm seeing
+potentially are the atom beta
+1 and the
+1 and the
+um clipping
+Amazing RL.
+That's
+So, this actually does look like pretty
+So, this actually does look like pretty
+stable, pretty stable training. It's not
+stable, pretty stable training. It's not
+quite log
+quite log
+linear. Um, it does increase though.8
+88 would
+be up to like 40 by 40
+mapsish on average being solved.
+Well, I guess it's actually a little
+Well, I guess it's actually a little
+harder to
+say cuz you can complete several short
+say cuz you can complete several short
+maps uh in the time that it takes like
+maps uh in the time that it takes like
+to fail on one long
+to fail on one long
+map. But this should be pretty cool
+map. But this should be pretty cool
+policy to look at.
+Hey Tyler,
+Hey Tyler,
+welcome. We are analyzing a very large
+welcome. We are analyzing a very large
+number of
+experiments. We got new hypers for
+experiments. We got new hypers for
+breakout. We solve in about
+breakout. We solve in about
+seconds and we have new state-of-the-art
+seconds and we have new state-of-the-art
+maze
+maze
+results. Maze being just
+results. Maze being just
+um stand in ludicrously hard RL
+task. Well, should be state of the art.
+task. Well, should be state of the art.
+We'll see when we look at this policy in
+We'll see when we look at this policy in
+a
+a
+second. 82%
+Very clean train
+curve. Any cool drone stuff on your end?
+on
+board. Oh, I see what you mean.
+board. Oh, I see what you mean.
+Gotcha.
+Gotcha.
+Cool. Something similar. We should have
+Cool. Something similar. We should have
+something similar to Montazuma's
+something similar to Montazuma's
+revenge. I mean, you could go implement
+revenge. I mean, you could go implement
+it to be fair. It would take a bit.
+I mean, honestly, like
+I mean, honestly, like
+just you know who you should chat with?
+just you know who you should chat with?
+You should chat with Ryan cuz
+You should chat with Ryan cuz
+like Ryan wants to really get Net Hack
+like Ryan wants to really get Net Hack
+working. Um, they're just some really
+working. Um, they're just some really
+obnoxious infrastructure problems with
+obnoxious infrastructure problems with
+like getting Net Hack to run really
+like getting Net Hack to run really
+well. Um, and the thing is like you're
+well. Um, and the thing is like you're
+never going to make like a rogike
+never going to make like a rogike
+dungeon crawler type thing that's
+dungeon crawler type thing that's
+anywhere near the complexity of Net
+anywhere near the complexity of Net
+Hack. But I wonder if like just the
+Hack. But I wonder if like just the
+exploration art of Net Hack of like
+exploration art of Net Hack of like
+having to get through like a big rogike
+having to get through like a big rogike
+dungeon if we could add that to Puffer
+dungeon if we could add that to Puffer
+Grid. It would just be like a new map
+Grid. It would just be like a new map
+gengo, right? Like if you made like um
+gengo, right? Like if you made like um
+connect interconnected rooms
+connect interconnected rooms
+uh terrain gen algorithm, then instead
+uh terrain gen algorithm, then instead
+of explore maze, it could be explore
+of explore maze, it could be explore
+like maze of rooms or
+like maze of rooms or
+whatever. And then that would be
+whatever. And then that would be
+interesting to see if you get like
+interesting to see if you get like
+coherent roomto room travel just
+coherent roomto room travel just
+emergent like it learns to never just
+emergent like it learns to never just
+run around in the middle of a room for
+run around in the middle of a room for
+no reason.
+Okay. Well, that doesn't seem amazing,
+Okay. Well, that doesn't seem amazing,
+but this is a really unlucky seed. Look
+but this is a really unlucky seed. Look
+at this. You go down here and then
+at this. You go down here and then
+you're just totally
+stuck. Come on. There you
+stuck. Come on. There you
+go. Oh, that was good backtracking.
+The really long-term backtracking is
+The really long-term backtracking is
+still
+hard. This is like a really Some of
+hard. This is like a really Some of
+these bigger mazes have really hard
+these bigger mazes have really hard
+seeds. Look, this one is all wrong. And
+seeds. Look, this one is all wrong. And
+like this one should be easy enough,
+like this one should be easy enough,
+right? It'll get this one. Yeah.
+scattered. This does actually have keys
+scattered. This does actually have keys
+implemented, captain. You can do locked
+implemented, captain. You can do locked
+rooms in this
+rooms in this
+maison. It'd be actually pretty easy to
+maison. It'd be actually pretty easy to
+build stuff on top of this. I was trying
+build stuff on top of this. I was trying
+to make like
+to make like
+a decent like grid thing without making
+a decent like grid thing without making
+it too
+it too
+enginey. This policy can still
+enginey. This policy can still
+definitely be better though.
+We can definitely still do better than
+this. Not bad though. It's just like
+this. Not bad though. It's just like
+sucks that it has to go all the way back
+here. It's kind of doing like local
+here. It's kind of doing like local
+backtracking, right?
+backtracking, right?
+Like it'll backtrack 10 20
+Like it'll backtrack 10 20
+steps. But if it's on the other side of
+steps. But if it's on the other side of
+the map, it's just not going to do
+it. Like fair play. That's really hard
+it. Like fair play. That's really hard
+to
+to
+learn. Oh, wait. It got it. I didn't
+learn. Oh, wait. It got it. I didn't
+even see the
+even see the
+solution. Nope. No reason, Captain. We
+solution. Nope. No reason, Captain. We
+should uh we should randomize it. I just
+should uh we should randomize it. I just
+haven't
+haven't
+bothered. This is actually if you want
+bothered. This is actually if you want
+to do well you should absolutely get
+to do well you should absolutely get
+impulse force thing first but like this
+impulse force thing first but like this
+is a really good M if you want to like
+is a really good M if you want to like
+just a solid research task like this is
+just a solid research task like this is
+a really good M to do stuff
+with. Okay.
+with. Okay.
+So, get a couple ideas with
+this. See what happens if I do this.
+It is possible the combination of very
+It is possible the combination of very
+high value coefficient and clip is going
+high value coefficient and clip is going
+to screw it
+to screw it
+up. I had some earlier tests suggesting
+up. I had some earlier tests suggesting
+that VF clip was that way too low.
+This curve seems to be very similar
+This curve seems to be very similar
+though is somewhat disappointing.
+What did we say? This was pryo
+alpha. Hang on.
+alpha. Hang on.
+We had pryo alpha. Oh yeah, the atom
+beta.92. I think I had something else
+for.99 was better for
+for.99 was better for
+this. Let's try
+that. First of all, let's see is this
+that. First of all, let's see is this
+doing
+doing
+anything? Nope. Same curve. So, we don't
+anything? Nope. Same curve. So, we don't
+need to mess with the value function
+need to mess with the value function
+clip coefficient
+clip coefficient
+here. We do want to mess with this
+here. We do want to mess with this
+optimizer
+optimizer
+coefficient. So, we'll run this for a
+coefficient. So, we'll run this for a
+couple minutes and then I will go grab
+couple minutes and then I will go grab
+breakfast and then I will be back
+breakfast and then I will be back
+afterwards and we will be continuing to
+afterwards and we will be continuing to
+work
+work
+on probably getting a bunch of new
+on probably getting a bunch of new
+sweeps launched, sweeps analysis.
+Um, general cleanup, GPU drive, new M's
+Um, general cleanup, GPU drive, new M's
+cabin. It would be a good idea to start
+cabin. It would be a good idea to start
+getting uh Impulse Wars stuff training
+getting uh Impulse Wars stuff training
+nicely in a release soon as
+nicely in a release soon as
+well. We should definitely do
+well. We should definitely do
+that because like in my
+that because like in my
+mind, we need good end
+mind, we need good end
+benchmarks. We need good sweeps. I need
+benchmarks. We need good sweeps. I need
+to keep cleaning up the code a little
+to keep cleaning up the code a little
+bit more. And then we're pretty close to
+bit more. And then we're pretty close to
+release. I'm just doing that
+stuff. It's a different one.
+Okay, this seems
+Okay, this seems
+um seems
+um seems
+worse. It makes sense. You trust the
+worse. It makes sense. You trust the
+sweep,
+right? If you
+right? If you
+do take off
+do take off
+streams, sweeps on impulse. Yeah, I it's
+streams, sweeps on impulse. Yeah, I it's
+worth sweeping for
+sure. I don't know. It's It's pretty
+sure. I don't know. It's It's pretty
+likely at this point that we just like
+likely at this point that we just like
+just sweeping stuff kind of solves a lot
+just sweeping stuff kind of solves a lot
+of
+of
+it. You
+know, it's fairly likely, I'd say.
+Okay, I'm going to go for uh for
+Okay, I'm going to go for uh for
+breakfast and I will be back afterwards
+breakfast and I will be back afterwards
+working on all sorts of RL stuff for the
+working on all sorts of RL stuff for the
+whole rest of the day thereafter. So uh
+whole rest of the day thereafter. So uh
+for the folks watching this is all free
+for the folks watching this is all free
+and open source software. You can help
+and open source software. You can help
+me out for free just by starting the
+me out for free just by starting the
+repo. Are we at 2K or is it rounded
+repo. Are we at 2K or is it rounded
+still? I really would like to hit 2K
+today. Two stars. If two people watching
+today. Two stars. If two people watching
+this star it, we'll hit 2K right now,
+this star it, we'll hit 2K right now,
+which would be
+awesome. Puffer.ai/puffer on GitHub. Uh,
+awesome. Puffer.ai/puffer on GitHub. Uh,
+also linked from puffer.ai.
+also linked from puffer.ai.
+If you want to get involved with
+If you want to get involved with
+development, join the Discord. It's
+development, join the Discord. It's
+discord.gg/puffer. It's also on here.
+discord.gg/puffer. It's also on here.
+And um most of our top contributors came
+And um most of our top contributors came
+in with zero RL background whatsoever.
+in with zero RL background whatsoever.
+So, we make it pretty easy to get on
+So, we make it pretty easy to get on
+board and it's a great way to learn
+board and it's a great way to learn
+stuff in AI and RL specifically. Other
+stuff in AI and RL specifically. Other
+than that, you can follow me on X for
+than that, you can follow me on X for
+more RL content. So, thanks and I will
+more RL content. So, thanks and I will
+be back after breakfast, probably about
+be back after breakfast, probably about
+an hour. Five.

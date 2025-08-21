@@ -1,0 +1,3329 @@
+Kind: captions
+Language: en
+should be back live
+should be back live
+here
+hi let's check the Discord for updates
+hi let's check the Discord for updates
+oops one dm then I got to answer on the
+oops one dm then I got to answer on the
+side
+side
+there uh and I think we'll be reviewing
+there uh and I think we'll be reviewing
+Blaster let's see
+okay
+so hold
+so hold
+on okay so this is all this is BET
+feedback contacts are a little
+feedback contacts are a little
+screwy uh update on code ball much
+screwy uh update on code ball much
+better last pointless
+better last pointless
+copy
+copy
+nice that's
+nice that's
+fine that usually happens
+step out of line
+step out of line
+what found a
+what found a
+bug tunnel through walls
+what's
+this okay bet I think is just looking at
+this okay bet I think is just looking at
+feedback investigated High compute time
+feedback investigated High compute time
+Fe observations the Bott neck any idea
+Fe observations the Bott neck any idea
+how to make this
+faster oh let's go check Xander M real
+quick
+quick
+see do have a perf test
+here so let's run
+here so let's run
+this and we will do some
+profiling does this stream
+up oh yeah there it is now it shows us
+up oh yeah there it is now it shows us
+up okay
+so yeah Xander your end is not slow
+let's figure out what's up with this
+let's figure out what's up with this
+it's and and python
+step
+num M's
+1024 this is
+correct um OB siiz
+maybe let's check OB
+maybe let's check OB
+siiz D type is nump and
+siiz D type is nump and
+8 num obs
+agent Site range agent Site range times
+agent Site range agent Site range times
+5 this is a perfectly reasonable
+obs that's very high EMP
+time that's actually kind of
+bizarre hey
+Xander um do you have any idea what's
+Xander um do you have any idea what's
+weird with this thing so if I build it
+weird with this thing so if I build it
+in C with fast on uh it's very good
+in C with fast on uh it's very good
+so I'm not sure where the perf drop is
+so I'm not sure where the perf drop is
+coming
+coming
+from let me see scon code
+maybe no your step function looks
+fine h
+it's definitely the
+end that's like particularly
+weird not sure just started
+weird not sure just started
+investigating
+investigating
+yeah report interval
+one is it the logging
+maybe no it wasn't the logging at all
+self. actions equal
+actions theog
+is the agent sight range not what I
+expect is that
+expect is that
+big don't think that should be too
+big I can always do this
+what's this do for
+us still
+21% that's
+21% that's
+crazy your M time should not be that
+crazy your M time should not be that
+slow let me make sure we didn't just
+slow let me make sure we didn't just
+break something and Puffer that's like
+suspicious yeah no it's
+suspicious yeah no it's
+fine okay so where could we possibly be
+fine okay so where could we possibly be
+dropping perf huh
+is it possible the per test is
+wrong let me
+wrong let me
+see m.n
+see m.n
+agents
+agents
+four oh wait Max steps
+300 I wonder if it's
+slower maybe like your reset function is
+slower maybe like your reset function is
+super slow or
+something that's
+this includes compute Ops
+this includes compute Ops
+right
+right
+yeah okay
+yeah okay
+so 2.3
+so 2.3
+million should be plenty
+fast really should be plenty
+fast really should be plenty
+fast and M
+fast and M
+start unless I'm missing something this
+start unless I'm missing something this
+looks like a perfectly good perf test
+added a
+added a
+call doesn't this do compute
+call doesn't this do compute
+observations
+though this already does compute
+though this already does compute
+observations Xander
+and that's normal but if it's 2.3
+and that's normal but if it's 2.3
+million with compute observations right
+million with compute observations right
+because if you're doing uh if you're
+because if you're doing uh if you're
+profile it step that already has
+profile it step that already has
+computer observations in
+it unless there's something wrong with
+it unless there's something wrong with
+the perf test which would
+like I suppose would make sense because
+like I suppose would make sense because
+it's kind of
+crazy for there to be that much of a
+crazy for there to be that much of a
+difference oh whoops yeah you're right
+difference oh whoops yeah you're right
+yeah so you're already doing that
+why is uh hold
+why is uh hold
+on you're only setting the action for
+on you're only setting the action for
+the first agent here to Rand percent 4
+right 1.5
+right 1.5
+million but that's still plenty fast
+Mir random moves still plenty
+fast do you have an llm Plugin or
+fast do you have an llm Plugin or
+something yes I have a super Maven I I
+something yes I have a super Maven I I
+highly suggest it it's just a fast auto
+highly suggest it it's just a fast auto
+complete like I don't use it for full
+complete like I don't use it for full
+functions I just use it to like
+functions I just use it to like
+autocomplete individual lines it's a
+autocomplete individual lines it's a
+nice piping
+nice piping
+buff well welcome back
+buff well welcome back
+Captain actually let me why why does
+Captain actually let me why why does
+nobody tell me when I do stupid [ __ ]
+nobody tell me when I do stupid [ __ ]
+like this like why does nobody tell me
+like this like why does nobody tell me
+when I clearly have my camera over my
+when I clearly have my camera over my
+terminal just be like hey Joseph you're
+terminal just be like hey Joseph you're
+being an idiot fix your
+being an idiot fix your
+term Cod EVS code
+term Cod EVS code
+yeah this one has a neoen plugin so I
+yeah this one has a neoen plugin so I
+like it and it's fast and the devs are
+like it and it's fast and the devs are
+cool
+I'm trash now let's try something like
+I'm trash now let's try something like
+this 20
+still 1.5
+M move all this garbage
+there we go that's
+cleaner step does reset as well
+right yeah Xander it's not the thing is
+right yeah Xander it's not the thing is
+compute OBS is going to be 90% of your
+compute OBS is going to be 90% of your
+time in an m like this like think about
+time in an m like this like think about
+it the actual action of moving stuff
+it the actual action of moving stuff
+around is free like most of your uh most
+around is free like most of your uh most
+your computer is going to go into
+your computer is going to go into
+compute OBS but that's not the problem
+compute OBS but that's not the problem
+if you're getting 1.5 million right then
+if you're getting 1.5 million right then
+you should just be fine you shouldn't
+you should just be fine you shouldn't
+have any perf issues at
+have any perf issues at
+all so I'm trying to figure out where
+all so I'm trying to figure out where
+they're coming
+from for
+you're not doing anything weird in here
+you're not doing anything weird in here
+as far as I can see
+OBS are reasonably
+sized I didn't see any overhead in here
+what's all the this error spam
+here okay this is just like weird scyon
+spam why is it compiling with
+spam why is it compiling with
+o1 and O2 okay
+o1 and O2 okay
+I think O2 takes
+precedence we didn't change anything
+precedence we didn't change anything
+that would mess this up
+right that's that's
+snake why are they're
+snake why are they're
+20 uh because cython and setup tools
+20 uh because cython and setup tools
+basically python is stupid is
+basically python is stupid is
+why so with multiprocessing we have 26%
+why so with multiprocessing we have 26%
+but that's still
+but that's still
+Oban it should be zero
+let me see what other param are on
+here e
+you just have to write a python perf
+you just have to write a python perf
+test
+sometimes we put these at the bottom of
+sometimes we put these at the bottom of
+files so that we can do a your python
+files so that we can do a your python
+perf test things are being
+stupid for
+what in the
+hell e
+okay so according to
+okay so according to
+this you get 900,000 out of
+this you get 900,000 out of
+uh out of
+C do it need to be faster
+C do it need to be faster
+like is it literally just
+like is it literally just
+that that it needs to just be faster
+that that it needs to just be faster
+than
+than
+this um cuz most of our M's are faster
+then hold
+on what if I just uh like
+on what if I just uh like
+return okay and then I do
+yeah okay so it is literally M
+yeah okay so it is literally M
+Speed yeah that makes sense I guess when
+Speed yeah that makes sense I guess when
+you add everything
+you add everything
+up okay so let's just make it a little
+up okay so let's just make it a little
+faster then
+this bounce
+check e
+I still have to advance
+it this bounce check is not
+it this bounce check is not
+helping you'd like to amortize this
+helping you'd like to amortize this
+bounce check I'm trying to think how to
+bounce check I'm trying to think how to
+do it with the way you have it set up
+I mean the one thing you could do would
+I mean the one thing you could do would
+be to
+compute compute the
+indices for
+why is this so slow compared
+why is this so slow compared
+to like what I do in snake I guess you
+to like what I do in snake I guess you
+have all these different channels is the
+thing type
+well there's some redundancy
+here for
+oh let's reverse this to be
+oh let's reverse this to be
+if not
+this is the same thing
+I don't know if this is correct let's
+I don't know if this is correct let's
+see
+error for
+that didn't help very
+that didn't help very
+much for
+I don't like this bounce check as the
+thing I'd have to profile this
+thing I'd have to profile this
+individually to
+see maybe we do have to
+see maybe we do have to
+Flip Flip the loops
+Flip Flip the loops
+and do the
+math
+math
+yeah I think we got to try at
+yeah I think we got to try at
+least so we're going to go
+to okay so here's our perf test
+I did make it a little
+faster oh wait a second cell type
+hang
+hang
+on am I just not reading
+correctly
+oh yeah that makes absolutely no sense
+oh yeah that makes absolutely no sense
+at all
+is there a m set here there is not
+okay so what we're going to do is we'll
+okay so what we're going to do is we'll
+get rid of this I
+get rid of this I
+[Music]
+[Music]
+believe
+believe
+unindent and then the one annoying thing
+unindent and then the one annoying thing
+is now we have to compute this
+is now we have to compute this
+observation
+observation
+index I think it's worth it though
+use negative 1 for empty I
+guess Xander is this ever
+guess Xander is this ever
+possible cell type I guess there's a
+possible cell type I guess there's a
+carrying option
+carrying option
+here
+here
+um I don't understand how these OBS are
+um I don't understand how these OBS are
+structured at the
+moment it's entity carrying
+it's carrying or not I don't understand
+it's carrying or not I don't understand
+how that
+how that
+works cuz you have or is it supposed to
+works cuz you have or is it supposed to
+be the fifth channels for carrying
+added in third Loop to get rid of single
+added in third Loop to get rid of single
+carrying
+carrying
+OBS okay so I don't think that was done
+OBS okay so I don't think that was done
+correctly if I did or whatever I don't
+correctly if I did or whatever I don't
+remember but um let's see
+remember but um let's see
+so cell
+type is this entity type so this is
+type is this entity type so this is
+always one to four so we
+do WS
+is is it division range minus
+one oh no it's
+one oh no it's
+not 0 to three
+yeah agent Site
+range
+e for
+okay something like this
+I think it's something like this
+I think it's something like this
+Vander let me see if this actually
+Vander let me see if this actually
+compiles
+first for
+Ah that's annoying that's not faster
+h
+it's got to be these computations right
+it's got to be these computations right
+let me
+see oh I didn't recompile hold on
+there we
+there we
+go that's what we want
+[Music]
+[Music]
+and then if all I do
+is if I just go to two M two workers
+there you go
+there you go
+Xander let's see if it still
+learns welcome YouTube folks currently
+learns welcome YouTube folks currently
+just doing a little bit of perf
+just doing a little bit of perf
+optimization on Xander's cool
+environment possible my indexing math is
+environment possible my indexing math is
+wrong here we will see if this thing
+wrong here we will see if this thing
+yeah it looks not to be training so
+yeah it looks not to be training so
+probably my index math is wrong
+probably my index math is wrong
+here let's figure that
+here let's figure that
+out it's nice and fast though
+so first of all this is this is four not
+so first of all this is this is four not
+five
+five
+um cell Y is Agent to y +
+um cell Y is Agent to y +
+D let's see so Channel offset is
+agent Site
+range so this has got to
+range so this has got to
+be yeah this is wrong so this
+is for
+let's see if that's
+right uh so Xander if you're still here
+right uh so Xander if you're still here
+what uh I did is you were looping over
+what uh I did is you were looping over
+each Channel you don't need to Loop over
+each Channel you don't need to Loop over
+the channels when it's just your one
+the channels when it's just your one
+hotting stuff right so you just Loop
+hotting stuff right so you just Loop
+over the uh the cell tiles you don't do
+over the uh the cell tiles you don't do
+all the Redundant checks and you just
+all the Redundant checks and you just
+set you just compute the index of the uh
+set you just compute the index of the uh
+the specific cell that needs to be one
+hotted I actually don't know why this is
+hotted I actually don't know why this is
+negative one either you should just be
+negative one either you should just be
+able to set this to
+able to set this to
+zero the way this is
+okay so still not
+training Channel offset
+is oh this is got to be this is totally
+is oh this is got to be this is totally
+wrong
+so you get your channel offset like
+so you get your channel offset like
+that out of bounds versus
+that out of bounds versus
+inbounds oh I see why you did that okay
+sure then you have to always
+sure then you have to always
+set you then you do have to set this to
+set you then you do have to set this to
+uh to zero though
+that's a little
+awkward well I guess what we can do is
+awkward well I guess what we can do is
+uh
+[Music]
+trash trash B yeah I see what you did
+trash trash B yeah I see what you did
+okay it's just slightly annoying to
+okay it's just slightly annoying to
+compute the OBS for us all
+for
+there's just some really obnoxious
+there's just some really obnoxious
+indexing math that we have to do here as
+all for
+shouldn't the did you what did you
+shouldn't the did you what did you
+change the plus one I was recomputing
+change the plus one I was recomputing
+the OBS index it's not plus one it's not
+the OBS index it's not plus one it's not
+contiguous in
+memory pretty sure that was the permute
+memory pretty sure that was the permute
+thing that you
+thing that you
+had it's Channel's first first not
+had it's Channel's first first not
+Channel's
+last
+for e
+this is actually the thing that's making
+this is actually the thing that's making
+our lives hard here is pie torch believe
+our lives hard here is pie torch believe
+it or
+it or
+not matching the way that pie torch uh
+not matching the way that pie torch uh
+expects
+expects
+data I don't know why the hell they do
+data I don't know why the hell they do
+it this way also it's very stupid to do
+it this way also it's very stupid to do
+it the way that they do it but it's like
+it the way that they do it but it's like
+an
+an
+ingrained ingrain
+ingrained ingrain
+choice if they use Channel's last format
+choice if they use Channel's last format
+which is also more efficient then we
+which is also more efficient then we
+would be able to compute data in that
+format e
+it's actually incredibly obnoxious here
+it's actually incredibly obnoxious here
+handling the
+padding Xander I honestly think it would
+padding Xander I honestly think it would
+be better to just add a
+be better to just add a
+wall like add like a wall
+type cuz having the P the observations
+type cuz having the P the observations
+is just going to be
+is just going to be
+slow you
+know let me try this for
+now like there's no way of doing it in
+now like there's no way of doing it in
+contiguous memory like
+contiguous memory like
+this um
+this um
+and this is super
+gross e
+try
+this still now
+okay for
+what is total num
+what is total num
+mobs oh it already has n agents in
+there okay
+three
+three
+okay wait so it's plus
+three how's that
+work oh because that's where the first
+work oh because that's where the first
+entity is duh
+okay
+for e
+[Music]
+okay no Heap
+okay no Heap
+overflow maybe now
+overflow maybe now
+works welcome YouTube
+works welcome YouTube
+folks hopefully the internet holds for
+folks hopefully the internet holds for
+today I fix those damn drivers soon
+today I fix those damn drivers soon
+uh okay cool so that's the local
+uh okay cool so that's the local
+speed about
+fast yes that's substantially faster
+fast yes that's substantially faster
+than before
+still not
+still not
+training how bad could I broken
+it and anybody see indexing
+bugs agent
+index it's five times the channel
+offset where's grid
+offset where's grid
+size grid
+size where does this get set
+well that's wrong right here this is
+n yeah
+let's try this
+let's try this
+[Music]
+[Music]
+again uh it doesn't
+build e
+what do you mean
+no do I spell the indexing wrong let me
+no do I spell the indexing wrong let me
+see so five
+see so five
+channels agent
+index five times Channel offset
+plus
+y
+y
+obsd wait agent Site range is
+obsd wait agent Site range is
+five
+yeah plus OBS
+X should be
+right and then offset
+right and then offset
+it's type times Channel offset
+it's type times Channel offset
+right set this to
+one set this to carrying
+as soon as we get this indexing right
+as soon as we get this indexing right
+your uh your M will be fixed and will be
+your uh your M will be fixed and will be
+million steps per second
+million steps per second
+train as it should be welcome YouTube
+train as it should be welcome YouTube
+folks uh the M we're currently debugging
+folks uh the M we're currently debugging
+for reference you can play it on puff. a
+for reference you can play it on puff. a
+if you just hold shift
+if you just hold shift
+down uh it is this trash pickup end you
+down uh it is this trash pickup end you
+can watch these puffers
+can watch these puffers
+collect and uh you know collect and
+collect and uh you know collect and
+return all these different
+return all these different
+objects and we have a way to make it way
+objects and we have a way to make it way
+faster with some just
+faster with some just
+like changes to the way in which we're
+like changes to the way in which we're
+Computing observations in the C
+Computing observations in the C
+file but there are a couple little bugs
+file but there are a couple little bugs
+with
+it entity
+agent what did we make the
+agent what did we make the
+obsd didn't we make it just the 11 by 11
+obsd didn't we make it just the 11 by 11
+or whatever
+now been watching back previous stream
+now been watching back previous stream
+slowly catching
+up very good hey jump in the Discord
+up very good hey jump in the Discord
+build some Ms with
+build some Ms with
+us when experimenting on top of your
+us when experimenting on top of your
+amps how many architectural decisions
+amps how many architectural decisions
+and Hyper prams are of
+and Hyper prams are of
+importance action OB space steams could
+importance action OB space steams could
+make a big difference so the ones that
+make a big difference so the ones that
+are just completely unintuitive and you
+are just completely unintuitive and you
+have to sweep the most sensitive are
+have to sweep the most sensitive are
+learning rate
+learning rate
+entropy uh gamma and J
+entropy uh gamma and J
+Lambda those are purely empirical you
+Lambda those are purely empirical you
+just have to sweep them there's some
+just have to sweep them there's some
+intuition that you can develop around
+intuition that you can develop around
+these but they're usually wrong um OB
+these but they're usually wrong um OB
+space
+space
+schemes generally there like yes there
+schemes generally there like yes there
+are decisions but that can be learned
+are decisions but that can be learned
+there's a method behind most of that
+there's a method behind most of that
+work um and then there are a few there
+work um and then there are a few there
+like there are several other things that
+like there are several other things that
+matter that we don't have a handle on
+matter that we don't have a handle on
+yet that is going to be the subject of
+yet that is going to be the subject of
+work starting in early
+2025 let me figure this out
+2025 let me figure this out
+here if anybody is the indexing bug feel
+here if anybody is the indexing bug feel
+free I mean this is just like
+silly I mean I really don't see it here
+silly I mean I really don't see it here
+because unless the observation didn't is
+because unless the observation didn't is
+wrong hold
+on num OBS
+is five yeah this is correct
+here
+right so
+it's OBS dim 2 * agent Site range plus
+it's OBS dim 2 * agent Site range plus
+one OB Let's uh let me just build this
+one OB Let's uh let me just build this
+and see again put a break point at like
+204 okay so we have
+204 okay so we have
+OBS and index
+10 and right
+here offset is
+here offset is
+8 of
+8 of
+129 OBS dim is 11
+129 OBS dim is 11
+yes OBS Y is
+zero 9x
+zero 9x
+can be 121
+agend index is still zero
+can you explain the last part of the
+can you explain the last part of the
+offset yeah so what you're doing here is
+offset yeah so what you're doing here is
+uh each observation is this size uh it's
+uh each observation is this size uh it's
+five channels and 11 by 11 so it's 5 by
+five channels and 11 by 11 so it's 5 by
+11 by 11 so here you skip whatever the
+11 by 11 so here you skip whatever the
+agent index is Time 5 by 11 by 11 so you
+agent index is Time 5 by 11 by 11 so you
+skip to the current agent and then the
+skip to the current agent and then the
+goal is that you skip over rows so uh
+goal is that you skip over rows so uh
+this should be this is to the first
+this should be this is to the first
+channel so like your position in the
+channel so like your position in the
+first channel should be your uh your y
+first channel should be your uh your y
+index in the
+index in the
+observation times 11 and plus OBS X is
+observation times 11 and plus OBS X is
+your X
+your X
+offset uh into that 11 by1
+window and then this bottom one here is
+window and then this bottom one here is
+skipping four channels so that you do
+skipping four channels so that you do
+the carrying
+so offset's
+14 this
+14 this
+entity right so that doesn't make sense
+entity right so that doesn't make sense
+does it
+so we're at
+so we're at
+204 it's right
+204 it's right
+here oh no here it is this is
+here oh no here it is this is
+good
+135 this all looks
+135 this all looks
+reasonable I guess I can observe uh I
+reasonable I guess I can observe uh I
+can go look at these OBS and python to
+can go look at these OBS and python to
+see what these look like so I can't find
+see what these look like so I can't find
+any issue looking at the C for
+okay so this is all zero
+then track
+then track
+is distributed around like
+this this is
+this this is
+possible and then trash
+possible and then trash
+bin I see multiple trash bins so that
+bin I see multiple trash bins so that
+should be wrong
+and then agent
+and then agent
+three I see four agents so that looks
+three I see four agents so that looks
+like that could be right so the only
+like that could be right so the only
+thing that's wrong here is I see that
+thing that's wrong here is I see that
+there are two trash bins
+somehow and then what about
+somehow and then what about
+four yeah four is zero so this is like
+four yeah four is zero so this is like
+almost
+almost
+reasonable the only thing that's
+reasonable the only thing that's
+suspicious is the two trash bins
+time fine
+h
+type times Channel offset
+what is a total n mobs maybe that's
+what is a total n mobs maybe that's
+wrong
+no that looks
+reasonable so
+am I somehow wrong about the storage
+am I somehow wrong about the storage
+format or something I shouldn't
+be definitely shouldn't be
+I no cuz you did Dy DX so I'm
+correct is it plus four times Channel
+correct is it plus four times Channel
+offet
+offet
+yes it should
+be cell X cell y
+why I'm trying to think what I haven't
+why I'm trying to think what I haven't
+tried yet for
+tried yet for
+this I'm staring at it's not
+this I'm staring at it's not
+particularly productive
+I'm like almost positive I'm just losing
+I'm like almost positive I'm just losing
+track of the index
+somehow hey
+index and I use the agent index
+correctly is there plus one or something
+correctly is there plus one or something
+no
+check if the cell is within bounds
+check if the cell is within bounds
+yes I I mean I have to be
+yes I I mean I have to be
+setting
+here found then
+false if
+false if
+found then
+okay and then we'll just
+do S Type spin
+okay let's try
+this I'm just going to see if I can
+this I'm just going to see if I can
+catch it double
+catch it double
+setting on uh
+no am I storing this in the wrong
+format because these Loops are telling
+format because these Loops are telling
+me that I'm not
+me that I'm not
+setting the bin twice per
+setting the bin twice per
+Loop did you realize you don't actually
+Loop did you realize you don't actually
+pre-compute pathing in
+MOBA yeah so uh it's cached instead of
+MOBA yeah so uh it's cached instead of
+pre-computed
+Captain it should actually be cashed
+so right here if not cached and it
+so right here if not cached and it
+should cash it
+should cash it
+otherwise so the reason for that is that
+otherwise so the reason for that is that
+um
+um
+pre-computing if you pre-compute and
+pre-computing if you pre-compute and
+then load in 250 Megs of data on the web
+then load in 250 Megs of data on the web
+it doesn't like that um and also during
+it doesn't like that um and also during
+training you're adding at most 3 seconds
+training you're adding at most 3 seconds
+total cuz it takes 3 seconds to
+total cuz it takes 3 seconds to
+pre-compute the whole map so you're
+pre-compute the whole map so you're
+adding three total seconds over the
+adding three total seconds over the
+whole course of training assuming that
+whole course of training assuming that
+it eventually has to do every single
+it eventually has to do every single
+possible
+pre-computation so it's a little bit
+smarter we use the um we use the
+smarter we use the um we use the
+pre-compute function for like the little
+pre-compute function for like the little
+there's like this little visual toy demo
+there's like this little visual toy demo
+somewhere in there where you can like
+somewhere in there where you can like
+you know scroll around with the mouse
+you know scroll around with the mouse
+and see all of the uh the pre-computed
+and see all of the uh the pre-computed
+paths in real
+time do you see index logic bugs here
+time do you see index logic bugs here
+because I don't see any index logic bugs
+here I'm almost positive I'm doing the
+here I'm almost positive I'm doing the
+indexing in the right order though
+let me
+let me
+see oh wait hold on is
+it just double check this message
+debate
+here let me just double check the
+here let me just double check the
+original code
+original code
+so I'm almost positive that I did uh the
+so I'm almost positive that I did uh the
+indexing order right
+but you never
+know okay so we go over
+this is the correct ordering as far as I
+this is the correct ordering as far as I
+can
+see it's Channel
+five by prop size by prop
+size for
+there anything else that I could have
+there anything else that I could have
+messed
+messed
+up process of doing
+up process of doing
+this because those OBS really look
+this because those OBS really look
+correct for
+me why are you multiplying by the type
+me why are you multiplying by the type
+because I'm trying to skip that many
+because I'm trying to skip that many
+channels so the way it's laid out in
+channels so the way it's laid out in
+memory it's agents then
+memory it's agents then
+channels then uh rows then
+channels then uh rows then
+columns so I'm trying to skip so I've
+columns so I'm trying to skip so I've
+gone ahead by the tile offset
+gone ahead by the tile offset
+here and then I'm trying to skip ahead
+here and then I'm trying to skip ahead
+however many channels I need to to one
+however many channels I need to to one
+hot just the specific channel that you
+hot just the specific channel that you
+need
+I'm going have to get dinner soon but I
+I'm going have to get dinner soon but I
+really want this thing to be fixed
+really want this thing to be fixed
+before
+before
+then because I fixed your speed thing
+then because I fixed your speed thing
+right I just have some index
+right I just have some index
+work and this is now training at over a
+work and this is now training at over a
+million steps per second there's just
+million steps per second there's just
+some little bug
+here wait hold on OBS y times OBS Di
+yeah that's
+fine plus OBS
+X I think it's
+X I think it's
+fine and something's clearly
+fine and something's clearly
+wrong it's five times Channel offset
+BFS instead of something like
+BFS instead of something like
+AAR it's a pre-compute anyways Captain
+AAR it's a pre-compute anyways Captain
+like it doesn't matter it's simpler and
+like it doesn't matter it's simpler and
+it adds 3 seconds total that's across
+it adds 3 seconds total that's across
+all the environments on a core as well
+all the environments on a core as well
+because it's cached across environment
+because it's cached across environment
+instances on the same
+instances on the same
+core so basically I it solved it in 3
+core so basically I it solved it in 3
+seconds oh yeah also that the uh the way
+seconds oh yeah also that the uh the way
+we do it um you solve all paths with it
+we do it um you solve all paths with it
+so uh AAR you cash less data at the same
+so uh AAR you cash less data at the same
+time I
+time I
+believe because each call to BFS it like
+believe because each call to BFS it like
+I think it caches many values at the
+I think it caches many values at the
+same time because you cash everything
+same time because you cash everything
+along the way anyways so the only thing
+along the way anyways so the only thing
+that AAR lets you do is like do I guess
+that AAR lets you do is like do I guess
+more calls that are less overhead
+each for all paths BF is what you
+want what the hell's wrong with this
+want what the hell's wrong with this
+thing
+thing
+um usually I don't get this hung up on
+um usually I don't get this hung up on
+index bugs like what the heck is Amateur
+index bugs like what the heck is Amateur
+hour
+here Channel offset be
+obon where
+I don't think
+I don't think
+so we want to jump
+so we want to jump
+ahead it's a
+ahead it's a
+4D tensor
+4D tensor
+right so it's like
+4096 uh or like I guess four agents 5 11
+4096 uh or like I guess four agents 5 11
+oops so
+you want to jump ahead
+by the type which is the second index
+by the type which is the second index
+times the channels which is the number
+times the channels which is the number
+of elements in the last two don't
+you I me I could just not be seeing
+you I me I could just not be seeing
+something and doing something stupid
+but e
+Channel
+Channel
+offset looks good to me like what the
+heck e
+let me try this
+why is it adding a slash
+n e
+I don't know why it's printing the slash
+I don't know why it's printing the slash
+on I dumb
+am I stupid why is this not printing
+am I stupid why is this not printing
+like normally
+there we
+there we
+go
+o oh that's
+funny e
+huh e
+there we
+there we
+go yay okay now we can actually
+go yay okay now we can actually
+see
+um could try just printing out each
+um could try just printing out each
+value see if it sequential it doesn't
+value see if it sequential it doesn't
+sequentially increases the
+sequentially increases the
+thing that's the annoying thing it's not
+thing that's the annoying thing it's not
+it's not laid out nicely in
+it's not laid out nicely in
+memory so three are the agents 1 2 3
+4 where's the trash bin did not see it
+4 where's the trash bin did not see it
+anywhere
+it's deterministic right
+replace that before I forget it
+replace that before I forget it
+but one two three
+but one two three
+4 and there's the trash
+4 and there's the trash
+bin here's all the
+bin here's all the
+trash the OBS look
+fine at least the this version of the
+fine at least the this version of the
+map looks fine
+right now the question
+right now the question
+is to match
+actually
+type guess we do
+for e
+Okay
+Okay
+so we just need one more slash
+n okay so here we
+n okay so here we
+go here is our
+go here is our
+map this one is blank this is
+map this one is blank this is
+good and then this one
+you can see this one
+matches yeah this one
+matches yeah this one
+matches first channel and then second
+matches first channel and then second
+Channel there are no
+Channel there are no
+twos so this is empty and then
+twos so this is empty and then
+threes one
+threes one
+one
+one
+yeah so this matches exactly
+so to me this looks completely
+good I have no idea why this doesn't
+good I have no idea why this doesn't
+work then
+there are five channels
+[Music]
+right where's the two it just none of
+right where's the two it just none of
+the agents can see
+the agents can see
+it it's not in view I checked on a
+it it's not in view I checked on a
+larger map I made like the map OBS
+larger map I made like the map OBS
+larger and I saw like the one two so
+larger and I saw like the one two so
+that's
+correct I am zeroing yet all right
+take another look at the uh the OBS and
+take another look at the uh the OBS and
+the
+policy for
+okay that's
+okay that's
+zero
+one
+one
+22 well that doesn't make sense there's
+22 well that doesn't make sense there's
+not 22 trash
+right yeah there's not 22 trash
+am I writing over it
+somehow I don't see how it would be
+somehow I don't see how it would be
+writing over
+it e
+yeah that doesn't make any
+sense two trash bins the four agents is
+sense two trash bins the four agents is
+correct
+it's not even the right total number of
+things
+right not even the right total number of
+right not even the right total number of
+things how do we do that
+things how do we do that
+um especially when I literally just
+um especially when I literally just
+saw I just saw printed out right from C
+saw I just saw printed out right from C
+that we had the right
+that we had the right
+total number of things um Ops look
+total number of things um Ops look
+reasonable
+like here's the big
+like here's the big
+one one two
+one one two
+three five six 7 8
+three five six 7 8
+[Music]
+[Music]
+9 12 1 14
+9 12 1 14
+20 and so these OBS
+20 and so these OBS
+are these OBS look good and then I check
+are these OBS look good and then I check
+that they match here as well
+it should be deterministic as well
+it should be deterministic as well
+though I actually I guess I don't know
+though I actually I guess I don't know
+if the seating is the
+if the seating is the
+same one
+you know it's interesting to me that we
+you know it's interesting to me that we
+have the first layer
+have the first layer
+zero and the last layer is zero which is
+zero and the last layer is zero which is
+what you would expect but then there're
+what you would expect but then there're
+just the wrong number of things within a
+just the wrong number of things within a
+specific layer can I do anything with
+specific layer can I do anything with
+that can that tell me
+anything I don't think that tells me
+anything I don't think that tells me
+anything
+drive me
+nuts e
+that doesn't even make sense because
+that doesn't even make sense because
+they can't
+they can't
+have they can't have that number of
+ones 30
+and the carrying is always zero
+first channel is always zero so they
+first channel is always zero so they
+yeah
+somehow four agents 20
+somehow four agents 20
+[Music]
+[Music]
+trash one bin should be
+trash one bin should be
+25 25 at
+25 25 at
+most
+for e
+that really doesn't make sense to
+me
+e e
+you might have to look at this Xander
+you might have to look at this Xander
+I'm having uh I don't know
+I'm having uh I don't know
+here I thought this like this looks
+here I thought this like this looks
+correct and all the like the prints look
+correct and all the like the prints look
+correct as well and then it gets into
+correct as well and then it gets into
+python wrong um
+See's the
+Char I mean I would think it would be
+like it's like the wrong number of ones
+like it's like the wrong number of ones
+though it's not just the wrong shape
+I don't even know how that's possible
+we literally check the OBS as they're
+we literally check the OBS as they're
+coming
+out like what the hell else going to
+B I'm like very confused for
+this was the more the most productive
+this was the more the most productive
+part I had right here was these
+part I had right here was these
+this this debugging right here
+okay so this is literally printing
+okay so this is literally printing
+out these bites like one by one
+what if we do like this
+so Agent
+so Agent
+Zero we
+Zero we
+get one two 3 four five and then the
+get one two 3 four five and then the
+original agent one there's the
+original agent one there's the
+two one
+oh wait now this doesn't
+oh wait now this doesn't
+match doesn't match for agent two oh
+match doesn't match for agent two oh
+because I'm still printing agent
+One agent
+Agent Zero agent one has this two
+Agent Zero agent one has this two
+here and then here's your
+two your
+two your
+3 it's all correct
+I'm going to have to keep debugging this
+I'm going to have to keep debugging this
+later because I can't figure out what
+later because I can't figure out what
+the hell's wrong with this
+um that drives me absolutely
+um that drives me absolutely
+insane like I can see
+insane like I can see
+the data looks good in
+the data looks good in
+C and then somehow it's wrong in
+Python I know that you passed the
+Python I know that you passed the
+correct and num
+correct and num
+agents increment here
+num
+mobs what if I leave this what if I
+mobs what if I leave this what if I
+leave these prints in
+and I do
+this for
+so
+so
+here we have agent
+here we have agent
+three you can
+three you can
+see Up's coming out
+here
+here
+two one two
+two one two
+oh
+oh
+why hang
+on was
+that
+no why is there this ghost
+no why is there this ghost
+one hang on
+one hang on
+maybe it is wrong in
+maybe it is wrong in
+uh
+see
+one now this is
+one now this is
+fine wait is
+it this Line's wrong
+right this sign is
+wrong so these prints are
+wrong so these prints are
+weird oh no this is yeah this is this
+weird oh no this is yeah this is this
+one is definitely
+wrong so there is an indexing
+wrong so there is an indexing
+bug how's that happen cuz it's like most
+bug how's that happen cuz it's like most
+ly
+ly
+right is Agent one fully
+correct no it's
+not why wasn't I catching that in the
+not why wasn't I catching that in the
+pure sea
+right
+so this one
+this m doesn't seem to have
+it is it just a lucky
+seed so this one you can see all four
+huh it's correct in the
+C but then when you run it through
+C but then when you run it through
+python it's wrong
+does that make any sense
+now look at this
+thing OBM is 11
+yeah completely messed
+up I check it meticulously in the sea
+oh you got got to be kidding
+me damn it Xander this one's on
+me damn it Xander this one's on
+you let me see if this fixes it I think
+you let me see if this fixes it I think
+this one's on you
+that's freaking
+that's freaking
+evil let me make sure
+trans are you still here Xander
+we need better
+we need better
+um we need better compile flags for our
+um we need better compile flags for our
+python versions to prevent that from
+python versions to prevent that from
+happening that would get caught by
+happening that would get caught by
+compile Flags
+let me make sure it works
+first I'm pretty confident now
+first I'm pretty confident now
+though I found
+it oops
+yep
+yep
+okay so Xander the reason I've been
+okay so Xander the reason I've been
+debugging this for the past
+hour what is wrong with this right here
+hour what is wrong with this right here
+you tell me e
+yeah I'll give you the hint it works in
+yeah I'll give you the hint it works in
+C it it doesn't work in
+Python your M now literally trains in 20
+Python your M now literally trains in 20
+seconds by the
+way all right you give
+way all right you give
+up ready here's the change
+I was using that in compute
+I was using that in compute
+observations and it was not initialized
+observations and it was not initialized
+for python it was only in the C
+for python it was only in the C
+version so now I can do M total num
+version so now I can do M total num
+OBS where is it oh right
+there I can
+build uh hold on
+okay so I
+okay so I
+can uh what is it demo
+can uh what is it demo
+and okay I can
+and okay I can
+build and now it'll
+work it was writing garbage everywhere
+work it was writing garbage everywhere
+because total noobs was not initialized
+because total noobs was not initialized
+so it was zeroing a random amount of
+so it was zeroing a random amount of
+memory this now works with zero % M time
+memory this now works with zero % M time
+there you go let that be a
+there you go let that be a
+lesson be careful what stuff you put in
+lesson be careful what stuff you put in
+a knit versus allocate allocate is just
+a knit versus allocate allocate is just
+the extra stuff that is only needed in
+C really that shouldn't have very much
+C really that shouldn't have very much
+in it at
+all there you
+all there you
+go uh I'm going to get rid of the
+go uh I'm going to get rid of the
+prints and then I'm going to push
+this and I will allow you to uh to train
+this and I will allow you to uh to train
+a new
+a new
+policy and do some stuff
+policy and do some stuff
+there yep that's why I've been stuck for
+there yep that's why I've been stuck for
+the last hour indexing was
+the last hour indexing was
+correct that thing was off
+I'm getting
+dinner e
+hi this soft topic but how do I
+hi this soft topic but how do I
+contribute to puffer lib I've made an M
+contribute to puffer lib I've made an M
+nowhere near as complicated current
+nowhere near as complicated current
+ocean Ms also know where is fast get
+ocean Ms also know where is fast get
+around 300K SPS uh you just jump in the
+around 300K SPS uh you just jump in the
+Discord discord.gg puffer show us what
+Discord discord.gg puffer show us what
+you've built um link us code and I will
+you've built um link us code and I will
+do a live review of basically anything
+do a live review of basically anything
+that you are willing to contribute we do
+that you are willing to contribute we do
+try to get the ocean M that we take a
+try to get the ocean M that we take a
+fair bit faster than that um but I will
+fair bit faster than that um but I will
+check the uh I'll check the code and see
+check the uh I'll check the code and see
+cuz usually usually I find new contribut
+cuz usually usually I find new contribut
+there's just a bunch of ways to make uh
+there's just a bunch of ways to make uh
+M code way faster let me merge this real
+M code way faster let me merge this real
+quick I've been fighting this this bug
+quick I've been fighting this this bug
+for the last hour finally got
+for the last hour finally got
+it at least now I don't have to go to
+it at least now I don't have to go to
+bed after uh go to get dinner and go to
+bed after uh go to get dinner and go to
+bed angry
+yeah but Xander if you wanted to like
+yeah but Xander if you wanted to like
+really improve this thing the other
+really improve this thing the other
+thing you could do is you could just
+thing you could do is you could just
+make the OBS a straight up one hot um
+make the OBS a straight up one hot um
+you could just make the M's a straight
+you could just make the M's a straight
+up one
+up one
+hot and then you'd be good yeah post the
+hot and then you'd be good yeah post the
+thing in the Discord I'm going to go
+thing in the Discord I'm going to go
+grab some dinner um for all the folks
+grab some dinner um for all the folks
+watching this if you're looking to get
+watching this if you're looking to get
+involved with this it's just puffer doai
+involved with this it's just puffer doai
+we've got everything on the homepage
+we've got everything on the homepage
+GitHub star it it really helps us if you
+GitHub star it it really helps us if you
+start the GitHub actually uh Discord
+start the GitHub actually uh Discord
+right here Discord GPU join this this is
+right here Discord GPU join this this is
+where literally everything
+where literally everything
+happens there's like no you you don't
+happens there's like no you you don't
+have to submit a resume you just you
+have to submit a resume you just you
+show up and you start building stuff
+show up and you start building stuff
+it's that easy
+it's that easy
+um and then there's also my X where I
+um and then there's also my X where I
+post a whole bunch of stuff on
+post a whole bunch of stuff on
+reinforcement learning and the like so
+reinforcement learning and the like so
+if you're interested you can follow me
+if you're interested you can follow me
+there as well and this gives you
+there as well and this gives you
+notifications when I'm live I'm Live
+notifications when I'm live I'm Live
+Here YouTube twitch it's multi
+Here YouTube twitch it's multi
+streamed that's pretty much everything
+streamed that's pretty much everything
+um I am going to go get food I will
+um I am going to go get food I will
+review B bets blast RM tomorrow I guess
+review B bets blast RM tomorrow I guess
+I think he's PR PR it and I will see you
+I think he's PR PR it and I will see you
+all around bye
+
+Kind: captions
+Language: en
+should be back live
+should be back live
+here
+hi let's check the Discord for updates
+hi let's check the Discord for updates
+oops one dm then I got to answer on the
+oops one dm then I got to answer on the
+side
+side
+there uh and I think we'll be reviewing
+there uh and I think we'll be reviewing
+Blaster let's see
+okay
+so hold
+so hold
+on okay so this is all this is BET
+feedback contacts are a little
+feedback contacts are a little
+screwy uh update on code ball much
+screwy uh update on code ball much
+better last pointless
+better last pointless
+copy
+copy
+nice that's
+nice that's
+fine that usually happens
+step out of line
+step out of line
+what found a
+what found a
+bug tunnel through walls
+what's
+this okay bet I think is just looking at
+this okay bet I think is just looking at
+feedback investigated High compute time
+feedback investigated High compute time
+Fe observations the Bott neck any idea
+Fe observations the Bott neck any idea
+how to make this
+faster oh let's go check Xander M real
+quick
+quick
+see do have a perf test
+here so let's run
+here so let's run
+this and we will do some
+profiling does this stream
+up oh yeah there it is now it shows us
+up oh yeah there it is now it shows us
+up okay
+so yeah Xander your end is not slow
+let's figure out what's up with this
+let's figure out what's up with this
+it's and and python
+step
+num M's
+1024 this is
+correct um OB siiz
+maybe let's check OB
+maybe let's check OB
+siiz D type is nump and
+siiz D type is nump and
+8 num obs
+agent Site range agent Site range times
+agent Site range agent Site range times
+5 this is a perfectly reasonable
+obs that's very high EMP
+time that's actually kind of
+bizarre hey
+Xander um do you have any idea what's
+Xander um do you have any idea what's
+weird with this thing so if I build it
+weird with this thing so if I build it
+in C with fast on uh it's very good
+in C with fast on uh it's very good
+so I'm not sure where the perf drop is
+so I'm not sure where the perf drop is
+coming
+coming
+from let me see scon code
+maybe no your step function looks
+fine h
+it's definitely the
+end that's like particularly
+weird not sure just started
+weird not sure just started
+investigating
+investigating
+yeah report interval
+one is it the logging
+maybe no it wasn't the logging at all
+self. actions equal
+actions theog
+is the agent sight range not what I
+expect is that
+expect is that
+big don't think that should be too
+big I can always do this
+what's this do for
+us still
+21% that's
+21% that's
+crazy your M time should not be that
+crazy your M time should not be that
+slow let me make sure we didn't just
+slow let me make sure we didn't just
+break something and Puffer that's like
+suspicious yeah no it's
+suspicious yeah no it's
+fine okay so where could we possibly be
+fine okay so where could we possibly be
+dropping perf huh
+is it possible the per test is
+wrong let me
+wrong let me
+see m.n
+see m.n
+agents
+agents
+four oh wait Max steps
+300 I wonder if it's
+slower maybe like your reset function is
+slower maybe like your reset function is
+super slow or
+something that's
+this includes compute Ops
+this includes compute Ops
+right
+right
+yeah okay
+yeah okay
+so 2.3
+so 2.3
+million should be plenty
+fast really should be plenty
+fast really should be plenty
+fast and M
+fast and M
+start unless I'm missing something this
+start unless I'm missing something this
+looks like a perfectly good perf test
+added a
+added a
+call doesn't this do compute
+call doesn't this do compute
+observations
+though this already does compute
+though this already does compute
+observations Xander
+and that's normal but if it's 2.3
+and that's normal but if it's 2.3
+million with compute observations right
+million with compute observations right
+because if you're doing uh if you're
+because if you're doing uh if you're
+profile it step that already has
+profile it step that already has
+computer observations in
+it unless there's something wrong with
+it unless there's something wrong with
+the perf test which would
+like I suppose would make sense because
+like I suppose would make sense because
+it's kind of
+crazy for there to be that much of a
+crazy for there to be that much of a
+difference oh whoops yeah you're right
+difference oh whoops yeah you're right
+yeah so you're already doing that
+why is uh hold
+why is uh hold
+on you're only setting the action for
+on you're only setting the action for
+the first agent here to Rand percent 4
+right 1.5
+right 1.5
+million but that's still plenty fast
+Mir random moves still plenty
+fast do you have an llm Plugin or
+fast do you have an llm Plugin or
+something yes I have a super Maven I I
+something yes I have a super Maven I I
+highly suggest it it's just a fast auto
+highly suggest it it's just a fast auto
+complete like I don't use it for full
+complete like I don't use it for full
+functions I just use it to like
+functions I just use it to like
+autocomplete individual lines it's a
+autocomplete individual lines it's a
+nice piping
+nice piping
+buff well welcome back
+buff well welcome back
+Captain actually let me why why does
+Captain actually let me why why does
+nobody tell me when I do stupid [ __ ]
+nobody tell me when I do stupid [ __ ]
+like this like why does nobody tell me
+like this like why does nobody tell me
+when I clearly have my camera over my
+when I clearly have my camera over my
+terminal just be like hey Joseph you're
+terminal just be like hey Joseph you're
+being an idiot fix your
+being an idiot fix your
+term Cod EVS code
+term Cod EVS code
+yeah this one has a neoen plugin so I
+yeah this one has a neoen plugin so I
+like it and it's fast and the devs are
+like it and it's fast and the devs are
+cool
+I'm trash now let's try something like
+I'm trash now let's try something like
+this 20
+still 1.5
+M move all this garbage
+there we go that's
+cleaner step does reset as well
+right yeah Xander it's not the thing is
+right yeah Xander it's not the thing is
+compute OBS is going to be 90% of your
+compute OBS is going to be 90% of your
+time in an m like this like think about
+time in an m like this like think about
+it the actual action of moving stuff
+it the actual action of moving stuff
+around is free like most of your uh most
+around is free like most of your uh most
+your computer is going to go into
+your computer is going to go into
+compute OBS but that's not the problem
+compute OBS but that's not the problem
+if you're getting 1.5 million right then
+if you're getting 1.5 million right then
+you should just be fine you shouldn't
+you should just be fine you shouldn't
+have any perf issues at
+have any perf issues at
+all so I'm trying to figure out where
+all so I'm trying to figure out where
+they're coming
+from for
+you're not doing anything weird in here
+you're not doing anything weird in here
+as far as I can see
+OBS are reasonably
+sized I didn't see any overhead in here
+what's all the this error spam
+here okay this is just like weird scyon
+spam why is it compiling with
+spam why is it compiling with
+o1 and O2 okay
+o1 and O2 okay
+I think O2 takes
+precedence we didn't change anything
+precedence we didn't change anything
+that would mess this up
+right that's that's
+snake why are they're
+snake why are they're
+20 uh because cython and setup tools
+20 uh because cython and setup tools
+basically python is stupid is
+basically python is stupid is
+why so with multiprocessing we have 26%
+why so with multiprocessing we have 26%
+but that's still
+but that's still
+Oban it should be zero
+let me see what other param are on
+here e
+you just have to write a python perf
+you just have to write a python perf
+test
+sometimes we put these at the bottom of
+sometimes we put these at the bottom of
+files so that we can do a your python
+files so that we can do a your python
+perf test things are being
+stupid for
+what in the
+hell e
+okay so according to
+okay so according to
+this you get 900,000 out of
+this you get 900,000 out of
+uh out of
+C do it need to be faster
+C do it need to be faster
+like is it literally just
+like is it literally just
+that that it needs to just be faster
+that that it needs to just be faster
+than
+than
+this um cuz most of our M's are faster
+then hold
+on what if I just uh like
+on what if I just uh like
+return okay and then I do
+yeah okay so it is literally M
+yeah okay so it is literally M
+Speed yeah that makes sense I guess when
+Speed yeah that makes sense I guess when
+you add everything
+you add everything
+up okay so let's just make it a little
+up okay so let's just make it a little
+faster then
+this bounce
+check e
+I still have to advance
+it this bounce check is not
+it this bounce check is not
+helping you'd like to amortize this
+helping you'd like to amortize this
+bounce check I'm trying to think how to
+bounce check I'm trying to think how to
+do it with the way you have it set up
+I mean the one thing you could do would
+I mean the one thing you could do would
+be to
+compute compute the
+indices for
+why is this so slow compared
+why is this so slow compared
+to like what I do in snake I guess you
+to like what I do in snake I guess you
+have all these different channels is the
+thing type
+well there's some redundancy
+here for
+oh let's reverse this to be
+oh let's reverse this to be
+if not
+this is the same thing
+I don't know if this is correct let's
+I don't know if this is correct let's
+see
+error for
+that didn't help very
+that didn't help very
+much for
+I don't like this bounce check as the
+thing I'd have to profile this
+thing I'd have to profile this
+individually to
+see maybe we do have to
+see maybe we do have to
+Flip Flip the loops
+Flip Flip the loops
+and do the
+math
+math
+yeah I think we got to try at
+yeah I think we got to try at
+least so we're going to go
+to okay so here's our perf test
+I did make it a little
+faster oh wait a second cell type
+hang
+hang
+on am I just not reading
+correctly
+oh yeah that makes absolutely no sense
+oh yeah that makes absolutely no sense
+at all
+is there a m set here there is not
+okay so what we're going to do is we'll
+okay so what we're going to do is we'll
+get rid of this I
+get rid of this I
+[Music]
+[Music]
+believe
+believe
+unindent and then the one annoying thing
+unindent and then the one annoying thing
+is now we have to compute this
+is now we have to compute this
+observation
+observation
+index I think it's worth it though
+use negative 1 for empty I
+guess Xander is this ever
+guess Xander is this ever
+possible cell type I guess there's a
+possible cell type I guess there's a
+carrying option
+carrying option
+here
+here
+um I don't understand how these OBS are
+um I don't understand how these OBS are
+structured at the
+moment it's entity carrying
+it's carrying or not I don't understand
+it's carrying or not I don't understand
+how that
+how that
+works cuz you have or is it supposed to
+works cuz you have or is it supposed to
+be the fifth channels for carrying
+added in third Loop to get rid of single
+added in third Loop to get rid of single
+carrying
+carrying
+OBS okay so I don't think that was done
+OBS okay so I don't think that was done
+correctly if I did or whatever I don't
+correctly if I did or whatever I don't
+remember but um let's see
+remember but um let's see
+so cell
+type is this entity type so this is
+type is this entity type so this is
+always one to four so we
+do WS
+is is it division range minus
+one oh no it's
+one oh no it's
+not 0 to three
+yeah agent Site
+range
+e for
+okay something like this
+I think it's something like this
+I think it's something like this
+Vander let me see if this actually
+Vander let me see if this actually
+compiles
+first for
+Ah that's annoying that's not faster
+h
+it's got to be these computations right
+it's got to be these computations right
+let me
+see oh I didn't recompile hold on
+there we
+there we
+go that's what we want
+[Music]
+[Music]
+and then if all I do
+is if I just go to two M two workers
+there you go
+there you go
+Xander let's see if it still
+learns welcome YouTube folks currently
+learns welcome YouTube folks currently
+just doing a little bit of perf
+just doing a little bit of perf
+optimization on Xander's cool
+environment possible my indexing math is
+environment possible my indexing math is
+wrong here we will see if this thing
+wrong here we will see if this thing
+yeah it looks not to be training so
+yeah it looks not to be training so
+probably my index math is wrong
+probably my index math is wrong
+here let's figure that
+here let's figure that
+out it's nice and fast though
+so first of all this is this is four not
+so first of all this is this is four not
+five
+five
+um cell Y is Agent to y +
+um cell Y is Agent to y +
+D let's see so Channel offset is
+agent Site
+range so this has got to
+range so this has got to
+be yeah this is wrong so this
+is for
+let's see if that's
+right uh so Xander if you're still here
+right uh so Xander if you're still here
+what uh I did is you were looping over
+what uh I did is you were looping over
+each Channel you don't need to Loop over
+each Channel you don't need to Loop over
+the channels when it's just your one
+the channels when it's just your one
+hotting stuff right so you just Loop
+hotting stuff right so you just Loop
+over the uh the cell tiles you don't do
+over the uh the cell tiles you don't do
+all the Redundant checks and you just
+all the Redundant checks and you just
+set you just compute the index of the uh
+set you just compute the index of the uh
+the specific cell that needs to be one
+hotted I actually don't know why this is
+hotted I actually don't know why this is
+negative one either you should just be
+negative one either you should just be
+able to set this to
+able to set this to
+zero the way this is
+okay so still not
+training Channel offset
+is oh this is got to be this is totally
+is oh this is got to be this is totally
+wrong
+so you get your channel offset like
+so you get your channel offset like
+that out of bounds versus
+that out of bounds versus
+inbounds oh I see why you did that okay
+sure then you have to always
+sure then you have to always
+set you then you do have to set this to
+set you then you do have to set this to
+uh to zero though
+that's a little
+awkward well I guess what we can do is
+awkward well I guess what we can do is
+uh
+[Music]
+trash trash B yeah I see what you did
+trash trash B yeah I see what you did
+okay it's just slightly annoying to
+okay it's just slightly annoying to
+compute the OBS for us all
+for
+there's just some really obnoxious
+there's just some really obnoxious
+indexing math that we have to do here as
+all for
+shouldn't the did you what did you
+shouldn't the did you what did you
+change the plus one I was recomputing
+change the plus one I was recomputing
+the OBS index it's not plus one it's not
+the OBS index it's not plus one it's not
+contiguous in
+memory pretty sure that was the permute
+memory pretty sure that was the permute
+thing that you
+thing that you
+had it's Channel's first first not
+had it's Channel's first first not
+Channel's
+last
+for e
+this is actually the thing that's making
+this is actually the thing that's making
+our lives hard here is pie torch believe
+our lives hard here is pie torch believe
+it or
+it or
+not matching the way that pie torch uh
+not matching the way that pie torch uh
+expects
+expects
+data I don't know why the hell they do
+data I don't know why the hell they do
+it this way also it's very stupid to do
+it this way also it's very stupid to do
+it the way that they do it but it's like
+it the way that they do it but it's like
+an
+an
+ingrained ingrain
+ingrained ingrain
+choice if they use Channel's last format
+choice if they use Channel's last format
+which is also more efficient then we
+which is also more efficient then we
+would be able to compute data in that
+format e
+it's actually incredibly obnoxious here
+it's actually incredibly obnoxious here
+handling the
+padding Xander I honestly think it would
+padding Xander I honestly think it would
+be better to just add a
+be better to just add a
+wall like add like a wall
+type cuz having the P the observations
+type cuz having the P the observations
+is just going to be
+is just going to be
+slow you
+know let me try this for
+now like there's no way of doing it in
+now like there's no way of doing it in
+contiguous memory like
+contiguous memory like
+this um
+this um
+and this is super
+gross e
+try
+this still now
+okay for
+what is total num
+what is total num
+mobs oh it already has n agents in
+there okay
+three
+three
+okay wait so it's plus
+three how's that
+work oh because that's where the first
+work oh because that's where the first
+entity is duh
+okay
+for e
+[Music]
+okay no Heap
+okay no Heap
+overflow maybe now
+overflow maybe now
+works welcome YouTube
+works welcome YouTube
+folks hopefully the internet holds for
+folks hopefully the internet holds for
+today I fix those damn drivers soon
+today I fix those damn drivers soon
+uh okay cool so that's the local
+uh okay cool so that's the local
+speed about
+fast yes that's substantially faster
+fast yes that's substantially faster
+than before
+still not
+still not
+training how bad could I broken
+it and anybody see indexing
+bugs agent
+index it's five times the channel
+offset where's grid
+offset where's grid
+size grid
+size where does this get set
+well that's wrong right here this is
+n yeah
+let's try this
+let's try this
+[Music]
+[Music]
+again uh it doesn't
+build e
+what do you mean
+no do I spell the indexing wrong let me
+no do I spell the indexing wrong let me
+see so five
+see so five
+channels agent
+index five times Channel offset
+plus
+y
+y
+obsd wait agent Site range is
+obsd wait agent Site range is
+five
+yeah plus OBS
+X should be
+right and then offset
+right and then offset
+it's type times Channel offset
+it's type times Channel offset
+right set this to
+one set this to carrying
+as soon as we get this indexing right
+as soon as we get this indexing right
+your uh your M will be fixed and will be
+your uh your M will be fixed and will be
+million steps per second
+million steps per second
+train as it should be welcome YouTube
+train as it should be welcome YouTube
+folks uh the M we're currently debugging
+folks uh the M we're currently debugging
+for reference you can play it on puff. a
+for reference you can play it on puff. a
+if you just hold shift
+if you just hold shift
+down uh it is this trash pickup end you
+down uh it is this trash pickup end you
+can watch these puffers
+can watch these puffers
+collect and uh you know collect and
+collect and uh you know collect and
+return all these different
+return all these different
+objects and we have a way to make it way
+objects and we have a way to make it way
+faster with some just
+faster with some just
+like changes to the way in which we're
+like changes to the way in which we're
+Computing observations in the C
+Computing observations in the C
+file but there are a couple little bugs
+file but there are a couple little bugs
+with
+it entity
+agent what did we make the
+agent what did we make the
+obsd didn't we make it just the 11 by 11
+obsd didn't we make it just the 11 by 11
+or whatever
+now been watching back previous stream
+now been watching back previous stream
+slowly catching
+up very good hey jump in the Discord
+up very good hey jump in the Discord
+build some Ms with
+build some Ms with
+us when experimenting on top of your
+us when experimenting on top of your
+amps how many architectural decisions
+amps how many architectural decisions
+and Hyper prams are of
+and Hyper prams are of
+importance action OB space steams could
+importance action OB space steams could
+make a big difference so the ones that
+make a big difference so the ones that
+are just completely unintuitive and you
+are just completely unintuitive and you
+have to sweep the most sensitive are
+have to sweep the most sensitive are
+learning rate
+learning rate
+entropy uh gamma and J
+entropy uh gamma and J
+Lambda those are purely empirical you
+Lambda those are purely empirical you
+just have to sweep them there's some
+just have to sweep them there's some
+intuition that you can develop around
+intuition that you can develop around
+these but they're usually wrong um OB
+these but they're usually wrong um OB
+space
+space
+schemes generally there like yes there
+schemes generally there like yes there
+are decisions but that can be learned
+are decisions but that can be learned
+there's a method behind most of that
+there's a method behind most of that
+work um and then there are a few there
+work um and then there are a few there
+like there are several other things that
+like there are several other things that
+matter that we don't have a handle on
+matter that we don't have a handle on
+yet that is going to be the subject of
+yet that is going to be the subject of
+work starting in early
+2025 let me figure this out
+2025 let me figure this out
+here if anybody is the indexing bug feel
+here if anybody is the indexing bug feel
+free I mean this is just like
+silly I mean I really don't see it here
+silly I mean I really don't see it here
+because unless the observation didn't is
+because unless the observation didn't is
+wrong hold
+on num OBS
+is five yeah this is correct
+here
+right so
+it's OBS dim 2 * agent Site range plus
+it's OBS dim 2 * agent Site range plus
+one OB Let's uh let me just build this
+one OB Let's uh let me just build this
+and see again put a break point at like
+204 okay so we have
+204 okay so we have
+OBS and index
+10 and right
+here offset is
+here offset is
+8 of
+8 of
+129 OBS dim is 11
+129 OBS dim is 11
+yes OBS Y is
+zero 9x
+zero 9x
+can be 121
+agend index is still zero
+can you explain the last part of the
+can you explain the last part of the
+offset yeah so what you're doing here is
+offset yeah so what you're doing here is
+uh each observation is this size uh it's
+uh each observation is this size uh it's
+five channels and 11 by 11 so it's 5 by
+five channels and 11 by 11 so it's 5 by
+11 by 11 so here you skip whatever the
+11 by 11 so here you skip whatever the
+agent index is Time 5 by 11 by 11 so you
+agent index is Time 5 by 11 by 11 so you
+skip to the current agent and then the
+skip to the current agent and then the
+goal is that you skip over rows so uh
+goal is that you skip over rows so uh
+this should be this is to the first
+this should be this is to the first
+channel so like your position in the
+channel so like your position in the
+first channel should be your uh your y
+first channel should be your uh your y
+index in the
+index in the
+observation times 11 and plus OBS X is
+observation times 11 and plus OBS X is
+your X
+your X
+offset uh into that 11 by1
+window and then this bottom one here is
+window and then this bottom one here is
+skipping four channels so that you do
+skipping four channels so that you do
+the carrying
+so offset's
+14 this
+14 this
+entity right so that doesn't make sense
+entity right so that doesn't make sense
+does it
+so we're at
+so we're at
+204 it's right
+204 it's right
+here oh no here it is this is
+here oh no here it is this is
+good
+135 this all looks
+135 this all looks
+reasonable I guess I can observe uh I
+reasonable I guess I can observe uh I
+can go look at these OBS and python to
+can go look at these OBS and python to
+see what these look like so I can't find
+see what these look like so I can't find
+any issue looking at the C for
+okay so this is all zero
+then track
+then track
+is distributed around like
+this this is
+this this is
+possible and then trash
+possible and then trash
+bin I see multiple trash bins so that
+bin I see multiple trash bins so that
+should be wrong
+and then agent
+and then agent
+three I see four agents so that looks
+three I see four agents so that looks
+like that could be right so the only
+like that could be right so the only
+thing that's wrong here is I see that
+thing that's wrong here is I see that
+there are two trash bins
+somehow and then what about
+somehow and then what about
+four yeah four is zero so this is like
+four yeah four is zero so this is like
+almost
+almost
+reasonable the only thing that's
+reasonable the only thing that's
+suspicious is the two trash bins
+time fine
+h
+type times Channel offset
+what is a total n mobs maybe that's
+what is a total n mobs maybe that's
+wrong
+no that looks
+reasonable so
+am I somehow wrong about the storage
+am I somehow wrong about the storage
+format or something I shouldn't
+be definitely shouldn't be
+I no cuz you did Dy DX so I'm
+correct is it plus four times Channel
+correct is it plus four times Channel
+offet
+offet
+yes it should
+be cell X cell y
+why I'm trying to think what I haven't
+why I'm trying to think what I haven't
+tried yet for
+tried yet for
+this I'm staring at it's not
+this I'm staring at it's not
+particularly productive
+I'm like almost positive I'm just losing
+I'm like almost positive I'm just losing
+track of the index
+somehow hey
+index and I use the agent index
+correctly is there plus one or something
+correctly is there plus one or something
+no
+check if the cell is within bounds
+check if the cell is within bounds
+yes I I mean I have to be
+yes I I mean I have to be
+setting
+here found then
+false if
+false if
+found then
+okay and then we'll just
+do S Type spin
+okay let's try
+this I'm just going to see if I can
+this I'm just going to see if I can
+catch it double
+catch it double
+setting on uh
+no am I storing this in the wrong
+format because these Loops are telling
+format because these Loops are telling
+me that I'm not
+me that I'm not
+setting the bin twice per
+setting the bin twice per
+Loop did you realize you don't actually
+Loop did you realize you don't actually
+pre-compute pathing in
+MOBA yeah so uh it's cached instead of
+MOBA yeah so uh it's cached instead of
+pre-computed
+Captain it should actually be cashed
+so right here if not cached and it
+so right here if not cached and it
+should cash it
+should cash it
+otherwise so the reason for that is that
+otherwise so the reason for that is that
+um
+um
+pre-computing if you pre-compute and
+pre-computing if you pre-compute and
+then load in 250 Megs of data on the web
+then load in 250 Megs of data on the web
+it doesn't like that um and also during
+it doesn't like that um and also during
+training you're adding at most 3 seconds
+training you're adding at most 3 seconds
+total cuz it takes 3 seconds to
+total cuz it takes 3 seconds to
+pre-compute the whole map so you're
+pre-compute the whole map so you're
+adding three total seconds over the
+adding three total seconds over the
+whole course of training assuming that
+whole course of training assuming that
+it eventually has to do every single
+it eventually has to do every single
+possible
+pre-computation so it's a little bit
+smarter we use the um we use the
+smarter we use the um we use the
+pre-compute function for like the little
+pre-compute function for like the little
+there's like this little visual toy demo
+there's like this little visual toy demo
+somewhere in there where you can like
+somewhere in there where you can like
+you know scroll around with the mouse
+you know scroll around with the mouse
+and see all of the uh the pre-computed
+and see all of the uh the pre-computed
+paths in real
+time do you see index logic bugs here
+time do you see index logic bugs here
+because I don't see any index logic bugs
+here I'm almost positive I'm doing the
+here I'm almost positive I'm doing the
+indexing in the right order though
+let me
+let me
+see oh wait hold on is
+it just double check this message
+debate
+here let me just double check the
+here let me just double check the
+original code
+original code
+so I'm almost positive that I did uh the
+so I'm almost positive that I did uh the
+indexing order right
+but you never
+know okay so we go over
+this is the correct ordering as far as I
+this is the correct ordering as far as I
+can
+see it's Channel
+five by prop size by prop
+size for
+there anything else that I could have
+there anything else that I could have
+messed
+messed
+up process of doing
+up process of doing
+this because those OBS really look
+this because those OBS really look
+correct for
+me why are you multiplying by the type
+me why are you multiplying by the type
+because I'm trying to skip that many
+because I'm trying to skip that many
+channels so the way it's laid out in
+channels so the way it's laid out in
+memory it's agents then
+memory it's agents then
+channels then uh rows then
+channels then uh rows then
+columns so I'm trying to skip so I've
+columns so I'm trying to skip so I've
+gone ahead by the tile offset
+gone ahead by the tile offset
+here and then I'm trying to skip ahead
+here and then I'm trying to skip ahead
+however many channels I need to to one
+however many channels I need to to one
+hot just the specific channel that you
+hot just the specific channel that you
+need
+I'm going have to get dinner soon but I
+I'm going have to get dinner soon but I
+really want this thing to be fixed
+really want this thing to be fixed
+before
+before
+then because I fixed your speed thing
+then because I fixed your speed thing
+right I just have some index
+right I just have some index
+work and this is now training at over a
+work and this is now training at over a
+million steps per second there's just
+million steps per second there's just
+some little bug
+here wait hold on OBS y times OBS Di
+yeah that's
+fine plus OBS
+X I think it's
+X I think it's
+fine and something's clearly
+fine and something's clearly
+wrong it's five times Channel offset
+BFS instead of something like
+BFS instead of something like
+AAR it's a pre-compute anyways Captain
+AAR it's a pre-compute anyways Captain
+like it doesn't matter it's simpler and
+like it doesn't matter it's simpler and
+it adds 3 seconds total that's across
+it adds 3 seconds total that's across
+all the environments on a core as well
+all the environments on a core as well
+because it's cached across environment
+because it's cached across environment
+instances on the same
+instances on the same
+core so basically I it solved it in 3
+core so basically I it solved it in 3
+seconds oh yeah also that the uh the way
+seconds oh yeah also that the uh the way
+we do it um you solve all paths with it
+we do it um you solve all paths with it
+so uh AAR you cash less data at the same
+so uh AAR you cash less data at the same
+time I
+time I
+believe because each call to BFS it like
+believe because each call to BFS it like
+I think it caches many values at the
+I think it caches many values at the
+same time because you cash everything
+same time because you cash everything
+along the way anyways so the only thing
+along the way anyways so the only thing
+that AAR lets you do is like do I guess
+that AAR lets you do is like do I guess
+more calls that are less overhead
+each for all paths BF is what you
+want what the hell's wrong with this
+want what the hell's wrong with this
+thing
+thing
+um usually I don't get this hung up on
+um usually I don't get this hung up on
+index bugs like what the heck is Amateur
+index bugs like what the heck is Amateur
+hour
+here Channel offset be
+obon where
+I don't think
+I don't think
+so we want to jump
+so we want to jump
+ahead it's a
+ahead it's a
+4D tensor
+4D tensor
+right so it's like
+4096 uh or like I guess four agents 5 11
+4096 uh or like I guess four agents 5 11
+oops so
+you want to jump ahead
+by the type which is the second index
+by the type which is the second index
+times the channels which is the number
+times the channels which is the number
+of elements in the last two don't
+you I me I could just not be seeing
+you I me I could just not be seeing
+something and doing something stupid
+but e
+Channel
+Channel
+offset looks good to me like what the
+heck e
+let me try this
+why is it adding a slash
+n e
+I don't know why it's printing the slash
+I don't know why it's printing the slash
+on I dumb
+am I stupid why is this not printing
+am I stupid why is this not printing
+like normally
+there we
+there we
+go
+o oh that's
+funny e
+huh e
+there we
+there we
+go yay okay now we can actually
+go yay okay now we can actually
+see
+um could try just printing out each
+um could try just printing out each
+value see if it sequential it doesn't
+value see if it sequential it doesn't
+sequentially increases the
+sequentially increases the
+thing that's the annoying thing it's not
+thing that's the annoying thing it's not
+it's not laid out nicely in
+it's not laid out nicely in
+memory so three are the agents 1 2 3
+4 where's the trash bin did not see it
+4 where's the trash bin did not see it
+anywhere
+it's deterministic right
+replace that before I forget it
+replace that before I forget it
+but one two three
+but one two three
+4 and there's the trash
+4 and there's the trash
+bin here's all the
+bin here's all the
+trash the OBS look
+fine at least the this version of the
+fine at least the this version of the
+map looks fine
+right now the question
+right now the question
+is to match
+actually
+type guess we do
+for e
+Okay
+Okay
+so we just need one more slash
+n okay so here we
+n okay so here we
+go here is our
+go here is our
+map this one is blank this is
+map this one is blank this is
+good and then this one
+you can see this one
+matches yeah this one
+matches yeah this one
+matches first channel and then second
+matches first channel and then second
+Channel there are no
+Channel there are no
+twos so this is empty and then
+twos so this is empty and then
+threes one
+threes one
+one
+one
+yeah so this matches exactly
+so to me this looks completely
+good I have no idea why this doesn't
+good I have no idea why this doesn't
+work then
+there are five channels
+[Music]
+right where's the two it just none of
+right where's the two it just none of
+the agents can see
+the agents can see
+it it's not in view I checked on a
+it it's not in view I checked on a
+larger map I made like the map OBS
+larger map I made like the map OBS
+larger and I saw like the one two so
+larger and I saw like the one two so
+that's
+correct I am zeroing yet all right
+take another look at the uh the OBS and
+take another look at the uh the OBS and
+the
+policy for
+okay that's
+okay that's
+zero
+one
+one
+22 well that doesn't make sense there's
+22 well that doesn't make sense there's
+not 22 trash
+right yeah there's not 22 trash
+am I writing over it
+somehow I don't see how it would be
+somehow I don't see how it would be
+writing over
+it e
+yeah that doesn't make any
+sense two trash bins the four agents is
+sense two trash bins the four agents is
+correct
+it's not even the right total number of
+things
+right not even the right total number of
+right not even the right total number of
+things how do we do that
+things how do we do that
+um especially when I literally just
+um especially when I literally just
+saw I just saw printed out right from C
+saw I just saw printed out right from C
+that we had the right
+that we had the right
+total number of things um Ops look
+total number of things um Ops look
+reasonable
+like here's the big
+like here's the big
+one one two
+one one two
+three five six 7 8
+three five six 7 8
+[Music]
+[Music]
+9 12 1 14
+9 12 1 14
+20 and so these OBS
+20 and so these OBS
+are these OBS look good and then I check
+are these OBS look good and then I check
+that they match here as well
+it should be deterministic as well
+it should be deterministic as well
+though I actually I guess I don't know
+though I actually I guess I don't know
+if the seating is the
+if the seating is the
+same one
+you know it's interesting to me that we
+you know it's interesting to me that we
+have the first layer
+have the first layer
+zero and the last layer is zero which is
+zero and the last layer is zero which is
+what you would expect but then there're
+what you would expect but then there're
+just the wrong number of things within a
+just the wrong number of things within a
+specific layer can I do anything with
+specific layer can I do anything with
+that can that tell me
+anything I don't think that tells me
+anything I don't think that tells me
+anything
+drive me
+nuts e
+that doesn't even make sense because
+that doesn't even make sense because
+they can't
+they can't
+have they can't have that number of
+ones 30
+and the carrying is always zero
+first channel is always zero so they
+first channel is always zero so they
+yeah
+somehow four agents 20
+somehow four agents 20
+[Music]
+[Music]
+trash one bin should be
+trash one bin should be
+25 25 at
+25 25 at
+most
+for e
+that really doesn't make sense to
+me
+e e
+you might have to look at this Xander
+you might have to look at this Xander
+I'm having uh I don't know
+I'm having uh I don't know
+here I thought this like this looks
+here I thought this like this looks
+correct and all the like the prints look
+correct and all the like the prints look
+correct as well and then it gets into
+correct as well and then it gets into
+python wrong um
+See's the
+Char I mean I would think it would be
+like it's like the wrong number of ones
+like it's like the wrong number of ones
+though it's not just the wrong shape
+I don't even know how that's possible
+we literally check the OBS as they're
+we literally check the OBS as they're
+coming
+out like what the hell else going to
+B I'm like very confused for
+this was the more the most productive
+this was the more the most productive
+part I had right here was these
+part I had right here was these
+this this debugging right here
+okay so this is literally printing
+okay so this is literally printing
+out these bites like one by one
+what if we do like this
+so Agent
+so Agent
+Zero we
+Zero we
+get one two 3 four five and then the
+get one two 3 four five and then the
+original agent one there's the
+original agent one there's the
+two one
+oh wait now this doesn't
+oh wait now this doesn't
+match doesn't match for agent two oh
+match doesn't match for agent two oh
+because I'm still printing agent
+One agent
+Agent Zero agent one has this two
+Agent Zero agent one has this two
+here and then here's your
+two your
+two your
+3 it's all correct
+I'm going to have to keep debugging this
+I'm going to have to keep debugging this
+later because I can't figure out what
+later because I can't figure out what
+the hell's wrong with this
+um that drives me absolutely
+um that drives me absolutely
+insane like I can see
+insane like I can see
+the data looks good in
+the data looks good in
+C and then somehow it's wrong in
+Python I know that you passed the
+Python I know that you passed the
+correct and num
+correct and num
+agents increment here
+num
+mobs what if I leave this what if I
+mobs what if I leave this what if I
+leave these prints in
+and I do
+this for
+so
+so
+here we have agent
+here we have agent
+three you can
+three you can
+see Up's coming out
+here
+here
+two one two
+two one two
+oh
+oh
+why hang
+on was
+that
+no why is there this ghost
+no why is there this ghost
+one hang on
+one hang on
+maybe it is wrong in
+maybe it is wrong in
+uh
+see
+one now this is
+one now this is
+fine wait is
+it this Line's wrong
+right this sign is
+wrong so these prints are
+wrong so these prints are
+weird oh no this is yeah this is this
+weird oh no this is yeah this is this
+one is definitely
+wrong so there is an indexing
+wrong so there is an indexing
+bug how's that happen cuz it's like most
+bug how's that happen cuz it's like most
+ly
+ly
+right is Agent one fully
+correct no it's
+not why wasn't I catching that in the
+not why wasn't I catching that in the
+pure sea
+right
+so this one
+this m doesn't seem to have
+it is it just a lucky
+seed so this one you can see all four
+huh it's correct in the
+C but then when you run it through
+C but then when you run it through
+python it's wrong
+does that make any sense
+now look at this
+thing OBM is 11
+yeah completely messed
+up I check it meticulously in the sea
+oh you got got to be kidding
+me damn it Xander this one's on
+me damn it Xander this one's on
+you let me see if this fixes it I think
+you let me see if this fixes it I think
+this one's on you
+that's freaking
+that's freaking
+evil let me make sure
+trans are you still here Xander
+we need better
+we need better
+um we need better compile flags for our
+um we need better compile flags for our
+python versions to prevent that from
+python versions to prevent that from
+happening that would get caught by
+happening that would get caught by
+compile Flags
+let me make sure it works
+first I'm pretty confident now
+first I'm pretty confident now
+though I found
+it oops
+yep
+yep
+okay so Xander the reason I've been
+okay so Xander the reason I've been
+debugging this for the past
+hour what is wrong with this right here
+hour what is wrong with this right here
+you tell me e
+yeah I'll give you the hint it works in
+yeah I'll give you the hint it works in
+C it it doesn't work in
+Python your M now literally trains in 20
+Python your M now literally trains in 20
+seconds by the
+way all right you give
+way all right you give
+up ready here's the change
+I was using that in compute
+I was using that in compute
+observations and it was not initialized
+observations and it was not initialized
+for python it was only in the C
+for python it was only in the C
+version so now I can do M total num
+version so now I can do M total num
+OBS where is it oh right
+there I can
+build uh hold on
+okay so I
+okay so I
+can uh what is it demo
+can uh what is it demo
+and okay I can
+and okay I can
+build and now it'll
+work it was writing garbage everywhere
+work it was writing garbage everywhere
+because total noobs was not initialized
+because total noobs was not initialized
+so it was zeroing a random amount of
+so it was zeroing a random amount of
+memory this now works with zero % M time
+memory this now works with zero % M time
+there you go let that be a
+there you go let that be a
+lesson be careful what stuff you put in
+lesson be careful what stuff you put in
+a knit versus allocate allocate is just
+a knit versus allocate allocate is just
+the extra stuff that is only needed in
+C really that shouldn't have very much
+C really that shouldn't have very much
+in it at
+all there you
+all there you
+go uh I'm going to get rid of the
+go uh I'm going to get rid of the
+prints and then I'm going to push
+this and I will allow you to uh to train
+this and I will allow you to uh to train
+a new
+a new
+policy and do some stuff
+policy and do some stuff
+there yep that's why I've been stuck for
+there yep that's why I've been stuck for
+the last hour indexing was
+the last hour indexing was
+correct that thing was off
+I'm getting
+dinner e
+hi this soft topic but how do I
+hi this soft topic but how do I
+contribute to puffer lib I've made an M
+contribute to puffer lib I've made an M
+nowhere near as complicated current
+nowhere near as complicated current
+ocean Ms also know where is fast get
+ocean Ms also know where is fast get
+around 300K SPS uh you just jump in the
+around 300K SPS uh you just jump in the
+Discord discord.gg puffer show us what
+Discord discord.gg puffer show us what
+you've built um link us code and I will
+you've built um link us code and I will
+do a live review of basically anything
+do a live review of basically anything
+that you are willing to contribute we do
+that you are willing to contribute we do
+try to get the ocean M that we take a
+try to get the ocean M that we take a
+fair bit faster than that um but I will
+fair bit faster than that um but I will
+check the uh I'll check the code and see
+check the uh I'll check the code and see
+cuz usually usually I find new contribut
+cuz usually usually I find new contribut
+there's just a bunch of ways to make uh
+there's just a bunch of ways to make uh
+M code way faster let me merge this real
+M code way faster let me merge this real
+quick I've been fighting this this bug
+quick I've been fighting this this bug
+for the last hour finally got
+for the last hour finally got
+it at least now I don't have to go to
+it at least now I don't have to go to
+bed after uh go to get dinner and go to
+bed after uh go to get dinner and go to
+bed angry
+yeah but Xander if you wanted to like
+yeah but Xander if you wanted to like
+really improve this thing the other
+really improve this thing the other
+thing you could do is you could just
+thing you could do is you could just
+make the OBS a straight up one hot um
+make the OBS a straight up one hot um
+you could just make the M's a straight
+you could just make the M's a straight
+up one
+up one
+hot and then you'd be good yeah post the
+hot and then you'd be good yeah post the
+thing in the Discord I'm going to go
+thing in the Discord I'm going to go
+grab some dinner um for all the folks
+grab some dinner um for all the folks
+watching this if you're looking to get
+watching this if you're looking to get
+involved with this it's just puffer doai
+involved with this it's just puffer doai
+we've got everything on the homepage
+we've got everything on the homepage
+GitHub star it it really helps us if you
+GitHub star it it really helps us if you
+start the GitHub actually uh Discord
+start the GitHub actually uh Discord
+right here Discord GPU join this this is
+right here Discord GPU join this this is
+where literally everything
+where literally everything
+happens there's like no you you don't
+happens there's like no you you don't
+have to submit a resume you just you
+have to submit a resume you just you
+show up and you start building stuff
+show up and you start building stuff
+it's that easy
+it's that easy
+um and then there's also my X where I
+um and then there's also my X where I
+post a whole bunch of stuff on
+post a whole bunch of stuff on
+reinforcement learning and the like so
+reinforcement learning and the like so
+if you're interested you can follow me
+if you're interested you can follow me
+there as well and this gives you
+there as well and this gives you
+notifications when I'm live I'm Live
+notifications when I'm live I'm Live
+Here YouTube twitch it's multi
+Here YouTube twitch it's multi
+streamed that's pretty much everything
+streamed that's pretty much everything
+um I am going to go get food I will
+um I am going to go get food I will
+review B bets blast RM tomorrow I guess
+review B bets blast RM tomorrow I guess
+I think he's PR PR it and I will see you
+I think he's PR PR it and I will see you
+all around bye

@@ -1,0 +1,6077 @@
+Kind: captions
+Language: en
+jumping
+jumping
+here from neural MMO
+every so often we get LM shenanigans
+[Music]
+[Music]
+all right that's all the stuff we have
+all right that's all the stuff we have
+to look at for now
+so oh no wait is
+so oh no wait is
+there one more
+message ah
+okay where's
+okay where's
+that
+that
+so oops say main gear
+stuff give a quick overview of what we
+stuff give a quick overview of what we
+were going to do here um we're working
+were going to do here um we're working
+on getting the Isaac Sim Isaac JY High
+on getting the Isaac Sim Isaac JY High
+Fidelity physics simulator bound up to
+Fidelity physics simulator bound up to
+puffer lib uh the problem is there about
+puffer lib uh the problem is there about
+three generations of PhD students worth
+three generations of PhD students worth
+of terrible code associated with that so
+of terrible code associated with that so
+we've been cleaning everything up we hit
+we've been cleaning everything up we hit
+tons of driver mesh Shenanigans which
+tons of driver mesh Shenanigans which
+took
+took
+another six
+another six
+hours but I finally got those hopefully
+hours but I finally got those hopefully
+fixed and now we just have to clean up
+fixed and now we just have to clean up
+the Sim figure out what's going on and
+the Sim figure out what's going on and
+we should be good to go
+I got about let me think
+I got about let me think
+today I got about 4 hours now and
+today I got about 4 hours now and
+probably another two hours after dinner
+probably another two hours after dinner
+I got probably 6 hours to get all this
+I got probably 6 hours to get all this
+stuff
+done I wake up and get this get to it
+took way longer than I would have liked
+took way longer than I would have liked
+to get my exercise in and get food and
+to get my exercise in and get food and
+stuff but went for a pretty hard run and
+stuff but went for a pretty hard run and
+you know it takes time to
+you know it takes time to
+recover 916 Pace
+recover 916 Pace
+5K um after literally 4 days of
+5K um after literally 4 days of
+training having been in the hospital
+training having been in the hospital
+with pneumonia so I'll take that anytime
+with pneumonia so I'll take that anytime
+not
+bad okay so we have our base
+bad okay so we have our base
+n and we have
+n and we have
+this now I think there is a
+synchronize step
+synchronize step
+Graphics draw a
+viewer I think that there's a
+viewer I think that there's a
+synchronize missing isn't there
+oh my
+bad it's kind of
+bad it's kind of
+interesting that they uh they bind their
+interesting that they uh they bind their
+docks right to their distributed code
+docks right to their distributed code
+they don't host
+them
+them
+uh I thought there's a graphic sync
+uh I thought there's a graphic sync
+function isn't
+there Step
+Graphics this should be if one is
+Graphics this should be if one is
+displaying the simulation this
+displaying the simulation this
+method okay so this is it here
+so hang
+on if I just oops if I just put this in
+here put this here
+here put this here
+right test
+Isaac
+3.8 okay so here we have our Bots um
+3.8 okay so here we have our Bots um
+they're actually they're hovering now
+they're actually they're hovering now
+that's
+interesting and if I
+interesting and if I
+continue it goes
+continue it goes
+black the Scene goes
+black so let's see
+why first of all let's try not doing
+why first of all let's try not doing
+these
+actions still goes black
+actually you know what maybe
+actually you know what maybe
+um maybe there's information we can use
+um maybe there's information we can use
+in the
+in the
+Sim you
+know unavailable with
+GPU so everything goes to
+GPU so everything goes to
+Nan oops viewer
+I lost a a
+thing Sim time
+thing Sim time
+step worker
+threads okay so we get all our pams in
+here but um everything is Nan
+here but um everything is Nan
+all
+all
+man so why is
+man so why is
+[Music]
+[Music]
+that I guess the first thing to do would
+that I guess the first thing to do would
+be to
+be to
+um see if we can get it to just render
+um see if we can get it to just render
+basically just update the
+render I got to wake up here
+render I got to wake up here
+thought I got mostly enough
+sleep I I guess I've been doing a fair
+sleep I I guess I've been doing a fair
+bit of work on this
+bit of work on this
+lately takes a lot out of
+you okay so there we go so
+you okay so there we go so
+now um we are no
+now um we are no
+longer breaking stuff we have everything
+longer breaking stuff we have everything
+in this position
+in this position
+here Sim the viewer and the
+here Sim the viewer and the
+perf oh and yeah you actually you can
+perf oh and yeah you actually you can
+control
+control
+this uh so yeah here are all the Bots
+this uh so yeah here are all the Bots
+they're all
+they're all
+floating they've been randomly colored
+floating they've been randomly colored
+so actually they include a pretty nice
+so actually they include a pretty nice
+little renderer for this as
+little renderer for this as
+well this is the
+humanoid it's got toe
+humanoid it's got toe
+flexors and pretty detailed hands I
+flexors and pretty detailed hands I
+guess yes yeah they're pretty darn
+guess yes yeah they're pretty darn
+detailed
+hands that's decent I
+guess so
+guess so
+um why can't we do
+um why can't we do
+anything if I do this it breaks
+anything if I do this it breaks
+right instantly break so self Jim
+right instantly break so self Jim
+simulate self. Sim
+why does
+why does
+that break
+it that's my
+it that's my
+email not like
+email not like
+that
+for e
+we're just using this to see if there
+we're just using this to see if there
+are a
+Dos basically fuzzy dock search
+if your humanoid is
+initialized prepare Sim is called before
+initialized prepare Sim is called before
+stepping which it is
+Sim
+Sim
+pams oh do we not have DT set no we do
+pams oh do we not have DT set no we do
+it's right
+it's right
+here solver
+here solver
+type
+one is this
+let's see what happens with
+this T made it
+this T made it
+up that's funny as
+hell and that's not
+hell and that's not
+it at least on its own that's not it
+um I could do refresh tensors
+maybe yeah I think that's what we do we
+maybe yeah I think that's what we do we
+go to step up
+go to step up
+here and we do
+here and we do
+this oops actually other way
+around where is
+it
+man actually maybe I need to do this
+man actually maybe I need to do this
+hold on
+okay so that doesn't
+help so we do
+do this is
+zeros this is
+zeros all right this has stuff in it
+so we got rigid body
+State
+zeros okay so this one's a little larger
+okay so it's all n
+get
+get
+Jim what do you what do you think that
+Jim what do you what do you think that
+this uh this function is do you think it
+this uh this function is do you think it
+exists or do you think jity made it up
+I bet your gy made it
+up yep made it up
+rigid body
+rigid body
+state is right
+state is right
+here well we just check this
+I'm trying to think if the best thing
+I'm trying to think if the best thing
+would just be to go line by line with
+would just be to go line by line with
+the
+original I'm trying to think what stuff
+original I'm trying to think what stuff
+I might have changed
+it's very difficult to go line by line
+it's very difficult to go line by line
+with the original though because the
+with the original though because the
+code is so
+bad oops
+okay so we
+do setup character
+props which loads the uh the
+asset num
+OBS
+okay do we
+okay do we
+um we create the ground plane first
+um we create the ground plane first
+surely
+right okay so wait this is in create
+Sim which is super. creat Sim
+and this doesn't get called this gets
+and this doesn't get called this gets
+called by the [ __ ] parent
+called by the [ __ ] parent
+class um very
+early I objectoriented programming needs
+early I objectoriented programming needs
+to be outlawed this is so horrible
+okay what do we do we do acquire
+okay what do we do we do acquire
+gem we set a bunch of
+rams um
+States it's buffer don't really get
+used create
+used create
+Sim which is where this calls the other
+Sim which is where this calls the other
+implementation and then prepare Sim is
+down all the way down
+down all the way down
+here so it's really it's in create Sim
+and then this calls super so we did we
+and then this calls super so we did we
+set the up
+AIS I think we do we set the up Axis in
+AIS I think we do we set the up Axis in
+the base
+right
+right
+yeah and then we create the SIM
+yeah and then we create the SIM
+so that calls
+so that calls
+super then we create the ground plane
+super then we create the ground plane
+which we just have way simpler
+which we just have way simpler
+here
+here
+um but we now need to go look for
+um but we now need to go look for
+create round
+create round
+plane to make plane
+plane to make plane
+prams you make this and this is
+prams you make this and this is
+fine and
+fine and
+then you have create
+then you have create
+M's gives you square root num m and
+M's gives you square root num m and
+spacing create
+spacing create
+M's I think this is the more complicated
+one do I have all of
+this so we have the root
+this so we have the root
+here we get our
+path we set the
+ARs and then we load
+ARs and then we load
+it and we get the num bodies rigid
+it and we get the num bodies rigid
+count
+yeah and
+yeah and
+uh then we create this Force
+sensor
+sensor
+spine torso
+spine torso
+index then there's a bunch of stuff here
+index then there's a bunch of stuff here
+they don't use it looks
+they don't use it looks
+like and then they have this
+Loop over num
+Loop over num
+Ms where they call create
+M and then they begin Aggregate and then
+M and then they begin Aggregate and then
+they call build M and then end Aggregate
+they call build M and then end Aggregate
+and then if we look at build n
+we
+we
+have call
+have call
+group filter and then we have this
+transform set
+file you call create
+file you call create
+actor then you enable the
+actor then you enable the
+sensors and then you
+sensors and then you
+I actually would prefer to do it like
+I actually would prefer to do it like
+this do the
+this do the
+color just one per
+humanoid and then we
+humanoid and then we
+do
+do
+this drive
+this drive
+mode and then we set the
+mode and then we set the
+property and we also pend this handle
+property and we also pend this handle
+okay
+um and then we do the depth of field
+stuff we get our
+stuff we get our
+limits we send them to torch
+limits we send them to torch
+we get their PD offset and
+scale what do they set for contact
+bodies
+bodies
+please hold
+on I'm going set this for now
+I don't think that changes
+anything yeah no we're still we're still
+anything yeah no we're still we're still
+uh failing
+uh failing
+instantly that is something
+you get all these
+you get all these
+tensors root tensor
+which
+states create
+states create
+rappers there's apparently a memory
+rappers there's apparently a memory
+thing that uh
+thing that uh
+you
+disable I want to try
+something okay it's not garbage
+collection it's funny that you can
+collection it's funny that you can
+uh you can do
+uh you can do
+this I wonder how much faster python is
+this I wonder how much faster python is
+without garbage
+collection should probably just use
+C
+oops Yeah most languages have like a
+oops Yeah most languages have like a
+weird way to mess with their garbage
+weird way to mess with their garbage
+collection
+system welcome
+back I am as
+well I pretty much just want to finish
+well I pretty much just want to finish
+this and then pass out that would be the
+this and then pass out that would be the
+best go to sleep at 400
+best go to sleep at 400
+p.m. that would be
+great probably yeah about then
+so you make all the darn
+tensors this is where you make all the
+tensors this is where you make all the
+tensors
+blank message from
+blank message from
+twitch that's
+funny
+e e
+hey
+PR much stuff here
+step
+actions
+every joint should have a velocity
+every joint should have a velocity
+parameter greater than zero
+okay
+re
+acquire is called before
+refresh are you [ __ ] me
+uh that's the one thing I cut out that I
+uh that's the one thing I cut out that I
+thought was redundant
+thought was redundant
+okay dude that's so
+stupid
+refresh that is so stupid
+acquire is called before refresh
+acquire is called before refresh
+here and then do they
+here and then do they
+refresh hold on they're acquiring yet
+okay so they have it what looks like
+okay so they have it what looks like
+they have it
+they have it
+backwards
+um so hold on this is refresh depth the
+um so hold on this is refresh depth the
+field actor route
+field actor route
+net
+net
+contact so this should just be refresh
+contact so this should just be refresh
+Sim
+tensors before acquire
+hey they fall through the
+hey they fall through the
+floor no they don't fall through the
+floor no they don't fall through the
+floor
+floor
+boom look at that we
+boom look at that we
+win we
+win that was so much freaking work to
+win that was so much freaking work to
+get this stupid thing to like oh my God
+get this stupid thing to like oh my God
+and this is just the basics
+and this is just the basics
+wait this was just the basics but still
+wait this was just the basics but still
+holy
+hell
+hell
+boink you're your
+robot want to commit this
+hold on I'll answer that in a
+second e
+I'm almost finished with my buck shot
+I'm almost finished with my buck shot
+roulette and I still haven't played that
+roulette and I still haven't played that
+game
+game
+dqn would you be able to once
+dqn would you be able to once
+over yeah sure of course I'll look at
+over yeah sure of course I'll look at
+the
+end you know if you buy if you get it
+end you know if you buy if you get it
+into a a
+into a a
+gym API gymnasium API uh you can just
+gym API gymnasium API uh you can just
+run puffer lib on it out of the box and
+run puffer lib on it out of the box and
+then you'll know whether it's the M or
+then you'll know whether it's the M or
+the uh the algorithm that's giving you
+the uh the algorithm that's giving you
+trouble because like we have a nice
+trouble because like we have a nice
+stable po implementation it's really
+stable po implementation it's really
+fast you can just run it against your
+environment it's literally a oneline
+environment it's literally a oneline
+binding for existing gymnasium
+environments welcome to all the YouTube
+environments welcome to all the YouTube
+folks we just got this thing
+working
+boom I thought it was on Steam is it
+boom I thought it was on Steam is it
+online as
+online as
+well not playing it on stream obviously
+well not playing it on stream obviously
+obviously
+but there're the
+but there're the
+robots
+robots
+Okay we have
+Okay we have
+robots humanoid
+robots humanoid
+thingies I don't do much just
+yet next we try to get the actions doing
+yet next we try to get the actions doing
+something
+that
+works I would like to rotate them so
+works I would like to rotate them so
+that they uh they're standing up by
+fall GPT probably
+transform Define using a
+quat D I love how it just waste all
+quat D I love how it just waste all
+these tokens and takes forever giving
+these tokens and takes forever giving
+you an annoying code
+okay initial pose so we just have to
+okay initial pose so we just have to
+rotate this is probably because we have
+rotate this is probably because we have
+the Z axis
+the Z axis
+up or whatever
+they math pie
+lower
+case need to get the
+case need to get the
+uh and stop the actions for a second so
+uh and stop the actions for a second so
+I can see
+it okay that's just the wrong direction
+it's one of these it's probably around
+it's one of these it's probably around
+the Z isn't
+the Z isn't
+it X
+it X
+zyx so it's this
+right there you
+go
+[Music]
+[Music]
+perfect Bonk
+Bonk Co
+ah hey
+ah hey
+Spencer send this to K real quick
+um e
+got do a little promo here and there
+there's a lot of stuff we can do from
+here I'd like to perf test this
+thing
+e e
+this will be the initial perf
+whoops so this will be initial perf with
+whoops so this will be initial perf with
+only eight of
+them 29 SPS God okay let's see if we
+them 29 SPS God okay let's see if we
+can't bring that up a a little bit holy
+hell no okay so it does take num
+M and then we do
+nice ni
+okay and then we would do
+okay and then we would do
+like realistically we're going to have
+like realistically we're going to have
+4096 of these
+right 21,000 so that's unusably
+right 21,000 so that's unusably
+bad we definitely have to bring that up
+bad we definitely have to bring that up
+though we're only getting um 10,000
+before so deleting a bunch of wrapper
+before so deleting a bunch of wrapper
+stuff did
+stuff did
+help I
+believe is this one of those M's where
+believe is this one of those M's where
+you really need to crank this to get a
+you really need to crank this to get a
+perf let me
+perf let me
+see let's see if this doubles
+see let's see if this doubles
+it waiting let me see
+if it's low man we're just going to
+if it's low man we're just going to
+teach you how to do some performance
+teach you how to do some performance
+engineering like you'll you're smart
+engineering like you'll you're smart
+enough you'll pick it up
+fast okay so it doesn't help above
+fast okay so it doesn't help above
+um above a certain
+um above a certain
+threshold so we'll use
+4096 I mean being good at writing fast
+4096 I mean being good at writing fast
+code is very very very very
+code is very very very very
+useful and often fast code ends up just
+useful and often fast code ends up just
+being simple code as well which is
+being simple code as well which is
+nice occasionally you got to do some
+nice occasionally you got to do some
+fancy caching but usually it's not that
+fancy caching but usually it's not that
+hard
+so there are a few things I want to do
+so there are a few things I want to do
+here
+if I load them all into the same
+if I load them all into the same
+scene on a GPU
+yeah
+yeah
+see kind of use GPT as some docks
+here I want to test this if the just to
+see for
+I'm getting about
+I'm getting about
+100 you have to try to make stuff that
+100 you have to try to make stuff that
+slow
+slow
+man you're in good company or along with
+man you're in good company or along with
+like top RL researchers doing that stuff
+like top RL researchers doing that stuff
+but yeah you're straight
+trolling assuming you mean M Speed not
+trolling assuming you mean M Speed not
+training
+speed yeah I think we're going to try
+this well dude write a perf test on your
+this well dude write a perf test on your
+environment it's not that hard like look
+environment it's not that hard like look
+do this it's like 10
+lines and always multiply by number of
+lines and always multiply by number of
+Agents cuz it's agent steps per
+Agents cuz it's agent steps per
+second it's multi-agent
+it turns out compute clusters is
+it turns out compute clusters is
+completely [ __ ] they got hacked in our
+completely [ __ ] they got hacked in our
+manually pulling Plows in are you
+manually pulling Plows in are you
+kidding
+kidding
+me that freaking
+sucks e
+nation state level
+nation state level
+attack
+lovely can you send them back um a
+lovely can you send them back um a
+patriot missile as a present
+the most valuable of research is the
+the most valuable of research is the
+curriculum learning it solves all of RL
+well now you got no excuse to uh to not
+well now you got no excuse to uh to not
+go use your
+go use your
+ridiculously expensive uh University gym
+ridiculously expensive uh University gym
+cuz you've got [ __ ] all else to
+cuz you've got [ __ ] all else to
+do no experiments are
+running oh yeah damn
+go for a run or something man
+go for a run or something man
+like I don't know you can't do [ __ ]
+like I don't know you can't do [ __ ]
+about
+that I did a about a 916 Pace 5K today
+that I did a about a 916 Pace 5K today
+with four days of training since
+with four days of training since
+pneumonia I'll take that
+RLC deadline yeah
+true I just added a kilometer a day this
+true I just added a kilometer a day this
+week from 2 to
+5 I I think it's the lack of weight it
+5 I I think it's the lack of weight it
+like cuz it feels really easy running
+like cuz it feels really easy running
+but my heart rate's literally at
+but my heart rate's literally at
+185 so I don't know it's kind kind of
+185 so I don't know it's kind kind of
+weird usually at 185 I'd be dying so I
+weird usually at 185 I'd be dying so I
+don't
+know all right Zoomer yeah yours goes to
+know all right Zoomer yeah yours goes to
+205 or
+whatever mine goes to like
+whatever mine goes to like
+190 low 190s I
+think lighter yeah I want to get the
+think lighter yeah I want to get the
+mass back though
+I get uh the rack will arrive in about
+I get uh the rack will arrive in about
+two weeks and then I get to start doing
+two weeks and then I get to start doing
+my stuff
+again oh man I did I went down that
+again oh man I did I went down that
+route in undergrad I
+route in undergrad I
+uh I had like four monsters a day for
+uh I had like four monsters a day for
+most of
+undergrad and probably more more in
+undergrad and probably more more in
+alcohol than that
+hey Ryan check this
+out we got uh Isaac Jim running in
+out we got uh Isaac Jim running in
+puffer no not at the same
+puffer no not at the same
+time look at
+this
+this
+Jesus got to get some cardio in man
+Jesus got to get some cardio in man
+lower that [ __ ] that's ridiculous
+yeah it's not running this is flopping
+yeah it's not running this is flopping
+around this is just random
+around this is just random
+actions ah yeah I remember okay that's
+rough it's got to be something
+rough it's got to be something
+man is there no way around that
+[ __ ] cuz not doing exercise will also
+[ __ ] cuz not doing exercise will also
+kill you
+is there nothing that you can do for
+that I think there was some US president
+that I think there was some US president
+who literally like trained himself half
+who literally like trained himself half
+to death and like cured his asthma
+to death and like cured his asthma
+though that's uh probably apocryphal
+more potent
+enough nine more
+months does it actually cure it after uh
+months does it actually cure it after uh
+a certain duration of
+a certain duration of
+time is that how it
+time is that how it
+works nine more months of 2.5 years in
+is that how it works it just it takes
+is that how it works it just it takes
+like like nearly three and a half years
+like like nearly three and a half years
+but then you then it's cured is that a
+but then you then it's cured is that a
+is that a
+thing I don't know how it
+works I kind of get what he means though
+works I kind of get what he means though
+cuz like I they gave me basically the
+cuz like I they gave me basically the
+same thing and that [ __ ] sucks it just
+same thing and that [ __ ] sucks it just
+it instantly spikes your heart rate but
+it instantly spikes your heart rate but
+it only spikes it by like 10 or 15 I'm
+it only spikes it by like 10 or 15 I'm
+pretty sure so if it's 98 resting I
+pretty sure so if it's 98 resting I
+think your normal resting is also very
+think your normal resting is also very
+high it's about what mine was before I
+high it's about what mine was before I
+started doing any
+exercise where try
+this it reduces it enough Oh okay that's
+this it reduces it enough Oh okay that's
+cool yeah your normal's probably high
+cool yeah your normal's probably high
+because you can't do
+because you can't do
+cardio is just what it's going to
+be yeah
+no for
+see you best of luck
+see you best of luck
+Ryan that's some [ __ ] I wish I could
+Ryan that's some [ __ ] I wish I could
+help you out but I definitely don't have
+help you out but I definitely don't have
+enough spare puffer boxes at the
+enough spare puffer boxes at the
+moment once I have the 40 then I will be
+moment once I have the 40 then I will be
+very happy to support some cool research
+very happy to support some cool research
+with you
+ordering those soon
+hopefully for
+fortunately you have to build up your
+tolerance
+yesh that's such
+yesh that's such
+[ __ ] it's cool that it eventually
+[ __ ] it's cool that it eventually
+gets cured but that's like [ __ ] hell
+well you can at least do some
+well you can at least do some
+powerlifting in the meantime and get
+powerlifting in the meantime and get
+plenty jacked it actually it takes way
+plenty jacked it actually it takes way
+longer to do um strength training than
+longer to do um strength training than
+cardio like you know it's like a couple
+cardio like you know it's like a couple
+years for most people like if you have
+years for most people like if you have
+average genetics and you're not like
+average genetics and you're not like
+super heavy it takes like a good 2 years
+super heavy it takes like a good 2 years
+to get a two-plate bench
+to get a two-plate bench
+press um
+press um
+and usually like longer to get like a th
+and usually like longer to get like a th
+total took me like four for that though
+total took me like four for that though
+I was also running only takes a year to
+I was also running only takes a year to
+be running marathons from like nothing
+so
+jeez I mean at least there's stuff you
+jeez I mean at least there's stuff you
+can carry for that it's not pleasant but
+can carry for that it's not pleasant but
+you have it
+what are you working
+on we are currently working on this High
+on we are currently working on this High
+Fidelity physics Sim Isaac gem we're
+Fidelity physics Sim Isaac gem we're
+getting this bound up to puffer lib
+getting this bound up to puffer lib
+which is my ultra high performance
+which is my ultra high performance
+reinforcement learning library and we're
+reinforcement learning library and we're
+cutting out all the dog [ __ ] code that's
+cutting out all the dog [ __ ] code that's
+uh surrounding this thing so you can
+uh surrounding this thing so you can
+actually use it in a way that makes
+actually use it in a way that makes
+sense is what we're currently doing
+this stream is pretty much just all the
+this stream is pretty much just all the
+reinforcement learning Dev I do goal is
+reinforcement learning Dev I do goal is
+this year for puffer to make RL 10 times
+this year for puffer to make RL 10 times
+easier to get working on new
+easier to get working on new
+problems I think we will hit
+that it's just I'm just sending it
+that it's just I'm just sending it
+random actions for testing that's no big
+random actions for testing that's no big
+deal that's easy to
+fix um now the question is why do I only
+fix um now the question is why do I only
+see one of
+these
+these
+Char create
+Char create
+actor
+actor
+group I do
+this there still only one of these
+guys enable for
+guys enable for
+sensors then you set the color
+set this I only see one of these
+set this I only see one of these
+guys in the
+render is it faster now hold
+on well actually that's not going to
+on well actually that's not going to
+tell me anything because I don't know if
+tell me anything because I don't know if
+it's actually running these
+it's actually running these
+I do something wrong
+I do something wrong
+here college student watching videos for
+here college student watching videos for
+Linux commands and saw the
+Linux commands and saw the
+video yeah man hey if you're looking to
+video yeah man hey if you're looking to
+get into some cool RL stuff we got lots
+get into some cool RL stuff we got lots
+of people you just need to be able to
+of people you just need to be able to
+code know if you can write some code you
+code know if you can write some code you
+can kind of start jamming some RL takes
+can kind of start jamming some RL takes
+people like a month or two to really get
+people like a month or two to really get
+onboarded and start writing some cool
+onboarded and start writing some cool
+stuff it's pretty
+quick $600 down to 461 that's
+quick $600 down to 461 that's
+good less code for same thing is
+good less code for same thing is
+better usually unless you're
+golfing spread out humanoids in a
+golfing spread out humanoids in a
+grid could that be it it's literally
+grid could that be it it's literally
+just they're all on top of each
+other hang on
+other hang on
+I'll feel kind of stupid if it's
+that it's not
+that there should be uh more of these
+that there should be uh more of these
+guys
+there's only one humanoid
+here create
+here create
+actor 0 yeah oh wait wait you got to do
+actor 0 yeah oh wait wait you got to do
+I forget it's a
+unique I forgot about
+unique I forgot about
+that you're writing in
+that you're writing in
+Python uh so this rapper code is iny
+Python uh so this rapper code is iny
+python puffer lib itself which is the
+python puffer lib itself which is the
+main library I develop the learning and
+main library I develop the learning and
+stuff is in Python with pytorch but all
+stuff is in Python with pytorch but all
+of the environments so the majority of
+of the environments so the majority of
+the library is in C so all these
+the library is in C so all these
+environments together about 20,000 lines
+environments together about 20,000 lines
+of c and uh you can play them on puffer
+of c and uh you can play them on puffer
+doai you can watch these agents play you
+doai you can watch these agents play you
+just hold shift you can take over for
+just hold shift you can take over for
+the agent and try to you know play for
+the agent and try to you know play for
+them take my hands off the agent takes
+them take my hands off the agent takes
+over from very simple to like very very
+over from very simple to like very very
+complex this is a miniature
+complex this is a miniature
+MMO I mean this is a mooba something
+MMO I mean this is a mooba something
+like mini League of Legends or mini
+like mini League of Legends or mini
+DOTA we got lots and lots of stuff on
+here this stuff has to be python though
+here this stuff has to be python though
+because it's a library with a python API
+so I wonder if they do have a a I don't
+so I wonder if they do have a a I don't
+think they have
+think they have
+um I guess technically if it's in
+um I guess technically if it's in
+C++ we could just not use the python
+C++ we could just not use the python
+API but I think that they have like I
+API but I think that they have like I
+don't know I might have to look into
+don't know I might have to look into
+that it doesn't really save anything for
+that it doesn't really save anything for
+the
+initialization I don't really want to
+initialization I don't really want to
+invest that heavily in this specific
+invest that heavily in this specific
+specific framework though um client is
+specific framework though um client is
+interested in this a few people are
+interested in this a few people are
+interested in this but this is not I
+interested in this but this is not I
+don't think Isaac Jim is like still
+don't think Isaac Jim is like still
+fully the dominant platform I think that
+fully the dominant platform I think that
+there are like a few more now that
+there are like a few more now that
+people are interested in so it doesn't
+people are interested in so it doesn't
+really make sense to go super super Ham
+really make sense to go super super Ham
+on this I'm going to get this like I've
+on this I'm going to get this like I've
+cut this from over 2,000 lines down to
+cut this from over 2,000 lines down to
+about a th000 2,000 being like the
+about a th000 2,000 being like the
+standard rappers that they provide um so
+standard rappers that they provide um so
+it's I've made it a lot simpler but I
+it's I've made it a lot simpler but I
+think digging into this C++ API and like
+think digging into this C++ API and like
+rewriting sections of that is where I
+rewriting sections of that is where I
+draw the
+line okay so this is
+line okay so this is
+still humanoid
+still humanoid
+zero oh wait cuz this is got to be num
+zero oh wait cuz this is got to be num
+actors
+duh num actors
+in I only deal with networking Scripts
+in I only deal with networking Scripts
+I mean you can do lots of things
+I mean you can do lots of things
+right uh
+gym wait
+shape this is numb
+agents I think
+n agent should be
+n agent should be
+defined of num
+actors okay oh wait there they are look
+actors okay oh wait there they are look
+at them
+so they're all like spread out kind of
+weird right they're spread out kind of
+weird right they're spread out kind of
+weird I think that's because of the
+weird I think that's because of the
+randomness or the uh the offsets
+maybe what if I do
+maybe what if I do
+this whoa
+okay they're not supposed to collide
+okay they're not supposed to collide
+like
+like
+that that's kind of funny
+though bot
+confetti let me see how I get them uh to
+confetti let me see how I get them uh to
+not collide
+not collide
+this was in the user guide but I didn't
+this was in the user guide but I didn't
+understand what they were
+understand what they were
+saying not very
+nice little bit of
+nice little bit of
+promo for folks watching literally all
+promo for folks watching literally all
+the stuff I'm working on is free and
+the stuff I'm working on is free and
+open source it's community-led so you
+open source it's community-led so you
+can get involved you don't have to deal
+can get involved you don't have to deal
+with terrible stuff like this we uh
+with terrible stuff like this we uh
+we're very happy to have people just
+we're very happy to have people just
+writing fun M's and uh I mean that
+writing fun M's and uh I mean that
+actually really helps the science side
+actually really helps the science side
+believe it or not you can it's pretty uh
+believe it or not you can it's pretty uh
+it's actually pretty quick to learn how
+it's actually pretty quick to learn how
+to write like really high perf M's like
+to write like really high perf M's like
+this and to get into some of the
+this and to get into some of the
+URL uh codes right here you can start to
+URL uh codes right here you can start to
+help us out really helps out a ton you
+help us out really helps out a ton you
+can join the Discord this is where we
+can join the Discord this is where we
+organize everything and you can follow
+organize everything and you can follow
+my ex for more content including some
+my ex for more content including some
+articles on RL we've got quick start
+articles on RL we've got quick start
+guides for newcomers all sorts of fun
+guides for newcomers all sorts of fun
+stuff don't forget to feed the puff for
+stuff don't forget to feed the puff for
+a star
+a star
+back to
+code well as soon as I figure this API
+code well as soon as I figure this API
+out that
+out that
+is simulation
+setup so we
+setup so we
+have environment collection is pack
+have environment collection is pack
+multiple instances of an environment
+multiple instances of an environment
+into a single simulation
+each M has its own coordinate
+space we'll get arranged in a 2d gr run
+space we'll get arranged in a 2d gr run
+row at a time
+oh so
+possibly so I think Isaac Jim
+possibly so I think Isaac Jim
+potentially does this for
+you we'll see about
+this okay Collision group is an integer
+this okay Collision group is an integer
+that identifies the Collision group to
+that identifies the Collision group to
+which they will sign they'll only
+which they will sign they'll only
+Collide if they belong to the same
+Collide if they belong to the same
+Collision
+group in certain
+group in certain
+cases You may wish to set up more than
+cases You may wish to set up more than
+one Collision
+one Collision
+group a bit Mask two bodies will not
+group a bit Mask two bodies will not
+Collide if their Collision filters have
+Collide if their Collision filters have
+a common bit
+set presentent certain kinds of objects
+set presentent certain kinds of objects
+in a scene from interacting
+physically Collision
+physically Collision
+filter so I think we look for create
+filter so I think we look for create
+actor and let's see if we get more about
+actor and let's see if we get more about
+the Collision
+filter bitwise
+filter for elements
+filter for elements
+to mask off
+Collision
+Collision
+maybe hold on
+no will not Collide if their Collision
+no will not Collide if their Collision
+groups share no common
+bits for
+unique guilt
+I don't actually know how this
+works okay shared Collision
+group so this is supposed to work so
+maybe maybe this does work hold on
+maybe maybe this does work hold on
+do these look like they're colliding or
+do these look like they're colliding or
+are they just
+like no these are definitely
+like no these are definitely
+colliding right these are definitely
+colliding right these are definitely
+colliding with each
+other I mean we can double check this
+other I mean we can double check this
+very
+easily 3
+two yeah see they all spread out that
+two yeah see they all spread out that
+means they're getting
+so I think that what it would look
+like this is what it should look
+like this is what it would look
+like this is what it would look
+like yeah is this what it looks like if
+like yeah is this what it looks like if
+there's no
+there's no
+Collision yeah cuz they're all
+Collision yeah cuz they're all
+like these are not there no Collision
+like these are not there no Collision
+there's no Collision filter here you can
+there's no Collision filter here you can
+see that they're all like
+see that they're all like
+overlapped um so I don't think I'm
+overlapped um so I don't think I'm
+understanding the way that the filter
+understanding the way that the filter
+works I don't think GPT is
+works I don't think GPT is
+either is a bit MK that lets you filter
+either is a bit MK that lets you filter
+out collisions between
+out collisions between
+bodies two bodies will not Collide if
+bodies two bodies will not Collide if
+their Collision filters have a common
+their Collision filters have a common
+bit
+set I think that means this has to be
+one they need to have a a common bit
+set does that work I think that's
+set does that work I think that's
+different
+different
+right versus hold on versus this
+yeah see how quickly these
+yeah see how quickly these
+separate these separate incredibly
+separate these separate incredibly
+quickly whereas these ones do
+not see there's still
+not see there's still
+like I think this
+like I think this
+works and I think that what we do now is
+works and I think that what we do now is
+we test the
+performance now it's possible that this
+performance now it's possible that this
+is not any FAS
+faster user aggregate
+size
+huh I thought you could do
+that can I do 256
+5,000
+SPS one can't do 10.4
+and that's slower somehow
+I think that I'm barking up the wrong
+I think that I'm barking up the wrong
+tree here though because I think what
+tree here though because I think what
+happens is Isaac Jim actually sticks all
+happens is Isaac Jim actually sticks all
+the agents in one environment uh
+internally for
+about
+this I can
+do not that
+okay that's
+better no longer
+better no longer
+exceeded user aggregate
+exceeded user aggregate
+size carb gy
+plugin okay 28k on 1024
+what about
+this okay that is a lot faster um but
+this okay that is a lot faster um but
+but we need to test
+but we need to test
+something uh let me think how I want to
+something uh let me think how I want to
+do this this I think I'm going to very
+do this this I think I'm going to very
+carefully
+carefully
+undo all of this which I just
+did very
+carefully copy it redo
+carefully copy it redo
+everything and then I'm going to do
+okay I'm going to do like
+this and I'm going to just
+this and I'm going to just
+make some small
+changes
+changes
+yeah
+okay environment new
+okay environment new
+n.p old
+n.p old
+n environment. pi and now we're going to
+do group will be zero and filter will be
+do group will be zero and filter will be
+one on all of them
+ah this 74,000 is that
+substantial
+71 so you get a very small perf boost it
+71 so you get a very small perf boost it
+looks like let me make sure that that
+looks like let me make sure that that
+was the case
+environment old
+environment old
+and
+Environ okay it is significant
+so I will put a comment
+so I will put a comment
+here you
+get small per boost three
+get small per boost three
+four
+four
+4% putting all
+so that's
+so that's
+nice we get
+nice we get
+this get AIS
+perams what's the model giving you line
+perams what's the model giving you line
+complete super maven
+I really like it it's I have two total
+I really like it it's I have two total
+plugins in neoen one is super Maven and
+plugins in neoen one is super Maven and
+the other is Sami which just gives you a
+the other is Sami which just gives you a
+couple extra syntax highlights in
+Python all I need
+yeah everyone has vs code ones right but
+yeah everyone has vs code ones right but
+not everybody has a neovin plugin I
+not everybody has a neovin plugin I
+don't think co-pilot has a a nice neoen
+don't think co-pilot has a a nice neoen
+plugin it's really easy to get this one
+plugin it's really easy to get this one
+working so I like it
+working so I like it
+it's also very fast um it gives you your
+it's also very fast um it gives you your
+code completes very
+quick I like
+quick I like
+it okay 75k steps per second is
+it okay 75k steps per second is
+decent
+now e
+at least when I got it it was way better
+at least when I got it it was way better
+than co-pilot for that I don't know
+than co-pilot for that I don't know
+about
+now ah
+this
+this
+next they cap your
+next they cap your
+amount you really don't need you really
+amount you really don't need you really
+don't need that for code completion is
+don't need that for code completion is
+the thing like you shouldn't be using it
+the thing like you shouldn't be using it
+for full functions you should be using
+for full functions you should be using
+it for line completion and for that you
+it for line completion and for that you
+don't need a crazy
+don't need a crazy
+model honestly if anybody wants a free
+model honestly if anybody wants a free
+startup idea integrate an LSP properly
+startup idea integrate an LSP properly
+with uh code completions it'll make it
+with uh code completions it'll make it
+way better and way faster
+way better and way faster
+they cap the number of completions you
+they cap the number of completions you
+get
+get
+wow that's annoying I yeah I pay for
+wow that's annoying I yeah I pay for
+super Maven Pro and it's not capped as
+super Maven Pro and it's not capped as
+far as I'm aware
+degrees of freedom let's see
+wait
+what we don't need any of that [ __ ] hold
+what we don't need any of that [ __ ] hold
+on can I just do this
+that should be faster you would
+that should be faster you would
+think I guess since there's no self
+think I guess since there's no self
+contact and there's nothing close it
+contact and there's nothing close it
+doesn't matter
+um
+friction
+names
+Keys
+Keys
+No how do I get the names for this
+get actor doof
+get actor doof
+properties I here this is how you get
+properties I here this is how you get
+the name
+The Hope here is that um by reducing the
+The Hope here is that um by reducing the
+degrees of freedom here it should get a
+degrees of freedom here it should get a
+lot
+lot
+faster okay so
+here yeah you see this is a lot of
+here yeah you see this is a lot of
+degrees of
+degrees of
+freedom uh thumb ring pinky middle
+index so what we'll do is we'll do
+this um
+thumb index
+thumb index
+middle you forgot
+middle you forgot
+ring oh no
+and we take
+this what's your plan for this PP yeah
+this what's your plan for this PP yeah
+there's a little bit of extra client
+there's a little bit of extra client
+stuff on this one um but it's
+mostly mostly that
+okay so that's not any faster
+can I see it in the The
+Sim the hand should not be uh the finger
+Sim the hand should not be uh the finger
+should not be flopping
+fingers are still flopping around it
+fingers are still flopping around it
+looks like to me
+you tell
+[Music]
+I can't quite
+tell definitely finding those
+ah you have to do you have to set
+it e
+okay still not seeing any perfing priest
+aggregate
+is rigid let me
+see Max number of
+see Max number of
+shapes flag to enable so this doesn't
+shapes flag to enable so this doesn't
+exist made that [ __ ] up
+I could comment the joints but I think
+I could comment the joints but I think
+then you get a I think you just get
+then you get a I think you just get
+missing
+missing
+hand if you do
+hand if you do
+that double check
+DMS nothing yet what time is it should
+DMS nothing yet what time is it should
+be 130
+okay so
+um I don't think this is
+sufficient block
+sufficient block
+points for
+H see this is tricky because a lot of
+H see this is tricky because a lot of
+the compute right now is just going into
+the compute right now is just going into
+the hands and we do not care about those
+the hands and we do not care about those
+for this it's kind of funny that they've
+for this it's kind of funny that they've
+got like this relatively blocky humanoid
+got like this relatively blocky humanoid
+and then they have the hands fully
+and then they have the hands fully
+articulated like
+is this even
+is this even
+working remove stiffness remove damping
+disable and
+do should actually we should see the
+do should actually we should see the
+hand being like locked we're not seeing
+hand being like locked we're not seeing
+that's not
+working it's hard to freaking see but
+working it's hard to freaking see but
+actually
+actually
+look
+orientation well it's going to be
+orientation well it's going to be
+oriented because differently because um
+oriented because differently because um
+know the whole B is moving around
+s e
+okay hang
+okay hang
+on are the fingers
+on are the fingers
+moving you should
+moving you should
+do 05 maybe
+do 05 maybe
+or might be too
+much are the individual fingers moving
+much are the individual fingers moving
+here
+can't tell it's not moving the wrist
+can't tell it's not moving the wrist
+either
+though it looks like it could
+though it looks like it could
+be oh here's an easy way to
+be oh here's an easy way to
+tell we can just
+tell we can just
+um does this look different
+it's actually very difficult to
+tell for
+you
+see
+see
+stiffness damping
+stiffness damping
+range it's a joint
+range it's a joint
+free
+joint body
+joint body
+joint toe is a joint
+that's
+that's
+tricky I don't think we can really mess
+tricky I don't think we can really mess
+with this because I think that the Gen
+with this because I think that the Gen
+well
+okay this is a little tricky because
+okay this is a little tricky because
+we're losing I think at least half of
+we're losing I think at least half of
+the performance to um we're losing at
+the performance to um we're losing at
+least half of the performance right here
+least half of the performance right here
+to the uh the excessively articulated
+to the uh the excessively articulated
+hands
+I do have it running at 70k which is
+I do have it running at 70k which is
+better than
+before much better than
+before I think that's going to have to
+before I think that's going to have to
+just be the perf optimization I do for
+just be the perf optimization I do for
+now is just what I've done here
+now is just what I've done here
+um cuz I think I got to get like OBS and
+um cuz I think I got to get like OBS and
+other stuff cleaned
+up yeah I'm going to take a couple quick
+up yeah I'm going to take a couple quick
+minutes use the restroom um and think
+minutes use the restroom um and think
+about what I'm going to do and then I'll
+about what I'm going to do and then I'll
+be back and we will clean up the rest of
+be back and we will clean up the rest of
+this um get maybe observations stuff
+this um get maybe observations stuff
+like that uh I'll leave some
+like that uh I'll leave some
+placeholders for some other stuff and we
+placeholders for some other stuff and we
+will be set be right back
+for
+e
+e e
+okay back one quick
+thing
+for
+e e
+there you
+go we do good work here we fix things
+go we do good work here we fix things
+this is what we
+do okay uh so next I'm not Computing
+do okay uh so next I'm not Computing
+observations yet
+I got to figure out what observations we
+want so they
+want so they
+do root H OBS local body
+do root H OBS local body
+pause body rote body contact
+pause body rote body contact
+buff they actually have a pretty big
+buff they actually have a pretty big
+observation
+observation
+space go check the
+paper we'll look at this
+paper we'll look at this
+paper what we're using for observations
+States consists of the input motions
+States consists of the input motions
+next
+next
+pose along with the difference between
+pose along with the difference between
+the input next pose and the current
+the input next pose and the current
+simulated pose across multiple
+simulated pose across multiple
+aspects don't give it the current pose
+a
+a
+line okay
+so joint
+so joint
+rotation
+rotation
+position joint velocity and
+angular
+velocity so the joint
+velocity so the joint
+rotation the position
+got to be a joints
+got to be a joints
+right velocity an angular
+velocity PD
+control reward function is designed to
+control reward function is designed to
+encourage make reward
+energy penalty and an adversarial
+energy penalty and an adversarial
+reward difference between simulated
+reward difference between simulated
+pose and the input
+pose
+okay energy penalty regulates the
+okay energy penalty regulates the
+policy adversary reward encourage
+policy adversary reward encourage
+is distribution of simil
+motions
+motions
+ah I
+see so
+see so
+that's a little tricky
+okay but this is not that bad we
+so these are the only
+so these are the only
+variables if I get these
+variables if I get these
+variables then we can do whatever
+and this is really what you would want
+and this is really what you would want
+this is Joint rotation position velocity
+this is Joint rotation position velocity
+angular velocity so this is all the
+angular velocity so this is all the
+stuff and they probably have it
+already they probably have this
+local body pause velocity angular
+local body pause velocity angular
+velocity so I just have to figure this
+velocity so I just have to figure this
+function
+function
+out and then they have this crazy reward
+out and then they have this crazy reward
+but this is from a different paper
+but this is from a different paper
+right what I should do is I should check
+right what I should do is I should check
+the other paper and see how it's
+the other paper and see how it's
+different and see what they say that
+different and see what they say that
+this is
+hopefully they tell you what their
+hopefully they tell you what their
+observations
+are stay
+are stay
+eight
+simulate local position rotation
+simulate local position rotation
+velocity and rotational
+velocity and rotational
+velocity is it wait local position
+velocity is it wait local position
+rotation
+velocity rotation position velocity and
+velocity rotation position velocity and
+angular so these are the same
+angular so these are the same
+thing local position rotation velocity
+rotation oh
+o so they should actually have all the
+o so they should actually have all the
+things I need in
+here it's just kind of tricky
+um body pause body Rod body
+um body pause body Rod body
+velocity angular
+velocity angular
+velocity so why is there so much stuff
+velocity so why is there so much stuff
+going on here local root OBS root height
+going on here local root OBS root height
+OBS contact
+forces so wait
+local body
+local body
+pause root pause
+expand okay I see so you want to get rid
+expand okay I see so you want to get rid
+of the global coordinate which is
+of the global coordinate which is
+fine then flat local body pause
+and then they rotate
+and then they rotate
+it I don't know why they do
+this
+e e
+so this extracts the root body
+so this extracts the root body
+position calculates The Heading
+rotation converts body positions to
+rotation converts body positions to
+local coordinates relative to
+local coordinates relative to
+root there's root
+position joint rotations
+position joint rotations
+linear and angular
+velocities joint
+velocities joint
+positions joint
+rotations joint velocities
+rotations joint velocities
+angular
+angular
+velocities and contact
+velocities and contact
+forces root
+height I
+height I
+see so I can just use this I
+think this is a confused
+think this is a confused
+function I think I can just use this and
+function I think I can just use this and
+get rid of contact forces and root
+height like this is mostly what I need
+if local root
+OBS so this has some extra stuff I don't
+OBS so this has some extra stuff I don't
+need but this is actually kind of fine
+let me see if I can get this to actually
+let me see if I can get this to actually
+run
+first cuz we do
+compute
+for e
+compute humanoid
+reward not
+reward not
+needed wait where's the freaking
+needed wait where's the freaking
+humanoid
+humanoid
+OBS I'm being stupid they should
+OBS I'm being stupid they should
+beute
+observations
+observations
+here yeah yeah yeah so this should go
+here yeah yeah yeah so this should go
+here observation
+here observation
+do
+observations and this will be
+we figure out what to do from
+here let just run
+immediately and give us
+observations it looks like it
+does we get this and we get observations
+does we get this and we get observations
+cool
+obss
+equals here your
+equals here your
+humanoids obs
+yeah so this is not returning
+OBS so I didn't return
+it 1 by
+it 1 by
+7 78 that's not correct because that
+7 78 that's not correct because that
+that's for
+that's for
+one one agent I
+one one agent I
+assume um
+human humanoid OBS
+Max
+humanoid by 788
+okay human
+Ms Point let see if the tensors going in
+Ms Point let see if the tensors going in
+are
+correct okay so this is the
+problem I know why it's by
+problem I know why it's by
+one you see yeah that's
+one you see yeah that's
+weird I think the shapes got messed up
+weird I think the shapes got messed up
+because I re ordered the environment a
+because I re ordered the environment a
+little
+bit it should just be numb agents is how
+bit it should just be numb agents is how
+it should
+it should
+work so
+work so
+um yeah let's sort that
+um yeah let's sort that
+out cuz any like the other anything else
+out cuz any like the other anything else
+is
+is
+silly oh are we going to be able to
+silly oh are we going to be able to
+reset
+reset
+individual only it matters if we can
+individual only it matters if we can
+reset individual agents for this
+reset individual agents for this
+actually does
+it we can
+it we can
+anyways yeah we should be able to do
+anyways yeah we should be able to do
+that
+that
+anyways it's not going to be any worse
+anyways it's not going to be any worse
+than resetting an
+than resetting an
+environment should be fine
+this rout
+States what shape does it give you for
+States what shape does it give you for
+this
+curious 32 by
+13 I have 32 agents don't
+I yeah so that's actually freaking
+I yeah so that's actually freaking
+perfect it gives you this in the exact
+perfect it gives you this in the exact
+format you'd want
+humanoid root state so this is just
+um num
+um num
+actors yeah so this is what we call a
+actors yeah so this is what we call a
+stupid
+stupid
+because this is the same thing so let's
+because this is the same thing so let's
+get rid of
+this we already have no actor so we
+this we already have no actor so we
+don't need this
+don't need this
+[ __ ] and inial humanoid root
+[ __ ] and inial humanoid root
+States we're just going to call Initial
+States we're just going to call Initial
+root
+States and then I don't know why they
+States and then I don't know why they
+zero this but
+sure humanoid actor
+sure humanoid actor
+IDs numb actors
+should literally just be this
+now
+factors so that's
+factors so that's
+easy do
+state we don't need this [ __ ]
+anymore doof
+anymore doof
+pause okay this is potentially
+pause okay this is potentially
+legitimate let's see what what this
+is trying to get some
+slices self Dot
+um m
+H they give me a deal perm thingy
+let me see about
+this okay that's
+this okay that's
+correct shall I see what they're trying
+correct shall I see what they're trying
+to do
+here but then where's this two come from
+I could get doing um
+yeah this is a very
+yeah this is a very
+screwy thing to
+do so this should be num actors DF per
+do so this should be num actors DF per
+actor like this would work
+right
+right
+no hang
+no hang
+on am I wrong here oh no no no because
+on am I wrong here oh no no no because
+it is a size two
+right
+active de deal
+active de deal
+of ah okay so there does it does have a
+of ah okay so there does it does have a
+two and
+then we do
+then we do
+do View
+is like this
+right do
+pause and this dot dot dot can just be
+colon num
+DF num
+doof num
+BF uh I don't know about this
+BF uh I don't know about this
+yet num
+yet num
+B is
+153 so I literally just need to this is
+153 so I literally just need to this is
+just self. n
+numdf and then it's just self. B
+pause is
+this yeah I think that's it
+we do initial doof
+we do initial doof
+pause and then
+this we don't really care about the
+this we don't really care about the
+force
+tensors
+tensors
+and see we got rigid body State
+here bodies per
+here bodies per
+Enis
+Enis
+probably they're vastly over
+probably they're vastly over
+complicating little
+this
+o
+o
+rigid body state
+shape num
+shape num
+M's bodies per
+M maybe they're joints but we'll
+see
+see
+factors let 16
+52 thought there were 51
+joints and then this is going to
+be bodies per n
+this is per
+actor so this should be num
+actors let's see how this
+does I'm trying to just clean this all
+does I'm trying to just clean this all
+up
+num actors bodies per
+actor
+actor
+self
+shape okay so this does actually work
+shape okay so this does actually work
+out
+view so you get this this
+view you and let just pull
+view you and let just pull
+in Num body
+yes
+yes
+yes B
+yes B
+per but this is still also num
+per but this is still also num
+bodies so this is SN
+bodies so this is SN
+bodies
+bodies
+bodies and then this
+bodies and then this
+is look how silly these people are
+you see how just how
+silly you see how it's like everywhere
+silly you see how it's like everywhere
+you
+you
+look there's just like completely
+look there's just like completely
+unnecessary complexity for no reason
+unnecessary complexity for no reason
+um there should be no contact
+um there should be no contact
+forces so I think we can just remove
+these we do we need the force
+these we do we need the force
+tensor I think we'll keep this for
+now we'll keep this one for now
+we'll have to fix a couple small things
+we'll have to fix a couple small things
+I'm
+I'm
+sure probably somebody using those
+sure probably somebody using those
+contact
+forces I mean really like this is what
+forces I mean really like this is what
+happens when you just dig into academic
+happens when you just dig into academic
+code it's like you just cut it away and
+code it's like you just cut it away and
+cut it away and cut it away and then
+cut it away and cut it away and then
+there's almost nothing left
+and you've just been like suffering on a
+and you've just been like suffering on a
+mountain of stupidity of your own
+mountain of stupidity of your own
+creation because you didn't
+creation because you didn't
+respect the utility of actually writing
+respect the utility of actually writing
+decent
+decent
+code that I can just keep doing science
+code that I can just keep doing science
+the code doesn't matter Yeah the code
+matters it's a very common trap for
+matters it's a very common trap for
+um
+um
+academics undervaluing the engineering
+academics undervaluing the engineering
+side it's really the most useful thing
+side it's really the most useful thing
+there
+there
+is I mean just being able to build
+is I mean just being able to build
+whatever you want and have everything be
+whatever you want and have everything be
+clear and
+simple well science isn't taught
+simple well science isn't taught
+either right
+either right
+you really have to learn that
+yourself like how to actually think
+yourself like how to actually think
+scientifically that
+scientifically that
+takes takes some number of years of
+takes takes some number of years of
+experience
+experience
+right but
+right but
+there's I don't know it's kind of
+there's I don't know it's kind of
+bizarre me get rid of contact
+forces I'm just going to get rid of
+forces I'm just going to get rid of
+these
+these
+and the body
+IDs hey bet we've been back man this is
+IDs hey bet we've been back man this is
+like hour I don't know six of the stream
+like hour I don't know six of the stream
+Maybe
+I don't think we need this at all
+sorry
+sorry
+mate you're good dude you're not
+mate you're good dude you're not
+obligated to hang on on my
+obligated to hang on on my
+stream hey how's it going um I'm getting
+stream hey how's it going um I'm getting
+better I ran a 9116 Pace 5K today after
+better I ran a 9116 Pace 5K today after
+4 days of training since uh so not
+4 days of training since uh so not
+terrible um it's going to take you know
+terrible um it's going to take you know
+some number of months to get my old
+some number of months to get my old
+level of Fitness back but at least I can
+level of Fitness back but at least I can
+run if I'm careful I'll be a able to
+run if I'm careful I'll be a able to
+start doing compound uh lifts in a
+start doing compound uh lifts in a
+couple of weeks and we'll see from
+there yeah I mean it's I'm going to have
+there yeah I mean it's I'm going to have
+access to some nice equipment which will
+access to some nice equipment which will
+be good I'm ordering um a ton of good
+be good I'm ordering um a ton of good
+gemm equipment I'm getting like a very
+gemm equipment I'm getting like a very
+nice power rack I'm getting a deadlift
+nice power rack I'm getting a deadlift
+platform for here I already have some
+platform for here I already have some
+like okayish adjustable dumbbells
+like okayish adjustable dumbbells
+um so we're going to get some nice stuff
+um so we're going to get some nice stuff
+going to go from there and I'm just
+going to go from there and I'm just
+getting Kung DMs
+Sol speed up with Isaac
+Sol speed up with Isaac
+Jim also scon
+Jim also scon
+compiling that compiles
+compiling that compiles
+for that compiles for the whole so um
+for that compiles for the whole so um
+this Branch here that I'm working on uh
+this Branch here that I'm working on uh
+I have to check if the scon compiles it
+I have to check if the scon compiles it
+I think it does it's an old python
+I think it does it's an old python
+version so I got to double check some
+version so I got to double check some
+stuff but yes for the main like 20 that
+stuff but yes for the main like 20 that
+all
+all
+works oh yeah yeah yeah okay toen this
+works oh yeah yeah yeah okay toen this
+is you I forget everybody has freaking
+is you I forget everybody has freaking
+different names um yeah but the thing is
+different names um yeah but the thing is
+it'll after you compile it once it'll
+it'll after you compile it once it'll
+cach everything so it'll only compile
+cach everything so it'll only compile
+your Robo
+code for
+if the full compile works like you're
+if the full compile works like you're
+good because it'll cach everything so
+good because it'll cach everything so
+it'll take a couple minutes to compile
+it'll take a couple minutes to compile
+the first time and then it'll just
+cash
+for
+e
+e
+e e
+yeah just doing a little uh little stuff
+yeah just doing a little uh little stuff
+here chatting with K on how to get this
+here chatting with K on how to get this
+thing
+working for
+very
+nice
+e e
+uhoh for
+but apparently I'm loading the wrong
+but apparently I'm loading the wrong
+bot um which is actually good news
+bot um which is actually good news
+because once I fix it it'll be way
+because once I fix it it'll be way
+faster we don't need the stupid finger
+faster we don't need the stupid finger
+actuators
+works
+works
+right yeah this works Bonk
+dude I got to register to download an
+dude I got to register to download an
+XML no we'll find it
+okay it's this
+okay it's this
+dude I guess I do have to do
+this e
+well we're fine because we are uh I mean
+well we're fine because we are uh I mean
+this is open source research
+[Music]
+oh that's
+oh that's
+cool that's nice of them they added me
+cool that's nice of them they added me
+as an author on um on GPU
+as an author on um on GPU
+drive it's fair I've done a ton of work
+not getting any email from him
+yet for
+not getting uh any emails from them I
+not getting uh any emails from them I
+thought that this was supposed to
+be where where was
+it oh it went to spam
+didn't I actually get the freaking
+didn't I actually get the freaking
+file I thought I had the
+file oh wait it's
+this rip
+torso for
+they
+changed I might te you just keep your
+changed I might te you just keep your
+email alums just get to keep their
+email alums just get to keep their
+emails it's kind of nice Stanford there
+emails it's kind of nice Stanford there
+like not for
+like not for
+alums like no we'd like to have our
+alums like no we'd like to have our
+alums which is smart
+oo that's weird
+only
+only
+motor position velocity
+actuators
+actuators
+supported let see
+no I deleted
+no I deleted
+garbage this is a different model as
+garbage this is a different model as
+well we just have to it just needs some
+adjusting and actually
+MIT likes it when you keep they actually
+MIT likes it when you keep they actually
+are pretty good about
+are pretty good about
+that not pinching a couple pennies
+that not pinching a couple pennies
+clearing email
+Registries um
+let say
+yeah
+so position
+control for
+don't
+know I do
+this that's very weird
+also it's very weird that it spams this
+also it's very weird that it spams this
+on uh on
+on uh on
+load like it spams it on load is very
+load like it spams it on load is very
+weird asset
+route let me see
+load what if I just look for load asset
+load what if I just look for load asset
+in this repo
+no they don't have load AET does this
+no they don't have load AET does this
+thing
+use oh wait this is a maoko
+based
+smpl for
+download
+download
+models models and dependencies
+full data
+I just not have load asset in it
+yeah it's just GitHub being
+yeah it's just GitHub being
+stupid
+um small asset
+um small asset
+file small asset
+options okay so this is what they set
+block this is block
+projectile we don't want block
+projectile we don't want block
+projectile we want the
+humanoid okay here's humanoid asset
+angular damping yeah this is literally
+angular damping yeah this is literally
+everyone copying each other's
+code so we got asset root asset file
+code so we got asset root asset file
+asset
+options SMP humanoid
+XML I suspect I don't have the right
+file literally spams your whole terminal
+instantly okay let's see where
+that looks like a different
+file endered
+mesh automatically
+mesh automatically
+create the simple humanoid
+interesting
+is this the
+same now this is a different
+same now this is a different
+model yes because it's from a Joko
+oh this is my code
+too see if this works real
+quick okay uh this might work
+it's how are there more degrees of
+it's how are there more degrees of
+freedom in this bloody thing
+oh wait no I think it was 153 before
+or well I can check it real quick right
+oh wait resources
+yeah okay
+we're good
+so yeah this is uh way better
+Now where's the OB
+space uh we're not going to know the
+space uh we're not going to know the
+observation space I
+observation space I
+think for a bit to
+think for a bit to
+do fix
+this action space is going to
+this action space is going to
+be NF I
+believe and uh I guess we'll
+believe and uh I guess we'll
+see ref
+Hy yeah we don't need this ship
+we're not going to know this until we uh
+we're not going to know this until we uh
+we get it from the model so that's fine
+oops and then
+oops and then
+body
+contact so we got key bodies
+contact so we got key bodies
+here and these are going to be
+here and these are going to be
+different so let's see
+different so let's see
+if this has a
+config simple
+config simple
+humanoid okay this doesn't
+humanoid okay this doesn't
+have this is
+have this is
+simple
+simple
+shape do we have the
+bodies
+bodies
+anywhere key bodies
+I guess I can get this from
+I guess I can get this from
+the
+task config of key Bodies Okay so it is
+task config of key Bodies Okay so it is
+in a
+in a
+config uh we just don't know which
+config
+yeah want
+yeah want
+config
+[Music]
+control key
+bodies I think this is simple humanoid
+bodies I think this is simple humanoid
+here
+oh so they fly off
+one
+but it's interesting
+interesting
+it doesn't seem like um
+well here for testing
+well here for testing
+purposes if we just do
+zero they still do that well I think
+zero they still do that well I think
+that the action mode is
+weird DF mode
+none was that what I had it as
+none was that what I had it as
+before no
+if I do this what happens
+they still go
+crazy why
+you know what we're going to do we'll do
+this we will do
+this make sure I have the full list
+I think there's this reset bodies thing
+I think there's this reset bodies thing
+as well hang on I missed something
+here so this is all the thing things in
+here so this is all the thing things in
+here I think if we were to do
+this this change
+anything no it does not
+what
+what
+exactly does CPP change about C to make
+exactly does CPP change about C to make
+it worse it's not that it changes
+it worse it's not that it changes
+anything specific for RL it's just that
+anything specific for RL it's just that
+people tend to like just write shittier
+people tend to like just write shittier
+code um and I don't want to deal with
+code um and I don't want to deal with
+that
+that
+language it's just much easier to just
+language it's just much easier to just
+write the damn stuff and
+say like I'm not going like I'm just not
+say like I'm not going like I'm just not
+dealing with people like throwing
+dealing with people like throwing
+arbitrary C++ at me and like reviewing
+arbitrary C++ at me and like reviewing
+and dealing with that I'm just not doing
+it you know it's very very easy to write
+it you know it's very very easy to write
+the environments and see the way we're
+the environments and see the way we're
+doing it it's very very very easy to
+doing it it's very very very easy to
+make sure everything is incredibly
+make sure everything is incredibly
+fast you
+know I mean we literally I have a
+know I mean we literally I have a
+project I'm supporting that's written in
+project I'm supporting that's written in
+like C in the C C++ GPU accelerated game
+like C in the C C++ GPU accelerated game
+engine but and on GPU they're getting
+engine but and on GPU they're getting
+50,000 frames per second and that's
+50,000 frames per second and that's
+after I've optimized the hell out of it
+after I've optimized the hell out of it
+I could write it in about the same
+I could write it in about the same
+amount of Cod Inc and it would run a
+amount of Cod Inc and it would run a
+million in fact we're probably going to
+million in fact we're probably going to
+help Port
+it
+e
+for
+e e
+maybe they do
+this H same
+this isn't
+this isn't
+here what do they do
+here what do they do
+differently you would think it should be
+differently you would think it should be
+in the
+in the
+setup Jesus there's so much freaking
+setup Jesus there's so much freaking
+code how do you write 1,700 lines of
+code how do you write 1,700 lines of
+code and then go to sleep saying yeah I
+code and then go to sleep saying yeah I
+just a good amount of code do right
+just a good amount of code do right
+that's totally the amount of code that
+that's totally the amount of code that
+you take to do
+this all right so we've got
+say projectile acids okay they're doing
+say projectile acids okay they're doing
+something different here maybe they do
+something different here maybe they do
+need a little more code I doubt they
+need a little more code I doubt they
+need that much more code
+though
+though
+tens where's the
+tens where's the
+humanoid robot config
+I don't know
+I don't know
+[Music]
+man I kind of suspected as much you know
+man I kind of suspected as much you know
+I don't I didn't think like yeah the RL
+I don't I didn't think like yeah the RL
+devs and Robotics are magically going to
+devs and Robotics are magically going to
+be way better than the rest of the field
+be way better than the rest of the field
+so yeah of course they likewise just
+so yeah of course they likewise just
+have a bunch of terrible code
+freaking gosh load
+andet create okay so
+andet create okay so
+here robot
+config s MPL robot
+they have just a ton of parameters you
+they have just a ton of parameters you
+need to load
+in this is so slow they decided to
+in this is so slow they decided to
+multiprocess it that's hilarious
+and kind of
+and kind of
+sad asset real
+file e
+asset
+asset
+options so when you load asset Road
+options so when you load asset Road
+asset file and asset
+options that's it unless there's
+options that's it unless there's
+anything else they add in
+anything else they add in
+here oh this is all they load in
+here oh this is all they load in
+so
+how is it the four sensors at the
+feet or sensor
+joints four sensor joints here and it
+joints four sensor joints here and it
+would be left and right ankle otherwise
+so I think it's left and right ankle
+and do
+and do
+lle or
+R this
+is does that do
+anything spazzes out and goes insane
+humanoid
+humanoid
+asset drive
+asset drive
+mode if I do
+this no
+I like I don't know what else there is
+I like I don't know what else there is
+in here that I'm
+missing guys this is where you load the
+missing guys this is where you load the
+ass at
+right e
+I wonder if I can Benchmark it at
+I wonder if I can Benchmark it at
+least this
+works I know Sim is pretty heavy yep
+works I know Sim is pretty heavy yep
+that's what we expect
+145,000 but I really have no idea what
+145,000 but I really have no idea what
+the hell's wrong with this and I got to
+the hell's wrong with this and I got to
+go to dinner
+go to dinner
+soon I really would like to fix this
+soon I really would like to fix this
+today if I can give um Kung something
+today if I can give um Kung something
+stable to deal with
+yeah this has been a
+yeah this has been a
+lot 25 hours and two
+lot 25 hours and two
+days most likely on
+days most likely on
+this we're pretty close here honestly
+this we're pretty close here honestly
+um it's just like I loaded in we had the
+um it's just like I loaded in we had the
+wrong model so I loaded in a new model
+wrong model so I loaded in a new model
+and I'll show you what happens it's fast
+and I'll show you what happens it's fast
+but it does this
+it's less hilarious when you have to
+it's less hilarious when you have to
+[ __ ] debug this hor
+[ __ ] 145k is nice though
+[ __ ] 145k is nice though
+we'll actually be able to train it close
+we'll actually be able to train it close
+to that I imagine we should get we
+to that I imagine we should get we
+should get over 100,000 training even
+should get over 100,000 training even
+with the netw Le for the smallest
+one I don't know if Kung is watching if
+one I don't know if Kung is watching if
+you have any idea what's wrong with this
+you have any idea what's wrong with this
+thing but I got no idea no you can't
+thing but I got no idea no you can't
+just step through it that's the thing
+because it just goes into some like
+because it just goes into some like
+massive
+Sim hold on this scale is totally
+weird maybe this is it
+let me grab this
+let me grab this
+function just to
+test it might be this because the
+test it might be this because the
+model's different
+okay then this sets
+PD hold
+on we'll we'll undo this garbage code if
+on we'll we'll undo this garbage code if
+we uh if we fix this if this fixes it
+rather um r R PD
+rather um r R PD
+is
+is
+see build
+see build
+PD and this gets called
+in right after you load the
+in right after you load the
+model
+load and we
+load and we
+do
+build
+build
+okay and then
+oops actually can go right
+here
+build
+action then we do
+PD
+action
+contion tets
+do offsets
+do they use those do offsets
+the
+heck give up
+names self. body
+names body name is
+names body name is
+onear
+body smpl Joko names
+oh my
+oh my
+[Music]
+God
+e
+e e
+bias offset
+false
+for e
+I'm going just try
+this dude what the [ __ ] is
+this dude what the [ __ ] is
+this like actually what is
+this
+for e
+okay bumping Neil I don't know what that
+okay bumping Neil I don't know what that
+is
+doesn't seem to be doing anything e
+still limits don't do anything
+I mean these are all on
+I mean these are all on
+zero so I don't see how zero doesn't do
+anything I don't think you need this
+anything I don't think you need this
+crazy ass PDX
+scale e
+okay
+really
+final scaled
+actions that is a good
+point
+for e
+Mass
+yeah it's just not a fun
+yeah it's just not a fun
+time I'm just straight up not having a
+time I'm just straight up not having a
+good time with this
+one we need that but we'll
+one we need that but we'll
+see what do they do with
+it they just [ __ ] with it a bit
+I'm trying to think
+I'm trying to think
+what what it would
+be they give me joint
+be they give me joint
+limits a while
+limits a while
+ago set doof Drive I think it made this
+ago set doof Drive I think it made this
+freaking function up as the problem I
+freaking function up as the problem I
+think it loves to make up API [ __ ] that
+think it loves to make up API [ __ ] that
+just doesn't exist
+suppos the
+function stupid [ __ ] thing
+so this get
+so this get
+set get do properties and then you can
+set get do properties and then you can
+set stiffness and
+damping 20 in 0.1
+one stiffness
+0.1 let's
+see
+okay now the question is is that a good
+okay now the question is is that a good
+solution or not
+so this causes it to fly the hell
+away a
+away a
+lot but there's still weird [ __ ] going
+on
+on
+H you're not going to enjoy your
+H you're not going to enjoy your
+algorithms course
+algorithms course
+then or your Advanced algorithms course
+then or your Advanced algorithms course
+at least the theoretical
+at least the theoretical
+one it's okay I hated that one
+too it just really sensitive
+all right none of you are flying away
+now they fly away at0 one really
+yep usually taking junior or senior year
+yep usually taking junior or senior year
+you can take it earlier if you want I
+you can take it earlier if you want I
+took it freshman
+took it freshman
+spring not a fun
+course I mean it's perfectly fine if
+course I mean it's perfectly fine if
+you're anywhere decent at proof-based
+you're anywhere decent at proof-based
+mathematic Buton
+1,200 really
+okay so they just wobble if you do
+okay so they just wobble if you do
+this if you
+this if you
+do they still fly
+away that seems
+away that seems
+good and then if I do like five then
+good and then if I do like five then
+they probably Fly Away
+oh no they
+don't I think that was it I have no idea
+don't I think that was it I have no idea
+why this is needed in this one and not
+why this is needed in this one and not
+the other one but going be
+the other one but going be
+this yes yes it
+will dude how stupid you think I
+am that's
+am that's
+stupid DN well
+hope a little
+hope a little
+stupid a little stupid sometimes
+Maybe
+e e
+getting rid of stuff we don't need
+anything that's not used gets
+deleted for
+very
+very
+nice okay 886
+lines and uh there are a few things
+lines and uh there are a few things
+we're not we're still going to be able
+we're not we're still going to be able
+to cut
+there we go 884
+there we go 884
+lines add
+environment all right
+yeah I'm only 142 XPS
+okay so for folks on YouTube uh I will
+okay so for folks on YouTube uh I will
+be back after
+be back after
+dinner in the meanwhile though if you're
+dinner in the meanwhile though if you're
+interested in ultra high performance
+interested in ultra high performance
+reinforcement
+reinforcement
+learning getting involved in the space
+learning getting involved in the space
+it's easier than you might
+it's easier than you might
+expect all my stuff is here on puffer
+expect all my stuff is here on puffer
+doai all the
+doai all the
+environments right here we've built all
+environments right here we've built all
+these they're all Ultra Ultra fast you
+these they're all Ultra Ultra fast you
+can play them in your browser you can
+can play them in your browser you can
+watch Agents play them in your browser
+watch Agents play them in your browser
+you can hold shift and you can play them
+you can hold shift and you can play them
+yourself they go from very simple to
+yourself they go from very simple to
+very very complex here's aobo with
+very very complex here's aobo with
+economy and
+economy and
+trade here's a MOA an MMO I mean before
+trade here's a MOA an MMO I mean before
+here's a MOA like League of Legends or
+here's a MOA like League of Legends or
+DOTA pretty nice
+DOTA pretty nice
+environments if you want to see the code
+environments if you want to see the code
+you can help us out a ton star the repo
+you can help us out a ton star the repo
+it's free really
+it's free really
+helps join the Discord if you want to
+helps join the Discord if you want to
+get involved with Dev or use the project
+get involved with Dev or use the project
+and if you're looking for more content
+and if you're looking for more content
+we have a bunch of articles on the blog
+we have a bunch of articles on the blog
+here but there are also some that you
+here but there are also some that you
+can only find on my X account where I
+can only find on my X account where I
+post all sorts of reinforcement learning
+post all sorts of reinforcement learning
+stuff back in a bit thanks for tuning in
+stuff back in a bit thanks for tuning in
+and see you around
+
+Kind: captions
+Language: en
+jumping
+jumping
+here from neural MMO
+every so often we get LM shenanigans
+[Music]
+[Music]
+all right that's all the stuff we have
+all right that's all the stuff we have
+to look at for now
+so oh no wait is
+so oh no wait is
+there one more
+message ah
+okay where's
+okay where's
+that
+that
+so oops say main gear
+stuff give a quick overview of what we
+stuff give a quick overview of what we
+were going to do here um we're working
+were going to do here um we're working
+on getting the Isaac Sim Isaac JY High
+on getting the Isaac Sim Isaac JY High
+Fidelity physics simulator bound up to
+Fidelity physics simulator bound up to
+puffer lib uh the problem is there about
+puffer lib uh the problem is there about
+three generations of PhD students worth
+three generations of PhD students worth
+of terrible code associated with that so
+of terrible code associated with that so
+we've been cleaning everything up we hit
+we've been cleaning everything up we hit
+tons of driver mesh Shenanigans which
+tons of driver mesh Shenanigans which
+took
+took
+another six
+another six
+hours but I finally got those hopefully
+hours but I finally got those hopefully
+fixed and now we just have to clean up
+fixed and now we just have to clean up
+the Sim figure out what's going on and
+the Sim figure out what's going on and
+we should be good to go
+I got about let me think
+I got about let me think
+today I got about 4 hours now and
+today I got about 4 hours now and
+probably another two hours after dinner
+probably another two hours after dinner
+I got probably 6 hours to get all this
+I got probably 6 hours to get all this
+stuff
+done I wake up and get this get to it
+took way longer than I would have liked
+took way longer than I would have liked
+to get my exercise in and get food and
+to get my exercise in and get food and
+stuff but went for a pretty hard run and
+stuff but went for a pretty hard run and
+you know it takes time to
+you know it takes time to
+recover 916 Pace
+recover 916 Pace
+5K um after literally 4 days of
+5K um after literally 4 days of
+training having been in the hospital
+training having been in the hospital
+with pneumonia so I'll take that anytime
+with pneumonia so I'll take that anytime
+not
+bad okay so we have our base
+bad okay so we have our base
+n and we have
+n and we have
+this now I think there is a
+synchronize step
+synchronize step
+Graphics draw a
+viewer I think that there's a
+viewer I think that there's a
+synchronize missing isn't there
+oh my
+bad it's kind of
+bad it's kind of
+interesting that they uh they bind their
+interesting that they uh they bind their
+docks right to their distributed code
+docks right to their distributed code
+they don't host
+them
+them
+uh I thought there's a graphic sync
+uh I thought there's a graphic sync
+function isn't
+there Step
+Graphics this should be if one is
+Graphics this should be if one is
+displaying the simulation this
+displaying the simulation this
+method okay so this is it here
+so hang
+on if I just oops if I just put this in
+here put this here
+here put this here
+right test
+Isaac
+3.8 okay so here we have our Bots um
+3.8 okay so here we have our Bots um
+they're actually they're hovering now
+they're actually they're hovering now
+that's
+interesting and if I
+interesting and if I
+continue it goes
+continue it goes
+black the Scene goes
+black so let's see
+why first of all let's try not doing
+why first of all let's try not doing
+these
+actions still goes black
+actually you know what maybe
+actually you know what maybe
+um maybe there's information we can use
+um maybe there's information we can use
+in the
+in the
+Sim you
+know unavailable with
+GPU so everything goes to
+GPU so everything goes to
+Nan oops viewer
+I lost a a
+thing Sim time
+thing Sim time
+step worker
+threads okay so we get all our pams in
+here but um everything is Nan
+here but um everything is Nan
+all
+all
+man so why is
+man so why is
+[Music]
+[Music]
+that I guess the first thing to do would
+that I guess the first thing to do would
+be to
+be to
+um see if we can get it to just render
+um see if we can get it to just render
+basically just update the
+render I got to wake up here
+render I got to wake up here
+thought I got mostly enough
+sleep I I guess I've been doing a fair
+sleep I I guess I've been doing a fair
+bit of work on this
+bit of work on this
+lately takes a lot out of
+you okay so there we go so
+you okay so there we go so
+now um we are no
+now um we are no
+longer breaking stuff we have everything
+longer breaking stuff we have everything
+in this position
+in this position
+here Sim the viewer and the
+here Sim the viewer and the
+perf oh and yeah you actually you can
+perf oh and yeah you actually you can
+control
+control
+this uh so yeah here are all the Bots
+this uh so yeah here are all the Bots
+they're all
+they're all
+floating they've been randomly colored
+floating they've been randomly colored
+so actually they include a pretty nice
+so actually they include a pretty nice
+little renderer for this as
+little renderer for this as
+well this is the
+humanoid it's got toe
+humanoid it's got toe
+flexors and pretty detailed hands I
+flexors and pretty detailed hands I
+guess yes yeah they're pretty darn
+guess yes yeah they're pretty darn
+detailed
+hands that's decent I
+guess so
+guess so
+um why can't we do
+um why can't we do
+anything if I do this it breaks
+anything if I do this it breaks
+right instantly break so self Jim
+right instantly break so self Jim
+simulate self. Sim
+why does
+why does
+that break
+it that's my
+it that's my
+email not like
+email not like
+that
+for e
+we're just using this to see if there
+we're just using this to see if there
+are a
+Dos basically fuzzy dock search
+if your humanoid is
+initialized prepare Sim is called before
+initialized prepare Sim is called before
+stepping which it is
+Sim
+Sim
+pams oh do we not have DT set no we do
+pams oh do we not have DT set no we do
+it's right
+it's right
+here solver
+here solver
+type
+one is this
+let's see what happens with
+this T made it
+this T made it
+up that's funny as
+hell and that's not
+hell and that's not
+it at least on its own that's not it
+um I could do refresh tensors
+maybe yeah I think that's what we do we
+maybe yeah I think that's what we do we
+go to step up
+go to step up
+here and we do
+here and we do
+this oops actually other way
+around where is
+it
+man actually maybe I need to do this
+man actually maybe I need to do this
+hold on
+okay so that doesn't
+help so we do
+do this is
+zeros this is
+zeros all right this has stuff in it
+so we got rigid body
+State
+zeros okay so this one's a little larger
+okay so it's all n
+get
+get
+Jim what do you what do you think that
+Jim what do you what do you think that
+this uh this function is do you think it
+this uh this function is do you think it
+exists or do you think jity made it up
+I bet your gy made it
+up yep made it up
+rigid body
+rigid body
+state is right
+state is right
+here well we just check this
+I'm trying to think if the best thing
+I'm trying to think if the best thing
+would just be to go line by line with
+would just be to go line by line with
+the
+original I'm trying to think what stuff
+original I'm trying to think what stuff
+I might have changed
+it's very difficult to go line by line
+it's very difficult to go line by line
+with the original though because the
+with the original though because the
+code is so
+bad oops
+okay so we
+do setup character
+props which loads the uh the
+asset num
+OBS
+okay do we
+okay do we
+um we create the ground plane first
+um we create the ground plane first
+surely
+right okay so wait this is in create
+Sim which is super. creat Sim
+and this doesn't get called this gets
+and this doesn't get called this gets
+called by the [ __ ] parent
+called by the [ __ ] parent
+class um very
+early I objectoriented programming needs
+early I objectoriented programming needs
+to be outlawed this is so horrible
+okay what do we do we do acquire
+okay what do we do we do acquire
+gem we set a bunch of
+rams um
+States it's buffer don't really get
+used create
+used create
+Sim which is where this calls the other
+Sim which is where this calls the other
+implementation and then prepare Sim is
+down all the way down
+down all the way down
+here so it's really it's in create Sim
+and then this calls super so we did we
+and then this calls super so we did we
+set the up
+AIS I think we do we set the up Axis in
+AIS I think we do we set the up Axis in
+the base
+right
+right
+yeah and then we create the SIM
+yeah and then we create the SIM
+so that calls
+so that calls
+super then we create the ground plane
+super then we create the ground plane
+which we just have way simpler
+which we just have way simpler
+here
+here
+um but we now need to go look for
+um but we now need to go look for
+create round
+create round
+plane to make plane
+plane to make plane
+prams you make this and this is
+prams you make this and this is
+fine and
+fine and
+then you have create
+then you have create
+M's gives you square root num m and
+M's gives you square root num m and
+spacing create
+spacing create
+M's I think this is the more complicated
+one do I have all of
+this so we have the root
+this so we have the root
+here we get our
+path we set the
+ARs and then we load
+ARs and then we load
+it and we get the num bodies rigid
+it and we get the num bodies rigid
+count
+yeah and
+yeah and
+uh then we create this Force
+sensor
+sensor
+spine torso
+spine torso
+index then there's a bunch of stuff here
+index then there's a bunch of stuff here
+they don't use it looks
+they don't use it looks
+like and then they have this
+Loop over num
+Loop over num
+Ms where they call create
+M and then they begin Aggregate and then
+M and then they begin Aggregate and then
+they call build M and then end Aggregate
+they call build M and then end Aggregate
+and then if we look at build n
+we
+we
+have call
+have call
+group filter and then we have this
+transform set
+file you call create
+file you call create
+actor then you enable the
+actor then you enable the
+sensors and then you
+sensors and then you
+I actually would prefer to do it like
+I actually would prefer to do it like
+this do the
+this do the
+color just one per
+humanoid and then we
+humanoid and then we
+do
+do
+this drive
+this drive
+mode and then we set the
+mode and then we set the
+property and we also pend this handle
+property and we also pend this handle
+okay
+um and then we do the depth of field
+stuff we get our
+stuff we get our
+limits we send them to torch
+limits we send them to torch
+we get their PD offset and
+scale what do they set for contact
+bodies
+bodies
+please hold
+on I'm going set this for now
+I don't think that changes
+anything yeah no we're still we're still
+anything yeah no we're still we're still
+uh failing
+uh failing
+instantly that is something
+you get all these
+you get all these
+tensors root tensor
+which
+states create
+states create
+rappers there's apparently a memory
+rappers there's apparently a memory
+thing that uh
+thing that uh
+you
+disable I want to try
+something okay it's not garbage
+collection it's funny that you can
+collection it's funny that you can
+uh you can do
+uh you can do
+this I wonder how much faster python is
+this I wonder how much faster python is
+without garbage
+collection should probably just use
+C
+oops Yeah most languages have like a
+oops Yeah most languages have like a
+weird way to mess with their garbage
+weird way to mess with their garbage
+collection
+system welcome
+back I am as
+well I pretty much just want to finish
+well I pretty much just want to finish
+this and then pass out that would be the
+this and then pass out that would be the
+best go to sleep at 400
+best go to sleep at 400
+p.m. that would be
+great probably yeah about then
+so you make all the darn
+tensors this is where you make all the
+tensors this is where you make all the
+tensors
+blank message from
+blank message from
+twitch that's
+funny
+e e
+hey
+PR much stuff here
+step
+actions
+every joint should have a velocity
+every joint should have a velocity
+parameter greater than zero
+okay
+re
+acquire is called before
+refresh are you [ __ ] me
+uh that's the one thing I cut out that I
+uh that's the one thing I cut out that I
+thought was redundant
+thought was redundant
+okay dude that's so
+stupid
+refresh that is so stupid
+acquire is called before refresh
+acquire is called before refresh
+here and then do they
+here and then do they
+refresh hold on they're acquiring yet
+okay so they have it what looks like
+okay so they have it what looks like
+they have it
+they have it
+backwards
+um so hold on this is refresh depth the
+um so hold on this is refresh depth the
+field actor route
+field actor route
+net
+net
+contact so this should just be refresh
+contact so this should just be refresh
+Sim
+tensors before acquire
+hey they fall through the
+hey they fall through the
+floor no they don't fall through the
+floor no they don't fall through the
+floor
+floor
+boom look at that we
+boom look at that we
+win we
+win that was so much freaking work to
+win that was so much freaking work to
+get this stupid thing to like oh my God
+get this stupid thing to like oh my God
+and this is just the basics
+and this is just the basics
+wait this was just the basics but still
+wait this was just the basics but still
+holy
+hell
+hell
+boink you're your
+robot want to commit this
+hold on I'll answer that in a
+second e
+I'm almost finished with my buck shot
+I'm almost finished with my buck shot
+roulette and I still haven't played that
+roulette and I still haven't played that
+game
+game
+dqn would you be able to once
+dqn would you be able to once
+over yeah sure of course I'll look at
+over yeah sure of course I'll look at
+the
+end you know if you buy if you get it
+end you know if you buy if you get it
+into a a
+into a a
+gym API gymnasium API uh you can just
+gym API gymnasium API uh you can just
+run puffer lib on it out of the box and
+run puffer lib on it out of the box and
+then you'll know whether it's the M or
+then you'll know whether it's the M or
+the uh the algorithm that's giving you
+the uh the algorithm that's giving you
+trouble because like we have a nice
+trouble because like we have a nice
+stable po implementation it's really
+stable po implementation it's really
+fast you can just run it against your
+environment it's literally a oneline
+environment it's literally a oneline
+binding for existing gymnasium
+environments welcome to all the YouTube
+environments welcome to all the YouTube
+folks we just got this thing
+working
+boom I thought it was on Steam is it
+boom I thought it was on Steam is it
+online as
+online as
+well not playing it on stream obviously
+well not playing it on stream obviously
+obviously
+but there're the
+but there're the
+robots
+robots
+Okay we have
+Okay we have
+robots humanoid
+robots humanoid
+thingies I don't do much just
+yet next we try to get the actions doing
+yet next we try to get the actions doing
+something
+that
+works I would like to rotate them so
+works I would like to rotate them so
+that they uh they're standing up by
+fall GPT probably
+transform Define using a
+quat D I love how it just waste all
+quat D I love how it just waste all
+these tokens and takes forever giving
+these tokens and takes forever giving
+you an annoying code
+okay initial pose so we just have to
+okay initial pose so we just have to
+rotate this is probably because we have
+rotate this is probably because we have
+the Z axis
+the Z axis
+up or whatever
+they math pie
+lower
+case need to get the
+case need to get the
+uh and stop the actions for a second so
+uh and stop the actions for a second so
+I can see
+it okay that's just the wrong direction
+it's one of these it's probably around
+it's one of these it's probably around
+the Z isn't
+the Z isn't
+it X
+it X
+zyx so it's this
+right there you
+go
+[Music]
+[Music]
+perfect Bonk
+Bonk Co
+ah hey
+ah hey
+Spencer send this to K real quick
+um e
+got do a little promo here and there
+there's a lot of stuff we can do from
+here I'd like to perf test this
+thing
+e e
+this will be the initial perf
+whoops so this will be initial perf with
+whoops so this will be initial perf with
+only eight of
+them 29 SPS God okay let's see if we
+them 29 SPS God okay let's see if we
+can't bring that up a a little bit holy
+hell no okay so it does take num
+M and then we do
+nice ni
+okay and then we would do
+okay and then we would do
+like realistically we're going to have
+like realistically we're going to have
+4096 of these
+right 21,000 so that's unusably
+right 21,000 so that's unusably
+bad we definitely have to bring that up
+bad we definitely have to bring that up
+though we're only getting um 10,000
+before so deleting a bunch of wrapper
+before so deleting a bunch of wrapper
+stuff did
+stuff did
+help I
+believe is this one of those M's where
+believe is this one of those M's where
+you really need to crank this to get a
+you really need to crank this to get a
+perf let me
+perf let me
+see let's see if this doubles
+see let's see if this doubles
+it waiting let me see
+if it's low man we're just going to
+if it's low man we're just going to
+teach you how to do some performance
+teach you how to do some performance
+engineering like you'll you're smart
+engineering like you'll you're smart
+enough you'll pick it up
+fast okay so it doesn't help above
+fast okay so it doesn't help above
+um above a certain
+um above a certain
+threshold so we'll use
+4096 I mean being good at writing fast
+4096 I mean being good at writing fast
+code is very very very very
+code is very very very very
+useful and often fast code ends up just
+useful and often fast code ends up just
+being simple code as well which is
+being simple code as well which is
+nice occasionally you got to do some
+nice occasionally you got to do some
+fancy caching but usually it's not that
+fancy caching but usually it's not that
+hard
+so there are a few things I want to do
+so there are a few things I want to do
+here
+if I load them all into the same
+if I load them all into the same
+scene on a GPU
+yeah
+yeah
+see kind of use GPT as some docks
+here I want to test this if the just to
+see for
+I'm getting about
+I'm getting about
+100 you have to try to make stuff that
+100 you have to try to make stuff that
+slow
+slow
+man you're in good company or along with
+man you're in good company or along with
+like top RL researchers doing that stuff
+like top RL researchers doing that stuff
+but yeah you're straight
+trolling assuming you mean M Speed not
+trolling assuming you mean M Speed not
+training
+speed yeah I think we're going to try
+this well dude write a perf test on your
+this well dude write a perf test on your
+environment it's not that hard like look
+environment it's not that hard like look
+do this it's like 10
+lines and always multiply by number of
+lines and always multiply by number of
+Agents cuz it's agent steps per
+Agents cuz it's agent steps per
+second it's multi-agent
+it turns out compute clusters is
+it turns out compute clusters is
+completely [ __ ] they got hacked in our
+completely [ __ ] they got hacked in our
+manually pulling Plows in are you
+manually pulling Plows in are you
+kidding
+kidding
+me that freaking
+sucks e
+nation state level
+nation state level
+attack
+lovely can you send them back um a
+lovely can you send them back um a
+patriot missile as a present
+the most valuable of research is the
+the most valuable of research is the
+curriculum learning it solves all of RL
+well now you got no excuse to uh to not
+well now you got no excuse to uh to not
+go use your
+go use your
+ridiculously expensive uh University gym
+ridiculously expensive uh University gym
+cuz you've got [ __ ] all else to
+cuz you've got [ __ ] all else to
+do no experiments are
+running oh yeah damn
+go for a run or something man
+go for a run or something man
+like I don't know you can't do [ __ ]
+like I don't know you can't do [ __ ]
+about
+that I did a about a 916 Pace 5K today
+that I did a about a 916 Pace 5K today
+with four days of training since
+with four days of training since
+pneumonia I'll take that
+RLC deadline yeah
+true I just added a kilometer a day this
+true I just added a kilometer a day this
+week from 2 to
+5 I I think it's the lack of weight it
+5 I I think it's the lack of weight it
+like cuz it feels really easy running
+like cuz it feels really easy running
+but my heart rate's literally at
+but my heart rate's literally at
+185 so I don't know it's kind kind of
+185 so I don't know it's kind kind of
+weird usually at 185 I'd be dying so I
+weird usually at 185 I'd be dying so I
+don't
+know all right Zoomer yeah yours goes to
+know all right Zoomer yeah yours goes to
+205 or
+whatever mine goes to like
+whatever mine goes to like
+190 low 190s I
+think lighter yeah I want to get the
+think lighter yeah I want to get the
+mass back though
+I get uh the rack will arrive in about
+I get uh the rack will arrive in about
+two weeks and then I get to start doing
+two weeks and then I get to start doing
+my stuff
+again oh man I did I went down that
+again oh man I did I went down that
+route in undergrad I
+route in undergrad I
+uh I had like four monsters a day for
+uh I had like four monsters a day for
+most of
+undergrad and probably more more in
+undergrad and probably more more in
+alcohol than that
+hey Ryan check this
+out we got uh Isaac Jim running in
+out we got uh Isaac Jim running in
+puffer no not at the same
+puffer no not at the same
+time look at
+this
+this
+Jesus got to get some cardio in man
+Jesus got to get some cardio in man
+lower that [ __ ] that's ridiculous
+yeah it's not running this is flopping
+yeah it's not running this is flopping
+around this is just random
+around this is just random
+actions ah yeah I remember okay that's
+rough it's got to be something
+rough it's got to be something
+man is there no way around that
+[ __ ] cuz not doing exercise will also
+[ __ ] cuz not doing exercise will also
+kill you
+is there nothing that you can do for
+that I think there was some US president
+that I think there was some US president
+who literally like trained himself half
+who literally like trained himself half
+to death and like cured his asthma
+to death and like cured his asthma
+though that's uh probably apocryphal
+more potent
+enough nine more
+months does it actually cure it after uh
+months does it actually cure it after uh
+a certain duration of
+a certain duration of
+time is that how it
+time is that how it
+works nine more months of 2.5 years in
+is that how it works it just it takes
+is that how it works it just it takes
+like like nearly three and a half years
+like like nearly three and a half years
+but then you then it's cured is that a
+but then you then it's cured is that a
+is that a
+thing I don't know how it
+works I kind of get what he means though
+works I kind of get what he means though
+cuz like I they gave me basically the
+cuz like I they gave me basically the
+same thing and that [ __ ] sucks it just
+same thing and that [ __ ] sucks it just
+it instantly spikes your heart rate but
+it instantly spikes your heart rate but
+it only spikes it by like 10 or 15 I'm
+it only spikes it by like 10 or 15 I'm
+pretty sure so if it's 98 resting I
+pretty sure so if it's 98 resting I
+think your normal resting is also very
+think your normal resting is also very
+high it's about what mine was before I
+high it's about what mine was before I
+started doing any
+exercise where try
+this it reduces it enough Oh okay that's
+this it reduces it enough Oh okay that's
+cool yeah your normal's probably high
+cool yeah your normal's probably high
+because you can't do
+because you can't do
+cardio is just what it's going to
+be yeah
+no for
+see you best of luck
+see you best of luck
+Ryan that's some [ __ ] I wish I could
+Ryan that's some [ __ ] I wish I could
+help you out but I definitely don't have
+help you out but I definitely don't have
+enough spare puffer boxes at the
+enough spare puffer boxes at the
+moment once I have the 40 then I will be
+moment once I have the 40 then I will be
+very happy to support some cool research
+very happy to support some cool research
+with you
+ordering those soon
+hopefully for
+fortunately you have to build up your
+tolerance
+yesh that's such
+yesh that's such
+[ __ ] it's cool that it eventually
+[ __ ] it's cool that it eventually
+gets cured but that's like [ __ ] hell
+well you can at least do some
+well you can at least do some
+powerlifting in the meantime and get
+powerlifting in the meantime and get
+plenty jacked it actually it takes way
+plenty jacked it actually it takes way
+longer to do um strength training than
+longer to do um strength training than
+cardio like you know it's like a couple
+cardio like you know it's like a couple
+years for most people like if you have
+years for most people like if you have
+average genetics and you're not like
+average genetics and you're not like
+super heavy it takes like a good 2 years
+super heavy it takes like a good 2 years
+to get a two-plate bench
+to get a two-plate bench
+press um
+press um
+and usually like longer to get like a th
+and usually like longer to get like a th
+total took me like four for that though
+total took me like four for that though
+I was also running only takes a year to
+I was also running only takes a year to
+be running marathons from like nothing
+so
+jeez I mean at least there's stuff you
+jeez I mean at least there's stuff you
+can carry for that it's not pleasant but
+can carry for that it's not pleasant but
+you have it
+what are you working
+on we are currently working on this High
+on we are currently working on this High
+Fidelity physics Sim Isaac gem we're
+Fidelity physics Sim Isaac gem we're
+getting this bound up to puffer lib
+getting this bound up to puffer lib
+which is my ultra high performance
+which is my ultra high performance
+reinforcement learning library and we're
+reinforcement learning library and we're
+cutting out all the dog [ __ ] code that's
+cutting out all the dog [ __ ] code that's
+uh surrounding this thing so you can
+uh surrounding this thing so you can
+actually use it in a way that makes
+actually use it in a way that makes
+sense is what we're currently doing
+this stream is pretty much just all the
+this stream is pretty much just all the
+reinforcement learning Dev I do goal is
+reinforcement learning Dev I do goal is
+this year for puffer to make RL 10 times
+this year for puffer to make RL 10 times
+easier to get working on new
+easier to get working on new
+problems I think we will hit
+that it's just I'm just sending it
+that it's just I'm just sending it
+random actions for testing that's no big
+random actions for testing that's no big
+deal that's easy to
+fix um now the question is why do I only
+fix um now the question is why do I only
+see one of
+these
+these
+Char create
+Char create
+actor
+actor
+group I do
+this there still only one of these
+guys enable for
+guys enable for
+sensors then you set the color
+set this I only see one of these
+set this I only see one of these
+guys in the
+render is it faster now hold
+on well actually that's not going to
+on well actually that's not going to
+tell me anything because I don't know if
+tell me anything because I don't know if
+it's actually running these
+it's actually running these
+I do something wrong
+I do something wrong
+here college student watching videos for
+here college student watching videos for
+Linux commands and saw the
+Linux commands and saw the
+video yeah man hey if you're looking to
+video yeah man hey if you're looking to
+get into some cool RL stuff we got lots
+get into some cool RL stuff we got lots
+of people you just need to be able to
+of people you just need to be able to
+code know if you can write some code you
+code know if you can write some code you
+can kind of start jamming some RL takes
+can kind of start jamming some RL takes
+people like a month or two to really get
+people like a month or two to really get
+onboarded and start writing some cool
+onboarded and start writing some cool
+stuff it's pretty
+quick $600 down to 461 that's
+quick $600 down to 461 that's
+good less code for same thing is
+good less code for same thing is
+better usually unless you're
+golfing spread out humanoids in a
+golfing spread out humanoids in a
+grid could that be it it's literally
+grid could that be it it's literally
+just they're all on top of each
+other hang on
+other hang on
+I'll feel kind of stupid if it's
+that it's not
+that there should be uh more of these
+that there should be uh more of these
+guys
+there's only one humanoid
+here create
+here create
+actor 0 yeah oh wait wait you got to do
+actor 0 yeah oh wait wait you got to do
+I forget it's a
+unique I forgot about
+unique I forgot about
+that you're writing in
+that you're writing in
+Python uh so this rapper code is iny
+Python uh so this rapper code is iny
+python puffer lib itself which is the
+python puffer lib itself which is the
+main library I develop the learning and
+main library I develop the learning and
+stuff is in Python with pytorch but all
+stuff is in Python with pytorch but all
+of the environments so the majority of
+of the environments so the majority of
+the library is in C so all these
+the library is in C so all these
+environments together about 20,000 lines
+environments together about 20,000 lines
+of c and uh you can play them on puffer
+of c and uh you can play them on puffer
+doai you can watch these agents play you
+doai you can watch these agents play you
+just hold shift you can take over for
+just hold shift you can take over for
+the agent and try to you know play for
+the agent and try to you know play for
+them take my hands off the agent takes
+them take my hands off the agent takes
+over from very simple to like very very
+over from very simple to like very very
+complex this is a miniature
+complex this is a miniature
+MMO I mean this is a mooba something
+MMO I mean this is a mooba something
+like mini League of Legends or mini
+like mini League of Legends or mini
+DOTA we got lots and lots of stuff on
+here this stuff has to be python though
+here this stuff has to be python though
+because it's a library with a python API
+so I wonder if they do have a a I don't
+so I wonder if they do have a a I don't
+think they have
+think they have
+um I guess technically if it's in
+um I guess technically if it's in
+C++ we could just not use the python
+C++ we could just not use the python
+API but I think that they have like I
+API but I think that they have like I
+don't know I might have to look into
+don't know I might have to look into
+that it doesn't really save anything for
+that it doesn't really save anything for
+the
+initialization I don't really want to
+initialization I don't really want to
+invest that heavily in this specific
+invest that heavily in this specific
+specific framework though um client is
+specific framework though um client is
+interested in this a few people are
+interested in this a few people are
+interested in this but this is not I
+interested in this but this is not I
+don't think Isaac Jim is like still
+don't think Isaac Jim is like still
+fully the dominant platform I think that
+fully the dominant platform I think that
+there are like a few more now that
+there are like a few more now that
+people are interested in so it doesn't
+people are interested in so it doesn't
+really make sense to go super super Ham
+really make sense to go super super Ham
+on this I'm going to get this like I've
+on this I'm going to get this like I've
+cut this from over 2,000 lines down to
+cut this from over 2,000 lines down to
+about a th000 2,000 being like the
+about a th000 2,000 being like the
+standard rappers that they provide um so
+standard rappers that they provide um so
+it's I've made it a lot simpler but I
+it's I've made it a lot simpler but I
+think digging into this C++ API and like
+think digging into this C++ API and like
+rewriting sections of that is where I
+rewriting sections of that is where I
+draw the
+line okay so this is
+line okay so this is
+still humanoid
+still humanoid
+zero oh wait cuz this is got to be num
+zero oh wait cuz this is got to be num
+actors
+duh num actors
+in I only deal with networking Scripts
+in I only deal with networking Scripts
+I mean you can do lots of things
+I mean you can do lots of things
+right uh
+gym wait
+shape this is numb
+agents I think
+n agent should be
+n agent should be
+defined of num
+actors okay oh wait there they are look
+actors okay oh wait there they are look
+at them
+so they're all like spread out kind of
+weird right they're spread out kind of
+weird right they're spread out kind of
+weird I think that's because of the
+weird I think that's because of the
+randomness or the uh the offsets
+maybe what if I do
+maybe what if I do
+this whoa
+okay they're not supposed to collide
+okay they're not supposed to collide
+like
+like
+that that's kind of funny
+though bot
+confetti let me see how I get them uh to
+confetti let me see how I get them uh to
+not collide
+not collide
+this was in the user guide but I didn't
+this was in the user guide but I didn't
+understand what they were
+understand what they were
+saying not very
+nice little bit of
+nice little bit of
+promo for folks watching literally all
+promo for folks watching literally all
+the stuff I'm working on is free and
+the stuff I'm working on is free and
+open source it's community-led so you
+open source it's community-led so you
+can get involved you don't have to deal
+can get involved you don't have to deal
+with terrible stuff like this we uh
+with terrible stuff like this we uh
+we're very happy to have people just
+we're very happy to have people just
+writing fun M's and uh I mean that
+writing fun M's and uh I mean that
+actually really helps the science side
+actually really helps the science side
+believe it or not you can it's pretty uh
+believe it or not you can it's pretty uh
+it's actually pretty quick to learn how
+it's actually pretty quick to learn how
+to write like really high perf M's like
+to write like really high perf M's like
+this and to get into some of the
+this and to get into some of the
+URL uh codes right here you can start to
+URL uh codes right here you can start to
+help us out really helps out a ton you
+help us out really helps out a ton you
+can join the Discord this is where we
+can join the Discord this is where we
+organize everything and you can follow
+organize everything and you can follow
+my ex for more content including some
+my ex for more content including some
+articles on RL we've got quick start
+articles on RL we've got quick start
+guides for newcomers all sorts of fun
+guides for newcomers all sorts of fun
+stuff don't forget to feed the puff for
+stuff don't forget to feed the puff for
+a star
+a star
+back to
+code well as soon as I figure this API
+code well as soon as I figure this API
+out that
+out that
+is simulation
+setup so we
+setup so we
+have environment collection is pack
+have environment collection is pack
+multiple instances of an environment
+multiple instances of an environment
+into a single simulation
+each M has its own coordinate
+space we'll get arranged in a 2d gr run
+space we'll get arranged in a 2d gr run
+row at a time
+oh so
+possibly so I think Isaac Jim
+possibly so I think Isaac Jim
+potentially does this for
+you we'll see about
+this okay Collision group is an integer
+this okay Collision group is an integer
+that identifies the Collision group to
+that identifies the Collision group to
+which they will sign they'll only
+which they will sign they'll only
+Collide if they belong to the same
+Collide if they belong to the same
+Collision
+group in certain
+group in certain
+cases You may wish to set up more than
+cases You may wish to set up more than
+one Collision
+one Collision
+group a bit Mask two bodies will not
+group a bit Mask two bodies will not
+Collide if their Collision filters have
+Collide if their Collision filters have
+a common bit
+set presentent certain kinds of objects
+set presentent certain kinds of objects
+in a scene from interacting
+physically Collision
+physically Collision
+filter so I think we look for create
+filter so I think we look for create
+actor and let's see if we get more about
+actor and let's see if we get more about
+the Collision
+filter bitwise
+filter for elements
+filter for elements
+to mask off
+Collision
+Collision
+maybe hold on
+no will not Collide if their Collision
+no will not Collide if their Collision
+groups share no common
+bits for
+unique guilt
+I don't actually know how this
+works okay shared Collision
+group so this is supposed to work so
+maybe maybe this does work hold on
+maybe maybe this does work hold on
+do these look like they're colliding or
+do these look like they're colliding or
+are they just
+like no these are definitely
+like no these are definitely
+colliding right these are definitely
+colliding right these are definitely
+colliding with each
+other I mean we can double check this
+other I mean we can double check this
+very
+easily 3
+two yeah see they all spread out that
+two yeah see they all spread out that
+means they're getting
+so I think that what it would look
+like this is what it should look
+like this is what it would look
+like this is what it would look
+like yeah is this what it looks like if
+like yeah is this what it looks like if
+there's no
+there's no
+Collision yeah cuz they're all
+Collision yeah cuz they're all
+like these are not there no Collision
+like these are not there no Collision
+there's no Collision filter here you can
+there's no Collision filter here you can
+see that they're all like
+see that they're all like
+overlapped um so I don't think I'm
+overlapped um so I don't think I'm
+understanding the way that the filter
+understanding the way that the filter
+works I don't think GPT is
+works I don't think GPT is
+either is a bit MK that lets you filter
+either is a bit MK that lets you filter
+out collisions between
+out collisions between
+bodies two bodies will not Collide if
+bodies two bodies will not Collide if
+their Collision filters have a common
+their Collision filters have a common
+bit
+set I think that means this has to be
+one they need to have a a common bit
+set does that work I think that's
+set does that work I think that's
+different
+different
+right versus hold on versus this
+yeah see how quickly these
+yeah see how quickly these
+separate these separate incredibly
+separate these separate incredibly
+quickly whereas these ones do
+not see there's still
+not see there's still
+like I think this
+like I think this
+works and I think that what we do now is
+works and I think that what we do now is
+we test the
+performance now it's possible that this
+performance now it's possible that this
+is not any FAS
+faster user aggregate
+size
+huh I thought you could do
+that can I do 256
+5,000
+SPS one can't do 10.4
+and that's slower somehow
+I think that I'm barking up the wrong
+I think that I'm barking up the wrong
+tree here though because I think what
+tree here though because I think what
+happens is Isaac Jim actually sticks all
+happens is Isaac Jim actually sticks all
+the agents in one environment uh
+internally for
+about
+this I can
+do not that
+okay that's
+better no longer
+better no longer
+exceeded user aggregate
+exceeded user aggregate
+size carb gy
+plugin okay 28k on 1024
+what about
+this okay that is a lot faster um but
+this okay that is a lot faster um but
+but we need to test
+but we need to test
+something uh let me think how I want to
+something uh let me think how I want to
+do this this I think I'm going to very
+do this this I think I'm going to very
+carefully
+carefully
+undo all of this which I just
+did very
+carefully copy it redo
+carefully copy it redo
+everything and then I'm going to do
+okay I'm going to do like
+this and I'm going to just
+this and I'm going to just
+make some small
+changes
+changes
+yeah
+okay environment new
+okay environment new
+n.p old
+n.p old
+n environment. pi and now we're going to
+do group will be zero and filter will be
+do group will be zero and filter will be
+one on all of them
+ah this 74,000 is that
+substantial
+71 so you get a very small perf boost it
+71 so you get a very small perf boost it
+looks like let me make sure that that
+looks like let me make sure that that
+was the case
+environment old
+environment old
+and
+Environ okay it is significant
+so I will put a comment
+so I will put a comment
+here you
+get small per boost three
+get small per boost three
+four
+four
+4% putting all
+so that's
+so that's
+nice we get
+nice we get
+this get AIS
+perams what's the model giving you line
+perams what's the model giving you line
+complete super maven
+I really like it it's I have two total
+I really like it it's I have two total
+plugins in neoen one is super Maven and
+plugins in neoen one is super Maven and
+the other is Sami which just gives you a
+the other is Sami which just gives you a
+couple extra syntax highlights in
+Python all I need
+yeah everyone has vs code ones right but
+yeah everyone has vs code ones right but
+not everybody has a neovin plugin I
+not everybody has a neovin plugin I
+don't think co-pilot has a a nice neoen
+don't think co-pilot has a a nice neoen
+plugin it's really easy to get this one
+plugin it's really easy to get this one
+working so I like it
+working so I like it
+it's also very fast um it gives you your
+it's also very fast um it gives you your
+code completes very
+quick I like
+quick I like
+it okay 75k steps per second is
+it okay 75k steps per second is
+decent
+now e
+at least when I got it it was way better
+at least when I got it it was way better
+than co-pilot for that I don't know
+than co-pilot for that I don't know
+about
+now ah
+this
+this
+next they cap your
+next they cap your
+amount you really don't need you really
+amount you really don't need you really
+don't need that for code completion is
+don't need that for code completion is
+the thing like you shouldn't be using it
+the thing like you shouldn't be using it
+for full functions you should be using
+for full functions you should be using
+it for line completion and for that you
+it for line completion and for that you
+don't need a crazy
+don't need a crazy
+model honestly if anybody wants a free
+model honestly if anybody wants a free
+startup idea integrate an LSP properly
+startup idea integrate an LSP properly
+with uh code completions it'll make it
+with uh code completions it'll make it
+way better and way faster
+way better and way faster
+they cap the number of completions you
+they cap the number of completions you
+get
+get
+wow that's annoying I yeah I pay for
+wow that's annoying I yeah I pay for
+super Maven Pro and it's not capped as
+super Maven Pro and it's not capped as
+far as I'm aware
+degrees of freedom let's see
+wait
+what we don't need any of that [ __ ] hold
+what we don't need any of that [ __ ] hold
+on can I just do this
+that should be faster you would
+that should be faster you would
+think I guess since there's no self
+think I guess since there's no self
+contact and there's nothing close it
+contact and there's nothing close it
+doesn't matter
+um
+friction
+names
+Keys
+Keys
+No how do I get the names for this
+get actor doof
+get actor doof
+properties I here this is how you get
+properties I here this is how you get
+the name
+The Hope here is that um by reducing the
+The Hope here is that um by reducing the
+degrees of freedom here it should get a
+degrees of freedom here it should get a
+lot
+lot
+faster okay so
+here yeah you see this is a lot of
+here yeah you see this is a lot of
+degrees of
+degrees of
+freedom uh thumb ring pinky middle
+index so what we'll do is we'll do
+this um
+thumb index
+thumb index
+middle you forgot
+middle you forgot
+ring oh no
+and we take
+this what's your plan for this PP yeah
+this what's your plan for this PP yeah
+there's a little bit of extra client
+there's a little bit of extra client
+stuff on this one um but it's
+mostly mostly that
+okay so that's not any faster
+can I see it in the The
+Sim the hand should not be uh the finger
+Sim the hand should not be uh the finger
+should not be flopping
+fingers are still flopping around it
+fingers are still flopping around it
+looks like to me
+you tell
+[Music]
+I can't quite
+tell definitely finding those
+ah you have to do you have to set
+it e
+okay still not seeing any perfing priest
+aggregate
+is rigid let me
+see Max number of
+see Max number of
+shapes flag to enable so this doesn't
+shapes flag to enable so this doesn't
+exist made that [ __ ] up
+I could comment the joints but I think
+I could comment the joints but I think
+then you get a I think you just get
+then you get a I think you just get
+missing
+missing
+hand if you do
+hand if you do
+that double check
+DMS nothing yet what time is it should
+DMS nothing yet what time is it should
+be 130
+okay so
+um I don't think this is
+sufficient block
+sufficient block
+points for
+H see this is tricky because a lot of
+H see this is tricky because a lot of
+the compute right now is just going into
+the compute right now is just going into
+the hands and we do not care about those
+the hands and we do not care about those
+for this it's kind of funny that they've
+for this it's kind of funny that they've
+got like this relatively blocky humanoid
+got like this relatively blocky humanoid
+and then they have the hands fully
+and then they have the hands fully
+articulated like
+is this even
+is this even
+working remove stiffness remove damping
+disable and
+do should actually we should see the
+do should actually we should see the
+hand being like locked we're not seeing
+hand being like locked we're not seeing
+that's not
+working it's hard to freaking see but
+working it's hard to freaking see but
+actually
+actually
+look
+orientation well it's going to be
+orientation well it's going to be
+oriented because differently because um
+oriented because differently because um
+know the whole B is moving around
+s e
+okay hang
+okay hang
+on are the fingers
+on are the fingers
+moving you should
+moving you should
+do 05 maybe
+do 05 maybe
+or might be too
+much are the individual fingers moving
+much are the individual fingers moving
+here
+can't tell it's not moving the wrist
+can't tell it's not moving the wrist
+either
+though it looks like it could
+though it looks like it could
+be oh here's an easy way to
+be oh here's an easy way to
+tell we can just
+tell we can just
+um does this look different
+it's actually very difficult to
+tell for
+you
+see
+see
+stiffness damping
+stiffness damping
+range it's a joint
+range it's a joint
+free
+joint body
+joint body
+joint toe is a joint
+that's
+that's
+tricky I don't think we can really mess
+tricky I don't think we can really mess
+with this because I think that the Gen
+with this because I think that the Gen
+well
+okay this is a little tricky because
+okay this is a little tricky because
+we're losing I think at least half of
+we're losing I think at least half of
+the performance to um we're losing at
+the performance to um we're losing at
+least half of the performance right here
+least half of the performance right here
+to the uh the excessively articulated
+to the uh the excessively articulated
+hands
+I do have it running at 70k which is
+I do have it running at 70k which is
+better than
+before much better than
+before I think that's going to have to
+before I think that's going to have to
+just be the perf optimization I do for
+just be the perf optimization I do for
+now is just what I've done here
+now is just what I've done here
+um cuz I think I got to get like OBS and
+um cuz I think I got to get like OBS and
+other stuff cleaned
+up yeah I'm going to take a couple quick
+up yeah I'm going to take a couple quick
+minutes use the restroom um and think
+minutes use the restroom um and think
+about what I'm going to do and then I'll
+about what I'm going to do and then I'll
+be back and we will clean up the rest of
+be back and we will clean up the rest of
+this um get maybe observations stuff
+this um get maybe observations stuff
+like that uh I'll leave some
+like that uh I'll leave some
+placeholders for some other stuff and we
+placeholders for some other stuff and we
+will be set be right back
+for
+e
+e e
+okay back one quick
+thing
+for
+e e
+there you
+go we do good work here we fix things
+go we do good work here we fix things
+this is what we
+do okay uh so next I'm not Computing
+do okay uh so next I'm not Computing
+observations yet
+I got to figure out what observations we
+want so they
+want so they
+do root H OBS local body
+do root H OBS local body
+pause body rote body contact
+pause body rote body contact
+buff they actually have a pretty big
+buff they actually have a pretty big
+observation
+observation
+space go check the
+paper we'll look at this
+paper we'll look at this
+paper what we're using for observations
+States consists of the input motions
+States consists of the input motions
+next
+next
+pose along with the difference between
+pose along with the difference between
+the input next pose and the current
+the input next pose and the current
+simulated pose across multiple
+simulated pose across multiple
+aspects don't give it the current pose
+a
+a
+line okay
+so joint
+so joint
+rotation
+rotation
+position joint velocity and
+angular
+velocity so the joint
+velocity so the joint
+rotation the position
+got to be a joints
+got to be a joints
+right velocity an angular
+velocity PD
+control reward function is designed to
+control reward function is designed to
+encourage make reward
+energy penalty and an adversarial
+energy penalty and an adversarial
+reward difference between simulated
+reward difference between simulated
+pose and the input
+pose
+okay energy penalty regulates the
+okay energy penalty regulates the
+policy adversary reward encourage
+policy adversary reward encourage
+is distribution of simil
+motions
+motions
+ah I
+see so
+see so
+that's a little tricky
+okay but this is not that bad we
+so these are the only
+so these are the only
+variables if I get these
+variables if I get these
+variables then we can do whatever
+and this is really what you would want
+and this is really what you would want
+this is Joint rotation position velocity
+this is Joint rotation position velocity
+angular velocity so this is all the
+angular velocity so this is all the
+stuff and they probably have it
+already they probably have this
+local body pause velocity angular
+local body pause velocity angular
+velocity so I just have to figure this
+velocity so I just have to figure this
+function
+function
+out and then they have this crazy reward
+out and then they have this crazy reward
+but this is from a different paper
+but this is from a different paper
+right what I should do is I should check
+right what I should do is I should check
+the other paper and see how it's
+the other paper and see how it's
+different and see what they say that
+different and see what they say that
+this is
+hopefully they tell you what their
+hopefully they tell you what their
+observations
+are stay
+are stay
+eight
+simulate local position rotation
+simulate local position rotation
+velocity and rotational
+velocity and rotational
+velocity is it wait local position
+velocity is it wait local position
+rotation
+velocity rotation position velocity and
+velocity rotation position velocity and
+angular so these are the same
+angular so these are the same
+thing local position rotation velocity
+rotation oh
+o so they should actually have all the
+o so they should actually have all the
+things I need in
+here it's just kind of tricky
+um body pause body Rod body
+um body pause body Rod body
+velocity angular
+velocity angular
+velocity so why is there so much stuff
+velocity so why is there so much stuff
+going on here local root OBS root height
+going on here local root OBS root height
+OBS contact
+forces so wait
+local body
+local body
+pause root pause
+expand okay I see so you want to get rid
+expand okay I see so you want to get rid
+of the global coordinate which is
+of the global coordinate which is
+fine then flat local body pause
+and then they rotate
+and then they rotate
+it I don't know why they do
+this
+e e
+so this extracts the root body
+so this extracts the root body
+position calculates The Heading
+rotation converts body positions to
+rotation converts body positions to
+local coordinates relative to
+local coordinates relative to
+root there's root
+position joint rotations
+position joint rotations
+linear and angular
+velocities joint
+velocities joint
+positions joint
+rotations joint velocities
+rotations joint velocities
+angular
+angular
+velocities and contact
+velocities and contact
+forces root
+height I
+height I
+see so I can just use this I
+think this is a confused
+think this is a confused
+function I think I can just use this and
+function I think I can just use this and
+get rid of contact forces and root
+height like this is mostly what I need
+if local root
+OBS so this has some extra stuff I don't
+OBS so this has some extra stuff I don't
+need but this is actually kind of fine
+let me see if I can get this to actually
+let me see if I can get this to actually
+run
+first cuz we do
+compute
+for e
+compute humanoid
+reward not
+reward not
+needed wait where's the freaking
+needed wait where's the freaking
+humanoid
+humanoid
+OBS I'm being stupid they should
+OBS I'm being stupid they should
+beute
+observations
+observations
+here yeah yeah yeah so this should go
+here yeah yeah yeah so this should go
+here observation
+here observation
+do
+observations and this will be
+we figure out what to do from
+here let just run
+immediately and give us
+observations it looks like it
+does we get this and we get observations
+does we get this and we get observations
+cool
+obss
+equals here your
+equals here your
+humanoids obs
+yeah so this is not returning
+OBS so I didn't return
+it 1 by
+it 1 by
+7 78 that's not correct because that
+7 78 that's not correct because that
+that's for
+that's for
+one one agent I
+one one agent I
+assume um
+human humanoid OBS
+Max
+humanoid by 788
+okay human
+Ms Point let see if the tensors going in
+Ms Point let see if the tensors going in
+are
+correct okay so this is the
+problem I know why it's by
+problem I know why it's by
+one you see yeah that's
+one you see yeah that's
+weird I think the shapes got messed up
+weird I think the shapes got messed up
+because I re ordered the environment a
+because I re ordered the environment a
+little
+bit it should just be numb agents is how
+bit it should just be numb agents is how
+it should
+it should
+work so
+work so
+um yeah let's sort that
+um yeah let's sort that
+out cuz any like the other anything else
+out cuz any like the other anything else
+is
+is
+silly oh are we going to be able to
+silly oh are we going to be able to
+reset
+reset
+individual only it matters if we can
+individual only it matters if we can
+reset individual agents for this
+reset individual agents for this
+actually does
+it we can
+it we can
+anyways yeah we should be able to do
+anyways yeah we should be able to do
+that
+that
+anyways it's not going to be any worse
+anyways it's not going to be any worse
+than resetting an
+than resetting an
+environment should be fine
+this rout
+States what shape does it give you for
+States what shape does it give you for
+this
+curious 32 by
+13 I have 32 agents don't
+I yeah so that's actually freaking
+I yeah so that's actually freaking
+perfect it gives you this in the exact
+perfect it gives you this in the exact
+format you'd want
+humanoid root state so this is just
+um num
+um num
+actors yeah so this is what we call a
+actors yeah so this is what we call a
+stupid
+stupid
+because this is the same thing so let's
+because this is the same thing so let's
+get rid of
+this we already have no actor so we
+this we already have no actor so we
+don't need this
+don't need this
+[ __ ] and inial humanoid root
+[ __ ] and inial humanoid root
+States we're just going to call Initial
+States we're just going to call Initial
+root
+States and then I don't know why they
+States and then I don't know why they
+zero this but
+sure humanoid actor
+sure humanoid actor
+IDs numb actors
+should literally just be this
+now
+factors so that's
+factors so that's
+easy do
+state we don't need this [ __ ]
+anymore doof
+anymore doof
+pause okay this is potentially
+pause okay this is potentially
+legitimate let's see what what this
+is trying to get some
+slices self Dot
+um m
+H they give me a deal perm thingy
+let me see about
+this okay that's
+this okay that's
+correct shall I see what they're trying
+correct shall I see what they're trying
+to do
+here but then where's this two come from
+I could get doing um
+yeah this is a very
+yeah this is a very
+screwy thing to
+do so this should be num actors DF per
+do so this should be num actors DF per
+actor like this would work
+right
+right
+no hang
+no hang
+on am I wrong here oh no no no because
+on am I wrong here oh no no no because
+it is a size two
+right
+active de deal
+active de deal
+of ah okay so there does it does have a
+of ah okay so there does it does have a
+two and
+then we do
+then we do
+do View
+is like this
+right do
+pause and this dot dot dot can just be
+colon num
+DF num
+doof num
+BF uh I don't know about this
+BF uh I don't know about this
+yet num
+yet num
+B is
+153 so I literally just need to this is
+153 so I literally just need to this is
+just self. n
+numdf and then it's just self. B
+pause is
+this yeah I think that's it
+we do initial doof
+we do initial doof
+pause and then
+this we don't really care about the
+this we don't really care about the
+force
+tensors
+tensors
+and see we got rigid body State
+here bodies per
+here bodies per
+Enis
+Enis
+probably they're vastly over
+probably they're vastly over
+complicating little
+this
+o
+o
+rigid body state
+shape num
+shape num
+M's bodies per
+M maybe they're joints but we'll
+see
+see
+factors let 16
+52 thought there were 51
+joints and then this is going to
+be bodies per n
+this is per
+actor so this should be num
+actors let's see how this
+does I'm trying to just clean this all
+does I'm trying to just clean this all
+up
+num actors bodies per
+actor
+actor
+self
+shape okay so this does actually work
+shape okay so this does actually work
+out
+view so you get this this
+view you and let just pull
+view you and let just pull
+in Num body
+yes
+yes
+yes B
+yes B
+per but this is still also num
+per but this is still also num
+bodies so this is SN
+bodies so this is SN
+bodies
+bodies
+bodies and then this
+bodies and then this
+is look how silly these people are
+you see how just how
+silly you see how it's like everywhere
+silly you see how it's like everywhere
+you
+you
+look there's just like completely
+look there's just like completely
+unnecessary complexity for no reason
+unnecessary complexity for no reason
+um there should be no contact
+um there should be no contact
+forces so I think we can just remove
+these we do we need the force
+these we do we need the force
+tensor I think we'll keep this for
+now we'll keep this one for now
+we'll have to fix a couple small things
+we'll have to fix a couple small things
+I'm
+I'm
+sure probably somebody using those
+sure probably somebody using those
+contact
+forces I mean really like this is what
+forces I mean really like this is what
+happens when you just dig into academic
+happens when you just dig into academic
+code it's like you just cut it away and
+code it's like you just cut it away and
+cut it away and cut it away and then
+cut it away and cut it away and then
+there's almost nothing left
+and you've just been like suffering on a
+and you've just been like suffering on a
+mountain of stupidity of your own
+mountain of stupidity of your own
+creation because you didn't
+creation because you didn't
+respect the utility of actually writing
+respect the utility of actually writing
+decent
+decent
+code that I can just keep doing science
+code that I can just keep doing science
+the code doesn't matter Yeah the code
+matters it's a very common trap for
+matters it's a very common trap for
+um
+um
+academics undervaluing the engineering
+academics undervaluing the engineering
+side it's really the most useful thing
+side it's really the most useful thing
+there
+there
+is I mean just being able to build
+is I mean just being able to build
+whatever you want and have everything be
+whatever you want and have everything be
+clear and
+simple well science isn't taught
+simple well science isn't taught
+either right
+either right
+you really have to learn that
+yourself like how to actually think
+yourself like how to actually think
+scientifically that
+scientifically that
+takes takes some number of years of
+takes takes some number of years of
+experience
+experience
+right but
+right but
+there's I don't know it's kind of
+there's I don't know it's kind of
+bizarre me get rid of contact
+forces I'm just going to get rid of
+forces I'm just going to get rid of
+these
+these
+and the body
+IDs hey bet we've been back man this is
+IDs hey bet we've been back man this is
+like hour I don't know six of the stream
+like hour I don't know six of the stream
+Maybe
+I don't think we need this at all
+sorry
+sorry
+mate you're good dude you're not
+mate you're good dude you're not
+obligated to hang on on my
+obligated to hang on on my
+stream hey how's it going um I'm getting
+stream hey how's it going um I'm getting
+better I ran a 9116 Pace 5K today after
+better I ran a 9116 Pace 5K today after
+4 days of training since uh so not
+4 days of training since uh so not
+terrible um it's going to take you know
+terrible um it's going to take you know
+some number of months to get my old
+some number of months to get my old
+level of Fitness back but at least I can
+level of Fitness back but at least I can
+run if I'm careful I'll be a able to
+run if I'm careful I'll be a able to
+start doing compound uh lifts in a
+start doing compound uh lifts in a
+couple of weeks and we'll see from
+there yeah I mean it's I'm going to have
+there yeah I mean it's I'm going to have
+access to some nice equipment which will
+access to some nice equipment which will
+be good I'm ordering um a ton of good
+be good I'm ordering um a ton of good
+gemm equipment I'm getting like a very
+gemm equipment I'm getting like a very
+nice power rack I'm getting a deadlift
+nice power rack I'm getting a deadlift
+platform for here I already have some
+platform for here I already have some
+like okayish adjustable dumbbells
+like okayish adjustable dumbbells
+um so we're going to get some nice stuff
+um so we're going to get some nice stuff
+going to go from there and I'm just
+going to go from there and I'm just
+getting Kung DMs
+Sol speed up with Isaac
+Sol speed up with Isaac
+Jim also scon
+Jim also scon
+compiling that compiles
+compiling that compiles
+for that compiles for the whole so um
+for that compiles for the whole so um
+this Branch here that I'm working on uh
+this Branch here that I'm working on uh
+I have to check if the scon compiles it
+I have to check if the scon compiles it
+I think it does it's an old python
+I think it does it's an old python
+version so I got to double check some
+version so I got to double check some
+stuff but yes for the main like 20 that
+stuff but yes for the main like 20 that
+all
+all
+works oh yeah yeah yeah okay toen this
+works oh yeah yeah yeah okay toen this
+is you I forget everybody has freaking
+is you I forget everybody has freaking
+different names um yeah but the thing is
+different names um yeah but the thing is
+it'll after you compile it once it'll
+it'll after you compile it once it'll
+cach everything so it'll only compile
+cach everything so it'll only compile
+your Robo
+code for
+if the full compile works like you're
+if the full compile works like you're
+good because it'll cach everything so
+good because it'll cach everything so
+it'll take a couple minutes to compile
+it'll take a couple minutes to compile
+the first time and then it'll just
+cash
+for
+e
+e
+e e
+yeah just doing a little uh little stuff
+yeah just doing a little uh little stuff
+here chatting with K on how to get this
+here chatting with K on how to get this
+thing
+working for
+very
+nice
+e e
+uhoh for
+but apparently I'm loading the wrong
+but apparently I'm loading the wrong
+bot um which is actually good news
+bot um which is actually good news
+because once I fix it it'll be way
+because once I fix it it'll be way
+faster we don't need the stupid finger
+faster we don't need the stupid finger
+actuators
+works
+works
+right yeah this works Bonk
+dude I got to register to download an
+dude I got to register to download an
+XML no we'll find it
+okay it's this
+okay it's this
+dude I guess I do have to do
+this e
+well we're fine because we are uh I mean
+well we're fine because we are uh I mean
+this is open source research
+[Music]
+oh that's
+oh that's
+cool that's nice of them they added me
+cool that's nice of them they added me
+as an author on um on GPU
+as an author on um on GPU
+drive it's fair I've done a ton of work
+not getting any email from him
+yet for
+not getting uh any emails from them I
+not getting uh any emails from them I
+thought that this was supposed to
+be where where was
+it oh it went to spam
+didn't I actually get the freaking
+didn't I actually get the freaking
+file I thought I had the
+file oh wait it's
+this rip
+torso for
+they
+changed I might te you just keep your
+changed I might te you just keep your
+email alums just get to keep their
+email alums just get to keep their
+emails it's kind of nice Stanford there
+emails it's kind of nice Stanford there
+like not for
+like not for
+alums like no we'd like to have our
+alums like no we'd like to have our
+alums which is smart
+oo that's weird
+only
+only
+motor position velocity
+actuators
+actuators
+supported let see
+no I deleted
+no I deleted
+garbage this is a different model as
+garbage this is a different model as
+well we just have to it just needs some
+adjusting and actually
+MIT likes it when you keep they actually
+MIT likes it when you keep they actually
+are pretty good about
+are pretty good about
+that not pinching a couple pennies
+that not pinching a couple pennies
+clearing email
+Registries um
+let say
+yeah
+so position
+control for
+don't
+know I do
+this that's very weird
+also it's very weird that it spams this
+also it's very weird that it spams this
+on uh on
+on uh on
+load like it spams it on load is very
+load like it spams it on load is very
+weird asset
+route let me see
+load what if I just look for load asset
+load what if I just look for load asset
+in this repo
+no they don't have load AET does this
+no they don't have load AET does this
+thing
+use oh wait this is a maoko
+based
+smpl for
+download
+download
+models models and dependencies
+full data
+I just not have load asset in it
+yeah it's just GitHub being
+yeah it's just GitHub being
+stupid
+um small asset
+um small asset
+file small asset
+options okay so this is what they set
+block this is block
+projectile we don't want block
+projectile we don't want block
+projectile we want the
+humanoid okay here's humanoid asset
+angular damping yeah this is literally
+angular damping yeah this is literally
+everyone copying each other's
+code so we got asset root asset file
+code so we got asset root asset file
+asset
+options SMP humanoid
+XML I suspect I don't have the right
+file literally spams your whole terminal
+instantly okay let's see where
+that looks like a different
+file endered
+mesh automatically
+mesh automatically
+create the simple humanoid
+interesting
+is this the
+same now this is a different
+same now this is a different
+model yes because it's from a Joko
+oh this is my code
+too see if this works real
+quick okay uh this might work
+it's how are there more degrees of
+it's how are there more degrees of
+freedom in this bloody thing
+oh wait no I think it was 153 before
+or well I can check it real quick right
+oh wait resources
+yeah okay
+we're good
+so yeah this is uh way better
+Now where's the OB
+space uh we're not going to know the
+space uh we're not going to know the
+observation space I
+observation space I
+think for a bit to
+think for a bit to
+do fix
+this action space is going to
+this action space is going to
+be NF I
+believe and uh I guess we'll
+believe and uh I guess we'll
+see ref
+Hy yeah we don't need this ship
+we're not going to know this until we uh
+we're not going to know this until we uh
+we get it from the model so that's fine
+oops and then
+oops and then
+body
+contact so we got key bodies
+contact so we got key bodies
+here and these are going to be
+here and these are going to be
+different so let's see
+different so let's see
+if this has a
+config simple
+config simple
+humanoid okay this doesn't
+humanoid okay this doesn't
+have this is
+have this is
+simple
+simple
+shape do we have the
+bodies
+bodies
+anywhere key bodies
+I guess I can get this from
+I guess I can get this from
+the
+task config of key Bodies Okay so it is
+task config of key Bodies Okay so it is
+in a
+in a
+config uh we just don't know which
+config
+yeah want
+yeah want
+config
+[Music]
+control key
+bodies I think this is simple humanoid
+bodies I think this is simple humanoid
+here
+oh so they fly off
+one
+but it's interesting
+interesting
+it doesn't seem like um
+well here for testing
+well here for testing
+purposes if we just do
+zero they still do that well I think
+zero they still do that well I think
+that the action mode is
+weird DF mode
+none was that what I had it as
+none was that what I had it as
+before no
+if I do this what happens
+they still go
+crazy why
+you know what we're going to do we'll do
+this we will do
+this make sure I have the full list
+I think there's this reset bodies thing
+I think there's this reset bodies thing
+as well hang on I missed something
+here so this is all the thing things in
+here so this is all the thing things in
+here I think if we were to do
+this this change
+anything no it does not
+what
+what
+exactly does CPP change about C to make
+exactly does CPP change about C to make
+it worse it's not that it changes
+it worse it's not that it changes
+anything specific for RL it's just that
+anything specific for RL it's just that
+people tend to like just write shittier
+people tend to like just write shittier
+code um and I don't want to deal with
+code um and I don't want to deal with
+that
+that
+language it's just much easier to just
+language it's just much easier to just
+write the damn stuff and
+say like I'm not going like I'm just not
+say like I'm not going like I'm just not
+dealing with people like throwing
+dealing with people like throwing
+arbitrary C++ at me and like reviewing
+arbitrary C++ at me and like reviewing
+and dealing with that I'm just not doing
+it you know it's very very easy to write
+it you know it's very very easy to write
+the environments and see the way we're
+the environments and see the way we're
+doing it it's very very very easy to
+doing it it's very very very easy to
+make sure everything is incredibly
+make sure everything is incredibly
+fast you
+know I mean we literally I have a
+know I mean we literally I have a
+project I'm supporting that's written in
+project I'm supporting that's written in
+like C in the C C++ GPU accelerated game
+like C in the C C++ GPU accelerated game
+engine but and on GPU they're getting
+engine but and on GPU they're getting
+50,000 frames per second and that's
+50,000 frames per second and that's
+after I've optimized the hell out of it
+after I've optimized the hell out of it
+I could write it in about the same
+I could write it in about the same
+amount of Cod Inc and it would run a
+amount of Cod Inc and it would run a
+million in fact we're probably going to
+million in fact we're probably going to
+help Port
+it
+e
+for
+e e
+maybe they do
+this H same
+this isn't
+this isn't
+here what do they do
+here what do they do
+differently you would think it should be
+differently you would think it should be
+in the
+in the
+setup Jesus there's so much freaking
+setup Jesus there's so much freaking
+code how do you write 1,700 lines of
+code how do you write 1,700 lines of
+code and then go to sleep saying yeah I
+code and then go to sleep saying yeah I
+just a good amount of code do right
+just a good amount of code do right
+that's totally the amount of code that
+that's totally the amount of code that
+you take to do
+this all right so we've got
+say projectile acids okay they're doing
+say projectile acids okay they're doing
+something different here maybe they do
+something different here maybe they do
+need a little more code I doubt they
+need a little more code I doubt they
+need that much more code
+though
+though
+tens where's the
+tens where's the
+humanoid robot config
+I don't know
+I don't know
+[Music]
+man I kind of suspected as much you know
+man I kind of suspected as much you know
+I don't I didn't think like yeah the RL
+I don't I didn't think like yeah the RL
+devs and Robotics are magically going to
+devs and Robotics are magically going to
+be way better than the rest of the field
+be way better than the rest of the field
+so yeah of course they likewise just
+so yeah of course they likewise just
+have a bunch of terrible code
+freaking gosh load
+andet create okay so
+andet create okay so
+here robot
+config s MPL robot
+they have just a ton of parameters you
+they have just a ton of parameters you
+need to load
+in this is so slow they decided to
+in this is so slow they decided to
+multiprocess it that's hilarious
+and kind of
+and kind of
+sad asset real
+file e
+asset
+asset
+options so when you load asset Road
+options so when you load asset Road
+asset file and asset
+options that's it unless there's
+options that's it unless there's
+anything else they add in
+anything else they add in
+here oh this is all they load in
+here oh this is all they load in
+so
+how is it the four sensors at the
+feet or sensor
+joints four sensor joints here and it
+joints four sensor joints here and it
+would be left and right ankle otherwise
+so I think it's left and right ankle
+and do
+and do
+lle or
+R this
+is does that do
+anything spazzes out and goes insane
+humanoid
+humanoid
+asset drive
+asset drive
+mode if I do
+this no
+I like I don't know what else there is
+I like I don't know what else there is
+in here that I'm
+missing guys this is where you load the
+missing guys this is where you load the
+ass at
+right e
+I wonder if I can Benchmark it at
+I wonder if I can Benchmark it at
+least this
+works I know Sim is pretty heavy yep
+works I know Sim is pretty heavy yep
+that's what we expect
+145,000 but I really have no idea what
+145,000 but I really have no idea what
+the hell's wrong with this and I got to
+the hell's wrong with this and I got to
+go to dinner
+go to dinner
+soon I really would like to fix this
+soon I really would like to fix this
+today if I can give um Kung something
+today if I can give um Kung something
+stable to deal with
+yeah this has been a
+yeah this has been a
+lot 25 hours and two
+lot 25 hours and two
+days most likely on
+days most likely on
+this we're pretty close here honestly
+this we're pretty close here honestly
+um it's just like I loaded in we had the
+um it's just like I loaded in we had the
+wrong model so I loaded in a new model
+wrong model so I loaded in a new model
+and I'll show you what happens it's fast
+and I'll show you what happens it's fast
+but it does this
+it's less hilarious when you have to
+it's less hilarious when you have to
+[ __ ] debug this hor
+[ __ ] 145k is nice though
+[ __ ] 145k is nice though
+we'll actually be able to train it close
+we'll actually be able to train it close
+to that I imagine we should get we
+to that I imagine we should get we
+should get over 100,000 training even
+should get over 100,000 training even
+with the netw Le for the smallest
+one I don't know if Kung is watching if
+one I don't know if Kung is watching if
+you have any idea what's wrong with this
+you have any idea what's wrong with this
+thing but I got no idea no you can't
+thing but I got no idea no you can't
+just step through it that's the thing
+because it just goes into some like
+because it just goes into some like
+massive
+Sim hold on this scale is totally
+weird maybe this is it
+let me grab this
+let me grab this
+function just to
+test it might be this because the
+test it might be this because the
+model's different
+okay then this sets
+PD hold
+on we'll we'll undo this garbage code if
+on we'll we'll undo this garbage code if
+we uh if we fix this if this fixes it
+rather um r R PD
+rather um r R PD
+is
+is
+see build
+see build
+PD and this gets called
+in right after you load the
+in right after you load the
+model
+load and we
+load and we
+do
+build
+build
+okay and then
+oops actually can go right
+here
+build
+action then we do
+PD
+action
+contion tets
+do offsets
+do they use those do offsets
+the
+heck give up
+names self. body
+names body name is
+names body name is
+onear
+body smpl Joko names
+oh my
+oh my
+[Music]
+God
+e
+e e
+bias offset
+false
+for e
+I'm going just try
+this dude what the [ __ ] is
+this dude what the [ __ ] is
+this like actually what is
+this
+for e
+okay bumping Neil I don't know what that
+okay bumping Neil I don't know what that
+is
+doesn't seem to be doing anything e
+still limits don't do anything
+I mean these are all on
+I mean these are all on
+zero so I don't see how zero doesn't do
+anything I don't think you need this
+anything I don't think you need this
+crazy ass PDX
+scale e
+okay
+really
+final scaled
+actions that is a good
+point
+for e
+Mass
+yeah it's just not a fun
+yeah it's just not a fun
+time I'm just straight up not having a
+time I'm just straight up not having a
+good time with this
+one we need that but we'll
+one we need that but we'll
+see what do they do with
+it they just [ __ ] with it a bit
+I'm trying to think
+I'm trying to think
+what what it would
+be they give me joint
+be they give me joint
+limits a while
+limits a while
+ago set doof Drive I think it made this
+ago set doof Drive I think it made this
+freaking function up as the problem I
+freaking function up as the problem I
+think it loves to make up API [ __ ] that
+think it loves to make up API [ __ ] that
+just doesn't exist
+suppos the
+function stupid [ __ ] thing
+so this get
+so this get
+set get do properties and then you can
+set get do properties and then you can
+set stiffness and
+damping 20 in 0.1
+one stiffness
+0.1 let's
+see
+okay now the question is is that a good
+okay now the question is is that a good
+solution or not
+so this causes it to fly the hell
+away a
+away a
+lot but there's still weird [ __ ] going
+on
+on
+H you're not going to enjoy your
+H you're not going to enjoy your
+algorithms course
+algorithms course
+then or your Advanced algorithms course
+then or your Advanced algorithms course
+at least the theoretical
+at least the theoretical
+one it's okay I hated that one
+too it just really sensitive
+all right none of you are flying away
+now they fly away at0 one really
+yep usually taking junior or senior year
+yep usually taking junior or senior year
+you can take it earlier if you want I
+you can take it earlier if you want I
+took it freshman
+took it freshman
+spring not a fun
+course I mean it's perfectly fine if
+course I mean it's perfectly fine if
+you're anywhere decent at proof-based
+you're anywhere decent at proof-based
+mathematic Buton
+1,200 really
+okay so they just wobble if you do
+okay so they just wobble if you do
+this if you
+this if you
+do they still fly
+away that seems
+away that seems
+good and then if I do like five then
+good and then if I do like five then
+they probably Fly Away
+oh no they
+don't I think that was it I have no idea
+don't I think that was it I have no idea
+why this is needed in this one and not
+why this is needed in this one and not
+the other one but going be
+the other one but going be
+this yes yes it
+will dude how stupid you think I
+am that's
+am that's
+stupid DN well
+hope a little
+hope a little
+stupid a little stupid sometimes
+Maybe
+e e
+getting rid of stuff we don't need
+anything that's not used gets
+deleted for
+very
+very
+nice okay 886
+lines and uh there are a few things
+lines and uh there are a few things
+we're not we're still going to be able
+we're not we're still going to be able
+to cut
+there we go 884
+there we go 884
+lines add
+environment all right
+yeah I'm only 142 XPS
+okay so for folks on YouTube uh I will
+okay so for folks on YouTube uh I will
+be back after
+be back after
+dinner in the meanwhile though if you're
+dinner in the meanwhile though if you're
+interested in ultra high performance
+interested in ultra high performance
+reinforcement
+reinforcement
+learning getting involved in the space
+learning getting involved in the space
+it's easier than you might
+it's easier than you might
+expect all my stuff is here on puffer
+expect all my stuff is here on puffer
+doai all the
+doai all the
+environments right here we've built all
+environments right here we've built all
+these they're all Ultra Ultra fast you
+these they're all Ultra Ultra fast you
+can play them in your browser you can
+can play them in your browser you can
+watch Agents play them in your browser
+watch Agents play them in your browser
+you can hold shift and you can play them
+you can hold shift and you can play them
+yourself they go from very simple to
+yourself they go from very simple to
+very very complex here's aobo with
+very very complex here's aobo with
+economy and
+economy and
+trade here's a MOA an MMO I mean before
+trade here's a MOA an MMO I mean before
+here's a MOA like League of Legends or
+here's a MOA like League of Legends or
+DOTA pretty nice
+DOTA pretty nice
+environments if you want to see the code
+environments if you want to see the code
+you can help us out a ton star the repo
+you can help us out a ton star the repo
+it's free really
+it's free really
+helps join the Discord if you want to
+helps join the Discord if you want to
+get involved with Dev or use the project
+get involved with Dev or use the project
+and if you're looking for more content
+and if you're looking for more content
+we have a bunch of articles on the blog
+we have a bunch of articles on the blog
+here but there are also some that you
+here but there are also some that you
+can only find on my X account where I
+can only find on my X account where I
+post all sorts of reinforcement learning
+post all sorts of reinforcement learning
+stuff back in a bit thanks for tuning in
+stuff back in a bit thanks for tuning in
+and see you around

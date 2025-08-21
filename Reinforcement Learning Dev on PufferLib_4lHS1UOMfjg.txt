@@ -1,0 +1,2817 @@
+Kind: captions
+Language: en
+Morning. We are back live. Happy
+Monday. I got a bit of RNR yesterday.
+Monday. I got a bit of RNR yesterday.
+So, the goal is going to be to close out
+So, the goal is going to be to close out
+this release strong.
+this release strong.
+hopefully have it actually properly
+hopefully have it actually properly
+tested, not forgetting any of the things
+tested, not forgetting any of the things
+we need. Um, I'm going to start off
+we need. Um, I'm going to start off
+today
+today
+by applying just a band-aid patch to the
+by applying just a band-aid patch to the
+setup so that we can actually build
+setup so that we can actually build
+things without having to like manually
+things without having to like manually
+copy files around
+copy files around
+today. Also help with uh a bunch of the
+today. Also help with uh a bunch of the
+people who are kind of trying to fight
+people who are kind of trying to fight
+with the dev branch to keep stuff
+with the dev branch to keep stuff
+working. We'll do that.
+working. We'll do that.
+Um, we're going to look at our sweep
+Um, we're going to look at our sweep
+code. There's a lot of stuff that we
+code. There's a lot of stuff that we
+need to finalize on sweeps and then
+need to finalize on sweeps and then
+likely a lot of just small environment
+likely a lot of just small environment
+binding changes and integrations to make
+binding changes and integrations to make
+sure all of our environments work with
+sure all of our environments work with
+dev. We've made some small CPI changes.
+dev. We've made some small CPI changes.
+They're going to need to be uh things
+They're going to need to be uh things
+are going to be need to be updated
+are going to be need to be updated
+for. So, we'll do that. And
+for. So, we'll do that. And
+um that pretty much will get us onto the
+um that pretty much will get us onto the
+experimentation and testing
+experimentation and testing
+phase.
+phase.
+Um we're kind of just on like we're on
+Um we're kind of just on like we're on
+like sort of between the minor fixes
+like sort of between the minor fixes
+phase and that final testing phase. So I
+phase and that final testing phase. So I
+want to really get us to that. I think
+want to really get us to that. I think
+actually the main thing that I don't
+actually the main thing that I don't
+know about there is
+the probably just the
+the probably just the
+um the sweep stuff. There's still a
+um the sweep stuff. There's still a
+couple rough edges, but we'll get to
+couple rough edges, but we'll get to
+that. Let me switch the scene
+that. Let me switch the scene
+view and we'll get started.
+Hang
+on. Let's see. Posted it here. Yes, he
+on. Let's see. Posted it here. Yes, he
+did. So, let me see if this even makes
+did. So, let me see if this even makes
+any sense.
+Yeah. So, this
+Yeah. So, this
+thing runs an additional copy. I don't
+thing runs an additional copy. I don't
+know why this doesn't happen by default.
+but we can see here that it is actually
+but we can see here that it is actually
+correctly copying
+correctly copying
+now. Yo, what's up Mr.
+now. Yo, what's up Mr.
+Sup? Morning
+Okay, let's see what actually
+runs. Let's actually do a
+runs. Let's actually do a
+full B full dash dot. Let's see if our
+full B full dash dot. Let's see if our
+commands work at all.
+minus one
+fly. Okay. So, for some reason it's
+fly. Okay. So, for some reason it's
+defaulted to
+defaulted to
+3.8. We'll fix that on the container.
+Can we do
+Can we do
+um what's the uh the Nvidia Docker
+containers? I'm just trying to think of
+containers? I'm just trying to think of
+um Okay, so this is they do still ship
+um Okay, so this is they do still ship
+2204 containers. I believe 2404 is the
+2204 containers. I believe 2404 is the
+first Docker version where things get
+first Docker version where things get
+stupid. I mean the first abundu version
+stupid. I mean the first abundu version
+where things get stupid. So, we can
+where things get stupid. So, we can
+probably just put like Python 312 on uh
+probably just put like Python 312 on uh
+what is it? The 128
+container. Oh, yeah. They ship
+container. Oh, yeah. They ship
+containers with everything, huh?
+12.8.1
+Devel. So, we'll probably do
+this now. The only thing is we probably
+this now. The only thing is we probably
+want to have
+want to have
+um maybe two versions.
+128 is like really new and your drivers
+128 is like really new and your drivers
+are going to be
+dated. I could also just do 128 and make
+dated. I could also just do 128 and make
+an upgrade driver
+an upgrade driver
+script. That's also valid, right?
+That might be easier to maintain Then
+This seems to run perfectly
+fine. Cool.
+So, we have that issue fixed. Now, let's
+So, we have that issue fixed. Now, let's
+do let's check on our
+do let's check on our
+experiments. Check on our experiments.
+Why you have two terminals running on
+Why you have two terminals running on
+the same
+the same
+folder? So I can do
+this, right? I can run training and then
+this, right? I can run training and then
+I can
+I can
+like edit
+like edit
+here because all my all my dev is also
+here because all my all my dev is also
+just in
+just in
+term. So I have an edit window and
+term. So I have an edit window and
+usually I have a run window.
+And normally this one would be a full
+And normally this one would be a full
+size like this would be my full left
+size like this would be my full left
+screen, but I have uh my cameras in the
+screen, but I have uh my cameras in the
+way. So, I have chat on this monitor, so
+way. So, I have chat on this monitor, so
+it's easier for me to see without
+it's easier for me to see without
+looking over like this.
+Okay. So, whatever I ran here was like
+Okay. So, whatever I ran here was like
+okay, but not quite as good as before,
+okay, but not quite as good as before,
+it looks
+like. Let's figure out what this was. I
+like. Let's figure out what this was. I
+think this is with resets.
+Yeah, I think this is like if you reset
+Yeah, I think this is like if you reset
+the end and run a very small amount of
+the end and run a very small amount of
+like followup
+stuff. Let's try a few things here.
+Um, this is like a very small sample as
+Um, this is like a very small sample as
+well.
+I also don't like that we have a two
+I also don't like that we have a two
+train functions. Might have to rename
+train functions. Might have to rename
+some things. But uh for now here I
+some things. But uh for now here I
+think Oh, hang on. This is not resetting
+think Oh, hang on. This is not resetting
+right.
+this I don't think I've seen well I
+this I don't think I've seen well I
+don't know if you're if you're new to
+don't know if you're if you're new to
+the stream so this is I do ultra high
+the stream so this is I do ultra high
+performant reinforcement learning
+performant reinforcement learning
+dev
+dev
+so all these demos on puffer.ai these
+so all these demos on puffer.ai these
+are all simple games but written in C to
+are all simple games but written in C to
+run like 10,000 times faster than you
+run like 10,000 times faster than you
+would normally expect and uh we train AI
+would normally expect and uh we train AI
+on these and we use these for research
+on these and we use these for research
+in order to make the methods behind all
+in order to make the methods behind all
+of this way better. So you can see all
+of this way better. So you can see all
+of these in your browser and like this
+of these in your browser and like this
+is a neural net playing this game
+is a neural net playing this game
+superhuman live in your
+superhuman live in your
+browser. We've got multi-agent stuff
+browser. We've got multi-agent stuff
+like the snake game. So if you watch
+like the snake game. So if you watch
+this for long enough you'll see like all
+this for long enough you'll see like all
+sorts of snakes
+sorts of snakes
+emerge. We've got like classic arcade
+emerge. We've got like classic arcade
+stuff and we've even got more complex
+stuff and we've even got more complex
+and interesting things like uh this
+and interesting things like uh this
+massively multi-agent environment which
+massively multi-agent environment which
+has like economy and trade and resources
+has like economy and trade and resources
+and equipment and all sorts of things.
+and equipment and all sorts of things.
+So this is what I do. This is my job. Um
+So this is what I do. This is my job. Um
+trying to like improve this field and
+trying to like improve this field and
+progress the science here. And I stream
+progress the science here. And I stream
+all the dev because why not?
+Yeah. So this chart is this is a Neptune
+Yeah. So this chart is this is a Neptune
+interface. So this is 200 experiments.
+interface. So this is 200 experiments.
+Each of these experiments is
+Each of these experiments is
+uh that's E8. So this is up each of
+uh that's E8. So this is up each of
+these experiments is up to 600 million
+these experiments is up to 600 million
+steps of maze solving. So this plot has
+steps of maze solving. So this plot has
+I don't know probably
+I don't know probably
+like a couple like few hundred years
+like a couple like few hundred years
+worth of like games played just solving
+worth of like games played just solving
+mazes and uh the goal of this is to like
+mazes and uh the goal of this is to like
+automatically find the best algorithm
+automatically find the best algorithm
+settings. So like some of the
+settings. So like some of the
+experiments we run they don't do very
+experiments we run they don't do very
+well but then we have a a method that
+well but then we have a a method that
+automatically tunes the way that our
+automatically tunes the way that our
+experiments are run in order to get
+experiments are run in order to get
+better results overall here.
+So this graph that I'm
+seeing Yeah, this graph that I'm seeing
+doesn't Oh, no. Here it is. Yeah. Yeah.
+doesn't Oh, no. Here it is. Yeah. Yeah.
+Yeah. Okay.
+Yeah. Okay.
+So there is an async reset
+here. You're not going to alpha code
+here. You're not going to alpha code
+your way. So here's the thing. When you
+your way. So here's the thing. When you
+use code as your
+use code as your
+primitive, not everything if when you're
+primitive, not everything if when you're
+talking about code in the way that they
+talking about code in the way that they
+are, it's like scripts and classic
+are, it's like scripts and classic
+algorithms like classic software. Not
+algorithms like classic software. Not
+every problem is amendable to that. Like
+every problem is amendable to that. Like
+for instance, if you imagine trying to
+for instance, if you imagine trying to
+like script a bot for Dota, like a bot
+like script a bot for Dota, like a bot
+to play Dota or a bot to like you know
+to play Dota or a bot to like you know
+do any sort of fiddly task often like
+do any sort of fiddly task often like
+calibrate a machine in industry or like
+calibrate a machine in industry or like
+optimize some process like op like the
+optimize some process like op like the
+data center cooling that they did as
+data center cooling that they did as
+well with DRL.
+well with DRL.
+Um it's way better to have these
+Um it's way better to have these
+processes be fuzzy and you want a model
+processes be fuzzy and you want a model
+that can actually just output actions
+that can actually just output actions
+directly. So it's not like one is just
+directly. So it's not like one is just
+better than the other. It's like they're
+better than the other. It's like they're
+different. There are different use
+cases. It's not even that I'm bearish on
+cases. It's not even that I'm bearish on
+the stuff that
+the stuff that
+um you know that's happening in language
+um you know that's happening in language
+modeling land. Like Deep Mind's doing
+modeling land. Like Deep Mind's doing
+really cool stuff in that space as well.
+really cool stuff in that space as well.
+It's just like I think re like deep
+It's just like I think re like deep
+reinforcement learning is also really
+reinforcement learning is also really
+important and comparatively like
+important and comparatively like
+nobody's working on it. So that's why I
+nobody's working on it. So that's why I
+do this stuff, right?
+do this stuff, right?
+If there's an important problem and zero
+If there's an important problem and zero
+other qualified people are doing it,
+other qualified people are doing it,
+that's an opportunity for Okay.
+All
+right, we're going to run this. We're
+right, we're going to run this. We're
+going to see what this does.
+Um, and if this doesn't work, then I
+Um, and if this doesn't work, then I
+think that there is there's something
+think that there is there's something
+screwy with the hyper pram sweep
+screwy with the hyper pram sweep
+specifically that's like requiring you
+specifically that's like requiring you
+to have skewed results for it to
+to have skewed results for it to
+work. Ryan does stop a little bit. I had
+work. Ryan does stop a little bit. I had
+to take uh the better part of yesterday
+to take uh the better part of yesterday
+off to sort of just
+off to sort of just
+recover. Got a little bit of a run in,
+recover. Got a little bit of a run in,
+got some lifting in. I kind of chilled
+got some lifting in. I kind of chilled
+for a bit. It was good.
+Um, yeah. So, I'm I think that we're
+Um, yeah. So, I'm I think that we're
+probably good to just like crank out
+probably good to just like crank out
+this release over the next few days.
+this release over the next few days.
+That's the
+That's the
+goal. I got 45 minutesish, 40 minutesish
+goal. I got 45 minutesish, 40 minutesish
+now, and then after breakfast, I will be
+now, and then after breakfast, I will be
+back for the whole rest of the day doing
+this. That is the plan.
+So, we're going to try the m sweep one
+So, we're going to try the m sweep one
+more time.
+And we're going to hope that we actually
+And we're going to hope that we actually
+get
+get
+um like some more reasonable stuff out
+um like some more reasonable stuff out
+of this. But I'm going to try to monitor
+of this. But I'm going to try to monitor
+this more throughout the day so we get
+this more throughout the day so we get
+more runs in because really this hyper
+more runs in because really this hyper
+pram stuff needs to just be done. Like
+pram stuff needs to just be done. Like
+this is the only missing uh like
+this is the only missing uh like
+functionality piece is just like getting
+functionality piece is just like getting
+the the default settings for hyper pram
+the the default settings for hyper pram
+sweeps solid. I'm going to leave this up
+sweeps solid. I'm going to leave this up
+on the other window.
+on the other window.
+Wait, there's a release. Yeah, big
+Wait, there's a release. Yeah, big
+release coming as soon as I well, as
+release coming as soon as I well, as
+soon as I finish all the like testing
+soon as I finish all the like testing
+and stuff for this. All this stuff is
+and stuff for this. All this stuff is
+free and open source code, but um we
+free and open source code, but um we
+operate in like four to six month
+operate in like four to six month
+usually release cycles. So, I only ship
+usually release cycles. So, I only ship
+two or three major big versions a year,
+two or three major big versions a year,
+but like they're really large. So, like
+but like they're really large. So, like
+um it's a generational leap, if you
+um it's a generational leap, if you
+will. Like reinforcement learning in
+will. Like reinforcement learning in
+2.0, know it works if you automate the
+2.0, know it works if you automate the
+hell out of it. Reinforcement learning
+hell out of it. Reinforcement learning
+in 3 0 once I finish the fiddly bits
+in 3 0 once I finish the fiddly bits
+kind of just works a lot of the time out
+kind of just works a lot of the time out
+of the
+of the
+box and then hopefully by the end of the
+box and then hopefully by the end of the
+year we get 40. Um which if that goes
+year we get 40. Um which if that goes
+the way that I hope it does uh it should
+the way that I hope it does uh it should
+just be yet again like a completely
+just be yet again like a completely
+different field and at that point we'll
+different field and at that point we'll
+kind of be able to just solve
+kind of be able to just solve
+whatever the grind takes a small lifting
+whatever the grind takes a small lifting
+intermission break. Thanks for the
+intermission break. Thanks for the
+reminder.
+and get more
+coffee. The
+coffee. The
+uh the pressing
+uh the pressing
+strength is definitely
+strength is definitely
+back. Need to get
+back. Need to get
+my pulling and leg strength back to
+my pulling and leg strength back to
+where they used to
+be. The current
+be. The current
+project. All
+right.
+right.
+So, let's look at
+So, let's look at
+the the original maze sweep that
+worked. Like, you can see these all
+worked. Like, you can see these all
+these like jank ones here that didn't
+work. It's actually pretty weird.
+So based on these, I actually am
+So based on these, I actually am
+probably not going to
+probably not going to
+expect this thing to work
+expect this thing to work
+correctly. Let me find the good
+correctly. Let me find the good
+one. Mark Rippletoe
+one. Mark Rippletoe
+approved.
+approved.
+Man, I
+Man, I
+did He was the starting strength guy,
+did He was the starting strength guy,
+right? I did 5x5s for like uh maybe the
+right? I did 5x5s for like uh maybe the
+first two years and then two things kind
+first two years and then two things kind
+of happen. one, it stops working, and
+of happen. one, it stops working, and
+two, a 5x5 once you are decently strong,
+two, a 5x5 once you are decently strong,
+especially if you're doing any other
+especially if you're doing any other
+side sort of exercise outside of that
+side sort of exercise outside of that
+cuz like I run as well, it's just a
+cuz like I run as well, it's just a
+brutal thing to do like to always be
+brutal thing to do like to always be
+doing a
+5x5. Like I do a if I do a 5x5 of
+5x5. Like I do a if I do a 5x5 of
+squats, that's it. I'm out for the day.
+So, I had to do heavy light days for
+So, I had to do heavy light days for
+like a year or so after that. And then I
+like a year or so after that. And then I
+sort of like the focus was on running
+sort of like the focus was on running
+for like a year till I did my uh my
+for like a year till I did my uh my
+50k. Then I came back got my thousand
+50k. Then I came back got my thousand
+total and then pneumonia kicked my ass.
+total and then pneumonia kicked my ass.
+So, I'm still recovering from
+that. Higher score. No, higher score is
+that. Higher score. No, higher score is
+good. No problem with the questions.
+good. No problem with the questions.
+You're new. Um,
+You're new. Um,
+so what this is, let me explain what
+so what this is, let me explain what
+this is. So this is a solve percentage
+this is. So this is a solve percentage
+on the y ais. Um, and this is for mazes.
+on the y ais. Um, and this is for mazes.
+So like if I just
+do, let me see if I have a demo for
+this. Nah, we don't have the demo file
+this. Nah, we don't have the demo file
+on
+this. Uh, here. Puffer
+Eval. Okay, so this is a random agent
+Eval. Okay, so this is a random agent
+solving a maze. It's not going to do
+solving a maze. It's not going to do
+very well because it's random. So the
+very well because it's random. So the
+goal is to learn an agent that can solve
+goal is to learn an agent that can solve
+this maze. And then we randomly generate
+this maze. And then we randomly generate
+new mazes of different sizes as well. So
+new mazes of different sizes as well. So
+the maze could be like this big, or the
+the maze could be like this big, or the
+maze could be the size of this whole
+maze could be the size of this whole
+window here.
+window here.
+um down to around here. So, we're trying
+um down to around here. So, we're trying
+to train a good maze solving agent. And
+to train a good maze solving agent. And
+specifically, it's not that mazes are
+specifically, it's not that mazes are
+very interesting. It's that they're a
+very interesting. It's that they're a
+very tough problem for RL to solve. Like
+very tough problem for RL to solve. Like
+RL is can solve really, really amazing
+RL is can solve really, really amazing
+things, but not really mazes very well.
+things, but not really mazes very well.
+Mazes are very hard. So, what happens is
+Mazes are very hard. So, what happens is
+if you're good at solving mazes, it
+if you're good at solving mazes, it
+often is the case that your same
+often is the case that your same
+algorithm is going to be good at solving
+algorithm is going to be good at solving
+a lot of other things as well, uh with
+a lot of other things as well, uh with
+reinforcement learning specifically. So
+reinforcement learning specifically. So
+y-axis here is the percentage of mazes
+y-axis here is the percentage of mazes
+that it solves and x-axis is the number
+that it solves and x-axis is the number
+of steps that we've trained the agent
+of steps that we've trained the agent
+for and then all the different graphs or
+for and then all the different graphs or
+different experiment settings. So one of
+different experiment settings. So one of
+these lines, this is 50 million here. So
+these lines, this is 50 million here. So
+one of these lines is an agent trained
+one of these lines is an agent trained
+for 50 million steps on solving mazes.
+for 50 million steps on solving mazes.
+So it's basically it's made 50 million
+So it's basically it's made 50 million
+moves within different mazes. And you
+moves within different mazes. And you
+can see that we have some settings that
+can see that we have some settings that
+do very poorly and some settings that do
+do very poorly and some settings that do
+pretty well up here. So my goal here is
+pretty well up here. So my goal here is
+to get an algorithm uh get a setting
+to get an algorithm uh get a setting
+such that when we release puffer you can
+such that when we release puffer you can
+run this thing and it should generate
+run this thing and it should generate
+you very good consistent results on
+you very good consistent results on
+mazes and then what I do on top of that
+mazes and then what I do on top of that
+right is I don't just do mazes right I
+right is I don't just do mazes right I
+run it on breakout I run it on neural
+run it on breakout I run it on neural
+MMO which is a fancy end I run it on
+MMO which is a fancy end I run it on
+multi- aent stuff I run it on tons of
+multi- aent stuff I run it on tons of
+different things and if it does well on
+different things and if it does well on
+all of them then that is a robust
+all of them then that is a robust
+algorithm so that is the goal And if we
+algorithm so that is the goal And if we
+are able to do that, then we will have
+are able to do that, then we will have
+made a monumental difference in the
+made a monumental difference in the
+field of reinforcement learning. Uh
+field of reinforcement learning. Uh
+because this stuff kind of just doesn't
+because this stuff kind of just doesn't
+exist outside of Puffer Lib right now,
+exist outside of Puffer Lib right now,
+my project. Um yeah, that's our
+goal. I'm trying to find the
+goal. I'm trying to find the
+good the good maze result.
+Okay. Yeah. So, this is the one that I
+Okay. Yeah. So, this is the one that I
+was looking for. So, this is I think the
+was looking for. So, this is I think the
+best one that we've seen so
+far. How much funding do you have for
+far. How much funding do you have for
+Puffer Lib? I don't take funding. We
+Puffer Lib? I don't take funding. We
+have a few clients. Uh we charge for not
+have a few clients. Uh we charge for not
+any of our code. Our code code's all
+any of our code. Our code code's all
+free, but we charge for priority
+free, but we charge for priority
+service. So, let's say that you're doing
+service. So, let's say that you're doing
+reinforcement learning industry. You're
+reinforcement learning industry. You're
+probably having a tough time of it
+probably having a tough time of it
+because it's really hard. We have the
+because it's really hard. We have the
+best tech and the best tools uh to help
+best tech and the best tools uh to help
+you solve that problem. So you can pay
+you solve that problem. So you can pay
+us to have our eyes on your problem to
+us to have our eyes on your problem to
+get all of our latest tools as they come
+get all of our latest tools as they come
+out instead of waiting for the next
+out instead of waiting for the next
+release and to help steer some of our
+release and to help steer some of our
+research directions in ways that benefit
+research directions in ways that benefit
+you. So we charge for that and then that
+you. So we charge for that and then that
+funds like servers and many of the other
+funds like servers and many of the other
+things that we
+need building a kind of setup for
+need building a kind of setup for
+algorithm testing. Yeah, it's a bit of
+algorithm testing. Yeah, it's a bit of
+both cuz like Pufferlib is both a
+both cuz like Pufferlib is both a
+toolkit for doing reinforcement learning
+toolkit for doing reinforcement learning
+very very well in academia and industry,
+very very well in academia and industry,
+but it's also a toolkit for advancing
+but it's also a toolkit for advancing
+reinforcement learning itself. And we
+reinforcement learning itself. And we
+use it for
+both. So the thing that I'm running into
+both. So the thing that I'm running into
+right now, which is a little bit weird,
+right now, which is a little bit weird,
+is this is the best set of maze
+is this is the best set of maze
+experiments that I have. And I believe
+experiments that I have. And I believe
+that the way that I get I got these was
+that the way that I get I got these was
+that when I do my evaluations, I reset
+that when I do my evaluations, I reset
+the maze before I evaluate it and then I
+the maze before I evaluate it and then I
+run for like a small fixed number of
+run for like a small fixed number of
+steps and that actually guides the
+steps and that actually guides the
+curves to be
+curves to be
+better. Whereas with this one, it's like
+better. Whereas with this one, it's like
+the same thing except
+the same thing except
+uh I don't reset the mazes for
+uh I don't reset the mazes for
+evaluation and then this totally screws
+evaluation and then this totally screws
+stuff up. Now looking at this
+stuff up. Now looking at this
+here, there's a big difference in the
+here, there's a big difference in the
+x-axis. I'm just noticing now. Wait,
+x-axis. I'm just noticing now. Wait,
+this is
+5v7. Oh, okay. I think that the issue
+5v7. Oh, okay. I think that the issue
+that we're running into is just
+that we're running into is just
+somehow one setting is running longer
+somehow one setting is running longer
+experiments than the other, which would
+experiments than the other, which would
+make a lot more
+sense. Yeah. Yeah. And to new folks,
+sense. Yeah. Yeah. And to new folks,
+like I generally do the best job I can
+like I generally do the best job I can
+kind of just narrating stuff as I'm
+kind of just narrating stuff as I'm
+thinking it, but like I mean it's this
+thinking it, but like I mean it's this
+is like a research stream first and
+is like a research stream first and
+foremost. So if you like if stuff
+foremost. So if you like if stuff
+doesn't make sense and you're curious,
+doesn't make sense and you're curious,
+just ask questions. Like half the reason
+just ask questions. Like half the reason
+I stream. Part of it is like it forces
+I stream. Part of it is like it forces
+me to narrate my thought process out
+me to narrate my thought process out
+loud, which actually makes me more
+loud, which actually makes me more
+productive than any time I spend talking
+productive than any time I spend talking
+to chat anyways. So it's cool. Um, and
+to chat anyways. So it's cool. Um, and
+the other thing that's nice about this
+the other thing that's nice about this
+is all of Puffer Lib's free and open
+is all of Puffer Lib's free and open
+source. And like one of the main ways
+source. And like one of the main ways
+that we advance the field is from open
+that we advance the field is from open
+source contributors. So like if you're
+source contributors. So like if you're
+interested in working on AI stuff and
+interested in working on AI stuff and
+you want to learn this and you have not
+you want to learn this and you have not
+even an AI background, if you just have
+even an AI background, if you just have
+a programming
+a programming
+background, most of these environments
+background, most of these environments
+are written by contributors. Like most
+are written by contributors. Like most
+of these are a few hundred lines. It's
+of these are a few hundred lines. It's
+basically just low-level game
+basically just low-level game
+development with a few extras in order
+development with a few extras in order
+to make them work well with
+to make them work well with
+reinforcement learning. So like, you
+reinforcement learning. So like, you
+know, we have contributors that we've
+know, we have contributors that we've
+onboarded that are now doing stuff that
+onboarded that are now doing stuff that
+rivals like top uh top academic labs in
+rivals like top uh top academic labs in
+RL. So if you're interested in that,
+RL. So if you're interested in that,
+drop by the Discord, you know, or hit me
+drop by the Discord, you know, or hit me
+up and come build with us.
+Okay, so this is performing differently
+Okay, so this is performing differently
+uh compared to before. It's not all
+uh compared to before. It's not all
+stuck on these really short runs, it
+stuck on these really short runs, it
+seems. So possibly this does
+seems. So possibly this does
+okay. I think we will leave this one for
+okay. I think we will leave this one for
+like the next and probably until after
+like the next and probably until after
+breakfast and then we'll check this
+breakfast and then we'll check this
+experiment. But this is like not looking
+experiment. But this is like not looking
+terrible just initially. Now, I do
+terrible just initially. Now, I do
+wonder why there's so many of these like
+wonder why there's so many of these like
+bad runs down
+bad runs down
+here. This is a little bit
+here. This is a little bit
+sketchy.
+sketchy.
+Um, we'll have to do some analysis on
+Um, we'll have to do some analysis on
+that, but I think as a first uh first
+that, but I think as a first uh first
+pass, this is pretty
+decent. Okay, so that checks off two of
+decent. Okay, so that checks off two of
+the things uh that I wanted to get
+the things uh that I wanted to get
+started for this
+started for this
+morning. Let's go check the to-do list.
+We've got all the blog post to work on.
+We've got all the blog post to work on.
+I do not feel like doing that right
+I do not feel like doing that right
+now. Uh we've got docks to finish kind
+now. Uh we've got docks to finish kind
+of. Maze sweeps, ablations.
+Okay, I think I figured this out.
+I'm just looking through the list of
+I'm just looking through the list of
+like things that we can that we still
+like things that we can that we still
+have to do. I think it is mostly going
+have to do. I think it is mostly going
+to
+to
+be just like final
+uh final build stuff,
+huh? So I the biggest thing is probably
+huh? So I the biggest thing is probably
+just going to be all the environments
+just going to be all the environments
+need to be updated and and adjusted a
+need to be updated and and adjusted a
+little bit.
+I think that gave me some PRs that I
+I think that gave me some PRs that I
+haven't
+haven't
+merged. How can you quantify how far are
+merged. How can you quantify how far are
+we at solving the maze? Yeah, you only
+we at solving the maze? Yeah, you only
+solve it if you reach the end point. So
+solve it if you reach the end point. So
+80% of the ma there's no solve 80% of
+80% of the ma there's no solve 80% of
+the maze. It's solving 80% of
+the maze. It's solving 80% of
+mazes. There's some details on that, but
+mazes. There's some details on that, but
+roughly that metric means for 80% of the
+roughly that metric means for 80% of the
+mazes that that we give you, you solve
+mazes that that we give you, you solve
+uh you solve them. That's what it
+means. More precisely, it means um if I
+means. More precisely, it means um if I
+generate you a random maze, there's
+generate you a random maze, there's
+about an 80% chance that you'll solve
+it. And to be clear, like so
+it. And to be clear, like so
+reinforcement learning is really not
+reinforcement learning is really not
+good at mazes. Um and it's not supposed
+good at mazes. Um and it's not supposed
+to be. Like that's there are reasons not
+to be. Like that's there are reasons not
+to expect it to be good. So how well we
+to expect it to be good. So how well we
+are able to do in this uh is actually a
+are able to do in this uh is actually a
+very good indication that we just have
+very good indication that we just have
+the best algorithm
+the best algorithm
+overall because like our agent I've
+overall because like our agent I've
+shown this to other researchers in RL as
+shown this to other researchers in RL as
+well and they're like what the heck how
+well and they're like what the heck how
+are you able to do
+that 20 37 stars very
+I think we go merge bets PR right now.
+Got Gabe has sent us a new environment
+Got Gabe has sent us a new environment
+as well.
+We've got
+bets pushed as is
+bets pushed as is
+removed flash from end
+binding.
+Okay, that's fine.
+He's got binding C. He got rid of the
+He's got binding C. He got rid of the
+Syon
+Syon
+file. He's added
+us the new binding format for triple
+us the new binding format for triple
+triad. It looks
+triad. It looks
+like the triple triad code is a mess. We
+like the triple triad code is a mess. We
+don't have too high of standards there.
+don't have too high of standards there.
+There's the new log structure. This is
+There's the new log structure. This is
+done correctly. Removes all the old
+done correctly. Removes all the old
+stuff. This is
+good. This is also
+fine. I believe this is good
+fine. I believe this is good
+too. Got allocate on
+too. Got allocate on
+this into the freeze.
+I think he removed
+um he reindexed actions a little
+um he reindexed actions a little
+bit. Should be fine.
+He like refactored a few names.
+Fine. New binding. Very good. And remove
+Fine. New binding. Very good. And remove
+this from there.
+Good. Thank you. Bet. We will merge
+Good. Thank you. Bet. We will merge
+this.
+engine paths. Yeah, let's get rid of
+this. And then I believe triple triad
+this. And then I believe triple triad
+here we can get rid of because we're
+here we can get rid of because we're
+removing the siphon.
+two
+conflicts. I don't see anything else.
+conflicts. I don't see anything else.
+Oh, there it
+Oh, there it
+is. And then we can get rid of this
+is. And then we can get rid of this
+because we automated the finding of
+because we automated the finding of
+files.
+Good work to bet.
+no attribute. So we have to fix the
+no attribute. So we have to fix the
+config most
+likely of
+this. And now this is when we're going
+this. And now this is when we're going
+to hit the new uh binding nonsense.
+Holy.
+Holy.
+So, is this free? So, this just has to
+So, is this free? So, this just has to
+call free triple
+triad. And honestly, why don't we just
+We can just make this C
+close. Undefined symbol C.
+Close. This should be defined
+Close. This should be defined
+now. Is it not
+building? I see the Syon stuff building.
+Excuse
+me. Okay, it's still not building.
+Okay, I think that was something,
+right? Returning void
+star. Uh, that's not in
+here. Okay. Well, let's see if this
+here. Okay. Well, let's see if this
+runs.
+It
+It
+does. And that
+trains. That like trains very well.
+trains. That like trains very well.
+Perfect.
+Three and a half million steps a second.
+I am totally going to have to make like
+I am totally going to have to make like
+a
+a
+sample or or maybe just comment like the
+sample or or maybe just comment like the
+squared sample project.
+one of those two
+things. Uh, that does now work
+things. Uh, that does now work
+though. And if we check our
+mazes, I mean, we're getting some decent
+mazes, I mean, we're getting some decent
+runs here, right? So, what's this? 70
+runs here, right? So, what's this? 70
+and 200
+and 200
+mil. And
+mil. And
+then believe this is 500 mil,
+then believe this is 500 mil,
+right? Yeah. So, this is 500 mil. So 200
+right? Yeah. So, this is 500 mil. So 200
+mil. Uh we actually do have within 200
+mil. Uh we actually do have within 200
+mil we've got like
+mil we've got like
+0.9. So we'll see how
+0.9. So we'll see how
+uh how this goes. It runs more
+uh how this goes. It runs more
+experiments. I do think that this one
+experiments. I do think that this one
+takes a while to find the good runs.
+takes a while to find the good runs.
+Right. Let me double check
+Right. Let me double check
+that. Okay. Yeah. So like this one took
+that. Okay. Yeah. So like this one took
+what's this? Like probably 40 50
+what's this? Like probably 40 50
+experiments before it got any that were
+experiments before it got any that were
+this good.
+probably that like the first ones it
+probably that like the first ones it
+came up with were uh very long and then
+came up with were uh very long and then
+it found shorter ones later. So this is
+it found shorter ones later. So this is
+fine. This is totally
+fine. Welcome YouTube
+fine. Welcome YouTube
+folks. Happy Monday.
+So, things to do today because I've got
+So, things to do today because I've got
+breakfast in 15ish minutes, but I think
+breakfast in 15ish minutes, but I think
+the plan today should be update all the
+the plan today should be update all the
+ends.
+ends.
+Um, and then start working on docs
+Um, and then start working on docs
+around that. Actually, I'm going to see.
+around that. Actually, I'm going to see.
+Let me just at
+bet observation issues for Python M's in
+bet observation issues for Python M's in
+dev.
+dev.
+Let me go see your Is it this thing?
+Linky right
+here. Or is there a different
+issue? So, this seed thing is just it
+issue? So, this seed thing is just it
+needing a seed.
+needing a seed.
+So
+like was it Pokemon is what you're
+doing. So all I have to do for this is
+doing. So all I have to do for this is
+that. All
+right. Maybe even
+this. And then
+run mini
+run mini
+grid.
+Sure. So this is post-process.
+This just got moved is
+all. This gives you a nice clean
+error. And I I do have to make sure this
+error. And I I do have to make sure this
+installs with the right
+Python, but that's just because I have
+Python, but that's just because I have
+weird This broke my
+term.
+Let's fix your shape
+stuff. Thank you for the reports, by the
+stuff. Thank you for the reports, by the
+way. This is all just like, you know,
+way. This is all just like, you know,
+stuff. I need I do need all these
+stuff. I need I do need all these
+reports to be able to fix things quickly
+reports to be able to fix things quickly
+because all that happens, right, is I
+because all that happens, right, is I
+have to like slice and dice things to
+have to like slice and dice things to
+get things clean for release. And I'm
+get things clean for release. And I'm
+obviously going to break stuff in the
+process. Yeah, ideally we can uh I wish
+process. Yeah, ideally we can uh I wish
+I had better tools for that actually.
+I had better tools for that actually.
+Um but yeah, that is on the list as
+Um but yeah, that is on the list as
+well.
+well.
+or should
+be. Oh, those aren't even deprecated
+be. Oh, those aren't even deprecated
+imports. They're just changed.
+imports. They're just changed.
+Deprecated would be that I support the
+Deprecated would be that I support the
+old way of doing it. I just
+don't. Okay. So this is seed here
+right. Okay. So I got your error
+here. At least this is hitting a spot
+here. At least this is hitting a spot
+where it's supposed to hit, right?
+where it's supposed to hit, right?
+like it's supposed to hit this error if
+like it's supposed to hit this error if
+something is wrong rather than just
+something is wrong rather than just
+randomly
+failing. Dict adder for obs. Hang
+on. Okay. So, this is just that there's
+on. Okay. So, this is just that there's
+one environment
+I actually would like to fix that one
+I actually would like to fix that one
+real quick.
+I actually think this squeeze is kind of
+I actually think this squeeze is kind of
+bad,
+huh?
+huh?
+Yeah.
+Yeah.
+Okay. So, I'm going to have to fix that
+Okay. So, I'm going to have to fix that
+uh elsewhere. And I think this is
+uh elsewhere. And I think this is
+running like a single
+environment dict for obs dype. I don't
+environment dict for obs dype. I don't
+get that
+one. This does seem to be
+training. And now this this has to be
+update. We really should have config
+update. We really should have config
+validation. It's just hard for me to
+validation. It's just hard for me to
+figure out how to do it.
+Well, so now this is should be
+Well, so now this is should be
+reasonable
+reasonable
+SPS. Okay, so there's your 30k mini
+grid. That's much better, right?
+And let's see if this breaks anything
+else. Doesn't break
+else. Doesn't break
+this. Might screw with the continuous.
+this. Might screw with the continuous.
+We'll see.
+nativeized D
+type and policy through dict OBS errors.
+type and policy through dict OBS errors.
+Oh, I know what that is.
+Oh, I know what that is.
+Um, where uh
+where do you have uh do you have that
+where do you have uh do you have that
+anywhere? Cuz I know what that
+anywhere? Cuz I know what that
+is. Oh,
+here. Pie
+torch. Uh, are you sure you're on the
+torch. Uh, are you sure you're on the
+updated version for that? because that's
+updated version for that? because that's
+not the code that I
+have. Yeah. So, uh lean key, I already
+have. Yeah. So, uh lean key, I already
+fixed that one. That one is already
+fixed that one. That one is already
+fixed in dev.
+Let me see uh with net hack because I
+Let me see uh with net hack because I
+think I tried this on net hack before
+think I tried this on net hack before
+which has nativeized
+dype. Yeah. So that's fixed. Linky
+Yeah, I definitely want Pokemon working
+Yeah, I definitely want Pokemon working
+in this. And I do need to do that flush
+in this. And I do need to do that flush
+thing for that guy as well. The uh the
+thing for that guy as well. The uh the
+hope with Pokemon is that we're going to
+hope with Pokemon is that we're going to
+be able to like soda with uh the new
+be able to like soda with uh the new
+changes. Like our new trainer is really
+changes. Like our new trainer is really
+really really good. We should be able to
+really really good. We should be able to
+soda it.
+I do have to run for breakfast in a few
+I do have to run for breakfast in a few
+minutes
+though. So, we will uh we'll finish that
+though. So, we will uh we'll finish that
+until I got to go. Um but just for the
+until I got to go. Um but just for the
+other folks watching at the
+other folks watching at the
+moment. This is all free and open source
+moment. This is all free and open source
+dev. As you can see here, um puffer.ai
+dev. As you can see here, um puffer.ai
+for all the details. If you want to help
+for all the details. If you want to help
+me out for free, just start the
+me out for free, just start the
+repository. Really helps. And if you
+repository. Really helps. And if you
+want to get involved with dev, just join
+want to get involved with dev, just join
+the Discord. That
+the Discord. That
+easy. And let me see what we can help
+easy. And let me see what we can help
+Linky
+with. You're good. Do what you need
+with. You're good. Do what you need
+to. Well, I I got a couple minutes, I
+think.
+think.
+Um, just let me know if the current
+Um, just let me know if the current
+version works.
+version works.
+I'm sure I broke all the ocean M's.
+I'm sure I broke all the ocean M's.
+Like, if you recompile any of the ocean
+Like, if you recompile any of the ocean
+m, they're all going to break. But
+m, they're all going to break. But
+that's on the to-do list today. That's
+that's on the to-do list today. That's
+just straight up like I changed the name
+just straight up like I changed the name
+of a couple of functions and I need to
+of a couple of functions and I need to
+like edit some Okay.
+Zero dependencies is kind of crazy.
+How many actual depths do we have that
+How many actual depths do we have that
+we need? I mean, there's just like so
+we need? I mean, there's just like so
+much garbage,
+right? I mean, unless you're literally
+right? I mean, unless you're literally
+making numpy like tiny, you need a
+making numpy like tiny, you need a
+numpy. Open CV. We can probably get rid
+numpy. Open CV. We can probably get rid
+of Syon. Um, we're almost getting rid
+of Syon. Um, we're almost getting rid
+of. We use just Rich is like our
+of. We use just Rich is like our
+training demo to prettyify some stuff.
+training demo to prettyify some stuff.
+These are like standard annoying
+These are like standard annoying
+things. Uh, so is
+things. Uh, so is
+this
+this
+torch cuz torch this is also torch. So
+torch cuz torch this is also torch. So
+the only stuff is like psutil and image
+the only stuff is like psutil and image
+io.
+Maybe you posted in thread. Let me take
+Maybe you posted in thread. Let me take
+a quick look and then go for breakfast
+a quick look and then go for breakfast
+and then I will be back for the whole
+and then I will be back for the whole
+rest of the day with more
+dev. Is that on Pokemon
+dev. Is that on Pokemon
+specifically? Yeah.
+So, so I'm basically gonna have to run
+So, so I'm basically gonna have to run
+that specific end to C link key because
+that specific end to C link key because
+native uh dtypes is supposed to be a
+native uh dtypes is supposed to be a
+dictionary, but for some reason you just
+dictionary, but for some reason you just
+have one
+have one
+type. You
+see like that's supposed to be in a
+see like that's supposed to be in a
+dictionary.
+Um, so yeah, just like remind me or
+Um, so yeah, just like remind me or
+nudge me around when you're around today
+nudge me around when you're around today
+or whenever and uh I'll like get this
+or whenever and uh I'll like get this
+thing set up and we'll see why it
+thing set up and we'll see why it
+doesn't work with uh current puffer and
+doesn't work with uh current puffer and
+I'll fix that for
+you is 10, right? Yeah. Okay, I'm going
+you is 10, right? Yeah. Okay, I'm going
+to go for breakfast. Thanks, folks. Star
+to go for breakfast. Thanks, folks. Star
+Repo to help us out, all that.
+
+Kind: captions
+Language: en
+Morning. We are back live. Happy
+Monday. I got a bit of RNR yesterday.
+Monday. I got a bit of RNR yesterday.
+So, the goal is going to be to close out
+So, the goal is going to be to close out
+this release strong.
+this release strong.
+hopefully have it actually properly
+hopefully have it actually properly
+tested, not forgetting any of the things
+tested, not forgetting any of the things
+we need. Um, I'm going to start off
+we need. Um, I'm going to start off
+today
+today
+by applying just a band-aid patch to the
+by applying just a band-aid patch to the
+setup so that we can actually build
+setup so that we can actually build
+things without having to like manually
+things without having to like manually
+copy files around
+copy files around
+today. Also help with uh a bunch of the
+today. Also help with uh a bunch of the
+people who are kind of trying to fight
+people who are kind of trying to fight
+with the dev branch to keep stuff
+with the dev branch to keep stuff
+working. We'll do that.
+working. We'll do that.
+Um, we're going to look at our sweep
+Um, we're going to look at our sweep
+code. There's a lot of stuff that we
+code. There's a lot of stuff that we
+need to finalize on sweeps and then
+need to finalize on sweeps and then
+likely a lot of just small environment
+likely a lot of just small environment
+binding changes and integrations to make
+binding changes and integrations to make
+sure all of our environments work with
+sure all of our environments work with
+dev. We've made some small CPI changes.
+dev. We've made some small CPI changes.
+They're going to need to be uh things
+They're going to need to be uh things
+are going to be need to be updated
+are going to be need to be updated
+for. So, we'll do that. And
+for. So, we'll do that. And
+um that pretty much will get us onto the
+um that pretty much will get us onto the
+experimentation and testing
+experimentation and testing
+phase.
+phase.
+Um we're kind of just on like we're on
+Um we're kind of just on like we're on
+like sort of between the minor fixes
+like sort of between the minor fixes
+phase and that final testing phase. So I
+phase and that final testing phase. So I
+want to really get us to that. I think
+want to really get us to that. I think
+actually the main thing that I don't
+actually the main thing that I don't
+know about there is
+the probably just the
+the probably just the
+um the sweep stuff. There's still a
+um the sweep stuff. There's still a
+couple rough edges, but we'll get to
+couple rough edges, but we'll get to
+that. Let me switch the scene
+that. Let me switch the scene
+view and we'll get started.
+Hang
+on. Let's see. Posted it here. Yes, he
+on. Let's see. Posted it here. Yes, he
+did. So, let me see if this even makes
+did. So, let me see if this even makes
+any sense.
+Yeah. So, this
+Yeah. So, this
+thing runs an additional copy. I don't
+thing runs an additional copy. I don't
+know why this doesn't happen by default.
+but we can see here that it is actually
+but we can see here that it is actually
+correctly copying
+correctly copying
+now. Yo, what's up Mr.
+now. Yo, what's up Mr.
+Sup? Morning
+Okay, let's see what actually
+runs. Let's actually do a
+runs. Let's actually do a
+full B full dash dot. Let's see if our
+full B full dash dot. Let's see if our
+commands work at all.
+minus one
+fly. Okay. So, for some reason it's
+fly. Okay. So, for some reason it's
+defaulted to
+defaulted to
+3.8. We'll fix that on the container.
+Can we do
+Can we do
+um what's the uh the Nvidia Docker
+containers? I'm just trying to think of
+containers? I'm just trying to think of
+um Okay, so this is they do still ship
+um Okay, so this is they do still ship
+2204 containers. I believe 2404 is the
+2204 containers. I believe 2404 is the
+first Docker version where things get
+first Docker version where things get
+stupid. I mean the first abundu version
+stupid. I mean the first abundu version
+where things get stupid. So, we can
+where things get stupid. So, we can
+probably just put like Python 312 on uh
+probably just put like Python 312 on uh
+what is it? The 128
+container. Oh, yeah. They ship
+container. Oh, yeah. They ship
+containers with everything, huh?
+12.8.1
+Devel. So, we'll probably do
+this now. The only thing is we probably
+this now. The only thing is we probably
+want to have
+want to have
+um maybe two versions.
+128 is like really new and your drivers
+128 is like really new and your drivers
+are going to be
+dated. I could also just do 128 and make
+dated. I could also just do 128 and make
+an upgrade driver
+an upgrade driver
+script. That's also valid, right?
+That might be easier to maintain Then
+This seems to run perfectly
+fine. Cool.
+So, we have that issue fixed. Now, let's
+So, we have that issue fixed. Now, let's
+do let's check on our
+do let's check on our
+experiments. Check on our experiments.
+Why you have two terminals running on
+Why you have two terminals running on
+the same
+the same
+folder? So I can do
+this, right? I can run training and then
+this, right? I can run training and then
+I can
+I can
+like edit
+like edit
+here because all my all my dev is also
+here because all my all my dev is also
+just in
+just in
+term. So I have an edit window and
+term. So I have an edit window and
+usually I have a run window.
+And normally this one would be a full
+And normally this one would be a full
+size like this would be my full left
+size like this would be my full left
+screen, but I have uh my cameras in the
+screen, but I have uh my cameras in the
+way. So, I have chat on this monitor, so
+way. So, I have chat on this monitor, so
+it's easier for me to see without
+it's easier for me to see without
+looking over like this.
+Okay. So, whatever I ran here was like
+Okay. So, whatever I ran here was like
+okay, but not quite as good as before,
+okay, but not quite as good as before,
+it looks
+like. Let's figure out what this was. I
+like. Let's figure out what this was. I
+think this is with resets.
+Yeah, I think this is like if you reset
+Yeah, I think this is like if you reset
+the end and run a very small amount of
+the end and run a very small amount of
+like followup
+stuff. Let's try a few things here.
+Um, this is like a very small sample as
+Um, this is like a very small sample as
+well.
+I also don't like that we have a two
+I also don't like that we have a two
+train functions. Might have to rename
+train functions. Might have to rename
+some things. But uh for now here I
+some things. But uh for now here I
+think Oh, hang on. This is not resetting
+think Oh, hang on. This is not resetting
+right.
+this I don't think I've seen well I
+this I don't think I've seen well I
+don't know if you're if you're new to
+don't know if you're if you're new to
+the stream so this is I do ultra high
+the stream so this is I do ultra high
+performant reinforcement learning
+performant reinforcement learning
+dev
+dev
+so all these demos on puffer.ai these
+so all these demos on puffer.ai these
+are all simple games but written in C to
+are all simple games but written in C to
+run like 10,000 times faster than you
+run like 10,000 times faster than you
+would normally expect and uh we train AI
+would normally expect and uh we train AI
+on these and we use these for research
+on these and we use these for research
+in order to make the methods behind all
+in order to make the methods behind all
+of this way better. So you can see all
+of this way better. So you can see all
+of these in your browser and like this
+of these in your browser and like this
+is a neural net playing this game
+is a neural net playing this game
+superhuman live in your
+superhuman live in your
+browser. We've got multi-agent stuff
+browser. We've got multi-agent stuff
+like the snake game. So if you watch
+like the snake game. So if you watch
+this for long enough you'll see like all
+this for long enough you'll see like all
+sorts of snakes
+sorts of snakes
+emerge. We've got like classic arcade
+emerge. We've got like classic arcade
+stuff and we've even got more complex
+stuff and we've even got more complex
+and interesting things like uh this
+and interesting things like uh this
+massively multi-agent environment which
+massively multi-agent environment which
+has like economy and trade and resources
+has like economy and trade and resources
+and equipment and all sorts of things.
+and equipment and all sorts of things.
+So this is what I do. This is my job. Um
+So this is what I do. This is my job. Um
+trying to like improve this field and
+trying to like improve this field and
+progress the science here. And I stream
+progress the science here. And I stream
+all the dev because why not?
+Yeah. So this chart is this is a Neptune
+Yeah. So this chart is this is a Neptune
+interface. So this is 200 experiments.
+interface. So this is 200 experiments.
+Each of these experiments is
+Each of these experiments is
+uh that's E8. So this is up each of
+uh that's E8. So this is up each of
+these experiments is up to 600 million
+these experiments is up to 600 million
+steps of maze solving. So this plot has
+steps of maze solving. So this plot has
+I don't know probably
+I don't know probably
+like a couple like few hundred years
+like a couple like few hundred years
+worth of like games played just solving
+worth of like games played just solving
+mazes and uh the goal of this is to like
+mazes and uh the goal of this is to like
+automatically find the best algorithm
+automatically find the best algorithm
+settings. So like some of the
+settings. So like some of the
+experiments we run they don't do very
+experiments we run they don't do very
+well but then we have a a method that
+well but then we have a a method that
+automatically tunes the way that our
+automatically tunes the way that our
+experiments are run in order to get
+experiments are run in order to get
+better results overall here.
+So this graph that I'm
+seeing Yeah, this graph that I'm seeing
+doesn't Oh, no. Here it is. Yeah. Yeah.
+doesn't Oh, no. Here it is. Yeah. Yeah.
+Yeah. Okay.
+Yeah. Okay.
+So there is an async reset
+here. You're not going to alpha code
+here. You're not going to alpha code
+your way. So here's the thing. When you
+your way. So here's the thing. When you
+use code as your
+use code as your
+primitive, not everything if when you're
+primitive, not everything if when you're
+talking about code in the way that they
+talking about code in the way that they
+are, it's like scripts and classic
+are, it's like scripts and classic
+algorithms like classic software. Not
+algorithms like classic software. Not
+every problem is amendable to that. Like
+every problem is amendable to that. Like
+for instance, if you imagine trying to
+for instance, if you imagine trying to
+like script a bot for Dota, like a bot
+like script a bot for Dota, like a bot
+to play Dota or a bot to like you know
+to play Dota or a bot to like you know
+do any sort of fiddly task often like
+do any sort of fiddly task often like
+calibrate a machine in industry or like
+calibrate a machine in industry or like
+optimize some process like op like the
+optimize some process like op like the
+data center cooling that they did as
+data center cooling that they did as
+well with DRL.
+well with DRL.
+Um it's way better to have these
+Um it's way better to have these
+processes be fuzzy and you want a model
+processes be fuzzy and you want a model
+that can actually just output actions
+that can actually just output actions
+directly. So it's not like one is just
+directly. So it's not like one is just
+better than the other. It's like they're
+better than the other. It's like they're
+different. There are different use
+cases. It's not even that I'm bearish on
+cases. It's not even that I'm bearish on
+the stuff that
+the stuff that
+um you know that's happening in language
+um you know that's happening in language
+modeling land. Like Deep Mind's doing
+modeling land. Like Deep Mind's doing
+really cool stuff in that space as well.
+really cool stuff in that space as well.
+It's just like I think re like deep
+It's just like I think re like deep
+reinforcement learning is also really
+reinforcement learning is also really
+important and comparatively like
+important and comparatively like
+nobody's working on it. So that's why I
+nobody's working on it. So that's why I
+do this stuff, right?
+do this stuff, right?
+If there's an important problem and zero
+If there's an important problem and zero
+other qualified people are doing it,
+other qualified people are doing it,
+that's an opportunity for Okay.
+All
+right, we're going to run this. We're
+right, we're going to run this. We're
+going to see what this does.
+Um, and if this doesn't work, then I
+Um, and if this doesn't work, then I
+think that there is there's something
+think that there is there's something
+screwy with the hyper pram sweep
+screwy with the hyper pram sweep
+specifically that's like requiring you
+specifically that's like requiring you
+to have skewed results for it to
+to have skewed results for it to
+work. Ryan does stop a little bit. I had
+work. Ryan does stop a little bit. I had
+to take uh the better part of yesterday
+to take uh the better part of yesterday
+off to sort of just
+off to sort of just
+recover. Got a little bit of a run in,
+recover. Got a little bit of a run in,
+got some lifting in. I kind of chilled
+got some lifting in. I kind of chilled
+for a bit. It was good.
+Um, yeah. So, I'm I think that we're
+Um, yeah. So, I'm I think that we're
+probably good to just like crank out
+probably good to just like crank out
+this release over the next few days.
+this release over the next few days.
+That's the
+That's the
+goal. I got 45 minutesish, 40 minutesish
+goal. I got 45 minutesish, 40 minutesish
+now, and then after breakfast, I will be
+now, and then after breakfast, I will be
+back for the whole rest of the day doing
+this. That is the plan.
+So, we're going to try the m sweep one
+So, we're going to try the m sweep one
+more time.
+And we're going to hope that we actually
+And we're going to hope that we actually
+get
+get
+um like some more reasonable stuff out
+um like some more reasonable stuff out
+of this. But I'm going to try to monitor
+of this. But I'm going to try to monitor
+this more throughout the day so we get
+this more throughout the day so we get
+more runs in because really this hyper
+more runs in because really this hyper
+pram stuff needs to just be done. Like
+pram stuff needs to just be done. Like
+this is the only missing uh like
+this is the only missing uh like
+functionality piece is just like getting
+functionality piece is just like getting
+the the default settings for hyper pram
+the the default settings for hyper pram
+sweeps solid. I'm going to leave this up
+sweeps solid. I'm going to leave this up
+on the other window.
+on the other window.
+Wait, there's a release. Yeah, big
+Wait, there's a release. Yeah, big
+release coming as soon as I well, as
+release coming as soon as I well, as
+soon as I finish all the like testing
+soon as I finish all the like testing
+and stuff for this. All this stuff is
+and stuff for this. All this stuff is
+free and open source code, but um we
+free and open source code, but um we
+operate in like four to six month
+operate in like four to six month
+usually release cycles. So, I only ship
+usually release cycles. So, I only ship
+two or three major big versions a year,
+two or three major big versions a year,
+but like they're really large. So, like
+but like they're really large. So, like
+um it's a generational leap, if you
+um it's a generational leap, if you
+will. Like reinforcement learning in
+will. Like reinforcement learning in
+2.0, know it works if you automate the
+2.0, know it works if you automate the
+hell out of it. Reinforcement learning
+hell out of it. Reinforcement learning
+in 3 0 once I finish the fiddly bits
+in 3 0 once I finish the fiddly bits
+kind of just works a lot of the time out
+kind of just works a lot of the time out
+of the
+of the
+box and then hopefully by the end of the
+box and then hopefully by the end of the
+year we get 40. Um which if that goes
+year we get 40. Um which if that goes
+the way that I hope it does uh it should
+the way that I hope it does uh it should
+just be yet again like a completely
+just be yet again like a completely
+different field and at that point we'll
+different field and at that point we'll
+kind of be able to just solve
+kind of be able to just solve
+whatever the grind takes a small lifting
+whatever the grind takes a small lifting
+intermission break. Thanks for the
+intermission break. Thanks for the
+reminder.
+and get more
+coffee. The
+coffee. The
+uh the pressing
+uh the pressing
+strength is definitely
+strength is definitely
+back. Need to get
+back. Need to get
+my pulling and leg strength back to
+my pulling and leg strength back to
+where they used to
+be. The current
+be. The current
+project. All
+right.
+right.
+So, let's look at
+So, let's look at
+the the original maze sweep that
+worked. Like, you can see these all
+worked. Like, you can see these all
+these like jank ones here that didn't
+work. It's actually pretty weird.
+So based on these, I actually am
+So based on these, I actually am
+probably not going to
+probably not going to
+expect this thing to work
+expect this thing to work
+correctly. Let me find the good
+correctly. Let me find the good
+one. Mark Rippletoe
+one. Mark Rippletoe
+approved.
+approved.
+Man, I
+Man, I
+did He was the starting strength guy,
+did He was the starting strength guy,
+right? I did 5x5s for like uh maybe the
+right? I did 5x5s for like uh maybe the
+first two years and then two things kind
+first two years and then two things kind
+of happen. one, it stops working, and
+of happen. one, it stops working, and
+two, a 5x5 once you are decently strong,
+two, a 5x5 once you are decently strong,
+especially if you're doing any other
+especially if you're doing any other
+side sort of exercise outside of that
+side sort of exercise outside of that
+cuz like I run as well, it's just a
+cuz like I run as well, it's just a
+brutal thing to do like to always be
+brutal thing to do like to always be
+doing a
+5x5. Like I do a if I do a 5x5 of
+5x5. Like I do a if I do a 5x5 of
+squats, that's it. I'm out for the day.
+So, I had to do heavy light days for
+So, I had to do heavy light days for
+like a year or so after that. And then I
+like a year or so after that. And then I
+sort of like the focus was on running
+sort of like the focus was on running
+for like a year till I did my uh my
+for like a year till I did my uh my
+50k. Then I came back got my thousand
+50k. Then I came back got my thousand
+total and then pneumonia kicked my ass.
+total and then pneumonia kicked my ass.
+So, I'm still recovering from
+that. Higher score. No, higher score is
+that. Higher score. No, higher score is
+good. No problem with the questions.
+good. No problem with the questions.
+You're new. Um,
+You're new. Um,
+so what this is, let me explain what
+so what this is, let me explain what
+this is. So this is a solve percentage
+this is. So this is a solve percentage
+on the y ais. Um, and this is for mazes.
+on the y ais. Um, and this is for mazes.
+So like if I just
+do, let me see if I have a demo for
+this. Nah, we don't have the demo file
+this. Nah, we don't have the demo file
+on
+this. Uh, here. Puffer
+Eval. Okay, so this is a random agent
+Eval. Okay, so this is a random agent
+solving a maze. It's not going to do
+solving a maze. It's not going to do
+very well because it's random. So the
+very well because it's random. So the
+goal is to learn an agent that can solve
+goal is to learn an agent that can solve
+this maze. And then we randomly generate
+this maze. And then we randomly generate
+new mazes of different sizes as well. So
+new mazes of different sizes as well. So
+the maze could be like this big, or the
+the maze could be like this big, or the
+maze could be the size of this whole
+maze could be the size of this whole
+window here.
+window here.
+um down to around here. So, we're trying
+um down to around here. So, we're trying
+to train a good maze solving agent. And
+to train a good maze solving agent. And
+specifically, it's not that mazes are
+specifically, it's not that mazes are
+very interesting. It's that they're a
+very interesting. It's that they're a
+very tough problem for RL to solve. Like
+very tough problem for RL to solve. Like
+RL is can solve really, really amazing
+RL is can solve really, really amazing
+things, but not really mazes very well.
+things, but not really mazes very well.
+Mazes are very hard. So, what happens is
+Mazes are very hard. So, what happens is
+if you're good at solving mazes, it
+if you're good at solving mazes, it
+often is the case that your same
+often is the case that your same
+algorithm is going to be good at solving
+algorithm is going to be good at solving
+a lot of other things as well, uh with
+a lot of other things as well, uh with
+reinforcement learning specifically. So
+reinforcement learning specifically. So
+y-axis here is the percentage of mazes
+y-axis here is the percentage of mazes
+that it solves and x-axis is the number
+that it solves and x-axis is the number
+of steps that we've trained the agent
+of steps that we've trained the agent
+for and then all the different graphs or
+for and then all the different graphs or
+different experiment settings. So one of
+different experiment settings. So one of
+these lines, this is 50 million here. So
+these lines, this is 50 million here. So
+one of these lines is an agent trained
+one of these lines is an agent trained
+for 50 million steps on solving mazes.
+for 50 million steps on solving mazes.
+So it's basically it's made 50 million
+So it's basically it's made 50 million
+moves within different mazes. And you
+moves within different mazes. And you
+can see that we have some settings that
+can see that we have some settings that
+do very poorly and some settings that do
+do very poorly and some settings that do
+pretty well up here. So my goal here is
+pretty well up here. So my goal here is
+to get an algorithm uh get a setting
+to get an algorithm uh get a setting
+such that when we release puffer you can
+such that when we release puffer you can
+run this thing and it should generate
+run this thing and it should generate
+you very good consistent results on
+you very good consistent results on
+mazes and then what I do on top of that
+mazes and then what I do on top of that
+right is I don't just do mazes right I
+right is I don't just do mazes right I
+run it on breakout I run it on neural
+run it on breakout I run it on neural
+MMO which is a fancy end I run it on
+MMO which is a fancy end I run it on
+multi- aent stuff I run it on tons of
+multi- aent stuff I run it on tons of
+different things and if it does well on
+different things and if it does well on
+all of them then that is a robust
+all of them then that is a robust
+algorithm so that is the goal And if we
+algorithm so that is the goal And if we
+are able to do that, then we will have
+are able to do that, then we will have
+made a monumental difference in the
+made a monumental difference in the
+field of reinforcement learning. Uh
+field of reinforcement learning. Uh
+because this stuff kind of just doesn't
+because this stuff kind of just doesn't
+exist outside of Puffer Lib right now,
+exist outside of Puffer Lib right now,
+my project. Um yeah, that's our
+goal. I'm trying to find the
+goal. I'm trying to find the
+good the good maze result.
+Okay. Yeah. So, this is the one that I
+Okay. Yeah. So, this is the one that I
+was looking for. So, this is I think the
+was looking for. So, this is I think the
+best one that we've seen so
+far. How much funding do you have for
+far. How much funding do you have for
+Puffer Lib? I don't take funding. We
+Puffer Lib? I don't take funding. We
+have a few clients. Uh we charge for not
+have a few clients. Uh we charge for not
+any of our code. Our code code's all
+any of our code. Our code code's all
+free, but we charge for priority
+free, but we charge for priority
+service. So, let's say that you're doing
+service. So, let's say that you're doing
+reinforcement learning industry. You're
+reinforcement learning industry. You're
+probably having a tough time of it
+probably having a tough time of it
+because it's really hard. We have the
+because it's really hard. We have the
+best tech and the best tools uh to help
+best tech and the best tools uh to help
+you solve that problem. So you can pay
+you solve that problem. So you can pay
+us to have our eyes on your problem to
+us to have our eyes on your problem to
+get all of our latest tools as they come
+get all of our latest tools as they come
+out instead of waiting for the next
+out instead of waiting for the next
+release and to help steer some of our
+release and to help steer some of our
+research directions in ways that benefit
+research directions in ways that benefit
+you. So we charge for that and then that
+you. So we charge for that and then that
+funds like servers and many of the other
+funds like servers and many of the other
+things that we
+need building a kind of setup for
+need building a kind of setup for
+algorithm testing. Yeah, it's a bit of
+algorithm testing. Yeah, it's a bit of
+both cuz like Pufferlib is both a
+both cuz like Pufferlib is both a
+toolkit for doing reinforcement learning
+toolkit for doing reinforcement learning
+very very well in academia and industry,
+very very well in academia and industry,
+but it's also a toolkit for advancing
+but it's also a toolkit for advancing
+reinforcement learning itself. And we
+reinforcement learning itself. And we
+use it for
+both. So the thing that I'm running into
+both. So the thing that I'm running into
+right now, which is a little bit weird,
+right now, which is a little bit weird,
+is this is the best set of maze
+is this is the best set of maze
+experiments that I have. And I believe
+experiments that I have. And I believe
+that the way that I get I got these was
+that the way that I get I got these was
+that when I do my evaluations, I reset
+that when I do my evaluations, I reset
+the maze before I evaluate it and then I
+the maze before I evaluate it and then I
+run for like a small fixed number of
+run for like a small fixed number of
+steps and that actually guides the
+steps and that actually guides the
+curves to be
+curves to be
+better. Whereas with this one, it's like
+better. Whereas with this one, it's like
+the same thing except
+the same thing except
+uh I don't reset the mazes for
+uh I don't reset the mazes for
+evaluation and then this totally screws
+evaluation and then this totally screws
+stuff up. Now looking at this
+stuff up. Now looking at this
+here, there's a big difference in the
+here, there's a big difference in the
+x-axis. I'm just noticing now. Wait,
+x-axis. I'm just noticing now. Wait,
+this is
+5v7. Oh, okay. I think that the issue
+5v7. Oh, okay. I think that the issue
+that we're running into is just
+that we're running into is just
+somehow one setting is running longer
+somehow one setting is running longer
+experiments than the other, which would
+experiments than the other, which would
+make a lot more
+sense. Yeah. Yeah. And to new folks,
+sense. Yeah. Yeah. And to new folks,
+like I generally do the best job I can
+like I generally do the best job I can
+kind of just narrating stuff as I'm
+kind of just narrating stuff as I'm
+thinking it, but like I mean it's this
+thinking it, but like I mean it's this
+is like a research stream first and
+is like a research stream first and
+foremost. So if you like if stuff
+foremost. So if you like if stuff
+doesn't make sense and you're curious,
+doesn't make sense and you're curious,
+just ask questions. Like half the reason
+just ask questions. Like half the reason
+I stream. Part of it is like it forces
+I stream. Part of it is like it forces
+me to narrate my thought process out
+me to narrate my thought process out
+loud, which actually makes me more
+loud, which actually makes me more
+productive than any time I spend talking
+productive than any time I spend talking
+to chat anyways. So it's cool. Um, and
+to chat anyways. So it's cool. Um, and
+the other thing that's nice about this
+the other thing that's nice about this
+is all of Puffer Lib's free and open
+is all of Puffer Lib's free and open
+source. And like one of the main ways
+source. And like one of the main ways
+that we advance the field is from open
+that we advance the field is from open
+source contributors. So like if you're
+source contributors. So like if you're
+interested in working on AI stuff and
+interested in working on AI stuff and
+you want to learn this and you have not
+you want to learn this and you have not
+even an AI background, if you just have
+even an AI background, if you just have
+a programming
+a programming
+background, most of these environments
+background, most of these environments
+are written by contributors. Like most
+are written by contributors. Like most
+of these are a few hundred lines. It's
+of these are a few hundred lines. It's
+basically just low-level game
+basically just low-level game
+development with a few extras in order
+development with a few extras in order
+to make them work well with
+to make them work well with
+reinforcement learning. So like, you
+reinforcement learning. So like, you
+know, we have contributors that we've
+know, we have contributors that we've
+onboarded that are now doing stuff that
+onboarded that are now doing stuff that
+rivals like top uh top academic labs in
+rivals like top uh top academic labs in
+RL. So if you're interested in that,
+RL. So if you're interested in that,
+drop by the Discord, you know, or hit me
+drop by the Discord, you know, or hit me
+up and come build with us.
+Okay, so this is performing differently
+Okay, so this is performing differently
+uh compared to before. It's not all
+uh compared to before. It's not all
+stuck on these really short runs, it
+stuck on these really short runs, it
+seems. So possibly this does
+seems. So possibly this does
+okay. I think we will leave this one for
+okay. I think we will leave this one for
+like the next and probably until after
+like the next and probably until after
+breakfast and then we'll check this
+breakfast and then we'll check this
+experiment. But this is like not looking
+experiment. But this is like not looking
+terrible just initially. Now, I do
+terrible just initially. Now, I do
+wonder why there's so many of these like
+wonder why there's so many of these like
+bad runs down
+bad runs down
+here. This is a little bit
+here. This is a little bit
+sketchy.
+sketchy.
+Um, we'll have to do some analysis on
+Um, we'll have to do some analysis on
+that, but I think as a first uh first
+that, but I think as a first uh first
+pass, this is pretty
+decent. Okay, so that checks off two of
+decent. Okay, so that checks off two of
+the things uh that I wanted to get
+the things uh that I wanted to get
+started for this
+started for this
+morning. Let's go check the to-do list.
+We've got all the blog post to work on.
+We've got all the blog post to work on.
+I do not feel like doing that right
+I do not feel like doing that right
+now. Uh we've got docks to finish kind
+now. Uh we've got docks to finish kind
+of. Maze sweeps, ablations.
+Okay, I think I figured this out.
+I'm just looking through the list of
+I'm just looking through the list of
+like things that we can that we still
+like things that we can that we still
+have to do. I think it is mostly going
+have to do. I think it is mostly going
+to
+to
+be just like final
+uh final build stuff,
+huh? So I the biggest thing is probably
+huh? So I the biggest thing is probably
+just going to be all the environments
+just going to be all the environments
+need to be updated and and adjusted a
+need to be updated and and adjusted a
+little bit.
+I think that gave me some PRs that I
+I think that gave me some PRs that I
+haven't
+haven't
+merged. How can you quantify how far are
+merged. How can you quantify how far are
+we at solving the maze? Yeah, you only
+we at solving the maze? Yeah, you only
+solve it if you reach the end point. So
+solve it if you reach the end point. So
+80% of the ma there's no solve 80% of
+80% of the ma there's no solve 80% of
+the maze. It's solving 80% of
+the maze. It's solving 80% of
+mazes. There's some details on that, but
+mazes. There's some details on that, but
+roughly that metric means for 80% of the
+roughly that metric means for 80% of the
+mazes that that we give you, you solve
+mazes that that we give you, you solve
+uh you solve them. That's what it
+means. More precisely, it means um if I
+means. More precisely, it means um if I
+generate you a random maze, there's
+generate you a random maze, there's
+about an 80% chance that you'll solve
+it. And to be clear, like so
+it. And to be clear, like so
+reinforcement learning is really not
+reinforcement learning is really not
+good at mazes. Um and it's not supposed
+good at mazes. Um and it's not supposed
+to be. Like that's there are reasons not
+to be. Like that's there are reasons not
+to expect it to be good. So how well we
+to expect it to be good. So how well we
+are able to do in this uh is actually a
+are able to do in this uh is actually a
+very good indication that we just have
+very good indication that we just have
+the best algorithm
+the best algorithm
+overall because like our agent I've
+overall because like our agent I've
+shown this to other researchers in RL as
+shown this to other researchers in RL as
+well and they're like what the heck how
+well and they're like what the heck how
+are you able to do
+that 20 37 stars very
+I think we go merge bets PR right now.
+Got Gabe has sent us a new environment
+Got Gabe has sent us a new environment
+as well.
+We've got
+bets pushed as is
+bets pushed as is
+removed flash from end
+binding.
+Okay, that's fine.
+He's got binding C. He got rid of the
+He's got binding C. He got rid of the
+Syon
+Syon
+file. He's added
+us the new binding format for triple
+us the new binding format for triple
+triad. It looks
+triad. It looks
+like the triple triad code is a mess. We
+like the triple triad code is a mess. We
+don't have too high of standards there.
+don't have too high of standards there.
+There's the new log structure. This is
+There's the new log structure. This is
+done correctly. Removes all the old
+done correctly. Removes all the old
+stuff. This is
+good. This is also
+fine. I believe this is good
+fine. I believe this is good
+too. Got allocate on
+too. Got allocate on
+this into the freeze.
+I think he removed
+um he reindexed actions a little
+um he reindexed actions a little
+bit. Should be fine.
+He like refactored a few names.
+Fine. New binding. Very good. And remove
+Fine. New binding. Very good. And remove
+this from there.
+Good. Thank you. Bet. We will merge
+Good. Thank you. Bet. We will merge
+this.
+engine paths. Yeah, let's get rid of
+this. And then I believe triple triad
+this. And then I believe triple triad
+here we can get rid of because we're
+here we can get rid of because we're
+removing the siphon.
+two
+conflicts. I don't see anything else.
+conflicts. I don't see anything else.
+Oh, there it
+Oh, there it
+is. And then we can get rid of this
+is. And then we can get rid of this
+because we automated the finding of
+because we automated the finding of
+files.
+Good work to bet.
+no attribute. So we have to fix the
+no attribute. So we have to fix the
+config most
+likely of
+this. And now this is when we're going
+this. And now this is when we're going
+to hit the new uh binding nonsense.
+Holy.
+Holy.
+So, is this free? So, this just has to
+So, is this free? So, this just has to
+call free triple
+triad. And honestly, why don't we just
+We can just make this C
+close. Undefined symbol C.
+Close. This should be defined
+Close. This should be defined
+now. Is it not
+building? I see the Syon stuff building.
+Excuse
+me. Okay, it's still not building.
+Okay, I think that was something,
+right? Returning void
+star. Uh, that's not in
+here. Okay. Well, let's see if this
+here. Okay. Well, let's see if this
+runs.
+It
+It
+does. And that
+trains. That like trains very well.
+trains. That like trains very well.
+Perfect.
+Three and a half million steps a second.
+I am totally going to have to make like
+I am totally going to have to make like
+a
+a
+sample or or maybe just comment like the
+sample or or maybe just comment like the
+squared sample project.
+one of those two
+things. Uh, that does now work
+things. Uh, that does now work
+though. And if we check our
+mazes, I mean, we're getting some decent
+mazes, I mean, we're getting some decent
+runs here, right? So, what's this? 70
+runs here, right? So, what's this? 70
+and 200
+and 200
+mil. And
+mil. And
+then believe this is 500 mil,
+then believe this is 500 mil,
+right? Yeah. So, this is 500 mil. So 200
+right? Yeah. So, this is 500 mil. So 200
+mil. Uh we actually do have within 200
+mil. Uh we actually do have within 200
+mil we've got like
+mil we've got like
+0.9. So we'll see how
+0.9. So we'll see how
+uh how this goes. It runs more
+uh how this goes. It runs more
+experiments. I do think that this one
+experiments. I do think that this one
+takes a while to find the good runs.
+takes a while to find the good runs.
+Right. Let me double check
+Right. Let me double check
+that. Okay. Yeah. So like this one took
+that. Okay. Yeah. So like this one took
+what's this? Like probably 40 50
+what's this? Like probably 40 50
+experiments before it got any that were
+experiments before it got any that were
+this good.
+probably that like the first ones it
+probably that like the first ones it
+came up with were uh very long and then
+came up with were uh very long and then
+it found shorter ones later. So this is
+it found shorter ones later. So this is
+fine. This is totally
+fine. Welcome YouTube
+fine. Welcome YouTube
+folks. Happy Monday.
+So, things to do today because I've got
+So, things to do today because I've got
+breakfast in 15ish minutes, but I think
+breakfast in 15ish minutes, but I think
+the plan today should be update all the
+the plan today should be update all the
+ends.
+ends.
+Um, and then start working on docs
+Um, and then start working on docs
+around that. Actually, I'm going to see.
+around that. Actually, I'm going to see.
+Let me just at
+bet observation issues for Python M's in
+bet observation issues for Python M's in
+dev.
+dev.
+Let me go see your Is it this thing?
+Linky right
+here. Or is there a different
+issue? So, this seed thing is just it
+issue? So, this seed thing is just it
+needing a seed.
+needing a seed.
+So
+like was it Pokemon is what you're
+doing. So all I have to do for this is
+doing. So all I have to do for this is
+that. All
+right. Maybe even
+this. And then
+run mini
+run mini
+grid.
+Sure. So this is post-process.
+This just got moved is
+all. This gives you a nice clean
+error. And I I do have to make sure this
+error. And I I do have to make sure this
+installs with the right
+Python, but that's just because I have
+Python, but that's just because I have
+weird This broke my
+term.
+Let's fix your shape
+stuff. Thank you for the reports, by the
+stuff. Thank you for the reports, by the
+way. This is all just like, you know,
+way. This is all just like, you know,
+stuff. I need I do need all these
+stuff. I need I do need all these
+reports to be able to fix things quickly
+reports to be able to fix things quickly
+because all that happens, right, is I
+because all that happens, right, is I
+have to like slice and dice things to
+have to like slice and dice things to
+get things clean for release. And I'm
+get things clean for release. And I'm
+obviously going to break stuff in the
+process. Yeah, ideally we can uh I wish
+process. Yeah, ideally we can uh I wish
+I had better tools for that actually.
+I had better tools for that actually.
+Um but yeah, that is on the list as
+Um but yeah, that is on the list as
+well.
+well.
+or should
+be. Oh, those aren't even deprecated
+be. Oh, those aren't even deprecated
+imports. They're just changed.
+imports. They're just changed.
+Deprecated would be that I support the
+Deprecated would be that I support the
+old way of doing it. I just
+don't. Okay. So this is seed here
+right. Okay. So I got your error
+here. At least this is hitting a spot
+here. At least this is hitting a spot
+where it's supposed to hit, right?
+where it's supposed to hit, right?
+like it's supposed to hit this error if
+like it's supposed to hit this error if
+something is wrong rather than just
+something is wrong rather than just
+randomly
+failing. Dict adder for obs. Hang
+on. Okay. So, this is just that there's
+on. Okay. So, this is just that there's
+one environment
+I actually would like to fix that one
+I actually would like to fix that one
+real quick.
+I actually think this squeeze is kind of
+I actually think this squeeze is kind of
+bad,
+huh?
+huh?
+Yeah.
+Yeah.
+Okay. So, I'm going to have to fix that
+Okay. So, I'm going to have to fix that
+uh elsewhere. And I think this is
+uh elsewhere. And I think this is
+running like a single
+environment dict for obs dype. I don't
+environment dict for obs dype. I don't
+get that
+one. This does seem to be
+training. And now this this has to be
+update. We really should have config
+update. We really should have config
+validation. It's just hard for me to
+validation. It's just hard for me to
+figure out how to do it.
+Well, so now this is should be
+Well, so now this is should be
+reasonable
+reasonable
+SPS. Okay, so there's your 30k mini
+grid. That's much better, right?
+And let's see if this breaks anything
+else. Doesn't break
+else. Doesn't break
+this. Might screw with the continuous.
+this. Might screw with the continuous.
+We'll see.
+nativeized D
+type and policy through dict OBS errors.
+type and policy through dict OBS errors.
+Oh, I know what that is.
+Oh, I know what that is.
+Um, where uh
+where do you have uh do you have that
+where do you have uh do you have that
+anywhere? Cuz I know what that
+anywhere? Cuz I know what that
+is. Oh,
+here. Pie
+torch. Uh, are you sure you're on the
+torch. Uh, are you sure you're on the
+updated version for that? because that's
+updated version for that? because that's
+not the code that I
+have. Yeah. So, uh lean key, I already
+have. Yeah. So, uh lean key, I already
+fixed that one. That one is already
+fixed that one. That one is already
+fixed in dev.
+Let me see uh with net hack because I
+Let me see uh with net hack because I
+think I tried this on net hack before
+think I tried this on net hack before
+which has nativeized
+dype. Yeah. So that's fixed. Linky
+Yeah, I definitely want Pokemon working
+Yeah, I definitely want Pokemon working
+in this. And I do need to do that flush
+in this. And I do need to do that flush
+thing for that guy as well. The uh the
+thing for that guy as well. The uh the
+hope with Pokemon is that we're going to
+hope with Pokemon is that we're going to
+be able to like soda with uh the new
+be able to like soda with uh the new
+changes. Like our new trainer is really
+changes. Like our new trainer is really
+really really good. We should be able to
+really really good. We should be able to
+soda it.
+I do have to run for breakfast in a few
+I do have to run for breakfast in a few
+minutes
+though. So, we will uh we'll finish that
+though. So, we will uh we'll finish that
+until I got to go. Um but just for the
+until I got to go. Um but just for the
+other folks watching at the
+other folks watching at the
+moment. This is all free and open source
+moment. This is all free and open source
+dev. As you can see here, um puffer.ai
+dev. As you can see here, um puffer.ai
+for all the details. If you want to help
+for all the details. If you want to help
+me out for free, just start the
+me out for free, just start the
+repository. Really helps. And if you
+repository. Really helps. And if you
+want to get involved with dev, just join
+want to get involved with dev, just join
+the Discord. That
+the Discord. That
+easy. And let me see what we can help
+easy. And let me see what we can help
+Linky
+with. You're good. Do what you need
+with. You're good. Do what you need
+to. Well, I I got a couple minutes, I
+think.
+think.
+Um, just let me know if the current
+Um, just let me know if the current
+version works.
+version works.
+I'm sure I broke all the ocean M's.
+I'm sure I broke all the ocean M's.
+Like, if you recompile any of the ocean
+Like, if you recompile any of the ocean
+m, they're all going to break. But
+m, they're all going to break. But
+that's on the to-do list today. That's
+that's on the to-do list today. That's
+just straight up like I changed the name
+just straight up like I changed the name
+of a couple of functions and I need to
+of a couple of functions and I need to
+like edit some Okay.
+Zero dependencies is kind of crazy.
+How many actual depths do we have that
+How many actual depths do we have that
+we need? I mean, there's just like so
+we need? I mean, there's just like so
+much garbage,
+right? I mean, unless you're literally
+right? I mean, unless you're literally
+making numpy like tiny, you need a
+making numpy like tiny, you need a
+numpy. Open CV. We can probably get rid
+numpy. Open CV. We can probably get rid
+of Syon. Um, we're almost getting rid
+of Syon. Um, we're almost getting rid
+of. We use just Rich is like our
+of. We use just Rich is like our
+training demo to prettyify some stuff.
+training demo to prettyify some stuff.
+These are like standard annoying
+These are like standard annoying
+things. Uh, so is
+things. Uh, so is
+this
+this
+torch cuz torch this is also torch. So
+torch cuz torch this is also torch. So
+the only stuff is like psutil and image
+the only stuff is like psutil and image
+io.
+Maybe you posted in thread. Let me take
+Maybe you posted in thread. Let me take
+a quick look and then go for breakfast
+a quick look and then go for breakfast
+and then I will be back for the whole
+and then I will be back for the whole
+rest of the day with more
+dev. Is that on Pokemon
+dev. Is that on Pokemon
+specifically? Yeah.
+So, so I'm basically gonna have to run
+So, so I'm basically gonna have to run
+that specific end to C link key because
+that specific end to C link key because
+native uh dtypes is supposed to be a
+native uh dtypes is supposed to be a
+dictionary, but for some reason you just
+dictionary, but for some reason you just
+have one
+have one
+type. You
+see like that's supposed to be in a
+see like that's supposed to be in a
+dictionary.
+Um, so yeah, just like remind me or
+Um, so yeah, just like remind me or
+nudge me around when you're around today
+nudge me around when you're around today
+or whenever and uh I'll like get this
+or whenever and uh I'll like get this
+thing set up and we'll see why it
+thing set up and we'll see why it
+doesn't work with uh current puffer and
+doesn't work with uh current puffer and
+I'll fix that for
+you is 10, right? Yeah. Okay, I'm going
+you is 10, right? Yeah. Okay, I'm going
+to go for breakfast. Thanks, folks. Star
+to go for breakfast. Thanks, folks. Star
+Repo to help us out, all that.

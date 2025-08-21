@@ -1,0 +1,5133 @@
+Kind: captions
+Language: en
+Okay, we are
+Okay, we are
+live.
+live.
+Hi, today is going to
+Hi, today is going to
+be bit of an extravaganza.
+We are going to go down a large rabbit
+We are going to go down a large rabbit
+hole but only for one
+hole but only for one
+day. And uh the goal is to see if
+day. And uh the goal is to see if
+generally anything in
+generally anything in
+modelbased just works and is easy or if
+modelbased just works and is easy or if
+it seems like that's just not the
+it seems like that's just not the
+case. Uh there are a couple papers that
+case. Uh there are a couple papers that
+I definitely
+I definitely
+want to look
+want to look
+at. This is sketchy. This should not
+at. This is sketchy. This should not
+have
+failed. That must have just like
+broken. We are going to check uh the
+broken. We are going to check uh the
+nighttime runs though, the runs from
+nighttime runs though, the runs from
+last night real quick.
+So I believe this was
+the Yeah, this is the recent
+one.
+one.
+Interesting. Well, we will see how this
+Interesting. Well, we will see how this
+turns out. Uh I don't like this
+turns out. Uh I don't like this
+intersection but it is
+intersection but it is
+training. Okay, that's all we had to
+training. Okay, that's all we had to
+check. Just make sure that it has not
+check. Just make sure that it has not
+catastrophically
+catastrophically
+failed. Train curves are generally
+failed. Train curves are generally
+fine. So a few papers I want to start
+fine. So a few papers I want to start
+with. I haven't looked at this in a long
+with. I haven't looked at this in a long
+time.
+I do not like this paper one bit
+I do not like this paper one bit
+because well half of it's wrong but we
+because well half of it's wrong but we
+will look at the core world
+model. I think these are probably the
+model. I think these are probably the
+two that we should look
+at. Yeah.
+Okay, we'll start with this. Uh, it's
+Okay, we'll start with this. Uh, it's
+been several years since I've read
+this. I remember liking this
+paper. Let me see how they do their
+paper. Let me see how they do their
+world
+model. We'll go to paper mode.
+How mu z uses its model to
+How mu z uses its model to
+plan given previous hidden
+plan given previous hidden
+states and a candidate
+states and a candidate
+action. The dynamics G provides an
+action. The dynamics G provides an
+immediate reward R and a new hidden
+immediate reward R and a new hidden
+state SK.
+Policy and value are computed from the
+Policy and value are computed from the
+hidden states by predicting a function
+f. The initial hidden state s0 is
+f. The initial hidden state s0 is
+obtained by passing the past observation
+obtained by passing the past observation
+into a representation function h.
+Okay, so this could just be
+Okay, so this could just be
+multiple heads on the same network,
+multiple heads on the same network,
+right? You have your LSTM or
+right? You have your LSTM or
+whatever producing
+whatever producing
+states. You predict
+reward policy
+value. Okay.
+Here's their
+Here's their
+algorithm. Predictions are made each
+algorithm. Predictions are made each
+time step
+time step
+t for k 0 to upper
+t for k 0 to upper
+case k. Is that okay?
+case k. Is that okay?
+I think it is by model mu of
+I think it is by model mu of
+theta with
+theta with
+[Music]
+[Music]
+parameters theta conditioned on past
+parameters theta conditioned on past
+observations. What's on the doc? Is it
+observations. What's on the doc? Is it
+the Atari twoe paper? No, that's awful.
+the Atari twoe paper? No, that's awful.
+Uh that
+Uh that
+is off policy. We're going to look at
+is off policy. We're going to look at
+modelbased stuff today. I think is going
+modelbased stuff today. I think is going
+to be more promising if you want to use
+to be more promising if you want to use
+a crap ton of compute to do something.
+a crap ton of compute to do something.
+Um, I think that the off policy stuff is
+Um, I think that the off policy stuff is
+kind of just not the way to do it
+kind of just not the way to do it
+compared to
+compared to
+this. So, we're going to try we're
+this. So, we're going to try we're
+basically going to try to see if
+basically going to try to see if
+anything model based makes sense today
+anything model based makes sense today
+and like immediately
+and like immediately
+helps. I the ideal is to
+helps. I the ideal is to
+uh let me just sort of outline my goal
+uh let me just sort of outline my goal
+for today. I would like puffer lip to be
+for today. I would like puffer lip to be
+to have a core algorithm that can be
+to have a core algorithm that can be
+very very fast if you have infinite
+very very fast if you have infinite
+data, but also you can kind of just turn
+data, but also you can kind of just turn
+the knob and use more compute on the
+the knob and use more compute on the
+same data. And the thing that in my mind
+same data. And the thing that in my mind
+makes the most sense for that is a
+makes the most sense for that is a
+certain form of world model based
+certain form of world model based
+specifically something like this that's
+specifically something like this that's
+kind of similar to learn search.
+kind of similar to learn search.
+Um compression and search are the two
+Um compression and search are the two
+things that we know scale. So this is
+things that we know scale. So this is
+kind of
+both. The model predicts three future
+both. The model predicts three future
+quantities. Okay. The policy
+the value
+the value
+function and the immediate
+reward. Internally at each time step,
+reward. Internally at each time step,
+the model is
+the model is
+represented. It's got to predict next
+represented. It's got to predict next
+obs, doesn't it? Models represented by
+obs, doesn't it? Models represented by
+the combination of a representation
+the combination of a representation
+function, a dynamics function, and a
+function, a dynamics function, and a
+prediction function. the dynamic
+prediction function. the dynamic
+function that computes at each
+function that computes at each
+hypothetical step K an immediate reward
+hypothetical step K an immediate reward
+in an internal state S. Okay, so this is
+in an internal state S. Okay, so this is
+going to
+going to
+predict this predicts next state as
+predict this predicts next state as
+well, which is what we'd
+well, which is what we'd
+expect. But it predicts internal state,
+expect. But it predicts internal state,
+not ops, which is very
+not ops, which is very
+nice. Unlike traditional approaches to
+nice. Unlike traditional approaches to
+modelbased RL, this internal state SK
+modelbased RL, this internal state SK
+has no semantics of environment state
+has no semantics of environment state
+attached to it. It is simply the hidden
+attached to it. It is simply the hidden
+state of the overall
+state of the overall
+model and its sole purpose is to
+model and its sole purpose is to
+accurately predict relevant future
+accurately predict relevant future
+quantities, policy, value, and reward.
+quantities, policy, value, and reward.
+Okay, in this paper dynamics functions
+Okay, in this paper dynamics functions
+represented
+deterministically prediction function f
+deterministically prediction function f
+computes the policy and value function
+computes the policy and value function
+from internal
+from internal
+states
+sk akin to the joint policy and value
+sk akin to the joint policy and value
+network of alpha
+network of alpha
+zero. A representation function h theta
+zero. A representation function h theta
+initialized the root state s0 by
+initialized the root state s0 by
+encoding past observations.
+encoding past observations.
+This has no spec special semantics
+This has no spec special semantics
+beyond its support for future
+beyond its support for future
+predictions. Given such a model, it is
+predictions. Given such a model, it is
+possible to search over hypothetical
+possible to search over hypothetical
+future trajectories A1 through a K given
+future trajectories A1 through a K given
+past observations 01 through
+OT. For example, a naive search could
+OT. For example, a naive search could
+simply select the kstep action sequence
+simply select the kstep action sequence
+that maximizes minimum value function.
+that maximizes minimum value function.
+Yes.
+Yes.
+More generally, we may apply any MDP
+More generally, we may apply any MDP
+planning algorithm to the internal
+planning algorithm to the internal
+rewards in state space induced by the
+rewards in state space induced by the
+dynamics
+function. Specifically, we use an MCTS
+function. Specifically, we use an MCTS
+algorithm similar to alpha zero search
+algorithm similar to alpha zero search
+generalized to allow for single agent
+generalized to allow for single agent
+domains and intermediate rewards.
+All parameters of the model are trained
+All parameters of the model are trained
+jointly to accurately match the policy
+jointly to accurately match the policy
+value and reward
+predictions for every hypothetical step
+predictions for every hypothetical step
+K to three corresponding
+K to three corresponding
+targets observed after K actual time
+targets observed after K actual time
+steps have elapsed.
+So, you only get to train this on the
+uh you only get to train this on the
+uh you only get to train this on the
+action that you actually take,
+right? Which is
+fine. Value targets are generated by
+fine. Value targets are generated by
+playing out the game or MTP using the
+playing out the game or MTP using the
+search policy. Unlike Alphazere, we
+search policy. Unlike Alphazere, we
+allow for long episodes with discounting
+allow for long episodes with discounting
+and intermediate rewards by computing
+and intermediate rewards by computing
+endstep return that bootstrapped end
+endstep return that bootstrapped end
+steps into the future from search
+value. Yeah. Okay. I remember really
+value. Yeah. Okay. I remember really
+liking this paper and I still really
+liking this paper and I still really
+like this paper. This is just like a
+like this paper. This is just like a
+very clean way of doing
+very clean way of doing
+uh MCTS without access to
+dynamics. And we literally have go to
+dynamics. And we literally have go to
+try this on if we wanted
+to. And then this does ludicrously well
+to. And then this does ludicrously well
+on
+on Atari as well, which makes
+sense. Okay, so I see how this works.
+sense. Okay, so I see how this works.
+Uh,
+Uh,
+Dreamer only claims to be better
+Dreamer only claims to be better
+[Music]
+[Music]
+on. This claims to be better on Atari
+on. This claims to be better on Atari
+and it claims to be better
+and it claims to be better
+on
+Minecraft, but this algorithm is a total
+Minecraft, but this algorithm is a total
+[ __ ] mess.
+[ __ ] mess.
+So yeah, this is a full encoder decoder.
+This is an RSSM.
+Is there any difference between this and
+Is there any difference between this and
+MU zero except for the fact that they
+MU zero except for the fact that they
+use an RSSM and then they use
+use an RSSM and then they use
+um uh they predict output ops instead of
+um uh they predict output ops instead of
+hidden states.
+Let's see how big their policy is.
+saw one of the
+saw one of the
+papers use the world mile small
+papers use the world mile small
+trajectories tens of steps into the
+future. Uh I mean it depends on the
+future. Uh I mean it depends on the
+environment whether you can do that
+environment whether you can do that
+right but like you absolutely should be
+right but like you absolutely should be
+able to do that with something like
+able to do that with something like
+go. It's like very obviously
+go. It's like very obviously
+deterministic.
+in like a very easy to predict way,
+right? Do they have the uh the policy
+sides? Have some search algorithm to
+sides? Have some search algorithm to
+pick and refine steps instead of just an
+pick and refine steps instead of just an
+action
+action
+policy. So my understanding of this and
+policy. So my understanding of this and
+I I just have skimmed this and I read
+I I just have skimmed this and I read
+this years ago, right? is that you uh
+this years ago, right? is that you uh
+you're training a world model which is
+you're training a world model which is
+in this case you're just predicting the
+in this case you're just predicting the
+next hidden hidden state dynamics and
+next hidden hidden state dynamics and
+then from that you're predicting reward
+then from that you're predicting reward
+action
+action
+uh reward and action
+uh reward and action
+right and then you run MCTS over that in
+right and then you run MCTS over that in
+order to predict the trajectory that you
+order to predict the trajectory that you
+actually take and then you backrop on
+actually take and then you backrop on
+that we use it for continuous
+that we use it for continuous
+control so this is fully General you can
+control so this is fully General you can
+use this on
+use this on
+any on any problem
+type. Um I don't know how far forward
+type. Um I don't know how far forward
+you can prop on continuous control. The
+you can prop on continuous control. The
+thing with tens of steps in continuous
+thing with tens of steps in continuous
+control is that can actually be a very
+control is that can actually be a very
+small window of time,
+right? Like 10 steps and go is actually
+right? Like 10 steps and go is actually
+a lot of stuff happens. 10 steps of
+a lot of stuff happens. 10 steps of
+robotics is not very much happened.
+So I usually I go by like real time
+equivalents. Okay. They have the
+equivalents. Okay. They have the
+architecture
+architecture
+here. They have 16 residual blocks.
+That's got to be way smaller than 200
+That's got to be way smaller than 200
+million parameters,
+right? Quonization, it was a couple of
+right? Quonization, it was a couple of
+seconds.
+seconds.
+Okay. Even if they picked a trajectory,
+Okay. Even if they picked a trajectory,
+they picked the first
+they picked the first
+action and rinse and repeat. figure out
+action and rinse and repeat. figure out
+a new trajectory after one step. Yes.
+a new trajectory after one step. Yes.
+Yeah, that's what you would expect. So,
+Yeah, that's what you would expect. So,
+the thing is then you're only really
+the thing is then you're only really
+training
+training
+on is are they training on the whole
+on is are they training on the whole
+trajectory? They're not then, right?
+trajectory? They're not then, right?
+You're really only you only get to train
+You're really only you only get to train
+on the data that you actually
+on the data that you actually
+see, which is the action that you
+see, which is the action that you
+actually take, right?
+actually take, right?
+So, you generate a whole bunch of these
+So, you generate a whole bunch of these
+rollouts, but you only get to
+rollouts, but you only get to
+actually see the uh the result of one
+actually see the uh the result of one
+action.
+then learn on a regular roll. That's
+then learn on a regular roll. That's
+normal. Do replays. So, that seems very
+normal. Do replays. So, that seems very
+clean to me.
+clean to me.
+I think the dreamer is kind of just they
+I think the dreamer is kind of just they
+did the same thing except they do
+did the same thing except they do
+uh they do a decoder for the
+uh they do a decoder for the
+actual like they decode and predict the
+actual like they decode and predict the
+full image or whatever instead of
+full image or whatever instead of
+predicting state which is actually a bad
+predicting state which is actually a bad
+thing because it makes it really
+thing because it makes it really
+obnoxious to do uh partially observed
+obnoxious to do uh partially observed
+state type environments because like you
+state type environments because like you
+have to write an obnoxious inverse
+have to write an obnoxious inverse
+encoder to decode
+encoder to decode
+Um and then they have like RSSM or
+Um and then they have like RSSM or
+whatever. This is not like that
+whatever. This is not like that
+meaningfully different from Uzero,
+right? I also don't like autoenccoders
+right? I also don't like autoenccoders
+for that. Yeah, it's a real pain in
+for that. Yeah, it's a real pain in
+RL.
+RL.
+Um let's ask
+Um let's ask
+Brock just in case. Sometimes it catches
+Brock just in case. Sometimes it catches
+things usually not. M0 I've missed. I'm
+things usually not. M0 I've missed. I'm
+watch M0 was the good one. I think I
+watch M0 was the good one. I think I
+remember I like that paper reading and I
+remember I like that paper reading and I
+don't I don't like most of the world
+don't I don't like most of the world
+model papers. Also, Dreamer V3 is like
+model papers. Also, Dreamer V3 is like
+half wrong.
+Okay. This doesn't use
+MCTS. Oh, yeah. Okay. I remember. So,
+MCTS. Oh, yeah. Okay. I remember. So,
+they train on imagined rollouts. Right.
+they train on imagined rollouts. Right.
+Right. Right. Right. There's a big
+Right. Right. Right. There's a big
+difference here.
+betting is good if you can train
+inverse.
+Um, yeah, it's just that in practice the
+Um, yeah, it's just that in practice the
+inverse world models are really
+inverse world models are really
+obnoxious to define, right?
+Okay. So I think that I see
+Okay. So I think that I see
+mostly how this work. I think it makes
+mostly how this work. I think it makes
+sense to spend a little bit more time
+sense to spend a little bit more time
+making sure I understand the details
+making sure I understand the details
+fully here.
+So what we would do here, we would add
+So what we would do here, we would add
+like some additional network head that
+like some additional network head that
+probably actually has to have a couple
+probably actually has to have a couple
+layers on it, right? Um and that will
+layers on it, right? Um and that will
+predict
+Or we could just have it just be another
+LSTM. It could just be another LSTM,
+right? Hang on. How do we roll this
+right? Hang on. How do we roll this
+thing
+thing
+forward reasonably?
+It has to be conditioned on the actions,
+It has to be conditioned on the actions,
+right?
+versus this thing.
+They just train everything on imagined
+They just train everything on imagined
+roll outs.
+See, the thing that's sketchy about this
+See, the thing that's sketchy about this
+paper, right, is it depends on all these
+paper, right, is it depends on all these
+tricks that don't act we like we know
+tricks that don't act we like we know
+don't actually work.
+What about wall time? So, the wall time
+What about wall time? So, the wall time
+of this model is evidently actually
+of this model is evidently actually
+quite good. The thing that's sketchy
+quite good. The thing that's sketchy
+about this is so this goes up to a 200
+about this is so this goes up to a 200
+mil perm model.
+mil perm model.
+Um, and it's like the Perf is very
+Um, and it's like the Perf is very
+highly dependent on all these tricks,
+highly dependent on all these tricks,
+like half of the Perf, but these tricks
+like half of the Perf, but these tricks
+are absolute [ __ ] like we've tested
+are absolute [ __ ] like we've tested
+them. We have a Nerx paper on it.
+them. We have a Nerx paper on it.
+They're
+[ __ ] So, it's a very like
+[ __ ] So, it's a very like
+sketchy thing to get to
+work. It's also kind of like an all-in
+work. It's also kind of like an all-in
+algorithm in the sense that like when
+algorithm in the sense that like when
+you're actually training on the world
+you're actually training on the world
+model itself, it has to be really good.
+model itself, it has to be really good.
+Um, I think that M0 is a better fit for
+Um, I think that M0 is a better fit for
+what we're looking for at the moment,
+what we're looking for at the moment,
+which is like I think with this you can
+which is like I think with this you can
+kind of just do your on policy learning
+kind of just do your on policy learning
+the way that you normally do, right? And
+the way that you normally do, right? And
+then like you can scale up
+then like you can scale up
+uh you can scale up if you want to like
+uh you can scale up if you want to like
+scale up compute to do more search to
+scale up compute to do more search to
+get better
+get better
+data. This also gives you test time
+data. This also gives you test time
+scaling for free, doesn't it? Yeah, this
+scaling for free, doesn't it? Yeah, this
+gives you test time scaling for
+gives you test time scaling for
+free, which you would think would mean
+free, which you would think would mean
+you'd also be able to use a much smaller
+model. And like with these residual
+model. And like with these residual
+blocks, it seems like this would be
+blocks, it seems like this would be
+smaller as well.
+Okay, let me make sure I actually figure
+Okay, let me make sure I actually figure
+out how I can how this is implemented.
+out how I can how this is implemented.
+Um, there's the
+algorithm IRL bottoms and it has a
+sense. I just want something where we
+sense. I just want something where we
+can crank up compute if we want,
+can crank up compute if we want,
+right? Without screwing up our base
+right? Without screwing up our base
+algorithm. So, this seems like we can
+algorithm. So, this seems like we can
+just train this auxiliary
+just train this auxiliary
+thing and then use that to crank compute
+thing and then use that to crank compute
+when we want to.
+I wish they had an algorithm block on
+I wish they had an algorithm block on
+this.
+Let me see if I can draw this out and
+Let me see if I can draw this out and
+then we can try to maybe implement
+this. So
+like here's your normal RNN, right?
+and this is also
+B1. So they also they predict reward now
+B1. So they also they predict reward now
+directly. So this is going to get R1 I
+directly. So this is going to get R1 I
+guess.
+Or do we not need to? Hang
+Or do we not need to? Hang
+on. We need some way to encode. I think
+on. We need some way to encode. I think
+you need to encode both the action and
+you need to encode both the action and
+the state,
+right? I think it's like action state
+right? I think it's like action state
+pair is got to be the input. Let's see
+pair is got to be the input. Let's see
+where they describe this. Oh, they have
+where they describe this. Oh, they have
+this as well.
+It's
+on. I think it's just you add an extra
+on. I think it's just you add an extra
+model, right?
+How do you get the
+actions? Okay, so unrolling this is
+actions? Okay, so unrolling this is
+actually kind of tricky, right?
+Because you sample the action.
+Let me just read this whole
+thing. Model just models aspects that
+thing. Model just models aspects that
+are important to agent decisions.
+How good is the current
+How good is the current
+position? What action to take? Reward.
+position? What action to take? Reward.
+How good was the last
+action? But then it needs the state
+action? But then it needs the state
+model, right?
+Yeah, the dynamics
+function. Which does take the action.
+function. Which does take the action.
+Okay.
+So, the only obnoxious thing about this,
+So, the only obnoxious thing about this,
+right,
+is this has to be an LSTM cell, not an
+is this has to be an LSTM cell, not an
+LSTM, I believe.
+This scales up inference time compute
+This scales up inference time compute
+doesn't it because this is you do this
+doesn't it because this is you do this
+in the data collection phase. I know I
+in the data collection phase. I know I
+had asked you this question last night
+had asked you this question last night
+regard regarding last time first as how
+regard regarding last time first as how
+did you get comfortable with Linux daily
+did you get comfortable with Linux daily
+coming from
+coming from
+Windows if I recall I I've used Linux
+Windows if I recall I I've used Linux
+forever WSL2 is basically native Linux
+forever WSL2 is basically native Linux
+um it's just required if you do anything
+um it's just required if you do anything
+if you're doing anything in scientific
+if you're doing anything in scientific
+computing or really even programming in
+computing or really even programming in
+general you're just using Linux and
+general you're just using Linux and
+you're really just uh you're really just
+you're really just uh you're really just
+like limiting yourself
+like limiting yourself
+otherwise like outside of net like uh
+otherwise like outside of net like uh
+Windows is just not a serious
+Windows is just not a serious
+development
+environment and game engines. I guess
+environment and game engines. I guess
+that's about it.
+So if we do this model
+So if we do this model
+as if we do this as an LSTM state,
+as if we do this as an LSTM state,
+right? Then we can write a pretty basic
+right? Then we can write a pretty basic
+piece of
+code. So it's like a
+And this is
+like this is S1, isn't
+Or do you do your own embedding of
+OBS? Could be
+OBS? Could be
+either. Uh so you do this and then this
+either. Uh so you do this and then this
+will produce
+Well, this doesn't produce
+O. Oh, I guess this is what this is
+O. Oh, I guess this is what this is
+supposed to be. This is like E1 or
+supposed to be. This is like E1 or
+whatever. And like you look right here,
+whatever. And like you look right here,
+this is
+this is
+E1, right? And then this is going to
+E1, right? And then this is going to
+produce
+E2,
+right? And this will probably also
+right? And this will probably also
+produce some other
+produce some other
+stuff. No, it just produces E2, I
+stuff. No, it just produces E2, I
+guess. But then what about S?
+Thank you for response. Contemplating
+Thank you for response. Contemplating
+full Linux
+desktop. You don't have to immediately
+desktop. You don't have to immediately
+like go buy a new machine or something.
+like go buy a new machine or something.
+You can dual boot, which is admittedly a
+You can dual boot, which is admittedly a
+bit of a pain in the ass, but it works.
+bit of a pain in the ass, but it works.
+Uh if you're on Windows, just use WSL
+Uh if you're on Windows, just use WSL
+because it's basically native Linux.
+because it's basically native Linux.
+It's the same dev environment and
+It's the same dev environment and
+everything. It's like a really good
+everything. It's like a really good
+option. Um Mac, a lot of people in
+option. Um Mac, a lot of people in
+industry use Mac. I frankly hate it, but
+industry use Mac. I frankly hate it, but
+it's like closer because it's a Unix
+it's like closer because it's a Unix
+environment. Not everything works the
+environment. Not everything works the
+same and there's a bunch of setup pain
+same and there's a bunch of setup pain
+in the ass.
+in the ass.
+Um I myself I have native Linux machines
+Um I myself I have native Linux machines
+cuz it's just easier.
+The other thing that you can do, which
+The other thing that you can do, which
+is another thing people will do, is
+is another thing people will do, is
+they'll get themselves like a Linux box
+they'll get themselves like a Linux box
+that they'll just SSH into or whatever
+that they'll just SSH into or whatever
+to use for development, and then they'll
+to use for development, and then they'll
+access it from whatever they prefer to
+use. Any of those is
+reasonable. Okay. Okay. So, I think that
+reasonable. Okay. Okay. So, I think that
+this wasn't intended to be for an
+this wasn't intended to be for an
+LSTMbased model,
+LSTMbased model,
+right?
+right?
+Because you'd also have to predict this
+Because you'd also have to predict this
+state, don't
+you? Or do you not have to? You have to
+you? Or do you not have to? You have to
+predict the input state to this thing,
+predict the input state to this thing,
+don't you? Because if I roll this out,
+don't you? Because if I roll this out,
+yeah, I can use this state.
+yeah, I can use this state.
+But then if I roll it out again, yeah,
+But then if I roll it out again, yeah,
+this state is now
+this state is now
+stale. So I have to predict the state as
+well. I mean that's not terrible, right?
+Well, this thing is actually pretty easy
+Well, this thing is actually pretty easy
+to train, right? Because
+to train, right? Because
+like you just train this on the actions
+like you just train this on the actions
+of the
+of the
+trajectory that you actually took, the
+trajectory that you actually took, the
+embeddings of the trajectory that you
+embeddings of the trajectory that you
+just took, right?
+And then the next one, the next like
+And then the next one, the next like
+embedding. So that's not bad. This thing
+embedding. So that's not bad. This thing
+should be pretty easy to set up training
+should be pretty easy to set up training
+for.
+You kind of want to give this the state
+You kind of want to give this the state
+as well, don't you?
+Oh, maybe what you do is you take these
+Oh, maybe what you do is you take these
+two and you put these in
+two and you put these in
+here and then this is here and then E2
+here and then this is here and then E2
+is out. Yeah. Okay. So, it's actually if
+is out. Yeah. Okay. So, it's actually if
+I revise this then what it should look
+I revise this then what it should look
+like is this. It's just an LSTM cell.
+It takes this is
+It takes this is
+E1
+A1 this is
+S0
+S1 and then this
+S1 and then this
+is E1 or E2.
+is E1 or E2.
+too.
+Now, can you train this like this
+Now, can you train this like this
+though?
+I mean, this has to go into the main
+I mean, this has to go into the main
+network now, right? This
+S1 because then you have to put
+S1 because then you have to put
+E2 and S1 into your
+net, which is fine.
+Maybe maybe that's fine.
+Maybe maybe that's fine.
+It should learn the same
+representation. Wait a second. So if
+representation. Wait a second. So if
+you're if this is going to
+get Can you not just put the previous
+action into this
+thing. Can this not just be one
+thing. Can this not just be one
+network? What if I just put like
+network? What if I just put like
+a Z A1 into these and then this is going
+a Z A1 into these and then this is going
+to predict
+to predict
+E1? Does that just
+work? because
+work? because
+then I can use E1 instead of
+then I can use E1 instead of
+O as many times as I
+O as many times as I
+want, right? And it's a good idea to
+want, right? And it's a good idea to
+have the action in the input anyways. I
+have the action in the input anyways. I
+was going to have to solve that
+was going to have to solve that
+problem. So then this literally just
+problem. So then this literally just
+adds one head to the
+adds one head to the
+output and then that lets you roll the
+output and then that lets you roll the
+model forward, right?
+model forward, right?
+And then the only thing that you have to
+And then the only thing that you have to
+do is you train this embedding versus
+do is you train this embedding versus
+this
+embedding. This also has to predict R
+embedding. This also has to predict R
+now, right?
+because you have to you need that to
+because you have to you need that to
+like to know which one to pick. But I
+like to know which one to pick. But I
+think that actually could be pretty
+think that actually could be pretty
+simple. I don't even think you have to
+simple. I don't even think you have to
+add like an extra network, right? You
+add like an extra network, right? You
+just have to
+just have to
+predict E1 off of this like a two-layer
+predict E1 off of this like a two-layer
+MLP.
+That seems like it could
+work. So, uh they said that there was a
+work. So, uh they said that there was a
+thing where they use more train time
+thing where they use more train time
+compute though, not just more inference
+compute though, not just more inference
+compute, right?
+Let me read this more carefully. I'm
+Let me read this more carefully. I'm
+just going to go through this out loud.
+just going to go through this out loud.
+We now describe mu0 algorithm in more
+We now describe mu0 algorithm in more
+detail. Predictions are made at each
+detail. Predictions are made at each
+time step t k0 to k by a model mu of pi
+time step t k0 to k by a model mu of pi
+theta with parameters theta condition on
+theta with parameters theta condition on
+past observations 01 through o and for k
+past observations 01 through o and for k
+greater than zero on future actions a t
+greater than zero on future actions a t
++ 1 through a t plus k. The model
++ 1 through a t plus k. The model
+predicts three future quantities. The
+predicts three future quantities. The
+policy
+policy
+pi of a t + k + 1 conditioned on 01
+pi of a t + k + 1 conditioned on 01
+through
+through
+o comma a t + 1 through a t +
+o comma a t + 1 through a t +
+k. The value functions vt k which is
+k. The value functions vt k which is
+equal to the expectation of some
+equal to the expectation of some
+discounted return. This is just
+discounted return. This is just
+discounted
+discounted
+return and the immediate reward rtk= mu
+return and the immediate reward rtk= mu
+tk plus uh t plus
+tk plus uh t plus
+k where u is the true observed
+k where u is the true observed
+reward as a policy used to select real
+reward as a policy used to select real
+actions and this gamma is a discount
+actions and this gamma is a discount
+factor. It's got to be
+factor. It's got to be
+um internally at each time step the
+um internally at each time step the
+model is represented by the combination
+model is represented by the combination
+of a representation function, a dynamics
+of a representation function, a dynamics
+function and a prediction function. The
+function and a prediction function. The
+dynamics function g of theta is a
+dynamics function g of theta is a
+recurrent
+process
+process
+represented.
+represented.
+Okay. R
+Okay. R
+k= g theta s k - a K. Uh that computes
+k= g theta s k - a K. Uh that computes
+at each hypothetical step K an immediate
+at each hypothetical step K an immediate
+reward and an internal state
+SK. Does this mean it's a separate
+SK. Does this mean it's a separate
+dynamics? Like it's a
+dynamics? Like it's a
+separate recurrent process.
+separate recurrent process.
+It mirrors the structure of an MDP model
+It mirrors the structure of an MDP model
+that computes the expected reward and
+that computes the expected reward and
+state transitions for a given state in
+state transitions for a given state in
+action. However, unlike traditional
+action. However, unlike traditional
+approaches to model based RL, this
+approaches to model based RL, this
+internal state SK has no semantics of
+internal state SK has no semantics of
+environment state attached to it. It is
+environment state attached to it. It is
+simply the hidden state of the overall
+simply the hidden state of the overall
+model and its sole purpose is to
+model and its sole purpose is to
+accurately predict relevant future
+accurately predict relevant future
+quantities, policies, values, and
+quantities, policies, values, and
+rewards.
+In this paper, the dynamics function is
+In this paper, the dynamics function is
+represented
+deterministically. The extension to
+deterministically. The extension to
+stoastic transitions is left for future
+stoastic transitions is left for future
+work. A prediction function f theta
+work. A prediction function f theta
+computes the policy and value functions
+computes the policy and value functions
+from the internal states.
+SK PK VK F beta F of SK akin to the
+SK PK VK F beta F of SK akin to the
+joint policy and value network of alpha
+zero representation function H of theta
+zero representation function H of theta
+initialize the root state S0 by encoding
+initialize the root state S0 by encoding
+past observations. It says no special
+past observations. It says no special
+semantics beyond its support for future
+semantics beyond its support for future
+predictions. Okay, so they're doing
+predictions. Okay, so they're doing
+something a little different here.
+Um, it looks like the policy is not a
+Um, it looks like the policy is not a
+recurrent
+recurrent
+function, but the dynamics function
+is
+potentially. But how does this work?
+So, they take the initial state.
+There probably several ways you could
+There probably several ways you could
+implement
+this given such a model it is hang
+this given such a model it is hang
+on it mirror let's
+on it mirror let's
+see r uh g theta is a recurrent process
+see r uh g theta is a recurrent process
+rk= g theta SKUS 1 AK that computes at
+rk= g theta SKUS 1 AK that computes at
+each hypothetical step K and immediate
+each hypothetical step K and immediate
+reward RK in internal state SK. It
+reward RK in internal state SK. It
+mirrors the structure of an MDP model
+mirrors the structure of an MDP model
+that computes the expected reward and
+that computes the expected reward and
+state transition for a given state and
+state transition for a given state and
+action. However, unlike traditional
+action. However, unlike traditional
+approaches to model based RL, this
+approaches to model based RL, this
+internal state SK has no semantics of
+internal state SK has no semantics of
+environment state attached to it. It is
+environment state attached to it. It is
+simply the hidden state of the overall
+simply the hidden state of the overall
+model and its sole purpose is to
+model and its sole purpose is to
+accurately produce relevant future
+accurately produce relevant future
+quantities. Okay, so this is not
+quantities. Okay, so this is not
+encoder. Uh this is not like an
+encoder. Uh this is not like an
+autoenccode
+autoenccode
+thing. In this paper, the dynamics
+thing. In this paper, the dynamics
+function is represented
+deterministically. That's fine. A
+deterministically. That's fine. A
+prediction function f theta computes the
+prediction function f theta computes the
+policy and value functions from the
+policy and value functions from the
+internal states akin to the joint policy
+internal states akin to the joint policy
+and value function network of alpha 0.
+Oh, okay. So, I have this wrong then.
+Oh, okay. So, I have this wrong then.
+So, it's not the same shared network.
+It's So, you have your normal
+It's So, you have your normal
+net doing its thing, right?
+This is
+a And then this new
+a And then this new
+model, it's probably starts with
+model, it's probably starts with
+observation or something. Double check.
+representation function initialize the
+representation function initialize the
+root state by encoding past
+observations. So we can probably just
+observations. So we can probably just
+use
+use
+uh we can probably just
+uh we can probably just
+use this embedding here,
+use this embedding here,
+right? So this can be
+s S hat or whatever and then we make a
+s S hat or whatever and then we make a
+new dynamics function which is another
+new dynamics function which is another
+LSTM.
+So this
+is and this this has to
+is and this this has to
+predict action.
+Does it need
+value? I mean, the simplest version of
+value? I mean, the simplest version of
+this would just
+this would just
+be action
+And uh what's it? This just predicts
+And uh what's it? This just predicts
+action and
+reward.
+reward.
+A1 R1
+And now this has to take
+in. This makes sense to have this
+here. This only has one input, doesn't
+it? I guess it gets the embedding of
+a.
+So, yeah. So, this has to get like
+These have to get rolled ahead. So this
+These have to get rolled ahead. So this
+is actually like
+two. Oh, there's just no action in this
+two. Oh, there's just no action in this
+one, I guess.
+Okay. So,
+Okay. So,
+regardless, this starts to get
+like
+like
+right. So you just have this separate
+right. So you just have this separate
+network.
+And this one's going to just be
+And this one's going to just be
+similarly like the LSTM that we have,
+similarly like the LSTM that we have,
+right?
+a little simpler even because it's just
+a little simpler even because it's just
+the
+LSTM. Make sure I have this correct.
+Given such a model, it's possible to
+Given such a model, it's possible to
+search over hypothetical f future
+search over hypothetical f future
+trajectories A1 through OK AK given past
+trajectories A1 through OK AK given past
+observations 01 through
+observations 01 through
+OT. For example, a naive search could
+OT. For example, a naive search could
+simply select the case action sequence
+simply select the case action sequence
+that maximizes the value function. More
+that maximizes the value function. More
+generally, we may apply any MDP planning
+generally, we may apply any MDP planning
+algorithm to the internal rewards and
+algorithm to the internal rewards and
+state space induced by the dynamics
+state space induced by the dynamics
+function. Specifically, we use an MCTS
+function. Specifically, we use an MCTS
+algorithm similar to alpha zero search
+algorithm similar to alpha zero search
+generalized to allow for single agent
+generalized to allow for single agent
+domains and an intermediate to
+domains and an intermediate to
+rewards. The MCTS algorithm may be
+rewards. The MCTS algorithm may be
+viewed as a search policy and search
+viewed as a search policy and search
+value function VT expectation mut plus
+value function VT expectation mut plus
+one yada
+one yada
+yada that selects both an action and
+yada that selects both an action and
+predicts cumulative reward given past
+predicts cumulative reward given past
+observations. At each internal node, it
+observations. At each internal node, it
+makes use of the policy value function
+makes use of the policy value function
+reward estimate to produce
+reward estimate to produce
+uh combines these values to using look
+uh combines these values to using look
+at search to produce improved policy pi
+at search to produce improved policy pi
+an improved value function v at the root
+an improved value function v at the root
+of the search tree. But
+wait, approve
+wait, approve
+policy. Okay.
+policy. Okay.
+All parameters of the model are trained
+All parameters of the model are trained
+jointly to accurately match the policy
+jointly to accurately match the policy
+value function and reward
+prediction for every hypothetical step K
+prediction for every hypothetical step K
+to three corresponding targets observed
+to three corresponding targets observed
+after K actual time steps have
+after K actual time steps have
+elapsed. The first objective is to
+elapsed. The first objective is to
+minimize the error between the actions
+minimize the error between the actions
+predicted by the policy and by the
+predicted by the policy and by the
+search policy.
+Also like alpha zero value targets are
+Also like alpha zero value targets are
+generated by playing out the
+generated by playing out the
+game or MTP using the search policy.
+game or MTP using the search policy.
+However, unlike Alpha Zero, we allow for
+However, unlike Alpha Zero, we allow for
+long
+long
+episodes. It's
+episodes. It's
+fine. Second objective is to minimize
+fine. Second objective is to minimize
+error between the value function and the
+error between the value function and the
+value target. Third objective is to
+value target. Third objective is to
+minimize error between the predicted
+minimize error between the predicted
+immediate reward and observed immediate
+immediate reward and observed immediate
+re
+reward. Okay.
+It looks ahead. K equals 5 hypothetical
+It looks ahead. K equals 5 hypothetical
+steps.
+Hey Cash, I'm doing well. We're doing
+Hey Cash, I'm doing well. We're doing
+um model based RL stuff today.
+Okay. So, whatever. They have a fancy
+Okay. So, whatever. They have a fancy
+ass tree thing.
+So, the one thing I didn't get from the
+So, the one thing I didn't get from the
+blog post
+blog post
+was Where's this?
+M0 can repeatedly use its learn model to
+M0 can repeatedly use its learn model to
+improve
+improve
+planning. Yeah, that's
+fine. Oh, this is interesting, right? Um
+It actually does bootstrap
+itself. I don't see how this
+works. M0
+works. M0
+reanalyze. They have this as
+This does
+worse. Okay, we can potentially ignore
+worse. Okay, we can potentially ignore
+that. Oh no, cuz it's 200
+mil. But that is a variant.
+mil. But that is a variant.
+So I think that we can kind of start
+So I think that we can kind of start
+with just like get a dynamics model, use
+with just like get a dynamics model, use
+it, see if it does anything,
+right? Yeah, I think we can start with
+right? Yeah, I think we can start with
+something like
+something like
+this. This we can definitely implement
+this. This we can definitely implement
+today. The other stuff is like it's
+today. The other stuff is like it's
+going to be tricky to figure out how to
+going to be tricky to figure out how to
+make that stuff fast. This is like I
+make that stuff fast. This is like I
+think we can do this batched, right?
+We should be able to do this
+We should be able to do this
+back, which should be pretty
+easy. Yeah. Okay.
+easy. Yeah. Okay.
+I think we just got to start coding
+I think we just got to start coding
+this. I think I've got like enough of a
+this. I think I've got like enough of a
+an idea on how to like get started and
+an idea on how to like get started and
+we got to start on this because this is
+we got to start on this because this is
+going to be pretty
+going to be pretty
+substantial. And
+substantial. And
+um I want to make sure that we get the
+um I want to make sure that we get the
+best chance we can at actually getting
+best chance we can at actually getting
+it to work
+it to work
+today because I I only really want to
+today because I I only really want to
+allocate today to seeing if model base
+allocate today to seeing if model base
+does anything.
+I was messing with a bunch of stuff
+I was messing with a bunch of stuff
+here, right?
+Yeah. Easiest way to start on this is
+Yeah. Easiest way to start on this is
+going to
+be does this get added to the LSTM
+be does this get added to the LSTM
+wrapper? No, it doesn't. Right.
+wrapper? No, it doesn't. Right.
+This does need to be a separate model, I
+believe. Can just put it in the top for
+believe. Can just put it in the top for
+now.
+This needs to
+This needs to
+be LSTM cell,
+right? This kind of needs to be both.
+right? This kind of needs to be both.
+Okay, we need to steal the trick that we
+Okay, we need to steal the trick that we
+did from
+did from
+here, which is like this.
+What size? Hidden
+size. So that gives us the LSTM.
+action embedding
+action embedding
+works. And then you need an action prod
+works. And then you need an action prod
+and a reward
+prod like this.
+Move this out of the
+way. That's really it.
+So this takes an action I believe is all
+So this takes an action I believe is all
+it takes.
+and then
+We can actually do the whole search
+We can actually do the whole search
+inside of this. Now that I'm thinking
+inside of this. Now that I'm thinking
+about it, right, we could do the whole
+about it, right, we could do the whole
+search inside this
+function. Let me code this for now.
+So
+So
+here you teach your forceet,
+here you teach your forceet,
+right? So it's literally then just going
+right? So it's literally then just going
+to be like
+Super.forward. Yes. Super
+forward. And then again the state is
+forward. And then again the state is
+just the input state. So this is totally
+just the input state. So this is totally
+fine.
+And then this gives you
+logits and
+reward. And then you train this
+reward. And then you train this
+thing with the actual logic and the
+thing with the actual logic and the
+actual
+actual
+reward. Okay, that's actually pretty
+reward. Okay, that's actually pretty
+easy. That's pretty easy. Um, should
+easy. That's pretty easy. Um, should
+this technically
+this technically
+Should this technically work
+with I think that this actually
+with I think that this actually
+technically should work like this even
+technically should work like this even
+like this should not crash training. And
+like this should not crash training. And
+then what you do here is you add the
+then what you do here is you add the
+loop here which is your like search
+loop here which is your like search
+whatever search algorithm it just runs
+whatever search algorithm it just runs
+over this. I think that's how it would
+work. Yeah, that's how it would work.
+work. Yeah, that's how it would work.
+So, I think that this is pretty much the
+So, I think that this is pretty much the
+only code you need with this.
+Um, I could add the sampling into here
+Um, I could add the sampling into here
+to make it a little
+easier. Like
+this. You don't need to even know the
+this. You don't need to even know the
+reward here. So, it's just action log
+reward here. So, it's just action log
+prop.
+prop.
+I think you only need to know action
+I think you only need to know action
+from
+this.
+Okay. So then we do like
+Something like
+this. Okay. And so now you have your
+this. Okay. And so now you have your
+policy
+policy
+here which
+here which
+is computing logits and
+values and you need to give
+values and you need to give
+it it needs the embeddings doesn't it?
+it it needs the embeddings doesn't it?
+It needs like the initial embedding or
+It needs like the initial embedding or
+what does it need?
+Yeah, it needs the initial embedding of
+Yeah, it needs the initial embedding of
+observation
+observation
+uh to
+uh to
+be to have the first state. I
+be to have the first state. I
+guess you could technically learn this.
+You could technically learn this, but I
+You could technically learn this, but I
+think it would be
+think it would be
+harder because you're only learning it
+harder because you're only learning it
+on this one state here. So I think you
+on this one state here. So I think you
+just want to share the logits on
+this.
+this.
+So I think then we just do like
+So I think then we just do like
+statebatch like state.bed or something.
+That's not a full LSTM state though.
+That's not a full LSTM state though.
+Hang
+on. You need to have a hidden end of
+on. You need to have a hidden end of
+cell state for this.
+That's kind of awkward. You could use a
+That's kind of awkward. You could use a
+GRU. Doesn't a GRU have one
+state. Yeah, GRU has one stage. So, you
+state. Yeah, GRU has one stage. So, you
+could technically do
+this. That might just be easier for now.
+And then you'll have to adjust these
+And then you'll have to adjust these
+weights, but no big deal. Okay.
+So, you get your action
+here. You still need log prop, don't
+here. You still need log prop, don't
+you?
+Oh, you can just give it
+action if action is none else.
+something like
+something like
+this. Okay. And then now you would still
+this. Okay. And then now you would still
+have to train
+have to train
+it. You still have to train it.
+All this, all this stuff
+All this, all this stuff
+works like before.
+Oh, you also have to add it to the
+optimizer. Like this.
+and then mu0 gives you what logit value
+and then mu0 gives you what logit value
+as
+450 logits and
+reward
+zero. This gets batchactions which is
+zero. This gets batchactions which is
+good and state.bed
+good and state.bed
+right? Yeah, it gets the first
+embedding. So in order to give it
+embedding. So in order to give it
+state.bed, state.inbed should just
+be batch
+be batch
+time
+time
+state.bed equals
+state.bed equals
+hidden
+zero. Uh and then that should be that
+zero. Uh and then that should be that
+should be a dot detach, shouldn't it?
+should be a dot detach, shouldn't it?
+Yeah, that should be did
+Yeah, that should be did
+cache. We don't want to train through
+cache. We don't want to train through
+that. I would hope. Maybe. We'll
+see. And then you just have this, right?
+see. And then you just have this, right?
+Which is
+Which is
+like move zero actions.
+You don't need entropy for this
+thing. Do not need entropy for this
+thing. Do not need entropy for this
+thing.
+Hang on. Do you train this thing? You
+Hang on. Do you train this thing? You
+probably just train this thing to like
+probably just train this thing to like
+match actions of original policy or
+match actions of original policy or
+something, right?
+minimize error between actions predicted
+minimize error between actions predicted
+by the policy and the search policy.
+Um, I'm trying to think how we want to
+Um, I'm trying to think how we want to
+train this thing.
+kind of just the way that we are right
+kind of just the way that we are right
+now, right?
+Oh, wait. Does the policy even do
+Oh, wait. Does the policy even do
+anything in this setup?
+Because I don't know if the policy even
+Because I don't know if the policy even
+does anything in this setup.
+There kind of is
+There kind of is
+no other policy.
+Oh, wait. No, you're just you're
+Oh, wait. No, you're just you're
+learning. Okay, I'm done. Hang on. I
+learning. Okay, I'm done. Hang on. I
+just have this thing in my head wrong.
+just have this thing in my head wrong.
+Um, yeah, it's not like an auxiliary
+Um, yeah, it's not like an auxiliary
+thing. This is a replacement for the
+thing. This is a replacement for the
+model. Okay,
+so in this
+so in this
+case, and they made it recurrent for a
+case, and they made it recurrent for a
+different reason.
+different reason.
+uh from what we I was thinking of as
+well. Let me go back to drawing board
+well. Let me go back to drawing board
+here a little bit.
+This seems like it should be compatible.
+This seems like it should be compatible.
+Actually, this seems like they should be
+compatible. So, like what they're saying
+compatible. So, like what they're saying
+here, right, is if you normally if you
+here, right, is if you normally if you
+just have your policy that like takes in
+just have your policy that like takes in
+observation, right? And this thing is
+observation, right? And this thing is
+going to
+going to
+output
+output
+action. They say, "Hey, why don't you
+action. They say, "Hey, why don't you
+just output
+just output
+uh
+uh
+reward and
+state?" And then this can
+state?" And then this can
+go, you take your reward and your
+action. Hang on.
+No, it's still not quite
+[Music]
+right. No, hang on. This is fine, right?
+So you need an ops encoder,
+So you need an ops encoder,
+right? So ops goes in
+here. Action goes in here, I guess.
+And then you get
+a
+a
+reward and like value or
+reward and like value or
+whatever. And
+whatever. And
+then they also want you to predict
+then they also want you to predict
+state. Well, this is a recurrent model.
+state. Well, this is a recurrent model.
+So this will just give you the next
+So this will just give you the next
+state, right?
+And then action goes in
+here and this keeps roll. So this works.
+here and this keeps roll. So this works.
+So now I guess the the thing that I'm
+So now I guess the the thing that I'm
+getting hung up on here, right, is that
+getting hung up on here, right, is that
+they added recurrence here to implement
+they added recurrence here to implement
+their algorithm on top of a
+their algorithm on top of a
+non-recurrent
+non-recurrent
+policy. So I need to now think of how
+policy. So I need to now think of how
+this would work on top of a recurrent
+this would work on top of a recurrent
+policy.
+Is it any
+different? I mean, the only thing that's
+different? I mean, the only thing that's
+wacko here is
+that the obs goes in here as the hidden
+that the obs goes in here as the hidden
+state,
+state,
+right? But does that matter?
+Oh, it does matter because I need to be
+Oh, it does matter because I need to be
+able to put OBS in as well. Okay, shoot.
+able to put OBS in as well. Okay, shoot.
+Um,
+I mean, I could technically do it this
+I mean, I could technically do it this
+way for
+now. This would be an easier way to
+now. This would be an easier way to
+start.
+This would be a a way easier way to
+This would be a a way easier way to
+start on
+this and then it's not really recurrent
+this and then it's not really recurrent
+in the same
+in the same
+way.
+So you would still train it kind of like
+So you would still train it kind of like
+a recurrent net though.
+You would kind of just use you use a GRU
+Can't put OBS in every step
+here. I don't think you can put OBS in
+here. I don't think you can put OBS in
+as this date like this. It'll mess up
+as this date like this. It'll mess up
+the way that you train an
+RNN. Like obs needs to go in here.
+That's fine.
+This is fine. We just put OBS in
+here. OBS concatenated with actions at
+here. OBS concatenated with actions at
+least.
+Actually, this is kind of the
+Actually, this is kind of the
+simplest
+simplest
+possible way to do it, right? Hang on.
+possible way to do it, right? Hang on.
+If I literally
+If I literally
+just So this is your
+just So this is your
+standard RNN, right? So you have
+standard RNN, right? So you have
+S0, OBS, you have
+actions, right? And you have OBS come in
+actions, right? And you have OBS come in
+at every step. So I can put actions in
+at every step. So I can put actions in
+here. That's no problem. This is
+here. That's no problem. This is
+T+1. And then all you do here, so you
+T+1. And then all you do here, so you
+can like use this as a normal
+can like use this as a normal
+LSTM
+LSTM
+model, but then you can also use this
+model, but then you can also use this
+uh during inference.
+uh during inference.
+Maybe I guess you have to train it on
+Maybe I guess you have to train it on
+two different objectives, which is a
+two different objectives, which is a
+little
+little
+weird, but you could actually just take
+weird, but you could actually just take
+the output state
+here. Well, LSTM has two states. There's
+here. Well, LSTM has two states. There's
+a hidden state and a cell state. So you
+a hidden state and a cell state. So you
+could take like the extra state here and
+could take like the extra state here and
+put it in as
+obs. I think that actually
+obs. I think that actually
+works. So then you save the because the
+works. So then you save the because the
+LSTM has two states, right? So you save
+LSTM has two states, right? So you save
+one
+one
+state of the
+two to just be arbitrary whatever it
+two to just be arbitrary whatever it
+wants to be and the other one gets
+wants to be and the other one gets
+constrained that it has to represent the
+constrained that it has to represent the
+embedding of the obs I
+guess of the next
+obs doable I
+obs doable I
+think is this insane or is this like a
+think is this insane or is this like a
+pretty reasonable able way to do
+pretty reasonable able way to do
+something model basedesque on top of
+something model basedesque on top of
+uh an already existing recurrent
+model cuz this this would let you just
+model cuz this this would let you just
+continue like rolling it out as
+well. Okay, let's try this and see how
+well. Okay, let's try this and see how
+far we
+far we
+get before I get hung up on something
+get before I get hung up on something
+else. So, we don't need
+else. So, we don't need
+Think we don't need the GRD or anything
+Think we don't need the GRD or anything
+in this case then do
+we just need to
+we just need to
+add we just need to add actions to the
+add we just need to add actions to the
+signature There.
+This means to predict
+Oh, but this is real
+ops.
+ops.
+Okay, it's a little
+Okay, it's a little
+tricky. Think we can do this though?
+the state gets
+the state gets
+that juices everything that you
+that juices everything that you
+need and then this thing is going to
+output just going to output logic and
+output just going to output logic and
+value Right? Even need to predict
+value Right? Even need to predict
+anything else. It doesn't.
+Right? So this can just stay as it was.
+Yeah, I see such a simpler way to do
+Yeah, I see such a simpler way to do
+this now with this. Okay. Um, we're
+this now with this. Okay. Um, we're
+going
+to stash or get
+stash zero.
+I just I see a way better way how the
+I just I see a way better way how the
+how we can do it like this now. It's way
+how we can do it like this now. It's way
+easier.
+So action
+buffer.
+buffer.
+Okay. So now we have
+Okay. So now we have
+actions state has this
+Default we'll
+Default we'll
+have action encoder
+Cool.
+So now we have action
+So now we have action
+encoder then encode observations.
+Okay, so this
+works. Here's the restroom real quick
+works. Here's the restroom real quick
+and then we keep implementing. Be right
+and then we keep implementing. Be right
+back.
+So we have this implemented
+now. All we should need to do is add
+now. All we should need to do is add
+this
+to frame.
+Where
+state? It's literally in here already.
+state? It's literally in here already.
+Action equals
+Action equals
+bash.actions. I just haven't been using
+it. Okay.
+See if we can get this train.
+the
+heck. Oh, I think you need to uh to
+heck. Oh, I think you need to uh to
+reshape the actions then as well, don't
+reshape the actions then as well, don't
+you? Yeah. Yeah. So, Ford train needs to
+you? Yeah. Yeah. So, Ford train needs to
+do
+But that's it though. It just needs to
+But that's it though. It just needs to
+flatten. That's fine.
+up my
+terminal. Okay, that actually does
+terminal. Okay, that actually does
+train. Seems
+This should be like same or better perf
+This should be like same or better perf
+than before as well because
+than before as well because
+um this is literally the same thing just
+um this is literally the same thing just
+with action embedding. This is the first
+step and then we'll add one auxiliary
+step and then we'll add one auxiliary
+loss and see if it screws up training
+loss and see if it screws up training
+and then literally from that we should
+and then literally from that we should
+be able to have a model based
+be able to have a model based
+thing. That should literally be all it
+thing. That should literally be all it
+takes.
+This is not training anywhere near
+This is not training anywhere near
+quickly
+quickly
+enough. I
+think I don't know what I could have
+think I don't know what I could have
+possibly
+broken. Hang on. It's possible I hadn't
+broken. Hang on. It's possible I hadn't
+checked the breakout config lately.
+I put in
+here should be fine,
+right? It's definitely not what we want.
+here. Let's Let's do something
+Okay. So, this one does train
+This one does not train anywhere near as
+well. These are the same configs.
+Okay, these must not be getting passed
+Okay, these must not be getting passed
+correctly then because
+correctly then because
+um yeah, this works and the other one
+doesn't. So bear
+with Oh, there's an off by one, isn't
+there? There's Yeah, there's an off by
+there? There's Yeah, there's an off by
+one.
+Okay.
+There we go. So that actually
+There we go. So that actually
+matters. It learns uh to condition quite
+matters. It learns uh to condition quite
+heavily on that. That looks like
+Oh, that's really good, isn't
+Oh, that's really good, isn't
+it? Hang on. That's better than we had
+it? Hang on. That's better than we had
+before by a
+before by a
+lot. Okay, maybe I've just been dumb not
+lot. Okay, maybe I've just been dumb not
+bothering making an action encoder. That
+bothering making an action encoder. That
+actually looks like it really freaking
+actually looks like it really freaking
+helps, doesn't
+helps, doesn't
+it? Holy
+Yeah. Okay. So, at least we're going to
+Yeah. Okay. So, at least we're going to
+definitely guaranteed for sure get one
+definitely guaranteed for sure get one
+good thing today, right? I'm pretty damn
+good thing today, right? I'm pretty damn
+sure. We'll uh we'll run a double check
+sure. We'll uh we'll run a double check
+since this was so useful.
+Okay, there is some instability jank
+Okay, there is some instability jank
+going on it looks like,
+but we expect that's the experience
+buffer. Yeah, we expect that's the
+buffer. Yeah, we expect that's the
+experience buffer bug.
+Oh, actually interesting. Is it?
+Oh, actually interesting. Is it?
+Um, no. This is more aggressive than
+Um, no. This is more aggressive than
+before. Maybe it is the
+same. Same
+curve.
+curve.
+H. Well, that learns way faster than it
+H. Well, that learns way faster than it
+used to. So, something got better.
+used to. So, something got better.
+But, okay. Action encoding doesn't
+But, okay. Action encoding doesn't
+actually help. It's just the whole thing
+actually help. It's just the whole thing
+must have gotten better. That's weird.
+must have gotten better. That's weird.
+Unless I uh didn't check out the branch
+Unless I uh didn't check out the branch
+or
+something. No, I'm on
+it. Okay, that's fine then.
+it. Okay, that's fine then.
+It would be kind of weird if it helped
+It would be kind of weird if it helped
+that much. Um, but now we have this. We
+that much. Um, but now we have this. We
+can
+can
+do some stuff with
+this. Next thing is going to be
+this. Next thing is going to be
+additional loss on LSTM.
+additional loss on LSTM.
+Let me go remind
+myself which one of the states is
+which. It's the hidden state
+which. It's the hidden state
+H that we
+need. So this needs to be in forward
+need. So this needs to be in forward
+train.
+state
+dot. What format do we want it
+dot. What format do we want it
+in? You probably want it
+in this format.
+this and then LSTMH is going to have to
+this and then LSTMH is going to have to
+be normed towards that.
+And that would be done
+And that would be done
+right like hereish
+maybe it's not Neptune this
+Do we not get LSTMH out of
+this? We should get LSTMH,
+right? length
+right? length
+one. This needs to return
+full. We're going to have a problem if
+full. We're going to have a problem if
+this doesn't return us full
+this doesn't return us full
+uh full
+data. No, it
+data. No, it
+does. It returns the full thing. So, why
+does. It returns the full thing. So, why
+aren't we getting it?
+New
+value budgets.
+Oh, that's layer. It's one
+Oh, that's layer. It's one
+layer. That's totally
+fine. Is that right? It's one
+fine. Is that right? It's one
+No, hang on. That doesn't make sense,
+No, hang on. That doesn't make sense,
+right?
+Why is this one?
+Oh, it only gives you the final hidden
+Oh, it only gives you the final hidden
+state. [ __ ]
+Wait, isn't this the one that we want
+Wait, isn't this the one that we want
+anyways though?
+If I just do uh if I just train like a
+If I just do uh if I just train like a
+layer or
+layer or
+two that
+projects instead have to train something
+projects instead have to train something
+that projects this.
+that projects this.
+Okay, that's not bad.
+state. I just need state hidden I
+guess on this
+And then this default policy needs like
+um this needs like an extra loss on it.
+Just like small little net There.
+What's the dimension of this
+thing? 64. I think 64 is the time,
+thing? 64. I think 64 is the time,
+right? 64 is the time.
+This doesn't have to be recurrent, I
+This doesn't have to be recurrent, I
+guess.
+Next state predictions
+world loss.
+Okay, you have a world model in
+Okay, you have a world model in
+here. Uh, it seems like the loss is
+here. Uh, it seems like the loss is
+exploding, but you have
+exploding, but you have
+it. Yeah, the loss is completely
+it. Yeah, the loss is completely
+freaking exploding.
+Let's try One.
+Technically, these don't have to be
+Technically, these don't have to be
+detached.
+Guess we try that next
+Okay. Well, that fixes it
+right now. It is very good at predicting
+right now. It is very good at predicting
+next
+next
+state. Does it still
+state. Does it still
+train? Bit slower, but it
+does. Is it even
+does. Is it even
+slower? 30 mil per
+800. Yeah, it's a bit slower. Not that
+much. And you get a good world model
+much. And you get a good world model
+loss.
+loss.
+So, uh let's commit this
+Technically, you don't even need to have
+Technically, you don't even need to have
+a network here,
+right? I think this probably messes it
+right? I think this probably messes it
+up though.
+Seems
+not still
+train. Still trains perfectly well.
+Actually, let's log this
+Actually, let's log this
+one. Be curious to see how this stacks
+one. Be curious to see how this stacks
+up because now you're just saying that
+up because now you're just saying that
+the output should be next state, right?
+the output should be next state, right?
+And then it should be really really easy
+And then it should be really really easy
+from next state to predict um or
+from next state to predict um or
+encoding of next state, which should be
+encoding of next state, which should be
+very easy to predict reward from because
+very easy to predict reward from because
+you can just see whether you broke a
+you can just see whether you broke a
+brick, I guess.
+Okay. I mean, that's basically the same
+curve. So, this objective doesn't seem
+curve. So, this objective doesn't seem
+like it hurt
+anything. Did I do this right? Is it
+anything. Did I do this right? Is it
+really this
+easy? I mean, I guess it wouldn't be
+easy? I mean, I guess it wouldn't be
+that surprising
+that surprising
+like predicting the next state like that
+like predicting the next state like that
+is a good thing to predict generally,
+right? So, I think we kind of just get
+right? So, I think we kind of just get
+world model for free
+world model for free
+then with this setup. Right.
+then with this setup. Right.
+next state. Unless I did something wrong
+next state. Unless I did something wrong
+here,
+here,
+but let's just make sure that these are
+but let's just make sure that these are
+different. I mean, they'd have to be
+different. I mean, they'd have to be
+different though,
+right? The soft
+Yeah, these are different
+tensors.
+tensors.
+Okay, so um like
+Okay, so um like
+technically we can just do mu0 in the
+technically we can just do mu0 in the
+forward pass now, can't
+forward pass now, can't
+we? It's just use the world model to try
+we? It's just use the world model to try
+to find better actions, right?
+to find better actions, right?
+like we can do any sort of search that
+like we can do any sort of search that
+we want now, right? Isn't that that's
+we want now, right? Isn't that that's
+the whole
+point? Where's
+point? Where's
+it? What are you implementing? Uh
+it? What are you implementing? Uh
+something that's pretty close to mu0.
+something that's pretty close to mu0.
+I'm just trying to see like what's the
+I'm just trying to see like what's the
+easiest way I can get some sort of world
+easiest way I can get some sort of world
+modeling based thing into puffer where I
+modeling based thing into puffer where I
+can like crank up compute in order to
+can like crank up compute in order to
+get more sample efficiency or leave it
+get more sample efficiency or leave it
+at base and get like the same result
+at base and get like the same result
+that puffer gets right now.
+So, so far all I had to do was
+So, so far all I had to do was
+uh I make the encoder action
+uh I make the encoder action
+conditional. So, it gets to see the
+conditional. So, it gets to see the
+action taking with taken which you need
+action taking with taken which you need
+in order to predict next state, right?
+in order to predict next state, right?
+And then I just added a loss between the
+And then I just added a loss between the
+output of the recurrent cell which is
+output of the recurrent cell which is
+like your intermediate hidden state and
+like your intermediate hidden state and
+the embedding of the next state both of
+the embedding of the next state both of
+which are
+which are
+differentiable. m0 should be strong on
+differentiable. m0 should be strong on
+breakout. I'm just using this as like a
+breakout. I'm just using this as like a
+trivial quick test m to make sure I
+trivial quick test m to make sure I
+don't break anything. Um like no
+don't break anything. Um like no
+technically I could implement it all
+technically I could implement it all
+correctly and it would be the same. I
+correctly and it would be the same. I
+just want to make sure I don't
+just want to make sure I don't
+catastrophically fail on breakout as a
+catastrophically fail on breakout as a
+result of what I'm doing. I have lots of
+result of what I'm doing. I have lots of
+other test
+MS but theoretically I mean it should do
+MS but theoretically I mean it should do
+a little better once you do uh the
+a little better once you do uh the
+search
+search
+component. Okay. So encode
+component. Okay. So encode
+observations good
+observations good
+actions goes right
+right
+here. It's usually like this, right? OBS
+here. It's usually like this, right? OBS
+embed
+hidden. So, this hidden is the world
+hidden. So, this hidden is the world
+model target now, right?
+So, can I not just like write a loop
+So, can I not just like write a loop
+here? I should be able to just write a
+here? I should be able to just write a
+loop here.
+You need to select the action for
+You need to select the action for
+this. This is the one tricky
+this. This is the one tricky
+thing. You need to select the action for
+this. So you start with
+this. So you start with
+like args embed
+hidden and then you do
+hidden and then you do
+like
+like
+obsed equals
+obsed equals
+rake obs. in
+bed. This takes like ops
+bed. This takes like ops
+embed STM
+state. You need a rig LSTM state as
+state. You need a rig LSTM state as
+well. I
+believe. So the hidden cell or the cells
+believe. So the hidden cell or the cells
+which one of these is trained to
+which one of these is trained to
+be it's the hidden that's trained to be
+be it's the hidden that's trained to be
+the next
+prediction. So this can be
+obsed and I think the only thing that's
+obsed and I think the only thing that's
+missing here is the action prediction,
+missing here is the action prediction,
+right?
+right?
+Because then what we would do is we'd be
+Because then what we would do is we'd be
+able to figure out which of these we
+able to figure out which of these we
+actually want to use if we had the
+actually want to use if we had the
+reward
+prediction. Oh no, we also need the
+prediction. Oh no, we also need the
+action
+sampling
+because Oh, that's a little tricky.
+Yeah, I messed up the action embedding
+Yeah, I messed up the action embedding
+here because it's predicting right now.
+here because it's predicting right now.
+It's predicting the entire embedding. It
+It's predicting the entire embedding. It
+needs to predict the embedding without
+needs to predict the embedding without
+the action
+component because then the idea here,
+component because then the idea here,
+right, is that you have to
+right, is that you have to
+run you run the decoder on this thing,
+run you run the decoder on this thing,
+right?
+Get out of here.
+Get out of here.
+Bot time is it also 10:26. So I'm going
+Bot time is it also 10:26. So I'm going
+to go for uh breakfast/brunch
+to go for uh breakfast/brunch
+soon. Get rid of this bot.
+This is just going to be false for now.
+This is just going to be false for now.
+We'll think about this
+We'll think about this
+after. Okay. So, you sample logits, you
+after. Okay. So, you sample logits, you
+get your act, your log prop, and then
+get your act, your log prop, and then
+the idea is that this needs to get
+the idea is that this needs to get
+combined with OBS embedding. But I don't
+combined with OBS embedding. But I don't
+have that right yet, right?
+have that right yet, right?
+And then this will get used to select
+And then this will get used to select
+which hidden state you
+use. And actually what we should do is
+use. And actually what we should do is
+we should leave these as hidden in LSTM
+we should leave these as hidden in LSTM
+state. And I should just
+state. And I should just
+do
+zero. It's your hidden
+We don't need the values for now.
+We don't need the values for now.
+Technically, we
+Technically, we
+could we actually technically could just
+could we actually technically could just
+bootstrap from this
+value. Watch
+it. I think it's better to just do.
+Well, let me see if I can like catch
+Well, let me see if I can like catch
+something real quick that would like do
+something real quick that would like do
+that we would expect to kind of do
+that we would expect to kind of do
+something.
+You kind of need to know like the
+You kind of need to know like the
+best delta
+Hey, I think it makes sense to just
+Hey, I think it makes sense to just
+predict rewards,
+right? Plus bootstrap value maybe.
+I think it's just something like this
+I think it's just something like this
+honestly. Right. We have to train that
+honestly. Right. We have to train that
+uh that value head. Hang
+on. I think that's like all there is to
+on. I think that's like all there is to
+mu to like doing something mu zero. Like
+mu to like doing something mu zero. Like
+obviously that's not like the full MCTS,
+obviously that's not like the full MCTS,
+but that's decent.
+but that's decent.
+Um, that should do something
+maybe just do a bunch of trials.
+maybe just do a bunch of trials.
+Um, oh, we still have to fix the action
+Um, oh, we still have to fix the action
+head. I think I'm going to have to do
+head. I think I'm going to have to do
+that after breakfast. But let's add the
+that after breakfast. But let's add the
+reward loss real quick because that can
+reward loss real quick because that can
+just go by right by the value
+just go by right by the value
+loss. It's like super basic.
+loss. It's like super basic.
+Um, you do actually have to output the
+Um, you do actually have to output the
+reward though.
+Shoot. I guess I just add it to state or
+Shoot. I guess I just add it to state or
+something.
+Yeah, I guess I just add it to
+state.rewards and do you
+predict? I have to do the same thing,
+predict? I have to do the same thing,
+right?
+Did you have to install a special
+Did you have to install a special
+version of Triton? No, I
+didn't. Hey, Spencer. I'm doing world
+didn't. Hey, Spencer. I'm doing world
+model stuff today. I'm seeing if I can
+model stuff today. I'm seeing if I can
+get us like anything crazy to work. I
+get us like anything crazy to work. I
+think it's worth a day.
+I can get you another box if you need to
+I can get you another box if you need to
+play with one
+though. Like I can get you access to
+though. Like I can get you access to
+one. I have one I'm probably not going
+one. I have one I'm probably not going
+to use today. I don't know what you're
+to use today. I don't know what you're
+working on.
+normal box works just fine. I see. Yep.
+normal box works just fine. I see. Yep.
+Yeah. 5090 steps a pain in the
+Yeah. 5090 steps a pain in the
+ass. We're definitely going to make sure
+ass. We're definitely going to make sure
+that we don't have that problem with 40
+that we don't have that problem with 40
+boxes when we order them.
+Or maybe this does make sense to just
+Or maybe this does make sense to just
+put in the
+LSTM. Yeah, I got to like I'm hungry
+LSTM. Yeah, I got to like I'm hungry
+though. I got to go get breakfast and
+though. I got to go get breakfast and
+stuff. And uh I will be back soon. Uh
+stuff. And uh I will be back soon. Uh
+I'm just going to get some food real
+I'm just going to get some food real
+quick and then we're going to do this
+quick and then we're going to do this
+all day long. We're gonna see if we can
+all day long. We're gonna see if we can
+get some world model based thing to do a
+get some world model based thing to do a
+thing in Puffer. Uh, thanks folks for
+thing in Puffer. Uh, thanks folks for
+watching. If you're interested in this
+watching. If you're interested in this
+stuff, puffer.ai for all the things. We
+stuff, puffer.ai for all the things. We
+are two stars off of this rounding up to
+are two stars off of this rounding up to
+2K. So, please just go ahead and star
+2K. So, please just go ahead and star
+Puffer. Helps us out a lot. And you can
+Puffer. Helps us out a lot. And you can
+join the discord.
+
+Kind: captions
+Language: en
+Okay, we are
+Okay, we are
+live.
+live.
+Hi, today is going to
+Hi, today is going to
+be bit of an extravaganza.
+We are going to go down a large rabbit
+We are going to go down a large rabbit
+hole but only for one
+hole but only for one
+day. And uh the goal is to see if
+day. And uh the goal is to see if
+generally anything in
+generally anything in
+modelbased just works and is easy or if
+modelbased just works and is easy or if
+it seems like that's just not the
+it seems like that's just not the
+case. Uh there are a couple papers that
+case. Uh there are a couple papers that
+I definitely
+I definitely
+want to look
+want to look
+at. This is sketchy. This should not
+at. This is sketchy. This should not
+have
+failed. That must have just like
+broken. We are going to check uh the
+broken. We are going to check uh the
+nighttime runs though, the runs from
+nighttime runs though, the runs from
+last night real quick.
+So I believe this was
+the Yeah, this is the recent
+one.
+one.
+Interesting. Well, we will see how this
+Interesting. Well, we will see how this
+turns out. Uh I don't like this
+turns out. Uh I don't like this
+intersection but it is
+intersection but it is
+training. Okay, that's all we had to
+training. Okay, that's all we had to
+check. Just make sure that it has not
+check. Just make sure that it has not
+catastrophically
+catastrophically
+failed. Train curves are generally
+failed. Train curves are generally
+fine. So a few papers I want to start
+fine. So a few papers I want to start
+with. I haven't looked at this in a long
+with. I haven't looked at this in a long
+time.
+I do not like this paper one bit
+I do not like this paper one bit
+because well half of it's wrong but we
+because well half of it's wrong but we
+will look at the core world
+model. I think these are probably the
+model. I think these are probably the
+two that we should look
+at. Yeah.
+Okay, we'll start with this. Uh, it's
+Okay, we'll start with this. Uh, it's
+been several years since I've read
+this. I remember liking this
+paper. Let me see how they do their
+paper. Let me see how they do their
+world
+model. We'll go to paper mode.
+How mu z uses its model to
+How mu z uses its model to
+plan given previous hidden
+plan given previous hidden
+states and a candidate
+states and a candidate
+action. The dynamics G provides an
+action. The dynamics G provides an
+immediate reward R and a new hidden
+immediate reward R and a new hidden
+state SK.
+Policy and value are computed from the
+Policy and value are computed from the
+hidden states by predicting a function
+f. The initial hidden state s0 is
+f. The initial hidden state s0 is
+obtained by passing the past observation
+obtained by passing the past observation
+into a representation function h.
+Okay, so this could just be
+Okay, so this could just be
+multiple heads on the same network,
+multiple heads on the same network,
+right? You have your LSTM or
+right? You have your LSTM or
+whatever producing
+whatever producing
+states. You predict
+reward policy
+value. Okay.
+Here's their
+Here's their
+algorithm. Predictions are made each
+algorithm. Predictions are made each
+time step
+time step
+t for k 0 to upper
+t for k 0 to upper
+case k. Is that okay?
+case k. Is that okay?
+I think it is by model mu of
+I think it is by model mu of
+theta with
+theta with
+[Music]
+[Music]
+parameters theta conditioned on past
+parameters theta conditioned on past
+observations. What's on the doc? Is it
+observations. What's on the doc? Is it
+the Atari twoe paper? No, that's awful.
+the Atari twoe paper? No, that's awful.
+Uh that
+Uh that
+is off policy. We're going to look at
+is off policy. We're going to look at
+modelbased stuff today. I think is going
+modelbased stuff today. I think is going
+to be more promising if you want to use
+to be more promising if you want to use
+a crap ton of compute to do something.
+a crap ton of compute to do something.
+Um, I think that the off policy stuff is
+Um, I think that the off policy stuff is
+kind of just not the way to do it
+kind of just not the way to do it
+compared to
+compared to
+this. So, we're going to try we're
+this. So, we're going to try we're
+basically going to try to see if
+basically going to try to see if
+anything model based makes sense today
+anything model based makes sense today
+and like immediately
+and like immediately
+helps. I the ideal is to
+helps. I the ideal is to
+uh let me just sort of outline my goal
+uh let me just sort of outline my goal
+for today. I would like puffer lip to be
+for today. I would like puffer lip to be
+to have a core algorithm that can be
+to have a core algorithm that can be
+very very fast if you have infinite
+very very fast if you have infinite
+data, but also you can kind of just turn
+data, but also you can kind of just turn
+the knob and use more compute on the
+the knob and use more compute on the
+same data. And the thing that in my mind
+same data. And the thing that in my mind
+makes the most sense for that is a
+makes the most sense for that is a
+certain form of world model based
+certain form of world model based
+specifically something like this that's
+specifically something like this that's
+kind of similar to learn search.
+kind of similar to learn search.
+Um compression and search are the two
+Um compression and search are the two
+things that we know scale. So this is
+things that we know scale. So this is
+kind of
+both. The model predicts three future
+both. The model predicts three future
+quantities. Okay. The policy
+the value
+the value
+function and the immediate
+reward. Internally at each time step,
+reward. Internally at each time step,
+the model is
+the model is
+represented. It's got to predict next
+represented. It's got to predict next
+obs, doesn't it? Models represented by
+obs, doesn't it? Models represented by
+the combination of a representation
+the combination of a representation
+function, a dynamics function, and a
+function, a dynamics function, and a
+prediction function. the dynamic
+prediction function. the dynamic
+function that computes at each
+function that computes at each
+hypothetical step K an immediate reward
+hypothetical step K an immediate reward
+in an internal state S. Okay, so this is
+in an internal state S. Okay, so this is
+going to
+going to
+predict this predicts next state as
+predict this predicts next state as
+well, which is what we'd
+well, which is what we'd
+expect. But it predicts internal state,
+expect. But it predicts internal state,
+not ops, which is very
+not ops, which is very
+nice. Unlike traditional approaches to
+nice. Unlike traditional approaches to
+modelbased RL, this internal state SK
+modelbased RL, this internal state SK
+has no semantics of environment state
+has no semantics of environment state
+attached to it. It is simply the hidden
+attached to it. It is simply the hidden
+state of the overall
+state of the overall
+model and its sole purpose is to
+model and its sole purpose is to
+accurately predict relevant future
+accurately predict relevant future
+quantities, policy, value, and reward.
+quantities, policy, value, and reward.
+Okay, in this paper dynamics functions
+Okay, in this paper dynamics functions
+represented
+deterministically prediction function f
+deterministically prediction function f
+computes the policy and value function
+computes the policy and value function
+from internal
+from internal
+states
+sk akin to the joint policy and value
+sk akin to the joint policy and value
+network of alpha
+network of alpha
+zero. A representation function h theta
+zero. A representation function h theta
+initialized the root state s0 by
+initialized the root state s0 by
+encoding past observations.
+encoding past observations.
+This has no spec special semantics
+This has no spec special semantics
+beyond its support for future
+beyond its support for future
+predictions. Given such a model, it is
+predictions. Given such a model, it is
+possible to search over hypothetical
+possible to search over hypothetical
+future trajectories A1 through a K given
+future trajectories A1 through a K given
+past observations 01 through
+OT. For example, a naive search could
+OT. For example, a naive search could
+simply select the kstep action sequence
+simply select the kstep action sequence
+that maximizes minimum value function.
+that maximizes minimum value function.
+Yes.
+Yes.
+More generally, we may apply any MDP
+More generally, we may apply any MDP
+planning algorithm to the internal
+planning algorithm to the internal
+rewards in state space induced by the
+rewards in state space induced by the
+dynamics
+function. Specifically, we use an MCTS
+function. Specifically, we use an MCTS
+algorithm similar to alpha zero search
+algorithm similar to alpha zero search
+generalized to allow for single agent
+generalized to allow for single agent
+domains and intermediate rewards.
+All parameters of the model are trained
+All parameters of the model are trained
+jointly to accurately match the policy
+jointly to accurately match the policy
+value and reward
+predictions for every hypothetical step
+predictions for every hypothetical step
+K to three corresponding
+K to three corresponding
+targets observed after K actual time
+targets observed after K actual time
+steps have elapsed.
+So, you only get to train this on the
+uh you only get to train this on the
+uh you only get to train this on the
+action that you actually take,
+right? Which is
+fine. Value targets are generated by
+fine. Value targets are generated by
+playing out the game or MTP using the
+playing out the game or MTP using the
+search policy. Unlike Alphazere, we
+search policy. Unlike Alphazere, we
+allow for long episodes with discounting
+allow for long episodes with discounting
+and intermediate rewards by computing
+and intermediate rewards by computing
+endstep return that bootstrapped end
+endstep return that bootstrapped end
+steps into the future from search
+value. Yeah. Okay. I remember really
+value. Yeah. Okay. I remember really
+liking this paper and I still really
+liking this paper and I still really
+like this paper. This is just like a
+like this paper. This is just like a
+very clean way of doing
+very clean way of doing
+uh MCTS without access to
+dynamics. And we literally have go to
+dynamics. And we literally have go to
+try this on if we wanted
+to. And then this does ludicrously well
+to. And then this does ludicrously well
+on
+on Atari as well, which makes
+sense. Okay, so I see how this works.
+sense. Okay, so I see how this works.
+Uh,
+Uh,
+Dreamer only claims to be better
+Dreamer only claims to be better
+[Music]
+[Music]
+on. This claims to be better on Atari
+on. This claims to be better on Atari
+and it claims to be better
+and it claims to be better
+on
+Minecraft, but this algorithm is a total
+Minecraft, but this algorithm is a total
+[ __ ] mess.
+[ __ ] mess.
+So yeah, this is a full encoder decoder.
+This is an RSSM.
+Is there any difference between this and
+Is there any difference between this and
+MU zero except for the fact that they
+MU zero except for the fact that they
+use an RSSM and then they use
+use an RSSM and then they use
+um uh they predict output ops instead of
+um uh they predict output ops instead of
+hidden states.
+Let's see how big their policy is.
+saw one of the
+saw one of the
+papers use the world mile small
+papers use the world mile small
+trajectories tens of steps into the
+future. Uh I mean it depends on the
+future. Uh I mean it depends on the
+environment whether you can do that
+environment whether you can do that
+right but like you absolutely should be
+right but like you absolutely should be
+able to do that with something like
+able to do that with something like
+go. It's like very obviously
+go. It's like very obviously
+deterministic.
+in like a very easy to predict way,
+right? Do they have the uh the policy
+sides? Have some search algorithm to
+sides? Have some search algorithm to
+pick and refine steps instead of just an
+pick and refine steps instead of just an
+action
+action
+policy. So my understanding of this and
+policy. So my understanding of this and
+I I just have skimmed this and I read
+I I just have skimmed this and I read
+this years ago, right? is that you uh
+this years ago, right? is that you uh
+you're training a world model which is
+you're training a world model which is
+in this case you're just predicting the
+in this case you're just predicting the
+next hidden hidden state dynamics and
+next hidden hidden state dynamics and
+then from that you're predicting reward
+then from that you're predicting reward
+action
+action
+uh reward and action
+uh reward and action
+right and then you run MCTS over that in
+right and then you run MCTS over that in
+order to predict the trajectory that you
+order to predict the trajectory that you
+actually take and then you backrop on
+actually take and then you backrop on
+that we use it for continuous
+that we use it for continuous
+control so this is fully General you can
+control so this is fully General you can
+use this on
+use this on
+any on any problem
+type. Um I don't know how far forward
+type. Um I don't know how far forward
+you can prop on continuous control. The
+you can prop on continuous control. The
+thing with tens of steps in continuous
+thing with tens of steps in continuous
+control is that can actually be a very
+control is that can actually be a very
+small window of time,
+right? Like 10 steps and go is actually
+right? Like 10 steps and go is actually
+a lot of stuff happens. 10 steps of
+a lot of stuff happens. 10 steps of
+robotics is not very much happened.
+So I usually I go by like real time
+equivalents. Okay. They have the
+equivalents. Okay. They have the
+architecture
+architecture
+here. They have 16 residual blocks.
+That's got to be way smaller than 200
+That's got to be way smaller than 200
+million parameters,
+right? Quonization, it was a couple of
+right? Quonization, it was a couple of
+seconds.
+seconds.
+Okay. Even if they picked a trajectory,
+Okay. Even if they picked a trajectory,
+they picked the first
+they picked the first
+action and rinse and repeat. figure out
+action and rinse and repeat. figure out
+a new trajectory after one step. Yes.
+a new trajectory after one step. Yes.
+Yeah, that's what you would expect. So,
+Yeah, that's what you would expect. So,
+the thing is then you're only really
+the thing is then you're only really
+training
+training
+on is are they training on the whole
+on is are they training on the whole
+trajectory? They're not then, right?
+trajectory? They're not then, right?
+You're really only you only get to train
+You're really only you only get to train
+on the data that you actually
+on the data that you actually
+see, which is the action that you
+see, which is the action that you
+actually take, right?
+actually take, right?
+So, you generate a whole bunch of these
+So, you generate a whole bunch of these
+rollouts, but you only get to
+rollouts, but you only get to
+actually see the uh the result of one
+actually see the uh the result of one
+action.
+then learn on a regular roll. That's
+then learn on a regular roll. That's
+normal. Do replays. So, that seems very
+normal. Do replays. So, that seems very
+clean to me.
+clean to me.
+I think the dreamer is kind of just they
+I think the dreamer is kind of just they
+did the same thing except they do
+did the same thing except they do
+uh they do a decoder for the
+uh they do a decoder for the
+actual like they decode and predict the
+actual like they decode and predict the
+full image or whatever instead of
+full image or whatever instead of
+predicting state which is actually a bad
+predicting state which is actually a bad
+thing because it makes it really
+thing because it makes it really
+obnoxious to do uh partially observed
+obnoxious to do uh partially observed
+state type environments because like you
+state type environments because like you
+have to write an obnoxious inverse
+have to write an obnoxious inverse
+encoder to decode
+encoder to decode
+Um and then they have like RSSM or
+Um and then they have like RSSM or
+whatever. This is not like that
+whatever. This is not like that
+meaningfully different from Uzero,
+right? I also don't like autoenccoders
+right? I also don't like autoenccoders
+for that. Yeah, it's a real pain in
+for that. Yeah, it's a real pain in
+RL.
+RL.
+Um let's ask
+Um let's ask
+Brock just in case. Sometimes it catches
+Brock just in case. Sometimes it catches
+things usually not. M0 I've missed. I'm
+things usually not. M0 I've missed. I'm
+watch M0 was the good one. I think I
+watch M0 was the good one. I think I
+remember I like that paper reading and I
+remember I like that paper reading and I
+don't I don't like most of the world
+don't I don't like most of the world
+model papers. Also, Dreamer V3 is like
+model papers. Also, Dreamer V3 is like
+half wrong.
+Okay. This doesn't use
+MCTS. Oh, yeah. Okay. I remember. So,
+MCTS. Oh, yeah. Okay. I remember. So,
+they train on imagined rollouts. Right.
+they train on imagined rollouts. Right.
+Right. Right. Right. There's a big
+Right. Right. Right. There's a big
+difference here.
+betting is good if you can train
+inverse.
+Um, yeah, it's just that in practice the
+Um, yeah, it's just that in practice the
+inverse world models are really
+inverse world models are really
+obnoxious to define, right?
+Okay. So I think that I see
+Okay. So I think that I see
+mostly how this work. I think it makes
+mostly how this work. I think it makes
+sense to spend a little bit more time
+sense to spend a little bit more time
+making sure I understand the details
+making sure I understand the details
+fully here.
+So what we would do here, we would add
+So what we would do here, we would add
+like some additional network head that
+like some additional network head that
+probably actually has to have a couple
+probably actually has to have a couple
+layers on it, right? Um and that will
+layers on it, right? Um and that will
+predict
+Or we could just have it just be another
+LSTM. It could just be another LSTM,
+right? Hang on. How do we roll this
+right? Hang on. How do we roll this
+thing
+thing
+forward reasonably?
+It has to be conditioned on the actions,
+It has to be conditioned on the actions,
+right?
+versus this thing.
+They just train everything on imagined
+They just train everything on imagined
+roll outs.
+See, the thing that's sketchy about this
+See, the thing that's sketchy about this
+paper, right, is it depends on all these
+paper, right, is it depends on all these
+tricks that don't act we like we know
+tricks that don't act we like we know
+don't actually work.
+What about wall time? So, the wall time
+What about wall time? So, the wall time
+of this model is evidently actually
+of this model is evidently actually
+quite good. The thing that's sketchy
+quite good. The thing that's sketchy
+about this is so this goes up to a 200
+about this is so this goes up to a 200
+mil perm model.
+mil perm model.
+Um, and it's like the Perf is very
+Um, and it's like the Perf is very
+highly dependent on all these tricks,
+highly dependent on all these tricks,
+like half of the Perf, but these tricks
+like half of the Perf, but these tricks
+are absolute [ __ ] like we've tested
+are absolute [ __ ] like we've tested
+them. We have a Nerx paper on it.
+them. We have a Nerx paper on it.
+They're
+[ __ ] So, it's a very like
+[ __ ] So, it's a very like
+sketchy thing to get to
+work. It's also kind of like an all-in
+work. It's also kind of like an all-in
+algorithm in the sense that like when
+algorithm in the sense that like when
+you're actually training on the world
+you're actually training on the world
+model itself, it has to be really good.
+model itself, it has to be really good.
+Um, I think that M0 is a better fit for
+Um, I think that M0 is a better fit for
+what we're looking for at the moment,
+what we're looking for at the moment,
+which is like I think with this you can
+which is like I think with this you can
+kind of just do your on policy learning
+kind of just do your on policy learning
+the way that you normally do, right? And
+the way that you normally do, right? And
+then like you can scale up
+then like you can scale up
+uh you can scale up if you want to like
+uh you can scale up if you want to like
+scale up compute to do more search to
+scale up compute to do more search to
+get better
+get better
+data. This also gives you test time
+data. This also gives you test time
+scaling for free, doesn't it? Yeah, this
+scaling for free, doesn't it? Yeah, this
+gives you test time scaling for
+gives you test time scaling for
+free, which you would think would mean
+free, which you would think would mean
+you'd also be able to use a much smaller
+model. And like with these residual
+model. And like with these residual
+blocks, it seems like this would be
+blocks, it seems like this would be
+smaller as well.
+Okay, let me make sure I actually figure
+Okay, let me make sure I actually figure
+out how I can how this is implemented.
+out how I can how this is implemented.
+Um, there's the
+algorithm IRL bottoms and it has a
+sense. I just want something where we
+sense. I just want something where we
+can crank up compute if we want,
+can crank up compute if we want,
+right? Without screwing up our base
+right? Without screwing up our base
+algorithm. So, this seems like we can
+algorithm. So, this seems like we can
+just train this auxiliary
+just train this auxiliary
+thing and then use that to crank compute
+thing and then use that to crank compute
+when we want to.
+I wish they had an algorithm block on
+I wish they had an algorithm block on
+this.
+Let me see if I can draw this out and
+Let me see if I can draw this out and
+then we can try to maybe implement
+this. So
+like here's your normal RNN, right?
+and this is also
+B1. So they also they predict reward now
+B1. So they also they predict reward now
+directly. So this is going to get R1 I
+directly. So this is going to get R1 I
+guess.
+Or do we not need to? Hang
+Or do we not need to? Hang
+on. We need some way to encode. I think
+on. We need some way to encode. I think
+you need to encode both the action and
+you need to encode both the action and
+the state,
+right? I think it's like action state
+right? I think it's like action state
+pair is got to be the input. Let's see
+pair is got to be the input. Let's see
+where they describe this. Oh, they have
+where they describe this. Oh, they have
+this as well.
+It's
+on. I think it's just you add an extra
+on. I think it's just you add an extra
+model, right?
+How do you get the
+actions? Okay, so unrolling this is
+actions? Okay, so unrolling this is
+actually kind of tricky, right?
+Because you sample the action.
+Let me just read this whole
+thing. Model just models aspects that
+thing. Model just models aspects that
+are important to agent decisions.
+How good is the current
+How good is the current
+position? What action to take? Reward.
+position? What action to take? Reward.
+How good was the last
+action? But then it needs the state
+action? But then it needs the state
+model, right?
+Yeah, the dynamics
+function. Which does take the action.
+function. Which does take the action.
+Okay.
+So, the only obnoxious thing about this,
+So, the only obnoxious thing about this,
+right,
+is this has to be an LSTM cell, not an
+is this has to be an LSTM cell, not an
+LSTM, I believe.
+This scales up inference time compute
+This scales up inference time compute
+doesn't it because this is you do this
+doesn't it because this is you do this
+in the data collection phase. I know I
+in the data collection phase. I know I
+had asked you this question last night
+had asked you this question last night
+regard regarding last time first as how
+regard regarding last time first as how
+did you get comfortable with Linux daily
+did you get comfortable with Linux daily
+coming from
+coming from
+Windows if I recall I I've used Linux
+Windows if I recall I I've used Linux
+forever WSL2 is basically native Linux
+forever WSL2 is basically native Linux
+um it's just required if you do anything
+um it's just required if you do anything
+if you're doing anything in scientific
+if you're doing anything in scientific
+computing or really even programming in
+computing or really even programming in
+general you're just using Linux and
+general you're just using Linux and
+you're really just uh you're really just
+you're really just uh you're really just
+like limiting yourself
+like limiting yourself
+otherwise like outside of net like uh
+otherwise like outside of net like uh
+Windows is just not a serious
+Windows is just not a serious
+development
+environment and game engines. I guess
+environment and game engines. I guess
+that's about it.
+So if we do this model
+So if we do this model
+as if we do this as an LSTM state,
+as if we do this as an LSTM state,
+right? Then we can write a pretty basic
+right? Then we can write a pretty basic
+piece of
+code. So it's like a
+And this is
+like this is S1, isn't
+Or do you do your own embedding of
+OBS? Could be
+OBS? Could be
+either. Uh so you do this and then this
+either. Uh so you do this and then this
+will produce
+Well, this doesn't produce
+O. Oh, I guess this is what this is
+O. Oh, I guess this is what this is
+supposed to be. This is like E1 or
+supposed to be. This is like E1 or
+whatever. And like you look right here,
+whatever. And like you look right here,
+this is
+this is
+E1, right? And then this is going to
+E1, right? And then this is going to
+produce
+E2,
+right? And this will probably also
+right? And this will probably also
+produce some other
+produce some other
+stuff. No, it just produces E2, I
+stuff. No, it just produces E2, I
+guess. But then what about S?
+Thank you for response. Contemplating
+Thank you for response. Contemplating
+full Linux
+desktop. You don't have to immediately
+desktop. You don't have to immediately
+like go buy a new machine or something.
+like go buy a new machine or something.
+You can dual boot, which is admittedly a
+You can dual boot, which is admittedly a
+bit of a pain in the ass, but it works.
+bit of a pain in the ass, but it works.
+Uh if you're on Windows, just use WSL
+Uh if you're on Windows, just use WSL
+because it's basically native Linux.
+because it's basically native Linux.
+It's the same dev environment and
+It's the same dev environment and
+everything. It's like a really good
+everything. It's like a really good
+option. Um Mac, a lot of people in
+option. Um Mac, a lot of people in
+industry use Mac. I frankly hate it, but
+industry use Mac. I frankly hate it, but
+it's like closer because it's a Unix
+it's like closer because it's a Unix
+environment. Not everything works the
+environment. Not everything works the
+same and there's a bunch of setup pain
+same and there's a bunch of setup pain
+in the ass.
+in the ass.
+Um I myself I have native Linux machines
+Um I myself I have native Linux machines
+cuz it's just easier.
+The other thing that you can do, which
+The other thing that you can do, which
+is another thing people will do, is
+is another thing people will do, is
+they'll get themselves like a Linux box
+they'll get themselves like a Linux box
+that they'll just SSH into or whatever
+that they'll just SSH into or whatever
+to use for development, and then they'll
+to use for development, and then they'll
+access it from whatever they prefer to
+use. Any of those is
+reasonable. Okay. Okay. So, I think that
+reasonable. Okay. Okay. So, I think that
+this wasn't intended to be for an
+this wasn't intended to be for an
+LSTMbased model,
+LSTMbased model,
+right?
+right?
+Because you'd also have to predict this
+Because you'd also have to predict this
+state, don't
+you? Or do you not have to? You have to
+you? Or do you not have to? You have to
+predict the input state to this thing,
+predict the input state to this thing,
+don't you? Because if I roll this out,
+don't you? Because if I roll this out,
+yeah, I can use this state.
+yeah, I can use this state.
+But then if I roll it out again, yeah,
+But then if I roll it out again, yeah,
+this state is now
+this state is now
+stale. So I have to predict the state as
+well. I mean that's not terrible, right?
+Well, this thing is actually pretty easy
+Well, this thing is actually pretty easy
+to train, right? Because
+to train, right? Because
+like you just train this on the actions
+like you just train this on the actions
+of the
+of the
+trajectory that you actually took, the
+trajectory that you actually took, the
+embeddings of the trajectory that you
+embeddings of the trajectory that you
+just took, right?
+And then the next one, the next like
+And then the next one, the next like
+embedding. So that's not bad. This thing
+embedding. So that's not bad. This thing
+should be pretty easy to set up training
+should be pretty easy to set up training
+for.
+You kind of want to give this the state
+You kind of want to give this the state
+as well, don't you?
+Oh, maybe what you do is you take these
+Oh, maybe what you do is you take these
+two and you put these in
+two and you put these in
+here and then this is here and then E2
+here and then this is here and then E2
+is out. Yeah. Okay. So, it's actually if
+is out. Yeah. Okay. So, it's actually if
+I revise this then what it should look
+I revise this then what it should look
+like is this. It's just an LSTM cell.
+It takes this is
+It takes this is
+E1
+A1 this is
+S0
+S1 and then this
+S1 and then this
+is E1 or E2.
+is E1 or E2.
+too.
+Now, can you train this like this
+Now, can you train this like this
+though?
+I mean, this has to go into the main
+I mean, this has to go into the main
+network now, right? This
+S1 because then you have to put
+S1 because then you have to put
+E2 and S1 into your
+net, which is fine.
+Maybe maybe that's fine.
+Maybe maybe that's fine.
+It should learn the same
+representation. Wait a second. So if
+representation. Wait a second. So if
+you're if this is going to
+get Can you not just put the previous
+action into this
+thing. Can this not just be one
+thing. Can this not just be one
+network? What if I just put like
+network? What if I just put like
+a Z A1 into these and then this is going
+a Z A1 into these and then this is going
+to predict
+to predict
+E1? Does that just
+work? because
+work? because
+then I can use E1 instead of
+then I can use E1 instead of
+O as many times as I
+O as many times as I
+want, right? And it's a good idea to
+want, right? And it's a good idea to
+have the action in the input anyways. I
+have the action in the input anyways. I
+was going to have to solve that
+was going to have to solve that
+problem. So then this literally just
+problem. So then this literally just
+adds one head to the
+adds one head to the
+output and then that lets you roll the
+output and then that lets you roll the
+model forward, right?
+model forward, right?
+And then the only thing that you have to
+And then the only thing that you have to
+do is you train this embedding versus
+do is you train this embedding versus
+this
+embedding. This also has to predict R
+embedding. This also has to predict R
+now, right?
+because you have to you need that to
+because you have to you need that to
+like to know which one to pick. But I
+like to know which one to pick. But I
+think that actually could be pretty
+think that actually could be pretty
+simple. I don't even think you have to
+simple. I don't even think you have to
+add like an extra network, right? You
+add like an extra network, right? You
+just have to
+just have to
+predict E1 off of this like a two-layer
+predict E1 off of this like a two-layer
+MLP.
+That seems like it could
+work. So, uh they said that there was a
+work. So, uh they said that there was a
+thing where they use more train time
+thing where they use more train time
+compute though, not just more inference
+compute though, not just more inference
+compute, right?
+Let me read this more carefully. I'm
+Let me read this more carefully. I'm
+just going to go through this out loud.
+just going to go through this out loud.
+We now describe mu0 algorithm in more
+We now describe mu0 algorithm in more
+detail. Predictions are made at each
+detail. Predictions are made at each
+time step t k0 to k by a model mu of pi
+time step t k0 to k by a model mu of pi
+theta with parameters theta condition on
+theta with parameters theta condition on
+past observations 01 through o and for k
+past observations 01 through o and for k
+greater than zero on future actions a t
+greater than zero on future actions a t
++ 1 through a t plus k. The model
++ 1 through a t plus k. The model
+predicts three future quantities. The
+predicts three future quantities. The
+policy
+policy
+pi of a t + k + 1 conditioned on 01
+pi of a t + k + 1 conditioned on 01
+through
+through
+o comma a t + 1 through a t +
+o comma a t + 1 through a t +
+k. The value functions vt k which is
+k. The value functions vt k which is
+equal to the expectation of some
+equal to the expectation of some
+discounted return. This is just
+discounted return. This is just
+discounted
+discounted
+return and the immediate reward rtk= mu
+return and the immediate reward rtk= mu
+tk plus uh t plus
+tk plus uh t plus
+k where u is the true observed
+k where u is the true observed
+reward as a policy used to select real
+reward as a policy used to select real
+actions and this gamma is a discount
+actions and this gamma is a discount
+factor. It's got to be
+factor. It's got to be
+um internally at each time step the
+um internally at each time step the
+model is represented by the combination
+model is represented by the combination
+of a representation function, a dynamics
+of a representation function, a dynamics
+function and a prediction function. The
+function and a prediction function. The
+dynamics function g of theta is a
+dynamics function g of theta is a
+recurrent
+process
+process
+represented.
+represented.
+Okay. R
+Okay. R
+k= g theta s k - a K. Uh that computes
+k= g theta s k - a K. Uh that computes
+at each hypothetical step K an immediate
+at each hypothetical step K an immediate
+reward and an internal state
+SK. Does this mean it's a separate
+SK. Does this mean it's a separate
+dynamics? Like it's a
+dynamics? Like it's a
+separate recurrent process.
+separate recurrent process.
+It mirrors the structure of an MDP model
+It mirrors the structure of an MDP model
+that computes the expected reward and
+that computes the expected reward and
+state transitions for a given state in
+state transitions for a given state in
+action. However, unlike traditional
+action. However, unlike traditional
+approaches to model based RL, this
+approaches to model based RL, this
+internal state SK has no semantics of
+internal state SK has no semantics of
+environment state attached to it. It is
+environment state attached to it. It is
+simply the hidden state of the overall
+simply the hidden state of the overall
+model and its sole purpose is to
+model and its sole purpose is to
+accurately predict relevant future
+accurately predict relevant future
+quantities, policies, values, and
+quantities, policies, values, and
+rewards.
+In this paper, the dynamics function is
+In this paper, the dynamics function is
+represented
+deterministically. The extension to
+deterministically. The extension to
+stoastic transitions is left for future
+stoastic transitions is left for future
+work. A prediction function f theta
+work. A prediction function f theta
+computes the policy and value functions
+computes the policy and value functions
+from the internal states.
+SK PK VK F beta F of SK akin to the
+SK PK VK F beta F of SK akin to the
+joint policy and value network of alpha
+zero representation function H of theta
+zero representation function H of theta
+initialize the root state S0 by encoding
+initialize the root state S0 by encoding
+past observations. It says no special
+past observations. It says no special
+semantics beyond its support for future
+semantics beyond its support for future
+predictions. Okay, so they're doing
+predictions. Okay, so they're doing
+something a little different here.
+Um, it looks like the policy is not a
+Um, it looks like the policy is not a
+recurrent
+recurrent
+function, but the dynamics function
+is
+potentially. But how does this work?
+So, they take the initial state.
+There probably several ways you could
+There probably several ways you could
+implement
+this given such a model it is hang
+this given such a model it is hang
+on it mirror let's
+on it mirror let's
+see r uh g theta is a recurrent process
+see r uh g theta is a recurrent process
+rk= g theta SKUS 1 AK that computes at
+rk= g theta SKUS 1 AK that computes at
+each hypothetical step K and immediate
+each hypothetical step K and immediate
+reward RK in internal state SK. It
+reward RK in internal state SK. It
+mirrors the structure of an MDP model
+mirrors the structure of an MDP model
+that computes the expected reward and
+that computes the expected reward and
+state transition for a given state and
+state transition for a given state and
+action. However, unlike traditional
+action. However, unlike traditional
+approaches to model based RL, this
+approaches to model based RL, this
+internal state SK has no semantics of
+internal state SK has no semantics of
+environment state attached to it. It is
+environment state attached to it. It is
+simply the hidden state of the overall
+simply the hidden state of the overall
+model and its sole purpose is to
+model and its sole purpose is to
+accurately produce relevant future
+accurately produce relevant future
+quantities. Okay, so this is not
+quantities. Okay, so this is not
+encoder. Uh this is not like an
+encoder. Uh this is not like an
+autoenccode
+autoenccode
+thing. In this paper, the dynamics
+thing. In this paper, the dynamics
+function is represented
+deterministically. That's fine. A
+deterministically. That's fine. A
+prediction function f theta computes the
+prediction function f theta computes the
+policy and value functions from the
+policy and value functions from the
+internal states akin to the joint policy
+internal states akin to the joint policy
+and value function network of alpha 0.
+Oh, okay. So, I have this wrong then.
+Oh, okay. So, I have this wrong then.
+So, it's not the same shared network.
+It's So, you have your normal
+It's So, you have your normal
+net doing its thing, right?
+This is
+a And then this new
+a And then this new
+model, it's probably starts with
+model, it's probably starts with
+observation or something. Double check.
+representation function initialize the
+representation function initialize the
+root state by encoding past
+observations. So we can probably just
+observations. So we can probably just
+use
+use
+uh we can probably just
+uh we can probably just
+use this embedding here,
+use this embedding here,
+right? So this can be
+s S hat or whatever and then we make a
+s S hat or whatever and then we make a
+new dynamics function which is another
+new dynamics function which is another
+LSTM.
+So this
+is and this this has to
+is and this this has to
+predict action.
+Does it need
+value? I mean, the simplest version of
+value? I mean, the simplest version of
+this would just
+this would just
+be action
+And uh what's it? This just predicts
+And uh what's it? This just predicts
+action and
+reward.
+reward.
+A1 R1
+And now this has to take
+in. This makes sense to have this
+here. This only has one input, doesn't
+it? I guess it gets the embedding of
+a.
+So, yeah. So, this has to get like
+These have to get rolled ahead. So this
+These have to get rolled ahead. So this
+is actually like
+two. Oh, there's just no action in this
+two. Oh, there's just no action in this
+one, I guess.
+Okay. So,
+Okay. So,
+regardless, this starts to get
+like
+like
+right. So you just have this separate
+right. So you just have this separate
+network.
+And this one's going to just be
+And this one's going to just be
+similarly like the LSTM that we have,
+similarly like the LSTM that we have,
+right?
+a little simpler even because it's just
+a little simpler even because it's just
+the
+LSTM. Make sure I have this correct.
+Given such a model, it's possible to
+Given such a model, it's possible to
+search over hypothetical f future
+search over hypothetical f future
+trajectories A1 through OK AK given past
+trajectories A1 through OK AK given past
+observations 01 through
+observations 01 through
+OT. For example, a naive search could
+OT. For example, a naive search could
+simply select the case action sequence
+simply select the case action sequence
+that maximizes the value function. More
+that maximizes the value function. More
+generally, we may apply any MDP planning
+generally, we may apply any MDP planning
+algorithm to the internal rewards and
+algorithm to the internal rewards and
+state space induced by the dynamics
+state space induced by the dynamics
+function. Specifically, we use an MCTS
+function. Specifically, we use an MCTS
+algorithm similar to alpha zero search
+algorithm similar to alpha zero search
+generalized to allow for single agent
+generalized to allow for single agent
+domains and an intermediate to
+domains and an intermediate to
+rewards. The MCTS algorithm may be
+rewards. The MCTS algorithm may be
+viewed as a search policy and search
+viewed as a search policy and search
+value function VT expectation mut plus
+value function VT expectation mut plus
+one yada
+one yada
+yada that selects both an action and
+yada that selects both an action and
+predicts cumulative reward given past
+predicts cumulative reward given past
+observations. At each internal node, it
+observations. At each internal node, it
+makes use of the policy value function
+makes use of the policy value function
+reward estimate to produce
+reward estimate to produce
+uh combines these values to using look
+uh combines these values to using look
+at search to produce improved policy pi
+at search to produce improved policy pi
+an improved value function v at the root
+an improved value function v at the root
+of the search tree. But
+wait, approve
+wait, approve
+policy. Okay.
+policy. Okay.
+All parameters of the model are trained
+All parameters of the model are trained
+jointly to accurately match the policy
+jointly to accurately match the policy
+value function and reward
+prediction for every hypothetical step K
+prediction for every hypothetical step K
+to three corresponding targets observed
+to three corresponding targets observed
+after K actual time steps have
+after K actual time steps have
+elapsed. The first objective is to
+elapsed. The first objective is to
+minimize the error between the actions
+minimize the error between the actions
+predicted by the policy and by the
+predicted by the policy and by the
+search policy.
+Also like alpha zero value targets are
+Also like alpha zero value targets are
+generated by playing out the
+generated by playing out the
+game or MTP using the search policy.
+game or MTP using the search policy.
+However, unlike Alpha Zero, we allow for
+However, unlike Alpha Zero, we allow for
+long
+long
+episodes. It's
+episodes. It's
+fine. Second objective is to minimize
+fine. Second objective is to minimize
+error between the value function and the
+error between the value function and the
+value target. Third objective is to
+value target. Third objective is to
+minimize error between the predicted
+minimize error between the predicted
+immediate reward and observed immediate
+immediate reward and observed immediate
+re
+reward. Okay.
+It looks ahead. K equals 5 hypothetical
+It looks ahead. K equals 5 hypothetical
+steps.
+Hey Cash, I'm doing well. We're doing
+Hey Cash, I'm doing well. We're doing
+um model based RL stuff today.
+Okay. So, whatever. They have a fancy
+Okay. So, whatever. They have a fancy
+ass tree thing.
+So, the one thing I didn't get from the
+So, the one thing I didn't get from the
+blog post
+blog post
+was Where's this?
+M0 can repeatedly use its learn model to
+M0 can repeatedly use its learn model to
+improve
+improve
+planning. Yeah, that's
+fine. Oh, this is interesting, right? Um
+It actually does bootstrap
+itself. I don't see how this
+works. M0
+works. M0
+reanalyze. They have this as
+This does
+worse. Okay, we can potentially ignore
+worse. Okay, we can potentially ignore
+that. Oh no, cuz it's 200
+mil. But that is a variant.
+mil. But that is a variant.
+So I think that we can kind of start
+So I think that we can kind of start
+with just like get a dynamics model, use
+with just like get a dynamics model, use
+it, see if it does anything,
+right? Yeah, I think we can start with
+right? Yeah, I think we can start with
+something like
+something like
+this. This we can definitely implement
+this. This we can definitely implement
+today. The other stuff is like it's
+today. The other stuff is like it's
+going to be tricky to figure out how to
+going to be tricky to figure out how to
+make that stuff fast. This is like I
+make that stuff fast. This is like I
+think we can do this batched, right?
+We should be able to do this
+We should be able to do this
+back, which should be pretty
+easy. Yeah. Okay.
+easy. Yeah. Okay.
+I think we just got to start coding
+I think we just got to start coding
+this. I think I've got like enough of a
+this. I think I've got like enough of a
+an idea on how to like get started and
+an idea on how to like get started and
+we got to start on this because this is
+we got to start on this because this is
+going to be pretty
+going to be pretty
+substantial. And
+substantial. And
+um I want to make sure that we get the
+um I want to make sure that we get the
+best chance we can at actually getting
+best chance we can at actually getting
+it to work
+it to work
+today because I I only really want to
+today because I I only really want to
+allocate today to seeing if model base
+allocate today to seeing if model base
+does anything.
+I was messing with a bunch of stuff
+I was messing with a bunch of stuff
+here, right?
+Yeah. Easiest way to start on this is
+Yeah. Easiest way to start on this is
+going to
+be does this get added to the LSTM
+be does this get added to the LSTM
+wrapper? No, it doesn't. Right.
+wrapper? No, it doesn't. Right.
+This does need to be a separate model, I
+believe. Can just put it in the top for
+believe. Can just put it in the top for
+now.
+This needs to
+This needs to
+be LSTM cell,
+right? This kind of needs to be both.
+right? This kind of needs to be both.
+Okay, we need to steal the trick that we
+Okay, we need to steal the trick that we
+did from
+did from
+here, which is like this.
+What size? Hidden
+size. So that gives us the LSTM.
+action embedding
+action embedding
+works. And then you need an action prod
+works. And then you need an action prod
+and a reward
+prod like this.
+Move this out of the
+way. That's really it.
+So this takes an action I believe is all
+So this takes an action I believe is all
+it takes.
+and then
+We can actually do the whole search
+We can actually do the whole search
+inside of this. Now that I'm thinking
+inside of this. Now that I'm thinking
+about it, right, we could do the whole
+about it, right, we could do the whole
+search inside this
+function. Let me code this for now.
+So
+So
+here you teach your forceet,
+here you teach your forceet,
+right? So it's literally then just going
+right? So it's literally then just going
+to be like
+Super.forward. Yes. Super
+forward. And then again the state is
+forward. And then again the state is
+just the input state. So this is totally
+just the input state. So this is totally
+fine.
+And then this gives you
+logits and
+reward. And then you train this
+reward. And then you train this
+thing with the actual logic and the
+thing with the actual logic and the
+actual
+actual
+reward. Okay, that's actually pretty
+reward. Okay, that's actually pretty
+easy. That's pretty easy. Um, should
+easy. That's pretty easy. Um, should
+this technically
+this technically
+Should this technically work
+with I think that this actually
+with I think that this actually
+technically should work like this even
+technically should work like this even
+like this should not crash training. And
+like this should not crash training. And
+then what you do here is you add the
+then what you do here is you add the
+loop here which is your like search
+loop here which is your like search
+whatever search algorithm it just runs
+whatever search algorithm it just runs
+over this. I think that's how it would
+work. Yeah, that's how it would work.
+work. Yeah, that's how it would work.
+So, I think that this is pretty much the
+So, I think that this is pretty much the
+only code you need with this.
+Um, I could add the sampling into here
+Um, I could add the sampling into here
+to make it a little
+easier. Like
+this. You don't need to even know the
+this. You don't need to even know the
+reward here. So, it's just action log
+reward here. So, it's just action log
+prop.
+prop.
+I think you only need to know action
+I think you only need to know action
+from
+this.
+Okay. So then we do like
+Something like
+this. Okay. And so now you have your
+this. Okay. And so now you have your
+policy
+policy
+here which
+here which
+is computing logits and
+values and you need to give
+values and you need to give
+it it needs the embeddings doesn't it?
+it it needs the embeddings doesn't it?
+It needs like the initial embedding or
+It needs like the initial embedding or
+what does it need?
+Yeah, it needs the initial embedding of
+Yeah, it needs the initial embedding of
+observation
+observation
+uh to
+uh to
+be to have the first state. I
+be to have the first state. I
+guess you could technically learn this.
+You could technically learn this, but I
+You could technically learn this, but I
+think it would be
+think it would be
+harder because you're only learning it
+harder because you're only learning it
+on this one state here. So I think you
+on this one state here. So I think you
+just want to share the logits on
+this.
+this.
+So I think then we just do like
+So I think then we just do like
+statebatch like state.bed or something.
+That's not a full LSTM state though.
+That's not a full LSTM state though.
+Hang
+on. You need to have a hidden end of
+on. You need to have a hidden end of
+cell state for this.
+That's kind of awkward. You could use a
+That's kind of awkward. You could use a
+GRU. Doesn't a GRU have one
+state. Yeah, GRU has one stage. So, you
+state. Yeah, GRU has one stage. So, you
+could technically do
+this. That might just be easier for now.
+And then you'll have to adjust these
+And then you'll have to adjust these
+weights, but no big deal. Okay.
+So, you get your action
+here. You still need log prop, don't
+here. You still need log prop, don't
+you?
+Oh, you can just give it
+action if action is none else.
+something like
+something like
+this. Okay. And then now you would still
+this. Okay. And then now you would still
+have to train
+have to train
+it. You still have to train it.
+All this, all this stuff
+All this, all this stuff
+works like before.
+Oh, you also have to add it to the
+optimizer. Like this.
+and then mu0 gives you what logit value
+and then mu0 gives you what logit value
+as
+450 logits and
+reward
+zero. This gets batchactions which is
+zero. This gets batchactions which is
+good and state.bed
+good and state.bed
+right? Yeah, it gets the first
+embedding. So in order to give it
+embedding. So in order to give it
+state.bed, state.inbed should just
+be batch
+be batch
+time
+time
+state.bed equals
+state.bed equals
+hidden
+zero. Uh and then that should be that
+zero. Uh and then that should be that
+should be a dot detach, shouldn't it?
+should be a dot detach, shouldn't it?
+Yeah, that should be did
+Yeah, that should be did
+cache. We don't want to train through
+cache. We don't want to train through
+that. I would hope. Maybe. We'll
+see. And then you just have this, right?
+see. And then you just have this, right?
+Which is
+Which is
+like move zero actions.
+You don't need entropy for this
+thing. Do not need entropy for this
+thing. Do not need entropy for this
+thing.
+Hang on. Do you train this thing? You
+Hang on. Do you train this thing? You
+probably just train this thing to like
+probably just train this thing to like
+match actions of original policy or
+match actions of original policy or
+something, right?
+minimize error between actions predicted
+minimize error between actions predicted
+by the policy and the search policy.
+Um, I'm trying to think how we want to
+Um, I'm trying to think how we want to
+train this thing.
+kind of just the way that we are right
+kind of just the way that we are right
+now, right?
+Oh, wait. Does the policy even do
+Oh, wait. Does the policy even do
+anything in this setup?
+Because I don't know if the policy even
+Because I don't know if the policy even
+does anything in this setup.
+There kind of is
+There kind of is
+no other policy.
+Oh, wait. No, you're just you're
+Oh, wait. No, you're just you're
+learning. Okay, I'm done. Hang on. I
+learning. Okay, I'm done. Hang on. I
+just have this thing in my head wrong.
+just have this thing in my head wrong.
+Um, yeah, it's not like an auxiliary
+Um, yeah, it's not like an auxiliary
+thing. This is a replacement for the
+thing. This is a replacement for the
+model. Okay,
+so in this
+so in this
+case, and they made it recurrent for a
+case, and they made it recurrent for a
+different reason.
+different reason.
+uh from what we I was thinking of as
+well. Let me go back to drawing board
+well. Let me go back to drawing board
+here a little bit.
+This seems like it should be compatible.
+This seems like it should be compatible.
+Actually, this seems like they should be
+compatible. So, like what they're saying
+compatible. So, like what they're saying
+here, right, is if you normally if you
+here, right, is if you normally if you
+just have your policy that like takes in
+just have your policy that like takes in
+observation, right? And this thing is
+observation, right? And this thing is
+going to
+going to
+output
+output
+action. They say, "Hey, why don't you
+action. They say, "Hey, why don't you
+just output
+just output
+uh
+uh
+reward and
+state?" And then this can
+state?" And then this can
+go, you take your reward and your
+action. Hang on.
+No, it's still not quite
+[Music]
+right. No, hang on. This is fine, right?
+So you need an ops encoder,
+So you need an ops encoder,
+right? So ops goes in
+here. Action goes in here, I guess.
+And then you get
+a
+a
+reward and like value or
+reward and like value or
+whatever. And
+whatever. And
+then they also want you to predict
+then they also want you to predict
+state. Well, this is a recurrent model.
+state. Well, this is a recurrent model.
+So this will just give you the next
+So this will just give you the next
+state, right?
+And then action goes in
+here and this keeps roll. So this works.
+here and this keeps roll. So this works.
+So now I guess the the thing that I'm
+So now I guess the the thing that I'm
+getting hung up on here, right, is that
+getting hung up on here, right, is that
+they added recurrence here to implement
+they added recurrence here to implement
+their algorithm on top of a
+their algorithm on top of a
+non-recurrent
+non-recurrent
+policy. So I need to now think of how
+policy. So I need to now think of how
+this would work on top of a recurrent
+this would work on top of a recurrent
+policy.
+Is it any
+different? I mean, the only thing that's
+different? I mean, the only thing that's
+wacko here is
+that the obs goes in here as the hidden
+that the obs goes in here as the hidden
+state,
+state,
+right? But does that matter?
+Oh, it does matter because I need to be
+Oh, it does matter because I need to be
+able to put OBS in as well. Okay, shoot.
+able to put OBS in as well. Okay, shoot.
+Um,
+I mean, I could technically do it this
+I mean, I could technically do it this
+way for
+now. This would be an easier way to
+now. This would be an easier way to
+start.
+This would be a a way easier way to
+This would be a a way easier way to
+start on
+this and then it's not really recurrent
+this and then it's not really recurrent
+in the same
+in the same
+way.
+So you would still train it kind of like
+So you would still train it kind of like
+a recurrent net though.
+You would kind of just use you use a GRU
+Can't put OBS in every step
+here. I don't think you can put OBS in
+here. I don't think you can put OBS in
+as this date like this. It'll mess up
+as this date like this. It'll mess up
+the way that you train an
+RNN. Like obs needs to go in here.
+That's fine.
+This is fine. We just put OBS in
+here. OBS concatenated with actions at
+here. OBS concatenated with actions at
+least.
+Actually, this is kind of the
+Actually, this is kind of the
+simplest
+simplest
+possible way to do it, right? Hang on.
+possible way to do it, right? Hang on.
+If I literally
+If I literally
+just So this is your
+just So this is your
+standard RNN, right? So you have
+standard RNN, right? So you have
+S0, OBS, you have
+actions, right? And you have OBS come in
+actions, right? And you have OBS come in
+at every step. So I can put actions in
+at every step. So I can put actions in
+here. That's no problem. This is
+here. That's no problem. This is
+T+1. And then all you do here, so you
+T+1. And then all you do here, so you
+can like use this as a normal
+can like use this as a normal
+LSTM
+LSTM
+model, but then you can also use this
+model, but then you can also use this
+uh during inference.
+uh during inference.
+Maybe I guess you have to train it on
+Maybe I guess you have to train it on
+two different objectives, which is a
+two different objectives, which is a
+little
+little
+weird, but you could actually just take
+weird, but you could actually just take
+the output state
+here. Well, LSTM has two states. There's
+here. Well, LSTM has two states. There's
+a hidden state and a cell state. So you
+a hidden state and a cell state. So you
+could take like the extra state here and
+could take like the extra state here and
+put it in as
+obs. I think that actually
+obs. I think that actually
+works. So then you save the because the
+works. So then you save the because the
+LSTM has two states, right? So you save
+LSTM has two states, right? So you save
+one
+one
+state of the
+two to just be arbitrary whatever it
+two to just be arbitrary whatever it
+wants to be and the other one gets
+wants to be and the other one gets
+constrained that it has to represent the
+constrained that it has to represent the
+embedding of the obs I
+guess of the next
+obs doable I
+obs doable I
+think is this insane or is this like a
+think is this insane or is this like a
+pretty reasonable able way to do
+pretty reasonable able way to do
+something model basedesque on top of
+something model basedesque on top of
+uh an already existing recurrent
+model cuz this this would let you just
+model cuz this this would let you just
+continue like rolling it out as
+well. Okay, let's try this and see how
+well. Okay, let's try this and see how
+far we
+far we
+get before I get hung up on something
+get before I get hung up on something
+else. So, we don't need
+else. So, we don't need
+Think we don't need the GRD or anything
+Think we don't need the GRD or anything
+in this case then do
+we just need to
+we just need to
+add we just need to add actions to the
+add we just need to add actions to the
+signature There.
+This means to predict
+Oh, but this is real
+ops.
+ops.
+Okay, it's a little
+Okay, it's a little
+tricky. Think we can do this though?
+the state gets
+the state gets
+that juices everything that you
+that juices everything that you
+need and then this thing is going to
+output just going to output logic and
+output just going to output logic and
+value Right? Even need to predict
+value Right? Even need to predict
+anything else. It doesn't.
+Right? So this can just stay as it was.
+Yeah, I see such a simpler way to do
+Yeah, I see such a simpler way to do
+this now with this. Okay. Um, we're
+this now with this. Okay. Um, we're
+going
+to stash or get
+stash zero.
+I just I see a way better way how the
+I just I see a way better way how the
+how we can do it like this now. It's way
+how we can do it like this now. It's way
+easier.
+So action
+buffer.
+buffer.
+Okay. So now we have
+Okay. So now we have
+actions state has this
+Default we'll
+Default we'll
+have action encoder
+Cool.
+So now we have action
+So now we have action
+encoder then encode observations.
+Okay, so this
+works. Here's the restroom real quick
+works. Here's the restroom real quick
+and then we keep implementing. Be right
+and then we keep implementing. Be right
+back.
+So we have this implemented
+now. All we should need to do is add
+now. All we should need to do is add
+this
+to frame.
+Where
+state? It's literally in here already.
+state? It's literally in here already.
+Action equals
+Action equals
+bash.actions. I just haven't been using
+it. Okay.
+See if we can get this train.
+the
+heck. Oh, I think you need to uh to
+heck. Oh, I think you need to uh to
+reshape the actions then as well, don't
+reshape the actions then as well, don't
+you? Yeah. Yeah. So, Ford train needs to
+you? Yeah. Yeah. So, Ford train needs to
+do
+But that's it though. It just needs to
+But that's it though. It just needs to
+flatten. That's fine.
+up my
+terminal. Okay, that actually does
+terminal. Okay, that actually does
+train. Seems
+This should be like same or better perf
+This should be like same or better perf
+than before as well because
+than before as well because
+um this is literally the same thing just
+um this is literally the same thing just
+with action embedding. This is the first
+step and then we'll add one auxiliary
+step and then we'll add one auxiliary
+loss and see if it screws up training
+loss and see if it screws up training
+and then literally from that we should
+and then literally from that we should
+be able to have a model based
+be able to have a model based
+thing. That should literally be all it
+thing. That should literally be all it
+takes.
+This is not training anywhere near
+This is not training anywhere near
+quickly
+quickly
+enough. I
+think I don't know what I could have
+think I don't know what I could have
+possibly
+broken. Hang on. It's possible I hadn't
+broken. Hang on. It's possible I hadn't
+checked the breakout config lately.
+I put in
+here should be fine,
+right? It's definitely not what we want.
+here. Let's Let's do something
+Okay. So, this one does train
+This one does not train anywhere near as
+well. These are the same configs.
+Okay, these must not be getting passed
+Okay, these must not be getting passed
+correctly then because
+correctly then because
+um yeah, this works and the other one
+doesn't. So bear
+with Oh, there's an off by one, isn't
+there? There's Yeah, there's an off by
+there? There's Yeah, there's an off by
+one.
+Okay.
+There we go. So that actually
+There we go. So that actually
+matters. It learns uh to condition quite
+matters. It learns uh to condition quite
+heavily on that. That looks like
+Oh, that's really good, isn't
+Oh, that's really good, isn't
+it? Hang on. That's better than we had
+it? Hang on. That's better than we had
+before by a
+before by a
+lot. Okay, maybe I've just been dumb not
+lot. Okay, maybe I've just been dumb not
+bothering making an action encoder. That
+bothering making an action encoder. That
+actually looks like it really freaking
+actually looks like it really freaking
+helps, doesn't
+helps, doesn't
+it? Holy
+Yeah. Okay. So, at least we're going to
+Yeah. Okay. So, at least we're going to
+definitely guaranteed for sure get one
+definitely guaranteed for sure get one
+good thing today, right? I'm pretty damn
+good thing today, right? I'm pretty damn
+sure. We'll uh we'll run a double check
+sure. We'll uh we'll run a double check
+since this was so useful.
+Okay, there is some instability jank
+Okay, there is some instability jank
+going on it looks like,
+but we expect that's the experience
+buffer. Yeah, we expect that's the
+buffer. Yeah, we expect that's the
+experience buffer bug.
+Oh, actually interesting. Is it?
+Oh, actually interesting. Is it?
+Um, no. This is more aggressive than
+Um, no. This is more aggressive than
+before. Maybe it is the
+same. Same
+curve.
+curve.
+H. Well, that learns way faster than it
+H. Well, that learns way faster than it
+used to. So, something got better.
+used to. So, something got better.
+But, okay. Action encoding doesn't
+But, okay. Action encoding doesn't
+actually help. It's just the whole thing
+actually help. It's just the whole thing
+must have gotten better. That's weird.
+must have gotten better. That's weird.
+Unless I uh didn't check out the branch
+Unless I uh didn't check out the branch
+or
+something. No, I'm on
+it. Okay, that's fine then.
+it. Okay, that's fine then.
+It would be kind of weird if it helped
+It would be kind of weird if it helped
+that much. Um, but now we have this. We
+that much. Um, but now we have this. We
+can
+can
+do some stuff with
+this. Next thing is going to be
+this. Next thing is going to be
+additional loss on LSTM.
+additional loss on LSTM.
+Let me go remind
+myself which one of the states is
+which. It's the hidden state
+which. It's the hidden state
+H that we
+need. So this needs to be in forward
+need. So this needs to be in forward
+train.
+state
+dot. What format do we want it
+dot. What format do we want it
+in? You probably want it
+in this format.
+this and then LSTMH is going to have to
+this and then LSTMH is going to have to
+be normed towards that.
+And that would be done
+And that would be done
+right like hereish
+maybe it's not Neptune this
+Do we not get LSTMH out of
+this? We should get LSTMH,
+right? length
+right? length
+one. This needs to return
+full. We're going to have a problem if
+full. We're going to have a problem if
+this doesn't return us full
+this doesn't return us full
+uh full
+data. No, it
+data. No, it
+does. It returns the full thing. So, why
+does. It returns the full thing. So, why
+aren't we getting it?
+New
+value budgets.
+Oh, that's layer. It's one
+Oh, that's layer. It's one
+layer. That's totally
+fine. Is that right? It's one
+fine. Is that right? It's one
+No, hang on. That doesn't make sense,
+No, hang on. That doesn't make sense,
+right?
+Why is this one?
+Oh, it only gives you the final hidden
+Oh, it only gives you the final hidden
+state. [ __ ]
+Wait, isn't this the one that we want
+Wait, isn't this the one that we want
+anyways though?
+If I just do uh if I just train like a
+If I just do uh if I just train like a
+layer or
+layer or
+two that
+projects instead have to train something
+projects instead have to train something
+that projects this.
+that projects this.
+Okay, that's not bad.
+state. I just need state hidden I
+guess on this
+And then this default policy needs like
+um this needs like an extra loss on it.
+Just like small little net There.
+What's the dimension of this
+thing? 64. I think 64 is the time,
+thing? 64. I think 64 is the time,
+right? 64 is the time.
+This doesn't have to be recurrent, I
+This doesn't have to be recurrent, I
+guess.
+Next state predictions
+world loss.
+Okay, you have a world model in
+Okay, you have a world model in
+here. Uh, it seems like the loss is
+here. Uh, it seems like the loss is
+exploding, but you have
+exploding, but you have
+it. Yeah, the loss is completely
+it. Yeah, the loss is completely
+freaking exploding.
+Let's try One.
+Technically, these don't have to be
+Technically, these don't have to be
+detached.
+Guess we try that next
+Okay. Well, that fixes it
+right now. It is very good at predicting
+right now. It is very good at predicting
+next
+next
+state. Does it still
+state. Does it still
+train? Bit slower, but it
+does. Is it even
+does. Is it even
+slower? 30 mil per
+800. Yeah, it's a bit slower. Not that
+much. And you get a good world model
+much. And you get a good world model
+loss.
+loss.
+So, uh let's commit this
+Technically, you don't even need to have
+Technically, you don't even need to have
+a network here,
+right? I think this probably messes it
+right? I think this probably messes it
+up though.
+Seems
+not still
+train. Still trains perfectly well.
+Actually, let's log this
+Actually, let's log this
+one. Be curious to see how this stacks
+one. Be curious to see how this stacks
+up because now you're just saying that
+up because now you're just saying that
+the output should be next state, right?
+the output should be next state, right?
+And then it should be really really easy
+And then it should be really really easy
+from next state to predict um or
+from next state to predict um or
+encoding of next state, which should be
+encoding of next state, which should be
+very easy to predict reward from because
+very easy to predict reward from because
+you can just see whether you broke a
+you can just see whether you broke a
+brick, I guess.
+Okay. I mean, that's basically the same
+curve. So, this objective doesn't seem
+curve. So, this objective doesn't seem
+like it hurt
+anything. Did I do this right? Is it
+anything. Did I do this right? Is it
+really this
+easy? I mean, I guess it wouldn't be
+easy? I mean, I guess it wouldn't be
+that surprising
+that surprising
+like predicting the next state like that
+like predicting the next state like that
+is a good thing to predict generally,
+right? So, I think we kind of just get
+right? So, I think we kind of just get
+world model for free
+world model for free
+then with this setup. Right.
+then with this setup. Right.
+next state. Unless I did something wrong
+next state. Unless I did something wrong
+here,
+here,
+but let's just make sure that these are
+but let's just make sure that these are
+different. I mean, they'd have to be
+different. I mean, they'd have to be
+different though,
+right? The soft
+Yeah, these are different
+tensors.
+tensors.
+Okay, so um like
+Okay, so um like
+technically we can just do mu0 in the
+technically we can just do mu0 in the
+forward pass now, can't
+forward pass now, can't
+we? It's just use the world model to try
+we? It's just use the world model to try
+to find better actions, right?
+to find better actions, right?
+like we can do any sort of search that
+like we can do any sort of search that
+we want now, right? Isn't that that's
+we want now, right? Isn't that that's
+the whole
+point? Where's
+point? Where's
+it? What are you implementing? Uh
+it? What are you implementing? Uh
+something that's pretty close to mu0.
+something that's pretty close to mu0.
+I'm just trying to see like what's the
+I'm just trying to see like what's the
+easiest way I can get some sort of world
+easiest way I can get some sort of world
+modeling based thing into puffer where I
+modeling based thing into puffer where I
+can like crank up compute in order to
+can like crank up compute in order to
+get more sample efficiency or leave it
+get more sample efficiency or leave it
+at base and get like the same result
+at base and get like the same result
+that puffer gets right now.
+So, so far all I had to do was
+So, so far all I had to do was
+uh I make the encoder action
+uh I make the encoder action
+conditional. So, it gets to see the
+conditional. So, it gets to see the
+action taking with taken which you need
+action taking with taken which you need
+in order to predict next state, right?
+in order to predict next state, right?
+And then I just added a loss between the
+And then I just added a loss between the
+output of the recurrent cell which is
+output of the recurrent cell which is
+like your intermediate hidden state and
+like your intermediate hidden state and
+the embedding of the next state both of
+the embedding of the next state both of
+which are
+which are
+differentiable. m0 should be strong on
+differentiable. m0 should be strong on
+breakout. I'm just using this as like a
+breakout. I'm just using this as like a
+trivial quick test m to make sure I
+trivial quick test m to make sure I
+don't break anything. Um like no
+don't break anything. Um like no
+technically I could implement it all
+technically I could implement it all
+correctly and it would be the same. I
+correctly and it would be the same. I
+just want to make sure I don't
+just want to make sure I don't
+catastrophically fail on breakout as a
+catastrophically fail on breakout as a
+result of what I'm doing. I have lots of
+result of what I'm doing. I have lots of
+other test
+MS but theoretically I mean it should do
+MS but theoretically I mean it should do
+a little better once you do uh the
+a little better once you do uh the
+search
+search
+component. Okay. So encode
+component. Okay. So encode
+observations good
+observations good
+actions goes right
+right
+here. It's usually like this, right? OBS
+here. It's usually like this, right? OBS
+embed
+hidden. So, this hidden is the world
+hidden. So, this hidden is the world
+model target now, right?
+So, can I not just like write a loop
+So, can I not just like write a loop
+here? I should be able to just write a
+here? I should be able to just write a
+loop here.
+You need to select the action for
+You need to select the action for
+this. This is the one tricky
+this. This is the one tricky
+thing. You need to select the action for
+this. So you start with
+this. So you start with
+like args embed
+hidden and then you do
+hidden and then you do
+like
+like
+obsed equals
+obsed equals
+rake obs. in
+bed. This takes like ops
+bed. This takes like ops
+embed STM
+state. You need a rig LSTM state as
+state. You need a rig LSTM state as
+well. I
+believe. So the hidden cell or the cells
+believe. So the hidden cell or the cells
+which one of these is trained to
+which one of these is trained to
+be it's the hidden that's trained to be
+be it's the hidden that's trained to be
+the next
+prediction. So this can be
+obsed and I think the only thing that's
+obsed and I think the only thing that's
+missing here is the action prediction,
+missing here is the action prediction,
+right?
+right?
+Because then what we would do is we'd be
+Because then what we would do is we'd be
+able to figure out which of these we
+able to figure out which of these we
+actually want to use if we had the
+actually want to use if we had the
+reward
+prediction. Oh no, we also need the
+prediction. Oh no, we also need the
+action
+sampling
+because Oh, that's a little tricky.
+Yeah, I messed up the action embedding
+Yeah, I messed up the action embedding
+here because it's predicting right now.
+here because it's predicting right now.
+It's predicting the entire embedding. It
+It's predicting the entire embedding. It
+needs to predict the embedding without
+needs to predict the embedding without
+the action
+component because then the idea here,
+component because then the idea here,
+right, is that you have to
+right, is that you have to
+run you run the decoder on this thing,
+run you run the decoder on this thing,
+right?
+Get out of here.
+Get out of here.
+Bot time is it also 10:26. So I'm going
+Bot time is it also 10:26. So I'm going
+to go for uh breakfast/brunch
+to go for uh breakfast/brunch
+soon. Get rid of this bot.
+This is just going to be false for now.
+This is just going to be false for now.
+We'll think about this
+We'll think about this
+after. Okay. So, you sample logits, you
+after. Okay. So, you sample logits, you
+get your act, your log prop, and then
+get your act, your log prop, and then
+the idea is that this needs to get
+the idea is that this needs to get
+combined with OBS embedding. But I don't
+combined with OBS embedding. But I don't
+have that right yet, right?
+have that right yet, right?
+And then this will get used to select
+And then this will get used to select
+which hidden state you
+use. And actually what we should do is
+use. And actually what we should do is
+we should leave these as hidden in LSTM
+we should leave these as hidden in LSTM
+state. And I should just
+state. And I should just
+do
+zero. It's your hidden
+We don't need the values for now.
+We don't need the values for now.
+Technically, we
+Technically, we
+could we actually technically could just
+could we actually technically could just
+bootstrap from this
+value. Watch
+it. I think it's better to just do.
+Well, let me see if I can like catch
+Well, let me see if I can like catch
+something real quick that would like do
+something real quick that would like do
+that we would expect to kind of do
+that we would expect to kind of do
+something.
+You kind of need to know like the
+You kind of need to know like the
+best delta
+Hey, I think it makes sense to just
+Hey, I think it makes sense to just
+predict rewards,
+right? Plus bootstrap value maybe.
+I think it's just something like this
+I think it's just something like this
+honestly. Right. We have to train that
+honestly. Right. We have to train that
+uh that value head. Hang
+on. I think that's like all there is to
+on. I think that's like all there is to
+mu to like doing something mu zero. Like
+mu to like doing something mu zero. Like
+obviously that's not like the full MCTS,
+obviously that's not like the full MCTS,
+but that's decent.
+but that's decent.
+Um, that should do something
+maybe just do a bunch of trials.
+maybe just do a bunch of trials.
+Um, oh, we still have to fix the action
+Um, oh, we still have to fix the action
+head. I think I'm going to have to do
+head. I think I'm going to have to do
+that after breakfast. But let's add the
+that after breakfast. But let's add the
+reward loss real quick because that can
+reward loss real quick because that can
+just go by right by the value
+just go by right by the value
+loss. It's like super basic.
+loss. It's like super basic.
+Um, you do actually have to output the
+Um, you do actually have to output the
+reward though.
+Shoot. I guess I just add it to state or
+Shoot. I guess I just add it to state or
+something.
+Yeah, I guess I just add it to
+state.rewards and do you
+predict? I have to do the same thing,
+predict? I have to do the same thing,
+right?
+Did you have to install a special
+Did you have to install a special
+version of Triton? No, I
+didn't. Hey, Spencer. I'm doing world
+didn't. Hey, Spencer. I'm doing world
+model stuff today. I'm seeing if I can
+model stuff today. I'm seeing if I can
+get us like anything crazy to work. I
+get us like anything crazy to work. I
+think it's worth a day.
+I can get you another box if you need to
+I can get you another box if you need to
+play with one
+though. Like I can get you access to
+though. Like I can get you access to
+one. I have one I'm probably not going
+one. I have one I'm probably not going
+to use today. I don't know what you're
+to use today. I don't know what you're
+working on.
+normal box works just fine. I see. Yep.
+normal box works just fine. I see. Yep.
+Yeah. 5090 steps a pain in the
+Yeah. 5090 steps a pain in the
+ass. We're definitely going to make sure
+ass. We're definitely going to make sure
+that we don't have that problem with 40
+that we don't have that problem with 40
+boxes when we order them.
+Or maybe this does make sense to just
+Or maybe this does make sense to just
+put in the
+LSTM. Yeah, I got to like I'm hungry
+LSTM. Yeah, I got to like I'm hungry
+though. I got to go get breakfast and
+though. I got to go get breakfast and
+stuff. And uh I will be back soon. Uh
+stuff. And uh I will be back soon. Uh
+I'm just going to get some food real
+I'm just going to get some food real
+quick and then we're going to do this
+quick and then we're going to do this
+all day long. We're gonna see if we can
+all day long. We're gonna see if we can
+get some world model based thing to do a
+get some world model based thing to do a
+thing in Puffer. Uh, thanks folks for
+thing in Puffer. Uh, thanks folks for
+watching. If you're interested in this
+watching. If you're interested in this
+stuff, puffer.ai for all the things. We
+stuff, puffer.ai for all the things. We
+are two stars off of this rounding up to
+are two stars off of this rounding up to
+2K. So, please just go ahead and star
+2K. So, please just go ahead and star
+Puffer. Helps us out a lot. And you can
+Puffer. Helps us out a lot. And you can
+join the discord.

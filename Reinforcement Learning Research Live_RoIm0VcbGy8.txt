@@ -1,0 +1,3705 @@
+Kind: captions
+Language: en
+Okay,
+Okay,
+we are back live.
+we are back live.
+Good morning folks.
+We have a few things to do today. Um,
+We have a few things to do today. Um,
+as I kind of said yesterday,
+as I kind of said yesterday,
+really not doing like a huge amount of
+really not doing like a huge amount of
+stuff this.
+stuff this.
+We're kind of just doing post-release
+We're kind of just doing post-release
+stuff. We're doing a few posts on uh
+stuff. We're doing a few posts on uh
+Twitter and everywhere else. Making sure
+Twitter and everywhere else. Making sure
+that people actually see our release.
+that people actually see our release.
+We're fixing up some things that I
+We're fixing up some things that I
+haven't had time to fix for people who
+haven't had time to fix for people who
+are uh involved with and using Puffer
+are uh involved with and using Puffer
+Lib, let's say. trying to fix up some
+Lib, let's say. trying to fix up some
+things with the meta environment. I told
+things with the meta environment. I told
+Stone I'd do some robotic stuff. Just
+Stone I'd do some robotic stuff. Just
+know a few little things here and there.
+know a few little things here and there.
+Um,
+Um,
+and then, you know, sometime in the next
+and then, you know, sometime in the next
+couple weeks, we're going to really
+couple weeks, we're going to really
+start on the new stuff with drones and
+start on the new stuff with drones and
+more industry side.
+more industry side.
+They're having some meetings with
+They're having some meetings with
+various bases off the uh off the stream
+various bases off the uh off the stream
+looking for problems we can solve with
+looking for problems we can solve with
+uh RL going forward.
+uh RL going forward.
+Pop out the chat real quick and then
+Pop out the chat real quick and then
+I'll this over to the green view
+moment
+and I think what we're going to do on
+and I think what we're going to do on
+I got a meeting in like an hour, no two
+I got a meeting in like an hour, no two
+hours.
+hours.
+So that's good. Um,
+So that's good. Um,
+what we're going to do in the meantime,
+what we're going to do in the meantime,
+we're going to see if we can figure out
+we're going to see if we can figure out
+this meta environment and what's going
+this meta environment and what's going
+on with it.
+I would love to know why it's this slow.
+Can I figure out why it's this slow?
+Can I figure out why it's this slow?
+Actually,
+Actually,
+maybe I can just figure out
+Yeah, let's do like test
+Yeah, let's do like test
+at uh
+down here.
+Move all this crap out of the way.
+Okay. So, does this work?
+Okay. So, does this work?
+If so, we can run profiler on it.
+does work.
+Do I have um profile in here?
+This is a torch profile which is not
+there way we can get profiling into C
+there way we can get profiling into C
+from Python
+from Python
+when it's like an external thing that we
+when it's like an external thing that we
+don't have control over
+or am I going to have to set up like uh
+or am I going to have to set up like uh
+level profiling?
+Tricky with the way that they've
+Tricky with the way that they've
+developed this specific environment.
+I think I know how to do it though.
+this thing All right.
+So, pretty much what I'm trying to do
+So, pretty much what I'm trying to do
+here is I'm just trying to figure out
+here is I'm just trying to figure out
+why this end is so slow. Um, so I can at
+why this end is so slow. Um, so I can at
+least have some idea of how to set up
+least have some idea of how to set up
+efficient experiments on it.
+efficient experiments on it.
+It might just be that it's just slow
+It might just be that it's just slow
+overall, but I'm hoping that they're
+overall, but I'm hoping that they're
+going to be like some combination of
+going to be like some combination of
+settings that are at least bearable. Uh,
+settings that are at least bearable. Uh,
+we're going to eventually have to
+we're going to eventually have to
+rewrite some sections, I think, of it or
+rewrite some sections, I think, of it or
+reoptimize some sections, at least help
+reoptimize some sections, at least help
+the authors do that. But in the
+the authors do that. But in the
+meantime, just looking for something
+meantime, just looking for something
+quick.
+Oh, okay. So, we actually do get
+Oh, okay. So, we actually do get
+This is way too big, though.
+See what this does.
+See what this does.
+Oops. All right. One second. Apparently,
+Oops. All right. One second. Apparently,
+I have countertops being installed right
+I have countertops being installed right
+now. I'll be right back.
+I'll have to monitor that, but
+I'll have to monitor that, but
+otherwise good to do a little bit of
+otherwise good to do a little bit of
+work for a
+I figure out why this
+backwards
+by
+Oh, I just had to add dump.
+Literally just that.
+Okay.
+Okay.
+So from this
+So from this
+we can see the problem
+we can see the problem
+and I checked
+Probably the replay riders probably
+Probably the replay riders probably
+filling up my whole disc space as well.
+That's what was happening.
+And now we have
+And now we have
+most of the time is coming from samples.
+Good.
+Now, this is probably going to tell us a
+Now, this is probably going to tell us a
+very different story, right?
+very different story, right?
+Yeah, very different story.
+Yeah, very different story.
+That's 680k.
+And that's actually as about as fast as
+And that's actually as about as fast as
+we should expect it to go anyways,
+we should expect it to go anyways,
+right? Yeah. Let's just let that train.
+right? Yeah. Let's just let that train.
+And actually, we'll we'll log that
+And actually, we'll we'll log that
+on Neptune.
+on Neptune.
+And I'll tag it
+token.
+Good.
+Good.
+Go check on the counters.
+I have had a uh a piece of plywood for
+I have had a uh a piece of plywood for
+the kitchen counter for the last couple
+the kitchen counter for the last couple
+of months. This uh building is not fully
+of months. This uh building is not fully
+finished, so that's nice.
+finished, so that's nice.
+All right. What's going on here? This
+All right. What's going on here? This
+This thing does not appear to be
+This thing does not appear to be
+training like at all, right?
+Yeah. So,
+let me see what we put in the config for
+let me see what we put in the config for
+this.
+Actually,
+Actually,
+maybe we should just try to run this
+maybe we should just try to run this
+thing.
+So, this is finishing eval. And once
+So, this is finishing eval. And once
+this is done with Eval, we're going to
+this is done with Eval, we're going to
+actually now finally, and this is why
+actually now finally, and this is why
+it's taken me so long to actually even
+it's taken me so long to actually even
+do anything with this end. We didn't
+do anything with this end. We didn't
+have the replay viewer working. At least
+have the replay viewer working. At least
+now we'll be able to see what it is this
+now we'll be able to see what it is this
+policy is doing and whether it makes any
+policy is doing and whether it makes any
+sense, whether the environment is a
+sense, whether the environment is a
+problem or what.
+That ought to give us a couple replays.
+That ought to give us a couple replays.
+Give it a minute to run.
+The hope is that today we'll actually be
+The hope is that today we'll actually be
+able to get some
+able to get some
+at least some sort of reasonable policy.
+at least some sort of reasonable policy.
+Got you two articles. What you think we
+Got you two articles. What you think we
+should post first?
+should post first?
+Terraform.
+Uh I just did
+Uh I just did
+two technical articles.
+Don't think
+Don't think
+we can try. Let's see if we try this
+we can try. Let's see if we try this
+one.
+one.
+See,
+uh, title needs work, I think.
+Let me think.
+Okay, let let me read it and then we'll
+Okay, let let me read it and then we'll
+think on title.
+Honestly,
+this image could be the uh you need an
+this image could be the uh you need an
+image for the uh the header of it. This
+image for the uh the header of it. This
+could be it.
+could be it.
+This is hilarious.
+Let's see that. So, that's the main
+Let's see that. So, that's the main
+thing that we got to look at is the
+thing that we got to look at is the
+title and the uh
+title and the uh
+and the image.
+Gamifying.
+Yeah, this basically just needs to be
+Yeah, this basically just needs to be
+rewarded. The the thing is you're trying
+rewarded. The the thing is you're trying
+to say gamify your problem so that
+to say gamify your problem so that
+reinforcement learning can solve it.
+reinforcement learning can solve it.
+Like
+so that header image doesn't do much.
+Yeah, I don't I don't think that's a
+Yeah, I don't I don't think that's a
+particularly good header image.
+particularly good header image.
+Presumably
+you have this in X article format as
+you have this in X article format as
+well, right?
+52. I mean, honestly, this thing
+52. I mean, honestly, this thing
+this thing here is pretty close.
+You can literally just paste this into
+You can literally just paste this into
+uh like a Google a Google draw and like
+uh like a Google a Google draw and like
+add white space on either side if it
+add white space on either side if it
+doesn't fit and it'll be fine.
+Let me think about how we do this.
+There's really nothing even about G.
+There's really nothing even about G.
+This is like an enticing concept, but
+This is like an enticing concept, but
+the article really isn't about
+Maybe we do the other one today actually
+Maybe we do the other one today actually
+cuz I'm looking at how basic this one is
+cuz I'm looking at how basic this one is
+now. This one will do well, but I don't
+now. This one will do well, but I don't
+know if it matches the release week
+know if it matches the release week
+stuff as well.
+stuff as well.
+This is like reinforcement learning
+This is like reinforcement learning
+basics or something, right?
+But like how to game like honestly you
+But like how to game like honestly you
+could make a separate article on like
+could make a separate article on like
+how to gify a problem for RL. This is
+how to gify a problem for RL. This is
+not really what this is. Like that's
+not really what this is. Like that's
+like a really effective thing and
+like a really effective thing and
+there's actually quite a bit of
+there's actually quite a bit of
+technical depth on that. Like if you
+technical depth on that. Like if you
+think about it, right, that's like a big
+think about it, right, that's like a big
+chunk of what I did with neural MMO 3.
+chunk of what I did with neural MMO 3.
+There like a ton of ways you could set
+There like a ton of ways you could set
+that problem up, most of which don't
+that problem up, most of which don't
+work.
+Uh, terraform or tower climb.
+This is cool. Let me let me read through
+This is cool. Let me let me read through
+this and see if this is a better fit.
+I think the title is too long.
+Uh the content is fine for the first
+Uh the content is fine for the first
+one. It's just I don't know if it fits
+one. It's just I don't know if it fits
+like staging in the release Take
+Hang on. They're uh putting the
+Hang on. They're uh putting the
+countertop in and I guess cutting it or
+countertop in and I guess cutting it or
+something.
+Okay, I think we're good. We'll see.
+Okay, I think we're good. We'll see.
+I guess they're like grinding it so it
+I guess they're like grinding it so it
+fits something.
+Look back. What?
+What's this doc article? We're uh I'm
+What's this doc article? We're uh I'm
+This is a Spencer wrote an article. I'm
+This is a Spencer wrote an article. I'm
+just looking it over. We're doing like
+just looking it over. We're doing like
+one article per day for uh the 3.0
+one article per day for uh the 3.0
+release. So, we just have tons of
+release. So, we just have tons of
+articles and we're just releasing one
+articles and we're just releasing one
+till per day until we run out.
+till per day until we run out.
+probably excluding the weekend.
+Spencer, it would be good to mention
+Spencer, it would be good to mention
+that um right here that like you know
+that um right here that like you know
+you often you're targeting performance
+you often you're targeting performance
+marks that can be uh
+should mention that the uh the target
+should mention that the uh the target
+speed can be like 10,000x what you would
+speed can be like 10,000x what you would
+expect for a normal game, right?
+expect for a normal game, right?
+Like that we can actually like you can
+Like that we can actually like you can
+continue to train faster like by making
+continue to train faster like by making
+it like a th000 to 10,000x faster than a
+it like a th000 to 10,000x faster than a
+normal game at least.
+normal game at least.
+More than 10,000 ups.
+So, like in the original game, right,
+So, like in the original game, right,
+like a human's only going to need to
+like a human's only going to need to
+climb a couple blocks.
+like you only need to simulate a couple
+like you only need to simulate a couple
+blocks per second and then it's like 60
+blocks per second and then it's like 60
+frames or whatever. But what we do is we
+frames or whatever. But what we do is we
+do like a million like movements per
+do like a million like movements per
+second and you can actually train a
+second and you can actually train a
+neural net that fast. Um, I so I guess
+neural net that fast. Um, I so I guess
+it's worth mentioning like just how fast
+it's worth mentioning like just how fast
+these things are compared to like what
+these things are compared to like what
+how fast a normal game would On.
+What's this line supposed to be,
+What's this line supposed to be,
+Spencer?
+I think this is there's like a missing
+I think this is there's like a missing
+sentence here, right? Like it's
+sentence here, right? Like it's
+compressed so that you uh you have lower
+compressed so that you uh you have lower
+CPU toGPU transfer, right?
+Okay, let me see. venture.
+Yeah, I just I missed it because I was
+Yeah, I just I missed it because I was
+distracted. It's fine. Yeah, this is
+distracted. It's fine. Yeah, this is
+fine. Spencer.
+Yeah, this is cool. Can we get a Can we
+Yeah, this is cool. Can we get a Can we
+get a header image where the puffer is
+get a header image where the puffer is
+not like looking away from the screen?
+not like looking away from the screen?
+Other than that, I think this is uh
+Other than that, I think this is uh
+good. Now, I don't know if the title
+good. Now, I don't know if the title
+fits in um you got to make sure that
+fits in um you got to make sure that
+like the full title shows up on the
+like the full title shows up on the
+post.
+post.
+You might have to tweak that.
+You might have to tweak that.
+I mean, you could just use the second
+I mean, you could just use the second
+part to be honest if it doesn't fit.
+part to be honest if it doesn't fit.
+Like training AI to beat an unreasonably
+Like training AI to beat an unreasonably
+hard puzzle game
+hard puzzle game
+is pretty good.
+So, yeah, do that. Put it into an
+So, yeah, do that. Put it into an
+article nicely and let me know so I can
+article nicely and let me know so I can
+repost it.
+want to read Terra while you're at it. I
+want to read Terra while you're at it. I
+can look.
+So, this is just an this is just Mars.
+So, this is just an this is just Mars.
+Doesn't show the end.
+This is good. Yeah,
+this is a really good quote.
+this is a really good quote.
+I honestly I think that after you post
+I honestly I think that after you post
+this, like in a couple days or
+this, like in a couple days or
+something, you should just tweet this as
+something, you should just tweet this as
+a standalone.
+a standalone.
+This is really good.
+This is a good article, Spencer. I think
+This is a good article, Spencer. I think
+these two are these two are quite nice.
+these two are these two are quite nice.
+I don't think you post these back to
+I don't think you post these back to
+back. I think you do you can pick one
+back. I think you do you can pick one
+and then do a different one. So either
+and then do a different one. So either
+of these is good for today. Um
+of these is good for today. Um
+and then like we'll space them, right?
+and then like we'll space them, right?
+So like ideally we it's we probably have
+So like ideally we it's we probably have
+two weeks worth of articles really. So
+two weeks worth of articles really. So
+we'll space it so that there's different
+we'll space it so that there's different
+you know that there's variety. It's not
+you know that there's variety. It's not
+just like all the M's and then all the
+just like all the M's and then all the
+this and all the that. I find when I
+this and all the that. I find when I
+post like one M today, one M tomorrow,
+post like one M today, one M tomorrow,
+next day like it doesn't get much
+next day like it doesn't get much
+traction.
+I would think again about the
+I don't know if the thumbnail just
+I don't know if the thumbnail just
+having a random screenshot of Mars.
+This is an art like you got to know that
+This is an art like you got to know that
+this is Okay. So, here's one thing to
+this is Okay. So, here's one thing to
+know about your uh about articles,
+know about your uh about articles,
+Spencer. This is something useful. So,
+Spencer. This is something useful. So,
+you got to think of the preview. So,
+you got to think of the preview. So,
+it'll show you the image, the title, and
+it'll show you the image, the title, and
+then the first couple sentences of the
+then the first couple sentences of the
+post. That's all it will have.
+So that's all people see before they
+So that's all people see before they
+actually decide if they want to read the
+actually decide if they want to read the
+article. So they'll see like maybe this
+article. So they'll see like maybe this
+much like this much stuff. So I think
+much like this much stuff. So I think
+like the content of the article is fine.
+like the content of the article is fine.
+Do a little bit of thinking about how to
+Do a little bit of thinking about how to
+do this and then you know either this or
+do this and then you know either this or
+tower climb whatever. Um and I will
+tower climb whatever. Um and I will
+repost those as well. Like a decent a
+repost those as well. Like a decent a
+decent quote tweet.
+Okay.
+Okay.
+Oh no, I forgot I had this running.
+Oh no, I forgot I had this running.
+Uh yeah, we generated a bunch of
+Uh yeah, we generated a bunch of
+garbage. Holy
+going to factory tour right now. We'll
+going to factory tour right now. We'll
+post after. Solid.
+All right,
+All right,
+let me see if we can actually
+let me see if we can actually
+make this thing work now.
+Okay, so I have to drag
+drag this thing which is
+okay cool. So,
+okay cool. So,
+I mean, we can immediately see why this
+I mean, we can immediately see why this
+doesn't work, right?
+one agent mine generator and an alter.
+Number of agents will be one
+Number of agents will be one
+agent.
+and
+and
+96.
+Like so.
+And we'll see how slow this is.
+K. Really?
+Okay. No, we have 200k now.
+See
+what this does in 50 million stuff.
+Let me go check on my counter as well.
+So, the expected reward here, let me
+So, the expected reward here, let me
+think what the expected reward is. It
+think what the expected reward is. It
+should be quite high, right?
+should be quite high, right?
+Am I rewarding this thing for
+just for getting rewarded for hearts?
+just for getting rewarded for hearts?
+But, I mean, it should pretty much just
+But, I mean, it should pretty much just
+be able to do
+be able to do
+You should be able to get tons of these.
+See
+if I remembered to track this.
+if I remembered to track this.
+Didn't. That's okay.
+Didn't. That's okay.
+We'll just watch it.
+This should definitely be able to go
+This should definitely be able to go
+above one.
+If it can't, then there's a problem.
+Maxing at one would be very suspicious.
+One heart.
+It seems like there is specifically
+It seems like there is specifically
+only getting one is a thing.
+It's a very small map. It should have no
+It's a very small map. It should have no
+problem with this task. So, I suspect
+problem with this task. So, I suspect
+that we're going to load up the policy
+that we're going to load up the policy
+and we're going to see something weird.
+That's like the most likely.
+That's like the most likely.
+It is also somewhat annoying to me that
+It is also somewhat annoying to me that
+we can only do this like 50 million
+we can only do this like 50 million
+steps.
+steps.
+This thing is minimum of 10 times Well,
+This thing is minimum of 10 times Well,
+is it 10 times too slow? It's really
+is it 10 times too slow? It's really
+only two or three times too slow to
+only two or three times too slow to
+think of it.
+think of it.
+You should not be getting bottlenecked
+You should not be getting bottlenecked
+by the environment.
+This article's done pretty well. 40k
+This article's done pretty well. 40k
+views on something this technical.
+get all the politics off the timeline.
+Oh, this is awesome.
+Oh, this is awesome.
+Yeah, this artificial life type work is
+Yeah, this artificial life type work is
+really cool.
+There's definitely something about
+There's definitely something about
+I always think it's suspicious when like
+I always think it's suspicious when like
+rewards are at numbers like that.
+Exactly one and it's never gone above
+Exactly one and it's never gone above
+one.
+one.
+Oh,
+Oh,
+and corrected.
+and corrected.
+Went slightly above one.
+I think it should just be able to do way
+I think it should just be able to do way
+way more than that though. We'll see
+way more than that though. We'll see
+from the uh the replay, I guess.
+We'll see from the replay.
+It also didn't take very long. 50
+It also didn't take very long. 50
+million steps is considered very very
+million steps is considered very very
+quick. Just that the code is slow. So I
+quick. Just that the code is slow. So I
+mean this should have been like a one
+mean this should have been like a one
+minute experiment or whatever.
+5 minutes for 50 million has not been a
+5 minutes for 50 million has not been a
+thing since uh buffer 10.
+Yep. Hang on.
+All right.
+I would like to know why this thing gets
+I would like to know why this thing gets
+stuck on eBel for so long, but whatever.
+All right.
+countertop is done. This runs
+Not quite
+Not quite
+have something
+plus bionics.
+What?
+I I don't even know what that means.
+Dominant.
+Dominant.
+What does that even mean?
+there there.
+there there.
+Now,
+okay, this is what we wanted. This is
+okay, this is what we wanted. This is
+the simplest possible environment.
+I don't know why their play button
+I don't know why their play button
+doesn't work, but
+Oh, it just literally chills there.
+Oh, it just literally chills there.
+Let me see.
+It doesn't do anything. It literally
+It doesn't do anything. It literally
+just chills there.
+I don't think that that's better.
+I don't think that that's better.
+like
+like that design doesn't exist
+like that design doesn't exist
+really in nature and I don't think it's
+really in nature and I don't think it's
+very effective.
+I do hope we'll see like severalfold
+I do hope we'll see like severalfold
+increased capacity for cardio and
+increased capacity for cardio and
+strength though and intelligence.
+I mean, let me tell you, the other thing
+I mean, let me tell you, the other thing
+that would just be great is if we
+that would just be great is if we
+actually could fix freaking muscular
+actually could fix freaking muscular
+injuries quickly because I got a bad
+injuries quickly because I got a bad
+rotator right now. I cannot bench the
+rotator right now. I cannot bench the
+bar before I hurt this rotator a few
+bar before I hurt this rotator a few
+weeks ago. Could bench 210 for 10 quite
+weeks ago. Could bench 210 for 10 quite
+easily.
+And I mention bar
+And I mention bar
+ridiculous.
+Let's start by fixing that crap.
+I know what we're going to do.
+Now these all have zero have zero
+Now these all have zero have zero
+initial items right
+Now, what we're going to do
+one reward for or red.
+Stay away from benching.
+Stay away from benching.
+Uh, actually I didn't hurt it on a bench
+Uh, actually I didn't hurt it on a bench
+press. I heard it on an I heard it on a
+press. I heard it on an I heard it on a
+uh dumbbell shoulder press. I've never
+uh dumbbell shoulder press. I've never
+had a major injury from benching.
+Okay, so this should basically just go
+Okay, so this should basically just go
+straight up here.
+Yeah, I I mean somebody it was a pretty
+Yeah, I I mean somebody it was a pretty
+I was being careful. Somebody distracted
+I was being careful. Somebody distracted
+me. It was like it was a whole thing.
+me. It was like it was a whole thing.
+But I think it's only like a it should
+But I think it's only like a it should
+be a pretty minor injury. Should be like
+be a pretty minor injury. Should be like
+it should at least be peeled enough in a
+it should at least be peeled enough in a
+few more weeks.
+few more weeks.
+won't need surgery or anything.
+I mean, we can see this thing is
+I mean, we can see this thing is
+correct, right? Like this.
+correct, right? Like this.
+It's like getting tons of ore because
+It's like getting tons of ore because
+obviously it should be able to get tons
+obviously it should be able to get tons
+of ore because it's really freaking
+of ore because it's really freaking
+easy.
+Now we don't give it any reward for
+Now we don't give it any reward for
+getting ore
+getting ore
+and we give it
+now we give it only reward for the
+now we give it only reward for the
+second stage product.
+Okay. Very very small bit of reward
+Okay. Very very small bit of reward
+there.
+But I don't know if that's going to be
+But I don't know if that's going to be
+enough for it to latch on. We'll see.
+enough for it to latch on. We'll see.
+It technically should be possible with
+It technically should be possible with
+um new advantage filtering stuff.
+um new advantage filtering stuff.
+Okay.
+I go see what they're
+Interesting that this thing is like
+Interesting that this thing is like
+this is definitely better than random,
+this is definitely better than random,
+but it's not like um
+but it's not like um
+it's not just like learning it with any
+it's not just like learning it with any
+real speed.
+Let me try different hypers.
+Let me try different hypers.
+I think that the hyper pram are really
+I think that the hyper pram are really
+jank on this.
+We just like
+We just like
+What happens if I just do this?
+Thank you.
+Okay. Does this make a difference?
+Okay. Does this make a difference?
+Looks like it does. We'll see if it's
+Looks like it does. We'll see if it's
+stable.
+stable.
+Oh, yeah. Hypers. Just bad hypers.
+This is an easy task, right?
+Boom.
+Quite slow. This thing better not be
+Quite slow. This thing better not be
+dumping replays.
+I'm dumping replays. Just slow.
+I'm dumping replays. Just slow.
+All right.
+Now we will see whether it can get um
+Now we will see whether it can get um
+get any reward off of this.
+probably just a combination of many like
+probably just a combination of many like
+small changes just making it very
+small changes just making it very
+suboptimal for learning.
+Now, it is interesting here. I don't
+Now, it is interesting here. I don't
+think that they're getting
+think that they're getting
+any Yeah, they can't do this randomly at
+any Yeah, they can't do this randomly at
+all.
+They've kind of created a little bit of
+They've kind of created a little bit of
+a degenerate loop here with the reward
+a degenerate loop here with the reward
+structure, right?
+structure, right?
+like by rewarding for intermediate
+like by rewarding for intermediate
+products.
+Did just get the reward once. There.
+Let me think about this a little bit.
+Hi, Hyper.
+No idea what you're doing, but admire
+No idea what you're doing, but admire
+your discipline. I mean, I can explain
+your discipline. I mean, I can explain
+what I'm doing in a pretty simple way
+what I'm doing in a pretty simple way
+here. Like
+a lot of these problems we work on are
+a lot of these problems we work on are
+either games or they look like games,
+either games or they look like games,
+right? Even the industry ones we
+right? Even the industry ones we
+essentially gify. So we're basically
+essentially gify. So we're basically
+we're just thinking about how we can get
+we're just thinking about how we can get
+this AI to learn to play a game uh by
+this AI to learn to play a game uh by
+thinking about the structure of the
+thinking about the structure of the
+problem and like
+problem and like
+kind of the way in which we're rewarding
+kind of the way in which we're rewarding
+the agent for doing different things in
+the agent for doing different things in
+the game.
+the game.
+What I'm kind of doing here is like
+What I'm kind of doing here is like
+it's sort of like how you learn math in
+it's sort of like how you learn math in
+school. Uh to solve this problem, you
+school. Uh to solve this problem, you
+have to go to this mine. You have to
+have to go to this mine. You have to
+collect three ore and then you have to
+collect three ore and then you have to
+take them over here to get a battery.
+take them over here to get a battery.
+And then three batteries make a heart.
+And then three batteries make a heart.
+So I'm kind of figuring out how I tell
+So I'm kind of figuring out how I tell
+the agent to like that it needs to do
+the agent to like that it needs to do
+these three things in a row implicitly.
+I'll talk more once the vacuuming is
+I'll talk more once the vacuuming is
+done in here.
+done in here.
+I don't know if it's coming through on
+I don't know if it's coming through on
+the mic, but it probably is.
+No noise now. Okay, I guess my filter is
+No noise now. Okay, I guess my filter is
+really good because I can barely hear
+really good because I can barely hear
+myself talking.
+Um,
+let me try something.
+let me try something.
+If they only have 10 items,
+If they only have 10 items,
+I don't think they can get rid of items.
+I don't think they can get rid of items.
+Can you get rid of items in this?
+Can you get rid of items in this?
+I don't think you can.
+So, if you can't get rid of items,
+the filter.
+the filter.
+It better be. This is a very nice audio
+It better be. This is a very nice audio
+setup.
+Okay. So, my idea here is if we reward
+Okay. So, my idea here is if we reward
+them a little bit for ore, a little bit
+them a little bit for ore, a little bit
+for batteries, and a little bit for
+for batteries, and a little bit for
+hearts, what I would expect to happen
+hearts, what I would expect to happen
+naively is it's just going to like spam
+naively is it's just going to like spam
+ore and get this forever. Um, but if we
+ore and get this forever. Um, but if we
+kept the inventory to be pretty small,
+kept the inventory to be pretty small,
+like it's going to see that its
+like it's going to see that its
+inventory is full and it's going to have
+inventory is full and it's going to have
+to get rid of the ore and like the
+to get rid of the ore and like the
+resources somehow, and the only place to
+resources somehow, and the only place to
+get rid of it is going to be in these
+get rid of it is going to be in these
+other converters.
+other converters.
+So, we'll try that.
+Again,
+this is not going to tell us anything on
+this is not going to tell us anything on
+its own until we actually see the uh
+its own until we actually see the uh
+graph here.
+Okay, so it's getting or
+The maximum score it can get from or
+The maximum score it can get from or
+alone
+alone
+2.5 I believe.
+Okay. So once it's above 2.5
+Okay. So once it's above 2.5
+because it has 10 slots and it gets 0.25
+because it has 10 slots and it gets 0.25
+rewards each.
+rewards each.
+So it means it has to be it has to
+So it means it has to be it has to
+basically be freeing up its inventory.
+Let's see if I'm correct. Yes. You see
+Let's see if I'm correct. Yes. You see
+this? It's starting to make batteries
+and hearts.
+This is still going straight up.
+thing is super slow about
+This is what we want to see, which when
+This is what we want to see, which when
+we run this, I expect it's just going to
+we run this, I expect it's just going to
+be running between all three converters.
+Don't pay attention to these graphs as
+Don't pay attention to these graphs as
+much.
+much.
+Uh, I actually don't think that these
+Uh, I actually don't think that these
+are correct. I think that these are just
+are correct. I think that these are just
+logging wrong.
+Oh, yeah. I
+Oh, yeah. I
+Let's see if we're doing numbers on
+Let's see if we're doing numbers on
+LinkedIn.
+There's this post.
+There's literally nobody on this site.
+and it's starting to peak. It's also
+and it's starting to peak. It's also
+expected, right? Because you can't get
+expected, right? Because you can't get
+infinite rewards when you don't have
+infinite rewards when you don't have
+infinite time.
+Soon as this eval, we'll see how well
+Soon as this eval, we'll see how well
+this does. And uh well, I at least have
+this does. And uh well, I at least have
+something to
+That's his replay writer.
+One.
+this a minute to eval.
+this a minute to eval.
+Hopefully, this is at least a decent
+Hopefully, this is at least a decent
+starter policy.
+starter policy.
+Anything great.
+Anything great.
+This should be decent enough starter
+This should be decent enough starter
+policy. Uh then we will basically just
+policy. Uh then we will basically just
+be able to take this thing, run it on
+be able to take this thing, run it on
+the full maps, and see if anything
+the full maps, and see if anything
+happens.
+I wish that this thing would actually
+I wish that this thing would actually
+this buttons would work.
+Well, I guess we'll have to do it this
+Well, I guess we'll have to do it this
+way.
+Get a full inventory of
+Get a full inventory of
+stuff from the mine.
+stuff from the mine.
+Then it's going to go find
+Then it's going to go find
+the generator.
+Who made that? This is uh Meta with two
+Who made that? This is uh Meta with two
+T's.
+T's.
+You can find their GitHub,
+You can find their GitHub,
+not Facebook.
+not Facebook.
+Okay. So then they do this conversion.
+It works, right?
+All
+right. So, this now that this works, the
+right. So, this now that this works, the
+question is, can we scale it up
+or do we want to do the cool downs
+or do we want to do the cool downs
+first?
+first?
+Maybe we want to do the pull downs
+Maybe we want to do the pull downs
+first.
+Give you three mines.
+We'll
+look at the
+uh let's go look at their configs.
+Pull down.
+Pull down.
+What did we say that they put
+What did we say that they put
+many things for there?
+Two generators, 10 mines, six agents.
+Two generators, 10 mines, six agents.
+Okay, so we'll do like two here.
+Basically, we just see whether this does
+Basically, we just see whether this does
+anything.
+This will make it substantially harder
+This will make it substantially harder
+to learn.
+Not really for any good reason.
+Basically, just the agent can't see the
+Basically, just the agent can't see the
+waiting animation.
+Why is it taking this long?
+Oh, cuz I left the replay if you were on
+Oh, cuz I left the replay if you were on
+like a dummy.
+Yes.
+If this works,
+If this works,
+then possibly the full map work. See,
+are they actually doing this for um
+are they actually doing this for um
+their configs?
+Okay. So, the only problem here is I
+Okay. So, the only problem here is I
+don't know
+don't know
+the scale of anything.
+Um,
+this is way lower
+this is way lower
+and uh we don't it's not getting any
+and uh we don't it's not getting any
+hearts yet, which is a problem.
+See if that changes.
+Oh, no. It is. It's just It's at one.
+Oh, no. It is. It's just It's at one.
+That's actually good.
+And realistically, I think that the max
+And realistically, I think that the max
+you can get is like two, isn't it?
+you can get is like two, isn't it?
+Cuz you need nine. Hang on. You need
+Cuz you need nine. Hang on. You need
+nine ores,
+nine ores,
+which you actually have to take the time
+which you actually have to take the time
+to collect.
+I guess if you go between two mines, you
+I guess if you go between two mines, you
+should be able to get two hearts.
+You know what? I wonder if it was I
+You know what? I wonder if it was I
+wonder if this was a straightup logging
+wonder if this was a straightup logging
+change.
+This could have been a straightup
+This could have been a straightup
+logging change. No,
+logging change. No,
+maybe not cuz there were 10 mines.
+I'm trying to figure out like cuz we had
+I'm trying to figure out like cuz we had
+a version of this that worked before,
+a version of this that worked before,
+but like I basically never saw it. I
+but like I basically never saw it. I
+just trained them a policy and sent it
+just trained them a policy and sent it
+to them and they were like, "Oh yeah,
+to them and they were like, "Oh yeah,
+that's really good.
+This is expected because again the cool
+This is expected because again the cool
+down times are totally different.
+down times are totally different.
+These metrics are
+these metrics are definitely reported
+these metrics are definitely reported
+wrong.
+wrong.
+Definitely
+wonder how they're being reported.
+wonder how they're being reported.
+We'll look at that in the meantime while
+We'll look at that in the meantime while
+this finishes training.
+This a lib or you made that?
+This a lib or you made that?
+Which visualization?
+Which visualization?
+Oh, this one. No, this is this is the
+Oh, this one. No, this is this is the
+meta, guys.
+they they build everything like the
+they they build everything like the
+exact opposite of the way that I do. So,
+exact opposite of the way that I do. So,
+uh we have our visualizations on um on
+uh we have our visualizations on um on
+puffer.ai.
+Like for instance, this is one of the
+Like for instance, this is one of the
+ones.
+ones.
+This is probably the NF that I built
+This is probably the NF that I built
+that I'm most proud of.
+that I'm most proud of.
+See,
+hang on.
+hang on.
+by mistake.
+I will check your template momentarily.
+Okay. Uh you cannot run this while also
+Okay. Uh you cannot run this while also
+running training at the same time.
+You link it anywhere?
+You link it anywhere?
+Discord.
+Thank you.
+970.
+Okay, I'm going to have to read through
+Okay, I'm going to have to read through
+this. This is gigantic
+template.
+template.
+What do you mean just a template? I
+What do you mean just a template? I
+mean, it's huge, right?
+This is several times longer than all of
+This is several times longer than all of
+the current docs put together, right?
+Wait, what?
+says is part of this AI generated
+says is part of this AI generated
+because there's stuff that does not make
+because there's stuff that does not make
+sense in here. Like we don't have a
+sense in here. Like we don't have a
+puffer libmodels.policy
+puffer libmodels.policy
+and then there's like they're like
+and then there's like they're like
+random characters in the middle of this
+random characters in the middle of this
+from like is this SAM script?
+from like is this SAM script?
+I think it's like some SAM script
+I think it's like some SAM script
+characters.
+Just this template,
+not a real
+What do you mean by a template? Hey
+What do you mean by a template? Hey
+Brad, how's it going? What What do you
+Brad, how's it going? What What do you
+mean by a template? Because like a
+mean by a template? Because like a
+template is like something that you copy
+template is like something that you copy
+and then you edit it for your own
+and then you edit it for your own
+environment, right? Like we have one of
+environment, right? Like we have one of
+those.
+those.
+But this is not what a template is,
+But this is not what a template is,
+right?
+Sample sample template.
+Sample sample template.
+Okay. So I guess you just mean it's like
+Okay. So I guess you just mean it's like
+something sort of like this. Okay.
+So I mean you basically what you want is
+So I mean you basically what you want is
+you want you want like a from scratch
+you want you want like a from scratch
+tutorial like assuming you don't know
+tutorial like assuming you don't know
+any RLS like at all. Okay.
+Yeah,
+Yeah,
+that can be arranged
+be arranged.
+You have to realize that like literally
+You have to realize that like literally
+before puffer live, this wasn't a field
+before puffer live, this wasn't a field
+where that was a a reasonable thing to
+where that was a a reasonable thing to
+even do cuz like it was so much harder
+even do cuz like it was so much harder
+to even do anything that like a I'm a
+to even do anything that like a I'm a
+beginner. I don't know RL. How do I like
+beginner. I don't know RL. How do I like
+make cool new stuff? It's like, well,
+make cool new stuff? It's like, well,
+you just don't. Um, now though, yes, you
+you just don't. Um, now though, yes, you
+actually can do that in Puffer Lib, and
+actually can do that in Puffer Lib, and
+our docs just have not caught up to
+our docs just have not caught up to
+that, which is fair.
+that, which is fair.
+That's not a Puffer Lib guide anymore,
+That's not a Puffer Lib guide anymore,
+though. That's like a RL basics, which
+though. That's like a RL basics, which
+Yeah, we can do something for that. It's
+Yeah, we can do something for that. It's
+like RL basics with Puffer Lib.
+like RL basics with Puffer Lib.
+It's not Puffer Lib Basics. It's like
+It's not Puffer Lib Basics. It's like
+kind of RL Basics. Yeah.
+I have a meeting that's technically at
+I have a meeting that's technically at
+1, but the guy told me he's probably
+1, but the guy told me he's probably
+going to be a bit late.
+going to be a bit late.
+What I'm probably going to do is I'm
+What I'm probably going to do is I'm
+going to message him like, "Hey, let me
+going to message him like, "Hey, let me
+know when you're
+know when you're
+around
+ask people start from scratch
+ask people start from scratch
+again like this was the type of thing
+again like this was the type of thing
+where this start basically this started
+where this start basically this started
+off as a toolkit for PhDs in
+off as a toolkit for PhDs in
+reinforcement learning right and then we
+reinforcement learning right and then we
+made it simpler because we made the
+made it simpler because we made the
+library way faster and way simpler right
+library way faster and way simpler right
+then we brought it down to like okay
+then we brought it down to like okay
+this is a toolkit for like AI people who
+this is a toolkit for like AI people who
+are trying to get into RL, right? Like
+are trying to get into RL, right? Like
+people with like research experience in
+people with like research experience in
+other areas. Maybe you have like a
+other areas. Maybe you have like a
+masters or a PhD in another area and
+masters or a PhD in another area and
+you're trying to do RL. And then it got
+you're trying to do RL. And then it got
+to the point where we literally have
+to the point where we literally have
+brand new programmers that can actually
+brand new programmers that can actually
+do stuff with it now and the docs
+do stuff with it now and the docs
+haven't caught up to that. So that is a
+haven't caught up to that. So that is a
+fair point.
+Like I'm going to have to figure out the
+Like I'm going to have to figure out the
+format in which to present this. Like
+format in which to present this. Like
+you understand why I can't just like put
+you understand why I can't just like put
+this as the documentation page, right?
+this as the documentation page, right?
+Cuz like if I put this as the as the
+Cuz like if I put this as the as the
+documentation page, then like
+documentation page, then like
+experienced RL people are going to be
+experienced RL people are going to be
+like, what the hell is this just like a
+like, what the hell is this just like a
+tutorial library for beginners? Like
+tutorial library for beginners? Like
+where do I find the information I
+where do I find the information I
+actually need? But I need to kind of do
+actually need? But I need to kind of do
+both and I they need to be in separate
+both and I they need to be in separate
+places.
+places.
+A bachelor student learning puffer li
+A bachelor student learning puffer li
+from their first year of college.
+from their first year of college.
+Yeah. So, this is the thing like you can
+Yeah. So, this is the thing like you can
+actually do that now as a bachelor
+actually do that now as a bachelor
+student in your first year of college.
+student in your first year of college.
+Uh, I tried to do RL as a bachelor
+Uh, I tried to do RL as a bachelor
+student in my first year of college with
+student in my first year of college with
+the tools that were available back then
+the tools that were available back then
+and it was impossible.
+and it was impossible.
+Like it doesn't matter if you're a
+Like it doesn't matter if you're a
+genius, just couldn't do anything at
+genius, just couldn't do anything at
+all.
+all.
+Um, so times have changed and now
+Um, so times have changed and now
+actually we can do stuff. And
+actually we can do stuff. And
+admittedly, like we've actually had
+admittedly, like we've actually had
+undergrads contributing really awesome
+undergrads contributing really awesome
+stuff now. So do you want to have docs
+stuff now. So do you want to have docs
+for that? I just have to figure out how
+for that? I just have to figure out how
+to present it, right? Because like if
+to present it, right? Because like if
+you present the docs like the main docs
+you present the docs like the main docs
+pages like this is like for ultra
+pages like this is like for ultra
+beginners, then you lose the experienced
+beginners, then you lose the experienced
+people that you also care about. So I
+people that you also care about. So I
+have to figure out how to put it
+have to figure out how to put it
+separately. I might do it as like a blog
+separately. I might do it as like a blog
+post more than anything, right?
+post more than anything, right?
+That might be better to just have like,
+That might be better to just have like,
+you know, um
+like like quick start RL with puffer lib
+like like quick start RL with puffer lib
+for complete beginners or something.
+Yeah, there will have to be like two
+Yeah, there will have to be like two
+sections or something. Now, like putting
+sections or something. Now, like putting
+two sections, I'll play with the format.
+two sections, I'll play with the format.
+Basically, I hear you and like, okay, I
+Basically, I hear you and like, okay, I
+can do something to have like a complete
+can do something to have like a complete
+beginner guide that covers the
+beginner guide that covers the
+information that you put in here, but I
+information that you put in here, but I
+have to decide on the format, right?
+That would be great. Yeah. Okay. So,
+That would be great. Yeah. Okay. So,
+this is something that people want.
+this is something that people want.
+This is something that people want. I
+This is something that people want. I
+just have to figure out the form to
+just have to figure out the form to
+deliver it.
+In the meantime, until I've done that,
+In the meantime, until I've done that,
+I literally stream all day. So, if you
+I literally stream all day. So, if you
+have questions, you ask them here.
+This read me on squared example. this
+This read me on squared example. this
+code doesn't actually run is the thing,
+code doesn't actually run is the thing,
+right? Like
+it's generally not a good idea to
+it's generally not a good idea to
+include code examples for code that
+include code examples for code that
+actually doesn't run, right? Like you
+actually doesn't run, right? Like you
+don't do like a code walkthrough when
+don't do like a code walkthrough when
+the code doesn't actually work.
+But we'll have to tweak some stuff on it
+But we'll have to tweak some stuff on it
+at the very least.
+Yeah.
+Yeah.
+Okay. So, this is this one. Let's see if
+Okay. So, this is this one. Let's see if
+we
+after making.
+Why is this agent invisible?
+There we go.
+Oh, it's very smart.
+Solid.
+Welcome, humble fool. What is this end
+Welcome, humble fool. What is this end
+of about? It's resource conversion. You
+of about? It's resource conversion. You
+have to get three ores from here and
+have to get three ores from here and
+then put the three ores in the
+then put the three ores in the
+generator. That makes a battery. And
+generator. That makes a battery. And
+then three batteries go to the altar and
+then three batteries go to the altar and
+makes a heart.
+I mean, this agent has learned this task
+I mean, this agent has learned this task
+pretty well perfectly.
+Percy Leon,
+Percy Leon,
+what tweet have you linked? Percy
+That's a good thing to do.
+That's a good thing to do.
+I don't know. I don't know how they
+I don't know. I don't know how they
+actually do this. If it's like from
+actually do this. If it's like from
+scratch, but actually it's PyTorch, then
+scratch, but actually it's PyTorch, then
+that's kind of silly. But like, yes,
+that's kind of silly. But like, yes,
+language models from scratch, it's good.
+language models from scratch, it's good.
+Honestly, the best resource on that, I
+Honestly, the best resource on that, I
+don't know about this course, the best
+don't know about this course, the best
+resource on language models from scratch
+resource on language models from scratch
+is Carpathy's GPT2 speedrun,
+is Carpathy's GPT2 speedrun,
+like his like GPT2 original code,
+like his like GPT2 original code,
+actually before all the crazy speedrun
+actually before all the crazy speedrun
+stuff is really good. Read the replies.
+stuff is really good. Read the replies.
+Okay, for some reason those didn't show
+Okay, for some reason those didn't show
+up. Hang on.
+That's a weird level of abstraction.
+I would either do it like you can use
+I would either do it like you can use
+linear right you can use basic layers
+linear right you can use basic layers
+but obviously don't no transformer or
+but obviously don't no transformer or
+attention or whatever
+attention or whatever
+um or I would go lower level
+brighten
+brighten
+Yeah, this is still pretty high level.
+Yeah, this is still pretty high level.
+Honestly,
+this is a good thing to have. It's still
+this is a good thing to have. It's still
+pretty high level. I mean, that's is a
+pretty high level. I mean, that's is a
+good course. Like, I would have taken
+good course. Like, I would have taken
+this if I were uh the student there.
+this if I were uh the student there.
+That's like good.
+How did you define rewards for Pokemon
+How did you define rewards for Pokemon
+Red? There's a blog post.
+You see, there's a blog post. It covers
+You see, there's a blog post. It covers
+everything.
+everything.
+You can also at that guy in uh Discord.
+You can also at that guy in uh Discord.
+I'd buy a course if you offered one. I'm
+I'd buy a course if you offered one. I'm
+not in the business of selling you
+not in the business of selling you
+courses. All my educational content is
+courses. All my educational content is
+free. I sell um I sell my services to
+free. I sell um I sell my services to
+companies who are trying to like solve a
+companies who are trying to like solve a
+hard RL problem uh in their business.
+hard RL problem uh in their business.
+All the other stuff's free, including
+All the other stuff's free, including
+the code. Be right back. I'm going to
+the code. Be right back. I'm going to
+use the restroom real quick and then I
+use the restroom real quick and then I
+got to figure out where this guy is for
+got to figure out where this guy is for
+my meeting. Uh but he's probably going
+my meeting. Uh but he's probably going
+to be late, so I probably have a little
+to be late, so I probably have a little
+bit longer here.
+Brad, if you want to like learn this
+Brad, if you want to like learn this
+stuff, literally the best way is to just
+stuff, literally the best way is to just
+get jump into the puffer discord and
+get jump into the puffer discord and
+like start building some environments.
+You learn and at the same time you
+You learn and at the same time you
+actually help advance all the research
+actually help advance all the research
+that we're doing. Let me go figure out
+that we're doing. Let me go figure out
+where this guy is for me.
+So, uh, the plan for folks, uh, I have a
+So, uh, the plan for folks, uh, I have a
+meeting. I don't know when the guy is
+meeting. I don't know when the guy is
+going to be here. He said he'd be late,
+going to be here. He said he'd be late,
+like fairly late. So, um, at some point
+like fairly late. So, um, at some point
+I'll just hop out and hang on, let me
+I'll just hop out and hang on, let me
+message him and then I will be live back
+message him and then I will be live back
+afterwards.
+really appreciate stuff you've open
+really appreciate stuff you've open
+source. Thank you.
+source. Thank you.
+I mean, honestly, at this point, like
+I mean, honestly, at this point, like
+most of the stuff in Puffer Lib, like
+most of the stuff in Puffer Lib, like
+the majority of the code, at least the
+the majority of the code, at least the
+end code is written by contributors,
+end code is written by contributors,
+right? Um,
+right? Um,
+and some of them come out like really
+and some of them come out like really
+well
+well
+and like in a way you wouldn't even
+and like in a way you wouldn't even
+expect. Go look at Tetris on the
+expect. Go look at Tetris on the
+website. It's absolutely mesmerizing.
+website. It's absolutely mesmerizing.
+Systems capable of analogy and
+Systems capable of analogy and
+reasoning. That's going to be more
+reasoning. That's going to be more
+language stuff I would think than
+you might be more interested in language
+you might be more interested in language
+stuff. It's harder to do language though
+stuff. It's harder to do language though
+because like frankly you can't really do
+because like frankly you can't really do
+any research.
+any research.
+You can't really do much meaningful
+You can't really do much meaningful
+research in language modeling space at
+research in language modeling space at
+the moment because everything's just so
+the moment because everything's just so
+big and expensive. RL is one of the few
+big and expensive. RL is one of the few
+places in AI where you can really just
+places in AI where you can really just
+make a huge difference without it
+make a huge difference without it
+needing a ton of resources.
+How do you define if an agent has
+How do you define if an agent has
+learned a concept? Well, I mean right
+learned a concept? Well, I mean right
+here, look uh it's not just this map. it
+here, look uh it's not just this map. it
+like any permutation of where these
+like any permutation of where these
+obstacles go.
+obstacles go.
+This agent has learned that it needs to
+This agent has learned that it needs to
+get three resources from the mine, put
+get three resources from the mine, put
+three resources into there, wait for
+three resources into there, wait for
+them to convert, and then it's going to
+them to convert, and then it's going to
+have to take them out and it puts them
+have to take them out and it puts them
+into the alter to get a heart.
+into the alter to get a heart.
+It very clearly understands that because
+It very clearly understands that because
+this is randomized during training. So,
+this is randomized during training. So,
+these obstacles can be anywhere and
+these obstacles can be anywhere and
+it'll do the same thing.
+it'll do the same thing.
+LMS don't do analogy and reasoning. They
+LMS don't do analogy and reasoning. They
+definitely do. They definitely do.
+definitely do. They definitely do.
+They're they're fuzzy and they make
+They're they're fuzzy and they make
+weird errors in ways that humans don't.
+weird errors in ways that humans don't.
+So it's like it's not a onetoone like
+So it's like it's not a onetoone like
+exactly like humans, but they definitely
+exactly like humans, but they definitely
+do follow stuff like that. You can just
+do follow stuff like that. You can just
+ask it like you know you can like ask it
+ask it like you know you can like ask it
+to complete an analogy and it'll do it.
+to complete an analogy and it'll do it.
+Abstract the concept to a new
+Abstract the concept to a new
+environment. It can. It's just a matter
+environment. It can. It's just a matter
+of extent and a matter of error classes,
+of extent and a matter of error classes,
+right? Like for instance, it's never
+right? Like for instance, it's never
+seen this specific environment during
+seen this specific environment during
+training. Like I guarantee you it's
+training. Like I guarantee you it's
+never seen this exact placement of all
+never seen this exact placement of all
+the obstacles.
+So this is generalizing in some sense.
+So this is generalizing in some sense.
+It hasn't seen this exact environment.
+It hasn't seen this exact environment.
+They say, well, what happens if I only
+They say, well, what happens if I only
+put one mine in or what if I make the
+put one mine in or what if I make the
+map bigger? There are classes to
+map bigger? There are classes to
+generalization, right?
+Let me just make sure I don't miss this
+Let me just make sure I don't miss this
+guy because I don't know if he'll check
+guy because I don't know if he'll check
+his Twitter DMs.
+app.cal.com.
+No idea what that is.
+Uh I don't think that
+Uh I don't think that
+I think you might be surprised with
+I think you might be surprised with
+that. I
+that. I
+like the way that we do it is going to
+like the way that we do it is going to
+make
+it's going to make errors that people
+it's going to make errors that people
+don't, but it's also definitely going to
+don't, but it's also definitely going to
+get things right that the average person
+get things right that the average person
+won't, right?
+won't, right?
+Like if you go like try to come up with
+Like if you go like try to come up with
+like the most novel analogy you possibly
+like the most novel analogy you possibly
+can. Ask a bunch of people and then ask
+can. Ask a bunch of people and then ask
+the LLM and see.
+the LLM and see.
+Yeah, I think like a lot of the LLMs
+Yeah, I think like a lot of the LLMs
+can't reason stuff is kind of just
+can't reason stuff is kind of just
+silly. Um, but like on equally silly is,
+silly. Um, but like on equally silly is,
+oh, LLMs are just super human. They
+oh, LLMs are just super human. They
+already they solve everything. They're
+already they solve everything. They're
+great. We should just do everything with
+great. We should just do everything with
+LLMs. Like that doesn't work either.
+LLMs. Like that doesn't work either.
+They're kind of useless for programming
+They're kind of useless for programming
+for me, for most of the stuff that I do.
+for me, for most of the stuff that I do.
+Um,
+Um,
+and they're useless for a lot of other
+and they're useless for a lot of other
+things as well. So like, yeah.
+Okay, I got to run to this meeting. Um,
+Okay, I got to run to this meeting. Um,
+thanks for tuning in folks. I will be
+thanks for tuning in folks. I will be
+back right after this.
+back right after this.
+Uh, if you want to check out all our
+Uh, if you want to check out all our
+stuff, it's all at puffer.ai.
+stuff, it's all at puffer.ai.
+Start the repo to help me out for free.
+Start the repo to help me out for free.
+Take a look at our latest release.
+Take a look at our latest release.
+Puffer 3 is here. It's all open source.
+Puffer 3 is here. It's all open source.
+Follow me on X for more content. And
+Follow me on X for more content. And
+we're posting all sorts of cool RL
+we're posting all sorts of cool RL
+articles.
+
+Kind: captions
+Language: en
+Okay,
+Okay,
+we are back live.
+we are back live.
+Good morning folks.
+We have a few things to do today. Um,
+We have a few things to do today. Um,
+as I kind of said yesterday,
+as I kind of said yesterday,
+really not doing like a huge amount of
+really not doing like a huge amount of
+stuff this.
+stuff this.
+We're kind of just doing post-release
+We're kind of just doing post-release
+stuff. We're doing a few posts on uh
+stuff. We're doing a few posts on uh
+Twitter and everywhere else. Making sure
+Twitter and everywhere else. Making sure
+that people actually see our release.
+that people actually see our release.
+We're fixing up some things that I
+We're fixing up some things that I
+haven't had time to fix for people who
+haven't had time to fix for people who
+are uh involved with and using Puffer
+are uh involved with and using Puffer
+Lib, let's say. trying to fix up some
+Lib, let's say. trying to fix up some
+things with the meta environment. I told
+things with the meta environment. I told
+Stone I'd do some robotic stuff. Just
+Stone I'd do some robotic stuff. Just
+know a few little things here and there.
+know a few little things here and there.
+Um,
+Um,
+and then, you know, sometime in the next
+and then, you know, sometime in the next
+couple weeks, we're going to really
+couple weeks, we're going to really
+start on the new stuff with drones and
+start on the new stuff with drones and
+more industry side.
+more industry side.
+They're having some meetings with
+They're having some meetings with
+various bases off the uh off the stream
+various bases off the uh off the stream
+looking for problems we can solve with
+looking for problems we can solve with
+uh RL going forward.
+uh RL going forward.
+Pop out the chat real quick and then
+Pop out the chat real quick and then
+I'll this over to the green view
+moment
+and I think what we're going to do on
+and I think what we're going to do on
+I got a meeting in like an hour, no two
+I got a meeting in like an hour, no two
+hours.
+hours.
+So that's good. Um,
+So that's good. Um,
+what we're going to do in the meantime,
+what we're going to do in the meantime,
+we're going to see if we can figure out
+we're going to see if we can figure out
+this meta environment and what's going
+this meta environment and what's going
+on with it.
+I would love to know why it's this slow.
+Can I figure out why it's this slow?
+Can I figure out why it's this slow?
+Actually,
+Actually,
+maybe I can just figure out
+Yeah, let's do like test
+Yeah, let's do like test
+at uh
+down here.
+Move all this crap out of the way.
+Okay. So, does this work?
+Okay. So, does this work?
+If so, we can run profiler on it.
+does work.
+Do I have um profile in here?
+This is a torch profile which is not
+there way we can get profiling into C
+there way we can get profiling into C
+from Python
+from Python
+when it's like an external thing that we
+when it's like an external thing that we
+don't have control over
+or am I going to have to set up like uh
+or am I going to have to set up like uh
+level profiling?
+Tricky with the way that they've
+Tricky with the way that they've
+developed this specific environment.
+I think I know how to do it though.
+this thing All right.
+So, pretty much what I'm trying to do
+So, pretty much what I'm trying to do
+here is I'm just trying to figure out
+here is I'm just trying to figure out
+why this end is so slow. Um, so I can at
+why this end is so slow. Um, so I can at
+least have some idea of how to set up
+least have some idea of how to set up
+efficient experiments on it.
+efficient experiments on it.
+It might just be that it's just slow
+It might just be that it's just slow
+overall, but I'm hoping that they're
+overall, but I'm hoping that they're
+going to be like some combination of
+going to be like some combination of
+settings that are at least bearable. Uh,
+settings that are at least bearable. Uh,
+we're going to eventually have to
+we're going to eventually have to
+rewrite some sections, I think, of it or
+rewrite some sections, I think, of it or
+reoptimize some sections, at least help
+reoptimize some sections, at least help
+the authors do that. But in the
+the authors do that. But in the
+meantime, just looking for something
+meantime, just looking for something
+quick.
+Oh, okay. So, we actually do get
+Oh, okay. So, we actually do get
+This is way too big, though.
+See what this does.
+See what this does.
+Oops. All right. One second. Apparently,
+Oops. All right. One second. Apparently,
+I have countertops being installed right
+I have countertops being installed right
+now. I'll be right back.
+I'll have to monitor that, but
+I'll have to monitor that, but
+otherwise good to do a little bit of
+otherwise good to do a little bit of
+work for a
+I figure out why this
+backwards
+by
+Oh, I just had to add dump.
+Literally just that.
+Okay.
+Okay.
+So from this
+So from this
+we can see the problem
+we can see the problem
+and I checked
+Probably the replay riders probably
+Probably the replay riders probably
+filling up my whole disc space as well.
+That's what was happening.
+And now we have
+And now we have
+most of the time is coming from samples.
+Good.
+Now, this is probably going to tell us a
+Now, this is probably going to tell us a
+very different story, right?
+very different story, right?
+Yeah, very different story.
+Yeah, very different story.
+That's 680k.
+And that's actually as about as fast as
+And that's actually as about as fast as
+we should expect it to go anyways,
+we should expect it to go anyways,
+right? Yeah. Let's just let that train.
+right? Yeah. Let's just let that train.
+And actually, we'll we'll log that
+And actually, we'll we'll log that
+on Neptune.
+on Neptune.
+And I'll tag it
+token.
+Good.
+Good.
+Go check on the counters.
+I have had a uh a piece of plywood for
+I have had a uh a piece of plywood for
+the kitchen counter for the last couple
+the kitchen counter for the last couple
+of months. This uh building is not fully
+of months. This uh building is not fully
+finished, so that's nice.
+finished, so that's nice.
+All right. What's going on here? This
+All right. What's going on here? This
+This thing does not appear to be
+This thing does not appear to be
+training like at all, right?
+Yeah. So,
+let me see what we put in the config for
+let me see what we put in the config for
+this.
+Actually,
+Actually,
+maybe we should just try to run this
+maybe we should just try to run this
+thing.
+So, this is finishing eval. And once
+So, this is finishing eval. And once
+this is done with Eval, we're going to
+this is done with Eval, we're going to
+actually now finally, and this is why
+actually now finally, and this is why
+it's taken me so long to actually even
+it's taken me so long to actually even
+do anything with this end. We didn't
+do anything with this end. We didn't
+have the replay viewer working. At least
+have the replay viewer working. At least
+now we'll be able to see what it is this
+now we'll be able to see what it is this
+policy is doing and whether it makes any
+policy is doing and whether it makes any
+sense, whether the environment is a
+sense, whether the environment is a
+problem or what.
+That ought to give us a couple replays.
+That ought to give us a couple replays.
+Give it a minute to run.
+The hope is that today we'll actually be
+The hope is that today we'll actually be
+able to get some
+able to get some
+at least some sort of reasonable policy.
+at least some sort of reasonable policy.
+Got you two articles. What you think we
+Got you two articles. What you think we
+should post first?
+should post first?
+Terraform.
+Uh I just did
+Uh I just did
+two technical articles.
+Don't think
+Don't think
+we can try. Let's see if we try this
+we can try. Let's see if we try this
+one.
+one.
+See,
+uh, title needs work, I think.
+Let me think.
+Okay, let let me read it and then we'll
+Okay, let let me read it and then we'll
+think on title.
+Honestly,
+this image could be the uh you need an
+this image could be the uh you need an
+image for the uh the header of it. This
+image for the uh the header of it. This
+could be it.
+could be it.
+This is hilarious.
+Let's see that. So, that's the main
+Let's see that. So, that's the main
+thing that we got to look at is the
+thing that we got to look at is the
+title and the uh
+title and the uh
+and the image.
+Gamifying.
+Yeah, this basically just needs to be
+Yeah, this basically just needs to be
+rewarded. The the thing is you're trying
+rewarded. The the thing is you're trying
+to say gamify your problem so that
+to say gamify your problem so that
+reinforcement learning can solve it.
+reinforcement learning can solve it.
+Like
+so that header image doesn't do much.
+Yeah, I don't I don't think that's a
+Yeah, I don't I don't think that's a
+particularly good header image.
+particularly good header image.
+Presumably
+you have this in X article format as
+you have this in X article format as
+well, right?
+52. I mean, honestly, this thing
+52. I mean, honestly, this thing
+this thing here is pretty close.
+You can literally just paste this into
+You can literally just paste this into
+uh like a Google a Google draw and like
+uh like a Google a Google draw and like
+add white space on either side if it
+add white space on either side if it
+doesn't fit and it'll be fine.
+Let me think about how we do this.
+There's really nothing even about G.
+There's really nothing even about G.
+This is like an enticing concept, but
+This is like an enticing concept, but
+the article really isn't about
+Maybe we do the other one today actually
+Maybe we do the other one today actually
+cuz I'm looking at how basic this one is
+cuz I'm looking at how basic this one is
+now. This one will do well, but I don't
+now. This one will do well, but I don't
+know if it matches the release week
+know if it matches the release week
+stuff as well.
+stuff as well.
+This is like reinforcement learning
+This is like reinforcement learning
+basics or something, right?
+But like how to game like honestly you
+But like how to game like honestly you
+could make a separate article on like
+could make a separate article on like
+how to gify a problem for RL. This is
+how to gify a problem for RL. This is
+not really what this is. Like that's
+not really what this is. Like that's
+like a really effective thing and
+like a really effective thing and
+there's actually quite a bit of
+there's actually quite a bit of
+technical depth on that. Like if you
+technical depth on that. Like if you
+think about it, right, that's like a big
+think about it, right, that's like a big
+chunk of what I did with neural MMO 3.
+chunk of what I did with neural MMO 3.
+There like a ton of ways you could set
+There like a ton of ways you could set
+that problem up, most of which don't
+that problem up, most of which don't
+work.
+Uh, terraform or tower climb.
+This is cool. Let me let me read through
+This is cool. Let me let me read through
+this and see if this is a better fit.
+I think the title is too long.
+Uh the content is fine for the first
+Uh the content is fine for the first
+one. It's just I don't know if it fits
+one. It's just I don't know if it fits
+like staging in the release Take
+Hang on. They're uh putting the
+Hang on. They're uh putting the
+countertop in and I guess cutting it or
+countertop in and I guess cutting it or
+something.
+Okay, I think we're good. We'll see.
+Okay, I think we're good. We'll see.
+I guess they're like grinding it so it
+I guess they're like grinding it so it
+fits something.
+Look back. What?
+What's this doc article? We're uh I'm
+What's this doc article? We're uh I'm
+This is a Spencer wrote an article. I'm
+This is a Spencer wrote an article. I'm
+just looking it over. We're doing like
+just looking it over. We're doing like
+one article per day for uh the 3.0
+one article per day for uh the 3.0
+release. So, we just have tons of
+release. So, we just have tons of
+articles and we're just releasing one
+articles and we're just releasing one
+till per day until we run out.
+till per day until we run out.
+probably excluding the weekend.
+Spencer, it would be good to mention
+Spencer, it would be good to mention
+that um right here that like you know
+that um right here that like you know
+you often you're targeting performance
+you often you're targeting performance
+marks that can be uh
+should mention that the uh the target
+should mention that the uh the target
+speed can be like 10,000x what you would
+speed can be like 10,000x what you would
+expect for a normal game, right?
+expect for a normal game, right?
+Like that we can actually like you can
+Like that we can actually like you can
+continue to train faster like by making
+continue to train faster like by making
+it like a th000 to 10,000x faster than a
+it like a th000 to 10,000x faster than a
+normal game at least.
+normal game at least.
+More than 10,000 ups.
+So, like in the original game, right,
+So, like in the original game, right,
+like a human's only going to need to
+like a human's only going to need to
+climb a couple blocks.
+like you only need to simulate a couple
+like you only need to simulate a couple
+blocks per second and then it's like 60
+blocks per second and then it's like 60
+frames or whatever. But what we do is we
+frames or whatever. But what we do is we
+do like a million like movements per
+do like a million like movements per
+second and you can actually train a
+second and you can actually train a
+neural net that fast. Um, I so I guess
+neural net that fast. Um, I so I guess
+it's worth mentioning like just how fast
+it's worth mentioning like just how fast
+these things are compared to like what
+these things are compared to like what
+how fast a normal game would On.
+What's this line supposed to be,
+What's this line supposed to be,
+Spencer?
+I think this is there's like a missing
+I think this is there's like a missing
+sentence here, right? Like it's
+sentence here, right? Like it's
+compressed so that you uh you have lower
+compressed so that you uh you have lower
+CPU toGPU transfer, right?
+Okay, let me see. venture.
+Yeah, I just I missed it because I was
+Yeah, I just I missed it because I was
+distracted. It's fine. Yeah, this is
+distracted. It's fine. Yeah, this is
+fine. Spencer.
+Yeah, this is cool. Can we get a Can we
+Yeah, this is cool. Can we get a Can we
+get a header image where the puffer is
+get a header image where the puffer is
+not like looking away from the screen?
+not like looking away from the screen?
+Other than that, I think this is uh
+Other than that, I think this is uh
+good. Now, I don't know if the title
+good. Now, I don't know if the title
+fits in um you got to make sure that
+fits in um you got to make sure that
+like the full title shows up on the
+like the full title shows up on the
+post.
+post.
+You might have to tweak that.
+You might have to tweak that.
+I mean, you could just use the second
+I mean, you could just use the second
+part to be honest if it doesn't fit.
+part to be honest if it doesn't fit.
+Like training AI to beat an unreasonably
+Like training AI to beat an unreasonably
+hard puzzle game
+hard puzzle game
+is pretty good.
+So, yeah, do that. Put it into an
+So, yeah, do that. Put it into an
+article nicely and let me know so I can
+article nicely and let me know so I can
+repost it.
+want to read Terra while you're at it. I
+want to read Terra while you're at it. I
+can look.
+So, this is just an this is just Mars.
+So, this is just an this is just Mars.
+Doesn't show the end.
+This is good. Yeah,
+this is a really good quote.
+this is a really good quote.
+I honestly I think that after you post
+I honestly I think that after you post
+this, like in a couple days or
+this, like in a couple days or
+something, you should just tweet this as
+something, you should just tweet this as
+a standalone.
+a standalone.
+This is really good.
+This is a good article, Spencer. I think
+This is a good article, Spencer. I think
+these two are these two are quite nice.
+these two are these two are quite nice.
+I don't think you post these back to
+I don't think you post these back to
+back. I think you do you can pick one
+back. I think you do you can pick one
+and then do a different one. So either
+and then do a different one. So either
+of these is good for today. Um
+of these is good for today. Um
+and then like we'll space them, right?
+and then like we'll space them, right?
+So like ideally we it's we probably have
+So like ideally we it's we probably have
+two weeks worth of articles really. So
+two weeks worth of articles really. So
+we'll space it so that there's different
+we'll space it so that there's different
+you know that there's variety. It's not
+you know that there's variety. It's not
+just like all the M's and then all the
+just like all the M's and then all the
+this and all the that. I find when I
+this and all the that. I find when I
+post like one M today, one M tomorrow,
+post like one M today, one M tomorrow,
+next day like it doesn't get much
+next day like it doesn't get much
+traction.
+I would think again about the
+I don't know if the thumbnail just
+I don't know if the thumbnail just
+having a random screenshot of Mars.
+This is an art like you got to know that
+This is an art like you got to know that
+this is Okay. So, here's one thing to
+this is Okay. So, here's one thing to
+know about your uh about articles,
+know about your uh about articles,
+Spencer. This is something useful. So,
+Spencer. This is something useful. So,
+you got to think of the preview. So,
+you got to think of the preview. So,
+it'll show you the image, the title, and
+it'll show you the image, the title, and
+then the first couple sentences of the
+then the first couple sentences of the
+post. That's all it will have.
+So that's all people see before they
+So that's all people see before they
+actually decide if they want to read the
+actually decide if they want to read the
+article. So they'll see like maybe this
+article. So they'll see like maybe this
+much like this much stuff. So I think
+much like this much stuff. So I think
+like the content of the article is fine.
+like the content of the article is fine.
+Do a little bit of thinking about how to
+Do a little bit of thinking about how to
+do this and then you know either this or
+do this and then you know either this or
+tower climb whatever. Um and I will
+tower climb whatever. Um and I will
+repost those as well. Like a decent a
+repost those as well. Like a decent a
+decent quote tweet.
+Okay.
+Okay.
+Oh no, I forgot I had this running.
+Oh no, I forgot I had this running.
+Uh yeah, we generated a bunch of
+Uh yeah, we generated a bunch of
+garbage. Holy
+going to factory tour right now. We'll
+going to factory tour right now. We'll
+post after. Solid.
+All right,
+All right,
+let me see if we can actually
+let me see if we can actually
+make this thing work now.
+Okay, so I have to drag
+drag this thing which is
+okay cool. So,
+okay cool. So,
+I mean, we can immediately see why this
+I mean, we can immediately see why this
+doesn't work, right?
+one agent mine generator and an alter.
+Number of agents will be one
+Number of agents will be one
+agent.
+and
+and
+96.
+Like so.
+And we'll see how slow this is.
+K. Really?
+Okay. No, we have 200k now.
+See
+what this does in 50 million stuff.
+Let me go check on my counter as well.
+So, the expected reward here, let me
+So, the expected reward here, let me
+think what the expected reward is. It
+think what the expected reward is. It
+should be quite high, right?
+should be quite high, right?
+Am I rewarding this thing for
+just for getting rewarded for hearts?
+just for getting rewarded for hearts?
+But, I mean, it should pretty much just
+But, I mean, it should pretty much just
+be able to do
+be able to do
+You should be able to get tons of these.
+See
+if I remembered to track this.
+if I remembered to track this.
+Didn't. That's okay.
+Didn't. That's okay.
+We'll just watch it.
+This should definitely be able to go
+This should definitely be able to go
+above one.
+If it can't, then there's a problem.
+Maxing at one would be very suspicious.
+One heart.
+It seems like there is specifically
+It seems like there is specifically
+only getting one is a thing.
+It's a very small map. It should have no
+It's a very small map. It should have no
+problem with this task. So, I suspect
+problem with this task. So, I suspect
+that we're going to load up the policy
+that we're going to load up the policy
+and we're going to see something weird.
+That's like the most likely.
+That's like the most likely.
+It is also somewhat annoying to me that
+It is also somewhat annoying to me that
+we can only do this like 50 million
+we can only do this like 50 million
+steps.
+steps.
+This thing is minimum of 10 times Well,
+This thing is minimum of 10 times Well,
+is it 10 times too slow? It's really
+is it 10 times too slow? It's really
+only two or three times too slow to
+only two or three times too slow to
+think of it.
+think of it.
+You should not be getting bottlenecked
+You should not be getting bottlenecked
+by the environment.
+This article's done pretty well. 40k
+This article's done pretty well. 40k
+views on something this technical.
+get all the politics off the timeline.
+Oh, this is awesome.
+Oh, this is awesome.
+Yeah, this artificial life type work is
+Yeah, this artificial life type work is
+really cool.
+There's definitely something about
+There's definitely something about
+I always think it's suspicious when like
+I always think it's suspicious when like
+rewards are at numbers like that.
+Exactly one and it's never gone above
+Exactly one and it's never gone above
+one.
+one.
+Oh,
+Oh,
+and corrected.
+and corrected.
+Went slightly above one.
+I think it should just be able to do way
+I think it should just be able to do way
+way more than that though. We'll see
+way more than that though. We'll see
+from the uh the replay, I guess.
+We'll see from the replay.
+It also didn't take very long. 50
+It also didn't take very long. 50
+million steps is considered very very
+million steps is considered very very
+quick. Just that the code is slow. So I
+quick. Just that the code is slow. So I
+mean this should have been like a one
+mean this should have been like a one
+minute experiment or whatever.
+5 minutes for 50 million has not been a
+5 minutes for 50 million has not been a
+thing since uh buffer 10.
+Yep. Hang on.
+All right.
+I would like to know why this thing gets
+I would like to know why this thing gets
+stuck on eBel for so long, but whatever.
+All right.
+countertop is done. This runs
+Not quite
+Not quite
+have something
+plus bionics.
+What?
+I I don't even know what that means.
+Dominant.
+Dominant.
+What does that even mean?
+there there.
+there there.
+Now,
+okay, this is what we wanted. This is
+okay, this is what we wanted. This is
+the simplest possible environment.
+I don't know why their play button
+I don't know why their play button
+doesn't work, but
+Oh, it just literally chills there.
+Oh, it just literally chills there.
+Let me see.
+It doesn't do anything. It literally
+It doesn't do anything. It literally
+just chills there.
+I don't think that that's better.
+I don't think that that's better.
+like
+like that design doesn't exist
+like that design doesn't exist
+really in nature and I don't think it's
+really in nature and I don't think it's
+very effective.
+I do hope we'll see like severalfold
+I do hope we'll see like severalfold
+increased capacity for cardio and
+increased capacity for cardio and
+strength though and intelligence.
+I mean, let me tell you, the other thing
+I mean, let me tell you, the other thing
+that would just be great is if we
+that would just be great is if we
+actually could fix freaking muscular
+actually could fix freaking muscular
+injuries quickly because I got a bad
+injuries quickly because I got a bad
+rotator right now. I cannot bench the
+rotator right now. I cannot bench the
+bar before I hurt this rotator a few
+bar before I hurt this rotator a few
+weeks ago. Could bench 210 for 10 quite
+weeks ago. Could bench 210 for 10 quite
+easily.
+And I mention bar
+And I mention bar
+ridiculous.
+Let's start by fixing that crap.
+I know what we're going to do.
+Now these all have zero have zero
+Now these all have zero have zero
+initial items right
+Now, what we're going to do
+one reward for or red.
+Stay away from benching.
+Stay away from benching.
+Uh, actually I didn't hurt it on a bench
+Uh, actually I didn't hurt it on a bench
+press. I heard it on an I heard it on a
+press. I heard it on an I heard it on a
+uh dumbbell shoulder press. I've never
+uh dumbbell shoulder press. I've never
+had a major injury from benching.
+Okay, so this should basically just go
+Okay, so this should basically just go
+straight up here.
+Yeah, I I mean somebody it was a pretty
+Yeah, I I mean somebody it was a pretty
+I was being careful. Somebody distracted
+I was being careful. Somebody distracted
+me. It was like it was a whole thing.
+me. It was like it was a whole thing.
+But I think it's only like a it should
+But I think it's only like a it should
+be a pretty minor injury. Should be like
+be a pretty minor injury. Should be like
+it should at least be peeled enough in a
+it should at least be peeled enough in a
+few more weeks.
+few more weeks.
+won't need surgery or anything.
+I mean, we can see this thing is
+I mean, we can see this thing is
+correct, right? Like this.
+correct, right? Like this.
+It's like getting tons of ore because
+It's like getting tons of ore because
+obviously it should be able to get tons
+obviously it should be able to get tons
+of ore because it's really freaking
+of ore because it's really freaking
+easy.
+Now we don't give it any reward for
+Now we don't give it any reward for
+getting ore
+getting ore
+and we give it
+now we give it only reward for the
+now we give it only reward for the
+second stage product.
+Okay. Very very small bit of reward
+Okay. Very very small bit of reward
+there.
+But I don't know if that's going to be
+But I don't know if that's going to be
+enough for it to latch on. We'll see.
+enough for it to latch on. We'll see.
+It technically should be possible with
+It technically should be possible with
+um new advantage filtering stuff.
+um new advantage filtering stuff.
+Okay.
+I go see what they're
+Interesting that this thing is like
+Interesting that this thing is like
+this is definitely better than random,
+this is definitely better than random,
+but it's not like um
+but it's not like um
+it's not just like learning it with any
+it's not just like learning it with any
+real speed.
+Let me try different hypers.
+Let me try different hypers.
+I think that the hyper pram are really
+I think that the hyper pram are really
+jank on this.
+We just like
+We just like
+What happens if I just do this?
+Thank you.
+Okay. Does this make a difference?
+Okay. Does this make a difference?
+Looks like it does. We'll see if it's
+Looks like it does. We'll see if it's
+stable.
+stable.
+Oh, yeah. Hypers. Just bad hypers.
+This is an easy task, right?
+Boom.
+Quite slow. This thing better not be
+Quite slow. This thing better not be
+dumping replays.
+I'm dumping replays. Just slow.
+I'm dumping replays. Just slow.
+All right.
+Now we will see whether it can get um
+Now we will see whether it can get um
+get any reward off of this.
+probably just a combination of many like
+probably just a combination of many like
+small changes just making it very
+small changes just making it very
+suboptimal for learning.
+Now, it is interesting here. I don't
+Now, it is interesting here. I don't
+think that they're getting
+think that they're getting
+any Yeah, they can't do this randomly at
+any Yeah, they can't do this randomly at
+all.
+They've kind of created a little bit of
+They've kind of created a little bit of
+a degenerate loop here with the reward
+a degenerate loop here with the reward
+structure, right?
+structure, right?
+like by rewarding for intermediate
+like by rewarding for intermediate
+products.
+Did just get the reward once. There.
+Let me think about this a little bit.
+Hi, Hyper.
+No idea what you're doing, but admire
+No idea what you're doing, but admire
+your discipline. I mean, I can explain
+your discipline. I mean, I can explain
+what I'm doing in a pretty simple way
+what I'm doing in a pretty simple way
+here. Like
+a lot of these problems we work on are
+a lot of these problems we work on are
+either games or they look like games,
+either games or they look like games,
+right? Even the industry ones we
+right? Even the industry ones we
+essentially gify. So we're basically
+essentially gify. So we're basically
+we're just thinking about how we can get
+we're just thinking about how we can get
+this AI to learn to play a game uh by
+this AI to learn to play a game uh by
+thinking about the structure of the
+thinking about the structure of the
+problem and like
+problem and like
+kind of the way in which we're rewarding
+kind of the way in which we're rewarding
+the agent for doing different things in
+the agent for doing different things in
+the game.
+the game.
+What I'm kind of doing here is like
+What I'm kind of doing here is like
+it's sort of like how you learn math in
+it's sort of like how you learn math in
+school. Uh to solve this problem, you
+school. Uh to solve this problem, you
+have to go to this mine. You have to
+have to go to this mine. You have to
+collect three ore and then you have to
+collect three ore and then you have to
+take them over here to get a battery.
+take them over here to get a battery.
+And then three batteries make a heart.
+And then three batteries make a heart.
+So I'm kind of figuring out how I tell
+So I'm kind of figuring out how I tell
+the agent to like that it needs to do
+the agent to like that it needs to do
+these three things in a row implicitly.
+I'll talk more once the vacuuming is
+I'll talk more once the vacuuming is
+done in here.
+done in here.
+I don't know if it's coming through on
+I don't know if it's coming through on
+the mic, but it probably is.
+No noise now. Okay, I guess my filter is
+No noise now. Okay, I guess my filter is
+really good because I can barely hear
+really good because I can barely hear
+myself talking.
+Um,
+let me try something.
+let me try something.
+If they only have 10 items,
+If they only have 10 items,
+I don't think they can get rid of items.
+I don't think they can get rid of items.
+Can you get rid of items in this?
+Can you get rid of items in this?
+I don't think you can.
+So, if you can't get rid of items,
+the filter.
+the filter.
+It better be. This is a very nice audio
+It better be. This is a very nice audio
+setup.
+Okay. So, my idea here is if we reward
+Okay. So, my idea here is if we reward
+them a little bit for ore, a little bit
+them a little bit for ore, a little bit
+for batteries, and a little bit for
+for batteries, and a little bit for
+hearts, what I would expect to happen
+hearts, what I would expect to happen
+naively is it's just going to like spam
+naively is it's just going to like spam
+ore and get this forever. Um, but if we
+ore and get this forever. Um, but if we
+kept the inventory to be pretty small,
+kept the inventory to be pretty small,
+like it's going to see that its
+like it's going to see that its
+inventory is full and it's going to have
+inventory is full and it's going to have
+to get rid of the ore and like the
+to get rid of the ore and like the
+resources somehow, and the only place to
+resources somehow, and the only place to
+get rid of it is going to be in these
+get rid of it is going to be in these
+other converters.
+other converters.
+So, we'll try that.
+Again,
+this is not going to tell us anything on
+this is not going to tell us anything on
+its own until we actually see the uh
+its own until we actually see the uh
+graph here.
+Okay, so it's getting or
+The maximum score it can get from or
+The maximum score it can get from or
+alone
+alone
+2.5 I believe.
+Okay. So once it's above 2.5
+Okay. So once it's above 2.5
+because it has 10 slots and it gets 0.25
+because it has 10 slots and it gets 0.25
+rewards each.
+rewards each.
+So it means it has to be it has to
+So it means it has to be it has to
+basically be freeing up its inventory.
+Let's see if I'm correct. Yes. You see
+Let's see if I'm correct. Yes. You see
+this? It's starting to make batteries
+and hearts.
+This is still going straight up.
+thing is super slow about
+This is what we want to see, which when
+This is what we want to see, which when
+we run this, I expect it's just going to
+we run this, I expect it's just going to
+be running between all three converters.
+Don't pay attention to these graphs as
+Don't pay attention to these graphs as
+much.
+much.
+Uh, I actually don't think that these
+Uh, I actually don't think that these
+are correct. I think that these are just
+are correct. I think that these are just
+logging wrong.
+Oh, yeah. I
+Oh, yeah. I
+Let's see if we're doing numbers on
+Let's see if we're doing numbers on
+LinkedIn.
+There's this post.
+There's literally nobody on this site.
+and it's starting to peak. It's also
+and it's starting to peak. It's also
+expected, right? Because you can't get
+expected, right? Because you can't get
+infinite rewards when you don't have
+infinite rewards when you don't have
+infinite time.
+Soon as this eval, we'll see how well
+Soon as this eval, we'll see how well
+this does. And uh well, I at least have
+this does. And uh well, I at least have
+something to
+That's his replay writer.
+One.
+this a minute to eval.
+this a minute to eval.
+Hopefully, this is at least a decent
+Hopefully, this is at least a decent
+starter policy.
+starter policy.
+Anything great.
+Anything great.
+This should be decent enough starter
+This should be decent enough starter
+policy. Uh then we will basically just
+policy. Uh then we will basically just
+be able to take this thing, run it on
+be able to take this thing, run it on
+the full maps, and see if anything
+the full maps, and see if anything
+happens.
+I wish that this thing would actually
+I wish that this thing would actually
+this buttons would work.
+Well, I guess we'll have to do it this
+Well, I guess we'll have to do it this
+way.
+Get a full inventory of
+Get a full inventory of
+stuff from the mine.
+stuff from the mine.
+Then it's going to go find
+Then it's going to go find
+the generator.
+Who made that? This is uh Meta with two
+Who made that? This is uh Meta with two
+T's.
+T's.
+You can find their GitHub,
+You can find their GitHub,
+not Facebook.
+not Facebook.
+Okay. So then they do this conversion.
+It works, right?
+All
+right. So, this now that this works, the
+right. So, this now that this works, the
+question is, can we scale it up
+or do we want to do the cool downs
+or do we want to do the cool downs
+first?
+first?
+Maybe we want to do the pull downs
+Maybe we want to do the pull downs
+first.
+Give you three mines.
+We'll
+look at the
+uh let's go look at their configs.
+Pull down.
+Pull down.
+What did we say that they put
+What did we say that they put
+many things for there?
+Two generators, 10 mines, six agents.
+Two generators, 10 mines, six agents.
+Okay, so we'll do like two here.
+Basically, we just see whether this does
+Basically, we just see whether this does
+anything.
+This will make it substantially harder
+This will make it substantially harder
+to learn.
+Not really for any good reason.
+Basically, just the agent can't see the
+Basically, just the agent can't see the
+waiting animation.
+Why is it taking this long?
+Oh, cuz I left the replay if you were on
+Oh, cuz I left the replay if you were on
+like a dummy.
+Yes.
+If this works,
+If this works,
+then possibly the full map work. See,
+are they actually doing this for um
+are they actually doing this for um
+their configs?
+Okay. So, the only problem here is I
+Okay. So, the only problem here is I
+don't know
+don't know
+the scale of anything.
+Um,
+this is way lower
+this is way lower
+and uh we don't it's not getting any
+and uh we don't it's not getting any
+hearts yet, which is a problem.
+See if that changes.
+Oh, no. It is. It's just It's at one.
+Oh, no. It is. It's just It's at one.
+That's actually good.
+And realistically, I think that the max
+And realistically, I think that the max
+you can get is like two, isn't it?
+you can get is like two, isn't it?
+Cuz you need nine. Hang on. You need
+Cuz you need nine. Hang on. You need
+nine ores,
+nine ores,
+which you actually have to take the time
+which you actually have to take the time
+to collect.
+I guess if you go between two mines, you
+I guess if you go between two mines, you
+should be able to get two hearts.
+You know what? I wonder if it was I
+You know what? I wonder if it was I
+wonder if this was a straightup logging
+wonder if this was a straightup logging
+change.
+This could have been a straightup
+This could have been a straightup
+logging change. No,
+logging change. No,
+maybe not cuz there were 10 mines.
+I'm trying to figure out like cuz we had
+I'm trying to figure out like cuz we had
+a version of this that worked before,
+a version of this that worked before,
+but like I basically never saw it. I
+but like I basically never saw it. I
+just trained them a policy and sent it
+just trained them a policy and sent it
+to them and they were like, "Oh yeah,
+to them and they were like, "Oh yeah,
+that's really good.
+This is expected because again the cool
+This is expected because again the cool
+down times are totally different.
+down times are totally different.
+These metrics are
+these metrics are definitely reported
+these metrics are definitely reported
+wrong.
+wrong.
+Definitely
+wonder how they're being reported.
+wonder how they're being reported.
+We'll look at that in the meantime while
+We'll look at that in the meantime while
+this finishes training.
+This a lib or you made that?
+This a lib or you made that?
+Which visualization?
+Which visualization?
+Oh, this one. No, this is this is the
+Oh, this one. No, this is this is the
+meta, guys.
+they they build everything like the
+they they build everything like the
+exact opposite of the way that I do. So,
+exact opposite of the way that I do. So,
+uh we have our visualizations on um on
+uh we have our visualizations on um on
+puffer.ai.
+Like for instance, this is one of the
+Like for instance, this is one of the
+ones.
+ones.
+This is probably the NF that I built
+This is probably the NF that I built
+that I'm most proud of.
+that I'm most proud of.
+See,
+hang on.
+hang on.
+by mistake.
+I will check your template momentarily.
+Okay. Uh you cannot run this while also
+Okay. Uh you cannot run this while also
+running training at the same time.
+You link it anywhere?
+You link it anywhere?
+Discord.
+Thank you.
+970.
+Okay, I'm going to have to read through
+Okay, I'm going to have to read through
+this. This is gigantic
+template.
+template.
+What do you mean just a template? I
+What do you mean just a template? I
+mean, it's huge, right?
+This is several times longer than all of
+This is several times longer than all of
+the current docs put together, right?
+Wait, what?
+says is part of this AI generated
+says is part of this AI generated
+because there's stuff that does not make
+because there's stuff that does not make
+sense in here. Like we don't have a
+sense in here. Like we don't have a
+puffer libmodels.policy
+puffer libmodels.policy
+and then there's like they're like
+and then there's like they're like
+random characters in the middle of this
+random characters in the middle of this
+from like is this SAM script?
+from like is this SAM script?
+I think it's like some SAM script
+I think it's like some SAM script
+characters.
+Just this template,
+not a real
+What do you mean by a template? Hey
+What do you mean by a template? Hey
+Brad, how's it going? What What do you
+Brad, how's it going? What What do you
+mean by a template? Because like a
+mean by a template? Because like a
+template is like something that you copy
+template is like something that you copy
+and then you edit it for your own
+and then you edit it for your own
+environment, right? Like we have one of
+environment, right? Like we have one of
+those.
+those.
+But this is not what a template is,
+But this is not what a template is,
+right?
+Sample sample template.
+Sample sample template.
+Okay. So I guess you just mean it's like
+Okay. So I guess you just mean it's like
+something sort of like this. Okay.
+So I mean you basically what you want is
+So I mean you basically what you want is
+you want you want like a from scratch
+you want you want like a from scratch
+tutorial like assuming you don't know
+tutorial like assuming you don't know
+any RLS like at all. Okay.
+Yeah,
+Yeah,
+that can be arranged
+be arranged.
+You have to realize that like literally
+You have to realize that like literally
+before puffer live, this wasn't a field
+before puffer live, this wasn't a field
+where that was a a reasonable thing to
+where that was a a reasonable thing to
+even do cuz like it was so much harder
+even do cuz like it was so much harder
+to even do anything that like a I'm a
+to even do anything that like a I'm a
+beginner. I don't know RL. How do I like
+beginner. I don't know RL. How do I like
+make cool new stuff? It's like, well,
+make cool new stuff? It's like, well,
+you just don't. Um, now though, yes, you
+you just don't. Um, now though, yes, you
+actually can do that in Puffer Lib, and
+actually can do that in Puffer Lib, and
+our docs just have not caught up to
+our docs just have not caught up to
+that, which is fair.
+that, which is fair.
+That's not a Puffer Lib guide anymore,
+That's not a Puffer Lib guide anymore,
+though. That's like a RL basics, which
+though. That's like a RL basics, which
+Yeah, we can do something for that. It's
+Yeah, we can do something for that. It's
+like RL basics with Puffer Lib.
+like RL basics with Puffer Lib.
+It's not Puffer Lib Basics. It's like
+It's not Puffer Lib Basics. It's like
+kind of RL Basics. Yeah.
+I have a meeting that's technically at
+I have a meeting that's technically at
+1, but the guy told me he's probably
+1, but the guy told me he's probably
+going to be a bit late.
+going to be a bit late.
+What I'm probably going to do is I'm
+What I'm probably going to do is I'm
+going to message him like, "Hey, let me
+going to message him like, "Hey, let me
+know when you're
+know when you're
+around
+ask people start from scratch
+ask people start from scratch
+again like this was the type of thing
+again like this was the type of thing
+where this start basically this started
+where this start basically this started
+off as a toolkit for PhDs in
+off as a toolkit for PhDs in
+reinforcement learning right and then we
+reinforcement learning right and then we
+made it simpler because we made the
+made it simpler because we made the
+library way faster and way simpler right
+library way faster and way simpler right
+then we brought it down to like okay
+then we brought it down to like okay
+this is a toolkit for like AI people who
+this is a toolkit for like AI people who
+are trying to get into RL, right? Like
+are trying to get into RL, right? Like
+people with like research experience in
+people with like research experience in
+other areas. Maybe you have like a
+other areas. Maybe you have like a
+masters or a PhD in another area and
+masters or a PhD in another area and
+you're trying to do RL. And then it got
+you're trying to do RL. And then it got
+to the point where we literally have
+to the point where we literally have
+brand new programmers that can actually
+brand new programmers that can actually
+do stuff with it now and the docs
+do stuff with it now and the docs
+haven't caught up to that. So that is a
+haven't caught up to that. So that is a
+fair point.
+Like I'm going to have to figure out the
+Like I'm going to have to figure out the
+format in which to present this. Like
+format in which to present this. Like
+you understand why I can't just like put
+you understand why I can't just like put
+this as the documentation page, right?
+this as the documentation page, right?
+Cuz like if I put this as the as the
+Cuz like if I put this as the as the
+documentation page, then like
+documentation page, then like
+experienced RL people are going to be
+experienced RL people are going to be
+like, what the hell is this just like a
+like, what the hell is this just like a
+tutorial library for beginners? Like
+tutorial library for beginners? Like
+where do I find the information I
+where do I find the information I
+actually need? But I need to kind of do
+actually need? But I need to kind of do
+both and I they need to be in separate
+both and I they need to be in separate
+places.
+places.
+A bachelor student learning puffer li
+A bachelor student learning puffer li
+from their first year of college.
+from their first year of college.
+Yeah. So, this is the thing like you can
+Yeah. So, this is the thing like you can
+actually do that now as a bachelor
+actually do that now as a bachelor
+student in your first year of college.
+student in your first year of college.
+Uh, I tried to do RL as a bachelor
+Uh, I tried to do RL as a bachelor
+student in my first year of college with
+student in my first year of college with
+the tools that were available back then
+the tools that were available back then
+and it was impossible.
+and it was impossible.
+Like it doesn't matter if you're a
+Like it doesn't matter if you're a
+genius, just couldn't do anything at
+genius, just couldn't do anything at
+all.
+all.
+Um, so times have changed and now
+Um, so times have changed and now
+actually we can do stuff. And
+actually we can do stuff. And
+admittedly, like we've actually had
+admittedly, like we've actually had
+undergrads contributing really awesome
+undergrads contributing really awesome
+stuff now. So do you want to have docs
+stuff now. So do you want to have docs
+for that? I just have to figure out how
+for that? I just have to figure out how
+to present it, right? Because like if
+to present it, right? Because like if
+you present the docs like the main docs
+you present the docs like the main docs
+pages like this is like for ultra
+pages like this is like for ultra
+beginners, then you lose the experienced
+beginners, then you lose the experienced
+people that you also care about. So I
+people that you also care about. So I
+have to figure out how to put it
+have to figure out how to put it
+separately. I might do it as like a blog
+separately. I might do it as like a blog
+post more than anything, right?
+post more than anything, right?
+That might be better to just have like,
+That might be better to just have like,
+you know, um
+like like quick start RL with puffer lib
+like like quick start RL with puffer lib
+for complete beginners or something.
+Yeah, there will have to be like two
+Yeah, there will have to be like two
+sections or something. Now, like putting
+sections or something. Now, like putting
+two sections, I'll play with the format.
+two sections, I'll play with the format.
+Basically, I hear you and like, okay, I
+Basically, I hear you and like, okay, I
+can do something to have like a complete
+can do something to have like a complete
+beginner guide that covers the
+beginner guide that covers the
+information that you put in here, but I
+information that you put in here, but I
+have to decide on the format, right?
+That would be great. Yeah. Okay. So,
+That would be great. Yeah. Okay. So,
+this is something that people want.
+this is something that people want.
+This is something that people want. I
+This is something that people want. I
+just have to figure out the form to
+just have to figure out the form to
+deliver it.
+In the meantime, until I've done that,
+In the meantime, until I've done that,
+I literally stream all day. So, if you
+I literally stream all day. So, if you
+have questions, you ask them here.
+This read me on squared example. this
+This read me on squared example. this
+code doesn't actually run is the thing,
+code doesn't actually run is the thing,
+right? Like
+it's generally not a good idea to
+it's generally not a good idea to
+include code examples for code that
+include code examples for code that
+actually doesn't run, right? Like you
+actually doesn't run, right? Like you
+don't do like a code walkthrough when
+don't do like a code walkthrough when
+the code doesn't actually work.
+But we'll have to tweak some stuff on it
+But we'll have to tweak some stuff on it
+at the very least.
+Yeah.
+Yeah.
+Okay. So, this is this one. Let's see if
+Okay. So, this is this one. Let's see if
+we
+after making.
+Why is this agent invisible?
+There we go.
+Oh, it's very smart.
+Solid.
+Welcome, humble fool. What is this end
+Welcome, humble fool. What is this end
+of about? It's resource conversion. You
+of about? It's resource conversion. You
+have to get three ores from here and
+have to get three ores from here and
+then put the three ores in the
+then put the three ores in the
+generator. That makes a battery. And
+generator. That makes a battery. And
+then three batteries go to the altar and
+then three batteries go to the altar and
+makes a heart.
+I mean, this agent has learned this task
+I mean, this agent has learned this task
+pretty well perfectly.
+Percy Leon,
+Percy Leon,
+what tweet have you linked? Percy
+That's a good thing to do.
+That's a good thing to do.
+I don't know. I don't know how they
+I don't know. I don't know how they
+actually do this. If it's like from
+actually do this. If it's like from
+scratch, but actually it's PyTorch, then
+scratch, but actually it's PyTorch, then
+that's kind of silly. But like, yes,
+that's kind of silly. But like, yes,
+language models from scratch, it's good.
+language models from scratch, it's good.
+Honestly, the best resource on that, I
+Honestly, the best resource on that, I
+don't know about this course, the best
+don't know about this course, the best
+resource on language models from scratch
+resource on language models from scratch
+is Carpathy's GPT2 speedrun,
+is Carpathy's GPT2 speedrun,
+like his like GPT2 original code,
+like his like GPT2 original code,
+actually before all the crazy speedrun
+actually before all the crazy speedrun
+stuff is really good. Read the replies.
+stuff is really good. Read the replies.
+Okay, for some reason those didn't show
+Okay, for some reason those didn't show
+up. Hang on.
+That's a weird level of abstraction.
+I would either do it like you can use
+I would either do it like you can use
+linear right you can use basic layers
+linear right you can use basic layers
+but obviously don't no transformer or
+but obviously don't no transformer or
+attention or whatever
+attention or whatever
+um or I would go lower level
+brighten
+brighten
+Yeah, this is still pretty high level.
+Yeah, this is still pretty high level.
+Honestly,
+this is a good thing to have. It's still
+this is a good thing to have. It's still
+pretty high level. I mean, that's is a
+pretty high level. I mean, that's is a
+good course. Like, I would have taken
+good course. Like, I would have taken
+this if I were uh the student there.
+this if I were uh the student there.
+That's like good.
+How did you define rewards for Pokemon
+How did you define rewards for Pokemon
+Red? There's a blog post.
+You see, there's a blog post. It covers
+You see, there's a blog post. It covers
+everything.
+everything.
+You can also at that guy in uh Discord.
+You can also at that guy in uh Discord.
+I'd buy a course if you offered one. I'm
+I'd buy a course if you offered one. I'm
+not in the business of selling you
+not in the business of selling you
+courses. All my educational content is
+courses. All my educational content is
+free. I sell um I sell my services to
+free. I sell um I sell my services to
+companies who are trying to like solve a
+companies who are trying to like solve a
+hard RL problem uh in their business.
+hard RL problem uh in their business.
+All the other stuff's free, including
+All the other stuff's free, including
+the code. Be right back. I'm going to
+the code. Be right back. I'm going to
+use the restroom real quick and then I
+use the restroom real quick and then I
+got to figure out where this guy is for
+got to figure out where this guy is for
+my meeting. Uh but he's probably going
+my meeting. Uh but he's probably going
+to be late, so I probably have a little
+to be late, so I probably have a little
+bit longer here.
+Brad, if you want to like learn this
+Brad, if you want to like learn this
+stuff, literally the best way is to just
+stuff, literally the best way is to just
+get jump into the puffer discord and
+get jump into the puffer discord and
+like start building some environments.
+You learn and at the same time you
+You learn and at the same time you
+actually help advance all the research
+actually help advance all the research
+that we're doing. Let me go figure out
+that we're doing. Let me go figure out
+where this guy is for me.
+So, uh, the plan for folks, uh, I have a
+So, uh, the plan for folks, uh, I have a
+meeting. I don't know when the guy is
+meeting. I don't know when the guy is
+going to be here. He said he'd be late,
+going to be here. He said he'd be late,
+like fairly late. So, um, at some point
+like fairly late. So, um, at some point
+I'll just hop out and hang on, let me
+I'll just hop out and hang on, let me
+message him and then I will be live back
+message him and then I will be live back
+afterwards.
+really appreciate stuff you've open
+really appreciate stuff you've open
+source. Thank you.
+source. Thank you.
+I mean, honestly, at this point, like
+I mean, honestly, at this point, like
+most of the stuff in Puffer Lib, like
+most of the stuff in Puffer Lib, like
+the majority of the code, at least the
+the majority of the code, at least the
+end code is written by contributors,
+end code is written by contributors,
+right? Um,
+right? Um,
+and some of them come out like really
+and some of them come out like really
+well
+well
+and like in a way you wouldn't even
+and like in a way you wouldn't even
+expect. Go look at Tetris on the
+expect. Go look at Tetris on the
+website. It's absolutely mesmerizing.
+website. It's absolutely mesmerizing.
+Systems capable of analogy and
+Systems capable of analogy and
+reasoning. That's going to be more
+reasoning. That's going to be more
+language stuff I would think than
+you might be more interested in language
+you might be more interested in language
+stuff. It's harder to do language though
+stuff. It's harder to do language though
+because like frankly you can't really do
+because like frankly you can't really do
+any research.
+any research.
+You can't really do much meaningful
+You can't really do much meaningful
+research in language modeling space at
+research in language modeling space at
+the moment because everything's just so
+the moment because everything's just so
+big and expensive. RL is one of the few
+big and expensive. RL is one of the few
+places in AI where you can really just
+places in AI where you can really just
+make a huge difference without it
+make a huge difference without it
+needing a ton of resources.
+How do you define if an agent has
+How do you define if an agent has
+learned a concept? Well, I mean right
+learned a concept? Well, I mean right
+here, look uh it's not just this map. it
+here, look uh it's not just this map. it
+like any permutation of where these
+like any permutation of where these
+obstacles go.
+obstacles go.
+This agent has learned that it needs to
+This agent has learned that it needs to
+get three resources from the mine, put
+get three resources from the mine, put
+three resources into there, wait for
+three resources into there, wait for
+them to convert, and then it's going to
+them to convert, and then it's going to
+have to take them out and it puts them
+have to take them out and it puts them
+into the alter to get a heart.
+into the alter to get a heart.
+It very clearly understands that because
+It very clearly understands that because
+this is randomized during training. So,
+this is randomized during training. So,
+these obstacles can be anywhere and
+these obstacles can be anywhere and
+it'll do the same thing.
+it'll do the same thing.
+LMS don't do analogy and reasoning. They
+LMS don't do analogy and reasoning. They
+definitely do. They definitely do.
+definitely do. They definitely do.
+They're they're fuzzy and they make
+They're they're fuzzy and they make
+weird errors in ways that humans don't.
+weird errors in ways that humans don't.
+So it's like it's not a onetoone like
+So it's like it's not a onetoone like
+exactly like humans, but they definitely
+exactly like humans, but they definitely
+do follow stuff like that. You can just
+do follow stuff like that. You can just
+ask it like you know you can like ask it
+ask it like you know you can like ask it
+to complete an analogy and it'll do it.
+to complete an analogy and it'll do it.
+Abstract the concept to a new
+Abstract the concept to a new
+environment. It can. It's just a matter
+environment. It can. It's just a matter
+of extent and a matter of error classes,
+of extent and a matter of error classes,
+right? Like for instance, it's never
+right? Like for instance, it's never
+seen this specific environment during
+seen this specific environment during
+training. Like I guarantee you it's
+training. Like I guarantee you it's
+never seen this exact placement of all
+never seen this exact placement of all
+the obstacles.
+So this is generalizing in some sense.
+So this is generalizing in some sense.
+It hasn't seen this exact environment.
+It hasn't seen this exact environment.
+They say, well, what happens if I only
+They say, well, what happens if I only
+put one mine in or what if I make the
+put one mine in or what if I make the
+map bigger? There are classes to
+map bigger? There are classes to
+generalization, right?
+Let me just make sure I don't miss this
+Let me just make sure I don't miss this
+guy because I don't know if he'll check
+guy because I don't know if he'll check
+his Twitter DMs.
+app.cal.com.
+No idea what that is.
+Uh I don't think that
+Uh I don't think that
+I think you might be surprised with
+I think you might be surprised with
+that. I
+that. I
+like the way that we do it is going to
+like the way that we do it is going to
+make
+it's going to make errors that people
+it's going to make errors that people
+don't, but it's also definitely going to
+don't, but it's also definitely going to
+get things right that the average person
+get things right that the average person
+won't, right?
+won't, right?
+Like if you go like try to come up with
+Like if you go like try to come up with
+like the most novel analogy you possibly
+like the most novel analogy you possibly
+can. Ask a bunch of people and then ask
+can. Ask a bunch of people and then ask
+the LLM and see.
+the LLM and see.
+Yeah, I think like a lot of the LLMs
+Yeah, I think like a lot of the LLMs
+can't reason stuff is kind of just
+can't reason stuff is kind of just
+silly. Um, but like on equally silly is,
+silly. Um, but like on equally silly is,
+oh, LLMs are just super human. They
+oh, LLMs are just super human. They
+already they solve everything. They're
+already they solve everything. They're
+great. We should just do everything with
+great. We should just do everything with
+LLMs. Like that doesn't work either.
+LLMs. Like that doesn't work either.
+They're kind of useless for programming
+They're kind of useless for programming
+for me, for most of the stuff that I do.
+for me, for most of the stuff that I do.
+Um,
+Um,
+and they're useless for a lot of other
+and they're useless for a lot of other
+things as well. So like, yeah.
+Okay, I got to run to this meeting. Um,
+Okay, I got to run to this meeting. Um,
+thanks for tuning in folks. I will be
+thanks for tuning in folks. I will be
+back right after this.
+back right after this.
+Uh, if you want to check out all our
+Uh, if you want to check out all our
+stuff, it's all at puffer.ai.
+stuff, it's all at puffer.ai.
+Start the repo to help me out for free.
+Start the repo to help me out for free.
+Take a look at our latest release.
+Take a look at our latest release.
+Puffer 3 is here. It's all open source.
+Puffer 3 is here. It's all open source.
+Follow me on X for more content. And
+Follow me on X for more content. And
+we're posting all sorts of cool RL
+we're posting all sorts of cool RL
+articles.

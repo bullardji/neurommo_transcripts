@@ -1,0 +1,3711 @@
+Kind: captions
+Language: en
+Hey
+folks, I'm back for
+folks, I'm back for
+another, let's say, hour and a half.
+another, let's say, hour and a half.
+Oops.
+Oops.
+[Music]
+Um, I think we're just going to see if
+Um, I think we're just going to see if
+what we can do about offline I mean off
+what we can do about offline I mean off
+policy right now and uh then we
+policy right now and uh then we
+will integrate everything tomorrow.
+will integrate everything tomorrow.
+And hopefully we will go from there. We
+And hopefully we will go from there. We
+will
+see real
+quick. Quick round of uh looking at
+this. Oh yeah, I see it. Okay, that's
+this. Oh yeah, I see it. Okay, that's
+good. That's a good result so
+good. That's a good result so
+far. That's like very nice.
+far. That's like very nice.
+very slightly
+above roughly same stability, maybe a
+above roughly same stability, maybe a
+little more. I don't know. We're happy
+little more. I don't know. We're happy
+with that. We're definitely happy to see
+that. Okay.
+that. Okay.
+Um, hey bet, welcome.
+Yeah, the shape just doesn't blend at
+Yeah, the shape just doesn't blend at
+all, does
+it? No, no, it's the stupid um blueprint
+it? No, no, it's the stupid um blueprint
+stuff.
+go back to this for a second.
+go back to this for a second.
+So offline data really doesn't all
+So offline data really doesn't all
+policy data isn't the thing that's
+policy data isn't the thing that's
+screwing us. It's the prioritization of
+screwing us. It's the prioritization of
+that data
+that data
+somehow. That's really weird.
+Wait, what the
+Wait, what the
+hell?
+Importance. Isn't this
+Wait, this samples with importance. Oh,
+Wait, this samples with importance. Oh,
+but importance is advantages. So, this
+but importance is advantages. So, this
+is
+is
+[Music]
+fine. This thing, this random sample is
+fine. This thing, this random sample is
+the thing that messes with
+the thing that messes with
+it. Hang
+it. Hang
+on. Yeah, there's like really no
+on. Yeah, there's like really no
+difference with the prioritization for
+difference with the prioritization for
+this.
+So, you're not expecting it to do
+So, you're not expecting it to do
+better. You just want it to not do
+better. You just want it to not do
+worse.
+It's very weird that it
+like this is the worst one. Right.
+Maybe the importance ratio is not
+Maybe the importance ratio is not
+getting used
+getting used
+correctly. We'll have to
+see. Yeah. So, this is the worst curve.
+see. Yeah. So, this is the worst curve.
+You can see
+You can see
+it. Yeah, it's following this path.
+it. Yeah, it's following this path.
+Okay.
+So, maybe there's something in the
+So, maybe there's something in the
+experience ratio for
+experience ratio for
+us for us to think about, right?
+Oh, this thing doesn't get updated at
+Oh, this thing doesn't get updated at
+all, does
+it? Does this not get updated at
+all? It does right here.
+We do like one data epoch though, right?
+It still should diverge a
+bit. I mean, advantage takes into
+bit. I mean, advantage takes into
+account both of these things already.
+As long as you're using the correct
+As long as you're using the correct
+updated ratio, which we are,
+right?
+Yeah. I mean, advantages gets recalked.
+ratio is like technically stale,
+ratio is like technically stale,
+but you can't do anything about that
+but you can't do anything about that
+without doing another forward pass,
+without doing another forward pass,
+right?
+I mean, you would think that the really
+I mean, you would think that the really
+high advantage trajectories would be
+good. Maybe they stick around too
+long. Maybe that's it, right? cuz like
+long. Maybe that's it, right? cuz like
+isn't top K way
+worse? Yeah, this is the top K one was
+worse? Yeah, this is the top K one was
+way down here, right?
+way down here, right?
+So if you keep the same samples around
+So if you keep the same samples around
+for a long time,
+um they get more and more off policy.
+um they get more and more off policy.
+Maybe
+is there a reason to like keep it
+is there a reason to like keep it
+anyways.
+Is there a reason to keep this anyways
+Is there a reason to keep this anyways
+versus just like running more epochs?
+Maybe this corrects so that we can use
+Maybe this corrects so that we can use
+it more than
+before. Hang on.
+It's time for some benchmarking. I think
+Did you accidentally paste what you were
+Did you accidentally paste what you were
+working onto the into the stream chat
+working onto the into the stream chat
+there, Morgan?
+Okay, this is what we do. Go to none.
+Okay, this is what we do. Go to none.
+Here's our benchmark.
+All right, enough random code snippets
+All right, enough random code snippets
+in the chat.
+Oh, I wasn't
+using I know it's Python, but you can
+using I know it's Python, but you can
+use Java.
+use Java.
+JavaScript to do
+JavaScript to do
+things. Not an AI. You
+can't. I'm not running
+can't. I'm not running
+freaking JavaScript, PyTorch
+freaking JavaScript, PyTorch
+models. I like my current stack of
+models. I like my current stack of
+Python and
+Python and
+C. Lot of C, little Python.
+Okay. So that's good. So this is our new
+algorithm. Now what we do
+We crank up 80 bucks to like
+four, say five
+even. So now we see how this does with a
+even. So now we see how this does with a
+bunch of extra updates.
+This might be too easy to use as a
+This might be too easy to use as a
+proper benchmark, but we'll see.
+Okay. So, I mean this is expected. More
+Okay. So, I mean this is expected. More
+update epochs makes it train slower but
+update epochs makes it train slower but
+more sample efficient. Yeah.
+This is like an interesting spike
+This is like an interesting spike
+here. Oh, you know what this probably
+here. Oh, you know what this probably
+is? This is probably when it wins the
+is? This is probably when it wins the
+first stage of the game, right? Cuz this
+first stage of the game, right? Cuz this
+is half the score. It's probably really
+is half the score. It's probably really
+annoying to get it to get that last
+[Music]
+brick. That's totally what it
+is.
+is.
+Okay, so here's our graph.
+um it's more sample efficient obviously.
+um it's more sample efficient obviously.
+Now the question is going to be what
+Now the question is going to be what
+happens when we compare this to the new
+happens when we compare this to the new
+advantage function cuz this is
+advantage function cuz this is
+technically like slightly off policy
+technically like slightly off policy
+data now right
+like it got all this extra
+like it got all this extra
+data, but it really didn't learn that
+data, but it really didn't learn that
+much faster with PO, right?
+Okay. So, this is our baseline with
+Okay. So, this is our baseline with
+PO. Now we do puffer advantage.
+It's stuck in exactly the same spot.
+so like so far it's like a little better
+maybe. Yeah. But we're not seeing like a
+maybe. Yeah. But we're not seeing like a
+massive increase in sample efficiency or
+massive increase in sample efficiency or
+anything.
+Yeah, it looks like this is probably
+Yeah, it looks like this is probably
+just going to be like a relatively minor
+just going to be like a relatively minor
+but permanent bump, right? Where it's
+but permanent bump, right? Where it's
+like slightly
+better. I don't know. I like conceivably
+better. I don't know. I like conceivably
+it could just do it in half the time,
+it could just do it in half the time,
+right?
+I don't
+know. I mean, so far here we're doing
+know. I mean, so far here we're doing
+like it's kind of consistent, right? We
+like it's kind of consistent, right? We
+just do slightly slightly
+better. I mean, we have
+Let me
+think. Well, I mean, the thing is
+think. Well, I mean, the thing is
+like the fact that this isn't a massive
+like the fact that this isn't a massive
+difference tells me like I don't think
+difference tells me like I don't think
+that this is a massive sample efficiency
+that this is a massive sample efficiency
+gain. It's like a nice little boost. I
+gain. It's like a nice little boost. I
+think it'll make all your curves a
+think it'll make all your curves a
+little bit
+cleaner.
+Um, well, I mean, if you want power to
+Um, well, I mean, if you want power to
+find much of a difference, this is the
+find much of a difference, this is the
+graph, right? This is going to be the
+graph, right? This is going to be the
+neural MMO one.
+neural MMO one.
+I mean, I was testing something very
+I mean, I was testing something very
+specific here, right? I was testing the
+specific here, right? I was testing the
+ability of this algorithm to make uh to
+ability of this algorithm to make uh to
+reuse data versus the other
+reuse data versus the other
+one. Actually, you know what? I have a
+one. Actually, you know what? I have a
+better way of testing it. You're right.
+Here, we'll do
+this. In the meantime, I'll look at B
+this. In the meantime, I'll look at B
+trace a little
+bit. We should probably graph some of
+bit. We should probably graph some of
+these as well or like log
+this. We'll do that in a second.
+Yeah. Okay. So, this was the concern
+Yeah. Okay. So, this was the concern
+here, right? You go 12 update epochs and
+here, right? You go 12 update epochs and
+it starts doing worse, slightly worse,
+it starts doing worse, slightly worse,
+which is the same as
+which is the same as
+um GA.
+um GA.
+So, I don't think that this does it for
+So, I don't think that this does it for
+off policy correction too
+off policy correction too
+well. It's a nice little
+boost. Nice little boost for sure.
+I wouldn't have screwed up the off
+I wouldn't have screwed up the off
+policy sampling ability, right? with
+um and we can always try this versus B
+um and we can always try this versus B
+trace.
+Yeah. So, this thing sucks.
+Yeah. So, this thing sucks.
+Okay. Now, next we just
+do we make sure that I didn't mess up
+do we make sure that I didn't mess up
+something here.
+Like it is technically
+Like it is technically
+possible. I'm
+bad. It is technically possible that
+bad. It is technically possible that
+vrace is the sample efficiency one.
+I doubt it. I highly doubt it.
+I doubt it. I highly doubt it.
+Like 15% that this does it. Maybe less.
+Like 15% that this does it. Maybe less.
+That's being
+generous. But we have to test it.
+I want to read a few more off policy
+I want to read a few more off policy
+correction things.
+Welcome YouTube
+Welcome YouTube
+folks. We've got the new algorithm
+folks. We've got the new algorithm
+running. It's like just a little bit
+running. It's like just a little bit
+better than generalized advantage
+better than generalized advantage
+estimation, which is what we
+estimation, which is what we
+expected. Yeah, Vrace on its own doesn't
+expected. Yeah, Vrace on its own doesn't
+do anything.
+Um, it's like just barely a little bit
+better. It's really weird how bad V
+better. It's really weird how bad V
+trace is just on its own, isn't
+it? Oh, well, you do have to tune it to
+it? Oh, well, you do have to tune it to
+be
+be
+fair. Hang on. Maybe this wasn't fair.
+fair. Hang on. Maybe this wasn't fair.
+Maybe I should have tuned it.
+Okay, we'll let that
+run. This is This is Impala.
+Okay, it's this one.
+Okay, this thing is
+Okay, this thing is
+ridiculously
+ridiculously
+inefficient. This is like laughably
+inefficient. This is like laughably
+hilariously
+stupid. Like the things you'll do for
+stupid. Like the things you'll do for
+sample efficiency. Holy hell.
+Where's the soft Watkins thing?
+Okay, here's soft
+Watkins. Agent 57 uses
+Watkins. Agent 57 uses
+retrace to compute return estimates from
+retrace to compute return estimates from
+all policy data. It tends to cut traces
+all policy data. It tends to cut traces
+too aggressively when using epsilon
+too aggressively when using epsilon
+greedy policies, thus slowing down
+greedy policies, thus slowing down
+propagation of information.
+alternative return estimator which we
+alternative return estimator which we
+derive from Q of
+lambda Watkins whatever
+We propose to use a softer trace cutting
+We propose to use a softer trace cutting
+mechanism by adding a fixed tolerance
+mechanism by adding a fixed tolerance
+parameter and taking the expectation of
+parameter and taking the expectation of
+trace coefficients under pi. So what is
+this? Well, this is
+this? Well, this is
+like this is like uh V trace right here,
+like this is like uh V trace right here,
+right?
+Fix tolerance parameter.
+What the hell is this soft Watkins
+What the hell is this soft Watkins
+thing? They have an ablation on
+thing? They have an ablation on
+this. Surely they do ablations,
+this. Surely they do ablations,
+right? Soft Watkins.
+I don't understand what this
+is. What is this operator? So they
+is. What is this operator? So they
+take is this
+one? The heck is this?
+one? The heck is this?
+Oh, indicator. Yeah.
+One. Okay. So, what they doing here is
+One. Okay. So, what they doing here is
+this is like
+um so this lambda
+um so this lambda
+I is the importance ratio clamped port
+I is the importance ratio clamped port
+importance ratio in our
+importance ratio in our
+thing. And
+here they define a max. They define a
+here they define a max. They define a
+change in
+Q. So I think if the Q function changes
+Q. So I think if the Q function changes
+too
+much they just drop them I
+much they just drop them I
+guess. So instead of it being a ratio
+guess. So instead of it being a ratio
+it's like a hard clip.
+So, it's actually kind of more similar
+So, it's actually kind of more similar
+to this for what we would do because we
+to this for what we would do because we
+don't have the you.
+Oh, so this is they do it whenever the
+Oh, so this is they do it whenever the
+action changes I
+action changes I
+guess.
+guess.
+H Oh, so whenever it count Oh, okay. I
+H Oh, so whenever it count Oh, okay. I
+see. So whenever the optimal action
+see. So whenever the optimal action
+changes or
+whatever, that's kind of cool.
+stuff like this we can potentially do.
+Yeah. The thing is our policies are
+Yeah. The thing is our policies are
+stochastic. So
+like it doesn't quite work the same. Oh
+like it doesn't quite work the same. Oh
+also uh this experiment failed horribly.
+also uh this experiment failed horribly.
+So I not as badly as before, but like
+So I not as badly as before, but like
+yeah, V trace alone is not
+amazing. Okay, so now we know why our
+amazing. Okay, so now we know why our
+off policy stuff isn't doing great. It's
+cuz these things just aren't great with
+cuz these things just aren't great with
+off policy data.
+Yeah. So their stuff is
+Yeah. So their stuff is
+like this thing
+like this thing
+is where is
+is where is
+it? Yeah. So this thing is
+it? Yeah. So this thing is
+um very much dependent on having a Q
+um very much dependent on having a Q
+function
+function
+because they essentially they prevent
+because they essentially they prevent
+data from going off policy.
+The trust region masks out the loss at
+The trust region masks out the loss at
+any time step which both of the
+any time step which both of the
+following conditions
+hold. So this is the clip.
+sign of the
+sign of the
+difference. Well, what's the G is the
+difference. Well, what's the G is the
+return estimate.
+isn't there a caution parame that's like
+isn't there a caution parame that's like
+kind of similar to this
+What else did they do?
+Okay. So, they do have a policy
+Okay. So, they do have a policy
+distillation component.
+Yeah. So, this totally breaks it,
+Yeah. So, this totally breaks it,
+right? This caution thing totally breaks
+right? This caution thing totally breaks
+it. We don't want
+it. We don't want
+that,
+that,
+right? We'll double check.
+Are there any
+Are there any
+other these
+flags? Colossian
+Yeah. Okay. So, this is this
+Yeah. Okay. So, this is this
+recovers like original per here,
+right? What? This one didn't seem to be
+right? What? This one didn't seem to be
+that great.
+I didn't think this Mars thing did
+I didn't think this Mars thing did
+anything either, right?
+Fiddle with a few things now.
+Yep. Not
+great. Oh, you dummy. You've been
+great. Oh, you dummy. You've been
+putting them on the wrong one. All
+right, let's try this
+right, let's try this
+correctly. Stop looking at noise.
+I must have applied caution correctly,
+I must have applied caution correctly,
+right? Cuz that was like a a big delta.
+So yeah, that's not great. Let me make
+So yeah, that's not great. Let me make
+sure we're recovering original perf
+sure we're recovering original perf
+here. Something I something like making
+here. Something I something like making
+me uncomfortable with
+me uncomfortable with
+this. Make sure we recover perf.
+So, how's
+this? It's good.
+Okay, we're not recovering original PF.
+Okay, we're not recovering original PF.
+Oh, wait. We are recovering original
+Oh, wait. We are recovering original
+Perf. These were the high sample ones.
+Perf. These were the high sample ones.
+Okay. Yeah. No, we're good. We're good
+Okay. Yeah. No, we're good. We're good
+cuz these were the
+cuz these were the
+uh Yeah, these were
+uh Yeah, these were
+the Yeah, we're we're perfectly good
+the Yeah, we're we're perfectly good
+here.
+I got to be careful at this hour. I
+I got to be careful at this hour. I
+start making dumb
+mistakes. Did I I think I did apply
+mistakes. Did I I think I did apply
+caution correctly here to this though,
+caution correctly here to this though,
+right?
+We'll try
+that. It's 827.
+that. It's 827.
+Um, look at PPG again.
+And that's like a huge difference,
+right? Where's the algorithm pseudo
+right? Where's the algorithm pseudo
+code? I'm trying to think if we can like
+code? I'm trying to think if we can like
+hack
+hack
+this. I think we can hack this a little
+bit. So, what I'm thinking here,
+bit. So, what I'm thinking here,
+right, is we
+optimize we optimize the
+optimize we optimize the
+policy and the value function jointly
+policy and the value function jointly
+for an
+for an
+epoch. And then we can optionally add
+epoch. And then we can optionally add
+additional value function epochs.
+L joint L
+value. Okay, I think we try
+value. Okay, I think we try
+it. What happened with this
+one? Yeah. Okay, I got it right the
+one? Yeah. Okay, I got it right the
+first time. This is way worse.
+Let me go grab those other previous
+Let me go grab those other previous
+graphs as
+well. Okay, so these were like the
+Yeah, we've got our baselines. This was
+Yeah, we've got our baselines. This was
+like data reuse.
+How do we do
+How do we do
+this?
+this?
+KL, we have this up here.
+scale going to be with
+this. I'm being lazy,
+but I think it's just like one ratio
+but I think it's just like one ratio
+over the other.
+literally just subtract log props.
+We don't want to pull it to the
+We don't want to pull it to the
+[Music]
+um We don't want to pull it back to the
+um We don't want to pull it back to the
+original policy though.
+Yo, Spencer, how's it
+Yo, Spencer, how's it
+going? We made some really solid
+going? We made some really solid
+algorithm progress today.
+We came up with a small but seemingly
+We came up with a small but seemingly
+very stable general purpose improvement
+very stable general purpose improvement
+to advantage estimation.
+So that's solid.
+This is
+stupid. I go look the policy.
+Oh, I see how this works. Yeah, that's
+Oh, I see how this works. Yeah, that's
+really
+really
+obnoxious. Could be able to start doing
+obnoxious. Could be able to start doing
+full-time RL going for it. Awesome.
+full-time RL going for it. Awesome.
+Yeah, let's catch up over the weekend. I
+Yeah, let's catch up over the weekend. I
+might have some cool uh I might have
+might have some cool uh I might have
+some cool stuff for you.
+Let me actually go send one message
+Let me actually go send one message
+right now.
+This this portion makes it
+infeasible right here.
+Oh, I know what I can do
+though. I know what I can
+though. I know what I can
+do. I know what they must do.
+Still not
+amazing. Let me just try to get
+amazing. Let me just try to get
+something going real quick, right?
+something going real quick, right?
+something real quick like.
+do this
+do this
+[ __ ] Come
+[ __ ] Come
+on. What we're going to try to do
+on. What we're going to try to do
+here, the thing is it's a little bit of
+here, the thing is it's a little bit of
+a
+hack. Do I want to do this, man? I think
+hack. Do I want to do this, man? I think
+I'm going to end up unlearning the
+I'm going to end up unlearning the
+freaking policy.
+How the hell do you do this? There's
+How the hell do you do this? There's
+like no good way to
+add a cloning objective at all.
+Maybe this was right.
+We just
+do maybe we would do Yes.
+First, we make sure that it doesn't
+First, we make sure that it doesn't
+change
+anything. How's your Vim scroll so
+anything. How's your Vim scroll so
+smooth?
+smooth?
+This What do you mean this?
+Like this is just default neo. my
+Like this is just default neo. my
+guy with um the one trick is you always
+guy with um the one trick is you always
+increase your key repeat speed on your
+increase your key repeat speed on your
+OS.
+It's like one of the first things I
+It's like one of the first things I
+noticed is default key ree default key
+noticed is default key ree default key
+repeat speed is like
+awful. Okay, so I somehow broke
+awful. Okay, so I somehow broke
+something. I
+something. I
+guess this doesn't
+work.
+Right. Bim cursor looks
+Right. Bim cursor looks
+geriatric. I I have a total of two
+geriatric. I I have a total of two
+plugins in this. I've got SEMI because
+plugins in this. I've got SEMI because
+Python syntax highlighting sucks. And
+Python syntax highlighting sucks. And
+then I've got
+then I've got
+um uh Super Maven for like I don't know
+um uh Super Maven for like I don't know
+typing speed
+boost. So what happened to the epoch
+boost. So what happened to the epoch
+here?
+Okay. Is this thing
+Okay. Is this thing
+matching it? So this should match
+matching it? So this should match
+because
+because
+um it should never hit this cloning loss
+here. Okay, perfect match. And now it'll
+here. Okay, perfect match. And now it'll
+hit the cloning
+hit the cloning
+loss. And we'll see if that does
+loss. And we'll see if that does
+anything.
+Oh,
+Oh,
+good. How would you like to see a
+good. How would you like to see a
+reproduction of scaling scaling laws
+paper? Which
+paper? Which
+one? So, the one I know that's like
+one? So, the one I know that's like
+there's single agent RL scaling laws.
+there's single agent RL scaling laws.
+This one's pretty good.
+Um, this is Where's the Schulman
+Um, this is Where's the Schulman
+one? Yeah, this is the Schulman one. And
+one? Yeah, this is the Schulman one. And
+then there's the scaling scaling laws
+then there's the scaling scaling laws
+for board
+games. This guy is smart but completely
+insane. This was a pretty cool
+paper. So, it depends which one you
+paper. So, it depends which one you
+mean.
+He was one of he uh he founded one of
+He was one of he uh he founded one of
+the biggest RL Discords back when it was
+the biggest RL Discords back when it was
+active. Uh was one of the first people
+active. Uh was one of the first people
+to go to anthropic. told me they were
+to go to anthropic. told me they were
+like terrified of all of my neural MMO
+like terrified of all of my neural MMO
+things because oh no, it's like
+things because oh no, it's like
+dangerous AI and that they were going to
+dangerous AI and that they were going to
+be like the role model for how to do
+be like the role model for how to do
+safe AI research and now they're doing
+safe AI research and now they're doing
+completely closed source AI resource and
+completely closed source AI resource and
+are you know defense contractors as well
+are you know defense contractors as well
+which I'm generally fine with but uh not
+which I'm generally fine with but uh not
+exactly at all what they said. So, I
+exactly at all what they said. So, I
+don't know. I generally think that the
+don't know. I generally think that the
+anth like especially early anthropic
+anth like especially early anthropic
+folks are just completely
+batshit. Google has a 10% stake. I
+batshit. Google has a 10% stake. I
+forgot about
+forgot about
+that. Is that even a
+that. Is that even a
+thing? I don't
+thing? I don't
+know. But yeah, I generally like the
+know. But yeah, I generally like the
+early anthropic people are batshit. Some
+early anthropic people are batshit. Some
+of them now are probably just like,
+of them now are probably just like,
+yeah, it's a big it's a big AI lab like
+yeah, it's a big it's a big AI lab like
+the rest of them. But the early like
+the rest of them. But the early like
+original split was complete
+batshit. Very good paper though. One of
+batshit. Very good paper though. One of
+my favorite papers actually. It's like
+my favorite papers actually. It's like
+one of the best done RL papers I've
+one of the best done RL papers I've
+seen.
+What's
+this? Is this way
+faster?
+faster?
+Huh? Interesting.
+early anthropic or all. Yeah, like I
+early anthropic or all. Yeah, like I
+said, that
+[ __ ] Like I said, bat [ __ ] crazy.
+TD
+That's immediately better,
+That's immediately better,
+right? Not
+right? Not
+much is better though.
+Yeah, there's not really like a cute
+Yeah, there's not really like a cute
+hack way
+hack way
+to do this.
+So what I was trying to do is I was
+So what I was trying to do is I was
+trying to find like a like a hack way to
+trying to find like a like a hack way to
+do something approximately ppg phasic
+do something approximately ppg phasic
+policy gradients but without the fixed
+policy gradients but without the fixed
+cost
+cost
+overhead. Um it doesn't seem like there
+overhead. Um it doesn't seem like there
+is a good way to do that.
+There's not really a way we can get
+There's not really a way we can get
+additional value function training in,
+additional value function training in,
+right?
+We
+could. Okay, one last thing I'm going to
+could. Okay, one last thing I'm going to
+try really quick.
+One last thing I just want to try really
+One last thing I just want to try really
+quick.
+So this is like really low clipping
+So this is like really low clipping
+coefficient and then extra epoch.
+This do
+anything? Doesn't seem like this does
+anything? Doesn't seem like this does
+anything.
+Yeah. Not right.
+Value function coefficients already
+Value function coefficients already
+quite big.
+Okay, so none of these attacks like
+Okay, so none of these attacks like
+really do anything.
+really do anything.
+you'd have to do full full basic policy
+you'd have to do full full basic policy
+gradient and
+gradient and
+um I don't really like that because you
+um I don't really like that because you
+have to go through the whole data set
+have to go through the whole data set
+again just for the privilege of then
+again just for the privilege of then
+being able to do even more
+being able to do even more
+work. I mean I guess it's hang
+on. Okay, I actually maybe it's not bad
+on. Okay, I actually maybe it's not bad
+come to think of it because
+times it 9:07. Okay. You know,
+times it 9:07. Okay. You know,
+maybe maybe it's actually not that
+maybe maybe it's actually not that
+bad. Um, and the reason I'm thinking
+bad. Um, and the reason I'm thinking
+that
+that
+is you only have to do the extra forward
+is you only have to do the extra forward
+pass if you get through the whole data
+pass if you get through the whole data
+set, right?
+set, right?
+or if you get through your if you're
+or if you get through your if you're
+going to do multiple epochs. So, it
+going to do multiple epochs. So, it
+should be purely a method of scaling
+up. Okay, we'll mess with this tomorrow.
+up. Okay, we'll mess with this tomorrow.
+I think that there is actually a world
+I think that there is actually a world
+in which this works. So, I'll explain
+in which this works. So, I'll explain
+the idea briefly. So, here's the thing
+the idea briefly. So, here's the thing
+with phasic policy gradients, right?
+with phasic policy gradients, right?
+This is the algorithm. Um, this is
+This is the algorithm. Um, this is
+normally what you would do with
+normally what you would do with
+PO. Okay, so this is now you have to
+PO. Okay, so this is now you have to
+double your compute and then you have to
+double your compute and then you have to
+redo the whole forward pass. So that's
+redo the whole forward pass. So that's
+like another.5 and then you do a bunch
+like another.5 and then you do a bunch
+of extra epochs on both of these. So
+of extra epochs on both of these. So
+what I'm going to do instead is it's
+what I'm going to do instead is it's
+just going to be we do one epoch of this
+just going to be we do one epoch of this
+altogether, which is the exact same cost
+altogether, which is the exact same cost
+as what you would do for PO and then if
+as what you would do for PO and then if
+you want to do more epochs, then you do
+you want to do more epochs, then you do
+this once and then you do this stuff.
+this once and then you do this stuff.
+Um and then ideally what that means is
+Um and then ideally what that means is
+that you maintain exact equivalence with
+that you maintain exact equivalence with
+PO but then you add you essentially just
+PO but then you add you essentially just
+strictly add an option to train the
+strictly add an option to train the
+value function
+value function
+more and we'll see if that does
+more and we'll see if that does
+something. Hypothesis here is that it
+something. Hypothesis here is that it
+should do
+should do
+something. Hey Ryan. Yo Ryan, does this
+something. Hey Ryan. Yo Ryan, does this
+make
+make
+sense? Why does that not work?
+You just jointly do one PO EPOC policy
+You just jointly do one PO EPOC policy
+loss and value
+loss. Yeah, but who cares,
+right? But like who cares, right?
+No, no, no. What I'm saying here is you
+No, no, no. What I'm saying here is you
+just do you literally do the first epoch
+just do you literally do the first epoch
+of PO stays PO or the first N epochs of
+of PO stays PO or the first N epochs of
+PO stay PO, right? And then you have the
+PO stay PO, right? And then you have the
+option to add epochs that just train the
+option to add epochs that just train the
+value function and keep the PO output
+value function and keep the PO output
+exactly the same via the KL divergence.
+exactly the same via the KL divergence.
+So essentially what I'm trying to do
+So essentially what I'm trying to do
+here, right, is they show here that like
+here, right, is they show here that like
+you actually make the policy do worse
+you actually make the policy do worse
+after a while and I actually I can
+after a while and I actually I can
+reproduce that result as well. If you
+reproduce that result as well. If you
+just keep putting more data through it,
+just keep putting more data through it,
+you do worse because data gets
+you do worse because data gets
+increasingly off
+increasingly off
+policy. But you do better if you train
+policy. But you do better if you train
+the value function for longer, right? So
+the value function for longer, right? So
+what if I just make this split, right?
+what if I just make this split, right?
+Where you can do extra
+Where you can do extra
+epochs sort of defeat. How does it
+epochs sort of defeat. How does it
+defeat the
+purpose? It lets you do PO and then do
+purpose? It lets you do PO and then do
+extra value training, right?
+If you just want you don't you do need
+If you just want you don't you do need
+the a step you do need the aux step. You
+the a step you do need the aux step. You
+can't tune up value epochs independently
+can't tune up value epochs independently
+because you're assuming it's a shared
+because you're assuming it's a shared
+head. And if you have a shared value
+head. And if you have a shared value
+head, then uh you craft the policy if
+head, then uh you craft the policy if
+you don't have a behavioral cloning
+you don't have a behavioral cloning
+loss. But you can't have a behavioral
+loss. But you can't have a behavioral
+cloning loss while you're also training
+cloning loss while you're also training
+the
+policy.
+Right? So I'm saying here is you just
+Right? So I'm saying here is you just
+have this. You don't have a separate
+have this. You don't have a separate
+value network. You use the shared mode
+value network. You use the shared mode
+that they said works right here. You
+that they said works right here. You
+train. This phase is just PO. You do
+train. This phase is just PO. You do
+PO for an epoch or two and then you do
+PO for an epoch or two and then you do
+this and then this gives you the PI. Uh
+this and then this gives you the PI. Uh
+this essentially gives you your updated
+this essentially gives you your updated
+logic for everything and then your new
+logic for everything and then your new
+updates. Go over
+updates. Go over
+that. Yeah, it is a behavioral cloning
+that. Yeah, it is a behavioral cloning
+loss bet.
+I think this might
+I think this might
+work. I think this should work.
+Really value function doesn't interfere.
+Well, in that case, they're doing
+um they have like this other version of
+um they have like this other version of
+it though, don't
+it though, don't
+they? Hang on. Where's this other
+they? Hang on. Where's this other
+version of it?
+[Music]
+They don't have the ablation on why this
+They don't have the ablation on why this
+matters
+though. I guess they also say not to do
+though. I guess they also say not to do
+the ox phase too often,
+right? Isn't that a thing? Like don't do
+right? Isn't that a thing? Like don't do
+the auxiliary phase too often.
+Yeah. Okay. That actually might be kind
+Yeah. Okay. That actually might be kind
+of sketchy.
+Like why does it interfere though?
+It doesn't. It just says we think they
+It doesn't. It just says we think they
+interfere as far as I know. Well, the
+interfere as far as I know. Well, the
+goal is to decouple value function
+training. The Well, the thing is the
+training. The Well, the thing is the
+other thing this lets you do, right, is
+other thing this lets you do, right, is
+this lets you train the value function
+this lets you train the value function
+more than the
+policy, right?
+policy, right?
+The main result as I read it here is
+The main result as I read it here is
+that if you train the policy more than
+that if you train the policy more than
+an epoch, it does
+an epoch, it does
+worse. Why can't you just do that with
+worse. Why can't you just do that with
+PO? You can't just train the value
+PO? You can't just train the value
+head. If you just train the value head,
+head. If you just train the value head,
+you corrupt the features if you're not
+you corrupt the features if you're not
+also training the PO loss. You need to
+also training the PO loss. You need to
+have a behavioral cloning. Like if
+have a behavioral cloning. Like if
+you're not going to train the policy
+you're not going to train the policy
+head like to improve the policy, then
+head like to improve the policy, then
+you have to behavioral clone it against
+you have to behavioral clone it against
+where you started at before you started
+where you started at before you started
+training this value function even more.
+training this value function even more.
+So the goal is to keep the policy doing
+So the goal is to keep the policy doing
+the exact same thing while you keep
+the exact same thing while you keep
+training the value function more. Right?
+training the value function more. Right?
+So the policy develops for one epoch and
+So the policy develops for one epoch and
+then you can train the policy uh the
+then you can train the policy uh the
+value head of the policy a whole bunch
+value head of the policy a whole bunch
+without destroying the policy logics.
+You can't just train them
+separately. I was suggesting right our
+separately. I was suggesting right our
+default implementation basically always
+default implementation basically always
+does one epoch of po right. So I'm
+does one epoch of po right. So I'm
+saying do one epoch of PO and then if
+saying do one epoch of PO and then if
+you want to do more epoch so if you want
+you want to do more epoch so if you want
+to like crank up compute then what you
+to like crank up compute then what you
+can do is you can uh you can go compute
+can do is you can uh you can go compute
+updated logics through the data set with
+updated logics through the data set with
+the thing that you just trained for an
+the thing that you just trained for an
+epoch then behavioral clone versus that
+epoch then behavioral clone versus that
+so that the policy doesn't change and
+so that the policy doesn't change and
+keep training the value
+head. Okay, this is also kind of sketchy
+head. Okay, this is also kind of sketchy
+here, right?
+here, right?
+They say that uh the baseline
+They say that uh the baseline
+PO does shite if uh you use separate
+PO does shite if uh you use separate
+networks.
+When this gets to 0.6
+When this gets to 0.6
+six. And what are they claiming this
+gets 70
+portion a step if you increase value
+portion a step if you increase value
+epox well yeah the I the plan is you do
+epox well yeah the I the plan is you do
+npo steps optimal is probably one but
+npo steps optimal is probably one but
+it's like prioritize sampling so who
+it's like prioritize sampling so who
+knows
+knows
+um and then separately right you can do
+um and then separately right you can do
+value function training followed by or
+value function training followed by or
+simultaneous even value function
+simultaneous even value function
+training and behavioral
+cloning. Let me get rid of that
+bot. I think it makes
+sense here. Let me just real
+quick. Oh man, did you just link me
+Gail? Is this remotely similar?
+No, not like
+this expert trajectories. There's
+this expert trajectories. There's
+no Gail is Gail offline or something.
+no Gail is Gail offline or something.
+There's no expert
+There's no expert
+data. Yeah, there's no
+demonstrations. How the [ __ ] is there an
+demonstrations. How the [ __ ] is there an
+imitation library? A whole library for
+imitation library? A whole library for
+that [ __ ] It's easy.
+Suppose supposed to be taking a
+Suppose supposed to be taking a
+break theory craft ppg stuff tomorrow.
+break theory craft ppg stuff tomorrow.
+Cool. Proton PPG. We could potentially
+Cool. Proton PPG. We could potentially
+look
+look
+at Why did you say it wasn't great
+at Why did you say it wasn't great
+originally? Did it not reproduce the
+originally? Did it not reproduce the
+paper?
+use cleaner else
+use cleaner else
+version. It was just slow I guess,
+version. It was just slow I guess,
+right? I would imagine it to be
+slow combined with PLR which uses value
+slow combined with PLR which uses value
+predictions.
+predictions.
+Huh, weird.
+So the way I was going to implement it
+So the way I was going to implement it
+right base PO is exactly the same zero
+right base PO is exactly the same zero
+change
+change
+whatsoever. It purely gives you
+whatsoever. It purely gives you
+additional value function training.
+Wait, they only run it every 25 PO
+updates. So that's going to mess some
+updates. So that's going to mess some
+stuff
+up. Let me see. There was an aux
+up. Let me see. There was an aux
+frequency ablation.
+frequency ablation.
+I this might not be worth doing then if
+I this might not be worth doing then if
+it's because I you have to do it jointly
+it's because I you have to do it jointly
+for it to be worth
+it. Like you'd have to do it
+it. Like you'd have to do it
+[Music]
+jointly. Okay. So this isn't worth it
+jointly. Okay. So this isn't worth it
+then, right? Look, this goes back to
+6. It shouldn't require that, but I here
+6. It shouldn't require that, but I here
+I think the whole thing breaks here
+I think the whole thing breaks here
+because yeah, that basically brings it
+because yeah, that basically brings it
+back down to
+pof. So doing
+um yeah, if you do it too frequently, it
+um yeah, if you do it too frequently, it
+harms perf. So I was going to do it
+harms perf. So I was going to do it
+jointly. So that's just not going to
+jointly. So that's just not going to
+work, right?
+Did they benchmark this versus just
+Did they benchmark this versus just
+doubling the network
+size? They probably didn't,
+right? You know, I'm kind of starting to
+right? You know, I'm kind of starting to
+wonder here, Ryan.
+wonder here, Ryan.
+Like, they use two separate
+Like, they use two separate
+networks, but they say it still works
+networks, but they say it still works
+with this
+with this
+Where is it? It still works with
+Where is it? It still works with
+um single net.
+Well, it actually doesn't make any damn
+Well, it actually doesn't make any damn
+sense that this works, right? Because
+sense that this works, right? Because
+like think about it. Okay, so like they
+like think about it. Okay, so like they
+just have the value function head. The
+just have the value function head. The
+point is that like the value function
+point is that like the value function
+learns useful features that you then
+learns useful features that you then
+distill into the main network,
+distill into the main network,
+right? But there's nothing to distill
+right? But there's nothing to distill
+because the value head functions just
+because the value head functions just
+like a small head.
+like a small head.
+So there's nothing to distill and
+So there's nothing to distill and
+somehow they're still getting
+PF. Well, I guess that would mean if
+PF. Well, I guess that would mean if
+there's nothing to distill, I guess it's
+there's nothing to distill, I guess it's
+the fact then that they are doing
+the fact then that they are doing
+additional full gradient value training,
+additional full gradient value training,
+right? So, actually, no. This still does
+right? So, actually, no. This still does
+make sense.
+make sense.
+[ __ ] I think this will be worth playing
+[ __ ] I think this will be worth playing
+with a little bit
+tomorrow. If I weren't exhausted now, I
+tomorrow. If I weren't exhausted now, I
+could probably just do it in an hour. I
+could probably just do it in an hour. I
+think I'll just do it in the
+think I'll just do it in the
+morning. We'll see. If it's not
+morning. We'll see. If it's not
+promising, I won't stick with it very
+promising, I won't stick with it very
+long.
+long.
+But this was basically like one of the
+But this was basically like one of the
+methods I wanted to play with
+methods I wanted to play with
+um for increased sample
+um for increased sample
+efficiency. Yeah, I have looked at it a
+efficiency. Yeah, I have looked at it a
+little
+little
+bit. I mean if you read it this way,
+bit. I mean if you read it this way,
+right, this is like 2 to 3x sample
+right, this is like 2 to 3x sample
+efficiency that they are claiming here,
+efficiency that they are claiming here,
+right? This is like doubled sample
+right? This is like doubled sample
+efficiency.
+more than doubled like
+3x. Actually, Ryan, here's another
+3x. Actually, Ryan, here's another
+thing, right?
+thing, right?
+So look at
+So look at
+this. If you do detach the value head,
+right? If you detach the value head
+right? If you detach the value head
+here, then wait, what's this B? Oh,
+here, then wait, what's this B? Oh,
+that's just entropy. So if you attach
+that's just entropy. So if you attach
+the value head here, then you can do
+the value head here, then you can do
+this at the same
+this at the same
+time, right? Because this doesn't
+time, right? Because this doesn't
+interfere with this. So you you can do
+interfere with this. So you you can do
+this at the same time. So this is just
+this at the same time. So this is just
+PO with detached value
+head. And then every so often you run
+head. And then every so often you run
+this
+So you just do this is the joint first
+So you just do this is the joint first
+step first
+step first
+epoch and then you run additional of
+epoch and then you run additional of
+these and then every so often you do
+this do them together unless well yeah
+this do them together unless well yeah
+but the thing is you can always do let's
+but the thing is you can always do let's
+say you're going to usually do one epoch
+say you're going to usually do one epoch
+of PO you also get one epoch of value
+of PO you also get one epoch of value
+function training basically for
+function training basically for
+free cuz you batch it,
+right? And then this is like a pure
+right? And then this is like a pure
+extension,
+extension,
+right? It's just like a pure extension
+right? It's just like a pure extension
+of
+this. You know, one thing I want to try
+this. You know, one thing I want to try
+just real quick before
+just real quick before
+I What if we just
+do and make sure that this is our
+do and make sure that this is our
+baseline. And
+then what if you just detach the value
+then what if you just detach the value
+head? What
+head? What
+happens?
+Ignore the stop. It still works.
+Ignore the stop. It still works.
+Yeah, it's very close without it
+Yeah, it's very close without it
+though. Like let's see what happens if I
+though. Like let's see what happens if I
+do. I think that's the same initial
+do. I think that's the same initial
+curve,
+right? Yeah, this is fine. This the same
+right? Yeah, this is fine. This the same
+initial curve. What happens if I just do
+this? Like just literally detach the
+this? Like just literally detach the
+value head there.
+This is baseline, by the way. These are
+This is baseline, by the way. These are
+like more
+epochs. It does
+epochs. It does
+better. Look at that.
+better. Look at that.
+It literally does [ __ ] better if you
+It literally does [ __ ] better if you
+detach the value
+head. I think that's like enough of a a
+head. I think that's like enough of a a
+cue that it's worth looking into, right?
+Oh, you know one other thing we can do
+Oh, you know one other thing we can do
+real quick that would make it really
+real quick that would make it really
+that would be really
+that would be really
+easy. Hang on. We're going to try
+easy. Hang on. We're going to try
+something really really
+quick. So this is true or so this is
+quick. So this is true or so this is
+just PO, right?
+I'll do like
+this. Yeah. Let me do this.
+Well, apparently something wrong because
+Well, apparently something wrong because
+uh that shouldn't have
+uh that shouldn't have
+failed. Hang
+failed. Hang
+on. Hang on.
+on. Hang on.
+I screw
+up. It's a zero.
+I wanted to see with detached value
+I wanted to see with detached value
+head if you can now just train it
+more. You should definitely be able to
+more. You should definitely be able to
+just train it more something's wrong.
+So that
+runs. No, I want to just it's just going
+runs. No, I want to just it's just going
+to train the the uh value head more. How
+to train the the uh value head more. How
+do I I if I zero this loss, it doesn't
+do I I if I zero this loss, it doesn't
+do anything, right?
+do anything, right?
+Yeah, this can't do
+anything. Running rate
+anything. Running rate
+tracking. That could be a thing. It's Mu
+tracking. That could be a thing. It's Mu
+on probably maybe similar
+That's
+annoying. I mean, that doesn't explain
+annoying. I mean, that doesn't explain
+it failing this hard,
+though. I don't think it does.
+Oh, you're a dummy is why I detached the
+Oh, you're a dummy is why I detached the
+wrong [ __ ]
+state. Yeah, that'll do it.
+I don't
+I don't
+know. Let's see if this is could have
+know. Let's see if this is could have
+been noise. Let's see if this actually
+been noise. Let's see if this actually
+is like significantly
+better. That's still the wrong one. What
+better. That's still the wrong one. What
+the [ __ ] is wrong with me?
+Okay, this has to work,
+right? Yeah, I know. Flash
+experiment. [ __ ] sake, man.
+This is the one that we're pulling,
+This is the one that we're pulling,
+right?
+Well, maybe this one just doesn't work
+Well, maybe this one just doesn't work
+at all.
+Ah yeah, here's the issue. If you detach
+Ah yeah, here's the issue. If you detach
+the value head, the network just trains
+the value head, the network just trains
+like [ __ ]
+whereas the logic actually
+works. That's kind of
+works. That's kind of
+crazy. Wait, is that actually
+true? That's kind of crazy, right? Like
+true? That's kind of crazy, right? Like
+look, you detach this
+here. Can you just
+here. Can you just
+detach? Can you detach this one?
+and have it still
+work.
+work.
+Uh yeah, dude, you can
+Uh yeah, dude, you can
+detach you can detach the policy head
+detach you can detach the policy head
+but not the value head.
+Isn't that kind of
+crazy though? Interestingly, I think I
+crazy though? Interestingly, I think I
+detached both and that was the best of
+detached both and that was the best of
+all of
+all of
+them. Let me see for sure.
+What's
+What's
+training? Good
+question. Maybe that was a bug. We'll
+question. Maybe that was a bug. We'll
+see. That'd be pretty funny, wouldn't
+see. That'd be pretty funny, wouldn't
+it? All right. So, you can detach one or
+it? All right. So, you can detach one or
+the other.
+the other.
+Uh, and then if we detach
+both. Oh, you know why? It was because
+both. Oh, you know why? It was because
+this doesn't get called
+this doesn't get called
+anyways. This is the for this was called
+anyways. This is the for this was called
+during eval time. So that's why it
+during eval time. So that's why it
+worked and then the improvement was just
+worked and then the improvement was just
+noise.
+Okay. Yeah, this is not like this will
+Okay. Yeah, this is not like this will
+fail. I'm
+fail. I'm
+sure this will fail.
+But still that's interesting, right?
+But still that's interesting, right?
+That you can detach the value head but
+That you can detach the value head but
+not
+the Yeah. And then you get a failure
+the Yeah. And then you get a failure
+because there's no
+because there's no
+gradient.
+Yeah.
+Yeah.
+Uh yes.
+But I mean that wouldn't really lend
+But I mean that wouldn't really lend
+itself to any major conclusion, right?
+itself to any major conclusion, right?
+That just tells you that you need to
+That just tells you that you need to
+learn the both, which is like, yeah,
+learn the both, which is like, yeah,
+duh. You need to learn them
+both. I mean, like
+Do any of these things have as much
+Do any of these things have as much
+effect as just doing
+this? You got to admit it's pretty cool
+this? You got to admit it's pretty cool
+how fast we can run these,
+how fast we can run these,
+right? These are 80 mil experiments.
+right? These are 80 mil experiments.
+You'd be waiting an hour a piece for
+You'd be waiting an hour a piece for
+these normally.
+You' think it would impact PPG though,
+right?
+right?
+[Music]
+Um, there's something there. There's
+Um, there's something there. There's
+something
+something
+here. Start testing dumb ideas on Puffer
+here. Start testing dumb ideas on Puffer
+Breakout. Well, the thing is it's not
+Breakout. Well, the thing is it's not
+just Puffer Breakout. You can do it with
+just Puffer Breakout. You can do it with
+Pong and that'll run in 20 seconds. And
+Pong and that'll run in 20 seconds. And
+you can do it in Snake and that'll run
+you can do it in Snake and that'll run
+in a minute.
+Yeah, I'm trying to figure out what the
+Yeah, I'm trying to figure out what the
+hell it is the thing that they're on
+hell it is the thing that they're on
+like they're up to is with
+like they're up to is with
+that here. Let's see what happens just
+that here. Let's see what happens just
+by making the network a little
+by making the network a little
+bigger. Just like magnitude of effect
+bigger. Just like magnitude of effect
+kind of a thing.
+Okay, so this was like four epochs.
+That's
+That's
+worse.
+Lol. Thanks, Orl. Okay. Actually, I
+Lol. Thanks, Orl. Okay. Actually, I
+understand why it is that that happens
+understand why it is that that happens
+now, though. That's going to be gone
+now, though. That's going to be gone
+pretty
+pretty
+soon. That will do better in the
+future. Was better for a little bit.
+Is there anything to
+Is there anything to
+basic in that
+case? It's weird cuz like the ppg they
+case? It's weird cuz like the ppg they
+say the PO baseline with separate models
+say the PO baseline with separate models
+does
+does
+[ __ ] but then like isn't there that
+[ __ ] but then like isn't there that
+annoying Google like large scale
+What's it? What
+matters this thing?
+Didn't these guys find that shared was
+Didn't these guys find that shared was
+way worse for their [ __ ]
+Figure 15.
+Do you think this is stupid capacity
+Do you think this is stupid capacity
+issue?
+This stupid shared network thing like
+This stupid shared network thing like
+versus separates always bothered me.
+The hell's this baseline cost?
+I don't
+I don't
+know. The authors of this paper [ __ ]
+know. The authors of this paper [ __ ]
+my stuff at
+Google. Do you think they're paper
+Google. Do you think they're paper
+[ __ ] That'd be
+[ __ ] That'd be
+fun because they come up with a lot of
+fun because they come up with a lot of
+things that don't really hold across the
+things that don't really hold across the
+whole rest of RL
+whole rest of RL
+since why I couldn't publish for a year.
+since why I couldn't publish for a year.
+Dip
+shots. Yeah. The funny thing about this
+shots. Yeah. The funny thing about this
+is these 4,000 choice configurations on
+is these 4,000 choice configurations on
+like puffer tasks. This would be like,
+like puffer tasks. This would be like,
+you know, a
+box. Okay. Well, I think I should go to
+box. Okay. Well, I think I should go to
+bed actually to be fair. Um, and I just
+bed actually to be fair. Um, and I just
+want to do RL [ __ ] 24/7 now until
+want to do RL [ __ ] 24/7 now until
+it's solved. It's like I got the RL bug.
+it's solved. It's like I got the RL bug.
+It's got to be
+solved. Uh,
+PO
+implementation used for Google's
+implementation used for Google's
+RHF was based on the implementation from
+RHF was based on the implementation from
+that paper and it had a bug that made it
+that paper and it had a bug that made it
+really bad for a year.
+Oh, they are [ __ ]
+Oh, they are [ __ ]
+huh? All
+right. They get really weird results
+right. They get really weird results
+that don't really match anything in the
+that don't really match anything in the
+rest of RL, right? It is also shitty
+rest of RL, right? It is also shitty
+control stuff,
+control stuff,
+though. No one used PPO because of
+though. No one used PPO because of
+that. They didn't because of one shitty
+that. They didn't because of one shitty
+Oh, man.
+Oh, man.
+What do you say we like who's going to
+What do you say we like who's going to
+win, right? The [ __ ] multi-trillion
+win, right? The [ __ ] multi-trillion
+dollar
+dollar
+company or me with one puffer
+company or me with one puffer
+[Music]
+fish. All right, apparently we have 11
+fish. All right, apparently we have 11
+people watching at this hour. Um, so
+people watching at this hour. Um, so
+here's the deal, folks. I got to get
+here's the deal, folks. I got to get
+sleep,
+sleep,
+but I will be back first thing in the
+but I will be back first thing in the
+morning. All my stuff's open source here
+morning. All my stuff's open source here
+at puffer.ai. AI. We made a pretty nice
+at puffer.ai. AI. We made a pretty nice
+breakthrough today with the new
+breakthrough today with the new
+advantage algorithm. Uh if you want to
+advantage algorithm. Uh if you want to
+help us out for free, literally for
+help us out for free, literally for
+free. Takes 2 seconds. Just start the
+free. Takes 2 seconds. Just start the
+repo. We're almost at 2,000. It'll be
+repo. We're almost at 2,000. It'll be
+great. Um other than that, you can join
+great. Um other than that, you can join
+the Discord to get involved with
+the Discord to get involved with
+development. You do not need an RL
+development. You do not need an RL
+background to get involved. Some of our
+background to get involved. Some of our
+best contributors, actually all of our
+best contributors, actually all of our
+best contributors now, uh, had zero RL
+best contributors now, uh, had zero RL
+background coming in. Programming
+background coming in. Programming
+background helps, but a lot of this
+background helps, but a lot of this
+stuff's actually pretty nice and easy to
+stuff's actually pretty nice and easy to
+pick up, but there's a lot of like cool
+pick up, but there's a lot of like cool
+self-contained dev you can do. It's a
+self-contained dev you can do. It's a
+lot like low-level gamedev, except do
+lot like low-level gamedev, except do
+train superhuman AIs on it. So, join
+train superhuman AIs on it. So, join
+there if you want to get involved with
+there if you want to get involved with
+that. Uh there's also a blog post on how
+that. Uh there's also a blog post on how
+to get started and you can follow me on
+to get started and you can follow me on
+X for more RL content. But yeah, that's
+X for more RL content. But yeah, that's
+the vibe around here. We do research
+the vibe around here. We do research
+live, some engineering, some science,
+live, some engineering, some science,
+some math, and uh yeah, back first thing
+some math, and uh yeah, back first thing
+in the
+morning. I just get a message from
+morning. I just get a message from
+someone like, "Hi,
+whatever." Hi, yes, it's me.
+whatever." Hi, yes, it's me.
+Oh, that was separate. Okay, cool. Well,
+Oh, that was separate. Okay, cool. Well,
+yeah. See you folks. Thanks for tuning
+yeah. See you folks. Thanks for tuning
+in. Bye-bye.
+
+Kind: captions
+Language: en
+Hey
+folks, I'm back for
+folks, I'm back for
+another, let's say, hour and a half.
+another, let's say, hour and a half.
+Oops.
+Oops.
+[Music]
+Um, I think we're just going to see if
+Um, I think we're just going to see if
+what we can do about offline I mean off
+what we can do about offline I mean off
+policy right now and uh then we
+policy right now and uh then we
+will integrate everything tomorrow.
+will integrate everything tomorrow.
+And hopefully we will go from there. We
+And hopefully we will go from there. We
+will
+see real
+quick. Quick round of uh looking at
+this. Oh yeah, I see it. Okay, that's
+this. Oh yeah, I see it. Okay, that's
+good. That's a good result so
+good. That's a good result so
+far. That's like very nice.
+far. That's like very nice.
+very slightly
+above roughly same stability, maybe a
+above roughly same stability, maybe a
+little more. I don't know. We're happy
+little more. I don't know. We're happy
+with that. We're definitely happy to see
+that. Okay.
+that. Okay.
+Um, hey bet, welcome.
+Yeah, the shape just doesn't blend at
+Yeah, the shape just doesn't blend at
+all, does
+it? No, no, it's the stupid um blueprint
+it? No, no, it's the stupid um blueprint
+stuff.
+go back to this for a second.
+go back to this for a second.
+So offline data really doesn't all
+So offline data really doesn't all
+policy data isn't the thing that's
+policy data isn't the thing that's
+screwing us. It's the prioritization of
+screwing us. It's the prioritization of
+that data
+that data
+somehow. That's really weird.
+Wait, what the
+Wait, what the
+hell?
+Importance. Isn't this
+Wait, this samples with importance. Oh,
+Wait, this samples with importance. Oh,
+but importance is advantages. So, this
+but importance is advantages. So, this
+is
+is
+[Music]
+fine. This thing, this random sample is
+fine. This thing, this random sample is
+the thing that messes with
+the thing that messes with
+it. Hang
+it. Hang
+on. Yeah, there's like really no
+on. Yeah, there's like really no
+difference with the prioritization for
+difference with the prioritization for
+this.
+So, you're not expecting it to do
+So, you're not expecting it to do
+better. You just want it to not do
+better. You just want it to not do
+worse.
+It's very weird that it
+like this is the worst one. Right.
+Maybe the importance ratio is not
+Maybe the importance ratio is not
+getting used
+getting used
+correctly. We'll have to
+see. Yeah. So, this is the worst curve.
+see. Yeah. So, this is the worst curve.
+You can see
+You can see
+it. Yeah, it's following this path.
+it. Yeah, it's following this path.
+Okay.
+So, maybe there's something in the
+So, maybe there's something in the
+experience ratio for
+experience ratio for
+us for us to think about, right?
+Oh, this thing doesn't get updated at
+Oh, this thing doesn't get updated at
+all, does
+it? Does this not get updated at
+all? It does right here.
+We do like one data epoch though, right?
+It still should diverge a
+bit. I mean, advantage takes into
+bit. I mean, advantage takes into
+account both of these things already.
+As long as you're using the correct
+As long as you're using the correct
+updated ratio, which we are,
+right?
+Yeah. I mean, advantages gets recalked.
+ratio is like technically stale,
+ratio is like technically stale,
+but you can't do anything about that
+but you can't do anything about that
+without doing another forward pass,
+without doing another forward pass,
+right?
+I mean, you would think that the really
+I mean, you would think that the really
+high advantage trajectories would be
+good. Maybe they stick around too
+long. Maybe that's it, right? cuz like
+long. Maybe that's it, right? cuz like
+isn't top K way
+worse? Yeah, this is the top K one was
+worse? Yeah, this is the top K one was
+way down here, right?
+way down here, right?
+So if you keep the same samples around
+So if you keep the same samples around
+for a long time,
+um they get more and more off policy.
+um they get more and more off policy.
+Maybe
+is there a reason to like keep it
+is there a reason to like keep it
+anyways.
+Is there a reason to keep this anyways
+Is there a reason to keep this anyways
+versus just like running more epochs?
+Maybe this corrects so that we can use
+Maybe this corrects so that we can use
+it more than
+before. Hang on.
+It's time for some benchmarking. I think
+Did you accidentally paste what you were
+Did you accidentally paste what you were
+working onto the into the stream chat
+working onto the into the stream chat
+there, Morgan?
+Okay, this is what we do. Go to none.
+Okay, this is what we do. Go to none.
+Here's our benchmark.
+All right, enough random code snippets
+All right, enough random code snippets
+in the chat.
+Oh, I wasn't
+using I know it's Python, but you can
+using I know it's Python, but you can
+use Java.
+use Java.
+JavaScript to do
+JavaScript to do
+things. Not an AI. You
+can't. I'm not running
+can't. I'm not running
+freaking JavaScript, PyTorch
+freaking JavaScript, PyTorch
+models. I like my current stack of
+models. I like my current stack of
+Python and
+Python and
+C. Lot of C, little Python.
+Okay. So that's good. So this is our new
+algorithm. Now what we do
+We crank up 80 bucks to like
+four, say five
+even. So now we see how this does with a
+even. So now we see how this does with a
+bunch of extra updates.
+This might be too easy to use as a
+This might be too easy to use as a
+proper benchmark, but we'll see.
+Okay. So, I mean this is expected. More
+Okay. So, I mean this is expected. More
+update epochs makes it train slower but
+update epochs makes it train slower but
+more sample efficient. Yeah.
+This is like an interesting spike
+This is like an interesting spike
+here. Oh, you know what this probably
+here. Oh, you know what this probably
+is? This is probably when it wins the
+is? This is probably when it wins the
+first stage of the game, right? Cuz this
+first stage of the game, right? Cuz this
+is half the score. It's probably really
+is half the score. It's probably really
+annoying to get it to get that last
+[Music]
+brick. That's totally what it
+is.
+is.
+Okay, so here's our graph.
+um it's more sample efficient obviously.
+um it's more sample efficient obviously.
+Now the question is going to be what
+Now the question is going to be what
+happens when we compare this to the new
+happens when we compare this to the new
+advantage function cuz this is
+advantage function cuz this is
+technically like slightly off policy
+technically like slightly off policy
+data now right
+like it got all this extra
+like it got all this extra
+data, but it really didn't learn that
+data, but it really didn't learn that
+much faster with PO, right?
+Okay. So, this is our baseline with
+Okay. So, this is our baseline with
+PO. Now we do puffer advantage.
+It's stuck in exactly the same spot.
+so like so far it's like a little better
+maybe. Yeah. But we're not seeing like a
+maybe. Yeah. But we're not seeing like a
+massive increase in sample efficiency or
+massive increase in sample efficiency or
+anything.
+Yeah, it looks like this is probably
+Yeah, it looks like this is probably
+just going to be like a relatively minor
+just going to be like a relatively minor
+but permanent bump, right? Where it's
+but permanent bump, right? Where it's
+like slightly
+better. I don't know. I like conceivably
+better. I don't know. I like conceivably
+it could just do it in half the time,
+it could just do it in half the time,
+right?
+I don't
+know. I mean, so far here we're doing
+know. I mean, so far here we're doing
+like it's kind of consistent, right? We
+like it's kind of consistent, right? We
+just do slightly slightly
+better. I mean, we have
+Let me
+think. Well, I mean, the thing is
+think. Well, I mean, the thing is
+like the fact that this isn't a massive
+like the fact that this isn't a massive
+difference tells me like I don't think
+difference tells me like I don't think
+that this is a massive sample efficiency
+that this is a massive sample efficiency
+gain. It's like a nice little boost. I
+gain. It's like a nice little boost. I
+think it'll make all your curves a
+think it'll make all your curves a
+little bit
+cleaner.
+Um, well, I mean, if you want power to
+Um, well, I mean, if you want power to
+find much of a difference, this is the
+find much of a difference, this is the
+graph, right? This is going to be the
+graph, right? This is going to be the
+neural MMO one.
+neural MMO one.
+I mean, I was testing something very
+I mean, I was testing something very
+specific here, right? I was testing the
+specific here, right? I was testing the
+ability of this algorithm to make uh to
+ability of this algorithm to make uh to
+reuse data versus the other
+reuse data versus the other
+one. Actually, you know what? I have a
+one. Actually, you know what? I have a
+better way of testing it. You're right.
+Here, we'll do
+this. In the meantime, I'll look at B
+this. In the meantime, I'll look at B
+trace a little
+bit. We should probably graph some of
+bit. We should probably graph some of
+these as well or like log
+this. We'll do that in a second.
+Yeah. Okay. So, this was the concern
+Yeah. Okay. So, this was the concern
+here, right? You go 12 update epochs and
+here, right? You go 12 update epochs and
+it starts doing worse, slightly worse,
+it starts doing worse, slightly worse,
+which is the same as
+which is the same as
+um GA.
+um GA.
+So, I don't think that this does it for
+So, I don't think that this does it for
+off policy correction too
+off policy correction too
+well. It's a nice little
+boost. Nice little boost for sure.
+I wouldn't have screwed up the off
+I wouldn't have screwed up the off
+policy sampling ability, right? with
+um and we can always try this versus B
+um and we can always try this versus B
+trace.
+Yeah. So, this thing sucks.
+Yeah. So, this thing sucks.
+Okay. Now, next we just
+do we make sure that I didn't mess up
+do we make sure that I didn't mess up
+something here.
+Like it is technically
+Like it is technically
+possible. I'm
+bad. It is technically possible that
+bad. It is technically possible that
+vrace is the sample efficiency one.
+I doubt it. I highly doubt it.
+I doubt it. I highly doubt it.
+Like 15% that this does it. Maybe less.
+Like 15% that this does it. Maybe less.
+That's being
+generous. But we have to test it.
+I want to read a few more off policy
+I want to read a few more off policy
+correction things.
+Welcome YouTube
+Welcome YouTube
+folks. We've got the new algorithm
+folks. We've got the new algorithm
+running. It's like just a little bit
+running. It's like just a little bit
+better than generalized advantage
+better than generalized advantage
+estimation, which is what we
+estimation, which is what we
+expected. Yeah, Vrace on its own doesn't
+expected. Yeah, Vrace on its own doesn't
+do anything.
+Um, it's like just barely a little bit
+better. It's really weird how bad V
+better. It's really weird how bad V
+trace is just on its own, isn't
+it? Oh, well, you do have to tune it to
+it? Oh, well, you do have to tune it to
+be
+be
+fair. Hang on. Maybe this wasn't fair.
+fair. Hang on. Maybe this wasn't fair.
+Maybe I should have tuned it.
+Okay, we'll let that
+run. This is This is Impala.
+Okay, it's this one.
+Okay, this thing is
+Okay, this thing is
+ridiculously
+ridiculously
+inefficient. This is like laughably
+inefficient. This is like laughably
+hilariously
+stupid. Like the things you'll do for
+stupid. Like the things you'll do for
+sample efficiency. Holy hell.
+Where's the soft Watkins thing?
+Okay, here's soft
+Watkins. Agent 57 uses
+Watkins. Agent 57 uses
+retrace to compute return estimates from
+retrace to compute return estimates from
+all policy data. It tends to cut traces
+all policy data. It tends to cut traces
+too aggressively when using epsilon
+too aggressively when using epsilon
+greedy policies, thus slowing down
+greedy policies, thus slowing down
+propagation of information.
+alternative return estimator which we
+alternative return estimator which we
+derive from Q of
+lambda Watkins whatever
+We propose to use a softer trace cutting
+We propose to use a softer trace cutting
+mechanism by adding a fixed tolerance
+mechanism by adding a fixed tolerance
+parameter and taking the expectation of
+parameter and taking the expectation of
+trace coefficients under pi. So what is
+this? Well, this is
+this? Well, this is
+like this is like uh V trace right here,
+like this is like uh V trace right here,
+right?
+Fix tolerance parameter.
+What the hell is this soft Watkins
+What the hell is this soft Watkins
+thing? They have an ablation on
+thing? They have an ablation on
+this. Surely they do ablations,
+this. Surely they do ablations,
+right? Soft Watkins.
+I don't understand what this
+is. What is this operator? So they
+is. What is this operator? So they
+take is this
+one? The heck is this?
+one? The heck is this?
+Oh, indicator. Yeah.
+One. Okay. So, what they doing here is
+One. Okay. So, what they doing here is
+this is like
+um so this lambda
+um so this lambda
+I is the importance ratio clamped port
+I is the importance ratio clamped port
+importance ratio in our
+importance ratio in our
+thing. And
+here they define a max. They define a
+here they define a max. They define a
+change in
+Q. So I think if the Q function changes
+Q. So I think if the Q function changes
+too
+much they just drop them I
+much they just drop them I
+guess. So instead of it being a ratio
+guess. So instead of it being a ratio
+it's like a hard clip.
+So, it's actually kind of more similar
+So, it's actually kind of more similar
+to this for what we would do because we
+to this for what we would do because we
+don't have the you.
+Oh, so this is they do it whenever the
+Oh, so this is they do it whenever the
+action changes I
+action changes I
+guess.
+guess.
+H Oh, so whenever it count Oh, okay. I
+H Oh, so whenever it count Oh, okay. I
+see. So whenever the optimal action
+see. So whenever the optimal action
+changes or
+whatever, that's kind of cool.
+stuff like this we can potentially do.
+Yeah. The thing is our policies are
+Yeah. The thing is our policies are
+stochastic. So
+like it doesn't quite work the same. Oh
+like it doesn't quite work the same. Oh
+also uh this experiment failed horribly.
+also uh this experiment failed horribly.
+So I not as badly as before, but like
+So I not as badly as before, but like
+yeah, V trace alone is not
+amazing. Okay, so now we know why our
+amazing. Okay, so now we know why our
+off policy stuff isn't doing great. It's
+cuz these things just aren't great with
+cuz these things just aren't great with
+off policy data.
+Yeah. So their stuff is
+Yeah. So their stuff is
+like this thing
+like this thing
+is where is
+is where is
+it? Yeah. So this thing is
+it? Yeah. So this thing is
+um very much dependent on having a Q
+um very much dependent on having a Q
+function
+function
+because they essentially they prevent
+because they essentially they prevent
+data from going off policy.
+The trust region masks out the loss at
+The trust region masks out the loss at
+any time step which both of the
+any time step which both of the
+following conditions
+hold. So this is the clip.
+sign of the
+sign of the
+difference. Well, what's the G is the
+difference. Well, what's the G is the
+return estimate.
+isn't there a caution parame that's like
+isn't there a caution parame that's like
+kind of similar to this
+What else did they do?
+Okay. So, they do have a policy
+Okay. So, they do have a policy
+distillation component.
+Yeah. So, this totally breaks it,
+Yeah. So, this totally breaks it,
+right? This caution thing totally breaks
+right? This caution thing totally breaks
+it. We don't want
+it. We don't want
+that,
+that,
+right? We'll double check.
+Are there any
+Are there any
+other these
+flags? Colossian
+Yeah. Okay. So, this is this
+Yeah. Okay. So, this is this
+recovers like original per here,
+right? What? This one didn't seem to be
+right? What? This one didn't seem to be
+that great.
+I didn't think this Mars thing did
+I didn't think this Mars thing did
+anything either, right?
+Fiddle with a few things now.
+Yep. Not
+great. Oh, you dummy. You've been
+great. Oh, you dummy. You've been
+putting them on the wrong one. All
+right, let's try this
+right, let's try this
+correctly. Stop looking at noise.
+I must have applied caution correctly,
+I must have applied caution correctly,
+right? Cuz that was like a a big delta.
+So yeah, that's not great. Let me make
+So yeah, that's not great. Let me make
+sure we're recovering original perf
+sure we're recovering original perf
+here. Something I something like making
+here. Something I something like making
+me uncomfortable with
+me uncomfortable with
+this. Make sure we recover perf.
+So, how's
+this? It's good.
+Okay, we're not recovering original PF.
+Okay, we're not recovering original PF.
+Oh, wait. We are recovering original
+Oh, wait. We are recovering original
+Perf. These were the high sample ones.
+Perf. These were the high sample ones.
+Okay. Yeah. No, we're good. We're good
+Okay. Yeah. No, we're good. We're good
+cuz these were the
+cuz these were the
+uh Yeah, these were
+uh Yeah, these were
+the Yeah, we're we're perfectly good
+the Yeah, we're we're perfectly good
+here.
+I got to be careful at this hour. I
+I got to be careful at this hour. I
+start making dumb
+mistakes. Did I I think I did apply
+mistakes. Did I I think I did apply
+caution correctly here to this though,
+caution correctly here to this though,
+right?
+We'll try
+that. It's 827.
+that. It's 827.
+Um, look at PPG again.
+And that's like a huge difference,
+right? Where's the algorithm pseudo
+right? Where's the algorithm pseudo
+code? I'm trying to think if we can like
+code? I'm trying to think if we can like
+hack
+hack
+this. I think we can hack this a little
+bit. So, what I'm thinking here,
+bit. So, what I'm thinking here,
+right, is we
+optimize we optimize the
+optimize we optimize the
+policy and the value function jointly
+policy and the value function jointly
+for an
+for an
+epoch. And then we can optionally add
+epoch. And then we can optionally add
+additional value function epochs.
+L joint L
+value. Okay, I think we try
+value. Okay, I think we try
+it. What happened with this
+one? Yeah. Okay, I got it right the
+one? Yeah. Okay, I got it right the
+first time. This is way worse.
+Let me go grab those other previous
+Let me go grab those other previous
+graphs as
+well. Okay, so these were like the
+Yeah, we've got our baselines. This was
+Yeah, we've got our baselines. This was
+like data reuse.
+How do we do
+How do we do
+this?
+this?
+KL, we have this up here.
+scale going to be with
+this. I'm being lazy,
+but I think it's just like one ratio
+but I think it's just like one ratio
+over the other.
+literally just subtract log props.
+We don't want to pull it to the
+We don't want to pull it to the
+[Music]
+um We don't want to pull it back to the
+um We don't want to pull it back to the
+original policy though.
+Yo, Spencer, how's it
+Yo, Spencer, how's it
+going? We made some really solid
+going? We made some really solid
+algorithm progress today.
+We came up with a small but seemingly
+We came up with a small but seemingly
+very stable general purpose improvement
+very stable general purpose improvement
+to advantage estimation.
+So that's solid.
+This is
+stupid. I go look the policy.
+Oh, I see how this works. Yeah, that's
+Oh, I see how this works. Yeah, that's
+really
+really
+obnoxious. Could be able to start doing
+obnoxious. Could be able to start doing
+full-time RL going for it. Awesome.
+full-time RL going for it. Awesome.
+Yeah, let's catch up over the weekend. I
+Yeah, let's catch up over the weekend. I
+might have some cool uh I might have
+might have some cool uh I might have
+some cool stuff for you.
+Let me actually go send one message
+Let me actually go send one message
+right now.
+This this portion makes it
+infeasible right here.
+Oh, I know what I can do
+though. I know what I can
+though. I know what I can
+do. I know what they must do.
+Still not
+amazing. Let me just try to get
+amazing. Let me just try to get
+something going real quick, right?
+something going real quick, right?
+something real quick like.
+do this
+do this
+[ __ ] Come
+[ __ ] Come
+on. What we're going to try to do
+on. What we're going to try to do
+here, the thing is it's a little bit of
+here, the thing is it's a little bit of
+a
+hack. Do I want to do this, man? I think
+hack. Do I want to do this, man? I think
+I'm going to end up unlearning the
+I'm going to end up unlearning the
+freaking policy.
+How the hell do you do this? There's
+How the hell do you do this? There's
+like no good way to
+add a cloning objective at all.
+Maybe this was right.
+We just
+do maybe we would do Yes.
+First, we make sure that it doesn't
+First, we make sure that it doesn't
+change
+anything. How's your Vim scroll so
+anything. How's your Vim scroll so
+smooth?
+smooth?
+This What do you mean this?
+Like this is just default neo. my
+Like this is just default neo. my
+guy with um the one trick is you always
+guy with um the one trick is you always
+increase your key repeat speed on your
+increase your key repeat speed on your
+OS.
+It's like one of the first things I
+It's like one of the first things I
+noticed is default key ree default key
+noticed is default key ree default key
+repeat speed is like
+awful. Okay, so I somehow broke
+awful. Okay, so I somehow broke
+something. I
+something. I
+guess this doesn't
+work.
+Right. Bim cursor looks
+Right. Bim cursor looks
+geriatric. I I have a total of two
+geriatric. I I have a total of two
+plugins in this. I've got SEMI because
+plugins in this. I've got SEMI because
+Python syntax highlighting sucks. And
+Python syntax highlighting sucks. And
+then I've got
+then I've got
+um uh Super Maven for like I don't know
+um uh Super Maven for like I don't know
+typing speed
+boost. So what happened to the epoch
+boost. So what happened to the epoch
+here?
+Okay. Is this thing
+Okay. Is this thing
+matching it? So this should match
+matching it? So this should match
+because
+because
+um it should never hit this cloning loss
+here. Okay, perfect match. And now it'll
+here. Okay, perfect match. And now it'll
+hit the cloning
+hit the cloning
+loss. And we'll see if that does
+loss. And we'll see if that does
+anything.
+Oh,
+Oh,
+good. How would you like to see a
+good. How would you like to see a
+reproduction of scaling scaling laws
+paper? Which
+paper? Which
+one? So, the one I know that's like
+one? So, the one I know that's like
+there's single agent RL scaling laws.
+there's single agent RL scaling laws.
+This one's pretty good.
+Um, this is Where's the Schulman
+Um, this is Where's the Schulman
+one? Yeah, this is the Schulman one. And
+one? Yeah, this is the Schulman one. And
+then there's the scaling scaling laws
+then there's the scaling scaling laws
+for board
+games. This guy is smart but completely
+insane. This was a pretty cool
+paper. So, it depends which one you
+paper. So, it depends which one you
+mean.
+He was one of he uh he founded one of
+He was one of he uh he founded one of
+the biggest RL Discords back when it was
+the biggest RL Discords back when it was
+active. Uh was one of the first people
+active. Uh was one of the first people
+to go to anthropic. told me they were
+to go to anthropic. told me they were
+like terrified of all of my neural MMO
+like terrified of all of my neural MMO
+things because oh no, it's like
+things because oh no, it's like
+dangerous AI and that they were going to
+dangerous AI and that they were going to
+be like the role model for how to do
+be like the role model for how to do
+safe AI research and now they're doing
+safe AI research and now they're doing
+completely closed source AI resource and
+completely closed source AI resource and
+are you know defense contractors as well
+are you know defense contractors as well
+which I'm generally fine with but uh not
+which I'm generally fine with but uh not
+exactly at all what they said. So, I
+exactly at all what they said. So, I
+don't know. I generally think that the
+don't know. I generally think that the
+anth like especially early anthropic
+anth like especially early anthropic
+folks are just completely
+batshit. Google has a 10% stake. I
+batshit. Google has a 10% stake. I
+forgot about
+forgot about
+that. Is that even a
+that. Is that even a
+thing? I don't
+thing? I don't
+know. But yeah, I generally like the
+know. But yeah, I generally like the
+early anthropic people are batshit. Some
+early anthropic people are batshit. Some
+of them now are probably just like,
+of them now are probably just like,
+yeah, it's a big it's a big AI lab like
+yeah, it's a big it's a big AI lab like
+the rest of them. But the early like
+the rest of them. But the early like
+original split was complete
+batshit. Very good paper though. One of
+batshit. Very good paper though. One of
+my favorite papers actually. It's like
+my favorite papers actually. It's like
+one of the best done RL papers I've
+one of the best done RL papers I've
+seen.
+What's
+this? Is this way
+faster?
+faster?
+Huh? Interesting.
+early anthropic or all. Yeah, like I
+early anthropic or all. Yeah, like I
+said, that
+[ __ ] Like I said, bat [ __ ] crazy.
+TD
+That's immediately better,
+That's immediately better,
+right? Not
+right? Not
+much is better though.
+Yeah, there's not really like a cute
+Yeah, there's not really like a cute
+hack way
+hack way
+to do this.
+So what I was trying to do is I was
+So what I was trying to do is I was
+trying to find like a like a hack way to
+trying to find like a like a hack way to
+do something approximately ppg phasic
+do something approximately ppg phasic
+policy gradients but without the fixed
+policy gradients but without the fixed
+cost
+cost
+overhead. Um it doesn't seem like there
+overhead. Um it doesn't seem like there
+is a good way to do that.
+There's not really a way we can get
+There's not really a way we can get
+additional value function training in,
+additional value function training in,
+right?
+We
+could. Okay, one last thing I'm going to
+could. Okay, one last thing I'm going to
+try really quick.
+One last thing I just want to try really
+One last thing I just want to try really
+quick.
+So this is like really low clipping
+So this is like really low clipping
+coefficient and then extra epoch.
+This do
+anything? Doesn't seem like this does
+anything? Doesn't seem like this does
+anything.
+Yeah. Not right.
+Value function coefficients already
+Value function coefficients already
+quite big.
+Okay, so none of these attacks like
+Okay, so none of these attacks like
+really do anything.
+really do anything.
+you'd have to do full full basic policy
+you'd have to do full full basic policy
+gradient and
+gradient and
+um I don't really like that because you
+um I don't really like that because you
+have to go through the whole data set
+have to go through the whole data set
+again just for the privilege of then
+again just for the privilege of then
+being able to do even more
+being able to do even more
+work. I mean I guess it's hang
+on. Okay, I actually maybe it's not bad
+on. Okay, I actually maybe it's not bad
+come to think of it because
+times it 9:07. Okay. You know,
+times it 9:07. Okay. You know,
+maybe maybe it's actually not that
+maybe maybe it's actually not that
+bad. Um, and the reason I'm thinking
+bad. Um, and the reason I'm thinking
+that
+that
+is you only have to do the extra forward
+is you only have to do the extra forward
+pass if you get through the whole data
+pass if you get through the whole data
+set, right?
+set, right?
+or if you get through your if you're
+or if you get through your if you're
+going to do multiple epochs. So, it
+going to do multiple epochs. So, it
+should be purely a method of scaling
+up. Okay, we'll mess with this tomorrow.
+up. Okay, we'll mess with this tomorrow.
+I think that there is actually a world
+I think that there is actually a world
+in which this works. So, I'll explain
+in which this works. So, I'll explain
+the idea briefly. So, here's the thing
+the idea briefly. So, here's the thing
+with phasic policy gradients, right?
+with phasic policy gradients, right?
+This is the algorithm. Um, this is
+This is the algorithm. Um, this is
+normally what you would do with
+normally what you would do with
+PO. Okay, so this is now you have to
+PO. Okay, so this is now you have to
+double your compute and then you have to
+double your compute and then you have to
+redo the whole forward pass. So that's
+redo the whole forward pass. So that's
+like another.5 and then you do a bunch
+like another.5 and then you do a bunch
+of extra epochs on both of these. So
+of extra epochs on both of these. So
+what I'm going to do instead is it's
+what I'm going to do instead is it's
+just going to be we do one epoch of this
+just going to be we do one epoch of this
+altogether, which is the exact same cost
+altogether, which is the exact same cost
+as what you would do for PO and then if
+as what you would do for PO and then if
+you want to do more epochs, then you do
+you want to do more epochs, then you do
+this once and then you do this stuff.
+this once and then you do this stuff.
+Um and then ideally what that means is
+Um and then ideally what that means is
+that you maintain exact equivalence with
+that you maintain exact equivalence with
+PO but then you add you essentially just
+PO but then you add you essentially just
+strictly add an option to train the
+strictly add an option to train the
+value function
+value function
+more and we'll see if that does
+more and we'll see if that does
+something. Hypothesis here is that it
+something. Hypothesis here is that it
+should do
+should do
+something. Hey Ryan. Yo Ryan, does this
+something. Hey Ryan. Yo Ryan, does this
+make
+make
+sense? Why does that not work?
+You just jointly do one PO EPOC policy
+You just jointly do one PO EPOC policy
+loss and value
+loss. Yeah, but who cares,
+right? But like who cares, right?
+No, no, no. What I'm saying here is you
+No, no, no. What I'm saying here is you
+just do you literally do the first epoch
+just do you literally do the first epoch
+of PO stays PO or the first N epochs of
+of PO stays PO or the first N epochs of
+PO stay PO, right? And then you have the
+PO stay PO, right? And then you have the
+option to add epochs that just train the
+option to add epochs that just train the
+value function and keep the PO output
+value function and keep the PO output
+exactly the same via the KL divergence.
+exactly the same via the KL divergence.
+So essentially what I'm trying to do
+So essentially what I'm trying to do
+here, right, is they show here that like
+here, right, is they show here that like
+you actually make the policy do worse
+you actually make the policy do worse
+after a while and I actually I can
+after a while and I actually I can
+reproduce that result as well. If you
+reproduce that result as well. If you
+just keep putting more data through it,
+just keep putting more data through it,
+you do worse because data gets
+you do worse because data gets
+increasingly off
+increasingly off
+policy. But you do better if you train
+policy. But you do better if you train
+the value function for longer, right? So
+the value function for longer, right? So
+what if I just make this split, right?
+what if I just make this split, right?
+Where you can do extra
+Where you can do extra
+epochs sort of defeat. How does it
+epochs sort of defeat. How does it
+defeat the
+purpose? It lets you do PO and then do
+purpose? It lets you do PO and then do
+extra value training, right?
+If you just want you don't you do need
+If you just want you don't you do need
+the a step you do need the aux step. You
+the a step you do need the aux step. You
+can't tune up value epochs independently
+can't tune up value epochs independently
+because you're assuming it's a shared
+because you're assuming it's a shared
+head. And if you have a shared value
+head. And if you have a shared value
+head, then uh you craft the policy if
+head, then uh you craft the policy if
+you don't have a behavioral cloning
+you don't have a behavioral cloning
+loss. But you can't have a behavioral
+loss. But you can't have a behavioral
+cloning loss while you're also training
+cloning loss while you're also training
+the
+policy.
+Right? So I'm saying here is you just
+Right? So I'm saying here is you just
+have this. You don't have a separate
+have this. You don't have a separate
+value network. You use the shared mode
+value network. You use the shared mode
+that they said works right here. You
+that they said works right here. You
+train. This phase is just PO. You do
+train. This phase is just PO. You do
+PO for an epoch or two and then you do
+PO for an epoch or two and then you do
+this and then this gives you the PI. Uh
+this and then this gives you the PI. Uh
+this essentially gives you your updated
+this essentially gives you your updated
+logic for everything and then your new
+logic for everything and then your new
+updates. Go over
+updates. Go over
+that. Yeah, it is a behavioral cloning
+that. Yeah, it is a behavioral cloning
+loss bet.
+I think this might
+I think this might
+work. I think this should work.
+Really value function doesn't interfere.
+Well, in that case, they're doing
+um they have like this other version of
+um they have like this other version of
+it though, don't
+it though, don't
+they? Hang on. Where's this other
+they? Hang on. Where's this other
+version of it?
+[Music]
+They don't have the ablation on why this
+They don't have the ablation on why this
+matters
+though. I guess they also say not to do
+though. I guess they also say not to do
+the ox phase too often,
+right? Isn't that a thing? Like don't do
+right? Isn't that a thing? Like don't do
+the auxiliary phase too often.
+Yeah. Okay. That actually might be kind
+Yeah. Okay. That actually might be kind
+of sketchy.
+Like why does it interfere though?
+It doesn't. It just says we think they
+It doesn't. It just says we think they
+interfere as far as I know. Well, the
+interfere as far as I know. Well, the
+goal is to decouple value function
+training. The Well, the thing is the
+training. The Well, the thing is the
+other thing this lets you do, right, is
+other thing this lets you do, right, is
+this lets you train the value function
+this lets you train the value function
+more than the
+policy, right?
+policy, right?
+The main result as I read it here is
+The main result as I read it here is
+that if you train the policy more than
+that if you train the policy more than
+an epoch, it does
+an epoch, it does
+worse. Why can't you just do that with
+worse. Why can't you just do that with
+PO? You can't just train the value
+PO? You can't just train the value
+head. If you just train the value head,
+head. If you just train the value head,
+you corrupt the features if you're not
+you corrupt the features if you're not
+also training the PO loss. You need to
+also training the PO loss. You need to
+have a behavioral cloning. Like if
+have a behavioral cloning. Like if
+you're not going to train the policy
+you're not going to train the policy
+head like to improve the policy, then
+head like to improve the policy, then
+you have to behavioral clone it against
+you have to behavioral clone it against
+where you started at before you started
+where you started at before you started
+training this value function even more.
+training this value function even more.
+So the goal is to keep the policy doing
+So the goal is to keep the policy doing
+the exact same thing while you keep
+the exact same thing while you keep
+training the value function more. Right?
+training the value function more. Right?
+So the policy develops for one epoch and
+So the policy develops for one epoch and
+then you can train the policy uh the
+then you can train the policy uh the
+value head of the policy a whole bunch
+value head of the policy a whole bunch
+without destroying the policy logics.
+You can't just train them
+separately. I was suggesting right our
+separately. I was suggesting right our
+default implementation basically always
+default implementation basically always
+does one epoch of po right. So I'm
+does one epoch of po right. So I'm
+saying do one epoch of PO and then if
+saying do one epoch of PO and then if
+you want to do more epoch so if you want
+you want to do more epoch so if you want
+to like crank up compute then what you
+to like crank up compute then what you
+can do is you can uh you can go compute
+can do is you can uh you can go compute
+updated logics through the data set with
+updated logics through the data set with
+the thing that you just trained for an
+the thing that you just trained for an
+epoch then behavioral clone versus that
+epoch then behavioral clone versus that
+so that the policy doesn't change and
+so that the policy doesn't change and
+keep training the value
+head. Okay, this is also kind of sketchy
+head. Okay, this is also kind of sketchy
+here, right?
+here, right?
+They say that uh the baseline
+They say that uh the baseline
+PO does shite if uh you use separate
+PO does shite if uh you use separate
+networks.
+When this gets to 0.6
+When this gets to 0.6
+six. And what are they claiming this
+gets 70
+portion a step if you increase value
+portion a step if you increase value
+epox well yeah the I the plan is you do
+epox well yeah the I the plan is you do
+npo steps optimal is probably one but
+npo steps optimal is probably one but
+it's like prioritize sampling so who
+it's like prioritize sampling so who
+knows
+knows
+um and then separately right you can do
+um and then separately right you can do
+value function training followed by or
+value function training followed by or
+simultaneous even value function
+simultaneous even value function
+training and behavioral
+cloning. Let me get rid of that
+bot. I think it makes
+sense here. Let me just real
+quick. Oh man, did you just link me
+Gail? Is this remotely similar?
+No, not like
+this expert trajectories. There's
+this expert trajectories. There's
+no Gail is Gail offline or something.
+no Gail is Gail offline or something.
+There's no expert
+There's no expert
+data. Yeah, there's no
+demonstrations. How the [ __ ] is there an
+demonstrations. How the [ __ ] is there an
+imitation library? A whole library for
+imitation library? A whole library for
+that [ __ ] It's easy.
+Suppose supposed to be taking a
+Suppose supposed to be taking a
+break theory craft ppg stuff tomorrow.
+break theory craft ppg stuff tomorrow.
+Cool. Proton PPG. We could potentially
+Cool. Proton PPG. We could potentially
+look
+look
+at Why did you say it wasn't great
+at Why did you say it wasn't great
+originally? Did it not reproduce the
+originally? Did it not reproduce the
+paper?
+use cleaner else
+use cleaner else
+version. It was just slow I guess,
+version. It was just slow I guess,
+right? I would imagine it to be
+slow combined with PLR which uses value
+slow combined with PLR which uses value
+predictions.
+predictions.
+Huh, weird.
+So the way I was going to implement it
+So the way I was going to implement it
+right base PO is exactly the same zero
+right base PO is exactly the same zero
+change
+change
+whatsoever. It purely gives you
+whatsoever. It purely gives you
+additional value function training.
+Wait, they only run it every 25 PO
+updates. So that's going to mess some
+updates. So that's going to mess some
+stuff
+up. Let me see. There was an aux
+up. Let me see. There was an aux
+frequency ablation.
+frequency ablation.
+I this might not be worth doing then if
+I this might not be worth doing then if
+it's because I you have to do it jointly
+it's because I you have to do it jointly
+for it to be worth
+it. Like you'd have to do it
+it. Like you'd have to do it
+[Music]
+jointly. Okay. So this isn't worth it
+jointly. Okay. So this isn't worth it
+then, right? Look, this goes back to
+6. It shouldn't require that, but I here
+6. It shouldn't require that, but I here
+I think the whole thing breaks here
+I think the whole thing breaks here
+because yeah, that basically brings it
+because yeah, that basically brings it
+back down to
+pof. So doing
+um yeah, if you do it too frequently, it
+um yeah, if you do it too frequently, it
+harms perf. So I was going to do it
+harms perf. So I was going to do it
+jointly. So that's just not going to
+jointly. So that's just not going to
+work, right?
+Did they benchmark this versus just
+Did they benchmark this versus just
+doubling the network
+size? They probably didn't,
+right? You know, I'm kind of starting to
+right? You know, I'm kind of starting to
+wonder here, Ryan.
+wonder here, Ryan.
+Like, they use two separate
+Like, they use two separate
+networks, but they say it still works
+networks, but they say it still works
+with this
+with this
+Where is it? It still works with
+Where is it? It still works with
+um single net.
+Well, it actually doesn't make any damn
+Well, it actually doesn't make any damn
+sense that this works, right? Because
+sense that this works, right? Because
+like think about it. Okay, so like they
+like think about it. Okay, so like they
+just have the value function head. The
+just have the value function head. The
+point is that like the value function
+point is that like the value function
+learns useful features that you then
+learns useful features that you then
+distill into the main network,
+distill into the main network,
+right? But there's nothing to distill
+right? But there's nothing to distill
+because the value head functions just
+because the value head functions just
+like a small head.
+like a small head.
+So there's nothing to distill and
+So there's nothing to distill and
+somehow they're still getting
+PF. Well, I guess that would mean if
+PF. Well, I guess that would mean if
+there's nothing to distill, I guess it's
+there's nothing to distill, I guess it's
+the fact then that they are doing
+the fact then that they are doing
+additional full gradient value training,
+additional full gradient value training,
+right? So, actually, no. This still does
+right? So, actually, no. This still does
+make sense.
+make sense.
+[ __ ] I think this will be worth playing
+[ __ ] I think this will be worth playing
+with a little bit
+tomorrow. If I weren't exhausted now, I
+tomorrow. If I weren't exhausted now, I
+could probably just do it in an hour. I
+could probably just do it in an hour. I
+think I'll just do it in the
+think I'll just do it in the
+morning. We'll see. If it's not
+morning. We'll see. If it's not
+promising, I won't stick with it very
+promising, I won't stick with it very
+long.
+long.
+But this was basically like one of the
+But this was basically like one of the
+methods I wanted to play with
+methods I wanted to play with
+um for increased sample
+um for increased sample
+efficiency. Yeah, I have looked at it a
+efficiency. Yeah, I have looked at it a
+little
+little
+bit. I mean if you read it this way,
+bit. I mean if you read it this way,
+right, this is like 2 to 3x sample
+right, this is like 2 to 3x sample
+efficiency that they are claiming here,
+efficiency that they are claiming here,
+right? This is like doubled sample
+right? This is like doubled sample
+efficiency.
+more than doubled like
+3x. Actually, Ryan, here's another
+3x. Actually, Ryan, here's another
+thing, right?
+thing, right?
+So look at
+So look at
+this. If you do detach the value head,
+right? If you detach the value head
+right? If you detach the value head
+here, then wait, what's this B? Oh,
+here, then wait, what's this B? Oh,
+that's just entropy. So if you attach
+that's just entropy. So if you attach
+the value head here, then you can do
+the value head here, then you can do
+this at the same
+this at the same
+time, right? Because this doesn't
+time, right? Because this doesn't
+interfere with this. So you you can do
+interfere with this. So you you can do
+this at the same time. So this is just
+this at the same time. So this is just
+PO with detached value
+head. And then every so often you run
+head. And then every so often you run
+this
+So you just do this is the joint first
+So you just do this is the joint first
+step first
+step first
+epoch and then you run additional of
+epoch and then you run additional of
+these and then every so often you do
+this do them together unless well yeah
+this do them together unless well yeah
+but the thing is you can always do let's
+but the thing is you can always do let's
+say you're going to usually do one epoch
+say you're going to usually do one epoch
+of PO you also get one epoch of value
+of PO you also get one epoch of value
+function training basically for
+function training basically for
+free cuz you batch it,
+right? And then this is like a pure
+right? And then this is like a pure
+extension,
+extension,
+right? It's just like a pure extension
+right? It's just like a pure extension
+of
+this. You know, one thing I want to try
+this. You know, one thing I want to try
+just real quick before
+just real quick before
+I What if we just
+do and make sure that this is our
+do and make sure that this is our
+baseline. And
+then what if you just detach the value
+then what if you just detach the value
+head? What
+head? What
+happens?
+Ignore the stop. It still works.
+Ignore the stop. It still works.
+Yeah, it's very close without it
+Yeah, it's very close without it
+though. Like let's see what happens if I
+though. Like let's see what happens if I
+do. I think that's the same initial
+do. I think that's the same initial
+curve,
+right? Yeah, this is fine. This the same
+right? Yeah, this is fine. This the same
+initial curve. What happens if I just do
+this? Like just literally detach the
+this? Like just literally detach the
+value head there.
+This is baseline, by the way. These are
+This is baseline, by the way. These are
+like more
+epochs. It does
+epochs. It does
+better. Look at that.
+better. Look at that.
+It literally does [ __ ] better if you
+It literally does [ __ ] better if you
+detach the value
+head. I think that's like enough of a a
+head. I think that's like enough of a a
+cue that it's worth looking into, right?
+Oh, you know one other thing we can do
+Oh, you know one other thing we can do
+real quick that would make it really
+real quick that would make it really
+that would be really
+that would be really
+easy. Hang on. We're going to try
+easy. Hang on. We're going to try
+something really really
+quick. So this is true or so this is
+quick. So this is true or so this is
+just PO, right?
+I'll do like
+this. Yeah. Let me do this.
+Well, apparently something wrong because
+Well, apparently something wrong because
+uh that shouldn't have
+uh that shouldn't have
+failed. Hang
+failed. Hang
+on. Hang on.
+on. Hang on.
+I screw
+up. It's a zero.
+I wanted to see with detached value
+I wanted to see with detached value
+head if you can now just train it
+more. You should definitely be able to
+more. You should definitely be able to
+just train it more something's wrong.
+So that
+runs. No, I want to just it's just going
+runs. No, I want to just it's just going
+to train the the uh value head more. How
+to train the the uh value head more. How
+do I I if I zero this loss, it doesn't
+do I I if I zero this loss, it doesn't
+do anything, right?
+do anything, right?
+Yeah, this can't do
+anything. Running rate
+anything. Running rate
+tracking. That could be a thing. It's Mu
+tracking. That could be a thing. It's Mu
+on probably maybe similar
+That's
+annoying. I mean, that doesn't explain
+annoying. I mean, that doesn't explain
+it failing this hard,
+though. I don't think it does.
+Oh, you're a dummy is why I detached the
+Oh, you're a dummy is why I detached the
+wrong [ __ ]
+state. Yeah, that'll do it.
+I don't
+I don't
+know. Let's see if this is could have
+know. Let's see if this is could have
+been noise. Let's see if this actually
+been noise. Let's see if this actually
+is like significantly
+better. That's still the wrong one. What
+better. That's still the wrong one. What
+the [ __ ] is wrong with me?
+Okay, this has to work,
+right? Yeah, I know. Flash
+experiment. [ __ ] sake, man.
+This is the one that we're pulling,
+This is the one that we're pulling,
+right?
+Well, maybe this one just doesn't work
+Well, maybe this one just doesn't work
+at all.
+Ah yeah, here's the issue. If you detach
+Ah yeah, here's the issue. If you detach
+the value head, the network just trains
+the value head, the network just trains
+like [ __ ]
+whereas the logic actually
+works. That's kind of
+works. That's kind of
+crazy. Wait, is that actually
+true? That's kind of crazy, right? Like
+true? That's kind of crazy, right? Like
+look, you detach this
+here. Can you just
+here. Can you just
+detach? Can you detach this one?
+and have it still
+work.
+work.
+Uh yeah, dude, you can
+Uh yeah, dude, you can
+detach you can detach the policy head
+detach you can detach the policy head
+but not the value head.
+Isn't that kind of
+crazy though? Interestingly, I think I
+crazy though? Interestingly, I think I
+detached both and that was the best of
+detached both and that was the best of
+all of
+all of
+them. Let me see for sure.
+What's
+What's
+training? Good
+question. Maybe that was a bug. We'll
+question. Maybe that was a bug. We'll
+see. That'd be pretty funny, wouldn't
+see. That'd be pretty funny, wouldn't
+it? All right. So, you can detach one or
+it? All right. So, you can detach one or
+the other.
+the other.
+Uh, and then if we detach
+both. Oh, you know why? It was because
+both. Oh, you know why? It was because
+this doesn't get called
+this doesn't get called
+anyways. This is the for this was called
+anyways. This is the for this was called
+during eval time. So that's why it
+during eval time. So that's why it
+worked and then the improvement was just
+worked and then the improvement was just
+noise.
+Okay. Yeah, this is not like this will
+Okay. Yeah, this is not like this will
+fail. I'm
+fail. I'm
+sure this will fail.
+But still that's interesting, right?
+But still that's interesting, right?
+That you can detach the value head but
+That you can detach the value head but
+not
+the Yeah. And then you get a failure
+the Yeah. And then you get a failure
+because there's no
+because there's no
+gradient.
+Yeah.
+Yeah.
+Uh yes.
+But I mean that wouldn't really lend
+But I mean that wouldn't really lend
+itself to any major conclusion, right?
+itself to any major conclusion, right?
+That just tells you that you need to
+That just tells you that you need to
+learn the both, which is like, yeah,
+learn the both, which is like, yeah,
+duh. You need to learn them
+both. I mean, like
+Do any of these things have as much
+Do any of these things have as much
+effect as just doing
+this? You got to admit it's pretty cool
+this? You got to admit it's pretty cool
+how fast we can run these,
+how fast we can run these,
+right? These are 80 mil experiments.
+right? These are 80 mil experiments.
+You'd be waiting an hour a piece for
+You'd be waiting an hour a piece for
+these normally.
+You' think it would impact PPG though,
+right?
+right?
+[Music]
+Um, there's something there. There's
+Um, there's something there. There's
+something
+something
+here. Start testing dumb ideas on Puffer
+here. Start testing dumb ideas on Puffer
+Breakout. Well, the thing is it's not
+Breakout. Well, the thing is it's not
+just Puffer Breakout. You can do it with
+just Puffer Breakout. You can do it with
+Pong and that'll run in 20 seconds. And
+Pong and that'll run in 20 seconds. And
+you can do it in Snake and that'll run
+you can do it in Snake and that'll run
+in a minute.
+Yeah, I'm trying to figure out what the
+Yeah, I'm trying to figure out what the
+hell it is the thing that they're on
+hell it is the thing that they're on
+like they're up to is with
+like they're up to is with
+that here. Let's see what happens just
+that here. Let's see what happens just
+by making the network a little
+by making the network a little
+bigger. Just like magnitude of effect
+bigger. Just like magnitude of effect
+kind of a thing.
+Okay, so this was like four epochs.
+That's
+That's
+worse.
+Lol. Thanks, Orl. Okay. Actually, I
+Lol. Thanks, Orl. Okay. Actually, I
+understand why it is that that happens
+understand why it is that that happens
+now, though. That's going to be gone
+now, though. That's going to be gone
+pretty
+pretty
+soon. That will do better in the
+future. Was better for a little bit.
+Is there anything to
+Is there anything to
+basic in that
+case? It's weird cuz like the ppg they
+case? It's weird cuz like the ppg they
+say the PO baseline with separate models
+say the PO baseline with separate models
+does
+does
+[ __ ] but then like isn't there that
+[ __ ] but then like isn't there that
+annoying Google like large scale
+What's it? What
+matters this thing?
+Didn't these guys find that shared was
+Didn't these guys find that shared was
+way worse for their [ __ ]
+Figure 15.
+Do you think this is stupid capacity
+Do you think this is stupid capacity
+issue?
+This stupid shared network thing like
+This stupid shared network thing like
+versus separates always bothered me.
+The hell's this baseline cost?
+I don't
+I don't
+know. The authors of this paper [ __ ]
+know. The authors of this paper [ __ ]
+my stuff at
+Google. Do you think they're paper
+Google. Do you think they're paper
+[ __ ] That'd be
+[ __ ] That'd be
+fun because they come up with a lot of
+fun because they come up with a lot of
+things that don't really hold across the
+things that don't really hold across the
+whole rest of RL
+whole rest of RL
+since why I couldn't publish for a year.
+since why I couldn't publish for a year.
+Dip
+shots. Yeah. The funny thing about this
+shots. Yeah. The funny thing about this
+is these 4,000 choice configurations on
+is these 4,000 choice configurations on
+like puffer tasks. This would be like,
+like puffer tasks. This would be like,
+you know, a
+box. Okay. Well, I think I should go to
+box. Okay. Well, I think I should go to
+bed actually to be fair. Um, and I just
+bed actually to be fair. Um, and I just
+want to do RL [ __ ] 24/7 now until
+want to do RL [ __ ] 24/7 now until
+it's solved. It's like I got the RL bug.
+it's solved. It's like I got the RL bug.
+It's got to be
+solved. Uh,
+PO
+implementation used for Google's
+implementation used for Google's
+RHF was based on the implementation from
+RHF was based on the implementation from
+that paper and it had a bug that made it
+that paper and it had a bug that made it
+really bad for a year.
+Oh, they are [ __ ]
+Oh, they are [ __ ]
+huh? All
+right. They get really weird results
+right. They get really weird results
+that don't really match anything in the
+that don't really match anything in the
+rest of RL, right? It is also shitty
+rest of RL, right? It is also shitty
+control stuff,
+control stuff,
+though. No one used PPO because of
+though. No one used PPO because of
+that. They didn't because of one shitty
+that. They didn't because of one shitty
+Oh, man.
+Oh, man.
+What do you say we like who's going to
+What do you say we like who's going to
+win, right? The [ __ ] multi-trillion
+win, right? The [ __ ] multi-trillion
+dollar
+dollar
+company or me with one puffer
+company or me with one puffer
+[Music]
+fish. All right, apparently we have 11
+fish. All right, apparently we have 11
+people watching at this hour. Um, so
+people watching at this hour. Um, so
+here's the deal, folks. I got to get
+here's the deal, folks. I got to get
+sleep,
+sleep,
+but I will be back first thing in the
+but I will be back first thing in the
+morning. All my stuff's open source here
+morning. All my stuff's open source here
+at puffer.ai. AI. We made a pretty nice
+at puffer.ai. AI. We made a pretty nice
+breakthrough today with the new
+breakthrough today with the new
+advantage algorithm. Uh if you want to
+advantage algorithm. Uh if you want to
+help us out for free, literally for
+help us out for free, literally for
+free. Takes 2 seconds. Just start the
+free. Takes 2 seconds. Just start the
+repo. We're almost at 2,000. It'll be
+repo. We're almost at 2,000. It'll be
+great. Um other than that, you can join
+great. Um other than that, you can join
+the Discord to get involved with
+the Discord to get involved with
+development. You do not need an RL
+development. You do not need an RL
+background to get involved. Some of our
+background to get involved. Some of our
+best contributors, actually all of our
+best contributors, actually all of our
+best contributors now, uh, had zero RL
+best contributors now, uh, had zero RL
+background coming in. Programming
+background coming in. Programming
+background helps, but a lot of this
+background helps, but a lot of this
+stuff's actually pretty nice and easy to
+stuff's actually pretty nice and easy to
+pick up, but there's a lot of like cool
+pick up, but there's a lot of like cool
+self-contained dev you can do. It's a
+self-contained dev you can do. It's a
+lot like low-level gamedev, except do
+lot like low-level gamedev, except do
+train superhuman AIs on it. So, join
+train superhuman AIs on it. So, join
+there if you want to get involved with
+there if you want to get involved with
+that. Uh there's also a blog post on how
+that. Uh there's also a blog post on how
+to get started and you can follow me on
+to get started and you can follow me on
+X for more RL content. But yeah, that's
+X for more RL content. But yeah, that's
+the vibe around here. We do research
+the vibe around here. We do research
+live, some engineering, some science,
+live, some engineering, some science,
+some math, and uh yeah, back first thing
+some math, and uh yeah, back first thing
+in the
+morning. I just get a message from
+morning. I just get a message from
+someone like, "Hi,
+whatever." Hi, yes, it's me.
+whatever." Hi, yes, it's me.
+Oh, that was separate. Okay, cool. Well,
+Oh, that was separate. Okay, cool. Well,
+yeah. See you folks. Thanks for tuning
+yeah. See you folks. Thanks for tuning
+in. Bye-bye.

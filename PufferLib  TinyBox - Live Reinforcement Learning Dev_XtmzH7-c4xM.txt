@@ -1,0 +1,5485 @@
+Kind: captions
+Language: en
+Okay, we are back
+Okay, we are back
+live.
+Hi. Done with
+Hi. Done with
+meetings at least for now.
+ies on anything
+ies on anything
+else should be
+good. Where did my chat window
+go? There we
+are.
+There. How we doing on experiments?
+Not so
+good. Okay, so these are all logging
+good. Okay, so these are all logging
+like basically the same
+thing. What is this?
+The heck is
+this?
+Uh, and
+Oh, this is grid. Okay, that's just our
+sweep. Okay, so we've got two
+sweep. Okay, so we've got two
+things
+things
+weird overall.
+You should work with
+You should work with
+um multi-GPU,
+right? If I like look for distributed.
+Oh, maybe these don't work with
+distributed. Why do they have opportuna?
+music.
+Um, I'm realizing I don't think this
+Um, I'm realizing I don't think this
+thing works
+thing works
+on distributed, does it?
+That seems iffy.
+Do you need to use this?
+Okay. So, it's supposed to just
+Okay. So, it's supposed to just
+do backward.
+Yeah. So there should not be anything
+Yeah. So there should not be anything
+required to make this
+work. PDP to train
+I don't think if there are any other
+I don't think if there are any other
+like obvious common
+like obvious common
+gotchas. I guess technically I could do
+gotchas. I guess technically I could do
+like one of the other M's that I know is
+like one of the other M's that I know is
+really
+really
+easy, right?
+I'm going to try a really easy env. See
+I'm going to try a really easy env. See
+how that
+goes. We'll do puffer convert.
+going on
+going on
+here scale being
+weird. Okay, Twitter's pretty good
+sometimes. There we go.
+want to authenticate this on the side
+want to authenticate this on the side
+real quick and then we will be able
+to be able to get this running.
+Tiny
+box. Oh, tiny. A tiny
+box. Cool.
+So, uh, there's no team up session here.
+So, uh, there's no team up session here.
+What the
+hell? Oh, I'm
+dumb. Okay, so this has
+dumb. Okay, so this has
+run 1.8 billion
+run 1.8 billion
+steps. Just hard failed.
+and not import
+binding.
+Really? Yeah.
+Okay, it's just a build
+error.
+H, it should pick it up.
+Maybe I just didn't rebuild since I
+Maybe I just didn't rebuild since I
+pulled the
+pulled the
+latest. Could be. That
+figure out
+figure out
+DDP first. Okay.
+And actually this one is
+And actually this one is
+episode length.
+Okay, that's successful
+training. Okay, so next
+We will do
+DDP. Excuse me.
+Uh yeah, they shouldn't log from all
+Uh yeah, they shouldn't log from all
+ranks. Kind of
+weird. Fix that later. We'll start with
+weird. Fix that later. We'll start with
+this.
+Okay, so this is now training at 4
+Okay, so this is now training at 4
+million steps per
+million steps per
+second. Uh, the steps counter is still
+second. Uh, the steps counter is still
+not correct, it looks like to me.
+4 million is not super
+4 million is not super
+impressive. Like we're going to be able
+impressive. Like we're going to be able
+to get neural MMO training at this
+to get neural MMO training at this
+speed. Speed is not the problem. The
+speed. Speed is not the problem. The
+problem is the dynamic somehow not
+problem is the dynamic somehow not
+converging.
+Like somehow the training is different
+Like somehow the training is different
+here than normal cuz this is not
+here than normal cuz this is not
+converging.
+It's kind of starting to optimize. Yeah,
+It's kind of starting to optimize. Yeah,
+it's not solving the
+it's not solving the
+end. Be a simpler way of saying
+end. Be a simpler way of saying
+it. I mean, it's it's kind of starting
+it. I mean, it's it's kind of starting
+to do something, but
+to do something, but
+like not
+really. I mean, we have we have things
+really. I mean, we have we have things
+to test here, though.
+There are a lot of possible explanations
+There are a lot of possible explanations
+for
+this all distributed
+this all distributed
+runs. Okay, it is kind of starting to
+train. The question is why is it so much
+train. The question is why is it so much
+worse? We have some things we can check.
+baseline.
+Now we're going to try running it
+Now we're going to try running it
+through the distributed interface but
+through the distributed interface but
+with only one uh one
+with only one uh one
+process. So this should be exactly equal
+process. So this should be exactly equal
+to the original curve. If this is not
+to the original curve. If this is not
+equal to the original curve, we will
+equal to the original curve, we will
+know immediately that this is something
+know immediately that this is something
+specifically due to uh with the way that
+specifically due to uh with the way that
+DDP is working not hypers or anything
+DDP is working not hypers or anything
+else.
+else.
+If this actually works equal to the
+If this actually works equal to the
+original, then we will know that it is
+original, then we will know that it is
+most likely something with
+hypers. Okay.
+So that is quite odd.
+It is training better than
+It is training better than
+before, but nowhere near as well as it
+before, but nowhere near as well as it
+should. Also, why is it not
+logging? 381
+Guess this didn't log.
+Okay, so this like for whatever reason
+Okay, so this like for whatever reason
+did not
+did not
+log, but
+log, but
+um I mean it also definitely didn't
+um I mean it also definitely didn't
+work. This is something related
+work. This is something related
+to distributed training specifically.
+Looks like Hrien might swing
+Looks like Hrien might swing
+by and building
+ends. Type in on Discord.
+Late at my place surely will come this
+Late at my place surely will come this
+week. It's fine. I got work to do
+anyways. We need to use glue.
+Let's try
+that. Yeah, Tetris. Nice. M. Good. M.
+[Music]
+That's
+Let's see if it's glue backend
+Let's see if it's glue backend
+shenanigans.
+Nope, not backend shenanigans.
+Let's not do Neptune for a
+Let's not do Neptune for a
+bit. Just going to do some basic debug.
+Okay, how about we do Yes.
+Try this.
+I suspect that it's not getting
+I suspect that it's not getting
+gradients for
+forward. This will be forward
+forward. This will be forward
+eval. This will be
+forward. Ah, that's very different. You
+forward. Ah, that's very different. You
+see, it just wasn't training.
+Boom. Now works amazingly well.
+And this
+trains and trains quite nicely in
+fact. So can we get matched matched
+fact. So can we get matched matched
+results now is the question.
+So, we'll do this first. Actually, isn't
+So, we'll do this first. Actually, isn't
+the global step like the global step
+the global step like the global step
+just
+doesn't make sense. We'll do this for
+doesn't make sense. We'll do this for
+now and see what this outputs
+be interesting to see what this thing
+be interesting to see what this thing
+does.
+So, like this doesn't seem to
+So, like this doesn't seem to
+be working any better than
+be working any better than
+before. It's also logging kind of
+before. It's also logging kind of
+weird. Like, this should be more steps,
+weird. Like, this should be more steps,
+right?
+Like we have like all these different
+Like we have like all these different
+little
+graphs. We should figure out why the uh
+graphs. We should figure out why the uh
+the x axis is wrong first.
+134 mil
+134 mil
+steps. Same as before, right?
+mil. Okay, so this is actually correct,
+mil. Okay, so this is actually correct,
+right? 80 mil
+138 mil. Yeah. So this is
+138 mil. Yeah. So this is
+correct. Then
+correct. Then
+why why are we not logging correctly?
+Huh? Ah because it's this needs to be
+Huh? Ah because it's this needs to be
+agent steps.
+I'll see from there.
+Uh, are we not getting any logs from
+Uh, are we not getting any logs from
+this
+this
+thing? We do not appear to be getting
+thing? We do not appear to be getting
+any logs.
+Okay. So, this is still not printing
+Okay. So, this is still not printing
+correctly, but I think that's now just a
+correctly, but I think that's now just a
+dashboard error, right?
+That'll fix prints a little
+bit. Uh, it's still not logging
+bit. Uh, it's still not logging
+anything, right? Oh, no, it
+is. There we
+is. There we
+are. So, look at this.
+If we do this in relative time, it's
+If we do this in relative time, it's
+very very similar to
+very very similar to
+this. If we do it in
+steps, it's way farther
+out. Now, what we're going to try to do
+out. Now, what we're going to try to do
+is match this original curve.
+is match this original curve.
+Um, I'll try to match the original
+Um, I'll try to match the original
+curve.
+dividing 100 by a number.
+this. Uh, it's a little awkward because
+this. Uh, it's a little awkward because
+I only have six
+I only have six
+cards, but I think we'll do
+like 8192 mini batch or
+like 8192 mini batch or
+whatever. And then like num m will just
+whatever. And then like num m will just
+go
+go
+to like
+to like
+two two
+two two
+m like this.
+Yeah. Well, this doesn't work at all.
+That did not work at all.
+Try this just to be sure that it's not
+Try this just to be sure that it's not
+jank out of this.
+Hey
+Dan.
+This doesn't work at
+This doesn't work at
+all.
+all.
+Think was the original was 32 and 16 m,
+Think was the original was 32 and 16 m,
+right?
+Well, we didn't mess with the batch
+Well, we didn't mess with the batch
+size, so that's going to probably
+size, so that's going to probably
+completely screw it,
+right? And one sec, my 10. Let me let me
+right? And one sec, my 10. Let me let me
+try one last thing so I keep my train of
+try one last thing so I keep my train of
+thought, and then I will do that.
+I'm right. This should do something.
+Okay. Like this.
+You can also always do four
+You can also always do four
+cards. The test
+run be better as four cards.
+Batch size divide by four. Mini batch
+Batch size divide by four. Mini batch
+divide by
+divide by
+four times divide by four.
+Are the ants allowed to die in
+Are the ants allowed to die in
+this and then they don't come back?
+park.
+Weird. They do come back.
+Okay.
+Are we ready to add another full 3D
+Are we ready to add another full 3D
+physics sim? Do you have one?
+We're certainly ready to add substantial
+We're certainly ready to add substantial
+hardware to
+hardware to
+Puffer. We got tiny boxes here.
+something something guy.
+And yeah, Kyle does robotics. I've
+And yeah, Kyle does robotics. I've
+talked with him. He's cool. Uh yeah,
+talked with him. He's cool. Uh yeah,
+seeing I don't freaking know what that
+seeing I don't freaking know what that
+guy does.
+Kyle's like actually a PhD candidate.
+orenstein,
+orenstein,
+right? Has a harp seal as his profile
+picture. Just join Discord, boys. Cool.
+Hello. Yeah. How's it going?
+Hello. Yeah. How's it going?
+Pretty good. What's going on with the
+Pretty good. What's going on with the
+stream so I don't hear you in several
+stream so I don't hear you in several
+places? So, um yeah, basically um let me
+places? So, um yeah, basically um let me
+show you on my screen where I'm at with
+show you on my screen where I'm at with
+this. All right, great. I bet. Very
+this. All right, great. I bet. Very
+good. We got tiny boxes. Yeah, I know.
+good. We got tiny boxes. Yeah, I know.
+That's that's what you know that's the
+That's that's what you know that's the
+real the real interesting thing. No,
+real the real interesting thing. No,
+Kyle Kyle was asking uh have we added
+Kyle Kyle was asking uh have we added
+you know did we add any other full 3D
+you know did we add any other full 3D
+physics sims to buffer
+um 3D physics?
+um 3D physics?
+I know we we didn't but no could we?
+I know we we didn't but no could we?
+Yeah, we can you can bind anything to
+Yeah, we can you can bind anything to
+it, man. It's just that the engines like
+it, man. It's just that the engines like
+you can bind to whatever you want. Like
+you can bind to whatever you want. Like
+I'm probably going to do a basic one for
+I'm probably going to do a basic one for
+drones relatively soon.
+drones relatively soon.
+I mean like we're not doing like we're
+I mean like we're not doing like we're
+not making a humanoid sim or anything
+not making a humanoid sim or anything
+like
+like
+that cuz like I mean that would actually
+that cuz like I mean that would actually
+be a big like a big thing to
+do. Like if I wanted to do better than
+do. Like if I wanted to do better than
+Isaac or something, I'd basically that
+Isaac or something, I'd basically that
+would be a big
+would be a big
+project. Okay, so we've got ants. These
+project. Okay, so we've got ants. These
+are the trained ants presumably. These
+are the trained ants presumably. These
+are not the trained ants. These are
+are not the trained ants. These are
+scripted ants. So as I when I hold shift
+scripted ants. So as I when I hold shift
+um they are using some helper functions
+um they are using some helper functions
+that I've written in theh file. So this
+that I've written in theh file. So this
+was like my sanity check of theh file is
+was like my sanity check of theh file is
+uh basically are they actually able to
+uh basically are they actually able to
+see things in their vision and are they
+see things in their vision and are they
+able to use the correct angle and
+able to use the correct angle and
+distance to food and to the colony in
+distance to food and to the colony in
+order to get food back and forth. And
+order to get food back and forth. And
+you can see this is performing pretty
+you can see this is performing pretty
+well. There's another guy with an antsim
+well. There's another guy with an antsim
+on uh on YouTube I just saw as well. Um
+on uh on YouTube I just saw as well. Um
+he's not even doing RL and he's got like
+he's not even doing RL and he's got like
+you know all these crazy colony like
+you know all these crazy colony like
+behaviors. I think we could definitely
+behaviors. I think we could definitely
+do like this should definitely work and
+do like this should definitely work and
+we should definitely be able to get
+we should definitely be able to get
+something really compelling from this.
+something really compelling from this.
+Fact like the end I did recently with
+Fact like the end I did recently with
+all the puffers streaming around is
+all the puffers streaming around is
+pretty well. Yeah. It's like we should
+pretty well. Yeah. It's like we should
+totally be able to get stuff like this
+totally be able to get stuff like this
+to work. Um right. So is this still
+to work. Um right. So is this still
+agents here. This is still scripted
+agents here. This is still scripted
+agents. These are scripted agents. Yes.
+agents. These are scripted agents. Yes.
+When I let go of shift, they start
+When I let go of shift, they start
+acting randomly. Okay. Um but when I'm
+acting randomly. Okay. Um but when I'm
+holding down shift, they're behaving in
+holding down shift, they're behaving in
+a scripted way. And um and that has just
+a scripted way. And um and that has just
+been to test my helper functions. So uh
+been to test my helper functions. So uh
+I've got this get angle function, this
+I've got this get angle function, this
+wrap angle function, uh this distance
+wrap angle function, uh this distance
+squared function, and is envision
+squared function, and is envision
+function that I use in theh file. All of
+function that I use in theh file. All of
+these appear to work. Otherwise, they
+these appear to work. Otherwise, they
+would not be able to bring food to the
+would not be able to bring food to the
+colony and back so predictably.
+colony and back so predictably.
+Okay. Wait, does that did you say
+Okay. Wait, does that did you say
+compute observations was in there or no?
+compute observations was in there or no?
+Yeah. So, compute observations is uh in
+Yeah. So, compute observations is uh in
+here I just uh
+here I just uh
+it like your script actually reads from
+it like your script actually reads from
+the computed observations or it reads
+the computed observations or it reads
+from game state.
+from game state.
+It reads from the computed observations.
+It reads from the computed observations.
+So, this is file. Very good job. Is
+So, this is file. Very good job. Is
+cool. Yeah. That's that's how you write
+cool. Yeah. That's that's how you write
+a test, right? Like because otherwise
+a test, right? Like because otherwise
+the obs could be wrong, right? Yeah.
+the obs could be wrong, right? Yeah.
+Yeah. So in here uh in the actual env
+Yeah. So in here uh in the actual env
+I've got the this is uh why I I need to
+I've got the this is uh why I I need to
+actually check that this is right. Um
+actually check that this is right. Um
+but I've got the shape here. That's
+but I've got the shape here. That's
+wrong. Eight is the observation size. So
+wrong. Eight is the observation size. So
+it is okay. Can they all see Can every
+it is okay. Can they all see Can every
+agent see every other agent? Is that the
+agent see every other agent? Is that the
+intent?
+intent?
+They are not able to perceive each
+They are not able to perceive each
+other. No. Okay. So then why is the
+other. No. Okay. So then why is the
+observations agents?
+observations agents?
+Yeah. So the observations are just the
+Yeah. So the observations are just the
+current ant position for 0 and one. Uh
+current ant position for 0 and one. Uh
+two and three is the ant direction. Uh
+two and three is the ant direction. Uh
+this direction is always going to be
+this direction is always going to be
+because the wrap angle function between
+because the wrap angle function between
+negative pi and pi in radians. Yeah.
+negative pi and pi in radians. Yeah.
+Okay. So this just normalizes it to
+Okay. So this just normalizes it to
+between 0 and one. Remove remove times
+between 0 and one. Remove remove times
+self-num agents or whatever from the uh
+self-num agents or whatever from the uh
+Python.
+Python.
+Uh okay. So just eight. That's just
+Uh okay. So just eight. That's just
+eight brain. Okay. Ran that. Sounds
+eight brain. Okay. Ran that. Sounds
+good. Let's try it.
+Cool. So funny. It's so funny to see you
+Cool. So funny. It's so funny to see you
+getting 80,000 SPS on a CPU.
+getting 80,000 SPS on a CPU.
+That's funny. Is that high or low? To
+That's funny. Is that high or low? To
+give you an idea, before Puffer, when
+give you an idea, before Puffer, when
+people were training like on GPU and
+people were training like on GPU and
+SP3, like most of research was
+SP3, like most of research was
+proceeding at a tenth of this speed on
+proceeding at a tenth of this speed on
+GPUs,
+GPUs,
+right? Now, to be fair, you know, if I
+right? Now, to be fair, you know, if I
+were to run this on on GPU, this would
+were to run this on on GPU, this would
+be like two million steps a second or
+be like two million steps a second or
+whatever, but
+whatever, but
+Yeah, know this is this is uh the beauty
+Yeah, know this is this is uh the beauty
+of Puff Lib, right? I every so often
+of Puff Lib, right? I every so often
+it's just like ah yes, the high perk is
+it's just like ah yes, the high perk is
+good. I'm working on distributed
+good. I'm working on distributed
+training for us right now.
+training for us right now.
+Cool. Nice. One of the things I notice
+Cool. Nice. One of the things I notice
+is that the user stats of the score take
+is that the user stats of the score take
+a really long time to appear. Um, which
+a really long time to appear. Um, which
+is odd because if I run the C simulation
+is odd because if I run the C simulation
+in another, you got the stats working
+in another, you got the stats working
+even when they're behaving
+even when they're behaving
+randomly. Uh, yeah, they they do work
+randomly. Uh, yeah, they they do work
+like eventually it will actually log a
+like eventually it will actually log a
+score. Well, how's the log work in the
+score. Well, how's the log work in the
+Python?
+Python?
+Yeah. So the way that works
+Yeah. So the way that works
+is yeah we're using the veclog of the
+is yeah we're using the veclog of the
+nths and uh in here we've got this add
+nths and uh in here we've got this add
+log function which gets called and
+log function which gets called and
+tracks the score the score is getting
+tracks the score the score is getting
+incremented whenever uh the answer how
+incremented whenever uh the answer how
+many actually okay what's the report
+many actually okay what's the report
+interval
+interval
+report interval
+Uh, you mean how often do these logs
+Uh, you mean how often do these logs
+get? It's in It's in Python in the uh
+get? It's in It's in Python in the uh
+arguments the very top. Yeah. Yeah. One.
+arguments the very top. Yeah. Yeah. One.
+I changed it to one. Okay.
+I changed it to one. Okay.
+[Music]
+[Music]
+Um, yeah. Then that's definitely got to
+Um, yeah. Then that's definitely got to
+be like the ants not
+be like the ants not
+uh not logging super frequently. When do
+uh not logging super frequently. When do
+what does the trigger in C for calling
+what does the trigger in C for calling
+that log function? It's going to be the
+that log function? It's going to be the
+terminal, right?
+terminal, right?
+Yeah, exactly. When the ants die, which
+Yeah, exactly. When the ants die, which
+is uh I've set up this condition, the
+is uh I've set up this condition, the
+second one that you wrote, uh Dan, which
+second one that you wrote, uh Dan, which
+is Yeah. Um when the ants have exceeded
+is Yeah. Um when the ants have exceeded
+their lifetime, which is 100,000 time
+their lifetime, which is 100,000 time
+steps, they start to randomly die off
+steps, they start to randomly die off
+with.1% chance.
+with.1% chance.
+Oh, interesting. Oh, well then, yeah,
+Oh, interesting. Oh, well then, yeah,
+it's not that it takes forever, man.
+it's not that it takes forever, man.
+It's just that your training is super
+It's just that your training is super
+slow, so it takes a few million steps.
+slow, so it takes a few million steps.
+Like, that's a pretty rare condition.
+Like, that's a pretty rare condition.
+How many are how many Ms are running?
+How many are how many Ms are running?
+It's not going to actually be as fast as
+It's not going to actually be as fast as
+you might think. All like all the M's
+you might think. All like all the M's
+have all of the ants have to exceed
+have all of the ants have to exceed
+their lifetime. So it's numbum ants
+their lifetime. So it's numbum ants
+times lifetime
+times lifetime
+and then you know shortly after that.
+and then you know shortly after that.
+I see. So So if you if you want you
+I see. So So if you if you want you
+could make some live shorter and some
+could make some live shorter and some
+live you know longer if you wanted some
+live you know longer if you wanted some
+reporting. You could have them start at
+reporting. You could have them start at
+different lifetimes. You could have have
+different lifetimes. You could have have
+them start as old ants.
+They had no chance. But, you know, that
+They had no chance. But, you know, that
+that's kind of what I did with Enduro
+that's kind of what I did with Enduro
+because there was a weird Yeah, Enduro
+because there was a weird Yeah, Enduro
+is similar. It's just any it's anything
+is similar. It's just any it's anything
+that has like a really obnoxiously long
+that has like a really obnoxiously long
+uh horizon to it you kind of have to
+uh horizon to it you kind of have to
+mess with, right? So, you can you can
+mess with, right? So, you can you can
+start training at uh at various points
+start training at uh at various points
+in their lifetime and then have each
+in their lifetime and then have each
+ant's life each ant's reset proceed on
+ant's life each ant's reset proceed on
+its own. So in individually proceeding
+its own. So in individually proceeding
+so that they they maintain that uh
+so that they they maintain that uh
+offset that you've started them
+offset that you've started them
+with. That way you'll have consistent
+with. That way you'll have consistent
+logging throughout.
+logging throughout.
+Yeah. So they uh have a random lifetime
+Yeah. So they uh have a random lifetime
+start between zero and their total
+start between zero and their total
+lifetime when they'll start to die off.
+lifetime when they'll start to die off.
+Um work. See it. Try try running it. See
+Um work. See it. Try try running it. See
+if it if it reports the logs faster. I
+if it if it reports the logs faster. I
+see logs though. Oh, was that Yeah, it
+see logs though. Oh, was that Yeah, it
+was midun. It's not a huge deal. Did you
+was midun. It's not a huge deal. Did you
+What was there something appreciable you
+What was there something appreciable you
+changed to get them reporting or?
+changed to get them reporting or?
+Uh, no. The So, um, it was reporting
+Uh, no. The So, um, it was reporting
+before and I have changed a bunch of the
+before and I have changed a bunch of the
+observations. So, like, um, this used to
+observations. So, like, um, this used to
+be 12 different things, right? Yeah. Um,
+be 12 different things, right? Yeah. Um,
+I've brought it down to eight and I've
+I've brought it down to eight and I've
+commented out the sensing of
+commented out the sensing of
+pherommones. I really just want them to
+pherommones. I really just want them to
+be able to go to food and back to the
+be able to go to food and back to the
+colony for now and then we can implement
+colony for now and then we can implement
+pherommones afterwards. Yeah. Um, so
+pherommones afterwards. Yeah. Um, so
+I've simplified a lot of this and I've
+I've simplified a lot of this and I've
+written helper functions for some of it
+written helper functions for some of it
+so that I know that it's doing what I
+so that I know that it's doing what I
+expect because I can test these helper
+expect because I can test these helper
+functions with the C file. So that was
+functions with the C file. So that was
+kind of step one was making sure that
+kind of step one was making sure that
+these work. Okay, good. Yeah, that's
+these work. Okay, good. Yeah, that's
+good.
+good.
+Yeah. And then
+Yeah. And then
+um that plus um
+um that plus um
+the um this lifetime condition. I had
+the um this lifetime condition. I had
+this one before and the logs were still
+this one before and the logs were still
+appearing here, but um Okay. It would
+appearing here, but um Okay. It would
+take a while, right? Okay. So log so
+take a while, right? Okay. So log so
+logs always appeared for you though.
+logs always appeared for you though.
+Yeah. Yeah. Logs logs were appearing. Um
+Yeah. Yeah. Logs logs were appearing. Um
+yeah, before that it was like just a
+yeah, before that it was like just a
+problem with Neptune. Um you that might
+problem with Neptune. Um you that might
+be what you you were thinking of. I I
+be what you you were thinking of. I I
+felt, you know, I felt like I was
+felt, you know, I felt like I was
+running and I wasn't getting the user
+running and I wasn't getting the user
+stats appearing for whatever reason, at
+stats appearing for whatever reason, at
+least the code that I sent you to. It's
+least the code that I sent you to. It's
+very possible that there's a very small
+very possible that there's a very small
+thing that I did or didn't do and you
+thing that I did or didn't do and you
+just corrected it without even thinking
+just corrected it without even thinking
+about it. Possible way.
+Yeah. So, just so I get a sense of
+Yeah. So, just so I get a sense of
+shouldn't it be that since we've already
+shouldn't it be that since we've already
+crossed 2.0 0 million steps and the ants
+crossed 2.0 0 million steps and the ants
+lifetime is um 5,000 time steps that
+lifetime is um 5,000 time steps that
+they should have like died and been born
+they should have like died and been born
+again many times by now.
+again many times by now.
+Math out number of ants num m is 5,000.
+Math out number of ants num m is 5,000.
+Yeah. Uh the answer is maybe or maybe
+Yeah. Uh the answer is maybe or maybe
+not depending on if you yeah just
+not depending on if you yeah just
+compute it right and so uh you should be
+compute it right and so uh you should be
+seeing them if if you're starting them
+seeing them if if you're starting them
+at the ends of their lives and ad log is
+at the ends of their lives and ad log is
+being called quickly then you should see
+being called quickly then you should see
+some
+some
+I didn't listen to how many ants you
+I didn't listen to how many ants you
+have. How many ants do we uh how many
+have. How many ants do we uh how many
+ants total are there? Yeah. So right now
+ants total are there? Yeah. So right now
+there's only one environment and there's
+there's only one environment and there's
+32 ants per colony.
+32 ants per colony.
+64 total.
+64 total.
+Yeah. Well, hold on. Is that the number
+Yeah. Well, hold on. Is that the number
+of total ants or the number per colony?
+of total ants or the number per colony?
+Actually, let me in theh
+Actually, let me in theh
+file. I've messed up some of these.
+file. I've messed up some of these.
+Yeah, it could very easily be that it
+Yeah, it could very easily be that it
+takes a few million depending on how you
+takes a few million depending on how you
+have it defined.
+have it defined.
+Yeah, you also don't have enough ants if
+Yeah, you also don't have enough ants if
+you only have like 32 or what. Like the
+you only have like 32 or what. Like the
+thing can be training even on CPU can
+thing can be training even on CPU can
+probably be training at twice that speed
+probably be training at twice that speed
+with more agents. There was a I don't
+with more agents. There was a I don't
+know if this is a a bug or just uh an
+know if this is a a bug or just uh an
+oversight on on my part, but there was
+oversight on on my part, but there was
+an issue when I pumped the pump the ants
+an issue when I pumped the pump the ants
+uh like over a hundred. I I got a puffer
+uh like over a hundred. I I got a puffer
+bear.
+bear.
+Um I don't know if you've tried that,
+Um I don't know if you've tried that,
+Matan. Well, he had the wrong obace
+Matan. Well, he had the wrong obace
+wrong before.
+wrong before.
+Yeah, he he was like he was memory like
+Yeah, he he was like he was memory like
+you were just arbitrary right into
+you were just arbitrary right into
+memory with the obace before.
+memory with the obace before.
+Yeah. Told told you it wasn't perfect.
+Yeah. Told told you it wasn't perfect.
+Episode length that's 100,000 and1.
+Episode length that's 100,000 and1.
+Yeah. Bet single observation space is
+Yeah. Bet single observation space is
+observation space for a single agent.
+observation space for a single agent.
+Like that was the bug,
+right? Yeah. Yeah, that makes sense.
+right? Yeah. Yeah, that makes sense.
+That'll do it. Numb ants here. I would
+That'll do it. Numb ants here. I would
+call it agent observation space, but
+call it agent observation space, but
+like petting zoo defined that name. They
+like petting zoo defined that name. They
+they could have named it better. Well,
+they could have named it better. Well,
+it's in the it's in the doc it's in the
+it's in the it's in the doc it's in the
+documentation now. In your example, you
+documentation now. In your example, you
+You do specifically say that. So
+yeah. So numbum ants is this property of
+yeah. So numbum ants is this property of
+the environment which is the total
+the environment which is the total
+number of ants. So really this should be
+number of ants. So really this should be
+100 given that the number up here is 50
+100 given that the number up here is 50
+per colony.
+per colony.
+So what happens don't match is is one
+So what happens don't match is is one
+not getting passed or are they somehow
+not getting passed or are they somehow
+is it eight colonies because if it's 100
+is it eight colonies because if it's 100
+ants per colony times eight col then it
+ants per colony times eight col then it
+would be like 4 million
+would be like 4 million
+where else am I I'm not using max ants
+where else am I I'm not using max ants
+per colony anywhere else actually. So
+per colony anywhere else actually. So
+really it's they should be relying on
+really it's they should be relying on
+num adance. So that shouldn't be causing
+num adance. So that shouldn't be causing
+if you're just going to if you're just
+if you're just going to if you're just
+going to hardcode the number
+going to hardcode the number
+then yeah other otherwise if you if you
+then yeah other otherwise if you if you
+if you are going to pass it from Python
+if you are going to pass it from Python
+you should.
+you should.
+Yeah it seems like I'm not using this
+Yeah it seems like I'm not using this
+constant anywhere. Get rid of that
+constant anywhere. Get rid of that
+constant then you make it a uh
+constant then you make it a uh
+initialize it in your your antstruct
+initialize it in your your antstruct
+uh
+uh
+Yeah, that's your then then uh it'll ask
+Yeah, that's your then then uh it'll ask
+it's getting initialized in the end and
+it's getting initialized in the end and
+then um
+then um
+init it's okay. So you've you've already
+init it's okay. So you've you've already
+got it in there. So that that basically
+got it in there. So that that basically
+that concept was just there and doing
+that concept was just there and doing
+nothing. Okay. Yeah. Yeah.
+Yeah. Yeah. So that shouldn't be causing
+Yeah. Yeah. So that shouldn't be causing
+an issue. So there's no reason to stop
+an issue. So there's no reason to stop
+this this run. And it seems like it's
+this this run. And it seems like it's
+tracking score right now. Also, we can
+tracking score right now. Also, we can
+see Oh. Oh, we have we have a Neptune
+see Oh. Oh, we have we have a Neptune
+convert or another Neptune user. Joseph
+convert or another Neptune user. Joseph
+Neptune. Pretty nice. At least until
+Neptune. Pretty nice. At least until
+they decide to move the free tier.
+Hopefully not too bad. 4.5 is not not
+Hopefully not too bad. 4.5 is not not
+great though, right? Are they is that
+great though, right? Are they is that
+good? Is that a good score?
+good? Is that a good score?
+Uh yeah. So I mean 4.5 is definitely a
+Uh yeah. So I mean 4.5 is definitely a
+huge improvement over the like
+huge improvement over the like
+0.04 things that I was getting uh before
+0.04 things that I was getting uh before
+I made all these changes to the
+I made all these changes to the
+observation. Go run it like go render
+observation. Go run it like go render
+it. What are they doing?
+it. What are they doing?
+Um can I run it? Can I render it in the
+Um can I run it? Can I render it in the
+middle of a training run? Once once a
+middle of a training run? Once once a
+Well, you can wait for a model file is
+Well, you can wait for a model file is
+saved then yes. Yeah, I have to wait.
+saved then yes. Yeah, I have to wait.
+Yeah, you can in a different window once
+Yeah, you can in a different window once
+you have the first checkpoint or
+you have the first checkpoint or
+whatever.
+whatever.
+And are you doing the lo local
+And are you doing the lo local
+compilation or you can you can doesn't
+compilation or you can you can doesn't
+really matter how you render it.
+really matter how you render it.
+Yeah. So this is run 26. So Oh, look at
+Yeah. So this is run 26. So Oh, look at
+that. There are some things being saved
+that. There are some things being saved
+in here. Yeah, I've been running some
+in here. Yeah, I've been running some
+experiments. There you go. Just grab
+experiments. There you go. Just grab
+grab one. You can grab the latest one
+grab one. You can grab the latest one
+there. You can you can eval
+there. You can you can eval
+it. It shouldn't be that expensive to
+it. It shouldn't be that expensive to
+run an eval while training.
+run an eval while training.
+[Music]
+experiments
+experiments
+model
+model
+[Music]
+0000763.t Oh, command not found
+puffer. Did I miss Yeah, I missed that.
+puffer. Did I miss Yeah, I missed that.
+uh
+underscore
+underscore
+and that's strange size mismatch.
+Did you you didn't change the you don't
+Did you you didn't change the you don't
+have a custom network, do you?
+have a custom network, do you?
+No, you're just using the standard
+No, you're just using the standard
+whatever was with ocean preference
+whatever was with ocean preference
+policy recurrent. That looks right.
+policy recurrent. That looks right.
+Yeah.
+Um,
+Um,
+that's weird. Yeah, I don't know what is
+that's weird. Yeah, I don't know what is
+causing that exactly saying.
+causing that exactly saying.
+That should just run. Uh, you didn't you
+That should just run. Uh, you didn't you
+didn't pass any uh argument on the
+didn't pass any uh argument on the
+command line, did you? That was weird.
+command line, did you? That was weird.
+Preference load
+Preference load
+model CPU. I mean, all that looks fine.
+model CPU. I mean, all that looks fine.
+What do you say, Joseph?
+Look at his error
+Look at his error
+model path. This is he just ran an eval
+model path. This is he just ran an eval
+or tried to run an eval of the latest?
+or tried to run an eval of the latest?
+Uh, you sure? Get this runtime error.
+Uh, you sure? Get this runtime error.
+You sure that's your current run? You
+You sure that's your current run? You
+didn't change the OB size or anything,
+didn't change the OB size or anything,
+did you? It looks like this is the
+did you? It looks like this is the
+current run actually. Okay, there you
+current run actually. Okay, there you
+go. Load that current one then. It's
+go. Load that current one then. It's
+different OB size probably. Usually
+different OB size probably. Usually
+that's just the wrong model
+that
+28 model
+00200. All right, here they go. Here
+00200. All right, here they go. Here
+they go. And they're off.
+That was not bad. One of them just
+That was not bad. One of them just
+brought food back in a reasonable amount
+brought food back in a reasonable amount
+of time. Yeah, I think that might have
+of time. Yeah, I think that might have
+been random though. It seems like it
+been random though. It seems like it
+was. Yeah, because now they're passing
+was. Yeah, because now they're passing
+by the food sources and they're not
+by the food sources and they're not
+picking them up. It's funny as as
+picking them up. It's funny as as
+I I'm as I'm running my uh you know, I
+I I'm as I'm running my uh you know, I
+spent I spent an evening uh I spent I
+spent I spent an evening uh I spent I
+spent a night making cool graphics and
+spent a night making cool graphics and
+such with this. And uh I noticed
+such with this. And uh I noticed
+sometimes one colony would do pretty
+sometimes one colony would do pretty
+well.
+well.
+It's just random though. Like uh I think
+It's just random though. Like uh I think
+the red colony was for whatever reason
+the red colony was for whatever reason
+favored uh due to like placing her or
+favored uh due to like placing her or
+whatever. Yeah, red red's red's getting
+whatever. Yeah, red red's red's getting
+some food. They're not they're not
+some food. They're not they're not
+learning though. Uh yeah. No, they
+learning though. Uh yeah. No, they
+haven't figured this out. This is this
+haven't figured this out. This is this
+is just random. They're just going
+is just random. They're just going
+everywhere, right?
+everywhere, right?
+And they
+And they
+Yeah. So, um, I can confirm that they
+Yeah. So, um, I can confirm that they
+can see the food because when I run,
+can see the food because when I run,
+they get relative position to food or
+they get relative position to food or
+like they run straight to it. Yeah. So,
+like they run straight to it. Yeah. So,
+I'll show you how that works in the
+I'll show you how that works in the
+observation.
+observation.
+So, it says um find the closest visible
+So, it says um find the closest visible
+food, right? Uh I have this function
+food, right? Uh I have this function
+called is in vision which is basically
+called is in vision which is basically
+just checking if the distance squared
+just checking if the distance squared
+between the ants position and the food
+between the ants position and the food
+source position is uh less than the
+source position is uh less than the
+distance squared of the ants range of
+distance squared of the ants range of
+sight which I think is 500 right now.
+sight which I think is 500 right now.
+Yeah.
+Yeah.
+Um,
+Um,
+and so it's basically saying find the
+and so it's basically saying find the
+closest food source that is within its
+closest food source that is within its
+range of vision and uh return its
+range of vision and uh return its
+position in this closest food position
+position in this closest food position
+vector. Yeah, but that's it.
+vector. Yeah, but that's it.
+Get the angle. Okay, but then
+Get the angle. Okay, but then
+what's wait the closest food position?
+what's wait the closest food position?
+How does that get into the ops?
+How does that get into the ops?
+Uh, right here. Oh, okay. It's getting
+Uh, right here. Oh, okay. It's getting
+giving it's giving the angle and the
+giving it's giving the angle and the
+distance to that uh nearest
+food otherwise closest food position
+food otherwise closest food position
+will be zero and then um oh hold on that
+will be zero and then um oh hold on that
+could be an issue so I'm guessing
+could be an issue so I'm guessing
+actually this should be normalized in
+actually this should be normalized in
+some way where if it is not in its range
+some way where if it is not in its range
+range. If there's no food in its range
+range. If there's no food in its range
+of sight, this observation should be
+of sight, this observation should be
+zero or one, right?
+zero or one, right?
+Is obs a float?
+Is obs a float?
+Um,
+Um,
+obs. No, it's an array. Yeah, I mean,
+obs. No, it's an array. Yeah, I mean,
+it's an array of of float 32s. Yeah, set
+it's an array of of float 32s. Yeah, set
+to like negative one or something maybe.
+to like negative one or something maybe.
+Yeah. Okay. So, yeah, let me think about
+Yeah. Okay. So, yeah, let me think about
+how that works. So vector to the closest
+how that works. So vector to the closest
+food position is 0
+food position is 0
+0. Yep.
+0. Yep.
+And okay
+And okay
+if distance
+squares. Okay. So at the end of this for
+squares. Okay. So at the end of this for
+loop
+loop
+um
+um
+if
+if
+closest
+closest
+position equals 0 0
+position equals 0 0
+um
+um
+then I'll do I'm doing this in Python
+then I'll do I'm doing this in Python
+syntax
+but Yep.
+And same with this. Yep.
+And same with this. Yep.
+Otherwise, why is this an
+error? How do you do an equivalence
+error? How do you do an equivalence
+check between 2D vectors?
+check between 2D vectors?
+You check the components.
+You check the components.
+Okay.
+Okay.
+Uh if closest two vectors are you using
+Uh if closest two vectors are you using
+rail vectors
+rail vectors
+uh vector 2D is uh strct that I've been
+uh vector 2D is uh strct that I've been
+using. That's fine then. Yeah. If that's
+using. That's fine then. Yeah. If that's
+your struck then yeah you just the
+your struck then yeah you just the
+components.
+components.
+Yeah. Okay.
+Yeah. Okay.
+So [ __ ]
+off.
+Cool. Okay. Yeah. So now if the closest
+Cool. Okay. Yeah. So now if the closest
+food position was never found then it
+food position was never found then it
+will set these to negative
+one. Cool.
+one. Cool.
+Um, all right. What's going on in
+here? This
+graph. Okay, it seems to be going up.
+graph. Okay, it seems to be going up.
+This is the first time I've seen it go
+This is the first time I've seen it go
+get above five, which is
+cool.
+cool.
+Um, what do you guys think? Should we
+Um, what do you guys think? Should we
+shut it down and run it
+again? Let's do it.
+Definitely does something. Just
+the MX. Screw
+it. Should be able to do
+Are any of these loss um metrics useful?
+Um I mean, yeah, they're useful, but
+Um I mean, yeah, they're useful, but
+like depends what you're trying to do
+like depends what you're trying to do
+with them.
+with them.
+Not like this second. It's not It's not
+Not like this second. It's not It's not
+like turning it all up.
+like turning it all up.
+Yeah, that that makes sense, I guess.
+Yeah, that that makes sense, I guess.
+Um, is there a way for me to interpret
+Um, is there a way for me to interpret
+them through this uh through you've got
+them through this uh through you've got
+Yeah, if any of them if any of them
+Yeah, if any of them if any of them
+explode, you start asking questions.
+You know, your environment should be
+You know, your environment should be
+like working and and functioning.
+like working and and functioning.
+Like the thing with RL, right, is that
+Like the thing with RL, right, is that
+the policy loss. there's like a
+the policy loss. there's like a
+divergence term. It kind of just tells
+divergence term. It kind of just tells
+you how far the policy is off from the
+you how far the policy is off from the
+previous policy like KL and stuff.
+previous policy like KL and stuff.
+Doesn't tell you like there's not like a
+Doesn't tell you like there's not like a
+global
+global
+loss. Um
+yeah, I see. Ultimately, that's going to
+yeah, I see. Ultimately, that's going to
+be score. Yeah, exactly.
+be score. Yeah, exactly.
+Got
+Got
+it. All right. Well, there's some score.
+Score high, score low, score three.
+Score high, score low, score three.
+Yeah, three is not
+Yeah, three is not
+bad. Like I said, I was getting way
+bad. Like I said, I was getting way
+below one until recently. Whoa, look at
+below one until recently. Whoa, look at
+that. Oh, wait. That's agent steps.
+that. Oh, wait. That's agent steps.
+Yeah, agent steps will just keep going
+Yeah, agent steps will just keep going
+up. Ding. If only this was score. That
+up. Ding. If only this was score. That
+would be beautiful.
+would be beautiful.
+I see Perf down there.
+I see Perf down there.
+Perf score. Any
+Perf score. Any
+difference
+difference
+yet. I think since I've set the
+um number the lifetime to 5,000
+um number the lifetime to 5,000
+uh it'll take at most 5,000 time steps
+uh it'll take at most 5,000 time steps
+for all the ants to die. And so it's
+for all the ants to die. And so it's
+going to
+going to
+take well it took 50 epochs for the
+take well it took 50 epochs for the
+first one to appear. So maybe by the
+first one to appear. So maybe by the
+time we get to 100, we'll see the next.
+time we get to 100, we'll see the next.
+Now, do your do your environments reset
+Now, do your do your environments reset
+per ant?
+per ant?
+Uh no, the environment doesn't reset
+Uh no, the environment doesn't reset
+every ant. It resets uh when all the
+every ant. It resets uh when all the
+terminal conditions have been reached, I
+terminal conditions have been reached, I
+think, because because the the way to
+think, because because the the way to
+get the numbers faster is to have reset
+get the numbers faster is to have reset
+per ant maintaining that offset that you
+per ant maintaining that offset that you
+started at.
+Yeah. So when does C reset get called?
+Yeah. So when does C reset get called?
+When terminal
+uh and at the beginning automatically.
+Okay. Yeah, at the beginning makes
+Okay. Yeah, at the beginning makes
+sense. And then when all the terminals
+sense. And then when all the terminals
+are one, it'll get called. I don't need
+are one, it'll get called. I don't need
+to add that anywhere. Yeah. No, you
+to add that anywhere. Yeah. No, you
+don't need to add it. It automatically
+don't need to add it. It automatically
+will get called. Okay. Um, but it's
+will get called. Okay. Um, but it's
+uh to to do it to do it per agent, you
+uh to to do it to do it per agent, you
+have to do a little
+uh some a little tricky stuff. You have
+uh some a little tricky stuff. You have
+to you have to make sure that they are
+to you have to make sure that they are
+respecting their individual resets. So
+respecting their individual resets. So
+you can call a you can manually call a
+you can call a you can manually call a
+reset anytime you want. You can manually
+reset anytime you want. You can manually
+call it for a specific agent if you want
+call it for a specific agent if you want
+to do
+to do
+that. So you can manually call reset
+that. So you can manually call reset
+when that agent's
+when that agent's
+terminal is reached.
+terminal is reached.
+I guess why would we reset it when only
+I guess why would we reset it when only
+the first ant has died?
+the first ant has died?
+Like suppose that ant's going to go on
+Like suppose that ant's going to go on
+and and and start training, right? So
+and and and start training, right? So
+you're going to have ants at all all
+you're going to have ants at all all
+stages of of play
+stages of of play
+throughout.
+throughout.
+Uh learning will be uh accelerated
+Uh learning will be uh accelerated
+should
+should
+be it'll be I'm not sure I understand.
+be it'll be I'm not sure I understand.
+Yeah. If you check maybe maybe just look
+Yeah. If you check maybe maybe just look
+at enduro this I did this in enduro.
+at enduro this I did this in enduro.
+Yeah. So, let's see. That's in Yeah.
+Yeah. So, let's see. That's in Yeah.
+Enduro. Yeah. In the enduro.h. Yeah.
+Sorry. There's a lot. And I've
+Sorry. There's a lot. And I've
+Yeah. So, you declare it here, but
+Yeah. So, you declare it here, but
+you're not calling it in theh anywhere.
+Yeah. So it gets called for terminal the
+um and it's
+um and it's
+called and and there I'm tracking the
+called and and there I'm tracking the
+resets too.
+resets too.
+Go go go go go scroll scroll down to
+the scroll down to the step to see like
+the scroll down to the step to see like
+what's
+actually there's a whole bunch of logic
+actually there's a whole bunch of logic
+right? Yep. So,
+right? Yep. So,
+um, they get their their their time time
+um, they get their their their time time
+of day and there's their
+of day and there's their
+terminals and then go
+down. That's just uh the movement
+down. That's just uh the movement
+calculation.
+calculation.
+Uh, go down. There's
+Uh, go down. There's
+collision. Keep going. There's don't hit
+collision. Keep going. There's don't hit
+the edge, don't hit
+the edge, don't hit
+cars.
+cars.
+Uh, there's reward
+Uh, there's reward
+stuff. Then we get down
+to there's stay within the lines. Keep
+to there's stay within the lines. Keep
+going down. That's compute the edges of
+going down. That's compute the edges of
+the road.
+the road.
+Uh there's
+Uh there's
+some nuanced
+some nuanced
+Atari
+Atari
+behavior crashing enemy enemy
+behavior crashing enemy enemy
+cars go zoom. Keep going.
+Um there's the crashing logic. Keep
+Um there's the crashing logic. Keep
+going.
+Uh, collision.
+If I build this from the ocean, can I
+If I build this from the ocean, can I
+just play the game? Keep going. Yeah,
+just play the game? Keep going. Yeah,
+you can.
+you can.
+Um, yeah, keep
+Um, yeah, keep
+going. Yes, you can just play it.
+going. Yes, you can just play it.
+And all right, there's a day completed
+And all right, there's a day completed
+logic. So, day day completing is uh is
+logic. So, day day completing is uh is
+the end basically. So when a day is
+the end basically. So when a day is
+completed, that's uh that's a
+completed, that's uh that's a
+uh a terminal condition. Um
+so uh but but but but it doesn't it
+so uh but but but but it doesn't it
+doesn't so it is it only calls terminal
+doesn't so it is it only calls terminal
+if they've failed. It doesn't call it
+if they've failed. It doesn't call it
+won't be a terminal condition if they
+won't be a terminal condition if they
+have succeeded. However, there's a soft
+have succeeded. However, there's a soft
+reset that's called
+reset that's called
+uh for for resetting the the day itself
+uh for for resetting the the day itself
+because once you pass the requisite
+because once you pass the requisite
+number of cars, you've passed that day
+number of cars, you've passed that day
+in the in the game and then but you
+in the in the game and then but you
+still have to play for the whole day's
+still have to play for the whole day's
+duration. Uh the the reset will
+duration. Uh the the reset will
+uh basically a reset is a a punishment
+uh basically a reset is a a punishment
+for not finishing the the day. So, uh,
+for not finishing the the day. So, uh,
+those ones that fail get reset while
+those ones that fail get reset while
+those ones that did not fail, uh, get
+those ones that did not fail, uh, get
+soft reset. So, they they don't they
+soft reset. So, they they don't they
+don't lose,
+don't lose,
+uh, out on out on continue
+uh, out on out on continue
+reward. So, here's that makes sense.
+reward. So, here's that makes sense.
+Here's the day transition that that I'm
+Here's the day transition that that I'm
+handling it. So, this is that right
+handling it. So, this is that right
+there is rolling the day
+there is rolling the day
+uh rolling the day transition.
+uh rolling the day transition.
+Um, scroll down. Player failed to pass
+Um, scroll down. Player failed to pass
+required car. So there's the there's the
+required car. So there's the there's the
+reset. Uh, so I set terminals to true
+reset. Uh, so I set terminals to true
+there. But see, it's only it's only if
+there. But see, it's only it's only if
+they meet that that or if they did not
+they meet that that or if they did not
+meet the condition that they passed
+meet the condition that they passed
+enough
+enough
+cars. So there reset round is my my
+cars. So there reset round is my my
+reset my actual reset function. that
+reset my actual reset function. that
+that other reset function is just the
+that other reset function is just the
+thing that runs once.
+thing that runs once.
+Got it. Yeah. So So go look at reset
+Got it. Yeah. So So go look at reset
+round then.
+Yeah, that's what I am. Sorry. I forward
+Yeah, that's what I am. Sorry. I forward
+declared everything. All right. There's
+declared everything. All right. There's
+the real the real
+the real the real
+reset. So I'm I'm I've I've just defined
+reset. So I'm I'm I've I've just defined
+my own reset basically.
+Yeah. And so this is all this these are
+Yeah. And so this is all this these are
+basic basically I'm just everything
+basic basically I'm just everything
+that any any uh uh state data that would
+that any any uh uh state data that would
+currently be
+currently be
+uh present I'm resetting
+uh present I'm resetting
+here. So basically every single variable
+here. So basically every single variable
+uh just about every single
+uh just about every single
+variable and and the
+variable and and the
+rewards you see uh so see how I'm
+rewards you see uh so see how I'm
+tracking the separate v
+tracking the separate v
+values just tracking them with m
+values just tracking them with m
+variables and then uh
+variables and then uh
+um when
+um when
+they're when logs are ready to be called
+they're when logs are ready to be called
+then I uh copy them over to
+then I uh copy them over to
+logs. Yep. So there's the RNG state even
+logs. Yep. So there's the RNG state even
+preserved. So So yeah. So this
+preserved. So So yeah. So this
+soft this soft resetting
+soft this soft resetting
+will will allow the environments that
+will will allow the environments that
+fail to continue to go. Yeah, that makes
+fail to continue to go. Yeah, that makes
+sense. So they'll start over. The other
+sense. So they'll start over. The other
+ones will just keep going and they they
+ones will just keep going and they they
+will not hit the soft reset.
+will not hit the soft reset.
+when they fail they'll hit the soft
+when they fail they'll hit the soft
+reset too and go over. So
+reset too and go over. So
+yeah, that makes sense. I guess in the
+yeah, that makes sense. I guess in the
+case of the ants, the thing is we now
+case of the ants, the thing is we now
+have it where the lifetime is being
+have it where the lifetime is being
+initialized randomly, right? So suppose
+initialized randomly, right? So suppose
+the lifetime gets initially randomized
+the lifetime gets initially randomized
+to
+4,999.9 then the next time step it dies.
+4,999.9 then the next time step it dies.
+Yeah, it does. And now the whole thing
+Yeah, it does. And now the whole thing
+gets reset, right? And now none of the
+gets reset, right? And now none of the
+other ants got the opportunity or it
+other ants got the opportunity or it
+just doesn't do anything
+just doesn't do anything
+possibly. I don't know. Right. Right now
+possibly. I don't know. Right. Right now
+it doesn't do anything, which I think
+it doesn't do anything, which I think
+makes more sense. Well, it might it So
+makes more sense. Well, it might it So
+you can call a soft reset for the ones
+you can call a soft reset for the ones
+that
+that
+die, have them continue. So, I guess the
+die, have them continue. So, I guess the
+soft reset would just be return the ant
+soft reset would just be return the ant
+to uh the colony and then
+to uh the colony and then
+um cuz the ants like don't have that
+um cuz the ants like don't have that
+much stuff attached to them. They've got
+much stuff attached to them. They've got
+their lifetime. So, just reset its
+their lifetime. So, just reset its
+lifetime to zero. If it was carrying
+lifetime to zero. If it was carrying
+food, it's no longer carrying food. And
+food, it's no longer carrying food. And
+then randomize its direction and make
+then randomize its direction and make
+its position the calling.
+its position the calling.
+Initialize its lifetime to whatever its
+Initialize its lifetime to whatever its
+lifetime is going to be. I think if it's
+lifetime is going to be. I think if it's
+Yeah, that's true. It'll just be dead
+Yeah, that's true. It'll just be dead
+again. But yeah, uh no, zero will mean
+again. But yeah, uh no, zero will mean
+it'll have a full lifetime ahead of it
+it'll have a full lifetime ahead of it
+if we set the lifime close to 5,000.
+if we set the lifime close to 5,000.
+Just basically reinitialize reinitialize
+Just basically reinitialize reinitialize
+the things that make sense to to
+the things that make sense to to
+reinitialize.
+reinitialize.
+Yeah. Yeah, that makes
+Yeah. Yeah, that makes
+sense. Let's look at this graph.
+sense. Let's look at this graph.
+It should be going up. It is. This is
+not the worst graph I've seen. I mean, I
+not the worst graph I've seen. I mean, I
+I'
+I'
+I'd expect it to be doing more. That
+I'd expect it to be doing more. That
+being said, you could just the way you
+being said, you could just the way you
+have it structured right now could just
+have it structured right now could just
+be very very slow. And it is actually
+be very very slow. And it is actually
+looking good. Uh um yeah, the enduro
+looking good. Uh um yeah, the enduro
+curve is basically a bunch of stairs.
+curve is basically a bunch of stairs.
+That's cool.
+That's cool.
+Yeah, let's hopefully get it there soon.
+Yeah, let's hopefully get it there soon.
+But what do you think it could be that
+But what do you think it could be that
+is like slowing that down, right? Like I
+is like slowing that down, right? Like I
+think the behavior we're trying to get
+think the behavior we're trying to get
+is relatively simple. We don't even have
+is relatively simple. We don't even have
+the pherommones enabled. It's just go to
+the pherommones enabled. It's just go to
+the food and pick it up. They can't find
+the food and pick it up. They can't find
+the they don't know the food. They don't
+the they don't know the food. They don't
+know what they don't know what they're
+know what they don't know what they're
+supposed to be doing or they're not
+supposed to be doing or they're not
+getting a good reward signal. One of the
+getting a good reward signal. One of the
+two. or they they can't see it. So I
+two. or they they can't see it. So I
+suppose I mean 500 is a pretty big range
+suppose I mean 500 is a pretty big range
+of sight. I could increase their range
+of sight. I could increase their range
+of sight.
+of sight.
+Um and that's the thing like their range
+Um and that's the thing like their range
+of sight is the same in the scripted
+of sight is the same in the scripted
+behavior. Do they need range of sight?
+behavior. Do they need range of sight?
+Just just tell them where the stuff is.
+Just just tell them where the stuff is.
+We could do that. Yeah. Yeah.
+We could do that. Yeah. Yeah.
+Maybe let's do that next. Yeah. Tell
+Maybe let's do that next. Yeah. Tell
+them right where it is. They should they
+them right where it is. They should they
+should go out and get it. uh once one
+should go out and get it. uh once one
+realizes that it gets a reward. So the
+realizes that it gets a reward. So the
+first one that accidentally returns it
+first one that accidentally returns it
+will be a that
+will be a that
+should should be uh enough signal for
+should should be uh enough signal for
+for something to happen with the policy.
+for something to happen with the policy.
+uh or you put in rewards
+uh or you put in rewards
+uh that are
+uh that are
+uh more more dense so that you're
+uh more more dense so that you're
+rewarding behaviors that lead to that
+rewarding behaviors that lead to that
+end reward like moving towards the food
+end reward like moving towards the food
+for instance
+then when they have a sorry could you
+then when they have a sorry could you
+say that again about dense reward dense
+say that again about dense reward dense
+reward can help you
+reward can help you
+get get sparse training going
+get get sparse training going
+training. That was one of the things I
+training. That was one of the things I
+was thinking about is maybe we should
+was thinking about is maybe we should
+add to the observation uh or sorry to
+add to the observation uh or sorry to
+the rewards a small reward for being
+the rewards a small reward for being
+pointed towards food if you are um yeah
+pointed towards food if you are um yeah
+just pointed you can reward them for
+just pointed you can reward them for
+moving moving towards the food. Yeah.
+moving moving towards the food. Yeah.
+Yeah.
+Yeah.
+Yeah. Make the reward more dense could
+Yeah. Make the reward more dense could
+be reward for grabbing the food. The
+be reward for grabbing the food. The
+thing is you shouldn't need to. It's a
+thing is you shouldn't need to. It's a
+really easy problem like the
+really easy problem like the
+like if you look at the convert
+like if you look at the convert
+environment that trains in 30 seconds
+environment that trains in 30 seconds
+like
+like
+we're just telling it where the nearest
+we're just telling it where the nearest
+star is. It needs to figure out which
+star is. It needs to figure out which
+color star it even wants to get. Um
+my guess is how many like how many steps
+my guess is how many like how many steps
+does it
+does it
+take to get to the food?
+take to get to the food?
+Yeah, it shouldn't take this long, which
+Yeah, it shouldn't take this long, which
+is why I was No, actually, how many how
+is why I was No, actually, how many how
+fast do they move? How many steps does
+fast do they move? How many steps does
+it take to get to the food? Depends on
+it take to get to the food? Depends on
+where the food is relative to the
+where the food is relative to the
+colony. How long does it take to get
+colony. How long does it take to get
+across the screen?
+across the screen?
+Um, not long. I mean, they're moving at
+Um, not long. I mean, they're moving at
+a rate of uh what's the ant speed? I've
+a rate of uh what's the ant speed? I've
+set that as a constant here.
+They're moving uh one every
+They're moving uh one every
+uh step. Uh the total width of the
+uh step. Uh the total width of the
+window is 1280. So it should take them
+window is 1280. So it should take them
+1280 ticks to cross the whole screen.
+1280 ticks to cross the whole screen.
+Multiply their speed by like five or 10
+Multiply their speed by like five or 10
+and then rerun it.
+and then rerun it.
+I could try that.
+Yeah, we'll try.
+But yeah, I mean when I am running the
+But yeah, I mean when I am running the
+uh test version, right, and I have shift
+uh test version, right, and I have shift
+held down, they can see the food in
+held down, they can see the food in
+their range of vision, point themselves
+their range of vision, point themselves
+towards it, and point themselves back
+towards it, and point themselves back
+with pretty good
+with pretty good
+consistency.
+consistency.
+Right? And I'm using the same helper
+Right? And I'm using the same helper
+functions that I'm using in the
+functions that I'm using in the
+observation. Um, try the speed thing.
+observation. Um, try the speed thing.
+Yeah.
+Yeah.
+Yeah, I'll do that.
+Yeah, I'll do that.
+Take like a minute.
+Take like a minute.
+And yeah, this is about how fast they're
+And yeah, this is about how fast they're
+moving around the screen. This ant that
+moving around the screen. This ant that
+Yeah, but the thing is behind is the one
+Yeah, but the thing is behind is the one
+I'm in control of. Yeah. Like
+I'm in control of. Yeah. Like
+exploration becomes a hard problem when
+exploration becomes a hard problem when
+it takes them a ton of steps to get
+it takes them a ton of steps to get
+anywhere.
+anywhere.
+Mhm. But like literally just like
+Mhm. But like literally just like
+reducing the velocity, it actually makes
+reducing the velocity, it actually makes
+the problem fundamentally and
+the problem fundamentally and
+exponentially harder.
+exponentially harder.
+Yeah. Yeah. Makes makes if you don't if
+Yeah. Yeah. Makes makes if you don't if
+like the like you can solve this
+like the like you can solve this
+immediately with the rewards and stuff,
+immediately with the rewards and stuff,
+but like it like you have to actually do
+but like it like you have to actually do
+that stuff correctly. So like try this
+that stuff correctly. So like try this
+because like that'll just tell you
+because like that'll just tell you
+whether this was the issue or
+not. Common just RL playbook.
+Glad I have you guys here on the Discord
+Glad I have you guys here on the Discord
+to help me with that kind of stuff.
+to help me with that kind of stuff.
+Yeah, I'm going nuts here trying to
+Yeah, I'm going nuts here trying to
+figure out what the heck is wrong with
+figure out what the heck is wrong with
+the radian. Sweep still. What? Sweep
+the radian. Sweep still. What? Sweep
+sweep still or did you No, I I haven't
+sweep still or did you No, I I haven't
+fixed that either, but I'm trying to do
+fixed that either, but I'm trying to do
+distributed data parallel right now. Ah,
+distributed data parallel right now. Ah,
+that sounds like a headache. Yeah, I'll
+that sounds like a headache. Yeah, I'll
+be right back. It's best for me to get
+be right back. It's best for me to get
+clips in back.
+that you can you can also you can also
+that you can you can also you can also
+break this problem down into smaller
+break this problem down into smaller
+problems. You don't need look you don't
+problems. You don't need look you don't
+need to reward you don't need it to be a
+need to reward you don't need it to be a
+full a full circle. They get they go out
+full a full circle. They get they go out
+they get food they come back. You could
+they get food they come back. You could
+just reward them for getting food and
+just reward them for getting food and
+then that's it.
+then that's it.
+They just come back food but then the
+They just come back food but then the
+end. Yeah. It seems like it should be a
+end. Yeah. It seems like it should be a
+solvable problem to get them to come
+solvable problem to get them to come
+back as well, right? I completely agree.
+back as well, right? I completely agree.
+It should be should be pretty easy. So
+It should be should be pretty easy. So
+there's pro probably Did you Did you
+there's pro probably Did you Did you
+change the speed? I did. I updated it.
+change the speed? I did. I updated it.
+I'm going to let this training run
+I'm going to let this training run
+finish. And yeah, look at how this
+finish. And yeah, look at how this
+crashes at the end. I don't understand
+crashes at the end. I don't understand
+why it keeps doing that. Well, it's it's
+why it keeps doing that. Well, it's it's
+not working. It's It's broke. It's like
+not working. It's It's broke. It's like
+fundamentally broken. That's why it's
+fundamentally broken. That's why it's
+not doing stuff. It should be looking
+not doing stuff. It should be looking
+like an actual curve. Like
+like an actual curve. Like
+it should pick up the policy should pick
+it should pick up the policy should pick
+up on the signal. Unless you have no
+up on the signal. Unless you have no
+signal. You're giving them rewards,
+signal. You're giving them rewards,
+right? I am. Yeah. I mean, uh, I've got
+food, delivery, and death. Oh.
+food, delivery, and death. Oh.
+Yeah. Negative one is the death reward,
+Yeah. Negative one is the death reward,
+but that shouldn't impact the score
+but that shouldn't impact the score
+unless they're all dead. You never know.
+unless they're all dead. You never know.
+Get rid of the negative reward. Just put
+Get rid of the negative reward. Just put
+that to zero for now. Okay.
+that to zero for now. Okay.
+And so so they're only getting rewarded
+And so so they're only getting rewarded
+for two things.
+So they just wand so they wander they
+So they just wand so they wander they
+wander around until they find a food run
+wander around until they find a food run
+into a food which they do run into foods
+into a food which they do run into foods
+pretty often.
+pretty often.
+So then they get the reward. Uh but then
+So then they get the reward. Uh but then
+they have to they have to wander around
+they have to they have to wander around
+till they run into the home base again.
+till they run into the home base again.
+Yes.
+Yes.
+So otherwise they're they won't get a
+So otherwise they're they won't get a
+second reward. So until they until
+second reward. So until they until
+sufficient number of
+sufficient number of
+them are that have food are running into
+them are that have food are running into
+the base as well then they're not going
+the base as well then they're not going
+to be getting that signal. Uh right now
+to be getting that signal. Uh right now
+from from watching the evaluation I
+from from watching the evaluation I
+don't think that's happening very often.
+don't think that's happening very often.
+Right. So you're probably not they're
+Right. So you're probably not they're
+not getting any reward signal. So what
+not getting any reward signal. So what
+they're what what what they would be
+they're what what what they would be
+doing would be wandering around because
+doing would be wandering around because
+that's where they got the
+reward, but they're they're not direct,
+reward, but they're they're not direct,
+you know, they're not directed, right?
+you know, they're not directed, right?
+They're not going to the to a place,
+They're not going to the to a place,
+right? Uh do they have homebased obs?
+right? Uh do they have homebased obs?
+Yeah, they do. So it's in their
+Yeah, they do. So it's in their
+observations. Uh they can
+observations. Uh they can
+see the angle and uh pos relative
+see the angle and uh pos relative
+position to their colony.
+angle colony position
+angle colony position
+angle and distance I should say.
+Are these obs normalized?
+Are these obs normalized?
+They are. So this is always going to be
+They are. So this is always going to be
+between zero and one. And so is this
+between zero and one. And so is this
+and the the other ones are normalized
+and the the other ones are normalized
+too. Everything should be between zero
+too. Everything should be between zero
+and one except this I guess is between
+and one except this I guess is between
+negative one and one. closest
+negative one and one. closest
+food.
+food.
+Why? Just ne just negative one is
+the negative one was uh what Joseph
+the negative one was uh what Joseph
+recommended as the um this is not in the
+recommended as the um this is not in the
+range of sight but actually we just
+range of sight but actually we just
+removed the range of sight so we can
+removed the range of sight so we can
+comment this out as well right now.
+comment this out as well right now.
+Okay. Well, yeah. Just Yeah. I mean,
+Okay. Well, yeah. Just Yeah. I mean,
+because that
+because that
+Yeah. So, that's a default value for,
+Yeah. So, that's a default value for,
+right? Yeah. You can pick any uh any
+right? Yeah. You can pick any uh any
+default value that's not crazy. Okay.
+default value that's not crazy. Okay.
+I I've done, you know, negative 0.5.
+I I've done, you know, negative 0.5.
+Let's try keeping the is in vision in
+Let's try keeping the is in vision in
+and just increasing the You could leave
+and just increasing the You could leave
+the OBS in even doesn't
+the OBS in even doesn't
+really you want you want to make sure
+really you want you want to make sure
+you don't like comment out to full obs
+you don't like comment out to full obs
+because that'll change the size.
+because that'll change the size.
+Yeah. No, the size should still be
+Yeah. No, the size should still be
+eight. Here it
+eight. Here it
+is. And that's uh so used here. Put in a
+is. And that's uh so used here. Put in a
+put in a put in a reward for for
+um for going towards the
+um for going towards the
+colony with the food for being pointed
+colony with the food for being pointed
+towards the colony. a after they've, you
+towards the colony. a after they've, you
+know, after they've got a food, reward
+know, after they've got a food, reward
+them for moving towards the colony.
+them for moving towards the colony.
+Yeah. Okay.
+Yeah. Okay.
+So, let me
+So, let me
+see where I'm currently rewarding them.
+see where I'm currently rewarding them.
+Yep. If the ant
+Yep. If the ant
+has Yeah. If ant has no food, that's
+has Yeah. If ant has no food, that's
+fine. If the ant does have food.
+fine. If the ant does have food.
+Um,
+Um,
+okay.
+okay.
+If get
+If get
+angle between,
+angle between,
+um,
+and who's this? Can't you just do
+and who's this? Can't you just do
+Manhattan distance or something? What's
+Manhattan distance or something? What's
+up? Can't you just use Manhattan
+up? Can't you just use Manhattan
+distance or something?
+distance or something?
+Manhattan distance. Yeah, that's just
+Manhattan distance. Yeah, that's just
+like a basic distance calculation. How
+like a basic distance calculation. How
+far is the ant from from the the colony?
+far is the ant from from the the colony?
+I could I guess I would need the
+I could I guess I would need the
+previous time step to see if it has um
+previous time step to see if it has um
+gotten closer than before than it was
+gotten closer than before than it was
+before. Whereas if it's we just use
+before. Whereas if it's we just use
+angle, then we know if it's pointed and
+angle, then we know if it's pointed and
+it's always going to move forward. So,
+it's always going to move forward. So,
+we know that it's in the right direction
+we know that it's in the right direction
+because they don't have a they don't
+because they don't have a they don't
+have a choice about moving. All right.
+have a choice about moving. All right.
+Yeah, sounds sounds fine.
+Yeah, sounds sounds fine.
+Yeah. So if the angle between the ant
+Yeah. So if the angle between the ant
+and the colony
+um is greater than 0.1
+um is greater than 0.1
+uh give them
+a yeah
+and um where's the action?
+I guess I could do
+envctions and
+envctions and
+id
+id
+um equals
+um equals
+[Music]
+[Music]
+action turn. Let me think. Left or right
+action turn. Let me think. Left or right
+in
+in
+radians. I'm just going to copy this.
+radians. I'm just going to copy this.
+Already figured this out.
+Yeah, right. I'm using angle diff. If
+Yeah, right. I'm using angle diff. If
+the angle diff is greater than 0.1, they
+the angle diff is greater than 0.1, they
+turn
+right and rewards ID.
+right and rewards ID.
+plus equals
+um
+um
+let's do it like this.
+I still don't know why this thing is
+I still don't know why this thing is
+not like basically I can't get this
+not like basically I can't get this
+thing to
+thing to
+actually use four GPUs on like a quarter
+actually use four GPUs on like a quarter
+of the mini batch batch and all that to
+of the mini batch batch and all that to
+get the same result as training on one
+get the same result as training on one
+GPU.
+Something's weird.
+Should we try this?
+Should we try this?
+Uh, what? Yeah. Yeah. Once if you think
+Uh, what? Yeah. Yeah. Once if you think
+you got in there, right? Yeah.
+0.1. That's as much as they get for
+0.1. That's as much as they get for
+food, huh? You think that's a little
+food, huh? You think that's a little
+high?
+Half of that, maybe. Uh, they're going
+Half of that, maybe. Uh, they're going
+to get that every single step, right?
+to get that every single step, right?
+True. They're going to get it every step
+True. They're going to get it every step
+that they're pointed in the right
+that they're pointed in the right
+direction. Okay.
+direction. Okay.
+Yeah. 01 or they're going to reward hack
+Yeah. 01 or they're going to reward hack
+and start anything, right?
+and start anything, right?
+Cuz once they have a food, they're going
+Cuz once they have a food, they're going
+to
+to
+immediately be getting that reward
+immediately be getting that reward
+effectively. Let's try this.
+See what happens. So otherwise, yeah,
+See what happens. So otherwise, yeah,
+huge, huge, huge reward. Can derange it,
+huge, huge, huge reward. Can derange it,
+right? Yeah. Now, let's see what happens
+right? Yeah. Now, let's see what happens
+now. Should be like a slam
+now. Should be like a slam
+dunk. Uh, and you you you made them
+dunk. Uh, and you you you made them
+super fast.
+super fast.
+Yeah, they move five times faster now.
+See, some pretty insane
+See, some pretty insane
+uh score, right?
+Um, yeah,
+Um, yeah,
+hopefully. Let me rebuild the ocean as
+hopefully. Let me rebuild the ocean as
+well.
+You're compiling in between these steps,
+You're compiling in between these steps,
+right?
+right?
+Um, should I be compiling before I run
+Um, should I be compiling before I run
+the train? SMH. Yeah, you have to
+the train? SMH. Yeah, you have to
+recompile.
+recompile.
+Okay. I've been wasting a lot of time.
+Okay. I've been wasting a lot of time.
+Amazing. Okay. Sorry, I'm not paying
+Amazing. Okay. Sorry, I'm not paying
+super close attention to this. No,
+super close attention to this. No,
+that's all right. I appreciate you
+that's all right. I appreciate you
+letting me know these things. Well,
+letting me know these things. Well,
+yeah, there's a learning curve, right?
+yeah, there's a learning curve, right?
+Uh, okay.
+Uh, okay.
+With - Force.
+Uh, yep. We need a we need a a quick
+Uh, yep. We need a we need a a quick
+compile command. Uh, it's Oh, uh,
+compile command. Uh, it's Oh, uh,
+there's something in the C that I need
+there's something in the C that I need
+to fix. Yeah. Num. Let's just make this
+that's used in the C. The C is only the
+that's used in the C. The C is only the
+dot slash ants demo, right?
+dot slash ants demo, right?
+Yeah, that Yeah, what's in the C
+Yeah, that Yeah, what's in the C
+actually won't matter at all for
+actually won't matter at all for
+training, right? Yeah. Uh, okay.
+training, right? Yeah. Uh, okay.
+So, comp compile it
+So, comp compile it
+though. Python setup.py
+though. Python setup.py
+Pi build
+extin place
+d-force. You want me to paste a command?
+d-force. You want me to paste a command?
+Oh, uh, not build ocean. Different
+Oh, uh, not build ocean. Different
+command.
+command.
+No, build ocean is going to build you a
+No, build ocean is going to build you a
+local eval. Uh, it's you're your build
+local eval. Uh, it's you're your build
+ocean is just playing the game. you're
+ocean is just playing the game. you're
+you're comp you're compiling that
+you're comp you're compiling that
+locally. So all you're doing is running
+locally. So all you're doing is running
+the code. You're not using any sort of
+the code. You're not using any sort of
+training framework
+training framework
+uh at all. So you need you need to hook
+uh at all. So you need you need to hook
+it into the library. Um yeah, what's the
+it into the library. Um yeah, what's the
+command?
+Python python
+Python python
+setup.py
+setup.py
+ext-in place
+ext-in place
+dash force
+dash force
+We gota we
+We gota we
+gota we got to get a a
+gota we got to get a a
+buffer compiler or
+buffer compiler or
+something. But it
+uh it just feels a lot like make then.
+uh it just feels a lot like make then.
+Yeah, that makes sense. Is it wrong
+Yeah, that makes sense. Is it wrong
+though?
+though?
+Like the one good thing about one good
+Like the one good thing about one good
+thing about make is you can just do make
+thing about make is you can just do make
+and it does a thing.
+Yeah. I'm not sure.
+Like we should just be able to do puff.
+Yeah, that'd be cool. Just puff up.
+Yeah, that'd be cool. Just puff up.
+Puff up will be the compile command.
+Puff up will be the compile command.
+Yeah,
+Yeah,
+it's it's gonna be quicker than than
+it's it's gonna be quicker than than
+typing that pops up.
+typing that pops up.
+Did you send that in the chat or Oh,
+Did you send that in the chat or Oh,
+it's in uh voice chat, general chat.
+it's in uh voice chat, general chat.
+Yeah, here we go.
+Yeah, here we go.
+Yep. Wait, did this just work? I hope it
+Yep. Wait, did this just work? I hope it
+did, Joseph. I really do. I hate to see
+did, Joseph. I really do. I hate to see
+you stuck on things. Wait.
+It
+It
+actually whole bunch of stuff going on
+actually whole bunch of stuff going on
+here. Yeah. Yeah, it's recompiling
+here. Yeah. Yeah, it's recompiling
+everything.
+everything.
+All right, cool. Fortunately, it's
+All right, cool. Fortunately, it's
+quicker than before with the Syon. So,
+quicker than before with the Syon. So,
+this Okay, now I should run the training
+this Okay, now I should run the training
+script. Now you can train. Oh my god,
+script. Now you can train. Oh my god,
+dude. It's [ __ ] It was [ __ ]
+dude. It's [ __ ] It was [ __ ]
+seeding.
+seeding.
+Well, is that is
+Well, is that is
+that like score? Score came up right
+that like score? Score came up right
+away. Something
+score is popping up right away now. It
+score is popping up right away now. It
+was because everything was the same
+was because everything was the same
+seed.
+seed.
+Oh,
+Oh,
+okay. Whoa. I see your There's a log
+okay. Whoa. I see your There's a log
+there, too. Interesting.
+there, too. Interesting.
+Yeah, these are when the ants are dying.
+Yeah, these are when the ants are dying.
+Yeah.
+Yeah.
+Wow. Okay. This is I can't believe I
+Wow. Okay. This is I can't believe I
+haven't even been compiling properly
+haven't even been compiling properly
+this whole time.
+this whole time.
+Like you haven't been compiling at all.
+Like you haven't been compiling at all.
+Not just improperly.
+Not just improperly.
+Yeah. No, not at all. Right. Yeah. Uh is
+Yeah. No, not at all. Right. Yeah. Uh is
+score out of max one or
+uh yeah score should
+uh yeah score should
+be like being incremented by one every
+be like being incremented by one every
+time. But I think when it gets printed,
+time. But I think when it gets printed,
+it's doing something else. Saying like
+it's doing something else. Saying like
+out of all of the ants, that's fine. Per
+out of all of the ants, that's fine. Per
+per per reporting step, you're gonna
+per per reporting step, you're gonna
+have Whoa, it just went to 1.1. So it
+have Whoa, it just went to 1.1. So it
+was it was over one there. Per reporting
+was it was over one there. Per reporting
+step out of one, you're going to have a
+step out of one, you're going to have a
+max one. If all of them grabbed a food
+max one. If all of them grabbed a food
+and all of them took them back, took it
+and all of them took them back, took it
+back presumably if that's what your
+back presumably if that's what your
+score is.
+Yeah. So, it's going to increment the
+Yeah. So, it's going to increment the
+score by one when it delivers food,
+score by one when it delivers food,
+which is down here in
+which is down here in
+step. Check for food delivery score plus
+step. Check for food delivery score plus
+equals one.
+equals one.
+Right? And then when add log gets
+Right? And then when add log gets
+called, it's here. When should terminate
+called, it's here. When should terminate
+is true, it adds the log for that
+is true, it adds the log for that
+particular ant, but it divides the
+particular ant, but it divides the
+score. Well, performance is the division
+score. Well, performance is the division
+of the score. The score should just be
+of the score. The score should just be
+it should always be above one. So, this
+it should always be above one. So, this
+is confusing actually.
+is confusing actually.
+Score should always be above one. See
+Score should always be above one. See
+what what you're seeing are are uh who
+what what you're seeing are are uh who
+zero and now it has dropped to zero.
+Interesting. Okay, we're gonna see what
+Interesting. Okay, we're gonna see what
+this does.
+this does.
+Um,
+Um,
+yes.
+yes.
+Hopefully, this should be something.
+This is only It's only training 700k
+This is only It's only training 700k
+steps per second. Slightly annoying.
+steps per second. Slightly annoying.
+That's pretty pretty annoying. A measily
+That's pretty pretty annoying. A measily
+700k.
+700k.
+But the thing is I'm using four GPUs and
+But the thing is I'm using four GPUs and
+it trains at 450 with one. Um, so it's
+it trains at 450 with one. Um, so it's
+batch sizes and stuff need to be
+batch sizes and stuff need to be
+changed. But at least initially
+changed. But at least initially
+at least initially this should be I I
+at least initially this should be I I
+thought it was like only getting one
+thought it was like only getting one
+GPU's worth of data and that's kind of
+GPU's worth of data and that's kind of
+what was happening because of the
+what was happening because of the
+seeding. It turns out I see this is
+seeding. It turns out I see this is
+neural MMO. Okay. So this is neural MMO.
+neural MMO. Okay. So this is neural MMO.
+Now, we're going to see this whatever
+Now, we're going to see this whatever
+the heck this thing does
+the heck this thing does
+um over dinner. Hopefully, like just in
+um over dinner. Hopefully, like just in
+the course of dinner, this should
+the course of dinner, this should
+already train like a little bit. We'll
+already train like a little bit. We'll
+see if the curve is anything like
+see if the curve is anything like
+reasonable with four GPUs. Shouldn't it
+reasonable with four GPUs. Shouldn't it
+be like at least Yes, it should be
+be like at least Yes, it should be
+faster. But the thing is like it should
+faster. But the thing is like it should
+be faster, but like I had to this is an
+be faster, but like I had to this is an
+equivalence run. So, like I had to slice
+equivalence run. So, like I had to slice
+the mini batch size to be inefficient
+the mini batch size to be inefficient
+for the hardware. So, no worries. We'll
+for the hardware. So, no worries. We'll
+get there. Um, I got to get dinner. So,
+get there. Um, I got to get dinner. So,
+uh, let me
+see. To folks watching this, thanks for
+see. To folks watching this, thanks for
+tuning in. I will be back after dinner,
+tuning in. I will be back after dinner,
+most likely here, getting DDP working,
+most likely here, getting DDP working,
+getting hyperp sweeps working, all the
+getting hyperp sweeps working, all the
+things for release. Um, all my stuff's
+things for release. Um, all my stuff's
+free and open source at puffer.ai. So,
+free and open source at puffer.ai. So,
+Want to support the project for free?
+Want to support the project for free?
+Star the repo. You want to get involved
+Star the repo. You want to get involved
+with all this research and all these uh
+with all this research and all these uh
+environment dev and experiment side
+environment dev and experiment side
+stuff. Join the Discord. Also follow me
+stuff. Join the Discord. Also follow me
+on X for more than
+
+Kind: captions
+Language: en
+Okay, we are back
+Okay, we are back
+live.
+Hi. Done with
+Hi. Done with
+meetings at least for now.
+ies on anything
+ies on anything
+else should be
+good. Where did my chat window
+go? There we
+are.
+There. How we doing on experiments?
+Not so
+good. Okay, so these are all logging
+good. Okay, so these are all logging
+like basically the same
+thing. What is this?
+The heck is
+this?
+Uh, and
+Oh, this is grid. Okay, that's just our
+sweep. Okay, so we've got two
+sweep. Okay, so we've got two
+things
+things
+weird overall.
+You should work with
+You should work with
+um multi-GPU,
+right? If I like look for distributed.
+Oh, maybe these don't work with
+distributed. Why do they have opportuna?
+music.
+Um, I'm realizing I don't think this
+Um, I'm realizing I don't think this
+thing works
+thing works
+on distributed, does it?
+That seems iffy.
+Do you need to use this?
+Okay. So, it's supposed to just
+Okay. So, it's supposed to just
+do backward.
+Yeah. So there should not be anything
+Yeah. So there should not be anything
+required to make this
+work. PDP to train
+I don't think if there are any other
+I don't think if there are any other
+like obvious common
+like obvious common
+gotchas. I guess technically I could do
+gotchas. I guess technically I could do
+like one of the other M's that I know is
+like one of the other M's that I know is
+really
+really
+easy, right?
+I'm going to try a really easy env. See
+I'm going to try a really easy env. See
+how that
+goes. We'll do puffer convert.
+going on
+going on
+here scale being
+weird. Okay, Twitter's pretty good
+sometimes. There we go.
+want to authenticate this on the side
+want to authenticate this on the side
+real quick and then we will be able
+to be able to get this running.
+Tiny
+box. Oh, tiny. A tiny
+box. Cool.
+So, uh, there's no team up session here.
+So, uh, there's no team up session here.
+What the
+hell? Oh, I'm
+dumb. Okay, so this has
+dumb. Okay, so this has
+run 1.8 billion
+run 1.8 billion
+steps. Just hard failed.
+and not import
+binding.
+Really? Yeah.
+Okay, it's just a build
+error.
+H, it should pick it up.
+Maybe I just didn't rebuild since I
+Maybe I just didn't rebuild since I
+pulled the
+pulled the
+latest. Could be. That
+figure out
+figure out
+DDP first. Okay.
+And actually this one is
+And actually this one is
+episode length.
+Okay, that's successful
+training. Okay, so next
+We will do
+DDP. Excuse me.
+Uh yeah, they shouldn't log from all
+Uh yeah, they shouldn't log from all
+ranks. Kind of
+weird. Fix that later. We'll start with
+weird. Fix that later. We'll start with
+this.
+Okay, so this is now training at 4
+Okay, so this is now training at 4
+million steps per
+million steps per
+second. Uh, the steps counter is still
+second. Uh, the steps counter is still
+not correct, it looks like to me.
+4 million is not super
+4 million is not super
+impressive. Like we're going to be able
+impressive. Like we're going to be able
+to get neural MMO training at this
+to get neural MMO training at this
+speed. Speed is not the problem. The
+speed. Speed is not the problem. The
+problem is the dynamic somehow not
+problem is the dynamic somehow not
+converging.
+Like somehow the training is different
+Like somehow the training is different
+here than normal cuz this is not
+here than normal cuz this is not
+converging.
+It's kind of starting to optimize. Yeah,
+It's kind of starting to optimize. Yeah,
+it's not solving the
+it's not solving the
+end. Be a simpler way of saying
+end. Be a simpler way of saying
+it. I mean, it's it's kind of starting
+it. I mean, it's it's kind of starting
+to do something, but
+to do something, but
+like not
+really. I mean, we have we have things
+really. I mean, we have we have things
+to test here, though.
+There are a lot of possible explanations
+There are a lot of possible explanations
+for
+this all distributed
+this all distributed
+runs. Okay, it is kind of starting to
+train. The question is why is it so much
+train. The question is why is it so much
+worse? We have some things we can check.
+baseline.
+Now we're going to try running it
+Now we're going to try running it
+through the distributed interface but
+through the distributed interface but
+with only one uh one
+with only one uh one
+process. So this should be exactly equal
+process. So this should be exactly equal
+to the original curve. If this is not
+to the original curve. If this is not
+equal to the original curve, we will
+equal to the original curve, we will
+know immediately that this is something
+know immediately that this is something
+specifically due to uh with the way that
+specifically due to uh with the way that
+DDP is working not hypers or anything
+DDP is working not hypers or anything
+else.
+else.
+If this actually works equal to the
+If this actually works equal to the
+original, then we will know that it is
+original, then we will know that it is
+most likely something with
+hypers. Okay.
+So that is quite odd.
+It is training better than
+It is training better than
+before, but nowhere near as well as it
+before, but nowhere near as well as it
+should. Also, why is it not
+logging? 381
+Guess this didn't log.
+Okay, so this like for whatever reason
+Okay, so this like for whatever reason
+did not
+did not
+log, but
+log, but
+um I mean it also definitely didn't
+um I mean it also definitely didn't
+work. This is something related
+work. This is something related
+to distributed training specifically.
+Looks like Hrien might swing
+Looks like Hrien might swing
+by and building
+ends. Type in on Discord.
+Late at my place surely will come this
+Late at my place surely will come this
+week. It's fine. I got work to do
+anyways. We need to use glue.
+Let's try
+that. Yeah, Tetris. Nice. M. Good. M.
+[Music]
+That's
+Let's see if it's glue backend
+Let's see if it's glue backend
+shenanigans.
+Nope, not backend shenanigans.
+Let's not do Neptune for a
+Let's not do Neptune for a
+bit. Just going to do some basic debug.
+Okay, how about we do Yes.
+Try this.
+I suspect that it's not getting
+I suspect that it's not getting
+gradients for
+forward. This will be forward
+forward. This will be forward
+eval. This will be
+forward. Ah, that's very different. You
+forward. Ah, that's very different. You
+see, it just wasn't training.
+Boom. Now works amazingly well.
+And this
+trains and trains quite nicely in
+fact. So can we get matched matched
+fact. So can we get matched matched
+results now is the question.
+So, we'll do this first. Actually, isn't
+So, we'll do this first. Actually, isn't
+the global step like the global step
+the global step like the global step
+just
+doesn't make sense. We'll do this for
+doesn't make sense. We'll do this for
+now and see what this outputs
+be interesting to see what this thing
+be interesting to see what this thing
+does.
+So, like this doesn't seem to
+So, like this doesn't seem to
+be working any better than
+be working any better than
+before. It's also logging kind of
+before. It's also logging kind of
+weird. Like, this should be more steps,
+weird. Like, this should be more steps,
+right?
+Like we have like all these different
+Like we have like all these different
+little
+graphs. We should figure out why the uh
+graphs. We should figure out why the uh
+the x axis is wrong first.
+134 mil
+134 mil
+steps. Same as before, right?
+mil. Okay, so this is actually correct,
+mil. Okay, so this is actually correct,
+right? 80 mil
+138 mil. Yeah. So this is
+138 mil. Yeah. So this is
+correct. Then
+correct. Then
+why why are we not logging correctly?
+Huh? Ah because it's this needs to be
+Huh? Ah because it's this needs to be
+agent steps.
+I'll see from there.
+Uh, are we not getting any logs from
+Uh, are we not getting any logs from
+this
+this
+thing? We do not appear to be getting
+thing? We do not appear to be getting
+any logs.
+Okay. So, this is still not printing
+Okay. So, this is still not printing
+correctly, but I think that's now just a
+correctly, but I think that's now just a
+dashboard error, right?
+That'll fix prints a little
+bit. Uh, it's still not logging
+bit. Uh, it's still not logging
+anything, right? Oh, no, it
+is. There we
+is. There we
+are. So, look at this.
+If we do this in relative time, it's
+If we do this in relative time, it's
+very very similar to
+very very similar to
+this. If we do it in
+steps, it's way farther
+out. Now, what we're going to try to do
+out. Now, what we're going to try to do
+is match this original curve.
+is match this original curve.
+Um, I'll try to match the original
+Um, I'll try to match the original
+curve.
+dividing 100 by a number.
+this. Uh, it's a little awkward because
+this. Uh, it's a little awkward because
+I only have six
+I only have six
+cards, but I think we'll do
+like 8192 mini batch or
+like 8192 mini batch or
+whatever. And then like num m will just
+whatever. And then like num m will just
+go
+go
+to like
+to like
+two two
+two two
+m like this.
+Yeah. Well, this doesn't work at all.
+That did not work at all.
+Try this just to be sure that it's not
+Try this just to be sure that it's not
+jank out of this.
+Hey
+Dan.
+This doesn't work at
+This doesn't work at
+all.
+all.
+Think was the original was 32 and 16 m,
+Think was the original was 32 and 16 m,
+right?
+Well, we didn't mess with the batch
+Well, we didn't mess with the batch
+size, so that's going to probably
+size, so that's going to probably
+completely screw it,
+right? And one sec, my 10. Let me let me
+right? And one sec, my 10. Let me let me
+try one last thing so I keep my train of
+try one last thing so I keep my train of
+thought, and then I will do that.
+I'm right. This should do something.
+Okay. Like this.
+You can also always do four
+You can also always do four
+cards. The test
+run be better as four cards.
+Batch size divide by four. Mini batch
+Batch size divide by four. Mini batch
+divide by
+divide by
+four times divide by four.
+Are the ants allowed to die in
+Are the ants allowed to die in
+this and then they don't come back?
+park.
+Weird. They do come back.
+Okay.
+Are we ready to add another full 3D
+Are we ready to add another full 3D
+physics sim? Do you have one?
+We're certainly ready to add substantial
+We're certainly ready to add substantial
+hardware to
+hardware to
+Puffer. We got tiny boxes here.
+something something guy.
+And yeah, Kyle does robotics. I've
+And yeah, Kyle does robotics. I've
+talked with him. He's cool. Uh yeah,
+talked with him. He's cool. Uh yeah,
+seeing I don't freaking know what that
+seeing I don't freaking know what that
+guy does.
+Kyle's like actually a PhD candidate.
+orenstein,
+orenstein,
+right? Has a harp seal as his profile
+picture. Just join Discord, boys. Cool.
+Hello. Yeah. How's it going?
+Hello. Yeah. How's it going?
+Pretty good. What's going on with the
+Pretty good. What's going on with the
+stream so I don't hear you in several
+stream so I don't hear you in several
+places? So, um yeah, basically um let me
+places? So, um yeah, basically um let me
+show you on my screen where I'm at with
+show you on my screen where I'm at with
+this. All right, great. I bet. Very
+this. All right, great. I bet. Very
+good. We got tiny boxes. Yeah, I know.
+good. We got tiny boxes. Yeah, I know.
+That's that's what you know that's the
+That's that's what you know that's the
+real the real interesting thing. No,
+real the real interesting thing. No,
+Kyle Kyle was asking uh have we added
+Kyle Kyle was asking uh have we added
+you know did we add any other full 3D
+you know did we add any other full 3D
+physics sims to buffer
+um 3D physics?
+um 3D physics?
+I know we we didn't but no could we?
+I know we we didn't but no could we?
+Yeah, we can you can bind anything to
+Yeah, we can you can bind anything to
+it, man. It's just that the engines like
+it, man. It's just that the engines like
+you can bind to whatever you want. Like
+you can bind to whatever you want. Like
+I'm probably going to do a basic one for
+I'm probably going to do a basic one for
+drones relatively soon.
+drones relatively soon.
+I mean like we're not doing like we're
+I mean like we're not doing like we're
+not making a humanoid sim or anything
+not making a humanoid sim or anything
+like
+like
+that cuz like I mean that would actually
+that cuz like I mean that would actually
+be a big like a big thing to
+do. Like if I wanted to do better than
+do. Like if I wanted to do better than
+Isaac or something, I'd basically that
+Isaac or something, I'd basically that
+would be a big
+would be a big
+project. Okay, so we've got ants. These
+project. Okay, so we've got ants. These
+are the trained ants presumably. These
+are the trained ants presumably. These
+are not the trained ants. These are
+are not the trained ants. These are
+scripted ants. So as I when I hold shift
+scripted ants. So as I when I hold shift
+um they are using some helper functions
+um they are using some helper functions
+that I've written in theh file. So this
+that I've written in theh file. So this
+was like my sanity check of theh file is
+was like my sanity check of theh file is
+uh basically are they actually able to
+uh basically are they actually able to
+see things in their vision and are they
+see things in their vision and are they
+able to use the correct angle and
+able to use the correct angle and
+distance to food and to the colony in
+distance to food and to the colony in
+order to get food back and forth. And
+order to get food back and forth. And
+you can see this is performing pretty
+you can see this is performing pretty
+well. There's another guy with an antsim
+well. There's another guy with an antsim
+on uh on YouTube I just saw as well. Um
+on uh on YouTube I just saw as well. Um
+he's not even doing RL and he's got like
+he's not even doing RL and he's got like
+you know all these crazy colony like
+you know all these crazy colony like
+behaviors. I think we could definitely
+behaviors. I think we could definitely
+do like this should definitely work and
+do like this should definitely work and
+we should definitely be able to get
+we should definitely be able to get
+something really compelling from this.
+something really compelling from this.
+Fact like the end I did recently with
+Fact like the end I did recently with
+all the puffers streaming around is
+all the puffers streaming around is
+pretty well. Yeah. It's like we should
+pretty well. Yeah. It's like we should
+totally be able to get stuff like this
+totally be able to get stuff like this
+to work. Um right. So is this still
+to work. Um right. So is this still
+agents here. This is still scripted
+agents here. This is still scripted
+agents. These are scripted agents. Yes.
+agents. These are scripted agents. Yes.
+When I let go of shift, they start
+When I let go of shift, they start
+acting randomly. Okay. Um but when I'm
+acting randomly. Okay. Um but when I'm
+holding down shift, they're behaving in
+holding down shift, they're behaving in
+a scripted way. And um and that has just
+a scripted way. And um and that has just
+been to test my helper functions. So uh
+been to test my helper functions. So uh
+I've got this get angle function, this
+I've got this get angle function, this
+wrap angle function, uh this distance
+wrap angle function, uh this distance
+squared function, and is envision
+squared function, and is envision
+function that I use in theh file. All of
+function that I use in theh file. All of
+these appear to work. Otherwise, they
+these appear to work. Otherwise, they
+would not be able to bring food to the
+would not be able to bring food to the
+colony and back so predictably.
+colony and back so predictably.
+Okay. Wait, does that did you say
+Okay. Wait, does that did you say
+compute observations was in there or no?
+compute observations was in there or no?
+Yeah. So, compute observations is uh in
+Yeah. So, compute observations is uh in
+here I just uh
+here I just uh
+it like your script actually reads from
+it like your script actually reads from
+the computed observations or it reads
+the computed observations or it reads
+from game state.
+from game state.
+It reads from the computed observations.
+It reads from the computed observations.
+So, this is file. Very good job. Is
+So, this is file. Very good job. Is
+cool. Yeah. That's that's how you write
+cool. Yeah. That's that's how you write
+a test, right? Like because otherwise
+a test, right? Like because otherwise
+the obs could be wrong, right? Yeah.
+the obs could be wrong, right? Yeah.
+Yeah. So in here uh in the actual env
+Yeah. So in here uh in the actual env
+I've got the this is uh why I I need to
+I've got the this is uh why I I need to
+actually check that this is right. Um
+actually check that this is right. Um
+but I've got the shape here. That's
+but I've got the shape here. That's
+wrong. Eight is the observation size. So
+wrong. Eight is the observation size. So
+it is okay. Can they all see Can every
+it is okay. Can they all see Can every
+agent see every other agent? Is that the
+agent see every other agent? Is that the
+intent?
+intent?
+They are not able to perceive each
+They are not able to perceive each
+other. No. Okay. So then why is the
+other. No. Okay. So then why is the
+observations agents?
+observations agents?
+Yeah. So the observations are just the
+Yeah. So the observations are just the
+current ant position for 0 and one. Uh
+current ant position for 0 and one. Uh
+two and three is the ant direction. Uh
+two and three is the ant direction. Uh
+this direction is always going to be
+this direction is always going to be
+because the wrap angle function between
+because the wrap angle function between
+negative pi and pi in radians. Yeah.
+negative pi and pi in radians. Yeah.
+Okay. So this just normalizes it to
+Okay. So this just normalizes it to
+between 0 and one. Remove remove times
+between 0 and one. Remove remove times
+self-num agents or whatever from the uh
+self-num agents or whatever from the uh
+Python.
+Python.
+Uh okay. So just eight. That's just
+Uh okay. So just eight. That's just
+eight brain. Okay. Ran that. Sounds
+eight brain. Okay. Ran that. Sounds
+good. Let's try it.
+Cool. So funny. It's so funny to see you
+Cool. So funny. It's so funny to see you
+getting 80,000 SPS on a CPU.
+getting 80,000 SPS on a CPU.
+That's funny. Is that high or low? To
+That's funny. Is that high or low? To
+give you an idea, before Puffer, when
+give you an idea, before Puffer, when
+people were training like on GPU and
+people were training like on GPU and
+SP3, like most of research was
+SP3, like most of research was
+proceeding at a tenth of this speed on
+proceeding at a tenth of this speed on
+GPUs,
+GPUs,
+right? Now, to be fair, you know, if I
+right? Now, to be fair, you know, if I
+were to run this on on GPU, this would
+were to run this on on GPU, this would
+be like two million steps a second or
+be like two million steps a second or
+whatever, but
+whatever, but
+Yeah, know this is this is uh the beauty
+Yeah, know this is this is uh the beauty
+of Puff Lib, right? I every so often
+of Puff Lib, right? I every so often
+it's just like ah yes, the high perk is
+it's just like ah yes, the high perk is
+good. I'm working on distributed
+good. I'm working on distributed
+training for us right now.
+training for us right now.
+Cool. Nice. One of the things I notice
+Cool. Nice. One of the things I notice
+is that the user stats of the score take
+is that the user stats of the score take
+a really long time to appear. Um, which
+a really long time to appear. Um, which
+is odd because if I run the C simulation
+is odd because if I run the C simulation
+in another, you got the stats working
+in another, you got the stats working
+even when they're behaving
+even when they're behaving
+randomly. Uh, yeah, they they do work
+randomly. Uh, yeah, they they do work
+like eventually it will actually log a
+like eventually it will actually log a
+score. Well, how's the log work in the
+score. Well, how's the log work in the
+Python?
+Python?
+Yeah. So the way that works
+Yeah. So the way that works
+is yeah we're using the veclog of the
+is yeah we're using the veclog of the
+nths and uh in here we've got this add
+nths and uh in here we've got this add
+log function which gets called and
+log function which gets called and
+tracks the score the score is getting
+tracks the score the score is getting
+incremented whenever uh the answer how
+incremented whenever uh the answer how
+many actually okay what's the report
+many actually okay what's the report
+interval
+interval
+report interval
+Uh, you mean how often do these logs
+Uh, you mean how often do these logs
+get? It's in It's in Python in the uh
+get? It's in It's in Python in the uh
+arguments the very top. Yeah. Yeah. One.
+arguments the very top. Yeah. Yeah. One.
+I changed it to one. Okay.
+I changed it to one. Okay.
+[Music]
+[Music]
+Um, yeah. Then that's definitely got to
+Um, yeah. Then that's definitely got to
+be like the ants not
+be like the ants not
+uh not logging super frequently. When do
+uh not logging super frequently. When do
+what does the trigger in C for calling
+what does the trigger in C for calling
+that log function? It's going to be the
+that log function? It's going to be the
+terminal, right?
+terminal, right?
+Yeah, exactly. When the ants die, which
+Yeah, exactly. When the ants die, which
+is uh I've set up this condition, the
+is uh I've set up this condition, the
+second one that you wrote, uh Dan, which
+second one that you wrote, uh Dan, which
+is Yeah. Um when the ants have exceeded
+is Yeah. Um when the ants have exceeded
+their lifetime, which is 100,000 time
+their lifetime, which is 100,000 time
+steps, they start to randomly die off
+steps, they start to randomly die off
+with.1% chance.
+with.1% chance.
+Oh, interesting. Oh, well then, yeah,
+Oh, interesting. Oh, well then, yeah,
+it's not that it takes forever, man.
+it's not that it takes forever, man.
+It's just that your training is super
+It's just that your training is super
+slow, so it takes a few million steps.
+slow, so it takes a few million steps.
+Like, that's a pretty rare condition.
+Like, that's a pretty rare condition.
+How many are how many Ms are running?
+How many are how many Ms are running?
+It's not going to actually be as fast as
+It's not going to actually be as fast as
+you might think. All like all the M's
+you might think. All like all the M's
+have all of the ants have to exceed
+have all of the ants have to exceed
+their lifetime. So it's numbum ants
+their lifetime. So it's numbum ants
+times lifetime
+times lifetime
+and then you know shortly after that.
+and then you know shortly after that.
+I see. So So if you if you want you
+I see. So So if you if you want you
+could make some live shorter and some
+could make some live shorter and some
+live you know longer if you wanted some
+live you know longer if you wanted some
+reporting. You could have them start at
+reporting. You could have them start at
+different lifetimes. You could have have
+different lifetimes. You could have have
+them start as old ants.
+They had no chance. But, you know, that
+They had no chance. But, you know, that
+that's kind of what I did with Enduro
+that's kind of what I did with Enduro
+because there was a weird Yeah, Enduro
+because there was a weird Yeah, Enduro
+is similar. It's just any it's anything
+is similar. It's just any it's anything
+that has like a really obnoxiously long
+that has like a really obnoxiously long
+uh horizon to it you kind of have to
+uh horizon to it you kind of have to
+mess with, right? So, you can you can
+mess with, right? So, you can you can
+start training at uh at various points
+start training at uh at various points
+in their lifetime and then have each
+in their lifetime and then have each
+ant's life each ant's reset proceed on
+ant's life each ant's reset proceed on
+its own. So in individually proceeding
+its own. So in individually proceeding
+so that they they maintain that uh
+so that they they maintain that uh
+offset that you've started them
+offset that you've started them
+with. That way you'll have consistent
+with. That way you'll have consistent
+logging throughout.
+logging throughout.
+Yeah. So they uh have a random lifetime
+Yeah. So they uh have a random lifetime
+start between zero and their total
+start between zero and their total
+lifetime when they'll start to die off.
+lifetime when they'll start to die off.
+Um work. See it. Try try running it. See
+Um work. See it. Try try running it. See
+if it if it reports the logs faster. I
+if it if it reports the logs faster. I
+see logs though. Oh, was that Yeah, it
+see logs though. Oh, was that Yeah, it
+was midun. It's not a huge deal. Did you
+was midun. It's not a huge deal. Did you
+What was there something appreciable you
+What was there something appreciable you
+changed to get them reporting or?
+changed to get them reporting or?
+Uh, no. The So, um, it was reporting
+Uh, no. The So, um, it was reporting
+before and I have changed a bunch of the
+before and I have changed a bunch of the
+observations. So, like, um, this used to
+observations. So, like, um, this used to
+be 12 different things, right? Yeah. Um,
+be 12 different things, right? Yeah. Um,
+I've brought it down to eight and I've
+I've brought it down to eight and I've
+commented out the sensing of
+commented out the sensing of
+pherommones. I really just want them to
+pherommones. I really just want them to
+be able to go to food and back to the
+be able to go to food and back to the
+colony for now and then we can implement
+colony for now and then we can implement
+pherommones afterwards. Yeah. Um, so
+pherommones afterwards. Yeah. Um, so
+I've simplified a lot of this and I've
+I've simplified a lot of this and I've
+written helper functions for some of it
+written helper functions for some of it
+so that I know that it's doing what I
+so that I know that it's doing what I
+expect because I can test these helper
+expect because I can test these helper
+functions with the C file. So that was
+functions with the C file. So that was
+kind of step one was making sure that
+kind of step one was making sure that
+these work. Okay, good. Yeah, that's
+these work. Okay, good. Yeah, that's
+good.
+good.
+Yeah. And then
+Yeah. And then
+um that plus um
+um that plus um
+the um this lifetime condition. I had
+the um this lifetime condition. I had
+this one before and the logs were still
+this one before and the logs were still
+appearing here, but um Okay. It would
+appearing here, but um Okay. It would
+take a while, right? Okay. So log so
+take a while, right? Okay. So log so
+logs always appeared for you though.
+logs always appeared for you though.
+Yeah. Yeah. Logs logs were appearing. Um
+Yeah. Yeah. Logs logs were appearing. Um
+yeah, before that it was like just a
+yeah, before that it was like just a
+problem with Neptune. Um you that might
+problem with Neptune. Um you that might
+be what you you were thinking of. I I
+be what you you were thinking of. I I
+felt, you know, I felt like I was
+felt, you know, I felt like I was
+running and I wasn't getting the user
+running and I wasn't getting the user
+stats appearing for whatever reason, at
+stats appearing for whatever reason, at
+least the code that I sent you to. It's
+least the code that I sent you to. It's
+very possible that there's a very small
+very possible that there's a very small
+thing that I did or didn't do and you
+thing that I did or didn't do and you
+just corrected it without even thinking
+just corrected it without even thinking
+about it. Possible way.
+Yeah. So, just so I get a sense of
+Yeah. So, just so I get a sense of
+shouldn't it be that since we've already
+shouldn't it be that since we've already
+crossed 2.0 0 million steps and the ants
+crossed 2.0 0 million steps and the ants
+lifetime is um 5,000 time steps that
+lifetime is um 5,000 time steps that
+they should have like died and been born
+they should have like died and been born
+again many times by now.
+again many times by now.
+Math out number of ants num m is 5,000.
+Math out number of ants num m is 5,000.
+Yeah. Uh the answer is maybe or maybe
+Yeah. Uh the answer is maybe or maybe
+not depending on if you yeah just
+not depending on if you yeah just
+compute it right and so uh you should be
+compute it right and so uh you should be
+seeing them if if you're starting them
+seeing them if if you're starting them
+at the ends of their lives and ad log is
+at the ends of their lives and ad log is
+being called quickly then you should see
+being called quickly then you should see
+some
+some
+I didn't listen to how many ants you
+I didn't listen to how many ants you
+have. How many ants do we uh how many
+have. How many ants do we uh how many
+ants total are there? Yeah. So right now
+ants total are there? Yeah. So right now
+there's only one environment and there's
+there's only one environment and there's
+32 ants per colony.
+32 ants per colony.
+64 total.
+64 total.
+Yeah. Well, hold on. Is that the number
+Yeah. Well, hold on. Is that the number
+of total ants or the number per colony?
+of total ants or the number per colony?
+Actually, let me in theh
+Actually, let me in theh
+file. I've messed up some of these.
+file. I've messed up some of these.
+Yeah, it could very easily be that it
+Yeah, it could very easily be that it
+takes a few million depending on how you
+takes a few million depending on how you
+have it defined.
+have it defined.
+Yeah, you also don't have enough ants if
+Yeah, you also don't have enough ants if
+you only have like 32 or what. Like the
+you only have like 32 or what. Like the
+thing can be training even on CPU can
+thing can be training even on CPU can
+probably be training at twice that speed
+probably be training at twice that speed
+with more agents. There was a I don't
+with more agents. There was a I don't
+know if this is a a bug or just uh an
+know if this is a a bug or just uh an
+oversight on on my part, but there was
+oversight on on my part, but there was
+an issue when I pumped the pump the ants
+an issue when I pumped the pump the ants
+uh like over a hundred. I I got a puffer
+uh like over a hundred. I I got a puffer
+bear.
+bear.
+Um I don't know if you've tried that,
+Um I don't know if you've tried that,
+Matan. Well, he had the wrong obace
+Matan. Well, he had the wrong obace
+wrong before.
+wrong before.
+Yeah, he he was like he was memory like
+Yeah, he he was like he was memory like
+you were just arbitrary right into
+you were just arbitrary right into
+memory with the obace before.
+memory with the obace before.
+Yeah. Told told you it wasn't perfect.
+Yeah. Told told you it wasn't perfect.
+Episode length that's 100,000 and1.
+Episode length that's 100,000 and1.
+Yeah. Bet single observation space is
+Yeah. Bet single observation space is
+observation space for a single agent.
+observation space for a single agent.
+Like that was the bug,
+right? Yeah. Yeah, that makes sense.
+right? Yeah. Yeah, that makes sense.
+That'll do it. Numb ants here. I would
+That'll do it. Numb ants here. I would
+call it agent observation space, but
+call it agent observation space, but
+like petting zoo defined that name. They
+like petting zoo defined that name. They
+they could have named it better. Well,
+they could have named it better. Well,
+it's in the it's in the doc it's in the
+it's in the it's in the doc it's in the
+documentation now. In your example, you
+documentation now. In your example, you
+You do specifically say that. So
+yeah. So numbum ants is this property of
+yeah. So numbum ants is this property of
+the environment which is the total
+the environment which is the total
+number of ants. So really this should be
+number of ants. So really this should be
+100 given that the number up here is 50
+100 given that the number up here is 50
+per colony.
+per colony.
+So what happens don't match is is one
+So what happens don't match is is one
+not getting passed or are they somehow
+not getting passed or are they somehow
+is it eight colonies because if it's 100
+is it eight colonies because if it's 100
+ants per colony times eight col then it
+ants per colony times eight col then it
+would be like 4 million
+would be like 4 million
+where else am I I'm not using max ants
+where else am I I'm not using max ants
+per colony anywhere else actually. So
+per colony anywhere else actually. So
+really it's they should be relying on
+really it's they should be relying on
+num adance. So that shouldn't be causing
+num adance. So that shouldn't be causing
+if you're just going to if you're just
+if you're just going to if you're just
+going to hardcode the number
+going to hardcode the number
+then yeah other otherwise if you if you
+then yeah other otherwise if you if you
+if you are going to pass it from Python
+if you are going to pass it from Python
+you should.
+you should.
+Yeah it seems like I'm not using this
+Yeah it seems like I'm not using this
+constant anywhere. Get rid of that
+constant anywhere. Get rid of that
+constant then you make it a uh
+constant then you make it a uh
+initialize it in your your antstruct
+initialize it in your your antstruct
+uh
+uh
+Yeah, that's your then then uh it'll ask
+Yeah, that's your then then uh it'll ask
+it's getting initialized in the end and
+it's getting initialized in the end and
+then um
+then um
+init it's okay. So you've you've already
+init it's okay. So you've you've already
+got it in there. So that that basically
+got it in there. So that that basically
+that concept was just there and doing
+that concept was just there and doing
+nothing. Okay. Yeah. Yeah.
+Yeah. Yeah. So that shouldn't be causing
+Yeah. Yeah. So that shouldn't be causing
+an issue. So there's no reason to stop
+an issue. So there's no reason to stop
+this this run. And it seems like it's
+this this run. And it seems like it's
+tracking score right now. Also, we can
+tracking score right now. Also, we can
+see Oh. Oh, we have we have a Neptune
+see Oh. Oh, we have we have a Neptune
+convert or another Neptune user. Joseph
+convert or another Neptune user. Joseph
+Neptune. Pretty nice. At least until
+Neptune. Pretty nice. At least until
+they decide to move the free tier.
+Hopefully not too bad. 4.5 is not not
+Hopefully not too bad. 4.5 is not not
+great though, right? Are they is that
+great though, right? Are they is that
+good? Is that a good score?
+good? Is that a good score?
+Uh yeah. So I mean 4.5 is definitely a
+Uh yeah. So I mean 4.5 is definitely a
+huge improvement over the like
+huge improvement over the like
+0.04 things that I was getting uh before
+0.04 things that I was getting uh before
+I made all these changes to the
+I made all these changes to the
+observation. Go run it like go render
+observation. Go run it like go render
+it. What are they doing?
+it. What are they doing?
+Um can I run it? Can I render it in the
+Um can I run it? Can I render it in the
+middle of a training run? Once once a
+middle of a training run? Once once a
+Well, you can wait for a model file is
+Well, you can wait for a model file is
+saved then yes. Yeah, I have to wait.
+saved then yes. Yeah, I have to wait.
+Yeah, you can in a different window once
+Yeah, you can in a different window once
+you have the first checkpoint or
+you have the first checkpoint or
+whatever.
+whatever.
+And are you doing the lo local
+And are you doing the lo local
+compilation or you can you can doesn't
+compilation or you can you can doesn't
+really matter how you render it.
+really matter how you render it.
+Yeah. So this is run 26. So Oh, look at
+Yeah. So this is run 26. So Oh, look at
+that. There are some things being saved
+that. There are some things being saved
+in here. Yeah, I've been running some
+in here. Yeah, I've been running some
+experiments. There you go. Just grab
+experiments. There you go. Just grab
+grab one. You can grab the latest one
+grab one. You can grab the latest one
+there. You can you can eval
+there. You can you can eval
+it. It shouldn't be that expensive to
+it. It shouldn't be that expensive to
+run an eval while training.
+run an eval while training.
+[Music]
+experiments
+experiments
+model
+model
+[Music]
+0000763.t Oh, command not found
+puffer. Did I miss Yeah, I missed that.
+puffer. Did I miss Yeah, I missed that.
+uh
+underscore
+underscore
+and that's strange size mismatch.
+Did you you didn't change the you don't
+Did you you didn't change the you don't
+have a custom network, do you?
+have a custom network, do you?
+No, you're just using the standard
+No, you're just using the standard
+whatever was with ocean preference
+whatever was with ocean preference
+policy recurrent. That looks right.
+policy recurrent. That looks right.
+Yeah.
+Um,
+Um,
+that's weird. Yeah, I don't know what is
+that's weird. Yeah, I don't know what is
+causing that exactly saying.
+causing that exactly saying.
+That should just run. Uh, you didn't you
+That should just run. Uh, you didn't you
+didn't pass any uh argument on the
+didn't pass any uh argument on the
+command line, did you? That was weird.
+command line, did you? That was weird.
+Preference load
+Preference load
+model CPU. I mean, all that looks fine.
+model CPU. I mean, all that looks fine.
+What do you say, Joseph?
+Look at his error
+Look at his error
+model path. This is he just ran an eval
+model path. This is he just ran an eval
+or tried to run an eval of the latest?
+or tried to run an eval of the latest?
+Uh, you sure? Get this runtime error.
+Uh, you sure? Get this runtime error.
+You sure that's your current run? You
+You sure that's your current run? You
+didn't change the OB size or anything,
+didn't change the OB size or anything,
+did you? It looks like this is the
+did you? It looks like this is the
+current run actually. Okay, there you
+current run actually. Okay, there you
+go. Load that current one then. It's
+go. Load that current one then. It's
+different OB size probably. Usually
+different OB size probably. Usually
+that's just the wrong model
+that
+28 model
+00200. All right, here they go. Here
+00200. All right, here they go. Here
+they go. And they're off.
+That was not bad. One of them just
+That was not bad. One of them just
+brought food back in a reasonable amount
+brought food back in a reasonable amount
+of time. Yeah, I think that might have
+of time. Yeah, I think that might have
+been random though. It seems like it
+been random though. It seems like it
+was. Yeah, because now they're passing
+was. Yeah, because now they're passing
+by the food sources and they're not
+by the food sources and they're not
+picking them up. It's funny as as
+picking them up. It's funny as as
+I I'm as I'm running my uh you know, I
+I I'm as I'm running my uh you know, I
+spent I spent an evening uh I spent I
+spent I spent an evening uh I spent I
+spent a night making cool graphics and
+spent a night making cool graphics and
+such with this. And uh I noticed
+such with this. And uh I noticed
+sometimes one colony would do pretty
+sometimes one colony would do pretty
+well.
+well.
+It's just random though. Like uh I think
+It's just random though. Like uh I think
+the red colony was for whatever reason
+the red colony was for whatever reason
+favored uh due to like placing her or
+favored uh due to like placing her or
+whatever. Yeah, red red's red's getting
+whatever. Yeah, red red's red's getting
+some food. They're not they're not
+some food. They're not they're not
+learning though. Uh yeah. No, they
+learning though. Uh yeah. No, they
+haven't figured this out. This is this
+haven't figured this out. This is this
+is just random. They're just going
+is just random. They're just going
+everywhere, right?
+everywhere, right?
+And they
+And they
+Yeah. So, um, I can confirm that they
+Yeah. So, um, I can confirm that they
+can see the food because when I run,
+can see the food because when I run,
+they get relative position to food or
+they get relative position to food or
+like they run straight to it. Yeah. So,
+like they run straight to it. Yeah. So,
+I'll show you how that works in the
+I'll show you how that works in the
+observation.
+observation.
+So, it says um find the closest visible
+So, it says um find the closest visible
+food, right? Uh I have this function
+food, right? Uh I have this function
+called is in vision which is basically
+called is in vision which is basically
+just checking if the distance squared
+just checking if the distance squared
+between the ants position and the food
+between the ants position and the food
+source position is uh less than the
+source position is uh less than the
+distance squared of the ants range of
+distance squared of the ants range of
+sight which I think is 500 right now.
+sight which I think is 500 right now.
+Yeah.
+Yeah.
+Um,
+Um,
+and so it's basically saying find the
+and so it's basically saying find the
+closest food source that is within its
+closest food source that is within its
+range of vision and uh return its
+range of vision and uh return its
+position in this closest food position
+position in this closest food position
+vector. Yeah, but that's it.
+vector. Yeah, but that's it.
+Get the angle. Okay, but then
+Get the angle. Okay, but then
+what's wait the closest food position?
+what's wait the closest food position?
+How does that get into the ops?
+How does that get into the ops?
+Uh, right here. Oh, okay. It's getting
+Uh, right here. Oh, okay. It's getting
+giving it's giving the angle and the
+giving it's giving the angle and the
+distance to that uh nearest
+food otherwise closest food position
+food otherwise closest food position
+will be zero and then um oh hold on that
+will be zero and then um oh hold on that
+could be an issue so I'm guessing
+could be an issue so I'm guessing
+actually this should be normalized in
+actually this should be normalized in
+some way where if it is not in its range
+some way where if it is not in its range
+range. If there's no food in its range
+range. If there's no food in its range
+of sight, this observation should be
+of sight, this observation should be
+zero or one, right?
+zero or one, right?
+Is obs a float?
+Is obs a float?
+Um,
+Um,
+obs. No, it's an array. Yeah, I mean,
+obs. No, it's an array. Yeah, I mean,
+it's an array of of float 32s. Yeah, set
+it's an array of of float 32s. Yeah, set
+to like negative one or something maybe.
+to like negative one or something maybe.
+Yeah. Okay. So, yeah, let me think about
+Yeah. Okay. So, yeah, let me think about
+how that works. So vector to the closest
+how that works. So vector to the closest
+food position is 0
+food position is 0
+0. Yep.
+0. Yep.
+And okay
+And okay
+if distance
+squares. Okay. So at the end of this for
+squares. Okay. So at the end of this for
+loop
+loop
+um
+um
+if
+if
+closest
+closest
+position equals 0 0
+position equals 0 0
+um
+um
+then I'll do I'm doing this in Python
+then I'll do I'm doing this in Python
+syntax
+but Yep.
+And same with this. Yep.
+And same with this. Yep.
+Otherwise, why is this an
+error? How do you do an equivalence
+error? How do you do an equivalence
+check between 2D vectors?
+check between 2D vectors?
+You check the components.
+You check the components.
+Okay.
+Okay.
+Uh if closest two vectors are you using
+Uh if closest two vectors are you using
+rail vectors
+rail vectors
+uh vector 2D is uh strct that I've been
+uh vector 2D is uh strct that I've been
+using. That's fine then. Yeah. If that's
+using. That's fine then. Yeah. If that's
+your struck then yeah you just the
+your struck then yeah you just the
+components.
+components.
+Yeah. Okay.
+Yeah. Okay.
+So [ __ ]
+off.
+Cool. Okay. Yeah. So now if the closest
+Cool. Okay. Yeah. So now if the closest
+food position was never found then it
+food position was never found then it
+will set these to negative
+one. Cool.
+one. Cool.
+Um, all right. What's going on in
+here? This
+graph. Okay, it seems to be going up.
+graph. Okay, it seems to be going up.
+This is the first time I've seen it go
+This is the first time I've seen it go
+get above five, which is
+cool.
+cool.
+Um, what do you guys think? Should we
+Um, what do you guys think? Should we
+shut it down and run it
+again? Let's do it.
+Definitely does something. Just
+the MX. Screw
+it. Should be able to do
+Are any of these loss um metrics useful?
+Um I mean, yeah, they're useful, but
+Um I mean, yeah, they're useful, but
+like depends what you're trying to do
+like depends what you're trying to do
+with them.
+with them.
+Not like this second. It's not It's not
+Not like this second. It's not It's not
+like turning it all up.
+like turning it all up.
+Yeah, that that makes sense, I guess.
+Yeah, that that makes sense, I guess.
+Um, is there a way for me to interpret
+Um, is there a way for me to interpret
+them through this uh through you've got
+them through this uh through you've got
+Yeah, if any of them if any of them
+Yeah, if any of them if any of them
+explode, you start asking questions.
+You know, your environment should be
+You know, your environment should be
+like working and and functioning.
+like working and and functioning.
+Like the thing with RL, right, is that
+Like the thing with RL, right, is that
+the policy loss. there's like a
+the policy loss. there's like a
+divergence term. It kind of just tells
+divergence term. It kind of just tells
+you how far the policy is off from the
+you how far the policy is off from the
+previous policy like KL and stuff.
+previous policy like KL and stuff.
+Doesn't tell you like there's not like a
+Doesn't tell you like there's not like a
+global
+global
+loss. Um
+yeah, I see. Ultimately, that's going to
+yeah, I see. Ultimately, that's going to
+be score. Yeah, exactly.
+be score. Yeah, exactly.
+Got
+Got
+it. All right. Well, there's some score.
+Score high, score low, score three.
+Score high, score low, score three.
+Yeah, three is not
+Yeah, three is not
+bad. Like I said, I was getting way
+bad. Like I said, I was getting way
+below one until recently. Whoa, look at
+below one until recently. Whoa, look at
+that. Oh, wait. That's agent steps.
+that. Oh, wait. That's agent steps.
+Yeah, agent steps will just keep going
+Yeah, agent steps will just keep going
+up. Ding. If only this was score. That
+up. Ding. If only this was score. That
+would be beautiful.
+would be beautiful.
+I see Perf down there.
+I see Perf down there.
+Perf score. Any
+Perf score. Any
+difference
+difference
+yet. I think since I've set the
+um number the lifetime to 5,000
+um number the lifetime to 5,000
+uh it'll take at most 5,000 time steps
+uh it'll take at most 5,000 time steps
+for all the ants to die. And so it's
+for all the ants to die. And so it's
+going to
+going to
+take well it took 50 epochs for the
+take well it took 50 epochs for the
+first one to appear. So maybe by the
+first one to appear. So maybe by the
+time we get to 100, we'll see the next.
+time we get to 100, we'll see the next.
+Now, do your do your environments reset
+Now, do your do your environments reset
+per ant?
+per ant?
+Uh no, the environment doesn't reset
+Uh no, the environment doesn't reset
+every ant. It resets uh when all the
+every ant. It resets uh when all the
+terminal conditions have been reached, I
+terminal conditions have been reached, I
+think, because because the the way to
+think, because because the the way to
+get the numbers faster is to have reset
+get the numbers faster is to have reset
+per ant maintaining that offset that you
+per ant maintaining that offset that you
+started at.
+Yeah. So when does C reset get called?
+Yeah. So when does C reset get called?
+When terminal
+uh and at the beginning automatically.
+Okay. Yeah, at the beginning makes
+Okay. Yeah, at the beginning makes
+sense. And then when all the terminals
+sense. And then when all the terminals
+are one, it'll get called. I don't need
+are one, it'll get called. I don't need
+to add that anywhere. Yeah. No, you
+to add that anywhere. Yeah. No, you
+don't need to add it. It automatically
+don't need to add it. It automatically
+will get called. Okay. Um, but it's
+will get called. Okay. Um, but it's
+uh to to do it to do it per agent, you
+uh to to do it to do it per agent, you
+have to do a little
+uh some a little tricky stuff. You have
+uh some a little tricky stuff. You have
+to you have to make sure that they are
+to you have to make sure that they are
+respecting their individual resets. So
+respecting their individual resets. So
+you can call a you can manually call a
+you can call a you can manually call a
+reset anytime you want. You can manually
+reset anytime you want. You can manually
+call it for a specific agent if you want
+call it for a specific agent if you want
+to do
+to do
+that. So you can manually call reset
+that. So you can manually call reset
+when that agent's
+when that agent's
+terminal is reached.
+terminal is reached.
+I guess why would we reset it when only
+I guess why would we reset it when only
+the first ant has died?
+the first ant has died?
+Like suppose that ant's going to go on
+Like suppose that ant's going to go on
+and and and start training, right? So
+and and and start training, right? So
+you're going to have ants at all all
+you're going to have ants at all all
+stages of of play
+stages of of play
+throughout.
+throughout.
+Uh learning will be uh accelerated
+Uh learning will be uh accelerated
+should
+should
+be it'll be I'm not sure I understand.
+be it'll be I'm not sure I understand.
+Yeah. If you check maybe maybe just look
+Yeah. If you check maybe maybe just look
+at enduro this I did this in enduro.
+at enduro this I did this in enduro.
+Yeah. So, let's see. That's in Yeah.
+Yeah. So, let's see. That's in Yeah.
+Enduro. Yeah. In the enduro.h. Yeah.
+Sorry. There's a lot. And I've
+Sorry. There's a lot. And I've
+Yeah. So, you declare it here, but
+Yeah. So, you declare it here, but
+you're not calling it in theh anywhere.
+Yeah. So it gets called for terminal the
+um and it's
+um and it's
+called and and there I'm tracking the
+called and and there I'm tracking the
+resets too.
+resets too.
+Go go go go go scroll scroll down to
+the scroll down to the step to see like
+the scroll down to the step to see like
+what's
+actually there's a whole bunch of logic
+actually there's a whole bunch of logic
+right? Yep. So,
+right? Yep. So,
+um, they get their their their time time
+um, they get their their their time time
+of day and there's their
+of day and there's their
+terminals and then go
+down. That's just uh the movement
+down. That's just uh the movement
+calculation.
+calculation.
+Uh, go down. There's
+Uh, go down. There's
+collision. Keep going. There's don't hit
+collision. Keep going. There's don't hit
+the edge, don't hit
+the edge, don't hit
+cars.
+cars.
+Uh, there's reward
+Uh, there's reward
+stuff. Then we get down
+to there's stay within the lines. Keep
+to there's stay within the lines. Keep
+going down. That's compute the edges of
+going down. That's compute the edges of
+the road.
+the road.
+Uh there's
+Uh there's
+some nuanced
+some nuanced
+Atari
+Atari
+behavior crashing enemy enemy
+behavior crashing enemy enemy
+cars go zoom. Keep going.
+Um there's the crashing logic. Keep
+Um there's the crashing logic. Keep
+going.
+Uh, collision.
+If I build this from the ocean, can I
+If I build this from the ocean, can I
+just play the game? Keep going. Yeah,
+just play the game? Keep going. Yeah,
+you can.
+you can.
+Um, yeah, keep
+Um, yeah, keep
+going. Yes, you can just play it.
+going. Yes, you can just play it.
+And all right, there's a day completed
+And all right, there's a day completed
+logic. So, day day completing is uh is
+logic. So, day day completing is uh is
+the end basically. So when a day is
+the end basically. So when a day is
+completed, that's uh that's a
+completed, that's uh that's a
+uh a terminal condition. Um
+so uh but but but but it doesn't it
+so uh but but but but it doesn't it
+doesn't so it is it only calls terminal
+doesn't so it is it only calls terminal
+if they've failed. It doesn't call it
+if they've failed. It doesn't call it
+won't be a terminal condition if they
+won't be a terminal condition if they
+have succeeded. However, there's a soft
+have succeeded. However, there's a soft
+reset that's called
+reset that's called
+uh for for resetting the the day itself
+uh for for resetting the the day itself
+because once you pass the requisite
+because once you pass the requisite
+number of cars, you've passed that day
+number of cars, you've passed that day
+in the in the game and then but you
+in the in the game and then but you
+still have to play for the whole day's
+still have to play for the whole day's
+duration. Uh the the reset will
+duration. Uh the the reset will
+uh basically a reset is a a punishment
+uh basically a reset is a a punishment
+for not finishing the the day. So, uh,
+for not finishing the the day. So, uh,
+those ones that fail get reset while
+those ones that fail get reset while
+those ones that did not fail, uh, get
+those ones that did not fail, uh, get
+soft reset. So, they they don't they
+soft reset. So, they they don't they
+don't lose,
+don't lose,
+uh, out on out on continue
+uh, out on out on continue
+reward. So, here's that makes sense.
+reward. So, here's that makes sense.
+Here's the day transition that that I'm
+Here's the day transition that that I'm
+handling it. So, this is that right
+handling it. So, this is that right
+there is rolling the day
+there is rolling the day
+uh rolling the day transition.
+uh rolling the day transition.
+Um, scroll down. Player failed to pass
+Um, scroll down. Player failed to pass
+required car. So there's the there's the
+required car. So there's the there's the
+reset. Uh, so I set terminals to true
+reset. Uh, so I set terminals to true
+there. But see, it's only it's only if
+there. But see, it's only it's only if
+they meet that that or if they did not
+they meet that that or if they did not
+meet the condition that they passed
+meet the condition that they passed
+enough
+enough
+cars. So there reset round is my my
+cars. So there reset round is my my
+reset my actual reset function. that
+reset my actual reset function. that
+that other reset function is just the
+that other reset function is just the
+thing that runs once.
+thing that runs once.
+Got it. Yeah. So So go look at reset
+Got it. Yeah. So So go look at reset
+round then.
+Yeah, that's what I am. Sorry. I forward
+Yeah, that's what I am. Sorry. I forward
+declared everything. All right. There's
+declared everything. All right. There's
+the real the real
+the real the real
+reset. So I'm I'm I've I've just defined
+reset. So I'm I'm I've I've just defined
+my own reset basically.
+Yeah. And so this is all this these are
+Yeah. And so this is all this these are
+basic basically I'm just everything
+basic basically I'm just everything
+that any any uh uh state data that would
+that any any uh uh state data that would
+currently be
+currently be
+uh present I'm resetting
+uh present I'm resetting
+here. So basically every single variable
+here. So basically every single variable
+uh just about every single
+uh just about every single
+variable and and the
+variable and and the
+rewards you see uh so see how I'm
+rewards you see uh so see how I'm
+tracking the separate v
+tracking the separate v
+values just tracking them with m
+values just tracking them with m
+variables and then uh
+variables and then uh
+um when
+um when
+they're when logs are ready to be called
+they're when logs are ready to be called
+then I uh copy them over to
+then I uh copy them over to
+logs. Yep. So there's the RNG state even
+logs. Yep. So there's the RNG state even
+preserved. So So yeah. So this
+preserved. So So yeah. So this
+soft this soft resetting
+soft this soft resetting
+will will allow the environments that
+will will allow the environments that
+fail to continue to go. Yeah, that makes
+fail to continue to go. Yeah, that makes
+sense. So they'll start over. The other
+sense. So they'll start over. The other
+ones will just keep going and they they
+ones will just keep going and they they
+will not hit the soft reset.
+will not hit the soft reset.
+when they fail they'll hit the soft
+when they fail they'll hit the soft
+reset too and go over. So
+reset too and go over. So
+yeah, that makes sense. I guess in the
+yeah, that makes sense. I guess in the
+case of the ants, the thing is we now
+case of the ants, the thing is we now
+have it where the lifetime is being
+have it where the lifetime is being
+initialized randomly, right? So suppose
+initialized randomly, right? So suppose
+the lifetime gets initially randomized
+the lifetime gets initially randomized
+to
+4,999.9 then the next time step it dies.
+4,999.9 then the next time step it dies.
+Yeah, it does. And now the whole thing
+Yeah, it does. And now the whole thing
+gets reset, right? And now none of the
+gets reset, right? And now none of the
+other ants got the opportunity or it
+other ants got the opportunity or it
+just doesn't do anything
+just doesn't do anything
+possibly. I don't know. Right. Right now
+possibly. I don't know. Right. Right now
+it doesn't do anything, which I think
+it doesn't do anything, which I think
+makes more sense. Well, it might it So
+makes more sense. Well, it might it So
+you can call a soft reset for the ones
+you can call a soft reset for the ones
+that
+that
+die, have them continue. So, I guess the
+die, have them continue. So, I guess the
+soft reset would just be return the ant
+soft reset would just be return the ant
+to uh the colony and then
+to uh the colony and then
+um cuz the ants like don't have that
+um cuz the ants like don't have that
+much stuff attached to them. They've got
+much stuff attached to them. They've got
+their lifetime. So, just reset its
+their lifetime. So, just reset its
+lifetime to zero. If it was carrying
+lifetime to zero. If it was carrying
+food, it's no longer carrying food. And
+food, it's no longer carrying food. And
+then randomize its direction and make
+then randomize its direction and make
+its position the calling.
+its position the calling.
+Initialize its lifetime to whatever its
+Initialize its lifetime to whatever its
+lifetime is going to be. I think if it's
+lifetime is going to be. I think if it's
+Yeah, that's true. It'll just be dead
+Yeah, that's true. It'll just be dead
+again. But yeah, uh no, zero will mean
+again. But yeah, uh no, zero will mean
+it'll have a full lifetime ahead of it
+it'll have a full lifetime ahead of it
+if we set the lifime close to 5,000.
+if we set the lifime close to 5,000.
+Just basically reinitialize reinitialize
+Just basically reinitialize reinitialize
+the things that make sense to to
+the things that make sense to to
+reinitialize.
+reinitialize.
+Yeah. Yeah, that makes
+Yeah. Yeah, that makes
+sense. Let's look at this graph.
+sense. Let's look at this graph.
+It should be going up. It is. This is
+not the worst graph I've seen. I mean, I
+not the worst graph I've seen. I mean, I
+I'
+I'
+I'd expect it to be doing more. That
+I'd expect it to be doing more. That
+being said, you could just the way you
+being said, you could just the way you
+have it structured right now could just
+have it structured right now could just
+be very very slow. And it is actually
+be very very slow. And it is actually
+looking good. Uh um yeah, the enduro
+looking good. Uh um yeah, the enduro
+curve is basically a bunch of stairs.
+curve is basically a bunch of stairs.
+That's cool.
+That's cool.
+Yeah, let's hopefully get it there soon.
+Yeah, let's hopefully get it there soon.
+But what do you think it could be that
+But what do you think it could be that
+is like slowing that down, right? Like I
+is like slowing that down, right? Like I
+think the behavior we're trying to get
+think the behavior we're trying to get
+is relatively simple. We don't even have
+is relatively simple. We don't even have
+the pherommones enabled. It's just go to
+the pherommones enabled. It's just go to
+the food and pick it up. They can't find
+the food and pick it up. They can't find
+the they don't know the food. They don't
+the they don't know the food. They don't
+know what they don't know what they're
+know what they don't know what they're
+supposed to be doing or they're not
+supposed to be doing or they're not
+getting a good reward signal. One of the
+getting a good reward signal. One of the
+two. or they they can't see it. So I
+two. or they they can't see it. So I
+suppose I mean 500 is a pretty big range
+suppose I mean 500 is a pretty big range
+of sight. I could increase their range
+of sight. I could increase their range
+of sight.
+of sight.
+Um and that's the thing like their range
+Um and that's the thing like their range
+of sight is the same in the scripted
+of sight is the same in the scripted
+behavior. Do they need range of sight?
+behavior. Do they need range of sight?
+Just just tell them where the stuff is.
+Just just tell them where the stuff is.
+We could do that. Yeah. Yeah.
+We could do that. Yeah. Yeah.
+Maybe let's do that next. Yeah. Tell
+Maybe let's do that next. Yeah. Tell
+them right where it is. They should they
+them right where it is. They should they
+should go out and get it. uh once one
+should go out and get it. uh once one
+realizes that it gets a reward. So the
+realizes that it gets a reward. So the
+first one that accidentally returns it
+first one that accidentally returns it
+will be a that
+will be a that
+should should be uh enough signal for
+should should be uh enough signal for
+for something to happen with the policy.
+for something to happen with the policy.
+uh or you put in rewards
+uh or you put in rewards
+uh that are
+uh that are
+uh more more dense so that you're
+uh more more dense so that you're
+rewarding behaviors that lead to that
+rewarding behaviors that lead to that
+end reward like moving towards the food
+end reward like moving towards the food
+for instance
+then when they have a sorry could you
+then when they have a sorry could you
+say that again about dense reward dense
+say that again about dense reward dense
+reward can help you
+reward can help you
+get get sparse training going
+get get sparse training going
+training. That was one of the things I
+training. That was one of the things I
+was thinking about is maybe we should
+was thinking about is maybe we should
+add to the observation uh or sorry to
+add to the observation uh or sorry to
+the rewards a small reward for being
+the rewards a small reward for being
+pointed towards food if you are um yeah
+pointed towards food if you are um yeah
+just pointed you can reward them for
+just pointed you can reward them for
+moving moving towards the food. Yeah.
+moving moving towards the food. Yeah.
+Yeah.
+Yeah.
+Yeah. Make the reward more dense could
+Yeah. Make the reward more dense could
+be reward for grabbing the food. The
+be reward for grabbing the food. The
+thing is you shouldn't need to. It's a
+thing is you shouldn't need to. It's a
+really easy problem like the
+really easy problem like the
+like if you look at the convert
+like if you look at the convert
+environment that trains in 30 seconds
+environment that trains in 30 seconds
+like
+like
+we're just telling it where the nearest
+we're just telling it where the nearest
+star is. It needs to figure out which
+star is. It needs to figure out which
+color star it even wants to get. Um
+my guess is how many like how many steps
+my guess is how many like how many steps
+does it
+does it
+take to get to the food?
+take to get to the food?
+Yeah, it shouldn't take this long, which
+Yeah, it shouldn't take this long, which
+is why I was No, actually, how many how
+is why I was No, actually, how many how
+fast do they move? How many steps does
+fast do they move? How many steps does
+it take to get to the food? Depends on
+it take to get to the food? Depends on
+where the food is relative to the
+where the food is relative to the
+colony. How long does it take to get
+colony. How long does it take to get
+across the screen?
+across the screen?
+Um, not long. I mean, they're moving at
+Um, not long. I mean, they're moving at
+a rate of uh what's the ant speed? I've
+a rate of uh what's the ant speed? I've
+set that as a constant here.
+They're moving uh one every
+They're moving uh one every
+uh step. Uh the total width of the
+uh step. Uh the total width of the
+window is 1280. So it should take them
+window is 1280. So it should take them
+1280 ticks to cross the whole screen.
+1280 ticks to cross the whole screen.
+Multiply their speed by like five or 10
+Multiply their speed by like five or 10
+and then rerun it.
+and then rerun it.
+I could try that.
+Yeah, we'll try.
+But yeah, I mean when I am running the
+But yeah, I mean when I am running the
+uh test version, right, and I have shift
+uh test version, right, and I have shift
+held down, they can see the food in
+held down, they can see the food in
+their range of vision, point themselves
+their range of vision, point themselves
+towards it, and point themselves back
+towards it, and point themselves back
+with pretty good
+with pretty good
+consistency.
+consistency.
+Right? And I'm using the same helper
+Right? And I'm using the same helper
+functions that I'm using in the
+functions that I'm using in the
+observation. Um, try the speed thing.
+observation. Um, try the speed thing.
+Yeah.
+Yeah.
+Yeah, I'll do that.
+Yeah, I'll do that.
+Take like a minute.
+Take like a minute.
+And yeah, this is about how fast they're
+And yeah, this is about how fast they're
+moving around the screen. This ant that
+moving around the screen. This ant that
+Yeah, but the thing is behind is the one
+Yeah, but the thing is behind is the one
+I'm in control of. Yeah. Like
+I'm in control of. Yeah. Like
+exploration becomes a hard problem when
+exploration becomes a hard problem when
+it takes them a ton of steps to get
+it takes them a ton of steps to get
+anywhere.
+anywhere.
+Mhm. But like literally just like
+Mhm. But like literally just like
+reducing the velocity, it actually makes
+reducing the velocity, it actually makes
+the problem fundamentally and
+the problem fundamentally and
+exponentially harder.
+exponentially harder.
+Yeah. Yeah. Makes makes if you don't if
+Yeah. Yeah. Makes makes if you don't if
+like the like you can solve this
+like the like you can solve this
+immediately with the rewards and stuff,
+immediately with the rewards and stuff,
+but like it like you have to actually do
+but like it like you have to actually do
+that stuff correctly. So like try this
+that stuff correctly. So like try this
+because like that'll just tell you
+because like that'll just tell you
+whether this was the issue or
+not. Common just RL playbook.
+Glad I have you guys here on the Discord
+Glad I have you guys here on the Discord
+to help me with that kind of stuff.
+to help me with that kind of stuff.
+Yeah, I'm going nuts here trying to
+Yeah, I'm going nuts here trying to
+figure out what the heck is wrong with
+figure out what the heck is wrong with
+the radian. Sweep still. What? Sweep
+the radian. Sweep still. What? Sweep
+sweep still or did you No, I I haven't
+sweep still or did you No, I I haven't
+fixed that either, but I'm trying to do
+fixed that either, but I'm trying to do
+distributed data parallel right now. Ah,
+distributed data parallel right now. Ah,
+that sounds like a headache. Yeah, I'll
+that sounds like a headache. Yeah, I'll
+be right back. It's best for me to get
+be right back. It's best for me to get
+clips in back.
+that you can you can also you can also
+that you can you can also you can also
+break this problem down into smaller
+break this problem down into smaller
+problems. You don't need look you don't
+problems. You don't need look you don't
+need to reward you don't need it to be a
+need to reward you don't need it to be a
+full a full circle. They get they go out
+full a full circle. They get they go out
+they get food they come back. You could
+they get food they come back. You could
+just reward them for getting food and
+just reward them for getting food and
+then that's it.
+then that's it.
+They just come back food but then the
+They just come back food but then the
+end. Yeah. It seems like it should be a
+end. Yeah. It seems like it should be a
+solvable problem to get them to come
+solvable problem to get them to come
+back as well, right? I completely agree.
+back as well, right? I completely agree.
+It should be should be pretty easy. So
+It should be should be pretty easy. So
+there's pro probably Did you Did you
+there's pro probably Did you Did you
+change the speed? I did. I updated it.
+change the speed? I did. I updated it.
+I'm going to let this training run
+I'm going to let this training run
+finish. And yeah, look at how this
+finish. And yeah, look at how this
+crashes at the end. I don't understand
+crashes at the end. I don't understand
+why it keeps doing that. Well, it's it's
+why it keeps doing that. Well, it's it's
+not working. It's It's broke. It's like
+not working. It's It's broke. It's like
+fundamentally broken. That's why it's
+fundamentally broken. That's why it's
+not doing stuff. It should be looking
+not doing stuff. It should be looking
+like an actual curve. Like
+like an actual curve. Like
+it should pick up the policy should pick
+it should pick up the policy should pick
+up on the signal. Unless you have no
+up on the signal. Unless you have no
+signal. You're giving them rewards,
+signal. You're giving them rewards,
+right? I am. Yeah. I mean, uh, I've got
+food, delivery, and death. Oh.
+food, delivery, and death. Oh.
+Yeah. Negative one is the death reward,
+Yeah. Negative one is the death reward,
+but that shouldn't impact the score
+but that shouldn't impact the score
+unless they're all dead. You never know.
+unless they're all dead. You never know.
+Get rid of the negative reward. Just put
+Get rid of the negative reward. Just put
+that to zero for now. Okay.
+that to zero for now. Okay.
+And so so they're only getting rewarded
+And so so they're only getting rewarded
+for two things.
+So they just wand so they wander they
+So they just wand so they wander they
+wander around until they find a food run
+wander around until they find a food run
+into a food which they do run into foods
+into a food which they do run into foods
+pretty often.
+pretty often.
+So then they get the reward. Uh but then
+So then they get the reward. Uh but then
+they have to they have to wander around
+they have to they have to wander around
+till they run into the home base again.
+till they run into the home base again.
+Yes.
+Yes.
+So otherwise they're they won't get a
+So otherwise they're they won't get a
+second reward. So until they until
+second reward. So until they until
+sufficient number of
+sufficient number of
+them are that have food are running into
+them are that have food are running into
+the base as well then they're not going
+the base as well then they're not going
+to be getting that signal. Uh right now
+to be getting that signal. Uh right now
+from from watching the evaluation I
+from from watching the evaluation I
+don't think that's happening very often.
+don't think that's happening very often.
+Right. So you're probably not they're
+Right. So you're probably not they're
+not getting any reward signal. So what
+not getting any reward signal. So what
+they're what what what they would be
+they're what what what they would be
+doing would be wandering around because
+doing would be wandering around because
+that's where they got the
+reward, but they're they're not direct,
+reward, but they're they're not direct,
+you know, they're not directed, right?
+you know, they're not directed, right?
+They're not going to the to a place,
+They're not going to the to a place,
+right? Uh do they have homebased obs?
+right? Uh do they have homebased obs?
+Yeah, they do. So it's in their
+Yeah, they do. So it's in their
+observations. Uh they can
+observations. Uh they can
+see the angle and uh pos relative
+see the angle and uh pos relative
+position to their colony.
+angle colony position
+angle colony position
+angle and distance I should say.
+Are these obs normalized?
+Are these obs normalized?
+They are. So this is always going to be
+They are. So this is always going to be
+between zero and one. And so is this
+between zero and one. And so is this
+and the the other ones are normalized
+and the the other ones are normalized
+too. Everything should be between zero
+too. Everything should be between zero
+and one except this I guess is between
+and one except this I guess is between
+negative one and one. closest
+negative one and one. closest
+food.
+food.
+Why? Just ne just negative one is
+the negative one was uh what Joseph
+the negative one was uh what Joseph
+recommended as the um this is not in the
+recommended as the um this is not in the
+range of sight but actually we just
+range of sight but actually we just
+removed the range of sight so we can
+removed the range of sight so we can
+comment this out as well right now.
+comment this out as well right now.
+Okay. Well, yeah. Just Yeah. I mean,
+Okay. Well, yeah. Just Yeah. I mean,
+because that
+because that
+Yeah. So, that's a default value for,
+Yeah. So, that's a default value for,
+right? Yeah. You can pick any uh any
+right? Yeah. You can pick any uh any
+default value that's not crazy. Okay.
+default value that's not crazy. Okay.
+I I've done, you know, negative 0.5.
+I I've done, you know, negative 0.5.
+Let's try keeping the is in vision in
+Let's try keeping the is in vision in
+and just increasing the You could leave
+and just increasing the You could leave
+the OBS in even doesn't
+the OBS in even doesn't
+really you want you want to make sure
+really you want you want to make sure
+you don't like comment out to full obs
+you don't like comment out to full obs
+because that'll change the size.
+because that'll change the size.
+Yeah. No, the size should still be
+Yeah. No, the size should still be
+eight. Here it
+eight. Here it
+is. And that's uh so used here. Put in a
+is. And that's uh so used here. Put in a
+put in a put in a reward for for
+um for going towards the
+um for going towards the
+colony with the food for being pointed
+colony with the food for being pointed
+towards the colony. a after they've, you
+towards the colony. a after they've, you
+know, after they've got a food, reward
+know, after they've got a food, reward
+them for moving towards the colony.
+them for moving towards the colony.
+Yeah. Okay.
+Yeah. Okay.
+So, let me
+So, let me
+see where I'm currently rewarding them.
+see where I'm currently rewarding them.
+Yep. If the ant
+Yep. If the ant
+has Yeah. If ant has no food, that's
+has Yeah. If ant has no food, that's
+fine. If the ant does have food.
+fine. If the ant does have food.
+Um,
+Um,
+okay.
+okay.
+If get
+If get
+angle between,
+angle between,
+um,
+and who's this? Can't you just do
+and who's this? Can't you just do
+Manhattan distance or something? What's
+Manhattan distance or something? What's
+up? Can't you just use Manhattan
+up? Can't you just use Manhattan
+distance or something?
+distance or something?
+Manhattan distance. Yeah, that's just
+Manhattan distance. Yeah, that's just
+like a basic distance calculation. How
+like a basic distance calculation. How
+far is the ant from from the the colony?
+far is the ant from from the the colony?
+I could I guess I would need the
+I could I guess I would need the
+previous time step to see if it has um
+previous time step to see if it has um
+gotten closer than before than it was
+gotten closer than before than it was
+before. Whereas if it's we just use
+before. Whereas if it's we just use
+angle, then we know if it's pointed and
+angle, then we know if it's pointed and
+it's always going to move forward. So,
+it's always going to move forward. So,
+we know that it's in the right direction
+we know that it's in the right direction
+because they don't have a they don't
+because they don't have a they don't
+have a choice about moving. All right.
+have a choice about moving. All right.
+Yeah, sounds sounds fine.
+Yeah, sounds sounds fine.
+Yeah. So if the angle between the ant
+Yeah. So if the angle between the ant
+and the colony
+um is greater than 0.1
+um is greater than 0.1
+uh give them
+a yeah
+and um where's the action?
+I guess I could do
+envctions and
+envctions and
+id
+id
+um equals
+um equals
+[Music]
+[Music]
+action turn. Let me think. Left or right
+action turn. Let me think. Left or right
+in
+in
+radians. I'm just going to copy this.
+radians. I'm just going to copy this.
+Already figured this out.
+Yeah, right. I'm using angle diff. If
+Yeah, right. I'm using angle diff. If
+the angle diff is greater than 0.1, they
+the angle diff is greater than 0.1, they
+turn
+right and rewards ID.
+right and rewards ID.
+plus equals
+um
+um
+let's do it like this.
+I still don't know why this thing is
+I still don't know why this thing is
+not like basically I can't get this
+not like basically I can't get this
+thing to
+thing to
+actually use four GPUs on like a quarter
+actually use four GPUs on like a quarter
+of the mini batch batch and all that to
+of the mini batch batch and all that to
+get the same result as training on one
+get the same result as training on one
+GPU.
+Something's weird.
+Should we try this?
+Should we try this?
+Uh, what? Yeah. Yeah. Once if you think
+Uh, what? Yeah. Yeah. Once if you think
+you got in there, right? Yeah.
+0.1. That's as much as they get for
+0.1. That's as much as they get for
+food, huh? You think that's a little
+food, huh? You think that's a little
+high?
+Half of that, maybe. Uh, they're going
+Half of that, maybe. Uh, they're going
+to get that every single step, right?
+to get that every single step, right?
+True. They're going to get it every step
+True. They're going to get it every step
+that they're pointed in the right
+that they're pointed in the right
+direction. Okay.
+direction. Okay.
+Yeah. 01 or they're going to reward hack
+Yeah. 01 or they're going to reward hack
+and start anything, right?
+and start anything, right?
+Cuz once they have a food, they're going
+Cuz once they have a food, they're going
+to
+to
+immediately be getting that reward
+immediately be getting that reward
+effectively. Let's try this.
+See what happens. So otherwise, yeah,
+See what happens. So otherwise, yeah,
+huge, huge, huge reward. Can derange it,
+huge, huge, huge reward. Can derange it,
+right? Yeah. Now, let's see what happens
+right? Yeah. Now, let's see what happens
+now. Should be like a slam
+now. Should be like a slam
+dunk. Uh, and you you you made them
+dunk. Uh, and you you you made them
+super fast.
+super fast.
+Yeah, they move five times faster now.
+See, some pretty insane
+See, some pretty insane
+uh score, right?
+Um, yeah,
+Um, yeah,
+hopefully. Let me rebuild the ocean as
+hopefully. Let me rebuild the ocean as
+well.
+You're compiling in between these steps,
+You're compiling in between these steps,
+right?
+right?
+Um, should I be compiling before I run
+Um, should I be compiling before I run
+the train? SMH. Yeah, you have to
+the train? SMH. Yeah, you have to
+recompile.
+recompile.
+Okay. I've been wasting a lot of time.
+Okay. I've been wasting a lot of time.
+Amazing. Okay. Sorry, I'm not paying
+Amazing. Okay. Sorry, I'm not paying
+super close attention to this. No,
+super close attention to this. No,
+that's all right. I appreciate you
+that's all right. I appreciate you
+letting me know these things. Well,
+letting me know these things. Well,
+yeah, there's a learning curve, right?
+yeah, there's a learning curve, right?
+Uh, okay.
+Uh, okay.
+With - Force.
+Uh, yep. We need a we need a a quick
+Uh, yep. We need a we need a a quick
+compile command. Uh, it's Oh, uh,
+compile command. Uh, it's Oh, uh,
+there's something in the C that I need
+there's something in the C that I need
+to fix. Yeah. Num. Let's just make this
+that's used in the C. The C is only the
+that's used in the C. The C is only the
+dot slash ants demo, right?
+dot slash ants demo, right?
+Yeah, that Yeah, what's in the C
+Yeah, that Yeah, what's in the C
+actually won't matter at all for
+actually won't matter at all for
+training, right? Yeah. Uh, okay.
+training, right? Yeah. Uh, okay.
+So, comp compile it
+So, comp compile it
+though. Python setup.py
+though. Python setup.py
+Pi build
+extin place
+d-force. You want me to paste a command?
+d-force. You want me to paste a command?
+Oh, uh, not build ocean. Different
+Oh, uh, not build ocean. Different
+command.
+command.
+No, build ocean is going to build you a
+No, build ocean is going to build you a
+local eval. Uh, it's you're your build
+local eval. Uh, it's you're your build
+ocean is just playing the game. you're
+ocean is just playing the game. you're
+you're comp you're compiling that
+you're comp you're compiling that
+locally. So all you're doing is running
+locally. So all you're doing is running
+the code. You're not using any sort of
+the code. You're not using any sort of
+training framework
+training framework
+uh at all. So you need you need to hook
+uh at all. So you need you need to hook
+it into the library. Um yeah, what's the
+it into the library. Um yeah, what's the
+command?
+Python python
+Python python
+setup.py
+setup.py
+ext-in place
+ext-in place
+dash force
+dash force
+We gota we
+We gota we
+gota we got to get a a
+gota we got to get a a
+buffer compiler or
+buffer compiler or
+something. But it
+uh it just feels a lot like make then.
+uh it just feels a lot like make then.
+Yeah, that makes sense. Is it wrong
+Yeah, that makes sense. Is it wrong
+though?
+though?
+Like the one good thing about one good
+Like the one good thing about one good
+thing about make is you can just do make
+thing about make is you can just do make
+and it does a thing.
+Yeah. I'm not sure.
+Like we should just be able to do puff.
+Yeah, that'd be cool. Just puff up.
+Yeah, that'd be cool. Just puff up.
+Puff up will be the compile command.
+Puff up will be the compile command.
+Yeah,
+Yeah,
+it's it's gonna be quicker than than
+it's it's gonna be quicker than than
+typing that pops up.
+typing that pops up.
+Did you send that in the chat or Oh,
+Did you send that in the chat or Oh,
+it's in uh voice chat, general chat.
+it's in uh voice chat, general chat.
+Yeah, here we go.
+Yeah, here we go.
+Yep. Wait, did this just work? I hope it
+Yep. Wait, did this just work? I hope it
+did, Joseph. I really do. I hate to see
+did, Joseph. I really do. I hate to see
+you stuck on things. Wait.
+It
+It
+actually whole bunch of stuff going on
+actually whole bunch of stuff going on
+here. Yeah. Yeah, it's recompiling
+here. Yeah. Yeah, it's recompiling
+everything.
+everything.
+All right, cool. Fortunately, it's
+All right, cool. Fortunately, it's
+quicker than before with the Syon. So,
+quicker than before with the Syon. So,
+this Okay, now I should run the training
+this Okay, now I should run the training
+script. Now you can train. Oh my god,
+script. Now you can train. Oh my god,
+dude. It's [ __ ] It was [ __ ]
+dude. It's [ __ ] It was [ __ ]
+seeding.
+seeding.
+Well, is that is
+Well, is that is
+that like score? Score came up right
+that like score? Score came up right
+away. Something
+score is popping up right away now. It
+score is popping up right away now. It
+was because everything was the same
+was because everything was the same
+seed.
+seed.
+Oh,
+Oh,
+okay. Whoa. I see your There's a log
+okay. Whoa. I see your There's a log
+there, too. Interesting.
+there, too. Interesting.
+Yeah, these are when the ants are dying.
+Yeah, these are when the ants are dying.
+Yeah.
+Yeah.
+Wow. Okay. This is I can't believe I
+Wow. Okay. This is I can't believe I
+haven't even been compiling properly
+haven't even been compiling properly
+this whole time.
+this whole time.
+Like you haven't been compiling at all.
+Like you haven't been compiling at all.
+Not just improperly.
+Not just improperly.
+Yeah. No, not at all. Right. Yeah. Uh is
+Yeah. No, not at all. Right. Yeah. Uh is
+score out of max one or
+uh yeah score should
+uh yeah score should
+be like being incremented by one every
+be like being incremented by one every
+time. But I think when it gets printed,
+time. But I think when it gets printed,
+it's doing something else. Saying like
+it's doing something else. Saying like
+out of all of the ants, that's fine. Per
+out of all of the ants, that's fine. Per
+per per reporting step, you're gonna
+per per reporting step, you're gonna
+have Whoa, it just went to 1.1. So it
+have Whoa, it just went to 1.1. So it
+was it was over one there. Per reporting
+was it was over one there. Per reporting
+step out of one, you're going to have a
+step out of one, you're going to have a
+max one. If all of them grabbed a food
+max one. If all of them grabbed a food
+and all of them took them back, took it
+and all of them took them back, took it
+back presumably if that's what your
+back presumably if that's what your
+score is.
+Yeah. So, it's going to increment the
+Yeah. So, it's going to increment the
+score by one when it delivers food,
+score by one when it delivers food,
+which is down here in
+which is down here in
+step. Check for food delivery score plus
+step. Check for food delivery score plus
+equals one.
+equals one.
+Right? And then when add log gets
+Right? And then when add log gets
+called, it's here. When should terminate
+called, it's here. When should terminate
+is true, it adds the log for that
+is true, it adds the log for that
+particular ant, but it divides the
+particular ant, but it divides the
+score. Well, performance is the division
+score. Well, performance is the division
+of the score. The score should just be
+of the score. The score should just be
+it should always be above one. So, this
+it should always be above one. So, this
+is confusing actually.
+is confusing actually.
+Score should always be above one. See
+Score should always be above one. See
+what what you're seeing are are uh who
+what what you're seeing are are uh who
+zero and now it has dropped to zero.
+Interesting. Okay, we're gonna see what
+Interesting. Okay, we're gonna see what
+this does.
+this does.
+Um,
+Um,
+yes.
+yes.
+Hopefully, this should be something.
+This is only It's only training 700k
+This is only It's only training 700k
+steps per second. Slightly annoying.
+steps per second. Slightly annoying.
+That's pretty pretty annoying. A measily
+That's pretty pretty annoying. A measily
+700k.
+700k.
+But the thing is I'm using four GPUs and
+But the thing is I'm using four GPUs and
+it trains at 450 with one. Um, so it's
+it trains at 450 with one. Um, so it's
+batch sizes and stuff need to be
+batch sizes and stuff need to be
+changed. But at least initially
+changed. But at least initially
+at least initially this should be I I
+at least initially this should be I I
+thought it was like only getting one
+thought it was like only getting one
+GPU's worth of data and that's kind of
+GPU's worth of data and that's kind of
+what was happening because of the
+what was happening because of the
+seeding. It turns out I see this is
+seeding. It turns out I see this is
+neural MMO. Okay. So this is neural MMO.
+neural MMO. Okay. So this is neural MMO.
+Now, we're going to see this whatever
+Now, we're going to see this whatever
+the heck this thing does
+the heck this thing does
+um over dinner. Hopefully, like just in
+um over dinner. Hopefully, like just in
+the course of dinner, this should
+the course of dinner, this should
+already train like a little bit. We'll
+already train like a little bit. We'll
+see if the curve is anything like
+see if the curve is anything like
+reasonable with four GPUs. Shouldn't it
+reasonable with four GPUs. Shouldn't it
+be like at least Yes, it should be
+be like at least Yes, it should be
+faster. But the thing is like it should
+faster. But the thing is like it should
+be faster, but like I had to this is an
+be faster, but like I had to this is an
+equivalence run. So, like I had to slice
+equivalence run. So, like I had to slice
+the mini batch size to be inefficient
+the mini batch size to be inefficient
+for the hardware. So, no worries. We'll
+for the hardware. So, no worries. We'll
+get there. Um, I got to get dinner. So,
+get there. Um, I got to get dinner. So,
+uh, let me
+see. To folks watching this, thanks for
+see. To folks watching this, thanks for
+tuning in. I will be back after dinner,
+tuning in. I will be back after dinner,
+most likely here, getting DDP working,
+most likely here, getting DDP working,
+getting hyperp sweeps working, all the
+getting hyperp sweeps working, all the
+things for release. Um, all my stuff's
+things for release. Um, all my stuff's
+free and open source at puffer.ai. So,
+free and open source at puffer.ai. So,
+Want to support the project for free?
+Want to support the project for free?
+Star the repo. You want to get involved
+Star the repo. You want to get involved
+with all this research and all these uh
+with all this research and all these uh
+environment dev and experiment side
+environment dev and experiment side
+stuff. Join the Discord. Also follow me
+stuff. Join the Discord. Also follow me
+on X for more than

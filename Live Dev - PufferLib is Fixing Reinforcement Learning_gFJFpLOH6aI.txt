@@ -1,0 +1,6359 @@
+Kind: captions
+Language: en
+Okay, we are back
+Okay, we are back
+live.
+Hi. Lots of good news today, man.
+Hi. Lots of good news today, man.
+Today's just been a good day for
+Today's just been a good day for
+Puffer. Had a productive meeting
+Puffer. Had a productive meeting
+earlier. Got some stuff
+earlier. Got some stuff
+merged. Spencer found a bug in the place
+merged. Spencer found a bug in the place
+that I expected that there would be a
+that I expected that there would be a
+bug. So, I get to be smug about
+bug. So, I get to be smug about
+that. And uh view drive is going to be
+that. And uh view drive is going to be
+working.
+working.
+Now, all I really got to do is a little
+Now, all I really got to do is a little
+bit of work on the experience buffer and
+bit of work on the experience buffer and
+we should
+we should
+be pretty pretty solid. We should be
+be pretty pretty solid. We should be
+pretty solid with this latest version.
+pretty solid with this latest version.
+So, all I really wanted to do right
+now, main thing at
+least, go back to this sketch.
+I think we figured
+I think we figured
+out good
+out good
+enough realistically quite good
+enough realistically quite good
+solutions for everything except
+solutions for everything except
+uh collecting experience on environments
+uh collecting experience on environments
+with masking which is kind of the same
+with masking which is kind of the same
+as like collecting experience on multi-
+as like collecting experience on multi-
+aent environments where the agents can
+aent environments where the agents can
+die. And uh we don't have any
+die. And uh we don't have any
+environments right now where that is
+environments right now where that is
+mandatory but we do have some where that
+mandatory but we do have some where that
+option and we would like to be able to
+option and we would like to be able to
+train in that
+train in that
+setting. So,
+setting. So,
+uh yeah, I think I want to
+uh yeah, I think I want to
+like figure out what we do about that,
+right? And it's kind of
+sketchy. It is kind of sketchy.
+So before I could guarantee the batch
+So before I could guarantee the batch
+sizes would all be the same
+size and now I
+size and now I
+can't. This seems pretty
+bad. There's not really a great way
+bad. There's not really a great way
+around masking
+around masking
+either around uh this thing.
+either around uh this thing.
+I mean the the fundamental concept here
+I mean the the fundamental concept here
+I'm going to be like thinking about this
+I'm going to be like thinking about this
+like exploring a bunch of technical
+like exploring a bunch of technical
+things but the fundamental concept is
+things but the fundamental concept is
+you just get data that looks like this
+you just get data that looks like this
+right so it doesn't all match
+right so it doesn't all match
+up and that doesn't fit cleanly into an
+up and that doesn't fit cleanly into an
+experience
+buffer I'm trying to think realistically
+buffer I'm trying to think realistically
+how often this happens anyways
+It really only happens in
+It really only happens in
+like elimination style games,
+right? Like I have this issue in neural
+right? Like I have this issue in neural
+MMO because it was a battle
+MMO because it was a battle
+royale. But like MMOs aren't really
+royale. But like MMOs aren't really
+battle royale, so I just made it not a
+battle royale, so I just made it not a
+battle
+royale. If you have really long
+royale. If you have really long
+episodes, it shouldn't matter that much.
+How's it currently handled by Puffer?
+How's it currently handled by Puffer?
+Just completely skip observations. Well,
+Just completely skip observations. Well,
+in the current 2.0
+branch, you know, what is this? First
+branch, you know, what is this? First
+time watching. This is reinforcement
+time watching. This is reinforcement
+learning
+learning
+dev. I am uh I'm a researcher. I run
+dev. I am uh I'm a researcher. I run
+upper.ai.
+upper.ai.
+These are all ultra high performance
+These are all ultra high performance
+games that we've implemented that you
+games that we've implemented that you
+can watch AIs that have been trained to
+can watch AIs that have been trained to
+play these directly in your browser.
+play these directly in your browser.
+They're playing it directly in your
+They're playing it directly in your
+browser. You can like you can hold what
+browser. You can like you can hold what
+is it shift I believe and you can take
+is it shift I believe and you can take
+over and play the games. Some of them
+over and play the games. Some of them
+are simple, some of them are complex.
+are simple, some of them are complex.
+But yeah, this is kind of just uh the
+But yeah, this is kind of just uh the
+vibe around here is just watch research
+vibe around here is just watch research
+get done in real time. And then uh
+get done in real time. And then uh
+hopefully the streams convince some of
+hopefully the streams convince some of
+the people watching to also contribute
+the people watching to also contribute
+because it's all open source and many of
+because it's all open source and many of
+our best contributors just were people
+our best contributors just were people
+who kind of saw the content and saw the
+who kind of saw the content and saw the
+stuff and started building
+things. What I'm doing right now is uh
+things. What I'm doing right now is uh
+I'm attempting to solve a technical
+I'm attempting to solve a technical
+problem in the design of how we process
+problem in the design of how we process
+data that that comes in for training. So
+data that that comes in for training. So
+pepper um what we were doing in
+pepper um what we were doing in
+2 is we were collecting all the data to
+2 is we were collecting all the data to
+a flat buffer. So we just record it as
+a flat buffer. So we just record it as
+it comes in out of order. We record the
+it comes in out of order. We record the
+indices of that
+indices of that
+data and then right before we need to
+data and then right before we need to
+train on it we sort all the data by the
+train on it we sort all the data by the
+indices. So we get the like segments for
+indices. So we get the like segments for
+each agent next to each other and then
+each agent next to each other and then
+we just reshaped it. So you know data
+we just reshaped it. So you know data
+could cross boundaries. It could be that
+could cross boundaries. It could be that
+you know you get the f the end of one
+you know you get the f the end of one
+segment and then the start of the next
+segment and then the start of the next
+segment in the same batch. Um but like
+segment in the same batch. Um but like
+it works cleanly and you just don't add
+it works cleanly and you just don't add
+data to this buffer that's
+data to this buffer that's
+masked. We can't really do that now
+masked. We can't really do that now
+because what we're doing we're
+because what we're doing we're
+collecting stuff by segment so that we
+collecting stuff by segment so that we
+don't cross boundaries here.
+don't cross boundaries here.
+And uh as a result of
+And uh as a result of
+that, I can't really see a clean way of
+that, I can't really see a clean way of
+handling
+masking. It's a little
+tricky. Like the issue is that we're
+tricky. Like the issue is that we're
+filling up this
+buffer. I guess the right question to
+buffer. I guess the right question to
+ask is what do we do when an agent dies?
+ask is what do we do when an agent dies?
+Like fundamentally, what options do we
+Like fundamentally, what options do we
+have when an agent dies? Right? So we're
+have when an agent dies? Right? So we're
+getting data like this, data like this.
+getting data like this, data like this.
+It's all nice data is here. And then
+It's all nice data is here. And then
+this one just
+dies. Tell you I'm sold for working it
+dies. Tell you I'm sold for working it
+now. Awesome.
+now. Awesome.
+It's kind of um the cool thing about
+It's kind of um the cool thing about
+reinforcement learning, at least the way
+reinforcement learning, at least the way
+we're doing it, is you can kind of just
+we're doing it, is you can kind of just
+jam low-level game development
+jam low-level game development
+um and help revolutionize a branch of
+um and help revolutionize a branch of
+science at the same
+science at the same
+time. And like you can do it without
+time. And like you can do it without
+that much compute as well. Let me give
+that much compute as well. Let me give
+you one really cool example. So this is
+you one really cool example. So this is
+neural MMO 3. This is a follow-up to my
+neural MMO 3. This is a follow-up to my
+PhD thesis. And uh this is like this big
+PhD thesis. And uh this is like this big
+open world MMO environment. There's like
+open world MMO environment. There's like
+a market you can like you can sell and
+a market you can like you can sell and
+buy stuff on a global market. Like
+buy stuff on a global market. Like
+there's all sorts of complexity to this
+there's all sorts of complexity to this
+thing. This thing runs at 1.5 million
+thing. This thing runs at 1.5 million
+steps per second per core. Um so this
+steps per second per core. Um so this
+thing runs like literally a million
+thing runs like literally a million
+times real time. And we can train on one
+times real time. And we can train on one
+GPU in like three days. We can train on
+GPU in like three days. We can train on
+2,000 years worth of
+2,000 years worth of
+gameplay which is pretty cool.
+gameplay which is pretty cool.
+and then you can run the trained model
+and then you can run the trained model
+on like one CPU more
+easily. So yeah, this is this is what
+easily. So yeah, this is this is what
+I'm trying to do, right? I'm trying to
+I'm trying to do, right? I'm trying to
+revolutionize this area of of AI. I'm
+revolutionize this area of of AI. I'm
+really trying to make stuff clean, fast,
+really trying to make stuff clean, fast,
+and simple.
+and simple.
+Um, I spent my whole PhD working on
+Um, I spent my whole PhD working on
+largecale multi- aent learning in the
+largecale multi- aent learning in the
+space and now I'm sort of turning to try
+space and now I'm sort of turning to try
+to like make it practical, make all the
+to like make it practical, make all the
+infrastructure fast and simple, uh, and
+infrastructure fast and simple, uh, and
+make it way more broadly applicable to a
+make it way more broadly applicable to a
+ton of different
+things. Sometimes that involves doing a
+things. Sometimes that involves doing a
+bunch of like fun programming on stream.
+bunch of like fun programming on stream.
+Sometimes it involves stuff like this
+Sometimes it involves stuff like this
+where I have to think about data
+where I have to think about data
+structures for a couple
+hours. Okay. Fundamentally, the issue
+hours. Okay. Fundamentally, the issue
+with this data structure here,
+right, the issue is that I plan for
+right, the issue is that I plan for
+these to get
+these to get
+longer. Pepper here from Twitch just
+longer. Pepper here from Twitch just
+switched to YouTube. Hey, Pepper.
+Yeah, you're
+Yeah, you're
+um I mean the guy has so many
+um I mean the guy has so many
+different names. Where where did he go?
+different names. Where where did he go?
+You're Weston's friend, right?
+Yeah, this isn't going to be a problem.
+Yeah, this isn't going to be a problem.
+Like we can't keep it as is, right? We
+Like we can't keep it as is, right? We
+can't have our data buffers look like
+can't have our data buffers look like
+this where this all gets wasted because
+this where this all gets wasted because
+what always always ends up happening in
+what always always ends up happening in
+like elimination style games is that
+like elimination style games is that
+there just two players at the end for a
+there just two players at the end for a
+really long time. I
+really long time. I
+mean, this has got to be applicable
+mean, this has got to be applicable
+outside of just like games as well.
+outside of just like games as well.
+There have got to be environments that
+There have got to be environments that
+I'm going to run into where like this is
+I'm going to run into where like this is
+going to be an
+going to be an
+issue. I'm just trying to think if
+issue. I'm just trying to think if
+there's like a decent fix. I will take
+there's like a decent fix. I will take
+if it just is a little bit of padding
+if it just is a little bit of padding
+and I like lose a little bit of data.
+and I like lose a little bit of data.
+I'm fine with that. It just can't be
+I'm fine with that. It just can't be
+this. But it's tricky because like you
+this. But it's tricky because like you
+have to reuse this index then somehow,
+have to reuse this index then somehow,
+right? You have to like put data from
+right? You have to like put data from
+another agent here or something.
+Okay, here this is kind of
+Okay, here this is kind of
+complicated but like in theory
+complicated but like in theory
+right if I just had all the free
+indices so this is like we have like one
+indices so this is like we have like one
+index here these are like active
+And this is going to start off like zero
+And this is going to start off like zero
+one say 10 24
+agents. Okay. And then we have
+free and say it's like
+8192. Impulse war. Impulse war is
+8192. Impulse war. Impulse war is
+trained fine on box two. also alternated
+trained fine on box two. also alternated
+between 145 and 230 SPS. PR could be
+between 145 and 230 SPS. PR could be
+ready. Awesome. Let me finish these
+ready. Awesome. Let me finish these
+thoughts and then I'll merge that. Also,
+thoughts and then I'll merge that. Also,
+the profiling I don't think is accurate
+the profiling I don't think is accurate
+on the latest dev. I have to fix that
+on the latest dev. I have to fix that
+today as well. Let me see if I can
+today as well. Let me see if I can
+figure this out first because I think I
+figure this out first because I think I
+might have I don't even necessarily want
+might have I don't even necessarily want
+to implement this now. I just want to
+to implement this now. I just want to
+know that I have the way of doing this
+know that I have the way of doing this
+before I lock in the new experience
+before I lock in the new experience
+buffer
+buffer
+design. Okay. Like if an agent dies,
+design. Okay. Like if an agent dies,
+right? Can't I just technically, let's
+right? Can't I just technically, let's
+say agent two
+say agent two
+dies, can I not just append
+dies, can I not just append
+it? Or even better, can I not just like
+it? Or even better, can I not just like
+prepend
+prepend
+it? Would that work?
+I think
+so. that like this is technically a
+so. that like this is technically a
+possibility because then when you need
+possibility because then when you need
+more free indices you just grab them
+more free indices you just grab them
+from
+from
+here posted twice captain.
+Um, okay. But the other question here is
+Um, okay. But the other question here is
+actually like how likely is this
+actually like how likely is this
+scenario that we end up with
+this like
+um are we realistically going to want to
+um are we realistically going to want to
+collect more than like 128?
+Because typically in puffer we run a lot
+Because typically in puffer we run a lot
+of parallel environments for compute
+of parallel environments for compute
+efficiency. So like 1024 environments
+efficiency. So like 1024 environments
+times
+times
+128 that's already million, right?
+128 that's already million, right?
+That's already a
+million. No, I'm
+million. No, I'm
+dumb. That's 120k. I'm
+dumb. That's 120k. I'm
+stupid. Okay, but we run more than 1024
+stupid. Okay, but we run more than 1024
+environments. Usually we run like 4096.
+environments. Usually we run like 4096.
+So that's
+500k. So
+like there's not going to be a point in
+like there's not going to be a point in
+backcropping
+backcropping
+more than 120. There's just no way with
+more than 120. There's just no way with
+current architectures it matters.
+The only benefit is longer rollouts let
+The only benefit is longer rollouts let
+you compute advantage over longer
+you compute advantage over longer
+horizons. How confident am I that we're
+horizons. How confident am I that we're
+going to need long horizon advantage
+going to need long horizon advantage
+computation longer term?
+on one hand like
+on one hand like
+fundamentally I'm not confident that you
+fundamentally I'm not confident that you
+have to compute long trajectories to
+have to compute long trajectories to
+learn
+stuff but that's going to be dependent
+stuff but that's going to be dependent
+on a bunch of future research and so far
+on a bunch of future research and so far
+it has seemed really important for what
+it has seemed really important for what
+we've been
+we've been
+doing so we'll call that a toss
+up I I think ultimately the conclusion
+up I I think ultimately the conclusion
+here is
+here is
+that we don't deal with masking right
+that we don't deal with masking right
+now. We don't have any active projects
+now. We don't have any active projects
+that require masking, but we have a way
+that require masking, but we have a way
+to steer if we do end up requiring
+to steer if we do end up requiring
+masking. Uh and also
+masking. Uh and also
+technically, could I implement this in
+CUDA? I'm pretty confident I could
+CUDA? I'm pretty confident I could
+implement this operation very
+implement this operation very
+efficiently in CUDA if I had to.
+efficiently in CUDA if I had to.
+Yeah, because you don't actually need to
+Yeah, because you don't actually need to
+append stuff. You could have a fixed
+append stuff. You could have a fixed
+size list and you could just like
+size list and you could just like
+overwrite existing
+overwrite existing
+values. Okay, I'm confident that I could
+values. Okay, I'm confident that I could
+do this efficiently if I had to down the
+do this efficiently if I had to down the
+line. Have you tried to have you thought
+line. Have you tried to have you thought
+about trying to perform transfer
+about trying to perform transfer
+learning from one of the games, say
+learning from one of the games, say
+search and rescue with a multimodal
+search and rescue with a multimodal
+approach if possible that runs 3D? So,
+approach if possible that runs 3D? So,
+here's the issue with that type of
+here's the issue with that type of
+thing. I just talked with a company
+thing. I just talked with a company
+that's doing cool work in that space
+that's doing cool work in that space
+now.
+now.
+Um, the issue with like trying to do
+Um, the issue with like trying to do
+transfer, it doesn't work like train on
+transfer, it doesn't work like train on
+one environment and then transfer to
+one environment and then transfer to
+something totally different. The only
+something totally different. The only
+way that works and the only way that
+way that works and the only way that
+that's been demonstrated to work in
+that's been demonstrated to work in
+other areas of AI is train on a ton of
+other areas of AI is train on a ton of
+tasks and then transfer to something
+tasks and then transfer to something
+kind of similar or kind of in that
+kind of similar or kind of in that
+space. Um, that is just a much larger
+space. Um, that is just a much larger
+scale of research. like fundamentally
+scale of research. like fundamentally
+yes we could technically do it but now
+yes we could technically do it but now
+we're talking about needing hundreds of
+we're talking about needing hundreds of
+games and probably needing at least
+games and probably needing at least
+hundreds of GPUs like for these runs
+hundreds of GPUs like for these runs
+whereas for what we're doing we can
+whereas for what we're doing we can
+still get our fundamental research done
+still get our fundamental research done
+on all these methods uh we can train on
+on all these methods uh we can train on
+like billions or tens or hundreds of
+like billions or tens or hundreds of
+billions of steps and we can do it on
+billions of steps and we can do it on
+like one GPU per run
+like one GPU per run
+so we're doing pretty darn efficient
+so we're doing pretty darn efficient
+research for compute now that type of
+research for compute now that type of
+like generalization stuff is out there
+like generalization stuff is out there
+like yeah we're interested in it but um
+like yeah we're interested in it but um
+not at present
+not at present
+scale. Is this problem related to just
+scale. Is this problem related to just
+the sampling of the experience buffer?
+the sampling of the experience buffer?
+Are you talking about the buffer for
+Are you talking about the buffer for
+puffer m just the sampling of the
+puffer m just the sampling of the
+experience buffer?
+experience buffer?
+Um I technically have a very large
+Um I technically have a very large
+improvement to make on our vectorization
+improvement to make on our vectorization
+uh by integrating uh by having the
+uh by integrating uh by having the
+option to use torch tensors in the
+option to use torch tensors in the
+vectorzation itself. But it's going to
+vectorzation itself. But it's going to
+be way easier for me to implement that
+be way easier for me to implement that
+thing and it's going to be way simpler
+thing and it's going to be way simpler
+if I just wait until Python has good
+if I just wait until Python has good
+threading. And probably if by 3.14 they
+threading. And probably if by 3.14 they
+still don't have good threading, I'm
+still don't have good threading, I'm
+just going to do it in C is most likely
+just going to do it in C is most likely
+what's going to
+what's going to
+happen. But if Python actually gets
+happen. But if Python actually gets
+threading to work correctly, then we
+threading to work correctly, then we
+will be able to do that very very
+will be able to do that very very
+nicely. We'll be able to have like very
+nicely. We'll be able to have like very
+very nice improved vectorzation
+very nice improved vectorzation
+uh with that. At
+least I think we should be able
+least I think we should be able
+to. You need to be able to have uh you
+to. You need to be able to have uh you
+need to be a basically be able to share
+need to be a basically be able to share
+slices of torch tensors with different
+slices of torch tensors with different
+workers and because those are on
+workers and because those are on
+different processes right now it breaks
+different processes right now it breaks
+but if they were to be in
+but if they were to be in
+um on different threads it should work.
+um on different threads it should work.
+Welcome YouTube folks.
+Welcome YouTube folks.
+Okay, so I think that the conclusion of
+Okay, so I think that the conclusion of
+all of this is that uh this is probably
+all of this is that uh this is probably
+still a good buffer design.
+still a good buffer design.
+Realistically, this covers like 95% of
+Realistically, this covers like 95% of
+the cases that we want to learn on. It
+the cases that we want to learn on. It
+does it way better than the previous
+does it way better than the previous
+version of the code. There's a 5% of
+version of the code. There's a 5% of
+cases that the previous code covered
+cases that the previous code covered
+that this just doesn't cover at all. But
+that this just doesn't cover at all. But
+if we really had to, we have an
+if we really had to, we have an
+efficient way of handling that.
+efficient way of handling that.
+I think that's the conclusion from this
+I think that's the conclusion from this
+section which is good. That's like
+section which is good. That's like
+that's a good
+outcome. Anything from Spencer
+outcome. Anything from Spencer
+here? Expert
+here? Expert
+trajectories on the
+trajectories on the
+first
+first
+256 have 7% collision and 2% off road.
+256 have 7% collision and 2% off road.
+So, I may need to prune the data
+set. Interesting. Probably the data
+set. Interesting. Probably the data
+set's just
+noisy. Okay. Um, so I think that what
+noisy. Okay. Um, so I think that what
+we're going to do now, it's 2:30. I
+we're going to do now, it's 2:30. I
+think I'm going to work on the
+think I'm going to work on the
+experience buffer code a little bit. Uh
+experience buffer code a little bit. Uh
+I'm not going to handle masking but I'm
+I'm not going to handle masking but I'm
+going to see if I can get all the other
+going to see if I can get all the other
+edge cases out so that this thing
+edge cases out so that this thing
+generally behaves sely. Actually there
+generally behaves sely. Actually there
+is one other problem that we need to
+is one other problem that we need to
+solve I believe first uh which is quite
+solve I believe first uh which is quite
+a bit
+a bit
+simpler. There's been this weird
+simpler. There's been this weird
+indexing bug that I just need to think
+through right now. The way that we store
+through right now. The way that we store
+data
+data
+like our most common setup is something
+like our most common setup is something
+like
+this. So you got like one 10 24 rows 10
+this. So you got like one 10 24 rows 10
+24 rows.
+We can
+We can
+have offset infos for each dimension
+have offset infos for each dimension
+that help create an original
+tensor. But then you're training
+tensor. But then you're training
+on wait offset and
+post. So then you're training on m like
+post. So then you're training on m like
+you're training on padding right?
+You ideally don't want to train on
+You ideally don't want to train on
+padding because it's a waste of compute
+padding because it's a waste of compute
+resources. Like I had this issue in my
+resources. Like I had this issue in my
+PhD a whole bunch where you would get
+PhD a whole bunch where you would get
+like 5% data density. So you're throwing
+like 5% data density. So you're throwing
+away 95% of your compute if you train on
+away 95% of your compute if you train on
+the padding even if you mask
+it. So the goal is to create dense data,
+it. So the goal is to create dense data,
+not the
+not the
+pad. And in 95% of cases it works as is.
+pad. And in 95% of cases it works as is.
+And in 5% of cases, the thing that I
+And in 5% of cases, the thing that I
+discussed before should allow you to
+discussed before should allow you to
+create dense data where you're basically
+create dense data where you're basically
+like when you run out on one access or
+like when you run out on one access or
+whatever, when you get like to the end
+whatever, when you get like to the end
+of a agent lifespan, you're going to use
+of a agent lifespan, you're going to use
+the next piece of that segment for
+the next piece of that segment for
+another
+another
+agent. And the indexing I had there
+agent. And the indexing I had there
+should
+work.
+work.
+Okay.
+Okay.
+So, the way that this needs to work
+So, the way that this needs to work
+is you
+is you
+put data into each of these
+buffers. And what I was doing right now
+buffers. And what I was doing right now
+is I was having a free index. So I was
+is I was having a free index. So I was
+saying how many rows do you have left
+saying how many rows do you have left
+that are
+that are
+free? And what was happening is if you
+free? And what was happening is if you
+had exactly like the exact number of
+had exactly like the exact number of
+agents as you had data rows, then you
+agents as you had data rows, then you
+have no more indices free. So even
+have no more indices free. So even
+though you have spare room in this
+though you have spare room in this
+buffer, it wasn't picking it up. So I
+buffer, it wasn't picking it up. So I
+think what I have to do is something
+think what I have to do is something
+based on episode
+lengths. If I make a hard assumption
+lengths. If I make a hard assumption
+that we're always going to fill in the
+that we're always going to fill in the
+correct order, I think I can do this.
+correct order, I think I can do this.
+And I can just add a check to make sure
+And I can just add a check to make sure
+I don't screw this up.
+I don't screw this up.
+So I think what I do is I do like numbum
+So I think what I do is I do like numbum
+like
+like
+full
+full
+rows and then when you get to the
+rows and then when you get to the
+end I increment
+end I increment
+this. That way I'm not looking for extra
+this. That way I'm not looking for extra
+rows. I'm looking for how many are
+full. And I didn't want to do this
+full. And I didn't want to do this
+before because the masking thing, but I
+before because the masking thing, but I
+think we're actually fine with the way
+think we're actually fine with the way
+that this
+is. Yeah, this should be 100% fine.
+is. Yeah, this should be 100% fine.
+Okay, that wasn't that
+Okay, that wasn't that
+hard. I guess I was just uh tired before
+hard. I guess I was just uh tired before
+or whatever. Let's uh let's implement
+or whatever. Let's uh let's implement
+this very very carefully because this is
+this very very carefully because this is
+the type of thing where you can
+the type of thing where you can
+introduce large bugs. Check one other
+introduce large bugs. Check one other
+thing in Discord.
+All
+right. What is the current state of the
+code? That's fine.
+So, we still need this
+here. We're going to put a we'll put a
+here. We're going to put a we'll put a
+warning on
+that. This has to be
+that. This has to be
+like full rows.
+How about full
+How about full
+rows is less than on policy
+rows. Data full
+rows. And it doesn't even need to be in
+rows. And it doesn't even need to be in
+data, does
+data, does
+it? We'll do this for now.
+So what I was doing right
+So what I was doing right
+now is I was incrementing this like free
+index. You do need a free index, don't
+index. You do need a free index, don't
+you?
+I could also do just increment full
+rows. But this is the same freaking
+rows. But this is the same freaking
+code, isn't
+it? No, this is not the same code
+it? No, this is not the same code
+because they start at different
+values. These Yeah, these different
+values. These Yeah, these different
+values.
+Okay, that was the thing that I couldn't
+Okay, that was the thing that I couldn't
+figure out before. You need to count
+figure out before. You need to count
+both the free what index you're going to
+both the free what index you're going to
+fill next and you need to count how many
+fill next and you need to count how many
+rows you have full. Those are different
+rows you have full. Those are different
+pieces of information.
+Okay, there's
+breakout
+trains. Looks good.
+We'll like make sure a couple
+We'll like make sure a couple
+environments run and then we will do
+environments run and then we will do
+captain's PR and then uh with the next
+captain's PR and then uh with the next
+couple hours afterwards, assuming that
+couple hours afterwards, assuming that
+that goes well, we will continue to
+that goes well, we will continue to
+clean up this code a
+bit. 50 second breakout solve. That is
+bit. 50 second breakout solve. That is
+actually faster than before as well. I
+actually faster than before as well. I
+think we were throwing away some data or
+think we were throwing away some data or
+something
+before. We must have been like throwing
+before. We must have been like throwing
+away some
+data. Let's also just add a decent
+data. Let's also just add a decent
+warning while we're here.
+That's decent. Endur MMO frames 400k
+That's decent. Endur MMO frames 400k
+with the big model. Pretty
+with the big model. Pretty
+decent. We're
+decent. We're
+happy. Make sure I didn't screw it up
+happy. Make sure I didn't screw it up
+with that uh that
+with that uh that
+warning. That's good. Cool.
+Okay, that is uh that's a clean
+fix. Let's get this merge going.
+He said that this was ready,
+He said that this was ready,
+right?
+right?
+18,000 lines.
+Holy. You must have committed something
+Holy. You must have committed something
+you shouldn't have committed,
+you shouldn't have committed,
+right? 18,000 lines,
+right? 18,000 lines,
+ma'am. Yeah. So, let me just merge that
+ma'am. Yeah. So, let me just merge that
+real quick. Hang
+on. Fine
+on. Fine
+format. I don't mind dirty merging this,
+format. I don't mind dirty merging this,
+but holy hell,
+but holy hell,
+man. I know the end of it is like 8K.
+man. I know the end of it is like 8K.
+Where's the other 10K coming from?
+to be determined whether or not we
+to be determined whether or not we
+accept
+accept
+CMake. And we'll either accept that
+CMake. And we'll either accept that
+though or uh find something
+though or uh find something
+better and we'll get
+merged. I'm like waiting for the joke
+merged. I'm like waiting for the joke
+file that's like 10,000 lines of
+file that's like 10,000 lines of
+haha. Okay, these we've reviewed
+haha. Okay, these we've reviewed
+already.
+already.
+We did like a full review of this
+We did like a full review of this
+environment. Took like two or three days
+environment. Took like two or three days
+on
+stream. This is most of
+it. Oh, you
+it. Oh, you
+included All right. You included source
+included All right. You included source
+files for um
+for some dependencies. It seems probably
+for some dependencies. It seems probably
+there's like another one of
+these. Yeah, DL Malik. There you go. So,
+these. Yeah, DL Malik. There you go. So,
+it's it's big because
+it's it's big because
+of not a fan of the bender depths like
+this. Makes it annoying for us to like
+this. Makes it annoying for us to like
+keep track of our code base size and
+keep track of our code base size and
+stuff.
+Does anybody know how GitHub tracks like
+Does anybody know how GitHub tracks like
+line counts and stats? Can I put stuff
+line counts and stats? Can I put stuff
+in like external or something and have
+in like external or something and have
+it not count
+it not count
+it if we're going to do that?
+shaders. We reviewed these as
+well. We actually will get to run this
+well. We actually will get to run this
+end in a few minutes. Um, if I can get
+end in a few minutes. Um, if I can get
+this integrated and set up. It's a
+this integrated and set up. It's a
+really cool environment. It's like
+really cool environment. It's like
+really, really a cool environment. All
+really, really a cool environment. All
+credit to Captain for uh the code on
+credit to Captain for uh the code on
+this. I helped with I helped with some
+this. I helped with I helped with some
+of the front end for
+of the front end for
+it. Okay, so we're going to approve
+this. This
+this. This
+beast
+beast
+now. Not fan of
+cmake. We'll
+see. Uh let's see.
+of
+of
+dependency files
+going
+something
+Uh we will do
+this workflow requires approval from a
+this workflow requires approval from a
+maintainer.
+question. Yeah. No, it doesn't require
+question. Yeah. No, it doesn't require
+it's just getting
+merged.
+merged.
+Okay, let's see if we can get this to
+Okay, let's see if we can get this to
+run. I want to run the uh the renderer
+run. I want to run the uh the renderer
+for this. It's a really cool end. Very
+for this. It's a really cool end. Very
+happy to have this popper in any
+happy to have this popper in any
+state. Yeah, there it is. 18,000 lines.
+state. Yeah, there it is. 18,000 lines.
+So, if we ignore like the was it 10,000
+So, if we ignore like the was it 10,000
+lines of
+lines of
+dependencies? Um, what is it?
+10,000? Not quite. It's like 8,000
+10,000? Not quite. It's like 8,000
+lines. So, like a 10k line PR. Um, that
+lines. So, like a 10k line PR. Um, that
+is probably a half or a third of the
+is probably a half or a third of the
+size of the Puffer Code base. Probably
+size of the Puffer Code base. Probably
+like a third the size of all of Puffer.
+like a third the size of all of Puffer.
+So, this is a very big end.
+So, this is a very big end.
+Uh, did Captain tell me how to compile
+it? CM
+it? CM
+make. Is there a separate setup or
+make. Is there a separate setup or
+something? Oh, there's a tunnel.
+Maybe this will
+work. So yeah, the thing that's tricky
+work. So yeah, the thing that's tricky
+on the infrastructure side of this is
+on the infrastructure side of this is
+like this has a couple extra
+like this has a couple extra
+dependencies that are annoying to build
+dependencies that are annoying to build
+and link. So Captain just use CMake for
+and link. So Captain just use CMake for
+it. Um I really do not like CMake.
+it. Um I really do not like CMake.
+I really hope that we can find a way to
+I really hope that we can find a way to
+just like have a really simple build
+just like have a really simple build
+script that just does this and cut out
+script that just does this and cut out
+all the extra dependency and stuff, but
+all the extra dependency and stuff, but
+we will see. I figured we will merge it
+we will see. I figured we will merge it
+for now so that we can run experiments
+for now so that we can run experiments
+on it. I kind of want to have all the
+on it. I kind of want to have all the
+new M's uh checked into
+new M's uh checked into
+Puffer and that also lets me iterate on
+Puffer and that also lets me iterate on
+the models a little bit to help out the
+the models a little bit to help out the
+uh to help them out on this.
+So
+imple
+imple
+runs it does not render.
+Okay. Uh I guess you have to put render
+Okay. Uh I guess you have to put render
+equals through in the
+end. Yeah.
+Holy.
+Holy.
+Um, that doesn't seem to be the intended
+behavior.
+Captain, I imagine that this is because
+Captain, I imagine that this is because
+it has
+And we can hack it for
+And we can hack it for
+now. There we are.
+So this is just the uh
+So this is just the uh
+built-in like scripted opponent versus a
+built-in like scripted opponent versus a
+random agent random neural
+net rendering at I don't
+net rendering at I don't
+know this is not real time. This is
+know this is not real time. This is
+faster than real
+time. But yeah this looks
+time. But yeah this looks
+sweet. We got to fix resolution. We got
+sweet. We got to fix resolution. We got
+to fix like render arcs and stuff. But
+to fix like render arcs and stuff. But
+this is
+this is
+sweet. This is going to be so cool to
+sweet. This is going to be so cool to
+have in puffer.
+like a full
+game.
+Okay, I'm going to rename it to puffer
+Okay, I'm going to rename it to puffer
+impulse force.
+Then we're going to see what
+Then we're going to see what
+uh
+Holy Takes a second to
+Holy Takes a second to
+compile.
+compile.
+Shenanigans. I kind of want to disable
+Shenanigans. I kind of want to disable
+this annoying compile stuff to be
+this annoying compile stuff to be
+honest. I don't think it makes anything
+honest. I don't think it makes anything
+much
+faster. Just makes dev more
+annoying. It's
+annoying. It's
+dead. Is
+it? Are we good
+now? Okay.
+now? Okay.
+Refresh. Internet blip, I guess. Or
+Refresh. Internet blip, I guess. Or
+reream server blip.
+So, I did find
+So, I did find
+something. Hi. Are you building a game
+something. Hi. Are you building a game
+using reinforcement learning? We're
+using reinforcement learning? We're
+building a large number of games and
+building a large number of games and
+using reinforcement learning on
+using reinforcement learning on
+them. They're all on puffer.ai, at least
+them. They're all on puffer.ai, at least
+the one so far. We have more in
+the one so far. We have more in
+development.
+development.
+Everything from like breakout up to more
+Everything from like breakout up to more
+complicated and interesting things like
+complicated and interesting things like
+this mini
+MMO. We got lots of fun stuff in
+here. You can join the Discord to get
+here. You can join the Discord to get
+involved with the development of it if
+involved with the development of it if
+you're
+interested. Okay, I think the stream is
+interested. Okay, I think the stream is
+back. We had a little bit of a like
+back. We had a little bit of a like
+server bug. I dropped a ton of frames,
+server bug. I dropped a ton of frames,
+but should be good now.
+but should be good now.
+Um, yeah, Captain. I It dropped like a
+Um, yeah, Captain. I It dropped like a
+ton of frames. It was just the reream
+ton of frames. It was just the reream
+servers being
+servers being
+bugged and I might have to get a
+bugged and I might have to get a
+different provider for that. Their
+different provider for that. Their
+servers grew up once in a
+while. So, I found
+while. So, I found
+this replacement equals
+this replacement equals
+false. Discord link. Absolutely. It's
+false. Discord link. Absolutely. It's
+very easy to remember.
+Most of our contributors came in with
+Most of our contributors came in with
+zero RL experience as well and are now
+zero RL experience as well and are now
+contributing very very productively. So
+contributing very very productively. So
+I don't know your background, but if you
+I don't know your background, but if you
+can code, you're probably
+good. Replacement
+good. Replacement
+false. This is sketchy to
+false. This is sketchy to
+me. It should be replacement true,
+me. It should be replacement true,
+right?
+Has it always been this
+way? Yeah, look the default in torch
+way? Yeah, look the default in torch
+says
+says
+true. So if I just do
+true. So if I just do
+um multinnomial
+What happens?
+It should be faster with replacement,
+right? You would think
+so. Oh, you know what? Hang on. Let me
+so. Oh, you know what? Hang on. Let me
+get one more data point on this and then
+get one more data point on this and then
+I have an idea.
+Okay, so this isn't faster on its own,
+Okay, so this isn't faster on its own,
+but what about if I do
+both? Cuz it could be that the
+both? Cuz it could be that the
+concatenated
+concatenated
+one still has the replacement
+one still has the replacement
+[Music]
+[Music]
+overhead. Did you see the small changes
+overhead. Did you see the small changes
+I made to
+I made to
+demo.py? Uh, I did not.
+I'm trying to fix the multinnomial
+I'm trying to fix the multinnomial
+sampling thing at the moment for
+you. I'm actually very surprised that
+you. I'm actually very surprised that
+doesn't fix it.
+Okay. Well, what else does this do? So,
+Okay. Well, what else does this do? So,
+this calls
+multinnomial and then it calls reshape
+multinnomial and then it calls reshape
+and that's
+and that's
+it. I mean that's the whole operation
+then. And then log prop here.
+We should probably just get the torch
+We should probably just get the torch
+profiler out or something,
+profiler out or something,
+right? Torch profiler is such a
+right? Torch profiler is such a
+pain. But I think that's probably what
+pain. But I think that's probably what
+we have to do.
+was able to figure out.
+was able to figure out.
+Yeah, it's just kind of annoying.
+It's hard to read. Yeah, I know. That's
+It's hard to read. Yeah, I know. That's
+why I don't like
+it. Can we do something like this real
+it. Can we do something like this real
+quick?
+quick?
+No. If I just do
+like If we just do this
+Who died this?
+who did time
+total. Let's see if this does anything.
+total. Let's see if this does anything.
+I'm
+sure Okay.
+So sample logits total
+So sample logits total
+is 200 micro
+is 200 micro
+seconds
+multinnomial. This seems pretty evenly
+multinnomial. This seems pretty evenly
+distributed, doesn't it?
+Wait. Okay. 30% in
+multinnomial
+30% in
+30% in
+sum
+sum
+gather
+gather
+copy. That seems pretty evenly
+copy. That seems pretty evenly
+distributed to me.
+But you can see here it's um it's CPU
+But you can see here it's um it's CPU
+time, isn't
+time, isn't
+it? Oh, here it is. It is the
+multinnomial multinnomial
+multinnomial multinnomial
+taking a whole bunch of time.
+taking a whole bunch of time.
+It's all CPU
+time.
+Okay. So, do we need to look at the
+Okay. So, do we need to look at the
+multinnomial code then?
+underscore categorical sample.
+Oh, and then there's a scatter inside of
+Oh, and then there's a scatter inside of
+it. Okay. What is underscore
+categorical? Categorical
+Didn't I just read the categorical
+Didn't I just read the categorical
+source code and see if it had
+source code and see if it had
+multinnomial in
+multinnomial in
+it? Or am I going
+it? Or am I going
+crazy?
+crazy?
+Wait,
+Wait,
+what? Categorical calls
+what? Categorical calls
+multinnomial and multinnomial makes a
+categorical. Yeah, we're not happy with
+categorical. Yeah, we're not happy with
+that.
+Is there a way to find where the source
+Is there a way to find where the source
+is for
+this? Okay, get out of here, bot.
+It seems like it's
+It seems like it's
+um
+multinnomial. It seems like it calls
+multinnomial. It seems like it calls
+this.
+So then I don't understand how these
+So then I don't understand how these
+things fit
+together because this makes a
+categorical and then this
+categorical and then this
+does the sample on
+this underscore multinnomial
+So wait, this
+So wait, this
+is of a this is a
+constraint that has a
+check that doesn't do
+check that doesn't do
+anything. How does this make any sense?
+So multinnomial
+So multinnomial
+right we get to
+right we get to
+here then this makes a
+here then this makes a
+categorical and then this
+calls this
+multinnomial which takes prob sample
+multinnomial which takes prob sample
+shape
+It's not this,
+right? Is it
+right? Is it
+this? This is
+Onyx. Could it be this?
+But I mean this is defined unless this
+But I mean this is defined unless this
+import gets overridden
+somehow. Where is this?
+for dot
+multinnomial. It's got to be this,
+multinnomial. It's got to be this,
+right?
+There's an underscore
+There's an underscore
+here. Do these import
+star. Okay, this init file is not going
+star. Okay, this init file is not going
+to be particularly useful. So, I can't
+to be particularly useful. So, I can't
+tell what the hell it's calling.
+tell what the hell it's calling.
+to do this
+multinnomial. Was there a time
+multinnomial. Was there a time
+multinnomial in this
+trace? Didn't I just do
+this? Where did I uh I put this? Here it
+this? Where did I uh I put this? Here it
+is.
+So a 10 multinnomial
+right does this mean that the hang on if
+right does this mean that the hang on if
+I see the overhead in a 10 multinnomial
+This is 1.7
+This is 1.7
+ms. And then this says that I
+have like 300 ms micro uh 300 micro of
+have like 300 ms micro uh 300 micro of
+that in these ops. So then where's the
+that in these ops. So then where's the
+rest of it?
+The actual
+The actual
+um multial isn't that slow. It's
+um multial isn't that slow. It's
+probably the rapper blue,
+right? Do we even need this? Is there a
+right? Do we even need this? Is there a
+simpler way of doing this?
+Num
+Num
+samples indices are sampled from the
+samples indices are sampled from the
+multinnomial.
+We're only ever going to sample
+one. Right.
+This is a generalization of
+um this is literally just a prop sample.
+Okay, so you make a categorical and it
+Okay, so you make a categorical and it
+calls
+calls
+multinnomial and then it can it can
+multinnomial and then it can it can
+potentially do more than one sample I
+potentially do more than one sample I
+guess.
+And
+And
+like it's probably this
+like it's probably this
+thing cuz this is a 10 multinnomial
+log of
+input utils graph
+input utils graph
+context and then it's by
+name. I'm very confused if this is not
+name. I'm very confused if this is not
+just a prop
+sample. Is this doing anything other
+sample. Is this doing anything other
+than just
+than just
+like sampling based on prob and giving
+like sampling based on prob and giving
+you log prop returned?
+multinnomial logits to
+props. You can give this thing logit to
+props. You can give this thing logit to
+start
+start
+with. I think you can do even better
+with. I think you can do even better
+than
+than
+that. We're
+going to ask dumb questions and get some
+going to ask dumb questions and get some
+dumb
+answers. Multial sample doing anything
+answers. Multial sample doing anything
+other than just giving
+uh it
+I guess that's all it
+is. Okay, so like this goes through a
+is. Okay, so like this goes through a
+whole bunch of garbage.
+Okay. I don't actually
+know. I don't know about this.
+Watch steps.
+Yeah. So, it's not doing
+anything. It's slow.
+Semicorn
+Semicorn
+basic GPU.
+I'm just looking if there's like a lower
+I'm just looking if there's like a lower
+level function for this.
+No, not
+categorical. Add gumball noise to log
+props. Does that work?
+Hey
+bet. Does this work?
+That's different.
+Bet. Or it should be
+different. Maybe it's the same.
+I that might actually be the
+same. I remember that from a totally
+same. I remember that from a totally
+different context from like years ago.
+Yeah, the multinnomial is slow.
+Yeah, this is different. This is so that
+Yeah, this is different. This is so that
+you can compute
+gradients. So I do remember this
+gradients. So I do remember this
+correctly.
+So, it is actually interesting to think
+So, it is actually interesting to think
+about that. I haven't thought about that
+about that. I haven't thought about that
+in a while. So,
+thanks. It's small. What do you mean?
+thanks. It's small. What do you mean?
+No, it's the the function is
+No, it's the the function is
+screwy. Their function has like 10
+screwy. Their function has like 10
+layers of you don't
+need. As always, fan code
+Oh, this is so funny. This is
+like I I was interning under this guy as
+like I I was interning under this guy as
+a high school student about in this time
+a high school student about in this time
+period. That's funny as hell. This is
+period. That's funny as hell. This is
+from 2018, man.
+Is it relevant? This is like super
+old,
+old,
+right? Where did I just put your
+link?
+Funny to see your time come 15
+Funny to see your time come 15
+minutes free. What you want me to do?
+Yeah, this isn't what we want either. I
+Yeah, this isn't what we want either. I
+have installed instructions PR for
+have installed instructions PR for
+building. You weren't using the latest
+building. You weren't using the latest
+version. What do you mean I wasn't using
+version. What do you mean I wasn't using
+the latest
+the latest
+version?
+What? The PR that I merged wasn't the
+What? The PR that I merged wasn't the
+latest version?
+pip install- e dot doesn't do it from
+pip install- e dot doesn't do it from
+the impulse wars
+directory.
+Oh, okay.
+Well, I I pip installed from your
+Well, I I pip installed from your
+directory with your pipe like your
+toml. This is so silly.
+Isn't it just like argument of a or
+Isn't it just like argument of a or
+something? I have DSA algorithm. I don't
+something? I have DSA algorithm. I don't
+know
+know
+nothing. Should probably
+nothing. Should probably
+study. That's what I would suggest.
+study. That's what I would suggest.
+I literally had to look uh look that up
+I literally had to look uh look that up
+like last week or whatever because I
+like last week or whatever because I
+it's just domain. It's um data
+it's just domain. It's um data
+structures and algorith just a standard
+structures and algorith just a standard
+fang
+fang
+annoying like solve tricky impractical
+annoying like solve tricky impractical
+questions
+questions
+live. All right, with the advertising
+bet, shouldn't it just be
+like shouldn't it just be internally
+like shouldn't it just be internally
+doing like argument
+doing like argument
+of rand less than some
+Can I just do this?
+Yeah, I did fix
+Yeah, I did fix
+that. I might have rebroken it. We'll
+that. I might have rebroken it. We'll
+see.
+But fully compiles the uh the eval the
+But fully compiles the uh the eval the
+eval
+eval
+pass. And then the backward is mostly
+pass. And then the backward is mostly
+fast with
+2DN. That's been a thing for a while,
+2DN. That's been a thing for a while,
+but
+So, this actually does noise on
+So, this actually does noise on
+GPU. So, hang on. We should be able to
+GPU. So, hang on. We should be able to
+do something with this then if we're a
+do something with this then if we're a
+little clever, right?
+or that's not it, right?
+See if that does anything.
+It would be pretty sad if that did do
+something, but uh it's
+possible. So the idea here is we just
+possible. So the idea here is we just
+bypass the all the multinomial
+bypass the all the multinomial
+shenanigans. Argument CUDA is not
+shenanigans. Argument CUDA is not
+implemented for
+B. So you can do torch sum, right?
+Is this running the same function?
+What is this?
+Five, I guess. 17.
+What is the size and
+What is the size and
+shape
+shape
+categorical? Yeah, it's just they just
+categorical? Yeah, it's just they just
+give you some probabilities, man. And
+give you some probabilities, man. And
+it's like for some reason something is
+it's like for some reason something is
+slow.
+Okay, we still
+Okay, we still
+have 40% time in forward
+have 40% time in forward
+pass. Not
+ideal. Goal for
+ideal. Goal for
+today, mostly cleaning up the uh
+today, mostly cleaning up the uh
+experience buffer, improving performance
+experience buffer, improving performance
+on that. And uh Captain just PR this
+on that. And uh Captain just PR this
+like 10,000 line environment that's
+like 10,000 line environment that's
+currently bottlenecked by action
+currently bottlenecked by action
+sampling. Plus I've had a couple other
+sampling. Plus I've had a couple other
+requests for that. So I'm spending a
+requests for that. So I'm spending a
+little bit of time seeing if I can
+little bit of time seeing if I can
+improve that right now. And then if I
+improve that right now. And then if I
+have time after that I will probably go
+have time after that I will probably go
+back to cleaning up the experience
+back to cleaning up the experience
+buffer, getting some new experiments
+buffer, getting some new experiments
+running and things like that. You need
+running and things like that. You need
+to fix the panel
+to fix the panel
+profiling. That is true.
+I don't know. We can answer whatever you
+I don't know. We can answer whatever you
+want. It's a free country.
+Okay.
+So, okay. So, now I see soft
+So, okay. So, now I see soft
+max. Soft max in here
+max. Soft max in here
+is taking up the
+time. Uh, where the heck should Softmax
+time. Uh, where the heck should Softmax
+be getting called?
+What should be calling softmax
+here? What is this? I just like torch
+here? What is this? I just like torch
+profile
+shenanigans.
+Um one sample per element.
+Um, does log prop
+call broadcast tensors and then
+gather logic entropy.
+Okay. Okay. If I do this, is this
+Okay. Okay. If I do this, is this
+included?
+Okay, so there's
+Okay, so there's
+still soft
+max logic to
+props.
+Oh, logitics to prompts.
+So when you call multinnomial does it do
+So when you call multinnomial does it do
+this
+internally? Okay, this does do a soft
+internally? Okay, this does do a soft
+max.
+What you have to do,
+What you have to do,
+right? You have to do a soft max for
+this. So that's now what's taking up the
+this. So that's now what's taking up the
+time.
+and A10 soft max is mostly on the uh it
+and A10 soft max is mostly on the uh it
+is on the CPU
+here we are deep in PyTorch code not
+here we are deep in PyTorch code not
+that deep to be
+that deep to be
+fairly barely getting to the C++
+I want to see if this
+I want to see if this
+calls uh if this calls logistics to
+calls uh if this calls logistics to
+probs or
+probs or
+something. So when you do
+something. So when you do
+this because here you can give it
+this because here you can give it
+logits,
+logits,
+right? Yeah, you're allowed to give this
+right? Yeah, you're allowed to give this
+thing logits and then it just saves
+thing logits and then it just saves
+this
+categorical and then categorical does
+It norms
+It norms
+it or gives it logic. This is self
+it or gives it logic. This is self
+param and then underscore innit or
+param and then underscore innit or
+whatever. So underscore innit on
+whatever. So underscore innit on
+distribution. Does this have
+stuff? This doesn't seem to do
+anything. I don't see any normalization
+anything. I don't see any normalization
+happening
+happening
+there. So you do this thing, right?
+there. So you do this thing, right?
+Logit minus
+this that gives logits and
+this that gives logits and
+then oh yeah props is logit to probs.
+then oh yeah props is logit to probs.
+Cool. So logits to probs.
+There you
+There you
+go. It just does soft
+max. So logistic problems on. So it
+max. So logistic problems on. So it
+normalizes and then does
+this. Wait. log some
+x. Can we cut that down?
+log sum of x of log
+x and then the soft max does this.
+Wait, isn't this the
+Wait, isn't this the
+same some act
+logs? We still need the props, right?
+logs? We still need the props, right?
+Because we need log props.
+You just linked me the same distribution
+bet. Well, but the thing is it's not
+bet. Well, but the thing is it's not
+even like really okay. This whole thing
+even like really okay. This whole thing
+is like massively written out to be more
+is like massively written out to be more
+confusing than this is. Look, this is
+confusing than this is. Look, this is
+literally all that's happening.
+literally all that's happening.
+Okay, this is all the math that that you
+Okay, this is all the math that that you
+need. You don't need to know anything
+need. You don't need to know anything
+about stats or distributions or
+about stats or distributions or
+anything. P 0, P1,
+anything. P 0, P1,
+P2,
+P2,
+P3. These are numbers that sum to one.
+P3. These are numbers that sum to one.
+Okay. Then let's say this is like 0.1,
+Okay. Then let's say this is like 0.1,
+this is like 2, this is like three, and
+this is like 2, this is like three, and
+this was like 04. All right, these sum
+this was like 04. All right, these sum
+to one. So what this is going to do is
+to one. So what this is going to do is
+it generates a random number. Let's say
+it generates a random number. Let's say
+it's
+it's
+0.45 and then it
+0.45 and then it
+goes is this number bigger than this?
+goes is this number bigger than this?
+No. Okay, let's add this. Let's add this
+No. Okay, let's add this. Let's add this
+to the sum. Is the sum of these two
+to the sum. Is the sum of these two
+bigger? No, it's not. Okay, let's keep
+bigger? No, it's not. Okay, let's keep
+going.
+going.
+Is this one bigger if I add this one?
+Is this one bigger if I add this one?
+Yes, it is. So, this is the best one.
+Yes, it is. So, this is the best one.
+So, 012 and it's going to return index
+So, 012 and it's going to return index
+two. That's the entire
+two. That's the entire
+operation. There's just there's
+operation. There's just there's
+additional normalization and stuff, but
+additional normalization and stuff, but
+that's the entire
+operation. So, this is not really
+operation. So, this is not really
+complicated. Yeah, there is some like
+complicated. Yeah, there is some like
+the thing is you don't get
+the thing is you don't get
+probabilities, you get logits which is
+probabilities, you get logits which is
+like you have to then transform those
+like you have to then transform those
+into probs and usually you throw that
+into probs and usually you throw that
+through a softmax for numerical
+through a softmax for numerical
+stability. But uh like conceptually you
+stability. But uh like conceptually you
+don't need to know anything about
+don't need to know anything about
+advanced prob or stats or anything like
+advanced prob or stats or anything like
+it's really really basic. It's just
+it's really really basic. It's just
+there are 10 layers of code for
+there are 10 layers of code for
+something that is very
+something that is very
+simple. So that's all I have to figure
+simple. So that's all I have to figure
+out how to get around.
+like this here is this is for numerical
+like this here is this is for numerical
+stability and then the soft max is
+stability and then the soft max is
+technically also for numerical
+technically also for numerical
+stability. So
+like let me see what quantities we need.
+like let me see what quantities we need.
+Do we ever need
+probs? So we need log
+probs? So we need log
+prop and entropy.
+So we
+norm log prop do this just a
+broadcast. Okay. So this one doesn't
+broadcast. Okay. So this one doesn't
+make a ton of sense to me.
+Let me just like paste this and ask some
+Let me just like paste this and ask some
+questions here. I'm
+questions here. I'm
+confused. I'm very confused on
+this. Hey YouTube folks, welcome. We're
+this. Hey YouTube folks, welcome. We're
+currently doing numerical optimizations
+currently doing numerical optimizations
+on our uh RL inference path,
+on our uh RL inference path,
+specifically the action
+sampling. Got to make puffer lip go
+fast. Actually, let's just copy all
+fast. Actually, let's just copy all
+this.
+cumulative
+cumulative
+distribution in the B
+Isn't that just like incredibly
+Isn't that just like incredibly
+stupid? Wait, is that actually how
+stupid? Wait, is that actually how
+things Why the hell would you binary
+things Why the hell would you binary
+search when you're computing the
+search when you're computing the
+cumulative
+distribution? You should just be able to
+distribution? You should just be able to
+like get the index in the process of
+like get the index in the process of
+computing the
+computing the
+CDF or the cumitive distribution, not
+CDF or the cumitive distribution, not
+CDF.
+like you I showed you right you don't
+like you I showed you right you don't
+need to binary search it you only need
+need to binary search it you only need
+to like binary search it if you have a
+to like binary search it if you have a
+really long array and like you're doing
+really long array and like you're doing
+this the sum
+first well because in this case you
+first well because in this case you
+literally get the answer in the process
+literally get the answer in the process
+of doing the cumulative
+of doing the cumulative
+sum
+right so Technically, yes, you can
+right so Technically, yes, you can
+improve over the one that I wrote. Uh,
+improve over the one that I wrote. Uh,
+but you'd have to write a
+but you'd have to write a
+kernel. I just did cumulative sum, but
+kernel. I just did cumulative sum, but
+the thing is we still have uh it's still
+the thing is we still have uh it's still
+now we still have the soft max and the
+now we still have the soft max and the
+soft max is slow. So now my thing is
+soft max is slow. So now my thing is
+fast, but there's still the soft max
+fast, but there's still the soft max
+sample, the soft max. Um, so I'm trying
+sample, the soft max. Um, so I'm trying
+to see if we can combine some
+to see if we can combine some
+operations.
+Is Gumbo Mac
+stable? Hang on. What is
+this? Oh, that's interesting.
+That's Yeah. Well, torch
+doesn't. Let me see if this does
+anything. And then we replace this
+anything. And then we replace this
+where the multinnomial is.
+So we just
+So we just
+[Music]
+do I guess it's just going to be
+do I guess it's just going to be
+like
+dumbbell and then you still need normal
+dumbbell and then you still need normal
+objects but just avoid soft max
+Maybe I guess this makes sense because
+Maybe I guess this makes sense because
+like the action distribution doesn't
+like the action distribution doesn't
+have to be differentiable, right?
+Okay. So, now we can see what's wrong
+Okay. So, now we can see what's wrong
+with this film.
+random. So now the noise
+is the noise is now the bottleneck.
+thoughts.
+Allocate a giant ass
+Allocate a giant ass
+class CDFS lookup
+table. Generate a bunch of random
+table. Generate a bunch of random
+numbers.
+Make your own cuda. Your own included
+Make your own cuda. Your own included
+that avoids all the stupid size
+checks.
+Uh it's really weird how like every
+Uh it's really weird how like every
+single thing I've tried is about the
+single thing I've tried is about the
+same
+same
+speed. Like Now it's bottlenecked by a
+speed. Like Now it's bottlenecked by a
+random number gen. It seems it's also
+random number gen. It seems it's also
+all CPU bottleneck which is
+weird. Ideally eager mode should also be
+weird. Ideally eager mode should also be
+fast.
+happen. So this can be
+Awesome. Check that shortly.
+This random noise
+This random noise
+[Music]
+[Music]
+is you always need to regenerate the
+is you always need to regenerate the
+noise, right?
+There's no way that's going to be
+good. I mean, we got it right. Where is
+good. I mean, we got it right. Where is
+it? Right here.
+it? Right here.
+Right. Rand likes 800.
+It's one rand. It's a random number per
+It's one rand. It's a random number per
+action option.
+Captain. Why is the CPU time that
+high? Does this not like generate the
+high? Does this not like generate the
+noise on GPU?
+My make noise
+Yeah. Heat.
+Okay, this is
+Okay, this is
+something. Yeah, I don't know what
+something. Yeah, I don't know what
+that's doing.
+Uh, how about if we c we can catch the
+Uh, how about if we c we can catch the
+tensor if not the noise, right? So we
+tensor if not the noise, right? So we
+don't have to keep remaking it. Maybe
+don't have to keep remaking it. Maybe
+that helps.
+like. How about that?
+So,
+um
+storage zero like
+Okay.
+And
+then make sure you plot the R. I'm not
+then make sure you plot the R. I'm not
+catching the RNG. I'm just catching the
+catching the RNG. I'm just catching the
+storage tensor, Okay.
+So now uniform is slow. Huh?
+I'm kind of tempted to bet, but I don't
+I'm kind of tempted to bet, but I don't
+really think you
+can. You that guy. Could this be slow?
+Like RNG shouldn't be slow,
+right? Is this like some dumb thing
+right? Is this like some dumb thing
+where you have to get it from a certain
+where you have to get it from a certain
+stream or something? So like it's not
+stream or something? So like it's not
+parallelizable.
+bunch of internal checks. Technically,
+bunch of internal checks. Technically,
+it could be that it is it is CPU time.
+it could be that it is it is CPU time.
+Do they have like are they doing checks
+Do they have like are they doing checks
+per element or something? That
+guy. Welcome, Peanut.
+guy. Welcome, Peanut.
+Size check should not account for this.
+Size check should not account for this.
+They would have to be checking every
+They would have to be checking every
+element or
+something. Hang on. Let me just check
+something. Hang on. Let me just check
+for ghosts real
+quick. Is that faster or did I just get
+quick. Is that faster or did I just get
+lucky? No, I just got lucky.
+Okay, see you, man. Good
+Okay, see you, man. Good
+luck. Make sure you have your work
+luck. Make sure you have your work
+saved. Boxes are getting shipped or
+saved. Boxes are getting shipped or
+carried or whatever
+potentially. What about tweaking some
+potentially. What about tweaking some
+consoles? What?
+This is super irritating.
+Well, I shouldn't rely on
+Well, I shouldn't rely on
+um I shouldn't rely on this. I want to
+um I shouldn't rely on this. I want to
+do the end to end
+speed. See if that has changed anything
+speed. See if that has changed anything
+because there's a ton of overhead in the
+because there's a ton of overhead in the
+profiler. So, let's see if this has
+profiler. So, let's see if this has
+changed anything.
+No. Uh because compiling is a pain in
+No. Uh because compiling is a pain in
+the ass
+the ass
+generally and like if you want a library
+generally and like if you want a library
+that only works properly in full compile
+that only works properly in full compile
+mode like use jacks.
+or Tiny. Actually, if I wanted a library
+or Tiny. Actually, if I wanted a library
+that only works in compile mode, I'd use
+Tiny. It's like dramatically better
+Tiny. It's like dramatically better
+software.
+I
+mean, I could technically cack the
+mean, I could technically cack the
+noise.
+Let me try that real quick. Cuz if that
+Let me try that real quick. Cuz if that
+doesn't work, then nothing's going to
+doesn't work, then nothing's going to
+work.
+This is going to be somewhat
+tricky. I don't want to spend all day on
+tricky. I don't want to spend all day on
+it, but I will try something.
+Um,
+Okay.
+Now you get to like the key thing here
+Now you get to like the key thing here
+is we get to comment this out right
+Yeah. Okay. So, now we profile it and
+Yeah. Okay. So, now we profile it and
+see what the heck it says.
+see what the heck it says.
+I'm starting to suspect the profiler
+sucks because this doesn't make sense.
+Yeah. So
+here now it's saying add is taking
+This
+time it does say this is faster.
+Let's do it. Let's see if this changes
+anything. Nope. That's what it says. It
+anything. Nope. That's what it says. It
+said add is taking time.
+No, we're not making
+No, we're not making
+environments continuous over this
+environments continuous over this
+We're going to solve the
+We're going to solve the
+problem.
+I imagine this is like a combination of
+I imagine this is like a combination of
+profiling being dumb and a few other
+profiling being dumb and a few other
+things like just being hazy.
+What's wrong with this thing?
+doesn't seem right.
+Did I uh I think I screwed up something
+Did I uh I think I screwed up something
+here. Hang
+on. No.
+Not
+stack zero. Okay. Was very close.
+Okay, so that gives you
+Okay, so that gives you
+250. Um, this is still incredibly
+250. Um, this is still incredibly
+freaking
+freaking
+slow, right?
+Can't do that actually because it's
+Can't do that actually because it's
+uh these ones need to actually be back
+through. That's still freaking slow.
+Got some
+Then you get end of bottleneck
+top. Yeah, it's rough.
+There's not much way around this
+then. 128 a m*
+then. 128 a m*
+16 48 plot buffered. Yeah, you can't do
+16 48 plot buffered. Yeah, you can't do
+that.
+It's got to be like 512.
+Is the end really going to bottleneck
+Is the end really going to bottleneck
+that hard?
+Definitely got to be like
+512. Super obnoxious how that is
+though. Is it hard bottlenecks on
+ends? It really shouldn't be hard
+ends? It really shouldn't be hard
+bottleneck on ends.
+bottleneck on ends.
+copies. Really shouldn't have to quad
+copies. Really shouldn't have to quad
+buffer.
+Eight.
+Eight.
+Six. about
+this. Okay. So now we have 45% end time.
+This shouldn't be the
+issue. Going to try some stuff though.
+Okay. It's just the end being
+Okay. It's just the end being
+slow. It's hard to get around.
+You get way more
+You get way more
+reasonable ratios.
+reasonable ratios.
+Now, aside from the M, the M's just
+Now, aside from the M, the M's just
+being slow.
+So it really was just small batch
+So it really was just small batch
+training, huh?
+What do I have this on
+What do I have this on
+now? 6. Is this Yeah, it's 496. So, this
+now? 6. Is this Yeah, it's 496. So, this
+is the correct number of M to
+is the correct number of M to
+have for training for sure.
+50.
+See what this
+does. When are you moving the boxes?
+does. When are you moving the boxes?
+Probably tomorrow.
+I didn't mess with this, did
+I? I did. This
+Okay.
+See if this does anything.
+So it doesn't do
+So it doesn't do
+anything. Is that the uh the conclusion
+anything. Is that the uh the conclusion
+here?
+Oh, well this is doing everything
+Oh, well this is doing everything
+right. Hang on.
+I mean, this action sampling stuff
+I mean, this action sampling stuff
+really doesn't seem to make a damn
+really doesn't seem to make a damn
+difference.
+I can definitely optimize this a bit
+I can definitely optimize this a bit
+without doing the dumbbell softmax
+without doing the dumbbell softmax
+stuff, right?
+like
+Yeah, cuz this thing
+Yeah, cuz this thing
+does props.
+Yeah, all these operations are just kind
+Yeah, all these operations are just kind
+of
+of
+sucky.
+sucky.
+Um, let me think how we want to do this.
+I want to do
+this. You only need the loops for
+this. You only need the loops for
+multi-iscipe.
+So, what we're going to
+So, what we're going to
+do now, what we'll do is we'll
+I think there's a good way to clean this
+I think there's a good way to clean this
+up. It's just going to take a little
+up. It's just going to take a little
+work.
+which is the same
+speed now. Okay, there's some ops we can
+speed now. Okay, there's some ops we can
+potentially save.
+So we get logits to props.
+So,
+I think we're just redoing a ton of
+I think we're just redoing a ton of
+operations in this, right?
+It's good sound over both. I believe
+Apparently it's not
+Then log prop. What did I do for log
+Then log prop. What did I do for log
+prop?
+We are going to get a speed up out of
+We are going to get a speed up out of
+this
+this
+today. It's going to
+happen. Oops.
+You need props, don't you?
+Where is this 433?
+Okay. So, uh this
+oversummed in train mode. It overs
+Okay, we actually get a
+phrase. So, why is there an extra
+dim you would like to
+have log prop should get you a
+have log prop should get you a
+dimension. So, I think that this is just
+dimension. So, I think that this is just
+wrong
+then. Is this not supposed to be
+then. Is this not supposed to be
+summing
+zero. Lovely.
+Does this already
+fail? So this already fails.
+Yeah, I guess I didn't account for that
+Yeah, I guess I didn't account for that
+now, did
+I? Okay, we'll debug it in CUDA, I
+I? Okay, we'll debug it in CUDA, I
+guess.
+logits to problems on. This should be
+logits to problems on. This should be
+normalized logic, shouldn't it?
+getting
+getting
+somewhere. At the very least, it will
+somewhere. At the very least, it will
+clean up the code a
+clean up the code a
+bit. At the best, it should be a bit
+bit. At the best, it should be a bit
+faster once we get to work.
+[Music]
+That's good.
+You can't do log of normalized problems
+You can't do log of normalized problems
+or whatever.
+Let's see what the
+Let's see what the
+[Music]
+[Music]
+original what did they do in the
+original what did they do in the
+original code here? There's a log
+prop this one
+prop this one
+entropy. Okay. So you take normalized
+logits and logits to probs
+logits and logits to probs
+of logits
+of logits
+times logits to probs.
+Wait, I'm doing this wrong for sure.
+Right. Might have to go.
+Logits times log to props of logits.
+You have to do this clamping
+thing. This doesn't do any expensive
+thing. This doesn't do any expensive
+ops, right?
+That's it.
+Okay, it
+Okay, it
+runs. Probably not any faster,
+right? Code is much nicer though.
+So once I clean this up a little bit,
+So once I clean this up a little bit,
+right?
+Like this one's fast. This other one's
+Like this one's fast. This other one's
+also fast.
+prompts is equal to logit to
+prompts. We'll leave
+prompts. We'll leave
+the profiling in for right now, I guess.
+Oh, well it's actually it is fast now
+Oh, well it's actually it is fast now
+because of the
+uh the different
+uh the different
+params. So I guess this is the current
+params. So I guess this is the current
+thing, right? This is the new
+thing, right? This is the new
+code. Uh so this is an upgrade. And then
+code. Uh so this is an upgrade. And then
+if this runs, what we'll do is we'll try
+if this runs, what we'll do is we'll try
+the original and see if it's any faster
+the original and see if it's any faster
+on the original.
+So we have this and then we
+have we've got this. So this will be
+have we've got this. So this will be
+quad
+buffered and then hopefully with quad
+buffered and then hopefully with quad
+buffering it should be a little
+buffering it should be a little
+better. Maybe not.
+Doesn't seem like
+it. That is a little better.
+Maybe. Yeah, that is a little better.
+Right then. What was the original like
+Right then. What was the original like
+param or whatever in here?
+I guess it was 60. No,
+I guess it was 60. No,
+128. Is it 128 quad
+buffer? 128 quad
+buffer? 128 quad
+buffer. So that's going to be like very
+buffer. So that's going to be like very
+low batch size.
+better. Shaved like 20% overhead off of
+better. Shaved like 20% overhead off of
+the afford pass.
+runs pretty much the same now on any of
+runs pretty much the same now on any of
+those
+those
+settings. It's not
+settings. It's not
+bad. All right. Now we have to make sure
+bad. All right. Now we have to make sure
+we didn't break everything
+else. What in the heck?
+Why is this
+changed? Wait,
+why haven't changed some stuff? I think
+why haven't changed some stuff? I think
+you left comments
+you left comments
+somewhere. Would they be in the PR?
+somewhere. Would they be in the PR?
+Maybe. Yeah, that's not cool to change
+Maybe. Yeah, that's not cool to change
+that.
+What? What did you
+do? This for now.
+Oh, you just added an extra arg. I see.
+Oh, you just added an extra arg. I see.
+Okay. I'll have to fix stuff so it's
+Okay. I'll have to fix stuff so it's
+easier to add. We just All policies need
+easier to add. We just All policies need
+to take parts. That's the
+thing. So, if we just
+thing. So, if we just
+do, let's say we're not going to do this
+do, let's say we're not going to do this
+crazy random noise thing.
+Man, maybe we should try it. I spent the
+Man, maybe we should try it. I spent the
+time
+That actually kind of does make a
+difference. Oh, that's so annoying.
+It's like a 5% improvement or
+whatever. Uh pre-allocated noise
+whatever. Uh pre-allocated noise
+stuff seems like it makes a very like it
+stuff seems like it makes a very like it
+makes a small difference. I don't know.
+makes a small difference. I don't know.
+Is it worth leaving that in there?
+[Music]
+versus it's kind of sketchy is the thing
+versus it's kind of sketchy is the thing
+like the alternative is to just do
+like the alternative is to just do
+this was like 228
+Okay. Oh, hang on. I think it doesn't
+Okay. Oh, hang on. I think it doesn't
+make a
+difference. I think we're fine.
+It really shouldn't.
+Good for
+Good for
+pass. I turn on sitting
+pass. I turn on sitting
+ducks. M time. Why is m time less with
+ducks. M time. Why is m time less with
+sitting
+sitting
+ducks? Is it because it's a one v one?
+ducks? Is it because it's a one v one?
+Like I What?
+Okay.
+And then what we do
+is so we do this and now it goes from
+is so we do this and now it goes from
+270.
+Yeah. It's not bad, right?
+Total time steps is 10 mil by
+Total time steps is 10 mil by
+default. So, not
+default. So, not
+bad. Got to make sure it actually works
+bad. Got to make sure it actually works
+on the other
+ends. So, we're keeping that guy's
+ends. So, we're keeping that guy's
+chain, but we're fixing some other
+It's good to me,
+right? It's a 40 second
+solve. Pretty good. Let's make sure it
+solve. Pretty good. Let's make sure it
+works with
+like
+three.
+three.
+Solid. Okay.
+Solid. Okay.
+Well, how's that for
+Well, how's that for
+um little perf improvement? We cleaned
+um little perf improvement? We cleaned
+up the code and we made it a bit
+faster. That's decent progress,
+right? And then you can figure out the
+right? And then you can figure out the
+demo thing. Well, or I can actually to
+demo thing. Well, or I can actually to
+be fair. You can just change it locally
+be fair. You can just change it locally
+for now.
+Oh, I don't need the deterministic false
+thing. Test that later.
+there. No way to link somebody. The um
+Go send this to the other person who
+Go send this to the other person who
+wanted this.
+Neural MMO 3 was good on
+Neural MMO 3 was good on
+box.
+box.
+Interesting. Oh, we can always get it
+Interesting. Oh, we can always get it
+sent in if we
+sent in if we
+need. It's fine.
+need. It's fine.
+So, I've got like another half hour
+So, I've got like another half hour
+before
+dinner, possibly longer. We'll see. I'm
+dinner, possibly longer. We'll see. I'm
+going to take a couple quick minutes,
+going to take a couple quick minutes,
+grab myself a drink, and then uh we will
+grab myself a drink, and then uh we will
+do a little bit more clean up on the
+do a little bit more clean up on the
+experience buffer, a little bit more
+experience buffer, a little bit more
+optimization, and uh just generally a
+optimization, and uh just generally a
+little bit more work on getting this
+little bit more work on getting this
+into a good spot. Be right back.
+Okay. Cool. Impulse
+Okay. Cool. Impulse
+Wars running at a respectable
+speed. I guess we have this perf profile
+speed. I guess we have this perf profile
+right here for us, don't we? For neural
+right here for us, don't we? For neural
+MMO 11%
+copy, 20%
+forward, five and
+miss. That's pretty darn well optimized
+miss. That's pretty darn well optimized
+other than the copy overhead, which is
+It's kind of a lot of copy overhead
+actually. Let me check that. I'm pretty
+actually. Let me check that. I'm pretty
+sure the dtype is right on that. Should
+sure the dtype is right on that. Should
+be pretty small.
+you and
+date
+1700.
+1700.
+Um,
+wait, how's it
+wait, how's it
+1700? That seems big.
+Wait,
+what? Oh, it is 10 channels. Okay. I
+what? Oh, it is 10 channels. Okay. I
+forgot I did that.
+Yeah, I'd forgotten I had done it that
+way. I have this fancy bit packing
+way. I have this fancy bit packing
+stuff,
+stuff,
+but 10% overhead to not have to do that
+but 10% overhead to not have to do that
+is
+is
+not I suppose.
+So,
+So,
+um, was there anything else that I had
+um, was there anything else that I had
+to actually do on the experience buffer?
+to actually do on the experience buffer?
+Is it
+Is it
+ready? I think the CPU fallback doesn't
+ready? I think the CPU fallback doesn't
+work right now on
+work right now on
+uh on the
+buffer. Oops.
+All
+right, let's fix cuda
+right, let's fix cuda
+build. Should be pretty easy.
+Where's
+this num
+steps? Okay, so this vrace check
+steps? Okay, so this vrace check
+signature I think just changed, right?
+But this now
+But this now
+takes values rewards done
+importance vss advantages nonsteps
+importance vss advantages nonsteps
+horizon
+Do we use
+Do we use
+[Music]
+[Music]
+that? There's no
+BS,
+right? Oh, this is actually passed
+right? Oh, this is actually passed
+in. Okay.
+So rewards done.
+Where is
+this? There we go.
+a
+cuda b trace check. Oh, and now we're
+cuda b trace check. Oh, and now we're
+calling it with the wrong. Oh.
+And you don't pass
+And you don't pass
+in trace either, do you? This is just
+in trace either, do you? This is just
+fully
+dated. B trace
+checked. So wait this was the signature
+checked. So wait this was the signature
+right? So you pass in values, rewards,
+right? So you pass in values, rewards,
+dums,
+dums,
+importance,
+BS. That's it, right?
+And then you don't have trace. You don't
+And then you don't have trace. You don't
+need to return
+this. And now the other ones are going
+this. And now the other ones are going
+to error the exact same way. So that's
+to error the exact same way. So that's
+easy.
+Importance. Yeah. So this doesn't give
+Importance. Yeah. So this doesn't give
+you
+trace.
+trace.
+Oh, I see. So literally it's just the
+advantages. Yeah, we're going to have to
+advantages. Yeah, we're going to have to
+figure out how to reduce boiler plate in
+figure out how to reduce boiler plate in
+this thing, but not today.
+this thing, but not today.
+Okay, we're just going to get this to
+Okay, we're just going to get this to
+run.
+So
+So
+here B trace
+takes to float
+star
+Trace and V trace
+row BS advantages, right?
+Wait,
+what? Well, that would screw up
+what? Well, that would screw up
+everything.
+How did that
+happen? Oh, yeah. That would definitely
+happen? Oh, yeah. That would definitely
+break some stuff, huh?
+BS and advantages. Yeah, there's a lot
+BS and advantages. Yeah, there's a lot
+of stuff in
+here. Oh, but it's only in the CPP. It's
+here. Oh, but it's only in the CPP. It's
+not in the CUDA, right?
+So, this fall back was wrong. It's not
+So, this fall back was wrong. It's not
+like I had it wrong in here. Yeah, this
+like I had it wrong in here. Yeah, this
+is fine. Okay, I got worried for a
+is fine. Okay, I got worried for a
+second. That would have been a really
+second. That would have been a really
+bad bug. But if it's just in the fall
+bad bug. But if it's just in the fall
+back, that's not really it for anything.
+back, that's not really it for anything.
+But debugging is
+fine. Like, at least it's nowhere near
+fine. Like, at least it's nowhere near
+as bad as otherwise,
+right? Okay.
+importance. Lambda
+says everything but lambda
+A
+throw up. Advantage throw.
+There's just a ton of boiler plate
+There's just a ton of boiler plate
+involved with like
+involved with like
+binding the C to CUDA and
+binding the C to CUDA and
+C++ like your PI bind with torch. The
+C++ like your PI bind with torch. The
+actual logic like the kernel is really
+actual logic like the kernel is really
+easy or at least simple maybe not
+easy or at least simple maybe not
+easy but
+easy but
+uh it's a pain.
+phrase was not declared.
+Yeah, this is
+Yeah, this is
+box
+values. This is PS offset.
+and then this one as well.
+What's the value of
+rewards?
+Importance. It's a little silly to have
+Importance. It's a little silly to have
+these giant signatures repeated
+these giant signatures repeated
+everywhere. Otherwise, there really
+everywhere. Otherwise, there really
+wouldn't be much code. Um, I don't know.
+wouldn't be much code. Um, I don't know.
+Maybe I'll find some way around that.
+But yeah, so actually the training is
+But yeah, so actually the training is
+very very slow
+very very slow
+now. Most likely because of this
+current. Uh, actually the kernel should
+current. Uh, actually the kernel should
+be under miss, shouldn't
+be under miss, shouldn't
+it? Oh yeah, there we go. 200k on CPU.
+it? Oh yeah, there we go. 200k on CPU.
+Totally acceptable.
+Totally acceptable.
+Let's make sure I haven't broken
+Let's make sure I haven't broken
+GPU and we'll push Yes.
+Still trains quite
+Still trains quite
+nicely. Trains quite nicely
+nicely. Trains quite nicely
+indeed. 11% MISK is a little bit
+indeed. 11% MISK is a little bit
+annoying. 11% MISK is not that great. I
+annoying. 11% MISK is not that great. I
+have also profiling fixes to make at
+have also profiling fixes to make at
+like 15 minutes probably.
+I'd also like to set up some runs
+I'd also like to set up some runs
+though with the latest code
+version. Let me get that set up first.
+Um, hang on. Let me figure this out real
+Um, hang on. Let me figure this out real
+quick.
+[Music]
+Yeah, that's pretty big.
+Okay.
+Okay.
+So, I kind of want to try some network
+So, I kind of want to try some network
+[Music]
+[Music]
+changes, but I I actually want to have a
+changes, but I I actually want to have a
+baseline on the current version with the
+baseline on the current version with the
+layer norm.
+layer norm.
+with the layer norm. So, I think we're
+with the layer norm. So, I think we're
+just going to let this be as
+just going to let this be as
+is.
+is.
+Um, yeah, that's what we're going to do.
+Um, yeah, that's what we're going to do.
+And we're going to just SSH to the new
+box. I'm think I'm just going to bring
+box. I'm think I'm just going to bring
+both of these boxes next to me to the
+both of these boxes next to me to the
+new
+new
+facility cuz like
+facility cuz like
+I'd like to have two personal
+I'd like to have two personal
+ones just right there where I can get to
+ones just right there where I can get to
+them
+easily. No changes to neural MMO. At
+easily. No changes to neural MMO. At
+least there shouldn't be.
+least there shouldn't be.
+So
+one
+chunks
+chunks
+and make sure the config looks good.
+and make sure the config looks good.
+Change this for now because of Experian
+Change this for now because of Experian
+buffer
+bug. Let's do
+that. Batch and mini batch are the same.
+that. Batch and mini batch are the same.
+And is that
+um so 4096
+times do
+64 that actually would perform
+better. Yeah, I think this will do
+better. Let me fix that.
+moment. Set this new box up
+moment. Set this new box up
+for what I
+for what I
+need. Okay.
+This will give me the Neptune token
+This will give me the Neptune token
+prompt. Just
+I'm going to run
+I'm going to run
+this like so. And then I will check the
+this like so. And then I will check the
+perf. If perf is low, I'm going to go
+perf. If perf is low, I'm going to go
+back to the older BPT horizon. I think
+back to the older BPT horizon. I think
+it should probably be good.
+total
+agents.
+Oh, right. That's why I had it.
+Um, what do I think is better?
+I think we'll just
+do Yeah, we'll do BPT Horizon
+do Yeah, we'll do BPT Horizon
+32. This will match the
+32. This will match the
+original
+curves. That should match our original
+curves. That should match our original
+curves.
+pretty
+pretty
+good.
+570k. It's kind of crazy how fast like
+570k. It's kind of crazy how fast like
+and well optimized neural MMO is
+and well optimized neural MMO is
+compared to some of our others.
+I think I can make it even faster to be
+I think I can make it even faster to be
+honest with you.
+Okay. So, we now
+have we should have a
+have we should have a
+Neptune run
+Neptune run
+here with neural
+here with neural
+MMO already getting us
+score.
+score.
+Mhm. Very nice. Probably 35 mil or
+Mhm. Very nice. Probably 35 mil or
+whatever.
+So we can leave that
+So we can leave that
+be other changes and
+things profiling maybe.
+things profiling maybe.
+Let's see if profiling seems
+correct. We'll just do a basic
+correct. We'll just do a basic
+division. See if it makes
+sense. So 1.6 six mil and then however
+sense. So 1.6 six mil and then however
+long it
+takes. One more now
+80 over 50 is in fact 1.6 mil. Profiling
+80 over 50 is in fact 1.6 mil. Profiling
+seems
+seems
+accurate. Good.
+So then if profiling is accurate, we can
+So then if profiling is accurate, we can
+use
+use
+it. Uh we should be able to use it to
+it. Uh we should be able to use it to
+mess with some perf
+numbers. Breakout has obnoxiously high
+numbers. Breakout has obnoxiously high
+copying
+copying
+time. Really does, doesn't
+it? Not much I'm going to be able to do
+it? Not much I'm going to be able to do
+to get around that, though.
+So, let's just let's just play with
+So, let's just let's just play with
+stuff based
+on this still
+runs.9 and we do
+32K 2.7 2.8
+Does it go up from
+there? No, not
+there? No, not
+really. 32 is kind of maxed. What about
+really. 32 is kind of maxed. What about
+16 16k? Is that maxed?
+you get a little bit of benefit out of
+you get a little bit of benefit out of
+this. And then that's with batch PPT
+this. And then that's with batch PPT
+Horizon 64. So let's do
+524 8192 perfectly.
+524 8192 perfectly.
+And then
+327 here's a batch size of five full
+327 here's a batch size of five full
+sequences. That should be pretty good.
+sequences. That should be pretty good.
+Um me run this
+Um me run this
+again. Any other pars that matter
+here? Not
+particularly. Now the thing is I don't
+particularly. Now the thing is I don't
+know if this is going to optimize the
+know if this is going to optimize the
+same. I wouldn't be surprised if this
+same. I wouldn't be surprised if this
+fails. We'll do a very quick
+fails. We'll do a very quick
+um just
+um just
+manual fiddle with learning rate. See if
+manual fiddle with learning rate. See if
+it still solves type of a thing.
+almost
+almost
+almost if I just
+almost if I just
+delete these other
+delete these other
+things. What happens?
+should be roughly on
+should be roughly on
+par. Oh, also these atom betas
+This is kind of ridiculous if you look
+This is kind of ridiculous if you look
+at it, isn't
+at it, isn't
+it? 2.6
+mil. I'm going to be honest. I don't
+mil. I'm going to be honest. I don't
+really know where the extra perf came
+really know where the extra perf came
+from, but like I'll take it.
+from, but like I'll take it.
+Okay, so that's 30 seconds, 855, which
+Okay, so that's 30 seconds, 855, which
+is almost a solve. Not
+is almost a solve. Not
+quite. Let me try a linear schedule real
+quite. Let me try a linear schedule real
+quick.
+No
+different. What about no one kneeling?
+different. What about no one kneeling?
+This I expect to break.
+So, we pretty much have to figure out a
+So, we pretty much have to figure out a
+way to get um mini batch size higher on
+way to get um mini batch size higher on
+the smaller models
+the smaller models
+because 2.7 million SPS is
+ludicrous. Interesting. You do actually
+ludicrous. Interesting. You do actually
+need a scheduleuler. It doesn't matter
+need a scheduleuler. It doesn't matter
+if it's cosign or linear, which is like
+if it's cosign or linear, which is like
+two very different things.
+So, okay.
+That's too big.
+Solved. 29 seconds.
+Let's put that in.
+I'll take
+I'll take
+it. I will take
+it. And uh this is default batch size
+it. And uh this is default batch size
+and default BPD
+and default BPD
+horizon. So we can delete
+horizon. So we can delete
+these also default nums n workers all
+these also default nums n workers all
+this is default.
+this is default.
+This is default. This is
+This is default. This is
+default. Uh, so really the only things
+default. Uh, so really the only things
+we've changed, we've changed these two.
+we've changed, we've changed these two.
+We probably should now go and fiddle
+We probably should now go and fiddle
+with these on other environments as
+with these on other environments as
+well. I'm just going to commit this
+That's pretty
+good. That's pretty cool. All
+right, today has been a good day. Um,
+right, today has been a good day. Um,
+for the folks watching, I'm getting
+for the folks watching, I'm getting
+dinner. I might be back for a bit after
+dinner. I might be back for a bit after
+dinner. We're going to have to see how
+dinner. We're going to have to see how
+I'm
+I'm
+feeling. This is a pretty solid result,
+feeling. This is a pretty solid result,
+though. Let's just take a quick check at
+though. Let's just take a quick check at
+this graph. This graph is also looking
+this graph. This graph is also looking
+fine. Cool. Um, if you're interested in
+fine. Cool. Um, if you're interested in
+my work generally, tougher.ai, AI. You
+my work generally, tougher.ai, AI. You
+want to help me out for free? Star the
+want to help me out for free? Star the
+GitHub. Really helps. If you want to get
+GitHub. Really helps. If you want to get
+involved in dev, join the Discord. It's
+involved in dev, join the Discord. It's
+discord.gg/puffer. Our top contributors
+discord.gg/puffer. Our top contributors
+actually mostly came in with zero RL
+actually mostly came in with zero RL
+experience. So if you know how to
+experience. So if you know how to
+program, want to do some cool stuff, go
+program, want to do some cool stuff, go
+in and start writing some code with us.
+in and start writing some code with us.
+Other than that, you can follow me on X
+Other than that, you can follow me on X
+for
+
+Kind: captions
+Language: en
+Okay, we are back
+Okay, we are back
+live.
+Hi. Lots of good news today, man.
+Hi. Lots of good news today, man.
+Today's just been a good day for
+Today's just been a good day for
+Puffer. Had a productive meeting
+Puffer. Had a productive meeting
+earlier. Got some stuff
+earlier. Got some stuff
+merged. Spencer found a bug in the place
+merged. Spencer found a bug in the place
+that I expected that there would be a
+that I expected that there would be a
+bug. So, I get to be smug about
+bug. So, I get to be smug about
+that. And uh view drive is going to be
+that. And uh view drive is going to be
+working.
+working.
+Now, all I really got to do is a little
+Now, all I really got to do is a little
+bit of work on the experience buffer and
+bit of work on the experience buffer and
+we should
+we should
+be pretty pretty solid. We should be
+be pretty pretty solid. We should be
+pretty solid with this latest version.
+pretty solid with this latest version.
+So, all I really wanted to do right
+now, main thing at
+least, go back to this sketch.
+I think we figured
+I think we figured
+out good
+out good
+enough realistically quite good
+enough realistically quite good
+solutions for everything except
+solutions for everything except
+uh collecting experience on environments
+uh collecting experience on environments
+with masking which is kind of the same
+with masking which is kind of the same
+as like collecting experience on multi-
+as like collecting experience on multi-
+aent environments where the agents can
+aent environments where the agents can
+die. And uh we don't have any
+die. And uh we don't have any
+environments right now where that is
+environments right now where that is
+mandatory but we do have some where that
+mandatory but we do have some where that
+option and we would like to be able to
+option and we would like to be able to
+train in that
+train in that
+setting. So,
+setting. So,
+uh yeah, I think I want to
+uh yeah, I think I want to
+like figure out what we do about that,
+right? And it's kind of
+sketchy. It is kind of sketchy.
+So before I could guarantee the batch
+So before I could guarantee the batch
+sizes would all be the same
+size and now I
+size and now I
+can't. This seems pretty
+bad. There's not really a great way
+bad. There's not really a great way
+around masking
+around masking
+either around uh this thing.
+either around uh this thing.
+I mean the the fundamental concept here
+I mean the the fundamental concept here
+I'm going to be like thinking about this
+I'm going to be like thinking about this
+like exploring a bunch of technical
+like exploring a bunch of technical
+things but the fundamental concept is
+things but the fundamental concept is
+you just get data that looks like this
+you just get data that looks like this
+right so it doesn't all match
+right so it doesn't all match
+up and that doesn't fit cleanly into an
+up and that doesn't fit cleanly into an
+experience
+buffer I'm trying to think realistically
+buffer I'm trying to think realistically
+how often this happens anyways
+It really only happens in
+It really only happens in
+like elimination style games,
+right? Like I have this issue in neural
+right? Like I have this issue in neural
+MMO because it was a battle
+MMO because it was a battle
+royale. But like MMOs aren't really
+royale. But like MMOs aren't really
+battle royale, so I just made it not a
+battle royale, so I just made it not a
+battle
+royale. If you have really long
+royale. If you have really long
+episodes, it shouldn't matter that much.
+How's it currently handled by Puffer?
+How's it currently handled by Puffer?
+Just completely skip observations. Well,
+Just completely skip observations. Well,
+in the current 2.0
+branch, you know, what is this? First
+branch, you know, what is this? First
+time watching. This is reinforcement
+time watching. This is reinforcement
+learning
+learning
+dev. I am uh I'm a researcher. I run
+dev. I am uh I'm a researcher. I run
+upper.ai.
+upper.ai.
+These are all ultra high performance
+These are all ultra high performance
+games that we've implemented that you
+games that we've implemented that you
+can watch AIs that have been trained to
+can watch AIs that have been trained to
+play these directly in your browser.
+play these directly in your browser.
+They're playing it directly in your
+They're playing it directly in your
+browser. You can like you can hold what
+browser. You can like you can hold what
+is it shift I believe and you can take
+is it shift I believe and you can take
+over and play the games. Some of them
+over and play the games. Some of them
+are simple, some of them are complex.
+are simple, some of them are complex.
+But yeah, this is kind of just uh the
+But yeah, this is kind of just uh the
+vibe around here is just watch research
+vibe around here is just watch research
+get done in real time. And then uh
+get done in real time. And then uh
+hopefully the streams convince some of
+hopefully the streams convince some of
+the people watching to also contribute
+the people watching to also contribute
+because it's all open source and many of
+because it's all open source and many of
+our best contributors just were people
+our best contributors just were people
+who kind of saw the content and saw the
+who kind of saw the content and saw the
+stuff and started building
+things. What I'm doing right now is uh
+things. What I'm doing right now is uh
+I'm attempting to solve a technical
+I'm attempting to solve a technical
+problem in the design of how we process
+problem in the design of how we process
+data that that comes in for training. So
+data that that comes in for training. So
+pepper um what we were doing in
+pepper um what we were doing in
+2 is we were collecting all the data to
+2 is we were collecting all the data to
+a flat buffer. So we just record it as
+a flat buffer. So we just record it as
+it comes in out of order. We record the
+it comes in out of order. We record the
+indices of that
+indices of that
+data and then right before we need to
+data and then right before we need to
+train on it we sort all the data by the
+train on it we sort all the data by the
+indices. So we get the like segments for
+indices. So we get the like segments for
+each agent next to each other and then
+each agent next to each other and then
+we just reshaped it. So you know data
+we just reshaped it. So you know data
+could cross boundaries. It could be that
+could cross boundaries. It could be that
+you know you get the f the end of one
+you know you get the f the end of one
+segment and then the start of the next
+segment and then the start of the next
+segment in the same batch. Um but like
+segment in the same batch. Um but like
+it works cleanly and you just don't add
+it works cleanly and you just don't add
+data to this buffer that's
+data to this buffer that's
+masked. We can't really do that now
+masked. We can't really do that now
+because what we're doing we're
+because what we're doing we're
+collecting stuff by segment so that we
+collecting stuff by segment so that we
+don't cross boundaries here.
+don't cross boundaries here.
+And uh as a result of
+And uh as a result of
+that, I can't really see a clean way of
+that, I can't really see a clean way of
+handling
+masking. It's a little
+tricky. Like the issue is that we're
+tricky. Like the issue is that we're
+filling up this
+buffer. I guess the right question to
+buffer. I guess the right question to
+ask is what do we do when an agent dies?
+ask is what do we do when an agent dies?
+Like fundamentally, what options do we
+Like fundamentally, what options do we
+have when an agent dies? Right? So we're
+have when an agent dies? Right? So we're
+getting data like this, data like this.
+getting data like this, data like this.
+It's all nice data is here. And then
+It's all nice data is here. And then
+this one just
+dies. Tell you I'm sold for working it
+dies. Tell you I'm sold for working it
+now. Awesome.
+now. Awesome.
+It's kind of um the cool thing about
+It's kind of um the cool thing about
+reinforcement learning, at least the way
+reinforcement learning, at least the way
+we're doing it, is you can kind of just
+we're doing it, is you can kind of just
+jam low-level game development
+jam low-level game development
+um and help revolutionize a branch of
+um and help revolutionize a branch of
+science at the same
+science at the same
+time. And like you can do it without
+time. And like you can do it without
+that much compute as well. Let me give
+that much compute as well. Let me give
+you one really cool example. So this is
+you one really cool example. So this is
+neural MMO 3. This is a follow-up to my
+neural MMO 3. This is a follow-up to my
+PhD thesis. And uh this is like this big
+PhD thesis. And uh this is like this big
+open world MMO environment. There's like
+open world MMO environment. There's like
+a market you can like you can sell and
+a market you can like you can sell and
+buy stuff on a global market. Like
+buy stuff on a global market. Like
+there's all sorts of complexity to this
+there's all sorts of complexity to this
+thing. This thing runs at 1.5 million
+thing. This thing runs at 1.5 million
+steps per second per core. Um so this
+steps per second per core. Um so this
+thing runs like literally a million
+thing runs like literally a million
+times real time. And we can train on one
+times real time. And we can train on one
+GPU in like three days. We can train on
+GPU in like three days. We can train on
+2,000 years worth of
+2,000 years worth of
+gameplay which is pretty cool.
+gameplay which is pretty cool.
+and then you can run the trained model
+and then you can run the trained model
+on like one CPU more
+easily. So yeah, this is this is what
+easily. So yeah, this is this is what
+I'm trying to do, right? I'm trying to
+I'm trying to do, right? I'm trying to
+revolutionize this area of of AI. I'm
+revolutionize this area of of AI. I'm
+really trying to make stuff clean, fast,
+really trying to make stuff clean, fast,
+and simple.
+and simple.
+Um, I spent my whole PhD working on
+Um, I spent my whole PhD working on
+largecale multi- aent learning in the
+largecale multi- aent learning in the
+space and now I'm sort of turning to try
+space and now I'm sort of turning to try
+to like make it practical, make all the
+to like make it practical, make all the
+infrastructure fast and simple, uh, and
+infrastructure fast and simple, uh, and
+make it way more broadly applicable to a
+make it way more broadly applicable to a
+ton of different
+things. Sometimes that involves doing a
+things. Sometimes that involves doing a
+bunch of like fun programming on stream.
+bunch of like fun programming on stream.
+Sometimes it involves stuff like this
+Sometimes it involves stuff like this
+where I have to think about data
+where I have to think about data
+structures for a couple
+hours. Okay. Fundamentally, the issue
+hours. Okay. Fundamentally, the issue
+with this data structure here,
+right, the issue is that I plan for
+right, the issue is that I plan for
+these to get
+these to get
+longer. Pepper here from Twitch just
+longer. Pepper here from Twitch just
+switched to YouTube. Hey, Pepper.
+Yeah, you're
+Yeah, you're
+um I mean the guy has so many
+um I mean the guy has so many
+different names. Where where did he go?
+different names. Where where did he go?
+You're Weston's friend, right?
+Yeah, this isn't going to be a problem.
+Yeah, this isn't going to be a problem.
+Like we can't keep it as is, right? We
+Like we can't keep it as is, right? We
+can't have our data buffers look like
+can't have our data buffers look like
+this where this all gets wasted because
+this where this all gets wasted because
+what always always ends up happening in
+what always always ends up happening in
+like elimination style games is that
+like elimination style games is that
+there just two players at the end for a
+there just two players at the end for a
+really long time. I
+really long time. I
+mean, this has got to be applicable
+mean, this has got to be applicable
+outside of just like games as well.
+outside of just like games as well.
+There have got to be environments that
+There have got to be environments that
+I'm going to run into where like this is
+I'm going to run into where like this is
+going to be an
+going to be an
+issue. I'm just trying to think if
+issue. I'm just trying to think if
+there's like a decent fix. I will take
+there's like a decent fix. I will take
+if it just is a little bit of padding
+if it just is a little bit of padding
+and I like lose a little bit of data.
+and I like lose a little bit of data.
+I'm fine with that. It just can't be
+I'm fine with that. It just can't be
+this. But it's tricky because like you
+this. But it's tricky because like you
+have to reuse this index then somehow,
+have to reuse this index then somehow,
+right? You have to like put data from
+right? You have to like put data from
+another agent here or something.
+Okay, here this is kind of
+Okay, here this is kind of
+complicated but like in theory
+complicated but like in theory
+right if I just had all the free
+indices so this is like we have like one
+indices so this is like we have like one
+index here these are like active
+And this is going to start off like zero
+And this is going to start off like zero
+one say 10 24
+agents. Okay. And then we have
+free and say it's like
+8192. Impulse war. Impulse war is
+8192. Impulse war. Impulse war is
+trained fine on box two. also alternated
+trained fine on box two. also alternated
+between 145 and 230 SPS. PR could be
+between 145 and 230 SPS. PR could be
+ready. Awesome. Let me finish these
+ready. Awesome. Let me finish these
+thoughts and then I'll merge that. Also,
+thoughts and then I'll merge that. Also,
+the profiling I don't think is accurate
+the profiling I don't think is accurate
+on the latest dev. I have to fix that
+on the latest dev. I have to fix that
+today as well. Let me see if I can
+today as well. Let me see if I can
+figure this out first because I think I
+figure this out first because I think I
+might have I don't even necessarily want
+might have I don't even necessarily want
+to implement this now. I just want to
+to implement this now. I just want to
+know that I have the way of doing this
+know that I have the way of doing this
+before I lock in the new experience
+before I lock in the new experience
+buffer
+buffer
+design. Okay. Like if an agent dies,
+design. Okay. Like if an agent dies,
+right? Can't I just technically, let's
+right? Can't I just technically, let's
+say agent two
+say agent two
+dies, can I not just append
+dies, can I not just append
+it? Or even better, can I not just like
+it? Or even better, can I not just like
+prepend
+prepend
+it? Would that work?
+I think
+so. that like this is technically a
+so. that like this is technically a
+possibility because then when you need
+possibility because then when you need
+more free indices you just grab them
+more free indices you just grab them
+from
+from
+here posted twice captain.
+Um, okay. But the other question here is
+Um, okay. But the other question here is
+actually like how likely is this
+actually like how likely is this
+scenario that we end up with
+this like
+um are we realistically going to want to
+um are we realistically going to want to
+collect more than like 128?
+Because typically in puffer we run a lot
+Because typically in puffer we run a lot
+of parallel environments for compute
+of parallel environments for compute
+efficiency. So like 1024 environments
+efficiency. So like 1024 environments
+times
+times
+128 that's already million, right?
+128 that's already million, right?
+That's already a
+million. No, I'm
+million. No, I'm
+dumb. That's 120k. I'm
+dumb. That's 120k. I'm
+stupid. Okay, but we run more than 1024
+stupid. Okay, but we run more than 1024
+environments. Usually we run like 4096.
+environments. Usually we run like 4096.
+So that's
+500k. So
+like there's not going to be a point in
+like there's not going to be a point in
+backcropping
+backcropping
+more than 120. There's just no way with
+more than 120. There's just no way with
+current architectures it matters.
+The only benefit is longer rollouts let
+The only benefit is longer rollouts let
+you compute advantage over longer
+you compute advantage over longer
+horizons. How confident am I that we're
+horizons. How confident am I that we're
+going to need long horizon advantage
+going to need long horizon advantage
+computation longer term?
+on one hand like
+on one hand like
+fundamentally I'm not confident that you
+fundamentally I'm not confident that you
+have to compute long trajectories to
+have to compute long trajectories to
+learn
+stuff but that's going to be dependent
+stuff but that's going to be dependent
+on a bunch of future research and so far
+on a bunch of future research and so far
+it has seemed really important for what
+it has seemed really important for what
+we've been
+we've been
+doing so we'll call that a toss
+up I I think ultimately the conclusion
+up I I think ultimately the conclusion
+here is
+here is
+that we don't deal with masking right
+that we don't deal with masking right
+now. We don't have any active projects
+now. We don't have any active projects
+that require masking, but we have a way
+that require masking, but we have a way
+to steer if we do end up requiring
+to steer if we do end up requiring
+masking. Uh and also
+masking. Uh and also
+technically, could I implement this in
+CUDA? I'm pretty confident I could
+CUDA? I'm pretty confident I could
+implement this operation very
+implement this operation very
+efficiently in CUDA if I had to.
+efficiently in CUDA if I had to.
+Yeah, because you don't actually need to
+Yeah, because you don't actually need to
+append stuff. You could have a fixed
+append stuff. You could have a fixed
+size list and you could just like
+size list and you could just like
+overwrite existing
+overwrite existing
+values. Okay, I'm confident that I could
+values. Okay, I'm confident that I could
+do this efficiently if I had to down the
+do this efficiently if I had to down the
+line. Have you tried to have you thought
+line. Have you tried to have you thought
+about trying to perform transfer
+about trying to perform transfer
+learning from one of the games, say
+learning from one of the games, say
+search and rescue with a multimodal
+search and rescue with a multimodal
+approach if possible that runs 3D? So,
+approach if possible that runs 3D? So,
+here's the issue with that type of
+here's the issue with that type of
+thing. I just talked with a company
+thing. I just talked with a company
+that's doing cool work in that space
+that's doing cool work in that space
+now.
+now.
+Um, the issue with like trying to do
+Um, the issue with like trying to do
+transfer, it doesn't work like train on
+transfer, it doesn't work like train on
+one environment and then transfer to
+one environment and then transfer to
+something totally different. The only
+something totally different. The only
+way that works and the only way that
+way that works and the only way that
+that's been demonstrated to work in
+that's been demonstrated to work in
+other areas of AI is train on a ton of
+other areas of AI is train on a ton of
+tasks and then transfer to something
+tasks and then transfer to something
+kind of similar or kind of in that
+kind of similar or kind of in that
+space. Um, that is just a much larger
+space. Um, that is just a much larger
+scale of research. like fundamentally
+scale of research. like fundamentally
+yes we could technically do it but now
+yes we could technically do it but now
+we're talking about needing hundreds of
+we're talking about needing hundreds of
+games and probably needing at least
+games and probably needing at least
+hundreds of GPUs like for these runs
+hundreds of GPUs like for these runs
+whereas for what we're doing we can
+whereas for what we're doing we can
+still get our fundamental research done
+still get our fundamental research done
+on all these methods uh we can train on
+on all these methods uh we can train on
+like billions or tens or hundreds of
+like billions or tens or hundreds of
+billions of steps and we can do it on
+billions of steps and we can do it on
+like one GPU per run
+like one GPU per run
+so we're doing pretty darn efficient
+so we're doing pretty darn efficient
+research for compute now that type of
+research for compute now that type of
+like generalization stuff is out there
+like generalization stuff is out there
+like yeah we're interested in it but um
+like yeah we're interested in it but um
+not at present
+not at present
+scale. Is this problem related to just
+scale. Is this problem related to just
+the sampling of the experience buffer?
+the sampling of the experience buffer?
+Are you talking about the buffer for
+Are you talking about the buffer for
+puffer m just the sampling of the
+puffer m just the sampling of the
+experience buffer?
+experience buffer?
+Um I technically have a very large
+Um I technically have a very large
+improvement to make on our vectorization
+improvement to make on our vectorization
+uh by integrating uh by having the
+uh by integrating uh by having the
+option to use torch tensors in the
+option to use torch tensors in the
+vectorzation itself. But it's going to
+vectorzation itself. But it's going to
+be way easier for me to implement that
+be way easier for me to implement that
+thing and it's going to be way simpler
+thing and it's going to be way simpler
+if I just wait until Python has good
+if I just wait until Python has good
+threading. And probably if by 3.14 they
+threading. And probably if by 3.14 they
+still don't have good threading, I'm
+still don't have good threading, I'm
+just going to do it in C is most likely
+just going to do it in C is most likely
+what's going to
+what's going to
+happen. But if Python actually gets
+happen. But if Python actually gets
+threading to work correctly, then we
+threading to work correctly, then we
+will be able to do that very very
+will be able to do that very very
+nicely. We'll be able to have like very
+nicely. We'll be able to have like very
+very nice improved vectorzation
+very nice improved vectorzation
+uh with that. At
+least I think we should be able
+least I think we should be able
+to. You need to be able to have uh you
+to. You need to be able to have uh you
+need to be a basically be able to share
+need to be a basically be able to share
+slices of torch tensors with different
+slices of torch tensors with different
+workers and because those are on
+workers and because those are on
+different processes right now it breaks
+different processes right now it breaks
+but if they were to be in
+but if they were to be in
+um on different threads it should work.
+um on different threads it should work.
+Welcome YouTube folks.
+Welcome YouTube folks.
+Okay, so I think that the conclusion of
+Okay, so I think that the conclusion of
+all of this is that uh this is probably
+all of this is that uh this is probably
+still a good buffer design.
+still a good buffer design.
+Realistically, this covers like 95% of
+Realistically, this covers like 95% of
+the cases that we want to learn on. It
+the cases that we want to learn on. It
+does it way better than the previous
+does it way better than the previous
+version of the code. There's a 5% of
+version of the code. There's a 5% of
+cases that the previous code covered
+cases that the previous code covered
+that this just doesn't cover at all. But
+that this just doesn't cover at all. But
+if we really had to, we have an
+if we really had to, we have an
+efficient way of handling that.
+efficient way of handling that.
+I think that's the conclusion from this
+I think that's the conclusion from this
+section which is good. That's like
+section which is good. That's like
+that's a good
+outcome. Anything from Spencer
+outcome. Anything from Spencer
+here? Expert
+here? Expert
+trajectories on the
+trajectories on the
+first
+first
+256 have 7% collision and 2% off road.
+256 have 7% collision and 2% off road.
+So, I may need to prune the data
+set. Interesting. Probably the data
+set. Interesting. Probably the data
+set's just
+noisy. Okay. Um, so I think that what
+noisy. Okay. Um, so I think that what
+we're going to do now, it's 2:30. I
+we're going to do now, it's 2:30. I
+think I'm going to work on the
+think I'm going to work on the
+experience buffer code a little bit. Uh
+experience buffer code a little bit. Uh
+I'm not going to handle masking but I'm
+I'm not going to handle masking but I'm
+going to see if I can get all the other
+going to see if I can get all the other
+edge cases out so that this thing
+edge cases out so that this thing
+generally behaves sely. Actually there
+generally behaves sely. Actually there
+is one other problem that we need to
+is one other problem that we need to
+solve I believe first uh which is quite
+solve I believe first uh which is quite
+a bit
+a bit
+simpler. There's been this weird
+simpler. There's been this weird
+indexing bug that I just need to think
+through right now. The way that we store
+through right now. The way that we store
+data
+data
+like our most common setup is something
+like our most common setup is something
+like
+this. So you got like one 10 24 rows 10
+this. So you got like one 10 24 rows 10
+24 rows.
+We can
+We can
+have offset infos for each dimension
+have offset infos for each dimension
+that help create an original
+tensor. But then you're training
+tensor. But then you're training
+on wait offset and
+post. So then you're training on m like
+post. So then you're training on m like
+you're training on padding right?
+You ideally don't want to train on
+You ideally don't want to train on
+padding because it's a waste of compute
+padding because it's a waste of compute
+resources. Like I had this issue in my
+resources. Like I had this issue in my
+PhD a whole bunch where you would get
+PhD a whole bunch where you would get
+like 5% data density. So you're throwing
+like 5% data density. So you're throwing
+away 95% of your compute if you train on
+away 95% of your compute if you train on
+the padding even if you mask
+it. So the goal is to create dense data,
+it. So the goal is to create dense data,
+not the
+not the
+pad. And in 95% of cases it works as is.
+pad. And in 95% of cases it works as is.
+And in 5% of cases, the thing that I
+And in 5% of cases, the thing that I
+discussed before should allow you to
+discussed before should allow you to
+create dense data where you're basically
+create dense data where you're basically
+like when you run out on one access or
+like when you run out on one access or
+whatever, when you get like to the end
+whatever, when you get like to the end
+of a agent lifespan, you're going to use
+of a agent lifespan, you're going to use
+the next piece of that segment for
+the next piece of that segment for
+another
+another
+agent. And the indexing I had there
+agent. And the indexing I had there
+should
+work.
+work.
+Okay.
+Okay.
+So, the way that this needs to work
+So, the way that this needs to work
+is you
+is you
+put data into each of these
+buffers. And what I was doing right now
+buffers. And what I was doing right now
+is I was having a free index. So I was
+is I was having a free index. So I was
+saying how many rows do you have left
+saying how many rows do you have left
+that are
+that are
+free? And what was happening is if you
+free? And what was happening is if you
+had exactly like the exact number of
+had exactly like the exact number of
+agents as you had data rows, then you
+agents as you had data rows, then you
+have no more indices free. So even
+have no more indices free. So even
+though you have spare room in this
+though you have spare room in this
+buffer, it wasn't picking it up. So I
+buffer, it wasn't picking it up. So I
+think what I have to do is something
+think what I have to do is something
+based on episode
+lengths. If I make a hard assumption
+lengths. If I make a hard assumption
+that we're always going to fill in the
+that we're always going to fill in the
+correct order, I think I can do this.
+correct order, I think I can do this.
+And I can just add a check to make sure
+And I can just add a check to make sure
+I don't screw this up.
+I don't screw this up.
+So I think what I do is I do like numbum
+So I think what I do is I do like numbum
+like
+like
+full
+full
+rows and then when you get to the
+rows and then when you get to the
+end I increment
+end I increment
+this. That way I'm not looking for extra
+this. That way I'm not looking for extra
+rows. I'm looking for how many are
+full. And I didn't want to do this
+full. And I didn't want to do this
+before because the masking thing, but I
+before because the masking thing, but I
+think we're actually fine with the way
+think we're actually fine with the way
+that this
+is. Yeah, this should be 100% fine.
+is. Yeah, this should be 100% fine.
+Okay, that wasn't that
+Okay, that wasn't that
+hard. I guess I was just uh tired before
+hard. I guess I was just uh tired before
+or whatever. Let's uh let's implement
+or whatever. Let's uh let's implement
+this very very carefully because this is
+this very very carefully because this is
+the type of thing where you can
+the type of thing where you can
+introduce large bugs. Check one other
+introduce large bugs. Check one other
+thing in Discord.
+All
+right. What is the current state of the
+code? That's fine.
+So, we still need this
+here. We're going to put a we'll put a
+here. We're going to put a we'll put a
+warning on
+that. This has to be
+that. This has to be
+like full rows.
+How about full
+How about full
+rows is less than on policy
+rows. Data full
+rows. And it doesn't even need to be in
+rows. And it doesn't even need to be in
+data, does
+data, does
+it? We'll do this for now.
+So what I was doing right
+So what I was doing right
+now is I was incrementing this like free
+index. You do need a free index, don't
+index. You do need a free index, don't
+you?
+I could also do just increment full
+rows. But this is the same freaking
+rows. But this is the same freaking
+code, isn't
+it? No, this is not the same code
+it? No, this is not the same code
+because they start at different
+values. These Yeah, these different
+values. These Yeah, these different
+values.
+Okay, that was the thing that I couldn't
+Okay, that was the thing that I couldn't
+figure out before. You need to count
+figure out before. You need to count
+both the free what index you're going to
+both the free what index you're going to
+fill next and you need to count how many
+fill next and you need to count how many
+rows you have full. Those are different
+rows you have full. Those are different
+pieces of information.
+Okay, there's
+breakout
+trains. Looks good.
+We'll like make sure a couple
+We'll like make sure a couple
+environments run and then we will do
+environments run and then we will do
+captain's PR and then uh with the next
+captain's PR and then uh with the next
+couple hours afterwards, assuming that
+couple hours afterwards, assuming that
+that goes well, we will continue to
+that goes well, we will continue to
+clean up this code a
+bit. 50 second breakout solve. That is
+bit. 50 second breakout solve. That is
+actually faster than before as well. I
+actually faster than before as well. I
+think we were throwing away some data or
+think we were throwing away some data or
+something
+before. We must have been like throwing
+before. We must have been like throwing
+away some
+data. Let's also just add a decent
+data. Let's also just add a decent
+warning while we're here.
+That's decent. Endur MMO frames 400k
+That's decent. Endur MMO frames 400k
+with the big model. Pretty
+with the big model. Pretty
+decent. We're
+decent. We're
+happy. Make sure I didn't screw it up
+happy. Make sure I didn't screw it up
+with that uh that
+with that uh that
+warning. That's good. Cool.
+Okay, that is uh that's a clean
+fix. Let's get this merge going.
+He said that this was ready,
+He said that this was ready,
+right?
+right?
+18,000 lines.
+Holy. You must have committed something
+Holy. You must have committed something
+you shouldn't have committed,
+you shouldn't have committed,
+right? 18,000 lines,
+right? 18,000 lines,
+ma'am. Yeah. So, let me just merge that
+ma'am. Yeah. So, let me just merge that
+real quick. Hang
+on. Fine
+on. Fine
+format. I don't mind dirty merging this,
+format. I don't mind dirty merging this,
+but holy hell,
+but holy hell,
+man. I know the end of it is like 8K.
+man. I know the end of it is like 8K.
+Where's the other 10K coming from?
+to be determined whether or not we
+to be determined whether or not we
+accept
+accept
+CMake. And we'll either accept that
+CMake. And we'll either accept that
+though or uh find something
+though or uh find something
+better and we'll get
+merged. I'm like waiting for the joke
+merged. I'm like waiting for the joke
+file that's like 10,000 lines of
+file that's like 10,000 lines of
+haha. Okay, these we've reviewed
+haha. Okay, these we've reviewed
+already.
+already.
+We did like a full review of this
+We did like a full review of this
+environment. Took like two or three days
+environment. Took like two or three days
+on
+stream. This is most of
+it. Oh, you
+it. Oh, you
+included All right. You included source
+included All right. You included source
+files for um
+for some dependencies. It seems probably
+for some dependencies. It seems probably
+there's like another one of
+these. Yeah, DL Malik. There you go. So,
+these. Yeah, DL Malik. There you go. So,
+it's it's big because
+it's it's big because
+of not a fan of the bender depths like
+this. Makes it annoying for us to like
+this. Makes it annoying for us to like
+keep track of our code base size and
+keep track of our code base size and
+stuff.
+Does anybody know how GitHub tracks like
+Does anybody know how GitHub tracks like
+line counts and stats? Can I put stuff
+line counts and stats? Can I put stuff
+in like external or something and have
+in like external or something and have
+it not count
+it not count
+it if we're going to do that?
+shaders. We reviewed these as
+well. We actually will get to run this
+well. We actually will get to run this
+end in a few minutes. Um, if I can get
+end in a few minutes. Um, if I can get
+this integrated and set up. It's a
+this integrated and set up. It's a
+really cool environment. It's like
+really cool environment. It's like
+really, really a cool environment. All
+really, really a cool environment. All
+credit to Captain for uh the code on
+credit to Captain for uh the code on
+this. I helped with I helped with some
+this. I helped with I helped with some
+of the front end for
+of the front end for
+it. Okay, so we're going to approve
+this. This
+this. This
+beast
+beast
+now. Not fan of
+cmake. We'll
+see. Uh let's see.
+of
+of
+dependency files
+going
+something
+Uh we will do
+this workflow requires approval from a
+this workflow requires approval from a
+maintainer.
+question. Yeah. No, it doesn't require
+question. Yeah. No, it doesn't require
+it's just getting
+merged.
+merged.
+Okay, let's see if we can get this to
+Okay, let's see if we can get this to
+run. I want to run the uh the renderer
+run. I want to run the uh the renderer
+for this. It's a really cool end. Very
+for this. It's a really cool end. Very
+happy to have this popper in any
+happy to have this popper in any
+state. Yeah, there it is. 18,000 lines.
+state. Yeah, there it is. 18,000 lines.
+So, if we ignore like the was it 10,000
+So, if we ignore like the was it 10,000
+lines of
+lines of
+dependencies? Um, what is it?
+10,000? Not quite. It's like 8,000
+10,000? Not quite. It's like 8,000
+lines. So, like a 10k line PR. Um, that
+lines. So, like a 10k line PR. Um, that
+is probably a half or a third of the
+is probably a half or a third of the
+size of the Puffer Code base. Probably
+size of the Puffer Code base. Probably
+like a third the size of all of Puffer.
+like a third the size of all of Puffer.
+So, this is a very big end.
+So, this is a very big end.
+Uh, did Captain tell me how to compile
+it? CM
+it? CM
+make. Is there a separate setup or
+make. Is there a separate setup or
+something? Oh, there's a tunnel.
+Maybe this will
+work. So yeah, the thing that's tricky
+work. So yeah, the thing that's tricky
+on the infrastructure side of this is
+on the infrastructure side of this is
+like this has a couple extra
+like this has a couple extra
+dependencies that are annoying to build
+dependencies that are annoying to build
+and link. So Captain just use CMake for
+and link. So Captain just use CMake for
+it. Um I really do not like CMake.
+it. Um I really do not like CMake.
+I really hope that we can find a way to
+I really hope that we can find a way to
+just like have a really simple build
+just like have a really simple build
+script that just does this and cut out
+script that just does this and cut out
+all the extra dependency and stuff, but
+all the extra dependency and stuff, but
+we will see. I figured we will merge it
+we will see. I figured we will merge it
+for now so that we can run experiments
+for now so that we can run experiments
+on it. I kind of want to have all the
+on it. I kind of want to have all the
+new M's uh checked into
+new M's uh checked into
+Puffer and that also lets me iterate on
+Puffer and that also lets me iterate on
+the models a little bit to help out the
+the models a little bit to help out the
+uh to help them out on this.
+So
+imple
+imple
+runs it does not render.
+Okay. Uh I guess you have to put render
+Okay. Uh I guess you have to put render
+equals through in the
+end. Yeah.
+Holy.
+Holy.
+Um, that doesn't seem to be the intended
+behavior.
+Captain, I imagine that this is because
+Captain, I imagine that this is because
+it has
+And we can hack it for
+And we can hack it for
+now. There we are.
+So this is just the uh
+So this is just the uh
+built-in like scripted opponent versus a
+built-in like scripted opponent versus a
+random agent random neural
+net rendering at I don't
+net rendering at I don't
+know this is not real time. This is
+know this is not real time. This is
+faster than real
+time. But yeah this looks
+time. But yeah this looks
+sweet. We got to fix resolution. We got
+sweet. We got to fix resolution. We got
+to fix like render arcs and stuff. But
+to fix like render arcs and stuff. But
+this is
+this is
+sweet. This is going to be so cool to
+sweet. This is going to be so cool to
+have in puffer.
+like a full
+game.
+Okay, I'm going to rename it to puffer
+Okay, I'm going to rename it to puffer
+impulse force.
+Then we're going to see what
+Then we're going to see what
+uh
+Holy Takes a second to
+Holy Takes a second to
+compile.
+compile.
+Shenanigans. I kind of want to disable
+Shenanigans. I kind of want to disable
+this annoying compile stuff to be
+this annoying compile stuff to be
+honest. I don't think it makes anything
+honest. I don't think it makes anything
+much
+faster. Just makes dev more
+annoying. It's
+annoying. It's
+dead. Is
+it? Are we good
+now? Okay.
+now? Okay.
+Refresh. Internet blip, I guess. Or
+Refresh. Internet blip, I guess. Or
+reream server blip.
+So, I did find
+So, I did find
+something. Hi. Are you building a game
+something. Hi. Are you building a game
+using reinforcement learning? We're
+using reinforcement learning? We're
+building a large number of games and
+building a large number of games and
+using reinforcement learning on
+using reinforcement learning on
+them. They're all on puffer.ai, at least
+them. They're all on puffer.ai, at least
+the one so far. We have more in
+the one so far. We have more in
+development.
+development.
+Everything from like breakout up to more
+Everything from like breakout up to more
+complicated and interesting things like
+complicated and interesting things like
+this mini
+MMO. We got lots of fun stuff in
+here. You can join the Discord to get
+here. You can join the Discord to get
+involved with the development of it if
+involved with the development of it if
+you're
+interested. Okay, I think the stream is
+interested. Okay, I think the stream is
+back. We had a little bit of a like
+back. We had a little bit of a like
+server bug. I dropped a ton of frames,
+server bug. I dropped a ton of frames,
+but should be good now.
+but should be good now.
+Um, yeah, Captain. I It dropped like a
+Um, yeah, Captain. I It dropped like a
+ton of frames. It was just the reream
+ton of frames. It was just the reream
+servers being
+servers being
+bugged and I might have to get a
+bugged and I might have to get a
+different provider for that. Their
+different provider for that. Their
+servers grew up once in a
+while. So, I found
+while. So, I found
+this replacement equals
+this replacement equals
+false. Discord link. Absolutely. It's
+false. Discord link. Absolutely. It's
+very easy to remember.
+Most of our contributors came in with
+Most of our contributors came in with
+zero RL experience as well and are now
+zero RL experience as well and are now
+contributing very very productively. So
+contributing very very productively. So
+I don't know your background, but if you
+I don't know your background, but if you
+can code, you're probably
+good. Replacement
+good. Replacement
+false. This is sketchy to
+false. This is sketchy to
+me. It should be replacement true,
+me. It should be replacement true,
+right?
+Has it always been this
+way? Yeah, look the default in torch
+way? Yeah, look the default in torch
+says
+says
+true. So if I just do
+true. So if I just do
+um multinnomial
+What happens?
+It should be faster with replacement,
+right? You would think
+so. Oh, you know what? Hang on. Let me
+so. Oh, you know what? Hang on. Let me
+get one more data point on this and then
+get one more data point on this and then
+I have an idea.
+Okay, so this isn't faster on its own,
+Okay, so this isn't faster on its own,
+but what about if I do
+both? Cuz it could be that the
+both? Cuz it could be that the
+concatenated
+concatenated
+one still has the replacement
+one still has the replacement
+[Music]
+[Music]
+overhead. Did you see the small changes
+overhead. Did you see the small changes
+I made to
+I made to
+demo.py? Uh, I did not.
+I'm trying to fix the multinnomial
+I'm trying to fix the multinnomial
+sampling thing at the moment for
+you. I'm actually very surprised that
+you. I'm actually very surprised that
+doesn't fix it.
+Okay. Well, what else does this do? So,
+Okay. Well, what else does this do? So,
+this calls
+multinnomial and then it calls reshape
+multinnomial and then it calls reshape
+and that's
+and that's
+it. I mean that's the whole operation
+then. And then log prop here.
+We should probably just get the torch
+We should probably just get the torch
+profiler out or something,
+profiler out or something,
+right? Torch profiler is such a
+right? Torch profiler is such a
+pain. But I think that's probably what
+pain. But I think that's probably what
+we have to do.
+was able to figure out.
+was able to figure out.
+Yeah, it's just kind of annoying.
+It's hard to read. Yeah, I know. That's
+It's hard to read. Yeah, I know. That's
+why I don't like
+it. Can we do something like this real
+it. Can we do something like this real
+quick?
+quick?
+No. If I just do
+like If we just do this
+Who died this?
+who did time
+total. Let's see if this does anything.
+total. Let's see if this does anything.
+I'm
+sure Okay.
+So sample logits total
+So sample logits total
+is 200 micro
+is 200 micro
+seconds
+multinnomial. This seems pretty evenly
+multinnomial. This seems pretty evenly
+distributed, doesn't it?
+Wait. Okay. 30% in
+multinnomial
+30% in
+30% in
+sum
+sum
+gather
+gather
+copy. That seems pretty evenly
+copy. That seems pretty evenly
+distributed to me.
+But you can see here it's um it's CPU
+But you can see here it's um it's CPU
+time, isn't
+time, isn't
+it? Oh, here it is. It is the
+multinnomial multinnomial
+multinnomial multinnomial
+taking a whole bunch of time.
+taking a whole bunch of time.
+It's all CPU
+time.
+Okay. So, do we need to look at the
+Okay. So, do we need to look at the
+multinnomial code then?
+underscore categorical sample.
+Oh, and then there's a scatter inside of
+Oh, and then there's a scatter inside of
+it. Okay. What is underscore
+categorical? Categorical
+Didn't I just read the categorical
+Didn't I just read the categorical
+source code and see if it had
+source code and see if it had
+multinnomial in
+multinnomial in
+it? Or am I going
+it? Or am I going
+crazy?
+crazy?
+Wait,
+Wait,
+what? Categorical calls
+what? Categorical calls
+multinnomial and multinnomial makes a
+categorical. Yeah, we're not happy with
+categorical. Yeah, we're not happy with
+that.
+Is there a way to find where the source
+Is there a way to find where the source
+is for
+this? Okay, get out of here, bot.
+It seems like it's
+It seems like it's
+um
+multinnomial. It seems like it calls
+multinnomial. It seems like it calls
+this.
+So then I don't understand how these
+So then I don't understand how these
+things fit
+together because this makes a
+categorical and then this
+categorical and then this
+does the sample on
+this underscore multinnomial
+So wait, this
+So wait, this
+is of a this is a
+constraint that has a
+check that doesn't do
+check that doesn't do
+anything. How does this make any sense?
+So multinnomial
+So multinnomial
+right we get to
+right we get to
+here then this makes a
+here then this makes a
+categorical and then this
+calls this
+multinnomial which takes prob sample
+multinnomial which takes prob sample
+shape
+It's not this,
+right? Is it
+right? Is it
+this? This is
+Onyx. Could it be this?
+But I mean this is defined unless this
+But I mean this is defined unless this
+import gets overridden
+somehow. Where is this?
+for dot
+multinnomial. It's got to be this,
+multinnomial. It's got to be this,
+right?
+There's an underscore
+There's an underscore
+here. Do these import
+star. Okay, this init file is not going
+star. Okay, this init file is not going
+to be particularly useful. So, I can't
+to be particularly useful. So, I can't
+tell what the hell it's calling.
+tell what the hell it's calling.
+to do this
+multinnomial. Was there a time
+multinnomial. Was there a time
+multinnomial in this
+trace? Didn't I just do
+this? Where did I uh I put this? Here it
+this? Where did I uh I put this? Here it
+is.
+So a 10 multinnomial
+right does this mean that the hang on if
+right does this mean that the hang on if
+I see the overhead in a 10 multinnomial
+This is 1.7
+This is 1.7
+ms. And then this says that I
+have like 300 ms micro uh 300 micro of
+have like 300 ms micro uh 300 micro of
+that in these ops. So then where's the
+that in these ops. So then where's the
+rest of it?
+The actual
+The actual
+um multial isn't that slow. It's
+um multial isn't that slow. It's
+probably the rapper blue,
+right? Do we even need this? Is there a
+right? Do we even need this? Is there a
+simpler way of doing this?
+Num
+Num
+samples indices are sampled from the
+samples indices are sampled from the
+multinnomial.
+We're only ever going to sample
+one. Right.
+This is a generalization of
+um this is literally just a prop sample.
+Okay, so you make a categorical and it
+Okay, so you make a categorical and it
+calls
+calls
+multinnomial and then it can it can
+multinnomial and then it can it can
+potentially do more than one sample I
+potentially do more than one sample I
+guess.
+And
+And
+like it's probably this
+like it's probably this
+thing cuz this is a 10 multinnomial
+log of
+input utils graph
+input utils graph
+context and then it's by
+name. I'm very confused if this is not
+name. I'm very confused if this is not
+just a prop
+sample. Is this doing anything other
+sample. Is this doing anything other
+than just
+than just
+like sampling based on prob and giving
+like sampling based on prob and giving
+you log prop returned?
+multinnomial logits to
+props. You can give this thing logit to
+props. You can give this thing logit to
+start
+start
+with. I think you can do even better
+with. I think you can do even better
+than
+than
+that. We're
+going to ask dumb questions and get some
+going to ask dumb questions and get some
+dumb
+answers. Multial sample doing anything
+answers. Multial sample doing anything
+other than just giving
+uh it
+I guess that's all it
+is. Okay, so like this goes through a
+is. Okay, so like this goes through a
+whole bunch of garbage.
+Okay. I don't actually
+know. I don't know about this.
+Watch steps.
+Yeah. So, it's not doing
+anything. It's slow.
+Semicorn
+Semicorn
+basic GPU.
+I'm just looking if there's like a lower
+I'm just looking if there's like a lower
+level function for this.
+No, not
+categorical. Add gumball noise to log
+props. Does that work?
+Hey
+bet. Does this work?
+That's different.
+Bet. Or it should be
+different. Maybe it's the same.
+I that might actually be the
+same. I remember that from a totally
+same. I remember that from a totally
+different context from like years ago.
+Yeah, the multinnomial is slow.
+Yeah, this is different. This is so that
+Yeah, this is different. This is so that
+you can compute
+gradients. So I do remember this
+gradients. So I do remember this
+correctly.
+So, it is actually interesting to think
+So, it is actually interesting to think
+about that. I haven't thought about that
+about that. I haven't thought about that
+in a while. So,
+thanks. It's small. What do you mean?
+thanks. It's small. What do you mean?
+No, it's the the function is
+No, it's the the function is
+screwy. Their function has like 10
+screwy. Their function has like 10
+layers of you don't
+need. As always, fan code
+Oh, this is so funny. This is
+like I I was interning under this guy as
+like I I was interning under this guy as
+a high school student about in this time
+a high school student about in this time
+period. That's funny as hell. This is
+period. That's funny as hell. This is
+from 2018, man.
+Is it relevant? This is like super
+old,
+old,
+right? Where did I just put your
+link?
+Funny to see your time come 15
+Funny to see your time come 15
+minutes free. What you want me to do?
+Yeah, this isn't what we want either. I
+Yeah, this isn't what we want either. I
+have installed instructions PR for
+have installed instructions PR for
+building. You weren't using the latest
+building. You weren't using the latest
+version. What do you mean I wasn't using
+version. What do you mean I wasn't using
+the latest
+the latest
+version?
+What? The PR that I merged wasn't the
+What? The PR that I merged wasn't the
+latest version?
+pip install- e dot doesn't do it from
+pip install- e dot doesn't do it from
+the impulse wars
+directory.
+Oh, okay.
+Well, I I pip installed from your
+Well, I I pip installed from your
+directory with your pipe like your
+toml. This is so silly.
+Isn't it just like argument of a or
+Isn't it just like argument of a or
+something? I have DSA algorithm. I don't
+something? I have DSA algorithm. I don't
+know
+know
+nothing. Should probably
+nothing. Should probably
+study. That's what I would suggest.
+study. That's what I would suggest.
+I literally had to look uh look that up
+I literally had to look uh look that up
+like last week or whatever because I
+like last week or whatever because I
+it's just domain. It's um data
+it's just domain. It's um data
+structures and algorith just a standard
+structures and algorith just a standard
+fang
+fang
+annoying like solve tricky impractical
+annoying like solve tricky impractical
+questions
+questions
+live. All right, with the advertising
+bet, shouldn't it just be
+like shouldn't it just be internally
+like shouldn't it just be internally
+doing like argument
+doing like argument
+of rand less than some
+Can I just do this?
+Yeah, I did fix
+Yeah, I did fix
+that. I might have rebroken it. We'll
+that. I might have rebroken it. We'll
+see.
+But fully compiles the uh the eval the
+But fully compiles the uh the eval the
+eval
+eval
+pass. And then the backward is mostly
+pass. And then the backward is mostly
+fast with
+2DN. That's been a thing for a while,
+2DN. That's been a thing for a while,
+but
+So, this actually does noise on
+So, this actually does noise on
+GPU. So, hang on. We should be able to
+GPU. So, hang on. We should be able to
+do something with this then if we're a
+do something with this then if we're a
+little clever, right?
+or that's not it, right?
+See if that does anything.
+It would be pretty sad if that did do
+something, but uh it's
+possible. So the idea here is we just
+possible. So the idea here is we just
+bypass the all the multinomial
+bypass the all the multinomial
+shenanigans. Argument CUDA is not
+shenanigans. Argument CUDA is not
+implemented for
+B. So you can do torch sum, right?
+Is this running the same function?
+What is this?
+Five, I guess. 17.
+What is the size and
+What is the size and
+shape
+shape
+categorical? Yeah, it's just they just
+categorical? Yeah, it's just they just
+give you some probabilities, man. And
+give you some probabilities, man. And
+it's like for some reason something is
+it's like for some reason something is
+slow.
+Okay, we still
+Okay, we still
+have 40% time in forward
+have 40% time in forward
+pass. Not
+ideal. Goal for
+ideal. Goal for
+today, mostly cleaning up the uh
+today, mostly cleaning up the uh
+experience buffer, improving performance
+experience buffer, improving performance
+on that. And uh Captain just PR this
+on that. And uh Captain just PR this
+like 10,000 line environment that's
+like 10,000 line environment that's
+currently bottlenecked by action
+currently bottlenecked by action
+sampling. Plus I've had a couple other
+sampling. Plus I've had a couple other
+requests for that. So I'm spending a
+requests for that. So I'm spending a
+little bit of time seeing if I can
+little bit of time seeing if I can
+improve that right now. And then if I
+improve that right now. And then if I
+have time after that I will probably go
+have time after that I will probably go
+back to cleaning up the experience
+back to cleaning up the experience
+buffer, getting some new experiments
+buffer, getting some new experiments
+running and things like that. You need
+running and things like that. You need
+to fix the panel
+to fix the panel
+profiling. That is true.
+I don't know. We can answer whatever you
+I don't know. We can answer whatever you
+want. It's a free country.
+Okay.
+So, okay. So, now I see soft
+So, okay. So, now I see soft
+max. Soft max in here
+max. Soft max in here
+is taking up the
+time. Uh, where the heck should Softmax
+time. Uh, where the heck should Softmax
+be getting called?
+What should be calling softmax
+here? What is this? I just like torch
+here? What is this? I just like torch
+profile
+shenanigans.
+Um one sample per element.
+Um, does log prop
+call broadcast tensors and then
+gather logic entropy.
+Okay. Okay. If I do this, is this
+Okay. Okay. If I do this, is this
+included?
+Okay, so there's
+Okay, so there's
+still soft
+max logic to
+props.
+Oh, logitics to prompts.
+So when you call multinnomial does it do
+So when you call multinnomial does it do
+this
+internally? Okay, this does do a soft
+internally? Okay, this does do a soft
+max.
+What you have to do,
+What you have to do,
+right? You have to do a soft max for
+this. So that's now what's taking up the
+this. So that's now what's taking up the
+time.
+and A10 soft max is mostly on the uh it
+and A10 soft max is mostly on the uh it
+is on the CPU
+here we are deep in PyTorch code not
+here we are deep in PyTorch code not
+that deep to be
+that deep to be
+fairly barely getting to the C++
+I want to see if this
+I want to see if this
+calls uh if this calls logistics to
+calls uh if this calls logistics to
+probs or
+probs or
+something. So when you do
+something. So when you do
+this because here you can give it
+this because here you can give it
+logits,
+logits,
+right? Yeah, you're allowed to give this
+right? Yeah, you're allowed to give this
+thing logits and then it just saves
+thing logits and then it just saves
+this
+categorical and then categorical does
+It norms
+It norms
+it or gives it logic. This is self
+it or gives it logic. This is self
+param and then underscore innit or
+param and then underscore innit or
+whatever. So underscore innit on
+whatever. So underscore innit on
+distribution. Does this have
+stuff? This doesn't seem to do
+anything. I don't see any normalization
+anything. I don't see any normalization
+happening
+happening
+there. So you do this thing, right?
+there. So you do this thing, right?
+Logit minus
+this that gives logits and
+this that gives logits and
+then oh yeah props is logit to probs.
+then oh yeah props is logit to probs.
+Cool. So logits to probs.
+There you
+There you
+go. It just does soft
+max. So logistic problems on. So it
+max. So logistic problems on. So it
+normalizes and then does
+this. Wait. log some
+x. Can we cut that down?
+log sum of x of log
+x and then the soft max does this.
+Wait, isn't this the
+Wait, isn't this the
+same some act
+logs? We still need the props, right?
+logs? We still need the props, right?
+Because we need log props.
+You just linked me the same distribution
+bet. Well, but the thing is it's not
+bet. Well, but the thing is it's not
+even like really okay. This whole thing
+even like really okay. This whole thing
+is like massively written out to be more
+is like massively written out to be more
+confusing than this is. Look, this is
+confusing than this is. Look, this is
+literally all that's happening.
+literally all that's happening.
+Okay, this is all the math that that you
+Okay, this is all the math that that you
+need. You don't need to know anything
+need. You don't need to know anything
+about stats or distributions or
+about stats or distributions or
+anything. P 0, P1,
+anything. P 0, P1,
+P2,
+P2,
+P3. These are numbers that sum to one.
+P3. These are numbers that sum to one.
+Okay. Then let's say this is like 0.1,
+Okay. Then let's say this is like 0.1,
+this is like 2, this is like three, and
+this is like 2, this is like three, and
+this was like 04. All right, these sum
+this was like 04. All right, these sum
+to one. So what this is going to do is
+to one. So what this is going to do is
+it generates a random number. Let's say
+it generates a random number. Let's say
+it's
+it's
+0.45 and then it
+0.45 and then it
+goes is this number bigger than this?
+goes is this number bigger than this?
+No. Okay, let's add this. Let's add this
+No. Okay, let's add this. Let's add this
+to the sum. Is the sum of these two
+to the sum. Is the sum of these two
+bigger? No, it's not. Okay, let's keep
+bigger? No, it's not. Okay, let's keep
+going.
+going.
+Is this one bigger if I add this one?
+Is this one bigger if I add this one?
+Yes, it is. So, this is the best one.
+Yes, it is. So, this is the best one.
+So, 012 and it's going to return index
+So, 012 and it's going to return index
+two. That's the entire
+two. That's the entire
+operation. There's just there's
+operation. There's just there's
+additional normalization and stuff, but
+additional normalization and stuff, but
+that's the entire
+operation. So, this is not really
+operation. So, this is not really
+complicated. Yeah, there is some like
+complicated. Yeah, there is some like
+the thing is you don't get
+the thing is you don't get
+probabilities, you get logits which is
+probabilities, you get logits which is
+like you have to then transform those
+like you have to then transform those
+into probs and usually you throw that
+into probs and usually you throw that
+through a softmax for numerical
+through a softmax for numerical
+stability. But uh like conceptually you
+stability. But uh like conceptually you
+don't need to know anything about
+don't need to know anything about
+advanced prob or stats or anything like
+advanced prob or stats or anything like
+it's really really basic. It's just
+it's really really basic. It's just
+there are 10 layers of code for
+there are 10 layers of code for
+something that is very
+something that is very
+simple. So that's all I have to figure
+simple. So that's all I have to figure
+out how to get around.
+like this here is this is for numerical
+like this here is this is for numerical
+stability and then the soft max is
+stability and then the soft max is
+technically also for numerical
+technically also for numerical
+stability. So
+like let me see what quantities we need.
+like let me see what quantities we need.
+Do we ever need
+probs? So we need log
+probs? So we need log
+prop and entropy.
+So we
+norm log prop do this just a
+broadcast. Okay. So this one doesn't
+broadcast. Okay. So this one doesn't
+make a ton of sense to me.
+Let me just like paste this and ask some
+Let me just like paste this and ask some
+questions here. I'm
+questions here. I'm
+confused. I'm very confused on
+this. Hey YouTube folks, welcome. We're
+this. Hey YouTube folks, welcome. We're
+currently doing numerical optimizations
+currently doing numerical optimizations
+on our uh RL inference path,
+on our uh RL inference path,
+specifically the action
+sampling. Got to make puffer lip go
+fast. Actually, let's just copy all
+fast. Actually, let's just copy all
+this.
+cumulative
+cumulative
+distribution in the B
+Isn't that just like incredibly
+Isn't that just like incredibly
+stupid? Wait, is that actually how
+stupid? Wait, is that actually how
+things Why the hell would you binary
+things Why the hell would you binary
+search when you're computing the
+search when you're computing the
+cumulative
+distribution? You should just be able to
+distribution? You should just be able to
+like get the index in the process of
+like get the index in the process of
+computing the
+computing the
+CDF or the cumitive distribution, not
+CDF or the cumitive distribution, not
+CDF.
+like you I showed you right you don't
+like you I showed you right you don't
+need to binary search it you only need
+need to binary search it you only need
+to like binary search it if you have a
+to like binary search it if you have a
+really long array and like you're doing
+really long array and like you're doing
+this the sum
+first well because in this case you
+first well because in this case you
+literally get the answer in the process
+literally get the answer in the process
+of doing the cumulative
+of doing the cumulative
+sum
+right so Technically, yes, you can
+right so Technically, yes, you can
+improve over the one that I wrote. Uh,
+improve over the one that I wrote. Uh,
+but you'd have to write a
+but you'd have to write a
+kernel. I just did cumulative sum, but
+kernel. I just did cumulative sum, but
+the thing is we still have uh it's still
+the thing is we still have uh it's still
+now we still have the soft max and the
+now we still have the soft max and the
+soft max is slow. So now my thing is
+soft max is slow. So now my thing is
+fast, but there's still the soft max
+fast, but there's still the soft max
+sample, the soft max. Um, so I'm trying
+sample, the soft max. Um, so I'm trying
+to see if we can combine some
+to see if we can combine some
+operations.
+Is Gumbo Mac
+stable? Hang on. What is
+this? Oh, that's interesting.
+That's Yeah. Well, torch
+doesn't. Let me see if this does
+anything. And then we replace this
+anything. And then we replace this
+where the multinnomial is.
+So we just
+So we just
+[Music]
+do I guess it's just going to be
+do I guess it's just going to be
+like
+dumbbell and then you still need normal
+dumbbell and then you still need normal
+objects but just avoid soft max
+Maybe I guess this makes sense because
+Maybe I guess this makes sense because
+like the action distribution doesn't
+like the action distribution doesn't
+have to be differentiable, right?
+Okay. So, now we can see what's wrong
+Okay. So, now we can see what's wrong
+with this film.
+random. So now the noise
+is the noise is now the bottleneck.
+thoughts.
+Allocate a giant ass
+Allocate a giant ass
+class CDFS lookup
+table. Generate a bunch of random
+table. Generate a bunch of random
+numbers.
+Make your own cuda. Your own included
+Make your own cuda. Your own included
+that avoids all the stupid size
+checks.
+Uh it's really weird how like every
+Uh it's really weird how like every
+single thing I've tried is about the
+single thing I've tried is about the
+same
+same
+speed. Like Now it's bottlenecked by a
+speed. Like Now it's bottlenecked by a
+random number gen. It seems it's also
+random number gen. It seems it's also
+all CPU bottleneck which is
+weird. Ideally eager mode should also be
+weird. Ideally eager mode should also be
+fast.
+happen. So this can be
+Awesome. Check that shortly.
+This random noise
+This random noise
+[Music]
+[Music]
+is you always need to regenerate the
+is you always need to regenerate the
+noise, right?
+There's no way that's going to be
+good. I mean, we got it right. Where is
+good. I mean, we got it right. Where is
+it? Right here.
+it? Right here.
+Right. Rand likes 800.
+It's one rand. It's a random number per
+It's one rand. It's a random number per
+action option.
+Captain. Why is the CPU time that
+high? Does this not like generate the
+high? Does this not like generate the
+noise on GPU?
+My make noise
+Yeah. Heat.
+Okay, this is
+Okay, this is
+something. Yeah, I don't know what
+something. Yeah, I don't know what
+that's doing.
+Uh, how about if we c we can catch the
+Uh, how about if we c we can catch the
+tensor if not the noise, right? So we
+tensor if not the noise, right? So we
+don't have to keep remaking it. Maybe
+don't have to keep remaking it. Maybe
+that helps.
+like. How about that?
+So,
+um
+storage zero like
+Okay.
+And
+then make sure you plot the R. I'm not
+then make sure you plot the R. I'm not
+catching the RNG. I'm just catching the
+catching the RNG. I'm just catching the
+storage tensor, Okay.
+So now uniform is slow. Huh?
+I'm kind of tempted to bet, but I don't
+I'm kind of tempted to bet, but I don't
+really think you
+can. You that guy. Could this be slow?
+Like RNG shouldn't be slow,
+right? Is this like some dumb thing
+right? Is this like some dumb thing
+where you have to get it from a certain
+where you have to get it from a certain
+stream or something? So like it's not
+stream or something? So like it's not
+parallelizable.
+bunch of internal checks. Technically,
+bunch of internal checks. Technically,
+it could be that it is it is CPU time.
+it could be that it is it is CPU time.
+Do they have like are they doing checks
+Do they have like are they doing checks
+per element or something? That
+guy. Welcome, Peanut.
+guy. Welcome, Peanut.
+Size check should not account for this.
+Size check should not account for this.
+They would have to be checking every
+They would have to be checking every
+element or
+something. Hang on. Let me just check
+something. Hang on. Let me just check
+for ghosts real
+quick. Is that faster or did I just get
+quick. Is that faster or did I just get
+lucky? No, I just got lucky.
+Okay, see you, man. Good
+Okay, see you, man. Good
+luck. Make sure you have your work
+luck. Make sure you have your work
+saved. Boxes are getting shipped or
+saved. Boxes are getting shipped or
+carried or whatever
+potentially. What about tweaking some
+potentially. What about tweaking some
+consoles? What?
+This is super irritating.
+Well, I shouldn't rely on
+Well, I shouldn't rely on
+um I shouldn't rely on this. I want to
+um I shouldn't rely on this. I want to
+do the end to end
+speed. See if that has changed anything
+speed. See if that has changed anything
+because there's a ton of overhead in the
+because there's a ton of overhead in the
+profiler. So, let's see if this has
+profiler. So, let's see if this has
+changed anything.
+No. Uh because compiling is a pain in
+No. Uh because compiling is a pain in
+the ass
+the ass
+generally and like if you want a library
+generally and like if you want a library
+that only works properly in full compile
+that only works properly in full compile
+mode like use jacks.
+or Tiny. Actually, if I wanted a library
+or Tiny. Actually, if I wanted a library
+that only works in compile mode, I'd use
+Tiny. It's like dramatically better
+Tiny. It's like dramatically better
+software.
+I
+mean, I could technically cack the
+mean, I could technically cack the
+noise.
+Let me try that real quick. Cuz if that
+Let me try that real quick. Cuz if that
+doesn't work, then nothing's going to
+doesn't work, then nothing's going to
+work.
+This is going to be somewhat
+tricky. I don't want to spend all day on
+tricky. I don't want to spend all day on
+it, but I will try something.
+Um,
+Okay.
+Now you get to like the key thing here
+Now you get to like the key thing here
+is we get to comment this out right
+Yeah. Okay. So, now we profile it and
+Yeah. Okay. So, now we profile it and
+see what the heck it says.
+see what the heck it says.
+I'm starting to suspect the profiler
+sucks because this doesn't make sense.
+Yeah. So
+here now it's saying add is taking
+This
+time it does say this is faster.
+Let's do it. Let's see if this changes
+anything. Nope. That's what it says. It
+anything. Nope. That's what it says. It
+said add is taking time.
+No, we're not making
+No, we're not making
+environments continuous over this
+environments continuous over this
+We're going to solve the
+We're going to solve the
+problem.
+I imagine this is like a combination of
+I imagine this is like a combination of
+profiling being dumb and a few other
+profiling being dumb and a few other
+things like just being hazy.
+What's wrong with this thing?
+doesn't seem right.
+Did I uh I think I screwed up something
+Did I uh I think I screwed up something
+here. Hang
+on. No.
+Not
+stack zero. Okay. Was very close.
+Okay, so that gives you
+Okay, so that gives you
+250. Um, this is still incredibly
+250. Um, this is still incredibly
+freaking
+freaking
+slow, right?
+Can't do that actually because it's
+Can't do that actually because it's
+uh these ones need to actually be back
+through. That's still freaking slow.
+Got some
+Then you get end of bottleneck
+top. Yeah, it's rough.
+There's not much way around this
+then. 128 a m*
+then. 128 a m*
+16 48 plot buffered. Yeah, you can't do
+16 48 plot buffered. Yeah, you can't do
+that.
+It's got to be like 512.
+Is the end really going to bottleneck
+Is the end really going to bottleneck
+that hard?
+Definitely got to be like
+512. Super obnoxious how that is
+though. Is it hard bottlenecks on
+ends? It really shouldn't be hard
+ends? It really shouldn't be hard
+bottleneck on ends.
+bottleneck on ends.
+copies. Really shouldn't have to quad
+copies. Really shouldn't have to quad
+buffer.
+Eight.
+Eight.
+Six. about
+this. Okay. So now we have 45% end time.
+This shouldn't be the
+issue. Going to try some stuff though.
+Okay. It's just the end being
+Okay. It's just the end being
+slow. It's hard to get around.
+You get way more
+You get way more
+reasonable ratios.
+reasonable ratios.
+Now, aside from the M, the M's just
+Now, aside from the M, the M's just
+being slow.
+So it really was just small batch
+So it really was just small batch
+training, huh?
+What do I have this on
+What do I have this on
+now? 6. Is this Yeah, it's 496. So, this
+now? 6. Is this Yeah, it's 496. So, this
+is the correct number of M to
+is the correct number of M to
+have for training for sure.
+50.
+See what this
+does. When are you moving the boxes?
+does. When are you moving the boxes?
+Probably tomorrow.
+I didn't mess with this, did
+I? I did. This
+Okay.
+See if this does anything.
+So it doesn't do
+So it doesn't do
+anything. Is that the uh the conclusion
+anything. Is that the uh the conclusion
+here?
+Oh, well this is doing everything
+Oh, well this is doing everything
+right. Hang on.
+I mean, this action sampling stuff
+I mean, this action sampling stuff
+really doesn't seem to make a damn
+really doesn't seem to make a damn
+difference.
+I can definitely optimize this a bit
+I can definitely optimize this a bit
+without doing the dumbbell softmax
+without doing the dumbbell softmax
+stuff, right?
+like
+Yeah, cuz this thing
+Yeah, cuz this thing
+does props.
+Yeah, all these operations are just kind
+Yeah, all these operations are just kind
+of
+of
+sucky.
+sucky.
+Um, let me think how we want to do this.
+I want to do
+this. You only need the loops for
+this. You only need the loops for
+multi-iscipe.
+So, what we're going to
+So, what we're going to
+do now, what we'll do is we'll
+I think there's a good way to clean this
+I think there's a good way to clean this
+up. It's just going to take a little
+up. It's just going to take a little
+work.
+which is the same
+speed now. Okay, there's some ops we can
+speed now. Okay, there's some ops we can
+potentially save.
+So we get logits to props.
+So,
+I think we're just redoing a ton of
+I think we're just redoing a ton of
+operations in this, right?
+It's good sound over both. I believe
+Apparently it's not
+Then log prop. What did I do for log
+Then log prop. What did I do for log
+prop?
+We are going to get a speed up out of
+We are going to get a speed up out of
+this
+this
+today. It's going to
+happen. Oops.
+You need props, don't you?
+Where is this 433?
+Okay. So, uh this
+oversummed in train mode. It overs
+Okay, we actually get a
+phrase. So, why is there an extra
+dim you would like to
+have log prop should get you a
+have log prop should get you a
+dimension. So, I think that this is just
+dimension. So, I think that this is just
+wrong
+then. Is this not supposed to be
+then. Is this not supposed to be
+summing
+zero. Lovely.
+Does this already
+fail? So this already fails.
+Yeah, I guess I didn't account for that
+Yeah, I guess I didn't account for that
+now, did
+I? Okay, we'll debug it in CUDA, I
+I? Okay, we'll debug it in CUDA, I
+guess.
+logits to problems on. This should be
+logits to problems on. This should be
+normalized logic, shouldn't it?
+getting
+getting
+somewhere. At the very least, it will
+somewhere. At the very least, it will
+clean up the code a
+clean up the code a
+bit. At the best, it should be a bit
+bit. At the best, it should be a bit
+faster once we get to work.
+[Music]
+That's good.
+You can't do log of normalized problems
+You can't do log of normalized problems
+or whatever.
+Let's see what the
+Let's see what the
+[Music]
+[Music]
+original what did they do in the
+original what did they do in the
+original code here? There's a log
+prop this one
+prop this one
+entropy. Okay. So you take normalized
+logits and logits to probs
+logits and logits to probs
+of logits
+of logits
+times logits to probs.
+Wait, I'm doing this wrong for sure.
+Right. Might have to go.
+Logits times log to props of logits.
+You have to do this clamping
+thing. This doesn't do any expensive
+thing. This doesn't do any expensive
+ops, right?
+That's it.
+Okay, it
+Okay, it
+runs. Probably not any faster,
+right? Code is much nicer though.
+So once I clean this up a little bit,
+So once I clean this up a little bit,
+right?
+Like this one's fast. This other one's
+Like this one's fast. This other one's
+also fast.
+prompts is equal to logit to
+prompts. We'll leave
+prompts. We'll leave
+the profiling in for right now, I guess.
+Oh, well it's actually it is fast now
+Oh, well it's actually it is fast now
+because of the
+uh the different
+uh the different
+params. So I guess this is the current
+params. So I guess this is the current
+thing, right? This is the new
+thing, right? This is the new
+code. Uh so this is an upgrade. And then
+code. Uh so this is an upgrade. And then
+if this runs, what we'll do is we'll try
+if this runs, what we'll do is we'll try
+the original and see if it's any faster
+the original and see if it's any faster
+on the original.
+So we have this and then we
+have we've got this. So this will be
+have we've got this. So this will be
+quad
+buffered and then hopefully with quad
+buffered and then hopefully with quad
+buffering it should be a little
+buffering it should be a little
+better. Maybe not.
+Doesn't seem like
+it. That is a little better.
+Maybe. Yeah, that is a little better.
+Right then. What was the original like
+Right then. What was the original like
+param or whatever in here?
+I guess it was 60. No,
+I guess it was 60. No,
+128. Is it 128 quad
+buffer? 128 quad
+buffer? 128 quad
+buffer. So that's going to be like very
+buffer. So that's going to be like very
+low batch size.
+better. Shaved like 20% overhead off of
+better. Shaved like 20% overhead off of
+the afford pass.
+runs pretty much the same now on any of
+runs pretty much the same now on any of
+those
+those
+settings. It's not
+settings. It's not
+bad. All right. Now we have to make sure
+bad. All right. Now we have to make sure
+we didn't break everything
+else. What in the heck?
+Why is this
+changed? Wait,
+why haven't changed some stuff? I think
+why haven't changed some stuff? I think
+you left comments
+you left comments
+somewhere. Would they be in the PR?
+somewhere. Would they be in the PR?
+Maybe. Yeah, that's not cool to change
+Maybe. Yeah, that's not cool to change
+that.
+What? What did you
+do? This for now.
+Oh, you just added an extra arg. I see.
+Oh, you just added an extra arg. I see.
+Okay. I'll have to fix stuff so it's
+Okay. I'll have to fix stuff so it's
+easier to add. We just All policies need
+easier to add. We just All policies need
+to take parts. That's the
+thing. So, if we just
+thing. So, if we just
+do, let's say we're not going to do this
+do, let's say we're not going to do this
+crazy random noise thing.
+Man, maybe we should try it. I spent the
+Man, maybe we should try it. I spent the
+time
+That actually kind of does make a
+difference. Oh, that's so annoying.
+It's like a 5% improvement or
+whatever. Uh pre-allocated noise
+whatever. Uh pre-allocated noise
+stuff seems like it makes a very like it
+stuff seems like it makes a very like it
+makes a small difference. I don't know.
+makes a small difference. I don't know.
+Is it worth leaving that in there?
+[Music]
+versus it's kind of sketchy is the thing
+versus it's kind of sketchy is the thing
+like the alternative is to just do
+like the alternative is to just do
+this was like 228
+Okay. Oh, hang on. I think it doesn't
+Okay. Oh, hang on. I think it doesn't
+make a
+difference. I think we're fine.
+It really shouldn't.
+Good for
+Good for
+pass. I turn on sitting
+pass. I turn on sitting
+ducks. M time. Why is m time less with
+ducks. M time. Why is m time less with
+sitting
+sitting
+ducks? Is it because it's a one v one?
+ducks? Is it because it's a one v one?
+Like I What?
+Okay.
+And then what we do
+is so we do this and now it goes from
+is so we do this and now it goes from
+270.
+Yeah. It's not bad, right?
+Total time steps is 10 mil by
+Total time steps is 10 mil by
+default. So, not
+default. So, not
+bad. Got to make sure it actually works
+bad. Got to make sure it actually works
+on the other
+ends. So, we're keeping that guy's
+ends. So, we're keeping that guy's
+chain, but we're fixing some other
+It's good to me,
+right? It's a 40 second
+solve. Pretty good. Let's make sure it
+solve. Pretty good. Let's make sure it
+works with
+like
+three.
+three.
+Solid. Okay.
+Solid. Okay.
+Well, how's that for
+Well, how's that for
+um little perf improvement? We cleaned
+um little perf improvement? We cleaned
+up the code and we made it a bit
+faster. That's decent progress,
+right? And then you can figure out the
+right? And then you can figure out the
+demo thing. Well, or I can actually to
+demo thing. Well, or I can actually to
+be fair. You can just change it locally
+be fair. You can just change it locally
+for now.
+Oh, I don't need the deterministic false
+thing. Test that later.
+there. No way to link somebody. The um
+Go send this to the other person who
+Go send this to the other person who
+wanted this.
+Neural MMO 3 was good on
+Neural MMO 3 was good on
+box.
+box.
+Interesting. Oh, we can always get it
+Interesting. Oh, we can always get it
+sent in if we
+sent in if we
+need. It's fine.
+need. It's fine.
+So, I've got like another half hour
+So, I've got like another half hour
+before
+dinner, possibly longer. We'll see. I'm
+dinner, possibly longer. We'll see. I'm
+going to take a couple quick minutes,
+going to take a couple quick minutes,
+grab myself a drink, and then uh we will
+grab myself a drink, and then uh we will
+do a little bit more clean up on the
+do a little bit more clean up on the
+experience buffer, a little bit more
+experience buffer, a little bit more
+optimization, and uh just generally a
+optimization, and uh just generally a
+little bit more work on getting this
+little bit more work on getting this
+into a good spot. Be right back.
+Okay. Cool. Impulse
+Okay. Cool. Impulse
+Wars running at a respectable
+speed. I guess we have this perf profile
+speed. I guess we have this perf profile
+right here for us, don't we? For neural
+right here for us, don't we? For neural
+MMO 11%
+copy, 20%
+forward, five and
+miss. That's pretty darn well optimized
+miss. That's pretty darn well optimized
+other than the copy overhead, which is
+It's kind of a lot of copy overhead
+actually. Let me check that. I'm pretty
+actually. Let me check that. I'm pretty
+sure the dtype is right on that. Should
+sure the dtype is right on that. Should
+be pretty small.
+you and
+date
+1700.
+1700.
+Um,
+wait, how's it
+wait, how's it
+1700? That seems big.
+Wait,
+what? Oh, it is 10 channels. Okay. I
+what? Oh, it is 10 channels. Okay. I
+forgot I did that.
+Yeah, I'd forgotten I had done it that
+way. I have this fancy bit packing
+way. I have this fancy bit packing
+stuff,
+stuff,
+but 10% overhead to not have to do that
+but 10% overhead to not have to do that
+is
+is
+not I suppose.
+So,
+So,
+um, was there anything else that I had
+um, was there anything else that I had
+to actually do on the experience buffer?
+to actually do on the experience buffer?
+Is it
+Is it
+ready? I think the CPU fallback doesn't
+ready? I think the CPU fallback doesn't
+work right now on
+work right now on
+uh on the
+buffer. Oops.
+All
+right, let's fix cuda
+right, let's fix cuda
+build. Should be pretty easy.
+Where's
+this num
+steps? Okay, so this vrace check
+steps? Okay, so this vrace check
+signature I think just changed, right?
+But this now
+But this now
+takes values rewards done
+importance vss advantages nonsteps
+importance vss advantages nonsteps
+horizon
+Do we use
+Do we use
+[Music]
+[Music]
+that? There's no
+BS,
+right? Oh, this is actually passed
+right? Oh, this is actually passed
+in. Okay.
+So rewards done.
+Where is
+this? There we go.
+a
+cuda b trace check. Oh, and now we're
+cuda b trace check. Oh, and now we're
+calling it with the wrong. Oh.
+And you don't pass
+And you don't pass
+in trace either, do you? This is just
+in trace either, do you? This is just
+fully
+dated. B trace
+checked. So wait this was the signature
+checked. So wait this was the signature
+right? So you pass in values, rewards,
+right? So you pass in values, rewards,
+dums,
+dums,
+importance,
+BS. That's it, right?
+And then you don't have trace. You don't
+And then you don't have trace. You don't
+need to return
+this. And now the other ones are going
+this. And now the other ones are going
+to error the exact same way. So that's
+to error the exact same way. So that's
+easy.
+Importance. Yeah. So this doesn't give
+Importance. Yeah. So this doesn't give
+you
+trace.
+trace.
+Oh, I see. So literally it's just the
+advantages. Yeah, we're going to have to
+advantages. Yeah, we're going to have to
+figure out how to reduce boiler plate in
+figure out how to reduce boiler plate in
+this thing, but not today.
+this thing, but not today.
+Okay, we're just going to get this to
+Okay, we're just going to get this to
+run.
+So
+So
+here B trace
+takes to float
+star
+Trace and V trace
+row BS advantages, right?
+Wait,
+what? Well, that would screw up
+what? Well, that would screw up
+everything.
+How did that
+happen? Oh, yeah. That would definitely
+happen? Oh, yeah. That would definitely
+break some stuff, huh?
+BS and advantages. Yeah, there's a lot
+BS and advantages. Yeah, there's a lot
+of stuff in
+here. Oh, but it's only in the CPP. It's
+here. Oh, but it's only in the CPP. It's
+not in the CUDA, right?
+So, this fall back was wrong. It's not
+So, this fall back was wrong. It's not
+like I had it wrong in here. Yeah, this
+like I had it wrong in here. Yeah, this
+is fine. Okay, I got worried for a
+is fine. Okay, I got worried for a
+second. That would have been a really
+second. That would have been a really
+bad bug. But if it's just in the fall
+bad bug. But if it's just in the fall
+back, that's not really it for anything.
+back, that's not really it for anything.
+But debugging is
+fine. Like, at least it's nowhere near
+fine. Like, at least it's nowhere near
+as bad as otherwise,
+right? Okay.
+importance. Lambda
+says everything but lambda
+A
+throw up. Advantage throw.
+There's just a ton of boiler plate
+There's just a ton of boiler plate
+involved with like
+involved with like
+binding the C to CUDA and
+binding the C to CUDA and
+C++ like your PI bind with torch. The
+C++ like your PI bind with torch. The
+actual logic like the kernel is really
+actual logic like the kernel is really
+easy or at least simple maybe not
+easy or at least simple maybe not
+easy but
+easy but
+uh it's a pain.
+phrase was not declared.
+Yeah, this is
+Yeah, this is
+box
+values. This is PS offset.
+and then this one as well.
+What's the value of
+rewards?
+Importance. It's a little silly to have
+Importance. It's a little silly to have
+these giant signatures repeated
+these giant signatures repeated
+everywhere. Otherwise, there really
+everywhere. Otherwise, there really
+wouldn't be much code. Um, I don't know.
+wouldn't be much code. Um, I don't know.
+Maybe I'll find some way around that.
+But yeah, so actually the training is
+But yeah, so actually the training is
+very very slow
+very very slow
+now. Most likely because of this
+current. Uh, actually the kernel should
+current. Uh, actually the kernel should
+be under miss, shouldn't
+be under miss, shouldn't
+it? Oh yeah, there we go. 200k on CPU.
+it? Oh yeah, there we go. 200k on CPU.
+Totally acceptable.
+Totally acceptable.
+Let's make sure I haven't broken
+Let's make sure I haven't broken
+GPU and we'll push Yes.
+Still trains quite
+Still trains quite
+nicely. Trains quite nicely
+nicely. Trains quite nicely
+indeed. 11% MISK is a little bit
+indeed. 11% MISK is a little bit
+annoying. 11% MISK is not that great. I
+annoying. 11% MISK is not that great. I
+have also profiling fixes to make at
+have also profiling fixes to make at
+like 15 minutes probably.
+I'd also like to set up some runs
+I'd also like to set up some runs
+though with the latest code
+version. Let me get that set up first.
+Um, hang on. Let me figure this out real
+Um, hang on. Let me figure this out real
+quick.
+[Music]
+Yeah, that's pretty big.
+Okay.
+Okay.
+So, I kind of want to try some network
+So, I kind of want to try some network
+[Music]
+[Music]
+changes, but I I actually want to have a
+changes, but I I actually want to have a
+baseline on the current version with the
+baseline on the current version with the
+layer norm.
+layer norm.
+with the layer norm. So, I think we're
+with the layer norm. So, I think we're
+just going to let this be as
+just going to let this be as
+is.
+is.
+Um, yeah, that's what we're going to do.
+Um, yeah, that's what we're going to do.
+And we're going to just SSH to the new
+box. I'm think I'm just going to bring
+box. I'm think I'm just going to bring
+both of these boxes next to me to the
+both of these boxes next to me to the
+new
+new
+facility cuz like
+facility cuz like
+I'd like to have two personal
+I'd like to have two personal
+ones just right there where I can get to
+ones just right there where I can get to
+them
+easily. No changes to neural MMO. At
+easily. No changes to neural MMO. At
+least there shouldn't be.
+least there shouldn't be.
+So
+one
+chunks
+chunks
+and make sure the config looks good.
+and make sure the config looks good.
+Change this for now because of Experian
+Change this for now because of Experian
+buffer
+bug. Let's do
+that. Batch and mini batch are the same.
+that. Batch and mini batch are the same.
+And is that
+um so 4096
+times do
+64 that actually would perform
+better. Yeah, I think this will do
+better. Let me fix that.
+moment. Set this new box up
+moment. Set this new box up
+for what I
+for what I
+need. Okay.
+This will give me the Neptune token
+This will give me the Neptune token
+prompt. Just
+I'm going to run
+I'm going to run
+this like so. And then I will check the
+this like so. And then I will check the
+perf. If perf is low, I'm going to go
+perf. If perf is low, I'm going to go
+back to the older BPT horizon. I think
+back to the older BPT horizon. I think
+it should probably be good.
+total
+agents.
+Oh, right. That's why I had it.
+Um, what do I think is better?
+I think we'll just
+do Yeah, we'll do BPT Horizon
+do Yeah, we'll do BPT Horizon
+32. This will match the
+32. This will match the
+original
+curves. That should match our original
+curves. That should match our original
+curves.
+pretty
+pretty
+good.
+570k. It's kind of crazy how fast like
+570k. It's kind of crazy how fast like
+and well optimized neural MMO is
+and well optimized neural MMO is
+compared to some of our others.
+I think I can make it even faster to be
+I think I can make it even faster to be
+honest with you.
+Okay. So, we now
+have we should have a
+have we should have a
+Neptune run
+Neptune run
+here with neural
+here with neural
+MMO already getting us
+score.
+score.
+Mhm. Very nice. Probably 35 mil or
+Mhm. Very nice. Probably 35 mil or
+whatever.
+So we can leave that
+So we can leave that
+be other changes and
+things profiling maybe.
+things profiling maybe.
+Let's see if profiling seems
+correct. We'll just do a basic
+correct. We'll just do a basic
+division. See if it makes
+sense. So 1.6 six mil and then however
+sense. So 1.6 six mil and then however
+long it
+takes. One more now
+80 over 50 is in fact 1.6 mil. Profiling
+80 over 50 is in fact 1.6 mil. Profiling
+seems
+seems
+accurate. Good.
+So then if profiling is accurate, we can
+So then if profiling is accurate, we can
+use
+use
+it. Uh we should be able to use it to
+it. Uh we should be able to use it to
+mess with some perf
+numbers. Breakout has obnoxiously high
+numbers. Breakout has obnoxiously high
+copying
+copying
+time. Really does, doesn't
+it? Not much I'm going to be able to do
+it? Not much I'm going to be able to do
+to get around that, though.
+So, let's just let's just play with
+So, let's just let's just play with
+stuff based
+on this still
+runs.9 and we do
+32K 2.7 2.8
+Does it go up from
+there? No, not
+there? No, not
+really. 32 is kind of maxed. What about
+really. 32 is kind of maxed. What about
+16 16k? Is that maxed?
+you get a little bit of benefit out of
+you get a little bit of benefit out of
+this. And then that's with batch PPT
+this. And then that's with batch PPT
+Horizon 64. So let's do
+524 8192 perfectly.
+524 8192 perfectly.
+And then
+327 here's a batch size of five full
+327 here's a batch size of five full
+sequences. That should be pretty good.
+sequences. That should be pretty good.
+Um me run this
+Um me run this
+again. Any other pars that matter
+here? Not
+particularly. Now the thing is I don't
+particularly. Now the thing is I don't
+know if this is going to optimize the
+know if this is going to optimize the
+same. I wouldn't be surprised if this
+same. I wouldn't be surprised if this
+fails. We'll do a very quick
+fails. We'll do a very quick
+um just
+um just
+manual fiddle with learning rate. See if
+manual fiddle with learning rate. See if
+it still solves type of a thing.
+almost
+almost
+almost if I just
+almost if I just
+delete these other
+delete these other
+things. What happens?
+should be roughly on
+should be roughly on
+par. Oh, also these atom betas
+This is kind of ridiculous if you look
+This is kind of ridiculous if you look
+at it, isn't
+at it, isn't
+it? 2.6
+mil. I'm going to be honest. I don't
+mil. I'm going to be honest. I don't
+really know where the extra perf came
+really know where the extra perf came
+from, but like I'll take it.
+from, but like I'll take it.
+Okay, so that's 30 seconds, 855, which
+Okay, so that's 30 seconds, 855, which
+is almost a solve. Not
+is almost a solve. Not
+quite. Let me try a linear schedule real
+quite. Let me try a linear schedule real
+quick.
+No
+different. What about no one kneeling?
+different. What about no one kneeling?
+This I expect to break.
+So, we pretty much have to figure out a
+So, we pretty much have to figure out a
+way to get um mini batch size higher on
+way to get um mini batch size higher on
+the smaller models
+the smaller models
+because 2.7 million SPS is
+ludicrous. Interesting. You do actually
+ludicrous. Interesting. You do actually
+need a scheduleuler. It doesn't matter
+need a scheduleuler. It doesn't matter
+if it's cosign or linear, which is like
+if it's cosign or linear, which is like
+two very different things.
+So, okay.
+That's too big.
+Solved. 29 seconds.
+Let's put that in.
+I'll take
+I'll take
+it. I will take
+it. And uh this is default batch size
+it. And uh this is default batch size
+and default BPD
+and default BPD
+horizon. So we can delete
+horizon. So we can delete
+these also default nums n workers all
+these also default nums n workers all
+this is default.
+this is default.
+This is default. This is
+This is default. This is
+default. Uh, so really the only things
+default. Uh, so really the only things
+we've changed, we've changed these two.
+we've changed, we've changed these two.
+We probably should now go and fiddle
+We probably should now go and fiddle
+with these on other environments as
+with these on other environments as
+well. I'm just going to commit this
+That's pretty
+good. That's pretty cool. All
+right, today has been a good day. Um,
+right, today has been a good day. Um,
+for the folks watching, I'm getting
+for the folks watching, I'm getting
+dinner. I might be back for a bit after
+dinner. I might be back for a bit after
+dinner. We're going to have to see how
+dinner. We're going to have to see how
+I'm
+I'm
+feeling. This is a pretty solid result,
+feeling. This is a pretty solid result,
+though. Let's just take a quick check at
+though. Let's just take a quick check at
+this graph. This graph is also looking
+this graph. This graph is also looking
+fine. Cool. Um, if you're interested in
+fine. Cool. Um, if you're interested in
+my work generally, tougher.ai, AI. You
+my work generally, tougher.ai, AI. You
+want to help me out for free? Star the
+want to help me out for free? Star the
+GitHub. Really helps. If you want to get
+GitHub. Really helps. If you want to get
+involved in dev, join the Discord. It's
+involved in dev, join the Discord. It's
+discord.gg/puffer. Our top contributors
+discord.gg/puffer. Our top contributors
+actually mostly came in with zero RL
+actually mostly came in with zero RL
+experience. So if you know how to
+experience. So if you know how to
+program, want to do some cool stuff, go
+program, want to do some cool stuff, go
+in and start writing some code with us.
+in and start writing some code with us.
+Other than that, you can follow me on X
+Other than that, you can follow me on X
+for

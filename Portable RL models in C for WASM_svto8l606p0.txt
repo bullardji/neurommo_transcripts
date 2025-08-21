@@ -1,0 +1,6227 @@
+Kind: captions
+Language: en
+hello we're
+hello we're
+back let's get this done
+[Music]
+so yeah the issue at the moment was that
+so yeah the issue at the moment was that
+we don't have matching lstm States
+right we've tested the whole network up
+right we've tested the whole network up
+into the
+into the
+lstm but the lsdm doesn't match right
+lstm but the lsdm doesn't match right
+that's where we left
+off and's see what we're
+off and's see what we're
+printing h
+see I do that
+right let
+see it should be H right
+HC initial hidden
+HC initial hidden
+State initial cell
+State initial cell
+State
+input
+input
+wait am I dumb
+here wait is there a third
+input there is a third input
+how do I mess that
+how do I mess that
+up
+up
+wait
+huh oh but I have this in the
+test I don't know why I thought it was
+test I don't know why I thought it was
+any different
+any different
+actually yeah they're two states
+actually yeah they're two states
+right uh
+okay but like
+okay but like
+regardless
+lstm net PR
+output oh
+output oh
+wait where's
+wait where's
+PR oh it's not re 3 output what the heck
+that might be
+it
+76 wait eight
+76 wait eight
+82 then negative3 set so this is very
+82 then negative3 set so this is very
+close but a little off
+close but a little off
+right
+right
+043 718
+76 it's kind of weird how close these
+76 it's kind of weird how close these
+are isn't
+it wait flat
+it wait flat
+hidden hold
+hidden hold
+on what are we printing
+out got
+let's see what we
+got oh okay we're just not this is
+got oh okay we're just not this is
+fine this is
+fine this is
+fine this get rid of
+this okay so we have we have lstm
+this okay so we have we have lstm
+here we have flath hidden
+here we have flath hidden
+713 yeah so this one matches
+713 yeah so this one matches
+exactly and then this one at the
+exactly and then this one at the
+bottom matches
+bottom matches
+almost but almost
+almost but almost
+matches
+matches
+somehow it's
+somehow it's
+like yeah there's no way that this is
+like yeah there's no way that this is
+going to be a 02
+off it's weird because most of these
+off it's weird because most of these
+values are like most of them are spot on
+values are like most of them are spot on
+and then some of them are
+and then some of them are
+not can I see any
+not can I see any
+pattern like are the negative one's
+wrong
+maybe okay so we have reu prod re
+right we
+recompile yeah know this is still wrong
+very odd this
+very odd this
+[Music]
+one is State H the right
+one is State H the right
+State yeah this is the right state
+State yeah this is the right state
+right and then it
+returns outputs HC
+it bothers me that it's this close as
+it bothers me that it's this close as
+well like
+why were the biases the
+why were the biases the
+same the biases were the same weren't
+they it's like some of these are just
+they it's like some of these are just
+spot on and then some of these are like
+spot on and then some of these are like
+close but no
+close but no
+cigar I mean and then some of them are
+cigar I mean and then some of them are
+quite far
+let me just double Tech check the
+test well I am seeing here
+let me try a couple
+things I might have like caused some
+things I might have like caused some
+symmetry [ __ ]
+right I might have just messed something
+right I might have just messed something
+up here in my
+test
+test
+aha
+aha
+gotcha test is
+wrong there's a symmetry issue
+I'm glad I thought of
+that let's see what I think the Symmetry
+that let's see what I think the Symmetry
+issue
+is e
+I don't know why I have these headphones
+I don't know why I have these headphones
+on either I don't need
+these symmetry error there only so many
+these symmetry error there only so many
+things that can be symmetry errors right
+m
+bias input let's just double check real
+bias input let's just double check real
+quick I want to make sure we're not
+crazy I'll make sure we're not crazy
+crazy I'll make sure we're not crazy
+here
+we don't have any errors in linear
+we don't have any errors in linear
+layers now do
+layers now do
+we no we
+we no we
+don't
+don't
+okay what about
+this state hmp is already wrong
+so we're basically we're
+so we're basically we're
+guaranteed well I could have called it
+guaranteed well I could have called it
+in the wrong order or something
+right
+right
+input State H State C weight input
+input State H State C weight input
+weight
+weight
+State bias input by
+State bias input by
+state
+state
+buffer that size input size hidden size
+buffer that size input size hidden size
+okay uh other other
+okay uh other other
+idea right another
+idea right another
+idea could this be wrong
+idea could this be wrong
+order this could be wrong order
+order this could be wrong order
+right wait input weight
+State this could be wrong
+whoops
+whoops
+save should be wrong order
+could totally be a wrong
+order what happened to test
+order what happened to test
+model I'm going to this
+model I'm going to this
+function save model weights is it
+let's see the
+order wait input hidden bias input bias
+hidden why are the
+why are the biases exactly the
+same isn't that kind of
+weird wait wait bias bias
+though that how I do it
+weight waight bias bi yeah that's how it
+weight waight bias bi yeah that's how it
+does it we know that the weights are the
+same make
+lstm you do
+linear and linear accumulate wait hold
+linear and linear accumulate wait hold
+on linear
+accumulate plus equals
+Waits buffer
+Waits buffer
+input bius
+input bius
+buffer what about this buffer
+now this buffer
+gets why why am I
+passing oh because it's the output okay
+input weight bias
+input weight bias
+output
+output
+yeah that looks fine to me
+I'm trying to think where it would be
+I'm trying to think where it would be
+where there's like a symmetry
+where there's like a symmetry
+issue because it works if you use the
+issue because it works if you use the
+same seed for all the random
+data let me
+data let me
+see on the indexing math could very well
+see on the indexing math could very well
+be indexing math right
+input plus
+offset
+offset
+wait input offset batch times hidden
+size wait what hold on
+size wait what hold on
+and put offset as
+and put offset as
+batch
+yeah
+yeah
+so H
+so H
+State depends on C
+State depends on C
+State and then it's going to
+State and then it's going to
+be well wait can the indexing be wrong I
+be well wait can the indexing be wrong I
+guess it could be cuz it's metric
+maybe f
+maybe f
+is one so it's going to be at plus
+is one so it's going to be at plus
+hidden
+hidden
+size plus cell State T minus one is the
+input
+input
+input wait input offset
+input wait input offset
+here yeah plus I oh wait
+well in this case it works but I think
+well in this case it works but I think
+that more generally this is
+that more generally this is
+wrong because you need to know the input
+size so I think this is
+technically this is hidden
+technically this is hidden
+offset input
+offset this can be
+input and then this one is actually
+input and then this one is actually
+hidden
+hidden
+offset H an
+offset back
+offset back
+offset this input
+offset this input
+offset offset siid
+then this is state is going to be hidden
+then this is state is going to be hidden
+off that
+right plus
+I and state C
+H La that right
+let's return all the seeds to 42
+passes
+passes
+fails that's weird
+okay
+works let
+Works four this should be 45
+Works four this should be 45
+6 wait 43 yeah 44 45 46
+assess so it's when this one
+assess so it's when this one
+becomes the cell state becomes different
+becomes the cell state becomes different
+from the input it
+from the input it
+fails hold on maybe this is just a test
+input torch no this is
+good and then you do H comma
+good and then you do H comma
+C and for some reason C has to be the
+C and for some reason C has to be the
+same as the
+same as the
+input it's when the cell state is
+input it's when the cell state is
+different from the input that it
+different from the input that it
+fails that's a good enough clue
+fails that's a good enough clue
+right and the cell State I must be using
+right and the cell State I must be using
+the um oh I'm dumb hold
+the um oh I'm dumb hold
+on I know what it
+on I know what it
+is I know what it
+does right
+yeah right here you
+bastard
+bastard
+T right here this is State
+T right here this is State
+C that state C right
+C that state C right
+there and then that's got to
+there and then that's got to
+be hidden
+offset we
+input and then there's no input offset
+input and then there's no input offset
+we just do hidden off like
+that what now it fails
+still hold
+still hold
+on I should not be
+failing how but when I do this
+yeah
+HC I could have sworn that that would
+HC I could have sworn that that would
+have been
+have been
+it it actually build
+oh hold on maybe I need to recompile
+oh hold on maybe I need to recompile
+this
+right maybe I need to recompile this
+there it goes I forgot that you have to
+there it goes I forgot that you have to
+trigger the um the test Rec compilation
+trigger the um the test Rec compilation
+path
+path
+separately so now was this with the
+separately so now was this with the
+right
+right
+data yes it was
+data yes it was
+perfect that was the issue
+okay perfect matches
+okay perfect matches
+exactly that was it we had an index bug
+exactly that was it we had an index bug
+in our lstm
+was nefarious that was a nefarious bug
+was nefarious that was a nefarious bug
+down to
+RNG but we got
+it time is it
+it time is it
+5:30 I got more work in me
+yet I got some more work in me
+I mean I almost feel like I don't have
+I mean I almost feel like I don't have
+to test this but I think I probably
+to test this but I think I probably
+should well let's just go all the way
+should well let's just go all the way
+the action layer you
+know yeah let's just go right to here
+know yeah let's just go right to here
+because if this is correct here then
+because if this is correct here then
+we're good
+six then we do is we print
+six then we do is we print
+F this and then we print f fln
+F this and then we print f fln
+okay so
+now doubl type
+in move this assert down
+well now we get the action outputs
+right oops
+right oops
+comment hi read your papers on neural
+comment hi read your papers on neural
+MMO and puffer Li thank you
+MMO and puffer Li thank you
+welcome we're coding up some cool stuff
+welcome we're coding up some cool stuff
+though the results are going to be much
+though the results are going to be much
+cooler than the process because the
+cooler than the process because the
+process is a lot of me debugging crra
+accesses but we're going to be able to
+accesses but we're going to be able to
+run some really cool RL networks on the
+web yeah it's cool right
+web yeah it's cool right
+right and they're not dumb little agents
+right and they're not dumb little agents
+either we're going to run CNN MLP lstm
+either we're going to run CNN MLP lstm
+agents with fancy observation data on
+agents with fancy observation data on
+the web in purec real time client side
+the web in purec real time client side
+single core it's going to be
+sweet is actually happening as well it's
+sweet is actually happening as well it's
+probably going to be done
+probably going to be done
+today if I can just fix these last
+today if I can just fix these last
+couple of bugs it's not that bad either
+couple of bugs it's not that bad either
+it's maybe like four 5 lines of C total
+it's maybe like four 5 lines of C total
+to just you know replace P torch at
+to just you know replace P torch at
+least for
+least for
+inference and compile for web it's not
+inference and compile for web it's not
+bad not bad at
+all
+e e
+what am I looking at
+what am I looking at
+here
+probs for.
+probs for.
+split okay we should just do like a
+split okay we should just do like a
+explicit sample
+right
+um hard Max
+argmax attach CPU
+argmax attach CPU
+numpy argmax samples
+let's see if this
+works okay so it does work I don't know
+works okay so it does work I don't know
+why there's all this
+why there's all this
+data there's got to be dirty data
+data there's got to be dirty data
+somewhere in one of these
+somewhere in one of these
+buffers but this does
+work that should be fine though
+right let me just make sure real quick I
+right let me just make sure real quick I
+just want to be positive
+yeah okay we're fine I see it we're
+yeah okay we're fine I see it we're
+good
+so can we just run this and win
+so can we just run this and win
+now that what
+happens I think we can just run this and
+happens I think we can just run this and
+win
+headphones go back on screaming kids
+headphones go back on screaming kids
+outside drive me
+nuts I have absolutely zero patience
+nuts I have absolutely zero patience
+whatsoever which is funny because I have
+whatsoever which is funny because I have
+tons of patience for
+tons of patience for
+code for
+seg
+Bol oh that's actually in
+um that's an actual memory access
+though I'm assuming that
+though I'm assuming that
+it's this move
+somehow what is
+somehow what is
+mobet if it runs I'll show you but
+mobet if it runs I'll show you but
+actually here I may as well show you on
+actually here I may as well show you on
+the web first have you seen the mob I've
+the web first have you seen the mob I've
+been building you can play it online
+been building you can play it online
+though it has some bugs at the moment so
+though it has some bugs at the moment so
+this runs in your browser it's written
+this runs in your browser it's written
+in pure C it's like 2,000 lines of C
+in pure C it's like 2,000 lines of C
+it's like a miniature version of Dota or
+it's like a miniature version of Dota or
+of Legends if you will it has abilities
+of Legends if you will it has abilities
+it has five different
+it has five different
+characters and it runs at like a million
+characters and it runs at like a million
+steps per second per
+core so it's pretty
+cooloo so what we're trying to do is
+cooloo so what we're trying to do is
+we're going to try to get this network
+we're going to try to get this network
+running so that we can actually have we
+running so that we can actually have we
+can play with and against RL
+can play with and against RL
+agents I think that would be a cool
+agents I think that would be a cool
+thing to to
+thing to to
+do and it's particularly cool because
+do and it's particularly cool because
+I'm going to be able to actually put
+I'm going to be able to actually put
+some good networks together yeah and
+some good networks together yeah and
+like this Tech we're going to get to use
+like this Tech we're going to get to use
+this for everything as well because
+this for everything as well because
+basically like that whole puffet that's
+basically like that whole puffet that's
+the hard part like once I remove these
+the hard part like once I remove these
+prints the actual net code for um this
+prints the actual net code for um this
+specific environment is like 100 lines
+specific environment is like 100 lines
+it's like not even any longer than the P
+it's like not even any longer than the P
+torch code yeah it's a little obnoxious
+torch code yeah it's a little obnoxious
+because I have a bunch of stuff
+because I have a bunch of stuff
+hardcoded at the moment
+hardcoded at the moment
+are you building this yeah this is all
+are you building this yeah this is all
+my
+my
+code
+code
+here this is puffet this is the C
+here this is puffet this is the C
+learning uh not learning C inference
+learning uh not learning C inference
+Library linear comms
+Library linear comms
+lstms and
+lstms and
+then
+then
+m.h 2,000 lines of
+m.h 2,000 lines of
+C is that entire
+C is that entire
+environment runs Ultra fast we can do RL
+environment runs Ultra fast we can do RL
+on it
+on it
+pretty
+nice all open
+source and you can play it online too
+source and you can play it online too
+cuz C compiles to web assembly which is
+cuz C compiles to web assembly which is
+pretty nice yeah I'm a front end
+pretty nice yeah I'm a front end
+developer C is a front-end language
+developer C is a front-end language
+right
+let's see what happens if I
+do I'd love to contribute oh of course
+do I'd love to contribute oh of course
+we love we love uh contributions let me
+we love we love uh contributions let me
+show you a little bit of that
+show you a little bit of that
+so this is
+so this is
+discord.gg puffer this is where we
+discord.gg puffer this is where we
+organize stuff we got 400 people in here
+organize stuff we got 400 people in here
+at the
+at the
+moment uh if I show you I think it's in
+moment uh if I show you I think it's in
+general we have to scroll a bunch
+general we have to scroll a bunch
+here but there are some cool things so
+here but there are some cool things so
+this is an environment that somebody's
+this is an environment that somebody's
+building it's based on this old French
+building it's based on this old French
+emo called uh do somebody's building
+emo called uh do somebody's building
+this out as a high perf environment for
+this out as a high perf environment for
+RL we've got
+simpler stuff as well let me show you a
+simpler stuff as well let me show you a
+couple of the
+couple of the
+others this is the
+others this is the
+Moa and here let's see the Atari
+Moa and here let's see the Atari
+ones so we have people building highper
+ones so we have people building highper
+versions of Atari so like pong but run
+versions of Atari so like pong but run
+super super
+super super
+fast and we've got breakout but run
+fast and we've got breakout but run
+super super
+fast so pretty much I mean for most most
+fast so pretty much I mean for most most
+people the easiest way to contribute
+people the easiest way to contribute
+that doesn't require like tons and tons
+that doesn't require like tons and tons
+of RL experience is to just like you
+of RL experience is to just like you
+know get on board with the high per
+know get on board with the high per
+environment development and make some
+environment development and make some
+cool games that run Ultra Ultra fast for
+cool games that run Ultra Ultra fast for
+reinforcement learning or you know other
+reinforcement learning or you know other
+types of simulators doesn't matter but
+types of simulators doesn't matter but
+definitely ultra high perf like we try
+definitely ultra high perf like we try
+to have everything run a minimum of a
+to have everything run a minimum of a
+million steps per second per core which
+million steps per second per core which
+is not all that hard to do you can write
+is not all that hard to do you can write
+in C if you want to it's not required uh
+in C if you want to it's not required uh
+C is nice because we can run it on the
+C is nice because we can run it on the
+web but scon is perfectly all right
+web but scon is perfectly all right
+reads exactly like python with types but
+reads exactly like python with types but
+is just as fast as C in fact I did the
+is just as fast as C in fact I did the
+mo bit in scon first I did a whole bunch
+mo bit in scon first I did a whole bunch
+of the environments in scon first uh so
+of the environments in scon first uh so
+that's the easiest way for people that
+that's the easiest way for people that
+have way more RL experience you know we
+have way more RL experience you know we
+also accept contributions on
+also accept contributions on
+infrastructure environment bindings
+infrastructure environment bindings
+benchmarking and those types of
+benchmarking and those types of
+areas but yeah if you're just trying to
+areas but yeah if you're just trying to
+like do some cool RL stuff this is uh
+like do some cool RL stuff this is uh
+probably the easiest way is to like help
+probably the easiest way is to like help
+us build out these
+us build out these
+environments and of course I'm always
+environments and of course I'm always
+happy to help contributors I
+happy to help contributors I
+occasionally like I'll I'll do code
+occasionally like I'll I'll do code
+reviews on stream and stuff like that I
+reviews on stream and stuff like that I
+pretty much stream uh all week long you
+pretty much stream uh all week long you
+know five days a week
+so let me know what interests you
+I haven't seen South on here either
+I haven't seen South on here either
+lately but we also have a we've also got
+lately but we also have a we've also got
+a cool artist who's been like making
+a cool artist who's been like making
+artwork for this MOA so we got all sorts
+artwork for this MOA so we got all sorts
+of fun contributors
+this is wrong here
+right actions
+how does this even
+work
+work
+philosophy how the heck does this
+work
+work
+oh I
+oh I
+see uhhuh
+see uhhuh
+well that's
+terrible we do minus 300
+that even does that do it I think it
+does
+I something is like moving outside the
+I something is like moving outside the
+map cuz the movement is too fast
+let me see if I can
+see I have an interest in RL with
+see I have an interest in RL with
+robotics working on a research project
+robotics working on a research project
+with stuck on something very cool so for
+with stuck on something very cool so for
+robotic
+robotic
+stuff I'll show you who you should
+stuff I'll show you who you should
+follow I'm sure you know Stone tow
+follow I'm sure you know Stone tow
+already but uh kyong is
+this is who you should follow he does
+this is who you should follow he does
+robotics for
+robotics for
+puffer um let's
+see yeah so while he's been doing some
+see yeah so while he's been doing some
+of these control M but I think he's also
+of these control M but I think he's also
+got other more sophisticated ones um
+got other more sophisticated ones um
+he's adding like bindings for existing
+he's adding like bindings for existing
+robotics
+robotics
+M at some point we're going to want to
+M at some point we're going to want to
+do like our own ultra high perf Sim but
+do like our own ultra high perf Sim but
+like if you're looking to add
+like if you're looking to add
+Integrations for this type of stuff
+Integrations for this type of stuff
+that's
+that's
+awesome definitely something we would
+awesome definitely something we would
+like to be putting more emphasis
+like to be putting more emphasis
+into yeah there's lots of good material
+into yeah there's lots of good material
+in here
+this like actually a speed issue hold on
+this like actually a speed issue hold on
+this could be a me issue but I think
+this could be a me issue but I think
+it's a speed
+issue
+issue
+okay definitely an issue here
+move
+to
+to
+Source map offset
+okay so destination got messed up
+okay so destination got messed up
+somehow
+why is this destination so
+why is this destination so
+crazy that's
+crazy why is it like
+this rest of them don't well actually
+this rest of them don't well actually
+they do what the
+they do what the
+heck destinations are
+like why they it is
+huge velocity is off
+maybe I can't think of anything else
+maybe I can't think of anything else
+that would cause
+that can't think of anything
+else hold it shouldn't be minus 300 it
+else hold it shouldn't be minus 300 it
+should be plus 300
+right yeah that'll
+cause wait I'm confused
+no it is
+no it is
+minus right
+what if I do this
+aha it is a velocity
+issue look at
+that well something's really weird with
+that well something's really weird with
+the movement but definitely a velocity
+issue we're going to have to train some
+issue we're going to have to train some
+better agents now as well for web
+what we do for the
+uh e
+how I want to do the movement
+is actually is it minus
+three yeah it's minus three like this
+and it's an instar
+and it's an instar
+right so why doesn't this
+work oh because you don't want to
+work oh because you don't want to
+subtract a you don't want to
+subtract a you don't want to
+subtract like this hold
+subtract like this hold
+on I got
+on I got
+you I got you
+you I got you
+here we'll fix this
+now I may be running out of steam for
+now I may be running out of steam for
+interesting
+interesting
+commentary I am going to fix this
+commentary I am going to fix this
+tonight
+holy what the
+heck I would have thought that would
+work why
+work why
+not why is it so fast
+gigantic numbers
+why are they like this
+maybe it's in the
+sampler yeah what the [ __ ] is
+sampler yeah what the [ __ ] is
+this right
+minus
+minus
+three -
+303 that is weird right
+303 that is weird right
+shouldn't be able to do
+that hold
+that hold
+on actions of I *
+6 should be be
+fine
+fine
+no
+because
+why maybe I have the alignment wrong
+six Agent Time
+six
+wait 100
+times is there's something weird going
+times is there's something weird going
+on
+here what if I just put this
+here we're like so close to having this
+here we're like so close to having this
+work whoops so close to having this
+working okay so now I should have some
+working okay so now I should have some
+[Music]
+[Music]
+reasonable -200
+reasonable -200
+-300 is it just not setting the actions
+-300 is it just not setting the actions
+here these look like they're left over
+right they're left over from the
+right they're left over from the
+previous
+step
+step
+forward
+forward could my multi just freep me off
+maybe my multi- discreet is
+off
+this
+this
+oops for
+hold on is this it
+here yeah I think this is
+it found
+it found
+it I got to love obscur
+bus I will say though the number of bug
+bus I will say though the number of bug
+fixes I've gotten today like I'm
+fixes I've gotten today like I'm
+actually very happy with their
+actually very happy with their
+progress I fixed a lot of bugs man
+this
+garbage it's going to make me run
+slow oh man look at this
+it's pressing my buttons for me so I
+it's pressing my buttons for me so I
+can't press
+can't press
+them yeah see it's like it decided to
+them yeah see it's like it decided to
+take over my buttons there and
+attack something's still going too fast
+it's so much closer though it's so much
+it's so much closer though it's so much
+closer like maybe now I can figure out
+closer like maybe now I can figure out
+what the heck it is
+what is still
+printing that's weird how it zooms like
+printing that's weird how it zooms like
+that
+there appears to be some weird logic
+there appears to be some weird logic
+left over when I switch
+characters I don't know why sometimes
+characters I don't know why sometimes
+like some of these aren't moving there
+like some of these aren't moving there
+it
+goes how are they moving that
+fast
+holy somehow they're glitching like a
+holy somehow they're glitching like a
+move
+buff I mean but that's the neural net
+buff I mean but that's the neural net
+control in them look that's them that is
+control in them look that's them that is
+the neuronet rushing down mid with like
+the neuronet rushing down mid with like
+glitched fast
+speed and this is this guy sitting on a
+tower I call that a
+tower I call that a
+success we have some debugging to do
+success we have some debugging to do
+now but that is a success a resounding
+now but that is a success a resounding
+success even we're going to commit all
+success even we're going to commit all
+this before we lose
+this before we lose
+it for
+what uh we'll have to remove that I
+what uh we'll have to remove that I
+don't want to mess it up
+though yeah this is wrong
+there we
+there we
+go cool I'm going to be right back just
+go cool I'm going to be right back just
+arush him real quick and then we will uh
+arush him real quick and then we will uh
+we'll start just debugging this game
+we'll start just debugging this game
+because as soon as I get the bugs out
+because as soon as I get the bugs out
+this is going to be
+awesome
+e
+e
+e e
+okay kick the tie this out of my desk on
+okay kick the tie this out of my desk on
+the way
+the way
+in
+okay all we got to do is get some bugs
+okay all we got to do is get some bugs
+out of the environment now we have the
+out of the environment now we have the
+Nets working it's just like stuff is
+Nets working it's just like stuff is
+going crazy as
+all so let's start on that here just for
+all so let's start on that here just for
+a little bit
+today forward
+yeah so what you need to do here
+right is whichever of these things is uh
+right is whichever of these things is uh
+being messed
+with yeah whichever of these things is
+with yeah whichever of these things is
+being messed with you need to zero
+being messed with you need to zero
+out the
+actions UWE
+and now it should stop trying to press
+and now it should stop trying to press
+my buttons for
+me look at that now I get smooth
+movement and oops they're going to flank
+movement and oops they're going to flank
+me I'm guess I'm going through the
+me I'm guess I'm going through the
+terrain
+terrain
+clipping yeah there you go there's the
+clipping yeah there you go there's the
+assassinate skill off with Mana yeah
+assassinate skill off with Mana yeah
+there we go and die here yep cool so Uh
+there we go and die here yep cool so Uh
+something's crazy with these guys that
+something's crazy with these guys that
+they're just like zooming around like
+they're just like zooming around like
+that let's see what happened
+interesting you're just dividing by
+interesting you're just dividing by
+100 I see nothing wrong with this
+100 I see nothing wrong with this
+dividing by
+100 oh wait no that's bad isn't
+100 oh wait no that's bad isn't
+it yeah that's bad
+you have to Norm this don't
+you I think I have to Norm this
+is that it that's I guess that's a 40%
+is that it that's I guess that's a 40%
+speed
+speed
+buff oh no that's yeah it's way more
+buff oh no that's yeah it's way more
+because yeah they're going 3x
+because yeah they're going 3x
+faster so this is divide by three this
+faster so this is divide by three this
+is still not perfect but this should be
+um
+on b 300
+on b 300
+yeah here we
+go let's just
+go let's just
+do
+if
+if
+Yer than one
+now what we
+do yeah
+X see if this does
+X see if this does
+it f ABS f
+see
+ABS hello YouTube
+ABS hello YouTube
+folks hey
+folks hey
+bet we
+bet we
+are doing crazy things
+okay there we go RL agents running in
+C we are starring puffer yeah remember
+C we are starring puffer yeah remember
+star the
+puffer I don't have any
+CDs come
+CDs come
+on take the tower
+it's going to start hitting me
+it's going to start hitting me
+soon there we go
+assassinated
+yeah you can ghost through terrain with
+yeah you can ghost through terrain with
+the speed
+buff what are the policies for these
+buff what are the policies for these
+agents are they pre-trained from the
+agents are they pre-trained from the
+previous run these are pre-trained
+previous run these are pre-trained
+agents that as of right now as of just
+agents that as of right now as of just
+when you joined here these are
+when you joined here these are
+pre-trained agents that are running uh
+pre-trained agents that are running uh
+the pytorch CNN lstm NLP uh MLP model
+the pytorch CNN lstm NLP uh MLP model
+but it's being loaded into pure C so
+but it's being loaded into pure C so
+inference is done in pure C on One Core
+inference is done in pure C on One Core
+in real
+time why not C++ because C++ makes me
+sad it really does not add
+sad it really does not add
+anything really doesn't whoops really
+anything really doesn't whoops really
+does not add anything to uh to what I'm
+does not add anything to uh to what I'm
+doing
+doing
+here it's only 400 some odd lines of
+here it's only 400 some odd lines of
+code to implement like a basic pie torch
+code to implement like a basic pie torch
+thing it sounds hard but puffer Li makes
+thing it sounds hard but puffer Li makes
+it easy well this part is kind of hard
+it easy well this part is kind of hard
+bet I'm not going to lie this part was
+bet I'm not going to lie this part was
+kind of
+kind of
+hard we have an lstm we have a com 2D
+hard we have an lstm we have a com 2D
+and these have been meticulously
+and these have been meticulously
+matched we these have been meticulously
+matched we these have been meticulously
+matched to the pytorch reference
+matched to the pytorch reference
+implementations and by reference
+implementations and by reference
+implementations I mean testing bit by
+implementations I mean testing bit by
+bit to try to get it to be the same like
+bit to try to get it to be the same like
+I can't get the code because it's all
+I can't get the code because it's all
+like CNN so you rolled your own neuronet
+like CNN so you rolled your own neuronet
+inference agents for this game I mean
+inference agents for this game I mean
+for puffer in general for puffer in
+for puffer in general for puffer in
+general like we're going to be able to
+general like we're going to be able to
+use this in all of the Sims that we make
+use this in all of the Sims that we make
+for puffer now right
+for puffer now right
+this is just going to be one of them and
+this is just going to be one of them and
+the reason that I did it like this right
+the reason that I did it like this right
+is that now we can compile these to web
+is that now we can compile these to web
+assembly and we're going to be able to
+assembly and we're going to be able to
+run these on the browser so these
+run these on the browser so these
+browser guys are actually going to be
+browser guys are actually going to be
+able to move around and we have RL
+able to move around and we have RL
+teammates so you'll just be able to play
+teammates so you'll just be able to play
+this online and like you know fight
+this online and like you know fight
+these guys or
+these guys or
+whatever speaking of which you can play
+whatever speaking of which you can play
+this now it's very buggy but it is on
+this now it's very buggy but it is on
+the puffer website uh we need to add the
+the puffer website uh we need to add the
+agents in and stuff like that but it's
+there you also have we have snake these
+there you also have we have snake these
+ones actually we do have some RL agents
+ones actually we do have some RL agents
+they're pretty dumb we're going to
+they're pretty dumb we're going to
+upgrade them using all the new inference
+upgrade them using all the new inference
+code that I just
+code that I just
+wrote yeah but you can play Snake versus
+wrote yeah but you can play Snake versus
+you know the RL
+agents and we're going to add more games
+agents and we're going to add more games
+here as well we're going to have a whole
+here as well we're going to have a whole
+Suite of them
+okay so we fixed the speed hack
+okay so we fixed the speed hack
+issue what other stuff is there to
+fix is the goal to use the game sim to
+fix is the goal to use the game sim to
+make great RL or to use RL to make great
+make great RL or to use RL to make great
+and fun games or both uh the goal is
+and fun games or both uh the goal is
+mostly to use the game sim to make great
+mostly to use the game sim to make great
+RL you know if game studios want to do
+RL you know if game studios want to do
+the opposite though right if game
+the opposite though right if game
+studios want to do the other one and
+studios want to do the other one and
+want some assistance in that puffer will
+want some assistance in that puffer will
+be happy to help there um but yeah the
+be happy to help there um but yeah the
+motivation is mostly to have Ultra ultra
+motivation is mostly to have Ultra ultra
+high performance simulations for
+high performance simulations for
+reinforcement learning that we can then
+reinforcement learning that we can then
+use to you know hypers scale the field
+use to you know hypers scale the field
+like dramatically Advance the state of
+like dramatically Advance the state of
+RL
+and all of this is part of it all of
+and all of this is part of it all of
+this is part of
+it I guess we just got to find bugs now
+it I guess we just got to find bugs now
+huh it's pretty
+huh it's pretty
+obnoxious I think I know one of them let
+obnoxious I think I know one of them let
+me
+see there's like this one obnoxious
+see there's like this one obnoxious
+inference above
+yeah okay this doesn't
+yeah okay this doesn't
+help let's fix the
+controls e
+there we
+go pathing is kind of weird how it does
+this yeah why is it doing RuneScape path
+this yeah why is it doing RuneScape path
+thing hold on
+oh yeah I see why it's doing
+oh yeah I see why it's doing
+okay think work is super cool mained
+okay think work is super cool mained
+goals to advance RL how's running and
+goals to advance RL how's running and
+browser playing wouldn't the research
+browser playing wouldn't the research
+mostly be done on Research or servers
+mostly be done on Research or servers
+yeah no the having it on browser is just
+yeah no the having it on browser is just
+uh it's just for demo purposes I figure
+uh it's just for demo purposes I figure
+like there are a lot of cool RL
+like there are a lot of cool RL
+environments that don't get enough usage
+environments that don't get enough usage
+so this is just a cool way to demo the
+so this is just a cool way to demo the
+environments um the thing is though like
+environments um the thing is though like
+yeah I technically already had this
+yeah I technically already had this
+coded in uh in scyon but like hoing it
+coded in uh in scyon but like hoing it
+to C didn't really take me that long and
+to C didn't really take me that long and
+this whole inference engine it took me
+this whole inference engine it took me
+like three or four days to build so it's
+like three or four days to build so it's
+really not that big of an investment to
+really not that big of an investment to
+have awesome demos that means that like
+have awesome demos that means that like
+10 times more people will see these
+10 times more people will see these
+environments and like you know
+environments and like you know
+ultimately also puffer is a company so
+ultimately also puffer is a company so
+it is kind of important for us to have
+it is kind of important for us to have
+cool demos to show people right um yeah
+cool demos to show people right um yeah
+so that's that's basically the reason
+so that's that's basically the reason
+there so yeah like I could write these
+there so yeah like I could write these
+in scon just as well for the performance
+in scon just as well for the performance
+um but hey you know if we write it in C
+um but hey you know if we write it in C
+then I get cool demos out of it as
+well you went with the file IO option no
+well you went with the file IO option no
+I didn't bet where do you see
+I didn't bet where do you see
+that we wrote proper tests
+there's a
+there's a
+warning
+warning
+where build open text that's something
+where build open text that's something
+else that's something
+else that's something
+else no I wrote proper test
+else no I wrote proper test
+bet for the
+engine yeah so we have to fix this is
+engine yeah so we have to fix this is
+freaking RuneScape pathing right here
+um yeah this is RuneScape pathing
+um yeah this is RuneScape pathing
+so shoot I do need this normalization
+so shoot I do need this normalization
+don't
+don't
+I okay maybe I wasn't that dumb to begin
+I okay maybe I wasn't that dumb to begin
+with right
+how's
+how's
+this I think this does
+it and then we'll have to scale the
+uh the agent actions as well maybe we'll
+uh the agent actions as well maybe we'll
+move that piece of code
+yeah there you go no more RuneScape
+yeah there you go no more RuneScape
+movement you go straight to
+Target we should get rid of this cursor
+Target we should get rid of this cursor
+and we should add like some click
+and we should add like some click
+effects good job join Discord yeah join
+effects good job join Discord yeah join
+Discord ggp puffer this is all open
+Discord ggp puffer this is all open
+source work we have all sorts of cool
+source work we have all sorts of cool
+stuff going on
+stuff going on
+bet is our official Advertiser
+here you can get bad help from people
+like oh
+bet sometimes I'm
+bet sometimes I'm
+sometimes I'm right
+sometimes I think I got to repeat this
+sometimes I think I got to repeat this
+little bit of code right
+little bit of code right
+here uh in the
+actual yeah I got to repeat this
+last actually what I can do here I can
+last actually what I can do here I can
+clean this up a little bit because I
+clean this up a little bit because I
+just need this to be
+just need this to be
+here um
+than
+than
+one there we
+one there we
+go we
+go we
+Norm now everybody's moving at the same
+Norm now everybody's moving at the same
+reasonable speed
+reasonable speed
+everybody gets their actions Norm to
+everybody gets their actions Norm to
+one they move a little slower on the
+one they move a little slower on the
+diagonals but now the speeds are
+diagonals but now the speeds are
+consistent
+right the policies are a little confused
+right the policies are a little confused
+because they're they weren't trained
+because they're they weren't trained
+that way so they get stuck on stuff
+now did it just see me walk into its
+now did it just see me walk into its
+Vision range and attack try to attack me
+Vision range and attack try to attack me
+or no tried to
+or no tried to
+it tried to heal me actually it used its
+it tried to heal me actually it used its
+support ability that's
+funny what did it just use half its mana
+on what are you guys doing here I bet if
+on what are you guys doing here I bet if
+I just like unstuck it a little bit
+I just like unstuck it a little bit
+right yeah now it
+goes
+goes
+yeah so these just aren't very good
+yeah so these just aren't very good
+agents also the map is slightly
+off don't have Mana for this I think
+off don't have Mana for this I think
+it's 150 Mana there we go there's the
+it's 150 Mana there we go there's the
+assassinate
+very
+cool other
+cool other
+bugs we pretty much all we need to do is
+bugs we pretty much all we need to do is
+find all the bugs in this so we can
+find all the bugs in this so we can
+actually train in this version of the
+actually train in this version of the
+environment cuz all these policies are
+environment cuz all these policies are
+just transferred from the sconed
+version I believe there's a bug when you
+version I believe there's a bug when you
+win the game isn't
+win the game isn't
+there I think the towers keep hitting
+there I think the towers keep hitting
+you or something
+I should like confirm
+that here this is what we're going to do
+that here this is what we're going to do
+to confirm
+this we're going to just make the tank
+this we're going to just make the tank
+op so I can insta win the game
+okay that's insta winning the game
+okay that's insta winning the game
+versus
+Towers
+oops am I getting
+oops am I getting
+hit no Tower's not hitting
+hit no Tower's not hitting
+me I don't have my cool Downs refresh
+me I don't have my cool Downs refresh
+for some
+reason okay the jump back to spawn
+is the jump back to spawn is
+is the jump back to spawn is
+annoying I think we should just remove
+annoying I think we should just remove
+that I don't think we actually need that
+that I don't think we actually need that
+for training
+yeah this right
+here I don't think we need this
+oh let's also fix uh CDs on
+death okay this will fix CDs on death
+how did the transition from python to C
+how did the transition from python to C
+well it was in scon to begin with it
+well it was in scon to begin with it
+wasn't in Python that would have been
+wasn't in Python that would have been
+night marriage
+night marriage
+um it only took me like 3 days
+um it only took me like 3 days
+hey Teto how's it
+hey Teto how's it
+going uh we currently have policies here
+going uh we currently have policies here
+CNN lstm and MLP policies running in
+CNN lstm and MLP policies running in
+pure C so that's
+fun oops I hit the wrong button and my
+fun oops I hit the wrong button and my
+skill is on cool
+skill is on cool
+down awesome now thank you this is all
+down awesome now thank you this is all
+open source as well let's just win this
+open source as well let's just win this
+game and oh there it was there's the bug
+game and oh there it was there's the bug
+okay so we'll have to fix this that's
+okay so we'll have to fix this that's
+what I was testing for uh the more
+what I was testing for uh the more
+stable but still buggy version is is
+stable but still buggy version is is
+online right here so you can kind of
+online right here so you can kind of
+play it the RL Bots are not in there yet
+play it the RL Bots are not in there yet
+because I just had to implement all the
+because I just had to implement all the
+freaking C policy stuff uh but this is
+freaking C policy stuff uh but this is
+here and then also you can play the
+here and then also you can play the
+snake one this does have RL boot but
+snake one this does have RL boot but
+they're just MLPs so we're going to
+they're just MLPs so we're going to
+upgrade the AIS with uh CNN lstm as soon
+upgrade the AIS with uh CNN lstm as soon
+as I get around to that after finishing
+as I get around to that after finishing
+up the Moa since we actually have
+up the Moa since we actually have
+policies that are trained like that but
+policies that are trained like that but
+I didn't have the the inference code for
+I didn't have the the inference code for
+it since like you can't use P torch on
+web so what just
+web so what just
+happened we also have to have the thing
+happened we also have to have the thing
+not segol on
+not segol on
+web
+uh I see
+that's
+funny
+funny
+so engage AOE
+so engage AOE
+huh have not played a MOA so this is
+huh have not played a MOA so this is
+super confusing yeah moas are the most
+super confusing yeah moas are the most
+complicated freaking confusing genre of
+complicated freaking confusing genre of
+game in existence to learn you have to
+game in existence to learn you have to
+have played Dota or League of Legends in
+have played Dota or League of Legends in
+order to what's going on there's just no
+order to what's going on there's just no
+way I can explain to you otherwise right
+way I can explain to you otherwise right
+like here let me find the DOTA
+map I'll give you the quick
+map I'll give you the quick
+version here this looks
+version here this looks
+good so DOTA is a 5v5 game so is League
+good so DOTA is a 5v5 game so is League
+uh there are these there's this map
+uh there are these there's this map
+there are three lanes in the map there's
+there are three lanes in the map there's
+a top middle and bottom Lane and in each
+a top middle and bottom Lane and in each
+lane you've got these three towers and
+lane you've got these three towers and
+then you've also got these defending
+then you've also got these defending
+Towers in the center
+Towers in the center
+and then there's the objective to
+and then there's the objective to
+capture in the middle so your goal is to
+capture in the middle so your goal is to
+in you only really need one of the lanes
+in you only really need one of the lanes
+though usually you end up taking all of
+though usually you end up taking all of
+them or at least two of them uh your
+them or at least two of them uh your
+goal is to break the level up defeat the
+goal is to break the level up defeat the
+opponents take the enemy towers and then
+opponents take the enemy towers and then
+capture the objective in the center and
+capture the objective in the center and
+like all of the different characters
+like all of the different characters
+play differently and they are like
+play differently and they are like
+minion waves that fight each other in
+minion waves that fight each other in
+the center and try to take the towers
+the center and try to take the towers
+for you and then they're neutral enemies
+for you and then they're neutral enemies
+that you have to kill along the way for
+that you have to kill along the way for
+gold lots and lots of stuff very very
+gold lots and lots of stuff very very
+complicated
+game so we have a mini version of
+that we're using it for research
+let's see if this does anything
+die die die die
+die and we use our heal
+die and we use our heal
+buff oh look we actually have an RL
+buff oh look we actually have an RL
+teammate here
+teammate here
+look at
+look at
+that he's going to die because he's not
+that he's going to die because he's not
+very smart but he is we do have an RL
+teammate
+teammate
+okay nothing crashed that
+okay nothing crashed that
+time all the levels did
+reset they're dying instantly but that's
+reset they're dying instantly but that's
+just because I've super like Giga buff
+just because I've super like Giga buff
+the damage we should probably fix some
+the damage we should probably fix some
+of these rendering glitches with like
+of these rendering glitches with like
+the render lines going off
+the render lines going off
+screen I'm mostly trying to find crashes
+screen I'm mostly trying to find crashes
+though I should just put this online and
+though I should just put this online and
+let you all find the crashes for me that
+let you all find the crashes for me that
+would be the uh the smart way of doing
+would be the uh the smart way of doing
+it
+okay there they go there are the RL
+okay there they go there are the RL
+teammates they get stuck on stuff
+teammates they get stuck on stuff
+because they're not very
+because they're not very
+smart but they do
+smart but they do
+work radiant victory
+why did I just get sent back to
+base I thought I fixed
+base I thought I fixed
+that oh something is targeting
+that oh something is targeting
+me something is targeting me there's a
+me something is targeting me there's a
+weird
+weird
+bug what is targeting
+bug what is targeting
+me is it my own
+Tower am I say or is it something
+Tower am I say or is it something
+invisible
+is it my own
+Tower the hell is targeting me is it
+Tower the hell is targeting me is it
+targeting me across the map it has to be
+targeting me across the map it has to be
+right so something is wrong in the
+right so something is wrong in the
+targeting logic something is targeting
+targeting logic something is targeting
+on
+on
+zero yeah that's what's
+happening something's doing 350 damage I
+happening something's doing 350 damage I
+believe yeah
+believe yeah
+350 Towers too op well these are my own
+350 Towers too op well these are my own
+Towers right so something is doing 350
+Towers right so something is doing 350
+damage so I got to figure out what is
+damage so I got to figure out what is
+doing what is capable of doing 350
+doing what is capable of doing 350
+damage in the
+damage in the
+game I don't think any of the towers do
+game I don't think any of the towers do
+350 I think that's like the enemy burst
+350 I think that's like the enemy burst
+or
+whatever I have 350 in here
+whatever I have 350 in here
+anyway oh wait is it my
+support support does negative but this
+support support does negative but this
+should be
+should be
+healing and it's minus player level so
+healing and it's minus player level so
+no this can't be it cuz this would be
+no this can't be it cuz this would be
+400 even if it were a heal I'll test the
+400 even if it were a heal I'll test the
+support just in
+support just in
+case to see if it actually heals
+correctly I think but basically I think
+correctly I think but basically I think
+that there's some targeting bug where
+that there's some targeting bug where
+like something is being able to index
+like something is being able to index
+the wrong target here let me go get
+the wrong target here let me go get
+myself damage
+ah here we
+ah here we
+go engage
+AOE definitely something on the
+AOE definitely something on the
+targeting
+oh I just noticed your tag is C assembly
+oh I just noticed your tag is C assembly
+that's
+fun I'm going to be honest I've been
+fun I'm going to be honest I've been
+writing C for like the past two or three
+writing C for like the past two or three
+weeks before that I I haven't written C
+weeks before that I I haven't written C
+in 10
+in 10
+years but I've been enjoying
+years but I've been enjoying
+it I've been writing python for like
+it I've been writing python for like
+close to 10
+close to 10
+years almost exclusively python as well
+years almost exclusively python as well
+little bit of a little bit of CP in
+little bit of a little bit of CP in
+there for Unity but that's about
+there for Unity but that's about
+it I mean I honestly really enjoy
+it I mean I honestly really enjoy
+it I like the thing is my undergrad
+it I like the thing is my undergrad
+ruined it for me like the Stamford
+ruined it for me like the Stamford
+lectur on it were so bad like
+lectur on it were so bad like
+just not knowing that like Das F like s
+just not knowing that like Das F like s
+address sanitizers exist was just God
+address sanitizers exist was just God
+awful I'm pretty sure just with knowing
+awful I'm pretty sure just with knowing
+that like a dress sanitizers exist like
+that like a dress sanitizers exist like
+it's actually so much so much better
+it's actually so much so much better
+now I think if they just fixed that one
+now I think if they just fixed that one
+thing I would have had a fine time but
+thing I would have had a fine time but
+they literally didn't tell us that those
+they literally didn't tell us that those
+were a
+thing it's absolutely brutal
+I'd rather have an address sanitizer
+I'd rather have an address sanitizer
+than an LSP
+it's quite funny as well because like I
+it's quite funny as well because like I
+get a lot of people like why are you
+get a lot of people like why are you
+writing it in C like why are you making
+writing it in C like why are you making
+this hard on yourself and it's like no
+this hard on yourself and it's like no
+I'm writing it in C to make it easy on
+I'm writing it in C to make it easy on
+myself like what else would I write it
+in
+for e
+I think what this would be caused
+by they got to look at the targeting
+by they got to look at the targeting
+Maybe
+you do scan every
+tick you don't reset scan targets though
+tick you don't reset scan targets though
+do
+you I guess that's probably what we need
+you I guess that's probably what we need
+to do is reset scan targets or something
+this has got to be only on environment
+this has got to be only on environment
+reset though
+right
+reset
+reset
+okay why is it set to 121
+plus let's see this see if this does
+it I mean I think technically you need
+it I mean I think technically you need
+to reset on death as
+to reset on death as
+well I forget will it break in a place
+well I forget will it break in a place
+yeah you totally can do
+yeah you totally can do
+that I there might be I don't know if
+that I there might be I don't know if
+you can break on Segal I think Segal is
+you can break on Segal I think Segal is
+just dead welcome as well
+just dead welcome as well
+we got it working these networks are not
+we got it working these networks are not
+great because uh I haven't trained great
+great because uh I haven't trained great
+networks yet but like this is these guys
+networks yet but like this is these guys
+are technically lstm CNN MLP
+agents it should break on the seg
+agents it should break on the seg
+fult oh I don't
+fult oh I don't
+know we're in pure Sealand now
+so okay look did you see that it's
+so okay look did you see that it's
+zapping across the freaking map that's
+bad why was it zapping across the
+bad why was it zapping across the
+map there's some screwy stuff going
+map there's some screwy stuff going
+on oh and there's definitely
+on oh and there's definitely
+like yeah it's zapping across the map
+like yeah it's zapping across the map
+there's definitely something screwy
+there's definitely something screwy
+going on
+going on
+here feature not a
+bug ah you see right there something
+bug ah you see right there something
+just hit me
+let's see if it does it again I think
+let's see if it does it again I think
+it's going to do 350 damage no something
+it's going to do 350 damage no something
+is doing like small damage to
+me I think it only happens yeah there it
+me I think it only happens yeah there it
+goes through
+350 it's very weird
+do we think that's a tower what could
+do we think that's a tower what could
+that
+that
+be what does 350
+damage Tower damage no the towers only
+damage Tower damage no the towers only
+do 175
+do 175
+Max 175 * 2 is 350 if I'm getting hit by
+Max 175 * 2 is 350 if I'm getting hit by
+both of them somehow
+right what do we think I'm getting
+right what do we think I'm getting
+consistently hit for
+350 I should just log attack that take
+350 I should just log attack that take
+place above a certain distance
+place above a certain distance
+right let's just log attacks that take
+right let's just log attacks that take
+place above
+place above
+uh a certain distance that would be the
+uh a certain distance that would be the
+smarter
+thing where is this
+float disc to
+float disc to
+Target there we
+Target there we
+go
+go
+10 print
+10 print
+F CER
+F CER
+per
+distance yeah let's try
+this so now we should get some useful
+prints
+prints
+yeah go get some
+levels what's up
+levels what's up
+Tower nothing has attacked over 10
+Tower nothing has attacked over 10
+distance yet
+I got to
+I got to
+heal attacker 199 that's
+heal attacker 199 that's
+interesting oh I'm pressing the wrong
+interesting oh I'm pressing the wrong
+button the UI is not unresponsive I was
+button the UI is not unresponsive I was
+just pressing the wrong
+button
+button
+okay attacker five
+that's interesting
+that's interesting
+right attacker five is the
+right attacker five is the
+enemy wait what attacker five should be
+enemy wait what attacker five should be
+0 one
+0 one
+two the enemy
+support Target three is 0 one two three
+support Target three is 0 one two three
+yep the tank
+yep the tank
+and they're cross mapping
+and they're cross mapping
+me 189 and then attacker 199
+me 189 and then attacker 199
+is the heck is attacker 100 I didn't
+is the heck is attacker 100 I didn't
+think there were
+199 that goes back
+199 that goes back
+on yeah there's
+202 okay this is enough logs
+182 okay so the 200s are Towers I guess
+182 okay so the 200s are Towers I guess
+right wait
+right wait
+182 yeah 206 should be the
+182 yeah 206 should be the
+highest so these are enemy
+highest so these are enemy
+towers and then somehow also the enemy
+towers and then somehow also the enemy
+support is targeting
+me across the map
+where's South as
+where's South as
+well I want to show them the uh the cool
+well I want to show them the uh the cool
+demos
+I got to do the animation set for the uh
+I got to do the animation set for the uh
+for the animation
+for the animation
+logic at some point soon
+scams in
+AOE tower Tower
+Vision nearest scan
+Vision nearest scan
+Target I don't understand how
+Target I don't understand how
+it keeps
+it keeps
+scanning and it's still hitting
+me
+right like this should be going continue
+right like this should be going continue
+continue continue continue right not
+continue continue continue right not
+scanning anything
+and then it should be nulling the
+target so the fact that that's not just
+target so the fact that that's not just
+it's not just like it's hitting me on
+it's not just like it's hitting me on
+reset have to sleep I've done sleep
+reset have to sleep I've done sleep
+throughout the night and you're still
+throughout the night and you're still
+alive yeah man you're not getting enough
+alive yeah man you're not getting enough
+sleep
+sleep
+then I work but I get lots of sleep
+sleep's important
+hours not
+hours not
+enough I get eight or
+nine mind you I've had periods of
+nine mind you I've had periods of
+several years in my life where I've
+several years in my life where I've
+gotten like four consistently but not
+gotten like four consistently but not
+doing that [ __ ] again
+doing that [ __ ] again
+there's literally no point like I can't
+there's literally no point like I can't
+function on that at like any amount of
+function on that at like any amount of
+capacity so unless I'm doing really
+capacity so unless I'm doing really
+stupid work right
+but yeah when I was younger I did not
+but yeah when I was younger I did not
+sleep at
+all and
+all and
+targets I still don't know what's wrong
+targets I still don't know what's wrong
+with this Towers
+logic like
+this looks
+this looks
+fine there the cool
+fine there the cool
+Downs it has to freaking scam
+right yeah we step every tick
+no this is
+we yeah the ticks are
+correct and then we
+scan like am I missing something here
+I mean I can try this just to
+see like I could be Computing PID wrong
+see like I could be Computing PID wrong
+or something ridiculous but let's see if
+or something ridiculous but let's see if
+this does
+it right we're taking over the
+it right we're taking over the
+tank I want the op character
+what the heck did that much damage to
+me
+me
+jeez okay the tanks can uh the minions
+jeez okay the tanks can uh the minions
+can
+can
+tank what in the
+tank what in the
+heck got to do
+heck got to do
+this oh yeah there we go we're getting
+this oh yeah there we go we're getting
+hit on by
+hit on by
+a crazy thing so before even
+a crazy thing so before even
+reset we've got
+reset we've got
+distances well those ones might be okay
+distances well those ones might be okay
+because they're only like 10
+distance let's see if the bug is
+distance let's see if the bug is
+fixed I think all we have to do is like
+fixed I think all we have to do is like
+wait
+right distance 11
+I
+I
+[Music]
+man yeah that's
+feasible I think that's technically
+feasible not getting
+feasible not getting
+hit so am I just misunderstanding how
+hit so am I just misunderstanding how
+this thing works here
+oh no there it
+is okay
+so two different
+so two different
+Towers Target
+50 you know the weird thing about this
+50 you know the weird thing about this
+is I've have this null I
+is I've have this null I
+rebuild yeah I rebuilt right
+here okay so this is not
+working
+YX hold on
+let me just check one thing and I'll
+let me just check one thing and I'll
+look at
+that huh remember the question I asked
+that huh remember the question I asked
+about training on lots of
+about training on lots of
+simulations I had an idea that we can
+simulations I had an idea that we can
+somehow merge the weights of two
+somehow merge the weights of two
+different
+different
+networks
+networks
+uh I don't think you're looking at
+uh I don't think you're looking at
+Ensemble learning I think you're looking
+Ensemble learning I think you're looking
+at distill
+at distill
+is player in N entities
+is player in N entities
+yes I look up I would suggest that you
+yes I look up I would suggest that you
+look up um like policy
+look up um like policy
+distillation or something like that is
+distillation or something like that is
+player and yeah so all of the different
+player and yeah so all of the different
+the uh players creeps neutrals Towers
+the uh players creeps neutrals Towers
+everything is inside of entities and
+everything is inside of entities and
+then there's the get entity function
+then there's the get entity function
+that will it essentially just is a
+that will it essentially just is a
+conditional it'll just match your index
+conditional it'll just match your index
+to whatever like to whatever your type
+to whatever like to whatever your type
+is uh there's only one struct type in
+is uh there's only one struct type in
+order to make everything very easy like
+order to make everything very easy like
+everything is just an entity and then
+everything is just an entity and then
+like the entity struct just has all the
+like the entity struct just has all the
+different
+properties it makes things very
+easy it skips the player when
+easy it skips the player when
+scanning let me see
+[Music]
+[Music]
+so if the targets is invalid it skips
+so if the targets is invalid it skips
+it uh if the target is on the same team
+it uh if the target is on the same team
+it skips it so you're on your same
+it skips it so you're on your same
+team uh if the target
+team uh if the target
+is yeah there's they're Flags basically
+is yeah there's they're Flags basically
+to control what to
+to control what to
+skip Target equal so it should be on
+skip Target equal so it should be on
+team so not just yourself but anything
+team so not just yourself but anything
+on your same
+on your same
+team and the reason it's coded that way
+team and the reason it's coded that way
+is for like for healing effects for
+is for like for healing effects for
+instance there's like a self heal and
+instance there's like a self heal and
+there's an AOE
+there's an AOE
+heal so like you can scan for like
+heal so like you can scan for like
+nearby
+nearby
+allies I guess technically that one
+allies I guess technically that one
+should just always go through because uh
+should just always go through because uh
+you're always with an AOE so you should
+you're always with an AOE so you should
+always be able to heal yourself
+but it can't
+but it can't
+be it shouldn't be able to be just
+be it shouldn't be able to be just
+hitting
+hitting
+itself cuz the Knight
+itself cuz the Knight
+is yeah the puffer Knight is level one
+is yeah the puffer Knight is level one
+and I said it's damage to
+and I said it's damage to
+250 and it was taking
+350 yeah so it would take 300 not 350 at
+350 yeah so it would take 300 not 350 at
+level
+level
+one something and like you can also see
+one something and like you can also see
+right these attackers these high indices
+right these attackers these high indices
+here correspond to Towers so like
+here correspond to Towers so like
+occasionally like I'll see like
+occasionally like I'll see like
+something hitting I'll see something
+something hitting I'll see something
+else but mostly it looks like
+else but mostly it looks like
+Towers towers are somehow like hitting
+Towers towers are somehow like hitting
+outside of their range and I I don't
+outside of their range and I I don't
+know if it's they're just randomly
+know if it's they're just randomly
+hitting outside of their range or like
+hitting outside of their range or like
+it's if they've seen you they're getting
+it's if they've seen you they're getting
+stuck on you or something
+and mobile
+and mobile
+player Tower and then it's Tower
+vision is five which is fine
+player y minus
+player y minus
+radius xus
+radius let's just make sure then let's
+radius let's just make sure then let's
+let's not be useless
+let's not be useless
+here so like
+see if this does
+it uh could also
+it uh could also
+be it could be something to do with
+be it could be something to do with
+like
+like
+whoops what happened
+here yeah
+it could be like not the first scan
+it could be like not the first scan
+Target it could be like overflowing its
+Target it could be like overflowing its
+Target buff or some weird
+Target buff or some weird
+[ __ ]
+[ __ ]
+here let's go see
+again as soon as I get this into like a
+again as soon as I get this into like a
+pretty much playable State though even
+pretty much playable State though even
+if there are like a few bugs left as
+if there are like a few bugs left as
+long as I don't see like crazy bugs I'm
+long as I don't see like crazy bugs I'm
+just going to put this online and let
+just going to put this online and let
+you guys like play it and then I'll find
+you guys like play it and then I'll find
+out the bugs that way it's like
+out the bugs that way it's like
+literally just play
+testing jeez you guys do a lot of D what
+testing jeez you guys do a lot of D what
+how are you hitting me
+how are you hitting me
+there how are you hitting me there
+okay Target minus one
+well that doesn't make any sense
+well that doesn't make any sense
+negative one should be
+negative one should be
+a
+sentinol I literally have
+could this be grid
+desync this could be grid desync right
+let's let's try grid
+desync that's a valid thing we're going
+desync that's a valid thing we're going
+to have to edit the renderer for
+this where is it targeting overlays
+wait what hold on
+all
+rectangle how did I have moves
+implemented okay I don't have actually
+understand should be not equal to zero
+understand should be not equal to zero
+right basically what I want to do is I
+right basically what I want to do is I
+want to like overlay to see if I'm
+want to like overlay to see if I'm
+leaving ghost on the map
+I think it's possible that we're leaving
+I think it's possible that we're leaving
+ghosts by ghosts I mean like we're not
+ghosts by ghosts I mean like we're not
+clearing from the map
+correctly I don't know how that would do
+correctly I don't know how that would do
+anything
+but okay so right here
+I already draw the terrain
+I already draw the terrain
+somewhere oh yeah I drew it in the
+Shader let's try this
+okay so now we can see on these debug
+okay so now we can see on these debug
+cells right we can see actually where
+cells right we can see actually where
+everything is on the grid
+so like we'd be able to see for instance
+so like we'd be able to see for instance
+if uh I killed stuff but then it left
+if uh I killed stuff but then it left
+like ghosts around oh thank you for the
+like ghosts around oh thank you for the
+heal
+heal
+support look at that my Allied neural
+support look at that my Allied neural
+network did uh did something nice for
+me it's okay I will avenge you
+okay oh look at that you see that
+ghosts look see this guy he just
+ghosts look see this guy he just
+freaking teleported to
+freaking teleported to
+me this guy just tpd to me you see the
+me this guy just tpd to me you see the
+ghost there
+I got to get past these guys so I can
+I got to get past these guys so I can
+actually go see
+actually go see
+it on let me see how I can Juke
+it on let me see how I can Juke
+by ah look ghost right
+there H ghosts yeah I saw the ghosts
+okay e
+oh okay
+so
+so
+nmobile well we see that we have
+nmobile well we see that we have
+ghosts initialized players
+ghosts initialized players
+they get their spawn positions
+I'm guessing it's this thing right
+here if I just do this does this do it
+wait how do despawning the creeps
+work oh it's because I was zeroing the
+work oh it's because I was zeroing the
+PID map before isn't
+PID map before isn't
+it
+it
+okay yeah I see
+okay yeah I see
+yeah that's going to get totally messed
+yeah that's going to get totally messed
+up isn't
+it so the issue is that I was
+it so the issue is that I was
+um before this I was zeroing out or I
+um before this I was zeroing out or I
+was like resetting um the whole map when
+was like resetting um the whole map when
+the game finished and I'm not doing not
+the game finished and I'm not doing not
+doing that
+doing that
+anymore so it leaves
+anymore so it leaves
+ghosts so I just need to go through all
+ghosts so I just need to go through all
+the entities and reset them let me uh
+the entities and reset them let me uh
+here's what I'm going to do I'm going to
+here's what I'm going to do I'm going to
+order dinner on the side here and then
+order dinner on the side here and then
+uh I'm going to continue working on this
+uh I'm going to continue working on this
+until it gets
+here D I really appreciate the support
+here D I really appreciate the support
+on this just like on like a little post
+on this just like on like a little post
+like this it's nice to
+see what I order for dinner
+some eggs corn beef
+[Music]
+let's keep working on this for the next
+let's keep working on this for the next
+however long it takes to get
+however long it takes to get
+here so
+let's be smart about
+this when you initialize
+I just have to be a little disciplined
+I just have to be a little disciplined
+here player
+here player
+PID and a
+PID and a
+one
+okay what else
+need to be negative 1
+hold
+hold
+on no I'm I'm
+on no I'm I'm
+uh it's so weird because
+like would an ensemble of policies be
+like would an ensemble of policies be
+more effective than using a single
+more effective than using a single
+policy emble of polic policies policy
+policy emble of polic policies policy
+reform the general rule for naive
+reform the general rule for naive
+ensembling from like classic vision and
+ensembling from like classic vision and
+NLP from back in the day was you get 2%
+NLP from back in the day was you get 2%
+so you Ensemble eight models you get 2%
+better you can be smarter about it and
+better you can be smarter about it and
+then you end up with things that are
+then you end up with things that are
+like kind of ensembles but not really
+like kind of ensembles but not really
+you can look at mixture of experts for
+you can look at mixture of experts for
+that um you can also just make the
+that um you can also just make the
+policy bigger
+okay so basically what I have to figure
+okay so basically what I have to figure
+out
+here is if I'm going to have to
+here is if I'm going to have to
+kill the entities or
+not e
+I don't think this is the function that
+I don't think this is the function that
+matters it's the move to function that
+matters it's the move to function that
+matters
+right because the way I do it
+is I clear
+The
+Source I should be able to fix this this
+Source I should be able to fix this this
+is not that hard I'm just like end of a
+is not that hard I'm just like end of a
+long day here and it is kind of
+long day here and it is kind of
+important to do this right so
+important to do this right so
+essentially the issue is uh the way in
+essentially the issue is uh the way in
+which I move around players and the way
+which I move around players and the way
+in which I handle like killing and
+in which I handle like killing and
+respawning entities in the game
+I should probably just separate this
+out just to like
+delete like delete at
+delete like delete at
+and um Place add or
+whatever
+whatever
+yeah I'm trying to think how hard that
+yeah I'm trying to think how hard that
+will be to do correctly right
+will be to do correctly right
+now e
+that doesn't actually help me though
+that doesn't actually help me though
+does
+it I think the quickest fix for
+it I think the quickest fix for
+now the quickest fix
+yeah if I just set the initial X and Y
+yeah if I just set the initial X and Y
+to
+zero
+right then I don't have to set it there
+you can do kill entity
+then Tower respawn should be
+fine for
+40s I should set the initial X and y's
+otherwise I'm going to have a problem
+right where the hell are the
+right where the hell are the
+creeps do I not set them
+yeah I don't even check them at
+all
+for e
+Rex
+offset of
+offset of
+n
+n
+i that's
+good e
+let's see what this
+does 15
+where did my chat
+where did my chat
+go oh I
+go oh I
+Disappeared whoops wrong
+hotkey so what do we think do we think
+hotkey so what do we think do we think
+that this uh does anything
+let's go
+support engage support
+oh I
+died why do I only have 700
+died why do I only have 700
+health I'm level
+health I'm level
+13 I should have more Health than
+13 I should have more Health than
+this I guess leveling health is not
+working I was wondering why it was so
+working I was wondering why it was so
+hard yeah I just got merked by
+hard yeah I just got merked by
+something oh oh those towers are hitting
+something oh oh those towers are hitting
+me
+me
+still okay well you can see that the
+still okay well you can see that the
+corpses are
+corpses are
+gone so that's one thing that was fixed
+gone so that's one thing that was fixed
+it looks like there's still
+bugs they appear rarer
+oh now I have 1600 Health but there's
+oh now I have 1600 Health but there's
+definitely something screw with the
+leveling yeah so something just hit
+leveling yeah so something just hit
+me from far
+me from far
+off oh but it just
+okay interesting
+see
+definitely Max Health bugs where's my
+food uh not here
+yet maybe we fix this bug
+definitely some stuff that needs to just
+definitely some stuff that needs to just
+be tracked a little bit better
+not going to lie I'm kind of too fried
+not going to lie I'm kind of too fried
+to get anywhere else on this today so
+to get anywhere else on this today so
+I'm going to push this for
+now you guys can play with it if you
+now you guys can play with it if you
+want
+thanks that's
+well that's
+fun
+comments thank
+you for
+hey you know uh I don't know if you're
+hey you know uh I don't know if you're
+still around here but this is available
+still around here but this is available
+a standalone on the GitHub
+and as of today we've confirmed it's
+and as of today we've confirmed it's
+correct I'm going to I'll put out a post
+correct I'm going to I'll put out a post
+on this tomorrow I'll be sure to tag the
+on this tomorrow I'll be sure to tag the
+C assembly folks but
+C assembly folks but
+um yeah maybe you guys will want to
+um yeah maybe you guys will want to
+optimize it
+actually I got to move it into like a
+actually I got to move it into like a
+stand a self-contained thing but
+stand a self-contained thing but
+um I don't think that this code is
+um I don't think that this code is
+amazing to be honest like I like
+amazing to be honest like I like
+the I like the actual implementations of
+the I like the actual implementations of
+the Nets I I don't know if I like the
+the Nets I I don't know if I like the
+way that I've done the
+way that I've done the
+rappers I don't know if I like the way
+rappers I don't know if I like the way
+that I've done the allocations on the
+that I've done the allocations on the
+rappers and
+rappers and
+stuff maybe you guys will have some
+stuff maybe you guys will have some
+ideas on that
+though the other thing I just I can't
+though the other thing I just I can't
+figure out how I I want to do and see is
+figure out how I I want to do and see is
+um multi-dimensional
+um multi-dimensional
+arrays like always having to do flat
+arrays like always having to do flat
+indexing is really really
+indexing is really really
+rough I figured out you can cast to a
+rough I figured out you can cast to a
+multi-dimension array I don't know if
+multi-dimension array I don't know if
+that's a good idea or not I do that in a
+that's a good idea or not I do that in a
+couple
+couple
+places but yeah 444 lines for all
+this so that's
+this so that's
+fun and yeah puffer AI is the Business
+fun and yeah puffer AI is the Business
+site but uh you know we have docks as
+site but uh you know we have docks as
+well we got puff I get habio for docs
+well we got puff I get habio for docs
+all open
+source and this was a pretty cool
+source and this was a pretty cool
+Community
+Community
+thing the the one thing I can't figure
+thing the the one thing I can't figure
+out with the c assembly folks is
+out with the c assembly folks is
+like I'll see people trying to like
+like I'll see people trying to like
+Implement all sorts of fancy
+Implement all sorts of fancy
+abstractions in C and I wonder like you
+abstractions in C and I wonder like you
+know why if why are you coding stuff and
+know why if why are you coding stuff and
+see if you want the fancy abstractions I
+see if you want the fancy abstractions I
+thought the point was to not do any of
+that so yeah this like this type of
+that so yeah this like this type of
+stuff confuses me like why do you want
+stuff confuses me like why do you want
+this
+this
+right it's cool that you can do
+it it's definitely cool that you can do
+it but do you really want it right like
+it but do you really want it right like
+my favorite thing about C is just being
+my favorite thing about C is just being
+I like writing things in the stupid EST
+I like writing things in the stupid EST
+way possible and just like having it be
+way possible and just like having it be
+fast and super maintainable cuz like
+fast and super maintainable cuz like
+there's nothing confusing ever right
+there's nothing confusing ever right
+like honestly I think some of these this
+like honestly I think some of these this
+environment code it's some of the most
+environment code it's some of the most
+maintainable code I've written just
+maintainable code I've written just
+because it's actually brain dead right
+because it's actually brain dead right
+like I just get to be completely brain
+like I just get to be completely brain
+dead and see and it's it's great I love
+it like I haven't even needed to have a
+it like I haven't even needed to have a
+dictionary yet like I haven't even
+dictionary yet like I haven't even
+needed a map yet it's just use arrays
+needed a map yet it's just use arrays
+for everything
+for everything
+but yeah I will uh I'll post about the
+but yeah I will uh I'll post about the
+actual puffer net. C tomorrow I think
+actual puffer net. C tomorrow I think
+it's quite nice like what it
+it's quite nice like what it
+provides because you get um there's some
+provides because you get um there's some
+utility things but you get I mean really
+utility things but you get I mean really
+most of it is wrappers for like just the
+most of it is wrappers for like just the
+allocations and like storing all these
+allocations and like storing all these
+annoying variables but if you just look
+annoying variables but if you just look
+at like the procedural
+at like the procedural
+API right like the pure procedural stuff
+API right like the pure procedural stuff
+here is so there's this load file stuff
+here is so there's this load file stuff
+which you can ignore uh so now from line
+which you can ignore uh so now from line
+50 to
+50 to
+[Music]
+[Music]
+line 160 so you ignore all the brackets
+line 160 so you ignore all the brackets
+it's literally less than 100 lines for
+it's literally less than 100 lines for
+lstm convolution layers and a couple
+lstm convolution layers and a couple
+different types of linear layers and
+activations doesn't take much
+activations doesn't take much
+code the indexing on this was a pain
+code the indexing on this was a pain
+the con was
+the con was
+painful but
+painful but
+yeah and I'm sure it's not fast but it's
+yeah and I'm sure it's not fast but it's
+fast enough like we can tile the map
+fast enough like we can tile the map
+moles or
+moles or
+stuff um in the future we could try
+simd couple other utils ARG Max for
+simd couple other utils ARG Max for
+multi
+multi
+discreet I am curious what the um C
+discreet I am curious what the um C
+assembly folks will think about the way
+assembly folks will think about the way
+that I'm doing this type of stuff I
+that I'm doing this type of stuff I
+don't know if I like
+don't know if I like
+it I have strs to store like the layers
+it I have strs to store like the layers
+here I didn't make a tensor struct I
+here I didn't make a tensor struct I
+thought that would be too much uh I did
+thought that would be too much uh I did
+put a batch size so I have to you have
+put a batch size so I have to you have
+to have a fixed batch size just because
+to have a fixed batch size just because
+I didn't want to have to pass this as a
+I didn't want to have to pass this as a
+parameter otherwise you have to pass it
+parameter otherwise you have to pass it
+every time you call forward because
+every time you call forward because
+there's no tensor
+there's no tensor
+struck
+struck
+um I have weights here so you make it
+um I have weights here so you make it
+with weights and then this thing just
+with weights and then this thing just
+like gets the block of memory from the
+like gets the block of memory from the
+file so your weights are in contiguous
+file so your weights are in contiguous
+memory which is kind of cool the weights
+memory which is kind of cool the weights
+for the entire network are in contiguous
+for the entire network are in contiguous
+memory loaded from the
+memory loaded from the
+file
+file
+um you store some of these pams and then
+um you store some of these pams and then
+the actual like wrapped API is you just
+the actual like wrapped API is you just
+call I mean you can see here like you
+call I mean you can see here like you
+just call linear with the layer and then
+just call linear with the layer and then
+the input and then you get the weights
+the input and then you get the weights
+from the layer the bias from the layer
+from the layer the bias from the layer
+and it just puts it inside of
+and it just puts it inside of
+output so it's not maling anything there
+output so it's not maling anything there
+are no dynamic memory allocations right
+are no dynamic memory allocations right
+it just stores it in an output
+buffer
+buffer
+yeah I don't know design wise with this
+yeah I don't know design wise with this
+type of stuff I haven't been like I
+type of stuff I haven't been like I
+haven't been doing stuff this way to
+haven't been doing stuff this way to
+know whether this is a good
+know whether this is a good
+idea right like technically I could
+idea right like technically I could
+still have this struct but then instead
+still have this struct but then instead
+of having it be a make like this I could
+of having it be a make like this I could
+have an init so you like declare the
+have an init so you like declare the
+struct and then you init it with weights
+struct and then you init it with weights
+or
+or
+whatever I don't know if like having
+whatever I don't know if like having
+like this make function with like a
+like this make function with like a
+batch input output is kind of weird
+batch input output is kind of weird
+because I can just do like know struck.
+because I can just do like know struck.
+batch size. input.
+batch size. input.
+output but then I do want to have these
+output but then I do want to have these
+for the init I want to have like this
+for the init I want to have like this
+init stuff do get weights for
+you because it has to do like Dimension
+you because it has to do like Dimension
+math and
+math and
+stuff so I'm not entirely sure on this
+stuff so I'm not entirely sure on this
+side but I figure that this will be like
+side but I figure that this will be like
+a nice little
+a nice little
+Standalone um like that people will be
+Standalone um like that people will be
+able to play with and I'll just like
+able to play with and I'll just like
+improve over time this is not the main
+improve over time this is not the main
+focus right I'm not trying to make a new
+focus right I'm not trying to make a new
+tiny grad or you know a new pie torch or
+tiny grad or you know a new pie torch or
+anything the main point of this is to
+anything the main point of this is to
+just like have something that's know
+just like have something that's know
+nice and simple to use so we can do cool
+nice and simple to use so we can do cool
+stuff on
+web and like the goal is not to have
+web and like the goal is not to have
+this game be super fun or anything I
+this game be super fun or anything I
+just want this to be like you know
+just want this to be like you know
+mildly entertaining and like
+mildly entertaining and like
+recognizably looks like League or do or
+recognizably looks like League or do or
+um DOTA right looks like recognizably
+um DOTA right looks like recognizably
+like a game and has some complexity to
+like a game and has some complexity to
+it right and then have like a bunch of
+it right and then have like a bunch of
+these types of Sims so that we can use
+these types of Sims so that we can use
+them for RL I mean this thing will run
+them for RL I mean this thing will run
+at over a million steps per second per
+at over a million steps per second per
+core without rendering so I mean we can
+core without rendering so I mean we can
+literally get like centuries worth of
+literally get like centuries worth of
+training data per day per GPU with
+training data per day per GPU with
+this like the training runs that I do on
+this like the training runs that I do on
+this like we'll do like 20 billion step
+this like we'll do like 20 billion step
+training runs uh on one GPU and I think
+training runs uh on one GPU and I think
+I can make it even faster than that
+this is
+funny this is kind of unironically a
+funny this is kind of unironically a
+decent way to do um like lowii rendering
+decent way to do um like lowii rendering
+is super important for
+is super important for
+RL like we really need better ways of
+RL like we really need better ways of
+getting simulation State fast fast fast
+getting simulation State fast fast fast
+I have uh I have bindings for Doom as
+I have uh I have bindings for Doom as
+well for puffer lib I can get it up to
+well for puffer lib I can get it up to
+100,000 uh frames per second on a good
+100,000 uh frames per second on a good
+I9 with like 24
+cores but it's hard to get it way
+faster I really like
+faster I really like
+RB yeah I really really like RB
+hey if I wanted a borrow Checker i' take
+hey if I wanted a borrow Checker i' take
+out a
+loan
+funny all right food's here in a minute
+funny all right food's here in a minute
+so uh I'm going to going to be back
+so uh I'm going to going to be back
+doing this stuff tomorrow when my brain
+doing this stuff tomorrow when my brain
+is fresh
+is fresh
+um yeah I'm going to be back doing this
+um yeah I'm going to be back doing this
+when my brain is
+when my brain is
+fresh I'm going to so tomorrow the goal
+fresh I'm going to so tomorrow the goal
+is going to be to clean up the
+is going to be to clean up the
+environment hopefully we can get it
+environment hopefully we can get it
+stable enough that I will be able to do
+stable enough that I will be able to do
+training on the pure sea environment
+training on the pure sea environment
+instead of the scyon version um we'll
+instead of the scyon version um we'll
+see if I can get all that done and if I
+see if I can get all that done and if I
+can manage to do that then oh [ __ ] my
+can manage to do that then oh [ __ ] my
+boxes are down actually I don't know if
+boxes are down actually I don't know if
+you've seen the puffer cluster we're
+you've seen the puffer cluster we're
+currently having some maintenance issues
+currently having some maintenance issues
+uh but this is normally where we do all
+uh but this is normally where we do all
+of the training
+of the training
+runs uh so if I can get these boxes to
+runs uh so if I can get these boxes to
+be back up tomorrow then hopefully we
+be back up tomorrow then hopefully we
+can actually do some training runs on
+can actually do some training runs on
+them uh we have like awesome hyper Prem
+them uh we have like awesome hyper Prem
+sweeps to do and we can get some
+sweeps to do and we can get some
+policies that would be good if not I'll
+policies that would be good if not I'll
+just use the current one I have which
+just use the current one I have which
+isn't amazing um but we can do that and
+isn't amazing um but we can do that and
+then people will be able to start
+then people will be able to start
+helping debug online and then over the
+helping debug online and then over the
+next few days we'll keep polishing this
+next few days we'll keep polishing this
+stuff I'm sure there'll be some things
+stuff I'm sure there'll be some things
+to fix uh I probably have to do some
+to fix uh I probably have to do some
+sort of an animation system depending uh
+sort of an animation system depending uh
+we have an artist who has been
+we have an artist who has been
+contributing awesome stuff so all like
+contributing awesome stuff so all like
+the Assets in it right now but yeah
+the Assets in it right now but yeah
+we'll see after that uh I also have the
+we'll see after that uh I also have the
+other a few other environments to code
+other a few other environments to code
+on but I'm liking the direction that
+on but I'm liking the direction that
+this is all taking and we'll have to see
+this is all taking and we'll have to see
+when I cut a release I think it's going
+when I cut a release I think it's going
+to be the Moa the other environment
+to be the Moa the other environment
+that's not announced and like maybe a
+that's not announced and like maybe a
+few small other environment ports and
+few small other environment ports and
+then we'll release that as like the big
+then we'll release that as like the big
+environment update for
+environment update for
+puffer I really like I want when I
+puffer I really like I want when I
+release that update I want it to be like
+release that update I want it to be like
+hey we have the simulation data that we
+hey we have the simulation data that we
+need to push RL forward for the next
+need to push RL forward for the next
+however
+long anyways thank you folks and uh I
+long anyways thank you folks and uh I
+will be back tomorrow bye
+
+Kind: captions
+Language: en
+hello we're
+hello we're
+back let's get this done
+[Music]
+so yeah the issue at the moment was that
+so yeah the issue at the moment was that
+we don't have matching lstm States
+right we've tested the whole network up
+right we've tested the whole network up
+into the
+into the
+lstm but the lsdm doesn't match right
+lstm but the lsdm doesn't match right
+that's where we left
+off and's see what we're
+off and's see what we're
+printing h
+see I do that
+right let
+see it should be H right
+HC initial hidden
+HC initial hidden
+State initial cell
+State initial cell
+State
+input
+input
+wait am I dumb
+here wait is there a third
+input there is a third input
+how do I mess that
+how do I mess that
+up
+up
+wait
+huh oh but I have this in the
+test I don't know why I thought it was
+test I don't know why I thought it was
+any different
+any different
+actually yeah they're two states
+actually yeah they're two states
+right uh
+okay but like
+okay but like
+regardless
+lstm net PR
+output oh
+output oh
+wait where's
+wait where's
+PR oh it's not re 3 output what the heck
+that might be
+it
+76 wait eight
+76 wait eight
+82 then negative3 set so this is very
+82 then negative3 set so this is very
+close but a little off
+close but a little off
+right
+right
+043 718
+76 it's kind of weird how close these
+76 it's kind of weird how close these
+are isn't
+it wait flat
+it wait flat
+hidden hold
+hidden hold
+on what are we printing
+out got
+let's see what we
+got oh okay we're just not this is
+got oh okay we're just not this is
+fine this is
+fine this is
+fine this get rid of
+this okay so we have we have lstm
+this okay so we have we have lstm
+here we have flath hidden
+here we have flath hidden
+713 yeah so this one matches
+713 yeah so this one matches
+exactly and then this one at the
+exactly and then this one at the
+bottom matches
+bottom matches
+almost but almost
+almost but almost
+matches
+matches
+somehow it's
+somehow it's
+like yeah there's no way that this is
+like yeah there's no way that this is
+going to be a 02
+off it's weird because most of these
+off it's weird because most of these
+values are like most of them are spot on
+values are like most of them are spot on
+and then some of them are
+and then some of them are
+not can I see any
+not can I see any
+pattern like are the negative one's
+wrong
+maybe okay so we have reu prod re
+right we
+recompile yeah know this is still wrong
+very odd this
+very odd this
+[Music]
+one is State H the right
+one is State H the right
+State yeah this is the right state
+State yeah this is the right state
+right and then it
+returns outputs HC
+it bothers me that it's this close as
+it bothers me that it's this close as
+well like
+why were the biases the
+why were the biases the
+same the biases were the same weren't
+they it's like some of these are just
+they it's like some of these are just
+spot on and then some of these are like
+spot on and then some of these are like
+close but no
+close but no
+cigar I mean and then some of them are
+cigar I mean and then some of them are
+quite far
+let me just double Tech check the
+test well I am seeing here
+let me try a couple
+things I might have like caused some
+things I might have like caused some
+symmetry [ __ ]
+right I might have just messed something
+right I might have just messed something
+up here in my
+test
+test
+aha
+aha
+gotcha test is
+wrong there's a symmetry issue
+I'm glad I thought of
+that let's see what I think the Symmetry
+that let's see what I think the Symmetry
+issue
+is e
+I don't know why I have these headphones
+I don't know why I have these headphones
+on either I don't need
+these symmetry error there only so many
+these symmetry error there only so many
+things that can be symmetry errors right
+m
+bias input let's just double check real
+bias input let's just double check real
+quick I want to make sure we're not
+crazy I'll make sure we're not crazy
+crazy I'll make sure we're not crazy
+here
+we don't have any errors in linear
+we don't have any errors in linear
+layers now do
+layers now do
+we no we
+we no we
+don't
+don't
+okay what about
+this state hmp is already wrong
+so we're basically we're
+so we're basically we're
+guaranteed well I could have called it
+guaranteed well I could have called it
+in the wrong order or something
+right
+right
+input State H State C weight input
+input State H State C weight input
+weight
+weight
+State bias input by
+State bias input by
+state
+state
+buffer that size input size hidden size
+buffer that size input size hidden size
+okay uh other other
+okay uh other other
+idea right another
+idea right another
+idea could this be wrong
+idea could this be wrong
+order this could be wrong order
+order this could be wrong order
+right wait input weight
+State this could be wrong
+whoops
+whoops
+save should be wrong order
+could totally be a wrong
+order what happened to test
+order what happened to test
+model I'm going to this
+model I'm going to this
+function save model weights is it
+let's see the
+order wait input hidden bias input bias
+hidden why are the
+why are the biases exactly the
+same isn't that kind of
+weird wait wait bias bias
+though that how I do it
+weight waight bias bi yeah that's how it
+weight waight bias bi yeah that's how it
+does it we know that the weights are the
+same make
+lstm you do
+linear and linear accumulate wait hold
+linear and linear accumulate wait hold
+on linear
+accumulate plus equals
+Waits buffer
+Waits buffer
+input bius
+input bius
+buffer what about this buffer
+now this buffer
+gets why why am I
+passing oh because it's the output okay
+input weight bias
+input weight bias
+output
+output
+yeah that looks fine to me
+I'm trying to think where it would be
+I'm trying to think where it would be
+where there's like a symmetry
+where there's like a symmetry
+issue because it works if you use the
+issue because it works if you use the
+same seed for all the random
+data let me
+data let me
+see on the indexing math could very well
+see on the indexing math could very well
+be indexing math right
+input plus
+offset
+offset
+wait input offset batch times hidden
+size wait what hold on
+size wait what hold on
+and put offset as
+and put offset as
+batch
+yeah
+yeah
+so H
+so H
+State depends on C
+State depends on C
+State and then it's going to
+State and then it's going to
+be well wait can the indexing be wrong I
+be well wait can the indexing be wrong I
+guess it could be cuz it's metric
+maybe f
+maybe f
+is one so it's going to be at plus
+is one so it's going to be at plus
+hidden
+hidden
+size plus cell State T minus one is the
+input
+input
+input wait input offset
+input wait input offset
+here yeah plus I oh wait
+well in this case it works but I think
+well in this case it works but I think
+that more generally this is
+that more generally this is
+wrong because you need to know the input
+size so I think this is
+technically this is hidden
+technically this is hidden
+offset input
+offset this can be
+input and then this one is actually
+input and then this one is actually
+hidden
+hidden
+offset H an
+offset back
+offset back
+offset this input
+offset this input
+offset offset siid
+then this is state is going to be hidden
+then this is state is going to be hidden
+off that
+right plus
+I and state C
+H La that right
+let's return all the seeds to 42
+passes
+passes
+fails that's weird
+okay
+works let
+Works four this should be 45
+Works four this should be 45
+6 wait 43 yeah 44 45 46
+assess so it's when this one
+assess so it's when this one
+becomes the cell state becomes different
+becomes the cell state becomes different
+from the input it
+from the input it
+fails hold on maybe this is just a test
+input torch no this is
+good and then you do H comma
+good and then you do H comma
+C and for some reason C has to be the
+C and for some reason C has to be the
+same as the
+same as the
+input it's when the cell state is
+input it's when the cell state is
+different from the input that it
+different from the input that it
+fails that's a good enough clue
+fails that's a good enough clue
+right and the cell State I must be using
+right and the cell State I must be using
+the um oh I'm dumb hold
+the um oh I'm dumb hold
+on I know what it
+on I know what it
+is I know what it
+does right
+yeah right here you
+bastard
+bastard
+T right here this is State
+T right here this is State
+C that state C right
+C that state C right
+there and then that's got to
+there and then that's got to
+be hidden
+offset we
+input and then there's no input offset
+input and then there's no input offset
+we just do hidden off like
+that what now it fails
+still hold
+still hold
+on I should not be
+failing how but when I do this
+yeah
+HC I could have sworn that that would
+HC I could have sworn that that would
+have been
+have been
+it it actually build
+oh hold on maybe I need to recompile
+oh hold on maybe I need to recompile
+this
+right maybe I need to recompile this
+there it goes I forgot that you have to
+there it goes I forgot that you have to
+trigger the um the test Rec compilation
+trigger the um the test Rec compilation
+path
+path
+separately so now was this with the
+separately so now was this with the
+right
+right
+data yes it was
+data yes it was
+perfect that was the issue
+okay perfect matches
+okay perfect matches
+exactly that was it we had an index bug
+exactly that was it we had an index bug
+in our lstm
+was nefarious that was a nefarious bug
+was nefarious that was a nefarious bug
+down to
+RNG but we got
+it time is it
+it time is it
+5:30 I got more work in me
+yet I got some more work in me
+I mean I almost feel like I don't have
+I mean I almost feel like I don't have
+to test this but I think I probably
+to test this but I think I probably
+should well let's just go all the way
+should well let's just go all the way
+the action layer you
+know yeah let's just go right to here
+know yeah let's just go right to here
+because if this is correct here then
+because if this is correct here then
+we're good
+six then we do is we print
+six then we do is we print
+F this and then we print f fln
+F this and then we print f fln
+okay so
+now doubl type
+in move this assert down
+well now we get the action outputs
+right oops
+right oops
+comment hi read your papers on neural
+comment hi read your papers on neural
+MMO and puffer Li thank you
+MMO and puffer Li thank you
+welcome we're coding up some cool stuff
+welcome we're coding up some cool stuff
+though the results are going to be much
+though the results are going to be much
+cooler than the process because the
+cooler than the process because the
+process is a lot of me debugging crra
+accesses but we're going to be able to
+accesses but we're going to be able to
+run some really cool RL networks on the
+web yeah it's cool right
+web yeah it's cool right
+right and they're not dumb little agents
+right and they're not dumb little agents
+either we're going to run CNN MLP lstm
+either we're going to run CNN MLP lstm
+agents with fancy observation data on
+agents with fancy observation data on
+the web in purec real time client side
+the web in purec real time client side
+single core it's going to be
+sweet is actually happening as well it's
+sweet is actually happening as well it's
+probably going to be done
+probably going to be done
+today if I can just fix these last
+today if I can just fix these last
+couple of bugs it's not that bad either
+couple of bugs it's not that bad either
+it's maybe like four 5 lines of C total
+it's maybe like four 5 lines of C total
+to just you know replace P torch at
+to just you know replace P torch at
+least for
+least for
+inference and compile for web it's not
+inference and compile for web it's not
+bad not bad at
+all
+e e
+what am I looking at
+what am I looking at
+here
+probs for.
+probs for.
+split okay we should just do like a
+split okay we should just do like a
+explicit sample
+right
+um hard Max
+argmax attach CPU
+argmax attach CPU
+numpy argmax samples
+let's see if this
+works okay so it does work I don't know
+works okay so it does work I don't know
+why there's all this
+why there's all this
+data there's got to be dirty data
+data there's got to be dirty data
+somewhere in one of these
+somewhere in one of these
+buffers but this does
+work that should be fine though
+right let me just make sure real quick I
+right let me just make sure real quick I
+just want to be positive
+yeah okay we're fine I see it we're
+yeah okay we're fine I see it we're
+good
+so can we just run this and win
+so can we just run this and win
+now that what
+happens I think we can just run this and
+happens I think we can just run this and
+win
+headphones go back on screaming kids
+headphones go back on screaming kids
+outside drive me
+nuts I have absolutely zero patience
+nuts I have absolutely zero patience
+whatsoever which is funny because I have
+whatsoever which is funny because I have
+tons of patience for
+tons of patience for
+code for
+seg
+Bol oh that's actually in
+um that's an actual memory access
+though I'm assuming that
+though I'm assuming that
+it's this move
+somehow what is
+somehow what is
+mobet if it runs I'll show you but
+mobet if it runs I'll show you but
+actually here I may as well show you on
+actually here I may as well show you on
+the web first have you seen the mob I've
+the web first have you seen the mob I've
+been building you can play it online
+been building you can play it online
+though it has some bugs at the moment so
+though it has some bugs at the moment so
+this runs in your browser it's written
+this runs in your browser it's written
+in pure C it's like 2,000 lines of C
+in pure C it's like 2,000 lines of C
+it's like a miniature version of Dota or
+it's like a miniature version of Dota or
+of Legends if you will it has abilities
+of Legends if you will it has abilities
+it has five different
+it has five different
+characters and it runs at like a million
+characters and it runs at like a million
+steps per second per
+core so it's pretty
+cooloo so what we're trying to do is
+cooloo so what we're trying to do is
+we're going to try to get this network
+we're going to try to get this network
+running so that we can actually have we
+running so that we can actually have we
+can play with and against RL
+can play with and against RL
+agents I think that would be a cool
+agents I think that would be a cool
+thing to to
+thing to to
+do and it's particularly cool because
+do and it's particularly cool because
+I'm going to be able to actually put
+I'm going to be able to actually put
+some good networks together yeah and
+some good networks together yeah and
+like this Tech we're going to get to use
+like this Tech we're going to get to use
+this for everything as well because
+this for everything as well because
+basically like that whole puffet that's
+basically like that whole puffet that's
+the hard part like once I remove these
+the hard part like once I remove these
+prints the actual net code for um this
+prints the actual net code for um this
+specific environment is like 100 lines
+specific environment is like 100 lines
+it's like not even any longer than the P
+it's like not even any longer than the P
+torch code yeah it's a little obnoxious
+torch code yeah it's a little obnoxious
+because I have a bunch of stuff
+because I have a bunch of stuff
+hardcoded at the moment
+hardcoded at the moment
+are you building this yeah this is all
+are you building this yeah this is all
+my
+my
+code
+code
+here this is puffet this is the C
+here this is puffet this is the C
+learning uh not learning C inference
+learning uh not learning C inference
+Library linear comms
+Library linear comms
+lstms and
+lstms and
+then
+then
+m.h 2,000 lines of
+m.h 2,000 lines of
+C is that entire
+C is that entire
+environment runs Ultra fast we can do RL
+environment runs Ultra fast we can do RL
+on it
+on it
+pretty
+nice all open
+source and you can play it online too
+source and you can play it online too
+cuz C compiles to web assembly which is
+cuz C compiles to web assembly which is
+pretty nice yeah I'm a front end
+pretty nice yeah I'm a front end
+developer C is a front-end language
+developer C is a front-end language
+right
+let's see what happens if I
+do I'd love to contribute oh of course
+do I'd love to contribute oh of course
+we love we love uh contributions let me
+we love we love uh contributions let me
+show you a little bit of that
+show you a little bit of that
+so this is
+so this is
+discord.gg puffer this is where we
+discord.gg puffer this is where we
+organize stuff we got 400 people in here
+organize stuff we got 400 people in here
+at the
+at the
+moment uh if I show you I think it's in
+moment uh if I show you I think it's in
+general we have to scroll a bunch
+general we have to scroll a bunch
+here but there are some cool things so
+here but there are some cool things so
+this is an environment that somebody's
+this is an environment that somebody's
+building it's based on this old French
+building it's based on this old French
+emo called uh do somebody's building
+emo called uh do somebody's building
+this out as a high perf environment for
+this out as a high perf environment for
+RL we've got
+simpler stuff as well let me show you a
+simpler stuff as well let me show you a
+couple of the
+couple of the
+others this is the
+others this is the
+Moa and here let's see the Atari
+Moa and here let's see the Atari
+ones so we have people building highper
+ones so we have people building highper
+versions of Atari so like pong but run
+versions of Atari so like pong but run
+super super
+super super
+fast and we've got breakout but run
+fast and we've got breakout but run
+super super
+fast so pretty much I mean for most most
+fast so pretty much I mean for most most
+people the easiest way to contribute
+people the easiest way to contribute
+that doesn't require like tons and tons
+that doesn't require like tons and tons
+of RL experience is to just like you
+of RL experience is to just like you
+know get on board with the high per
+know get on board with the high per
+environment development and make some
+environment development and make some
+cool games that run Ultra Ultra fast for
+cool games that run Ultra Ultra fast for
+reinforcement learning or you know other
+reinforcement learning or you know other
+types of simulators doesn't matter but
+types of simulators doesn't matter but
+definitely ultra high perf like we try
+definitely ultra high perf like we try
+to have everything run a minimum of a
+to have everything run a minimum of a
+million steps per second per core which
+million steps per second per core which
+is not all that hard to do you can write
+is not all that hard to do you can write
+in C if you want to it's not required uh
+in C if you want to it's not required uh
+C is nice because we can run it on the
+C is nice because we can run it on the
+web but scon is perfectly all right
+web but scon is perfectly all right
+reads exactly like python with types but
+reads exactly like python with types but
+is just as fast as C in fact I did the
+is just as fast as C in fact I did the
+mo bit in scon first I did a whole bunch
+mo bit in scon first I did a whole bunch
+of the environments in scon first uh so
+of the environments in scon first uh so
+that's the easiest way for people that
+that's the easiest way for people that
+have way more RL experience you know we
+have way more RL experience you know we
+also accept contributions on
+also accept contributions on
+infrastructure environment bindings
+infrastructure environment bindings
+benchmarking and those types of
+benchmarking and those types of
+areas but yeah if you're just trying to
+areas but yeah if you're just trying to
+like do some cool RL stuff this is uh
+like do some cool RL stuff this is uh
+probably the easiest way is to like help
+probably the easiest way is to like help
+us build out these
+us build out these
+environments and of course I'm always
+environments and of course I'm always
+happy to help contributors I
+happy to help contributors I
+occasionally like I'll I'll do code
+occasionally like I'll I'll do code
+reviews on stream and stuff like that I
+reviews on stream and stuff like that I
+pretty much stream uh all week long you
+pretty much stream uh all week long you
+know five days a week
+so let me know what interests you
+I haven't seen South on here either
+I haven't seen South on here either
+lately but we also have a we've also got
+lately but we also have a we've also got
+a cool artist who's been like making
+a cool artist who's been like making
+artwork for this MOA so we got all sorts
+artwork for this MOA so we got all sorts
+of fun contributors
+this is wrong here
+right actions
+how does this even
+work
+work
+philosophy how the heck does this
+work
+work
+oh I
+oh I
+see uhhuh
+see uhhuh
+well that's
+terrible we do minus 300
+that even does that do it I think it
+does
+I something is like moving outside the
+I something is like moving outside the
+map cuz the movement is too fast
+let me see if I can
+see I have an interest in RL with
+see I have an interest in RL with
+robotics working on a research project
+robotics working on a research project
+with stuck on something very cool so for
+with stuck on something very cool so for
+robotic
+robotic
+stuff I'll show you who you should
+stuff I'll show you who you should
+follow I'm sure you know Stone tow
+follow I'm sure you know Stone tow
+already but uh kyong is
+this is who you should follow he does
+this is who you should follow he does
+robotics for
+robotics for
+puffer um let's
+see yeah so while he's been doing some
+see yeah so while he's been doing some
+of these control M but I think he's also
+of these control M but I think he's also
+got other more sophisticated ones um
+got other more sophisticated ones um
+he's adding like bindings for existing
+he's adding like bindings for existing
+robotics
+robotics
+M at some point we're going to want to
+M at some point we're going to want to
+do like our own ultra high perf Sim but
+do like our own ultra high perf Sim but
+like if you're looking to add
+like if you're looking to add
+Integrations for this type of stuff
+Integrations for this type of stuff
+that's
+that's
+awesome definitely something we would
+awesome definitely something we would
+like to be putting more emphasis
+like to be putting more emphasis
+into yeah there's lots of good material
+into yeah there's lots of good material
+in here
+this like actually a speed issue hold on
+this like actually a speed issue hold on
+this could be a me issue but I think
+this could be a me issue but I think
+it's a speed
+issue
+issue
+okay definitely an issue here
+move
+to
+to
+Source map offset
+okay so destination got messed up
+okay so destination got messed up
+somehow
+why is this destination so
+why is this destination so
+crazy that's
+crazy why is it like
+this rest of them don't well actually
+this rest of them don't well actually
+they do what the
+they do what the
+heck destinations are
+like why they it is
+huge velocity is off
+maybe I can't think of anything else
+maybe I can't think of anything else
+that would cause
+that can't think of anything
+else hold it shouldn't be minus 300 it
+else hold it shouldn't be minus 300 it
+should be plus 300
+right yeah that'll
+cause wait I'm confused
+no it is
+no it is
+minus right
+what if I do this
+aha it is a velocity
+issue look at
+that well something's really weird with
+that well something's really weird with
+the movement but definitely a velocity
+issue we're going to have to train some
+issue we're going to have to train some
+better agents now as well for web
+what we do for the
+uh e
+how I want to do the movement
+is actually is it minus
+three yeah it's minus three like this
+and it's an instar
+and it's an instar
+right so why doesn't this
+work oh because you don't want to
+work oh because you don't want to
+subtract a you don't want to
+subtract a you don't want to
+subtract like this hold
+subtract like this hold
+on I got
+on I got
+you I got you
+you I got you
+here we'll fix this
+now I may be running out of steam for
+now I may be running out of steam for
+interesting
+interesting
+commentary I am going to fix this
+commentary I am going to fix this
+tonight
+holy what the
+heck I would have thought that would
+work why
+work why
+not why is it so fast
+gigantic numbers
+why are they like this
+maybe it's in the
+sampler yeah what the [ __ ] is
+sampler yeah what the [ __ ] is
+this right
+minus
+minus
+three -
+303 that is weird right
+303 that is weird right
+shouldn't be able to do
+that hold
+that hold
+on actions of I *
+6 should be be
+fine
+fine
+no
+because
+why maybe I have the alignment wrong
+six Agent Time
+six
+wait 100
+times is there's something weird going
+times is there's something weird going
+on
+here what if I just put this
+here we're like so close to having this
+here we're like so close to having this
+work whoops so close to having this
+working okay so now I should have some
+working okay so now I should have some
+[Music]
+[Music]
+reasonable -200
+reasonable -200
+-300 is it just not setting the actions
+-300 is it just not setting the actions
+here these look like they're left over
+right they're left over from the
+right they're left over from the
+previous
+step
+step
+forward
+forward could my multi just freep me off
+maybe my multi- discreet is
+off
+this
+this
+oops for
+hold on is this it
+here yeah I think this is
+it found
+it found
+it I got to love obscur
+bus I will say though the number of bug
+bus I will say though the number of bug
+fixes I've gotten today like I'm
+fixes I've gotten today like I'm
+actually very happy with their
+actually very happy with their
+progress I fixed a lot of bugs man
+this
+garbage it's going to make me run
+slow oh man look at this
+it's pressing my buttons for me so I
+it's pressing my buttons for me so I
+can't press
+can't press
+them yeah see it's like it decided to
+them yeah see it's like it decided to
+take over my buttons there and
+attack something's still going too fast
+it's so much closer though it's so much
+it's so much closer though it's so much
+closer like maybe now I can figure out
+closer like maybe now I can figure out
+what the heck it is
+what is still
+printing that's weird how it zooms like
+printing that's weird how it zooms like
+that
+there appears to be some weird logic
+there appears to be some weird logic
+left over when I switch
+characters I don't know why sometimes
+characters I don't know why sometimes
+like some of these aren't moving there
+like some of these aren't moving there
+it
+goes how are they moving that
+fast
+holy somehow they're glitching like a
+holy somehow they're glitching like a
+move
+buff I mean but that's the neural net
+buff I mean but that's the neural net
+control in them look that's them that is
+control in them look that's them that is
+the neuronet rushing down mid with like
+the neuronet rushing down mid with like
+glitched fast
+speed and this is this guy sitting on a
+tower I call that a
+tower I call that a
+success we have some debugging to do
+success we have some debugging to do
+now but that is a success a resounding
+now but that is a success a resounding
+success even we're going to commit all
+success even we're going to commit all
+this before we lose
+this before we lose
+it for
+what uh we'll have to remove that I
+what uh we'll have to remove that I
+don't want to mess it up
+though yeah this is wrong
+there we
+there we
+go cool I'm going to be right back just
+go cool I'm going to be right back just
+arush him real quick and then we will uh
+arush him real quick and then we will uh
+we'll start just debugging this game
+we'll start just debugging this game
+because as soon as I get the bugs out
+because as soon as I get the bugs out
+this is going to be
+awesome
+e
+e
+e e
+okay kick the tie this out of my desk on
+okay kick the tie this out of my desk on
+the way
+the way
+in
+okay all we got to do is get some bugs
+okay all we got to do is get some bugs
+out of the environment now we have the
+out of the environment now we have the
+Nets working it's just like stuff is
+Nets working it's just like stuff is
+going crazy as
+all so let's start on that here just for
+all so let's start on that here just for
+a little bit
+today forward
+yeah so what you need to do here
+right is whichever of these things is uh
+right is whichever of these things is uh
+being messed
+with yeah whichever of these things is
+with yeah whichever of these things is
+being messed with you need to zero
+being messed with you need to zero
+out the
+actions UWE
+and now it should stop trying to press
+and now it should stop trying to press
+my buttons for
+me look at that now I get smooth
+movement and oops they're going to flank
+movement and oops they're going to flank
+me I'm guess I'm going through the
+me I'm guess I'm going through the
+terrain
+terrain
+clipping yeah there you go there's the
+clipping yeah there you go there's the
+assassinate skill off with Mana yeah
+assassinate skill off with Mana yeah
+there we go and die here yep cool so Uh
+there we go and die here yep cool so Uh
+something's crazy with these guys that
+something's crazy with these guys that
+they're just like zooming around like
+they're just like zooming around like
+that let's see what happened
+interesting you're just dividing by
+interesting you're just dividing by
+100 I see nothing wrong with this
+100 I see nothing wrong with this
+dividing by
+100 oh wait no that's bad isn't
+100 oh wait no that's bad isn't
+it yeah that's bad
+you have to Norm this don't
+you I think I have to Norm this
+is that it that's I guess that's a 40%
+is that it that's I guess that's a 40%
+speed
+speed
+buff oh no that's yeah it's way more
+buff oh no that's yeah it's way more
+because yeah they're going 3x
+because yeah they're going 3x
+faster so this is divide by three this
+faster so this is divide by three this
+is still not perfect but this should be
+um
+on b 300
+on b 300
+yeah here we
+go let's just
+go let's just
+do
+if
+if
+Yer than one
+now what we
+do yeah
+X see if this does
+X see if this does
+it f ABS f
+see
+ABS hello YouTube
+ABS hello YouTube
+folks hey
+folks hey
+bet we
+bet we
+are doing crazy things
+okay there we go RL agents running in
+C we are starring puffer yeah remember
+C we are starring puffer yeah remember
+star the
+puffer I don't have any
+CDs come
+CDs come
+on take the tower
+it's going to start hitting me
+it's going to start hitting me
+soon there we go
+assassinated
+yeah you can ghost through terrain with
+yeah you can ghost through terrain with
+the speed
+buff what are the policies for these
+buff what are the policies for these
+agents are they pre-trained from the
+agents are they pre-trained from the
+previous run these are pre-trained
+previous run these are pre-trained
+agents that as of right now as of just
+agents that as of right now as of just
+when you joined here these are
+when you joined here these are
+pre-trained agents that are running uh
+pre-trained agents that are running uh
+the pytorch CNN lstm NLP uh MLP model
+the pytorch CNN lstm NLP uh MLP model
+but it's being loaded into pure C so
+but it's being loaded into pure C so
+inference is done in pure C on One Core
+inference is done in pure C on One Core
+in real
+time why not C++ because C++ makes me
+sad it really does not add
+sad it really does not add
+anything really doesn't whoops really
+anything really doesn't whoops really
+does not add anything to uh to what I'm
+does not add anything to uh to what I'm
+doing
+doing
+here it's only 400 some odd lines of
+here it's only 400 some odd lines of
+code to implement like a basic pie torch
+code to implement like a basic pie torch
+thing it sounds hard but puffer Li makes
+thing it sounds hard but puffer Li makes
+it easy well this part is kind of hard
+it easy well this part is kind of hard
+bet I'm not going to lie this part was
+bet I'm not going to lie this part was
+kind of
+kind of
+hard we have an lstm we have a com 2D
+hard we have an lstm we have a com 2D
+and these have been meticulously
+and these have been meticulously
+matched we these have been meticulously
+matched we these have been meticulously
+matched to the pytorch reference
+matched to the pytorch reference
+implementations and by reference
+implementations and by reference
+implementations I mean testing bit by
+implementations I mean testing bit by
+bit to try to get it to be the same like
+bit to try to get it to be the same like
+I can't get the code because it's all
+I can't get the code because it's all
+like CNN so you rolled your own neuronet
+like CNN so you rolled your own neuronet
+inference agents for this game I mean
+inference agents for this game I mean
+for puffer in general for puffer in
+for puffer in general for puffer in
+general like we're going to be able to
+general like we're going to be able to
+use this in all of the Sims that we make
+use this in all of the Sims that we make
+for puffer now right
+for puffer now right
+this is just going to be one of them and
+this is just going to be one of them and
+the reason that I did it like this right
+the reason that I did it like this right
+is that now we can compile these to web
+is that now we can compile these to web
+assembly and we're going to be able to
+assembly and we're going to be able to
+run these on the browser so these
+run these on the browser so these
+browser guys are actually going to be
+browser guys are actually going to be
+able to move around and we have RL
+able to move around and we have RL
+teammates so you'll just be able to play
+teammates so you'll just be able to play
+this online and like you know fight
+this online and like you know fight
+these guys or
+these guys or
+whatever speaking of which you can play
+whatever speaking of which you can play
+this now it's very buggy but it is on
+this now it's very buggy but it is on
+the puffer website uh we need to add the
+the puffer website uh we need to add the
+agents in and stuff like that but it's
+there you also have we have snake these
+there you also have we have snake these
+ones actually we do have some RL agents
+ones actually we do have some RL agents
+they're pretty dumb we're going to
+they're pretty dumb we're going to
+upgrade them using all the new inference
+upgrade them using all the new inference
+code that I just
+code that I just
+wrote yeah but you can play Snake versus
+wrote yeah but you can play Snake versus
+you know the RL
+agents and we're going to add more games
+agents and we're going to add more games
+here as well we're going to have a whole
+here as well we're going to have a whole
+Suite of them
+okay so we fixed the speed hack
+okay so we fixed the speed hack
+issue what other stuff is there to
+fix is the goal to use the game sim to
+fix is the goal to use the game sim to
+make great RL or to use RL to make great
+make great RL or to use RL to make great
+and fun games or both uh the goal is
+and fun games or both uh the goal is
+mostly to use the game sim to make great
+mostly to use the game sim to make great
+RL you know if game studios want to do
+RL you know if game studios want to do
+the opposite though right if game
+the opposite though right if game
+studios want to do the other one and
+studios want to do the other one and
+want some assistance in that puffer will
+want some assistance in that puffer will
+be happy to help there um but yeah the
+be happy to help there um but yeah the
+motivation is mostly to have Ultra ultra
+motivation is mostly to have Ultra ultra
+high performance simulations for
+high performance simulations for
+reinforcement learning that we can then
+reinforcement learning that we can then
+use to you know hypers scale the field
+use to you know hypers scale the field
+like dramatically Advance the state of
+like dramatically Advance the state of
+RL
+and all of this is part of it all of
+and all of this is part of it all of
+this is part of
+it I guess we just got to find bugs now
+it I guess we just got to find bugs now
+huh it's pretty
+huh it's pretty
+obnoxious I think I know one of them let
+obnoxious I think I know one of them let
+me
+see there's like this one obnoxious
+see there's like this one obnoxious
+inference above
+yeah okay this doesn't
+yeah okay this doesn't
+help let's fix the
+controls e
+there we
+go pathing is kind of weird how it does
+this yeah why is it doing RuneScape path
+this yeah why is it doing RuneScape path
+thing hold on
+oh yeah I see why it's doing
+oh yeah I see why it's doing
+okay think work is super cool mained
+okay think work is super cool mained
+goals to advance RL how's running and
+goals to advance RL how's running and
+browser playing wouldn't the research
+browser playing wouldn't the research
+mostly be done on Research or servers
+mostly be done on Research or servers
+yeah no the having it on browser is just
+yeah no the having it on browser is just
+uh it's just for demo purposes I figure
+uh it's just for demo purposes I figure
+like there are a lot of cool RL
+like there are a lot of cool RL
+environments that don't get enough usage
+environments that don't get enough usage
+so this is just a cool way to demo the
+so this is just a cool way to demo the
+environments um the thing is though like
+environments um the thing is though like
+yeah I technically already had this
+yeah I technically already had this
+coded in uh in scyon but like hoing it
+coded in uh in scyon but like hoing it
+to C didn't really take me that long and
+to C didn't really take me that long and
+this whole inference engine it took me
+this whole inference engine it took me
+like three or four days to build so it's
+like three or four days to build so it's
+really not that big of an investment to
+really not that big of an investment to
+have awesome demos that means that like
+have awesome demos that means that like
+10 times more people will see these
+10 times more people will see these
+environments and like you know
+environments and like you know
+ultimately also puffer is a company so
+ultimately also puffer is a company so
+it is kind of important for us to have
+it is kind of important for us to have
+cool demos to show people right um yeah
+cool demos to show people right um yeah
+so that's that's basically the reason
+so that's that's basically the reason
+there so yeah like I could write these
+there so yeah like I could write these
+in scon just as well for the performance
+in scon just as well for the performance
+um but hey you know if we write it in C
+um but hey you know if we write it in C
+then I get cool demos out of it as
+well you went with the file IO option no
+well you went with the file IO option no
+I didn't bet where do you see
+I didn't bet where do you see
+that we wrote proper tests
+there's a
+there's a
+warning
+warning
+where build open text that's something
+where build open text that's something
+else that's something
+else that's something
+else no I wrote proper test
+else no I wrote proper test
+bet for the
+engine yeah so we have to fix this is
+engine yeah so we have to fix this is
+freaking RuneScape pathing right here
+um yeah this is RuneScape pathing
+um yeah this is RuneScape pathing
+so shoot I do need this normalization
+so shoot I do need this normalization
+don't
+don't
+I okay maybe I wasn't that dumb to begin
+I okay maybe I wasn't that dumb to begin
+with right
+how's
+how's
+this I think this does
+it and then we'll have to scale the
+uh the agent actions as well maybe we'll
+uh the agent actions as well maybe we'll
+move that piece of code
+yeah there you go no more RuneScape
+yeah there you go no more RuneScape
+movement you go straight to
+Target we should get rid of this cursor
+Target we should get rid of this cursor
+and we should add like some click
+and we should add like some click
+effects good job join Discord yeah join
+effects good job join Discord yeah join
+Discord ggp puffer this is all open
+Discord ggp puffer this is all open
+source work we have all sorts of cool
+source work we have all sorts of cool
+stuff going on
+stuff going on
+bet is our official Advertiser
+here you can get bad help from people
+like oh
+bet sometimes I'm
+bet sometimes I'm
+sometimes I'm right
+sometimes I think I got to repeat this
+sometimes I think I got to repeat this
+little bit of code right
+little bit of code right
+here uh in the
+actual yeah I got to repeat this
+last actually what I can do here I can
+last actually what I can do here I can
+clean this up a little bit because I
+clean this up a little bit because I
+just need this to be
+just need this to be
+here um
+than
+than
+one there we
+one there we
+go we
+go we
+Norm now everybody's moving at the same
+Norm now everybody's moving at the same
+reasonable speed
+reasonable speed
+everybody gets their actions Norm to
+everybody gets their actions Norm to
+one they move a little slower on the
+one they move a little slower on the
+diagonals but now the speeds are
+diagonals but now the speeds are
+consistent
+right the policies are a little confused
+right the policies are a little confused
+because they're they weren't trained
+because they're they weren't trained
+that way so they get stuck on stuff
+now did it just see me walk into its
+now did it just see me walk into its
+Vision range and attack try to attack me
+Vision range and attack try to attack me
+or no tried to
+or no tried to
+it tried to heal me actually it used its
+it tried to heal me actually it used its
+support ability that's
+funny what did it just use half its mana
+on what are you guys doing here I bet if
+on what are you guys doing here I bet if
+I just like unstuck it a little bit
+I just like unstuck it a little bit
+right yeah now it
+goes
+goes
+yeah so these just aren't very good
+yeah so these just aren't very good
+agents also the map is slightly
+off don't have Mana for this I think
+off don't have Mana for this I think
+it's 150 Mana there we go there's the
+it's 150 Mana there we go there's the
+assassinate
+very
+cool other
+cool other
+bugs we pretty much all we need to do is
+bugs we pretty much all we need to do is
+find all the bugs in this so we can
+find all the bugs in this so we can
+actually train in this version of the
+actually train in this version of the
+environment cuz all these policies are
+environment cuz all these policies are
+just transferred from the sconed
+version I believe there's a bug when you
+version I believe there's a bug when you
+win the game isn't
+win the game isn't
+there I think the towers keep hitting
+there I think the towers keep hitting
+you or something
+I should like confirm
+that here this is what we're going to do
+that here this is what we're going to do
+to confirm
+this we're going to just make the tank
+this we're going to just make the tank
+op so I can insta win the game
+okay that's insta winning the game
+okay that's insta winning the game
+versus
+Towers
+oops am I getting
+oops am I getting
+hit no Tower's not hitting
+hit no Tower's not hitting
+me I don't have my cool Downs refresh
+me I don't have my cool Downs refresh
+for some
+reason okay the jump back to spawn
+is the jump back to spawn is
+is the jump back to spawn is
+annoying I think we should just remove
+annoying I think we should just remove
+that I don't think we actually need that
+that I don't think we actually need that
+for training
+yeah this right
+here I don't think we need this
+oh let's also fix uh CDs on
+death okay this will fix CDs on death
+how did the transition from python to C
+how did the transition from python to C
+well it was in scon to begin with it
+well it was in scon to begin with it
+wasn't in Python that would have been
+wasn't in Python that would have been
+night marriage
+night marriage
+um it only took me like 3 days
+um it only took me like 3 days
+hey Teto how's it
+hey Teto how's it
+going uh we currently have policies here
+going uh we currently have policies here
+CNN lstm and MLP policies running in
+CNN lstm and MLP policies running in
+pure C so that's
+fun oops I hit the wrong button and my
+fun oops I hit the wrong button and my
+skill is on cool
+skill is on cool
+down awesome now thank you this is all
+down awesome now thank you this is all
+open source as well let's just win this
+open source as well let's just win this
+game and oh there it was there's the bug
+game and oh there it was there's the bug
+okay so we'll have to fix this that's
+okay so we'll have to fix this that's
+what I was testing for uh the more
+what I was testing for uh the more
+stable but still buggy version is is
+stable but still buggy version is is
+online right here so you can kind of
+online right here so you can kind of
+play it the RL Bots are not in there yet
+play it the RL Bots are not in there yet
+because I just had to implement all the
+because I just had to implement all the
+freaking C policy stuff uh but this is
+freaking C policy stuff uh but this is
+here and then also you can play the
+here and then also you can play the
+snake one this does have RL boot but
+snake one this does have RL boot but
+they're just MLPs so we're going to
+they're just MLPs so we're going to
+upgrade the AIS with uh CNN lstm as soon
+upgrade the AIS with uh CNN lstm as soon
+as I get around to that after finishing
+as I get around to that after finishing
+up the Moa since we actually have
+up the Moa since we actually have
+policies that are trained like that but
+policies that are trained like that but
+I didn't have the the inference code for
+I didn't have the the inference code for
+it since like you can't use P torch on
+web so what just
+web so what just
+happened we also have to have the thing
+happened we also have to have the thing
+not segol on
+not segol on
+web
+uh I see
+that's
+funny
+funny
+so engage AOE
+so engage AOE
+huh have not played a MOA so this is
+huh have not played a MOA so this is
+super confusing yeah moas are the most
+super confusing yeah moas are the most
+complicated freaking confusing genre of
+complicated freaking confusing genre of
+game in existence to learn you have to
+game in existence to learn you have to
+have played Dota or League of Legends in
+have played Dota or League of Legends in
+order to what's going on there's just no
+order to what's going on there's just no
+way I can explain to you otherwise right
+way I can explain to you otherwise right
+like here let me find the DOTA
+map I'll give you the quick
+map I'll give you the quick
+version here this looks
+version here this looks
+good so DOTA is a 5v5 game so is League
+good so DOTA is a 5v5 game so is League
+uh there are these there's this map
+uh there are these there's this map
+there are three lanes in the map there's
+there are three lanes in the map there's
+a top middle and bottom Lane and in each
+a top middle and bottom Lane and in each
+lane you've got these three towers and
+lane you've got these three towers and
+then you've also got these defending
+then you've also got these defending
+Towers in the center
+Towers in the center
+and then there's the objective to
+and then there's the objective to
+capture in the middle so your goal is to
+capture in the middle so your goal is to
+in you only really need one of the lanes
+in you only really need one of the lanes
+though usually you end up taking all of
+though usually you end up taking all of
+them or at least two of them uh your
+them or at least two of them uh your
+goal is to break the level up defeat the
+goal is to break the level up defeat the
+opponents take the enemy towers and then
+opponents take the enemy towers and then
+capture the objective in the center and
+capture the objective in the center and
+like all of the different characters
+like all of the different characters
+play differently and they are like
+play differently and they are like
+minion waves that fight each other in
+minion waves that fight each other in
+the center and try to take the towers
+the center and try to take the towers
+for you and then they're neutral enemies
+for you and then they're neutral enemies
+that you have to kill along the way for
+that you have to kill along the way for
+gold lots and lots of stuff very very
+gold lots and lots of stuff very very
+complicated
+game so we have a mini version of
+that we're using it for research
+let's see if this does anything
+die die die die
+die and we use our heal
+die and we use our heal
+buff oh look we actually have an RL
+buff oh look we actually have an RL
+teammate here
+teammate here
+look at
+look at
+that he's going to die because he's not
+that he's going to die because he's not
+very smart but he is we do have an RL
+teammate
+teammate
+okay nothing crashed that
+okay nothing crashed that
+time all the levels did
+reset they're dying instantly but that's
+reset they're dying instantly but that's
+just because I've super like Giga buff
+just because I've super like Giga buff
+the damage we should probably fix some
+the damage we should probably fix some
+of these rendering glitches with like
+of these rendering glitches with like
+the render lines going off
+the render lines going off
+screen I'm mostly trying to find crashes
+screen I'm mostly trying to find crashes
+though I should just put this online and
+though I should just put this online and
+let you all find the crashes for me that
+let you all find the crashes for me that
+would be the uh the smart way of doing
+would be the uh the smart way of doing
+it
+okay there they go there are the RL
+okay there they go there are the RL
+teammates they get stuck on stuff
+teammates they get stuck on stuff
+because they're not very
+because they're not very
+smart but they do
+smart but they do
+work radiant victory
+why did I just get sent back to
+base I thought I fixed
+base I thought I fixed
+that oh something is targeting
+that oh something is targeting
+me something is targeting me there's a
+me something is targeting me there's a
+weird
+weird
+bug what is targeting
+bug what is targeting
+me is it my own
+Tower am I say or is it something
+Tower am I say or is it something
+invisible
+is it my own
+Tower the hell is targeting me is it
+Tower the hell is targeting me is it
+targeting me across the map it has to be
+targeting me across the map it has to be
+right so something is wrong in the
+right so something is wrong in the
+targeting logic something is targeting
+targeting logic something is targeting
+on
+on
+zero yeah that's what's
+happening something's doing 350 damage I
+happening something's doing 350 damage I
+believe yeah
+believe yeah
+350 Towers too op well these are my own
+350 Towers too op well these are my own
+Towers right so something is doing 350
+Towers right so something is doing 350
+damage so I got to figure out what is
+damage so I got to figure out what is
+doing what is capable of doing 350
+doing what is capable of doing 350
+damage in the
+damage in the
+game I don't think any of the towers do
+game I don't think any of the towers do
+350 I think that's like the enemy burst
+350 I think that's like the enemy burst
+or
+whatever I have 350 in here
+whatever I have 350 in here
+anyway oh wait is it my
+support support does negative but this
+support support does negative but this
+should be
+should be
+healing and it's minus player level so
+healing and it's minus player level so
+no this can't be it cuz this would be
+no this can't be it cuz this would be
+400 even if it were a heal I'll test the
+400 even if it were a heal I'll test the
+support just in
+support just in
+case to see if it actually heals
+correctly I think but basically I think
+correctly I think but basically I think
+that there's some targeting bug where
+that there's some targeting bug where
+like something is being able to index
+like something is being able to index
+the wrong target here let me go get
+the wrong target here let me go get
+myself damage
+ah here we
+ah here we
+go engage
+AOE definitely something on the
+AOE definitely something on the
+targeting
+oh I just noticed your tag is C assembly
+oh I just noticed your tag is C assembly
+that's
+fun I'm going to be honest I've been
+fun I'm going to be honest I've been
+writing C for like the past two or three
+writing C for like the past two or three
+weeks before that I I haven't written C
+weeks before that I I haven't written C
+in 10
+in 10
+years but I've been enjoying
+years but I've been enjoying
+it I've been writing python for like
+it I've been writing python for like
+close to 10
+close to 10
+years almost exclusively python as well
+years almost exclusively python as well
+little bit of a little bit of CP in
+little bit of a little bit of CP in
+there for Unity but that's about
+there for Unity but that's about
+it I mean I honestly really enjoy
+it I mean I honestly really enjoy
+it I like the thing is my undergrad
+it I like the thing is my undergrad
+ruined it for me like the Stamford
+ruined it for me like the Stamford
+lectur on it were so bad like
+lectur on it were so bad like
+just not knowing that like Das F like s
+just not knowing that like Das F like s
+address sanitizers exist was just God
+address sanitizers exist was just God
+awful I'm pretty sure just with knowing
+awful I'm pretty sure just with knowing
+that like a dress sanitizers exist like
+that like a dress sanitizers exist like
+it's actually so much so much better
+it's actually so much so much better
+now I think if they just fixed that one
+now I think if they just fixed that one
+thing I would have had a fine time but
+thing I would have had a fine time but
+they literally didn't tell us that those
+they literally didn't tell us that those
+were a
+thing it's absolutely brutal
+I'd rather have an address sanitizer
+I'd rather have an address sanitizer
+than an LSP
+it's quite funny as well because like I
+it's quite funny as well because like I
+get a lot of people like why are you
+get a lot of people like why are you
+writing it in C like why are you making
+writing it in C like why are you making
+this hard on yourself and it's like no
+this hard on yourself and it's like no
+I'm writing it in C to make it easy on
+I'm writing it in C to make it easy on
+myself like what else would I write it
+in
+for e
+I think what this would be caused
+by they got to look at the targeting
+by they got to look at the targeting
+Maybe
+you do scan every
+tick you don't reset scan targets though
+tick you don't reset scan targets though
+do
+you I guess that's probably what we need
+you I guess that's probably what we need
+to do is reset scan targets or something
+this has got to be only on environment
+this has got to be only on environment
+reset though
+right
+reset
+reset
+okay why is it set to 121
+plus let's see this see if this does
+it I mean I think technically you need
+it I mean I think technically you need
+to reset on death as
+to reset on death as
+well I forget will it break in a place
+well I forget will it break in a place
+yeah you totally can do
+yeah you totally can do
+that I there might be I don't know if
+that I there might be I don't know if
+you can break on Segal I think Segal is
+you can break on Segal I think Segal is
+just dead welcome as well
+just dead welcome as well
+we got it working these networks are not
+we got it working these networks are not
+great because uh I haven't trained great
+great because uh I haven't trained great
+networks yet but like this is these guys
+networks yet but like this is these guys
+are technically lstm CNN MLP
+agents it should break on the seg
+agents it should break on the seg
+fult oh I don't
+fult oh I don't
+know we're in pure Sealand now
+so okay look did you see that it's
+so okay look did you see that it's
+zapping across the freaking map that's
+bad why was it zapping across the
+bad why was it zapping across the
+map there's some screwy stuff going
+map there's some screwy stuff going
+on oh and there's definitely
+on oh and there's definitely
+like yeah it's zapping across the map
+like yeah it's zapping across the map
+there's definitely something screwy
+there's definitely something screwy
+going on
+going on
+here feature not a
+bug ah you see right there something
+bug ah you see right there something
+just hit me
+let's see if it does it again I think
+let's see if it does it again I think
+it's going to do 350 damage no something
+it's going to do 350 damage no something
+is doing like small damage to
+me I think it only happens yeah there it
+me I think it only happens yeah there it
+goes through
+350 it's very weird
+do we think that's a tower what could
+do we think that's a tower what could
+that
+that
+be what does 350
+damage Tower damage no the towers only
+damage Tower damage no the towers only
+do 175
+do 175
+Max 175 * 2 is 350 if I'm getting hit by
+Max 175 * 2 is 350 if I'm getting hit by
+both of them somehow
+right what do we think I'm getting
+right what do we think I'm getting
+consistently hit for
+350 I should just log attack that take
+350 I should just log attack that take
+place above a certain distance
+place above a certain distance
+right let's just log attacks that take
+right let's just log attacks that take
+place above
+place above
+uh a certain distance that would be the
+uh a certain distance that would be the
+smarter
+thing where is this
+float disc to
+float disc to
+Target there we
+Target there we
+go
+go
+10 print
+10 print
+F CER
+F CER
+per
+distance yeah let's try
+this so now we should get some useful
+prints
+prints
+yeah go get some
+levels what's up
+levels what's up
+Tower nothing has attacked over 10
+Tower nothing has attacked over 10
+distance yet
+I got to
+I got to
+heal attacker 199 that's
+heal attacker 199 that's
+interesting oh I'm pressing the wrong
+interesting oh I'm pressing the wrong
+button the UI is not unresponsive I was
+button the UI is not unresponsive I was
+just pressing the wrong
+button
+button
+okay attacker five
+that's interesting
+that's interesting
+right attacker five is the
+right attacker five is the
+enemy wait what attacker five should be
+enemy wait what attacker five should be
+0 one
+0 one
+two the enemy
+support Target three is 0 one two three
+support Target three is 0 one two three
+yep the tank
+yep the tank
+and they're cross mapping
+and they're cross mapping
+me 189 and then attacker 199
+me 189 and then attacker 199
+is the heck is attacker 100 I didn't
+is the heck is attacker 100 I didn't
+think there were
+199 that goes back
+199 that goes back
+on yeah there's
+202 okay this is enough logs
+182 okay so the 200s are Towers I guess
+182 okay so the 200s are Towers I guess
+right wait
+right wait
+182 yeah 206 should be the
+182 yeah 206 should be the
+highest so these are enemy
+highest so these are enemy
+towers and then somehow also the enemy
+towers and then somehow also the enemy
+support is targeting
+me across the map
+where's South as
+where's South as
+well I want to show them the uh the cool
+well I want to show them the uh the cool
+demos
+I got to do the animation set for the uh
+I got to do the animation set for the uh
+for the animation
+for the animation
+logic at some point soon
+scams in
+AOE tower Tower
+Vision nearest scan
+Vision nearest scan
+Target I don't understand how
+Target I don't understand how
+it keeps
+it keeps
+scanning and it's still hitting
+me
+right like this should be going continue
+right like this should be going continue
+continue continue continue right not
+continue continue continue right not
+scanning anything
+and then it should be nulling the
+target so the fact that that's not just
+target so the fact that that's not just
+it's not just like it's hitting me on
+it's not just like it's hitting me on
+reset have to sleep I've done sleep
+reset have to sleep I've done sleep
+throughout the night and you're still
+throughout the night and you're still
+alive yeah man you're not getting enough
+alive yeah man you're not getting enough
+sleep
+sleep
+then I work but I get lots of sleep
+sleep's important
+hours not
+hours not
+enough I get eight or
+nine mind you I've had periods of
+nine mind you I've had periods of
+several years in my life where I've
+several years in my life where I've
+gotten like four consistently but not
+gotten like four consistently but not
+doing that [ __ ] again
+doing that [ __ ] again
+there's literally no point like I can't
+there's literally no point like I can't
+function on that at like any amount of
+function on that at like any amount of
+capacity so unless I'm doing really
+capacity so unless I'm doing really
+stupid work right
+but yeah when I was younger I did not
+but yeah when I was younger I did not
+sleep at
+all and
+all and
+targets I still don't know what's wrong
+targets I still don't know what's wrong
+with this Towers
+logic like
+this looks
+this looks
+fine there the cool
+fine there the cool
+Downs it has to freaking scam
+right yeah we step every tick
+no this is
+we yeah the ticks are
+correct and then we
+scan like am I missing something here
+I mean I can try this just to
+see like I could be Computing PID wrong
+see like I could be Computing PID wrong
+or something ridiculous but let's see if
+or something ridiculous but let's see if
+this does
+it right we're taking over the
+it right we're taking over the
+tank I want the op character
+what the heck did that much damage to
+me
+me
+jeez okay the tanks can uh the minions
+jeez okay the tanks can uh the minions
+can
+can
+tank what in the
+tank what in the
+heck got to do
+heck got to do
+this oh yeah there we go we're getting
+this oh yeah there we go we're getting
+hit on by
+hit on by
+a crazy thing so before even
+a crazy thing so before even
+reset we've got
+reset we've got
+distances well those ones might be okay
+distances well those ones might be okay
+because they're only like 10
+distance let's see if the bug is
+distance let's see if the bug is
+fixed I think all we have to do is like
+fixed I think all we have to do is like
+wait
+right distance 11
+I
+I
+[Music]
+man yeah that's
+feasible I think that's technically
+feasible not getting
+feasible not getting
+hit so am I just misunderstanding how
+hit so am I just misunderstanding how
+this thing works here
+oh no there it
+is okay
+so two different
+so two different
+Towers Target
+50 you know the weird thing about this
+50 you know the weird thing about this
+is I've have this null I
+is I've have this null I
+rebuild yeah I rebuilt right
+here okay so this is not
+working
+YX hold on
+let me just check one thing and I'll
+let me just check one thing and I'll
+look at
+that huh remember the question I asked
+that huh remember the question I asked
+about training on lots of
+about training on lots of
+simulations I had an idea that we can
+simulations I had an idea that we can
+somehow merge the weights of two
+somehow merge the weights of two
+different
+different
+networks
+networks
+uh I don't think you're looking at
+uh I don't think you're looking at
+Ensemble learning I think you're looking
+Ensemble learning I think you're looking
+at distill
+at distill
+is player in N entities
+is player in N entities
+yes I look up I would suggest that you
+yes I look up I would suggest that you
+look up um like policy
+look up um like policy
+distillation or something like that is
+distillation or something like that is
+player and yeah so all of the different
+player and yeah so all of the different
+the uh players creeps neutrals Towers
+the uh players creeps neutrals Towers
+everything is inside of entities and
+everything is inside of entities and
+then there's the get entity function
+then there's the get entity function
+that will it essentially just is a
+that will it essentially just is a
+conditional it'll just match your index
+conditional it'll just match your index
+to whatever like to whatever your type
+to whatever like to whatever your type
+is uh there's only one struct type in
+is uh there's only one struct type in
+order to make everything very easy like
+order to make everything very easy like
+everything is just an entity and then
+everything is just an entity and then
+like the entity struct just has all the
+like the entity struct just has all the
+different
+properties it makes things very
+easy it skips the player when
+easy it skips the player when
+scanning let me see
+[Music]
+[Music]
+so if the targets is invalid it skips
+so if the targets is invalid it skips
+it uh if the target is on the same team
+it uh if the target is on the same team
+it skips it so you're on your same
+it skips it so you're on your same
+team uh if the target
+team uh if the target
+is yeah there's they're Flags basically
+is yeah there's they're Flags basically
+to control what to
+to control what to
+skip Target equal so it should be on
+skip Target equal so it should be on
+team so not just yourself but anything
+team so not just yourself but anything
+on your same
+on your same
+team and the reason it's coded that way
+team and the reason it's coded that way
+is for like for healing effects for
+is for like for healing effects for
+instance there's like a self heal and
+instance there's like a self heal and
+there's an AOE
+there's an AOE
+heal so like you can scan for like
+heal so like you can scan for like
+nearby
+nearby
+allies I guess technically that one
+allies I guess technically that one
+should just always go through because uh
+should just always go through because uh
+you're always with an AOE so you should
+you're always with an AOE so you should
+always be able to heal yourself
+but it can't
+but it can't
+be it shouldn't be able to be just
+be it shouldn't be able to be just
+hitting
+hitting
+itself cuz the Knight
+itself cuz the Knight
+is yeah the puffer Knight is level one
+is yeah the puffer Knight is level one
+and I said it's damage to
+and I said it's damage to
+250 and it was taking
+350 yeah so it would take 300 not 350 at
+350 yeah so it would take 300 not 350 at
+level
+level
+one something and like you can also see
+one something and like you can also see
+right these attackers these high indices
+right these attackers these high indices
+here correspond to Towers so like
+here correspond to Towers so like
+occasionally like I'll see like
+occasionally like I'll see like
+something hitting I'll see something
+something hitting I'll see something
+else but mostly it looks like
+else but mostly it looks like
+Towers towers are somehow like hitting
+Towers towers are somehow like hitting
+outside of their range and I I don't
+outside of their range and I I don't
+know if it's they're just randomly
+know if it's they're just randomly
+hitting outside of their range or like
+hitting outside of their range or like
+it's if they've seen you they're getting
+it's if they've seen you they're getting
+stuck on you or something
+and mobile
+and mobile
+player Tower and then it's Tower
+vision is five which is fine
+player y minus
+player y minus
+radius xus
+radius let's just make sure then let's
+radius let's just make sure then let's
+let's not be useless
+let's not be useless
+here so like
+see if this does
+it uh could also
+it uh could also
+be it could be something to do with
+be it could be something to do with
+like
+like
+whoops what happened
+here yeah
+it could be like not the first scan
+it could be like not the first scan
+Target it could be like overflowing its
+Target it could be like overflowing its
+Target buff or some weird
+Target buff or some weird
+[ __ ]
+[ __ ]
+here let's go see
+again as soon as I get this into like a
+again as soon as I get this into like a
+pretty much playable State though even
+pretty much playable State though even
+if there are like a few bugs left as
+if there are like a few bugs left as
+long as I don't see like crazy bugs I'm
+long as I don't see like crazy bugs I'm
+just going to put this online and let
+just going to put this online and let
+you guys like play it and then I'll find
+you guys like play it and then I'll find
+out the bugs that way it's like
+out the bugs that way it's like
+literally just play
+testing jeez you guys do a lot of D what
+testing jeez you guys do a lot of D what
+how are you hitting me
+how are you hitting me
+there how are you hitting me there
+okay Target minus one
+well that doesn't make any sense
+well that doesn't make any sense
+negative one should be
+negative one should be
+a
+sentinol I literally have
+could this be grid
+desync this could be grid desync right
+let's let's try grid
+desync that's a valid thing we're going
+desync that's a valid thing we're going
+to have to edit the renderer for
+this where is it targeting overlays
+wait what hold on
+all
+rectangle how did I have moves
+implemented okay I don't have actually
+understand should be not equal to zero
+understand should be not equal to zero
+right basically what I want to do is I
+right basically what I want to do is I
+want to like overlay to see if I'm
+want to like overlay to see if I'm
+leaving ghost on the map
+I think it's possible that we're leaving
+I think it's possible that we're leaving
+ghosts by ghosts I mean like we're not
+ghosts by ghosts I mean like we're not
+clearing from the map
+correctly I don't know how that would do
+correctly I don't know how that would do
+anything
+but okay so right here
+I already draw the terrain
+I already draw the terrain
+somewhere oh yeah I drew it in the
+Shader let's try this
+okay so now we can see on these debug
+okay so now we can see on these debug
+cells right we can see actually where
+cells right we can see actually where
+everything is on the grid
+so like we'd be able to see for instance
+so like we'd be able to see for instance
+if uh I killed stuff but then it left
+if uh I killed stuff but then it left
+like ghosts around oh thank you for the
+like ghosts around oh thank you for the
+heal
+heal
+support look at that my Allied neural
+support look at that my Allied neural
+network did uh did something nice for
+me it's okay I will avenge you
+okay oh look at that you see that
+ghosts look see this guy he just
+ghosts look see this guy he just
+freaking teleported to
+freaking teleported to
+me this guy just tpd to me you see the
+me this guy just tpd to me you see the
+ghost there
+I got to get past these guys so I can
+I got to get past these guys so I can
+actually go see
+actually go see
+it on let me see how I can Juke
+it on let me see how I can Juke
+by ah look ghost right
+there H ghosts yeah I saw the ghosts
+okay e
+oh okay
+so
+so
+nmobile well we see that we have
+nmobile well we see that we have
+ghosts initialized players
+ghosts initialized players
+they get their spawn positions
+I'm guessing it's this thing right
+here if I just do this does this do it
+wait how do despawning the creeps
+work oh it's because I was zeroing the
+work oh it's because I was zeroing the
+PID map before isn't
+PID map before isn't
+it
+it
+okay yeah I see
+okay yeah I see
+yeah that's going to get totally messed
+yeah that's going to get totally messed
+up isn't
+it so the issue is that I was
+it so the issue is that I was
+um before this I was zeroing out or I
+um before this I was zeroing out or I
+was like resetting um the whole map when
+was like resetting um the whole map when
+the game finished and I'm not doing not
+the game finished and I'm not doing not
+doing that
+doing that
+anymore so it leaves
+anymore so it leaves
+ghosts so I just need to go through all
+ghosts so I just need to go through all
+the entities and reset them let me uh
+the entities and reset them let me uh
+here's what I'm going to do I'm going to
+here's what I'm going to do I'm going to
+order dinner on the side here and then
+order dinner on the side here and then
+uh I'm going to continue working on this
+uh I'm going to continue working on this
+until it gets
+here D I really appreciate the support
+here D I really appreciate the support
+on this just like on like a little post
+on this just like on like a little post
+like this it's nice to
+see what I order for dinner
+some eggs corn beef
+[Music]
+let's keep working on this for the next
+let's keep working on this for the next
+however long it takes to get
+however long it takes to get
+here so
+let's be smart about
+this when you initialize
+I just have to be a little disciplined
+I just have to be a little disciplined
+here player
+here player
+PID and a
+PID and a
+one
+okay what else
+need to be negative 1
+hold
+hold
+on no I'm I'm
+on no I'm I'm
+uh it's so weird because
+like would an ensemble of policies be
+like would an ensemble of policies be
+more effective than using a single
+more effective than using a single
+policy emble of polic policies policy
+policy emble of polic policies policy
+reform the general rule for naive
+reform the general rule for naive
+ensembling from like classic vision and
+ensembling from like classic vision and
+NLP from back in the day was you get 2%
+NLP from back in the day was you get 2%
+so you Ensemble eight models you get 2%
+better you can be smarter about it and
+better you can be smarter about it and
+then you end up with things that are
+then you end up with things that are
+like kind of ensembles but not really
+like kind of ensembles but not really
+you can look at mixture of experts for
+you can look at mixture of experts for
+that um you can also just make the
+that um you can also just make the
+policy bigger
+okay so basically what I have to figure
+okay so basically what I have to figure
+out
+here is if I'm going to have to
+here is if I'm going to have to
+kill the entities or
+not e
+I don't think this is the function that
+I don't think this is the function that
+matters it's the move to function that
+matters it's the move to function that
+matters
+right because the way I do it
+is I clear
+The
+Source I should be able to fix this this
+Source I should be able to fix this this
+is not that hard I'm just like end of a
+is not that hard I'm just like end of a
+long day here and it is kind of
+long day here and it is kind of
+important to do this right so
+important to do this right so
+essentially the issue is uh the way in
+essentially the issue is uh the way in
+which I move around players and the way
+which I move around players and the way
+in which I handle like killing and
+in which I handle like killing and
+respawning entities in the game
+I should probably just separate this
+out just to like
+delete like delete at
+delete like delete at
+and um Place add or
+whatever
+whatever
+yeah I'm trying to think how hard that
+yeah I'm trying to think how hard that
+will be to do correctly right
+will be to do correctly right
+now e
+that doesn't actually help me though
+that doesn't actually help me though
+does
+it I think the quickest fix for
+it I think the quickest fix for
+now the quickest fix
+yeah if I just set the initial X and Y
+yeah if I just set the initial X and Y
+to
+zero
+right then I don't have to set it there
+you can do kill entity
+then Tower respawn should be
+fine for
+40s I should set the initial X and y's
+otherwise I'm going to have a problem
+right where the hell are the
+right where the hell are the
+creeps do I not set them
+yeah I don't even check them at
+all
+for e
+Rex
+offset of
+offset of
+n
+n
+i that's
+good e
+let's see what this
+does 15
+where did my chat
+where did my chat
+go oh I
+go oh I
+Disappeared whoops wrong
+hotkey so what do we think do we think
+hotkey so what do we think do we think
+that this uh does anything
+let's go
+support engage support
+oh I
+died why do I only have 700
+died why do I only have 700
+health I'm level
+health I'm level
+13 I should have more Health than
+13 I should have more Health than
+this I guess leveling health is not
+working I was wondering why it was so
+working I was wondering why it was so
+hard yeah I just got merked by
+hard yeah I just got merked by
+something oh oh those towers are hitting
+something oh oh those towers are hitting
+me
+me
+still okay well you can see that the
+still okay well you can see that the
+corpses are
+corpses are
+gone so that's one thing that was fixed
+gone so that's one thing that was fixed
+it looks like there's still
+bugs they appear rarer
+oh now I have 1600 Health but there's
+oh now I have 1600 Health but there's
+definitely something screw with the
+leveling yeah so something just hit
+leveling yeah so something just hit
+me from far
+me from far
+off oh but it just
+okay interesting
+see
+definitely Max Health bugs where's my
+food uh not here
+yet maybe we fix this bug
+definitely some stuff that needs to just
+definitely some stuff that needs to just
+be tracked a little bit better
+not going to lie I'm kind of too fried
+not going to lie I'm kind of too fried
+to get anywhere else on this today so
+to get anywhere else on this today so
+I'm going to push this for
+now you guys can play with it if you
+now you guys can play with it if you
+want
+thanks that's
+well that's
+fun
+comments thank
+you for
+hey you know uh I don't know if you're
+hey you know uh I don't know if you're
+still around here but this is available
+still around here but this is available
+a standalone on the GitHub
+and as of today we've confirmed it's
+and as of today we've confirmed it's
+correct I'm going to I'll put out a post
+correct I'm going to I'll put out a post
+on this tomorrow I'll be sure to tag the
+on this tomorrow I'll be sure to tag the
+C assembly folks but
+C assembly folks but
+um yeah maybe you guys will want to
+um yeah maybe you guys will want to
+optimize it
+actually I got to move it into like a
+actually I got to move it into like a
+stand a self-contained thing but
+stand a self-contained thing but
+um I don't think that this code is
+um I don't think that this code is
+amazing to be honest like I like
+amazing to be honest like I like
+the I like the actual implementations of
+the I like the actual implementations of
+the Nets I I don't know if I like the
+the Nets I I don't know if I like the
+way that I've done the
+way that I've done the
+rappers I don't know if I like the way
+rappers I don't know if I like the way
+that I've done the allocations on the
+that I've done the allocations on the
+rappers and
+rappers and
+stuff maybe you guys will have some
+stuff maybe you guys will have some
+ideas on that
+though the other thing I just I can't
+though the other thing I just I can't
+figure out how I I want to do and see is
+figure out how I I want to do and see is
+um multi-dimensional
+um multi-dimensional
+arrays like always having to do flat
+arrays like always having to do flat
+indexing is really really
+indexing is really really
+rough I figured out you can cast to a
+rough I figured out you can cast to a
+multi-dimension array I don't know if
+multi-dimension array I don't know if
+that's a good idea or not I do that in a
+that's a good idea or not I do that in a
+couple
+couple
+places but yeah 444 lines for all
+this so that's
+this so that's
+fun and yeah puffer AI is the Business
+fun and yeah puffer AI is the Business
+site but uh you know we have docks as
+site but uh you know we have docks as
+well we got puff I get habio for docs
+well we got puff I get habio for docs
+all open
+source and this was a pretty cool
+source and this was a pretty cool
+Community
+Community
+thing the the one thing I can't figure
+thing the the one thing I can't figure
+out with the c assembly folks is
+out with the c assembly folks is
+like I'll see people trying to like
+like I'll see people trying to like
+Implement all sorts of fancy
+Implement all sorts of fancy
+abstractions in C and I wonder like you
+abstractions in C and I wonder like you
+know why if why are you coding stuff and
+know why if why are you coding stuff and
+see if you want the fancy abstractions I
+see if you want the fancy abstractions I
+thought the point was to not do any of
+that so yeah this like this type of
+that so yeah this like this type of
+stuff confuses me like why do you want
+stuff confuses me like why do you want
+this
+this
+right it's cool that you can do
+it it's definitely cool that you can do
+it but do you really want it right like
+it but do you really want it right like
+my favorite thing about C is just being
+my favorite thing about C is just being
+I like writing things in the stupid EST
+I like writing things in the stupid EST
+way possible and just like having it be
+way possible and just like having it be
+fast and super maintainable cuz like
+fast and super maintainable cuz like
+there's nothing confusing ever right
+there's nothing confusing ever right
+like honestly I think some of these this
+like honestly I think some of these this
+environment code it's some of the most
+environment code it's some of the most
+maintainable code I've written just
+maintainable code I've written just
+because it's actually brain dead right
+because it's actually brain dead right
+like I just get to be completely brain
+like I just get to be completely brain
+dead and see and it's it's great I love
+it like I haven't even needed to have a
+it like I haven't even needed to have a
+dictionary yet like I haven't even
+dictionary yet like I haven't even
+needed a map yet it's just use arrays
+needed a map yet it's just use arrays
+for everything
+for everything
+but yeah I will uh I'll post about the
+but yeah I will uh I'll post about the
+actual puffer net. C tomorrow I think
+actual puffer net. C tomorrow I think
+it's quite nice like what it
+it's quite nice like what it
+provides because you get um there's some
+provides because you get um there's some
+utility things but you get I mean really
+utility things but you get I mean really
+most of it is wrappers for like just the
+most of it is wrappers for like just the
+allocations and like storing all these
+allocations and like storing all these
+annoying variables but if you just look
+annoying variables but if you just look
+at like the procedural
+at like the procedural
+API right like the pure procedural stuff
+API right like the pure procedural stuff
+here is so there's this load file stuff
+here is so there's this load file stuff
+which you can ignore uh so now from line
+which you can ignore uh so now from line
+50 to
+50 to
+[Music]
+[Music]
+line 160 so you ignore all the brackets
+line 160 so you ignore all the brackets
+it's literally less than 100 lines for
+it's literally less than 100 lines for
+lstm convolution layers and a couple
+lstm convolution layers and a couple
+different types of linear layers and
+activations doesn't take much
+activations doesn't take much
+code the indexing on this was a pain
+code the indexing on this was a pain
+the con was
+the con was
+painful but
+painful but
+yeah and I'm sure it's not fast but it's
+yeah and I'm sure it's not fast but it's
+fast enough like we can tile the map
+fast enough like we can tile the map
+moles or
+moles or
+stuff um in the future we could try
+simd couple other utils ARG Max for
+simd couple other utils ARG Max for
+multi
+multi
+discreet I am curious what the um C
+discreet I am curious what the um C
+assembly folks will think about the way
+assembly folks will think about the way
+that I'm doing this type of stuff I
+that I'm doing this type of stuff I
+don't know if I like
+don't know if I like
+it I have strs to store like the layers
+it I have strs to store like the layers
+here I didn't make a tensor struct I
+here I didn't make a tensor struct I
+thought that would be too much uh I did
+thought that would be too much uh I did
+put a batch size so I have to you have
+put a batch size so I have to you have
+to have a fixed batch size just because
+to have a fixed batch size just because
+I didn't want to have to pass this as a
+I didn't want to have to pass this as a
+parameter otherwise you have to pass it
+parameter otherwise you have to pass it
+every time you call forward because
+every time you call forward because
+there's no tensor
+there's no tensor
+struck
+struck
+um I have weights here so you make it
+um I have weights here so you make it
+with weights and then this thing just
+with weights and then this thing just
+like gets the block of memory from the
+like gets the block of memory from the
+file so your weights are in contiguous
+file so your weights are in contiguous
+memory which is kind of cool the weights
+memory which is kind of cool the weights
+for the entire network are in contiguous
+for the entire network are in contiguous
+memory loaded from the
+memory loaded from the
+file
+file
+um you store some of these pams and then
+um you store some of these pams and then
+the actual like wrapped API is you just
+the actual like wrapped API is you just
+call I mean you can see here like you
+call I mean you can see here like you
+just call linear with the layer and then
+just call linear with the layer and then
+the input and then you get the weights
+the input and then you get the weights
+from the layer the bias from the layer
+from the layer the bias from the layer
+and it just puts it inside of
+and it just puts it inside of
+output so it's not maling anything there
+output so it's not maling anything there
+are no dynamic memory allocations right
+are no dynamic memory allocations right
+it just stores it in an output
+buffer
+buffer
+yeah I don't know design wise with this
+yeah I don't know design wise with this
+type of stuff I haven't been like I
+type of stuff I haven't been like I
+haven't been doing stuff this way to
+haven't been doing stuff this way to
+know whether this is a good
+know whether this is a good
+idea right like technically I could
+idea right like technically I could
+still have this struct but then instead
+still have this struct but then instead
+of having it be a make like this I could
+of having it be a make like this I could
+have an init so you like declare the
+have an init so you like declare the
+struct and then you init it with weights
+struct and then you init it with weights
+or
+or
+whatever I don't know if like having
+whatever I don't know if like having
+like this make function with like a
+like this make function with like a
+batch input output is kind of weird
+batch input output is kind of weird
+because I can just do like know struck.
+because I can just do like know struck.
+batch size. input.
+batch size. input.
+output but then I do want to have these
+output but then I do want to have these
+for the init I want to have like this
+for the init I want to have like this
+init stuff do get weights for
+you because it has to do like Dimension
+you because it has to do like Dimension
+math and
+math and
+stuff so I'm not entirely sure on this
+stuff so I'm not entirely sure on this
+side but I figure that this will be like
+side but I figure that this will be like
+a nice little
+a nice little
+Standalone um like that people will be
+Standalone um like that people will be
+able to play with and I'll just like
+able to play with and I'll just like
+improve over time this is not the main
+improve over time this is not the main
+focus right I'm not trying to make a new
+focus right I'm not trying to make a new
+tiny grad or you know a new pie torch or
+tiny grad or you know a new pie torch or
+anything the main point of this is to
+anything the main point of this is to
+just like have something that's know
+just like have something that's know
+nice and simple to use so we can do cool
+nice and simple to use so we can do cool
+stuff on
+web and like the goal is not to have
+web and like the goal is not to have
+this game be super fun or anything I
+this game be super fun or anything I
+just want this to be like you know
+just want this to be like you know
+mildly entertaining and like
+mildly entertaining and like
+recognizably looks like League or do or
+recognizably looks like League or do or
+um DOTA right looks like recognizably
+um DOTA right looks like recognizably
+like a game and has some complexity to
+like a game and has some complexity to
+it right and then have like a bunch of
+it right and then have like a bunch of
+these types of Sims so that we can use
+these types of Sims so that we can use
+them for RL I mean this thing will run
+them for RL I mean this thing will run
+at over a million steps per second per
+at over a million steps per second per
+core without rendering so I mean we can
+core without rendering so I mean we can
+literally get like centuries worth of
+literally get like centuries worth of
+training data per day per GPU with
+training data per day per GPU with
+this like the training runs that I do on
+this like the training runs that I do on
+this like we'll do like 20 billion step
+this like we'll do like 20 billion step
+training runs uh on one GPU and I think
+training runs uh on one GPU and I think
+I can make it even faster than that
+this is
+funny this is kind of unironically a
+funny this is kind of unironically a
+decent way to do um like lowii rendering
+decent way to do um like lowii rendering
+is super important for
+is super important for
+RL like we really need better ways of
+RL like we really need better ways of
+getting simulation State fast fast fast
+getting simulation State fast fast fast
+I have uh I have bindings for Doom as
+I have uh I have bindings for Doom as
+well for puffer lib I can get it up to
+well for puffer lib I can get it up to
+100,000 uh frames per second on a good
+100,000 uh frames per second on a good
+I9 with like 24
+cores but it's hard to get it way
+faster I really like
+faster I really like
+RB yeah I really really like RB
+hey if I wanted a borrow Checker i' take
+hey if I wanted a borrow Checker i' take
+out a
+loan
+funny all right food's here in a minute
+funny all right food's here in a minute
+so uh I'm going to going to be back
+so uh I'm going to going to be back
+doing this stuff tomorrow when my brain
+doing this stuff tomorrow when my brain
+is fresh
+is fresh
+um yeah I'm going to be back doing this
+um yeah I'm going to be back doing this
+when my brain is
+when my brain is
+fresh I'm going to so tomorrow the goal
+fresh I'm going to so tomorrow the goal
+is going to be to clean up the
+is going to be to clean up the
+environment hopefully we can get it
+environment hopefully we can get it
+stable enough that I will be able to do
+stable enough that I will be able to do
+training on the pure sea environment
+training on the pure sea environment
+instead of the scyon version um we'll
+instead of the scyon version um we'll
+see if I can get all that done and if I
+see if I can get all that done and if I
+can manage to do that then oh [ __ ] my
+can manage to do that then oh [ __ ] my
+boxes are down actually I don't know if
+boxes are down actually I don't know if
+you've seen the puffer cluster we're
+you've seen the puffer cluster we're
+currently having some maintenance issues
+currently having some maintenance issues
+uh but this is normally where we do all
+uh but this is normally where we do all
+of the training
+of the training
+runs uh so if I can get these boxes to
+runs uh so if I can get these boxes to
+be back up tomorrow then hopefully we
+be back up tomorrow then hopefully we
+can actually do some training runs on
+can actually do some training runs on
+them uh we have like awesome hyper Prem
+them uh we have like awesome hyper Prem
+sweeps to do and we can get some
+sweeps to do and we can get some
+policies that would be good if not I'll
+policies that would be good if not I'll
+just use the current one I have which
+just use the current one I have which
+isn't amazing um but we can do that and
+isn't amazing um but we can do that and
+then people will be able to start
+then people will be able to start
+helping debug online and then over the
+helping debug online and then over the
+next few days we'll keep polishing this
+next few days we'll keep polishing this
+stuff I'm sure there'll be some things
+stuff I'm sure there'll be some things
+to fix uh I probably have to do some
+to fix uh I probably have to do some
+sort of an animation system depending uh
+sort of an animation system depending uh
+we have an artist who has been
+we have an artist who has been
+contributing awesome stuff so all like
+contributing awesome stuff so all like
+the Assets in it right now but yeah
+the Assets in it right now but yeah
+we'll see after that uh I also have the
+we'll see after that uh I also have the
+other a few other environments to code
+other a few other environments to code
+on but I'm liking the direction that
+on but I'm liking the direction that
+this is all taking and we'll have to see
+this is all taking and we'll have to see
+when I cut a release I think it's going
+when I cut a release I think it's going
+to be the Moa the other environment
+to be the Moa the other environment
+that's not announced and like maybe a
+that's not announced and like maybe a
+few small other environment ports and
+few small other environment ports and
+then we'll release that as like the big
+then we'll release that as like the big
+environment update for
+environment update for
+puffer I really like I want when I
+puffer I really like I want when I
+release that update I want it to be like
+release that update I want it to be like
+hey we have the simulation data that we
+hey we have the simulation data that we
+need to push RL forward for the next
+need to push RL forward for the next
+however
+long anyways thank you folks and uh I
+long anyways thank you folks and uh I
+will be back tomorrow bye

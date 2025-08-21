@@ -1,0 +1,5099 @@
+Kind: captions
+Language: en
+Okay,
+Okay,
+we live.
+we live.
+Hi.
+I've got some guys here doing uh work on
+I've got some guys here doing uh work on
+the AC,
+the AC,
+but I figured I would at least try to uh
+but I figured I would at least try to uh
+get a little bit of a stream in today.
+get a little bit of a stream in today.
+I've also just been doing the
+I've also just been doing the
+presentation for RLC. I had to make that
+presentation for RLC. I had to make that
+this morning.
+this morning.
+pretty well done. Okay, so let me show
+pretty well done. Okay, so let me show
+you what I want to do now because
+you what I want to do now because
+doing a million things lately and there
+doing a million things lately and there
+it's occurred to me that there's one
+it's occurred to me that there's one
+like
+like
+relatively at least not horribly
+relatively at least not horribly
+mindbending thing that I can do that's
+mindbending thing that I can do that's
+kind of important to have done for
+kind of important to have done for
+Puffer, which is uh just the the build
+Puffer, which is uh just the the build
+system, right?
+apparently. Well, we'll see whether this
+apparently. Well, we'll see whether this
+is just hallucinated garbage, but there
+is just hallucinated garbage, but there
+should be a better way.
+No build isolation package. This looks
+No build isolation package. This looks
+good.
+But is this actually in UV
+But is this actually in UV
+or is this hallucinated garbage?
+Ah, this is actually a thing. So,
+Ah, this is actually a thing. So,
+disable
+isolation when building source
+isolation when building source
+distributions for a specific package.
+distributions for a specific package.
+No build isolation package equals.
+So then I guess
+So then I guess
+the question here is there's a high
+the question here is there's a high
+product toml and a UV toml.
+What is the difference between these
+What is the difference between these
+two?
+If a pi project tol is found uv will
+If a pi project tol is found uv will
+reuv
+okay
+takes present
+can't do this with
+can't do this with
+can't do this with C extensions and CUDA
+can't do this with C extensions and CUDA
+can you say hey something
+let me see to what extent this is
+the most important thing I think at the
+the most important thing I think at the
+moment with puffer is we need the C
+moment with puffer is we need the C
+extensions and we need the CUDA
+extensions and we need the CUDA
+extensions Right.
+We do see extensions with with
+We do see extensions with with
+UV.
+Somebody's gotten this.
+Okay. So, this actually
+generated.
+Um,
+okay.
+This is kind of part of it.
+This is kind of part of it.
+I don't think that this works perfectly,
+I don't think that this works perfectly,
+right?
+Yeah. So, you still end up with setup
+Yeah. So, you still end up with setup
+tools even with UV and setup tools
+tools even with UV and setup tools
+sucks, but like these other things don't
+sucks, but like these other things don't
+freaking work,
+right?
+right?
+Welcome YouTube folks. I should say what
+Welcome YouTube folks. I should say what
+we're trying to do today to give folks a
+we're trying to do today to give folks a
+little bit of context. So, uh, I kind of
+little bit of context. So, uh, I kind of
+pride myself on having Puffer be just
+pride myself on having Puffer be just
+the easiest to use, like most
+the easiest to use, like most
+userfriendly, best supported RL project.
+userfriendly, best supported RL project.
+And it drives me batshit insane that
+And it drives me batshit insane that
+like we have so many people with setup
+like we have so many people with setup
+issues.
+issues.
+And like I've put a lot of time into it
+And like I've put a lot of time into it
+already, but like this is just so
+already, but like this is just so
+important that it's worth actually
+important that it's worth actually
+getting this right. And there kind of a
+getting this right. And there kind of a
+few different reasons that this stuff is
+few different reasons that this stuff is
+hard. So let me So first of all, if
+hard. So let me So first of all, if
+you're doing a pure a pure Python
+you're doing a pure a pure Python
+package with no extensions, no CUDA or
+package with no extensions, no CUDA or
+nothing, and you don't you're not doing
+nothing, and you don't you're not doing
+anything crazy, Python packaging is not
+anything crazy, Python packaging is not
+that hard. It's kind of insane that they
+that hard. It's kind of insane that they
+keep adding breaking changes to the
+keep adding breaking changes to the
+build system itself every other version,
+build system itself every other version,
+but it's not that bad. Now, as soon as
+but it's not that bad. Now, as soon as
+you start doing like C extensions
+you start doing like C extensions
+and CUDA extensions, uh, Python build
+and CUDA extensions, uh, Python build
+system just sucks.
+system just sucks.
+So, pretty much what I'm trying to
+So, pretty much what I'm trying to
+figure out how to do is how to wrangle
+figure out how to do is how to wrangle
+this in a way that users are going to
+this in a way that users are going to
+end up with fewer bugs.
+I took your advice on how to learn ML
+I took your advice on how to learn ML
+and it's going good so far. Very good.
+and it's going good so far. Very good.
+Welcome, Spirit.
+Welcome, Spirit.
+It does take some time. Honestly though,
+It does take some time. Honestly though,
+getting good at programming and ML
+getting good at programming and ML
+fundamentals is the hardest part.
+Like you can do a lot once you have
+Like you can do a lot once you have
+those fundamentals.
+XT modules.
+XT modules.
+This is kind of sucky because there's no
+This is kind of sucky because there's no
+way to do this automatically, right?
+set up. I'm trying, man. It's hard.
+set up. I'm trying, man. It's hard.
+That's why I figured we'd stream today,
+That's why I figured we'd stream today,
+right? We'll stream a little bit of it.
+I saw couple of the extra commands in
+I saw couple of the extra commands in
+your blog. Pretty easy.
+surface some of the help thread
+surface some of the help thread
+happy to go through. I mean ideally like
+happy to go through. I mean ideally like
+okay the best case scenario is that we
+okay the best case scenario is that we
+just work around this so that people
+just work around this so that people
+don't hit these bugs. The second best
+don't hit these bugs. The second best
+just thing is that we like minimize and
+just thing is that we like minimize and
+document, right? But I don't think I've
+document, right? But I don't think I've
+tried pretty hard to fix it but I don't
+tried pretty hard to fix it but I don't
+think I've tried hard enough just yet,
+think I've tried hard enough just yet,
+right? Like there are a few things I
+right? Like there are a few things I
+haven't explored and that's what I want
+haven't explored and that's what I want
+to do right now with you guys.
+to do right now with you guys.
+I have no idea what I'm doing with this
+I have no idea what I'm doing with this
+by the way. Like I am not I don't
+by the way. Like I am not I don't
+maintain a million packages. I don't
+maintain a million packages. I don't
+have deep knowledge of the build system.
+have deep knowledge of the build system.
+If anybody wants to help with this like
+If anybody wants to help with this like
+live here a Okay.
+where this is.
+So, like things that we haven't tried,
+So, like things that we haven't tried,
+right?
+right?
+I haven't really tried more native UV
+I haven't really tried more native UV
+style stuff.
+style stuff.
+I don't think there's a way to get rid
+I don't think there's a way to get rid
+of the setup.py
+of the setup.py
+uh thing entirely.
+uh thing entirely.
+I think that the most likely thing
+I think that the most likely thing
+that's going to happen is we'll at least
+that's going to happen is we'll at least
+find like some better workaround for how
+find like some better workaround for how
+we build extensions, but I think we're
+we build extensions, but I think we're
+still going to have to keep the big
+still going to have to keep the big
+messy setup.py and everything.
+messy setup.py and everything.
+Can't help. May the force be with you.
+Can't help. May the force be with you.
+Thank you.
+I honestly I think yeah this whole like
+I honestly I think yeah this whole like
+pi project tommo [ __ ] is
+pi project tommo [ __ ] is
+I think this was a dumb decision for
+I think this was a dumb decision for
+Python packaging in general like it
+Python packaging in general like it
+can't do all the stuff that you do. So
+can't do all the stuff that you do. So
+now it's like we have two things instead
+now it's like we have two things instead
+of one
+s Python
+s Python
+for scikit build core.
+Okay.
+Okay.
+About 9
+able to
+and
+and
+torch.
+The scikit build core just wrap setup
+The scikit build core just wrap setup
+tools.
+I want to see what this is.
+Oh, that's kind of ass, isn't it?
+Wait, does not use setup tool.
+Wait, does not use setup tool.
+They say it's glue and then they say it
+They say it's glue and then they say it
+doesn't use setup tools.
+Yeah. I don't want to see make
+Yeah. I don't want to see make
+face thing. This is dumb.
+This is worse, right?
+Yeah, I really don't want freaking cm
+Yeah, I really don't want freaking cm
+make
+if I can avoid it.
+I mean, that's like enough reason to not
+I mean, that's like enough reason to not
+use this as is, right?
+Yeah, this thing's incredibly stupid.
+Okay.
+You also end up having to use setup
+You also end up having to use setup
+tools anyways.
+build Just
+I think everything depends on setup. set
+I think everything depends on setup. set
+up tool, right?
+Like there are no alternatives to setup
+Like there are no alternatives to setup
+tools
+even though it's a pain.
+try
+try
+search like simp
+search like simp
+not really I honestly I don't use um
+not really I honestly I don't use um
+I don't use LLMs heavily enough for
+I don't use LLMs heavily enough for
+anything that like any of the like any
+anything that like any of the like any
+of the new versions really matter.
+Like basically all the big labs just
+Like basically all the big labs just
+leap frog each other every other month.
+leap frog each other every other month.
+It doesn't matter enough to me to like
+It doesn't matter enough to me to like
+use whatever one is currently people are
+use whatever one is currently people are
+saying the best and keep across all of
+saying the best and keep across all of
+them.
+What is Mason?
+This a thing.
+Heck is Mason.
+What is this
+build tool wrapper for
+this? Wait, is this also
+Yeah.
+We don't want any build system at all is
+We don't want any build system at all is
+the thing.
+Like we basically just want freaking GCC
+Like we basically just want freaking GCC
+and CC cache
+languages.
+languages.
+I mean basically all we want, right?
+I mean basically all we want, right?
+Well, there are a couple things. We need
+Well, there are a couple things. We need
+whatever the hell is required to build
+whatever the hell is required to build
+CUDA, which is NVCC plus whatever
+CUDA, which is NVCC plus whatever
+garbage is tied up with that, right?
+garbage is tied up with that, right?
+But then our actual C extensions,
+But then our actual C extensions,
+we literally just need GCC.
+And like everybody always is trying to
+And like everybody always is trying to
+stick make files into everything or C
+stick make files into everything or C
+make files at least just like no, stop
+make files at least just like no, stop
+it.
+it.
+Why does everybody always want to make
+Why does everybody always want to make
+the build system complicated as hell for
+the build system complicated as hell for
+no reason?
+Like, oh, just one more build system,
+Like, oh, just one more build system,
+bro. Just one more. Just one more build
+bro. Just one more. Just one more build
+system.
+I think you're stuck with setup tools no
+I think you're stuck with setup tools no
+matter what.
+Yeah, toml and setup pi.
+Yeah, toml and setup pi.
+So, basically stuck with what we have.
+So, basically stuck with what we have.
+But maybe we can do maybe we can
+But maybe we can do maybe we can
+basically just port chunks of this
+torch. What do you mean the lid torch?
+Oh, that's Jason. Sadly, I don't know
+Oh, that's Jason. Sadly, I don't know
+enough about Python.
+enough about Python.
+So, Tim, it's just like various build
+So, Tim, it's just like various build
+issues where people not being able to
+issues where people not being able to
+install easily because of uh things that
+install easily because of uh things that
+have to do with how we build extensions
+have to do with how we build extensions
+and setup tools versions and
+and setup tools versions and
+dependencies things.
+I think probably
+I got to go figure out between a UV file
+I got to go figure out between a UV file
+and uh
+and uh
+else. So,
+else. So,
+don't do this.
+Look, UV docs.
+it come. Yes, it is.
+it come. Yes, it is.
+So, right now we only ship
+So, right now we only ship
+basically we don't ship the pre-built
+basically we don't ship the pre-built
+CUDA, right? We just ship the source and
+CUDA, right? We just ship the source and
+then the package builds it on your
+then the package builds it on your
+system. Um because I really really don't
+system. Um because I really really don't
+want to have to ship our own CUDA
+want to have to ship our own CUDA
+kernels like our pre-built ones.
+kernels like our pre-built ones.
+Technically, if I have to down the line,
+Technically, if I have to down the line,
+we can do that. But that's like it is a
+we can do that. But that's like it is a
+massive massive pain in the ass to ship
+massive massive pain in the ass to ship
+a pre-built Cuda.
+Like technically, right, we could just
+Like technically, right, we could just
+ship binaries for everything and then
+ship binaries for everything and then
+like everything would work instantly. I
+like everything would work instantly. I
+don't think I'm ready to do that though
+don't think I'm ready to do that though
+because like
+because like
+having a having a way to ship binaries
+having a having a way to ship binaries
+on something that includes CUDA is just
+on something that includes CUDA is just
+horrible. If I didn't have any CUDA, I
+horrible. If I didn't have any CUDA, I
+think it would relatively okay.
+Okay. Okay. So, we have this
+Okay.
+UV decks.
+UV decks.
+Maybe this.
+Okay. So I guess we can try this stuff,
+Okay. So I guess we can try this stuff,
+right?
+Let me understand um their UV toml
+Let me understand um their UV toml
+versus pi project toml.
+Okay. So, I don't think we need this
+Okay. So, I don't think we need this
+unless is there anything.
+Yeah. So, it doesn't even make a UV toml
+Yeah. So, it doesn't even make a UV toml
+by default. It just does uh a pi project
+by default. It just does uh a pi project
+tunnel.
+Okay. So these add and remove are just
+Okay. So these add and remove are just
+like these straight up don't do
+like these straight up don't do
+anything, right? They just edit the
+anything, right? They just edit the
+toml.
+Yeah. So this is like a poetry.
+You don't want a lock file, right? This
+You don't want a lock file, right? This
+is like poetry style and lock file means
+is like poetry style and lock file means
+can't use package with anything because
+can't use package with anything because
+everything is pinned.
+I mean I guess it is kind of like a
+I mean I guess it is kind of like a
+lightweight docker in a sense, right?
+That's kind of like a weird in between
+That's kind of like a weird in between
+to me though. like pin all the packages
+to me though. like pin all the packages
+but not Docker is like it's kind of like
+but not Docker is like it's kind of like
+eh I really don't want things to go
+eh I really don't want things to go
+wrong but I don't like I don't actually
+wrong but I don't like I don't actually
+care enough to make sure things don't go
+care enough to make sure things don't go
+wrong. The docker makes sure things
+wrong. The docker makes sure things
+don't go wrong.
+Okay. So,
+Okay. So,
+I think we just need like move some
+I think we just need like move some
+stuff.
+I think like ultimately
+just do something like this.
+See what we can do with this.
+We have our camel here.
+We don't have a UV section at all.
+We can do like tool.uv
+We can do like tool.uv
+build
+uh
+thing like this.
+Oh, hang on before I do this.
+have tool UV
+have tool UV
+this
+this
+is
+then there should be a guide on this
+then there should be a guide on this
+right
+like to set this up with UV
+Hey, how's it going? Welcome,
+Hey, how's it going? Welcome,
+Desh. I am working on making Puffer
+Desh. I am working on making Puffer
+easier to build and install. Fewer users
+easier to build and install. Fewer users
+have errors.
+as a build back end.
+UV build backend only supports pure
+UV build backend only supports pure
+Python code
+projects with extension module.
+UV supports creating projects with the
+UV supports creating projects with the
+following build systems.
+What about just setup tools?
+Setup tools works, doesn't it?
+Okay, this is just the default.
+Okay.
+Okay.
+Well, we're getting somewhere here. I
+Well, we're getting somewhere here. I
+just read this.
+There's also project.scripts which goes
+There's also project.scripts which goes
+here.
+Are you on Discord?
+Are you on Discord?
+Uh, I shouldn't be on Discord right now,
+Uh, I shouldn't be on Discord right now,
+but Puffer is on Discord. Yeah.
+Is it UV pip install or is it UV build?
+Is it UV pip install or is it UV build?
+What is it?
+Or is it you pipe?
+Use UV to set the VN source. It then
+Use UV to set the VN source. It then
+uses PIP.
+Yeah, but like
+Yeah, but like
+you see the thing, right, where it's
+you see the thing, right, where it's
+just like, oh, it replaces PIP and all
+just like, oh, it replaces PIP and all
+these other tools except then you
+these other tools except then you
+actually still have to use them.
+Tread latest. No, I don't spirit. I
+Tread latest. No, I don't spirit. I
+really don't try like the latest any
+really don't try like the latest any
+model.
+Like generally in my view, it's like all
+Like generally in my view, it's like all
+the models just suck
+the models just suck
+and I basically just use them to look up
+and I basically just use them to look up
+docs
+pip. Yeah. I'm trying to see is does
+pip. Yeah. I'm trying to see is does
+that actually use pip or is it like
+that actually use pip or is it like
+their version of pip
+like I know I can do Yes.
+cannot
+cannot
+provide a value for scripts
+listed under
+listed under
+the hell is this?
+Why wouldn't I be able to do that?
+This is literally just
+is it dynamic scripts
+is it dynamic scripts
+dependencies?
+Oh,
+Oh,
+this doesn't need to be.
+this doesn't need to be.
+And I'll just do this.
+Wait. Project optional dependency build
+Wait. Project optional dependency build
+equals
+equals
+file.
+You see what this is
+You see what this is
+by default. UV builds all packages in
+by default. UV builds all packages in
+isolated virtual environments as per
+isolated virtual environments as per
+this absolutely braindad stupid pep that
+this absolutely braindad stupid pep that
+is the source of all evils because
+is the source of all evils because
+Python developers suck.
+Python developers suck.
+I'm sorry I misread that. It just says
+I'm sorry I misread that. It just says
+as per pep 517.
+as per pep 517.
+Some packages are incompatible with
+Some packages are incompatible with
+build isolation. It intentionally
+build isolation. It intentionally
+or unintentionally
+disable build isolation for specific
+disable build isolation for specific
+dependency. Add it to no build isolation
+dependency. Add it to no build isolation
+package.
+Yeah. Didn't you know this is an
+Yeah. Didn't you know this is an
+entertainment stream? Kidding. Disable
+build isolation for specific dependency.
+build isolation for specific dependency.
+Add it to no build isolation.
+I think that's good, right?
+Installing packages without build
+Installing packages without build
+isolation requires that the package
+isolation requires that the package
+build dependencies are installed in the
+build dependencies are installed in the
+project envir prior to installing the
+project envir prior to installing the
+package.
+This can be achieved by separating out
+This can be achieved by separating out
+the build dependency and the package
+the build dependency and the package
+that require them into distinct extras.
+that require them into distinct extras.
+For example,
+[Music]
+[Music]
+First, sync the extra build dependency.
+Damn it.
+Damn it.
+Swear to God, that guy, you're freaking
+seriously broke my build.
+I got to freaking ban him from doing
+I got to freaking ban him from doing
+[ __ ]
+This works good.
+Okay. So, let me understand this thing.
+Okay. So, let me understand this thing.
+Optional dependencies
+Optional dependencies
+build and compile.
+What you would do here is
+What you would do here is
+sync extra build. Well, no. This isn't
+sync extra build. Well, no. This isn't
+what a user would do because this is all
+what a user would do because this is all
+from source.
+setup tools wheel, Syon, Numpai, and
+Yeah. But build system is going to then
+Yeah. But build system is going to then
+mess it up, isn't it? Because it's go
+mess it up, isn't it? Because it's go
+get the wrong numpy or something.
+Wait. By default, the project will be
+Wait. By default, the project will be
+installed in editable mode. Okay.
+the UV sync and UV Done.
+Locking and syncing are automatic.
+Well, we don't want to use these, right?
+Well, we don't want to use these, right?
+Cuz this interface is dumb.
+Okay, so we do want the UV pip interface
+Okay, so we do want the UV pip interface
+cuz this is like mini docker without the
+cuz this is like mini docker without the
+guarantees and actually dumber.
+guarantees and actually dumber.
+This is like the poetry interface.
+Well, I mean, think about it for 3
+Well, I mean, think about it for 3
+seconds, right? What happens when you
+seconds, right? What happens when you
+have a lock file? You're basically
+have a lock file? You're basically
+telling everybody else to go screw
+telling everybody else to go screw
+themselves because you're going to pin
+themselves because you're going to pin
+every single version of every single
+every single version of every single
+library and therefore make it impossible
+library and therefore make it impossible
+to use with anything else. You're
+to use with anything else. You're
+basically saying your thing is the top
+basically saying your thing is the top
+level and everything else can just go
+level and everything else can just go
+screw itself.
+different purpose.
+different purpose.
+Well, but like even if I want to give
+Well, but like even if I want to give
+you that interface, right, the goal is
+you that interface, right, the goal is
+to have an interface where everything is
+to have an interface where everything is
+pinned so stuff doesn't break. This
+pinned so stuff doesn't break. This
+doesn't even guarantee that stuff
+doesn't even guarantee that stuff
+doesn't break because people have
+doesn't break because people have
+different system packages, right? The
+different system packages, right? The
+only thing that actually guarantees that
+only thing that actually guarantees that
+things don't break is you hand somebody
+things don't break is you hand somebody
+a Docker that actually guarantees that
+a Docker that actually guarantees that
+the thing will work.
+Okay. So,
+need numpai at build time. Torch at
+need numpai at build time. Torch at
+build time.
+980 run thing.
+First PC I built was two 980 Ti.
+Let's see what other garbage is in here
+Let's see what other garbage is in here
+that like we can potentially
+that like we can potentially
+improve upon.
+Literally running a Linux env. Yep.
+You
+library is I'm pretty sure the most What
+library is I'm pretty sure the most What
+do you mean?
+Well, presumably you're already running
+Well, presumably you're already running
+on a Linux host anyways or you're
+on a Linux host anyways or you're
+trolling, right?
+and like if you're not on a Linux host
+and like if you're not on a Linux host
+and you're worried about the Perf, like
+and you're worried about the Perf, like
+I'm way more worried about you trying to
+I'm way more worried about you trying to
+do crazy ass stuff on Mac going to break
+do crazy ass stuff on Mac going to break
+everything. Like I actually probably am
+everything. Like I actually probably am
+going to have to go get a Mac just
+going to have to go get a Mac just
+because of the number of Mac users who
+because of the number of Mac users who
+are getting stuck on dumb stuff because
+are getting stuck on dumb stuff because
+it's like just not a real like not a
+it's like just not a real like not a
+real dev platform.
+At least the Windows users will go like
+At least the Windows users will go like
+install WSL and get what's reasonably a
+install WSL and get what's reasonably a
+native Linux environment, a reasonably
+native Linux environment, a reasonably
+native Linux environment. Like the most
+native Linux environment. Like the most
+bugs, more bugs than anything come from
+bugs, more bugs than anything come from
+freaking Macs.
+versioning for LM6.
+Yeah, I like to just ignore all the
+Yeah, I like to just ignore all the
+LLMs.
+Kind of sick of the LM everything.
+It's like so dumb. If you just drive I'm
+It's like so dumb. If you just drive I'm
+in Palo Alto and if you just drive from
+in Palo Alto and if you just drive from
+Palo Alto to SF, you will go by
+Palo Alto to SF, you will go by
+literally dozens of the dumbest LLM B
+literally dozens of the dumbest LLM B
+billboards you've ever seen.
+Okay, so there you go. That's like five
+Okay, so there you go. That's like five
+mill steps per second breakout with
+mill steps per second breakout with
+compile.
+compile.
+Of
+course, it actually takes longer to
+course, it actually takes longer to
+train with compile than without because
+Same hardware was greater than one hell.
+Looks good.
+Okay. So, I guess I move.
+I don't know the format. Let me see.
+I don't know the format. Let me see.
+There's like
+this.
+Hey, Weston. I'm trying to make Puffer
+Hey, Weston. I'm trying to make Puffer
+easier to install and use.
+So, I guess we get project optional
+So, I guess we get project optional
+dependencies.
+Do cleaner Welcome.
+Oh, we don't need this [ __ ] anymore at
+Oh, we don't need this [ __ ] anymore at
+all.
+Doc is just a separate repo.
+See if this is broken.
+Docs is not the
+Docs is not the
+on
+cannot provide a value for optional
+cannot provide a value for optional
+dependencies listed under dynamic at the
+dependencies listed under dynamic at the
+same time
+same time
+dependencies and option.
+Okay, what does the dynamic flag do?
+You understand this?
+Okay, I'll be right back. Let me use a
+Okay, I'll be right back. Let me use a
+restroom real quick. We're going to
+restroom real quick. We're going to
+actually make some progress on this
+actually make some progress on this
+today. I think this will finally like
+today. I think this will finally like
+this will fix a lot of people's build
+this will fix a lot of people's build
+problems unless I break more stuff in
+problems unless I break more stuff in
+the process, which is why I wanted to
+the process, which is why I wanted to
+stream this. So hopefully you all can
+stream this. So hopefully you all can
+just help me test it. Be right back.
+guys doing water.
+By default, UV will only rebuild
+By default, UV will only rebuild
+reinstall local directory dependency.
+the root directory or if a source
+the root directory or if a source
+directory added a remote. What
+add cache key
+different
+not what we care about, right?
+What are you building?
+What are you building?
+Ultra high performance reinforcement
+Ultra high performance reinforcement
+learning. You can see all sorts of our
+learning. You can see all sorts of our
+demos on puffer.ai.
+demos on puffer.ai.
+Train agents. They'll run live in your
+Train agents. They'll run live in your
+browser. You can play the games
+browser. You can play the games
+yourself. Not all games. You can also
+yourself. Not all games. You can also
+like fly drones and do other things as
+like fly drones and do other things as
+well.
+well.
+Oh, it's a big open source project. I
+Oh, it's a big open source project. I
+stream most of the development. I'm a
+stream most of the development. I'm a
+researcher. Sometimes I'm doing cool
+researcher. Sometimes I'm doing cool
+algorithms. Sometimes, like today, I am
+algorithms. Sometimes, like today, I am
+just doing user stuff to try to make it
+just doing user stuff to try to make it
+easier for everybody to play with the
+easier for everybody to play with the
+software.
+software.
+Right now, I'm currently trying to
+Right now, I'm currently trying to
+figure out really fiddly things with uh
+figure out really fiddly things with uh
+users not being able to build packages
+users not being able to build packages
+as they should.
+I see you're at the fun part.
+I see you're at the fun part.
+I made my RLC talk earlier today.
+I made my RLC talk earlier today.
+I don't know. I felt like I'm just kind
+I don't know. I felt like I'm just kind
+of burnt on everything. So, I figured
+of burnt on everything. So, I figured
+out, okay, this is pretty easy and this
+out, okay, this is pretty easy and this
+is actually really important. So,
+is actually really important. So,
+it's just like it's easy. It just takes
+it's just like it's easy. It just takes
+forever to figure out the details. I
+forever to figure out the details. I
+figured I'd do this. When are we doing
+figured I'd do this. When are we doing
+net hack? Man,
+net hack? Man,
+are you done with RLC stuff yet?
+are you done with RLC stuff yet?
+It doesn't take that long to make these
+It doesn't take that long to make these
+presentations. All right, look. I'll
+presentations. All right, look. I'll
+show you my my slides
+here. We'll do the exclusive, not so
+here. We'll do the exclusive, not so
+exclusive for this stream preview.
+It's all open source. We have tons and
+It's all open source. We have tons and
+tons of like new RL people coming in and
+tons of like new RL people coming in and
+learning this stuff and contributing.
+learning this stuff and contributing.
+Where did I put it?
+Where did I put it?
+Show you my slides for this. I think
+Show you my slides for this. I think
+they're not bad.
+Boom.
+Boom.
+Training demo. The GIF, how we train it.
+Training demo. The GIF, how we train it.
+Near MMO demo.
+Near MMO demo.
+This, this, this, this. That's it.
+This, this, this, this. That's it.
+Not bad, right?
+Not bad, right?
+Honestly, only took me a couple hours to
+Honestly, only took me a couple hours to
+throw it together and then it took uh
+throw it together and then it took uh
+couple more hours going through it,
+couple more hours going through it,
+seeing if I liked it.
+seeing if I liked it.
+Not bad.
+Yeah. So, this article is not remotely
+Yeah. So, this article is not remotely
+what I was uh expecting.
+what I was uh expecting.
+Put a day or two in and we can chat
+Put a day or two in and we can chat
+about it at RLC. Sounds good.
+about it at RLC. Sounds good.
+Just packing and doing that hack.
+Just packing and doing that hack.
+Oh, yeah. That's going to be fun.
+I got a I got a giant pip I can send you
+I got a I got a giant pip I can send you
+as a bonus for uh getting Net Hack
+as a bonus for uh getting Net Hack
+working with Puffer.
+Send that off to Canada.
+We might have to set up an incentive so
+We might have to set up an incentive so
+that you actually get to net hack cuz I
+that you actually get to net hack cuz I
+want to see that stuff work too, man.
+That's it's big. I hope you have like
+That's it's big. I hope you have like
+you have space for it. It's like it's
+you have space for it. It's like it's
+like three or four feet.
+You're not getting one of those feels
+You're not getting one of those feels
+though. Those feels are mine.
+Two more years of intense research, so I
+Two more years of intense research, so I
+decided to take it easy. Yeah, fair
+decided to take it easy. Yeah, fair
+enough.
+Honestly, I just want to get back to the
+Honestly, I just want to get back to the
+intense research because it's a heck of
+intense research because it's a heck of
+a lot more chill than the crap I've been
+a lot more chill than the crap I've been
+doing lately.
+Growing company is not necessarily hard,
+Growing company is not necessarily hard,
+but it is a pain in the ass.
+What is this dynamic crap?
+What is this dynamic crap?
+Bugging baselines. Realized it was a
+Bugging baselines. Realized it was a
+really dumb bug in gymnasium's reward
+really dumb bug in gymnasium's reward
+normalization build perf. Eh,
+normalization build perf. Eh,
+dude, just delete all the rappers. Why
+dude, just delete all the rappers. Why
+are you using those? They suck.
+Oh, yeah. One thing to know is we by
+Oh, yeah. One thing to know is we by
+default we just clip negative one to
+default we just clip negative one to
+one.
+works. Yeah,
+works. Yeah,
+but we did it specifically cuz like some
+but we did it specifically cuz like some
+M's have dumb rewards and they just
+M's have dumb rewards and they just
+won't learn.
+won't learn.
+Don't
+Don't
+statistical standard deviation
+statistical standard deviation
+works. So, if it works well on
+works. So, if it works well on
+everything, we'd consider it, right?
+Flipping has been a really decent
+Flipping has been a really decent
+baseline for us so far.
+We have more core algorithm
+We have more core algorithm
+improvements, by the way, that I think
+improvements, by the way, that I think
+we're going to be able to make soon. At
+we're going to be able to make soon. At
+least one of them. We have one very
+least one of them. We have one very
+promising candidate
+and give Spencer a couple days to take a
+and give Spencer a couple days to take a
+crack at it before I
+crack at it before I
+publicize that. I think it's a decent
+publicize that. I think it's a decent
+one, though.
+one, though.
+Um,
+what the heck is this dynamic arc?
+I guess it just means comes from.
+Maybe we can just stick all the depths
+Maybe we can just stick all the depths
+in, right?
+I think we just like go through and
+I think we just like go through and
+move all this crap.
+I think you don't even need this
+I think you don't even need this
+everywhere, right?
+everywhere, right?
+probably.
+That's again.
+Crafter still
+kind of sad how like much attention
+kind of sad how like much attention
+stupid crafter has gotten. I guess now
+stupid crafter has gotten. I guess now
+at least some people are using craft
+at least some people are using craft
+decks is better. The original crafter m
+decks is better. The original crafter m
+is just terrible though. They had such a
+is just terrible though. They had such a
+freaking embarrassment.
+Okay, so this thing
+Okay, so this thing
+uh this thing just needs gymnasium. I
+uh this thing just needs gymnasium. I
+probably just need
+Um,
+Ed
+Ed
+surely doesn't need gym and gymnasium,
+surely doesn't need gym and gymnasium,
+right?
+right?
+Surely just needs this
+Surely just needs this
+agent is
+kind of pointless to be honest because
+you like you really just don't need it.
+you like you really just don't need it.
+Meta
+This should be a gymnasium. Yeah.
+Any hack doesn't need gem anymore,
+Any hack doesn't need gem anymore,
+right?
+Oh, shoot. It does.
+Oh, shoot. It does.
+That's dumb.
+Thought net hack got updated, didn't it?
+Nope. Freaking gem.
+Nope. Freaking gem.
+Ridiculous.
+And neural MMO. I don't remember. So all
+And neural MMO. I don't remember. So all
+of these is
+head.
+All this crap
+up Jen
+and Vizdoom.
+So,
+So,
+uh I should now be able to
+this comment.
+I believe this is how it works, right?
+I believe this is how it works, right?
+You do like this
+text.
+Hopefully this will be a little cleaner.
+Hopefully this will be a little cleaner.
+I don't know. We'll see.
+I don't know. We'll see.
+It'll actually make it easier to just
+It'll actually make it easier to just
+like swap in and out dependencies a
+like swap in and out dependencies a
+little bit, I guess.
+Eventually, I'm just going to end up
+Eventually, I'm just going to end up
+going and like dropping a bunch of these
+going and like dropping a bunch of these
+anyways, right? Like there's so many of
+anyways, right? Like there's so many of
+these old environments that like
+these old environments that like
+technically compile but are so stupid
+technically compile but are so stupid
+and broken that like nobody uses them
+and broken that like nobody uses them
+anyways.
+anyways.
+Plus they're slow.
+Plus they're slow.
+Kind of just bloat and there's not
+Kind of just bloat and there's not
+really a point in dealing with them.
+really a point in dealing with them.
+There was like a stage in building
+There was like a stage in building
+Puffer where I was kind of just trying
+Puffer where I was kind of just trying
+to make Puffer be the best thing between
+to make Puffer be the best thing between
+everything else. Like the best
+everything else. Like the best
+gobetween. Uh that's not what Puffer is
+gobetween. Uh that's not what Puffer is
+anymore though, right? like puffers. We
+anymore though, right? like puffers. We
+have our own stuff now in basically
+have our own stuff now in basically
+every category and it's better. So,
+every category and it's better. So,
+we're kind of just doing legacy support
+we're kind of just doing legacy support
+plus like a few historically important
+plus like a few historically important
+environments.
+environments.
+And most of these can just get killed.
+Now we get rid of optional depths I
+Now we get rid of optional depths I
+guess
+guess
+from here.
+No optional dynamic depths.
+extras.
+I guess common is like an
+I guess common is like an
+never do this though. Anyways,
+never do this though. Anyways,
+let's just get rid of this.
+Yeah. So this is like get rid of this
+should be better honestly. This be
+should be better honestly. This be
+simpler.
+Gym version not defined.
+Hang on.
+All requires
+Hey Tim, I just got Puffer installed and
+Hey Tim, I just got Puffer installed and
+training. It's really easy on Linux. How
+training. It's really easy on Linux. How
+do weights in the resources folder work?
+do weights in the resources folder work?
+Uh, they work like this, Tim. Well,
+Uh, they work like this, Tim. Well,
+actually, I'm not going to be able to
+actually, I'm not going to be able to
+show you on my local or I mean my
+show you on my local or I mean my
+remote.
+remote.
+Show you this.
+Show you this.
+They're really just for like they're
+They're really just for like they're
+mostly for our web demos and plus
+mostly for our web demos and plus
+debugging. But what you can technically
+debugging. But what you can technically
+do, let me see if I have my environment
+do, let me see if I have my environment
+set up correctly.
+All right. So, bash scripts build ocean
+All right. So, bash scripts build ocean
+like pong for local or faster web.
+like pong for local or faster web.
+And then if I just do / pong, this is
+And then if I just do / pong, this is
+running in pure C with no Python, no
+running in pure C with no Python, no
+PyTorch, nothing. So those resources
+PyTorch, nothing. So those resources
+files
+files
+um those bins in there are loading
+um those bins in there are loading
+weight or have weights in a binary
+weight or have weights in a binary
+format that can be loaded from state.
+This is just running through our like
+This is just running through our like
+standalone C neural network library that
+standalone C neural network library that
+we have as part of puffer.
+Pretty cool.
+Let's see how fed the puffer is today.
+Let's see how fed the puffer is today.
+Anybody
+Anybody
+feed the puffer?
+He's getting decently fed.
+He's getting decently fed.
+374 stars.
+374 stars.
+Funky puffer. Get him.
+So eventually after I don't know I have
+So eventually after I don't know I have
+a a a revenue milestone in my head where
+a a a revenue milestone in my head where
+once we hit it we'll we'll get like the
+once we hit it we'll we'll get like the
+puffer touched up and we'll get a a nice
+puffer touched up and we'll get a a nice
+animation set for him.
+All right. So this says
+says this works.
+That's not bad, right?
+Get rid of this crap.
+and this is still a bunch of crap.
+I think we're good.
+What is it? It's UV build or whatever.
+Build source.
+UV publish
+test that the package canal
+UV run.
+What we do like this?
+Okay.
+still doing material science. I'm not
+still doing material science. I'm not
+doing it right now, but yes, we are
+doing it right now, but yes, we are
+still doing material science. It's
+still doing material science. It's
+actually like one of my top two things.
+actually like one of my top two things.
+I'm just kind of burnt on hard things at
+I'm just kind of burnt on hard things at
+the moment. I'm doing easy but important
+the moment. I'm doing easy but important
+things right now,
+things right now,
+you
+Wait, what? It built a wheel.
+Wait, what? It built a wheel.
+How the hell did it just build a wheel?
+We'll try this one First,
+[Music]
+This works.
+Okay, this is fine.
+Uh, hang on. No, this one is expect this
+Uh, hang on. No, this one is expect this
+is expected. Fine.
+But I guess technically there is a wheel
+But I guess technically there is a wheel
+build, right?
+build, right?
+I could technically upload this wheel
+I could technically upload this wheel
+and then we would have like a wheel for
+and then we would have like a wheel for
+one specific setup. I guess it's not
+one specific setup. I guess it's not
+terrible.
+terrible.
+Not a bad Okay.
+What would be the best test of this?
+I guess what we'll do is I'll like I'll
+I guess what we'll do is I'll like I'll
+ship this to 3 0
+ship this to 3 0
+and um
+yeah I'll just I'll ship this to 3.0
+yeah I'll just I'll ship this to 3.0
+and we'll wait to do a new package
+and we'll wait to do a new package
+release. This will already be in the
+release. This will already be in the
+source.
+source.
+do that.
+Okay. So, good.
+Okay. So, good.
+Now we have our local
+and we can just do
+and we can just do
+integration possible or is it too slow?
+integration possible or is it too slow?
+Yeah, we've already had people do Majoko
+Yeah, we've already had people do Majoko
+stuff. If you really want to do Majoko,
+stuff. If you really want to do Majoko,
+I would suggest using MJX,
+I would suggest using MJX,
+there already a binding for it. I'm
+there already a binding for it. I'm
+pretty sure
+pretty sure
+there wouldn't really be a point to us
+there wouldn't really be a point to us
+doing our own M's with Majoko cuz it's
+doing our own M's with Majoko cuz it's
+like it's slow.
+like it's slow.
+Um,
+Um,
+we I think that's what's more likely is
+we I think that's what's more likely is
+we'll slowly expand. We'll do like a few
+we'll slowly expand. We'll do like a few
+of our own Sims and then the heavier
+of our own Sims and then the heavier
+stuff we'll try to bind like the least
+stuff we'll try to bind like the least
+bad existing Sims.
+See
+how this goes.
+Guda version.
+Okay. Well, this is like a separate,
+Okay. Well, this is like a separate,
+right?
+This is my janky setup.
+Let's check on
+Okay, this runs.
+Super old CPU. 90K is good.
+And it renders.
+And it renders.
+If I go to a different directory.
+Sometimes we have to check this.
+Sometimes we have to check this.
+Okay, this is a a wrong permissions
+Okay, this is a a wrong permissions
+directory, which is fine.
+We'll just do this random directory.
+Okay, that's a permissioning screw up.
+Okay, that's a permissioning screw up.
+That's fine. That's just WSL. It's
+That's fine. That's just WSL. It's
+trying to link to the correct place.
+trying to link to the correct place.
+I think that's fine.
+Let's uh put in the Discord.
+Where the heck were it? Screenshots.
+Yeah, I didn't see them.
+I guess they're probably on the PR.
+That works. We can get rid of it on the
+That works. We can get rid of it on the
+docks.
+How to not get bored while studying.
+How to not get bored while studying.
+Um, you're probably studying boring
+Um, you're probably studying boring
+stuff.
+stuff.
+Oh, there is no way to not get bored
+Oh, there is no way to not get bored
+when you're doing boring things.
+when you're doing boring things.
+That is not how it work.
+trying to think if there's anything else
+trying to think if there's anything else
+I can improve on the build system.
+This should basically fix.
+I guess there's still potentially Mac
+I guess there's still potentially Mac
+[ __ ] right?
+I think somebody reported like MPS not
+I think somebody reported like MPS not
+working or whatever.
+working or whatever.
+I mean, this should fix like the vast
+I mean, this should fix like the vast
+majority of stuff.
+Yeah, I think this is pretty decent
+Yeah, I think this is pretty decent
+overall.
+Okay, so we have set up.
+I think this is pretty much it. I think
+I think this is pretty much it. I think
+this is about the best we can do at the
+this is about the best we can do at the
+moment.
+I can technically ship the new wheels at
+I can technically ship the new wheels at
+some point
+some point
+like in a 3-1 or something,
+but this should be
+but this should be
+this should be some decent progress.
+this should be some decent progress.
+Okay, I didn't actually expect to get
+Okay, I didn't actually expect to get
+this done so quickly.
+this done so quickly.
+400 p.m. Probably still have another
+400 p.m. Probably still have another
+couple hours to do stuff.
+What do we do next?
+What do we do next?
+Body watching have M's? They want a PR.
+Body watching have M's? They want a PR.
+Mind reviewing an N or two.
+Where are all these M's that people are
+Where are all these M's that people are
+making?
+It doesn't have legs yet.
+Oh yeah, there's also this whisker racer
+Oh yeah, there's also this whisker racer
+end, right?
+I didn't play with that yet,
+but the guy who's uh who did that is not
+but the guy who's uh who did that is not
+upper targets. I am.
+All right. So, I see that there's the
+All right. So, I see that there's the
+lunar lander end and the racing end. I
+lunar lander end and the racing end. I
+could have sworn that people had more of
+could have sworn that people had more of
+them though, right?
+them though, right?
+Like, didn't people post a whole bunch
+Like, didn't people post a whole bunch
+of other stuff recent? Yeah. What's Now,
+of other stuff recent? Yeah. What's Now,
+this is Tetso doing stuff.
+Where's all the other Where are all the
+Where's all the other Where are all the
+other things? Okay, this one is good. I
+other things? Okay, this one is good. I
+can go through this.
+I mean, regardless, those are two good
+I mean, regardless, those are two good
+ends to get merged in. Right.
+ends to get merged in. Right.
+Go take a little look at the whisker
+Go take a little look at the whisker
+end. I'm going to have some fun.
+No such file or directory.
+Okay. So, you did not commit file, my
+Okay. So, you did not commit file, my
+guy.
+guy.
+I have a fresh PR somewhere.
+I have a fresh PR.
+We'll check this.
+Oh, holy. We have a lot of M's.
+Oh, holy. We have a lot of M's.
+Actually,
+this is great. We have like all sorts of
+this is great. We have like all sorts of
+off.
+Invert when you need them.
+Invert when you need them.
+Oh, he did ship me the weights. I can
+Oh, he did ship me the weights. I can
+yolo this for now.
+Pull this in.
+Oh, this is clean.
+Oh, this is clean.
+Look at this.
+I love this.
+Look at that.
+Look at that.
+That's a great environment.
+Shift M is a screenshot.
+Tab is full screen.
+So shift is me trying to control it
+So shift is me trying to control it
+myself and failing horribly.
+myself and failing horribly.
+But you can actually do it. I'm just
+But you can actually do it. I'm just
+bad.
+bad.
+Oh, it's actually doable. I'm just
+Oh, it's actually doable. I'm just
+really bad. Hang on.
+really bad. Hang on.
+Yeah, I'm just really
+Yeah, I'm just really
+Yeah. So, this is a good time to mention
+Yeah. So, this is a good time to mention
+I don't actually have a driver's
+I don't actually have a driver's
+license. Kind of just suck at all
+license. Kind of just suck at all
+control tasks
+control tasks
+before. I've never really tried that
+before. I've never really tried that
+hard, but still. Yeah.
+hard, but still. Yeah.
+environment.
+Racer.
+Next.
+Look for controls.
+Oh, it's M.
+I don't know what you're doing here.
+Oh, it's way easier to steer in first
+Oh, it's way easier to steer in first
+person.
+Cool.
+This is me playing now.
+This is me playing now.
+can tell because it looks awful. Now, if
+can tell because it looks awful. Now, if
+I take my hands off
+I take my hands off
+agent is way better.
+I do think this is probably going to OM
+I do think this is probably going to OM
+stuff eventually. I don't know what it's
+stuff eventually. I don't know what it's
+doing. Texture.
+Huge amount of args, man.
+We'll help him clean this up a little
+We'll help him clean this up a little
+bit, I'm sure.
+bit, I'm sure.
+Yeah, at least mess with it a little bit
+Yeah, at least mess with it a little bit
+for
+970 lines.
+see what this builds.
+We have this
+We have this
+decent, right?
+I just want to be able to switch the
+I just want to be able to switch the
+dang view.
+I want to get into ML and AI. What are
+I want to get into ML and AI. What are
+some good starter resources? The guide
+some good starter resources? The guide
+that I wrote exactly for this purpose
+that I wrote exactly for this purpose
+because I get this question all the
+because I get this question all the
+time.
+Here's the RL1.
+Here's the RL1.
+Here's the ML1.
+There you go.
+Got it.
+Honestly, the RL side of stuff is pretty
+Honestly, the RL side of stuff is pretty
+fun
+if you're interested in that as well.
+Okay, so now I should be able to shift
+Okay, so now I should be able to shift
+M.
+H.
+H.
+And I guess you go off the map.
+And I guess you go off the map.
+Hey, Puffer, you're not supposed to be
+Hey, Puffer, you're not supposed to be
+able to go off the map like that.
+Did it not reset correctly?
+Delete code. Nope.
+Do I want to change the colors of Yes,
+we leave this one as is, right?
+Oh, yeah. There's a bug.
+All
+right. So, now
+right. So, now
+go over to the better machine.
+go over to the better machine.
+Pull this
+And then we should be able to train this
+And then we should be able to train this
+thing. Yeah.
+3 million steps per second.
+But why is this thing trained for like
+But why is this thing trained for like
+no time at all?
+no time at all?
+Why is that a thing? Huh?
+Not like go up more. This full solved
+Oh, looks like it gets better.
+Yeah, this is like way better, right?
+Hello, men.
+Hello, men.
+Welcome.
+Okay.
+There we go. That's So that's fixed.
+I guess the fast does not work on him.
+Holy
+Uh yeah, that doesn't look like it's
+Uh yeah, that doesn't look like it's
+very good, does it?
+What the heck happened.
+enjoys nice picnics. See, I don't know
+enjoys nice picnics. See, I don't know
+what's wrong with him. Hang on. He's
+what's wrong with him. Hang on. He's
+just drunk or something.
+I told you guys not to give the puffers
+I told you guys not to give the puffers
+alcohol,
+alcohol,
+right?
+They don't do well with it.
+Just like not an amazing policy. It
+Just like not an amazing policy. It
+looks like
+now it works.
+now it works.
+Why' it crash a couple times first?
+Is that reproducible?
+Crashes.
+Crashes.
+Crashes.
+And it's chilling.
+Oh yeah, but this one doesn't work.
+Probably a policy mismatch.
+Well, we will leave this to um
+Well, we will leave this to um
+to Kinvert, but this is a very nice
+to Kinvert, but this is a very nice
+environment to play with, right?
+Quite nice.
+Oh, you know why? Hang on. I know. I'm
+Oh, you know why? Hang on. I know. I'm
+just
+just
+Hang on.
+Why dumb?
+There we go.
+Way better. All right.
+Very nice environment.
+Good enough to stick an initial version
+Good enough to stick an initial version
+on the website. No.
+Uh, we need [ __ ] a lot of stuff we need
+Uh, we need [ __ ] a lot of stuff we need
+to do for this.
+Okay. So, that's nice. Nice.
+Already up to date. It says
+and we need a screen as well, right?
+Where do we put whisker eraser?
+I kind of just like roughly order them
+I kind of just like roughly order them
+kind of according to complexity.
+Couple of these are misplaced. I think
+I think I put it before freeway.
+I think I put it before freeway.
+It's a good spot for it. Honestly,
+It's a good spot for it. Honestly,
+Pac-Man's not getting enough love.
+Pac-Man's not getting enough love.
+I think I like swap a few things
+I think I like swap a few things
+actually.
+Like let's put Pac-Man before Freeway.
+Honestly, Freeway Freeway needs to go
+Honestly, Freeway Freeway needs to go
+down a little bit. It's a pretty simple
+down a little bit. It's a pretty simple
+end
+end
+can go before Breakout maybe.
+And then
+And then
+I think Whisker Racer goes right after
+I think Whisker Racer goes right after
+Tetris.
+That'd be my preference.
+Not this one.
+What is this thing?
+Car racing.
+I
+around track.
+action.
+I totally just messed this crap up,
+I totally just messed this crap up,
+didn't I?
+didn't I?
+Copy this. Undo all this garbage that I
+Copy this. Undo all this garbage that I
+just did.
+Yes.
+Yes.
+Description
+eight.
+And then we can actually uh change But
+hey, Tim. So, it seems like creating
+hey, Tim. So, it seems like creating
+realistic Sims just got a lot more
+realistic Sims just got a lot more
+valuable.
+valuable.
+Uh, what are you referencing?
+Uh yes, but that doesn't necessarily
+Uh yes, but that doesn't necessarily
+mean you need realistic Sims, right?
+mean you need realistic Sims, right?
+Those are not necessarily the same
+Those are not necessarily the same
+statement. In fact, it's not how we do
+statement. In fact, it's not how we do
+stuff very often.
+You can get something that works in the
+You can get something that works in the
+real world without having a realistic
+real world without having a realistic
+sim.
+wrong with this.
+Um,
+Um,
+well that yes, but like so for instance
+well that yes, but like so for instance
+the drone sim that we're working on,
+the drone sim that we're working on,
+it's just very heavily domain
+it's just very heavily domain
+randomized, right?
+randomized, right?
+It's not like we're modeling
+It's not like we're modeling
+turbulence and stuff, but we're going to
+turbulence and stuff, but we're going to
+be able to have it work just by heavily
+be able to have it work just by heavily
+domain randomizing.
+domain randomizing.
+You'll see.
+Uh, why did this like server thing not
+Uh, why did this like server thing not
+work?
+Did this not just work?
+I want to see if it works on the
+I want to see if it works on the
+website. Why the hell does this not
+Where are we right now? And we're
+Where are we right now? And we're
+banning this bot first. Then uh where
+banning this bot first. Then uh where
+we're at is
+we're getting a new environment onto the
+we're getting a new environment onto the
+website for you all to play with.
+doesn't work either, right?
+All right. Well,
+All right. Well,
+do I want to just push this to the
+do I want to just push this to the
+website and see if it works?
+Hey,
+quiet stream day. But then again, I'm
+quiet stream day. But then again, I'm
+kind of just working on random crap. So,
+it's important random crap though, some
+it's important random crap though, some
+sense. We did push today the uh the
+sense. We did push today the uh the
+build fixes that should make it a heck
+build fixes that should make it a heck
+of a lot easier for you all use Puffer
+of a lot easier for you all use Puffer
+and get it installed without having to
+and get it installed without having to
+post a million support messages.
+Let's see. We'll see whether this gets
+Let's see. We'll see whether this gets
+onto the website in a second.
+And we let's depending we might will
+And we let's depending we might will
+either uh check two other things. Might
+either uh check two other things. Might
+be able to merge one more today. We
+be able to merge one more today. We
+might not.
+Website's not broken immediately.
+No racing envy either. Go check on the
+No racing envy either. Go check on the
+AC, guys.
+Yeah, turns out installing AC is a bunch
+Yeah, turns out installing AC is a bunch
+of work.
+80° in my office.
+Die in here.
+Where's the Whisker Racing thumbnail?
+Where's the Whisker Racing thumbnail?
+What the heck?
+Why is my thumbnail not
+should be now?
+There's the updated moa, right? Like I
+There's the updated moa, right? Like I
+actually got the is updated, but somehow
+actually got the is updated, but somehow
+this other thing didn't.
+Eraser thumbnail whisk.
+Oh, that's why
+There we go.
+That'll take a little to build.
+That'll take a little to build.
+See what other stuff people have
+See what other stuff people have
+submitted me.
+submitted me.
+Go open my presents.
+Don't
+wait. What is this?
+wait. What is this?
+This one I'm going to have to look at.
+This one I'm going to have to look at.
+They're docs for protein like how to run
+They're docs for protein like how to run
+and use Neptune.
+There you go my guy
+There you go my guy
+right here.
+right here.
+Neptune B
+Neptune B
+protein is the default.
+Hey, look at that.
+Job Kvert. Please do finish your
+Job Kvert. Please do finish your
+environment. But uh I like it. Well
+environment. But uh I like it. Well
+done.
+Well, submitted me cool things
+Well, submitted me cool things
+on this page. Installation.
+What?
+Doc type fix and a different clearer
+Doc type fix and a different clearer
+table of
+if I like this.
+Yep.
+Suppose we'll merge this for now. We'll
+Suppose we'll merge this for now. We'll
+see if I like it.
+Wait, this is you.
+Wait, this is you.
+If you're still here, kidding. What is
+If you're still here, kidding. What is
+this
+artillery?
+What?
+I was asking for help. Not sure you want
+I was asking for help. Not sure you want
+to pull this. Oh, okay. Yeah. What do
+to pull this. Oh, okay. Yeah. What do
+you want me to do? One other cool thing
+you want me to do? One other cool thing
+in here, isn't there?
+This is actually a pretty high-fi one,
+This is actually a pretty high-fi one,
+right? Like, this is a pretty decent
+right? Like, this is a pretty decent
+one.
+Big PR.
+Take a PR.
+know where he is. Where's the amazing
+Working on an aim trainer sim.
+Working on an aim trainer sim.
+Having trouble getting it to
+Having trouble getting it to
+six cubes of a random color.
+Are you rendering it?
+Are you rendering it?
+Wait, are you doing rendering during
+Wait, are you doing rendering during
+training?
+that like at all fast.
+Okay. So, I don't like the on this page
+Okay. So, I don't like the on this page
+banner, but everything else is fine.
+banner, but everything else is fine.
+Style changes are good.
+kept asking about this. So, we're going
+kept asking about this. So, we're going
+to fix this real quick.
+Okay, we're going to commit this to make
+Okay, we're going to commit this to make
+sure I didn't break anything.
+Polished a few things.
+This end looks so freaking good.
+Okay. So,
+pretty good.
+Happy with this overall.
+Okay. So, next would be
+Okay. So, next would be
+quick little end.
+Okay, so quick review of this.
+I don't know why you would do this in
+I don't know why you would do this in
+here.
+Okay.
+Yeah, but it's fine.
+Yeah, but it's fine.
+Left, right, up, down. Okay, this is
+Left, right, up, down. Okay, this is
+fine.
+fine.
+Like pretty standard.
+Does not include a policy.
+silly mem set but fine
+random room. Okay. So it is
+random room. Okay. So it is
+substantially randomized.
+But just randomize both and it's good.
+A very good way to clear. Good job on
+A very good way to clear. Good job on
+this.
+this.
+agent
+back on grid. This is pretty sane.
+back on grid. This is pretty sane.
+There's a timeout as well, which is
+There's a timeout as well, which is
+squares. I'd say this is a pretty
+squares. I'd say this is a pretty
+generous timeout, but sure.
+And what's it have in here? Size.
+And what's it have in here? Size.
+Okay. And then the OBS is just eight
+Okay. And then the OBS is just eight
+channel. Good
+channel. Good
+seven action.
+seven action.
+Pretty
+Pretty
+solid little end.
+Uh, something screwy happened here.
+Something very screwy happened there.
+Where was this guy?
+Heck.
+Convert.
+Okay, so
+Okay, so
+this has 3,000 freaking messages.
+That's freaking crazy.
+Well, that's all pretty well set then.
+Lot of scrolling. Yeah.
+Lot of scrolling. Yeah.
+Well, I'm trying to just like fix a lot
+Well, I'm trying to just like fix a lot
+of the common stuff, right? But I think
+of the common stuff, right? But I think
+I fixed a lot of the setup today. I got
+I fixed a lot of the setup today. I got
+one new person's env onto the website,
+one new person's env onto the website,
+though. They like usually people PR like
+though. They like usually people PR like
+90% completed ends. It's much better if
+90% completed ends. It's much better if
+you actually just finish it, but if it's
+you actually just finish it, but if it's
+cool, I kind of merge it anyways and
+cool, I kind of merge it anyways and
+just say, "Hey, please finish this."
+just say, "Hey, please finish this."
+Like this one's really cool, but it's
+Like this one's really cool, but it's
+only 90% done. Really?
+Isn't this kind of just cool to watch?
+It'd be a lot cooler if it drove
+It'd be a lot cooler if it drove
+smoothly.
+To be fair, also the policy could better
+To be fair, also the policy could better
+like I said 90% done environment.
+Welcome, Snow White.
+As am I.
+As am I.
+That without a sweep. Uh, I don't know
+That without a sweep. Uh, I don't know
+what they did.
+what they did.
+This is not a particularly difficult
+This is not a particularly difficult
+environment though. Uh there is a bug in
+environment though. Uh there is a bug in
+it that's making it a lot harder to
+it that's making it a lot harder to
+learn. Like I found that uh it can go
+learn. Like I found that uh it can go
+off the road and basically just get
+off the road and basically just get
+stuck off the road. I told Kvert to fix
+stuck off the road. I told Kvert to fix
+that. That's his end.
+Some of the ends that like are just
+Some of the ends that like are just
+really cool. I love Tetris. This env is
+really cool. I love Tetris. This env is
+probably one of the coolest to just
+probably one of the coolest to just
+watch.
+watch.
+Like just look how cool this thing is.
+Might
+as well just ask my question for that
+as well just ask my question for that
+end then. What is the advice on cleaning
+end then. What is the advice on cleaning
+up the last bit of the policy? My sweeps
+up the last bit of the policy? My sweeps
+haven't been getting to getting it where
+haven't been getting to getting it where
+I would like. Uh well, what's your end?
+usually that there's a pro like it's
+usually that there's a pro like it's
+usually a problem with your data like
+usually a problem with your data like
+odds are wrong or like it's not
+odds are wrong or like it's not
+resetting correctly. Like this one here
+resetting correctly. Like this one here
+for instance like sometimes it goes off
+for instance like sometimes it goes off
+the map and actually just like stays
+the map and actually just like stays
+running around off the map.
+running around off the map.
+Okay, let me see what this vision test
+Okay, let me see what this vision test
+thing is.
+thing is.
+Not that much code.
+800 million steps and doesn't solve.
+800 million steps and doesn't solve.
+Okay.
+Okay. So this is every axis I guess
+have a renderer on it.
+Wait, what?
+Oh, I see. So, this is
+Oh, I see. So, this is
+you're using ray stuff, but you're not
+you're using ray stuff, but you're not
+actually rendering it. Using it for
+actually rendering it. Using it for
+raycast. Is that it?
+Does it actually work?
+Kind of curious. I'm going to go take a
+Kind of curious. I'm going to go take a
+look at your end real quick.
+This is kind of a cool environment.
+This is kind of a cool environment.
+Yeah.
+Vision test.
+for really important policies that worth
+for really important policies that worth
+doing best of by a large number of
+um
+um
+if your training is stable you would
+if your training is stable you would
+probably just train for longer.
+It really shouldn't be that unstable.
+It really shouldn't be that unstable.
+Like you can technically construct
+Like you can technically construct
+environments where sometimes it works
+environments where sometimes it works
+and sometimes it doesn't, but usually
+and sometimes it doesn't, but usually
+you should end up with um pretty
+you should end up with um pretty
+consistent training curves.
+Mostly like the crazy training curves
+Mostly like the crazy training curves
+are mostly a relic of um just all sorts
+are mostly a relic of um just all sorts
+of other jank.
+You need our camera separately or
+You need our camera separately or
+something, man.
+I got Rayb.
+Yeah, you did. Okay. Where do I get it
+Yeah, you did. Okay. Where do I get it
+from?
+from?
+I just need this one file.
+Just this
+Okay. Well, this is going about a
+Okay. Well, this is going about a
+bajillion times too fast.
+bajillion times too fast.
+Be human playable, right?
+this thing actually work.
+I'm going to be very, very impressed if
+I'm going to be very, very impressed if
+this actually does anything.
+this actually does anything.
+I didn't think something like this would
+I didn't think something like this would
+work.
+I really didn't.
+Uh, I can just mess with the FPS, right?
+You always want it human playable when
+You always want it human playable when
+you can.
+you can.
+How the wait.
+Um, I should have done this on my
+I should have done this on the other
+I should have done this on the other
+machine, shouldn't I have? How fast does
+machine, shouldn't I have? How fast does
+this thing run?
+this thing run?
+curious.
+I'm going to train this actually. I
+I'm going to train this actually. I
+thought you made it sound like you wrote
+thought you made it sound like you wrote
+some dumb test environment, not like you
+some dumb test environment, not like you
+did something like legitimately
+did something like legitimately
+ridiculously freaking cool.
+ridiculously freaking cool.
+Kind of undersold it a little bit.
+That runs 7 mil.
+Uh, how is it rendering?
+Wait, dude. How is that rendering?
+What on earth?
+Oh yeah, this is going to need the
+Oh yeah, this is going to need the
+vision file, right?
+I'm reading what the trainer was
+I'm reading what the trainer was
+outputting.
+Um,
+Um,
+yeah, but like if you can actually get
+yeah, but like if you can actually get
+lowfi rendering to work in like
+lowfi rendering to work in like
+reasonably interesting scenes, even if
+reasonably interesting scenes, even if
+it's like really lowfi rendering, like
+it's like really lowfi rendering, like
+uh I'm not making any promises, but like
+uh I'm not making any promises, but like
+that's actually something that like we
+that's actually something that like we
+would be interested in for like contract
+would be interested in for like contract
+work.
+work.
+Like that's actually a pretty damn major
+Like that's actually a pretty damn major
+thing for us if that works.
+Like that would basically let us do like
+Like that would basically let us do like
+our own drone rendering and stuff. Uh as
+our own drone rendering and stuff. Uh as
+well as like when we do six degree of
+well as like when we do six degree of
+freedom arm, we could do that. Like you
+freedom arm, we could do that. Like you
+realize all this the stupid renderers,
+realize all this the stupid renderers,
+even their lowfi run ones run like
+even their lowfi run ones run like
+30,000 steps per second, 30,000 fps. You
+30,000 steps per second, 30,000 fps. You
+can get something that runs even like a
+can get something that runs even like a
+million
+I didn't think that that would work
+I didn't think that that would work
+because you're doing CPU rendering and I
+because you're doing CPU rendering and I
+thought that it would fundamentally be
+thought that it would fundamentally be
+too expensive of an operation.
+That actually works though.
+I'm running this on GP.
+I'm running this on GP.
+The rendering on GPU.
+The rendering on GPU.
+No, no, no. Cuz the environment is still
+No, no, no. Cuz the environment is still
+on CPU, isn't it?
+How in the hell?
+Well, you're right that it's not
+Well, you're right that it's not
+learning and this is a very simple
+learning and this is a very simple
+problem, so it should learn.
+problem, so it should learn.
+Um,
+nah. There's no way, right? Like, how
+nah. There's no way, right? Like, how
+the hell, right?
+Really?
+Four times three.
+Four times three.
+Is it like 8 by 8 by 3 or something?
+What?
+Okay. Well, I can help you fix this.
+0 to 255 the numbers.
+thing has like a
+help you out.
+help you out.
+This actually works. I will be actually
+This actually works. I will be actually
+like I will be very excited about this.
+Um
+Um
+I don't see how the hell you have this
+What's it called?
+What's it called?
+Wait, why is there no config for this
+Wait, why is there no config for this
+thing?
+Should
+Should
+be a config somewhere now.
+be a config somewhere now.
+What do you do
+or something like
+where did you put the config?
+Well, you must have cuz it rains.
+I don't see how
+config.
+config.
+Why don't I have it here? Oh, because
+Why don't I have it here? Oh, because
+I'm stupid. That's why.
+No, being stupid would do it.
+observations are empty.
+Hang on.
+Hey, they're going to finish AC today.
+Hang on, let me see.
+How do you like training on nothing?
+kind of a bad thing to mess up.
+You ran a sweep before you checked if
+You ran a sweep before you checked if
+you actually had any data.
+Where's compute observations?
+Wait, what?
+Wait, what?
+Yo, render is not getting cold, man.
+So, it's just not actually doing
+So, it's just not actually doing
+anything.
+anything.
+Yeah, you literally 7 million steps per
+Yeah, you literally 7 million steps per
+second cuz you're not actually
+second cuz you're not actually
+rendering.
+Yeah.
+Well, damn. That makes sense. Yeah.
+Well, damn. That makes sense. Yeah.
+I was going to say.
+So, um,
+So, um,
+were you the one asking about headless
+were you the one asking about headless
+rendering before or was that someone
+weird as I was when I was training it
+weird as I was when I was training it
+training when I was running without the
+um I mean it's possible that like it
+um I mean it's possible that like it
+learns to just go to uh
+learns to just go to uh
+like learns to actually just look at one
+like learns to actually just look at one
+of the boxes and then you can get one6th
+of the boxes and then you can get one6th
+of the reward.
+of the reward.
+Yeah, that can happen.
+But were you the one asking about
+But were you the one asking about
+headless rendering? Because kind of have
+headless rendering? Because kind of have
+to have that working. want to use rail
+to have that working. want to use rail
+functions to render's
+not here. Yeah, that's cool.
+did bear random at 25.
+I'm saying yeah. So like Ray isn't going
+I'm saying yeah. So like Ray isn't going
+to let you render not headless
+to let you render not headless
+by default. Have to get it to render
+by default. Have to get it to render
+headless. But here's the thing. This is
+headless. But here's the thing. This is
+why this stuff is usually hard, right?
+why this stuff is usually hard, right?
+Um,
+Um,
+like usually rendering is just very
+like usually rendering is just very
+slow. And then the type of stuff people
+slow. And then the type of stuff people
+do to make rendering go fast,
+stuff like this,
+like a batch renderer.
+For very simple scenes here,
+For very simple scenes here,
+they actually can get like over a
+they actually can get like over a
+million steps per second.
+million steps per second.
+Like for stuff like this, they're still
+Like for stuff like this, they're still
+getting like 200 to 300,000.
+And the high fidelity ones get lower,
+And the high fidelity ones get lower,
+right?
+Thanks for direction. Yeah, let me know
+Thanks for direction. Yeah, let me know
+like if you actually got something like
+like if you actually got something like
+that working. I'd be very surprised and
+that working. I'd be very surprised and
+there would be like immediate
+there would be like immediate
+applications of stuff.
+applications of stuff.
+Very immediate applic. It would
+Very immediate applic. It would
+basically mean that the entire graphics
+basically mean that the entire graphics
+community has been trolling this entire
+community has been trolling this entire
+time, which I doubt. It's possible.
+time, which I doubt. It's possible.
+Usually those guys actually know what
+Usually those guys actually know what
+they're talking about.
+Naively, I would think that it would be
+Naively, I would think that it would be
+more flops than you have on C2.
+Be my guess, though.
+Be my guess, though.
+I don't know. Maybe you end up getting
+I don't know. Maybe you end up getting
+like 10,000 steps per second per core.
+like 10,000 steps per second per core.
+And that's actually kind of useful even
+And that's actually kind of useful even
+even if you do that.
+way I'm beating those guys. Yeah,
+way I'm beating those guys. Yeah,
+he's in the uh the Discord. It's uh
+he's in the uh the Discord. It's uh
+Brennan
+Brennan
+Brennan Shackleton. He's in the Discord.
+Probably local in this area. Actually, I
+Probably local in this area. Actually, I
+met up with him at Stamford
+met up with him at Stamford
+HD.
+There's anything else in puff or
+There's anything else in puff or
+discord.
+I don't know. I got a little bit of time
+I don't know. I got a little bit of time
+before dinner.
+before dinner.
+I'm going to play a little bit with the
+I'm going to play a little bit with the
+um
+um
+play around with it.
+kind of curious.
+I like the little lowfi preview thing.
+I like the little lowfi preview thing.
+Like it's a nice end. It's just I don't
+Like it's a nice end. It's just I don't
+know how you actually get it to do that
+know how you actually get it to do that
+reasonably quickly.
+might be able to just do like a super
+might be able to just do like a super
+dumb software rendering. string
+dumb software rendering. string
+patient.
+Okay. So,
+Okay. So,
+23%
+23%
+time in the forward pass,
+time in the forward pass,
+4% time in copy.
+Have some ideas. What ideas have you
+Have some ideas. What ideas have you
+got? Rendering
+got? Rendering
+other stuff.
+Puppy time is kind of ludicrous.
+rendering.
+All right.
+All right.
+I mean, yeah, if you can get it to work,
+I mean, yeah, if you can get it to work,
+it would very good.
+I'd love to have like a super simple
+I'd love to have like a super simple
+software renderer. I don't know if it's
+software renderer. I don't know if it's
+actually going to do anything. Like to
+actually going to do anything. Like to
+be fair though, you can technically just
+be fair though, you can technically just
+paste a super simple software renderer
+paste a super simple software renderer
+into CUDA and have like a super simple
+into CUDA and have like a super simple
+GPU renderer, right?
+And vector grab color and pass those.
+And vector grab color and pass those.
+Yeah, you can do that. That's like what
+Yeah, you can do that. That's like what
+you're doing there is like lowfi ray
+you're doing there is like lowfi ray
+tracing, right?
+tracing, right?
+Lowfi ray trace.
+This is saying that it's basically
+This is saying that it's basically
+tapped.
+tapped.
+Come on, guys.
+Hey
+Hey
+guys are
+Okay. Hopefully they did not just do a
+Okay. Hopefully they did not just do a
+total hack job. I like other than the
+total hack job. I like other than the
+light, I don't really know.
+Uh I have some plans for some days I
+Uh I have some plans for some days I
+think.
+I have like one lunch thing
+I have like one lunch thing
+probably
+be.
+be.
+Oh,
+anyways, I fixed a bunch of
+anyways, I fixed a bunch of
+infrastructure today. Should be a lot
+infrastructure today. Should be a lot
+easier to install and use Puffer. I
+easier to install and use Puffer. I
+merged in a cool new racing environment
+merged in a cool new racing environment
+that you can play on the website
+that you can play on the website
+already. And uh oh, I forgot to stop my
+already. And uh oh, I forgot to stop my
+stream. I totally forgot to stop my
+stream. I totally forgot to stop my
+stream.
+What the hell are you all doing still
+What the hell are you all doing still
+watching me? Go do one.
+
+Kind: captions
+Language: en
+Okay,
+Okay,
+we live.
+we live.
+Hi.
+I've got some guys here doing uh work on
+I've got some guys here doing uh work on
+the AC,
+the AC,
+but I figured I would at least try to uh
+but I figured I would at least try to uh
+get a little bit of a stream in today.
+get a little bit of a stream in today.
+I've also just been doing the
+I've also just been doing the
+presentation for RLC. I had to make that
+presentation for RLC. I had to make that
+this morning.
+this morning.
+pretty well done. Okay, so let me show
+pretty well done. Okay, so let me show
+you what I want to do now because
+you what I want to do now because
+doing a million things lately and there
+doing a million things lately and there
+it's occurred to me that there's one
+it's occurred to me that there's one
+like
+like
+relatively at least not horribly
+relatively at least not horribly
+mindbending thing that I can do that's
+mindbending thing that I can do that's
+kind of important to have done for
+kind of important to have done for
+Puffer, which is uh just the the build
+Puffer, which is uh just the the build
+system, right?
+apparently. Well, we'll see whether this
+apparently. Well, we'll see whether this
+is just hallucinated garbage, but there
+is just hallucinated garbage, but there
+should be a better way.
+No build isolation package. This looks
+No build isolation package. This looks
+good.
+But is this actually in UV
+But is this actually in UV
+or is this hallucinated garbage?
+Ah, this is actually a thing. So,
+Ah, this is actually a thing. So,
+disable
+isolation when building source
+isolation when building source
+distributions for a specific package.
+distributions for a specific package.
+No build isolation package equals.
+So then I guess
+So then I guess
+the question here is there's a high
+the question here is there's a high
+product toml and a UV toml.
+What is the difference between these
+What is the difference between these
+two?
+If a pi project tol is found uv will
+If a pi project tol is found uv will
+reuv
+okay
+takes present
+can't do this with
+can't do this with
+can't do this with C extensions and CUDA
+can't do this with C extensions and CUDA
+can you say hey something
+let me see to what extent this is
+the most important thing I think at the
+the most important thing I think at the
+moment with puffer is we need the C
+moment with puffer is we need the C
+extensions and we need the CUDA
+extensions and we need the CUDA
+extensions Right.
+We do see extensions with with
+We do see extensions with with
+UV.
+Somebody's gotten this.
+Okay. So, this actually
+generated.
+Um,
+okay.
+This is kind of part of it.
+This is kind of part of it.
+I don't think that this works perfectly,
+I don't think that this works perfectly,
+right?
+Yeah. So, you still end up with setup
+Yeah. So, you still end up with setup
+tools even with UV and setup tools
+tools even with UV and setup tools
+sucks, but like these other things don't
+sucks, but like these other things don't
+freaking work,
+right?
+right?
+Welcome YouTube folks. I should say what
+Welcome YouTube folks. I should say what
+we're trying to do today to give folks a
+we're trying to do today to give folks a
+little bit of context. So, uh, I kind of
+little bit of context. So, uh, I kind of
+pride myself on having Puffer be just
+pride myself on having Puffer be just
+the easiest to use, like most
+the easiest to use, like most
+userfriendly, best supported RL project.
+userfriendly, best supported RL project.
+And it drives me batshit insane that
+And it drives me batshit insane that
+like we have so many people with setup
+like we have so many people with setup
+issues.
+issues.
+And like I've put a lot of time into it
+And like I've put a lot of time into it
+already, but like this is just so
+already, but like this is just so
+important that it's worth actually
+important that it's worth actually
+getting this right. And there kind of a
+getting this right. And there kind of a
+few different reasons that this stuff is
+few different reasons that this stuff is
+hard. So let me So first of all, if
+hard. So let me So first of all, if
+you're doing a pure a pure Python
+you're doing a pure a pure Python
+package with no extensions, no CUDA or
+package with no extensions, no CUDA or
+nothing, and you don't you're not doing
+nothing, and you don't you're not doing
+anything crazy, Python packaging is not
+anything crazy, Python packaging is not
+that hard. It's kind of insane that they
+that hard. It's kind of insane that they
+keep adding breaking changes to the
+keep adding breaking changes to the
+build system itself every other version,
+build system itself every other version,
+but it's not that bad. Now, as soon as
+but it's not that bad. Now, as soon as
+you start doing like C extensions
+you start doing like C extensions
+and CUDA extensions, uh, Python build
+and CUDA extensions, uh, Python build
+system just sucks.
+system just sucks.
+So, pretty much what I'm trying to
+So, pretty much what I'm trying to
+figure out how to do is how to wrangle
+figure out how to do is how to wrangle
+this in a way that users are going to
+this in a way that users are going to
+end up with fewer bugs.
+I took your advice on how to learn ML
+I took your advice on how to learn ML
+and it's going good so far. Very good.
+and it's going good so far. Very good.
+Welcome, Spirit.
+Welcome, Spirit.
+It does take some time. Honestly though,
+It does take some time. Honestly though,
+getting good at programming and ML
+getting good at programming and ML
+fundamentals is the hardest part.
+Like you can do a lot once you have
+Like you can do a lot once you have
+those fundamentals.
+XT modules.
+XT modules.
+This is kind of sucky because there's no
+This is kind of sucky because there's no
+way to do this automatically, right?
+set up. I'm trying, man. It's hard.
+set up. I'm trying, man. It's hard.
+That's why I figured we'd stream today,
+That's why I figured we'd stream today,
+right? We'll stream a little bit of it.
+I saw couple of the extra commands in
+I saw couple of the extra commands in
+your blog. Pretty easy.
+surface some of the help thread
+surface some of the help thread
+happy to go through. I mean ideally like
+happy to go through. I mean ideally like
+okay the best case scenario is that we
+okay the best case scenario is that we
+just work around this so that people
+just work around this so that people
+don't hit these bugs. The second best
+don't hit these bugs. The second best
+just thing is that we like minimize and
+just thing is that we like minimize and
+document, right? But I don't think I've
+document, right? But I don't think I've
+tried pretty hard to fix it but I don't
+tried pretty hard to fix it but I don't
+think I've tried hard enough just yet,
+think I've tried hard enough just yet,
+right? Like there are a few things I
+right? Like there are a few things I
+haven't explored and that's what I want
+haven't explored and that's what I want
+to do right now with you guys.
+to do right now with you guys.
+I have no idea what I'm doing with this
+I have no idea what I'm doing with this
+by the way. Like I am not I don't
+by the way. Like I am not I don't
+maintain a million packages. I don't
+maintain a million packages. I don't
+have deep knowledge of the build system.
+have deep knowledge of the build system.
+If anybody wants to help with this like
+If anybody wants to help with this like
+live here a Okay.
+where this is.
+So, like things that we haven't tried,
+So, like things that we haven't tried,
+right?
+right?
+I haven't really tried more native UV
+I haven't really tried more native UV
+style stuff.
+style stuff.
+I don't think there's a way to get rid
+I don't think there's a way to get rid
+of the setup.py
+of the setup.py
+uh thing entirely.
+uh thing entirely.
+I think that the most likely thing
+I think that the most likely thing
+that's going to happen is we'll at least
+that's going to happen is we'll at least
+find like some better workaround for how
+find like some better workaround for how
+we build extensions, but I think we're
+we build extensions, but I think we're
+still going to have to keep the big
+still going to have to keep the big
+messy setup.py and everything.
+messy setup.py and everything.
+Can't help. May the force be with you.
+Can't help. May the force be with you.
+Thank you.
+I honestly I think yeah this whole like
+I honestly I think yeah this whole like
+pi project tommo [ __ ] is
+pi project tommo [ __ ] is
+I think this was a dumb decision for
+I think this was a dumb decision for
+Python packaging in general like it
+Python packaging in general like it
+can't do all the stuff that you do. So
+can't do all the stuff that you do. So
+now it's like we have two things instead
+now it's like we have two things instead
+of one
+s Python
+s Python
+for scikit build core.
+Okay.
+Okay.
+About 9
+able to
+and
+and
+torch.
+The scikit build core just wrap setup
+The scikit build core just wrap setup
+tools.
+I want to see what this is.
+Oh, that's kind of ass, isn't it?
+Wait, does not use setup tool.
+Wait, does not use setup tool.
+They say it's glue and then they say it
+They say it's glue and then they say it
+doesn't use setup tools.
+Yeah. I don't want to see make
+Yeah. I don't want to see make
+face thing. This is dumb.
+This is worse, right?
+Yeah, I really don't want freaking cm
+Yeah, I really don't want freaking cm
+make
+if I can avoid it.
+I mean, that's like enough reason to not
+I mean, that's like enough reason to not
+use this as is, right?
+Yeah, this thing's incredibly stupid.
+Okay.
+You also end up having to use setup
+You also end up having to use setup
+tools anyways.
+build Just
+I think everything depends on setup. set
+I think everything depends on setup. set
+up tool, right?
+Like there are no alternatives to setup
+Like there are no alternatives to setup
+tools
+even though it's a pain.
+try
+try
+search like simp
+search like simp
+not really I honestly I don't use um
+not really I honestly I don't use um
+I don't use LLMs heavily enough for
+I don't use LLMs heavily enough for
+anything that like any of the like any
+anything that like any of the like any
+of the new versions really matter.
+Like basically all the big labs just
+Like basically all the big labs just
+leap frog each other every other month.
+leap frog each other every other month.
+It doesn't matter enough to me to like
+It doesn't matter enough to me to like
+use whatever one is currently people are
+use whatever one is currently people are
+saying the best and keep across all of
+saying the best and keep across all of
+them.
+What is Mason?
+This a thing.
+Heck is Mason.
+What is this
+build tool wrapper for
+this? Wait, is this also
+Yeah.
+We don't want any build system at all is
+We don't want any build system at all is
+the thing.
+Like we basically just want freaking GCC
+Like we basically just want freaking GCC
+and CC cache
+languages.
+languages.
+I mean basically all we want, right?
+I mean basically all we want, right?
+Well, there are a couple things. We need
+Well, there are a couple things. We need
+whatever the hell is required to build
+whatever the hell is required to build
+CUDA, which is NVCC plus whatever
+CUDA, which is NVCC plus whatever
+garbage is tied up with that, right?
+garbage is tied up with that, right?
+But then our actual C extensions,
+But then our actual C extensions,
+we literally just need GCC.
+And like everybody always is trying to
+And like everybody always is trying to
+stick make files into everything or C
+stick make files into everything or C
+make files at least just like no, stop
+make files at least just like no, stop
+it.
+it.
+Why does everybody always want to make
+Why does everybody always want to make
+the build system complicated as hell for
+the build system complicated as hell for
+no reason?
+Like, oh, just one more build system,
+Like, oh, just one more build system,
+bro. Just one more. Just one more build
+bro. Just one more. Just one more build
+system.
+I think you're stuck with setup tools no
+I think you're stuck with setup tools no
+matter what.
+Yeah, toml and setup pi.
+Yeah, toml and setup pi.
+So, basically stuck with what we have.
+So, basically stuck with what we have.
+But maybe we can do maybe we can
+But maybe we can do maybe we can
+basically just port chunks of this
+torch. What do you mean the lid torch?
+Oh, that's Jason. Sadly, I don't know
+Oh, that's Jason. Sadly, I don't know
+enough about Python.
+enough about Python.
+So, Tim, it's just like various build
+So, Tim, it's just like various build
+issues where people not being able to
+issues where people not being able to
+install easily because of uh things that
+install easily because of uh things that
+have to do with how we build extensions
+have to do with how we build extensions
+and setup tools versions and
+and setup tools versions and
+dependencies things.
+I think probably
+I got to go figure out between a UV file
+I got to go figure out between a UV file
+and uh
+and uh
+else. So,
+else. So,
+don't do this.
+Look, UV docs.
+it come. Yes, it is.
+it come. Yes, it is.
+So, right now we only ship
+So, right now we only ship
+basically we don't ship the pre-built
+basically we don't ship the pre-built
+CUDA, right? We just ship the source and
+CUDA, right? We just ship the source and
+then the package builds it on your
+then the package builds it on your
+system. Um because I really really don't
+system. Um because I really really don't
+want to have to ship our own CUDA
+want to have to ship our own CUDA
+kernels like our pre-built ones.
+kernels like our pre-built ones.
+Technically, if I have to down the line,
+Technically, if I have to down the line,
+we can do that. But that's like it is a
+we can do that. But that's like it is a
+massive massive pain in the ass to ship
+massive massive pain in the ass to ship
+a pre-built Cuda.
+Like technically, right, we could just
+Like technically, right, we could just
+ship binaries for everything and then
+ship binaries for everything and then
+like everything would work instantly. I
+like everything would work instantly. I
+don't think I'm ready to do that though
+don't think I'm ready to do that though
+because like
+because like
+having a having a way to ship binaries
+having a having a way to ship binaries
+on something that includes CUDA is just
+on something that includes CUDA is just
+horrible. If I didn't have any CUDA, I
+horrible. If I didn't have any CUDA, I
+think it would relatively okay.
+Okay. Okay. So, we have this
+Okay.
+UV decks.
+UV decks.
+Maybe this.
+Okay. So I guess we can try this stuff,
+Okay. So I guess we can try this stuff,
+right?
+Let me understand um their UV toml
+Let me understand um their UV toml
+versus pi project toml.
+Okay. So, I don't think we need this
+Okay. So, I don't think we need this
+unless is there anything.
+Yeah. So, it doesn't even make a UV toml
+Yeah. So, it doesn't even make a UV toml
+by default. It just does uh a pi project
+by default. It just does uh a pi project
+tunnel.
+Okay. So these add and remove are just
+Okay. So these add and remove are just
+like these straight up don't do
+like these straight up don't do
+anything, right? They just edit the
+anything, right? They just edit the
+toml.
+Yeah. So this is like a poetry.
+You don't want a lock file, right? This
+You don't want a lock file, right? This
+is like poetry style and lock file means
+is like poetry style and lock file means
+can't use package with anything because
+can't use package with anything because
+everything is pinned.
+I mean I guess it is kind of like a
+I mean I guess it is kind of like a
+lightweight docker in a sense, right?
+That's kind of like a weird in between
+That's kind of like a weird in between
+to me though. like pin all the packages
+to me though. like pin all the packages
+but not Docker is like it's kind of like
+but not Docker is like it's kind of like
+eh I really don't want things to go
+eh I really don't want things to go
+wrong but I don't like I don't actually
+wrong but I don't like I don't actually
+care enough to make sure things don't go
+care enough to make sure things don't go
+wrong. The docker makes sure things
+wrong. The docker makes sure things
+don't go wrong.
+Okay. So,
+Okay. So,
+I think we just need like move some
+I think we just need like move some
+stuff.
+I think like ultimately
+just do something like this.
+See what we can do with this.
+We have our camel here.
+We don't have a UV section at all.
+We can do like tool.uv
+We can do like tool.uv
+build
+uh
+thing like this.
+Oh, hang on before I do this.
+have tool UV
+have tool UV
+this
+this
+is
+then there should be a guide on this
+then there should be a guide on this
+right
+like to set this up with UV
+Hey, how's it going? Welcome,
+Hey, how's it going? Welcome,
+Desh. I am working on making Puffer
+Desh. I am working on making Puffer
+easier to build and install. Fewer users
+easier to build and install. Fewer users
+have errors.
+as a build back end.
+UV build backend only supports pure
+UV build backend only supports pure
+Python code
+projects with extension module.
+UV supports creating projects with the
+UV supports creating projects with the
+following build systems.
+What about just setup tools?
+Setup tools works, doesn't it?
+Okay, this is just the default.
+Okay.
+Okay.
+Well, we're getting somewhere here. I
+Well, we're getting somewhere here. I
+just read this.
+There's also project.scripts which goes
+There's also project.scripts which goes
+here.
+Are you on Discord?
+Are you on Discord?
+Uh, I shouldn't be on Discord right now,
+Uh, I shouldn't be on Discord right now,
+but Puffer is on Discord. Yeah.
+Is it UV pip install or is it UV build?
+Is it UV pip install or is it UV build?
+What is it?
+Or is it you pipe?
+Use UV to set the VN source. It then
+Use UV to set the VN source. It then
+uses PIP.
+Yeah, but like
+Yeah, but like
+you see the thing, right, where it's
+you see the thing, right, where it's
+just like, oh, it replaces PIP and all
+just like, oh, it replaces PIP and all
+these other tools except then you
+these other tools except then you
+actually still have to use them.
+Tread latest. No, I don't spirit. I
+Tread latest. No, I don't spirit. I
+really don't try like the latest any
+really don't try like the latest any
+model.
+Like generally in my view, it's like all
+Like generally in my view, it's like all
+the models just suck
+the models just suck
+and I basically just use them to look up
+and I basically just use them to look up
+docs
+pip. Yeah. I'm trying to see is does
+pip. Yeah. I'm trying to see is does
+that actually use pip or is it like
+that actually use pip or is it like
+their version of pip
+like I know I can do Yes.
+cannot
+cannot
+provide a value for scripts
+listed under
+listed under
+the hell is this?
+Why wouldn't I be able to do that?
+This is literally just
+is it dynamic scripts
+is it dynamic scripts
+dependencies?
+Oh,
+Oh,
+this doesn't need to be.
+this doesn't need to be.
+And I'll just do this.
+Wait. Project optional dependency build
+Wait. Project optional dependency build
+equals
+equals
+file.
+You see what this is
+You see what this is
+by default. UV builds all packages in
+by default. UV builds all packages in
+isolated virtual environments as per
+isolated virtual environments as per
+this absolutely braindad stupid pep that
+this absolutely braindad stupid pep that
+is the source of all evils because
+is the source of all evils because
+Python developers suck.
+Python developers suck.
+I'm sorry I misread that. It just says
+I'm sorry I misread that. It just says
+as per pep 517.
+as per pep 517.
+Some packages are incompatible with
+Some packages are incompatible with
+build isolation. It intentionally
+build isolation. It intentionally
+or unintentionally
+disable build isolation for specific
+disable build isolation for specific
+dependency. Add it to no build isolation
+dependency. Add it to no build isolation
+package.
+Yeah. Didn't you know this is an
+Yeah. Didn't you know this is an
+entertainment stream? Kidding. Disable
+build isolation for specific dependency.
+build isolation for specific dependency.
+Add it to no build isolation.
+I think that's good, right?
+Installing packages without build
+Installing packages without build
+isolation requires that the package
+isolation requires that the package
+build dependencies are installed in the
+build dependencies are installed in the
+project envir prior to installing the
+project envir prior to installing the
+package.
+This can be achieved by separating out
+This can be achieved by separating out
+the build dependency and the package
+the build dependency and the package
+that require them into distinct extras.
+that require them into distinct extras.
+For example,
+[Music]
+[Music]
+First, sync the extra build dependency.
+Damn it.
+Damn it.
+Swear to God, that guy, you're freaking
+seriously broke my build.
+I got to freaking ban him from doing
+I got to freaking ban him from doing
+[ __ ]
+This works good.
+Okay. So, let me understand this thing.
+Okay. So, let me understand this thing.
+Optional dependencies
+Optional dependencies
+build and compile.
+What you would do here is
+What you would do here is
+sync extra build. Well, no. This isn't
+sync extra build. Well, no. This isn't
+what a user would do because this is all
+what a user would do because this is all
+from source.
+setup tools wheel, Syon, Numpai, and
+Yeah. But build system is going to then
+Yeah. But build system is going to then
+mess it up, isn't it? Because it's go
+mess it up, isn't it? Because it's go
+get the wrong numpy or something.
+Wait. By default, the project will be
+Wait. By default, the project will be
+installed in editable mode. Okay.
+the UV sync and UV Done.
+Locking and syncing are automatic.
+Well, we don't want to use these, right?
+Well, we don't want to use these, right?
+Cuz this interface is dumb.
+Okay, so we do want the UV pip interface
+Okay, so we do want the UV pip interface
+cuz this is like mini docker without the
+cuz this is like mini docker without the
+guarantees and actually dumber.
+guarantees and actually dumber.
+This is like the poetry interface.
+Well, I mean, think about it for 3
+Well, I mean, think about it for 3
+seconds, right? What happens when you
+seconds, right? What happens when you
+have a lock file? You're basically
+have a lock file? You're basically
+telling everybody else to go screw
+telling everybody else to go screw
+themselves because you're going to pin
+themselves because you're going to pin
+every single version of every single
+every single version of every single
+library and therefore make it impossible
+library and therefore make it impossible
+to use with anything else. You're
+to use with anything else. You're
+basically saying your thing is the top
+basically saying your thing is the top
+level and everything else can just go
+level and everything else can just go
+screw itself.
+different purpose.
+different purpose.
+Well, but like even if I want to give
+Well, but like even if I want to give
+you that interface, right, the goal is
+you that interface, right, the goal is
+to have an interface where everything is
+to have an interface where everything is
+pinned so stuff doesn't break. This
+pinned so stuff doesn't break. This
+doesn't even guarantee that stuff
+doesn't even guarantee that stuff
+doesn't break because people have
+doesn't break because people have
+different system packages, right? The
+different system packages, right? The
+only thing that actually guarantees that
+only thing that actually guarantees that
+things don't break is you hand somebody
+things don't break is you hand somebody
+a Docker that actually guarantees that
+a Docker that actually guarantees that
+the thing will work.
+Okay. So,
+need numpai at build time. Torch at
+need numpai at build time. Torch at
+build time.
+980 run thing.
+First PC I built was two 980 Ti.
+Let's see what other garbage is in here
+Let's see what other garbage is in here
+that like we can potentially
+that like we can potentially
+improve upon.
+Literally running a Linux env. Yep.
+You
+library is I'm pretty sure the most What
+library is I'm pretty sure the most What
+do you mean?
+Well, presumably you're already running
+Well, presumably you're already running
+on a Linux host anyways or you're
+on a Linux host anyways or you're
+trolling, right?
+and like if you're not on a Linux host
+and like if you're not on a Linux host
+and you're worried about the Perf, like
+and you're worried about the Perf, like
+I'm way more worried about you trying to
+I'm way more worried about you trying to
+do crazy ass stuff on Mac going to break
+do crazy ass stuff on Mac going to break
+everything. Like I actually probably am
+everything. Like I actually probably am
+going to have to go get a Mac just
+going to have to go get a Mac just
+because of the number of Mac users who
+because of the number of Mac users who
+are getting stuck on dumb stuff because
+are getting stuck on dumb stuff because
+it's like just not a real like not a
+it's like just not a real like not a
+real dev platform.
+At least the Windows users will go like
+At least the Windows users will go like
+install WSL and get what's reasonably a
+install WSL and get what's reasonably a
+native Linux environment, a reasonably
+native Linux environment, a reasonably
+native Linux environment. Like the most
+native Linux environment. Like the most
+bugs, more bugs than anything come from
+bugs, more bugs than anything come from
+freaking Macs.
+versioning for LM6.
+Yeah, I like to just ignore all the
+Yeah, I like to just ignore all the
+LLMs.
+Kind of sick of the LM everything.
+It's like so dumb. If you just drive I'm
+It's like so dumb. If you just drive I'm
+in Palo Alto and if you just drive from
+in Palo Alto and if you just drive from
+Palo Alto to SF, you will go by
+Palo Alto to SF, you will go by
+literally dozens of the dumbest LLM B
+literally dozens of the dumbest LLM B
+billboards you've ever seen.
+Okay, so there you go. That's like five
+Okay, so there you go. That's like five
+mill steps per second breakout with
+mill steps per second breakout with
+compile.
+compile.
+Of
+course, it actually takes longer to
+course, it actually takes longer to
+train with compile than without because
+Same hardware was greater than one hell.
+Looks good.
+Okay. So, I guess I move.
+I don't know the format. Let me see.
+I don't know the format. Let me see.
+There's like
+this.
+Hey, Weston. I'm trying to make Puffer
+Hey, Weston. I'm trying to make Puffer
+easier to install and use.
+So, I guess we get project optional
+So, I guess we get project optional
+dependencies.
+Do cleaner Welcome.
+Oh, we don't need this [ __ ] anymore at
+Oh, we don't need this [ __ ] anymore at
+all.
+Doc is just a separate repo.
+See if this is broken.
+Docs is not the
+Docs is not the
+on
+cannot provide a value for optional
+cannot provide a value for optional
+dependencies listed under dynamic at the
+dependencies listed under dynamic at the
+same time
+same time
+dependencies and option.
+Okay, what does the dynamic flag do?
+You understand this?
+Okay, I'll be right back. Let me use a
+Okay, I'll be right back. Let me use a
+restroom real quick. We're going to
+restroom real quick. We're going to
+actually make some progress on this
+actually make some progress on this
+today. I think this will finally like
+today. I think this will finally like
+this will fix a lot of people's build
+this will fix a lot of people's build
+problems unless I break more stuff in
+problems unless I break more stuff in
+the process, which is why I wanted to
+the process, which is why I wanted to
+stream this. So hopefully you all can
+stream this. So hopefully you all can
+just help me test it. Be right back.
+guys doing water.
+By default, UV will only rebuild
+By default, UV will only rebuild
+reinstall local directory dependency.
+the root directory or if a source
+the root directory or if a source
+directory added a remote. What
+add cache key
+different
+not what we care about, right?
+What are you building?
+What are you building?
+Ultra high performance reinforcement
+Ultra high performance reinforcement
+learning. You can see all sorts of our
+learning. You can see all sorts of our
+demos on puffer.ai.
+demos on puffer.ai.
+Train agents. They'll run live in your
+Train agents. They'll run live in your
+browser. You can play the games
+browser. You can play the games
+yourself. Not all games. You can also
+yourself. Not all games. You can also
+like fly drones and do other things as
+like fly drones and do other things as
+well.
+well.
+Oh, it's a big open source project. I
+Oh, it's a big open source project. I
+stream most of the development. I'm a
+stream most of the development. I'm a
+researcher. Sometimes I'm doing cool
+researcher. Sometimes I'm doing cool
+algorithms. Sometimes, like today, I am
+algorithms. Sometimes, like today, I am
+just doing user stuff to try to make it
+just doing user stuff to try to make it
+easier for everybody to play with the
+easier for everybody to play with the
+software.
+software.
+Right now, I'm currently trying to
+Right now, I'm currently trying to
+figure out really fiddly things with uh
+figure out really fiddly things with uh
+users not being able to build packages
+users not being able to build packages
+as they should.
+I see you're at the fun part.
+I see you're at the fun part.
+I made my RLC talk earlier today.
+I made my RLC talk earlier today.
+I don't know. I felt like I'm just kind
+I don't know. I felt like I'm just kind
+of burnt on everything. So, I figured
+of burnt on everything. So, I figured
+out, okay, this is pretty easy and this
+out, okay, this is pretty easy and this
+is actually really important. So,
+is actually really important. So,
+it's just like it's easy. It just takes
+it's just like it's easy. It just takes
+forever to figure out the details. I
+forever to figure out the details. I
+figured I'd do this. When are we doing
+figured I'd do this. When are we doing
+net hack? Man,
+net hack? Man,
+are you done with RLC stuff yet?
+are you done with RLC stuff yet?
+It doesn't take that long to make these
+It doesn't take that long to make these
+presentations. All right, look. I'll
+presentations. All right, look. I'll
+show you my my slides
+here. We'll do the exclusive, not so
+here. We'll do the exclusive, not so
+exclusive for this stream preview.
+It's all open source. We have tons and
+It's all open source. We have tons and
+tons of like new RL people coming in and
+tons of like new RL people coming in and
+learning this stuff and contributing.
+learning this stuff and contributing.
+Where did I put it?
+Where did I put it?
+Show you my slides for this. I think
+Show you my slides for this. I think
+they're not bad.
+Boom.
+Boom.
+Training demo. The GIF, how we train it.
+Training demo. The GIF, how we train it.
+Near MMO demo.
+Near MMO demo.
+This, this, this, this. That's it.
+This, this, this, this. That's it.
+Not bad, right?
+Not bad, right?
+Honestly, only took me a couple hours to
+Honestly, only took me a couple hours to
+throw it together and then it took uh
+throw it together and then it took uh
+couple more hours going through it,
+couple more hours going through it,
+seeing if I liked it.
+seeing if I liked it.
+Not bad.
+Yeah. So, this article is not remotely
+Yeah. So, this article is not remotely
+what I was uh expecting.
+what I was uh expecting.
+Put a day or two in and we can chat
+Put a day or two in and we can chat
+about it at RLC. Sounds good.
+about it at RLC. Sounds good.
+Just packing and doing that hack.
+Just packing and doing that hack.
+Oh, yeah. That's going to be fun.
+I got a I got a giant pip I can send you
+I got a I got a giant pip I can send you
+as a bonus for uh getting Net Hack
+as a bonus for uh getting Net Hack
+working with Puffer.
+Send that off to Canada.
+We might have to set up an incentive so
+We might have to set up an incentive so
+that you actually get to net hack cuz I
+that you actually get to net hack cuz I
+want to see that stuff work too, man.
+That's it's big. I hope you have like
+That's it's big. I hope you have like
+you have space for it. It's like it's
+you have space for it. It's like it's
+like three or four feet.
+You're not getting one of those feels
+You're not getting one of those feels
+though. Those feels are mine.
+Two more years of intense research, so I
+Two more years of intense research, so I
+decided to take it easy. Yeah, fair
+decided to take it easy. Yeah, fair
+enough.
+Honestly, I just want to get back to the
+Honestly, I just want to get back to the
+intense research because it's a heck of
+intense research because it's a heck of
+a lot more chill than the crap I've been
+a lot more chill than the crap I've been
+doing lately.
+Growing company is not necessarily hard,
+Growing company is not necessarily hard,
+but it is a pain in the ass.
+What is this dynamic crap?
+What is this dynamic crap?
+Bugging baselines. Realized it was a
+Bugging baselines. Realized it was a
+really dumb bug in gymnasium's reward
+really dumb bug in gymnasium's reward
+normalization build perf. Eh,
+normalization build perf. Eh,
+dude, just delete all the rappers. Why
+dude, just delete all the rappers. Why
+are you using those? They suck.
+Oh, yeah. One thing to know is we by
+Oh, yeah. One thing to know is we by
+default we just clip negative one to
+default we just clip negative one to
+one.
+works. Yeah,
+works. Yeah,
+but we did it specifically cuz like some
+but we did it specifically cuz like some
+M's have dumb rewards and they just
+M's have dumb rewards and they just
+won't learn.
+won't learn.
+Don't
+Don't
+statistical standard deviation
+statistical standard deviation
+works. So, if it works well on
+works. So, if it works well on
+everything, we'd consider it, right?
+Flipping has been a really decent
+Flipping has been a really decent
+baseline for us so far.
+We have more core algorithm
+We have more core algorithm
+improvements, by the way, that I think
+improvements, by the way, that I think
+we're going to be able to make soon. At
+we're going to be able to make soon. At
+least one of them. We have one very
+least one of them. We have one very
+promising candidate
+and give Spencer a couple days to take a
+and give Spencer a couple days to take a
+crack at it before I
+crack at it before I
+publicize that. I think it's a decent
+publicize that. I think it's a decent
+one, though.
+one, though.
+Um,
+what the heck is this dynamic arc?
+I guess it just means comes from.
+Maybe we can just stick all the depths
+Maybe we can just stick all the depths
+in, right?
+I think we just like go through and
+I think we just like go through and
+move all this crap.
+I think you don't even need this
+I think you don't even need this
+everywhere, right?
+everywhere, right?
+probably.
+That's again.
+Crafter still
+kind of sad how like much attention
+kind of sad how like much attention
+stupid crafter has gotten. I guess now
+stupid crafter has gotten. I guess now
+at least some people are using craft
+at least some people are using craft
+decks is better. The original crafter m
+decks is better. The original crafter m
+is just terrible though. They had such a
+is just terrible though. They had such a
+freaking embarrassment.
+Okay, so this thing
+Okay, so this thing
+uh this thing just needs gymnasium. I
+uh this thing just needs gymnasium. I
+probably just need
+Um,
+Ed
+Ed
+surely doesn't need gym and gymnasium,
+surely doesn't need gym and gymnasium,
+right?
+right?
+Surely just needs this
+Surely just needs this
+agent is
+kind of pointless to be honest because
+you like you really just don't need it.
+you like you really just don't need it.
+Meta
+This should be a gymnasium. Yeah.
+Any hack doesn't need gem anymore,
+Any hack doesn't need gem anymore,
+right?
+Oh, shoot. It does.
+Oh, shoot. It does.
+That's dumb.
+Thought net hack got updated, didn't it?
+Nope. Freaking gem.
+Nope. Freaking gem.
+Ridiculous.
+And neural MMO. I don't remember. So all
+And neural MMO. I don't remember. So all
+of these is
+head.
+All this crap
+up Jen
+and Vizdoom.
+So,
+So,
+uh I should now be able to
+this comment.
+I believe this is how it works, right?
+I believe this is how it works, right?
+You do like this
+text.
+Hopefully this will be a little cleaner.
+Hopefully this will be a little cleaner.
+I don't know. We'll see.
+I don't know. We'll see.
+It'll actually make it easier to just
+It'll actually make it easier to just
+like swap in and out dependencies a
+like swap in and out dependencies a
+little bit, I guess.
+Eventually, I'm just going to end up
+Eventually, I'm just going to end up
+going and like dropping a bunch of these
+going and like dropping a bunch of these
+anyways, right? Like there's so many of
+anyways, right? Like there's so many of
+these old environments that like
+these old environments that like
+technically compile but are so stupid
+technically compile but are so stupid
+and broken that like nobody uses them
+and broken that like nobody uses them
+anyways.
+anyways.
+Plus they're slow.
+Plus they're slow.
+Kind of just bloat and there's not
+Kind of just bloat and there's not
+really a point in dealing with them.
+really a point in dealing with them.
+There was like a stage in building
+There was like a stage in building
+Puffer where I was kind of just trying
+Puffer where I was kind of just trying
+to make Puffer be the best thing between
+to make Puffer be the best thing between
+everything else. Like the best
+everything else. Like the best
+gobetween. Uh that's not what Puffer is
+gobetween. Uh that's not what Puffer is
+anymore though, right? like puffers. We
+anymore though, right? like puffers. We
+have our own stuff now in basically
+have our own stuff now in basically
+every category and it's better. So,
+every category and it's better. So,
+we're kind of just doing legacy support
+we're kind of just doing legacy support
+plus like a few historically important
+plus like a few historically important
+environments.
+environments.
+And most of these can just get killed.
+Now we get rid of optional depths I
+Now we get rid of optional depths I
+guess
+guess
+from here.
+No optional dynamic depths.
+extras.
+I guess common is like an
+I guess common is like an
+never do this though. Anyways,
+never do this though. Anyways,
+let's just get rid of this.
+Yeah. So this is like get rid of this
+should be better honestly. This be
+should be better honestly. This be
+simpler.
+Gym version not defined.
+Hang on.
+All requires
+Hey Tim, I just got Puffer installed and
+Hey Tim, I just got Puffer installed and
+training. It's really easy on Linux. How
+training. It's really easy on Linux. How
+do weights in the resources folder work?
+do weights in the resources folder work?
+Uh, they work like this, Tim. Well,
+Uh, they work like this, Tim. Well,
+actually, I'm not going to be able to
+actually, I'm not going to be able to
+show you on my local or I mean my
+show you on my local or I mean my
+remote.
+remote.
+Show you this.
+Show you this.
+They're really just for like they're
+They're really just for like they're
+mostly for our web demos and plus
+mostly for our web demos and plus
+debugging. But what you can technically
+debugging. But what you can technically
+do, let me see if I have my environment
+do, let me see if I have my environment
+set up correctly.
+All right. So, bash scripts build ocean
+All right. So, bash scripts build ocean
+like pong for local or faster web.
+like pong for local or faster web.
+And then if I just do / pong, this is
+And then if I just do / pong, this is
+running in pure C with no Python, no
+running in pure C with no Python, no
+PyTorch, nothing. So those resources
+PyTorch, nothing. So those resources
+files
+files
+um those bins in there are loading
+um those bins in there are loading
+weight or have weights in a binary
+weight or have weights in a binary
+format that can be loaded from state.
+This is just running through our like
+This is just running through our like
+standalone C neural network library that
+standalone C neural network library that
+we have as part of puffer.
+Pretty cool.
+Let's see how fed the puffer is today.
+Let's see how fed the puffer is today.
+Anybody
+Anybody
+feed the puffer?
+He's getting decently fed.
+He's getting decently fed.
+374 stars.
+374 stars.
+Funky puffer. Get him.
+So eventually after I don't know I have
+So eventually after I don't know I have
+a a a revenue milestone in my head where
+a a a revenue milestone in my head where
+once we hit it we'll we'll get like the
+once we hit it we'll we'll get like the
+puffer touched up and we'll get a a nice
+puffer touched up and we'll get a a nice
+animation set for him.
+All right. So this says
+says this works.
+That's not bad, right?
+Get rid of this crap.
+and this is still a bunch of crap.
+I think we're good.
+What is it? It's UV build or whatever.
+Build source.
+UV publish
+test that the package canal
+UV run.
+What we do like this?
+Okay.
+still doing material science. I'm not
+still doing material science. I'm not
+doing it right now, but yes, we are
+doing it right now, but yes, we are
+still doing material science. It's
+still doing material science. It's
+actually like one of my top two things.
+actually like one of my top two things.
+I'm just kind of burnt on hard things at
+I'm just kind of burnt on hard things at
+the moment. I'm doing easy but important
+the moment. I'm doing easy but important
+things right now,
+things right now,
+you
+Wait, what? It built a wheel.
+Wait, what? It built a wheel.
+How the hell did it just build a wheel?
+We'll try this one First,
+[Music]
+This works.
+Okay, this is fine.
+Uh, hang on. No, this one is expect this
+Uh, hang on. No, this one is expect this
+is expected. Fine.
+But I guess technically there is a wheel
+But I guess technically there is a wheel
+build, right?
+build, right?
+I could technically upload this wheel
+I could technically upload this wheel
+and then we would have like a wheel for
+and then we would have like a wheel for
+one specific setup. I guess it's not
+one specific setup. I guess it's not
+terrible.
+terrible.
+Not a bad Okay.
+What would be the best test of this?
+I guess what we'll do is I'll like I'll
+I guess what we'll do is I'll like I'll
+ship this to 3 0
+ship this to 3 0
+and um
+yeah I'll just I'll ship this to 3.0
+yeah I'll just I'll ship this to 3.0
+and we'll wait to do a new package
+and we'll wait to do a new package
+release. This will already be in the
+release. This will already be in the
+source.
+source.
+do that.
+Okay. So, good.
+Okay. So, good.
+Now we have our local
+and we can just do
+and we can just do
+integration possible or is it too slow?
+integration possible or is it too slow?
+Yeah, we've already had people do Majoko
+Yeah, we've already had people do Majoko
+stuff. If you really want to do Majoko,
+stuff. If you really want to do Majoko,
+I would suggest using MJX,
+I would suggest using MJX,
+there already a binding for it. I'm
+there already a binding for it. I'm
+pretty sure
+pretty sure
+there wouldn't really be a point to us
+there wouldn't really be a point to us
+doing our own M's with Majoko cuz it's
+doing our own M's with Majoko cuz it's
+like it's slow.
+like it's slow.
+Um,
+Um,
+we I think that's what's more likely is
+we I think that's what's more likely is
+we'll slowly expand. We'll do like a few
+we'll slowly expand. We'll do like a few
+of our own Sims and then the heavier
+of our own Sims and then the heavier
+stuff we'll try to bind like the least
+stuff we'll try to bind like the least
+bad existing Sims.
+See
+how this goes.
+Guda version.
+Okay. Well, this is like a separate,
+Okay. Well, this is like a separate,
+right?
+This is my janky setup.
+Let's check on
+Okay, this runs.
+Super old CPU. 90K is good.
+And it renders.
+And it renders.
+If I go to a different directory.
+Sometimes we have to check this.
+Sometimes we have to check this.
+Okay, this is a a wrong permissions
+Okay, this is a a wrong permissions
+directory, which is fine.
+We'll just do this random directory.
+Okay, that's a permissioning screw up.
+Okay, that's a permissioning screw up.
+That's fine. That's just WSL. It's
+That's fine. That's just WSL. It's
+trying to link to the correct place.
+trying to link to the correct place.
+I think that's fine.
+Let's uh put in the Discord.
+Where the heck were it? Screenshots.
+Yeah, I didn't see them.
+I guess they're probably on the PR.
+That works. We can get rid of it on the
+That works. We can get rid of it on the
+docks.
+How to not get bored while studying.
+How to not get bored while studying.
+Um, you're probably studying boring
+Um, you're probably studying boring
+stuff.
+stuff.
+Oh, there is no way to not get bored
+Oh, there is no way to not get bored
+when you're doing boring things.
+when you're doing boring things.
+That is not how it work.
+trying to think if there's anything else
+trying to think if there's anything else
+I can improve on the build system.
+This should basically fix.
+I guess there's still potentially Mac
+I guess there's still potentially Mac
+[ __ ] right?
+I think somebody reported like MPS not
+I think somebody reported like MPS not
+working or whatever.
+working or whatever.
+I mean, this should fix like the vast
+I mean, this should fix like the vast
+majority of stuff.
+Yeah, I think this is pretty decent
+Yeah, I think this is pretty decent
+overall.
+Okay, so we have set up.
+I think this is pretty much it. I think
+I think this is pretty much it. I think
+this is about the best we can do at the
+this is about the best we can do at the
+moment.
+I can technically ship the new wheels at
+I can technically ship the new wheels at
+some point
+some point
+like in a 3-1 or something,
+but this should be
+but this should be
+this should be some decent progress.
+this should be some decent progress.
+Okay, I didn't actually expect to get
+Okay, I didn't actually expect to get
+this done so quickly.
+this done so quickly.
+400 p.m. Probably still have another
+400 p.m. Probably still have another
+couple hours to do stuff.
+What do we do next?
+What do we do next?
+Body watching have M's? They want a PR.
+Body watching have M's? They want a PR.
+Mind reviewing an N or two.
+Where are all these M's that people are
+Where are all these M's that people are
+making?
+It doesn't have legs yet.
+Oh yeah, there's also this whisker racer
+Oh yeah, there's also this whisker racer
+end, right?
+I didn't play with that yet,
+but the guy who's uh who did that is not
+but the guy who's uh who did that is not
+upper targets. I am.
+All right. So, I see that there's the
+All right. So, I see that there's the
+lunar lander end and the racing end. I
+lunar lander end and the racing end. I
+could have sworn that people had more of
+could have sworn that people had more of
+them though, right?
+them though, right?
+Like, didn't people post a whole bunch
+Like, didn't people post a whole bunch
+of other stuff recent? Yeah. What's Now,
+of other stuff recent? Yeah. What's Now,
+this is Tetso doing stuff.
+Where's all the other Where are all the
+Where's all the other Where are all the
+other things? Okay, this one is good. I
+other things? Okay, this one is good. I
+can go through this.
+I mean, regardless, those are two good
+I mean, regardless, those are two good
+ends to get merged in. Right.
+ends to get merged in. Right.
+Go take a little look at the whisker
+Go take a little look at the whisker
+end. I'm going to have some fun.
+No such file or directory.
+Okay. So, you did not commit file, my
+Okay. So, you did not commit file, my
+guy.
+guy.
+I have a fresh PR somewhere.
+I have a fresh PR.
+We'll check this.
+Oh, holy. We have a lot of M's.
+Oh, holy. We have a lot of M's.
+Actually,
+this is great. We have like all sorts of
+this is great. We have like all sorts of
+off.
+Invert when you need them.
+Invert when you need them.
+Oh, he did ship me the weights. I can
+Oh, he did ship me the weights. I can
+yolo this for now.
+Pull this in.
+Oh, this is clean.
+Oh, this is clean.
+Look at this.
+I love this.
+Look at that.
+Look at that.
+That's a great environment.
+Shift M is a screenshot.
+Tab is full screen.
+So shift is me trying to control it
+So shift is me trying to control it
+myself and failing horribly.
+myself and failing horribly.
+But you can actually do it. I'm just
+But you can actually do it. I'm just
+bad.
+bad.
+Oh, it's actually doable. I'm just
+Oh, it's actually doable. I'm just
+really bad. Hang on.
+really bad. Hang on.
+Yeah, I'm just really
+Yeah, I'm just really
+Yeah. So, this is a good time to mention
+Yeah. So, this is a good time to mention
+I don't actually have a driver's
+I don't actually have a driver's
+license. Kind of just suck at all
+license. Kind of just suck at all
+control tasks
+control tasks
+before. I've never really tried that
+before. I've never really tried that
+hard, but still. Yeah.
+hard, but still. Yeah.
+environment.
+Racer.
+Next.
+Look for controls.
+Oh, it's M.
+I don't know what you're doing here.
+Oh, it's way easier to steer in first
+Oh, it's way easier to steer in first
+person.
+Cool.
+This is me playing now.
+This is me playing now.
+can tell because it looks awful. Now, if
+can tell because it looks awful. Now, if
+I take my hands off
+I take my hands off
+agent is way better.
+I do think this is probably going to OM
+I do think this is probably going to OM
+stuff eventually. I don't know what it's
+stuff eventually. I don't know what it's
+doing. Texture.
+Huge amount of args, man.
+We'll help him clean this up a little
+We'll help him clean this up a little
+bit, I'm sure.
+bit, I'm sure.
+Yeah, at least mess with it a little bit
+Yeah, at least mess with it a little bit
+for
+970 lines.
+see what this builds.
+We have this
+We have this
+decent, right?
+I just want to be able to switch the
+I just want to be able to switch the
+dang view.
+I want to get into ML and AI. What are
+I want to get into ML and AI. What are
+some good starter resources? The guide
+some good starter resources? The guide
+that I wrote exactly for this purpose
+that I wrote exactly for this purpose
+because I get this question all the
+because I get this question all the
+time.
+Here's the RL1.
+Here's the RL1.
+Here's the ML1.
+There you go.
+Got it.
+Honestly, the RL side of stuff is pretty
+Honestly, the RL side of stuff is pretty
+fun
+if you're interested in that as well.
+Okay, so now I should be able to shift
+Okay, so now I should be able to shift
+M.
+H.
+H.
+And I guess you go off the map.
+And I guess you go off the map.
+Hey, Puffer, you're not supposed to be
+Hey, Puffer, you're not supposed to be
+able to go off the map like that.
+Did it not reset correctly?
+Delete code. Nope.
+Do I want to change the colors of Yes,
+we leave this one as is, right?
+Oh, yeah. There's a bug.
+All
+right. So, now
+right. So, now
+go over to the better machine.
+go over to the better machine.
+Pull this
+And then we should be able to train this
+And then we should be able to train this
+thing. Yeah.
+3 million steps per second.
+But why is this thing trained for like
+But why is this thing trained for like
+no time at all?
+no time at all?
+Why is that a thing? Huh?
+Not like go up more. This full solved
+Oh, looks like it gets better.
+Yeah, this is like way better, right?
+Hello, men.
+Hello, men.
+Welcome.
+Okay.
+There we go. That's So that's fixed.
+I guess the fast does not work on him.
+Holy
+Uh yeah, that doesn't look like it's
+Uh yeah, that doesn't look like it's
+very good, does it?
+What the heck happened.
+enjoys nice picnics. See, I don't know
+enjoys nice picnics. See, I don't know
+what's wrong with him. Hang on. He's
+what's wrong with him. Hang on. He's
+just drunk or something.
+I told you guys not to give the puffers
+I told you guys not to give the puffers
+alcohol,
+alcohol,
+right?
+They don't do well with it.
+Just like not an amazing policy. It
+Just like not an amazing policy. It
+looks like
+now it works.
+now it works.
+Why' it crash a couple times first?
+Is that reproducible?
+Crashes.
+Crashes.
+Crashes.
+And it's chilling.
+Oh yeah, but this one doesn't work.
+Probably a policy mismatch.
+Well, we will leave this to um
+Well, we will leave this to um
+to Kinvert, but this is a very nice
+to Kinvert, but this is a very nice
+environment to play with, right?
+Quite nice.
+Oh, you know why? Hang on. I know. I'm
+Oh, you know why? Hang on. I know. I'm
+just
+just
+Hang on.
+Why dumb?
+There we go.
+Way better. All right.
+Very nice environment.
+Good enough to stick an initial version
+Good enough to stick an initial version
+on the website. No.
+Uh, we need [ __ ] a lot of stuff we need
+Uh, we need [ __ ] a lot of stuff we need
+to do for this.
+Okay. So, that's nice. Nice.
+Already up to date. It says
+and we need a screen as well, right?
+Where do we put whisker eraser?
+I kind of just like roughly order them
+I kind of just like roughly order them
+kind of according to complexity.
+Couple of these are misplaced. I think
+I think I put it before freeway.
+I think I put it before freeway.
+It's a good spot for it. Honestly,
+It's a good spot for it. Honestly,
+Pac-Man's not getting enough love.
+Pac-Man's not getting enough love.
+I think I like swap a few things
+I think I like swap a few things
+actually.
+Like let's put Pac-Man before Freeway.
+Honestly, Freeway Freeway needs to go
+Honestly, Freeway Freeway needs to go
+down a little bit. It's a pretty simple
+down a little bit. It's a pretty simple
+end
+end
+can go before Breakout maybe.
+And then
+And then
+I think Whisker Racer goes right after
+I think Whisker Racer goes right after
+Tetris.
+That'd be my preference.
+Not this one.
+What is this thing?
+Car racing.
+I
+around track.
+action.
+I totally just messed this crap up,
+I totally just messed this crap up,
+didn't I?
+didn't I?
+Copy this. Undo all this garbage that I
+Copy this. Undo all this garbage that I
+just did.
+Yes.
+Yes.
+Description
+eight.
+And then we can actually uh change But
+hey, Tim. So, it seems like creating
+hey, Tim. So, it seems like creating
+realistic Sims just got a lot more
+realistic Sims just got a lot more
+valuable.
+valuable.
+Uh, what are you referencing?
+Uh yes, but that doesn't necessarily
+Uh yes, but that doesn't necessarily
+mean you need realistic Sims, right?
+mean you need realistic Sims, right?
+Those are not necessarily the same
+Those are not necessarily the same
+statement. In fact, it's not how we do
+statement. In fact, it's not how we do
+stuff very often.
+You can get something that works in the
+You can get something that works in the
+real world without having a realistic
+real world without having a realistic
+sim.
+wrong with this.
+Um,
+Um,
+well that yes, but like so for instance
+well that yes, but like so for instance
+the drone sim that we're working on,
+the drone sim that we're working on,
+it's just very heavily domain
+it's just very heavily domain
+randomized, right?
+randomized, right?
+It's not like we're modeling
+It's not like we're modeling
+turbulence and stuff, but we're going to
+turbulence and stuff, but we're going to
+be able to have it work just by heavily
+be able to have it work just by heavily
+domain randomizing.
+domain randomizing.
+You'll see.
+Uh, why did this like server thing not
+Uh, why did this like server thing not
+work?
+Did this not just work?
+I want to see if it works on the
+I want to see if it works on the
+website. Why the hell does this not
+Where are we right now? And we're
+Where are we right now? And we're
+banning this bot first. Then uh where
+banning this bot first. Then uh where
+we're at is
+we're getting a new environment onto the
+we're getting a new environment onto the
+website for you all to play with.
+doesn't work either, right?
+All right. Well,
+All right. Well,
+do I want to just push this to the
+do I want to just push this to the
+website and see if it works?
+Hey,
+quiet stream day. But then again, I'm
+quiet stream day. But then again, I'm
+kind of just working on random crap. So,
+it's important random crap though, some
+it's important random crap though, some
+sense. We did push today the uh the
+sense. We did push today the uh the
+build fixes that should make it a heck
+build fixes that should make it a heck
+of a lot easier for you all use Puffer
+of a lot easier for you all use Puffer
+and get it installed without having to
+and get it installed without having to
+post a million support messages.
+Let's see. We'll see whether this gets
+Let's see. We'll see whether this gets
+onto the website in a second.
+And we let's depending we might will
+And we let's depending we might will
+either uh check two other things. Might
+either uh check two other things. Might
+be able to merge one more today. We
+be able to merge one more today. We
+might not.
+Website's not broken immediately.
+No racing envy either. Go check on the
+No racing envy either. Go check on the
+AC, guys.
+Yeah, turns out installing AC is a bunch
+Yeah, turns out installing AC is a bunch
+of work.
+80° in my office.
+Die in here.
+Where's the Whisker Racing thumbnail?
+Where's the Whisker Racing thumbnail?
+What the heck?
+Why is my thumbnail not
+should be now?
+There's the updated moa, right? Like I
+There's the updated moa, right? Like I
+actually got the is updated, but somehow
+actually got the is updated, but somehow
+this other thing didn't.
+Eraser thumbnail whisk.
+Oh, that's why
+There we go.
+That'll take a little to build.
+That'll take a little to build.
+See what other stuff people have
+See what other stuff people have
+submitted me.
+submitted me.
+Go open my presents.
+Don't
+wait. What is this?
+wait. What is this?
+This one I'm going to have to look at.
+This one I'm going to have to look at.
+They're docs for protein like how to run
+They're docs for protein like how to run
+and use Neptune.
+There you go my guy
+There you go my guy
+right here.
+right here.
+Neptune B
+Neptune B
+protein is the default.
+Hey, look at that.
+Job Kvert. Please do finish your
+Job Kvert. Please do finish your
+environment. But uh I like it. Well
+environment. But uh I like it. Well
+done.
+Well, submitted me cool things
+Well, submitted me cool things
+on this page. Installation.
+What?
+Doc type fix and a different clearer
+Doc type fix and a different clearer
+table of
+if I like this.
+Yep.
+Suppose we'll merge this for now. We'll
+Suppose we'll merge this for now. We'll
+see if I like it.
+Wait, this is you.
+Wait, this is you.
+If you're still here, kidding. What is
+If you're still here, kidding. What is
+this
+artillery?
+What?
+I was asking for help. Not sure you want
+I was asking for help. Not sure you want
+to pull this. Oh, okay. Yeah. What do
+to pull this. Oh, okay. Yeah. What do
+you want me to do? One other cool thing
+you want me to do? One other cool thing
+in here, isn't there?
+This is actually a pretty high-fi one,
+This is actually a pretty high-fi one,
+right? Like, this is a pretty decent
+right? Like, this is a pretty decent
+one.
+Big PR.
+Take a PR.
+know where he is. Where's the amazing
+Working on an aim trainer sim.
+Working on an aim trainer sim.
+Having trouble getting it to
+Having trouble getting it to
+six cubes of a random color.
+Are you rendering it?
+Are you rendering it?
+Wait, are you doing rendering during
+Wait, are you doing rendering during
+training?
+that like at all fast.
+Okay. So, I don't like the on this page
+Okay. So, I don't like the on this page
+banner, but everything else is fine.
+banner, but everything else is fine.
+Style changes are good.
+kept asking about this. So, we're going
+kept asking about this. So, we're going
+to fix this real quick.
+Okay, we're going to commit this to make
+Okay, we're going to commit this to make
+sure I didn't break anything.
+Polished a few things.
+This end looks so freaking good.
+Okay. So,
+pretty good.
+Happy with this overall.
+Okay. So, next would be
+Okay. So, next would be
+quick little end.
+Okay, so quick review of this.
+I don't know why you would do this in
+I don't know why you would do this in
+here.
+Okay.
+Yeah, but it's fine.
+Yeah, but it's fine.
+Left, right, up, down. Okay, this is
+Left, right, up, down. Okay, this is
+fine.
+fine.
+Like pretty standard.
+Does not include a policy.
+silly mem set but fine
+random room. Okay. So it is
+random room. Okay. So it is
+substantially randomized.
+But just randomize both and it's good.
+A very good way to clear. Good job on
+A very good way to clear. Good job on
+this.
+this.
+agent
+back on grid. This is pretty sane.
+back on grid. This is pretty sane.
+There's a timeout as well, which is
+There's a timeout as well, which is
+squares. I'd say this is a pretty
+squares. I'd say this is a pretty
+generous timeout, but sure.
+And what's it have in here? Size.
+And what's it have in here? Size.
+Okay. And then the OBS is just eight
+Okay. And then the OBS is just eight
+channel. Good
+channel. Good
+seven action.
+seven action.
+Pretty
+Pretty
+solid little end.
+Uh, something screwy happened here.
+Something very screwy happened there.
+Where was this guy?
+Heck.
+Convert.
+Okay, so
+Okay, so
+this has 3,000 freaking messages.
+That's freaking crazy.
+Well, that's all pretty well set then.
+Lot of scrolling. Yeah.
+Lot of scrolling. Yeah.
+Well, I'm trying to just like fix a lot
+Well, I'm trying to just like fix a lot
+of the common stuff, right? But I think
+of the common stuff, right? But I think
+I fixed a lot of the setup today. I got
+I fixed a lot of the setup today. I got
+one new person's env onto the website,
+one new person's env onto the website,
+though. They like usually people PR like
+though. They like usually people PR like
+90% completed ends. It's much better if
+90% completed ends. It's much better if
+you actually just finish it, but if it's
+you actually just finish it, but if it's
+cool, I kind of merge it anyways and
+cool, I kind of merge it anyways and
+just say, "Hey, please finish this."
+just say, "Hey, please finish this."
+Like this one's really cool, but it's
+Like this one's really cool, but it's
+only 90% done. Really?
+Isn't this kind of just cool to watch?
+It'd be a lot cooler if it drove
+It'd be a lot cooler if it drove
+smoothly.
+To be fair, also the policy could better
+To be fair, also the policy could better
+like I said 90% done environment.
+Welcome, Snow White.
+As am I.
+As am I.
+That without a sweep. Uh, I don't know
+That without a sweep. Uh, I don't know
+what they did.
+what they did.
+This is not a particularly difficult
+This is not a particularly difficult
+environment though. Uh there is a bug in
+environment though. Uh there is a bug in
+it that's making it a lot harder to
+it that's making it a lot harder to
+learn. Like I found that uh it can go
+learn. Like I found that uh it can go
+off the road and basically just get
+off the road and basically just get
+stuck off the road. I told Kvert to fix
+stuck off the road. I told Kvert to fix
+that. That's his end.
+Some of the ends that like are just
+Some of the ends that like are just
+really cool. I love Tetris. This env is
+really cool. I love Tetris. This env is
+probably one of the coolest to just
+probably one of the coolest to just
+watch.
+watch.
+Like just look how cool this thing is.
+Might
+as well just ask my question for that
+as well just ask my question for that
+end then. What is the advice on cleaning
+end then. What is the advice on cleaning
+up the last bit of the policy? My sweeps
+up the last bit of the policy? My sweeps
+haven't been getting to getting it where
+haven't been getting to getting it where
+I would like. Uh well, what's your end?
+usually that there's a pro like it's
+usually that there's a pro like it's
+usually a problem with your data like
+usually a problem with your data like
+odds are wrong or like it's not
+odds are wrong or like it's not
+resetting correctly. Like this one here
+resetting correctly. Like this one here
+for instance like sometimes it goes off
+for instance like sometimes it goes off
+the map and actually just like stays
+the map and actually just like stays
+running around off the map.
+running around off the map.
+Okay, let me see what this vision test
+Okay, let me see what this vision test
+thing is.
+thing is.
+Not that much code.
+800 million steps and doesn't solve.
+800 million steps and doesn't solve.
+Okay.
+Okay. So this is every axis I guess
+have a renderer on it.
+Wait, what?
+Oh, I see. So, this is
+Oh, I see. So, this is
+you're using ray stuff, but you're not
+you're using ray stuff, but you're not
+actually rendering it. Using it for
+actually rendering it. Using it for
+raycast. Is that it?
+Does it actually work?
+Kind of curious. I'm going to go take a
+Kind of curious. I'm going to go take a
+look at your end real quick.
+This is kind of a cool environment.
+This is kind of a cool environment.
+Yeah.
+Vision test.
+for really important policies that worth
+for really important policies that worth
+doing best of by a large number of
+um
+um
+if your training is stable you would
+if your training is stable you would
+probably just train for longer.
+It really shouldn't be that unstable.
+It really shouldn't be that unstable.
+Like you can technically construct
+Like you can technically construct
+environments where sometimes it works
+environments where sometimes it works
+and sometimes it doesn't, but usually
+and sometimes it doesn't, but usually
+you should end up with um pretty
+you should end up with um pretty
+consistent training curves.
+Mostly like the crazy training curves
+Mostly like the crazy training curves
+are mostly a relic of um just all sorts
+are mostly a relic of um just all sorts
+of other jank.
+You need our camera separately or
+You need our camera separately or
+something, man.
+I got Rayb.
+Yeah, you did. Okay. Where do I get it
+Yeah, you did. Okay. Where do I get it
+from?
+from?
+I just need this one file.
+Just this
+Okay. Well, this is going about a
+Okay. Well, this is going about a
+bajillion times too fast.
+bajillion times too fast.
+Be human playable, right?
+this thing actually work.
+I'm going to be very, very impressed if
+I'm going to be very, very impressed if
+this actually does anything.
+this actually does anything.
+I didn't think something like this would
+I didn't think something like this would
+work.
+I really didn't.
+Uh, I can just mess with the FPS, right?
+You always want it human playable when
+You always want it human playable when
+you can.
+you can.
+How the wait.
+Um, I should have done this on my
+I should have done this on the other
+I should have done this on the other
+machine, shouldn't I have? How fast does
+machine, shouldn't I have? How fast does
+this thing run?
+this thing run?
+curious.
+I'm going to train this actually. I
+I'm going to train this actually. I
+thought you made it sound like you wrote
+thought you made it sound like you wrote
+some dumb test environment, not like you
+some dumb test environment, not like you
+did something like legitimately
+did something like legitimately
+ridiculously freaking cool.
+ridiculously freaking cool.
+Kind of undersold it a little bit.
+That runs 7 mil.
+Uh, how is it rendering?
+Wait, dude. How is that rendering?
+What on earth?
+Oh yeah, this is going to need the
+Oh yeah, this is going to need the
+vision file, right?
+I'm reading what the trainer was
+I'm reading what the trainer was
+outputting.
+Um,
+Um,
+yeah, but like if you can actually get
+yeah, but like if you can actually get
+lowfi rendering to work in like
+lowfi rendering to work in like
+reasonably interesting scenes, even if
+reasonably interesting scenes, even if
+it's like really lowfi rendering, like
+it's like really lowfi rendering, like
+uh I'm not making any promises, but like
+uh I'm not making any promises, but like
+that's actually something that like we
+that's actually something that like we
+would be interested in for like contract
+would be interested in for like contract
+work.
+work.
+Like that's actually a pretty damn major
+Like that's actually a pretty damn major
+thing for us if that works.
+Like that would basically let us do like
+Like that would basically let us do like
+our own drone rendering and stuff. Uh as
+our own drone rendering and stuff. Uh as
+well as like when we do six degree of
+well as like when we do six degree of
+freedom arm, we could do that. Like you
+freedom arm, we could do that. Like you
+realize all this the stupid renderers,
+realize all this the stupid renderers,
+even their lowfi run ones run like
+even their lowfi run ones run like
+30,000 steps per second, 30,000 fps. You
+30,000 steps per second, 30,000 fps. You
+can get something that runs even like a
+can get something that runs even like a
+million
+I didn't think that that would work
+I didn't think that that would work
+because you're doing CPU rendering and I
+because you're doing CPU rendering and I
+thought that it would fundamentally be
+thought that it would fundamentally be
+too expensive of an operation.
+That actually works though.
+I'm running this on GP.
+I'm running this on GP.
+The rendering on GPU.
+The rendering on GPU.
+No, no, no. Cuz the environment is still
+No, no, no. Cuz the environment is still
+on CPU, isn't it?
+How in the hell?
+Well, you're right that it's not
+Well, you're right that it's not
+learning and this is a very simple
+learning and this is a very simple
+problem, so it should learn.
+problem, so it should learn.
+Um,
+nah. There's no way, right? Like, how
+nah. There's no way, right? Like, how
+the hell, right?
+Really?
+Four times three.
+Four times three.
+Is it like 8 by 8 by 3 or something?
+What?
+Okay. Well, I can help you fix this.
+0 to 255 the numbers.
+thing has like a
+help you out.
+help you out.
+This actually works. I will be actually
+This actually works. I will be actually
+like I will be very excited about this.
+Um
+Um
+I don't see how the hell you have this
+What's it called?
+What's it called?
+Wait, why is there no config for this
+Wait, why is there no config for this
+thing?
+Should
+Should
+be a config somewhere now.
+be a config somewhere now.
+What do you do
+or something like
+where did you put the config?
+Well, you must have cuz it rains.
+I don't see how
+config.
+config.
+Why don't I have it here? Oh, because
+Why don't I have it here? Oh, because
+I'm stupid. That's why.
+No, being stupid would do it.
+observations are empty.
+Hang on.
+Hey, they're going to finish AC today.
+Hang on, let me see.
+How do you like training on nothing?
+kind of a bad thing to mess up.
+You ran a sweep before you checked if
+You ran a sweep before you checked if
+you actually had any data.
+Where's compute observations?
+Wait, what?
+Wait, what?
+Yo, render is not getting cold, man.
+So, it's just not actually doing
+So, it's just not actually doing
+anything.
+anything.
+Yeah, you literally 7 million steps per
+Yeah, you literally 7 million steps per
+second cuz you're not actually
+second cuz you're not actually
+rendering.
+Yeah.
+Well, damn. That makes sense. Yeah.
+Well, damn. That makes sense. Yeah.
+I was going to say.
+So, um,
+So, um,
+were you the one asking about headless
+were you the one asking about headless
+rendering before or was that someone
+weird as I was when I was training it
+weird as I was when I was training it
+training when I was running without the
+um I mean it's possible that like it
+um I mean it's possible that like it
+learns to just go to uh
+learns to just go to uh
+like learns to actually just look at one
+like learns to actually just look at one
+of the boxes and then you can get one6th
+of the boxes and then you can get one6th
+of the reward.
+of the reward.
+Yeah, that can happen.
+But were you the one asking about
+But were you the one asking about
+headless rendering? Because kind of have
+headless rendering? Because kind of have
+to have that working. want to use rail
+to have that working. want to use rail
+functions to render's
+not here. Yeah, that's cool.
+did bear random at 25.
+I'm saying yeah. So like Ray isn't going
+I'm saying yeah. So like Ray isn't going
+to let you render not headless
+to let you render not headless
+by default. Have to get it to render
+by default. Have to get it to render
+headless. But here's the thing. This is
+headless. But here's the thing. This is
+why this stuff is usually hard, right?
+why this stuff is usually hard, right?
+Um,
+Um,
+like usually rendering is just very
+like usually rendering is just very
+slow. And then the type of stuff people
+slow. And then the type of stuff people
+do to make rendering go fast,
+stuff like this,
+like a batch renderer.
+For very simple scenes here,
+For very simple scenes here,
+they actually can get like over a
+they actually can get like over a
+million steps per second.
+million steps per second.
+Like for stuff like this, they're still
+Like for stuff like this, they're still
+getting like 200 to 300,000.
+And the high fidelity ones get lower,
+And the high fidelity ones get lower,
+right?
+Thanks for direction. Yeah, let me know
+Thanks for direction. Yeah, let me know
+like if you actually got something like
+like if you actually got something like
+that working. I'd be very surprised and
+that working. I'd be very surprised and
+there would be like immediate
+there would be like immediate
+applications of stuff.
+applications of stuff.
+Very immediate applic. It would
+Very immediate applic. It would
+basically mean that the entire graphics
+basically mean that the entire graphics
+community has been trolling this entire
+community has been trolling this entire
+time, which I doubt. It's possible.
+time, which I doubt. It's possible.
+Usually those guys actually know what
+Usually those guys actually know what
+they're talking about.
+Naively, I would think that it would be
+Naively, I would think that it would be
+more flops than you have on C2.
+Be my guess, though.
+Be my guess, though.
+I don't know. Maybe you end up getting
+I don't know. Maybe you end up getting
+like 10,000 steps per second per core.
+like 10,000 steps per second per core.
+And that's actually kind of useful even
+And that's actually kind of useful even
+even if you do that.
+way I'm beating those guys. Yeah,
+way I'm beating those guys. Yeah,
+he's in the uh the Discord. It's uh
+he's in the uh the Discord. It's uh
+Brennan
+Brennan
+Brennan Shackleton. He's in the Discord.
+Probably local in this area. Actually, I
+Probably local in this area. Actually, I
+met up with him at Stamford
+met up with him at Stamford
+HD.
+There's anything else in puff or
+There's anything else in puff or
+discord.
+I don't know. I got a little bit of time
+I don't know. I got a little bit of time
+before dinner.
+before dinner.
+I'm going to play a little bit with the
+I'm going to play a little bit with the
+um
+um
+play around with it.
+kind of curious.
+I like the little lowfi preview thing.
+I like the little lowfi preview thing.
+Like it's a nice end. It's just I don't
+Like it's a nice end. It's just I don't
+know how you actually get it to do that
+know how you actually get it to do that
+reasonably quickly.
+might be able to just do like a super
+might be able to just do like a super
+dumb software rendering. string
+dumb software rendering. string
+patient.
+Okay. So,
+Okay. So,
+23%
+23%
+time in the forward pass,
+time in the forward pass,
+4% time in copy.
+Have some ideas. What ideas have you
+Have some ideas. What ideas have you
+got? Rendering
+got? Rendering
+other stuff.
+Puppy time is kind of ludicrous.
+rendering.
+All right.
+All right.
+I mean, yeah, if you can get it to work,
+I mean, yeah, if you can get it to work,
+it would very good.
+I'd love to have like a super simple
+I'd love to have like a super simple
+software renderer. I don't know if it's
+software renderer. I don't know if it's
+actually going to do anything. Like to
+actually going to do anything. Like to
+be fair though, you can technically just
+be fair though, you can technically just
+paste a super simple software renderer
+paste a super simple software renderer
+into CUDA and have like a super simple
+into CUDA and have like a super simple
+GPU renderer, right?
+And vector grab color and pass those.
+And vector grab color and pass those.
+Yeah, you can do that. That's like what
+Yeah, you can do that. That's like what
+you're doing there is like lowfi ray
+you're doing there is like lowfi ray
+tracing, right?
+tracing, right?
+Lowfi ray trace.
+This is saying that it's basically
+This is saying that it's basically
+tapped.
+tapped.
+Come on, guys.
+Hey
+Hey
+guys are
+Okay. Hopefully they did not just do a
+Okay. Hopefully they did not just do a
+total hack job. I like other than the
+total hack job. I like other than the
+light, I don't really know.
+Uh I have some plans for some days I
+Uh I have some plans for some days I
+think.
+I have like one lunch thing
+I have like one lunch thing
+probably
+be.
+be.
+Oh,
+anyways, I fixed a bunch of
+anyways, I fixed a bunch of
+infrastructure today. Should be a lot
+infrastructure today. Should be a lot
+easier to install and use Puffer. I
+easier to install and use Puffer. I
+merged in a cool new racing environment
+merged in a cool new racing environment
+that you can play on the website
+that you can play on the website
+already. And uh oh, I forgot to stop my
+already. And uh oh, I forgot to stop my
+stream. I totally forgot to stop my
+stream. I totally forgot to stop my
+stream.
+What the hell are you all doing still
+What the hell are you all doing still
+watching me? Go do one.

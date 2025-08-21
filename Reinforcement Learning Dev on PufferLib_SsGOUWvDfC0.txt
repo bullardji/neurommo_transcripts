@@ -1,0 +1,2729 @@
+Kind: captions
+Language: en
+We're back live. Hi. Like I said, one
+We're back live. Hi. Like I said, one
+quick meeting
+quick meeting
+done. And we are back
+done. And we are back
+to removing the demons from
+RL. Oops. Let me reply to one message
+RL. Oops. Let me reply to one message
+first.
+All
+All
+right, we should be good.
+right, we should be good.
+Um, stream on. Oh, yeah, we're good.
+Um, stream on. Oh, yeah, we're good.
+Okay. Uh so Spencer is going to be back
+Okay. Uh so Spencer is going to be back
+in not very
+long and uh he is going to be with uh uh
+long and uh he is going to be with uh uh
+have the fixes I requested for G GPU
+have the fixes I requested for G GPU
+drive and then we will debug
+drive and then we will debug
+that. Me sure I don't miss messages from
+him. Yeah. And in the
+him. Yeah. And in the
+meantime, we will go back to hyperp
+shenanigans. In fact, I think it looks
+shenanigans. In fact, I think it looks
+like we have uh we have some runs
+like we have uh we have some runs
+here. Yeah, 126 runs.
+here. Yeah, 126 runs.
+Perfect. So, this was just running the
+Perfect. So, this was just running the
+whole time. And we can see that the vast
+whole time. And we can see that the vast
+majority of
+majority of
+these got stuck way down here.
+these got stuck way down here.
+So, let's figure out why why that
+So, let's figure out why why that
+happens.
+Right. So this is where uh the issue is.
+Right. So this is where uh the issue is.
+Let me explain a little bit what uh what
+Let me explain a little bit what uh what
+is going on right here. Um
+is going on right here. Um
+so the main issue that we've been having
+so the main issue that we've been having
+is that the hyperprem sweep tries to run
+is that the hyperprem sweep tries to run
+really short experiments for some
+really short experiments for some
+reason.
+reason.
+even though it's it's expressly designed
+even though it's it's expressly designed
+not to do that like like that's a common
+not to do that like like that's a common
+issue that literally this is algorithm
+issue that literally this is algorithm
+was designed to prevent happening. So I
+was designed to prevent happening. So I
+don't know why this is happening. We're
+don't know why this is happening. We're
+going to figure that out right now.
+exceptions. Are we in the right
+branch? No config
+for breakout.
+So, this is going to run one experiment
+So, this is going to run one experiment
+and then it will hit our uh our break
+and then it will hit our uh our break
+point and fix up this API stuff in the
+point and fix up this API stuff in the
+meanwhile. We uh moved exceptions into
+meanwhile. We uh moved exceptions into
+the main package to make it just easier.
+Hang on. Let me just address one thing.
+May I have a couple messages? Take care
+May I have a couple messages? Take care
+of them. We'll get back to this one
+of them. We'll get back to this one
+second.
+My bad, guys. I just have uh every so
+My bad, guys. I just have uh every so
+often I get random client messages that
+often I get random client messages that
+I have to go back and forth
+on. All
+right. So, we did hit this break point.
+Um target is
+Um target is
+04. It just picks a random number. So
+04. It just picks a random number. So
+this is trying to be 40%. So we should
+this is trying to be 40%. So we should
+expect this to be uh 40% of the way
+expect this to be uh 40% of the way
+between 20 mil and 80 mil. So this is
+between 20 mil and 80 mil. So this is
+going to be 50 milish.
+going to be 50 milish.
+Is that good math? No, that's not good
+Is that good math? No, that's not good
+math at all. Uh
+math at all. Uh
+30. 40ish mil maybe. Yeah, 40ish mil.
+lots
+lots
+of I've just been context switching all
+of I've just been context switching all
+day. So,
+day. So,
+uh, you know, hopping around on two
+uh, you know, hopping around on two
+different technical projects and a bunch
+different technical projects and a bunch
+of different messages. But, uh, the
+of different messages. But, uh, the
+thing that I am trying to figure out at
+thing that I am trying to figure out at
+the moment is just why the sweep doesn't
+the moment is just why the sweep doesn't
+work. If we get this sweep working
+work. If we get this sweep working
+today, be in a good spot because that
+today, be in a good spot because that
+kind of unblocks us on everything else
+kind of unblocks us on everything else
+in puffer.
+All
+All
+right. I think that conversation's
+right. I think that conversation's
+wrapped.
+wrapped.
+Um
+hopefully whoever is still there
+hopefully whoever is still there
+watching after I've been doing this for
+watching after I've been doing this for
+the last 20 minutes, thank you. It will
+the last 20 minutes, thank you. It will
+be back to your regularly scheduled RL
+be back to your regularly scheduled RL
+content for the next bit.
+content for the next bit.
+Um,
+okay. The weight is 04.
+Target or no target is point4 GP log C
+norm
+norm
+min is
+min is
+negative
+negative
+max is a bit over one.
+So, okay, that gives us suggestions of
+course. And
+now we have our
+now we have our
+index
+index
+BPC best index is 19.
+seconds. That seems low,
+right? 1.4 mil. 19 seconds should be
+right? 1.4 mil. 19 seconds should be
+like 30ish mil maybe.
+Can I just unnormalize this
+thing? Wait, it's in this space, right?
+thing? Wait, it's in this space, right?
+GP log C norm. So then it's like
+GP log C norm. So then it's like
+log d maxus log
+log d maxus log
+n
+plus and then it's x for
+this
+this
+23. That's not far off.
+We suggested 23 and we get um VPC of
+19. It's a little
+low. It's a little low when you would
+low. It's a little low when you would
+expect it to be high,
+expect it to be high,
+right? Because you're multiplying by GPY
+right? Because you're multiplying by GPY
+norm. you're taking score times uh the
+norm. you're taking score times uh the
+distance from the predicted cost. So
+distance from the predicted cost. So
+higher scoring would be higher
+higher scoring would be higher
+cost. Okay, so that's kind of weird.
+I'm trying to think how we debug
+this. I mean, it's like not impossible
+this. I mean, it's like not impossible
+that this result is what is what you'd
+that this result is what is what you'd
+get, but like overall, this is not what
+get, but like overall, this is not what
+you expect from a sweep. It should not
+you expect from a sweep. It should not
+be running this many
+be running this many
+uh this many
+uh this many
+lowcost runs.
+lowcost runs.
+It should be like roughly evenly
+It should be like roughly evenly
+distributed.
+I guess why don't we check what GPY norm
+I guess why don't we check what GPY norm
+is at that index,
+right? Wait,
+what? GPY
+norm. That doesn't make any sense,
+right? This doesn't make any sense at
+right? This doesn't make any sense at
+all because that shouldn't be
+maximized. They're all negative.
+maximized. They're all negative.
+Well, maybe that's the issue. Hang
+on. Oh, negative one.
+What? Hang on. Optimize.
+[Laughter]
+[Laughter]
+Oh my gosh, how tired was I when I wrote
+Oh my gosh, how tired was I when I wrote
+that? Okay.
+Okay. That is such a dumb bug. I was
+Okay. That is such a dumb bug. I was
+literally minimizing instead of
+literally minimizing instead of
+maximizing. That's a
+classic. Okay, we'll run a few uh a few
+classic. Okay, we'll run a few uh a few
+little experiments on this.
+Cool. So, that should be something. Uh,
+Cool. So, that should be something. Uh,
+that is Spencer messaging
+me that he's going to be a little bit
+me that he's going to be a little bit
+longer.
+longer.
+I got dinner at
+6, but I will be back after that in case
+6, but I will be back after that in case
+he's not done before then. All right, so
+he's not done before then. All right, so
+we'll let this run a few quick
+we'll let this run a few quick
+experiments and uh we will essentially
+experiments and uh we will essentially
+just see whether this does the correct
+just see whether this does the correct
+thing. Yeah, if you maximize instead of
+thing. Yeah, if you maximize instead of
+minima, I'm surprised it actually did
+minima, I'm surprised it actually did
+anything in that case. That's kind of
+anything in that case. That's kind of
+ridiculous. Oh, you know what that is?
+ridiculous. Oh, you know what that is?
+It just it tries to push to the min or
+It just it tries to push to the min or
+the max, right? Because
+like Yeah, that's why they're like a few
+like Yeah, that's why they're like a few
+experiments like way up high and
+experiments like way up high and
+then it's probably just trying to push
+then it's probably just trying to push
+all the way up or all the way down,
+all the way up or all the way down,
+something like that.
+So lo and behold, this is running for a
+So lo and behold, this is running for a
+long amount of
+time. If anything, now this probably
+time. If anything, now this probably
+biases to be too
+high actually. Hang on. Was that in How
+high actually. Hang on. Was that in How
+long has that been there? How long has
+long has that been there? How long has
+that bug been there?
+It would just be in sweeps,
+right? And
+right? And
+hyperp. Okay, so this was correct here.
+hyperp. Okay, so this was correct here.
+This was just an introduced bug when um
+This was just an introduced bug when um
+I screwed this up. So, we had this
+I screwed this up. So, we had this
+working correctly in all of our earlier
+working correctly in all of our earlier
+tests. All of them are fine. The
+tests. All of them are fine. The
+algorithm is completely valid. It's just
+algorithm is completely valid. It's just
+that we uh screwed this up in the most
+that we uh screwed this up in the most
+recent cleanup
+patch. This is just fine.
+So, what's this? This is 80 mil and then
+So, what's this? This is 80 mil and then
+78 mil and then it went up to 96
+mil and now it's doing like a 20
+mil and now it's doing like a 20
+mil 25 mil. Yeah, that's fine. We'll see
+mil 25 mil. Yeah, that's fine. We'll see
+if it does a bunch of those.
+if it does a bunch of those.
+I'll be surprised if it still does
+this. 202 should be like a 30 mil.
+Okay, now I'm starting to get
+suspicious. It should be
+picking pretty much randomly in this
+picking pretty much randomly in this
+range.
+Okay. So, I mean, this is now what I'd
+Okay. So, I mean, this is now what I'd
+expect, but now it's
+expect, but now it's
+like now it does feel like it's going to
+like now it does feel like it's going to
+the high end or the low end completely,
+the high end or the low end completely,
+right?
+I mean this is like the clearest
+I mean this is like the clearest
+possible objective though. It's pick a
+possible objective though. It's pick a
+experiment length, try to run something
+experiment length, try to run something
+that's near that rank length but also
+that's near that rank length but also
+try to run something that is high score.
+try to run something that is high score.
+All it
+is. Okay. Now biasing towards high score
+is. Okay. Now biasing towards high score
+here if it's going to start doing that
+here if it's going to start doing that
+is actually more reasonable.
+So wait what is true of that? Let's say
+So wait what is true of that? Let's say
+that we have a perfect model. Okay. So
+that we have a perfect model. Okay. So
+then for any reasonable like any parto
+then for any reasonable like any parto
+front we should have if you pick a
+front we should have if you pick a
+specific
+specific
+cost. Um and the metric is distance from
+cost. Um and the metric is distance from
+cost times score. You should never run
+cost times score. You should never run
+anything that is lower cost than your
+anything that is lower cost than your
+expected target. you can run something
+expected target. you can run something
+that is higher cost than the expected
+that is higher cost than the expected
+target if the reward curve is very
+target if the reward curve is very
+steep. So if you're expecting that you
+steep. So if you're expecting that you
+can do substantially better by running
+can do substantially better by running
+something that is higher cost you will
+something that is higher cost you will
+do so. So then this does incentivize you
+do so. So then this does incentivize you
+to fill out it kind of incentivizes you
+to fill out it kind of incentivizes you
+to fill out the elbow I think of the
+to fill out the elbow I think of the
+curve a little bit which is what we want
+curve a little bit which is what we want
+right like if your PTO front this is a
+right like if your PTO front this is a
+train run but imagine this is a PTO
+train run but imagine this is a PTO
+front then
+front then
+like you're going to fill out like
+like you're going to fill out like
+probably about this much of the curve
+probably about this much of the curve
+but you're not going to fill out over
+but you're not going to fill out over
+here because like if you fill out here
+here because like if you fill out here
+you can move a little bit in the x axis
+you can move a little bit in the x axis
+and do way better in the y- axis.
+and do way better in the y- axis.
+There's not really a point to doing
+There's not really a point to doing
+really lowc cost runs like this. But
+really lowc cost runs like this. But
+actually I think this algorithm is is
+actually I think this algorithm is is
+exactly what we want in theory and uh we
+exactly what we want in theory and uh we
+will see why it is doing this thing.
+will see why it is doing this thing.
+Now you would not expect it to
+be doing really like short runs very
+be doing really like short runs very
+often.
+I mean, it is possible it does just
+I mean, it is possible it does just
+doesn't have a great cost model
+yet. It's like too many short
+yet. It's like too many short
+runs. Oh, no, no, no. Hang on. It's not
+runs. Oh, no, no, no. Hang on. It's not
+too many short runs. This just bad
+too many short runs. This just bad
+performing runs. That's different. Okay,
+performing runs. That's different. Okay,
+this is actually fine. Few short runs,
+this is actually fine. Few short runs,
+some long runs. Yeah, this is totally
+some long runs. Yeah, this is totally
+fine. And this one does quite well as
+fine. And this one does quite well as
+well.
+So perfect.
+So yeah, we're getting like a good
+So yeah, we're getting like a good
+spread now. So we'll see whether this
+spread now. So we'll see whether this
+actually translates into uh
+actually translates into uh
+good score numbers here. It seems like
+good score numbers here. It seems like
+we're already getting like way more
+we're already getting like way more
+reasonable stuff though,
+reasonable stuff though,
+right? Two, three of these. Yeah.
+And then the goal of this
+And then the goal of this
+is as you fill in the
+is as you fill in the
+curve, you get incentivized to find you
+curve, you get incentivized to find you
+naturally based on the shape of the
+naturally based on the shape of the
+curve should get incentivized to find
+curve should get incentivized to find
+more and more uh time efficient runs.
+more and more uh time efficient runs.
+Okay,
+Okay,
+good. This is good.
+I don't know why it's still doing like a
+I don't know why it's still doing like a
+reasonable Oh, see this is not even a uh
+reasonable Oh, see this is not even a uh
+a short run, right? This is like a long
+a short run, right? This is like a long
+run in time steps. It's just really
+run in time steps. It's just really
+fast. Okay. Yeah, we're happy here.
+fast. Okay. Yeah, we're happy here.
+We're happy. I think that we push this.
+We're happy. I think that we push this.
+We run this on mazes and other
+We run this on mazes and other
+things. Um I'm going to run this not on
+things. Um I'm going to run this not on
+my local so that we can actually like
+my local so that we can actually like
+keep the results.
+and we will go from
+and we will go from
+there. 528. Got half an
+there. 528. Got half an
+hour. All right. Start by launching
+hour. All right. Start by launching
+these
+runs. This one's not going to do
+runs. This one's not going to do
+anything because it was like optimizing.
+anything because it was like optimizing.
+It was minimizing instead of
+maximizing.
+Boom. We're already in the DMX.
+I don't know. Just give it some
+name. And then this
+one. We also now know why this isn't
+one. We also now know why this isn't
+working,
+right? Attach.
+And now this should actually be
+And now this should actually be
+something resembling like a good
+sweep.
+sweep.
+Perfect. Yeah, it's a little silly to
+Perfect. Yeah, it's a little silly to
+see like our sweep stuff completely
+see like our sweep stuff completely
+breaking. Um, but hey, it's a dev
+breaking. Um, but hey, it's a dev
+branch. We know that this algorithm
+branch. We know that this algorithm
+works incredibly well. So, as soon as
+works incredibly well. So, as soon as
+this is fixed and maybe we fix a few
+this is fixed and maybe we fix a few
+more small things with this, we should
+more small things with this, we should
+be getting some very good
+be getting some very good
+results.
+Um, yeah, why don't we open this this
+Um, yeah, why don't we open this this
+graph up real quick? Oh,
+graph up real quick? Oh,
+yeah. We've got the baseline. We got one
+yeah. We've got the baseline. We got one
+run that seems to match baseline here.
+run that seems to match baseline here.
+And then we'll see uh how this stuff
+And then we'll see uh how this stuff
+does as it runs more.
+does as it runs more.
+No reason to keep this going on local.
+No reason to keep this going on local.
+This will just run on this new sweep. Uh
+This will just run on this new sweep. Uh
+and then next couple hours this will
+and then next couple hours this will
+finish
+finish
+running GPU drive stuff for
+Spencer. I would like to get GPU drive
+Spencer. I would like to get GPU drive
+working on this release branch if
+working on this release branch if
+possible.
+possible.
+I PR
+it well is going to have new code
+it well is going to have new code
+anyways. We'll have to do like a manual
+anyways. We'll have to do like a manual
+merge into
+that. Yeah, Spencer should be back
+that. Yeah, Spencer should be back
+soonish maybe. depends how long he's
+soonish maybe. depends how long he's
+eating is. Uh let's look at some other
+eating is. Uh let's look at some other
+stuff in the meantime.
+stuff in the meantime.
+So today we figured out the sweep
+So today we figured out the sweep
+errors. Uh we have we got training
+errors. Uh we have we got training
+running stably first of all and then we
+running stably first of all and then we
+also figured out the sweep errors for
+also figured out the sweep errors for
+the most part. We will continue
+the most part. We will continue
+fine-tuning sweeps, but at least now
+fine-tuning sweeps, but at least now
+it's finding like reasonable quality
+it's finding like reasonable quality
+runs in here.
+runs in here.
+Uh we will have results by later
+Uh we will have results by later
+tonight from the initial sweeps so we
+tonight from the initial sweeps so we
+can actually see what is going
+on. Back to the to-dos
+here. There are a few small things but I
+here. There are a few small things but I
+think mostly at this point it's the two
+think mostly at this point it's the two
+things that on that like I mentally I
+things that on that like I mentally I
+think I'm like the most bottlenecked on.
+think I'm like the most bottlenecked on.
+uh before being able to do the release.
+uh before being able to do the release.
+Well, really three
+Well, really three
+things. It's going to be the getting
+things. It's going to be the getting
+sweeps working nice and stable, which I
+sweeps working nice and stable, which I
+think we hopefully have most of that
+think we hopefully have most of that
+working
+working
+now.
+now.
+Um the rest of the general code cleanup
+Um the rest of the general code cleanup
+because like I don't want to like do the
+because like I don't want to like do the
+final experiment and then just do some
+final experiment and then just do some
+code cleanup and screw up the results or
+code cleanup and screw up the results or
+change the results. I'd like to have
+change the results. I'd like to have
+most of the general code cleanup done
+most of the general code cleanup done
+before we lock in final
+before we lock in final
+results. And I guess the other thing
+results. And I guess the other thing
+that's just going to take a while is
+that's just going to take a while is
+CUDA packaging. You know, why don't we
+CUDA packaging. You know, why don't we
+just start looking
+just start looking
+into the CUDA packaging stuff.
+Um because I just I know that's going to
+Um because I just I know that's going to
+be a pain. But like the issue right now
+be a pain. But like the issue right now
+is we've just been shipping source for
+is we've just been shipping source for
+puffer lib so far. We would ideally like
+puffer lib so far. We would ideally like
+to ship
+wheels. I think for the C extensions we
+wheels. I think for the C extensions we
+can get CI build wheel working for that.
+But for for
+But for for
+CUDA, let me see. GitHub build CUDA
+CUDA, let me see. GitHub build CUDA
+extends. Is this a
+thing? This is from
+2021. One has to install a matching CUDA
+2021. One has to install a matching CUDA
+systemwide.
+Did they ever end up doing this? Because
+Did they ever end up doing this? Because
+if PyTorch included CUDA dev tools
+Yeah. So it is a big file as well.
+Yeah. Okay. So, they just didn't do
+this. Building CUDA extensions has been
+this. Building CUDA extensions has been
+long.
+Yeah. Holy. So, this just kept going on
+Yeah. Holy. So, this just kept going on
+for a
+while. Okay. This is the exact error
+while. Okay. This is the exact error
+that I
+that I
+hit. This is the exact error that I hit
+hit. This is the exact error that I hit
+that for like an hour
+yesterday. Porch version available
+yesterday. Porch version available
+within the isolated build environment
+within the isolated build environment
+should be the same as the outside
+should be the same as the outside
+environment.
+Yeah. So this
+is this is the exact
+thing. Okay.
+Did this keep going? No, I already hit
+Did this keep going? No, I already hit
+the end of
+this. How does PyTorch do this? PieTorch
+this. How does PyTorch do this? PieTorch
+you just you install the version for
+you just you install the version for
+your CUDA,
+your CUDA,
+right? So PyTorch just builds and ships
+right? So PyTorch just builds and ships
+all the
+all the
+binaries. Like you don't just pip
+binaries. Like you don't just pip
+install PyTorch and expect it to work
+install PyTorch and expect it to work
+and everything, right? It works on like
+and everything, right? It works on like
+most
+most
+cards, but like you have to get it only
+cards, but like you have to get it only
+works if you have like a reasonable CUDA
+version. So like yeah, this is default
+version. So like yeah, this is default
+CUDA
+CUDA
+126. So this has to match, right?
+and they just give a dash dash. They
+and they just give a dash dash. They
+give an index
+URL. So I mean I could do
+URL. So I mean I could do
+this for
+binaries. Let me think what the the
+binaries. Let me think what the the
+options are. Right. Option one is we
+options are. Right. Option one is we
+have a good CPU fallback.
+I wonder how bad it is if you use the
+I wonder how bad it is if you use the
+CPU version,
+right? We could probably optimize it so
+right? We could probably optimize it so
+that the CPU fallback is not bad.
+Right. And
+then no, because the thing is when you
+then no, because the thing is when you
+you pip install it, if you pip install
+you pip install it, if you pip install
+puffer liib, then you still will not
+puffer liib, then you still will not
+have
+have
+uh you still just won't have access to
+uh you still just won't have access to
+the CUDA version like the CUDA dev most
+the CUDA version like the CUDA dev most
+of the
+of the
+time. Okay. So if you pip install
+time. Okay. So if you pip install
+without
+without
+CUDAV, then you get the CPU version. If
+CUDAV, then you get the CPU version. If
+you pip install with
+you pip install with
+CUDAV, then you get the GPU
+CUDAV, then you get the GPU
+version.
+Um, we could do
+that. And that's still just shipping
+that. And that's still just shipping
+estist, I guess.
+It would be such a better user
+It would be such a better user
+experience
+experience
+though, like tremendously better user
+though, like tremendously better user
+experience if you could just pip install
+experience if you could just pip install
+the thing that you want and it
+works. But then that requires me
+shipping for every Python version and
+shipping for every Python version and
+every CUDA version.
+It's annoying that you have to build it
+It's annoying that you have to build it
+on a system with a GPU,
+on a system with a GPU,
+right? That doesn't seem like you should
+right? That doesn't seem like you should
+have to do that. You have to
+build Can you automate CUDA builds?
+build Can you automate CUDA builds?
+Automate CUDA
+Automate CUDA
+builds GitHub.
+Hang on. Is this a
+thing? Can there be like a GitHub action
+to I mean you just need to build from
+to I mean you just need to build from
+like a certain like different Dockers or
+like a certain like different Dockers or
+whatever, right?
+I mean the best case scenario here,
+I mean the best case scenario here,
+right? What I would like for Puffer is
+right? What I would like for Puffer is
+I'd like you to just be able to kind of
+I'd like you to just be able to kind of
+like you do with Torch, you pip install
+like you do with Torch, you pip install
+Puffer LIIB, you make sure that you get
+Puffer LIIB, you make sure that you get
+the one for your torch drivers if it's
+the one for your torch drivers if it's
+different from the uh the current
+different from the uh the current
+defaults, and then you call it a day. I
+defaults, and then you call it a day. I
+don't want to have to
+don't want to have to
+manually go and like spin up VMs and do
+manually go and like spin up VMs and do
+all of
+that because it's like for
+every so what would it be? I think it's
+every so what would it be? I think it's
+like for every every CUDA version that
+like for every every CUDA version that
+you have to have, you spin up a
+you have to have, you spin up a
+different dev
+different dev
+container minimum,
+container minimum,
+right? And then let's say that you have
+right? And then let's say that you have
+like uh multiple different Pythons
+like uh multiple different Pythons
+installed. So then you just need you
+installed. So then you just need you
+need one container for each CUDA version
+need one container for each CUDA version
+you ship. And then from each of those
+you ship. And then from each of those
+you're going to ship let's say we do
+you're going to ship let's say we do
+like Python what 310 11 12 maybe
+like Python what 310 11 12 maybe
+13. So like however many versions of
+13. So like however many versions of
+Python we're going to support as
+well. And then if none of those work,
+well. And then if none of those work,
+then it has to go to the fallback, which
+then it has to go to the fallback, which
+is just going to install
+is just going to install
+um the CPU version of our extension and
+um the CPU version of our extension and
+will work as long as you have
+GCC. So I have an idea of how we can
+GCC. So I have an idea of how we can
+automate the builds. You do like CI
+automate the builds. You do like CI
+build wheel.
+Okay. So this is
+Okay. So this is
+like this is something right working
+like this is something right working
+examples translate
+examples translate
+to. So they do this
+right
+right
+install and I guess they ship
+kernels. Should they have like an action
+kernels. Should they have like an action
+or
+thing.
+Should be an actions or whatever in
+Should be an actions or whatever in
+here, shouldn't
+there? Apparently, you can do
+it. Is this the only one that has CUDA
+it. Is this the only one that has CUDA
+listed? It is.
+many
+Linux for multiple GPU architecture.
+I don't usually like do this type of
+I don't usually like do this type of
+stuff. So, let me see if we can figure
+stuff. So, let me see if we can figure
+something out. And it looks like we're
+something out. And it looks like we're
+going to have to do the GPU drive stuff
+going to have to do the GPU drive stuff
+after uh after
+after uh after
+dinner. The plan is I'm going to look at
+dinner. The plan is I'm going to look at
+this for a few. See if I can because I'm
+this for a few. See if I can because I'm
+going to have to do this like probably
+going to have to do this like probably
+next week. So, I'm just I figured it's a
+next week. So, I'm just I figured it's a
+good idea to take a look at what I'm I'm
+good idea to take a look at what I'm I'm
+dealing with.
+dealing with.
+Um, I'm going to go get dinner in a few
+Um, I'm going to go get dinner in a few
+and then uh I'm going to be back after
+and then uh I'm going to be back after
+dinner hopefully if Spencer is around.
+dinner hopefully if Spencer is around.
+Get GPU drive training very well and to
+Get GPU drive training very well and to
+monitor the sweep
+results. Where do you actually see like
+results. Where do you actually see like
+what what like scripts they're running
+what what like scripts they're running
+to do this? Oh, hang on. CIA there.
+to do this? Oh, hang on. CIA there.
+Right here.
+Right here.
+Right. Yeah. Right. So, this is their
+script. This is good. Right. So this is
+script. This is good. Right. So this is
+they have uh
+they have uh
+Abuntu runs on Abuntu
+Abuntu runs on Abuntu
+22. They set this stuff up. So this is
+22. They set this stuff up. So this is
+kind of
+Dockerish. Build Python wheels.
+So they build this super old mini Linux
+So they build this super old mini Linux
+thing,
+right? They also have Docker pushes.
+you know, this type of stuff I think we
+you know, this type of stuff I think we
+could actually benefit from. I don't
+could actually benefit from. I don't
+really like having like a bunch of
+really like having like a bunch of
+automated testing and stuff.
+Um, it like adds a lot of overhead to
+Um, it like adds a lot of overhead to
+dev, but for like dev ops
+specifically, I mean, I wouldn't mind
+specifically, I mean, I wouldn't mind
+having to not not having to build the
+having to not not having to build the
+darn dockers
+darn dockers
+manually and just having it push uh for
+manually and just having it push uh for
+us our latest
+us our latest
+containers. And then we can get our
+containers. And then we can get our
+containers with a couple different CUDA
+containers with a couple different CUDA
+versions.
+versions.
+Actually, we would have like different
+Actually, we would have like different
+uh different container
+shipped. So then that solves the docker
+shipped. So then that solves the docker
+issue, right? You just have you include
+issue, right? You just have you include
+different bases.
+And then the actual
+And then the actual
+build. I mean, the thing that would be
+build. I mean, the thing that would be
+ideal, right, is if you uh you could
+ideal, right, is if you uh you could
+just like you specify your Docker M,
+just like you specify your Docker M,
+right? Like several different Docker MS
+right? Like several different Docker MS
+and then you just build the uh the
+and then you just build the uh the
+binaries and upload them based on those
+binaries and upload them based on those
+dockers, right? Because like if you're
+dockers, right? Because like if you're
+going to go build a few different
+going to go build a few different
+Dockers
+Dockers
+anyways, you can just build your wheels
+anyways, you can just build your wheels
+on those
+dockers. Okay, I think I'm going to have
+dockers. Okay, I think I'm going to have
+to invest some more time into like doing
+to invest some more time into like doing
+the CI stuff. I really don't I've done
+the CI stuff. I really don't I've done
+almost none because I just I do not like
+almost none because I just I do not like
+CI for tests and stuff for Puffer. It's
+CI for tests and stuff for Puffer. It's
+just like you know you maintain the test
+just like you know you maintain the test
+and then you end up having to like do a
+and then you end up having to like do a
+bunch of dev work to maintain the tests.
+bunch of dev work to maintain the tests.
+It's like I have a few tests on pieces
+It's like I have a few tests on pieces
+of code that I know are very fiddly and
+of code that I know are very fiddly and
+I work very hard to minimize the number
+I work very hard to minimize the number
+of pieces of fiddly code.
+of pieces of fiddly code.
+Um but I think for this this actually
+Um but I think for this this actually
+can make sense because this is like this
+can make sense because this is like this
+is more like workflow automation stuff,
+is more like workflow automation stuff,
+right?
+right?
+where like you have to have um setups
+where like you have to have um setups
+for a few different uh a few different
+for a few different uh a few different
+versions. And this actually should make
+versions. And this actually should make
+it pretty
+it pretty
+straightforward. Oh, hey Spencer, you're
+straightforward. Oh, hey Spencer, you're
+back. God damn
+back. God damn
+it.
+it.
+Okay, where are you?
+Hey Spencer.
+Hey Spencer.
+Hey, what's up? I'm probably gonna have
+Hey, what's up? I'm probably gonna have
+to go for dinner in like five, but um
+to go for dinner in like five, but um
+yeah, no worries. I just wanted to
+yeah, no worries. I just wanted to
+clarify a couple things and then Yeah,
+clarify a couple things and then Yeah,
+let's do that and then we'll fix after
+let's do that and then we'll fix after
+dinner we'll I will hop back in here and
+dinner we'll I will hop back in here and
+we'll fix stuff. Yeah, no worries. I'll
+we'll fix stuff. Yeah, no worries. I'll
+probably go grab dinner at some point as
+probably go grab dinner at some point as
+well anyways.
+well anyways.
+Um, okay. So, I got respawning going,
+Um, okay. So, I got respawning going,
+right? And I just reset it to the
+right? And I just reset it to the
+original trajectory and all the things
+original trajectory and all the things
+if it would respond perfectly. Okay. Uh,
+if it would respond perfectly. Okay. Uh,
+I changed the score metric to be if it
+I changed the score metric to be if it
+reached the goal throughout the length
+reached the goal throughout the length
+of the entire episode, which is the 91st
+of the entire episode, which is the 91st
+step segment, right?
+step segment, right?
+Yeah. And
+Yeah. And
+then do we want to continuously reward
+then do we want to continuously reward
+it? No. If it re if it can if it hits
+it? No. If it re if it can if it hits
+the goal after already hitting the goal
+the goal after already hitting the goal
+once, like during the respawn, it hits
+once, like during the respawn, it hits
+the goal and then it respawns and then
+the goal and then it respawns and then
+it's not off the goal again. Well, it
+it's not off the goal again. Well, it
+takes a while to go hit the goal again,
+takes a while to go hit the goal again,
+right? Some are really close, some are
+right? Some are really close, some are
+far. Yeah, that's fine though. It can it
+far. Yeah, that's fine though. It can it
+can get a reward for it gets a reward
+can get a reward for it gets a reward
+once when it hits the goal and then it
+once when it hits the goal and then it
+respawns and then if it hits it again,
+respawns and then if it hits it again,
+it gets one reward. It doesn't get a
+it gets one reward. It doesn't get a
+reward for like sitting there
+reward for like sitting there
+repeatedly, right? It just it respawns
+repeatedly, right? It just it respawns
+every time it gets it once. Yeah, it
+every time it gets it once. Yeah, it
+would just respawn and then it would get
+would just respawn and then it would get
+a reward every time it Yes, that is
+a reward every time it Yes, that is
+fine. Do that. Okay. Um, did
+fine. Do that. Okay. Um, did
+that
+that
+observations I don't think should
+observations I don't think should
+meaningfully change. The only thing I
+meaningfully change. The only thing I
+did is I made sure that we're no longer
+did is I made sure that we're no longer
+skipping OBS after um we're there. I
+skipping OBS after um we're there. I
+took out the masking. I removed
+took out the masking. I removed
+it's going to make it so much easier.
+it's going to make it so much easier.
+Terminals aren't used at all. Yeah, they
+Terminals aren't used at all. Yeah, they
+are. Well, technically it's it should be
+are. Well, technically it's it should be
+um yeah, it's well, you can set the
+um yeah, it's well, you can set the
+agent being done whenever it hits the
+agent being done whenever it hits the
+goal technically and you could set
+goal technically and you could set
+truncated whenever you hit the 91 steps.
+truncated whenever you hit the 91 steps.
+Um we don't we do not use truncated at
+Um we don't we do not use truncated at
+the moment. We do use terminals. It is
+the moment. We do use terminals. It is
+used in the advantage function
+used in the advantage function
+calculation.
+calculation.
+Okay. So oftentimes things will train
+Okay. So oftentimes things will train
+perfectly well without it, but
+perfectly well without it, but
+technically the correct thing to do is
+technically the correct thing to do is
+to set it. Okay, I will leave it out for
+to set it. Okay, I will leave it out for
+now. That's fine.
+now. That's fine.
+Initial run did not get
+Initial run did not get
+to from using the same params was not
+to from using the same params was not
+able to get to um
+what did it get? 88% that we got. It
+what did it get? 88% that we got. It
+capped at like 40 or something. What's
+capped at like 40 or something. What's
+the curve seeing right now? Huh? What's
+the curve seeing right now? Huh? What's
+the curve?
+Um, let me just run one right now. I
+Um, let me just run one right now. I
+didn't put a curve on it. When when I
+didn't put a curve on it. When when I
+saw I got to 40, I just went back to
+saw I got to 40, I just went back to
+seeing if I had a bug somewhere. Okay,
+seeing if I had a bug somewhere. Okay,
+it should be like substantially better.
+That's what I wanted to kind of just
+That's what I wanted to kind of just
+make sure I got it. You might want to
+make sure I got it. You might want to
+set the dun, but yeah, I might set dun
+I mean, I guess I could set done when it
+I mean, I guess I could set done when it
+reached the
+reached the
+goal. That way, at least it can know to
+goal. That way, at least it can know to
+take it to the calculates advantages on
+take it to the calculates advantages on
+that group of time
+steps. Uh, yeah, if it hits the goal,
+steps. Uh, yeah, if it hits the goal,
+you can set done. It's good.
+you can set done. It's good.
+Let's see. I mean, my personal my
+Let's see. I mean, my personal my
+personal theory is with the LSTM, it
+personal theory is with the LSTM, it
+really shouldn't freaking matter, but
+really shouldn't freaking matter, but
+like I don't know. I've had like
+like I don't know. I've had like
+academic people be
+academic people be
+like ins like incensed that I uh have
+like ins like incensed that I uh have
+done such a a
+thing. Fair enough. Fair enough. Um Mhm.
+thing. Fair enough. Fair enough. Um Mhm.
+Okay. I mean, I think respawn should be
+Okay. I mean, I think respawn should be
+fairly simple. I don't see any other
+fairly simple. I don't see any other
+reasons why this would be demonstrabably
+reasons why this would be demonstrabably
+worse. Did you Did you render it?
+Hold
+Hold
+up. Should I take out the Is there any
+up. Should I take out the Is there any
+reason to take out the the max at all?
+reason to take out the the max at all?
+Max,
+the max pooling or should we still keep
+the max pooling or should we still keep
+that there? Why would you take that out?
+Well, I don't see a particular reason
+Well, I don't see a particular reason
+for it right now. No. What do you mean?
+for it right now. No. What do you mean?
+I mean
+I mean
+the max pooling it's like max pooling or
+the max pooling it's like max pooling or
+flatten, right?
+flatten, right?
+Yeah. And if you flatten it's
+gigantic. If you flatten like 32x64,
+gigantic. If you flatten like 32x64,
+then you have to do
+then you have to do
+32* 64 as a hidden layer to the next
+linear, right?
+Oh, that's a 1,800 hidden layer just off
+Oh, that's a 1,800 hidden layer just off
+of that. Okay, fair enough. That is very
+of that. Okay, fair enough. That is very
+big. And also you lose order and like
+big. And also you lose order and like
+you lose the ordering as well. The order
+you lose the ordering as well. The order
+and variance.
+Okay, let me ship over
+this. All right, where is this?
+this. All right, where is this?
+General
+chat. It's like 3 minutes into it. Seven
+chat. It's like 3 minutes into it. Seven
+run.
+run.
+Let me see.
+Is it in gen chat or is in the voice
+Is it in gen chat or is in the voice
+some voice? Uh the the gen whatever
+some voice? Uh the the gen whatever
+we're in the gen chat. Okay. Yeah, I
+we're in the gen chat. Okay. Yeah, I
+think I see it. So, this is
+think I see it. So, this is
+But this is not really doing too hot.
+But this is not really doing too hot.
+No,
+No,
+it could be the way I'm just using
+it could be the way I'm just using
+representing score though.
+representing score though.
+What do you mean?
+So when do you add a log?
+So when do you add a log?
+I am adding a log at the end of the 91
+I am adding a log at the end of the 91
+second. Well, that's why you need to add
+second. Well, that's why you need to add
+a log every time the agent either
+a log every time the agent either
+collides or uh or reaches the goal.
+Oh, okay. Never mind. I was being an
+Oh, okay. Never mind. I was being an
+idiot. I did not reset on collision
+idiot. I did not reset on collision
+because I was thinking collisions are
+because I was thinking collisions are
+off. Okay, so that's one thing. And the
+off. Okay, so that's one thing. And the
+other thing is like since the agents are
+other thing is like since the agents are
+no longer like get to goal and stay at
+no longer like get to goal and stay at
+goal like you got to add the logs
+goal like you got to add the logs
+whenever the agent dies like either like
+whenever the agent dies like either like
+it gets to the goal or or it uh
+it gets to the goal or or it uh
+collides,
+collides,
+right? Like that's essentially your
+right? Like that's essentially your
+agent roll out
+now. I mean, I could do it at
+um if the way I order it to say like I
+um if the way I order it to say like I
+set like an environment variable to
+set like an environment variable to
+track if the goal has been reached or if
+track if the goal has been reached or if
+it's been
+it's been
+collided like it'll it would set it in
+collided like it'll it would set it in
+somewhere later in step whenever that
+somewhere later in step whenever that
+happens and then when you go back to the
+happens and then when you go back to the
+start of the next step it would okay
+start of the next step it would okay
+there are a couple ways you could do it.
+there are a couple ways you could do it.
+The way I was suggesting is technically
+The way I was suggesting is technically
+harder than the one that NYU has set up,
+harder than the one that NYU has set up,
+but I think we would still full self.
+I always thought if you if you're
+I always thought if you if you're
+calling ad log this many times like some
+calling ad log this many times like some
+like the indexing of it gets all funky.
+like the indexing of it gets all funky.
+No, it shouldn't. I got to run for
+No, it shouldn't. I got to run for
+dinner though. So, uh I will I'll be
+dinner though. So, uh I will I'll be
+back on after for the folks on uh on
+back on after for the folks on uh on
+YouTube.
+YouTube.
+Um, this is all open source RLdev. You
+Um, this is all open source RLdev. You
+can check this out at puffer.ai. Start
+can check this out at puffer.ai. Start
+the GitHub to help us out. Join the
+the GitHub to help us out. Join the
+Discord if you want to get involved with
+Discord if you want to get involved with
+development. Thank
+
+Kind: captions
+Language: en
+We're back live. Hi. Like I said, one
+We're back live. Hi. Like I said, one
+quick meeting
+quick meeting
+done. And we are back
+done. And we are back
+to removing the demons from
+RL. Oops. Let me reply to one message
+RL. Oops. Let me reply to one message
+first.
+All
+All
+right, we should be good.
+right, we should be good.
+Um, stream on. Oh, yeah, we're good.
+Um, stream on. Oh, yeah, we're good.
+Okay. Uh so Spencer is going to be back
+Okay. Uh so Spencer is going to be back
+in not very
+long and uh he is going to be with uh uh
+long and uh he is going to be with uh uh
+have the fixes I requested for G GPU
+have the fixes I requested for G GPU
+drive and then we will debug
+drive and then we will debug
+that. Me sure I don't miss messages from
+him. Yeah. And in the
+him. Yeah. And in the
+meantime, we will go back to hyperp
+shenanigans. In fact, I think it looks
+shenanigans. In fact, I think it looks
+like we have uh we have some runs
+like we have uh we have some runs
+here. Yeah, 126 runs.
+here. Yeah, 126 runs.
+Perfect. So, this was just running the
+Perfect. So, this was just running the
+whole time. And we can see that the vast
+whole time. And we can see that the vast
+majority of
+majority of
+these got stuck way down here.
+these got stuck way down here.
+So, let's figure out why why that
+So, let's figure out why why that
+happens.
+Right. So this is where uh the issue is.
+Right. So this is where uh the issue is.
+Let me explain a little bit what uh what
+Let me explain a little bit what uh what
+is going on right here. Um
+is going on right here. Um
+so the main issue that we've been having
+so the main issue that we've been having
+is that the hyperprem sweep tries to run
+is that the hyperprem sweep tries to run
+really short experiments for some
+really short experiments for some
+reason.
+reason.
+even though it's it's expressly designed
+even though it's it's expressly designed
+not to do that like like that's a common
+not to do that like like that's a common
+issue that literally this is algorithm
+issue that literally this is algorithm
+was designed to prevent happening. So I
+was designed to prevent happening. So I
+don't know why this is happening. We're
+don't know why this is happening. We're
+going to figure that out right now.
+exceptions. Are we in the right
+branch? No config
+for breakout.
+So, this is going to run one experiment
+So, this is going to run one experiment
+and then it will hit our uh our break
+and then it will hit our uh our break
+point and fix up this API stuff in the
+point and fix up this API stuff in the
+meanwhile. We uh moved exceptions into
+meanwhile. We uh moved exceptions into
+the main package to make it just easier.
+Hang on. Let me just address one thing.
+May I have a couple messages? Take care
+May I have a couple messages? Take care
+of them. We'll get back to this one
+of them. We'll get back to this one
+second.
+My bad, guys. I just have uh every so
+My bad, guys. I just have uh every so
+often I get random client messages that
+often I get random client messages that
+I have to go back and forth
+on. All
+right. So, we did hit this break point.
+Um target is
+Um target is
+04. It just picks a random number. So
+04. It just picks a random number. So
+this is trying to be 40%. So we should
+this is trying to be 40%. So we should
+expect this to be uh 40% of the way
+expect this to be uh 40% of the way
+between 20 mil and 80 mil. So this is
+between 20 mil and 80 mil. So this is
+going to be 50 milish.
+going to be 50 milish.
+Is that good math? No, that's not good
+Is that good math? No, that's not good
+math at all. Uh
+math at all. Uh
+30. 40ish mil maybe. Yeah, 40ish mil.
+lots
+lots
+of I've just been context switching all
+of I've just been context switching all
+day. So,
+day. So,
+uh, you know, hopping around on two
+uh, you know, hopping around on two
+different technical projects and a bunch
+different technical projects and a bunch
+of different messages. But, uh, the
+of different messages. But, uh, the
+thing that I am trying to figure out at
+thing that I am trying to figure out at
+the moment is just why the sweep doesn't
+the moment is just why the sweep doesn't
+work. If we get this sweep working
+work. If we get this sweep working
+today, be in a good spot because that
+today, be in a good spot because that
+kind of unblocks us on everything else
+kind of unblocks us on everything else
+in puffer.
+All
+All
+right. I think that conversation's
+right. I think that conversation's
+wrapped.
+wrapped.
+Um
+hopefully whoever is still there
+hopefully whoever is still there
+watching after I've been doing this for
+watching after I've been doing this for
+the last 20 minutes, thank you. It will
+the last 20 minutes, thank you. It will
+be back to your regularly scheduled RL
+be back to your regularly scheduled RL
+content for the next bit.
+content for the next bit.
+Um,
+okay. The weight is 04.
+Target or no target is point4 GP log C
+norm
+norm
+min is
+min is
+negative
+negative
+max is a bit over one.
+So, okay, that gives us suggestions of
+course. And
+now we have our
+now we have our
+index
+index
+BPC best index is 19.
+seconds. That seems low,
+right? 1.4 mil. 19 seconds should be
+right? 1.4 mil. 19 seconds should be
+like 30ish mil maybe.
+Can I just unnormalize this
+thing? Wait, it's in this space, right?
+thing? Wait, it's in this space, right?
+GP log C norm. So then it's like
+GP log C norm. So then it's like
+log d maxus log
+log d maxus log
+n
+plus and then it's x for
+this
+this
+23. That's not far off.
+We suggested 23 and we get um VPC of
+19. It's a little
+low. It's a little low when you would
+low. It's a little low when you would
+expect it to be high,
+expect it to be high,
+right? Because you're multiplying by GPY
+right? Because you're multiplying by GPY
+norm. you're taking score times uh the
+norm. you're taking score times uh the
+distance from the predicted cost. So
+distance from the predicted cost. So
+higher scoring would be higher
+higher scoring would be higher
+cost. Okay, so that's kind of weird.
+I'm trying to think how we debug
+this. I mean, it's like not impossible
+this. I mean, it's like not impossible
+that this result is what is what you'd
+that this result is what is what you'd
+get, but like overall, this is not what
+get, but like overall, this is not what
+you expect from a sweep. It should not
+you expect from a sweep. It should not
+be running this many
+be running this many
+uh this many
+uh this many
+lowcost runs.
+lowcost runs.
+It should be like roughly evenly
+It should be like roughly evenly
+distributed.
+I guess why don't we check what GPY norm
+I guess why don't we check what GPY norm
+is at that index,
+right? Wait,
+what? GPY
+norm. That doesn't make any sense,
+right? This doesn't make any sense at
+right? This doesn't make any sense at
+all because that shouldn't be
+maximized. They're all negative.
+maximized. They're all negative.
+Well, maybe that's the issue. Hang
+on. Oh, negative one.
+What? Hang on. Optimize.
+[Laughter]
+[Laughter]
+Oh my gosh, how tired was I when I wrote
+Oh my gosh, how tired was I when I wrote
+that? Okay.
+Okay. That is such a dumb bug. I was
+Okay. That is such a dumb bug. I was
+literally minimizing instead of
+literally minimizing instead of
+maximizing. That's a
+classic. Okay, we'll run a few uh a few
+classic. Okay, we'll run a few uh a few
+little experiments on this.
+Cool. So, that should be something. Uh,
+Cool. So, that should be something. Uh,
+that is Spencer messaging
+me that he's going to be a little bit
+me that he's going to be a little bit
+longer.
+longer.
+I got dinner at
+6, but I will be back after that in case
+6, but I will be back after that in case
+he's not done before then. All right, so
+he's not done before then. All right, so
+we'll let this run a few quick
+we'll let this run a few quick
+experiments and uh we will essentially
+experiments and uh we will essentially
+just see whether this does the correct
+just see whether this does the correct
+thing. Yeah, if you maximize instead of
+thing. Yeah, if you maximize instead of
+minima, I'm surprised it actually did
+minima, I'm surprised it actually did
+anything in that case. That's kind of
+anything in that case. That's kind of
+ridiculous. Oh, you know what that is?
+ridiculous. Oh, you know what that is?
+It just it tries to push to the min or
+It just it tries to push to the min or
+the max, right? Because
+like Yeah, that's why they're like a few
+like Yeah, that's why they're like a few
+experiments like way up high and
+experiments like way up high and
+then it's probably just trying to push
+then it's probably just trying to push
+all the way up or all the way down,
+all the way up or all the way down,
+something like that.
+So lo and behold, this is running for a
+So lo and behold, this is running for a
+long amount of
+time. If anything, now this probably
+time. If anything, now this probably
+biases to be too
+high actually. Hang on. Was that in How
+high actually. Hang on. Was that in How
+long has that been there? How long has
+long has that been there? How long has
+that bug been there?
+It would just be in sweeps,
+right? And
+right? And
+hyperp. Okay, so this was correct here.
+hyperp. Okay, so this was correct here.
+This was just an introduced bug when um
+This was just an introduced bug when um
+I screwed this up. So, we had this
+I screwed this up. So, we had this
+working correctly in all of our earlier
+working correctly in all of our earlier
+tests. All of them are fine. The
+tests. All of them are fine. The
+algorithm is completely valid. It's just
+algorithm is completely valid. It's just
+that we uh screwed this up in the most
+that we uh screwed this up in the most
+recent cleanup
+patch. This is just fine.
+So, what's this? This is 80 mil and then
+So, what's this? This is 80 mil and then
+78 mil and then it went up to 96
+mil and now it's doing like a 20
+mil and now it's doing like a 20
+mil 25 mil. Yeah, that's fine. We'll see
+mil 25 mil. Yeah, that's fine. We'll see
+if it does a bunch of those.
+if it does a bunch of those.
+I'll be surprised if it still does
+this. 202 should be like a 30 mil.
+Okay, now I'm starting to get
+suspicious. It should be
+picking pretty much randomly in this
+picking pretty much randomly in this
+range.
+Okay. So, I mean, this is now what I'd
+Okay. So, I mean, this is now what I'd
+expect, but now it's
+expect, but now it's
+like now it does feel like it's going to
+like now it does feel like it's going to
+the high end or the low end completely,
+the high end or the low end completely,
+right?
+I mean this is like the clearest
+I mean this is like the clearest
+possible objective though. It's pick a
+possible objective though. It's pick a
+experiment length, try to run something
+experiment length, try to run something
+that's near that rank length but also
+that's near that rank length but also
+try to run something that is high score.
+try to run something that is high score.
+All it
+is. Okay. Now biasing towards high score
+is. Okay. Now biasing towards high score
+here if it's going to start doing that
+here if it's going to start doing that
+is actually more reasonable.
+So wait what is true of that? Let's say
+So wait what is true of that? Let's say
+that we have a perfect model. Okay. So
+that we have a perfect model. Okay. So
+then for any reasonable like any parto
+then for any reasonable like any parto
+front we should have if you pick a
+front we should have if you pick a
+specific
+specific
+cost. Um and the metric is distance from
+cost. Um and the metric is distance from
+cost times score. You should never run
+cost times score. You should never run
+anything that is lower cost than your
+anything that is lower cost than your
+expected target. you can run something
+expected target. you can run something
+that is higher cost than the expected
+that is higher cost than the expected
+target if the reward curve is very
+target if the reward curve is very
+steep. So if you're expecting that you
+steep. So if you're expecting that you
+can do substantially better by running
+can do substantially better by running
+something that is higher cost you will
+something that is higher cost you will
+do so. So then this does incentivize you
+do so. So then this does incentivize you
+to fill out it kind of incentivizes you
+to fill out it kind of incentivizes you
+to fill out the elbow I think of the
+to fill out the elbow I think of the
+curve a little bit which is what we want
+curve a little bit which is what we want
+right like if your PTO front this is a
+right like if your PTO front this is a
+train run but imagine this is a PTO
+train run but imagine this is a PTO
+front then
+front then
+like you're going to fill out like
+like you're going to fill out like
+probably about this much of the curve
+probably about this much of the curve
+but you're not going to fill out over
+but you're not going to fill out over
+here because like if you fill out here
+here because like if you fill out here
+you can move a little bit in the x axis
+you can move a little bit in the x axis
+and do way better in the y- axis.
+and do way better in the y- axis.
+There's not really a point to doing
+There's not really a point to doing
+really lowc cost runs like this. But
+really lowc cost runs like this. But
+actually I think this algorithm is is
+actually I think this algorithm is is
+exactly what we want in theory and uh we
+exactly what we want in theory and uh we
+will see why it is doing this thing.
+will see why it is doing this thing.
+Now you would not expect it to
+be doing really like short runs very
+be doing really like short runs very
+often.
+I mean, it is possible it does just
+I mean, it is possible it does just
+doesn't have a great cost model
+yet. It's like too many short
+yet. It's like too many short
+runs. Oh, no, no, no. Hang on. It's not
+runs. Oh, no, no, no. Hang on. It's not
+too many short runs. This just bad
+too many short runs. This just bad
+performing runs. That's different. Okay,
+performing runs. That's different. Okay,
+this is actually fine. Few short runs,
+this is actually fine. Few short runs,
+some long runs. Yeah, this is totally
+some long runs. Yeah, this is totally
+fine. And this one does quite well as
+fine. And this one does quite well as
+well.
+So perfect.
+So yeah, we're getting like a good
+So yeah, we're getting like a good
+spread now. So we'll see whether this
+spread now. So we'll see whether this
+actually translates into uh
+actually translates into uh
+good score numbers here. It seems like
+good score numbers here. It seems like
+we're already getting like way more
+we're already getting like way more
+reasonable stuff though,
+reasonable stuff though,
+right? Two, three of these. Yeah.
+And then the goal of this
+And then the goal of this
+is as you fill in the
+is as you fill in the
+curve, you get incentivized to find you
+curve, you get incentivized to find you
+naturally based on the shape of the
+naturally based on the shape of the
+curve should get incentivized to find
+curve should get incentivized to find
+more and more uh time efficient runs.
+more and more uh time efficient runs.
+Okay,
+Okay,
+good. This is good.
+I don't know why it's still doing like a
+I don't know why it's still doing like a
+reasonable Oh, see this is not even a uh
+reasonable Oh, see this is not even a uh
+a short run, right? This is like a long
+a short run, right? This is like a long
+run in time steps. It's just really
+run in time steps. It's just really
+fast. Okay. Yeah, we're happy here.
+fast. Okay. Yeah, we're happy here.
+We're happy. I think that we push this.
+We're happy. I think that we push this.
+We run this on mazes and other
+We run this on mazes and other
+things. Um I'm going to run this not on
+things. Um I'm going to run this not on
+my local so that we can actually like
+my local so that we can actually like
+keep the results.
+and we will go from
+and we will go from
+there. 528. Got half an
+there. 528. Got half an
+hour. All right. Start by launching
+hour. All right. Start by launching
+these
+runs. This one's not going to do
+runs. This one's not going to do
+anything because it was like optimizing.
+anything because it was like optimizing.
+It was minimizing instead of
+maximizing.
+Boom. We're already in the DMX.
+I don't know. Just give it some
+name. And then this
+one. We also now know why this isn't
+one. We also now know why this isn't
+working,
+right? Attach.
+And now this should actually be
+And now this should actually be
+something resembling like a good
+sweep.
+sweep.
+Perfect. Yeah, it's a little silly to
+Perfect. Yeah, it's a little silly to
+see like our sweep stuff completely
+see like our sweep stuff completely
+breaking. Um, but hey, it's a dev
+breaking. Um, but hey, it's a dev
+branch. We know that this algorithm
+branch. We know that this algorithm
+works incredibly well. So, as soon as
+works incredibly well. So, as soon as
+this is fixed and maybe we fix a few
+this is fixed and maybe we fix a few
+more small things with this, we should
+more small things with this, we should
+be getting some very good
+be getting some very good
+results.
+Um, yeah, why don't we open this this
+Um, yeah, why don't we open this this
+graph up real quick? Oh,
+graph up real quick? Oh,
+yeah. We've got the baseline. We got one
+yeah. We've got the baseline. We got one
+run that seems to match baseline here.
+run that seems to match baseline here.
+And then we'll see uh how this stuff
+And then we'll see uh how this stuff
+does as it runs more.
+does as it runs more.
+No reason to keep this going on local.
+No reason to keep this going on local.
+This will just run on this new sweep. Uh
+This will just run on this new sweep. Uh
+and then next couple hours this will
+and then next couple hours this will
+finish
+finish
+running GPU drive stuff for
+Spencer. I would like to get GPU drive
+Spencer. I would like to get GPU drive
+working on this release branch if
+working on this release branch if
+possible.
+possible.
+I PR
+it well is going to have new code
+it well is going to have new code
+anyways. We'll have to do like a manual
+anyways. We'll have to do like a manual
+merge into
+that. Yeah, Spencer should be back
+that. Yeah, Spencer should be back
+soonish maybe. depends how long he's
+soonish maybe. depends how long he's
+eating is. Uh let's look at some other
+eating is. Uh let's look at some other
+stuff in the meantime.
+stuff in the meantime.
+So today we figured out the sweep
+So today we figured out the sweep
+errors. Uh we have we got training
+errors. Uh we have we got training
+running stably first of all and then we
+running stably first of all and then we
+also figured out the sweep errors for
+also figured out the sweep errors for
+the most part. We will continue
+the most part. We will continue
+fine-tuning sweeps, but at least now
+fine-tuning sweeps, but at least now
+it's finding like reasonable quality
+it's finding like reasonable quality
+runs in here.
+runs in here.
+Uh we will have results by later
+Uh we will have results by later
+tonight from the initial sweeps so we
+tonight from the initial sweeps so we
+can actually see what is going
+on. Back to the to-dos
+here. There are a few small things but I
+here. There are a few small things but I
+think mostly at this point it's the two
+think mostly at this point it's the two
+things that on that like I mentally I
+things that on that like I mentally I
+think I'm like the most bottlenecked on.
+think I'm like the most bottlenecked on.
+uh before being able to do the release.
+uh before being able to do the release.
+Well, really three
+Well, really three
+things. It's going to be the getting
+things. It's going to be the getting
+sweeps working nice and stable, which I
+sweeps working nice and stable, which I
+think we hopefully have most of that
+think we hopefully have most of that
+working
+working
+now.
+now.
+Um the rest of the general code cleanup
+Um the rest of the general code cleanup
+because like I don't want to like do the
+because like I don't want to like do the
+final experiment and then just do some
+final experiment and then just do some
+code cleanup and screw up the results or
+code cleanup and screw up the results or
+change the results. I'd like to have
+change the results. I'd like to have
+most of the general code cleanup done
+most of the general code cleanup done
+before we lock in final
+before we lock in final
+results. And I guess the other thing
+results. And I guess the other thing
+that's just going to take a while is
+that's just going to take a while is
+CUDA packaging. You know, why don't we
+CUDA packaging. You know, why don't we
+just start looking
+just start looking
+into the CUDA packaging stuff.
+Um because I just I know that's going to
+Um because I just I know that's going to
+be a pain. But like the issue right now
+be a pain. But like the issue right now
+is we've just been shipping source for
+is we've just been shipping source for
+puffer lib so far. We would ideally like
+puffer lib so far. We would ideally like
+to ship
+wheels. I think for the C extensions we
+wheels. I think for the C extensions we
+can get CI build wheel working for that.
+But for for
+But for for
+CUDA, let me see. GitHub build CUDA
+CUDA, let me see. GitHub build CUDA
+extends. Is this a
+thing? This is from
+2021. One has to install a matching CUDA
+2021. One has to install a matching CUDA
+systemwide.
+Did they ever end up doing this? Because
+Did they ever end up doing this? Because
+if PyTorch included CUDA dev tools
+Yeah. So it is a big file as well.
+Yeah. Okay. So, they just didn't do
+this. Building CUDA extensions has been
+this. Building CUDA extensions has been
+long.
+Yeah. Holy. So, this just kept going on
+Yeah. Holy. So, this just kept going on
+for a
+while. Okay. This is the exact error
+while. Okay. This is the exact error
+that I
+that I
+hit. This is the exact error that I hit
+hit. This is the exact error that I hit
+that for like an hour
+yesterday. Porch version available
+yesterday. Porch version available
+within the isolated build environment
+within the isolated build environment
+should be the same as the outside
+should be the same as the outside
+environment.
+Yeah. So this
+is this is the exact
+thing. Okay.
+Did this keep going? No, I already hit
+Did this keep going? No, I already hit
+the end of
+this. How does PyTorch do this? PieTorch
+this. How does PyTorch do this? PieTorch
+you just you install the version for
+you just you install the version for
+your CUDA,
+your CUDA,
+right? So PyTorch just builds and ships
+right? So PyTorch just builds and ships
+all the
+all the
+binaries. Like you don't just pip
+binaries. Like you don't just pip
+install PyTorch and expect it to work
+install PyTorch and expect it to work
+and everything, right? It works on like
+and everything, right? It works on like
+most
+most
+cards, but like you have to get it only
+cards, but like you have to get it only
+works if you have like a reasonable CUDA
+version. So like yeah, this is default
+version. So like yeah, this is default
+CUDA
+CUDA
+126. So this has to match, right?
+and they just give a dash dash. They
+and they just give a dash dash. They
+give an index
+URL. So I mean I could do
+URL. So I mean I could do
+this for
+binaries. Let me think what the the
+binaries. Let me think what the the
+options are. Right. Option one is we
+options are. Right. Option one is we
+have a good CPU fallback.
+I wonder how bad it is if you use the
+I wonder how bad it is if you use the
+CPU version,
+right? We could probably optimize it so
+right? We could probably optimize it so
+that the CPU fallback is not bad.
+Right. And
+then no, because the thing is when you
+then no, because the thing is when you
+you pip install it, if you pip install
+you pip install it, if you pip install
+puffer liib, then you still will not
+puffer liib, then you still will not
+have
+have
+uh you still just won't have access to
+uh you still just won't have access to
+the CUDA version like the CUDA dev most
+the CUDA version like the CUDA dev most
+of the
+of the
+time. Okay. So if you pip install
+time. Okay. So if you pip install
+without
+without
+CUDAV, then you get the CPU version. If
+CUDAV, then you get the CPU version. If
+you pip install with
+you pip install with
+CUDAV, then you get the GPU
+CUDAV, then you get the GPU
+version.
+Um, we could do
+that. And that's still just shipping
+that. And that's still just shipping
+estist, I guess.
+It would be such a better user
+It would be such a better user
+experience
+experience
+though, like tremendously better user
+though, like tremendously better user
+experience if you could just pip install
+experience if you could just pip install
+the thing that you want and it
+works. But then that requires me
+shipping for every Python version and
+shipping for every Python version and
+every CUDA version.
+It's annoying that you have to build it
+It's annoying that you have to build it
+on a system with a GPU,
+on a system with a GPU,
+right? That doesn't seem like you should
+right? That doesn't seem like you should
+have to do that. You have to
+build Can you automate CUDA builds?
+build Can you automate CUDA builds?
+Automate CUDA
+Automate CUDA
+builds GitHub.
+Hang on. Is this a
+thing? Can there be like a GitHub action
+to I mean you just need to build from
+to I mean you just need to build from
+like a certain like different Dockers or
+like a certain like different Dockers or
+whatever, right?
+I mean the best case scenario here,
+I mean the best case scenario here,
+right? What I would like for Puffer is
+right? What I would like for Puffer is
+I'd like you to just be able to kind of
+I'd like you to just be able to kind of
+like you do with Torch, you pip install
+like you do with Torch, you pip install
+Puffer LIIB, you make sure that you get
+Puffer LIIB, you make sure that you get
+the one for your torch drivers if it's
+the one for your torch drivers if it's
+different from the uh the current
+different from the uh the current
+defaults, and then you call it a day. I
+defaults, and then you call it a day. I
+don't want to have to
+don't want to have to
+manually go and like spin up VMs and do
+manually go and like spin up VMs and do
+all of
+that because it's like for
+every so what would it be? I think it's
+every so what would it be? I think it's
+like for every every CUDA version that
+like for every every CUDA version that
+you have to have, you spin up a
+you have to have, you spin up a
+different dev
+different dev
+container minimum,
+container minimum,
+right? And then let's say that you have
+right? And then let's say that you have
+like uh multiple different Pythons
+like uh multiple different Pythons
+installed. So then you just need you
+installed. So then you just need you
+need one container for each CUDA version
+need one container for each CUDA version
+you ship. And then from each of those
+you ship. And then from each of those
+you're going to ship let's say we do
+you're going to ship let's say we do
+like Python what 310 11 12 maybe
+like Python what 310 11 12 maybe
+13. So like however many versions of
+13. So like however many versions of
+Python we're going to support as
+well. And then if none of those work,
+well. And then if none of those work,
+then it has to go to the fallback, which
+then it has to go to the fallback, which
+is just going to install
+is just going to install
+um the CPU version of our extension and
+um the CPU version of our extension and
+will work as long as you have
+GCC. So I have an idea of how we can
+GCC. So I have an idea of how we can
+automate the builds. You do like CI
+automate the builds. You do like CI
+build wheel.
+Okay. So this is
+Okay. So this is
+like this is something right working
+like this is something right working
+examples translate
+examples translate
+to. So they do this
+right
+right
+install and I guess they ship
+kernels. Should they have like an action
+kernels. Should they have like an action
+or
+thing.
+Should be an actions or whatever in
+Should be an actions or whatever in
+here, shouldn't
+there? Apparently, you can do
+it. Is this the only one that has CUDA
+it. Is this the only one that has CUDA
+listed? It is.
+many
+Linux for multiple GPU architecture.
+I don't usually like do this type of
+I don't usually like do this type of
+stuff. So, let me see if we can figure
+stuff. So, let me see if we can figure
+something out. And it looks like we're
+something out. And it looks like we're
+going to have to do the GPU drive stuff
+going to have to do the GPU drive stuff
+after uh after
+after uh after
+dinner. The plan is I'm going to look at
+dinner. The plan is I'm going to look at
+this for a few. See if I can because I'm
+this for a few. See if I can because I'm
+going to have to do this like probably
+going to have to do this like probably
+next week. So, I'm just I figured it's a
+next week. So, I'm just I figured it's a
+good idea to take a look at what I'm I'm
+good idea to take a look at what I'm I'm
+dealing with.
+dealing with.
+Um, I'm going to go get dinner in a few
+Um, I'm going to go get dinner in a few
+and then uh I'm going to be back after
+and then uh I'm going to be back after
+dinner hopefully if Spencer is around.
+dinner hopefully if Spencer is around.
+Get GPU drive training very well and to
+Get GPU drive training very well and to
+monitor the sweep
+results. Where do you actually see like
+results. Where do you actually see like
+what what like scripts they're running
+what what like scripts they're running
+to do this? Oh, hang on. CIA there.
+to do this? Oh, hang on. CIA there.
+Right here.
+Right here.
+Right. Yeah. Right. So, this is their
+script. This is good. Right. So this is
+script. This is good. Right. So this is
+they have uh
+they have uh
+Abuntu runs on Abuntu
+Abuntu runs on Abuntu
+22. They set this stuff up. So this is
+22. They set this stuff up. So this is
+kind of
+Dockerish. Build Python wheels.
+So they build this super old mini Linux
+So they build this super old mini Linux
+thing,
+right? They also have Docker pushes.
+you know, this type of stuff I think we
+you know, this type of stuff I think we
+could actually benefit from. I don't
+could actually benefit from. I don't
+really like having like a bunch of
+really like having like a bunch of
+automated testing and stuff.
+Um, it like adds a lot of overhead to
+Um, it like adds a lot of overhead to
+dev, but for like dev ops
+specifically, I mean, I wouldn't mind
+specifically, I mean, I wouldn't mind
+having to not not having to build the
+having to not not having to build the
+darn dockers
+darn dockers
+manually and just having it push uh for
+manually and just having it push uh for
+us our latest
+us our latest
+containers. And then we can get our
+containers. And then we can get our
+containers with a couple different CUDA
+containers with a couple different CUDA
+versions.
+versions.
+Actually, we would have like different
+Actually, we would have like different
+uh different container
+shipped. So then that solves the docker
+shipped. So then that solves the docker
+issue, right? You just have you include
+issue, right? You just have you include
+different bases.
+And then the actual
+And then the actual
+build. I mean, the thing that would be
+build. I mean, the thing that would be
+ideal, right, is if you uh you could
+ideal, right, is if you uh you could
+just like you specify your Docker M,
+just like you specify your Docker M,
+right? Like several different Docker MS
+right? Like several different Docker MS
+and then you just build the uh the
+and then you just build the uh the
+binaries and upload them based on those
+binaries and upload them based on those
+dockers, right? Because like if you're
+dockers, right? Because like if you're
+going to go build a few different
+going to go build a few different
+Dockers
+Dockers
+anyways, you can just build your wheels
+anyways, you can just build your wheels
+on those
+dockers. Okay, I think I'm going to have
+dockers. Okay, I think I'm going to have
+to invest some more time into like doing
+to invest some more time into like doing
+the CI stuff. I really don't I've done
+the CI stuff. I really don't I've done
+almost none because I just I do not like
+almost none because I just I do not like
+CI for tests and stuff for Puffer. It's
+CI for tests and stuff for Puffer. It's
+just like you know you maintain the test
+just like you know you maintain the test
+and then you end up having to like do a
+and then you end up having to like do a
+bunch of dev work to maintain the tests.
+bunch of dev work to maintain the tests.
+It's like I have a few tests on pieces
+It's like I have a few tests on pieces
+of code that I know are very fiddly and
+of code that I know are very fiddly and
+I work very hard to minimize the number
+I work very hard to minimize the number
+of pieces of fiddly code.
+of pieces of fiddly code.
+Um but I think for this this actually
+Um but I think for this this actually
+can make sense because this is like this
+can make sense because this is like this
+is more like workflow automation stuff,
+is more like workflow automation stuff,
+right?
+right?
+where like you have to have um setups
+where like you have to have um setups
+for a few different uh a few different
+for a few different uh a few different
+versions. And this actually should make
+versions. And this actually should make
+it pretty
+it pretty
+straightforward. Oh, hey Spencer, you're
+straightforward. Oh, hey Spencer, you're
+back. God damn
+back. God damn
+it.
+it.
+Okay, where are you?
+Hey Spencer.
+Hey Spencer.
+Hey, what's up? I'm probably gonna have
+Hey, what's up? I'm probably gonna have
+to go for dinner in like five, but um
+to go for dinner in like five, but um
+yeah, no worries. I just wanted to
+yeah, no worries. I just wanted to
+clarify a couple things and then Yeah,
+clarify a couple things and then Yeah,
+let's do that and then we'll fix after
+let's do that and then we'll fix after
+dinner we'll I will hop back in here and
+dinner we'll I will hop back in here and
+we'll fix stuff. Yeah, no worries. I'll
+we'll fix stuff. Yeah, no worries. I'll
+probably go grab dinner at some point as
+probably go grab dinner at some point as
+well anyways.
+well anyways.
+Um, okay. So, I got respawning going,
+Um, okay. So, I got respawning going,
+right? And I just reset it to the
+right? And I just reset it to the
+original trajectory and all the things
+original trajectory and all the things
+if it would respond perfectly. Okay. Uh,
+if it would respond perfectly. Okay. Uh,
+I changed the score metric to be if it
+I changed the score metric to be if it
+reached the goal throughout the length
+reached the goal throughout the length
+of the entire episode, which is the 91st
+of the entire episode, which is the 91st
+step segment, right?
+step segment, right?
+Yeah. And
+Yeah. And
+then do we want to continuously reward
+then do we want to continuously reward
+it? No. If it re if it can if it hits
+it? No. If it re if it can if it hits
+the goal after already hitting the goal
+the goal after already hitting the goal
+once, like during the respawn, it hits
+once, like during the respawn, it hits
+the goal and then it respawns and then
+the goal and then it respawns and then
+it's not off the goal again. Well, it
+it's not off the goal again. Well, it
+takes a while to go hit the goal again,
+takes a while to go hit the goal again,
+right? Some are really close, some are
+right? Some are really close, some are
+far. Yeah, that's fine though. It can it
+far. Yeah, that's fine though. It can it
+can get a reward for it gets a reward
+can get a reward for it gets a reward
+once when it hits the goal and then it
+once when it hits the goal and then it
+respawns and then if it hits it again,
+respawns and then if it hits it again,
+it gets one reward. It doesn't get a
+it gets one reward. It doesn't get a
+reward for like sitting there
+reward for like sitting there
+repeatedly, right? It just it respawns
+repeatedly, right? It just it respawns
+every time it gets it once. Yeah, it
+every time it gets it once. Yeah, it
+would just respawn and then it would get
+would just respawn and then it would get
+a reward every time it Yes, that is
+a reward every time it Yes, that is
+fine. Do that. Okay. Um, did
+fine. Do that. Okay. Um, did
+that
+that
+observations I don't think should
+observations I don't think should
+meaningfully change. The only thing I
+meaningfully change. The only thing I
+did is I made sure that we're no longer
+did is I made sure that we're no longer
+skipping OBS after um we're there. I
+skipping OBS after um we're there. I
+took out the masking. I removed
+took out the masking. I removed
+it's going to make it so much easier.
+it's going to make it so much easier.
+Terminals aren't used at all. Yeah, they
+Terminals aren't used at all. Yeah, they
+are. Well, technically it's it should be
+are. Well, technically it's it should be
+um yeah, it's well, you can set the
+um yeah, it's well, you can set the
+agent being done whenever it hits the
+agent being done whenever it hits the
+goal technically and you could set
+goal technically and you could set
+truncated whenever you hit the 91 steps.
+truncated whenever you hit the 91 steps.
+Um we don't we do not use truncated at
+Um we don't we do not use truncated at
+the moment. We do use terminals. It is
+the moment. We do use terminals. It is
+used in the advantage function
+used in the advantage function
+calculation.
+calculation.
+Okay. So oftentimes things will train
+Okay. So oftentimes things will train
+perfectly well without it, but
+perfectly well without it, but
+technically the correct thing to do is
+technically the correct thing to do is
+to set it. Okay, I will leave it out for
+to set it. Okay, I will leave it out for
+now. That's fine.
+now. That's fine.
+Initial run did not get
+Initial run did not get
+to from using the same params was not
+to from using the same params was not
+able to get to um
+what did it get? 88% that we got. It
+what did it get? 88% that we got. It
+capped at like 40 or something. What's
+capped at like 40 or something. What's
+the curve seeing right now? Huh? What's
+the curve seeing right now? Huh? What's
+the curve?
+Um, let me just run one right now. I
+Um, let me just run one right now. I
+didn't put a curve on it. When when I
+didn't put a curve on it. When when I
+saw I got to 40, I just went back to
+saw I got to 40, I just went back to
+seeing if I had a bug somewhere. Okay,
+seeing if I had a bug somewhere. Okay,
+it should be like substantially better.
+That's what I wanted to kind of just
+That's what I wanted to kind of just
+make sure I got it. You might want to
+make sure I got it. You might want to
+set the dun, but yeah, I might set dun
+I mean, I guess I could set done when it
+I mean, I guess I could set done when it
+reached the
+reached the
+goal. That way, at least it can know to
+goal. That way, at least it can know to
+take it to the calculates advantages on
+take it to the calculates advantages on
+that group of time
+steps. Uh, yeah, if it hits the goal,
+steps. Uh, yeah, if it hits the goal,
+you can set done. It's good.
+you can set done. It's good.
+Let's see. I mean, my personal my
+Let's see. I mean, my personal my
+personal theory is with the LSTM, it
+personal theory is with the LSTM, it
+really shouldn't freaking matter, but
+really shouldn't freaking matter, but
+like I don't know. I've had like
+like I don't know. I've had like
+academic people be
+academic people be
+like ins like incensed that I uh have
+like ins like incensed that I uh have
+done such a a
+thing. Fair enough. Fair enough. Um Mhm.
+thing. Fair enough. Fair enough. Um Mhm.
+Okay. I mean, I think respawn should be
+Okay. I mean, I think respawn should be
+fairly simple. I don't see any other
+fairly simple. I don't see any other
+reasons why this would be demonstrabably
+reasons why this would be demonstrabably
+worse. Did you Did you render it?
+Hold
+Hold
+up. Should I take out the Is there any
+up. Should I take out the Is there any
+reason to take out the the max at all?
+reason to take out the the max at all?
+Max,
+the max pooling or should we still keep
+the max pooling or should we still keep
+that there? Why would you take that out?
+Well, I don't see a particular reason
+Well, I don't see a particular reason
+for it right now. No. What do you mean?
+for it right now. No. What do you mean?
+I mean
+I mean
+the max pooling it's like max pooling or
+the max pooling it's like max pooling or
+flatten, right?
+flatten, right?
+Yeah. And if you flatten it's
+gigantic. If you flatten like 32x64,
+gigantic. If you flatten like 32x64,
+then you have to do
+then you have to do
+32* 64 as a hidden layer to the next
+linear, right?
+Oh, that's a 1,800 hidden layer just off
+Oh, that's a 1,800 hidden layer just off
+of that. Okay, fair enough. That is very
+of that. Okay, fair enough. That is very
+big. And also you lose order and like
+big. And also you lose order and like
+you lose the ordering as well. The order
+you lose the ordering as well. The order
+and variance.
+Okay, let me ship over
+this. All right, where is this?
+this. All right, where is this?
+General
+chat. It's like 3 minutes into it. Seven
+chat. It's like 3 minutes into it. Seven
+run.
+run.
+Let me see.
+Is it in gen chat or is in the voice
+Is it in gen chat or is in the voice
+some voice? Uh the the gen whatever
+some voice? Uh the the gen whatever
+we're in the gen chat. Okay. Yeah, I
+we're in the gen chat. Okay. Yeah, I
+think I see it. So, this is
+think I see it. So, this is
+But this is not really doing too hot.
+But this is not really doing too hot.
+No,
+No,
+it could be the way I'm just using
+it could be the way I'm just using
+representing score though.
+representing score though.
+What do you mean?
+So when do you add a log?
+So when do you add a log?
+I am adding a log at the end of the 91
+I am adding a log at the end of the 91
+second. Well, that's why you need to add
+second. Well, that's why you need to add
+a log every time the agent either
+a log every time the agent either
+collides or uh or reaches the goal.
+Oh, okay. Never mind. I was being an
+Oh, okay. Never mind. I was being an
+idiot. I did not reset on collision
+idiot. I did not reset on collision
+because I was thinking collisions are
+because I was thinking collisions are
+off. Okay, so that's one thing. And the
+off. Okay, so that's one thing. And the
+other thing is like since the agents are
+other thing is like since the agents are
+no longer like get to goal and stay at
+no longer like get to goal and stay at
+goal like you got to add the logs
+goal like you got to add the logs
+whenever the agent dies like either like
+whenever the agent dies like either like
+it gets to the goal or or it uh
+it gets to the goal or or it uh
+collides,
+collides,
+right? Like that's essentially your
+right? Like that's essentially your
+agent roll out
+now. I mean, I could do it at
+um if the way I order it to say like I
+um if the way I order it to say like I
+set like an environment variable to
+set like an environment variable to
+track if the goal has been reached or if
+track if the goal has been reached or if
+it's been
+it's been
+collided like it'll it would set it in
+collided like it'll it would set it in
+somewhere later in step whenever that
+somewhere later in step whenever that
+happens and then when you go back to the
+happens and then when you go back to the
+start of the next step it would okay
+start of the next step it would okay
+there are a couple ways you could do it.
+there are a couple ways you could do it.
+The way I was suggesting is technically
+The way I was suggesting is technically
+harder than the one that NYU has set up,
+harder than the one that NYU has set up,
+but I think we would still full self.
+I always thought if you if you're
+I always thought if you if you're
+calling ad log this many times like some
+calling ad log this many times like some
+like the indexing of it gets all funky.
+like the indexing of it gets all funky.
+No, it shouldn't. I got to run for
+No, it shouldn't. I got to run for
+dinner though. So, uh I will I'll be
+dinner though. So, uh I will I'll be
+back on after for the folks on uh on
+back on after for the folks on uh on
+YouTube.
+YouTube.
+Um, this is all open source RLdev. You
+Um, this is all open source RLdev. You
+can check this out at puffer.ai. Start
+can check this out at puffer.ai. Start
+the GitHub to help us out. Join the
+the GitHub to help us out. Join the
+Discord if you want to get involved with
+Discord if you want to get involved with
+development. Thank

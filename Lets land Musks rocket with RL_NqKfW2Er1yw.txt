@@ -1,0 +1,4393 @@
+Kind: captions
+Language: en
+okay I think we are
+live
+live
+hi well this was
+hi well this was
+unexpectedly
+unexpectedly
+successful I kind of just threw this on
+successful I kind of just threw this on
+uh on xent bunch of people tuned in so I
+uh on xent bunch of people tuned in so I
+figur let's do something fun
+today so
+today so
+David Haw just
+David Haw just
+posted I think I don't know if this is
+posted I think I don't know if this is
+his environment I think this is somebody
+his environment I think this is somebody
+else's this uh vectorized rocket Landing
+Sim yeah this is somebody else's
+right pretty
+right pretty
+interesting um but this end is very very
+interesting um but this end is very very
+old python
+old python
+3.5 7 years ago so I think what we're
+3.5 7 years ago so I think what we're
+going to do today is we're going to
+going to do today is we're going to
+modernize this thing we're going to
+modernize this thing we're going to
+insta solve it with puffer and we're
+insta solve it with puffer and we're
+going to put it on the
+going to put it on the
+website with a live
+website with a live
+demo if I am productive with this and I
+demo if I am productive with this and I
+don't get stuck on anything I think we
+don't get stuck on anything I think we
+can do all of this
+today uh I started briefly on this
+today uh I started briefly on this
+before so let me pull that code
+before so let me pull that code
+up and we'll just do some live
+up and we'll just do some live
+Dev
+Dev
+uh
+yeah the fork of this
+yeah the fork of this
+is right
+here you're free to grab this if you
+here you're free to grab this if you
+want help me debug it or
+whatever I don't know if we have our
+whatever I don't know if we have our
+machines up is the one thing I do need
+machines up is the one thing I do need
+to check at some point today whether we
+to check at some point today whether we
+have our uh our machines back up for
+have our uh our machines back up for
+running the experiments
+cool
+so and I we're just going to treat this
+so and I we're just going to treat this
+as uh like a redo of the project so
+as uh like a redo of the project so
+we'll give credits to the original
+we'll give credits to the original
+Creator but we're going to have to
+Creator but we're going to have to
+change a
+ton I think this would
+ton I think this would
+help I think this would help people try
+help I think this would help people try
+out did it might have eaten one of your
+out did it might have eaten one of your
+messages because I what would help
+messages because I what would help
+people try out and contribute
+people try out and contribute
+I think YouTube ate one of your messages
+I think YouTube ate one of your messages
+welcome welcome regardless
+though okay uh there's a lot of stuff in
+though okay uh there's a lot of stuff in
+here
+this is just our
+binding I added some wrappers to
+binding I added some wrappers to
+start uh and the main thing I think
+start uh and the main thing I think
+that's going to eat up most of our time
+here is this file which has the whole
+here is this file which has the whole
+simulation in
+it it is kind of vectorized
+already but it's using a bunch of old
+already but it's using a bunch of old
+libraries and old things it's using a
+libraries and old things it's using a
+bunch of old
+things I'm going to try to replace the
+things I'm going to try to replace the
+old render with rib real quick so we can
+old render with rib real quick so we can
+actually run this and see what's going
+actually run this and see what's going
+on with
+it refresh
+just be like
+this right so here is the Lander we have
+this right so here is the Lander we have
+to figure out how to draw this thing
+to figure out how to draw this thing
+using uh
+not this like super old library that
+not this like super old library that
+they have we're going to use
+RB there should be like a draw poly
+hly
+lines is there not like a
+lines is there not like a
+fill function for
+this
+this
+uh
+uh
+raw poly
+there's like
+there's like
+a none of them let you color
+a none of them let you color
+fill how' Robo tank turn out um I mean
+fill how' Robo tank turn out um I mean
+we're still we have like a basic
+we're still we have like a basic
+prototype of
+prototype of
+it um we just need to like there's just
+it um we just need to like there's just
+a lot of code you know I have tons of
+a lot of code you know I have tons of
+environments to work on as well as the
+environments to work on as well as the
+puffer core infro
+I'm trying to figure out here does this
+I'm trying to figure out here does this
+actually need to be a polygon or can we
+actually need to be a polygon or can we
+just
+just
+do this is like a really
+do this is like a really
+simple rocket
+right like why do they even need a
+right like why do they even need a
+polygon for this isn't this just a
+polygon for this isn't this just a
+rectangle
+I can just do draw a line everywhere for
+I can just do draw a line everywhere for
+now
+oh wait draw a line strap
+oh wait draw a line strap
+right
+points draw line
+strip Point count
+we're going to have to like do a bunch
+we're going to have to like do a bunch
+of refactor on this I'm
+of refactor on this I'm
+sure and
+sure and
+then they've got two colors
+apparently
+apparently
+clouds we're not going to have clouds
+clouds we're not going to have clouds
+for
+for
+now particles
+common all the unnecessary
+stuff this barge is erect okay so they
+stuff this barge is erect okay so they
+just they're just treating everything as
+just they're just treating everything as
+um they're just treating like everything
+um they're just treating like everything
+here as a uh as like a polygon I think
+here as a uh as like a polygon I think
+literally the easiest thing is going to
+literally the easiest thing is going to
+be to like just figure out what polygons
+be to like just figure out what polygons
+they actually want to draw and do that
+he do any
+[Music]
+they have some weird constants file
+they have a lot of constants in the
+they have a lot of constants in the
+constants
+file
+oops
+envirment could not need map plot
+this just super old
+code box 2D is still um nicely
+code box 2D is still um nicely
+maintained though so I don't think we
+maintained though so I don't think we
+need to redo the
+physics space from D type
+okay I think this actually did
+okay I think this actually did
+make the
+make the
+environment we just have to change this
+environment we just have to change this
+to
+to
+be may as well make a make it a a puffer
+be may as well make a make it a a puffer
+native M to start with since I think it
+native M to start with since I think it
+is already vectorized
+right me see I think it is literally
+right me see I think it is literally
+already vectorized
+let me see if I can tell is it
+vectorized there was something that said
+vectorized there was something that said
+Vector M
+here yeah you can see right here it's
+here yeah you can see right here it's
+already vectorized for us so we'll do uh
+already vectorized for us so we'll do uh
+we'll keep this
+we'll keep this
+in Python for now as Veen and then we
+in Python for now as Veen and then we
+will consider depending how long it
+will consider depending how long it
+takes me I will consider porting this to
+takes me I will consider porting this to
+c later
+today port puer
+okay and now we have stuff to
+okay and now we have stuff to
+implement so for puffer
+implement so for puffer
+API few stuff few things that we need
+API few stuff few things that we need
+to
+Define we need to
+do or gymnasium as gy
+do or gymnasium as gy
+modernize
+that I don't know why these constants
+that I don't know why these constants
+still show up in yellow
+action
+action
+space this actually doesn't give us the
+space this actually doesn't give us the
+bounds on
+bounds on
+stuff I think we Define
+stuff I think we Define
+single observation space as well with
+single observation space as well with
+the puffer
+version these bounds are very bad as
+well this doesn't actually tell us
+F FS PSI we don't know
+F FS PSI we don't know
+the the actual spaces on
+these nozzle angle
+limit better than motor
+speed 15 * degrees to radians
+so I think these are continuous
+so I think these are continuous
+spaces I'm pretty
+sure I can't tell
+sure I can't tell
+exactly maybe there's some
+docks super old en
+ah here we
+ah here we
+go 0 to one
+wait now this is
+example okay so they actually they do
+example okay so they actually they do
+give us here
+and then this
+and then this
+is
+zero1 negative
+zero1 negative
+nozzle angle limit and then it goes to
+nozzle angle limit and then it goes to
+one one and nozzle
+limit oops
+limit oops
+low equals
+this I equals
+this I equals
+this and then I need
+this and then I need
+shape which is going to
+be three
+what what do I have wrong
+here are these just not named
+here are these just not named
+yeah it's okay whatever we'll just do
+yeah it's okay whatever we'll just do
+this
+environment yeah we don't have a reset
+can just be defined as reset like
+this this should be single action
+this this should be single action
+space and then it's going to be very
+space and then it's going to be very
+nice here
+nice here
+because we actually get to get rid of
+because we actually get to get rid of
+this and this and this because we're
+this and this and this because we're
+making it a native M now just return
+making it a native M now just return
+this
+n do you plan on making an intro to RL
+n do you plan on making an intro to RL
+in both Python and C for beginners it
+in both Python and C for beginners it
+would be very interesting so I don't
+would be very interesting so I don't
+do educational material as like my main
+do educational material as like my main
+thing uh my focus is on pushing the
+thing uh my focus is on pushing the
+bounds of RL and it just so happens that
+bounds of RL and it just so happens that
+the way that I do stuff ends up being
+the way that I do stuff ends up being
+educational and beginner friendly but
+educational and beginner friendly but
+um I'll tell you what I am doing for
+um I'll tell you what I am doing for
+users which is going to be very helpful
+users which is going to be very helpful
+for new people is I'm making it very
+for new people is I'm making it very
+very easy to implement new environments
+very easy to implement new environments
+hprof environments you start in Python
+hprof environments you start in Python
+push them to scon push them to C so
+push them to scon push them to C so
+puffer really tries very hard to make it
+puffer really tries very hard to make it
+easy for you no matter at what level
+easy for you no matter at what level
+you're coming in so like right now this
+you're coming in so like right now this
+is a complicated en I've never seen
+is a complicated en I've never seen
+before it's got a bunch of physics and
+before it's got a bunch of physics and
+dependencies and old code uh that's in
+dependencies and old code uh that's in
+Python so I'm porting it to puffer's
+Python so I'm porting it to puffer's
+Native python API to get it working and
+Native python API to get it working and
+get it high per for Python and then
+get it high per for Python and then
+after that um I'm going to consider
+after that um I'm going to consider
+pushing it into scon or to C and puffer
+pushing it into scon or to C and puffer
+is going to make that very easy as for
+is going to make that very easy as for
+like tutorial IED type material I stream
+like tutorial IED type material I stream
+this type of work most days of the
+week there will also be updated
+week there will also be updated
+documentation at least tutorial
+documentation at least tutorial
+documentation not like video educational
+documentation not like video educational
+content but there will be tutorial
+content but there will be tutorial
+documentation on this uh in the next
+documentation on this uh in the next
+version for sure I've had multiple
+version for sure I've had multiple
+people asking for better
+docs you're also free to just ask stuff
+docs you're also free to just ask stuff
+on here right live user support best in
+on here right live user support best in
+the B best RL user support out there you
+the B best RL user support out there you
+literally can just ask stuff on stream
+literally can just ask stuff on stream
+all day
+what's the plan for
+today we're going to land Elon musk's
+today we're going to land Elon musk's
+rocket this is
+rocket this is
+uh old rocket Landing
+uh old rocket Landing
+environment um and we are going to
+environment um and we are going to
+revamp this thing so that it's actually
+revamp this thing so that it's actually
+usable in modern era code and we're
+usable in modern era code and we're
+going to get this thing we're going to
+going to get this thing we're going to
+see how hard this is I'm hoping we can
+see how hard this is I'm hoping we can
+have it on puffer
+have it on puffer
+GG trained and playable by the end of
+GG trained and playable by the end of
+the day we'll see if that ends up being
+the day we'll see if that ends up being
+too
+ambitious no attribute to Observation
+ambitious no attribute to Observation
+space
+rocket Lander has no attribute ah I just
+rocket Lander has no attribute ah I just
+forgot to
+do super
+so this is a new thing with the puffer
+so this is a new thing with the puffer
+API has to have a
+buffer and it sets up observations
+buffer and it sets up observations
+actions and stuff for you
+uh unexpected keyword
+uh unexpected keyword
+AR just not
+save now my
+agents
+agents
+on where am I
+this doesn't give us the number of
+this doesn't give us the number of
+environments being made does
+it is it a constant in
+here length of
+State how do we tell how many
+State how do we tell how many
+environments there are
+it's weird cuz parts of this look
+it's weird cuz parts of this look
+vectorized and parts of it don't look
+vectorized and parts of it don't look
+vectorized
+Gotta Love old
+code a seven-year-old project this
+code a seven-year-old project this
+thing's got to it would have had its PhD
+thing's got to it would have had its PhD
+by now it did started
+I'm going to set num agents to one for
+I'm going to set num agents to one for
+now cuz I can't tell what what this is
+now cuz I can't tell what what this is
+doing
+it's actually running to the end of
+it's actually running to the end of
+reset that's good news
+we just have API Shenanigans to
+fix this is on super old version of gy
+fix this is on super old version of gy
+and now we also have our puffer
+end
+end
+step oh I get it I think that they were
+step oh I get it I think that they were
+using maybe they were relying on gy to
+using maybe they were relying on gy to
+vectorize it or
+something that's probably it
+that's fine though step with
+that's fine though step with
+[Music]
+action
+same what's wrong with this
+interesting it gives you an action
+interesting it gives you an action
+that's not valid
+oh it's just uh it's like
+vectorized so there's like some
+vectorized so there's like some
+vectorization stuff in here but not uh
+vectorization stuff in here but not uh
+all of it this actually does run to the
+bottom okay self dot observations
+rewards then we just
+rewards then we just
+return self
+dot this is terminals
+[Music]
+and then
+infos no attribute
+infos no attribute
+observations really should have
+something did it not get initialized yet
+it should have gotten assigned right
+here just make sure of this
+step is being called before
+net return rocket
+Lander oh it
+Lander oh it
+calls yeah this is not correct my guy
+calls yeah this is not correct my guy
+this is
+this is
+not there we
+not there we
+go lots of old API
+go lots of old API
+Jank that's all right it's hard to
+Jank that's all right it's hard to
+follow uh some of this stuff because a
+follow uh some of this stuff because a
+lot of this is just like historical the
+lot of this is just like historical the
+way that I know gym API used to work
+way that I know gym API used to work
+five years
+ago this type of work you kind of have
+ago this type of work you kind of have
+to have historical context for but it'll
+to have historical context for but it'll
+start getting much cleaner very soon
+there we
+go so the way that puffer works here it
+go so the way that puffer works here it
+defines these buffers for you uh and
+defines these buffers for you uh and
+these buffers make it very convenient to
+these buffers make it very convenient to
+have your MB fast you just do all your
+have your MB fast you just do all your
+stuff into those buffers and look at
+stuff into those buffers and look at
+that we actually already have this thing
+that we actually already have this thing
+running I have no idea what it's running
+running I have no idea what it's running
+but it's running something we're
+but it's running something we're
+probably going to have to fix all the
+probably going to have to fix all the
+rendering before we know what's going on
+but it does
+but it does
+run not bad for 40 minutes
+work literally seven-year old
+project is observation the state what
+project is observation the state what
+are those eight numbers yeah it's got
+are those eight numbers yeah it's got
+the way that this thing was implemented
+the way that this thing was implemented
+before I'll show you I mean this is a
+before I'll show you I mean this is a
+simple environment right they just gave
+simple environment right they just gave
+you state access
+you state access
+I think State axis let me
+see XY velocity lateral angle angular
+see XY velocity lateral angle angular
+velocity and then you get vertical
+velocity and then you get vertical
+Thruster side Thruster and nozzle
+angle does this thing have CVX Pi in it
+angle does this thing have CVX Pi in it
+wait what
+what there's no way they're actually
+what there's no way they're actually
+using this
+using this
+right I haven't seen that in a long
+time this is awesome yeah thank you I I
+time this is awesome yeah thank you I I
+think people are going to start to see
+think people are going to start to see
+how easy RL is going to get with this
+how easy RL is going to get with this
+because like it's literally going to be
+because like it's literally going to be
+the case that I'm going to get the SIM
+the case that I'm going to get the SIM
+running fast I'm going to press a couple
+running fast I'm going to press a couple
+of buttons and the environment is going
+of buttons and the environment is going
+to be solved it's literally all the work
+to be solved it's literally all the work
+is just going into making the
+is just going into making the
+environments be fast and puffer does a
+environments be fast and puffer does a
+lot of the heavy lifting for
+you and it does so without you having a
+you and it does so without you having a
+bunch of apis that you have to
+learn this is all in the dev Branch but
+learn this is all in the dev Branch but
+uh it's getting merged with the next
+uh it's getting merged with the next
+update I just I keep getting distracted
+update I just I keep getting distracted
+by fun things like this
+by fun things like this
+project I'm going to put this in chat
+project I'm going to put this in chat
+for folks as well do go ahead and start
+for folks as well do go ahead and start
+the repo if you haven't already helps me
+the repo if you haven't already helps me
+out a
+[Music]
+[Music]
+ton like the two metrics that I track
+ton like the two metrics that I track
+are um stars on repo and then follows on
+X it's going pretty
+X it's going pretty
+well knit window
+uh
+name is there a guide on how to make new
+name is there a guide on how to make new
+environments uh there will be a there
+environments uh there will be a there
+will be some docs on this but there's
+will be some docs on this but there's
+also what you're watching right here
+also what you're watching right here
+you're watching me do that live pretty
+you're watching me do that live pretty
+much uh there's the
+much uh there's the
+Discord and we have tons of people
+Discord and we have tons of people
+building all sorts of new environments
+building all sorts of new environments
+that have had zero prior RL experience
+that have had zero prior RL experience
+just like you know standard engineering
+just like you know standard engineering
+background in um discord.gg
+background in um discord.gg
+sluff pretty easy to get
+sluff pretty easy to get
+involved in the evenings um after I
+involved in the evenings um after I
+finish work I'm usually like you know at
+finish work I'm usually like you know at
+the gym or whatever and I'll just be
+the gym or whatever and I'll just be
+like inv voice on Discord uh
+like inv voice on Discord uh
+troubleshooting stuff with contributors
+okay we have a
+window nothing is drawing to said
+window nothing is drawing to said
+window ah because we hit a break point
+[Music]
+[Music]
+cool this is literally a rectangle
+rectangle right
+oh I know why it's in this format it's
+oh I know why it's in this format it's
+in this format for the physics engine
+in this format for the physics engine
+right okay Landing
+right okay Landing
+barge we'll just do x
+equals
+equals
+0 zero Y is going to
+be wait
+0.1 5.2
+are these drawn from like the
+are these drawn from like the
+uh are these coordinates upside
+down what are these
+in like these coordinates don't make
+in like these coordinates don't make
+sense
+right polygon
+scale
+these are like flipped and they're also
+these are like flipped and they're also
+very badly
+scaled I mean I could just multiply
+scaled I mean I could just multiply
+these by like
+these by like
+what
+50 but you also have to
+50 but you also have to
+subtract uh
+all
+right with equals
+let's do like
+[Music]
+this okay draw a rectangle like
+this okay draw a rectangle like
+this and then we do
+this and then we do
+X pu scale
+I have to
+do
+y and then
+right did he give me the bottom
+right did he give me the bottom
+coordinate I don't know whatever
+we send
+it what are these ground
+Poes Landing
+Flags I just want to get a rocket that
+Flags I just want to get a rocket that
+like moves around to start
+it's funny how like
+it's funny how like
+um how much stuff gets held back by not
+um how much stuff gets held back by not
+having like good drawing
+tools like literally just having rayb
+tools like literally just having rayb
+made such a huge
+difference and then color is going to
+difference and then color is going to
+be red
+colors.
+red integers
+required
+really I do rectangle
+wrong draw a
+rectangle oh I it doesn't let you cast
+rectangle oh I it doesn't let you cast
+cuz it's the C type findind
+fine this is one of the things that's
+fine this is one of the things that's
+literally easier in C is that uh c will
+literally easier in C is that uh c will
+cast correctly for
+you yeah there we go
+this is also just a rectangle isn't
+it I just do like a draw converted wck
+it I just do like a draw converted wck
+function or
+something and then we just won't have to
+something and then we just won't have to
+worry about it
+okay
+yeah we're just going to like ignore the
+yeah we're just going to like ignore the
+weird scaling we're just going to make
+weird scaling we're just going to make
+our own thing for this so XY towards
+zero
+zero
+three
+viewport
+color draw a line Strip This is
+color draw a line Strip This is
+literally just going to be
+literally just going to be
+um
+orct half
+color
+right then this is going to
+be draw
+be draw
+correct color is red
+un type draw a
+un type draw a
+polyline okay I missed some of
+polyline okay I missed some of
+these we do not know what these even do
+these we do not know what these even do
+so we're just going to do
+so we're just going to do
+return and we will rebuild the interface
+return and we will rebuild the interface
+once we have a barge and a square or a
+once we have a barge and a square or a
+rectangle for rocket
+rectangle for rocket
+render
+render
+mode yeah that's
+API H
+human integer
+required what's
+required what's
+this oh this is literally particles
+huh well that's
+not as definitely not what we
+wanted yeah that's got
+awful welcome Nathan
+we're going to use the iron 3 leagues
+we're going to use the iron 3 leagues
+mechan League mechanics to quit out of
+mechan League mechanics to quit out of
+that before it overwhelms the CPU
+should we do
+dude why is it still doing it
+okay cool
+nothing on the
+screen oh we have to do uh yeah we
+screen oh we have to do uh yeah we
+didn't have it in draw mode
+so we do like this and then we have to
+so we do like this and then we have to
+do
+do
+begin begin drawing playar
+begin begin drawing playar
+background
+background
+and this is
+[Music]
+[Music]
+RL and then RL do end
+interesting it's still not doing
+interesting it's still not doing
+anything
+okay uh you can't put a break point in
+okay uh you can't put a break point in
+here right you have to put it at the end
+here right you have to put it at the end
+of the draw
+frame
+so let's just print out our draw cords
+so let's just print out our draw cords
+maybe that'll be easier
+okay so now we have
+our
+our
+interesting negative coordinates
+some of these aren't
+negative I think they're out of bounds
+negative I think they're out of bounds
+maybe
+withth
+height Z
+okay so something's weird
+here put break point
+here so here are our coordinates
+I think that it's hold on is it
+I think that it's hold on is it
+literally just as simple as hords
+2 this looks better
+now yeah negative widths and Heights
+now yeah negative widths and Heights
+well it's because there like there's
+well it's because there like there's
+this weird polygon format from uh
+this weird polygon format from uh
+whatever they Ed to draw this
+whatever they Ed to draw this
+with Okay so now we actually have
+with Okay so now we actually have
+something on the screen it's janky but
+something on the screen it's janky but
+you can see there's something there uh
+you can see there's something there uh
+some of these are still messed up so
+some of these are still messed up so
+possibly the order is not
+consistent
+yesh yeah cuz what it probably is is
+yesh yeah cuz what it probably is is
+they probably have like a poly gond draw
+they probably have like a poly gond draw
+and they're just going to put him in
+and they're just going to put him in
+whatever
+order um
+is there no like
+is there no like
+polyfill in
+polyfill in
+RB really
+draw
+textured it's weird that you can only
+textured it's weird that you can only
+draw it with a
+texture splines
+come on how is there
+come on how is there
+no there's got to be like a
+no there's got to be like a
+poly function
+right left right well it's going to have
+right left right well it's going to have
+a rotation as
+well I mean I could write the function
+well I mean I could write the function
+as well right I can easily write that
+as well right I can easily write that
+function too but like the cleaner thing
+function too but like the cleaner thing
+that's going to cause me less grief is
+that's going to cause me less grief is
+if I just have a poly draw function
+I could just draw the lines for
+now let's just draw the lines for
+now for
+okay so we
+okay so we
+have spline
+have spline
+segment
+segment
+um I might use that
+function let me I don't actually
+function let me I don't actually
+understand how they're doing their
+understand how they're doing their
+points in
+points in
+here draw a
+here draw a
+poly yeah it has that but like you see
+poly yeah it has that but like you see
+that's for that's for regular polygons
+that's for that's for regular polygons
+it has sides that doesn't let you do
+it has sides that doesn't let you do
+like arbitrary line fill convex
+shape X1
+shape X1
+y1 X2
+Y2 so we literally just have to do
+it's
+it's
+[Music]
+fine draw a
+fine draw a
+line yep
+okay this actually draws
+now let me see if we're still drawing
+now let me see if we're still drawing
+anything
+negative uh it doesn't actually
+negative uh it doesn't actually
+matter anymore
+can we see the
+can we see the
+Lander no
+oh that actually
+oh that actually
+worked actually worked reasonably well
+worked actually worked reasonably well
+that's so
+that's so
+funny I use draw triangle fan for
+funny I use draw triangle fan for
+arbitrary convex
+arbitrary convex
+poce okay that'll work
+poce okay that'll work
+Nathan here
+Nathan here
+[Laughter]
+[Laughter]
+Bonk that was not
+Bonk that was not
+[Laughter]
+[Laughter]
+bad oh that was so Jank but that
+bad oh that was so Jank but that
+actually that actually kind of did
+something that cracks me
+up okay here is the full
+rocket something tells me that this is
+rocket something tells me that this is
+not the way a rocket would behave you
+not the way a rocket would behave you
+know physics wise I don't know it
+know physics wise I don't know it
+there's something that doesn't look
+there's something that doesn't look
+quite right about about
+that let's get it to just be a
+that let's get it to just be a
+reasonable
+reasonable
+scale there we
+scale there we
+go
+WK so we're basically already to Mars
+WK so we're basically already to Mars
+right what bounciness coefficient are
+right what bounciness coefficient are
+you using here over
+you using here over
+9,000
+apparently this is not going to train
+apparently this is not going to train
+particularly well yet um we need to go I
+particularly well yet um we need to go I
+think now is probably a good time to
+think now is probably a good time to
+start going through the code properly
+survation space
+size really don't need this
+size really don't need this
+right just start stripping out fat
+and then we will do let's grab this
+and then we will do let's grab this
+comment
+get rid of this for now
+try figure out what portions of this
+try figure out what portions of this
+code are doing
+code are doing
+stuff inherited this got to
+reset step through one
+reset step through one
+action and return the state
+there no way to just get the
+state you should not have to um
+self.
+State you should not have to step the
+State you should not have to step the
+environment like
+environment like
+this I'm going to just return self.
+this I'm going to just return self.
+state
+check for
+contact vectorized
+nozzle strictly speaking you're out of
+nozzle strictly speaking you're out of
+fuel but act
+anyways minor d
+anyways minor d
+details problem specific physics State
+details problem specific physics State
+and
+rewards why does he have all this stuff
+rewards why does he have all this stuff
+as problem
+as problem
+specific generate
+State compute Rewards
+create
+rocket create
+rocket create
+barge yeah there's just a whole bunch of
+barge yeah there's just a whole bunch of
+Jank in here
+um with this like weird physics engine
+um with this like weird physics engine
+and drawing
+labels here's your render
+labels here's your render
+function
+refresh poly draw
+refresh poly draw
+line move barge
+interesting so they do have random like
+interesting so they do have random like
+move barge
+stuff is are they actually using all
+this like this is not getting used from
+this like this is not getting used from
+anywhere
+oh I guess this is for model predict so
+oh I guess this is for model predict so
+we can just start deleting stuff that's
+we can just start deleting stuff that's
+not used for the core
+m not
+used yeah there's a bunch of like model
+used yeah there's a bunch of like model
+predictive control stuff
+not
+used
+okay I'm not being dumb here right this
+okay I'm not being dumb here right this
+is a single file
+is a single file
+implementation it doesn't have anything
+implementation it doesn't have anything
+else that it could
+else that it could
+be yeah no there's nothing else I could
+be yeah no there's nothing else I could
+be using this
+for this is probably being
+for this is probably being
+used initial state
+initial Force there's no initial state
+none of this stuff gets used at
+all I guess they just have it all in uh
+all I guess they just have it all in uh
+in one place for
+this gets used
+this gets used
+right actually is move barge this is not
+right actually is move barge this is not
+used at all
+I feel like I'm doing the
+I feel like I'm doing the
+uh un like the Mark Brothers
+uh un like the Mark Brothers
+thing where they have uh ah this is such
+thing where they have uh ah this is such
+an old
+an old
+movie they've got this contract and
+movie they've got this contract and
+they're just like tearing out pieces of
+they're just like tearing out pieces of
+it and like oh we don't need that we
+it and like oh we don't need that we
+don't need that and they just end up
+don't need that and they just end up
+tearing up the whole
+thing and this does get
+used well we're not going to use any of
+used well we're not going to use any of
+their draw functions obviously
+we commented this
+stuff we're going to move
+stuff we're going to move
+this there's absolutely no point in this
+existing right
+this one as well we're going to just put
+this
+yeah and then refresh does this get
+called oh
+maybe we'll keep clouds and stuff we'll
+see 862
+see 862
+lines so we've cut it down a lot but
+lines so we've cut it down a lot but
+there's still a ton of stuff in here
+there's still a ton of stuff in here
+like what do
+like what do
+we what do we actually have here that's
+we what do we actually have here that's
+like
+upate
+parts now this does get used H we got
+parts now this does get used H we got
+rid of a bunch of stuff at
+rid of a bunch of stuff at
+least this run
+oh
+what I
+break
+break
+probably
+probably
+step no reset I broke for sure
+right yeah this is has to be
+right yeah this is has to be
+self observations is state in
+return where is
+the hang on
+previous state is
+State generate state right
+got to be like this right
+okay we've got
+okay we've got
+our
+our
+rocket works again minus a whole bunch
+rocket works again minus a whole bunch
+of code that we didn't need
+create clouds create barge
+used different Mass represent different
+used different Mass represent different
+forces
+interesting concept of
+interesting concept of
+options do not need this I don't think
+shaping of reward is
+shaping of reward is
+there whoa this is crazy reward
+shaping
+step oh 60
+FPS so I should set this to FPS
+FPS so I should set this to FPS
+here that's probably why it it's like so
+here that's probably why it it's like so
+weird
+looking yeah
+looking yeah
+okay it was just it was in slow motion I
+okay it was just it was in slow motion I
+mean Stills crazy rocket toppling around
+mean Stills crazy rocket toppling around
+like that but better
+I'm trying to think where I want to go
+I'm trying to think where I want to go
+with this if I just want to start trying
+with this if I just want to start trying
+to figure out how to put this into the
+to figure out how to put this into the
+main
+main
+Loop or what
+I guess this would give me a good excuse
+I guess this would give me a good excuse
+to do the thing that I've been wanting
+to do the thing that I've been wanting
+to do for a while which is to add um fix
+to do for a while which is to add um fix
+serial vectorization to work with
+this people have been asking for that as
+this people have been asking for that as
+well
+well
+so I can actually run this at a
+so I can actually run this at a
+reasonable
+speed yeah let's try that
+um well it still kind of needs to be
+um well it still kind of needs to be
+vectorized internally
+vectorized internally
+though yeah
+the thing is I'm I'm just uh running
+the thing is I'm I'm just uh running
+multiple copies of this thing the
+multiple copies of this thing the
+implementation technically supported it
+implementation technically supported it
+but it did it in a very weird
+way I mean I could just mark this as a
+way I mean I could just mark this as a
+uh
+uh
+gymnasium and instead of a puffer native
+gymnasium and instead of a puffer native
+n let me look up one thing I'm looking
+n let me look up one thing I'm looking
+let me look at like how hard thing would
+let me look at like how hard thing would
+be to actually port to Native C I don't
+be to actually port to Native C I don't
+want to do it just yet
+but they use box 2D which is in C isn't
+it box
+2D portable c17
+there a lot of stuff in
+here this is what I was going to have to
+here this is what I was going to have to
+do in order to have um like physics Sims
+do in order to have um like physics Sims
+in here
+yeah this is going to be a bigger
+yeah this is going to be a bigger
+project so I think that we're just going
+project so I think that we're just going
+to get this to do we're not going to put
+to get this to do we're not going to put
+it on the website for now but we're
+it on the website for now but we're
+going to see if we can get a rocket
+going to see if we can get a rocket
+landing and then we'll see from
+landing and then we'll see from
+there cuz if the thing is in order to
+there cuz if the thing is in order to
+get this onto the website I have to Port
+get this onto the website I have to Port
+this all the Capi of box 2D which would
+this all the Capi of box 2D which would
+normally be fine except there's a whole
+normally be fine except there's a whole
+bunch of Jank code the way that this is
+bunch of Jank code the way that this is
+written um
+written um
+possibly once I prune it down a little
+possibly once I prune it down a little
+bit more we'll be able to do that so let
+bit more we'll be able to do that so let
+me think what's going to be the easiest
+me think what's going to be the easiest
+way to get this thing
+way to get this thing
+training at a reasonable
+speed trying to think what would
+be yeah I can just go start messing with
+be yeah I can just go start messing with
+VEC I mean this is a feature that I've
+VEC I mean this is a feature that I've
+needed anyways
+physics
+physics
+yeah I mean that's going to be an area
+yeah I mean that's going to be an area
+where we'll want to do stuff anyways but
+where we'll want to do stuff anyways but
+like I don't even know how fast box 2D
+like I don't even know how fast box 2D
+is it's probably pretty fast if the
+is it's probably pretty fast if the
+guy's writing it in
+guy's writing it in
+C
+um that's more of a judgment on C
+um that's more of a judgment on C
+programming than on anything
+programming than on anything
+else like C programmers than anything
+else like C programmers than anything
+else this is probably
+fast let's at least get
+fast let's at least get
+um get
+um get
+something what is wrong
+with Y so serial ve
+trying to remember what things need to
+trying to remember what things need to
+be different even here
+I just do
+cereal what happens if I just do this
+actions do not
+match
+okay this should be compatible actually
+why did this give
+why did this give
+me actions that were not in this space
+they are in this space right noga
+.68 that could be the continuous Bas
+.68 that could be the continuous Bas
+code though not handling these bounds
+log standard deviation
+I think this gives
+I think this gives
+you1 to ones
+right orang distributions
+right orang distributions
+no this just gives you
+no this just gives you
+normal
+gaussian how do people do this in uh in
+gaussian how do people do this in uh in
+continuous action spaces hold on I need
+continuous action spaces hold on I need
+to either clip or something
+rescale okay so we're just going to have
+rescale okay so we're just going to have
+to mess with that that's
+to mess with that that's
+fine we'll do it on the environment
+side uh what it
+what we'll do is we'll just put this to
+be what we are going to have to probably
+be what we are going to have to probably
+rescale right unless they clip
+this appears to be
+running okay so now this is training
+running okay so now this is training
+what low thous
+with what are we
+running 64m
+how bad python is it should be so much
+faster fully bottlenecked by the
+faster fully bottlenecked by the
+environment let's see if we can at least
+environment let's see if we can at least
+get some stats out of this thing we'll
+get some stats out of this thing we'll
+probably end up having to Port it
+python is just like such a terrible
+python is just like such a terrible
+language for doing this type of
+language for doing this type of
+work I mean this is to be fair faster
+work I mean this is to be fair faster
+than a lot of python M's already with
+than a lot of python M's already with
+next to no optimization but really this
+next to no optimization but really this
+just needs to be it's like a thousand
+just needs to be it's like a thousand
+times slower than it should
+be e
+what do we just log do we just log
+what do we just log do we just log
+reward
+here may as
+well oh
+I think the problem is that this doesn't
+I think the problem is that this doesn't
+show up with Native
+right doesn't show up let's fix
+that sign
+buffers um
+nice
+just do this real
+quick let's get us reward yep there we
+quick let's get us reward yep there we
+go Rewards
+now it's just about fixing some
+now it's just about fixing some
+bugs and doing a hyper pram sweep on
+bugs and doing a hyper pram sweep on
+this if we
+can it's too slow is the
+problem wait too slow
+I'm tempted to profile
+it just to see if I can get the python
+it just to see if I can get the python
+version to go any
+faster but it looks like it's just a
+faster but it looks like it's just a
+bunch of really
+bunch of really
+Jank physics implemented in Python
+maybe we'll just guess some prms
+policy 64 environments because they're
+policy 64 environments because they're
+slow Point
+slow Point
+interval well except we don't have this
+interval well except we don't have this
+so we have to do here is
+so we have to do here is
+64 one
+batch size can be what 4096
+batch size can be what 4096
+maybe uh 64 *
+64 4 *
+64 4 *
+6 yeah that's correct duh that's
+6 yeah that's correct duh that's
+probably good enough um mini bad
+probably good enough um mini bad
+[Music]
+[Music]
+four box
+four box
+three ryzen keep Atari defaults
+let's
+let's
+see I haven't done too much on the
+see I haven't done too much on the
+continuous side though Kung says it uh
+continuous side though Kung says it uh
+it works
+so is it not resetting
+was probably not resetting at all
+yes it needs to handle its own resets
+it's
+it's
+true these need to
+true these need to
+go under
+go under
+here I would
+here I would
+say and
+then
+reset there there we go now it should be
+reset there there we go now it should be
+resetting
+correctly should just be a matter of
+correctly should just be a matter of
+speed from here if like if this thing
+speed from here if like if this thing
+ran a million steps per second we'd run
+ran a million steps per second we'd run
+a sweep and it would be insta
+a sweep and it would be insta
+solved either insta solved or unsolvable
+solved either insta solved or unsolvable
+like uh with current settings we would
+like uh with current settings we would
+know one way or the other like
+immediately I want to play with this for
+immediately I want to play with this for
+a little longer before I consider
+a little longer before I consider
+whether I want to just go all the way
+whether I want to just go all the way
+with this and just Port it to to see I
+with this and just Port it to to see I
+mean the physics Library itself is
+mean the physics Library itself is
+available in
+available in
+C
+so it's not
+crazy I could just work on cleaning up
+crazy I could just work on cleaning up
+their code a whole bunch before I do
+their code a whole bunch before I do
+that would make it much easier
+I mean the fact that this isn't solving
+I mean the fact that this isn't solving
+instantly is not surprising at all
+instantly is not surprising at all
+because it's
+because it's
+like slow bad hyper
+like slow bad hyper
+prams uh you really need the speed for
+prams uh you really need the speed for
+puffer to be able to
+puffer to be able to
+instantly to solve
+it why don't we try to Port this to be
+let me
+think reporting this to be
+think reporting this to be
+vectorized doesn't really
+vectorized doesn't really
+help yeah I think the only thing that
+help yeah I think the only thing that
+makes this reasonable is porting this to
+makes this reasonable is porting this to
+c
+native let me just scan through
+here all the physics functions are
+here all the physics functions are
+available in
+C create
+C create
+particles there is a bunch of
+stuff that will be tricky I think the
+stuff that will be tricky I think the
+way it's done here relying on python
+way it's done here relying on python
+data
+structures state is not bad
+compute
+rewards let me make sure I really
+have terrain coordinates
+I don't know what this is I think it's a
+I don't know what this is I think it's a
+little early to try to for this because
+little early to try to for this because
+I don't understand what they're doing
+I don't understand what they're doing
+for most of
+for most of
+this I think I need to do a little bit
+this I think I need to do a little bit
+more work on this code
+first why does this get slow lower
+first why does this get slow lower
+overtime as
+well the
+well the
+leak
+no
+no
+well we start on this then nozzle
+poly are these polygons used by
+create body
+Dynamics yeah they so the polygons are
+Dynamics yeah they so the polygons are
+used by the uh the physics engine
+what is
+this
+this
+height
+create create base static edges
+does this I don't think he had this
+does this I don't think he had this
+rendered what is this like uneven
+rendered what is this like uneven
+terrain or
+something oh the
+water I
+water I
+see so yeah we need to fix some of this
+see so yeah we need to fix some of this
+for
+sure cuz it's a barge okay duh
+create static Edge
+what stuff is in here that I haven't
+what stuff is in here that I haven't
+rendered see
+poly they have Curves in here but I
+poly they have Curves in here but I
+don't see where they have the curves
+let's just do this
+SE chunks
+okay
+uh so this needs a 255 on it
+uh so this needs a 255 on it
+right
+right
+is
+* 127
+plus plus
+0.5 it's
+interesting the chunks
+one
+minus what is this color formula that
+minus what is this color formula that
+they have hold
+on oh wait it's zero R
+on oh wait it's zero R
+yeah g is just 127 * K it's fine and
+yeah g is just 127 * K it's fine and
+then this is just going to
+be I don't see how this is 255
+be I don't see how this is 255
+plus
+plus
+0.5 we'll see
+let's see what
+happens integers
+required too many initializers for color
+required too many initializers for color
+got five one three
+oh that's cool
+I'm going to have to actually take a
+I'm going to have to actually take a
+break for lunch today cuz I didn't get
+break for lunch today cuz I didn't get
+to eat uh but I'm going to get I'm going
+to eat uh but I'm going to get I'm going
+to get the basic render of this thing
+to get the basic render of this thing
+done
+done
+first yeah that'll be
+first yeah that'll be
+good Landing
+Flags let's just do like
+this this is red
+draw a
+poly
+then okay we got our flags
+let's see the circles that this
+let's see the circles that this
+guy
+Drew radius
+Lander and
+particles I I think that
+matters that actually matter
+think
+think
+so I see how it
+so I see how it
+[Music]
+[Music]
+would and then what are
+would and then what are
+these oh well this
+these oh well this
+is hi
+welcome let's do draw a circle here
+ccle
+color uh puff
+scale we get started planning on making
+scale we get started planning on making
+some contributions put up a par for
+some contributions put up a par for
+connect for imponent improvements that's
+connect for imponent improvements that's
+great let me add the author of that
+[Laughter]
+let me
+at oh cool and you did it on the latest
+at oh cool and you did it on the latest
+one as well it looks like
+perfect greedy agent is
+perfect greedy agent is
+exactly what we
+wanted let's look at
+this so you got rid of this longest
+this so you got rid of this longest
+connected thing
+stage
+move check draw condition
+yeah I assume you put this at the top or
+yeah I assume you put this at the top or
+whatever uh player
+some good cleanups
+here check wind
+here check wind
+con moved it to Stage
+con moved it to Stage
+move can explore different
+move can explore different
+moves nice
+see commit
+move do
+move have you run a speed test real
+quick I'm just trying to see what you
+quick I'm just trying to see what you
+did for the win check
+I
+suspect let me
+say stage
+move check other PR for that it was bust
+wait like isn't it slow or like
+what oh okay that's
+fine
+fine
+cool uh uh I'm going to where's this I'm
+cool uh uh I'm going to where's this I'm
+going to merge this and I'm going to
+going to merge this and I'm going to
+play with it now is what I'm going to
+do and then we'll go back to Rocket in a
+second oh yeah that's not I didn't
+second oh yeah that's not I didn't
+update that
+[Music]
+so we can just
+do there's the new seab build
+do there's the new seab build
+system so we should just be a build
+system so we should just be a build
+ocean next for
+ocean next for
+local and then
+better review process than at my
+better review process than at my
+job yeah it's basically like I look at
+job yeah it's basically like I look at
+it see if it looks insane and if not I
+it see if it looks insane and if not I
+merge it and play with it unless you try
+merge it and play with it unless you try
+to merge stuff to like main branch or
+whatever he just intentionally blocked
+whatever he just intentionally blocked
+me there didn't
+he let's see if he intentionally blocks
+he let's see if he intentionally blocks
+me he does he does intentionally block
+me that's
+cool he intentionally blocks me
+cool he intentionally blocks me
+again oh that's way better
+again oh that's way better
+he just never makes a losing
+move not one step at
+least so you actually have to yeah
+least so you actually have to yeah
+that's way better
+that's way better
+okay so
+okay so
+now
+now
+what we
+do for
+we're going to train you an agent is
+we're going to train you an agent is
+what we're going to
+do if I can do it on my local machine
+huh that seems weird doesn't it
+let's see why it does that
+episode length is way too
+short what did you see it's just winning
+short what did you see it's just winning
+the game too
+the game too
+fast and the episode length is like
+fast and the episode length is like
+4.5 I probably it just hasn't compiled
+4.5 I probably it just hasn't compiled
+correctly or
+something maybe it just hasn't compiled
+something maybe it just hasn't compiled
+correctly
+okay yada
+yada so
+[Music]
+or I screwed up the
+rewards uh it's
+rewards uh it's
+winning you play Blue don't
+you it's getting uh one for
+losing it's getting one for losing
+let's see what you did
+here why do you get one for winning or
+here why do you get one for winning or
+opponent
+winning right
+oh
+oh
+wait
+wait
+what
+reward isn't there a log as well yeah
+reward isn't there a log as well yeah
+there's a log
+enlog score equals
+player are you player zero though you're
+player are you player zero though you're
+player zero aren't
+you is this backwards
+I reward
+okay so where do you get your
+reward where do you get your reward let
+reward where do you get your reward let
+me
+see so commit
+move this is a little weird because
+explain so you both call commit
+explain so you both call commit
+move and then you call it has Nega -1
+move and then you call it has Nega -1
+there and
+then
+player this is netive -1 though you're
+player this is netive -1 though you're
+doing so what's going on here
+like well wait you're giving it commit
+like well wait you're giving it commit
+move like is player supposed to be
+move like is player supposed to be
+negative
+one for
+negative-1 is
+negative-1 is
+script
+script
+okay and that's the way it was
+okay and that's the way it was
+before
+interesting log score
+episode
+episode
+return it's
+player you're blue right let me
+player you're blue right let me
+see yeah you are blue
+why are we scoring
+why are we scoring
+one when we're
+losing is it not recognizing we're
+losing for
+what were you rendering a yeah that was
+what were you rendering a yeah that was
+the policy I just trained while you were
+watching loses but it gets score
+one look you can train this here
+and this goes neg from negative all the
+and this goes neg from negative all the
+way up to
+one but then if I run it it's losing all
+one but then if I run it it's losing all
+the games
+where's
+score let's just print it here
+if this works this is great if we can
+if this works this is great if we can
+just get this to work this is great this
+just get this to work this is great this
+is exactly what we
+want just having like a simple greedy
+want just having like a simple greedy
+thing is way better than having a an
+thing is way better than having a an
+obnoxious MCTS
+obnoxious MCTS
+agent
+well is this F oops
+cheap views on
+band.com why is it
+1,24 not a
+1,24 not a
+float it a float
+f
+Le
+break it looks like it's losing
+okay here we have negative
+okay here we have negative
+score is what we would
+expect can't link to GitHub you can in
+Discord what's up
+Discord what's up
+here check WIC con
+um I'm
+confused does that break to her I don't
+confused does that break to her I don't
+know I see the negative score right
+know I see the negative score right
+here I see it losing every game let me
+here I see it losing every game let me
+see
+see
+why hang on let's see if we can do
+add
+log aggregating
+clear let's just do
+we're supposed to be landing musk's
+we're supposed to be landing musk's
+rocket but it's all right we get uh
+rocket but it's all right we get uh
+distracted for
+distracted for
+contributors plus it's a very weak
+contributors plus it's a very weak
+approximation of his rocket but it'll
+approximation of his rocket but it'll
+run a lot
+faster whatever the previous thing was
+faster whatever the previous thing was
+um there's a
+reward oh wait we should just be getting
+reward oh wait we should just be getting
+this
+right it should just show us the reward
+right it should just show us the reward
+after a second here zero
+ah it gets zero reward every
+ah it gets zero reward every
+tick you see this
+zero
+reward for
+what about this
+so here's what we're going to do we're
+so here's what we're going to do we're
+going to run it with a random policy and
+going to run it with a random policy and
+see if it gets
+rewards what
+okay
+so you can see it's not exploiting
+so you can see it's not exploiting
+anything it's just not getting rewards
+right playing out the full
+game
+WS look for common
+screw-ups no I got that one right
+you get off to I'm going to spend a
+you get off to I'm going to spend a
+couple more minutes and then I got to
+couple more minutes and then I got to
+get food I'm
+get food I'm
+starving I didn't get a proper
+breakfast and I made the mistake of
+breakfast and I made the mistake of
+skipping a meal after running a half
+skipping a meal after running a half
+marathon yesterday
+a m
+move what's the reset get
+called let try
+reward okay I I see the rewards
+here so wait if I see the rewards here
+are they just not getting to the
+are they just not getting to the
+python that would be really stupid
+wait why do we get reward
+wait why do we get reward
+here we do get reward
+here we do get reward
+here but we don't get reward
+how did I train this
+how did I train this
+before this might be a me
+buug no I did Native mode
+come
+on let see is it Act just going to
+on let see is it Act just going to
+be
+native oh H that was it okay that's good
+native oh H that was it okay that's good
+to
+to
+know that actually saves me a bug later
+know that actually saves me a bug later
+for for later today as
+well score is still wrong
+well score is still wrong
+though why is score wrong
+not rewarded
+score or the
+logging log score
+it just F native don't worry it's you
+it just F native don't worry it's you
+wouldn't it wouldn't even be possible
+wouldn't it wouldn't even be possible
+for you to have that bug it's because of
+for you to have that bug it's because of
+the experimental stuff I've been doing
+the experimental stuff I've been doing
+with the
+with the
+rocket um
+but then there's
+still so commit move
+right add log
+okay so here we get scores
+okay so here we get scores
+negative-1 occasionally winning which is
+negative-1 occasionally winning which is
+very
+very
+odd um but mostly negative
+one ah scores one
+oh well now it looks totally
+different
+um it's not did it find a
+um it's not did it find a
+bug I think it found an
+bug I think it found an
+exploit y I think that this thing found
+exploit y I think that this thing found
+an exploit in your Connect 4 thing
+look at
+that RL agent too smart you've been
+hacked is it the early return thing
+I'm trying to understand what this does
+well if you break out of this Loop you
+well if you break out of this Loop you
+go to here and then you do the negative
+go to here and then you do the negative
+Direction don't
+you I didn't write this bit well I
+you I didn't write this bit well I
+didn't
+either let me see let me see if I can
+either let me see let me see if I can
+figure out what this
+figure out what this
+is so
+c
+r
+r
+yeah I think that's fine
+let me see if I can do
+it like I think you play
+it like I think you play
+here and then
+here he didn't block
+me wait is this
+correct oh he just not doesn't block
+correct oh he just not doesn't block
+you wait what he blocked me
+there he doesn't there's something weird
+there he doesn't there's something weird
+with the blocks
+sh
+for e
+get this correctly
+get this correctly
+done all right
+done all right
+so I play
+here why am I not seeing any of
+this wait did I not
+rebuild uh this is not getting called
+background noise
+Jee Blended five times over
+time for some
+tests I'm testing it
+oh I have to rebuild my
+oh I have to rebuild my
+bad I forgot I have to rebuild the this
+binary
+binary
+oan
+uh collect
+[Music]
+undefined okay so
+here well what's happening here this
+here well what's happening here this
+doesn't make sense why is
+doesn't make sense why is
+this running repeatedly
+they should not be running like
+that oh it just puts no
+Ops for
+all
+all
+right
+right
+so opponent
+so opponent
+win it sees that I have a win
+here if I play like
+this oh it sees it
+is that all that was
+is that all that was
+happening
+oh yeah I think we're just incredibly
+oh yeah I think we're just incredibly
+stupid
+um you see what's
+um you see what's
+happening we're just dumb the rla just
+happening we're just dumb the rla just
+smarter
+it'll go here yeah
+see why didn't I think of
+that yeah we're just like I didn't
+that yeah we're just like I didn't
+realize how easy it is to beat a greedy
+realize how easy it is to beat a greedy
+agent if you know it's greedy
+recursive men Max the
+more likely you just need to have um
+more likely you just need to have um
+endstep look
+endstep look
+ahead still substantial improvement over
+ahead still substantial improvement over
+what was there
+before for
+interested in two
+interested in two
+player self play yeah that's the default
+player self play yeah that's the default
+it's very
+it's very
+easy um the the issue with it and I had
+easy um the the issue with it and I had
+somebody else try to do this before uh
+somebody else try to do this before uh
+you start needing like ELO as your win
+you start needing like ELO as your win
+metric right cuz your progress metric is
+metric right cuz your progress metric is
+like versus the opponent so the reason
+like versus the opponent so the reason
+that we wanted to have the built-in
+that we wanted to have the built-in
+opponent is because like is a whole
+opponent is because like is a whole
+another can of worms and it's nice to
+another can of worms and it's nice to
+have uh it's nice to have built an
+have uh it's nice to have built an
+opponent so you don't have to think
+opponent so you don't have to think
+about that for early experiments right
+about that for early experiments right
+so at least you know that like versus a
+so at least you know that like versus a
+fixed opponent you solve
+it I had a a collaborator trying this
+it I had a a collaborator trying this
+before and uh the conclusion was just
+before and uh the conclusion was just
+having a nice scripted opponent that's
+having a nice scripted opponent that's
+fast would make it substantially easier
+I got to go get some food um I'm going
+I got to go get some food um I'm going
+to be back in a little bit and I'll
+to be back in a little bit and I'll
+finish up rocket and answer some more
+finish up rocket and answer some more
+stuff if you have time or if you feel
+stuff if you have time or if you feel
+like it and you want to do I mean you
+like it and you want to do I mean you
+could just extend that thing to be like
+could just extend that thing to be like
+endep look ahead or whatever
+right if you're interested in
+that I think already by like two
+that I think already by like two
+steps it's already
+steps it's already
+probably uh easier
+
+Kind: captions
+Language: en
+okay I think we are
+live
+live
+hi well this was
+hi well this was
+unexpectedly
+unexpectedly
+successful I kind of just threw this on
+successful I kind of just threw this on
+uh on xent bunch of people tuned in so I
+uh on xent bunch of people tuned in so I
+figur let's do something fun
+today so
+today so
+David Haw just
+David Haw just
+posted I think I don't know if this is
+posted I think I don't know if this is
+his environment I think this is somebody
+his environment I think this is somebody
+else's this uh vectorized rocket Landing
+Sim yeah this is somebody else's
+right pretty
+right pretty
+interesting um but this end is very very
+interesting um but this end is very very
+old python
+old python
+3.5 7 years ago so I think what we're
+3.5 7 years ago so I think what we're
+going to do today is we're going to
+going to do today is we're going to
+modernize this thing we're going to
+modernize this thing we're going to
+insta solve it with puffer and we're
+insta solve it with puffer and we're
+going to put it on the
+going to put it on the
+website with a live
+website with a live
+demo if I am productive with this and I
+demo if I am productive with this and I
+don't get stuck on anything I think we
+don't get stuck on anything I think we
+can do all of this
+today uh I started briefly on this
+today uh I started briefly on this
+before so let me pull that code
+before so let me pull that code
+up and we'll just do some live
+up and we'll just do some live
+Dev
+Dev
+uh
+yeah the fork of this
+yeah the fork of this
+is right
+here you're free to grab this if you
+here you're free to grab this if you
+want help me debug it or
+whatever I don't know if we have our
+whatever I don't know if we have our
+machines up is the one thing I do need
+machines up is the one thing I do need
+to check at some point today whether we
+to check at some point today whether we
+have our uh our machines back up for
+have our uh our machines back up for
+running the experiments
+cool
+so and I we're just going to treat this
+so and I we're just going to treat this
+as uh like a redo of the project so
+as uh like a redo of the project so
+we'll give credits to the original
+we'll give credits to the original
+Creator but we're going to have to
+Creator but we're going to have to
+change a
+ton I think this would
+ton I think this would
+help I think this would help people try
+help I think this would help people try
+out did it might have eaten one of your
+out did it might have eaten one of your
+messages because I what would help
+messages because I what would help
+people try out and contribute
+people try out and contribute
+I think YouTube ate one of your messages
+I think YouTube ate one of your messages
+welcome welcome regardless
+though okay uh there's a lot of stuff in
+though okay uh there's a lot of stuff in
+here
+this is just our
+binding I added some wrappers to
+binding I added some wrappers to
+start uh and the main thing I think
+start uh and the main thing I think
+that's going to eat up most of our time
+here is this file which has the whole
+here is this file which has the whole
+simulation in
+it it is kind of vectorized
+already but it's using a bunch of old
+already but it's using a bunch of old
+libraries and old things it's using a
+libraries and old things it's using a
+bunch of old
+things I'm going to try to replace the
+things I'm going to try to replace the
+old render with rib real quick so we can
+old render with rib real quick so we can
+actually run this and see what's going
+actually run this and see what's going
+on with
+it refresh
+just be like
+this right so here is the Lander we have
+this right so here is the Lander we have
+to figure out how to draw this thing
+to figure out how to draw this thing
+using uh
+not this like super old library that
+not this like super old library that
+they have we're going to use
+RB there should be like a draw poly
+hly
+lines is there not like a
+lines is there not like a
+fill function for
+this
+this
+uh
+uh
+raw poly
+there's like
+there's like
+a none of them let you color
+a none of them let you color
+fill how' Robo tank turn out um I mean
+fill how' Robo tank turn out um I mean
+we're still we have like a basic
+we're still we have like a basic
+prototype of
+prototype of
+it um we just need to like there's just
+it um we just need to like there's just
+a lot of code you know I have tons of
+a lot of code you know I have tons of
+environments to work on as well as the
+environments to work on as well as the
+puffer core infro
+I'm trying to figure out here does this
+I'm trying to figure out here does this
+actually need to be a polygon or can we
+actually need to be a polygon or can we
+just
+just
+do this is like a really
+do this is like a really
+simple rocket
+right like why do they even need a
+right like why do they even need a
+polygon for this isn't this just a
+polygon for this isn't this just a
+rectangle
+I can just do draw a line everywhere for
+I can just do draw a line everywhere for
+now
+oh wait draw a line strap
+oh wait draw a line strap
+right
+points draw line
+strip Point count
+we're going to have to like do a bunch
+we're going to have to like do a bunch
+of refactor on this I'm
+of refactor on this I'm
+sure and
+sure and
+then they've got two colors
+apparently
+apparently
+clouds we're not going to have clouds
+clouds we're not going to have clouds
+for
+for
+now particles
+common all the unnecessary
+stuff this barge is erect okay so they
+stuff this barge is erect okay so they
+just they're just treating everything as
+just they're just treating everything as
+um they're just treating like everything
+um they're just treating like everything
+here as a uh as like a polygon I think
+here as a uh as like a polygon I think
+literally the easiest thing is going to
+literally the easiest thing is going to
+be to like just figure out what polygons
+be to like just figure out what polygons
+they actually want to draw and do that
+he do any
+[Music]
+they have some weird constants file
+they have a lot of constants in the
+they have a lot of constants in the
+constants
+file
+oops
+envirment could not need map plot
+this just super old
+code box 2D is still um nicely
+code box 2D is still um nicely
+maintained though so I don't think we
+maintained though so I don't think we
+need to redo the
+physics space from D type
+okay I think this actually did
+okay I think this actually did
+make the
+make the
+environment we just have to change this
+environment we just have to change this
+to
+to
+be may as well make a make it a a puffer
+be may as well make a make it a a puffer
+native M to start with since I think it
+native M to start with since I think it
+is already vectorized
+right me see I think it is literally
+right me see I think it is literally
+already vectorized
+let me see if I can tell is it
+vectorized there was something that said
+vectorized there was something that said
+Vector M
+here yeah you can see right here it's
+here yeah you can see right here it's
+already vectorized for us so we'll do uh
+already vectorized for us so we'll do uh
+we'll keep this
+we'll keep this
+in Python for now as Veen and then we
+in Python for now as Veen and then we
+will consider depending how long it
+will consider depending how long it
+takes me I will consider porting this to
+takes me I will consider porting this to
+c later
+today port puer
+okay and now we have stuff to
+okay and now we have stuff to
+implement so for puffer
+implement so for puffer
+API few stuff few things that we need
+API few stuff few things that we need
+to
+Define we need to
+do or gymnasium as gy
+do or gymnasium as gy
+modernize
+that I don't know why these constants
+that I don't know why these constants
+still show up in yellow
+action
+action
+space this actually doesn't give us the
+space this actually doesn't give us the
+bounds on
+bounds on
+stuff I think we Define
+stuff I think we Define
+single observation space as well with
+single observation space as well with
+the puffer
+version these bounds are very bad as
+well this doesn't actually tell us
+F FS PSI we don't know
+F FS PSI we don't know
+the the actual spaces on
+these nozzle angle
+limit better than motor
+speed 15 * degrees to radians
+so I think these are continuous
+so I think these are continuous
+spaces I'm pretty
+sure I can't tell
+sure I can't tell
+exactly maybe there's some
+docks super old en
+ah here we
+ah here we
+go 0 to one
+wait now this is
+example okay so they actually they do
+example okay so they actually they do
+give us here
+and then this
+and then this
+is
+zero1 negative
+zero1 negative
+nozzle angle limit and then it goes to
+nozzle angle limit and then it goes to
+one one and nozzle
+limit oops
+limit oops
+low equals
+this I equals
+this I equals
+this and then I need
+this and then I need
+shape which is going to
+be three
+what what do I have wrong
+here are these just not named
+here are these just not named
+yeah it's okay whatever we'll just do
+yeah it's okay whatever we'll just do
+this
+environment yeah we don't have a reset
+can just be defined as reset like
+this this should be single action
+this this should be single action
+space and then it's going to be very
+space and then it's going to be very
+nice here
+nice here
+because we actually get to get rid of
+because we actually get to get rid of
+this and this and this because we're
+this and this and this because we're
+making it a native M now just return
+making it a native M now just return
+this
+n do you plan on making an intro to RL
+n do you plan on making an intro to RL
+in both Python and C for beginners it
+in both Python and C for beginners it
+would be very interesting so I don't
+would be very interesting so I don't
+do educational material as like my main
+do educational material as like my main
+thing uh my focus is on pushing the
+thing uh my focus is on pushing the
+bounds of RL and it just so happens that
+bounds of RL and it just so happens that
+the way that I do stuff ends up being
+the way that I do stuff ends up being
+educational and beginner friendly but
+educational and beginner friendly but
+um I'll tell you what I am doing for
+um I'll tell you what I am doing for
+users which is going to be very helpful
+users which is going to be very helpful
+for new people is I'm making it very
+for new people is I'm making it very
+very easy to implement new environments
+very easy to implement new environments
+hprof environments you start in Python
+hprof environments you start in Python
+push them to scon push them to C so
+push them to scon push them to C so
+puffer really tries very hard to make it
+puffer really tries very hard to make it
+easy for you no matter at what level
+easy for you no matter at what level
+you're coming in so like right now this
+you're coming in so like right now this
+is a complicated en I've never seen
+is a complicated en I've never seen
+before it's got a bunch of physics and
+before it's got a bunch of physics and
+dependencies and old code uh that's in
+dependencies and old code uh that's in
+Python so I'm porting it to puffer's
+Python so I'm porting it to puffer's
+Native python API to get it working and
+Native python API to get it working and
+get it high per for Python and then
+get it high per for Python and then
+after that um I'm going to consider
+after that um I'm going to consider
+pushing it into scon or to C and puffer
+pushing it into scon or to C and puffer
+is going to make that very easy as for
+is going to make that very easy as for
+like tutorial IED type material I stream
+like tutorial IED type material I stream
+this type of work most days of the
+week there will also be updated
+week there will also be updated
+documentation at least tutorial
+documentation at least tutorial
+documentation not like video educational
+documentation not like video educational
+content but there will be tutorial
+content but there will be tutorial
+documentation on this uh in the next
+documentation on this uh in the next
+version for sure I've had multiple
+version for sure I've had multiple
+people asking for better
+docs you're also free to just ask stuff
+docs you're also free to just ask stuff
+on here right live user support best in
+on here right live user support best in
+the B best RL user support out there you
+the B best RL user support out there you
+literally can just ask stuff on stream
+literally can just ask stuff on stream
+all day
+what's the plan for
+today we're going to land Elon musk's
+today we're going to land Elon musk's
+rocket this is
+rocket this is
+uh old rocket Landing
+uh old rocket Landing
+environment um and we are going to
+environment um and we are going to
+revamp this thing so that it's actually
+revamp this thing so that it's actually
+usable in modern era code and we're
+usable in modern era code and we're
+going to get this thing we're going to
+going to get this thing we're going to
+see how hard this is I'm hoping we can
+see how hard this is I'm hoping we can
+have it on puffer
+have it on puffer
+GG trained and playable by the end of
+GG trained and playable by the end of
+the day we'll see if that ends up being
+the day we'll see if that ends up being
+too
+ambitious no attribute to Observation
+ambitious no attribute to Observation
+space
+rocket Lander has no attribute ah I just
+rocket Lander has no attribute ah I just
+forgot to
+do super
+so this is a new thing with the puffer
+so this is a new thing with the puffer
+API has to have a
+buffer and it sets up observations
+buffer and it sets up observations
+actions and stuff for you
+uh unexpected keyword
+uh unexpected keyword
+AR just not
+save now my
+agents
+agents
+on where am I
+this doesn't give us the number of
+this doesn't give us the number of
+environments being made does
+it is it a constant in
+here length of
+State how do we tell how many
+State how do we tell how many
+environments there are
+it's weird cuz parts of this look
+it's weird cuz parts of this look
+vectorized and parts of it don't look
+vectorized and parts of it don't look
+vectorized
+Gotta Love old
+code a seven-year-old project this
+code a seven-year-old project this
+thing's got to it would have had its PhD
+thing's got to it would have had its PhD
+by now it did started
+I'm going to set num agents to one for
+I'm going to set num agents to one for
+now cuz I can't tell what what this is
+now cuz I can't tell what what this is
+doing
+it's actually running to the end of
+it's actually running to the end of
+reset that's good news
+we just have API Shenanigans to
+fix this is on super old version of gy
+fix this is on super old version of gy
+and now we also have our puffer
+end
+end
+step oh I get it I think that they were
+step oh I get it I think that they were
+using maybe they were relying on gy to
+using maybe they were relying on gy to
+vectorize it or
+something that's probably it
+that's fine though step with
+that's fine though step with
+[Music]
+action
+same what's wrong with this
+interesting it gives you an action
+interesting it gives you an action
+that's not valid
+oh it's just uh it's like
+vectorized so there's like some
+vectorized so there's like some
+vectorization stuff in here but not uh
+vectorization stuff in here but not uh
+all of it this actually does run to the
+bottom okay self dot observations
+rewards then we just
+rewards then we just
+return self
+dot this is terminals
+[Music]
+and then
+infos no attribute
+infos no attribute
+observations really should have
+something did it not get initialized yet
+it should have gotten assigned right
+here just make sure of this
+step is being called before
+net return rocket
+Lander oh it
+Lander oh it
+calls yeah this is not correct my guy
+calls yeah this is not correct my guy
+this is
+this is
+not there we
+not there we
+go lots of old API
+go lots of old API
+Jank that's all right it's hard to
+Jank that's all right it's hard to
+follow uh some of this stuff because a
+follow uh some of this stuff because a
+lot of this is just like historical the
+lot of this is just like historical the
+way that I know gym API used to work
+way that I know gym API used to work
+five years
+ago this type of work you kind of have
+ago this type of work you kind of have
+to have historical context for but it'll
+to have historical context for but it'll
+start getting much cleaner very soon
+there we
+go so the way that puffer works here it
+go so the way that puffer works here it
+defines these buffers for you uh and
+defines these buffers for you uh and
+these buffers make it very convenient to
+these buffers make it very convenient to
+have your MB fast you just do all your
+have your MB fast you just do all your
+stuff into those buffers and look at
+stuff into those buffers and look at
+that we actually already have this thing
+that we actually already have this thing
+running I have no idea what it's running
+running I have no idea what it's running
+but it's running something we're
+but it's running something we're
+probably going to have to fix all the
+probably going to have to fix all the
+rendering before we know what's going on
+but it does
+but it does
+run not bad for 40 minutes
+work literally seven-year old
+project is observation the state what
+project is observation the state what
+are those eight numbers yeah it's got
+are those eight numbers yeah it's got
+the way that this thing was implemented
+the way that this thing was implemented
+before I'll show you I mean this is a
+before I'll show you I mean this is a
+simple environment right they just gave
+simple environment right they just gave
+you state access
+you state access
+I think State axis let me
+see XY velocity lateral angle angular
+see XY velocity lateral angle angular
+velocity and then you get vertical
+velocity and then you get vertical
+Thruster side Thruster and nozzle
+angle does this thing have CVX Pi in it
+angle does this thing have CVX Pi in it
+wait what
+what there's no way they're actually
+what there's no way they're actually
+using this
+using this
+right I haven't seen that in a long
+time this is awesome yeah thank you I I
+time this is awesome yeah thank you I I
+think people are going to start to see
+think people are going to start to see
+how easy RL is going to get with this
+how easy RL is going to get with this
+because like it's literally going to be
+because like it's literally going to be
+the case that I'm going to get the SIM
+the case that I'm going to get the SIM
+running fast I'm going to press a couple
+running fast I'm going to press a couple
+of buttons and the environment is going
+of buttons and the environment is going
+to be solved it's literally all the work
+to be solved it's literally all the work
+is just going into making the
+is just going into making the
+environments be fast and puffer does a
+environments be fast and puffer does a
+lot of the heavy lifting for
+you and it does so without you having a
+you and it does so without you having a
+bunch of apis that you have to
+learn this is all in the dev Branch but
+learn this is all in the dev Branch but
+uh it's getting merged with the next
+uh it's getting merged with the next
+update I just I keep getting distracted
+update I just I keep getting distracted
+by fun things like this
+by fun things like this
+project I'm going to put this in chat
+project I'm going to put this in chat
+for folks as well do go ahead and start
+for folks as well do go ahead and start
+the repo if you haven't already helps me
+the repo if you haven't already helps me
+out a
+[Music]
+[Music]
+ton like the two metrics that I track
+ton like the two metrics that I track
+are um stars on repo and then follows on
+X it's going pretty
+X it's going pretty
+well knit window
+uh
+name is there a guide on how to make new
+name is there a guide on how to make new
+environments uh there will be a there
+environments uh there will be a there
+will be some docs on this but there's
+will be some docs on this but there's
+also what you're watching right here
+also what you're watching right here
+you're watching me do that live pretty
+you're watching me do that live pretty
+much uh there's the
+much uh there's the
+Discord and we have tons of people
+Discord and we have tons of people
+building all sorts of new environments
+building all sorts of new environments
+that have had zero prior RL experience
+that have had zero prior RL experience
+just like you know standard engineering
+just like you know standard engineering
+background in um discord.gg
+background in um discord.gg
+sluff pretty easy to get
+sluff pretty easy to get
+involved in the evenings um after I
+involved in the evenings um after I
+finish work I'm usually like you know at
+finish work I'm usually like you know at
+the gym or whatever and I'll just be
+the gym or whatever and I'll just be
+like inv voice on Discord uh
+like inv voice on Discord uh
+troubleshooting stuff with contributors
+okay we have a
+window nothing is drawing to said
+window nothing is drawing to said
+window ah because we hit a break point
+[Music]
+[Music]
+cool this is literally a rectangle
+rectangle right
+oh I know why it's in this format it's
+oh I know why it's in this format it's
+in this format for the physics engine
+in this format for the physics engine
+right okay Landing
+right okay Landing
+barge we'll just do x
+equals
+equals
+0 zero Y is going to
+be wait
+0.1 5.2
+are these drawn from like the
+are these drawn from like the
+uh are these coordinates upside
+down what are these
+in like these coordinates don't make
+in like these coordinates don't make
+sense
+right polygon
+scale
+these are like flipped and they're also
+these are like flipped and they're also
+very badly
+scaled I mean I could just multiply
+scaled I mean I could just multiply
+these by like
+these by like
+what
+50 but you also have to
+50 but you also have to
+subtract uh
+all
+right with equals
+let's do like
+[Music]
+this okay draw a rectangle like
+this okay draw a rectangle like
+this and then we do
+this and then we do
+X pu scale
+I have to
+do
+y and then
+right did he give me the bottom
+right did he give me the bottom
+coordinate I don't know whatever
+we send
+it what are these ground
+Poes Landing
+Flags I just want to get a rocket that
+Flags I just want to get a rocket that
+like moves around to start
+it's funny how like
+it's funny how like
+um how much stuff gets held back by not
+um how much stuff gets held back by not
+having like good drawing
+tools like literally just having rayb
+tools like literally just having rayb
+made such a huge
+difference and then color is going to
+difference and then color is going to
+be red
+colors.
+red integers
+required
+really I do rectangle
+wrong draw a
+rectangle oh I it doesn't let you cast
+rectangle oh I it doesn't let you cast
+cuz it's the C type findind
+fine this is one of the things that's
+fine this is one of the things that's
+literally easier in C is that uh c will
+literally easier in C is that uh c will
+cast correctly for
+you yeah there we go
+this is also just a rectangle isn't
+it I just do like a draw converted wck
+it I just do like a draw converted wck
+function or
+something and then we just won't have to
+something and then we just won't have to
+worry about it
+okay
+yeah we're just going to like ignore the
+yeah we're just going to like ignore the
+weird scaling we're just going to make
+weird scaling we're just going to make
+our own thing for this so XY towards
+zero
+zero
+three
+viewport
+color draw a line Strip This is
+color draw a line Strip This is
+literally just going to be
+literally just going to be
+um
+orct half
+color
+right then this is going to
+be draw
+be draw
+correct color is red
+un type draw a
+un type draw a
+polyline okay I missed some of
+polyline okay I missed some of
+these we do not know what these even do
+these we do not know what these even do
+so we're just going to do
+so we're just going to do
+return and we will rebuild the interface
+return and we will rebuild the interface
+once we have a barge and a square or a
+once we have a barge and a square or a
+rectangle for rocket
+rectangle for rocket
+render
+render
+mode yeah that's
+API H
+human integer
+required what's
+required what's
+this oh this is literally particles
+huh well that's
+not as definitely not what we
+wanted yeah that's got
+awful welcome Nathan
+we're going to use the iron 3 leagues
+we're going to use the iron 3 leagues
+mechan League mechanics to quit out of
+mechan League mechanics to quit out of
+that before it overwhelms the CPU
+should we do
+dude why is it still doing it
+okay cool
+nothing on the
+screen oh we have to do uh yeah we
+screen oh we have to do uh yeah we
+didn't have it in draw mode
+so we do like this and then we have to
+so we do like this and then we have to
+do
+do
+begin begin drawing playar
+begin begin drawing playar
+background
+background
+and this is
+[Music]
+[Music]
+RL and then RL do end
+interesting it's still not doing
+interesting it's still not doing
+anything
+okay uh you can't put a break point in
+okay uh you can't put a break point in
+here right you have to put it at the end
+here right you have to put it at the end
+of the draw
+frame
+so let's just print out our draw cords
+so let's just print out our draw cords
+maybe that'll be easier
+okay so now we have
+our
+our
+interesting negative coordinates
+some of these aren't
+negative I think they're out of bounds
+negative I think they're out of bounds
+maybe
+withth
+height Z
+okay so something's weird
+here put break point
+here so here are our coordinates
+I think that it's hold on is it
+I think that it's hold on is it
+literally just as simple as hords
+2 this looks better
+now yeah negative widths and Heights
+now yeah negative widths and Heights
+well it's because there like there's
+well it's because there like there's
+this weird polygon format from uh
+this weird polygon format from uh
+whatever they Ed to draw this
+whatever they Ed to draw this
+with Okay so now we actually have
+with Okay so now we actually have
+something on the screen it's janky but
+something on the screen it's janky but
+you can see there's something there uh
+you can see there's something there uh
+some of these are still messed up so
+some of these are still messed up so
+possibly the order is not
+consistent
+yesh yeah cuz what it probably is is
+yesh yeah cuz what it probably is is
+they probably have like a poly gond draw
+they probably have like a poly gond draw
+and they're just going to put him in
+and they're just going to put him in
+whatever
+order um
+is there no like
+is there no like
+polyfill in
+polyfill in
+RB really
+draw
+textured it's weird that you can only
+textured it's weird that you can only
+draw it with a
+texture splines
+come on how is there
+come on how is there
+no there's got to be like a
+no there's got to be like a
+poly function
+right left right well it's going to have
+right left right well it's going to have
+a rotation as
+well I mean I could write the function
+well I mean I could write the function
+as well right I can easily write that
+as well right I can easily write that
+function too but like the cleaner thing
+function too but like the cleaner thing
+that's going to cause me less grief is
+that's going to cause me less grief is
+if I just have a poly draw function
+I could just draw the lines for
+now let's just draw the lines for
+now for
+okay so we
+okay so we
+have spline
+have spline
+segment
+segment
+um I might use that
+function let me I don't actually
+function let me I don't actually
+understand how they're doing their
+understand how they're doing their
+points in
+points in
+here draw a
+here draw a
+poly yeah it has that but like you see
+poly yeah it has that but like you see
+that's for that's for regular polygons
+that's for that's for regular polygons
+it has sides that doesn't let you do
+it has sides that doesn't let you do
+like arbitrary line fill convex
+shape X1
+shape X1
+y1 X2
+Y2 so we literally just have to do
+it's
+it's
+[Music]
+fine draw a
+fine draw a
+line yep
+okay this actually draws
+now let me see if we're still drawing
+now let me see if we're still drawing
+anything
+negative uh it doesn't actually
+negative uh it doesn't actually
+matter anymore
+can we see the
+can we see the
+Lander no
+oh that actually
+oh that actually
+worked actually worked reasonably well
+worked actually worked reasonably well
+that's so
+that's so
+funny I use draw triangle fan for
+funny I use draw triangle fan for
+arbitrary convex
+arbitrary convex
+poce okay that'll work
+poce okay that'll work
+Nathan here
+Nathan here
+[Laughter]
+[Laughter]
+Bonk that was not
+Bonk that was not
+[Laughter]
+[Laughter]
+bad oh that was so Jank but that
+bad oh that was so Jank but that
+actually that actually kind of did
+something that cracks me
+up okay here is the full
+rocket something tells me that this is
+rocket something tells me that this is
+not the way a rocket would behave you
+not the way a rocket would behave you
+know physics wise I don't know it
+know physics wise I don't know it
+there's something that doesn't look
+there's something that doesn't look
+quite right about about
+that let's get it to just be a
+that let's get it to just be a
+reasonable
+reasonable
+scale there we
+scale there we
+go
+WK so we're basically already to Mars
+WK so we're basically already to Mars
+right what bounciness coefficient are
+right what bounciness coefficient are
+you using here over
+you using here over
+9,000
+apparently this is not going to train
+apparently this is not going to train
+particularly well yet um we need to go I
+particularly well yet um we need to go I
+think now is probably a good time to
+think now is probably a good time to
+start going through the code properly
+survation space
+size really don't need this
+size really don't need this
+right just start stripping out fat
+and then we will do let's grab this
+and then we will do let's grab this
+comment
+get rid of this for now
+try figure out what portions of this
+try figure out what portions of this
+code are doing
+code are doing
+stuff inherited this got to
+reset step through one
+reset step through one
+action and return the state
+there no way to just get the
+state you should not have to um
+self.
+State you should not have to step the
+State you should not have to step the
+environment like
+environment like
+this I'm going to just return self.
+this I'm going to just return self.
+state
+check for
+contact vectorized
+nozzle strictly speaking you're out of
+nozzle strictly speaking you're out of
+fuel but act
+anyways minor d
+anyways minor d
+details problem specific physics State
+details problem specific physics State
+and
+rewards why does he have all this stuff
+rewards why does he have all this stuff
+as problem
+as problem
+specific generate
+State compute Rewards
+create
+rocket create
+rocket create
+barge yeah there's just a whole bunch of
+barge yeah there's just a whole bunch of
+Jank in here
+um with this like weird physics engine
+um with this like weird physics engine
+and drawing
+labels here's your render
+labels here's your render
+function
+refresh poly draw
+refresh poly draw
+line move barge
+interesting so they do have random like
+interesting so they do have random like
+move barge
+stuff is are they actually using all
+this like this is not getting used from
+this like this is not getting used from
+anywhere
+oh I guess this is for model predict so
+oh I guess this is for model predict so
+we can just start deleting stuff that's
+we can just start deleting stuff that's
+not used for the core
+m not
+used yeah there's a bunch of like model
+used yeah there's a bunch of like model
+predictive control stuff
+not
+used
+okay I'm not being dumb here right this
+okay I'm not being dumb here right this
+is a single file
+is a single file
+implementation it doesn't have anything
+implementation it doesn't have anything
+else that it could
+else that it could
+be yeah no there's nothing else I could
+be yeah no there's nothing else I could
+be using this
+for this is probably being
+for this is probably being
+used initial state
+initial Force there's no initial state
+none of this stuff gets used at
+all I guess they just have it all in uh
+all I guess they just have it all in uh
+in one place for
+this gets used
+this gets used
+right actually is move barge this is not
+right actually is move barge this is not
+used at all
+I feel like I'm doing the
+I feel like I'm doing the
+uh un like the Mark Brothers
+uh un like the Mark Brothers
+thing where they have uh ah this is such
+thing where they have uh ah this is such
+an old
+an old
+movie they've got this contract and
+movie they've got this contract and
+they're just like tearing out pieces of
+they're just like tearing out pieces of
+it and like oh we don't need that we
+it and like oh we don't need that we
+don't need that and they just end up
+don't need that and they just end up
+tearing up the whole
+thing and this does get
+used well we're not going to use any of
+used well we're not going to use any of
+their draw functions obviously
+we commented this
+stuff we're going to move
+stuff we're going to move
+this there's absolutely no point in this
+existing right
+this one as well we're going to just put
+this
+yeah and then refresh does this get
+called oh
+maybe we'll keep clouds and stuff we'll
+see 862
+see 862
+lines so we've cut it down a lot but
+lines so we've cut it down a lot but
+there's still a ton of stuff in here
+there's still a ton of stuff in here
+like what do
+like what do
+we what do we actually have here that's
+we what do we actually have here that's
+like
+upate
+parts now this does get used H we got
+parts now this does get used H we got
+rid of a bunch of stuff at
+rid of a bunch of stuff at
+least this run
+oh
+what I
+break
+break
+probably
+probably
+step no reset I broke for sure
+right yeah this is has to be
+right yeah this is has to be
+self observations is state in
+return where is
+the hang on
+previous state is
+State generate state right
+got to be like this right
+okay we've got
+okay we've got
+our
+our
+rocket works again minus a whole bunch
+rocket works again minus a whole bunch
+of code that we didn't need
+create clouds create barge
+used different Mass represent different
+used different Mass represent different
+forces
+interesting concept of
+interesting concept of
+options do not need this I don't think
+shaping of reward is
+shaping of reward is
+there whoa this is crazy reward
+shaping
+step oh 60
+FPS so I should set this to FPS
+FPS so I should set this to FPS
+here that's probably why it it's like so
+here that's probably why it it's like so
+weird
+looking yeah
+looking yeah
+okay it was just it was in slow motion I
+okay it was just it was in slow motion I
+mean Stills crazy rocket toppling around
+mean Stills crazy rocket toppling around
+like that but better
+I'm trying to think where I want to go
+I'm trying to think where I want to go
+with this if I just want to start trying
+with this if I just want to start trying
+to figure out how to put this into the
+to figure out how to put this into the
+main
+main
+Loop or what
+I guess this would give me a good excuse
+I guess this would give me a good excuse
+to do the thing that I've been wanting
+to do the thing that I've been wanting
+to do for a while which is to add um fix
+to do for a while which is to add um fix
+serial vectorization to work with
+this people have been asking for that as
+this people have been asking for that as
+well
+well
+so I can actually run this at a
+so I can actually run this at a
+reasonable
+speed yeah let's try that
+um well it still kind of needs to be
+um well it still kind of needs to be
+vectorized internally
+vectorized internally
+though yeah
+the thing is I'm I'm just uh running
+the thing is I'm I'm just uh running
+multiple copies of this thing the
+multiple copies of this thing the
+implementation technically supported it
+implementation technically supported it
+but it did it in a very weird
+way I mean I could just mark this as a
+way I mean I could just mark this as a
+uh
+uh
+gymnasium and instead of a puffer native
+gymnasium and instead of a puffer native
+n let me look up one thing I'm looking
+n let me look up one thing I'm looking
+let me look at like how hard thing would
+let me look at like how hard thing would
+be to actually port to Native C I don't
+be to actually port to Native C I don't
+want to do it just yet
+but they use box 2D which is in C isn't
+it box
+2D portable c17
+there a lot of stuff in
+here this is what I was going to have to
+here this is what I was going to have to
+do in order to have um like physics Sims
+do in order to have um like physics Sims
+in here
+yeah this is going to be a bigger
+yeah this is going to be a bigger
+project so I think that we're just going
+project so I think that we're just going
+to get this to do we're not going to put
+to get this to do we're not going to put
+it on the website for now but we're
+it on the website for now but we're
+going to see if we can get a rocket
+going to see if we can get a rocket
+landing and then we'll see from
+landing and then we'll see from
+there cuz if the thing is in order to
+there cuz if the thing is in order to
+get this onto the website I have to Port
+get this onto the website I have to Port
+this all the Capi of box 2D which would
+this all the Capi of box 2D which would
+normally be fine except there's a whole
+normally be fine except there's a whole
+bunch of Jank code the way that this is
+bunch of Jank code the way that this is
+written um
+written um
+possibly once I prune it down a little
+possibly once I prune it down a little
+bit more we'll be able to do that so let
+bit more we'll be able to do that so let
+me think what's going to be the easiest
+me think what's going to be the easiest
+way to get this thing
+way to get this thing
+training at a reasonable
+speed trying to think what would
+be yeah I can just go start messing with
+be yeah I can just go start messing with
+VEC I mean this is a feature that I've
+VEC I mean this is a feature that I've
+needed anyways
+physics
+physics
+yeah I mean that's going to be an area
+yeah I mean that's going to be an area
+where we'll want to do stuff anyways but
+where we'll want to do stuff anyways but
+like I don't even know how fast box 2D
+like I don't even know how fast box 2D
+is it's probably pretty fast if the
+is it's probably pretty fast if the
+guy's writing it in
+guy's writing it in
+C
+um that's more of a judgment on C
+um that's more of a judgment on C
+programming than on anything
+programming than on anything
+else like C programmers than anything
+else like C programmers than anything
+else this is probably
+fast let's at least get
+fast let's at least get
+um get
+um get
+something what is wrong
+with Y so serial ve
+trying to remember what things need to
+trying to remember what things need to
+be different even here
+I just do
+cereal what happens if I just do this
+actions do not
+match
+okay this should be compatible actually
+why did this give
+why did this give
+me actions that were not in this space
+they are in this space right noga
+.68 that could be the continuous Bas
+.68 that could be the continuous Bas
+code though not handling these bounds
+log standard deviation
+I think this gives
+I think this gives
+you1 to ones
+right orang distributions
+right orang distributions
+no this just gives you
+no this just gives you
+normal
+gaussian how do people do this in uh in
+gaussian how do people do this in uh in
+continuous action spaces hold on I need
+continuous action spaces hold on I need
+to either clip or something
+rescale okay so we're just going to have
+rescale okay so we're just going to have
+to mess with that that's
+to mess with that that's
+fine we'll do it on the environment
+side uh what it
+what we'll do is we'll just put this to
+be what we are going to have to probably
+be what we are going to have to probably
+rescale right unless they clip
+this appears to be
+running okay so now this is training
+running okay so now this is training
+what low thous
+with what are we
+running 64m
+how bad python is it should be so much
+faster fully bottlenecked by the
+faster fully bottlenecked by the
+environment let's see if we can at least
+environment let's see if we can at least
+get some stats out of this thing we'll
+get some stats out of this thing we'll
+probably end up having to Port it
+python is just like such a terrible
+python is just like such a terrible
+language for doing this type of
+language for doing this type of
+work I mean this is to be fair faster
+work I mean this is to be fair faster
+than a lot of python M's already with
+than a lot of python M's already with
+next to no optimization but really this
+next to no optimization but really this
+just needs to be it's like a thousand
+just needs to be it's like a thousand
+times slower than it should
+be e
+what do we just log do we just log
+what do we just log do we just log
+reward
+here may as
+well oh
+I think the problem is that this doesn't
+I think the problem is that this doesn't
+show up with Native
+right doesn't show up let's fix
+that sign
+buffers um
+nice
+just do this real
+quick let's get us reward yep there we
+quick let's get us reward yep there we
+go Rewards
+now it's just about fixing some
+now it's just about fixing some
+bugs and doing a hyper pram sweep on
+bugs and doing a hyper pram sweep on
+this if we
+can it's too slow is the
+problem wait too slow
+I'm tempted to profile
+it just to see if I can get the python
+it just to see if I can get the python
+version to go any
+faster but it looks like it's just a
+faster but it looks like it's just a
+bunch of really
+bunch of really
+Jank physics implemented in Python
+maybe we'll just guess some prms
+policy 64 environments because they're
+policy 64 environments because they're
+slow Point
+slow Point
+interval well except we don't have this
+interval well except we don't have this
+so we have to do here is
+so we have to do here is
+64 one
+batch size can be what 4096
+batch size can be what 4096
+maybe uh 64 *
+64 4 *
+64 4 *
+6 yeah that's correct duh that's
+6 yeah that's correct duh that's
+probably good enough um mini bad
+probably good enough um mini bad
+[Music]
+[Music]
+four box
+four box
+three ryzen keep Atari defaults
+let's
+let's
+see I haven't done too much on the
+see I haven't done too much on the
+continuous side though Kung says it uh
+continuous side though Kung says it uh
+it works
+so is it not resetting
+was probably not resetting at all
+yes it needs to handle its own resets
+it's
+it's
+true these need to
+true these need to
+go under
+go under
+here I would
+here I would
+say and
+then
+reset there there we go now it should be
+reset there there we go now it should be
+resetting
+correctly should just be a matter of
+correctly should just be a matter of
+speed from here if like if this thing
+speed from here if like if this thing
+ran a million steps per second we'd run
+ran a million steps per second we'd run
+a sweep and it would be insta
+a sweep and it would be insta
+solved either insta solved or unsolvable
+solved either insta solved or unsolvable
+like uh with current settings we would
+like uh with current settings we would
+know one way or the other like
+immediately I want to play with this for
+immediately I want to play with this for
+a little longer before I consider
+a little longer before I consider
+whether I want to just go all the way
+whether I want to just go all the way
+with this and just Port it to to see I
+with this and just Port it to to see I
+mean the physics Library itself is
+mean the physics Library itself is
+available in
+available in
+C
+so it's not
+crazy I could just work on cleaning up
+crazy I could just work on cleaning up
+their code a whole bunch before I do
+their code a whole bunch before I do
+that would make it much easier
+I mean the fact that this isn't solving
+I mean the fact that this isn't solving
+instantly is not surprising at all
+instantly is not surprising at all
+because it's
+because it's
+like slow bad hyper
+like slow bad hyper
+prams uh you really need the speed for
+prams uh you really need the speed for
+puffer to be able to
+puffer to be able to
+instantly to solve
+it why don't we try to Port this to be
+let me
+think reporting this to be
+think reporting this to be
+vectorized doesn't really
+vectorized doesn't really
+help yeah I think the only thing that
+help yeah I think the only thing that
+makes this reasonable is porting this to
+makes this reasonable is porting this to
+c
+native let me just scan through
+here all the physics functions are
+here all the physics functions are
+available in
+C create
+C create
+particles there is a bunch of
+stuff that will be tricky I think the
+stuff that will be tricky I think the
+way it's done here relying on python
+way it's done here relying on python
+data
+structures state is not bad
+compute
+rewards let me make sure I really
+have terrain coordinates
+I don't know what this is I think it's a
+I don't know what this is I think it's a
+little early to try to for this because
+little early to try to for this because
+I don't understand what they're doing
+I don't understand what they're doing
+for most of
+for most of
+this I think I need to do a little bit
+this I think I need to do a little bit
+more work on this code
+first why does this get slow lower
+first why does this get slow lower
+overtime as
+well the
+well the
+leak
+no
+no
+well we start on this then nozzle
+poly are these polygons used by
+create body
+Dynamics yeah they so the polygons are
+Dynamics yeah they so the polygons are
+used by the uh the physics engine
+what is
+this
+this
+height
+create create base static edges
+does this I don't think he had this
+does this I don't think he had this
+rendered what is this like uneven
+rendered what is this like uneven
+terrain or
+something oh the
+water I
+water I
+see so yeah we need to fix some of this
+see so yeah we need to fix some of this
+for
+sure cuz it's a barge okay duh
+create static Edge
+what stuff is in here that I haven't
+what stuff is in here that I haven't
+rendered see
+poly they have Curves in here but I
+poly they have Curves in here but I
+don't see where they have the curves
+let's just do this
+SE chunks
+okay
+uh so this needs a 255 on it
+uh so this needs a 255 on it
+right
+right
+is
+* 127
+plus plus
+0.5 it's
+interesting the chunks
+one
+minus what is this color formula that
+minus what is this color formula that
+they have hold
+on oh wait it's zero R
+on oh wait it's zero R
+yeah g is just 127 * K it's fine and
+yeah g is just 127 * K it's fine and
+then this is just going to
+be I don't see how this is 255
+be I don't see how this is 255
+plus
+plus
+0.5 we'll see
+let's see what
+happens integers
+required too many initializers for color
+required too many initializers for color
+got five one three
+oh that's cool
+I'm going to have to actually take a
+I'm going to have to actually take a
+break for lunch today cuz I didn't get
+break for lunch today cuz I didn't get
+to eat uh but I'm going to get I'm going
+to eat uh but I'm going to get I'm going
+to get the basic render of this thing
+to get the basic render of this thing
+done
+done
+first yeah that'll be
+first yeah that'll be
+good Landing
+Flags let's just do like
+this this is red
+draw a
+poly
+then okay we got our flags
+let's see the circles that this
+let's see the circles that this
+guy
+Drew radius
+Lander and
+particles I I think that
+matters that actually matter
+think
+think
+so I see how it
+so I see how it
+[Music]
+[Music]
+would and then what are
+would and then what are
+these oh well this
+these oh well this
+is hi
+welcome let's do draw a circle here
+ccle
+color uh puff
+scale we get started planning on making
+scale we get started planning on making
+some contributions put up a par for
+some contributions put up a par for
+connect for imponent improvements that's
+connect for imponent improvements that's
+great let me add the author of that
+[Laughter]
+let me
+at oh cool and you did it on the latest
+at oh cool and you did it on the latest
+one as well it looks like
+perfect greedy agent is
+perfect greedy agent is
+exactly what we
+wanted let's look at
+this so you got rid of this longest
+this so you got rid of this longest
+connected thing
+stage
+move check draw condition
+yeah I assume you put this at the top or
+yeah I assume you put this at the top or
+whatever uh player
+some good cleanups
+here check wind
+here check wind
+con moved it to Stage
+con moved it to Stage
+move can explore different
+move can explore different
+moves nice
+see commit
+move do
+move have you run a speed test real
+quick I'm just trying to see what you
+quick I'm just trying to see what you
+did for the win check
+I
+suspect let me
+say stage
+move check other PR for that it was bust
+wait like isn't it slow or like
+what oh okay that's
+fine
+fine
+cool uh uh I'm going to where's this I'm
+cool uh uh I'm going to where's this I'm
+going to merge this and I'm going to
+going to merge this and I'm going to
+play with it now is what I'm going to
+do and then we'll go back to Rocket in a
+second oh yeah that's not I didn't
+second oh yeah that's not I didn't
+update that
+[Music]
+so we can just
+do there's the new seab build
+do there's the new seab build
+system so we should just be a build
+system so we should just be a build
+ocean next for
+ocean next for
+local and then
+better review process than at my
+better review process than at my
+job yeah it's basically like I look at
+job yeah it's basically like I look at
+it see if it looks insane and if not I
+it see if it looks insane and if not I
+merge it and play with it unless you try
+merge it and play with it unless you try
+to merge stuff to like main branch or
+whatever he just intentionally blocked
+whatever he just intentionally blocked
+me there didn't
+he let's see if he intentionally blocks
+he let's see if he intentionally blocks
+me he does he does intentionally block
+me that's
+cool he intentionally blocks me
+cool he intentionally blocks me
+again oh that's way better
+again oh that's way better
+he just never makes a losing
+move not one step at
+least so you actually have to yeah
+least so you actually have to yeah
+that's way better
+that's way better
+okay so
+okay so
+now
+now
+what we
+do for
+we're going to train you an agent is
+we're going to train you an agent is
+what we're going to
+do if I can do it on my local machine
+huh that seems weird doesn't it
+let's see why it does that
+episode length is way too
+short what did you see it's just winning
+short what did you see it's just winning
+the game too
+the game too
+fast and the episode length is like
+fast and the episode length is like
+4.5 I probably it just hasn't compiled
+4.5 I probably it just hasn't compiled
+correctly or
+something maybe it just hasn't compiled
+something maybe it just hasn't compiled
+correctly
+okay yada
+yada so
+[Music]
+or I screwed up the
+rewards uh it's
+rewards uh it's
+winning you play Blue don't
+you it's getting uh one for
+losing it's getting one for losing
+let's see what you did
+here why do you get one for winning or
+here why do you get one for winning or
+opponent
+winning right
+oh
+oh
+wait
+wait
+what
+reward isn't there a log as well yeah
+reward isn't there a log as well yeah
+there's a log
+enlog score equals
+player are you player zero though you're
+player are you player zero though you're
+player zero aren't
+you is this backwards
+I reward
+okay so where do you get your
+reward where do you get your reward let
+reward where do you get your reward let
+me
+see so commit
+move this is a little weird because
+explain so you both call commit
+explain so you both call commit
+move and then you call it has Nega -1
+move and then you call it has Nega -1
+there and
+then
+player this is netive -1 though you're
+player this is netive -1 though you're
+doing so what's going on here
+like well wait you're giving it commit
+like well wait you're giving it commit
+move like is player supposed to be
+move like is player supposed to be
+negative
+one for
+negative-1 is
+negative-1 is
+script
+script
+okay and that's the way it was
+okay and that's the way it was
+before
+interesting log score
+episode
+episode
+return it's
+player you're blue right let me
+player you're blue right let me
+see yeah you are blue
+why are we scoring
+why are we scoring
+one when we're
+losing is it not recognizing we're
+losing for
+what were you rendering a yeah that was
+what were you rendering a yeah that was
+the policy I just trained while you were
+watching loses but it gets score
+one look you can train this here
+and this goes neg from negative all the
+and this goes neg from negative all the
+way up to
+one but then if I run it it's losing all
+one but then if I run it it's losing all
+the games
+where's
+score let's just print it here
+if this works this is great if we can
+if this works this is great if we can
+just get this to work this is great this
+just get this to work this is great this
+is exactly what we
+want just having like a simple greedy
+want just having like a simple greedy
+thing is way better than having a an
+thing is way better than having a an
+obnoxious MCTS
+obnoxious MCTS
+agent
+well is this F oops
+cheap views on
+band.com why is it
+1,24 not a
+1,24 not a
+float it a float
+f
+Le
+break it looks like it's losing
+okay here we have negative
+okay here we have negative
+score is what we would
+expect can't link to GitHub you can in
+Discord what's up
+Discord what's up
+here check WIC con
+um I'm
+confused does that break to her I don't
+confused does that break to her I don't
+know I see the negative score right
+know I see the negative score right
+here I see it losing every game let me
+here I see it losing every game let me
+see
+see
+why hang on let's see if we can do
+add
+log aggregating
+clear let's just do
+we're supposed to be landing musk's
+we're supposed to be landing musk's
+rocket but it's all right we get uh
+rocket but it's all right we get uh
+distracted for
+distracted for
+contributors plus it's a very weak
+contributors plus it's a very weak
+approximation of his rocket but it'll
+approximation of his rocket but it'll
+run a lot
+faster whatever the previous thing was
+faster whatever the previous thing was
+um there's a
+reward oh wait we should just be getting
+reward oh wait we should just be getting
+this
+right it should just show us the reward
+right it should just show us the reward
+after a second here zero
+ah it gets zero reward every
+ah it gets zero reward every
+tick you see this
+zero
+reward for
+what about this
+so here's what we're going to do we're
+so here's what we're going to do we're
+going to run it with a random policy and
+going to run it with a random policy and
+see if it gets
+rewards what
+okay
+so you can see it's not exploiting
+so you can see it's not exploiting
+anything it's just not getting rewards
+right playing out the full
+game
+WS look for common
+screw-ups no I got that one right
+you get off to I'm going to spend a
+you get off to I'm going to spend a
+couple more minutes and then I got to
+couple more minutes and then I got to
+get food I'm
+get food I'm
+starving I didn't get a proper
+breakfast and I made the mistake of
+breakfast and I made the mistake of
+skipping a meal after running a half
+skipping a meal after running a half
+marathon yesterday
+a m
+move what's the reset get
+called let try
+reward okay I I see the rewards
+here so wait if I see the rewards here
+are they just not getting to the
+are they just not getting to the
+python that would be really stupid
+wait why do we get reward
+wait why do we get reward
+here we do get reward
+here we do get reward
+here but we don't get reward
+how did I train this
+how did I train this
+before this might be a me
+buug no I did Native mode
+come
+on let see is it Act just going to
+on let see is it Act just going to
+be
+native oh H that was it okay that's good
+native oh H that was it okay that's good
+to
+to
+know that actually saves me a bug later
+know that actually saves me a bug later
+for for later today as
+well score is still wrong
+well score is still wrong
+though why is score wrong
+not rewarded
+score or the
+logging log score
+it just F native don't worry it's you
+it just F native don't worry it's you
+wouldn't it wouldn't even be possible
+wouldn't it wouldn't even be possible
+for you to have that bug it's because of
+for you to have that bug it's because of
+the experimental stuff I've been doing
+the experimental stuff I've been doing
+with the
+with the
+rocket um
+but then there's
+still so commit move
+right add log
+okay so here we get scores
+okay so here we get scores
+negative-1 occasionally winning which is
+negative-1 occasionally winning which is
+very
+very
+odd um but mostly negative
+one ah scores one
+oh well now it looks totally
+different
+um it's not did it find a
+um it's not did it find a
+bug I think it found an
+bug I think it found an
+exploit y I think that this thing found
+exploit y I think that this thing found
+an exploit in your Connect 4 thing
+look at
+that RL agent too smart you've been
+hacked is it the early return thing
+I'm trying to understand what this does
+well if you break out of this Loop you
+well if you break out of this Loop you
+go to here and then you do the negative
+go to here and then you do the negative
+Direction don't
+you I didn't write this bit well I
+you I didn't write this bit well I
+didn't
+either let me see let me see if I can
+either let me see let me see if I can
+figure out what this
+figure out what this
+is so
+c
+r
+r
+yeah I think that's fine
+let me see if I can do
+it like I think you play
+it like I think you play
+here and then
+here he didn't block
+me wait is this
+correct oh he just not doesn't block
+correct oh he just not doesn't block
+you wait what he blocked me
+there he doesn't there's something weird
+there he doesn't there's something weird
+with the blocks
+sh
+for e
+get this correctly
+get this correctly
+done all right
+done all right
+so I play
+here why am I not seeing any of
+this wait did I not
+rebuild uh this is not getting called
+background noise
+Jee Blended five times over
+time for some
+tests I'm testing it
+oh I have to rebuild my
+oh I have to rebuild my
+bad I forgot I have to rebuild the this
+binary
+binary
+oan
+uh collect
+[Music]
+undefined okay so
+here well what's happening here this
+here well what's happening here this
+doesn't make sense why is
+doesn't make sense why is
+this running repeatedly
+they should not be running like
+that oh it just puts no
+Ops for
+all
+all
+right
+right
+so opponent
+so opponent
+win it sees that I have a win
+here if I play like
+this oh it sees it
+is that all that was
+is that all that was
+happening
+oh yeah I think we're just incredibly
+oh yeah I think we're just incredibly
+stupid
+um you see what's
+um you see what's
+happening we're just dumb the rla just
+happening we're just dumb the rla just
+smarter
+it'll go here yeah
+see why didn't I think of
+that yeah we're just like I didn't
+that yeah we're just like I didn't
+realize how easy it is to beat a greedy
+realize how easy it is to beat a greedy
+agent if you know it's greedy
+recursive men Max the
+more likely you just need to have um
+more likely you just need to have um
+endstep look
+endstep look
+ahead still substantial improvement over
+ahead still substantial improvement over
+what was there
+before for
+interested in two
+interested in two
+player self play yeah that's the default
+player self play yeah that's the default
+it's very
+it's very
+easy um the the issue with it and I had
+easy um the the issue with it and I had
+somebody else try to do this before uh
+somebody else try to do this before uh
+you start needing like ELO as your win
+you start needing like ELO as your win
+metric right cuz your progress metric is
+metric right cuz your progress metric is
+like versus the opponent so the reason
+like versus the opponent so the reason
+that we wanted to have the built-in
+that we wanted to have the built-in
+opponent is because like is a whole
+opponent is because like is a whole
+another can of worms and it's nice to
+another can of worms and it's nice to
+have uh it's nice to have built an
+have uh it's nice to have built an
+opponent so you don't have to think
+opponent so you don't have to think
+about that for early experiments right
+about that for early experiments right
+so at least you know that like versus a
+so at least you know that like versus a
+fixed opponent you solve
+it I had a a collaborator trying this
+it I had a a collaborator trying this
+before and uh the conclusion was just
+before and uh the conclusion was just
+having a nice scripted opponent that's
+having a nice scripted opponent that's
+fast would make it substantially easier
+I got to go get some food um I'm going
+I got to go get some food um I'm going
+to be back in a little bit and I'll
+to be back in a little bit and I'll
+finish up rocket and answer some more
+finish up rocket and answer some more
+stuff if you have time or if you feel
+stuff if you have time or if you feel
+like it and you want to do I mean you
+like it and you want to do I mean you
+could just extend that thing to be like
+could just extend that thing to be like
+endep look ahead or whatever
+right if you're interested in
+that I think already by like two
+that I think already by like two
+steps it's already
+steps it's already
+probably uh easier

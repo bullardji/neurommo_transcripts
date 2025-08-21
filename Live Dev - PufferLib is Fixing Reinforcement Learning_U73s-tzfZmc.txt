@@ -1,0 +1,5289 @@
+Kind: captions
+Language: en
+Hello. Okay, we're live and we are no
+Hello. Okay, we're live and we are no
+longer dropping frames. So, I think we
+longer dropping frames. So, I think we
+just were on a bad reream
+just were on a bad reream
+server.
+Hi. I've been trying to figure that out.
+Hi. I've been trying to figure that out.
+It's been doing that every so often.
+It's been doing that every so often.
+Hopefully, now stream should be nice and
+Hopefully, now stream should be nice and
+stable because everything else on my end
+stable because everything else on my end
+is uh is aok. Okay, so we did this
+is uh is aok. Okay, so we did this
+yesterday. This was pretty
+yesterday. This was pretty
+cool. 80 mill steps of breakout at 2.7
+cool. 80 mill steps of breakout at 2.7
+mills per second, 29 seconds
+mills per second, 29 seconds
+solve. And this is 80 million frames
+solve. And this is 80 million frames
+with no frame skip. So, um I mean
+with no frame skip. So, um I mean
+arguably this isn't even really sample
+arguably this isn't even really sample
+inefficient at all either.
+So, here's the plan for
+today. It's currently
+today. It's currently
+8:34. We're going to put in about a
+8:34. We're going to put in about a
+2hour morning session here, maybe two
+2hour morning session here, maybe two
+and a half. We'll
+and a half. We'll
+see. And uh the main thing I want to do
+see. And uh the main thing I want to do
+is just see with all the improvements
+is just see with all the improvements
+we've made to buffer whether we can get
+we've made to buffer whether we can get
+away with way faster training settings.
+So the idea here is that there are
+So the idea here is that there are
+settings you can apply that are faster
+settings you can apply that are faster
+during wall clock
+during wall clock
+time but they may or may not train
+time but they may or may not train
+stably that depends on your
+stably that depends on your
+algorithm. So now with
+algorithm. So now with
+Muon and with advantage filtering and
+Muon and with advantage filtering and
+puffer advantage and all the things that
+puffer advantage and all the things that
+we've done over the last
+we've done over the last
+month, can
+month, can
+we actually bring Puffer to the point
+we actually bring Puffer to the point
+where we are no longer training at a
+where we are no longer training at a
+million steps per second. We're training
+million steps per second. We're training
+at multiple millions of steps per
+second. There is one thing I want to
+second. There is one thing I want to
+test just for hahas.
+before we really start on this. And
+um yeah, let's let's do one other thing
+um yeah, let's let's do one other thing
+just for a here.
+I think we might have to change the
+I think we might have to change the
+optimal uh the learning rate for this.
+optimal uh the learning rate for this.
+So, I'll do like two
+So, I'll do like two
+experiments. Uh
+experiments. Uh
+oh. Ah, right. I uh I forgot I broke
+oh. Ah, right. I uh I forgot I broke
+non-recurrent policies. All
+non-recurrent policies. All
+right, we'll do that later then. Let me
+right, we'll do that later then. Let me
+go grab the original breakout params.
+go grab the original breakout params.
+And I think we're going to actually be
+And I think we're going to actually be
+able to set this up as a proper
+able to set this up as a proper
+experiment like uh with like actual
+experiment like uh with like actual
+clean comparisons before and after with
+clean comparisons before and after with
+all the new organizational stuff I set
+up. Do start the repo. Helps us out a
+up. Do start the repo. Helps us out a
+lot.
+Okay, so before we had all these
+parameters, we're just going to take
+these and we are going to use these on
+breakout for the
+breakout for the
+before. And I'm going to set this up as
+before. And I'm going to set this up as
+Neptune. And this is going to be
+um slow
+baseline. We're going to do this for all
+baseline. We're going to do this for all
+the amps.
+We grab our Neptune. This is the neural
+We grab our Neptune. This is the neural
+MMO run from last night as well. This is
+MMO run from last night as well. This is
+30 billion and we're at
+4.7. Actually, let me check real quick
+4.7. Actually, let me check real quick
+if that's any good.
+Is this the new one here?
+Yeah, it is this one here. So, this one
+Yeah, it is this one here. So, this one
+is perfectly on par so far, it looks
+is perfectly on par so far, it looks
+like with the other
+like with the other
+ones. And uh hopefully it stays that
+ones. And uh hopefully it stays that
+way. Let's get our
+way. Let's get our
+key. I have a lot of things I want to
+key. I have a lot of things I want to
+try on neural MMO.
+in the next several
+days. One of the things I've never been
+days. One of the things I've never been
+great at as a researcher is scheduling
+great at as a researcher is scheduling
+experiments so that I always have
+experiments so that I always have
+something, you know, the next idea
+something, you know, the next idea
+running. It's been very difficult to
+running. It's been very difficult to
+like
+align like my thinking about a specific
+align like my thinking about a specific
+topic to the amount of time jobs will
+take.
+take.
+But we're still making good progress on
+But we're still making good progress on
+that
+one. Okay. So, why why is breakup slow?
+one. Okay. So, why why is breakup slow?
+That makes no sense,
+That makes no sense,
+right? Upper
+breakout.
+Um, is something wrong with this
+Um, is something wrong with this
+config? I am
+confused. Just take Neptune off.
+Yeah. So this is fast,
+right? 32k mini
+batch 4096
+ms. Do you see anything that would mess
+ms. Do you see anything that would mess
+up the speed?
+Now, this was fast before as well. I
+Now, this was fast before as well. I
+This is going to be some weird compile
+bug. How do we regenerate
+bug. How do we regenerate
+kernel? How do we regenerate the kernel?
+kernel? How do we regenerate the kernel?
+I'm trying to think.
+actually here. Let's try this.
+Make sure there's nothing else I could
+Make sure there's nothing else I could
+possibly have messed up
+here. I don't see anything.
+The fact that it's
+The fact that it's
+63. Yeah, it's all in training as
+63. Yeah, it's all in training as
+well. Would suggest the optimizer screwy
+well. Would suggest the optimizer screwy
+somehow,
+right? Where is
+definitely has an LSTM in
+there. So, uh, that's
+there. So, uh, that's
+bizarre. Oh, update epoch 64. How did
+bizarre. Oh, update epoch 64. How did
+this
+happen? Yeah, how did this happen?
+happen? Yeah, how did this happen?
+That's really
+weird. Well,
+whatever. Let
+me At least it's not something crazy
+me At least it's not something crazy
+cursed.
+Okay. So, we'll get our low bas
+It's a little more sample efficient on
+It's a little more sample efficient on
+the original.
+We'll do fast
+baseline. I will get an additional tab.
+So, not a perfect
+So, not a perfect
+solve in
+solve in
+uh Oh,
+uh Oh,
+no. I mean, that's pretty darn
+no. I mean, that's pretty darn
+close. This is 60. Was this? No. 80 mil.
+close. This is 60. Was this? No. 80 mil.
+And then here this one
+is 80 mil. So now see this one is
+is 80 mil. So now see this one is
+flatlined up here way
+before. So hang on let
+me be
+higher or should it just be more
+steps? We could add a very
+small. We could go up to 100
+small. We could go up to 100
+mil and then this should still be way
+mil and then this should still be way
+faster, right?
+Or do we think
+not? So we get the 29
+not? So we get the 29
+seconds. These are both about 29
+seconds. These are both about 29
+seconds.
+That's
+interesting. So then I mean this is not
+interesting. So then I mean this is not
+properly tuned
+properly tuned
+though. Can we get this one to
+be almost as sample efficient?
+Right. Let's see.
+So default 0.025.
+So we would like to do
+So we would like to do
+0 0.1 which is this crazy high learning
+rate since we 4xed the mini batch
+size. We double the number of
+size. We double the number of
+environments as
+environments as
+well. I believe we did.
+Okay. So, this is not
+stable. This is not
+stable. Should it be linear
+stable. Should it be linear
+increase or should it be square
+increase or should it be square
+root? I think it is linear.
+increase. So
+increase. So
+here, so it's slightly less sample
+here, so it's slightly less sample
+efficient it seems because we can't
+efficient it seems because we can't
+quite support the uh linear increase to
+quite support the uh linear increase to
+learning
+learning
+rate. Not quite.
+Do it this way.
+Oh, now this is failing
+Oh, now this is failing
+too. Okay, something is screwy here.
+too. Okay, something is screwy here.
+Didn't I
+Didn't I
+just I had this at 075.
+Is there a does this need like a warm up
+Is there a does this need like a warm up
+or
+something? So, you can also do this.
+something? So, you can also do this.
+This would be
+safer, but I think that this one might
+safer, but I think that this one might
+learn too slowly.
+And I'd really like to push this if I
+And I'd really like to push this if I
+can. If we can get the mini batch to be
+can. If we can get the mini batch to be
+if st training is like stable at this
+if st training is like stable at this
+mini batch size, everything just gets
+faster.
+faster.
+Oh, there we are.
+So, we should
+So, we should
+probably do a couple runs of this since
+probably do a couple runs of this since
+there's going to be some variance,
+there's going to be some variance,
+right?
+But just doubling the learning rate
+But just doubling the learning rate
+seems to
+seems to
+do most of what you'd want.
+Yeah, there is a little bit of variance
+Yeah, there is a little bit of variance
+though as to like when it
+solves because this is now on par with
+solves because this is now on par with
+the previous learning rate curve.
+I would still
+expect I would still kind of want this
+expect I would still kind of want this
+to be default
+to be default
+though. If you do if we don't push the
+though. If you do if we don't push the
+learning rate too high, the larger mini
+learning rate too high, the larger mini
+batch should be stable and it should
+batch should be stable and it should
+help more on complex ends.
+the data gets less off policy. There are
+the data gets less off policy. There are
+like a lot of benefits to this. Yeah. So
+like a lot of benefits to this. Yeah. So
+it's somewhere in this
+window. Somewhere in this
+window. Somewhere in this
+window it should pull solve if I just
+window it should pull solve if I just
+give it 100 mil,
+right? Like 25 mil frames.
+This dip in the curve also right here.
+This dip in the curve also right here.
+This is kind of a cool artifact in RL.
+This is kind of a cool artifact in RL.
+This is where it clears the first screen
+This is where it clears the first screen
+of bricks. So like it has to learn to
+of bricks. So like it has to learn to
+hit the last brick reliably because it's
+hit the last brick reliably because it's
+kind of hard to hit.
+So like you actually get learn curves in
+So like you actually get learn curves in
+RL that sometimes reflect specific
+RL that sometimes reflect specific
+difficulties in the
+difficulties in the
+environment. Okay. So there we go. This
+environment. Okay. So there we go. This
+one is that's a full salt. That's
+good. 32
+good. 32
+seconds. I don't really think we need
+seconds. I don't really think we need
+that. I think we can just leave it on
+that. I think we can just leave it on
+this.
+this.
+We can always double them for the uh the
+We can always double them for the uh the
+demos, right? They can just train twice
+demos, right? They can just train twice
+as long for the
+as long for the
+demos. This is like still pretty
+demos. This is like still pretty
+good. Uh we'll just
+good. Uh we'll just
+use whatever the first one
+was. This one's
+old
+old
+here. We'll we'll be fair. Let's just
+here. We'll we'll be fair. Let's just
+remove all these
+That
+There we are. So, we've got our 29
+There we are. So, we've got our 29
+second 26 second now 3 mil training uh 3
+second 26 second now 3 mil training uh 3
+mil stat per second run. And we've got
+mil stat per second run. And we've got
+this run which is actually fairly
+close but a little slower.
+little slower
+little slower
+overall and then the training speed is
+overall and then the training speed is
+like
+like
+half. Okay. So, next we're going to
+do we're going to see if we can do the
+do we're going to see if we can do the
+same thing on
+palm. I'm just going to go through all
+palm. I'm just going to go through all
+the ends and See if we can get
+the ends and See if we can get
+uh ludicrously fast training with the
+uh ludicrously fast training with the
+new
+infra. So poke should be comparable
+infra. So poke should be comparable
+maybe slower I think slower actually
+maybe slower I think slower actually
+training of the number of ends.
+This one might be a little difficult,
+This one might be a little difficult,
+come to think of it, because it's like
+come to think of it, because it's like
+only 20 mil total steps. So, this might
+only 20 mil total steps. So, this might
+be tough to
+match. So, what I was going to do
+match. So, what I was going to do
+first, if I
+first, if I
+just I'm pretty sure this makes it
+just I'm pretty sure this makes it
+worse. We'll
+see. It'll make it
+see. It'll make it
+fast. So, yeah, immediately this is now
+fast. So, yeah, immediately this is now
+three times the
+speed. And I haven't even fixed training
+speed. And I haven't even fixed training
+yet.
+Yeah, but we only get a score of
+17. Let's try if I do
+this. What happens when I do this? This
+this. What happens when I do this? This
+should go over 3 million.
+4 million step per second training.
+4 million step per second training.
+Okay,
+there. Yeah, but see it doesn't it
+there. Yeah, but see it doesn't it
+doesn't like train.
+Well, let's see if this one happens to
+Well, let's see if this one happens to
+be stable with higher
+be stable with higher
+LR. I'm just curious.
+This is not even with a trivial model is
+This is not even with a trivial model is
+the cool thing. Like this could be even
+the cool thing. Like this could be even
+substantially faster with um without the
+substantially faster with um without the
+LSTM on it.
+LSTM on it.
+So this is actually
+So this is actually
+the training speed with like a
+the training speed with like a
+reasonable
+reasonable
+model little MLP into LSTM, not just
+model little MLP into LSTM, not just
+like a 2A or MLP or something
+dumb. We might have to change the eval
+dumb. We might have to change the eval
+intervals though. This takes forever to
+intervals though. This takes forever to
+evaluate. I don't know why it's like
+evaluate. I don't know why it's like
+getting this many data points.
+Uh, okay. So, it actually,
+Uh, okay. So, it actually,
+interestingly, it didn't do really any
+interestingly, it didn't do really any
+better, but it also didn't do worse. If
+better, but it also didn't do worse. If
+I just up this to
+40, it'll still be faster.
+Where's
+info? Um,
+info? Um,
+why? Wait, why is there no info coming
+why? Wait, why is there no info coming
+back from
+back from
+this? Oh, this is the wrong one.
+tick percent log
+interval. So this is 128 *
+interval. So this is 128 *
+4,000
+80. It's just not getting logs back.
+That should be getting logs back
+That should be getting logs back
+though, I guess. Like the games just
+though, I guess. Like the games just
+take a long time to
+finish.
+finish.
+Evaluated 100 million steps.
+Evaluated 100 million steps.
+Okay, we're gonna have to mess with the
+Okay, we're gonna have to mess with the
+eval stuff
+today. So, like what's going on with
+today. So, like what's going on with
+this that it's
+not something screwing
+I can't see anywhere where you'd be
+I can't see anywhere where you'd be
+dropping
+logs, right? Where you'd be throwing
+logs, right? Where you'd be throwing
+away
+logs. Unless I'm doing it by mistake in
+logs. Unless I'm doing it by mistake in
+clean puffer.
+Yeah. So you wait
+for this should be totally
+fine. Let's see if it's just a sample
+fine. Let's see if it's just a sample
+thing.
+thing.
+Oops, wrong
+one. Like, does this thing eventually
+log? I 8x to the number of environments.
+log? I 8x to the number of environments.
+I should still be getting logs. There we
+I should still be getting logs. There we
+are. Oh, and then it get consistent. So,
+are. Oh, and then it get consistent. So,
+it just it doesn't even finish the uh
+it just it doesn't even finish the uh
+the episode, I guess. What
+happened? Okay.
+274 is the episode
+length and it's not training
+length and it's not training
+stably or
+something. No, it
+something. No, it
+is. Oh, you know what? This
+is. Oh, you know what? This
+is 74
+times I mean there's only 2 million.
+times I mean there's only 2 million.
+Hang on. There are 8192 total
+Hang on. There are 8192 total
+ms and it's only 274 episode length. No,
+ms and it's only 274 episode length. No,
+but the 274 episode length can't be
+but the 274 episode length can't be
+right. That's really short for
+right. That's really short for
+fall and it jumps up to uh to 20 score.
+fall and it jumps up to uh to 20 score.
+So basically, it's like I think what's
+So basically, it's like I think what's
+happening is the games are really long.
+happening is the games are really long.
+So, you don't actually get to see the
+So, you don't actually get to see the
+good policy during training because it's
+good policy during training because it's
+literally just playing one game, but
+literally just playing one game, but
+then it just knows how to play the game
+perfectly, which would then actually
+perfectly, which would then actually
+imply that you need to reset the
+imply that you need to reset the
+environment.
+Yeah. So, that's a perfect
+solve.
+solve.
+Okay. But the logging is just not going
+Okay. But the logging is just not going
+to
+to
+be great for pawn because the games are
+be great for pawn because the games are
+really long. Okay. But the eval at the
+really long. Okay. But the eval at the
+end should be accurate.
+end should be accurate.
+Maybe might have to reset the ends.
+Hey, can you reset the end after
+Hey, can you reset the end after
+it's I think you can
+make and
+then when does it get called and
+then when does it get called and
+reset
+reset
+it I'm just concerned here basically the
+it I'm just concerned here basically the
+thing I'm worried about is if the
+thing I'm worried about is if the
+episodes are really long it might like
+episodes are really long it might like
+during evaluation not run new games it
+during evaluation not run new games it
+might just be finishing all the games
+might just be finishing all the games
+from stale policies. So I think that you
+from stale policies. So I think that you
+got to have a reset in
+there. Okay. So this is now
+and presumably is not stable if I do
+and presumably is not stable if I do
+this.
+You know, the other thing I'm realizing
+You know, the other thing I'm realizing
+is we could
+is we could
+retune. We could not go crazy with this.
+retune. We could not go crazy with this.
+Yeah. So, this isn't
+Yeah. So, this isn't
+stable. Um, but if I do like 80, it's
+stable. Um, but if I do like 80, it's
+probably good. So, what we could do is
+probably good. So, what we could do is
+we could retune breakout,
+we could retune breakout,
+right? Or the high batch size. That's
+right? Or the high batch size. That's
+probably going to give us some different
+probably going to give us some different
+optimal hypers.
+And then we could apply those across
+everything. They're literally 30 second
+everything. They're literally 30 second
+runs. We could probably do that live,
+runs. We could probably do that live,
+couldn't
+couldn't
+we? Why don't I just set that up right
+now? Okay. So, yeah, this solves an 80.
+So Adam epsilon Adam
+beta I believe 64 is max BPD horizon
+right 8192
+Yes. 64 is going to be
+max gradient norm value
+max gradient norm value
+function. We don't really need to tune
+function. We don't really need to tune
+update epochs.
+Right. Tuning in. Did you do anything
+Right. Tuning in. Did you do anything
+with impulse? Not yet, Captain. And what
+with impulse? Not yet, Captain. And what
+I'm currently trying to do is I'm trying
+I'm currently trying to do is I'm trying
+to see if I can get stable large mini
+to see if I can get stable large mini
+batch training, which should help all of
+batch training, which should help all of
+us on
+everything. Okay, so that's now just
+everything. Okay, so that's now just
+tuning like the standard stuff.
+And
+well, I forget anything
+else. Werger. It's um they're faster to
+else. Werger. It's um they're faster to
+train. Do you see this 4 million step
+train. Do you see this 4 million step
+per second pong?
+That's with a real policy as well. We
+That's with a real policy as well. We
+can make it substantially faster than
+can make it substantially faster than
+that with um like a silly two-layer MLP.
+Okay. So unless Colonel
+Okay. So unless Colonel
+Colonel Jen messes us
+Colonel Jen messes us
+up. We should, this is the crazy thing,
+up. We should, this is the crazy thing,
+we should literally be able to do a
+we should literally be able to do a
+breakout sweep
+live. Why did it just train for 50 mil
+steps? Oh, cuz the sweep. Hang on. Yeah,
+steps? Oh, cuz the sweep. Hang on. Yeah,
+we don't want that.
+we don't want that.
+mil. We should literally be able to do a
+mil. We should literally be able to do a
+hyper pram sweep
+hyper pram sweep
+live because the runs are 30
+live because the runs are 30
+seconds. Eval might be a little
+seconds. Eval might be a little
+annoying. We'll
+annoying. We'll
+see. But
+see. But
+um yeah, 30 second breakout runs is kind
+um yeah, 30 second breakout runs is kind
+of nuts.
+I'd be interested to see how larger mini
+I'd be interested to see how larger mini
+batches do impulse wars. I did three or
+batches do impulse wars. I did three or
+so
+so
+sweeps. Protein never seemed to want to
+sweeps. Protein never seemed to want to
+explore
+explore
+it. Didn't find good runs. Yeah. So,
+it. Didn't find good runs. Yeah. So,
+previously, right, here's the thing with
+previously, right, here's the thing with
+larger mini batch size. You get fewer
+larger mini batch size. You get fewer
+gradient updates. So you need to be able
+gradient updates. So you need to be able
+to
+to
+actually make large stable updates for
+actually make large stable updates for
+it to be useful. And what it seems to
+it to be useful. And what it seems to
+me is that because of all the new
+me is that because of all the new
+algorithm improvements we've made, it
+algorithm improvements we've made, it
+seems substantially easier to do that
+seems substantially easier to do that
+than it was before.
+Muan and such are more sample. It's not
+Muan and such are more sample. It's not
+necessarily that it's more sample
+necessarily that it's more sample
+efficient, it's that it's more
+efficient, it's that it's more
+stable. So it means that like I can push
+stable. So it means that like I can push
+the learning rate higher. So I can make
+the learning rate higher. So I can make
+larger gradient updates than I could
+larger gradient updates than I could
+with Adam.
+with Adam.
+That's what it seems.
+It's weird how like the first few
+It's weird how like the first few
+experiments really aren't finding very
+experiments really aren't finding very
+much.
+Huh. Uh it's still training past the
+Huh. Uh it's still training past the
+allotted time step budget actually,
+allotted time step budget actually,
+isn't it?
+Uh, I'm not sweeping total time steps.
+Uh, I'm not sweeping total time steps.
+At least I shouldn't be. What the heck
+At least I shouldn't be. What the heck
+is it
+doing? I Yeah.
+The
+hell it's just doing what it wants. I
+hell it's just doing what it wants. I
+guess that seems like a
+bug. You know what? I don't know why
+bug. You know what? I don't know why
+it's doing that, but we'll let it we'll
+it's doing that, but we'll let it we'll
+let it cook a bit. We'll see what it
+let it cook a bit. We'll see what it
+figures out because it actually seems
+figures out because it actually seems
+like it got a lot of information out of
+like it got a lot of information out of
+that run, right? Cuz now all of a sudden
+that run, right? Cuz now all of a sudden
+it's got like a
+it's got like a
+reasonable like it got more reasonable
+reasonable like it got more reasonable
+perf much much faster.
+It should be reporting 10 10 data points
+It should be reporting 10 10 data points
+for each of these runs as well. So it
+for each of these runs as well. So it
+actually should learn from the whole
+curve. Just let Muan do its thing.
+curve. Just let Muan do its thing.
+protein do its thing. I do want to
+protein do its thing. I do want to
+figure out what the heck it is that's
+figure out what the heck it is that's
+causing that bug in the
+meantime. Oh, this is is this here?
+Oh yeah, this is the
+Oh yeah, this is the
+bug. It just keeps going up and up in
+bug. It just keeps going up and up in
+total time
+total time
+steps. Yeah, we got to fix that.
+There's the
+bug when I increase the mini
+bath. Yeah, that's not
+bath. Yeah, that's not
+um that's not a good thing to do really.
+So there is like a log failure
+thing. I got to come up with a better
+thing. I got to come up with a better
+way of doing this
+though. Well, now at least now we know
+though. Well, now at least now we know
+why that was
+happening. It was just going to keep
+happening. It was just going to keep
+running longer and longer experiments.
+Uh, yes, we could technically do that,
+Uh, yes, we could technically do that,
+but I don't know if I want
+but I don't know if I want
+to. The other option would just be to
+to. The other option would just be to
+like correctly constrain the search
+like correctly constrain the search
+space.
+You know, I could do something like you
+You know, I could do something like you
+add constraints like X frame not bigger
+add constraints like X frame not bigger
+than Y frame or
+whatever. Okay, this seems like it's
+whatever. Okay, this seems like it's
+already way better.
+Yeah, this is already way better.
+Hyper pram tuning in real
+time. We also might want to do runs and
+time. We also might want to do runs and
+child processes.
+I generally don't like kicking stuff
+I generally don't like kicking stuff
+into subprocesses when I can avoid
+into subprocesses when I can avoid
+it.
+it.
+[Music]
+[Music]
+Um because you end up eating error
+Um because you end up eating error
+messages and stuff.
+I would think that the better solution
+I would think that the better solution
+here would be to just constrain the surf
+here would be to just constrain the surf
+space more
+space more
+correctly and like we could add more
+correctly and like we could add more
+stuff into protein to help with
+that. Like there not that many like you
+that. Like there not that many like you
+can't out of memory yourself by
+can't out of memory yourself by
+increasing the learning rate or
+increasing the learning rate or
+something. It's literally just like
+something. It's literally just like
+batch size, mini batch size.
+batch size, mini batch size.
+Maybe BPD horizon.
+Yeah, it's a little tricky to like
+Yeah, it's a little tricky to like
+detect if max batch size can
+detect if max batch size can
+OM.
+Um, I guess now with like var variable
+Um, I guess now with like var variable
+net sizes, you can also do that, which
+net sizes, you can also do that, which
+is a little
+is a little
+janky. I want to think about it. I don't
+janky. I want to think about it. I don't
+want to just like throw everything into
+want to just like throw everything into
+a subprocess by default. That seems like
+a subprocess by default. That seems like
+a bad hack cuz that like that literally
+a bad hack cuz that like that literally
+makes all of the errors more annoying
+makes all of the errors more annoying
+now because now you get like stuff
+now because now you get like stuff
+obscured by being in a subprocess eating
+obscured by being in a subprocess eating
+traces and whatever.
+Can we just bring up the fact real quick
+Can we just bring up the fact real quick
+that um while we've been having this
+that um while we've been having this
+conversation, we've done nearly a
+conversation, we've done nearly a
+billion steps worth of sweep
+experiments. You can just
+experiments. You can just
+set standard out and air to parents and
+set standard out and air to parents and
+that's not really the issue.
+you do screw yourself from being able to
+you do screw yourself from being able to
+set a break point on error,
+set a break point on error,
+right? Like right now, this is actually
+right? Like right now, this is actually
+one of the things I was really proud
+one of the things I was really proud
+about with the new sweep system is
+about with the new sweep system is
+because we don't have womb's thing that
+because we don't have womb's thing that
+like throws it into a thread or
+like throws it into a thread or
+whatever, you can like set conditional
+whatever, you can like set conditional
+break points or whatever in a sweep and
+break points or whatever in a sweep and
+you will hit them and you can just debug
+3 million steps per second training is
+3 million steps per second training is
+about 10 billion steps per
+hour. 10 billion steps per hour is wild.
+This is on the 4090 as well, not even
+This is on the 4090 as well, not even
+the 5090. This is just on my local
+the 5090. This is just on my local
+machine.
+I
+mean, I agree with the problem that you
+mean, I agree with the problem that you
+brought up of
+brought up of
+like sweep should be stable and not just
+like sweep should be stable and not just
+crash due to OM. I don't necessarily
+crash due to OM. I don't necessarily
+like these proposed solutions.
+I think you would get like 80% of the
+I think you would get like 80% of the
+way there.
+way there.
+Um, so the place where it's most likely
+Um, so the place where it's most likely
+going to OM is on
+going to OM is on
+the it's the train step, right? like the
+the it's the train step, right? like the
+backwards like you have to do forwards
+backwards like you have to do forwards
+backwards on a mini batch of like 32K or
+backwards on a mini batch of like 32K or
+whatever. I could probably just
+whatever. I could probably just
+dynamically adjust gradient accumulation
+dynamically adjust gradient accumulation
+based on your network size and get like
+based on your network size and get like
+90% of the way there, Captain.
+So there's um when you do the training
+So there's um when you do the training
+step, right, there's a maximum mini
+step, right, there's a maximum mini
+batch size. That's the most memory
+batch size. That's the most memory
+intensive thing in uh in puffer like by
+intensive thing in uh in puffer like by
+a mile because that's you have to have
+a mile because that's you have to have
+you're doing a forward pass over 32k
+you're doing a forward pass over 32k
+samples or whatever say if you have a
+samples or whatever say if you have a
+big mini batch and you have to keep
+big mini batch and you have to keep
+around all the activations to do the
+around all the activations to do the
+backwards pass.
+backwards pass.
+um plus like all the optimizer state
+um plus like all the optimizer state
+stuff.
+stuff.
+So, but I have gradient accumulation
+So, but I have gradient accumulation
+where you can do you can split that mini
+where you can do you can split that mini
+batch into a smaller number of mini
+batch into a smaller number of mini
+batches and have the result be identical
+batches and have the result be identical
+and it's actually hardware efficient to
+and it's actually hardware efficient to
+do that with larger networks as well. I
+do that with larger networks as well. I
+can probably just set that automatically
+can probably just set that automatically
+and that'll catch like 90% of
+OM. Hello
+Spencer. I have been sent a link.
+Interesting. This one looks pretty
+Interesting. This one looks pretty
+good. These curves are a little
+wacky, but
+interesting. Something like that. Yeah.
+I wouldn't do it based on VRAM. I would
+I wouldn't do it based on VRAM. I would
+just do like a rough thing based on
+just do like a rough thing based on
+network
+network
+size and catch most of them.
+orange one's not
+orange one's not
+bad. This is only 250 mil steps as
+well. How are we doing on
+well. How are we doing on
+our sweep
+our sweep
+here? Oh, we're getting
+here? Oh, we're getting
+somewhere. We're getting somewhere.
+I kind of expected this to find good
+I kind of expected this to find good
+hypers a lot quicker considering that
+hypers a lot quicker considering that
+the defaults were
+the defaults were
+uh were so good. Let me make sure I
+uh were so good. Let me make sure I
+didn't mess anything up in um in the
+didn't mess anything up in um in the
+configs for this.
+mess something
+up. I don't think
+so. Probably just takes a while to sweep
+so. Probably just takes a while to sweep
+over all the
+over all the
+stuff. A lot of
+hyper. We are not even sweeping any of
+hyper. We are not even sweeping any of
+these priority replay things yet either.
+That should be able to make it a lot
+That should be able to make it a lot
+better.
+Maybe let's see what it's doing
+Maybe let's see what it's doing
+on sample wise.
+Pretty high learning
+rates. I should probably have this
+I don't think there is actually a way
+I don't think there is actually a way
+for me to like log the parto front
+correctly value
+correctly value
+[Music]
+[Music]
+coefficient form.
+and we have a couple runs in here right
+and we have a couple runs in here right
+now that are
+decent. Yeah, there are a couple decent
+decent. Yeah, there are a couple decent
+runs
+runs
+here. Wait, if these are
+here. Wait, if these are
+at Were the Did these just get run?
+at Were the Did these just get run?
+We didn't have these a second ago, did
+We didn't have these a second ago, did
+we? Oh, no, we
+did. Yeah, we
+did. Perfect is just a normalized
+did. Perfect is just a normalized
+four. It's the same as if I do this same
+four. It's the same as if I do this same
+exact curve changes the axis to be
+exact curve changes the axis to be
+whatever the M specific metric scale
+whatever the M specific metric scale
+is. I wanted all the M's to have a PF so
+is. I wanted all the M's to have a PF so
+that like we can benchmark all the
+that like we can benchmark all the
+different M's and put them on the same
+different M's and put them on the same
+plot and get like an average or
+plot and get like an average or
+whatever.
+So, I added that to
+everything. For Impulse Wars, it would
+everything. For Impulse Wars, it would
+just be like the win rate or whatever.
+just be like the win rate or whatever.
+You would just log a one for a win and a
+You would just log a one for a win and a
+zero for a loss.
+Yeah, that's what you would do or perf.
+Yeah, I can't call it score because some
+Yeah, I can't call it score because some
+environments actually like have a
+environments actually like have a
+score, right? So that needs to be called
+score, right? So that needs to be called
+score. So I made this just like a
+score. So I made this just like a
+normalized
+normalized
+thing. And you can't even call it like
+thing. And you can't even call it like
+normalized score because like Enduro has
+normalized score because like Enduro has
+a score that you could normalize, but
+a score that you could normalize, but
+that's not actually the metric that you
+that's not actually the metric that you
+would like to log.
+would like to log.
+So, it's a little silly. Okay.
+So that was a probably too high learning
+So that was a probably too high learning
+rate in crashing.
+I'm trying to think what um what protein
+I'm trying to think what um what protein
+actually does when you have the same
+actually does when you have the same
+cost
+everywhere. It should still work. I got
+everywhere. It should still work. I got
+to like there's some cases to analyze.
+pretty
+good. Oh, I thought I had
+good. Oh, I thought I had
+uh Yeah, if you zoom out, we have six
+uh Yeah, if you zoom out, we have six
+here as the best,
+here as the best,
+right? Close to six.
+What is going on with our breakout
+What is going on with our breakout
+sweep? Why is this thing having such a
+sweep? Why is this thing having such a
+hard time
+hard time
+finding good
+finding good
+parameters? Like some of these runs are
+parameters? Like some of these runs are
+pretty reasonable.
+Okay, we are making some progress. We
+Okay, we are making some progress. We
+are starting to get some better
+runs. My hope here was that it would be
+runs. My hope here was that it would be
+pretty easy to like reune this thing.
+Do we have any predictions here?
+Do we have any predictions here?
+Like what should change? Maybe like
+Like what should change? Maybe like
+gradient clipping and stuff should
+change. We actually haven't swept that
+change. We actually haven't swept that
+lately at all
+lately at all
+either. I kind of have to do that again.
+So, we'll give this uh we'll give this a
+So, we'll give this uh we'll give this a
+few more runs to see if it finds
+few more runs to see if it finds
+anything because these are starting to
+anything because these are starting to
+get better. Um, and then I think what
+get better. Um, and then I think what
+I'll do is I'll just take whatever I
+I'll do is I'll just take whatever I
+have from that. I'll throw like some
+have from that. I'll throw like some
+fast version on any of the M's where I
+fast version on any of the M's where I
+can get it to like remotely work. And
+can get it to like remotely work. And
+then from
+then from
+there, we can do like a more full sweep.
+there, we can do like a more full sweep.
+uh or we can start like doing some more
+uh or we can start like doing some more
+full sweeps on all the new parameters
+full sweeps on all the new parameters
+and stuff to see if we can really
+and stuff to see if we can really
+optimize and then uh we test on the
+optimize and then uh we test on the
+harder M like neural MMO to see if they
+harder M like neural MMO to see if they
+actually you know the stuff that we find
+actually you know the stuff that we find
+on the simpler M actually holds up. I
+on the simpler M actually holds up. I
+think that's going to be the play. We
+think that's going to be the play. We
+just got a good run as well, didn't
+just got a good run as well, didn't
+we? Yeah. So, we are making progress
+we? Yeah. So, we are making progress
+here.
+This is a pretty interesting gap here.
+This is a pretty interesting gap here.
+This like train to
+This like train to
+eval. This means that
+um the actual length of a game is is
+um the actual length of a game is is
+pretty long.
+pretty long.
+Like you know maybe a game lasts this
+Like you know maybe a game lasts this
+long or whatever. You have an old policy
+long or whatever. You have an old policy
+at the start of the game and you lose a
+at the start of the game and you lose a
+few lives or something on
+it would be my
+it would be my
+guess. There's a big eval gap from here
+guess. There's a big eval gap from here
+to
+to
+here like
+vertically. Ah. So here this is what I
+vertically. Ah. So here this is what I
+was looking at right. So
+was looking at right. So
+079 it is trying to
+079 it is trying to
+find higher learning rates that are
+find higher learning rates that are
+stable. It looks
+stable. It looks
+like it's very difficult to get the this
+like it's very difficult to get the this
+to be stable. But if it can find other
+to be stable. But if it can find other
+hypers that help this be stable then you
+hypers that help this be stable then you
+would expect a learning rate around
+would expect a learning rate around
+here based on the batch size.
+Uh, also gamma is
+Uh, also gamma is
+not going as ludicrously high as it was
+before. There is actually a fair bit of
+before. There is actually a fair bit of
+shift I think in what I'm seeing here so
+shift I think in what I'm seeing here so
+far compared to what we had before.
+far compared to what we had before.
+That should be being this low is a
+That should be being this low is a
+little
+weird. And here is the parrito
+front, I guess. Is this going to just be
+front, I guess. Is this going to just be
+from BPT
+from BPT
+Horizon? No, because it's mostly these.
+Horizon? No, because it's mostly these.
+So, this is just like run tor run
+So, this is just like run tor run
+variance. 10 20% run to run just
+variance. 10 20% run to run just
+variance.
+Oh
+wow. Start looking at some of the other
+wow. Start looking at some of the other
+amps. Snake is one where we were able to
+amps. Snake is one where we were able to
+get it to go like really fast. Hey, what
+get it to go like really fast. Hey, what
+are you up to today? Hey, Cash. So, we
+are you up to today? Hey, Cash. So, we
+got uh yesterday we kind of realized
+got uh yesterday we kind of realized
+that we're starting to get to the point
+that we're starting to get to the point
+where we can use larger batch sizes,
+where we can use larger batch sizes,
+larger mini batch sizes, and have
+larger mini batch sizes, and have
+training still be
+training still be
+stable. So, we're seeing if we can get
+stable. So, we're seeing if we can get
+some of the simpler M baselines to now
+some of the simpler M baselines to now
+be training at like 2 to 4 million steps
+be training at like 2 to 4 million steps
+per second instead of 0 to 1
+million. So, now this is a this is kind
+million. So, now this is a this is kind
+of cool. This is we're sweeping
+of cool. This is we're sweeping
+breakout. I'm literally doing this sweep
+breakout. I'm literally doing this sweep
+live because the runs are 30 seconds
+live because the runs are 30 seconds
+each. It's doing like 10 billion steps
+each. It's doing like 10 billion steps
+of training per
+hour is pretty
+crazy. And actually, you know, there's
+crazy. And actually, you know, there's
+still like 25% overhead just on copying
+still like 25% overhead just on copying
+data to GPU here.
+data to GPU here.
+This could actually be made a fair bit
+This could actually be made a fair bit
+faster even potentially.
+Now, the only annoying thing here is I
+Now, the only annoying thing here is I
+think that um the Perf improvements
+think that um the Perf improvements
+aren't going to be as significant for uh
+aren't going to be as significant for uh
+larger networks, but it is still
+larger networks, but it is still
+important for us to bring up the
+important for us to bring up the
+experiment
+experiment
+speed on these smaller
+speed on these smaller
+ones. And I think that you're still
+ones. And I think that you're still
+going to be able to use the same like
+going to be able to use the same like
+batch sizes and stuff on the larger
+batch sizes and stuff on the larger
+nets. And it should still be nice and
+nets. And it should still be nice and
+stable. It probably just won't have the
+stable. It probably just won't have the
+same
+same
+uh the same like wall clock perf
+uh the same like wall clock perf
+improvement, but you would actually
+improvement, but you would actually
+expect larger batch sizes to be good on
+expect larger batch sizes to be good on
+more complex ends. Anyways, this is
+more complex ends. Anyways, this is
+generally like a reasonable reasonable
+generally like a reasonable reasonable
+direction to
+go. Did I like totally mess something up
+go. Did I like totally mess something up
+or like why why don't we have a full
+or like why why don't we have a full
+solve here?
+solve here?
+We had a full solve with the original
+We had a full solve with the original
+hypers. I was just trying to do better
+hypers. I was just trying to do better
+than that.
+possibly just needs a really big sweep.
+possibly just needs a really big sweep.
+I don't know.
+I say we give this 50 experiments and
+I say we give this 50 experiments and
+then we call
+it unless this does something wild in
+it unless this does something wild in
+the next couple of experiments. We'll
+the next couple of experiments. We'll
+take this part of the work offline and
+take this part of the work offline and
+uh we'll just see if we can get current
+uh we'll just see if we can get current
+hypers to do something reasonable and
+hypers to do something reasonable and
+then we'll expect that if we run a much
+then we'll expect that if we run a much
+larger
+larger
+sweep that we should be able to do
+sweep that we should be able to do
+uh to do better potentially than this
+uh to do better potentially than this
+because we know that there are better
+because we know that there are better
+hyperparameters in the space than this.
+hyperparameters in the space than this.
+It's just about running a long enough
+It's just about running a long enough
+sweep to find them possibly messing with
+sweep to find them possibly messing with
+the defaults as well.
+Okay. So, nothing really amazing with
+this, but this is your sweep. This is 50
+this, but this is your sweep. This is 50
+experiments. We just did this live. 50
+experiments. We just did this live. 50
+experiments is that four billion steps
+experiments is that four billion steps
+of
+data. Uh 3.2 billion steps of
+data.
+Cool. I believe we had Pong running,
+Cool. I believe we had Pong running,
+right?
+Good palm
+Good palm
+curve does solve though.
+You're just doing this
+You're just doing this
+wrong. So, this is this is slow
+wrong. So, this is this is slow
+baseline.
+That is not good
+That is not good
+either. Hang on. I'm messing up ton of
+either. Hang on. I'm messing up ton of
+stuff up
+stuff up
+here. Let me just stop being
+sloppy. Okay, now this should work
+sloppy. Okay, now this should work
+correctly.
+And we should be able to crank some
+And we should be able to crank some
+experiments real quick.
+We put this on fast baseline and we see
+We put this on fast baseline and we see
+that it's fast
+Okay, that's not bad. We have fast pace
+line does
+line does
+this kind of
+screwy. Why
+screwy. Why
+is Oh, because it ran a ton of evalu.
+is Oh, because it ran a ton of evalu.
+Sure.
+There we
+There we
+go. Ran a ton of
+emails.
+Here's the snake. Slow bass
+Here's the snake. Slow bass
+blind. Snake was a fast end though,
+right?
+Shouldn't be any faster than pong
+Shouldn't be any faster than pong
+though. Maybe it gets like 3 4 mil
+optimized 94. Very
+optimized 94. Very
+good. So this is a very strong baseline
+good. So this is a very strong baseline
+for snake.
+for snake.
+And then we will
+do this for the fast
+do this for the fast
+one. Then this is num m is
+one. Then this is num m is
+eight. So 8
+eight. So 8
+*
+*
+256 is only 2048. So we go to 16 m for
+256 is only 2048. So we go to 16 m for
+the uh the new baseline.
+102. Yeah, this is a very
+102. Yeah, this is a very
+strong. This actually got better since
+strong. This actually got better since
+we picked some other stuff like 100 plus
+we picked some other stuff like 100 plus
+from snake is kind of
+crazy. This will be a good end for
+crazy. This will be a good end for
+actually I think for uh for testing the
+actually I think for uh for testing the
+larger batches.
+larger batches.
+You just sort of need stable updates on
+this. That's going to be hard to beat
+though. Curious to open the curve on
+though. Curious to open the curve on
+this.
+So, it's pretty flat. It wiggles around
+So, it's pretty flat. It wiggles around
+here a little bit. It does seem like it
+here a little bit. It does seem like it
+goes up
+slowly. 105.
+So, I guess the bug fixes I applied
+So, I guess the bug fixes I applied
+um actually helped because this is
+um actually helped because this is
+higher than it is than it was before by
+higher than it is than it was before by
+a couple points. Few more than a couple
+a couple points. Few more than a couple
+points. It's
+points. It's
+significant. I think it was like a 100
+significant. I think it was like a 100
+or something before. Now we're easily
+or something before. Now we're easily
+above
+hundreds. That's a very good result for
+hundreds. That's a very good result for
+Snake.
+At least this is giving me I mean the
+At least this is giving me I mean the
+one thing that this is doing and the
+one thing that this is doing and the
+reason the part of the reason I do stuff
+reason the part of the reason I do stuff
+like this where I kind of just slowly
+like this where I kind of just slowly
+manually run experiments um this is
+manually run experiments um this is
+giving me a lot of confidence in the new
+giving me a lot of confidence in the new
+dev branch uh as being like a stable
+dev branch uh as being like a stable
+high quality improvement like this is a
+high quality improvement like this is a
+solid learn curve for Snake.
+solid learn curve for Snake.
+Snake is usually very hard to get like
+Snake is usually very hard to get like
+above above this initial increment here.
+above above this initial increment here.
+It's usually quite difficult to do
+It's usually quite difficult to do
+better. I mean this is like a tiny
+better. I mean this is like a tiny
+network right that is being trained for
+network right that is being trained for
+300 mil and the tiny network is
+300 mil and the tiny network is
+continuing to
+improve. Okay, so 3
+improve. Okay, so 3
+minutes pretty good.
+Now we run this one. Be
+fast. The number of Twitch bots is kind
+fast. The number of Twitch bots is kind
+of ridiculous.
+only 2.4
+mil. I messed something up. I would have
+mil. I messed something up. I would have
+expected more than that.
+MS.
+MS.
+Uh, I didn't mess anything up. Numb
+Uh, I didn't mess anything up. Numb
+snakes.
+snakes.
+256 40 96 snakes.
+I guess this is the comp
+policy. This is still a faster than I've
+policy. This is still a faster than I've
+ever had a snake going on this, I
+ever had a snake going on this, I
+believe. So, it's still
+good. And how are we doing
+on on our run?
+105. So we got up to like 108 or
+105. So we got up to like 108 or
+whatever. So this is uh this is match.
+whatever. So this is uh this is match.
+So this is just
+pre-performance. It just works on snake.
+Can't
+Can't
+complain. 110. No compromises, just
+complain. 110. No compromises, just
+wins.
+wins.
+Perfect. Favorite classes you took at
+Perfect. Favorite classes you took at
+MIT during grad
+years? I mean, not a single class was
+years? I mean, not a single class was
+remotely relevant or useful to anything
+remotely relevant or useful to anything
+that I do now. Frankly, I like you only
+that I do now. Frankly, I like you only
+take four core classes
+take four core classes
+um like required classes. I took some
+um like required classes. I took some
+business electives that were good.
+Um let me think. Oh, the one course that
+Um let me think. Oh, the one course that
+was very good though in no way directly
+was very good though in no way directly
+useful to what I do. I took Sixer's
+useful to what I do. I took Sixer's
+theory course like his intro whatever it
+theory course like his intro whatever it
+is theory of computation course. So that
+is theory of computation course. So that
+was kind of cool because I really had
+was kind of cool because I really had
+not
+not
+done much proofbased math at all outside
+done much proofbased math at all outside
+of like the Stanford undergrad
+of like the Stanford undergrad
+requirements. Um, and like I actually
+requirements. Um, and like I actually
+had time to do it properly. So I was
+had time to do it properly. So I was
+like, "Oh, okay. I see proof based math.
+like, "Oh, okay. I see proof based math.
+Like I could learn this if I put in
+Like I could learn this if I put in
+time. Like I understand how this works.
+time. Like I understand how this works.
+Cool." If it says theory of computation
+Cool." If it says theory of computation
+then yeah. But like I took the NLP
+then yeah. But like I took the NLP
+course, wasn't useful. I mean, I took my
+course, wasn't useful. I mean, I took my
+advisor's course, which is not by any
+advisor's course, which is not by any
+means a bad course, but like you know,
+means a bad course, but like you know,
+hopefully if you're there as a PhD
+hopefully if you're there as a PhD
+student, you already know all the
+student, you already know all the
+material if it's in your domain, right?
+material if it's in your domain, right?
+Um, and then I took a deep learning
+Um, and then I took a deep learning
+hardware course that was
+hardware course that was
+like kind of interesting and like yeah,
+like kind of interesting and like yeah,
+learning about like uh matrix multiply
+learning about like uh matrix multiply
+tiling and stuff was
+tiling and stuff was
+good, but um they used a bunch of kind
+good, but um they used a bunch of kind
+of
+of
+janky like per performance monitoring
+janky like per performance monitoring
+tooling and
+stuff. I mean that's what everyone
+stuff. I mean that's what everyone
+takes. I don't know if you're are you a
+takes. I don't know if you're are you a
+grad student or an
+undergrad. Undergrad. Fair
+undergrad. Undergrad. Fair
+enough. I mean, I did my undergrad. My
+enough. I mean, I did my undergrad. My
+undergrad was Stanford.
+undergrad was Stanford.
+Um I I don't think any of the
+Um I I don't think any of the
+universities have like a lot of good
+universities have like a lot of good
+courses,
+courses,
+frankly. Uh there were a few good
+frankly. Uh there were a few good
+ones like my undergrad course is
+ones like my undergrad course is
+Stanford. So
+Stanford. So
+the the data like the initial data
+the the data like the initial data
+structures and algorithms course there
+structures and algorithms course there
+106x was like okay 103 was really good.
+106x was like okay 103 was really good.
+It's like complete newbie intro to
+It's like complete newbie intro to
+um I guess proof based mathematics as it
+um I guess proof based mathematics as it
+applies to CS like discrete stuff. Um
+applies to CS like discrete stuff. Um
+but it's like really well taught. Keith
+but it's like really well taught. Keith
+is awesome. Uh, I hated the system
+is awesome. Uh, I hated the system
+courses there. Actually, that's probably
+courses there. Actually, that's probably
+the thing I'm most annoyed about is it
+the thing I'm most annoyed about is it
+put me off of doing low-level
+put me off of doing low-level
+programming for 10 years. They were that
+programming for 10 years. They were that
+bad. And now I love low-level
+bad. And now I love low-level
+programming.
+programming.
+Um, Jerry Kane's done like impressive
+Um, Jerry Kane's done like impressive
+stuff, but he's just a terrible
+stuff, but he's just a terrible
+lecturer. He's really, really bad uh at
+lecturer. He's really, really bad uh at
+communicating stuff, and the problem
+communicating stuff, and the problem
+sets were just
+sets were just
+abysmal.
+abysmal.
+Um, 161 was there like was it the
+Um, 161 was there like was it the
+advanced grad, it's not that great.
+advanced grad, it's not that great.
+Their intro stats is good. Um, the best
+Their intro stats is good. Um, the best
+like grad course there was 231N. I think
+like grad course there was 231N. I think
+yeah, Stanford's uh deep learning course
+yeah, Stanford's uh deep learning course
+is still better than
+is still better than
+MIT's.
+MIT's.
+Um, yeah, I don't know. I would imagine
+Um, yeah, I don't know. I would imagine
+that probably like other engineering
+that probably like other engineering
+disciplines at MIT have cool stuff, but
+disciplines at MIT have cool stuff, but
+there wasn't much in CS that I know of
+there wasn't much in CS that I know of
+specifically. The one thing that is that
+specifically. The one thing that is that
+was kind of cool um was I don't know if
+was kind of cool um was I don't know if
+you can do this is I think you actually
+you can do this is I think you actually
+can as an undergrad just go enroll in
+can as an undergrad just go enroll in
+Sloan courses. Uh the business law
+Sloan courses. Uh the business law
+course was very
+course was very
+good. I think that one is pretty darn
+good. I think that one is pretty darn
+useful for doing a startup. It's
+useful for doing a startup. It's
+basically like how to not accidentally
+basically like how to not accidentally
+land yourself in jail when you're just
+land yourself in jail when you're just
+like a tech guy trying to make stuff.
+like a tech guy trying to make stuff.
+So, that was
+So, that was
+cool.
+Um, yeah.
+And if you just want a major confidence
+And if you just want a major confidence
+boost, go like take one of the startup
+boost, go like take one of the startup
+courses there and see like the types of
+courses there and see like the types of
+people that are doing startups without
+people that are doing startups without
+having a technical background and
+having a technical background and
+like you would be like, "Oh, I should
+like you would be like, "Oh, I should
+just do my own thing now because this is
+just do my own thing now because this is
+my competition. I should just do my own
+my competition. I should just do my own
+stuff." So, uh yeah, that's the summary.
+stuff." So, uh yeah, that's the summary.
+I wasn't much on courses. I just
+I wasn't much on courses. I just
+generally do not enjoy doing courses at
+generally do not enjoy doing courses at
+all. Uh, I spent I spent the vast
+all. Uh, I spent I spent the vast
+majority of my time in grad and
+majority of my time in grad and
+undergrad on
+undergrad on
+research, but there were a few good
+things. And there you go. There's
+things. And there you go. There's
+your probably more than you needed in
+your probably more than you needed in
+that
+summary.
+summary.
+Mhm. Honestly,
+Mhm. Honestly,
+like the main tricky that you got to
+like the main tricky that you got to
+figure out is you got to figure out how
+figure out is you got to figure out how
+to like to spend time
+to like to spend time
+uh in undergrad like on projects that
+uh in undergrad like on projects that
+actually teach you stuff. That's the
+actually teach you stuff. That's the
+tough thing, right? Whether it's
+tough thing, right? Whether it's
+research or open source or you know
+research or open source or you know
+other things around there.
+I suggest puffer
+I suggest puffer
+lift. Of course, you know, I'm a little
+lift. Of course, you know, I'm a little
+biased, but uh if you want to hack on
+biased, but uh if you want to hack on
+cool RL stuff and not deal with
+cool RL stuff and not deal with
+ludicrously deep software stacks that
+ludicrously deep software stacks that
+make no sense and learn low-level
+make no sense and learn low-level
+programming stuff as well, you kind of
+programming stuff as well, you kind of
+can't beat it.
+Oh yeah, I got I actually have a
+Oh yeah, I got I actually have a
+question for you because I never I
+question for you because I never I
+didn't really talk to many undergrads at
+didn't really talk to many undergrads at
+MIT. Is undergrad at MIT any
+fun? My impression of like as an
+fun? My impression of like as an
+undergrad at Stanford is that Stanford
+undergrad at Stanford is that Stanford
+is a lot more fun as an undergrad. Yes
+is a lot more fun as an undergrad. Yes
+and no.
+I mean,
+I mean,
+like, I think MIT just hammers you with
+like, I think MIT just hammers you with
+technical coursework a lot more. Like, I
+technical coursework a lot more. Like, I
+still had I had like 90 hour weeks
+still had I had like 90 hour weeks
+average, I think, my freshman year at
+average, I think, my freshman year at
+Stanford, but that's cuz I did the whole
+Stanford, but that's cuz I did the whole
+core my first
+core my first
+year. Stayed up all night laying out a
+year. Stayed up all night laying out a
+chip. That's kind of
+cool. I don't know. My impression was
+cool. I don't know. My impression was
+that like kind of regardless of what you
+that like kind of regardless of what you
+do, you're going to be ludicrously busy
+do, you're going to be ludicrously busy
+at MIT. And uh the Stanford was more
+at MIT. And uh the Stanford was more
+like a choose your own adventure. So
+like a choose your own adventure. So
+like yeah, if I if you're going to do
+like yeah, if I if you're going to do
+the whole four your first year, you're
+the whole four your first year, you're
+going to be busy, but like most people
+going to be busy, but like most people
+really aren't that busy there.
+No, no,
+no. It's kind of a funny question. It's
+no. It's kind of a funny question. It's
+like, do you have any fun?
+I mean, being incredibly frank here,
+I mean, being incredibly frank here,
+right? I did a ton of just like
+right? I did a ton of just like
+incredibly stupid stuff as an undergrad.
+incredibly stupid stuff as an undergrad.
+Um, I didn't touch anything but
+Um, I didn't touch anything but
+alcohol. So, I reserved that, but I just
+alcohol. So, I reserved that, but I just
+did a ton of incredibly stupid stuff.
+did a ton of incredibly stupid stuff.
+And like I don't necessarily regret
+And like I don't necessarily regret
+regret as much because having been
+regret as much because having been
+incredibly straight laced everywhere
+incredibly straight laced everywhere
+through my whole life leading up to
+through my whole life leading up to
+that, I think I'd feel like I'd missed
+that, I think I'd feel like I'd missed
+out if I hadn't. So undergrad is kind of
+out if I hadn't. So undergrad is kind of
+a time to get that good time to get that
+a time to get that good time to get that
+out of your system. But at the same
+out of your system. But at the same
+time, it's also a good time to like, you
+time, it's also a good time to like, you
+know, learn a bunch of stuff and get
+know, learn a bunch of stuff and get
+really good at what you do. So there's a
+really good at what you do. So there's a
+balance.
+balance.
+You can minmax basically take the
+You can minmax basically take the
+minimum to graduate and be under 40
+minimum to graduate and be under 40
+hours a week. That's not bad at
+hours a week. That's not bad at
+all. Too many classes I want to
+all. Too many classes I want to
+take. If you like taking classes, then
+take. If you like taking classes, then
+sure. From the ones I took, many of them
+sure. From the ones I took, many of them
+just weren't useful to
+me. like 15 hours a week working on a
+me. like 15 hours a week working on a
+side project would be more valuable than
+side project would be more valuable than
+a lot of the courses and that was true
+a lot of the courses and that was true
+of both but I think that's true
+anywhere okay so we have this one and
+anywhere okay so we have this one and
+now we will compare to
+oops this
+See you and best of luck. Thanks for
+See you and best of luck. Thanks for
+dropping by.
+I'd say I have dramatically more fun now
+I'd say I have dramatically more fun now
+though than I did in undergrad with a
+though than I did in undergrad with a
+few exceptions. H maybe not. I think I
+few exceptions. H maybe not. I think I
+have less fun but I'm much happier
+overall. I don't know.
+All right, we're getting some training
+All right, we're getting some training
+here. This is looking
+reasonable. So, we're
+at.1 likely we'll be less ample
+at.1 likely we'll be less ample
+efficient here,
+efficient here,
+right?
+right?
+Maybe max enjoyment is lower. is much
+Maybe max enjoyment is lower. is much
+higher probably.
+Yeah. I don't know. Last year kind of
+Yeah. I don't know. Last year kind of
+just absolutely sucked.
+just absolutely sucked.
+Um and then this year I started the year
+Um and then this year I started the year
+by nearly dying of
+by nearly dying of
+pneumonia. So,
+pneumonia. So,
+uh but since then it's been pretty good.
+uh but since then it's been pretty good.
+I've just been enjoying getting myself
+I've just been enjoying getting myself
+back into good shape and I've just been
+back into good shape and I've just been
+cranking cranking out work on Puffer.
+It's also I think it's having it be part
+It's also I think it's having it be part
+of the business is like part of a
+of the business is like part of a
+business is really nice because it
+business is really nice because it
+doesn't really feel like I'm in just in
+doesn't really feel like I'm in just in
+a hole anymore like working on stuff
+a hole anymore like working on stuff
+that like you know you don't like the
+that like you know you don't like the
+most you get out of anything in academia
+most you get out of anything in academia
+is maybe you get some recognition or
+is maybe you get some recognition or
+whatever but now it's like the
+whatever but now it's like the
+recognition comes in the form of people
+recognition comes in the form of people
+DMing me for like for jobs right and
+DMing me for like for jobs right and
+like interested like clients people want
+like interested like clients people want
+wanting to hire copper for stuff. So,
+wanting to hire copper for stuff. So,
+it's cool. It's definitely
+it's cool. It's definitely
+cool.
+cool.
+24.2. This is good.
+24.2. This is good.
+2.3. This is a solid
+perf. What else do we do?
+I kind of want to try something
+harder. I thought I did something with
+harder. I thought I did something with
+it. Hang on.
+It's going to get way better, I think,
+It's going to get way better, I think,
+as well with all the stuff we're
+as well with all the stuff we're
+building lately.
+I'm definitely working harder now though
+I'm definitely working harder now though
+than I did during the vast majority of
+than I did during the vast majority of
+my
+PhD, but I'm less burnt out from it.
+PhD, but I'm less burnt out from it.
+Like the work is better.
+And like also I don't have as many
+And like also I don't have as many
+ludicrously arbitrary
+ludicrously arbitrary
+deadlines. So
+deadlines. So
+like it's like go go go get the thing
+like it's like go go go get the thing
+get done, get the thing done, get the
+get done, get the thing done, get the
+thing done. But if it's like, hey, I
+thing done. But if it's like, hey, I
+just can't do stuff today. I just need
+just can't do stuff today. I just need
+to recharge. Like I can do that as
+well. It's pretty good.
+Welcome YouTube
+Welcome YouTube
+folks. For anyone new here, this is live
+folks. For anyone new here, this is live
+reinforcement learning dev.
+reinforcement learning dev.
+At the moment, this
+At the moment, this
+is running a whole bunch of experiments
+is running a whole bunch of experiments
+with much faster
+with much faster
+configurations to see if with all the
+configurations to see if with all the
+new, excuse me, algorithm improvements
+new, excuse me, algorithm improvements
+we've made lately,
+we've made lately,
+uh, if we can get away
+uh, if we can get away
+with larger batch sizes, mini batch
+with larger batch sizes, mini batch
+sizes, and uh, larger learning rates.
+sizes, and uh, larger learning rates.
+and seeing if we can actually like get
+and seeing if we can actually like get
+reinforcement learning at average of two
+reinforcement learning at average of two
+million steps per second instead of 1
+million on a dozen different
+environments. Okay, so Spencer's M. We
+environments. Okay, so Spencer's M. We
+get 90 with his defaults.
+and then it crashes a little bit
+and then it crashes a little bit
+here. Mostly
+90. That could be the cosine. No, it's
+90. That could be the cosine. No, it's
+not coine aling. He has learning rate
+not coine aling. He has learning rate
+off.
+So, I'm just going to delete all his
+So, I'm just going to delete all his
+hypers and uh see if it makes a
+difference. No discredit to the folks
+difference. No discredit to the folks
+who did the hyperpar tuning. Uh I did
+who did the hyperpar tuning. Uh I did
+hyperparameter tuning for each and every
+hyperparameter tuning for each and every
+individual end like 200 runs before. But
+individual end like 200 runs before. But
+uh we've made algorithmic improvements
+uh we've made algorithmic improvements
+and things are generally much more
+and things are generally much more
+robust now.
+So you can almost use the same hypers
+So you can almost use the same hypers
+for everything almost. I
+for everything almost. I
+believe we might have to keep gamma at
+believe we might have to keep gamma at
+like 0.98 or something. We will see.
+This is just not
+This is just not
+ebelling. Do
+this. Interesting.
+Okay, this is running. I'm going to rest
+Okay, this is running. I'm going to rest
+real quick. I'll be back. Then we'll
+real quick. I'll be back. Then we'll
+keep on this for a Nice.
+How's this
+How's this
+looking?
+looking?
+85. So,
+85. So,
+um, it's a bit
+um, it's a bit
+lower. It's a bit
+lower. I do want to run One additional
+lower. I do want to run One additional
+experiment on this though
+experiment on this though
+before we make
+before we make
+any proclamations because
+any proclamations because
+uh I do expect that this is probably
+uh I do expect that this is probably
+just gamma being
+off. Let me just try this.
+I'd like to get tower climb uh with a
+I'd like to get tower climb uh with a
+good baseline. This is a really good
+good baseline. This is a really good
+end. Has configurable
+difficulty. Did a really good
+time. This is a 560k per
+time. This is a 560k per
+model. So we may have to
+reduce learning rate a little bit. We'll
+see. Oh, there you go. Look, there's the
+perf.
+perf.
+Easy. It's just that
+Easy. It's just that
+easy. All right. Well,
+easy. All right. Well,
+We can then
+absolutely. We can absolutely use
+these. Do I want to try this learning
+these. Do I want to try this learning
+rate this high? I guess we'll see if
+rate this high? I guess we'll see if
+this crashes. I expect that there's a
+this crashes. I expect that there's a
+decent chance this
+crashes. Try it on hard. That'll come
+crashes. Try it on hard. That'll come
+next. Let me get the uh let me see if we
+next. Let me get the uh let me see if we
+get the fast params
+get the fast params
+first. So we will get rid of this one.
+first. So we will get rid of this one.
+We'll keep the other one as the slow
+baseline. This is good.
+If this crash goes back down, it's cuz
+If this crash goes back down, it's cuz
+the learning rate's too high. But, uh,
+the learning rate's too high. But, uh,
+that seems like stable
+that seems like stable
+0.95 to
+me.
+me.
+Uh, we crashing back.
+No.
+Cool. Hey, bet. What are we
+doing? Leroy
+Jenkins. We're always fixing RL.
+Okay. So, I mean,
+we're we're pretty happy with this,
+we're we're pretty happy with this,
+right? This is a
+right? This is a
+million million steps per second on
+uh like substantially larger model.
+I think we're pretty happy with
+that. So, I think we call this one here.
+that. So, I think we call this one here.
+This works
+fine. What else haven't I
+fine. What else haven't I
+done? There are a lot of them, right?
+Jeez. Well, best of luck with that bet
+Jeez. Well, best of luck with that bet
+and congratulations once
+and congratulations once
+again. What are you up to today? We're
+again. What are you up to today? We're
+trying to get Well, uh, it's better to
+trying to get Well, uh, it's better to
+just show you actually.
+How's
+this? 3 million step per second
+this? 3 million step per second
+training, 10 billion an hour.
+training, 10 billion an hour.
+I think it was pretty decent, right?
+How did you fasterized
+How did you fasterized
+it? It just retuned the learning rate a
+it? It just retuned the learning rate a
+little bit. I haven't even reuned
+little bit. I haven't even reuned
+everything. Wonder why copy overhead is
+everything. Wonder why copy overhead is
+so high. I can do something about that.
+so high. I can do something about that.
+I should be able to get it to zero uh
+I should be able to get it to zero uh
+captain, but not
+captain, but not
+yet. Oh, this is interesting.
+I guess it's not a multiple of eight.
+work. What idea do you have for that
+work. What idea do you have for that
+would be huge to remove
+would be huge to remove
+Uh, we can asynchronously queue up data
+Uh, we can asynchronously queue up data
+transfers, I'm pretty sure, but it's
+transfers, I'm pretty sure, but it's
+it's like a pain in the ass to do it in
+it's like a pain in the ass to do it in
+the multipprocessing
+the multipprocessing
+implementation. It'll be a lot easier
+implementation. It'll be a lot easier
+with a threading threaded
+with a threading threaded
+implementation. That doesn't work.
+implementation. That doesn't work.
+That's kind of weird.
+I'm just I'm fiddling with some batch
+I'm just I'm fiddling with some batch
+size params to like make stuff fit. I'm
+size params to like make stuff fit. I'm
+going to get like warnings on I'm going
+going to get like warnings on I'm going
+to put warnings on all this stuff
+to put warnings on all this stuff
+obviously before the release.
+You check this board.
+There you
+go. I'm also I've got a meeting on uh
+go. I'm also I've got a meeting on uh
+I've got a meeting about the
+I've got a meeting about the
+professional thing that we discussed. Uh
+professional thing that we discussed. Uh
+we're going to do Friday. So hopefully
+we're going to do Friday. So hopefully
+we get something going for next
+we get something going for next
+week. The uh I was trying to set that up
+week. The uh I was trying to set that up
+for earlier this week, but the guy I
+for earlier this week, but the guy I
+need to talk to about that has been
+need to talk to about that has been
+slammed with work.
+So, also they're still trying to figure
+So, also they're still trying to figure
+out
+specifics. There you
+specifics. There you
+go. Box six is good. Okay. So, I think
+go. Box six is good. Okay. So, I think
+I'm not going to ship any of the boxes
+I'm not going to ship any of the boxes
+to main gear then. I think I'm just
+to main gear then. I think I'm just
+going to like ship them direct to the
+going to like ship them direct to the
+new facility today. some of
+new facility today. some of
+them. So, yeah, guys, get your work off
+them. So, yeah, guys, get your work off
+the boxes or like not off like make sure
+the boxes or like not off like make sure
+everything is synced because I'm just
+everything is synced because I'm just
+going to like grab them and start
+going to like grab them and start
+shipping
+stuff. I don't know how many I want to
+stuff. I don't know how many I want to
+ship initially and
+ship initially and
+like we're going to have to figure that
+like we're going to have to figure that
+stuff
+out. But like technically, as long as
+out. But like technically, as long as
+there's internet, it shouldn't be that
+there's internet, it shouldn't be that
+bad, right?
+bad, right?
+Like worst case, I can just plug them
+Like worst case, I can just plug them
+into various different outlets even if
+into various different outlets even if
+our main electrical isn't
+our main electrical isn't
+working. The sync
+working. The sync
+pool. I also think I'm going to take
+pool. I also think I'm going to take
+both of my desktops with me just so like
+both of my desktops with me just so like
+we have one extra and like I don't have
+we have one extra and like I don't have
+to monopolize as many
+boxes. Why is this 41,000 SPS?
+boxes. Why is this 41,000 SPS?
+Oh, the CPU trained
+up. I have I have arrangements.
+Bet. I thought I had fixed this.
+Yeah, I've
+Yeah, I've
+Well, I have a It's We're not doing
+Well, I have a It's We're not doing
+that, but I've got arrangements. I also
+that, but I've got arrangements. I also
+have all the original boxes and packing
+have all the original boxes and packing
+material that they were shipped to me
+material that they were shipped to me
+in.
+in.
+So for this exact
+purpose, does this not work here?
+This new one's very nice
+This new one's very nice
+though. I will say this new one that I
+though. I will say this new one that I
+have, it's like very
+nice. It's like way
+nice. It's like way
+quieter. Yeah, it's like it's way
+quieter. Yeah, it's like it's way
+quieter.
+quieter.
+um doesn't really like the cooling in
+um doesn't really like the cooling in
+it's very
+it's very
+good like there are fewer move like
+good like there are fewer move like
+fewer parts that can go wrong. It's got
+fewer parts that can go wrong. It's got
+higher quality
+fans. Oh, I didn't think about this, did
+fans. Oh, I didn't think about this, did
+I?
+Does the thread count have to be a
+Does the thread count have to be a
+multiple of
+multiple of
+um the block size that
+thing? Like surely it doesn't have to be
+thing? Like surely it doesn't have to be
+a multiple of
+a multiple of
+the like surely you can have nonp power
+the like surely you can have nonp power
+of two matrices right or non multiple
+of two matrices right or non multiple
+128 apparently
+not okay I had not considered this
+not okay I had not considered this
+uh is there anything I can do about this
+uh is there anything I can do about this
+for now fix
+this none of these are going to be a
+this none of these are going to be a
+multiple of
+I could do slightly larger or I could do
+I could do slightly larger or I could do
+substantially
+smaller like this.
+smaller like this.
+2560. What if I did that?
+That's actually
+perfect for now. We just
+perfect for now. We just
+do. So,
+it's we want
+2560Ns. No, we
+want times two. So, we actually want
+want times two. So, we actually want
+5120.
+by 8 is
+by 8 is
+640. So we want 128
+m. I think this
+works. Oh, and then we actually hang on.
+works. Oh, and then we actually hang on.
+* 5 agents per n* 8 is
+this. So now this is going to be
+780. This is like
+We're getting some weird numbers here,
+We're getting some weird numbers here,
+but I just want to see if I can get
+but I just want to see if I can get
+something to
+We're going to have to figure out the
+We're going to have to figure out the
+like nonp power of 2 M's thing with the
+like nonp power of 2 M's thing with the
+new CUDA kernels, but for now this
+new CUDA kernels, but for now this
+should be
+reasonable. Remove this C.
+Did I not do this right?
+128 *
+5 should be 128 * 5 * 4 2560 Next day.
+I just want to see this end going
+I just want to see this end going
+fast like this one is up is actually a
+fast like this one is up is actually a
+pretty
+pretty
+small setup.
+small setup.
+Wait. Threads per
+Wait. Threads per
+block two
+block two
+blocks num steps plus threads per block
+blocks num steps plus threads per block
+minus
+one. How did it get two
+blocks? That's definitely going to fail.
+But
+why 320 steps?
+Yes. I'm quite confused.
+There. There's a second one of these,
+There. There's a second one of these,
+right? Oh, it's it's right
+here. So, why why is this batch
+weird? 320 by 64.
+Oh, that's not a multiple of of 128.
+Um, yeah, because the mini batch needs
+Um, yeah, because the mini batch needs
+to be Dang
+to be Dang
+it. And that's
+annoying. I could do the BPD Horizon on
+annoying. I could do the BPD Horizon on
+a multiple of two instead.
+80. I think if I do
+80 maybe this works. This is all just
+80 maybe this works. This is all just
+because CUDA kernels are not
+because CUDA kernels are not
+currently uh are kind of kind are kind
+currently uh are kind of kind are kind
+of fiddly at the moment. Total agents uh
+of fiddly at the moment. Total agents uh
+but then the batch size gets messed up.
+128 m, eight copies, five agents
+128 m, eight copies, five agents
+each, 80 steps.
+Okay, this this looks like these are all
+Okay, this this looks like these are all
+nice
+numbers. Perfect. One block and now that
+works. So, um this is not going to be
+works. So, um this is not going to be
+optimal by any
+means, but I want to see if this
+means, but I want to see if this
+actually does. We
+A network this size should be able to be
+A network this size should be able to be
+trained quite
+trained quite
+fast. Definitely over a million.
+I don't think we've ever gotten this one
+I don't think we've ever gotten this one
+to be fast.
+45% M
+time. H the M should not be that
+slow. I will have to go look at that.
+slow. I will have to go look at that.
+But and bottleneck otherwise we should
+But and bottleneck otherwise we should
+be able to get something decent at
+least. This one will return stats. Just
+least. This one will return stats. Just
+it takes a while. The games are really
+it takes a while. The games are really
+long. There you
+long. There you
+go. So I'll be happy with this for now.
+go. So I'll be happy with this for now.
+If
+If
+um if it does train
+reasonably. It just won a game. There we
+reasonably. It just won a game. There we
+go. Now it's winning games.
+This is win rate versus scripted
+opponents. And there you go. That's one
+opponents. And there you go. That's one
+win rate.
+We need to get some better opponents for
+We need to get some better opponents for
+this because this is a really cool
+this because this is a really cool
+end. All right, this works. Trains
+end. All right, this works. Trains
+500k
+500k
+is and uh M needs to be optimized, but
+is and uh M needs to be optimized, but
+this is all set. So, here's what I'm
+this is all set. So, here's what I'm
+going to do. I'm going to go get some
+going to do. I'm going to go get some
+exercise, get some food. I'm going to
+exercise, get some food. I'm going to
+come back in the afternoon, continue
+come back in the afternoon, continue
+finishing all of these M's up. Uh, have
+finishing all of these M's up. Uh, have
+nice, clean, fast
+nice, clean, fast
+configs. I will be back on stream for
+configs. I will be back on stream for
+that. And then tomorrow, I'm traveling
+that. And then tomorrow, I'm traveling
+to the new facility. So, I've got to
+to the new facility. So, I've got to
+take all my stuff over there. Um, we're
+take all my stuff over there. Um, we're
+waiting on delivery of all sorts of new
+waiting on delivery of all sorts of new
+setup for the stream. And uh yeah, once
+setup for the stream. And uh yeah, once
+that is set up, hopefully starting next
+that is set up, hopefully starting next
+week, I'll be live from there, assuming
+week, I'll be live from there, assuming
+that everything's good with the internet
+that everything's good with the internet
+and electrical and all that. So for
+and electrical and all that. So for
+folks watching, thanks for tuning in. If
+folks watching, thanks for tuning in. If
+you're interested in all this stuff,
+you're interested in all this stuff,
+it's all puffer.ai. It's all open
+it's all puffer.ai. It's all open
+source. You can help me out for free by
+source. You can help me out for free by
+starting the repo on GitHub. If you'd
+starting the repo on GitHub. If you'd
+like to get involved with dev, whether
+like to get involved with dev, whether
+you have an RL background or not, go in
+you have an RL background or not, go in
+the Discord.
+the Discord.
+Most of our top contributors came in
+Most of our top contributors came in
+with zero RL
+with zero RL
+knowledge. Other than that, you can
+knowledge. Other than that, you can
+follow me on X for more occasional RL
+follow me on X for more occasional RL
+content. I post some articles there.
+
+Kind: captions
+Language: en
+Hello. Okay, we're live and we are no
+Hello. Okay, we're live and we are no
+longer dropping frames. So, I think we
+longer dropping frames. So, I think we
+just were on a bad reream
+just were on a bad reream
+server.
+Hi. I've been trying to figure that out.
+Hi. I've been trying to figure that out.
+It's been doing that every so often.
+It's been doing that every so often.
+Hopefully, now stream should be nice and
+Hopefully, now stream should be nice and
+stable because everything else on my end
+stable because everything else on my end
+is uh is aok. Okay, so we did this
+is uh is aok. Okay, so we did this
+yesterday. This was pretty
+yesterday. This was pretty
+cool. 80 mill steps of breakout at 2.7
+cool. 80 mill steps of breakout at 2.7
+mills per second, 29 seconds
+mills per second, 29 seconds
+solve. And this is 80 million frames
+solve. And this is 80 million frames
+with no frame skip. So, um I mean
+with no frame skip. So, um I mean
+arguably this isn't even really sample
+arguably this isn't even really sample
+inefficient at all either.
+So, here's the plan for
+today. It's currently
+today. It's currently
+8:34. We're going to put in about a
+8:34. We're going to put in about a
+2hour morning session here, maybe two
+2hour morning session here, maybe two
+and a half. We'll
+and a half. We'll
+see. And uh the main thing I want to do
+see. And uh the main thing I want to do
+is just see with all the improvements
+is just see with all the improvements
+we've made to buffer whether we can get
+we've made to buffer whether we can get
+away with way faster training settings.
+So the idea here is that there are
+So the idea here is that there are
+settings you can apply that are faster
+settings you can apply that are faster
+during wall clock
+during wall clock
+time but they may or may not train
+time but they may or may not train
+stably that depends on your
+stably that depends on your
+algorithm. So now with
+algorithm. So now with
+Muon and with advantage filtering and
+Muon and with advantage filtering and
+puffer advantage and all the things that
+puffer advantage and all the things that
+we've done over the last
+we've done over the last
+month, can
+month, can
+we actually bring Puffer to the point
+we actually bring Puffer to the point
+where we are no longer training at a
+where we are no longer training at a
+million steps per second. We're training
+million steps per second. We're training
+at multiple millions of steps per
+second. There is one thing I want to
+second. There is one thing I want to
+test just for hahas.
+before we really start on this. And
+um yeah, let's let's do one other thing
+um yeah, let's let's do one other thing
+just for a here.
+I think we might have to change the
+I think we might have to change the
+optimal uh the learning rate for this.
+optimal uh the learning rate for this.
+So, I'll do like two
+So, I'll do like two
+experiments. Uh
+experiments. Uh
+oh. Ah, right. I uh I forgot I broke
+oh. Ah, right. I uh I forgot I broke
+non-recurrent policies. All
+non-recurrent policies. All
+right, we'll do that later then. Let me
+right, we'll do that later then. Let me
+go grab the original breakout params.
+go grab the original breakout params.
+And I think we're going to actually be
+And I think we're going to actually be
+able to set this up as a proper
+able to set this up as a proper
+experiment like uh with like actual
+experiment like uh with like actual
+clean comparisons before and after with
+clean comparisons before and after with
+all the new organizational stuff I set
+up. Do start the repo. Helps us out a
+up. Do start the repo. Helps us out a
+lot.
+Okay, so before we had all these
+parameters, we're just going to take
+these and we are going to use these on
+breakout for the
+breakout for the
+before. And I'm going to set this up as
+before. And I'm going to set this up as
+Neptune. And this is going to be
+um slow
+baseline. We're going to do this for all
+baseline. We're going to do this for all
+the amps.
+We grab our Neptune. This is the neural
+We grab our Neptune. This is the neural
+MMO run from last night as well. This is
+MMO run from last night as well. This is
+30 billion and we're at
+4.7. Actually, let me check real quick
+4.7. Actually, let me check real quick
+if that's any good.
+Is this the new one here?
+Yeah, it is this one here. So, this one
+Yeah, it is this one here. So, this one
+is perfectly on par so far, it looks
+is perfectly on par so far, it looks
+like with the other
+like with the other
+ones. And uh hopefully it stays that
+ones. And uh hopefully it stays that
+way. Let's get our
+way. Let's get our
+key. I have a lot of things I want to
+key. I have a lot of things I want to
+try on neural MMO.
+in the next several
+days. One of the things I've never been
+days. One of the things I've never been
+great at as a researcher is scheduling
+great at as a researcher is scheduling
+experiments so that I always have
+experiments so that I always have
+something, you know, the next idea
+something, you know, the next idea
+running. It's been very difficult to
+running. It's been very difficult to
+like
+align like my thinking about a specific
+align like my thinking about a specific
+topic to the amount of time jobs will
+take.
+take.
+But we're still making good progress on
+But we're still making good progress on
+that
+one. Okay. So, why why is breakup slow?
+one. Okay. So, why why is breakup slow?
+That makes no sense,
+That makes no sense,
+right? Upper
+breakout.
+Um, is something wrong with this
+Um, is something wrong with this
+config? I am
+confused. Just take Neptune off.
+Yeah. So this is fast,
+right? 32k mini
+batch 4096
+ms. Do you see anything that would mess
+ms. Do you see anything that would mess
+up the speed?
+Now, this was fast before as well. I
+Now, this was fast before as well. I
+This is going to be some weird compile
+bug. How do we regenerate
+bug. How do we regenerate
+kernel? How do we regenerate the kernel?
+kernel? How do we regenerate the kernel?
+I'm trying to think.
+actually here. Let's try this.
+Make sure there's nothing else I could
+Make sure there's nothing else I could
+possibly have messed up
+here. I don't see anything.
+The fact that it's
+The fact that it's
+63. Yeah, it's all in training as
+63. Yeah, it's all in training as
+well. Would suggest the optimizer screwy
+well. Would suggest the optimizer screwy
+somehow,
+right? Where is
+definitely has an LSTM in
+there. So, uh, that's
+there. So, uh, that's
+bizarre. Oh, update epoch 64. How did
+bizarre. Oh, update epoch 64. How did
+this
+happen? Yeah, how did this happen?
+happen? Yeah, how did this happen?
+That's really
+weird. Well,
+whatever. Let
+me At least it's not something crazy
+me At least it's not something crazy
+cursed.
+Okay. So, we'll get our low bas
+It's a little more sample efficient on
+It's a little more sample efficient on
+the original.
+We'll do fast
+baseline. I will get an additional tab.
+So, not a perfect
+So, not a perfect
+solve in
+solve in
+uh Oh,
+uh Oh,
+no. I mean, that's pretty darn
+no. I mean, that's pretty darn
+close. This is 60. Was this? No. 80 mil.
+close. This is 60. Was this? No. 80 mil.
+And then here this one
+is 80 mil. So now see this one is
+is 80 mil. So now see this one is
+flatlined up here way
+before. So hang on let
+me be
+higher or should it just be more
+steps? We could add a very
+small. We could go up to 100
+small. We could go up to 100
+mil and then this should still be way
+mil and then this should still be way
+faster, right?
+Or do we think
+not? So we get the 29
+not? So we get the 29
+seconds. These are both about 29
+seconds. These are both about 29
+seconds.
+That's
+interesting. So then I mean this is not
+interesting. So then I mean this is not
+properly tuned
+properly tuned
+though. Can we get this one to
+be almost as sample efficient?
+Right. Let's see.
+So default 0.025.
+So we would like to do
+So we would like to do
+0 0.1 which is this crazy high learning
+rate since we 4xed the mini batch
+size. We double the number of
+size. We double the number of
+environments as
+environments as
+well. I believe we did.
+Okay. So, this is not
+stable. This is not
+stable. Should it be linear
+stable. Should it be linear
+increase or should it be square
+increase or should it be square
+root? I think it is linear.
+increase. So
+increase. So
+here, so it's slightly less sample
+here, so it's slightly less sample
+efficient it seems because we can't
+efficient it seems because we can't
+quite support the uh linear increase to
+quite support the uh linear increase to
+learning
+learning
+rate. Not quite.
+Do it this way.
+Oh, now this is failing
+Oh, now this is failing
+too. Okay, something is screwy here.
+too. Okay, something is screwy here.
+Didn't I
+Didn't I
+just I had this at 075.
+Is there a does this need like a warm up
+Is there a does this need like a warm up
+or
+something? So, you can also do this.
+something? So, you can also do this.
+This would be
+safer, but I think that this one might
+safer, but I think that this one might
+learn too slowly.
+And I'd really like to push this if I
+And I'd really like to push this if I
+can. If we can get the mini batch to be
+can. If we can get the mini batch to be
+if st training is like stable at this
+if st training is like stable at this
+mini batch size, everything just gets
+faster.
+faster.
+Oh, there we are.
+So, we should
+So, we should
+probably do a couple runs of this since
+probably do a couple runs of this since
+there's going to be some variance,
+there's going to be some variance,
+right?
+But just doubling the learning rate
+But just doubling the learning rate
+seems to
+seems to
+do most of what you'd want.
+Yeah, there is a little bit of variance
+Yeah, there is a little bit of variance
+though as to like when it
+solves because this is now on par with
+solves because this is now on par with
+the previous learning rate curve.
+I would still
+expect I would still kind of want this
+expect I would still kind of want this
+to be default
+to be default
+though. If you do if we don't push the
+though. If you do if we don't push the
+learning rate too high, the larger mini
+learning rate too high, the larger mini
+batch should be stable and it should
+batch should be stable and it should
+help more on complex ends.
+the data gets less off policy. There are
+the data gets less off policy. There are
+like a lot of benefits to this. Yeah. So
+like a lot of benefits to this. Yeah. So
+it's somewhere in this
+window. Somewhere in this
+window. Somewhere in this
+window it should pull solve if I just
+window it should pull solve if I just
+give it 100 mil,
+right? Like 25 mil frames.
+This dip in the curve also right here.
+This dip in the curve also right here.
+This is kind of a cool artifact in RL.
+This is kind of a cool artifact in RL.
+This is where it clears the first screen
+This is where it clears the first screen
+of bricks. So like it has to learn to
+of bricks. So like it has to learn to
+hit the last brick reliably because it's
+hit the last brick reliably because it's
+kind of hard to hit.
+So like you actually get learn curves in
+So like you actually get learn curves in
+RL that sometimes reflect specific
+RL that sometimes reflect specific
+difficulties in the
+difficulties in the
+environment. Okay. So there we go. This
+environment. Okay. So there we go. This
+one is that's a full salt. That's
+good. 32
+good. 32
+seconds. I don't really think we need
+seconds. I don't really think we need
+that. I think we can just leave it on
+that. I think we can just leave it on
+this.
+this.
+We can always double them for the uh the
+We can always double them for the uh the
+demos, right? They can just train twice
+demos, right? They can just train twice
+as long for the
+as long for the
+demos. This is like still pretty
+demos. This is like still pretty
+good. Uh we'll just
+good. Uh we'll just
+use whatever the first one
+was. This one's
+old
+old
+here. We'll we'll be fair. Let's just
+here. We'll we'll be fair. Let's just
+remove all these
+That
+There we are. So, we've got our 29
+There we are. So, we've got our 29
+second 26 second now 3 mil training uh 3
+second 26 second now 3 mil training uh 3
+mil stat per second run. And we've got
+mil stat per second run. And we've got
+this run which is actually fairly
+close but a little slower.
+little slower
+little slower
+overall and then the training speed is
+overall and then the training speed is
+like
+like
+half. Okay. So, next we're going to
+do we're going to see if we can do the
+do we're going to see if we can do the
+same thing on
+palm. I'm just going to go through all
+palm. I'm just going to go through all
+the ends and See if we can get
+the ends and See if we can get
+uh ludicrously fast training with the
+uh ludicrously fast training with the
+new
+infra. So poke should be comparable
+infra. So poke should be comparable
+maybe slower I think slower actually
+maybe slower I think slower actually
+training of the number of ends.
+This one might be a little difficult,
+This one might be a little difficult,
+come to think of it, because it's like
+come to think of it, because it's like
+only 20 mil total steps. So, this might
+only 20 mil total steps. So, this might
+be tough to
+match. So, what I was going to do
+match. So, what I was going to do
+first, if I
+first, if I
+just I'm pretty sure this makes it
+just I'm pretty sure this makes it
+worse. We'll
+see. It'll make it
+see. It'll make it
+fast. So, yeah, immediately this is now
+fast. So, yeah, immediately this is now
+three times the
+speed. And I haven't even fixed training
+speed. And I haven't even fixed training
+yet.
+Yeah, but we only get a score of
+17. Let's try if I do
+this. What happens when I do this? This
+this. What happens when I do this? This
+should go over 3 million.
+4 million step per second training.
+4 million step per second training.
+Okay,
+there. Yeah, but see it doesn't it
+there. Yeah, but see it doesn't it
+doesn't like train.
+Well, let's see if this one happens to
+Well, let's see if this one happens to
+be stable with higher
+be stable with higher
+LR. I'm just curious.
+This is not even with a trivial model is
+This is not even with a trivial model is
+the cool thing. Like this could be even
+the cool thing. Like this could be even
+substantially faster with um without the
+substantially faster with um without the
+LSTM on it.
+LSTM on it.
+So this is actually
+So this is actually
+the training speed with like a
+the training speed with like a
+reasonable
+reasonable
+model little MLP into LSTM, not just
+model little MLP into LSTM, not just
+like a 2A or MLP or something
+dumb. We might have to change the eval
+dumb. We might have to change the eval
+intervals though. This takes forever to
+intervals though. This takes forever to
+evaluate. I don't know why it's like
+evaluate. I don't know why it's like
+getting this many data points.
+Uh, okay. So, it actually,
+Uh, okay. So, it actually,
+interestingly, it didn't do really any
+interestingly, it didn't do really any
+better, but it also didn't do worse. If
+better, but it also didn't do worse. If
+I just up this to
+40, it'll still be faster.
+Where's
+info? Um,
+info? Um,
+why? Wait, why is there no info coming
+why? Wait, why is there no info coming
+back from
+back from
+this? Oh, this is the wrong one.
+tick percent log
+interval. So this is 128 *
+interval. So this is 128 *
+4,000
+80. It's just not getting logs back.
+That should be getting logs back
+That should be getting logs back
+though, I guess. Like the games just
+though, I guess. Like the games just
+take a long time to
+finish.
+finish.
+Evaluated 100 million steps.
+Evaluated 100 million steps.
+Okay, we're gonna have to mess with the
+Okay, we're gonna have to mess with the
+eval stuff
+today. So, like what's going on with
+today. So, like what's going on with
+this that it's
+not something screwing
+I can't see anywhere where you'd be
+I can't see anywhere where you'd be
+dropping
+logs, right? Where you'd be throwing
+logs, right? Where you'd be throwing
+away
+logs. Unless I'm doing it by mistake in
+logs. Unless I'm doing it by mistake in
+clean puffer.
+Yeah. So you wait
+for this should be totally
+fine. Let's see if it's just a sample
+fine. Let's see if it's just a sample
+thing.
+thing.
+Oops, wrong
+one. Like, does this thing eventually
+log? I 8x to the number of environments.
+log? I 8x to the number of environments.
+I should still be getting logs. There we
+I should still be getting logs. There we
+are. Oh, and then it get consistent. So,
+are. Oh, and then it get consistent. So,
+it just it doesn't even finish the uh
+it just it doesn't even finish the uh
+the episode, I guess. What
+happened? Okay.
+274 is the episode
+length and it's not training
+length and it's not training
+stably or
+something. No, it
+something. No, it
+is. Oh, you know what? This
+is. Oh, you know what? This
+is 74
+times I mean there's only 2 million.
+times I mean there's only 2 million.
+Hang on. There are 8192 total
+Hang on. There are 8192 total
+ms and it's only 274 episode length. No,
+ms and it's only 274 episode length. No,
+but the 274 episode length can't be
+but the 274 episode length can't be
+right. That's really short for
+right. That's really short for
+fall and it jumps up to uh to 20 score.
+fall and it jumps up to uh to 20 score.
+So basically, it's like I think what's
+So basically, it's like I think what's
+happening is the games are really long.
+happening is the games are really long.
+So, you don't actually get to see the
+So, you don't actually get to see the
+good policy during training because it's
+good policy during training because it's
+literally just playing one game, but
+literally just playing one game, but
+then it just knows how to play the game
+perfectly, which would then actually
+perfectly, which would then actually
+imply that you need to reset the
+imply that you need to reset the
+environment.
+Yeah. So, that's a perfect
+solve.
+solve.
+Okay. But the logging is just not going
+Okay. But the logging is just not going
+to
+to
+be great for pawn because the games are
+be great for pawn because the games are
+really long. Okay. But the eval at the
+really long. Okay. But the eval at the
+end should be accurate.
+end should be accurate.
+Maybe might have to reset the ends.
+Hey, can you reset the end after
+Hey, can you reset the end after
+it's I think you can
+make and
+then when does it get called and
+then when does it get called and
+reset
+reset
+it I'm just concerned here basically the
+it I'm just concerned here basically the
+thing I'm worried about is if the
+thing I'm worried about is if the
+episodes are really long it might like
+episodes are really long it might like
+during evaluation not run new games it
+during evaluation not run new games it
+might just be finishing all the games
+might just be finishing all the games
+from stale policies. So I think that you
+from stale policies. So I think that you
+got to have a reset in
+there. Okay. So this is now
+and presumably is not stable if I do
+and presumably is not stable if I do
+this.
+You know, the other thing I'm realizing
+You know, the other thing I'm realizing
+is we could
+is we could
+retune. We could not go crazy with this.
+retune. We could not go crazy with this.
+Yeah. So, this isn't
+Yeah. So, this isn't
+stable. Um, but if I do like 80, it's
+stable. Um, but if I do like 80, it's
+probably good. So, what we could do is
+probably good. So, what we could do is
+we could retune breakout,
+we could retune breakout,
+right? Or the high batch size. That's
+right? Or the high batch size. That's
+probably going to give us some different
+probably going to give us some different
+optimal hypers.
+And then we could apply those across
+everything. They're literally 30 second
+everything. They're literally 30 second
+runs. We could probably do that live,
+runs. We could probably do that live,
+couldn't
+couldn't
+we? Why don't I just set that up right
+now? Okay. So, yeah, this solves an 80.
+So Adam epsilon Adam
+beta I believe 64 is max BPD horizon
+right 8192
+Yes. 64 is going to be
+max gradient norm value
+max gradient norm value
+function. We don't really need to tune
+function. We don't really need to tune
+update epochs.
+Right. Tuning in. Did you do anything
+Right. Tuning in. Did you do anything
+with impulse? Not yet, Captain. And what
+with impulse? Not yet, Captain. And what
+I'm currently trying to do is I'm trying
+I'm currently trying to do is I'm trying
+to see if I can get stable large mini
+to see if I can get stable large mini
+batch training, which should help all of
+batch training, which should help all of
+us on
+everything. Okay, so that's now just
+everything. Okay, so that's now just
+tuning like the standard stuff.
+And
+well, I forget anything
+else. Werger. It's um they're faster to
+else. Werger. It's um they're faster to
+train. Do you see this 4 million step
+train. Do you see this 4 million step
+per second pong?
+That's with a real policy as well. We
+That's with a real policy as well. We
+can make it substantially faster than
+can make it substantially faster than
+that with um like a silly two-layer MLP.
+Okay. So unless Colonel
+Okay. So unless Colonel
+Colonel Jen messes us
+Colonel Jen messes us
+up. We should, this is the crazy thing,
+up. We should, this is the crazy thing,
+we should literally be able to do a
+we should literally be able to do a
+breakout sweep
+live. Why did it just train for 50 mil
+steps? Oh, cuz the sweep. Hang on. Yeah,
+steps? Oh, cuz the sweep. Hang on. Yeah,
+we don't want that.
+we don't want that.
+mil. We should literally be able to do a
+mil. We should literally be able to do a
+hyper pram sweep
+hyper pram sweep
+live because the runs are 30
+live because the runs are 30
+seconds. Eval might be a little
+seconds. Eval might be a little
+annoying. We'll
+annoying. We'll
+see. But
+see. But
+um yeah, 30 second breakout runs is kind
+um yeah, 30 second breakout runs is kind
+of nuts.
+I'd be interested to see how larger mini
+I'd be interested to see how larger mini
+batches do impulse wars. I did three or
+batches do impulse wars. I did three or
+so
+so
+sweeps. Protein never seemed to want to
+sweeps. Protein never seemed to want to
+explore
+explore
+it. Didn't find good runs. Yeah. So,
+it. Didn't find good runs. Yeah. So,
+previously, right, here's the thing with
+previously, right, here's the thing with
+larger mini batch size. You get fewer
+larger mini batch size. You get fewer
+gradient updates. So you need to be able
+gradient updates. So you need to be able
+to
+to
+actually make large stable updates for
+actually make large stable updates for
+it to be useful. And what it seems to
+it to be useful. And what it seems to
+me is that because of all the new
+me is that because of all the new
+algorithm improvements we've made, it
+algorithm improvements we've made, it
+seems substantially easier to do that
+seems substantially easier to do that
+than it was before.
+Muan and such are more sample. It's not
+Muan and such are more sample. It's not
+necessarily that it's more sample
+necessarily that it's more sample
+efficient, it's that it's more
+efficient, it's that it's more
+stable. So it means that like I can push
+stable. So it means that like I can push
+the learning rate higher. So I can make
+the learning rate higher. So I can make
+larger gradient updates than I could
+larger gradient updates than I could
+with Adam.
+with Adam.
+That's what it seems.
+It's weird how like the first few
+It's weird how like the first few
+experiments really aren't finding very
+experiments really aren't finding very
+much.
+Huh. Uh it's still training past the
+Huh. Uh it's still training past the
+allotted time step budget actually,
+allotted time step budget actually,
+isn't it?
+Uh, I'm not sweeping total time steps.
+Uh, I'm not sweeping total time steps.
+At least I shouldn't be. What the heck
+At least I shouldn't be. What the heck
+is it
+doing? I Yeah.
+The
+hell it's just doing what it wants. I
+hell it's just doing what it wants. I
+guess that seems like a
+bug. You know what? I don't know why
+bug. You know what? I don't know why
+it's doing that, but we'll let it we'll
+it's doing that, but we'll let it we'll
+let it cook a bit. We'll see what it
+let it cook a bit. We'll see what it
+figures out because it actually seems
+figures out because it actually seems
+like it got a lot of information out of
+like it got a lot of information out of
+that run, right? Cuz now all of a sudden
+that run, right? Cuz now all of a sudden
+it's got like a
+it's got like a
+reasonable like it got more reasonable
+reasonable like it got more reasonable
+perf much much faster.
+It should be reporting 10 10 data points
+It should be reporting 10 10 data points
+for each of these runs as well. So it
+for each of these runs as well. So it
+actually should learn from the whole
+curve. Just let Muan do its thing.
+curve. Just let Muan do its thing.
+protein do its thing. I do want to
+protein do its thing. I do want to
+figure out what the heck it is that's
+figure out what the heck it is that's
+causing that bug in the
+meantime. Oh, this is is this here?
+Oh yeah, this is the
+Oh yeah, this is the
+bug. It just keeps going up and up in
+bug. It just keeps going up and up in
+total time
+total time
+steps. Yeah, we got to fix that.
+There's the
+bug when I increase the mini
+bath. Yeah, that's not
+bath. Yeah, that's not
+um that's not a good thing to do really.
+So there is like a log failure
+thing. I got to come up with a better
+thing. I got to come up with a better
+way of doing this
+though. Well, now at least now we know
+though. Well, now at least now we know
+why that was
+happening. It was just going to keep
+happening. It was just going to keep
+running longer and longer experiments.
+Uh, yes, we could technically do that,
+Uh, yes, we could technically do that,
+but I don't know if I want
+but I don't know if I want
+to. The other option would just be to
+to. The other option would just be to
+like correctly constrain the search
+like correctly constrain the search
+space.
+You know, I could do something like you
+You know, I could do something like you
+add constraints like X frame not bigger
+add constraints like X frame not bigger
+than Y frame or
+whatever. Okay, this seems like it's
+whatever. Okay, this seems like it's
+already way better.
+Yeah, this is already way better.
+Hyper pram tuning in real
+time. We also might want to do runs and
+time. We also might want to do runs and
+child processes.
+I generally don't like kicking stuff
+I generally don't like kicking stuff
+into subprocesses when I can avoid
+into subprocesses when I can avoid
+it.
+it.
+[Music]
+[Music]
+Um because you end up eating error
+Um because you end up eating error
+messages and stuff.
+I would think that the better solution
+I would think that the better solution
+here would be to just constrain the surf
+here would be to just constrain the surf
+space more
+space more
+correctly and like we could add more
+correctly and like we could add more
+stuff into protein to help with
+that. Like there not that many like you
+that. Like there not that many like you
+can't out of memory yourself by
+can't out of memory yourself by
+increasing the learning rate or
+increasing the learning rate or
+something. It's literally just like
+something. It's literally just like
+batch size, mini batch size.
+batch size, mini batch size.
+Maybe BPD horizon.
+Yeah, it's a little tricky to like
+Yeah, it's a little tricky to like
+detect if max batch size can
+detect if max batch size can
+OM.
+Um, I guess now with like var variable
+Um, I guess now with like var variable
+net sizes, you can also do that, which
+net sizes, you can also do that, which
+is a little
+is a little
+janky. I want to think about it. I don't
+janky. I want to think about it. I don't
+want to just like throw everything into
+want to just like throw everything into
+a subprocess by default. That seems like
+a subprocess by default. That seems like
+a bad hack cuz that like that literally
+a bad hack cuz that like that literally
+makes all of the errors more annoying
+makes all of the errors more annoying
+now because now you get like stuff
+now because now you get like stuff
+obscured by being in a subprocess eating
+obscured by being in a subprocess eating
+traces and whatever.
+Can we just bring up the fact real quick
+Can we just bring up the fact real quick
+that um while we've been having this
+that um while we've been having this
+conversation, we've done nearly a
+conversation, we've done nearly a
+billion steps worth of sweep
+experiments. You can just
+experiments. You can just
+set standard out and air to parents and
+set standard out and air to parents and
+that's not really the issue.
+you do screw yourself from being able to
+you do screw yourself from being able to
+set a break point on error,
+set a break point on error,
+right? Like right now, this is actually
+right? Like right now, this is actually
+one of the things I was really proud
+one of the things I was really proud
+about with the new sweep system is
+about with the new sweep system is
+because we don't have womb's thing that
+because we don't have womb's thing that
+like throws it into a thread or
+like throws it into a thread or
+whatever, you can like set conditional
+whatever, you can like set conditional
+break points or whatever in a sweep and
+break points or whatever in a sweep and
+you will hit them and you can just debug
+3 million steps per second training is
+3 million steps per second training is
+about 10 billion steps per
+hour. 10 billion steps per hour is wild.
+This is on the 4090 as well, not even
+This is on the 4090 as well, not even
+the 5090. This is just on my local
+the 5090. This is just on my local
+machine.
+I
+mean, I agree with the problem that you
+mean, I agree with the problem that you
+brought up of
+brought up of
+like sweep should be stable and not just
+like sweep should be stable and not just
+crash due to OM. I don't necessarily
+crash due to OM. I don't necessarily
+like these proposed solutions.
+I think you would get like 80% of the
+I think you would get like 80% of the
+way there.
+way there.
+Um, so the place where it's most likely
+Um, so the place where it's most likely
+going to OM is on
+going to OM is on
+the it's the train step, right? like the
+the it's the train step, right? like the
+backwards like you have to do forwards
+backwards like you have to do forwards
+backwards on a mini batch of like 32K or
+backwards on a mini batch of like 32K or
+whatever. I could probably just
+whatever. I could probably just
+dynamically adjust gradient accumulation
+dynamically adjust gradient accumulation
+based on your network size and get like
+based on your network size and get like
+90% of the way there, Captain.
+So there's um when you do the training
+So there's um when you do the training
+step, right, there's a maximum mini
+step, right, there's a maximum mini
+batch size. That's the most memory
+batch size. That's the most memory
+intensive thing in uh in puffer like by
+intensive thing in uh in puffer like by
+a mile because that's you have to have
+a mile because that's you have to have
+you're doing a forward pass over 32k
+you're doing a forward pass over 32k
+samples or whatever say if you have a
+samples or whatever say if you have a
+big mini batch and you have to keep
+big mini batch and you have to keep
+around all the activations to do the
+around all the activations to do the
+backwards pass.
+backwards pass.
+um plus like all the optimizer state
+um plus like all the optimizer state
+stuff.
+stuff.
+So, but I have gradient accumulation
+So, but I have gradient accumulation
+where you can do you can split that mini
+where you can do you can split that mini
+batch into a smaller number of mini
+batch into a smaller number of mini
+batches and have the result be identical
+batches and have the result be identical
+and it's actually hardware efficient to
+and it's actually hardware efficient to
+do that with larger networks as well. I
+do that with larger networks as well. I
+can probably just set that automatically
+can probably just set that automatically
+and that'll catch like 90% of
+OM. Hello
+Spencer. I have been sent a link.
+Interesting. This one looks pretty
+Interesting. This one looks pretty
+good. These curves are a little
+wacky, but
+interesting. Something like that. Yeah.
+I wouldn't do it based on VRAM. I would
+I wouldn't do it based on VRAM. I would
+just do like a rough thing based on
+just do like a rough thing based on
+network
+network
+size and catch most of them.
+orange one's not
+orange one's not
+bad. This is only 250 mil steps as
+well. How are we doing on
+well. How are we doing on
+our sweep
+our sweep
+here? Oh, we're getting
+here? Oh, we're getting
+somewhere. We're getting somewhere.
+I kind of expected this to find good
+I kind of expected this to find good
+hypers a lot quicker considering that
+hypers a lot quicker considering that
+the defaults were
+the defaults were
+uh were so good. Let me make sure I
+uh were so good. Let me make sure I
+didn't mess anything up in um in the
+didn't mess anything up in um in the
+configs for this.
+mess something
+up. I don't think
+so. Probably just takes a while to sweep
+so. Probably just takes a while to sweep
+over all the
+over all the
+stuff. A lot of
+hyper. We are not even sweeping any of
+hyper. We are not even sweeping any of
+these priority replay things yet either.
+That should be able to make it a lot
+That should be able to make it a lot
+better.
+Maybe let's see what it's doing
+Maybe let's see what it's doing
+on sample wise.
+Pretty high learning
+rates. I should probably have this
+I don't think there is actually a way
+I don't think there is actually a way
+for me to like log the parto front
+correctly value
+correctly value
+[Music]
+[Music]
+coefficient form.
+and we have a couple runs in here right
+and we have a couple runs in here right
+now that are
+decent. Yeah, there are a couple decent
+decent. Yeah, there are a couple decent
+runs
+runs
+here. Wait, if these are
+here. Wait, if these are
+at Were the Did these just get run?
+at Were the Did these just get run?
+We didn't have these a second ago, did
+We didn't have these a second ago, did
+we? Oh, no, we
+did. Yeah, we
+did. Perfect is just a normalized
+did. Perfect is just a normalized
+four. It's the same as if I do this same
+four. It's the same as if I do this same
+exact curve changes the axis to be
+exact curve changes the axis to be
+whatever the M specific metric scale
+whatever the M specific metric scale
+is. I wanted all the M's to have a PF so
+is. I wanted all the M's to have a PF so
+that like we can benchmark all the
+that like we can benchmark all the
+different M's and put them on the same
+different M's and put them on the same
+plot and get like an average or
+plot and get like an average or
+whatever.
+So, I added that to
+everything. For Impulse Wars, it would
+everything. For Impulse Wars, it would
+just be like the win rate or whatever.
+just be like the win rate or whatever.
+You would just log a one for a win and a
+You would just log a one for a win and a
+zero for a loss.
+Yeah, that's what you would do or perf.
+Yeah, I can't call it score because some
+Yeah, I can't call it score because some
+environments actually like have a
+environments actually like have a
+score, right? So that needs to be called
+score, right? So that needs to be called
+score. So I made this just like a
+score. So I made this just like a
+normalized
+normalized
+thing. And you can't even call it like
+thing. And you can't even call it like
+normalized score because like Enduro has
+normalized score because like Enduro has
+a score that you could normalize, but
+a score that you could normalize, but
+that's not actually the metric that you
+that's not actually the metric that you
+would like to log.
+would like to log.
+So, it's a little silly. Okay.
+So that was a probably too high learning
+So that was a probably too high learning
+rate in crashing.
+I'm trying to think what um what protein
+I'm trying to think what um what protein
+actually does when you have the same
+actually does when you have the same
+cost
+everywhere. It should still work. I got
+everywhere. It should still work. I got
+to like there's some cases to analyze.
+pretty
+good. Oh, I thought I had
+good. Oh, I thought I had
+uh Yeah, if you zoom out, we have six
+uh Yeah, if you zoom out, we have six
+here as the best,
+here as the best,
+right? Close to six.
+What is going on with our breakout
+What is going on with our breakout
+sweep? Why is this thing having such a
+sweep? Why is this thing having such a
+hard time
+hard time
+finding good
+finding good
+parameters? Like some of these runs are
+parameters? Like some of these runs are
+pretty reasonable.
+Okay, we are making some progress. We
+Okay, we are making some progress. We
+are starting to get some better
+runs. My hope here was that it would be
+runs. My hope here was that it would be
+pretty easy to like reune this thing.
+Do we have any predictions here?
+Do we have any predictions here?
+Like what should change? Maybe like
+Like what should change? Maybe like
+gradient clipping and stuff should
+change. We actually haven't swept that
+change. We actually haven't swept that
+lately at all
+lately at all
+either. I kind of have to do that again.
+So, we'll give this uh we'll give this a
+So, we'll give this uh we'll give this a
+few more runs to see if it finds
+few more runs to see if it finds
+anything because these are starting to
+anything because these are starting to
+get better. Um, and then I think what
+get better. Um, and then I think what
+I'll do is I'll just take whatever I
+I'll do is I'll just take whatever I
+have from that. I'll throw like some
+have from that. I'll throw like some
+fast version on any of the M's where I
+fast version on any of the M's where I
+can get it to like remotely work. And
+can get it to like remotely work. And
+then from
+then from
+there, we can do like a more full sweep.
+there, we can do like a more full sweep.
+uh or we can start like doing some more
+uh or we can start like doing some more
+full sweeps on all the new parameters
+full sweeps on all the new parameters
+and stuff to see if we can really
+and stuff to see if we can really
+optimize and then uh we test on the
+optimize and then uh we test on the
+harder M like neural MMO to see if they
+harder M like neural MMO to see if they
+actually you know the stuff that we find
+actually you know the stuff that we find
+on the simpler M actually holds up. I
+on the simpler M actually holds up. I
+think that's going to be the play. We
+think that's going to be the play. We
+just got a good run as well, didn't
+just got a good run as well, didn't
+we? Yeah. So, we are making progress
+we? Yeah. So, we are making progress
+here.
+This is a pretty interesting gap here.
+This is a pretty interesting gap here.
+This like train to
+This like train to
+eval. This means that
+um the actual length of a game is is
+um the actual length of a game is is
+pretty long.
+pretty long.
+Like you know maybe a game lasts this
+Like you know maybe a game lasts this
+long or whatever. You have an old policy
+long or whatever. You have an old policy
+at the start of the game and you lose a
+at the start of the game and you lose a
+few lives or something on
+it would be my
+it would be my
+guess. There's a big eval gap from here
+guess. There's a big eval gap from here
+to
+to
+here like
+vertically. Ah. So here this is what I
+vertically. Ah. So here this is what I
+was looking at right. So
+was looking at right. So
+079 it is trying to
+079 it is trying to
+find higher learning rates that are
+find higher learning rates that are
+stable. It looks
+stable. It looks
+like it's very difficult to get the this
+like it's very difficult to get the this
+to be stable. But if it can find other
+to be stable. But if it can find other
+hypers that help this be stable then you
+hypers that help this be stable then you
+would expect a learning rate around
+would expect a learning rate around
+here based on the batch size.
+Uh, also gamma is
+Uh, also gamma is
+not going as ludicrously high as it was
+before. There is actually a fair bit of
+before. There is actually a fair bit of
+shift I think in what I'm seeing here so
+shift I think in what I'm seeing here so
+far compared to what we had before.
+far compared to what we had before.
+That should be being this low is a
+That should be being this low is a
+little
+weird. And here is the parrito
+front, I guess. Is this going to just be
+front, I guess. Is this going to just be
+from BPT
+from BPT
+Horizon? No, because it's mostly these.
+Horizon? No, because it's mostly these.
+So, this is just like run tor run
+So, this is just like run tor run
+variance. 10 20% run to run just
+variance. 10 20% run to run just
+variance.
+Oh
+wow. Start looking at some of the other
+wow. Start looking at some of the other
+amps. Snake is one where we were able to
+amps. Snake is one where we were able to
+get it to go like really fast. Hey, what
+get it to go like really fast. Hey, what
+are you up to today? Hey, Cash. So, we
+are you up to today? Hey, Cash. So, we
+got uh yesterday we kind of realized
+got uh yesterday we kind of realized
+that we're starting to get to the point
+that we're starting to get to the point
+where we can use larger batch sizes,
+where we can use larger batch sizes,
+larger mini batch sizes, and have
+larger mini batch sizes, and have
+training still be
+training still be
+stable. So, we're seeing if we can get
+stable. So, we're seeing if we can get
+some of the simpler M baselines to now
+some of the simpler M baselines to now
+be training at like 2 to 4 million steps
+be training at like 2 to 4 million steps
+per second instead of 0 to 1
+million. So, now this is a this is kind
+million. So, now this is a this is kind
+of cool. This is we're sweeping
+of cool. This is we're sweeping
+breakout. I'm literally doing this sweep
+breakout. I'm literally doing this sweep
+live because the runs are 30 seconds
+live because the runs are 30 seconds
+each. It's doing like 10 billion steps
+each. It's doing like 10 billion steps
+of training per
+hour is pretty
+crazy. And actually, you know, there's
+crazy. And actually, you know, there's
+still like 25% overhead just on copying
+still like 25% overhead just on copying
+data to GPU here.
+data to GPU here.
+This could actually be made a fair bit
+This could actually be made a fair bit
+faster even potentially.
+Now, the only annoying thing here is I
+Now, the only annoying thing here is I
+think that um the Perf improvements
+think that um the Perf improvements
+aren't going to be as significant for uh
+aren't going to be as significant for uh
+larger networks, but it is still
+larger networks, but it is still
+important for us to bring up the
+important for us to bring up the
+experiment
+experiment
+speed on these smaller
+speed on these smaller
+ones. And I think that you're still
+ones. And I think that you're still
+going to be able to use the same like
+going to be able to use the same like
+batch sizes and stuff on the larger
+batch sizes and stuff on the larger
+nets. And it should still be nice and
+nets. And it should still be nice and
+stable. It probably just won't have the
+stable. It probably just won't have the
+same
+same
+uh the same like wall clock perf
+uh the same like wall clock perf
+improvement, but you would actually
+improvement, but you would actually
+expect larger batch sizes to be good on
+expect larger batch sizes to be good on
+more complex ends. Anyways, this is
+more complex ends. Anyways, this is
+generally like a reasonable reasonable
+generally like a reasonable reasonable
+direction to
+go. Did I like totally mess something up
+go. Did I like totally mess something up
+or like why why don't we have a full
+or like why why don't we have a full
+solve here?
+solve here?
+We had a full solve with the original
+We had a full solve with the original
+hypers. I was just trying to do better
+hypers. I was just trying to do better
+than that.
+possibly just needs a really big sweep.
+possibly just needs a really big sweep.
+I don't know.
+I say we give this 50 experiments and
+I say we give this 50 experiments and
+then we call
+it unless this does something wild in
+it unless this does something wild in
+the next couple of experiments. We'll
+the next couple of experiments. We'll
+take this part of the work offline and
+take this part of the work offline and
+uh we'll just see if we can get current
+uh we'll just see if we can get current
+hypers to do something reasonable and
+hypers to do something reasonable and
+then we'll expect that if we run a much
+then we'll expect that if we run a much
+larger
+larger
+sweep that we should be able to do
+sweep that we should be able to do
+uh to do better potentially than this
+uh to do better potentially than this
+because we know that there are better
+because we know that there are better
+hyperparameters in the space than this.
+hyperparameters in the space than this.
+It's just about running a long enough
+It's just about running a long enough
+sweep to find them possibly messing with
+sweep to find them possibly messing with
+the defaults as well.
+Okay. So, nothing really amazing with
+this, but this is your sweep. This is 50
+this, but this is your sweep. This is 50
+experiments. We just did this live. 50
+experiments. We just did this live. 50
+experiments is that four billion steps
+experiments is that four billion steps
+of
+data. Uh 3.2 billion steps of
+data.
+Cool. I believe we had Pong running,
+Cool. I believe we had Pong running,
+right?
+Good palm
+Good palm
+curve does solve though.
+You're just doing this
+You're just doing this
+wrong. So, this is this is slow
+wrong. So, this is this is slow
+baseline.
+That is not good
+That is not good
+either. Hang on. I'm messing up ton of
+either. Hang on. I'm messing up ton of
+stuff up
+stuff up
+here. Let me just stop being
+sloppy. Okay, now this should work
+sloppy. Okay, now this should work
+correctly.
+And we should be able to crank some
+And we should be able to crank some
+experiments real quick.
+We put this on fast baseline and we see
+We put this on fast baseline and we see
+that it's fast
+Okay, that's not bad. We have fast pace
+line does
+line does
+this kind of
+screwy. Why
+screwy. Why
+is Oh, because it ran a ton of evalu.
+is Oh, because it ran a ton of evalu.
+Sure.
+There we
+There we
+go. Ran a ton of
+emails.
+Here's the snake. Slow bass
+Here's the snake. Slow bass
+blind. Snake was a fast end though,
+right?
+Shouldn't be any faster than pong
+Shouldn't be any faster than pong
+though. Maybe it gets like 3 4 mil
+optimized 94. Very
+optimized 94. Very
+good. So this is a very strong baseline
+good. So this is a very strong baseline
+for snake.
+for snake.
+And then we will
+do this for the fast
+do this for the fast
+one. Then this is num m is
+one. Then this is num m is
+eight. So 8
+eight. So 8
+*
+*
+256 is only 2048. So we go to 16 m for
+256 is only 2048. So we go to 16 m for
+the uh the new baseline.
+102. Yeah, this is a very
+102. Yeah, this is a very
+strong. This actually got better since
+strong. This actually got better since
+we picked some other stuff like 100 plus
+we picked some other stuff like 100 plus
+from snake is kind of
+crazy. This will be a good end for
+crazy. This will be a good end for
+actually I think for uh for testing the
+actually I think for uh for testing the
+larger batches.
+larger batches.
+You just sort of need stable updates on
+this. That's going to be hard to beat
+though. Curious to open the curve on
+though. Curious to open the curve on
+this.
+So, it's pretty flat. It wiggles around
+So, it's pretty flat. It wiggles around
+here a little bit. It does seem like it
+here a little bit. It does seem like it
+goes up
+slowly. 105.
+So, I guess the bug fixes I applied
+So, I guess the bug fixes I applied
+um actually helped because this is
+um actually helped because this is
+higher than it is than it was before by
+higher than it is than it was before by
+a couple points. Few more than a couple
+a couple points. Few more than a couple
+points. It's
+points. It's
+significant. I think it was like a 100
+significant. I think it was like a 100
+or something before. Now we're easily
+or something before. Now we're easily
+above
+hundreds. That's a very good result for
+hundreds. That's a very good result for
+Snake.
+At least this is giving me I mean the
+At least this is giving me I mean the
+one thing that this is doing and the
+one thing that this is doing and the
+reason the part of the reason I do stuff
+reason the part of the reason I do stuff
+like this where I kind of just slowly
+like this where I kind of just slowly
+manually run experiments um this is
+manually run experiments um this is
+giving me a lot of confidence in the new
+giving me a lot of confidence in the new
+dev branch uh as being like a stable
+dev branch uh as being like a stable
+high quality improvement like this is a
+high quality improvement like this is a
+solid learn curve for Snake.
+solid learn curve for Snake.
+Snake is usually very hard to get like
+Snake is usually very hard to get like
+above above this initial increment here.
+above above this initial increment here.
+It's usually quite difficult to do
+It's usually quite difficult to do
+better. I mean this is like a tiny
+better. I mean this is like a tiny
+network right that is being trained for
+network right that is being trained for
+300 mil and the tiny network is
+300 mil and the tiny network is
+continuing to
+improve. Okay, so 3
+improve. Okay, so 3
+minutes pretty good.
+Now we run this one. Be
+fast. The number of Twitch bots is kind
+fast. The number of Twitch bots is kind
+of ridiculous.
+only 2.4
+mil. I messed something up. I would have
+mil. I messed something up. I would have
+expected more than that.
+MS.
+MS.
+Uh, I didn't mess anything up. Numb
+Uh, I didn't mess anything up. Numb
+snakes.
+snakes.
+256 40 96 snakes.
+I guess this is the comp
+policy. This is still a faster than I've
+policy. This is still a faster than I've
+ever had a snake going on this, I
+ever had a snake going on this, I
+believe. So, it's still
+good. And how are we doing
+on on our run?
+105. So we got up to like 108 or
+105. So we got up to like 108 or
+whatever. So this is uh this is match.
+whatever. So this is uh this is match.
+So this is just
+pre-performance. It just works on snake.
+Can't
+Can't
+complain. 110. No compromises, just
+complain. 110. No compromises, just
+wins.
+wins.
+Perfect. Favorite classes you took at
+Perfect. Favorite classes you took at
+MIT during grad
+years? I mean, not a single class was
+years? I mean, not a single class was
+remotely relevant or useful to anything
+remotely relevant or useful to anything
+that I do now. Frankly, I like you only
+that I do now. Frankly, I like you only
+take four core classes
+take four core classes
+um like required classes. I took some
+um like required classes. I took some
+business electives that were good.
+Um let me think. Oh, the one course that
+Um let me think. Oh, the one course that
+was very good though in no way directly
+was very good though in no way directly
+useful to what I do. I took Sixer's
+useful to what I do. I took Sixer's
+theory course like his intro whatever it
+theory course like his intro whatever it
+is theory of computation course. So that
+is theory of computation course. So that
+was kind of cool because I really had
+was kind of cool because I really had
+not
+not
+done much proofbased math at all outside
+done much proofbased math at all outside
+of like the Stanford undergrad
+of like the Stanford undergrad
+requirements. Um, and like I actually
+requirements. Um, and like I actually
+had time to do it properly. So I was
+had time to do it properly. So I was
+like, "Oh, okay. I see proof based math.
+like, "Oh, okay. I see proof based math.
+Like I could learn this if I put in
+Like I could learn this if I put in
+time. Like I understand how this works.
+time. Like I understand how this works.
+Cool." If it says theory of computation
+Cool." If it says theory of computation
+then yeah. But like I took the NLP
+then yeah. But like I took the NLP
+course, wasn't useful. I mean, I took my
+course, wasn't useful. I mean, I took my
+advisor's course, which is not by any
+advisor's course, which is not by any
+means a bad course, but like you know,
+means a bad course, but like you know,
+hopefully if you're there as a PhD
+hopefully if you're there as a PhD
+student, you already know all the
+student, you already know all the
+material if it's in your domain, right?
+material if it's in your domain, right?
+Um, and then I took a deep learning
+Um, and then I took a deep learning
+hardware course that was
+hardware course that was
+like kind of interesting and like yeah,
+like kind of interesting and like yeah,
+learning about like uh matrix multiply
+learning about like uh matrix multiply
+tiling and stuff was
+tiling and stuff was
+good, but um they used a bunch of kind
+good, but um they used a bunch of kind
+of
+of
+janky like per performance monitoring
+janky like per performance monitoring
+tooling and
+stuff. I mean that's what everyone
+stuff. I mean that's what everyone
+takes. I don't know if you're are you a
+takes. I don't know if you're are you a
+grad student or an
+undergrad. Undergrad. Fair
+undergrad. Undergrad. Fair
+enough. I mean, I did my undergrad. My
+enough. I mean, I did my undergrad. My
+undergrad was Stanford.
+undergrad was Stanford.
+Um I I don't think any of the
+Um I I don't think any of the
+universities have like a lot of good
+universities have like a lot of good
+courses,
+courses,
+frankly. Uh there were a few good
+frankly. Uh there were a few good
+ones like my undergrad course is
+ones like my undergrad course is
+Stanford. So
+Stanford. So
+the the data like the initial data
+the the data like the initial data
+structures and algorithms course there
+structures and algorithms course there
+106x was like okay 103 was really good.
+106x was like okay 103 was really good.
+It's like complete newbie intro to
+It's like complete newbie intro to
+um I guess proof based mathematics as it
+um I guess proof based mathematics as it
+applies to CS like discrete stuff. Um
+applies to CS like discrete stuff. Um
+but it's like really well taught. Keith
+but it's like really well taught. Keith
+is awesome. Uh, I hated the system
+is awesome. Uh, I hated the system
+courses there. Actually, that's probably
+courses there. Actually, that's probably
+the thing I'm most annoyed about is it
+the thing I'm most annoyed about is it
+put me off of doing low-level
+put me off of doing low-level
+programming for 10 years. They were that
+programming for 10 years. They were that
+bad. And now I love low-level
+bad. And now I love low-level
+programming.
+programming.
+Um, Jerry Kane's done like impressive
+Um, Jerry Kane's done like impressive
+stuff, but he's just a terrible
+stuff, but he's just a terrible
+lecturer. He's really, really bad uh at
+lecturer. He's really, really bad uh at
+communicating stuff, and the problem
+communicating stuff, and the problem
+sets were just
+sets were just
+abysmal.
+abysmal.
+Um, 161 was there like was it the
+Um, 161 was there like was it the
+advanced grad, it's not that great.
+advanced grad, it's not that great.
+Their intro stats is good. Um, the best
+Their intro stats is good. Um, the best
+like grad course there was 231N. I think
+like grad course there was 231N. I think
+yeah, Stanford's uh deep learning course
+yeah, Stanford's uh deep learning course
+is still better than
+is still better than
+MIT's.
+MIT's.
+Um, yeah, I don't know. I would imagine
+Um, yeah, I don't know. I would imagine
+that probably like other engineering
+that probably like other engineering
+disciplines at MIT have cool stuff, but
+disciplines at MIT have cool stuff, but
+there wasn't much in CS that I know of
+there wasn't much in CS that I know of
+specifically. The one thing that is that
+specifically. The one thing that is that
+was kind of cool um was I don't know if
+was kind of cool um was I don't know if
+you can do this is I think you actually
+you can do this is I think you actually
+can as an undergrad just go enroll in
+can as an undergrad just go enroll in
+Sloan courses. Uh the business law
+Sloan courses. Uh the business law
+course was very
+course was very
+good. I think that one is pretty darn
+good. I think that one is pretty darn
+useful for doing a startup. It's
+useful for doing a startup. It's
+basically like how to not accidentally
+basically like how to not accidentally
+land yourself in jail when you're just
+land yourself in jail when you're just
+like a tech guy trying to make stuff.
+like a tech guy trying to make stuff.
+So, that was
+So, that was
+cool.
+Um, yeah.
+And if you just want a major confidence
+And if you just want a major confidence
+boost, go like take one of the startup
+boost, go like take one of the startup
+courses there and see like the types of
+courses there and see like the types of
+people that are doing startups without
+people that are doing startups without
+having a technical background and
+having a technical background and
+like you would be like, "Oh, I should
+like you would be like, "Oh, I should
+just do my own thing now because this is
+just do my own thing now because this is
+my competition. I should just do my own
+my competition. I should just do my own
+stuff." So, uh yeah, that's the summary.
+stuff." So, uh yeah, that's the summary.
+I wasn't much on courses. I just
+I wasn't much on courses. I just
+generally do not enjoy doing courses at
+generally do not enjoy doing courses at
+all. Uh, I spent I spent the vast
+all. Uh, I spent I spent the vast
+majority of my time in grad and
+majority of my time in grad and
+undergrad on
+undergrad on
+research, but there were a few good
+things. And there you go. There's
+things. And there you go. There's
+your probably more than you needed in
+your probably more than you needed in
+that
+summary.
+summary.
+Mhm. Honestly,
+Mhm. Honestly,
+like the main tricky that you got to
+like the main tricky that you got to
+figure out is you got to figure out how
+figure out is you got to figure out how
+to like to spend time
+to like to spend time
+uh in undergrad like on projects that
+uh in undergrad like on projects that
+actually teach you stuff. That's the
+actually teach you stuff. That's the
+tough thing, right? Whether it's
+tough thing, right? Whether it's
+research or open source or you know
+research or open source or you know
+other things around there.
+I suggest puffer
+I suggest puffer
+lift. Of course, you know, I'm a little
+lift. Of course, you know, I'm a little
+biased, but uh if you want to hack on
+biased, but uh if you want to hack on
+cool RL stuff and not deal with
+cool RL stuff and not deal with
+ludicrously deep software stacks that
+ludicrously deep software stacks that
+make no sense and learn low-level
+make no sense and learn low-level
+programming stuff as well, you kind of
+programming stuff as well, you kind of
+can't beat it.
+Oh yeah, I got I actually have a
+Oh yeah, I got I actually have a
+question for you because I never I
+question for you because I never I
+didn't really talk to many undergrads at
+didn't really talk to many undergrads at
+MIT. Is undergrad at MIT any
+fun? My impression of like as an
+fun? My impression of like as an
+undergrad at Stanford is that Stanford
+undergrad at Stanford is that Stanford
+is a lot more fun as an undergrad. Yes
+is a lot more fun as an undergrad. Yes
+and no.
+I mean,
+I mean,
+like, I think MIT just hammers you with
+like, I think MIT just hammers you with
+technical coursework a lot more. Like, I
+technical coursework a lot more. Like, I
+still had I had like 90 hour weeks
+still had I had like 90 hour weeks
+average, I think, my freshman year at
+average, I think, my freshman year at
+Stanford, but that's cuz I did the whole
+Stanford, but that's cuz I did the whole
+core my first
+core my first
+year. Stayed up all night laying out a
+year. Stayed up all night laying out a
+chip. That's kind of
+cool. I don't know. My impression was
+cool. I don't know. My impression was
+that like kind of regardless of what you
+that like kind of regardless of what you
+do, you're going to be ludicrously busy
+do, you're going to be ludicrously busy
+at MIT. And uh the Stanford was more
+at MIT. And uh the Stanford was more
+like a choose your own adventure. So
+like a choose your own adventure. So
+like yeah, if I if you're going to do
+like yeah, if I if you're going to do
+the whole four your first year, you're
+the whole four your first year, you're
+going to be busy, but like most people
+going to be busy, but like most people
+really aren't that busy there.
+No, no,
+no. It's kind of a funny question. It's
+no. It's kind of a funny question. It's
+like, do you have any fun?
+I mean, being incredibly frank here,
+I mean, being incredibly frank here,
+right? I did a ton of just like
+right? I did a ton of just like
+incredibly stupid stuff as an undergrad.
+incredibly stupid stuff as an undergrad.
+Um, I didn't touch anything but
+Um, I didn't touch anything but
+alcohol. So, I reserved that, but I just
+alcohol. So, I reserved that, but I just
+did a ton of incredibly stupid stuff.
+did a ton of incredibly stupid stuff.
+And like I don't necessarily regret
+And like I don't necessarily regret
+regret as much because having been
+regret as much because having been
+incredibly straight laced everywhere
+incredibly straight laced everywhere
+through my whole life leading up to
+through my whole life leading up to
+that, I think I'd feel like I'd missed
+that, I think I'd feel like I'd missed
+out if I hadn't. So undergrad is kind of
+out if I hadn't. So undergrad is kind of
+a time to get that good time to get that
+a time to get that good time to get that
+out of your system. But at the same
+out of your system. But at the same
+time, it's also a good time to like, you
+time, it's also a good time to like, you
+know, learn a bunch of stuff and get
+know, learn a bunch of stuff and get
+really good at what you do. So there's a
+really good at what you do. So there's a
+balance.
+balance.
+You can minmax basically take the
+You can minmax basically take the
+minimum to graduate and be under 40
+minimum to graduate and be under 40
+hours a week. That's not bad at
+hours a week. That's not bad at
+all. Too many classes I want to
+all. Too many classes I want to
+take. If you like taking classes, then
+take. If you like taking classes, then
+sure. From the ones I took, many of them
+sure. From the ones I took, many of them
+just weren't useful to
+me. like 15 hours a week working on a
+me. like 15 hours a week working on a
+side project would be more valuable than
+side project would be more valuable than
+a lot of the courses and that was true
+a lot of the courses and that was true
+of both but I think that's true
+anywhere okay so we have this one and
+anywhere okay so we have this one and
+now we will compare to
+oops this
+See you and best of luck. Thanks for
+See you and best of luck. Thanks for
+dropping by.
+I'd say I have dramatically more fun now
+I'd say I have dramatically more fun now
+though than I did in undergrad with a
+though than I did in undergrad with a
+few exceptions. H maybe not. I think I
+few exceptions. H maybe not. I think I
+have less fun but I'm much happier
+overall. I don't know.
+All right, we're getting some training
+All right, we're getting some training
+here. This is looking
+reasonable. So, we're
+at.1 likely we'll be less ample
+at.1 likely we'll be less ample
+efficient here,
+efficient here,
+right?
+right?
+Maybe max enjoyment is lower. is much
+Maybe max enjoyment is lower. is much
+higher probably.
+Yeah. I don't know. Last year kind of
+Yeah. I don't know. Last year kind of
+just absolutely sucked.
+just absolutely sucked.
+Um and then this year I started the year
+Um and then this year I started the year
+by nearly dying of
+by nearly dying of
+pneumonia. So,
+pneumonia. So,
+uh but since then it's been pretty good.
+uh but since then it's been pretty good.
+I've just been enjoying getting myself
+I've just been enjoying getting myself
+back into good shape and I've just been
+back into good shape and I've just been
+cranking cranking out work on Puffer.
+It's also I think it's having it be part
+It's also I think it's having it be part
+of the business is like part of a
+of the business is like part of a
+business is really nice because it
+business is really nice because it
+doesn't really feel like I'm in just in
+doesn't really feel like I'm in just in
+a hole anymore like working on stuff
+a hole anymore like working on stuff
+that like you know you don't like the
+that like you know you don't like the
+most you get out of anything in academia
+most you get out of anything in academia
+is maybe you get some recognition or
+is maybe you get some recognition or
+whatever but now it's like the
+whatever but now it's like the
+recognition comes in the form of people
+recognition comes in the form of people
+DMing me for like for jobs right and
+DMing me for like for jobs right and
+like interested like clients people want
+like interested like clients people want
+wanting to hire copper for stuff. So,
+wanting to hire copper for stuff. So,
+it's cool. It's definitely
+it's cool. It's definitely
+cool.
+cool.
+24.2. This is good.
+24.2. This is good.
+2.3. This is a solid
+perf. What else do we do?
+I kind of want to try something
+harder. I thought I did something with
+harder. I thought I did something with
+it. Hang on.
+It's going to get way better, I think,
+It's going to get way better, I think,
+as well with all the stuff we're
+as well with all the stuff we're
+building lately.
+I'm definitely working harder now though
+I'm definitely working harder now though
+than I did during the vast majority of
+than I did during the vast majority of
+my
+PhD, but I'm less burnt out from it.
+PhD, but I'm less burnt out from it.
+Like the work is better.
+And like also I don't have as many
+And like also I don't have as many
+ludicrously arbitrary
+ludicrously arbitrary
+deadlines. So
+deadlines. So
+like it's like go go go get the thing
+like it's like go go go get the thing
+get done, get the thing done, get the
+get done, get the thing done, get the
+thing done. But if it's like, hey, I
+thing done. But if it's like, hey, I
+just can't do stuff today. I just need
+just can't do stuff today. I just need
+to recharge. Like I can do that as
+well. It's pretty good.
+Welcome YouTube
+Welcome YouTube
+folks. For anyone new here, this is live
+folks. For anyone new here, this is live
+reinforcement learning dev.
+reinforcement learning dev.
+At the moment, this
+At the moment, this
+is running a whole bunch of experiments
+is running a whole bunch of experiments
+with much faster
+with much faster
+configurations to see if with all the
+configurations to see if with all the
+new, excuse me, algorithm improvements
+new, excuse me, algorithm improvements
+we've made lately,
+we've made lately,
+uh, if we can get away
+uh, if we can get away
+with larger batch sizes, mini batch
+with larger batch sizes, mini batch
+sizes, and uh, larger learning rates.
+sizes, and uh, larger learning rates.
+and seeing if we can actually like get
+and seeing if we can actually like get
+reinforcement learning at average of two
+reinforcement learning at average of two
+million steps per second instead of 1
+million on a dozen different
+environments. Okay, so Spencer's M. We
+environments. Okay, so Spencer's M. We
+get 90 with his defaults.
+and then it crashes a little bit
+and then it crashes a little bit
+here. Mostly
+90. That could be the cosine. No, it's
+90. That could be the cosine. No, it's
+not coine aling. He has learning rate
+not coine aling. He has learning rate
+off.
+So, I'm just going to delete all his
+So, I'm just going to delete all his
+hypers and uh see if it makes a
+difference. No discredit to the folks
+difference. No discredit to the folks
+who did the hyperpar tuning. Uh I did
+who did the hyperpar tuning. Uh I did
+hyperparameter tuning for each and every
+hyperparameter tuning for each and every
+individual end like 200 runs before. But
+individual end like 200 runs before. But
+uh we've made algorithmic improvements
+uh we've made algorithmic improvements
+and things are generally much more
+and things are generally much more
+robust now.
+So you can almost use the same hypers
+So you can almost use the same hypers
+for everything almost. I
+for everything almost. I
+believe we might have to keep gamma at
+believe we might have to keep gamma at
+like 0.98 or something. We will see.
+This is just not
+This is just not
+ebelling. Do
+this. Interesting.
+Okay, this is running. I'm going to rest
+Okay, this is running. I'm going to rest
+real quick. I'll be back. Then we'll
+real quick. I'll be back. Then we'll
+keep on this for a Nice.
+How's this
+How's this
+looking?
+looking?
+85. So,
+85. So,
+um, it's a bit
+um, it's a bit
+lower. It's a bit
+lower. I do want to run One additional
+lower. I do want to run One additional
+experiment on this though
+experiment on this though
+before we make
+before we make
+any proclamations because
+any proclamations because
+uh I do expect that this is probably
+uh I do expect that this is probably
+just gamma being
+off. Let me just try this.
+I'd like to get tower climb uh with a
+I'd like to get tower climb uh with a
+good baseline. This is a really good
+good baseline. This is a really good
+end. Has configurable
+difficulty. Did a really good
+time. This is a 560k per
+time. This is a 560k per
+model. So we may have to
+reduce learning rate a little bit. We'll
+see. Oh, there you go. Look, there's the
+perf.
+perf.
+Easy. It's just that
+Easy. It's just that
+easy. All right. Well,
+easy. All right. Well,
+We can then
+absolutely. We can absolutely use
+these. Do I want to try this learning
+these. Do I want to try this learning
+rate this high? I guess we'll see if
+rate this high? I guess we'll see if
+this crashes. I expect that there's a
+this crashes. I expect that there's a
+decent chance this
+crashes. Try it on hard. That'll come
+crashes. Try it on hard. That'll come
+next. Let me get the uh let me see if we
+next. Let me get the uh let me see if we
+get the fast params
+get the fast params
+first. So we will get rid of this one.
+first. So we will get rid of this one.
+We'll keep the other one as the slow
+baseline. This is good.
+If this crash goes back down, it's cuz
+If this crash goes back down, it's cuz
+the learning rate's too high. But, uh,
+the learning rate's too high. But, uh,
+that seems like stable
+that seems like stable
+0.95 to
+me.
+me.
+Uh, we crashing back.
+No.
+Cool. Hey, bet. What are we
+doing? Leroy
+Jenkins. We're always fixing RL.
+Okay. So, I mean,
+we're we're pretty happy with this,
+we're we're pretty happy with this,
+right? This is a
+right? This is a
+million million steps per second on
+uh like substantially larger model.
+I think we're pretty happy with
+that. So, I think we call this one here.
+that. So, I think we call this one here.
+This works
+fine. What else haven't I
+fine. What else haven't I
+done? There are a lot of them, right?
+Jeez. Well, best of luck with that bet
+Jeez. Well, best of luck with that bet
+and congratulations once
+and congratulations once
+again. What are you up to today? We're
+again. What are you up to today? We're
+trying to get Well, uh, it's better to
+trying to get Well, uh, it's better to
+just show you actually.
+How's
+this? 3 million step per second
+this? 3 million step per second
+training, 10 billion an hour.
+training, 10 billion an hour.
+I think it was pretty decent, right?
+How did you fasterized
+How did you fasterized
+it? It just retuned the learning rate a
+it? It just retuned the learning rate a
+little bit. I haven't even reuned
+little bit. I haven't even reuned
+everything. Wonder why copy overhead is
+everything. Wonder why copy overhead is
+so high. I can do something about that.
+so high. I can do something about that.
+I should be able to get it to zero uh
+I should be able to get it to zero uh
+captain, but not
+captain, but not
+yet. Oh, this is interesting.
+I guess it's not a multiple of eight.
+work. What idea do you have for that
+work. What idea do you have for that
+would be huge to remove
+would be huge to remove
+Uh, we can asynchronously queue up data
+Uh, we can asynchronously queue up data
+transfers, I'm pretty sure, but it's
+transfers, I'm pretty sure, but it's
+it's like a pain in the ass to do it in
+it's like a pain in the ass to do it in
+the multipprocessing
+the multipprocessing
+implementation. It'll be a lot easier
+implementation. It'll be a lot easier
+with a threading threaded
+with a threading threaded
+implementation. That doesn't work.
+implementation. That doesn't work.
+That's kind of weird.
+I'm just I'm fiddling with some batch
+I'm just I'm fiddling with some batch
+size params to like make stuff fit. I'm
+size params to like make stuff fit. I'm
+going to get like warnings on I'm going
+going to get like warnings on I'm going
+to put warnings on all this stuff
+to put warnings on all this stuff
+obviously before the release.
+You check this board.
+There you
+go. I'm also I've got a meeting on uh
+go. I'm also I've got a meeting on uh
+I've got a meeting about the
+I've got a meeting about the
+professional thing that we discussed. Uh
+professional thing that we discussed. Uh
+we're going to do Friday. So hopefully
+we're going to do Friday. So hopefully
+we get something going for next
+we get something going for next
+week. The uh I was trying to set that up
+week. The uh I was trying to set that up
+for earlier this week, but the guy I
+for earlier this week, but the guy I
+need to talk to about that has been
+need to talk to about that has been
+slammed with work.
+So, also they're still trying to figure
+So, also they're still trying to figure
+out
+specifics. There you
+specifics. There you
+go. Box six is good. Okay. So, I think
+go. Box six is good. Okay. So, I think
+I'm not going to ship any of the boxes
+I'm not going to ship any of the boxes
+to main gear then. I think I'm just
+to main gear then. I think I'm just
+going to like ship them direct to the
+going to like ship them direct to the
+new facility today. some of
+new facility today. some of
+them. So, yeah, guys, get your work off
+them. So, yeah, guys, get your work off
+the boxes or like not off like make sure
+the boxes or like not off like make sure
+everything is synced because I'm just
+everything is synced because I'm just
+going to like grab them and start
+going to like grab them and start
+shipping
+stuff. I don't know how many I want to
+stuff. I don't know how many I want to
+ship initially and
+ship initially and
+like we're going to have to figure that
+like we're going to have to figure that
+stuff
+out. But like technically, as long as
+out. But like technically, as long as
+there's internet, it shouldn't be that
+there's internet, it shouldn't be that
+bad, right?
+bad, right?
+Like worst case, I can just plug them
+Like worst case, I can just plug them
+into various different outlets even if
+into various different outlets even if
+our main electrical isn't
+our main electrical isn't
+working. The sync
+working. The sync
+pool. I also think I'm going to take
+pool. I also think I'm going to take
+both of my desktops with me just so like
+both of my desktops with me just so like
+we have one extra and like I don't have
+we have one extra and like I don't have
+to monopolize as many
+boxes. Why is this 41,000 SPS?
+boxes. Why is this 41,000 SPS?
+Oh, the CPU trained
+up. I have I have arrangements.
+Bet. I thought I had fixed this.
+Yeah, I've
+Yeah, I've
+Well, I have a It's We're not doing
+Well, I have a It's We're not doing
+that, but I've got arrangements. I also
+that, but I've got arrangements. I also
+have all the original boxes and packing
+have all the original boxes and packing
+material that they were shipped to me
+material that they were shipped to me
+in.
+in.
+So for this exact
+purpose, does this not work here?
+This new one's very nice
+This new one's very nice
+though. I will say this new one that I
+though. I will say this new one that I
+have, it's like very
+nice. It's like way
+nice. It's like way
+quieter. Yeah, it's like it's way
+quieter. Yeah, it's like it's way
+quieter.
+quieter.
+um doesn't really like the cooling in
+um doesn't really like the cooling in
+it's very
+it's very
+good like there are fewer move like
+good like there are fewer move like
+fewer parts that can go wrong. It's got
+fewer parts that can go wrong. It's got
+higher quality
+fans. Oh, I didn't think about this, did
+fans. Oh, I didn't think about this, did
+I?
+Does the thread count have to be a
+Does the thread count have to be a
+multiple of
+multiple of
+um the block size that
+thing? Like surely it doesn't have to be
+thing? Like surely it doesn't have to be
+a multiple of
+a multiple of
+the like surely you can have nonp power
+the like surely you can have nonp power
+of two matrices right or non multiple
+of two matrices right or non multiple
+128 apparently
+not okay I had not considered this
+not okay I had not considered this
+uh is there anything I can do about this
+uh is there anything I can do about this
+for now fix
+this none of these are going to be a
+this none of these are going to be a
+multiple of
+I could do slightly larger or I could do
+I could do slightly larger or I could do
+substantially
+smaller like this.
+smaller like this.
+2560. What if I did that?
+That's actually
+perfect for now. We just
+perfect for now. We just
+do. So,
+it's we want
+2560Ns. No, we
+want times two. So, we actually want
+want times two. So, we actually want
+5120.
+by 8 is
+by 8 is
+640. So we want 128
+m. I think this
+works. Oh, and then we actually hang on.
+works. Oh, and then we actually hang on.
+* 5 agents per n* 8 is
+this. So now this is going to be
+780. This is like
+We're getting some weird numbers here,
+We're getting some weird numbers here,
+but I just want to see if I can get
+but I just want to see if I can get
+something to
+We're going to have to figure out the
+We're going to have to figure out the
+like nonp power of 2 M's thing with the
+like nonp power of 2 M's thing with the
+new CUDA kernels, but for now this
+new CUDA kernels, but for now this
+should be
+reasonable. Remove this C.
+Did I not do this right?
+128 *
+5 should be 128 * 5 * 4 2560 Next day.
+I just want to see this end going
+I just want to see this end going
+fast like this one is up is actually a
+fast like this one is up is actually a
+pretty
+pretty
+small setup.
+small setup.
+Wait. Threads per
+Wait. Threads per
+block two
+block two
+blocks num steps plus threads per block
+blocks num steps plus threads per block
+minus
+one. How did it get two
+blocks? That's definitely going to fail.
+But
+why 320 steps?
+Yes. I'm quite confused.
+There. There's a second one of these,
+There. There's a second one of these,
+right? Oh, it's it's right
+here. So, why why is this batch
+weird? 320 by 64.
+Oh, that's not a multiple of of 128.
+Um, yeah, because the mini batch needs
+Um, yeah, because the mini batch needs
+to be Dang
+to be Dang
+it. And that's
+annoying. I could do the BPD Horizon on
+annoying. I could do the BPD Horizon on
+a multiple of two instead.
+80. I think if I do
+80 maybe this works. This is all just
+80 maybe this works. This is all just
+because CUDA kernels are not
+because CUDA kernels are not
+currently uh are kind of kind are kind
+currently uh are kind of kind are kind
+of fiddly at the moment. Total agents uh
+of fiddly at the moment. Total agents uh
+but then the batch size gets messed up.
+128 m, eight copies, five agents
+128 m, eight copies, five agents
+each, 80 steps.
+Okay, this this looks like these are all
+Okay, this this looks like these are all
+nice
+numbers. Perfect. One block and now that
+works. So, um this is not going to be
+works. So, um this is not going to be
+optimal by any
+means, but I want to see if this
+means, but I want to see if this
+actually does. We
+A network this size should be able to be
+A network this size should be able to be
+trained quite
+trained quite
+fast. Definitely over a million.
+I don't think we've ever gotten this one
+I don't think we've ever gotten this one
+to be fast.
+45% M
+time. H the M should not be that
+slow. I will have to go look at that.
+slow. I will have to go look at that.
+But and bottleneck otherwise we should
+But and bottleneck otherwise we should
+be able to get something decent at
+least. This one will return stats. Just
+least. This one will return stats. Just
+it takes a while. The games are really
+it takes a while. The games are really
+long. There you
+long. There you
+go. So I'll be happy with this for now.
+go. So I'll be happy with this for now.
+If
+If
+um if it does train
+reasonably. It just won a game. There we
+reasonably. It just won a game. There we
+go. Now it's winning games.
+This is win rate versus scripted
+opponents. And there you go. That's one
+opponents. And there you go. That's one
+win rate.
+We need to get some better opponents for
+We need to get some better opponents for
+this because this is a really cool
+this because this is a really cool
+end. All right, this works. Trains
+end. All right, this works. Trains
+500k
+500k
+is and uh M needs to be optimized, but
+is and uh M needs to be optimized, but
+this is all set. So, here's what I'm
+this is all set. So, here's what I'm
+going to do. I'm going to go get some
+going to do. I'm going to go get some
+exercise, get some food. I'm going to
+exercise, get some food. I'm going to
+come back in the afternoon, continue
+come back in the afternoon, continue
+finishing all of these M's up. Uh, have
+finishing all of these M's up. Uh, have
+nice, clean, fast
+nice, clean, fast
+configs. I will be back on stream for
+configs. I will be back on stream for
+that. And then tomorrow, I'm traveling
+that. And then tomorrow, I'm traveling
+to the new facility. So, I've got to
+to the new facility. So, I've got to
+take all my stuff over there. Um, we're
+take all my stuff over there. Um, we're
+waiting on delivery of all sorts of new
+waiting on delivery of all sorts of new
+setup for the stream. And uh yeah, once
+setup for the stream. And uh yeah, once
+that is set up, hopefully starting next
+that is set up, hopefully starting next
+week, I'll be live from there, assuming
+week, I'll be live from there, assuming
+that everything's good with the internet
+that everything's good with the internet
+and electrical and all that. So for
+and electrical and all that. So for
+folks watching, thanks for tuning in. If
+folks watching, thanks for tuning in. If
+you're interested in all this stuff,
+you're interested in all this stuff,
+it's all puffer.ai. It's all open
+it's all puffer.ai. It's all open
+source. You can help me out for free by
+source. You can help me out for free by
+starting the repo on GitHub. If you'd
+starting the repo on GitHub. If you'd
+like to get involved with dev, whether
+like to get involved with dev, whether
+you have an RL background or not, go in
+you have an RL background or not, go in
+the Discord.
+the Discord.
+Most of our top contributors came in
+Most of our top contributors came in
+with zero RL
+with zero RL
+knowledge. Other than that, you can
+knowledge. Other than that, you can
+follow me on X for more occasional RL
+follow me on X for more occasional RL
+content. I post some articles there.

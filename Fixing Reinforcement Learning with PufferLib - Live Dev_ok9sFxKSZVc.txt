@@ -1,0 +1,6249 @@
+Kind: captions
+Language: en
+okay we're
+okay we're
+live
+live
+hi I've
+hi I've
+been the doctors all
+been the doctors all
+day so we're going to see if we can get
+day so we're going to see if we can get
+a little bit work done here in the
+a little bit work done here in the
+afternoon um
+there a few things I want to do
+there a few things I want to do
+today uh quick quick check of our
+today uh quick quick check of our
+ablations
+okay so these are not bad this is what
+okay so these are not bad this is what
+we get out of
+we get out of
+carbs
+carbs
+okay and this
+okay and this
+is what we get out of random
+is what we get out of random
+search so we can see we get far
+search so we can see we get far
+fewer good runs with random search carb
+fewer good runs with random search carb
+seems to give us something
+nice the fact that there's so many
+nice the fact that there's so many
+points not anywhere near the parito
+points not anywhere near the parito
+frontier is a little
+frontier is a little
+concerning
+um
+um
+definitely want to sort that out but we
+definitely want to sort that out but we
+will deal with that
+will deal with that
+later
+later
+oops
+oops
+um yeah I haven't heard back from the
+um yeah I haven't heard back from the
+MIT folks on uh the stuff I did
+MIT folks on uh the stuff I did
+yesterday for them and GPU Drive is
+yesterday for them and GPU Drive is
+proceeding pretty well
+proceeding pretty well
+so I have some other work to do at the
+so I have some other work to do at the
+moment there are a couple different
+moment there are a couple different
+things I can
+do let me see what I can
+do let me see what I can
+go go look
+at Okay so
+GPU I would like to get the set up with
+puffer this is some separate
+work the public portion is just getting
+work the public portion is just getting
+Isaac gem working nicely with
+Isaac gem working nicely with
+puffer
+um now I can probably get this bound
+um now I can probably get this bound
+pretty
+quick I'm trying to think
+quick I'm trying to think
+what I can do from there
+sh
+I mean I could just get this thing set
+I mean I could just get this thing set
+up and running like puffer
+po that's probably a decent
+po that's probably a decent
+test andp get
+up yeah let's try that um
+I think that's probably the reasonable
+I think that's probably the reasonable
+thing to
+do I'm trying to see where the Isaac say
+do I'm trying to see where the Isaac say
+binds are for
+binds are for
+this lots of people have been asking me
+this lots of people have been asking me
+about Isaac
+M
+tasks this task
+people really like their wrappers don't
+people really like their wrappers don't
+they oh this is actually very similar to
+they oh this is actually very similar to
+um how we do this with
+um how we do this with
+puffer yeah this is very similar
+it's a good
+sign accept for
+sign accept for
+this the fact that they are overriding
+this the fact that they are overriding
+their buffer instead of setting
+it I'm trying to think what's the best
+it I'm trying to think what's the best
+way to start on this
+um let me see how how far their training
+um let me see how how far their training
+code is
+code is
+off from what we're looking at
+I need this thing that they're calling
+I need this thing that they're calling
+an
+agent yeah so I think that
+agent yeah so I think that
+probably if I just get this bound to
+probably if I just get this bound to
+puffer then it's pretty easy to
+puffer then it's pretty easy to
+add the algorithm make
+changes to uh like an individual puffer
+changes to uh like an individual puffer
+train
+train
+file I can probably get this to train
+file I can probably get this to train
+way faster as
+well yeah cuz they just have some EX for
+well yeah cuz they just have some EX for
+losses and stuff that's
+losses and stuff that's
+fine okay so
+why is my machine going
+insane asso
+we go I don't know what's up with my
+we go I don't know what's up with my
+memory
+how much code is there in
+here quite a few
+here quite a few
+different tasks
+but this is the
+base and then
+base and then
+like knowing what my graphs look like do
+like knowing what my graphs look like do
+you
+you
+think yes that is why why do you have
+think yes that is why why do you have
+that as your value function coefficient
+that as your value function coefficient
+just stop tuning that parameter just
+just stop tuning that parameter just
+leave it at
+0.5 yeah set that just hard set value
+0.5 yeah set that just hard set value
+function actually link me your link me
+function actually link me your link me
+your hypers real quick because I didn't
+your hypers real quick because I didn't
+know you were doing that or if if I had
+know you were doing that or if if I had
+seen that I would have told you to not
+seen that I would have told you to not
+do
+that just link me your latest
+hypers holy hell
+hypers holy hell
+there a bunch of stuff in
+here it's really this is just like a
+here it's really this is just like a
+torch
+torch
+end right where they're just doing a
+end right where they're just doing a
+bunch of array Ops so torch
+I could go out
+to send image in Discord
+was
+was
+fine
+fine
+fine probably faster at 32 but fine
+fine probably faster at 32 but fine
+fine
+fine
+fine
+fine it's
+fine it's
+fine all right so this one is troll
+fine all right so this one is troll
+right here this value function
+right here this value function
+coefficient is Troll and then um
+um update epo's borderline
+um update epo's borderline
+here you've got 12 updates on stale data
+here you've got 12 updates on stale data
+cuz 32 131 so four updates per
+cuz 32 131 so four updates per
+Epoch um and then you got three Epoch so
+Epoch um and then you got three Epoch so
+12 if your m is fast basically this
+12 if your m is fast basically this
+number should always be one I know your
+number should always be one I know your
+m is having some speed issues so maybe
+m is having some speed issues so maybe
+it doesn't have to be one but uh that's
+it doesn't have to be one but uh that's
+enough F
+Yi you said it too I
+think I'd be surprised if I set up the
+think I'd be surprised if I set up the
+epox to
+epox to
+three I might have done it because your
+three I might have done it because your
+M is so
+M is so
+slow if your m is fast this is basically
+slow if your m is fast this is basically
+always
+one but yeah set value function to 05
+one but yeah set value function to 05
+and take it out of your sweep
+arguments that's why it's not
+stable let me go check on something real
+stable let me go check on something real
+quick folks
+yeah that's exactly it just try it at05
+yeah that's exactly it just try it at05
+and then if that sucks do a sweep with
+and then if that sucks do a sweep with
+it a sweep without it I mean
+I think I just got to grab
+I think I just got to grab
+this make a puffer
+this make a puffer
+wrapper
+wrapper
+and see what I can do from there
+is this a pit
+is this a pit
+package God damn it they don't have a
+package God damn it they don't have a
+pit
+package it's a
+package it's a
+pain might be ready for multi training
+pain might be ready for multi training
+[Music]
+[Music]
+soon so do they have a pit package
+when are you going to be working on
+when are you going to be working on
+multi- agent
+multi- agent
+stuff um this we like
+stuff um this we like
+either probably next week is what it's
+either probably next week is what it's
+going to be cuz I was sent one thing to
+going to be cuz I was sent one thing to
+do before this
+user support stuff
+thank
+you there you
+go yeah Captain I would suggest I would
+go yeah Captain I would suggest I would
+highly suggest um if you want to start
+highly suggest um if you want to start
+getting into the science side stuff do
+getting into the science side stuff do
+the uh The Continuous breakout pong as a
+the uh The Continuous breakout pong as a
+just a really quick thing because that's
+just a really quick thing because that's
+going to help you figure out what's
+going to help you figure out what's
+going on with your continuous side stuff
+going on with your continuous side stuff
+and then I will I'll get you involved
+and then I will I'll get you involved
+with some of our
+with some of our
+um our multi-agent
+um our multi-agent
+efforts that would be my
+efforts that would be my
+suggestion
+oops nothing private but just I don't
+oops nothing private but just I don't
+try not to leak DMS out of respect
+does not have
+does not have
+logging oops I almost l a bad
+end e
+okay we'll do my all my training has
+okay we'll do my all my training has
+been multi discreet recently due to
+been multi discreet recently due to
+continuous actions yeah so that is part
+continuous actions yeah so that is part
+of our science side stuff right I fixed
+of our science side stuff right I fixed
+breakout so it actually trains and we
+breakout so it actually trains and we
+can start running experiments on that as
+can start running experiments on that as
+well which will be
+fun oh yeah we're getting one more box
+fun oh yeah we're getting one more box
+soon so I think that'll free up one for
+soon so I think that'll free up one for
+you uh cuz I'm going to buy the well I
+you uh cuz I'm going to buy the well I
+don't know how long it takes them to
+don't know how long it takes them to
+ship it to be fair but I'm buying our
+ship it to be fair but I'm buying our
+test node with a 5090 I'm going to get
+test node with a 5090 I'm going to get
+like uh our
+like uh our
+initial like just our like make sure
+initial like just our like make sure
+that these boxes are
+that these boxes are
+good it's pretty nice we'll get
+good it's pretty nice we'll get
+um uh we got like a decent quoted price
+um uh we got like a decent quoted price
+on them they're going to be just over
+on them they're going to be just over
+5500 a box
+so under under quarter million which is
+nice uh
+nice uh
+this shouldn't even be that hard I'm
+this shouldn't even be that hard I'm
+just freaking
+exhausted I'm trying to think about how
+exhausted I'm trying to think about how
+I want to do
+this I had
+a over 4our dentist appointment why is
+a over 4our dentist appointment why is
+my hold on am I not live on
+my hold on am I not live on
+X oh no I am it's just a UI bug
+grabb
+this this is
+theirs and I want his Fork
+I guess I just have to install this
+I guess I just have to install this
+in if I just clone this in puffer lib
+in if I just clone this in puffer lib
+it'll work and then I can make a package
+it'll work and then I can make a package
+later
+right I think that's
+correct yeah we'll do it that way
+okay
+is X like continuously
+is X like continuously
+disconnecting or is it just restream
+disconnecting or is it just restream
+being
+weird it have me
+live it says unable to
+connect and now it shows us
+offline
+offline
+1450 I don't know what's happening to
+1450 I don't know what's happening to
+the
+the
+stream not much I can do about it but
+oh I think Kung made a top Mall
+okay I don't really want to run this
+it'll mess up my
+it'll mess up my
+container I guess what I want to do is I
+container I guess what I want to do is I
+want to just
+want to just
+grab where is
+it oh did I clone the wrong repo hold on
+yeah I CL the wrong
+repo that's this
+one this one also has a
+toml I guess this is what what I want to
+toml I guess this is what what I want to
+do is I want to make this a separate
+do is I want to make this a separate
+wrapper
+okay so we do something like
+this is above Puffer
+back task python yeah we don't like
+that that task python
+rapper is this not used
+reate
+okay I think what you do is you take
+this and then you wrap this so you this
+this and then you wrap this so you this
+goes here
+[Music]
+fig
+args okay so we'll figure out how to get
+args okay so we'll figure out how to get
+these
+these
+and
+and
+then we need a puffer native en
+so do
+M up n
+we do self.
+we do self.
+single observation space
+okay so it's going to be something like
+okay so it's going to be something like
+this or something like this
+now where do these configs come from
+reate rlg
+P lovely
+probably here
+where's the
+PPL e
+okay so here's a different
+en clean
+rln this looks like probably what
+rln this looks like probably what
+kyung
+did oh yeah perfect so he
+did yeah right right
+here so this is pretty much what we want
+yeah I'm going to have to sit down with
+yeah I'm going to have to sit down with
+Kung and help integrate this
+stuff quite a bit
+stuff quite a bit
+here I want to get at least to start on
+here I want to get at least to start on
+this
+though e
+okay so let's go with this instead
+then let's do and
+gym
+API here we get this
+this should be
+this should be
+n
+n
+CFG file
+basically we're going to get rid of
+basically we're going to get rid of
+arbs the way puffer set up
+our
+S Rams
+and then here we have
+and then here we have
+physics I see all this stuff
+good and then we just do
+what
+what
+this
+uhhuh if Sim is in
+config we'll get to that
+okay okay so we get rid of this
+and then this is now device
+and then this is now device
+ID and then
+headless okay so this is not as
+headless okay so this is not as
+bad now all we need to
+bad now all we need to
+do is figure out what files to add
+see
+now we got to go find
+this yep so here's the config file
+right and what else do we
+right and what else do we
+need motion
+need motion
+file and here's the motion file okay
+and that's it for now
+now we have to install a bunch of stuff
+now
+deprecated is it Isaac Jim or Isaac
+deprecated is it Isaac Jim or Isaac
+Sim that we
+use it is Isaac
+gem
+e e
+see if this
+works there we
+go e
+191 Megs is
+right see
+oh yeah that's right
+yes doesn't support
+311 well that's not
+great I'm tempted to make a new
+great I'm tempted to make a new
+container for
+this I could also just
+this I could also just
+install uh 3.9
+oh that's
+easy for
+yep
+you do
+this
+this
+oh
+okay Isaac gem
+okay Isaac gem
+today yeah we're looking at some
+today yeah we're looking at some
+stuff no module dist okay that's weird
+stuff no module dist okay that's weird
+because this definitely
+exists this exists in the I'm tempted to
+exists this exists in the I'm tempted to
+just get a container for
+just get a container for
+this do they ship
+containers cuz here's the thing like if
+containers cuz here's the thing like if
+I were using Isaac Sim one of their
+I were using Isaac Sim one of their
+updated things I could just do
+it do they not have a
+container Je
+I actually don't know what's wrong with
+I actually don't know what's wrong with
+this this is an obnoxious thing with
+this this is an obnoxious thing with
+like
+like
+old shitty old packages
+ah Python 3 Dev okay that's my
+ah Python 3 Dev okay that's my
+bad I don't usually have to install old
+bad I don't usually have to install old
+python versions usually we have stuff on
+python versions usually we have stuff on
+uh something somewhat
+recent puffer should be just fine with a
+recent puffer should be just fine with a
+High Fidelity
+High Fidelity
+Sim I mean the main thing puffer does is
+Sim I mean the main thing puffer does is
+not be slow so if your m is fast then
+not be slow so if your m is fast then
+puffer's fast if your m is slow puffer
+puffer's fast if your m is slow puffer
+tries to make it as fast as it can if
+tries to make it as fast as it can if
+your m is just fast then puffer is just
+fast okay this is NVIDIA Nvidia I'm
+fast okay this is NVIDIA Nvidia I'm
+expecting okay to not be a pain in the
+expecting okay to not be a pain in the
+ass
+surely Nvidia builds good
+surely Nvidia builds good
+software like if you were to pick one
+software like if you were to pick one
+company to expect to build good
+software oh less than 3.9 that's
+software oh less than 3.9 that's
+obnoxious
+okay that's really old
+okay that's really old
+I don't need VMS piss
+off let me make sure this is actually
+off let me make sure this is actually
+what's going on here
+oh yeah look at
+oh yeah look at
+that you do need
+that you do need
+3.8 that's crazy
+all
+all
+right so this should
+work it's
+work it's
+Nvidia there stuff should at least
+Nvidia there stuff should at least
+compile
+better not break my drivers
+okay
+okay
+uh
+uh
+cool so
+cool so
+now if I just have to get puffer working
+now if I just have to get puffer working
+on this
+version we go down to 38
+and then
+and then
+hopefully we can run the environment and
+hopefully we can run the environment and
+start looking at
+it e
+okay so that actually seems like it
+okay so that actually seems like it
+works um
+type object not why do we even have this
+type object not why do we even have this
+[ __ ] typed in the first
+place and I hate I
+place and I hate I
+hate typed python code like this
+look it just causes problems nothing
+else and you just literally end up
+else and you just literally end up
+deleting the bloody types
+okay's see
+good let's look at the
+toml 2
+5.1
+5.1
+okay well maybe
+okay well maybe
+now let me just try to install this as
+now let me just try to install this as
+is and see what
+happens oops not like
+that welcome YouTube folks
+that welcome YouTube folks
+currently integrating an Isaac gym based
+currently integrating an Isaac gym based
+environment seeing if we can get it
+environment seeing if we can get it
+running in
+puffer okay
+did that
+install no module Isaac
+gem uh how's that
+work excuse
+me successfully installed is
+the proper pip package
+the proper pip package
+right it should be installed
+okay now module
+is why the [ __ ] does this require cond
+is it not like does it not work outside
+is it not like does it not work outside
+of the
+environment oh it doesn't work at all
+importing I do I just need to sim link
+importing I do I just need to sim link
+it like the
+hell for
+editable
+install maybe this is the
+problem Maybe This Is It
+there we go editable installs just
+there we go editable installs just
+broken for some weird stupid
+broken for some weird stupid
+reason okay
+Isaac
+Gem High torch was
+Gem High torch was
+[Music]
+[Music]
+imported that's freaking
+hilarious which after Isaac J modules
+hilarious which after Isaac J modules
+really
+so I guess I can just do
+um e
+I just move this does it
+work torch is still getting imported
+first torch is already imported
+first torch is already imported
+yeah yeah
+no module gem
+no module gem
+torch all right what's gy
+torch Why didn't it get
+installed for
+G torch
+oh this is Gem torch
+I
+see I guess if you run from here
+Sim link
+everything it's got a
+Tomo but it's not set up as a package
+Tomo but it's not set up as a package
+you can clearly see
+maybe you do just have to go
+maybe it's just
+maybe it's just
+this it's a separate
+package
+for e
+still no gym
+torch why do pip install
+torch why do pip install
+dot
+instead ah there we
+instead ah there we
+go so now we have gem
+torch
+for e
+chatting with Kung here working on
+chatting with Kung here working on
+figuring out what uh what he's up to and
+figuring out what uh what he's up to and
+how he can help with
+this m.
+tasks all right so now here
+it's
+questionable okay stick to Isaac gy not
+questionable okay stick to Isaac gy not
+Isaac lab
+Isaac lab
+cool for
+asking Kong what's up with the packaging
+asking Kong what's up with the packaging
+here this doesn't make
+sense
+for e
+is hoi
+okay one second folks I'm just figuring
+okay one second folks I'm just figuring
+out what I can do because kung's working
+out what I can do because kung's working
+in parallel on um on this code base but
+in parallel on um on this code base but
+it doesn't seem quite ready to integrate
+it doesn't seem quite ready to integrate
+with puffer
+with puffer
+yet because it's not
+yet because it's not
+packaged I got Isaac I got Isaac Jim up
+packaged I got Isaac I got Isaac Jim up
+and
+running puffy this
+this looks like it's an actual package
+okay I can buy this instead for now
+this looks
+fine this hoi
+all
+right I guess this is what we're doing
+right I guess this is what we're doing
+then basically same thing just slightly
+then basically same thing just slightly
+different
+different
+repo uh I think this one is packaged
+repo uh I think this one is packaged
+already
+so let's also just do
+uh yeah let's just do pip install dot
+uh yeah let's just do pip install dot
+because editable seem screwy
+so this is what we
+so this is what we
+want this this thing
+want this this thing
+here which is very
+similar for
+oops just sent an LS in Discord
+okay so this is actually very
+okay so this is actually very
+similar um very very
+similar for
+I think we got a plan
+I think we got a plan
+here we got a plan
+all right so what we're going to do is
+all right so what we're going to do is
+we're going to take this
+stuff
+stuff
+whoops take all this
+stuff
+stuff
+and swap
+these and now this is going to go
+these and now this is going to go
+here uh I don't want to completely
+here uh I don't want to completely
+remove what I did before though because
+remove what I did before though because
+I'm going to end up doing something very
+similar so this make
+function it's almost exactly the same if
+function it's almost exactly the same if
+you look at
+it for
+so here's our task
+yeah okay this is exactly what I thought
+yeah okay this is exactly what I thought
+it was going to be perfect so I just
+it was going to be perfect so I just
+confirmed some stuff with kyung um
+confirmed some stuff with kyung um
+it's just going to end up
+it's just going to end up
+being some custom stuff in the clean
+being some custom stuff in the clean
+puff Ral script specific for this but
+puff Ral script specific for this but
+for the most part this is just going to
+for the most part this is just going to
+be some Isaac's and bind work
+yeah this is great this is exactly what
+yeah this is great this is exactly what
+uh what we want to be
+doing so I can't really say the details
+doing so I can't really say the details
+of what we're doing for uh this specific
+of what we're doing for uh this specific
+client but I can say that you know we're
+client but I can say that you know we're
+adding Isaac uh Isaac Jim bindings to
+adding Isaac uh Isaac Jim bindings to
+puffer lib and we're going to make sure
+puffer lib and we're going to make sure
+that Isaac Jim play nicely with puffer
+that Isaac Jim play nicely with puffer
+lib as a part of it right and all that
+lib as a part of it right and all that
+stuff goes right back into puffer lib
+stuff goes right back into puffer lib
+and is public so everything is
+and is public so everything is
+everything is fun
+there and then if I look at this this is
+there and then if I look at this this is
+the same pasted code I don't need to
+the same pasted code I don't need to
+change anything there
+change anything there
+numm yeah this is exactly the same
+numm yeah this is exactly the same
+code and then there's this vcas wrapper
+code and then there's this vcas wrapper
+which I'm not sure
+which I'm not sure
+about uh I could leave this in for
+about uh I could leave this in for
+now I probably should leave this in just
+now I probably should leave this in just
+for
+now and then we'll see what comes out of
+now and then we'll see what comes out of
+this
+piie
+pixie
+uh
+cond e
+okay all I got to do I'm still you know
+okay all I got to do I'm still you know
+on the side here going back and forth
+on the side here going back and forth
+through K clarifying A few
+through K clarifying A few
+things but pretty much it looks like I
+things but pretty much it looks like I
+just take this
+just take this
+environment I see what comes out of it
+here
+for e
+okay that's not bad
+okay that's not bad
+um I think that's
+um I think that's
+set now do I have did I make a config
+okay so I think think
+okay so I think think
+probably most of this is the
+probably most of this is the
+same uh obviously I don't need this
+same uh obviously I don't need this
+stuff
+stuff
+right and I do need to go
+right and I do need to go
+check what extra parameters this thing
+check what extra parameters this thing
+has
+yeah let's
+yeah let's
+see what this
+see what this
+has they get SIM
+has they get SIM
+forams parse Sim
+forams parse Sim
+forams yeah but we already have
+forams yeah but we already have
+these then they got
+args oh they do have a motion file
+args oh they do have a motion file
+still is this a thing
+motion file
+dur okay so they actually do have some
+dur okay so they actually do have some
+stuff uh it's actually the repos are
+stuff uh it's actually the repos are
+very
+similar and this
+it's probably
+like cuz I have to get the yeah
+like cuz I have to get the yeah
+fire and then this is
+fcker first pixie
+oh I also can edit uh
+zero so I think that's
+it uh we need
+num
+num
+M
+32 and it's going to be
+2048 e
+that's
+that's
+everything that is
+everything so we got F num threads num
+everything so we got F num threads num
+sub teams num client
+sub teams num client
+threads
+M's let me join there K just hopping on
+M's let me join there K just hopping on
+the
+the
+stream great
+okay so I got this I don't think we need
+okay so I got this I don't think we need
+this anymore we do we have this par Sim
+this anymore we do we have this par Sim
+config
+config
+thing or
+thing or
+Sim oh this is still there yeah this is
+Sim oh this is still there yeah this is
+still there I don't actually know what
+still there I don't actually know what
+is this is
+Sim I could just leave
+Sim I could just leave
+it right gy util
+but what's
+kig our s prams
+ARS where do this config come from oh
+ARS where do this config come from oh
+you just
+you just
+passed
+args okay so this is from the file
+so this yeah this
+config so all you got to do is
+config so all you got to do is
+this that's
+this that's
+fine we'll put this after the
+assert it's pretty good uh one second
+assert it's pretty good uh one second
+let me I'm going to be right back I uh
+let me I'm going to be right back I uh
+let me go talk to One
+let me go talk to One
+Thing
+e e
+okay minor Insurance CLE after 4our
+okay minor Insurance CLE after 4our
+dental
+dental
+procedure
+um K are you
+here X or
+twitch all
+okay so this seems to work
+no module fiz
+hoi
+hoi
+uh wait puffer lib environment
+uh wait puffer lib environment
+from no this should work
+cuz this is a pip package right so I
+cuz this is a pip package right so I
+should be able to
+import no module F hoi
+import no module F hoi
+okay
+um see this is what I wasn't sure about
+um see this is what I wasn't sure about
+with the packaging but this looks like
+with the packaging but this looks like
+it's
+correctly this looks like it's correctly
+done is oh yeah no this is
+correct but there's no fiz
+correct but there's no fiz
+h.n really did I mess up the import
+[Music]
+[Music]
+uh let me
+say from fiz hoyn
+is this a packaging error or
+something hold
+on there's an underscore net
+there there is no setup.py but there's a
+there there is no setup.py but there's a
+toml
+where
+is why is this not
+install that's pixie
+does it not install without
+pixie so I have the package installed I
+pixie so I have the package installed I
+can import the
+package but the like this doesn't show
+up I'm not really familiar with pure P
+up I'm not really familiar with pure P
+project toml based
+project toml based
+packaging um there would be like a find
+packaging um there would be like a find
+packages or a find namespace
+packages or a find namespace
+packages in a in a setup.py
+start
+start
+[Music]
+[Music]
+with God damn it you're making me
+with God damn it you're making me
+install pixie
+fine we'll install this
+garbage freaking com
+garbage freaking com
+you know how dumb it is to have a cond
+you know how dumb it is to have a cond
+inside of a
+inside of a
+Docker it's
+like so
+like so
+bloated but
+bloated but
+fine
+uh
+uh
+okay now
+what reinstall it
+do I have to make a pixie M or
+something
+Pixy pixie shell
+Pixy pixie shell
+they're killing
+me okay so from in
+me okay so from in
+here fix seash
+shell F dep parse
+unexpected keys
+I see so the dependencies are only
+I see so the dependencies are only
+specified under
+pixie why did it let me install
+it and then not have the
+it and then not have the
+packages I'm set
+packages I'm set
+up is it this
+no
+unexpected
+keys I don't
+know what's
+this okay this is
+this okay this is
+garbage R fresh installing box yeah go
+garbage R fresh installing box yeah go
+ahead K you can go ahead do a fresh
+install I'm a bit confused as to how
+install I'm a bit confused as to how
+this is working cuz the package is
+this is working cuz the package is
+building but it doesn't
+building but it doesn't
+have unless I'm doing something very
+have unless I'm doing something very
+stupid
+stupid
+like it builds without
+this but then it doesn't
+this but then it doesn't
+have n
+maybe hold
+on
+but just
+packages tool. setup tools
+yeah this is fine
+log in and log
+log in and log
+out real
+really okay hold
+on still no
+test
+uh the setup.py looks
+uh the setup.py looks
+correct as well I mean the toml looks
+correct as well I mean the toml looks
+correct I Haven I really don't use toml
+correct I Haven I really don't use toml
+that much
+but install with pixie. text
+does this like link to a version of
+does this like link to a version of
+python by default it shouldn't right
+python by default it shouldn't right
+because the toml has the python version
+because the toml has the python version
+right
+right
+yeah
+so unexpected
+keys do I have to init or something
+I don't know how this thing
+works me try
+something when I do it editable
+something when I do it editable
+does that do
+anything oh that works so for whatever
+anything oh that works so for whatever
+reason doing it
+reason doing it
+editable okay
+perfect I got it running without pixie
+perfect I got it running without pixie
+here um you have to install this one
+here um you have to install this one
+editable which is weird because the
+editable which is weird because the
+other one didn't work editable so I
+other one didn't work editable so I
+thought there was a quirk with
+thought there was a quirk with
+3.8
+3.8
+um f no attribute recurrent that's
+um f no attribute recurrent that's
+fine we don't need that we're just going
+fine we don't need that we're just going
+to
+to
+[Music]
+do
+config
+um make got unexpected
+um make got unexpected
+ARS
+name
+name Cuda not oh come on
+God damn it broke my
+God damn it broke my
+Cuda whatever this installed broke my
+Cuda whatever this installed broke my
+Cuda
+um failed
+great damn
+it okay
+it okay
+uh what do I do about
+this what was it that
+installed that installed
+installed that installed
+torch
+um for. version. Cuda
+okay so this is
+okay so this is
+12.1 Cuda
+12.1 Cuda
+12.1 that's definitely
+12.1 that's definitely
+supported new pixie version causing it
+supported new pixie version causing it
+okay cond tools are bad K I'm telling
+okay cond tools are bad K I'm telling
+you cond tools
+you cond tools
+suck but it's fine you want to use it
+suck but it's fine you want to use it
+for now we can use it for now I'm trying
+for now we can use it for now I'm trying
+to figure out why this thing was broken
+to figure out why this thing was broken
+my Cuda
+my Cuda
+completely
+um like what the hell did this thing
+um like what the hell did this thing
+install that broke my
+install that broke my
+Cuda do I have to just reboot the
+container I can try
+container I can try
+that it should
+work stop puffer tank
+okay maybe that fixes it
+seg
+seg
+fault okay so this now I have it but
+fault okay so this now I have it but
+it's seg
+it's seg
+faults
+um
+um
+oops
+Mar okay so this I got torch
+Mar okay so this I got torch
+working and then the seg folds
+somewhere let's see if I can figure out
+somewhere let's see if I can figure out
+where it seg fults probably right here
+where it seg fults probably right here
+right
+yeah so right there it's seg FS so let
+yeah so right there it's seg FS so let
+me figure this out
+me figure this out
+um here's our
+config if the asset path is wrong does
+config if the asset path is wrong does
+it seg
+it seg
+fault because
+fault because
+these this probably needs to have the
+these this probably needs to have the
+full path
+here RL device
+here RL device
+cud and oh headless is
+cud and oh headless is
+false headless should be true
+right headless should be
+true aha there we
+go and now we get as I expected we get
+go and now we get as I expected we get
+the load
+the load
+errors
+so I guess I just got to patch the paths
+so I guess I just got to patch the paths
+here because the config path doesn't
+here because the config path doesn't
+include the uh the full path
+right
+it's so the N
+has
+asset yeah so it's just in the n
+right here I
+think asset
+route uh it was just cuz headless was
+route uh it was just cuz headless was
+off
+young for
+okay now we
+okay now we
+have correct
+path okay what's wrong
+path okay what's wrong
+now
+now
+unsupported unsupported character config
+unsupported unsupported character config
+file
+file
+fiz
+X
+X
+slash is that the
+name
+SM uh that's not where it
+SM uh that's not where it
+is so where's that
+file the path is wrong
+SM
+SM
+SMX where's that come
+from SM
+SMX oh maybe I just don't need to add
+SMX oh maybe I just don't need to add
+the asset file name yeah
+wait so if I just
+look yeah that's it I just I I I just
+look yeah that's it I just I I I just
+don't need to add
+don't need to add
+that here it's just patch
+that here it's just patch
+the the route
+okay is a
+directory uh this is probably my bad
+directory uh this is probably my bad
+let's
+see motion filer
+motion ar.
+motion ar.
+motion walk
+motion walk
+pick slw walk
+pick slw walk
+pick.
+PT
+PT
+boom and
+boom and
+failed to
+failed to
+import data
+import data
+assets
+okay so this
+okay so this
+is it's getting this path from
+somewhere let's see where it's getting
+somewhere let's see where it's getting
+it from
+let see where it's getting the path
+from I don't
+see I don't see a bad path in
+see I don't see a bad path in
+here uh so it's got to be
+here uh so it's got to be
+in
+RS d
+update Tomo so new pixie works thank you
+update Tomo so new pixie works thank you
+very
+very
+nice uh I have it working outside a
+nice uh I have it working outside a
+fixie for now
+fixie for now
+though I'm just trying to fix the paths
+though I'm just trying to fix the paths
+because like it works inside of uh your
+because like it works inside of uh your
+directory but it doesn't work
+globally I'm trying to figure out where
+globally I'm trying to figure out where
+this path is coming from at the
+this path is coming from at the
+[Music]
+[Music]
+moment fiz Hy MJ CF I don't see where
+moment fiz Hy MJ CF I don't see where
+this is getting
+added I don't see this in the
+added I don't see this in the
+configuration a
+anywhere wait hold on
+maybe fiz hoi build Target
+tensors well no this is cuz it went past
+tensors well no this is cuz it went past
+the load
+operation maybe it's in the in the file
+operation maybe it's in the in the file
+itself maybe it's
+hardcoded May it's hard
+CED where is
+[Music]
+[Music]
+it and
+see MJ
+see MJ
+CF yep it's a
+hardcoded look at
+that look at
+that um so for
+now for now I'm going to just update
+now for now I'm going to just update
+I literally did this for people
+I literally did this for people
+yesterday
+yesterday
+um yeah so for packaging side stuff K
+um yeah so for packaging side stuff K
+this is how you do
+it just this is like a quick hack you do
+it just this is like a quick hack you do
+something like
+something like
+this where you just like put the path
+this where you just like put the path
+routes the absolute path routes in the
+routes the absolute path routes in the
+underscore knit or whatever and then you
+underscore knit or whatever and then you
+can just like add this to all their
+can just like add this to all their
+paths and it'll
+paths and it'll
+work for now I'm just going to fix the
+work for now I'm just going to fix the
+paths hard though
+only
+continuous
+continuous
+okay only continuous action
+space let's
+space let's
+see single action
+M's that's a continuous action
+M's that's a continuous action
+spice
+sir hey Joseph what's good I'm uh I'm
+sir hey Joseph what's good I'm uh I'm
+currently
+currently
+adding bindings for Isaac gem stuff to
+adding bindings for Isaac gem stuff to
+puffer we're doing a little bit of High
+puffer we're doing a little bit of High
+Fidelity
+Fidelity
+control we going high
+five okay so
+five okay so
+why why is this being
+weird only continuous action Bas
+supported oh you know what I
+wonder gym do spaces I wonder if this is
+wonder gym do spaces I wonder if this is
+gym gymnasium shenan
+against
+assert quick question about Robo code
+assert quick question about Robo code
+doing Isaac Labs my stuff yeah sure oh
+doing Isaac Labs my stuff yeah sure oh
+is this uh is this tosen
+yep great yeah no half the reason I
+yep great yeah no half the reason I
+stream is so that I can answer questions
+stream is so that I can answer questions
+live so ask
+away when you run Robo code does the
+away when you run Robo code does the
+robot actually and
+robot actually and
+render uh it only renders if you run the
+render uh it only renders if you run the
+the demo for that so like
+you
+you
+see this is what it looks
+like so I have the C render demo set up
+like so I have the C render demo set up
+I didn't even add the python stuff
+I didn't even add the python stuff
+right but yeah this
+right but yeah this
+is this script right here and you should
+is this script right here and you should
+be good to go and you see I didn't even
+be good to go and you see I didn't even
+bother like I didn't even clean up
+bother like I didn't even clean up
+memory or anything here
+yeah this is a gym gymnasium
+yeah this is a gym gymnasium
+thing it's going to be hoer
+thing it's going to be hoer
+lib spaces
+box isn't that what you ran bash scrips
+box isn't that what you ran bash scrips
+yeah bash scripts build yeah that's what
+yeah bash scripts build yeah that's what
+I ran
+scrips build ocean Robo code local and
+scrips build ocean Robo code local and
+then Robo
+then Robo
+code ignore the seg
+code ignore the seg
+fault my systems old
+fault my systems old
+janky yeah you can see I can play it a
+janky yeah you can see I can play it a
+little bit it's very hard to
+little bit it's very hard to
+play but you know you can kind of you
+play but you know you can kind of you
+can actually beat it just by doing that
+uh observation
+spikes why is mine running differently
+spikes why is mine running differently
+what your is doing
+aha not is instance
+one
+one too many values to
+one too many values to
+unpack
+unpack
+uh interesting
+oh OBS I
+see this doesn't give you
+see this doesn't give you
+infos when I run do slash it renders
+infos when I run do slash it renders
+fine when I run with
+fine when I run with
+GDB it renders funny attached is a
+GDB it renders funny attached is a
+picture let's
+picture let's
+see H that's funny
+uh yeah literally he's streaming now you
+uh yeah literally he's streaming now you
+just check if I'm streaming it's like
+just check if I'm streaming it's like
+it's this is the whole
+it's this is the whole
+point
+um yes it's just not loading assets
+um yes it's just not loading assets
+correctly man I don't know why not but
+correctly man I don't know why not but
+uh it's you can see it's rendering the
+uh it's you can see it's rendering the
+text and stuff but it's not loading in
+text and stuff but it's not loading in
+your asset files um um I don't know why
+your asset files um um I don't know why
+GDB would break asset
+loading that's kind of
+weird agent
+boundary I mean you can clearly see
+boundary I mean you can clearly see
+there's a bullet here there's a health
+there's a bullet here there's a health
+score here a health there and a radar be
+score here a health there and a radar be
+over there so that looks to me like it's
+over there so that looks to me like it's
+just not loading in the the assets and
+just not loading in the the assets and
+actually if you look on rip here
+actually if you look on rip here
+actually maybe I can Repro this for you
+actually maybe I can Repro this for you
+real quick
+I don't even see it it didn't even
+render oh no now it does
+render oh no now it does
+this works for me
+this works for me
+man I don't
+know this is with GDB
+on you can look to see if it's not
+on you can look to see if it's not
+loading the textures
+loading the textures
+correctly um you should get right here
+correctly um you should get right here
+like data loaded successfully 512
+like data loaded successfully 512
+512 resource Robo code PNG loaded
+512 resource Robo code PNG loaded
+successfully
+but that's
+weird possibly vs code thing if you're
+weird possibly vs code thing if you're
+running through that I don't
+know welcome YouTube folks we're
+know welcome YouTube folks we're
+currently attempting to get a Isaac's
+currently attempting to get a Isaac's
+Isaac gym based environment integrated
+Isaac gym based environment integrated
+nicely with a puffer
+lib okay so
+here okay
+here okay
+because I don't plan on multiprocessing
+because I don't plan on multiprocessing
+this can I do c to the OBS
+tensors I I think I
+can can you CA in place
+I think that'll work since it's
+I think that'll work since it's
+internally
+internally
+vectorized I should be able to just put
+vectorized I should be able to just put
+everything on
+everything on
+GPU
+GPU
+uh right they're npire rays
+okay going to jump
+okay going to jump
+off I do that I ran through vs code and
+off I do that I ran through vs code and
+it showed me
+it showed me
+might go talk to
+might go talk to
+him maybe I'm doing it wrong thanks and
+him maybe I'm doing it wrong thanks and
+have fun
+have fun
+yeah heavy tools have problems heavy
+yeah heavy tools have problems heavy
+tools have
+problems it's why develop everything in
+problems it's why develop everything in
+[ __ ]
+[ __ ]
+Vim console only it's just less [ __ ]
+Vim console only it's just less [ __ ]
+goes wrong
+yes so we have servation shape um num
+agents there's something screwy here
+agents there's something screwy here
+because uh this numb agent should give
+because uh this numb agent should give
+me yeah this numb agent should give
+me yeah this numb agent should give
+me a bigger
+OBS num
+OBS num
+agents one okay so that's wrong wrong
+agents one okay so that's wrong wrong
+where's this come
+from num
+M's okay it's num M's for some reason
+that'll fix off our
+spaces
+spaces
+okay
+great now we get our
+observations let's return puffer lib
+observations let's return puffer lib
+must return info as a list of dicks
+must return info as a list of dicks
+right our API is a little different
+almost
+done
+clamp got numpy okay yeah that's not
+clamp got numpy okay yeah that's not
+going to
+work uh so we got to do actions equals
+work uh so we got to do actions equals
+Torch from numpy actions. Cuda
+Torch from numpy actions. Cuda
+let's try
+let's try
+that we're making good progress
+that we're making good progress
+here making very good progress here okay
+here making very good progress here okay
+perfect so OBS reward done info I
+perfect so OBS reward done info I
+guessed
+guessed
+right OBS
+right OBS
+shape reward
+shape reward
+shape gun
+shape gun
+shape and
+shape and
+truncations
+truncations
+info ah and info has has some stuff in
+info ah and info has has some stuff in
+it
+um
+R
+R
+terminate
+RL so I guess this is probably
+this is probably from your rapper right
+this is probably from your rapper right
+from kung's rapper here uh we're
+from kung's rapper here uh we're
+probably going to want to change this a
+probably going to want to change this a
+little
+little
+bit episode
+returns return to episode
+returns okay I'm a little confused on
+returns okay I'm a little confused on
+this
+um let me see a plus equal
+rewards okay so I'm going to have to
+rewards okay so I'm going to have to
+help adjust this wrapper a little bit
+help adjust this wrapper a little bit
+because this is
+not okay like
+not okay like
+technically just for for an initial
+technically just for for an initial
+thing I can
+thing I can
+do info equals
+do info equals
+like episode
+return
+return
+me we can do episode
+length I can return info technically I
+length I can return info technically I
+can do this
+and let's see what
+and let's see what
+happens but I think we're going to have
+happens but I think we're going to have
+to fix that wrapper because that's not
+to fix that wrapper because that's not
+that's not a correct computation of
+return mean could not infer output okay
+got
+got
+in
+item hello
+by device side assert
+trigger what is wrong
+oh yeah one of those
+oh yeah one of those
+fun evaluate
+fun evaluate
+send actions I assume the actions are
+send actions I assume the actions are
+like the wrong data type or something
+how the hell is the action dim 153
+how the hell is the action dim 153
+that's
+obsene torch float 32 should probably be
+fine and it actually is
+[Music]
+so I'm assuming they bad actions in
+here let's try this
+here let's try this
+so bad that it broke the
+so bad that it broke the
+uh broke
+torch actions MP the
+max okay what's so bad about this
+what is so bad about uh about
+this Cuda get me
+uh I think I just have to run this on
+uh I think I just have to run this on
+CPU
+right okay so we're still going to get
+right okay so we're still going to get
+the device side ofert because it's
+the device side ofert because it's
+happening on the N
+happening on the N
+side
+um device
+is
+balse e
+okay M VI's GPU okay I just got
+okay M VI's GPU okay I just got
+to
+to
+[Music]
+[Music]
+config got to add it
+config got to add it
+here use GPU
+unrecognized m
+dot oh it's uh hold
+dot oh it's uh hold
+on CI the
+on CI the
+dash no attribute use GPU
+okay now we get
+okay now we get
+our our uh
+our our uh
+actions Max
+actions Max
+actions for.
+actions for.
+men okay so there's a
+men okay so there's a
+we didn't get the error out of this
+we didn't get the error out of this
+let's see we should get the error
+now
+now
+um
+um
+index 79 is out of
+Bounce
+Bounce
+interesting compute
+observations so how's that happen
+how does that
+happen we added
+this this
+this this
+clip index
+clip index
+79 I guess I got to just like go look at
+79 I guess I got to just like go look at
+this
+this
+right uh I don't know where like how
+right uh I don't know where like how
+this could be triggered
+let me
+see OBS
+equal okay so
+equal okay so
+here we are obs
+Max okay so we got some funky OBS here
+Max okay so we got some funky OBS here
+right
+right
+but
+but
+yes self- progress buff
+clone 879 is
+this
+this
+hoi data dict
+hoi data dict
+zero hoi
+zero hoi
+data tape
+I wonder if the m is
+done is the m just done
+here yeah I wonder if the m is just
+done okay so there's a true
+okay so I think it's going to
+okay so I think it's going to
+be if
+all self do
+terminals um we
+do I think we do
+do I think we do
+this is this it
+okay we have this set to massive badge
+okay we have this set to massive badge
+size uh so let's reduce this now
+size uh so let's reduce this now
+like
+six okay there we go this runs
+great so now we make it
+faster now we make it
+faster first thing we
+faster first thing we
+do how long does this take to AIT let's
+do how long does this take to AIT let's
+see
+going to set this on
+GPU that is incredibly slow
+we do usually
+we do usually
+40 40 96
+40 40 96
+M's and then we'll do a mini batch
+of
+32k let's see
+did recurrent here
+add an lstm because why not
+okay so I thought Isaac Sim was supposed
+okay so I thought Isaac Sim was supposed
+to be Isaac Jim was supposed to be
+to be Isaac Jim was supposed to be
+fast isn't
+fast isn't
+it why is it this freaking slow
+97%
+time in the
+environment this means that puffer is
+environment this means that puffer is
+adding like no overhead and we're just
+adding like no overhead and we're just
+waiting on the stupid Sim
+how
+many e
+okay let's try some settings
+okay let's try some settings
+16 one does this do anything
+holy
+slow how's it that
+slow how's it that
+slow I thought Isaac's gym was fast
+to leave this at what it was before
+to leave this at what it was before
+because
+holy
+holy
+um what did they have this set
+at they have some good settings for
+at they have some good settings for
+us
+4 2 48 m
+that's
+that's
+sad four mini
+batches I can match these settings
+or mini
+or mini
+batches update
+batches update
+EPO six which is
+obscene advantage C coefficient
+obscene advantage C coefficient
+two value
+loss
+false five
+false five
+they got some crazy settings in
+here this is a
+here this is a
+five Max rad
+five Max rad
+[Music]
+Norm
+Norm
+no
+o5 learning
+rate - 4
+[Music]
+[Music]
+and
+Gamma
+Lambda yes these don't even look
+Lambda yes these don't even look
+tuned like at all this is just some
+tuned like at all this is just some
+scientist that just like slapped some
+scientist that just like slapped some
+parameters and hoped it
+parameters and hoped it
+worked
+worked
+um I can run it with this but
+um I can run it with this but
+holy and they did 20 48m only as
+well what's this
+do that is painfully slow
+okay I I got it running though um I
+okay I I got it running though um I
+probably fix this episode return rapper
+probably fix this episode return rapper
+because that's
+because that's
+wrong
+wrong
+and then I get to ship this to
+K how fast is Isaac Jim supposed to run
+oh this is greater than
+oh this is greater than
+10,000 yeah that's crazy slow but they
+10,000 yeah that's crazy slow but they
+say that
+multi-agent okay they say that this can
+multi-agent okay they say that this can
+be
+be
+fast um
+um they say it can be
+fast let me just fix uh I'm going use a
+fast let me just fix uh I'm going use a
+restro real quick and then we're going
+restro real quick and then we're going
+to fix this environment
+wrapper and then we'll uh I'll chat with
+wrapper and then we'll uh I'll chat with
+Kung on a couple things oh I haven't
+Kung on a couple things oh I haven't
+been checking my Discord at all have
+I yeah one sec toen let me use a
+I yeah one sec toen let me use a
+restroom real quick be right
+back
+e e
+okay what can I
+okay what can I
+uh what can I do for you to send
+going over the bot you originally coded
+going over the bot you originally coded
+yeah it's a really stupid
+bot I think I spent all of 20 minutes on
+bot I think I spent all of 20 minutes on
+it
+default seems to be one m one robot next
+default seems to be one m one robot next
+406 yeah so K that's not how Isaac Isaac
+406 yeah so K that's not how Isaac Isaac
+Jim Works fast so if we can switch it
+Jim Works fast so if we can switch it
+cuz like we're not going to be able to
+cuz like we're not going to be able to
+get anything done at 10,000 steps per
+get anything done at 10,000 steps per
+second right we just
+second right we just
+not uh you were using the pose of the
+not uh you were using the pose of the
+other robot to be accurate when shooting
+other robot to be accurate when shooting
+we won't actually do that right
+we won't actually do that right
+shouldn't have access to the other
+shouldn't have access to the other
+robot's pose only yes
+robot's pose only yes
+exactly um so scripted Bots are allowed
+exactly um so scripted Bots are allowed
+to cheat essentially so we can have some
+to cheat essentially so we can have some
+built-in scripted opponents that can
+built-in scripted opponents that can
+cheat that's fine but when we're
+cheat that's fine but when we're
+training the RL Bots they're only going
+training the RL Bots they're only going
+to have access to the observations that
+to have access to the observations that
+they would get as defined by the
+they would get as defined by the
+original game you know scanning radar
+original game you know scanning radar
+and all that
+it's a very common way of building an
+it's a very common way of building an
+enemy AI is you just let the enemy cheat
+enemy AI is you just let the enemy cheat
+it's pretty
+simple e
+okay got you program to cheat then have
+okay got you program to cheat then have
+class now talk to you later yeah thanks
+class now talk to you later yeah thanks
+to awesome good work on
+to awesome good work on
+this uh where's the thing with
+K where my Discord go
+all right
+default board
+episode all right so let me see how this
+episode all right so let me see how this
+thing is is working at the moment um cuz
+thing is is working at the moment um cuz
+this is not
+correct I think what we're going to do
+reset and buy
+these oh also Kung I think that this um
+these oh also Kung I think that this um
+this reset is wrong as well because if
+this reset is wrong as well because if
+they're all separate environments then
+they're all separate environments then
+waiting for them all to be done right
+waiting for them all to be done right
+now before I reset any of
+them I'm not blaming you on this reset
+them I'm not blaming you on this reset
+rapper CH it's just it's wrong so I have
+rapper CH it's just it's wrong so I have
+to think about
+to think about
+it I think it's wrong at
+least Captain says finished a one bill
+least Captain says finished a one bill
+sweep did
+sweep did
+better we flaw still slowly exploding
+better we flaw still slowly exploding
+let me check can you put that link in
+let me check can you put that link in
+the Discord the uh the chat window is
+the Discord the uh the chat window is
+broken at the moment the clickable one
+broken at the moment the clickable one
+is
+is
+broken I will take a quick second to
+broken I will take a quick second to
+check that on list
+stream e
+okay this looks good
+right yeah this is better than
+before look at this this is still going
+before look at this this is still going
+up over here this burst hit you still
+up over here this burst hit you still
+have metrics that are going
+have metrics that are going
+up okay interesting with the value loss
+well your KL is
+well your KL is
+not amazing
+either me look at your
+stuff to be fair your losses I was just
+stuff to be fair your losses I was just
+uh a puffer bug was reported all your
+uh a puffer bug was reported all your
+losses are going to be scaled
+losses are going to be scaled
+up oh actually maybe your value loss
+up oh actually maybe your value loss
+isn't that bad Captain because I got a
+isn't that bad Captain because I got a
+bug report I haven't fixed it yet but
+bug report I haven't fixed it yet but
+I'm actually scaling all of the losses
+I'm actually scaling all of the losses
+by a factor of the number of epoch and
+by a factor of the number of epoch and
+you have multiple
+you have multiple
+epochs so if you have three Epoch
+epochs so if you have three Epoch
+actually your value loss is only like
+actually your value loss is only like
+0.2 or something so maybe this isn't
+0.2 or something so maybe this isn't
+that bad
+is this clip coefficient supposed to be
+0.1 I mean it's still slowly exploding
+0.1 I mean it's still slowly exploding
+right
+but yeah I got to fix
+that the default and clean if that's the
+that the default and clean if that's the
+clean RL default then it's
+good oh actually your target KL being 0.
+good oh actually your target KL being 0.
+2 uh that's probably why your KL is 0. 2
+2 uh that's probably why your KL is 0. 2
+isn't it or is it 0.02 let me
+see no it's 0.02 never
+see no it's 0.02 never
+mind so the kl's
+fine ENT triy is very
+fine ENT triy is very
+low honestly I can't tell you if this is
+low honestly I can't tell you if this is
+exploding this could be stabilizing over
+exploding this could be stabilizing over
+here and if this is divide by 3 it's
+here and if this is divide by 3 it's
+only it's less than 2 this could be
+fine yeah all of them are going to be
+fine yeah all of them are going to be
+lower by a factor of
+three so you know I wouldn't worry about
+three so you know I wouldn't worry about
+it until you see stuff crashing so when
+it until you see stuff crashing so when
+you see episode return
+you see episode return
+crash um that's when we can worry about
+crash um that's when we can worry about
+the value function
+the value function
+I think as long as you're going as win
+I think as long as you're going as win
+rate and episode return are stable going
+rate and episode return are stable going
+up you're fine for
+now try to train for longer
+now try to train for longer
+yeah what's the throughput of this
+yeah what's the throughput of this
+thing performance
+140 140k
+140 140k
+okay can I resume training runs easily I
+okay can I resume training runs easily I
+haven't tried I think you can I don't
+haven't tried I think you can I don't
+usually you should be able to load it in
+usually you should be able to load it in
+though you might have to fiddle with it
+though you might have to fiddle with it
+a little bit but you should be able to
+a little bit but you should be able to
+pass it to
+pass it to
+checkpoint I don't know if it'll like
+checkpoint I don't know if it'll like
+screw with the WB graphs or what
+this looks good
+though I really would like to get your
+though I really would like to get your
+training up by another like 3x or
+training up by another like 3x or
+whatever because if we can get it to
+whatever because if we can get it to
+like 500k then you can start running
+like 500k then you can start running
+proper sweeps I mean the thing is this m
+proper sweeps I mean the thing is this m
+takes long enough to train that like
+takes long enough to train that like
+you're probably going to have to run 500
+you're probably going to have to run 500
+million step
+million step
+sweeps like at 100,000 it's kind of slow
+right like it takes long enough to train
+right like it takes long enough to train
+that we're going to have to run 500 mil
+that we're going to have to run 500 mil
+sweeps I was thinking we can probably
+sweeps I was thinking we can probably
+add some early stopping stuff so like if
+add some early stopping stuff so like if
+after 100 Mil you know you don't have
+after 100 Mil you know you don't have
+point2 we can just stop the
+point2 we can just stop the
+runs um so that'll help some like once
+runs um so that'll help some like once
+we integrate that you could actually
+we integrate that you could actually
+help with that it's pretty easy
+help with that it's pretty easy
+um but yeah
+this burst hit is kind of good over here
+this burst hit is kind of good over here
+you see like like you have metrics that
+you see like like you have metrics that
+are still going
+up it's good to log stuff like this
+up it's good to log stuff like this
+right cuz like if you like have shops
+right cuz like if you like have shops
+hit with a specific weapon right maybe
+hit with a specific weapon right maybe
+it takes a while to figure out a
+it takes a while to figure out a
+specific weapon
+specific weapon
+this is good
+though that's
+though that's
+K default
+K default
+copied we said done m in clean AR
+copied we said done m in clean AR
+script okay maybe I N some SPS off of
+this done indices
+oh yeah that's
+good let me try
+good let me try
+this I do have weapon specific metrics
+this I do have weapon specific metrics
+in logs but I sum them in Python because
+in logs but I sum them in Python because
+I haven't needed them
+I haven't needed them
+yet sum
+them presumably you've looked at the
+them presumably you've looked at the
+logging for some of the complex M's
+logging for some of the complex M's
+right to see how to do
+it okay as long as you've looked at it
+it okay as long as you've looked at it
+and you're doing it
+right
+oops
+um one
+do
+observations how about
+observations how about
+this is
+this is
+this good for
+this good for
+us or is this bad for
+us shape the
+us shape the
+mismatch cannot be
+mismatch cannot be
+broadcast all right
+oops okay so this is
+empty
+empty
+if indices
+shape a mismatch
+so these are done in deas
+right okay so that's not resetting
+correctly for
+okay CH is there a weird thing where it
+okay CH is there a weird thing where it
+returns all of the observations even
+returns all of the observations even
+when you just reset specific IDs
+it seems to not be respecting
+this cuz it's returning me a full batch
+this cuz it's returning me a full batch
+even if I give it
+IDs I'm fix logging in the meantime
+yeah internally reset provides
+yeah internally reset provides
+IDs but returns okay so it does
+IDs but returns okay so it does
+correctly though it does correctly reset
+correctly though it does correctly reset
+just the M's
+just the M's
+for the indices you give it doesn't
+for the indices you give it doesn't
+reset them all for some dumb reason
+reset them all for some dumb reason
+right so this is
+safe see if that makes it faster or
+slower doesn't seem to change
+slower doesn't seem to change
+perf yep
+perf yep
+okay doesn't seem to change
+okay doesn't seem to change
+perf that's kind of weird that like
+perf that's kind of weird that like
+early
+early
+resetting doesn't really change perf
+well I will at least fix this return
+well I will at least fix this return
+rapper right now and we'll go from
+rapper right now and we'll go from
+there so
+lot of
+lot of
+inefficiencies yeah we are absolutely
+inefficiencies yeah we are absolutely
+going to have to like put them all in
+going to have to like put them all in
+one scene or something because we're not
+one scene or something because we're not
+going to be able to do anything with
+going to be able to do anything with
+11,000 steps per second just like
+11,000 steps per second just like
+straight up we're not going to be able
+straight up we're not going to be able
+to do anything um like 100k minimum for
+to do anything um like 100k minimum for
+us to be able to like
+us to be able to like
+function on
+function on
+this and Isaac Jim is supposed to be
+this and Isaac Jim is supposed to be
+able to hit like hundreds of thousands
+able to hit like hundreds of thousands
+of steps per second if you batch it's
+of steps per second if you batch it's
+just not set up
+just not set up
+correctly um you know for whatever
+correctly um you know for whatever
+reason these GPU Sims like you have to
+reason these GPU Sims like you have to
+put all the robots in one C and it's
+put all the robots in one C and it's
+kind of stupid but I think we should
+kind of stupid but I think we should
+need to do that
+need to do that
+because yeah this is
+because yeah this is
+not like we can't do anything with 11k
+not like we can't do anything with 11k
+SPS this is freaking slower than
+Atari at least we get like 30k out of
+Atari at least we get like 30k out of
+Atari
+sh
+digging inside
+yeah return
+episode do like this
+episode do like this
+then what we do
+then what we do
+is the done ones here we're going to
+is the done ones here we're going to
+have to
+Loop
+episode for
+equals
+e
+e
+e
+e e
+yeah I think this should be
+correct a list of dicks
+there we
+go so you you might want to double check
+go so you you might want to double check
+this
+um but this looks
+better
+e
+e e
+yeah I'm pushing this for you to play
+yeah I'm pushing this for you to play
+with
+with
+k
+um you should probably give me perms
+um you should probably give me perms
+[Music]
+[Music]
+to
+wait oh yeah this is all I changed
+wait oh yeah this is all I changed
+here um
+here um
+would you like me to push this to a
+would you like me to push this to a
+branch or do you want to integrate this
+branch or do you want to integrate this
+more generally like all you have to do
+more generally like all you have to do
+to fix this so it works with both your
+to fix this so it works with both your
+script and my script is uh do the like
+script and my script is uh do the like
+the root path thing maybe I'll just do
+the root path thing maybe I'll just do
+that for you right now let's see it's
+that for you right now let's see it's
+5:30 yeah I can probably just do that
+5:30 yeah I can probably just do that
+for you right
+for you right
+now
+um let me think how to do this
+yeah I should be able to do that
+yeah I should be able to do that
+so also is this thing
+so also is this thing
+training K I think that this thing is
+training K I think that this thing is
+actually
+training the the return has gone up it
+training the the return has gone up it
+was below 0.04 when I
+was below 0.04 when I
+started
+started
+so I think I actually got this thing
+so I think I actually got this thing
+training like zero
+shot is probably probably not great but
+shot is probably probably not great but
+it looks like it's going up a
+bit I grabbed all the parameters from
+bit I grabbed all the parameters from
+the clean RL file I don't know how fast
+the clean RL file I don't know how fast
+your training is with uh with clean RL
+your training is with uh with clean RL
+it's probably pretty similar since the M
+it's probably pretty similar since the M
+is so
+slow we'll do up to some level
+I've seen it with clean RL
+I've seen it with clean RL
+cool is this how fast clean RL runs as
+cool is this how fast clean RL runs as
+well I wouldn't think clean RL would be
+well I wouldn't think clean RL would be
+any faster than this it's 96% M time
+any faster than this it's 96% M time
+unless I broke something in the
+wrapper this is running with an lstm and
+everything
+everything
+similar cool I mean that's expected
+similar cool I mean that's expected
+right it's your hard bottleneck by the
+right it's your hard bottleneck by the
+end so once we make the M faster then
+end so once we make the M faster then
+puffer lib will actually be able to keep
+puffer lib will actually be able to keep
+up with it whereas basically narl
+wouldn't right
+so uh enter
+think that we do like this
+please push to a branch yeah let me fix
+please push to a branch yeah let me fix
+your path first
+perfect
+e e
+yeah this thing is definitely training I
+yeah this thing is definitely training I
+don't know how good it works with clean
+don't know how good it works with clean
+RL um but this thing is definitely
+RL um but this thing is definitely
+training so you should be able to use
+training so you should be able to use
+this for
+this has sweeps and W be integrated as
+this has sweeps and W be integrated as
+well so
+not able to fully
+replicate well yeah I mean you should be
+replicate well yeah I mean you should be
+like we should be able to use this for
+like we should be able to use this for
+basically both code bases it's almost
+basically both code bases it's almost
+identical
+right like I have this pushed like the
+right like I have this pushed like the
+code for ASC should be basically
+code for ASC should be basically
+identical to this
+also one thing to
+type one question there typed for you um
+tasks wait did
+I I'm
+confused this is not what I I did
+right okay I'm going to kill this cuz
+right okay I'm going to kill this cuz
+this definitely works it's not logging
+this definitely works it's not logging
+anyways
+so it's it's just it's a similar thing
+so it's it's just it's a similar thing
+with a better code base but we are going
+with a better code base but we are going
+to be able to do the full thing
+right do they have do they have
+right do they have do they have
+comparable numbers like are there
+comparable numbers like are there
+numbers on both of the papers to see how
+numbers on both of the papers to see how
+good those things are
+that would be useful to
+have okay you can't give it a path hold
+on okay well we got to give them the
+on okay well we got to give them the
+thing they asked
+thing they asked
+for unless we have a compelling evidence
+for unless we have a compelling evidence
+that this is
+better I'll take a look through both the
+papers before tomorrow
+um yeah this thing doesn't like
+um yeah this thing doesn't like
+strings we'll just do like that this
+strings we'll just do like that this
+thing doesn't like
+um doesn't like this we'll just do like
+um doesn't like this we'll just do like
+this
+okay
+cool we definitely need to get some like
+cool we definitely need to get some like
+just some baselines up and running and
+just some baselines up and running and
+we need it to be faster than this
+we need it to be faster than this
+because like we're just not going to get
+because like we're just not going to get
+anything done in a reasonable amount of
+anything done in a reasonable amount of
+time with training going at this speed
+time with training going at this speed
+so I would say like getting this thing
+so I would say like getting this thing
+if you can get the same thing loaded but
+if you can get the same thing loaded but
+instead of having it be 4,000 of like
+instead of having it be 4,000 of like
+4,000 scenes with one robot if it's just
+4,000 scenes with one robot if it's just
+like the same robot at like 4,000
+like the same robot at like 4,000
+stations in one scene if we can get that
+stations in one scene if we can get that
+fast that's going to be very very
+fast that's going to be very very
+important plus that'll be good for
+important plus that'll be good for
+puffer right that's like that's the
+puffer right that's like that's the
+version of Isaac we want in puffer like
+version of Isaac we want in puffer like
+this is completely useless as a
+this is completely useless as a
+environment like 11,000 you can't do
+environment like 11,000 you can't do
+anything with that
+what do I run here
+what do I run here
+wait oh
+cleaner I'm making sure that I didn't
+cleaner I'm making sure that I didn't
+break your
+break your
+script well I didn't install all the
+script well I didn't install all the
+stuff but fine you can test this I I
+stuff but fine you can test this I I
+doubt I broke your script it should be
+doubt I broke your script it should be
+fine
+as is 50K
+uh did you add me to this thing do I
+uh did you add me to this thing do I
+have to accept
+something I should just be added
+right I want to give you this
+Branch oh there it is
+huh I hit this
+check where the hell is this
+check where the hell is this
+I does the check not
+I does the check not
+actually do anything or is it
+just can you send it again I think I'm
+just can you send it again I think I'm
+not supposed to hit the
+check maybe is it in my
+check maybe is it in my
+email and freaking
+GitHub I want to give you these
+changes oh there it
+changes oh there it
+is got
+is got
+it I got it it's just the UI was weird
+it I got it it's just the UI was weird
+if you hit the check mark that doesn't
+if you hit the check mark that doesn't
+accept it it just deletes it so check
+accept it it just deletes it so check
+means delete I
+guess okay
+oops oh that's weird now it just works
+oops oh that's weird now it just works
+all right cool so there's your
+branch and uh you also have Isaac Jim
+branch and uh you also have Isaac Jim
+Branch on puffer
+Branch on puffer
+Li all right so that ought to work for
+you ASC is 50k do you know is ASC is it
+you ASC is 50k do you know is ASC is it
+is that with
+is that with
+one per
+one per
+scene or is that already parallelized
+scene or is that already parallelized
+like all the things in one scene so I'm
+like all the things in one scene so I'm
+pretty damn sure we want to put
+pretty damn sure we want to put
+everything in one
+everything in one
+scene like there's a huge huge
+scene like there's a huge huge
+difference between 50k and 500k as far
+difference between 50k and 500k as far
+as what we're going to be able to do
+as what we're going to be able to do
+with that like 500k means we can just
+with that like 500k means we can just
+Auto solve it with aggressive hyper pram
+Auto solve it with aggressive hyper pram
+sweeps 50k means we kind of have to do
+sweeps 50k means we kind of have to do
+stuff manually and guess
+CL
+CL
+1% no
+1% no
+fingers I
+see we want was itnl humanoid
+is it
+is it
+this I don't
+know I haven't seen others well that's
+know I haven't seen others well that's
+how Isaac Sim works right look
+it's the same as
+Isaac yeah look you see these demos all
+Isaac yeah look you see these demos all
+the time right where they have like a
+the time right where they have like a
+million robots in one
+M I'm pretty damn sure this is what you
+M I'm pretty damn sure this is what you
+do like look you see they have like them
+do like look you see they have like them
+all in one M like this
+I've seen this all over the place and
+I've seen this all over the place and
+I'm pretty sure it's because the way
+I'm pretty sure it's because the way
+that the physics Sim works you can't
+that the physics Sim works you can't
+parallelize the GPU computations over
+parallelize the GPU computations over
+instances you got to do it over uh in
+instances you got to do it over uh in
+one map I'm pretty
+one map I'm pretty
+sure that's only rendering
+really then why is it so
+really then why is it so
+slow I mean this thing is supposed to be
+slow I mean this thing is supposed to be
+faster right
+okay that's
+okay that's
+slow I thought this is supposed to be
+slow I thought this is supposed to be
+fast
+here for
+just ask Twitter
+and
+cool we're
+cool we're
+good so I mean that's
+that is
+working let me go look at this ASC
+paper what's it called action something
+paper what's it called action something
+or
+other this it
+find
+[Music]
+it
+it
+this and
+this and
+[Music]
+[Music]
+then
+this okay
+yeah I got it
+so adversarial skill and
+beddings is there a
+paper this
+paper this
+one
+okay and and then what's this Fizz
+hoi so we got this these guys have any
+comparable
+comparable
+benchmarks where's table
+not really comptable
+H fiz okay so that's a late wait I'm
+H fiz okay so that's a late wait I'm
+confused there so fiz hoi is a later
+paper so this thing
+paper so this thing
+has I mean this thing has a better model
+has I mean this thing has a better model
+though doesn't
+though doesn't
+it this is like a better humanoid
+it this is like a better humanoid
+model and then this is like a simplified
+model and then this is like a simplified
+thing is
+that or no cuz this has
+fingers this just has a
+fingers this just has a
+sword is
+that it's just the render
+that it's just the render
+ring okay so it's the
+same ASC is a simpler okay so hoi is a
+same ASC is a simpler okay so hoi is a
+more complex so we got that repo running
+more complex so we got that repo running
+is good
+right
+right
+fingers robot
+object but this is not for then is this
+object but this is not for then is this
+for animations what is this for physics
+for animations what is this for physics
+based
+imitation this might be too high
+imitation this might be too high
+fidelity
+fidelity
+honestly this might be too high fidelity
+honestly this might be too high fidelity
+though because
+like this is like for
+like this is like for
+accurate object interaction this is like
+accurate object interaction this is like
+too much just for animation right
+got to make the training fully work does
+got to make the training fully work does
+it not fully work at the
+it not fully work at the
+moment I mean this thing
+learns hey bet
+learns hey bet
+Biz Hy is for
+Biz Hy is for
+actual is it if I pull up the other
+paper looking fit still not at all man
+paper looking fit still not at all man
+I'm down 15 lbs in like 3 weeks and my
+I'm down 15 lbs in like 3 weeks and my
+lung capacity is totally
+lung capacity is totally
+destroyed um it is not a good
+time maybe may be but
+time maybe may be but
+it's it's pretty
+rough that's not
+this I'll go find the paper
+so are you sure Kung like this
+is what they're using here is not
+is what they're using here is not
+focused on like fine
+focused on like fine
+grained like fine grained object
+grained like fine grained object
+interaction this is focused on like
+interaction this is focused on like
+animation
+as e oh I see what you mean yeah cuz the
+as e oh I see what you mean yeah cuz the
+fiz hoi is more fine okay yeah yeah okay
+fiz hoi is more fine okay yeah yeah okay
+I I see you're
+right
+right
+um it doesn't yeah I know X is GL X is
+um it doesn't yeah I know X is GL X is
+glitched today I don't know what's wrong
+glitched today I don't know what's wrong
+with
+with
+it started and moved on
+it started and moved on
+okay well this is what we want to get to
+can
+we okay I'll figure out tomorrow to make
+we okay I'll figure out tomorrow to make
+sure we're like loading in the correct
+sure we're like loading in the correct
+bot in the correct scenes and
+bot in the correct scenes and
+stuff
+um the good thing is we got Isaac Jim
+um the good thing is we got Isaac Jim
+bound
+bound
+though we got Isaac in Bound to puffer
+though we got Isaac in Bound to puffer
+and you've started playing around with a
+and you've started playing around with a
+few different
+few different
+repos getting training working and such
+now it comes to my attention that this
+now it comes to my attention that this
+is frozen so really this is the part
+is frozen so really this is the part
+that we're looking
+that we're looking
+at is uh this like this is the RL Loop
+at is uh this like this is the RL Loop
+right here
+I don't fully understand
+I don't fully understand
+how the imitation and the RL data are
+how the imitation and the RL data are
+mixing
+mixing
+here
+um I guess what I have is I just have
+um I guess what I have is I just have
+like a pure a pure RL task running right
+like a pure a pure RL task running right
+but it is loading motion file so I don't
+but it is loading motion file so I don't
+exactly know what it's
+doing like I don't actually know exactly
+doing like I don't actually know exactly
+what it is I have bindings for like
+what it is I have bindings for like
+Isaac Jim yeah but I don't know what the
+Isaac Jim yeah but I don't know what the
+scenes and stuff were loaded in
+do you know what the humanoid that we're
+do you know what the humanoid that we're
+using is called I would like to know
+using is called I would like to know
+what humanoid we're currently
+what humanoid we're currently
+using for both of
+using for both of
+these you can find
+that trying to control the
+that trying to control the
+robot that looks like the input
+motion so what the rln
+motion so what the rln
+is the rln is like rewarding you for
+is the rln is like rewarding you for
+matching a trajectory already is that is
+matching a trajectory already is that is
+that what it
+is is that their whole code base or is
+is is that their whole code base or is
+that just the N is that in the N player
+that just the N is that in the N player
+like the thing that I bound to
+like the thing that I bound to
+puffer is this actually like human
+puffer is this actually like human
+regularized is this like trying to
+regularized is this like trying to
+regularize towards a human policy or is
+regularize towards a human policy or is
+this like just some random Isaac task
+yeah well not
+yeah well not
+falling so it is
+regularized
+regularized
+okay we're going to have to get the
+okay we're going to have to get the
+renderer working so we can play with
+it I want to see what the heck we're
+it I want to see what the heck we're
+actually doing
+actually doing
+ball playing lotions trying to match
+okay yeah well we're going to need to
+okay yeah well we're going to need to
+match that's probably not the type of
+match that's probably not the type of
+stuff we're going to want to match right
+stuff we're going to want to match right
+the point is if we've got the we've got
+the point is if we've got the we've got
+the Sim configured um they're like some
+the Sim configured um they're like some
+extra losses that are going to have to
+extra losses that are going to have to
+go into clean puff so you can play
+go into clean puff so you can play
+around with the ASC code base for a bit
+around with the ASC code base for a bit
+and then hopefully we can get the ASC M
+and then hopefully we can get the ASC M
+loaded into puffer and then added to
+loaded into puffer and then added to
+clean puff RL and hopefully we can get a
+clean puff RL and hopefully we can get a
+fast enough we can get the scene running
+fast enough we can get the scene running
+fast enough that we can do like hyper
+fast enough that we can do like hyper
+pram tuning and stuff and auto solve cuz
+pram tuning and stuff and auto solve cuz
+I can tell just looking at the default
+I can tell just looking at the default
+hyper prams um that they were not
+tuned I can tell just looking at it they
+tuned I can tell just looking at it they
+were not tuned
+this is very hard to port to right
+DM
+DM
+Nate
+what this is only updated to python 310
+what this is only updated to python 310
+really
+you kidding
+me dude what the
+me dude what the
+hell literally their latest thing is
+hell literally their latest thing is
+only
+310 this is only 2.6k
+310 this is only 2.6k
+Stars imagine passes
+that all
+that all
+right anything else for the time being
+right anything else for the time being
+CH or we uh we good for now I uh I think
+CH or we uh we good for now I uh I think
+I've gotten the thing done I needed for
+I've gotten the thing done I needed for
+today
+today
+um probably going to go grab dinner and
+um probably going to go grab dinner and
+then I might come back and start on some
+then I might come back and start on some
+oblations if I have any more energy left
+oblations if I have any more energy left
+for the
+for the
+day it's probably what I'm going to do I
+day it's probably what I'm going to do I
+might come back and stream a little bit
+might come back and stream a little bit
+later in the evening if I work I'll
+later in the evening if I work I'll
+stream it may as
+well or I could review uh bet I owe you
+well or I could review uh bet I owe you
+some code reviews as well so I could do
+some code reviews as well so I could do
+that
+yeah I got to eat first though go to
+yeah I got to eat first though go to
+find the humanoid model why is there no
+find the humanoid model why is there no
+yeah K if you can just like send me the
+yeah K if you can just like send me the
+basic obvious information that you would
+basic obvious information that you would
+ask about what we've done so far um that
+ask about what we've done so far um that
+would be great I think we've made some
+would be great I think we've made some
+pretty damn good progress for you know
+pretty damn good progress for you know
+just having been working on this for a
+just having been working on this for a
+few days um you know but I'd like to
+few days um you know but I'd like to
+actually have a good sense of what it is
+actually have a good sense of what it is
+like this is all very confusing right
+like this is all very confusing right
+like this a giant package and it's hard
+like this a giant package and it's hard
+to tell what you're actually doing with
+to tell what you're actually doing with
+any of this stuff but it would be good
+any of this stuff but it would be good
+to get a just a few Basics anyways folks
+to get a just a few Basics anyways folks
+I'm going to call it for now and then
+I'm going to call it for now and then
+I'm going to be back probably in like an
+I'm going to be back probably in like an
+hourish
+hourish
+depending um hour and a half maybe and
+depending um hour and a half maybe and
+probably we'll review some code for bet
+probably we'll review some code for bet
+merge in
+merge in
+uh one environment change one new
+uh one environment change one new
+environment and we'll go from
+environment and we'll go from
+there uh maybe I'll have some time for
+there uh maybe I'll have some time for
+some science side ablation stuff as
+well waiting for one last thing from
+well waiting for one last thing from
+Kong
+Kong
+confirmation and we'll call
+it yep we'll give you okay thank you
+it yep we'll give you okay thank you
+yeah you don't need to join the thing
+yeah you don't need to join the thing
+tomorrow it's like it's my job to keep
+tomorrow it's like it's my job to keep
+you out of
+you out of
+meetings all right see you all
+
+Kind: captions
+Language: en
+okay we're
+okay we're
+live
+live
+hi I've
+hi I've
+been the doctors all
+been the doctors all
+day so we're going to see if we can get
+day so we're going to see if we can get
+a little bit work done here in the
+a little bit work done here in the
+afternoon um
+there a few things I want to do
+there a few things I want to do
+today uh quick quick check of our
+today uh quick quick check of our
+ablations
+okay so these are not bad this is what
+okay so these are not bad this is what
+we get out of
+we get out of
+carbs
+carbs
+okay and this
+okay and this
+is what we get out of random
+is what we get out of random
+search so we can see we get far
+search so we can see we get far
+fewer good runs with random search carb
+fewer good runs with random search carb
+seems to give us something
+nice the fact that there's so many
+nice the fact that there's so many
+points not anywhere near the parito
+points not anywhere near the parito
+frontier is a little
+frontier is a little
+concerning
+um
+um
+definitely want to sort that out but we
+definitely want to sort that out but we
+will deal with that
+will deal with that
+later
+later
+oops
+oops
+um yeah I haven't heard back from the
+um yeah I haven't heard back from the
+MIT folks on uh the stuff I did
+MIT folks on uh the stuff I did
+yesterday for them and GPU Drive is
+yesterday for them and GPU Drive is
+proceeding pretty well
+proceeding pretty well
+so I have some other work to do at the
+so I have some other work to do at the
+moment there are a couple different
+moment there are a couple different
+things I can
+do let me see what I can
+do let me see what I can
+go go look
+at Okay so
+GPU I would like to get the set up with
+puffer this is some separate
+work the public portion is just getting
+work the public portion is just getting
+Isaac gem working nicely with
+Isaac gem working nicely with
+puffer
+um now I can probably get this bound
+um now I can probably get this bound
+pretty
+quick I'm trying to think
+quick I'm trying to think
+what I can do from there
+sh
+I mean I could just get this thing set
+I mean I could just get this thing set
+up and running like puffer
+po that's probably a decent
+po that's probably a decent
+test andp get
+up yeah let's try that um
+I think that's probably the reasonable
+I think that's probably the reasonable
+thing to
+do I'm trying to see where the Isaac say
+do I'm trying to see where the Isaac say
+binds are for
+binds are for
+this lots of people have been asking me
+this lots of people have been asking me
+about Isaac
+M
+tasks this task
+people really like their wrappers don't
+people really like their wrappers don't
+they oh this is actually very similar to
+they oh this is actually very similar to
+um how we do this with
+um how we do this with
+puffer yeah this is very similar
+it's a good
+sign accept for
+sign accept for
+this the fact that they are overriding
+this the fact that they are overriding
+their buffer instead of setting
+it I'm trying to think what's the best
+it I'm trying to think what's the best
+way to start on this
+um let me see how how far their training
+um let me see how how far their training
+code is
+code is
+off from what we're looking at
+I need this thing that they're calling
+I need this thing that they're calling
+an
+agent yeah so I think that
+agent yeah so I think that
+probably if I just get this bound to
+probably if I just get this bound to
+puffer then it's pretty easy to
+puffer then it's pretty easy to
+add the algorithm make
+changes to uh like an individual puffer
+changes to uh like an individual puffer
+train
+train
+file I can probably get this to train
+file I can probably get this to train
+way faster as
+well yeah cuz they just have some EX for
+well yeah cuz they just have some EX for
+losses and stuff that's
+losses and stuff that's
+fine okay so
+why is my machine going
+insane asso
+we go I don't know what's up with my
+we go I don't know what's up with my
+memory
+how much code is there in
+here quite a few
+here quite a few
+different tasks
+but this is the
+base and then
+base and then
+like knowing what my graphs look like do
+like knowing what my graphs look like do
+you
+you
+think yes that is why why do you have
+think yes that is why why do you have
+that as your value function coefficient
+that as your value function coefficient
+just stop tuning that parameter just
+just stop tuning that parameter just
+leave it at
+0.5 yeah set that just hard set value
+0.5 yeah set that just hard set value
+function actually link me your link me
+function actually link me your link me
+your hypers real quick because I didn't
+your hypers real quick because I didn't
+know you were doing that or if if I had
+know you were doing that or if if I had
+seen that I would have told you to not
+seen that I would have told you to not
+do
+that just link me your latest
+hypers holy hell
+hypers holy hell
+there a bunch of stuff in
+here it's really this is just like a
+here it's really this is just like a
+torch
+torch
+end right where they're just doing a
+end right where they're just doing a
+bunch of array Ops so torch
+I could go out
+to send image in Discord
+was
+was
+fine
+fine
+fine probably faster at 32 but fine
+fine probably faster at 32 but fine
+fine
+fine
+fine
+fine it's
+fine it's
+fine all right so this one is troll
+fine all right so this one is troll
+right here this value function
+right here this value function
+coefficient is Troll and then um
+um update epo's borderline
+um update epo's borderline
+here you've got 12 updates on stale data
+here you've got 12 updates on stale data
+cuz 32 131 so four updates per
+cuz 32 131 so four updates per
+Epoch um and then you got three Epoch so
+Epoch um and then you got three Epoch so
+12 if your m is fast basically this
+12 if your m is fast basically this
+number should always be one I know your
+number should always be one I know your
+m is having some speed issues so maybe
+m is having some speed issues so maybe
+it doesn't have to be one but uh that's
+it doesn't have to be one but uh that's
+enough F
+Yi you said it too I
+think I'd be surprised if I set up the
+think I'd be surprised if I set up the
+epox to
+epox to
+three I might have done it because your
+three I might have done it because your
+M is so
+M is so
+slow if your m is fast this is basically
+slow if your m is fast this is basically
+always
+one but yeah set value function to 05
+one but yeah set value function to 05
+and take it out of your sweep
+arguments that's why it's not
+stable let me go check on something real
+stable let me go check on something real
+quick folks
+yeah that's exactly it just try it at05
+yeah that's exactly it just try it at05
+and then if that sucks do a sweep with
+and then if that sucks do a sweep with
+it a sweep without it I mean
+I think I just got to grab
+I think I just got to grab
+this make a puffer
+this make a puffer
+wrapper
+wrapper
+and see what I can do from there
+is this a pit
+is this a pit
+package God damn it they don't have a
+package God damn it they don't have a
+pit
+package it's a
+package it's a
+pain might be ready for multi training
+pain might be ready for multi training
+[Music]
+[Music]
+soon so do they have a pit package
+when are you going to be working on
+when are you going to be working on
+multi- agent
+multi- agent
+stuff um this we like
+stuff um this we like
+either probably next week is what it's
+either probably next week is what it's
+going to be cuz I was sent one thing to
+going to be cuz I was sent one thing to
+do before this
+user support stuff
+thank
+you there you
+go yeah Captain I would suggest I would
+go yeah Captain I would suggest I would
+highly suggest um if you want to start
+highly suggest um if you want to start
+getting into the science side stuff do
+getting into the science side stuff do
+the uh The Continuous breakout pong as a
+the uh The Continuous breakout pong as a
+just a really quick thing because that's
+just a really quick thing because that's
+going to help you figure out what's
+going to help you figure out what's
+going on with your continuous side stuff
+going on with your continuous side stuff
+and then I will I'll get you involved
+and then I will I'll get you involved
+with some of our
+with some of our
+um our multi-agent
+um our multi-agent
+efforts that would be my
+efforts that would be my
+suggestion
+oops nothing private but just I don't
+oops nothing private but just I don't
+try not to leak DMS out of respect
+does not have
+does not have
+logging oops I almost l a bad
+end e
+okay we'll do my all my training has
+okay we'll do my all my training has
+been multi discreet recently due to
+been multi discreet recently due to
+continuous actions yeah so that is part
+continuous actions yeah so that is part
+of our science side stuff right I fixed
+of our science side stuff right I fixed
+breakout so it actually trains and we
+breakout so it actually trains and we
+can start running experiments on that as
+can start running experiments on that as
+well which will be
+fun oh yeah we're getting one more box
+fun oh yeah we're getting one more box
+soon so I think that'll free up one for
+soon so I think that'll free up one for
+you uh cuz I'm going to buy the well I
+you uh cuz I'm going to buy the well I
+don't know how long it takes them to
+don't know how long it takes them to
+ship it to be fair but I'm buying our
+ship it to be fair but I'm buying our
+test node with a 5090 I'm going to get
+test node with a 5090 I'm going to get
+like uh our
+like uh our
+initial like just our like make sure
+initial like just our like make sure
+that these boxes are
+that these boxes are
+good it's pretty nice we'll get
+good it's pretty nice we'll get
+um uh we got like a decent quoted price
+um uh we got like a decent quoted price
+on them they're going to be just over
+on them they're going to be just over
+5500 a box
+so under under quarter million which is
+nice uh
+nice uh
+this shouldn't even be that hard I'm
+this shouldn't even be that hard I'm
+just freaking
+exhausted I'm trying to think about how
+exhausted I'm trying to think about how
+I want to do
+this I had
+a over 4our dentist appointment why is
+a over 4our dentist appointment why is
+my hold on am I not live on
+my hold on am I not live on
+X oh no I am it's just a UI bug
+grabb
+this this is
+theirs and I want his Fork
+I guess I just have to install this
+I guess I just have to install this
+in if I just clone this in puffer lib
+in if I just clone this in puffer lib
+it'll work and then I can make a package
+it'll work and then I can make a package
+later
+right I think that's
+correct yeah we'll do it that way
+okay
+is X like continuously
+is X like continuously
+disconnecting or is it just restream
+disconnecting or is it just restream
+being
+weird it have me
+live it says unable to
+connect and now it shows us
+offline
+offline
+1450 I don't know what's happening to
+1450 I don't know what's happening to
+the
+the
+stream not much I can do about it but
+oh I think Kung made a top Mall
+okay I don't really want to run this
+it'll mess up my
+it'll mess up my
+container I guess what I want to do is I
+container I guess what I want to do is I
+want to just
+want to just
+grab where is
+it oh did I clone the wrong repo hold on
+yeah I CL the wrong
+repo that's this
+one this one also has a
+toml I guess this is what what I want to
+toml I guess this is what what I want to
+do is I want to make this a separate
+do is I want to make this a separate
+wrapper
+okay so we do something like
+this is above Puffer
+back task python yeah we don't like
+that that task python
+rapper is this not used
+reate
+okay I think what you do is you take
+this and then you wrap this so you this
+this and then you wrap this so you this
+goes here
+[Music]
+fig
+args okay so we'll figure out how to get
+args okay so we'll figure out how to get
+these
+these
+and
+and
+then we need a puffer native en
+so do
+M up n
+we do self.
+we do self.
+single observation space
+okay so it's going to be something like
+okay so it's going to be something like
+this or something like this
+now where do these configs come from
+reate rlg
+P lovely
+probably here
+where's the
+PPL e
+okay so here's a different
+en clean
+rln this looks like probably what
+rln this looks like probably what
+kyung
+did oh yeah perfect so he
+did yeah right right
+here so this is pretty much what we want
+yeah I'm going to have to sit down with
+yeah I'm going to have to sit down with
+Kung and help integrate this
+stuff quite a bit
+stuff quite a bit
+here I want to get at least to start on
+here I want to get at least to start on
+this
+though e
+okay so let's go with this instead
+then let's do and
+gym
+API here we get this
+this should be
+this should be
+n
+n
+CFG file
+basically we're going to get rid of
+basically we're going to get rid of
+arbs the way puffer set up
+our
+S Rams
+and then here we have
+and then here we have
+physics I see all this stuff
+good and then we just do
+what
+what
+this
+uhhuh if Sim is in
+config we'll get to that
+okay okay so we get rid of this
+and then this is now device
+and then this is now device
+ID and then
+headless okay so this is not as
+headless okay so this is not as
+bad now all we need to
+bad now all we need to
+do is figure out what files to add
+see
+now we got to go find
+this yep so here's the config file
+right and what else do we
+right and what else do we
+need motion
+need motion
+file and here's the motion file okay
+and that's it for now
+now we have to install a bunch of stuff
+now
+deprecated is it Isaac Jim or Isaac
+deprecated is it Isaac Jim or Isaac
+Sim that we
+use it is Isaac
+gem
+e e
+see if this
+works there we
+go e
+191 Megs is
+right see
+oh yeah that's right
+yes doesn't support
+311 well that's not
+great I'm tempted to make a new
+great I'm tempted to make a new
+container for
+this I could also just
+this I could also just
+install uh 3.9
+oh that's
+easy for
+yep
+you do
+this
+this
+oh
+okay Isaac gem
+okay Isaac gem
+today yeah we're looking at some
+today yeah we're looking at some
+stuff no module dist okay that's weird
+stuff no module dist okay that's weird
+because this definitely
+exists this exists in the I'm tempted to
+exists this exists in the I'm tempted to
+just get a container for
+just get a container for
+this do they ship
+containers cuz here's the thing like if
+containers cuz here's the thing like if
+I were using Isaac Sim one of their
+I were using Isaac Sim one of their
+updated things I could just do
+it do they not have a
+container Je
+I actually don't know what's wrong with
+I actually don't know what's wrong with
+this this is an obnoxious thing with
+this this is an obnoxious thing with
+like
+like
+old shitty old packages
+ah Python 3 Dev okay that's my
+ah Python 3 Dev okay that's my
+bad I don't usually have to install old
+bad I don't usually have to install old
+python versions usually we have stuff on
+python versions usually we have stuff on
+uh something somewhat
+recent puffer should be just fine with a
+recent puffer should be just fine with a
+High Fidelity
+High Fidelity
+Sim I mean the main thing puffer does is
+Sim I mean the main thing puffer does is
+not be slow so if your m is fast then
+not be slow so if your m is fast then
+puffer's fast if your m is slow puffer
+puffer's fast if your m is slow puffer
+tries to make it as fast as it can if
+tries to make it as fast as it can if
+your m is just fast then puffer is just
+fast okay this is NVIDIA Nvidia I'm
+fast okay this is NVIDIA Nvidia I'm
+expecting okay to not be a pain in the
+expecting okay to not be a pain in the
+ass
+surely Nvidia builds good
+surely Nvidia builds good
+software like if you were to pick one
+software like if you were to pick one
+company to expect to build good
+software oh less than 3.9 that's
+software oh less than 3.9 that's
+obnoxious
+okay that's really old
+okay that's really old
+I don't need VMS piss
+off let me make sure this is actually
+off let me make sure this is actually
+what's going on here
+oh yeah look at
+oh yeah look at
+that you do need
+that you do need
+3.8 that's crazy
+all
+all
+right so this should
+work it's
+work it's
+Nvidia there stuff should at least
+Nvidia there stuff should at least
+compile
+better not break my drivers
+okay
+okay
+uh
+uh
+cool so
+cool so
+now if I just have to get puffer working
+now if I just have to get puffer working
+on this
+version we go down to 38
+and then
+and then
+hopefully we can run the environment and
+hopefully we can run the environment and
+start looking at
+it e
+okay so that actually seems like it
+okay so that actually seems like it
+works um
+type object not why do we even have this
+type object not why do we even have this
+[ __ ] typed in the first
+place and I hate I
+place and I hate I
+hate typed python code like this
+look it just causes problems nothing
+else and you just literally end up
+else and you just literally end up
+deleting the bloody types
+okay's see
+good let's look at the
+toml 2
+5.1
+5.1
+okay well maybe
+okay well maybe
+now let me just try to install this as
+now let me just try to install this as
+is and see what
+happens oops not like
+that welcome YouTube folks
+that welcome YouTube folks
+currently integrating an Isaac gym based
+currently integrating an Isaac gym based
+environment seeing if we can get it
+environment seeing if we can get it
+running in
+puffer okay
+did that
+install no module Isaac
+gem uh how's that
+work excuse
+me successfully installed is
+the proper pip package
+the proper pip package
+right it should be installed
+okay now module
+is why the [ __ ] does this require cond
+is it not like does it not work outside
+is it not like does it not work outside
+of the
+environment oh it doesn't work at all
+importing I do I just need to sim link
+importing I do I just need to sim link
+it like the
+hell for
+editable
+install maybe this is the
+problem Maybe This Is It
+there we go editable installs just
+there we go editable installs just
+broken for some weird stupid
+broken for some weird stupid
+reason okay
+Isaac
+Gem High torch was
+Gem High torch was
+[Music]
+[Music]
+imported that's freaking
+hilarious which after Isaac J modules
+hilarious which after Isaac J modules
+really
+so I guess I can just do
+um e
+I just move this does it
+work torch is still getting imported
+first torch is already imported
+first torch is already imported
+yeah yeah
+no module gem
+no module gem
+torch all right what's gy
+torch Why didn't it get
+installed for
+G torch
+oh this is Gem torch
+I
+see I guess if you run from here
+Sim link
+everything it's got a
+Tomo but it's not set up as a package
+Tomo but it's not set up as a package
+you can clearly see
+maybe you do just have to go
+maybe it's just
+maybe it's just
+this it's a separate
+package
+for e
+still no gym
+torch why do pip install
+torch why do pip install
+dot
+instead ah there we
+instead ah there we
+go so now we have gem
+torch
+for e
+chatting with Kung here working on
+chatting with Kung here working on
+figuring out what uh what he's up to and
+figuring out what uh what he's up to and
+how he can help with
+this m.
+tasks all right so now here
+it's
+questionable okay stick to Isaac gy not
+questionable okay stick to Isaac gy not
+Isaac lab
+Isaac lab
+cool for
+asking Kong what's up with the packaging
+asking Kong what's up with the packaging
+here this doesn't make
+sense
+for e
+is hoi
+okay one second folks I'm just figuring
+okay one second folks I'm just figuring
+out what I can do because kung's working
+out what I can do because kung's working
+in parallel on um on this code base but
+in parallel on um on this code base but
+it doesn't seem quite ready to integrate
+it doesn't seem quite ready to integrate
+with puffer
+with puffer
+yet because it's not
+yet because it's not
+packaged I got Isaac I got Isaac Jim up
+packaged I got Isaac I got Isaac Jim up
+and
+running puffy this
+this looks like it's an actual package
+okay I can buy this instead for now
+this looks
+fine this hoi
+all
+right I guess this is what we're doing
+right I guess this is what we're doing
+then basically same thing just slightly
+then basically same thing just slightly
+different
+different
+repo uh I think this one is packaged
+repo uh I think this one is packaged
+already
+so let's also just do
+uh yeah let's just do pip install dot
+uh yeah let's just do pip install dot
+because editable seem screwy
+so this is what we
+so this is what we
+want this this thing
+want this this thing
+here which is very
+similar for
+oops just sent an LS in Discord
+okay so this is actually very
+okay so this is actually very
+similar um very very
+similar for
+I think we got a plan
+I think we got a plan
+here we got a plan
+all right so what we're going to do is
+all right so what we're going to do is
+we're going to take this
+stuff
+stuff
+whoops take all this
+stuff
+stuff
+and swap
+these and now this is going to go
+these and now this is going to go
+here uh I don't want to completely
+here uh I don't want to completely
+remove what I did before though because
+remove what I did before though because
+I'm going to end up doing something very
+similar so this make
+function it's almost exactly the same if
+function it's almost exactly the same if
+you look at
+it for
+so here's our task
+yeah okay this is exactly what I thought
+yeah okay this is exactly what I thought
+it was going to be perfect so I just
+it was going to be perfect so I just
+confirmed some stuff with kyung um
+confirmed some stuff with kyung um
+it's just going to end up
+it's just going to end up
+being some custom stuff in the clean
+being some custom stuff in the clean
+puff Ral script specific for this but
+puff Ral script specific for this but
+for the most part this is just going to
+for the most part this is just going to
+be some Isaac's and bind work
+yeah this is great this is exactly what
+yeah this is great this is exactly what
+uh what we want to be
+doing so I can't really say the details
+doing so I can't really say the details
+of what we're doing for uh this specific
+of what we're doing for uh this specific
+client but I can say that you know we're
+client but I can say that you know we're
+adding Isaac uh Isaac Jim bindings to
+adding Isaac uh Isaac Jim bindings to
+puffer lib and we're going to make sure
+puffer lib and we're going to make sure
+that Isaac Jim play nicely with puffer
+that Isaac Jim play nicely with puffer
+lib as a part of it right and all that
+lib as a part of it right and all that
+stuff goes right back into puffer lib
+stuff goes right back into puffer lib
+and is public so everything is
+and is public so everything is
+everything is fun
+there and then if I look at this this is
+there and then if I look at this this is
+the same pasted code I don't need to
+the same pasted code I don't need to
+change anything there
+change anything there
+numm yeah this is exactly the same
+numm yeah this is exactly the same
+code and then there's this vcas wrapper
+code and then there's this vcas wrapper
+which I'm not sure
+which I'm not sure
+about uh I could leave this in for
+about uh I could leave this in for
+now I probably should leave this in just
+now I probably should leave this in just
+for
+now and then we'll see what comes out of
+now and then we'll see what comes out of
+this
+piie
+pixie
+uh
+cond e
+okay all I got to do I'm still you know
+okay all I got to do I'm still you know
+on the side here going back and forth
+on the side here going back and forth
+through K clarifying A few
+through K clarifying A few
+things but pretty much it looks like I
+things but pretty much it looks like I
+just take this
+just take this
+environment I see what comes out of it
+here
+for e
+okay that's not bad
+okay that's not bad
+um I think that's
+um I think that's
+set now do I have did I make a config
+okay so I think think
+okay so I think think
+probably most of this is the
+probably most of this is the
+same uh obviously I don't need this
+same uh obviously I don't need this
+stuff
+stuff
+right and I do need to go
+right and I do need to go
+check what extra parameters this thing
+check what extra parameters this thing
+has
+yeah let's
+yeah let's
+see what this
+see what this
+has they get SIM
+has they get SIM
+forams parse Sim
+forams parse Sim
+forams yeah but we already have
+forams yeah but we already have
+these then they got
+args oh they do have a motion file
+args oh they do have a motion file
+still is this a thing
+motion file
+dur okay so they actually do have some
+dur okay so they actually do have some
+stuff uh it's actually the repos are
+stuff uh it's actually the repos are
+very
+similar and this
+it's probably
+like cuz I have to get the yeah
+like cuz I have to get the yeah
+fire and then this is
+fcker first pixie
+oh I also can edit uh
+zero so I think that's
+it uh we need
+num
+num
+M
+32 and it's going to be
+2048 e
+that's
+that's
+everything that is
+everything so we got F num threads num
+everything so we got F num threads num
+sub teams num client
+sub teams num client
+threads
+M's let me join there K just hopping on
+M's let me join there K just hopping on
+the
+the
+stream great
+okay so I got this I don't think we need
+okay so I got this I don't think we need
+this anymore we do we have this par Sim
+this anymore we do we have this par Sim
+config
+config
+thing or
+thing or
+Sim oh this is still there yeah this is
+Sim oh this is still there yeah this is
+still there I don't actually know what
+still there I don't actually know what
+is this is
+Sim I could just leave
+Sim I could just leave
+it right gy util
+but what's
+kig our s prams
+ARS where do this config come from oh
+ARS where do this config come from oh
+you just
+you just
+passed
+args okay so this is from the file
+so this yeah this
+config so all you got to do is
+config so all you got to do is
+this that's
+this that's
+fine we'll put this after the
+assert it's pretty good uh one second
+assert it's pretty good uh one second
+let me I'm going to be right back I uh
+let me I'm going to be right back I uh
+let me go talk to One
+let me go talk to One
+Thing
+e e
+okay minor Insurance CLE after 4our
+okay minor Insurance CLE after 4our
+dental
+dental
+procedure
+um K are you
+here X or
+twitch all
+okay so this seems to work
+no module fiz
+hoi
+hoi
+uh wait puffer lib environment
+uh wait puffer lib environment
+from no this should work
+cuz this is a pip package right so I
+cuz this is a pip package right so I
+should be able to
+import no module F hoi
+import no module F hoi
+okay
+um see this is what I wasn't sure about
+um see this is what I wasn't sure about
+with the packaging but this looks like
+with the packaging but this looks like
+it's
+correctly this looks like it's correctly
+done is oh yeah no this is
+correct but there's no fiz
+correct but there's no fiz
+h.n really did I mess up the import
+[Music]
+[Music]
+uh let me
+say from fiz hoyn
+is this a packaging error or
+something hold
+on there's an underscore net
+there there is no setup.py but there's a
+there there is no setup.py but there's a
+toml
+where
+is why is this not
+install that's pixie
+does it not install without
+pixie so I have the package installed I
+pixie so I have the package installed I
+can import the
+package but the like this doesn't show
+up I'm not really familiar with pure P
+up I'm not really familiar with pure P
+project toml based
+project toml based
+packaging um there would be like a find
+packaging um there would be like a find
+packages or a find namespace
+packages or a find namespace
+packages in a in a setup.py
+start
+start
+[Music]
+[Music]
+with God damn it you're making me
+with God damn it you're making me
+install pixie
+fine we'll install this
+garbage freaking com
+garbage freaking com
+you know how dumb it is to have a cond
+you know how dumb it is to have a cond
+inside of a
+inside of a
+Docker it's
+like so
+like so
+bloated but
+bloated but
+fine
+uh
+uh
+okay now
+what reinstall it
+do I have to make a pixie M or
+something
+Pixy pixie shell
+Pixy pixie shell
+they're killing
+me okay so from in
+me okay so from in
+here fix seash
+shell F dep parse
+unexpected keys
+I see so the dependencies are only
+I see so the dependencies are only
+specified under
+pixie why did it let me install
+it and then not have the
+it and then not have the
+packages I'm set
+packages I'm set
+up is it this
+no
+unexpected
+keys I don't
+know what's
+this okay this is
+this okay this is
+garbage R fresh installing box yeah go
+garbage R fresh installing box yeah go
+ahead K you can go ahead do a fresh
+install I'm a bit confused as to how
+install I'm a bit confused as to how
+this is working cuz the package is
+this is working cuz the package is
+building but it doesn't
+building but it doesn't
+have unless I'm doing something very
+have unless I'm doing something very
+stupid
+stupid
+like it builds without
+this but then it doesn't
+this but then it doesn't
+have n
+maybe hold
+on
+but just
+packages tool. setup tools
+yeah this is fine
+log in and log
+log in and log
+out real
+really okay hold
+on still no
+test
+uh the setup.py looks
+uh the setup.py looks
+correct as well I mean the toml looks
+correct as well I mean the toml looks
+correct I Haven I really don't use toml
+correct I Haven I really don't use toml
+that much
+but install with pixie. text
+does this like link to a version of
+does this like link to a version of
+python by default it shouldn't right
+python by default it shouldn't right
+because the toml has the python version
+because the toml has the python version
+right
+right
+yeah
+so unexpected
+keys do I have to init or something
+I don't know how this thing
+works me try
+something when I do it editable
+something when I do it editable
+does that do
+anything oh that works so for whatever
+anything oh that works so for whatever
+reason doing it
+reason doing it
+editable okay
+perfect I got it running without pixie
+perfect I got it running without pixie
+here um you have to install this one
+here um you have to install this one
+editable which is weird because the
+editable which is weird because the
+other one didn't work editable so I
+other one didn't work editable so I
+thought there was a quirk with
+thought there was a quirk with
+3.8
+3.8
+um f no attribute recurrent that's
+um f no attribute recurrent that's
+fine we don't need that we're just going
+fine we don't need that we're just going
+to
+to
+[Music]
+do
+config
+um make got unexpected
+um make got unexpected
+ARS
+name
+name Cuda not oh come on
+God damn it broke my
+God damn it broke my
+Cuda whatever this installed broke my
+Cuda whatever this installed broke my
+Cuda
+um failed
+great damn
+it okay
+it okay
+uh what do I do about
+this what was it that
+installed that installed
+installed that installed
+torch
+um for. version. Cuda
+okay so this is
+okay so this is
+12.1 Cuda
+12.1 Cuda
+12.1 that's definitely
+12.1 that's definitely
+supported new pixie version causing it
+supported new pixie version causing it
+okay cond tools are bad K I'm telling
+okay cond tools are bad K I'm telling
+you cond tools
+you cond tools
+suck but it's fine you want to use it
+suck but it's fine you want to use it
+for now we can use it for now I'm trying
+for now we can use it for now I'm trying
+to figure out why this thing was broken
+to figure out why this thing was broken
+my Cuda
+my Cuda
+completely
+um like what the hell did this thing
+um like what the hell did this thing
+install that broke my
+install that broke my
+Cuda do I have to just reboot the
+container I can try
+container I can try
+that it should
+work stop puffer tank
+okay maybe that fixes it
+seg
+seg
+fault okay so this now I have it but
+fault okay so this now I have it but
+it's seg
+it's seg
+faults
+um
+um
+oops
+Mar okay so this I got torch
+Mar okay so this I got torch
+working and then the seg folds
+somewhere let's see if I can figure out
+somewhere let's see if I can figure out
+where it seg fults probably right here
+where it seg fults probably right here
+right
+yeah so right there it's seg FS so let
+yeah so right there it's seg FS so let
+me figure this out
+me figure this out
+um here's our
+config if the asset path is wrong does
+config if the asset path is wrong does
+it seg
+it seg
+fault because
+fault because
+these this probably needs to have the
+these this probably needs to have the
+full path
+here RL device
+here RL device
+cud and oh headless is
+cud and oh headless is
+false headless should be true
+right headless should be
+true aha there we
+go and now we get as I expected we get
+go and now we get as I expected we get
+the load
+the load
+errors
+so I guess I just got to patch the paths
+so I guess I just got to patch the paths
+here because the config path doesn't
+here because the config path doesn't
+include the uh the full path
+right
+it's so the N
+has
+asset yeah so it's just in the n
+right here I
+think asset
+route uh it was just cuz headless was
+route uh it was just cuz headless was
+off
+young for
+okay now we
+okay now we
+have correct
+path okay what's wrong
+path okay what's wrong
+now
+now
+unsupported unsupported character config
+unsupported unsupported character config
+file
+file
+fiz
+X
+X
+slash is that the
+name
+SM uh that's not where it
+SM uh that's not where it
+is so where's that
+file the path is wrong
+SM
+SM
+SMX where's that come
+from SM
+SMX oh maybe I just don't need to add
+SMX oh maybe I just don't need to add
+the asset file name yeah
+wait so if I just
+look yeah that's it I just I I I just
+look yeah that's it I just I I I just
+don't need to add
+don't need to add
+that here it's just patch
+that here it's just patch
+the the route
+okay is a
+directory uh this is probably my bad
+directory uh this is probably my bad
+let's
+see motion filer
+motion ar.
+motion ar.
+motion walk
+motion walk
+pick slw walk
+pick slw walk
+pick.
+PT
+PT
+boom and
+boom and
+failed to
+failed to
+import data
+import data
+assets
+okay so this
+okay so this
+is it's getting this path from
+somewhere let's see where it's getting
+somewhere let's see where it's getting
+it from
+let see where it's getting the path
+from I don't
+see I don't see a bad path in
+see I don't see a bad path in
+here uh so it's got to be
+here uh so it's got to be
+in
+RS d
+update Tomo so new pixie works thank you
+update Tomo so new pixie works thank you
+very
+very
+nice uh I have it working outside a
+nice uh I have it working outside a
+fixie for now
+fixie for now
+though I'm just trying to fix the paths
+though I'm just trying to fix the paths
+because like it works inside of uh your
+because like it works inside of uh your
+directory but it doesn't work
+globally I'm trying to figure out where
+globally I'm trying to figure out where
+this path is coming from at the
+this path is coming from at the
+[Music]
+[Music]
+moment fiz Hy MJ CF I don't see where
+moment fiz Hy MJ CF I don't see where
+this is getting
+added I don't see this in the
+added I don't see this in the
+configuration a
+anywhere wait hold on
+maybe fiz hoi build Target
+tensors well no this is cuz it went past
+tensors well no this is cuz it went past
+the load
+operation maybe it's in the in the file
+operation maybe it's in the in the file
+itself maybe it's
+hardcoded May it's hard
+CED where is
+[Music]
+[Music]
+it and
+see MJ
+see MJ
+CF yep it's a
+hardcoded look at
+that look at
+that um so for
+now for now I'm going to just update
+now for now I'm going to just update
+I literally did this for people
+I literally did this for people
+yesterday
+yesterday
+um yeah so for packaging side stuff K
+um yeah so for packaging side stuff K
+this is how you do
+it just this is like a quick hack you do
+it just this is like a quick hack you do
+something like
+something like
+this where you just like put the path
+this where you just like put the path
+routes the absolute path routes in the
+routes the absolute path routes in the
+underscore knit or whatever and then you
+underscore knit or whatever and then you
+can just like add this to all their
+can just like add this to all their
+paths and it'll
+paths and it'll
+work for now I'm just going to fix the
+work for now I'm just going to fix the
+paths hard though
+only
+continuous
+continuous
+okay only continuous action
+space let's
+space let's
+see single action
+M's that's a continuous action
+M's that's a continuous action
+spice
+sir hey Joseph what's good I'm uh I'm
+sir hey Joseph what's good I'm uh I'm
+currently
+currently
+adding bindings for Isaac gem stuff to
+adding bindings for Isaac gem stuff to
+puffer we're doing a little bit of High
+puffer we're doing a little bit of High
+Fidelity
+Fidelity
+control we going high
+five okay so
+five okay so
+why why is this being
+weird only continuous action Bas
+supported oh you know what I
+wonder gym do spaces I wonder if this is
+wonder gym do spaces I wonder if this is
+gym gymnasium shenan
+against
+assert quick question about Robo code
+assert quick question about Robo code
+doing Isaac Labs my stuff yeah sure oh
+doing Isaac Labs my stuff yeah sure oh
+is this uh is this tosen
+yep great yeah no half the reason I
+yep great yeah no half the reason I
+stream is so that I can answer questions
+stream is so that I can answer questions
+live so ask
+away when you run Robo code does the
+away when you run Robo code does the
+robot actually and
+robot actually and
+render uh it only renders if you run the
+render uh it only renders if you run the
+the demo for that so like
+you
+you
+see this is what it looks
+like so I have the C render demo set up
+like so I have the C render demo set up
+I didn't even add the python stuff
+I didn't even add the python stuff
+right but yeah this
+right but yeah this
+is this script right here and you should
+is this script right here and you should
+be good to go and you see I didn't even
+be good to go and you see I didn't even
+bother like I didn't even clean up
+bother like I didn't even clean up
+memory or anything here
+yeah this is a gym gymnasium
+yeah this is a gym gymnasium
+thing it's going to be hoer
+thing it's going to be hoer
+lib spaces
+box isn't that what you ran bash scrips
+box isn't that what you ran bash scrips
+yeah bash scripts build yeah that's what
+yeah bash scripts build yeah that's what
+I ran
+scrips build ocean Robo code local and
+scrips build ocean Robo code local and
+then Robo
+then Robo
+code ignore the seg
+code ignore the seg
+fault my systems old
+fault my systems old
+janky yeah you can see I can play it a
+janky yeah you can see I can play it a
+little bit it's very hard to
+little bit it's very hard to
+play but you know you can kind of you
+play but you know you can kind of you
+can actually beat it just by doing that
+uh observation
+spikes why is mine running differently
+spikes why is mine running differently
+what your is doing
+aha not is instance
+one
+one too many values to
+one too many values to
+unpack
+unpack
+uh interesting
+oh OBS I
+see this doesn't give you
+see this doesn't give you
+infos when I run do slash it renders
+infos when I run do slash it renders
+fine when I run with
+fine when I run with
+GDB it renders funny attached is a
+GDB it renders funny attached is a
+picture let's
+picture let's
+see H that's funny
+uh yeah literally he's streaming now you
+uh yeah literally he's streaming now you
+just check if I'm streaming it's like
+just check if I'm streaming it's like
+it's this is the whole
+it's this is the whole
+point
+um yes it's just not loading assets
+um yes it's just not loading assets
+correctly man I don't know why not but
+correctly man I don't know why not but
+uh it's you can see it's rendering the
+uh it's you can see it's rendering the
+text and stuff but it's not loading in
+text and stuff but it's not loading in
+your asset files um um I don't know why
+your asset files um um I don't know why
+GDB would break asset
+loading that's kind of
+weird agent
+boundary I mean you can clearly see
+boundary I mean you can clearly see
+there's a bullet here there's a health
+there's a bullet here there's a health
+score here a health there and a radar be
+score here a health there and a radar be
+over there so that looks to me like it's
+over there so that looks to me like it's
+just not loading in the the assets and
+just not loading in the the assets and
+actually if you look on rip here
+actually if you look on rip here
+actually maybe I can Repro this for you
+actually maybe I can Repro this for you
+real quick
+I don't even see it it didn't even
+render oh no now it does
+render oh no now it does
+this works for me
+this works for me
+man I don't
+know this is with GDB
+on you can look to see if it's not
+on you can look to see if it's not
+loading the textures
+loading the textures
+correctly um you should get right here
+correctly um you should get right here
+like data loaded successfully 512
+like data loaded successfully 512
+512 resource Robo code PNG loaded
+512 resource Robo code PNG loaded
+successfully
+but that's
+weird possibly vs code thing if you're
+weird possibly vs code thing if you're
+running through that I don't
+know welcome YouTube folks we're
+know welcome YouTube folks we're
+currently attempting to get a Isaac's
+currently attempting to get a Isaac's
+Isaac gym based environment integrated
+Isaac gym based environment integrated
+nicely with a puffer
+lib okay so
+here okay
+here okay
+because I don't plan on multiprocessing
+because I don't plan on multiprocessing
+this can I do c to the OBS
+tensors I I think I
+can can you CA in place
+I think that'll work since it's
+I think that'll work since it's
+internally
+internally
+vectorized I should be able to just put
+vectorized I should be able to just put
+everything on
+everything on
+GPU
+GPU
+uh right they're npire rays
+okay going to jump
+okay going to jump
+off I do that I ran through vs code and
+off I do that I ran through vs code and
+it showed me
+it showed me
+might go talk to
+might go talk to
+him maybe I'm doing it wrong thanks and
+him maybe I'm doing it wrong thanks and
+have fun
+have fun
+yeah heavy tools have problems heavy
+yeah heavy tools have problems heavy
+tools have
+problems it's why develop everything in
+problems it's why develop everything in
+[ __ ]
+[ __ ]
+Vim console only it's just less [ __ ]
+Vim console only it's just less [ __ ]
+goes wrong
+yes so we have servation shape um num
+agents there's something screwy here
+agents there's something screwy here
+because uh this numb agent should give
+because uh this numb agent should give
+me yeah this numb agent should give
+me yeah this numb agent should give
+me a bigger
+OBS num
+OBS num
+agents one okay so that's wrong wrong
+agents one okay so that's wrong wrong
+where's this come
+from num
+M's okay it's num M's for some reason
+that'll fix off our
+spaces
+spaces
+okay
+great now we get our
+observations let's return puffer lib
+observations let's return puffer lib
+must return info as a list of dicks
+must return info as a list of dicks
+right our API is a little different
+almost
+done
+clamp got numpy okay yeah that's not
+clamp got numpy okay yeah that's not
+going to
+work uh so we got to do actions equals
+work uh so we got to do actions equals
+Torch from numpy actions. Cuda
+Torch from numpy actions. Cuda
+let's try
+let's try
+that we're making good progress
+that we're making good progress
+here making very good progress here okay
+here making very good progress here okay
+perfect so OBS reward done info I
+perfect so OBS reward done info I
+guessed
+guessed
+right OBS
+right OBS
+shape reward
+shape reward
+shape gun
+shape gun
+shape and
+shape and
+truncations
+truncations
+info ah and info has has some stuff in
+info ah and info has has some stuff in
+it
+um
+R
+R
+terminate
+RL so I guess this is probably
+this is probably from your rapper right
+this is probably from your rapper right
+from kung's rapper here uh we're
+from kung's rapper here uh we're
+probably going to want to change this a
+probably going to want to change this a
+little
+little
+bit episode
+returns return to episode
+returns okay I'm a little confused on
+returns okay I'm a little confused on
+this
+um let me see a plus equal
+rewards okay so I'm going to have to
+rewards okay so I'm going to have to
+help adjust this wrapper a little bit
+help adjust this wrapper a little bit
+because this is
+not okay like
+not okay like
+technically just for for an initial
+technically just for for an initial
+thing I can
+thing I can
+do info equals
+do info equals
+like episode
+return
+return
+me we can do episode
+length I can return info technically I
+length I can return info technically I
+can do this
+and let's see what
+and let's see what
+happens but I think we're going to have
+happens but I think we're going to have
+to fix that wrapper because that's not
+to fix that wrapper because that's not
+that's not a correct computation of
+return mean could not infer output okay
+got
+got
+in
+item hello
+by device side assert
+trigger what is wrong
+oh yeah one of those
+oh yeah one of those
+fun evaluate
+fun evaluate
+send actions I assume the actions are
+send actions I assume the actions are
+like the wrong data type or something
+how the hell is the action dim 153
+how the hell is the action dim 153
+that's
+obsene torch float 32 should probably be
+fine and it actually is
+[Music]
+so I'm assuming they bad actions in
+here let's try this
+here let's try this
+so bad that it broke the
+so bad that it broke the
+uh broke
+torch actions MP the
+max okay what's so bad about this
+what is so bad about uh about
+this Cuda get me
+uh I think I just have to run this on
+uh I think I just have to run this on
+CPU
+right okay so we're still going to get
+right okay so we're still going to get
+the device side ofert because it's
+the device side ofert because it's
+happening on the N
+happening on the N
+side
+um device
+is
+balse e
+okay M VI's GPU okay I just got
+okay M VI's GPU okay I just got
+to
+to
+[Music]
+[Music]
+config got to add it
+config got to add it
+here use GPU
+unrecognized m
+dot oh it's uh hold
+dot oh it's uh hold
+on CI the
+on CI the
+dash no attribute use GPU
+okay now we get
+okay now we get
+our our uh
+our our uh
+actions Max
+actions Max
+actions for.
+actions for.
+men okay so there's a
+men okay so there's a
+we didn't get the error out of this
+we didn't get the error out of this
+let's see we should get the error
+now
+now
+um
+um
+index 79 is out of
+Bounce
+Bounce
+interesting compute
+observations so how's that happen
+how does that
+happen we added
+this this
+this this
+clip index
+clip index
+79 I guess I got to just like go look at
+79 I guess I got to just like go look at
+this
+this
+right uh I don't know where like how
+right uh I don't know where like how
+this could be triggered
+let me
+see OBS
+equal okay so
+equal okay so
+here we are obs
+Max okay so we got some funky OBS here
+Max okay so we got some funky OBS here
+right
+right
+but
+but
+yes self- progress buff
+clone 879 is
+this
+this
+hoi data dict
+hoi data dict
+zero hoi
+zero hoi
+data tape
+I wonder if the m is
+done is the m just done
+here yeah I wonder if the m is just
+done okay so there's a true
+okay so I think it's going to
+okay so I think it's going to
+be if
+all self do
+terminals um we
+do I think we do
+do I think we do
+this is this it
+okay we have this set to massive badge
+okay we have this set to massive badge
+size uh so let's reduce this now
+size uh so let's reduce this now
+like
+six okay there we go this runs
+great so now we make it
+faster now we make it
+faster first thing we
+faster first thing we
+do how long does this take to AIT let's
+do how long does this take to AIT let's
+see
+going to set this on
+GPU that is incredibly slow
+we do usually
+we do usually
+40 40 96
+40 40 96
+M's and then we'll do a mini batch
+of
+32k let's see
+did recurrent here
+add an lstm because why not
+okay so I thought Isaac Sim was supposed
+okay so I thought Isaac Sim was supposed
+to be Isaac Jim was supposed to be
+to be Isaac Jim was supposed to be
+fast isn't
+fast isn't
+it why is it this freaking slow
+97%
+time in the
+environment this means that puffer is
+environment this means that puffer is
+adding like no overhead and we're just
+adding like no overhead and we're just
+waiting on the stupid Sim
+how
+many e
+okay let's try some settings
+okay let's try some settings
+16 one does this do anything
+holy
+slow how's it that
+slow how's it that
+slow I thought Isaac's gym was fast
+to leave this at what it was before
+to leave this at what it was before
+because
+holy
+holy
+um what did they have this set
+at they have some good settings for
+at they have some good settings for
+us
+4 2 48 m
+that's
+that's
+sad four mini
+batches I can match these settings
+or mini
+or mini
+batches update
+batches update
+EPO six which is
+obscene advantage C coefficient
+obscene advantage C coefficient
+two value
+loss
+false five
+false five
+they got some crazy settings in
+here this is a
+here this is a
+five Max rad
+five Max rad
+[Music]
+Norm
+Norm
+no
+o5 learning
+rate - 4
+[Music]
+[Music]
+and
+Gamma
+Lambda yes these don't even look
+Lambda yes these don't even look
+tuned like at all this is just some
+tuned like at all this is just some
+scientist that just like slapped some
+scientist that just like slapped some
+parameters and hoped it
+parameters and hoped it
+worked
+worked
+um I can run it with this but
+um I can run it with this but
+holy and they did 20 48m only as
+well what's this
+do that is painfully slow
+okay I I got it running though um I
+okay I I got it running though um I
+probably fix this episode return rapper
+probably fix this episode return rapper
+because that's
+because that's
+wrong
+wrong
+and then I get to ship this to
+K how fast is Isaac Jim supposed to run
+oh this is greater than
+oh this is greater than
+10,000 yeah that's crazy slow but they
+10,000 yeah that's crazy slow but they
+say that
+multi-agent okay they say that this can
+multi-agent okay they say that this can
+be
+be
+fast um
+um they say it can be
+fast let me just fix uh I'm going use a
+fast let me just fix uh I'm going use a
+restro real quick and then we're going
+restro real quick and then we're going
+to fix this environment
+wrapper and then we'll uh I'll chat with
+wrapper and then we'll uh I'll chat with
+Kung on a couple things oh I haven't
+Kung on a couple things oh I haven't
+been checking my Discord at all have
+I yeah one sec toen let me use a
+I yeah one sec toen let me use a
+restroom real quick be right
+back
+e e
+okay what can I
+okay what can I
+uh what can I do for you to send
+going over the bot you originally coded
+going over the bot you originally coded
+yeah it's a really stupid
+bot I think I spent all of 20 minutes on
+bot I think I spent all of 20 minutes on
+it
+default seems to be one m one robot next
+default seems to be one m one robot next
+406 yeah so K that's not how Isaac Isaac
+406 yeah so K that's not how Isaac Isaac
+Jim Works fast so if we can switch it
+Jim Works fast so if we can switch it
+cuz like we're not going to be able to
+cuz like we're not going to be able to
+get anything done at 10,000 steps per
+get anything done at 10,000 steps per
+second right we just
+second right we just
+not uh you were using the pose of the
+not uh you were using the pose of the
+other robot to be accurate when shooting
+other robot to be accurate when shooting
+we won't actually do that right
+we won't actually do that right
+shouldn't have access to the other
+shouldn't have access to the other
+robot's pose only yes
+robot's pose only yes
+exactly um so scripted Bots are allowed
+exactly um so scripted Bots are allowed
+to cheat essentially so we can have some
+to cheat essentially so we can have some
+built-in scripted opponents that can
+built-in scripted opponents that can
+cheat that's fine but when we're
+cheat that's fine but when we're
+training the RL Bots they're only going
+training the RL Bots they're only going
+to have access to the observations that
+to have access to the observations that
+they would get as defined by the
+they would get as defined by the
+original game you know scanning radar
+original game you know scanning radar
+and all that
+it's a very common way of building an
+it's a very common way of building an
+enemy AI is you just let the enemy cheat
+enemy AI is you just let the enemy cheat
+it's pretty
+simple e
+okay got you program to cheat then have
+okay got you program to cheat then have
+class now talk to you later yeah thanks
+class now talk to you later yeah thanks
+to awesome good work on
+to awesome good work on
+this uh where's the thing with
+K where my Discord go
+all right
+default board
+episode all right so let me see how this
+episode all right so let me see how this
+thing is is working at the moment um cuz
+thing is is working at the moment um cuz
+this is not
+correct I think what we're going to do
+reset and buy
+these oh also Kung I think that this um
+these oh also Kung I think that this um
+this reset is wrong as well because if
+this reset is wrong as well because if
+they're all separate environments then
+they're all separate environments then
+waiting for them all to be done right
+waiting for them all to be done right
+now before I reset any of
+them I'm not blaming you on this reset
+them I'm not blaming you on this reset
+rapper CH it's just it's wrong so I have
+rapper CH it's just it's wrong so I have
+to think about
+to think about
+it I think it's wrong at
+least Captain says finished a one bill
+least Captain says finished a one bill
+sweep did
+sweep did
+better we flaw still slowly exploding
+better we flaw still slowly exploding
+let me check can you put that link in
+let me check can you put that link in
+the Discord the uh the chat window is
+the Discord the uh the chat window is
+broken at the moment the clickable one
+broken at the moment the clickable one
+is
+is
+broken I will take a quick second to
+broken I will take a quick second to
+check that on list
+stream e
+okay this looks good
+right yeah this is better than
+before look at this this is still going
+before look at this this is still going
+up over here this burst hit you still
+up over here this burst hit you still
+have metrics that are going
+have metrics that are going
+up okay interesting with the value loss
+well your KL is
+well your KL is
+not amazing
+either me look at your
+stuff to be fair your losses I was just
+stuff to be fair your losses I was just
+uh a puffer bug was reported all your
+uh a puffer bug was reported all your
+losses are going to be scaled
+losses are going to be scaled
+up oh actually maybe your value loss
+up oh actually maybe your value loss
+isn't that bad Captain because I got a
+isn't that bad Captain because I got a
+bug report I haven't fixed it yet but
+bug report I haven't fixed it yet but
+I'm actually scaling all of the losses
+I'm actually scaling all of the losses
+by a factor of the number of epoch and
+by a factor of the number of epoch and
+you have multiple
+you have multiple
+epochs so if you have three Epoch
+epochs so if you have three Epoch
+actually your value loss is only like
+actually your value loss is only like
+0.2 or something so maybe this isn't
+0.2 or something so maybe this isn't
+that bad
+is this clip coefficient supposed to be
+0.1 I mean it's still slowly exploding
+0.1 I mean it's still slowly exploding
+right
+but yeah I got to fix
+that the default and clean if that's the
+that the default and clean if that's the
+clean RL default then it's
+good oh actually your target KL being 0.
+good oh actually your target KL being 0.
+2 uh that's probably why your KL is 0. 2
+2 uh that's probably why your KL is 0. 2
+isn't it or is it 0.02 let me
+see no it's 0.02 never
+see no it's 0.02 never
+mind so the kl's
+fine ENT triy is very
+fine ENT triy is very
+low honestly I can't tell you if this is
+low honestly I can't tell you if this is
+exploding this could be stabilizing over
+exploding this could be stabilizing over
+here and if this is divide by 3 it's
+here and if this is divide by 3 it's
+only it's less than 2 this could be
+fine yeah all of them are going to be
+fine yeah all of them are going to be
+lower by a factor of
+three so you know I wouldn't worry about
+three so you know I wouldn't worry about
+it until you see stuff crashing so when
+it until you see stuff crashing so when
+you see episode return
+you see episode return
+crash um that's when we can worry about
+crash um that's when we can worry about
+the value function
+the value function
+I think as long as you're going as win
+I think as long as you're going as win
+rate and episode return are stable going
+rate and episode return are stable going
+up you're fine for
+now try to train for longer
+now try to train for longer
+yeah what's the throughput of this
+yeah what's the throughput of this
+thing performance
+140 140k
+140 140k
+okay can I resume training runs easily I
+okay can I resume training runs easily I
+haven't tried I think you can I don't
+haven't tried I think you can I don't
+usually you should be able to load it in
+usually you should be able to load it in
+though you might have to fiddle with it
+though you might have to fiddle with it
+a little bit but you should be able to
+a little bit but you should be able to
+pass it to
+pass it to
+checkpoint I don't know if it'll like
+checkpoint I don't know if it'll like
+screw with the WB graphs or what
+this looks good
+though I really would like to get your
+though I really would like to get your
+training up by another like 3x or
+training up by another like 3x or
+whatever because if we can get it to
+whatever because if we can get it to
+like 500k then you can start running
+like 500k then you can start running
+proper sweeps I mean the thing is this m
+proper sweeps I mean the thing is this m
+takes long enough to train that like
+takes long enough to train that like
+you're probably going to have to run 500
+you're probably going to have to run 500
+million step
+million step
+sweeps like at 100,000 it's kind of slow
+right like it takes long enough to train
+right like it takes long enough to train
+that we're going to have to run 500 mil
+that we're going to have to run 500 mil
+sweeps I was thinking we can probably
+sweeps I was thinking we can probably
+add some early stopping stuff so like if
+add some early stopping stuff so like if
+after 100 Mil you know you don't have
+after 100 Mil you know you don't have
+point2 we can just stop the
+point2 we can just stop the
+runs um so that'll help some like once
+runs um so that'll help some like once
+we integrate that you could actually
+we integrate that you could actually
+help with that it's pretty easy
+help with that it's pretty easy
+um but yeah
+this burst hit is kind of good over here
+this burst hit is kind of good over here
+you see like like you have metrics that
+you see like like you have metrics that
+are still going
+up it's good to log stuff like this
+up it's good to log stuff like this
+right cuz like if you like have shops
+right cuz like if you like have shops
+hit with a specific weapon right maybe
+hit with a specific weapon right maybe
+it takes a while to figure out a
+it takes a while to figure out a
+specific weapon
+specific weapon
+this is good
+though that's
+though that's
+K default
+K default
+copied we said done m in clean AR
+copied we said done m in clean AR
+script okay maybe I N some SPS off of
+this done indices
+oh yeah that's
+good let me try
+good let me try
+this I do have weapon specific metrics
+this I do have weapon specific metrics
+in logs but I sum them in Python because
+in logs but I sum them in Python because
+I haven't needed them
+I haven't needed them
+yet sum
+them presumably you've looked at the
+them presumably you've looked at the
+logging for some of the complex M's
+logging for some of the complex M's
+right to see how to do
+it okay as long as you've looked at it
+it okay as long as you've looked at it
+and you're doing it
+right
+oops
+um one
+do
+observations how about
+observations how about
+this is
+this is
+this good for
+this good for
+us or is this bad for
+us shape the
+us shape the
+mismatch cannot be
+mismatch cannot be
+broadcast all right
+oops okay so this is
+empty
+empty
+if indices
+shape a mismatch
+so these are done in deas
+right okay so that's not resetting
+correctly for
+okay CH is there a weird thing where it
+okay CH is there a weird thing where it
+returns all of the observations even
+returns all of the observations even
+when you just reset specific IDs
+it seems to not be respecting
+this cuz it's returning me a full batch
+this cuz it's returning me a full batch
+even if I give it
+IDs I'm fix logging in the meantime
+yeah internally reset provides
+yeah internally reset provides
+IDs but returns okay so it does
+IDs but returns okay so it does
+correctly though it does correctly reset
+correctly though it does correctly reset
+just the M's
+just the M's
+for the indices you give it doesn't
+for the indices you give it doesn't
+reset them all for some dumb reason
+reset them all for some dumb reason
+right so this is
+safe see if that makes it faster or
+slower doesn't seem to change
+slower doesn't seem to change
+perf yep
+perf yep
+okay doesn't seem to change
+okay doesn't seem to change
+perf that's kind of weird that like
+perf that's kind of weird that like
+early
+early
+resetting doesn't really change perf
+well I will at least fix this return
+well I will at least fix this return
+rapper right now and we'll go from
+rapper right now and we'll go from
+there so
+lot of
+lot of
+inefficiencies yeah we are absolutely
+inefficiencies yeah we are absolutely
+going to have to like put them all in
+going to have to like put them all in
+one scene or something because we're not
+one scene or something because we're not
+going to be able to do anything with
+going to be able to do anything with
+11,000 steps per second just like
+11,000 steps per second just like
+straight up we're not going to be able
+straight up we're not going to be able
+to do anything um like 100k minimum for
+to do anything um like 100k minimum for
+us to be able to like
+us to be able to like
+function on
+function on
+this and Isaac Jim is supposed to be
+this and Isaac Jim is supposed to be
+able to hit like hundreds of thousands
+able to hit like hundreds of thousands
+of steps per second if you batch it's
+of steps per second if you batch it's
+just not set up
+just not set up
+correctly um you know for whatever
+correctly um you know for whatever
+reason these GPU Sims like you have to
+reason these GPU Sims like you have to
+put all the robots in one C and it's
+put all the robots in one C and it's
+kind of stupid but I think we should
+kind of stupid but I think we should
+need to do that
+need to do that
+because yeah this is
+because yeah this is
+not like we can't do anything with 11k
+not like we can't do anything with 11k
+SPS this is freaking slower than
+Atari at least we get like 30k out of
+Atari at least we get like 30k out of
+Atari
+sh
+digging inside
+yeah return
+episode do like this
+episode do like this
+then what we do
+then what we do
+is the done ones here we're going to
+is the done ones here we're going to
+have to
+Loop
+episode for
+equals
+e
+e
+e
+e e
+yeah I think this should be
+correct a list of dicks
+there we
+go so you you might want to double check
+go so you you might want to double check
+this
+um but this looks
+better
+e
+e e
+yeah I'm pushing this for you to play
+yeah I'm pushing this for you to play
+with
+with
+k
+um you should probably give me perms
+um you should probably give me perms
+[Music]
+[Music]
+to
+wait oh yeah this is all I changed
+wait oh yeah this is all I changed
+here um
+here um
+would you like me to push this to a
+would you like me to push this to a
+branch or do you want to integrate this
+branch or do you want to integrate this
+more generally like all you have to do
+more generally like all you have to do
+to fix this so it works with both your
+to fix this so it works with both your
+script and my script is uh do the like
+script and my script is uh do the like
+the root path thing maybe I'll just do
+the root path thing maybe I'll just do
+that for you right now let's see it's
+that for you right now let's see it's
+5:30 yeah I can probably just do that
+5:30 yeah I can probably just do that
+for you right
+for you right
+now
+um let me think how to do this
+yeah I should be able to do that
+yeah I should be able to do that
+so also is this thing
+so also is this thing
+training K I think that this thing is
+training K I think that this thing is
+actually
+training the the return has gone up it
+training the the return has gone up it
+was below 0.04 when I
+was below 0.04 when I
+started
+started
+so I think I actually got this thing
+so I think I actually got this thing
+training like zero
+shot is probably probably not great but
+shot is probably probably not great but
+it looks like it's going up a
+bit I grabbed all the parameters from
+bit I grabbed all the parameters from
+the clean RL file I don't know how fast
+the clean RL file I don't know how fast
+your training is with uh with clean RL
+your training is with uh with clean RL
+it's probably pretty similar since the M
+it's probably pretty similar since the M
+is so
+slow we'll do up to some level
+I've seen it with clean RL
+I've seen it with clean RL
+cool is this how fast clean RL runs as
+cool is this how fast clean RL runs as
+well I wouldn't think clean RL would be
+well I wouldn't think clean RL would be
+any faster than this it's 96% M time
+any faster than this it's 96% M time
+unless I broke something in the
+wrapper this is running with an lstm and
+everything
+everything
+similar cool I mean that's expected
+similar cool I mean that's expected
+right it's your hard bottleneck by the
+right it's your hard bottleneck by the
+end so once we make the M faster then
+end so once we make the M faster then
+puffer lib will actually be able to keep
+puffer lib will actually be able to keep
+up with it whereas basically narl
+wouldn't right
+so uh enter
+think that we do like this
+please push to a branch yeah let me fix
+please push to a branch yeah let me fix
+your path first
+perfect
+e e
+yeah this thing is definitely training I
+yeah this thing is definitely training I
+don't know how good it works with clean
+don't know how good it works with clean
+RL um but this thing is definitely
+RL um but this thing is definitely
+training so you should be able to use
+training so you should be able to use
+this for
+this has sweeps and W be integrated as
+this has sweeps and W be integrated as
+well so
+not able to fully
+replicate well yeah I mean you should be
+replicate well yeah I mean you should be
+like we should be able to use this for
+like we should be able to use this for
+basically both code bases it's almost
+basically both code bases it's almost
+identical
+right like I have this pushed like the
+right like I have this pushed like the
+code for ASC should be basically
+code for ASC should be basically
+identical to this
+also one thing to
+type one question there typed for you um
+tasks wait did
+I I'm
+confused this is not what I I did
+right okay I'm going to kill this cuz
+right okay I'm going to kill this cuz
+this definitely works it's not logging
+this definitely works it's not logging
+anyways
+so it's it's just it's a similar thing
+so it's it's just it's a similar thing
+with a better code base but we are going
+with a better code base but we are going
+to be able to do the full thing
+right do they have do they have
+right do they have do they have
+comparable numbers like are there
+comparable numbers like are there
+numbers on both of the papers to see how
+numbers on both of the papers to see how
+good those things are
+that would be useful to
+have okay you can't give it a path hold
+on okay well we got to give them the
+on okay well we got to give them the
+thing they asked
+thing they asked
+for unless we have a compelling evidence
+for unless we have a compelling evidence
+that this is
+better I'll take a look through both the
+papers before tomorrow
+um yeah this thing doesn't like
+um yeah this thing doesn't like
+strings we'll just do like that this
+strings we'll just do like that this
+thing doesn't like
+um doesn't like this we'll just do like
+um doesn't like this we'll just do like
+this
+okay
+cool we definitely need to get some like
+cool we definitely need to get some like
+just some baselines up and running and
+just some baselines up and running and
+we need it to be faster than this
+we need it to be faster than this
+because like we're just not going to get
+because like we're just not going to get
+anything done in a reasonable amount of
+anything done in a reasonable amount of
+time with training going at this speed
+time with training going at this speed
+so I would say like getting this thing
+so I would say like getting this thing
+if you can get the same thing loaded but
+if you can get the same thing loaded but
+instead of having it be 4,000 of like
+instead of having it be 4,000 of like
+4,000 scenes with one robot if it's just
+4,000 scenes with one robot if it's just
+like the same robot at like 4,000
+like the same robot at like 4,000
+stations in one scene if we can get that
+stations in one scene if we can get that
+fast that's going to be very very
+fast that's going to be very very
+important plus that'll be good for
+important plus that'll be good for
+puffer right that's like that's the
+puffer right that's like that's the
+version of Isaac we want in puffer like
+version of Isaac we want in puffer like
+this is completely useless as a
+this is completely useless as a
+environment like 11,000 you can't do
+environment like 11,000 you can't do
+anything with that
+what do I run here
+what do I run here
+wait oh
+cleaner I'm making sure that I didn't
+cleaner I'm making sure that I didn't
+break your
+break your
+script well I didn't install all the
+script well I didn't install all the
+stuff but fine you can test this I I
+stuff but fine you can test this I I
+doubt I broke your script it should be
+doubt I broke your script it should be
+fine
+as is 50K
+uh did you add me to this thing do I
+uh did you add me to this thing do I
+have to accept
+something I should just be added
+right I want to give you this
+Branch oh there it is
+huh I hit this
+check where the hell is this
+check where the hell is this
+I does the check not
+I does the check not
+actually do anything or is it
+just can you send it again I think I'm
+just can you send it again I think I'm
+not supposed to hit the
+check maybe is it in my
+check maybe is it in my
+email and freaking
+GitHub I want to give you these
+changes oh there it
+changes oh there it
+is got
+is got
+it I got it it's just the UI was weird
+it I got it it's just the UI was weird
+if you hit the check mark that doesn't
+if you hit the check mark that doesn't
+accept it it just deletes it so check
+accept it it just deletes it so check
+means delete I
+guess okay
+oops oh that's weird now it just works
+oops oh that's weird now it just works
+all right cool so there's your
+branch and uh you also have Isaac Jim
+branch and uh you also have Isaac Jim
+Branch on puffer
+Branch on puffer
+Li all right so that ought to work for
+you ASC is 50k do you know is ASC is it
+you ASC is 50k do you know is ASC is it
+is that with
+is that with
+one per
+one per
+scene or is that already parallelized
+scene or is that already parallelized
+like all the things in one scene so I'm
+like all the things in one scene so I'm
+pretty damn sure we want to put
+pretty damn sure we want to put
+everything in one
+everything in one
+scene like there's a huge huge
+scene like there's a huge huge
+difference between 50k and 500k as far
+difference between 50k and 500k as far
+as what we're going to be able to do
+as what we're going to be able to do
+with that like 500k means we can just
+with that like 500k means we can just
+Auto solve it with aggressive hyper pram
+Auto solve it with aggressive hyper pram
+sweeps 50k means we kind of have to do
+sweeps 50k means we kind of have to do
+stuff manually and guess
+CL
+CL
+1% no
+1% no
+fingers I
+see we want was itnl humanoid
+is it
+is it
+this I don't
+know I haven't seen others well that's
+know I haven't seen others well that's
+how Isaac Sim works right look
+it's the same as
+Isaac yeah look you see these demos all
+Isaac yeah look you see these demos all
+the time right where they have like a
+the time right where they have like a
+million robots in one
+M I'm pretty damn sure this is what you
+M I'm pretty damn sure this is what you
+do like look you see they have like them
+do like look you see they have like them
+all in one M like this
+I've seen this all over the place and
+I've seen this all over the place and
+I'm pretty sure it's because the way
+I'm pretty sure it's because the way
+that the physics Sim works you can't
+that the physics Sim works you can't
+parallelize the GPU computations over
+parallelize the GPU computations over
+instances you got to do it over uh in
+instances you got to do it over uh in
+one map I'm pretty
+one map I'm pretty
+sure that's only rendering
+really then why is it so
+really then why is it so
+slow I mean this thing is supposed to be
+slow I mean this thing is supposed to be
+faster right
+okay that's
+okay that's
+slow I thought this is supposed to be
+slow I thought this is supposed to be
+fast
+here for
+just ask Twitter
+and
+cool we're
+cool we're
+good so I mean that's
+that is
+working let me go look at this ASC
+paper what's it called action something
+paper what's it called action something
+or
+other this it
+find
+[Music]
+it
+it
+this and
+this and
+[Music]
+[Music]
+then
+this okay
+yeah I got it
+so adversarial skill and
+beddings is there a
+paper this
+paper this
+one
+okay and and then what's this Fizz
+hoi so we got this these guys have any
+comparable
+comparable
+benchmarks where's table
+not really comptable
+H fiz okay so that's a late wait I'm
+H fiz okay so that's a late wait I'm
+confused there so fiz hoi is a later
+paper so this thing
+paper so this thing
+has I mean this thing has a better model
+has I mean this thing has a better model
+though doesn't
+though doesn't
+it this is like a better humanoid
+it this is like a better humanoid
+model and then this is like a simplified
+model and then this is like a simplified
+thing is
+that or no cuz this has
+fingers this just has a
+fingers this just has a
+sword is
+that it's just the render
+that it's just the render
+ring okay so it's the
+same ASC is a simpler okay so hoi is a
+same ASC is a simpler okay so hoi is a
+more complex so we got that repo running
+more complex so we got that repo running
+is good
+right
+right
+fingers robot
+object but this is not for then is this
+object but this is not for then is this
+for animations what is this for physics
+for animations what is this for physics
+based
+imitation this might be too high
+imitation this might be too high
+fidelity
+fidelity
+honestly this might be too high fidelity
+honestly this might be too high fidelity
+though because
+like this is like for
+like this is like for
+accurate object interaction this is like
+accurate object interaction this is like
+too much just for animation right
+got to make the training fully work does
+got to make the training fully work does
+it not fully work at the
+it not fully work at the
+moment I mean this thing
+learns hey bet
+learns hey bet
+Biz Hy is for
+Biz Hy is for
+actual is it if I pull up the other
+paper looking fit still not at all man
+paper looking fit still not at all man
+I'm down 15 lbs in like 3 weeks and my
+I'm down 15 lbs in like 3 weeks and my
+lung capacity is totally
+lung capacity is totally
+destroyed um it is not a good
+time maybe may be but
+time maybe may be but
+it's it's pretty
+rough that's not
+this I'll go find the paper
+so are you sure Kung like this
+is what they're using here is not
+is what they're using here is not
+focused on like fine
+focused on like fine
+grained like fine grained object
+grained like fine grained object
+interaction this is focused on like
+interaction this is focused on like
+animation
+as e oh I see what you mean yeah cuz the
+as e oh I see what you mean yeah cuz the
+fiz hoi is more fine okay yeah yeah okay
+fiz hoi is more fine okay yeah yeah okay
+I I see you're
+right
+right
+um it doesn't yeah I know X is GL X is
+um it doesn't yeah I know X is GL X is
+glitched today I don't know what's wrong
+glitched today I don't know what's wrong
+with
+with
+it started and moved on
+it started and moved on
+okay well this is what we want to get to
+can
+we okay I'll figure out tomorrow to make
+we okay I'll figure out tomorrow to make
+sure we're like loading in the correct
+sure we're like loading in the correct
+bot in the correct scenes and
+bot in the correct scenes and
+stuff
+um the good thing is we got Isaac Jim
+um the good thing is we got Isaac Jim
+bound
+bound
+though we got Isaac in Bound to puffer
+though we got Isaac in Bound to puffer
+and you've started playing around with a
+and you've started playing around with a
+few different
+few different
+repos getting training working and such
+now it comes to my attention that this
+now it comes to my attention that this
+is frozen so really this is the part
+is frozen so really this is the part
+that we're looking
+that we're looking
+at is uh this like this is the RL Loop
+at is uh this like this is the RL Loop
+right here
+I don't fully understand
+I don't fully understand
+how the imitation and the RL data are
+how the imitation and the RL data are
+mixing
+mixing
+here
+um I guess what I have is I just have
+um I guess what I have is I just have
+like a pure a pure RL task running right
+like a pure a pure RL task running right
+but it is loading motion file so I don't
+but it is loading motion file so I don't
+exactly know what it's
+doing like I don't actually know exactly
+doing like I don't actually know exactly
+what it is I have bindings for like
+what it is I have bindings for like
+Isaac Jim yeah but I don't know what the
+Isaac Jim yeah but I don't know what the
+scenes and stuff were loaded in
+do you know what the humanoid that we're
+do you know what the humanoid that we're
+using is called I would like to know
+using is called I would like to know
+what humanoid we're currently
+what humanoid we're currently
+using for both of
+using for both of
+these you can find
+that trying to control the
+that trying to control the
+robot that looks like the input
+motion so what the rln
+motion so what the rln
+is the rln is like rewarding you for
+is the rln is like rewarding you for
+matching a trajectory already is that is
+matching a trajectory already is that is
+that what it
+is is that their whole code base or is
+is is that their whole code base or is
+that just the N is that in the N player
+that just the N is that in the N player
+like the thing that I bound to
+like the thing that I bound to
+puffer is this actually like human
+puffer is this actually like human
+regularized is this like trying to
+regularized is this like trying to
+regularize towards a human policy or is
+regularize towards a human policy or is
+this like just some random Isaac task
+yeah well not
+yeah well not
+falling so it is
+regularized
+regularized
+okay we're going to have to get the
+okay we're going to have to get the
+renderer working so we can play with
+it I want to see what the heck we're
+it I want to see what the heck we're
+actually doing
+actually doing
+ball playing lotions trying to match
+okay yeah well we're going to need to
+okay yeah well we're going to need to
+match that's probably not the type of
+match that's probably not the type of
+stuff we're going to want to match right
+stuff we're going to want to match right
+the point is if we've got the we've got
+the point is if we've got the we've got
+the Sim configured um they're like some
+the Sim configured um they're like some
+extra losses that are going to have to
+extra losses that are going to have to
+go into clean puff so you can play
+go into clean puff so you can play
+around with the ASC code base for a bit
+around with the ASC code base for a bit
+and then hopefully we can get the ASC M
+and then hopefully we can get the ASC M
+loaded into puffer and then added to
+loaded into puffer and then added to
+clean puff RL and hopefully we can get a
+clean puff RL and hopefully we can get a
+fast enough we can get the scene running
+fast enough we can get the scene running
+fast enough that we can do like hyper
+fast enough that we can do like hyper
+pram tuning and stuff and auto solve cuz
+pram tuning and stuff and auto solve cuz
+I can tell just looking at the default
+I can tell just looking at the default
+hyper prams um that they were not
+tuned I can tell just looking at it they
+tuned I can tell just looking at it they
+were not tuned
+this is very hard to port to right
+DM
+DM
+Nate
+what this is only updated to python 310
+what this is only updated to python 310
+really
+you kidding
+me dude what the
+me dude what the
+hell literally their latest thing is
+hell literally their latest thing is
+only
+310 this is only 2.6k
+310 this is only 2.6k
+Stars imagine passes
+that all
+that all
+right anything else for the time being
+right anything else for the time being
+CH or we uh we good for now I uh I think
+CH or we uh we good for now I uh I think
+I've gotten the thing done I needed for
+I've gotten the thing done I needed for
+today
+today
+um probably going to go grab dinner and
+um probably going to go grab dinner and
+then I might come back and start on some
+then I might come back and start on some
+oblations if I have any more energy left
+oblations if I have any more energy left
+for the
+for the
+day it's probably what I'm going to do I
+day it's probably what I'm going to do I
+might come back and stream a little bit
+might come back and stream a little bit
+later in the evening if I work I'll
+later in the evening if I work I'll
+stream it may as
+well or I could review uh bet I owe you
+well or I could review uh bet I owe you
+some code reviews as well so I could do
+some code reviews as well so I could do
+that
+yeah I got to eat first though go to
+yeah I got to eat first though go to
+find the humanoid model why is there no
+find the humanoid model why is there no
+yeah K if you can just like send me the
+yeah K if you can just like send me the
+basic obvious information that you would
+basic obvious information that you would
+ask about what we've done so far um that
+ask about what we've done so far um that
+would be great I think we've made some
+would be great I think we've made some
+pretty damn good progress for you know
+pretty damn good progress for you know
+just having been working on this for a
+just having been working on this for a
+few days um you know but I'd like to
+few days um you know but I'd like to
+actually have a good sense of what it is
+actually have a good sense of what it is
+like this is all very confusing right
+like this is all very confusing right
+like this a giant package and it's hard
+like this a giant package and it's hard
+to tell what you're actually doing with
+to tell what you're actually doing with
+any of this stuff but it would be good
+any of this stuff but it would be good
+to get a just a few Basics anyways folks
+to get a just a few Basics anyways folks
+I'm going to call it for now and then
+I'm going to call it for now and then
+I'm going to be back probably in like an
+I'm going to be back probably in like an
+hourish
+hourish
+depending um hour and a half maybe and
+depending um hour and a half maybe and
+probably we'll review some code for bet
+probably we'll review some code for bet
+merge in
+merge in
+uh one environment change one new
+uh one environment change one new
+environment and we'll go from
+environment and we'll go from
+there uh maybe I'll have some time for
+there uh maybe I'll have some time for
+some science side ablation stuff as
+well waiting for one last thing from
+well waiting for one last thing from
+Kong
+Kong
+confirmation and we'll call
+it yep we'll give you okay thank you
+it yep we'll give you okay thank you
+yeah you don't need to join the thing
+yeah you don't need to join the thing
+tomorrow it's like it's my job to keep
+tomorrow it's like it's my job to keep
+you out of
+you out of
+meetings all right see you all

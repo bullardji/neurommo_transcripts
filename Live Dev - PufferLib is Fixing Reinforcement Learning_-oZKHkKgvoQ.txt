@@ -1,0 +1,2841 @@
+Kind: captions
+Language: en
+Back live.
+Okay.
+Okay.
+Um, let's see what we've got here. First
+Um, let's see what we've got here. First
+of
+of
+all, that's a nice
+all, that's a nice
+soda. That's a nice
+soda. Let's just take a moment to uh to
+soda. Let's just take a moment to uh to
+appreciate that. is nice nice soda
+result. All
+right.
+Next. Yeah. So, uh this feature is
+Next. Yeah. So, uh this feature is
+supposed to be off policy
+correction, but it's not seeming very
+correction, but it's not seeming very
+off policy corrected to
+off policy corrected to
+me. But maybe we're doing something.
+Maybe we're doing it wrong.
+I guess we were going to just do
+I guess we were going to just do
+prioritized experience replay,
+right? That's a cool thing to do for a
+bit. Yeah. Yeah, that's what I was going
+bit. Yeah. Yeah, that's what I was going
+to do.
+Classic David silver
+binary key. That seems
+weird. I just really want to know their
+weird. I just really want to know their
+sampling, you
+sampling, you
+know, ratio.
+Where is the final
+Where is the final
+algorithm extensions?
+algorithm extensions?
+[Music]
+What's
+What's
+this? I'll get to that later. Uh, I
+this? I'll get to that later. Uh, I
+really want to get this implemented as
+really want to get this implemented as
+well today.
+Okay.
+So, prioritize replay. They
+do
+do
+P1 equals 1.
+Compute important sampling
+weight. I have no idea what this formula
+weight. I have no idea what this formula
+is.
+It uses TD error though.
+Did people use the rank base one or
+Did people use the rank base one or
+what?
+Okay. Did they not define these
+variables? Yeah. Okay. I've been uh I've
+variables? Yeah. Okay. I've been uh I've
+done like close to 10 hours of algorithm
+done like close to 10 hours of algorithm
+dev today. So, we're going to just go to
+dev today. So, we're going to just go to
+this for easy motive
+this for easy motive
+explain right out. The
+explain right out. The
+formula
+for Okay. N is the size the replay
+for Okay. N is the size the replay
+buffer. Okay.
+Duh. And this is P of
+Duh. And this is P of
+I. The heck is
+accumulate weight
+accumulate weight
+change. This is DQN, right?
+Yeah. Where do they use this weight?
+Oh,
+So there are just using the
+So there are just using the
+uh TD error.
+So they actually put a schedule on
+So they actually put a schedule on
+prioritize replay.
+Yeah. So the issue here right
+is this is what I was doing before.
+is this is what I was doing before.
+Really
+We could just go with J, right?
+Can I use the betray metric itself?
+your sampling segments
+your sampling segments
+non-uniformly. Use important sample
+non-uniformly. Use important sample
+waiting to correct
+waiting to correct
+bias in the policy
+bias in the policy
+gradient. Oh, that's probably actually
+gradient. Oh, that's probably actually
+important, isn't
+it? Hang on. Isn't the whole point of
+it? Hang on. Isn't the whole point of
+this to bias the policy gradient? I'm
+this to bias the policy gradient? I'm
+confused.
+And then what
+is I'm being a little stupid at this
+is I'm being a little stupid at this
+hour. This is uh this is actually very
+simple. Fully compensates for
+simple. Fully compensates for
+non-uniform probabilities if b equals 1.
+This is actually kind of good, isn't it?
+And then what's the
+alpha? P alpha over
+Okay, I mean we can kind of just
+Okay, I mean we can kind of just
+implement this,
+implement this,
+right? And then um alpha equals
+right? And then um alpha equals
+0, beta equals
+zero uh will just recover the original
+zero uh will just recover the original
+sampling. So that's actually totally
+sampling. So that's actually totally
+fine. 727. Let's implement that in a
+fine. 727. Let's implement that in a
+couple quick experiments and that will
+couple quick experiments and that will
+be awesome progress for today.
+What did they say? They
+said
+12.6 beta.
+We do beta
+So big cryop beta
+zero beta
+Yeah, that's good.
+Now, we'll just default this to
+torch multinnomial. We don't want right
+How do these problems get normalized?
+Oh, you can just you can call this with
+Oh, you can just you can call this with
+problems, right?
+Multial.
+And we have to do weights,
+right? I don't know where it came up
+right? I don't know where it came up
+with
+with
+this. This was definitely not the uh
+Not the gold.
+There you go.
+So apparently all we have to do is
+So apparently all we have to do is
+multiply by match
+dot. We just do
+See, let's see if we can get this to
+run. Cannot sample.
+All right. It's got to
+be Yeah, something like this, I assume.
+And these are all uniform right
+now. Sum to
+now. Sum to
+one. Pretty
+basic. We get some
+indices. Find our weights.
+advantages a mess.
+But I just want to get the initial
+But I just want to get the initial
+implementation
+in. Hello YouTube
+in. Hello YouTube
+folks.
+Welcome. All right. It runs. It does in
+Welcome. All right. It runs. It does in
+fact
+fact
+run.
+So this should now be
+So this should now be
+prioritized not across uh
+epochs. This was the thing that was
+epochs. This was the thing that was
+missing
+missing
+using importance weights.
+It stalled out a bit, but I think it's
+It stalled out a bit, but I think it's
+still pretty dang
+good. So, we get
+good. So, we get
+this. That's not bad.
+this. That's not bad.
+This is with the new
+This is with the new
+uh vrace. We should also do this
+for for
+J. Let's just add that for J. Why not,
+right? Batch. Cryo.
+Yeah. So, this is going to
+be Vantage
+equals file.
+equals file.
+Okay. So now this is without V
+trace. We didn't break
+trace. We didn't break
+anything. We
+anything. We
+didn't. Good.
+So, let me uh just disable a whole bunch
+So, let me uh just disable a whole bunch
+of
+of
+these these stupid
+runs. This seems perfectly good.
+I'm
+playing. Yeah, this seems like uh
+playing. Yeah, this seems like uh
+perfectly
+fine.
+fine.
+Great. So,
+Great. So,
+um Now the question is going to be B
+um Now the question is going to be B
+trace versus J E
+right B trace versus J
+E seems B trace does a little bit worse.
+Well, we now have prioritized
+sampling. We have this as our baseline.
+sampling. We have this as our baseline.
+This is our other
+This is our other
+baseline. So we actually what we can do
+baseline. So we actually what we can do
+is we can just
+Oops. Okay. So here is our V
+Oops. Okay. So here is our V
+trace. Here is our J.
+We're going to try a few more
+We're going to try a few more
+things since we're in a trying stuff
+things since we're in a trying stuff
+mode.
+We just want to be able to give this
+like a few extra trajectories, right?
+Okay, so this is now BRA with all policy
+Okay, so this is now BRA with all policy
+data only a little
+though. I'm seriously just crashes,
+right? Just crashes.
+I mean, it does still learn, but it
+I mean, it does still learn, but it
+learns slower.
+This is also a bad environment for this,
+This is also a bad environment for this,
+right? Yeah, this is a bad environment
+right? Yeah, this is a bad environment
+for
+for
+this. We should do
+this. We should do
+[Music]
+mazes. Let's do a maze benchmark.
+Assuming I haven't broken this
+thing. One
+thing. One
+map size 31
+and upper bridge.
+fun. So I think in this case I probably
+fun. So I think in this case I probably
+know how to fix this, right?
+How many do we have?
+56. That should be fine, shouldn't
+56. That should be fine, shouldn't
+it? Why is this thing not working?
+Maybe I didn't test this. Maybe I only
+Maybe I didn't test this. Maybe I only
+tested it this way.
+Yeah, that's it.
+Okay, cool.
+So, I'm probably just leave it like this
+So, I'm probably just leave it like this
+and see what the solve rate is, right?
+and see what the solve rate is, right?
+With the
+Let's just do 100
+mil. No
+betray. Yeah, this will be a good few
+betray. Yeah, this will be a good few
+experiments.
+retrace baseline's going to be
+Okay, so the PO baseline on this is
+Okay, so the PO baseline on this is
+pretty nice and smooth.
+We will also get to try this on
+We will also get to try this on
+um on Nurmo 3,
+um on Nurmo 3,
+right? We can just throw on
+right? We can just throw on
+prioritized prioritized
+prioritized prioritized
+replay now that we have
+it.
+Pretty clean curve though.
+And then we will compare retrace.
+Okay, stalls out low 70s.
+Okay, stalls out low 70s.
+Next will be B
+trades. Max uses goes from 27 to
+trades. Max uses goes from 27 to
+1918 and mean
+1918 and mean
+uses at So, there's definitely
+uses at So, there's definitely
+prioritization
+prioritization
+happening. There's definitely some
+happening. There's definitely some
+prioritization
+prioritization
+happening.
+happening.
+Uhoh. Does V trace just suck?
+No,
+It can't be that much worse.
+Let's see what the
+Let's see what the
+uh I had some original results in
+uh I had some original results in
+here. Find
+it. So, this did get over like 085 or
+it. So, this did get over like 085 or
+something in 100
+mil. Okay.
+Oh, that's not going to work, is it?
+We do this.
+I'm watching your stream on YouTube.
+I'm watching your stream on YouTube.
+Hello. You're allowed to ask stuff if
+Hello. You're allowed to ask stuff if
+you're stuck. You know, that's half the
+you're stuck. You know, that's half the
+reason I stream.
+So, I don't know what I did to this
+So, I don't know what I did to this
+environment, but
+environment, but
+um so far the prioritized replay seems
+um so far the prioritized replay seems
+fine.
+fine.
+It doesn't seem like I screwed anything
+It doesn't seem like I screwed anything
+up
+there. Yeah. If anything, this
+there. Yeah. If anything, this
+multinnomial is less
+consistent. So, it'll be worth throwing
+consistent. So, it'll be worth throwing
+this at
+this at
+um neural MMO 3 just to see prior
+Reapply priority play seems to have the
+Reapply priority play seems to have the
+cleaner curve.
+catching up a little bit. But
+um
+um
+Okay. So, uh I think the prioritize
+Okay. So, uh I think the prioritize
+replay
+replay
+is, you know, the prioritize replay is a
+is, you know, the prioritize replay is a
+good addition.
+Now then the question is just like what
+Now then the question is just like what
+the heck happened to
+um Vrace, right? What happened with
+um Vrace, right? What happened with
+Vrace? Cuz that's really weird for V
+Vrace? Cuz that's really weird for V
+trace to do
+that because it worked fine for
+that because it worked fine for
+breakout. Shouldn't just fail.
+You should be totally fine, right?
+Why is
+um why is betray not work on
+um why is betray not work on
+this? Hello. I was basically stuck
+this? Hello. I was basically stuck
+setting up on a run
+setting up on a run
+machine. When I make ocean breakout, it
+machine. When I make ocean breakout, it
+works fine. I print out the infos. I see
+works fine. I print out the infos. I see
+positive rewards and so
+positive rewards and so
+on. Okay. So, What's the setup issue
+then? Some reason observation stays the
+then? Some reason observation stays the
+same like after every step I'm getting
+same like after every step I'm getting
+the same.
+Um, so the only thing that I can think
+Um, so the only thing that I can think
+of that people get stuck on
+of that people get stuck on
+[Music]
+[Music]
+sometimes, what OS do those things
+run? So, let me find this for
+run? So, let me find this for
+you. The way that our native MS
+you. The way that our native MS
+work, so all our native MS define this
+work, so all our native MS define this
+buffer, observations, rewards,
+buffer, observations, rewards,
+whatever, and then they write stuff into
+whatever, and then they write stuff into
+that buffer.
+So if this is somehow go getting
+So if this is somehow go getting
+overwritten or
+overwritten or
+whatever, something weird can happen
+there. Try running with ve serial. See
+there. Try running with ve serial. See
+if that changes anything. And if not,
+if that changes anything. And if not,
+like link me the
+like link me the
+uh code you're
+uh code you're
+running because I've seen people do this
+running because I've seen people do this
+before. Oh, actually, I've literally had
+before. Oh, actually, I've literally had
+people write
+people write
+uh I've had people write this test
+uh I've had people write this test
+before and do it wrong. I've literally
+before and do it wrong. I've literally
+had people write this like test. Link me
+had people write this like test. Link me
+the test script you're running. It could
+the test script you're running. It could
+be if you're running a test script. I've
+be if you're running a test script. I've
+literally had people send me a test
+literally had people send me a test
+script where uh they have this exact
+script where uh they have this exact
+issue and it's just the way they write
+issue and it's just the way they write
+the
+script.
+script.
+VR, what's going on with you?
+Why do you work on proper breakout but
+Why do you work on proper breakout but
+then not on uh not on this m at
+all link in the Discord YouTube will
+all link in the Discord YouTube will
+yell at Okay.
+Let's do this
+Let's do this
+[Music]
+[Music]
+pryo
+method. Make sure it's not the sampling.
+Break out.
+Silly. Feed the Google
+fish. Is this German or what is Google
+fish. Is this German or what is Google
+fish? It's like something for proper
+fish? It's like something for proper
+fish, I'm sure.
+Hello. All right. So, it is genuinely
+Hello. All right. So, it is genuinely
+the case then
+the case then
+that irrespective of sampling it just
+that irrespective of sampling it just
+doesn't work
+doesn't work
+on this. Does it work on calm?
+I mean it works doesn't work as well.
+I mean it works doesn't work as well.
+It's not optimized for this though.
+not working at all on
+not working at all on
+um red is
+suspicious. And I just
+like do this.
+Oh, that's got E3B
+Oh, that's got E3B
+on. But I think I removed that already.
+channel wherever you can put it in the
+channel wherever you can put it in the
+jam. It's fine.
+Yep. So, here's the thing. Yeah, man. I
+Yep. So, here's the thing. Yeah, man. I
+need to add like some docs on this. I
+need to add like some docs on this. I
+thought I actually did add docs on this.
+thought I actually did add docs on this.
+So, it's just the way that you're
+So, it's just the way that you're
+testing this. Um, just like just copy
+testing this. Um, just like just copy
+this. I think you can like docopy or
+this. I think you can like docopy or
+whatever the
+whatever the
+array. So the obs update in place. It's
+array. So the obs update in place. It's
+the same tensor. That's the
+problem. You see? So this is giving you
+problem. You see? So this is giving you
+a handle to a
+a handle to a
+tensor, but then when you step the end,
+tensor, but then when you step the end,
+it writes the new data to that same
+it writes the new data to that same
+tensor.
+Like think about it because otherwise
+Like think about it because otherwise
+you end up making a new tensor every
+you end up making a new tensor every
+single time you step the end, right? And
+single time you step the end, right? And
+like nobody ever thinks about that. But
+like nobody ever thinks about that. But
+when you end up when you're doing
+when you end up when you're doing
+reinforcement learning at millions of
+reinforcement learning at millions of
+steps per second, you have to think
+steps per second, you have to think
+about stuff like that. So your thing is
+about stuff like that. So your thing is
+completely correct. You've got no issues
+completely correct. You've got no issues
+with it. It's just um yeah puffer native
+with it. It's just um yeah puffer native
+ms will update the temper in place. The
+ms will update the temper in place. The
+same will be true of the rewards dons
+same will be true of the rewards dons
+trunk like they all get updated in
+trunk like they all get updated in
+place.
+all written to shared buffer. Yeah, cuz
+all written to shared buffer. Yeah, cuz
+so the way the multipprocessing works,
+so the way the multipprocessing works,
+right?
+right?
+Um there's like this one big shared
+Um there's like this one big shared
+buffer and then it gives you it just
+buffer and then it gives you it just
+gives you slices of that buffer.
+gives you slices of that buffer.
+Sometimes it can copy. It depends. But
+Sometimes it can copy. It depends. But
+generally like the way to look at it is
+generally like the way to look at it is
+you should not assume that you're going
+you should not assume that you're going
+to be handed a unique
+to be handed a unique
+buffer. But the thing is like as soon as
+buffer. But the thing is like as soon as
+you do it like as soon as you put it
+you do it like as soon as you put it
+into a torch tensor and like move it to
+into a torch tensor and like move it to
+the GPU, it's going to get copied
+the GPU, it's going to get copied
+anyway. So you're never going to have a
+anyway. So you're never going to have a
+problem with that in practice.
+V trace just straight up doesn't work
+V trace just straight up doesn't work
+here. That's
+weird. It's very
+weird. It's very
+weird. Tra just straight up doesn't work
+weird. Tra just straight up doesn't work
+on the grids.
+Losses are fine. It just doesn't
+work. That's
+weird. So there's more work to do on V
+weird. So there's more work to do on V
+trace. I got the initial implementation
+trace. I got the initial implementation
+at
+at
+least. I guess I can rerun neural MMO
+least. I guess I can rerun neural MMO
+now with prioritized replay as well,
+now with prioritized replay as well,
+right?
+side invalid multial.
+I wonder if this is the thing that broke
+it. It can't be this.
+it. It can't be this.
+[Music]
+I might change stuff.
+Yep. All right, that works.
+Solid, solid
+Solid, solid
+progress. I need that box back
+progress. I need that box back
+though
+though
+because we need to run new job.
+That storage There.
+All right, this thing can report back in
+All right, this thing can report back in
+when it's uh played another thousand
+when it's uh played another thousand
+years of neural
+MMO. That's what 50 billion steps is.
+MMO. That's what 50 billion steps is.
+It's about a thousand years worth of
+It's about a thousand years worth of
+games
+games
+played right there. That is
+played right there. That is
+soda. But uh you know, we can't have
+soda. But uh you know, we can't have
+soda with a learning curve that looks
+soda with a learning curve that looks
+like this. I'm hoping that the
+like this. I'm hoping that the
+prioritize replay cleans this up a
+prioritize replay cleans this up a
+little bit. We will see. Maybe it does,
+little bit. We will see. Maybe it does,
+maybe it
+maybe it
+doesn't. Looks like another good end. I
+doesn't. Looks like another good end. I
+can chuck this
+out. This one mobile
+Do you like Pink
+Do you like Pink
+Floyd? I cannot name you a single Pink
+Floyd? I cannot name you a single Pink
+Floyd
+song. I listen to very little music in
+song. I listen to very little music in
+general.
+I kind of just like do reinforcement
+I kind of just like do reinforcement
+learning research, keep in shape,
+learning research, keep in shape,
+occasionally play a game or two. It's
+occasionally play a game or two. It's
+about it.
+about it.
+This is kind of the all
+This is kind of the all
+consuming pursuit of RL
+Yeah, it kind of
+has. I don't know. Like some number of
+has. I don't know. Like some number of
+months
+ago, I was on a date with like a really
+ago, I was on a date with like a really
+cute girl and she started talking about
+cute girl and she started talking about
+like music and stuff and I just went,
+like music and stuff and I just went,
+"Oh yeah, I have zero topics of
+"Oh yeah, I have zero topics of
+conversation cuz I do RL all day long. I
+conversation cuz I do RL all day long. I
+should probably just go finish all the
+should probably just go finish all the
+RL." I can just go solve that field so I
+RL." I can just go solve that field so I
+can do other
+stuff. Let's just go solve the field so
+stuff. Let's just go solve the field so
+I can move on to other things,
+I can move on to other things,
+right? Cuz nothing's going on in the
+right? Cuz nothing's going on in the
+meantime. Freaking all
+consuming. Funny as hell.
+Oh yeah. Oh yeah. I forgot about that.
+Oh yeah. Oh yeah. I forgot about that.
+People like listen to music and stuff,
+People like listen to music and stuff,
+right? Oh
+yeah. I got a I got a coil wine on this
+yeah. I got a I got a coil wine on this
+desktop next to me. Does that
+count? No. No. No. No. It plays
+count? No. No. No. No. It plays
+different notes depending on what jobs
+different notes depending on what jobs
+you run on the GPU. You know, if you
+you run on the GPU. You know, if you
+load it really heavy, you get one coil
+load it really heavy, you get one coil
+wind pattern. And if you load it
+wind pattern. And if you load it
+slightly less, you get another one.
+The hell is wrong with this thing? Why
+The hell is wrong with this thing? Why
+is this thing
+hanging? Is this V
+hanging? Is this V
+trace or is this just hanging?
+Okay, I think this is just like dev
+Okay, I think this is just like dev
+branch shenanigans.
+Can we get like something to work?
+Can we get like something to work?
+Maybe. How about puffer
+snake? Small time funs to try to do RL
+snake? Small time funs to try to do RL
+at a little more scale. And here I am
+at a little more scale. And here I am
+attempting to get puffer lip going, but
+attempting to get puffer lip going, but
+thanks. Yeah. Hey, I
+thanks. Yeah. Hey, I
+mean, here to help.
+I pretty much just build this thing
+I pretty much just build this thing
+24/7.
+24/7.
+So, this is going to be this kind of
+So, this is going to be this kind of
+already is the place to go for a wide
+already is the place to go for a wide
+range of RL
+range of RL
+applications. Like a ton of different RL
+applications. Like a ton of different RL
+problems you can think of. Popper is
+problems you can think of. Popper is
+kind of the best thing already and uh it
+kind of the best thing already and uh it
+will only continue to become the best
+will only continue to become the best
+thing for everything as we keep doing
+thing for everything as we keep doing
+stuff except LL. I don't really care to
+stuff except LL. I don't really care to
+bother with our
+bother with our
+LMLs, at least not at the moment. But
+LMLs, at least not at the moment. But
+other than
+other than
+that, probably the best place is
+here, you
+know. Can you learn snake, Mr. Beats?
+Okay. So slowly.
+Why? Okay. Definitely B trace is not
+Why? Okay. Definitely B trace is not
+uh V tracing.
+If someone else were to get the LM part
+If someone else were to get the LM part
+into
+into
+Popper, would you be down on what
+Popper, would you be down on what
+criteria to have for it? I mean, is
+criteria to have for it? I mean, is
+there like actually a useful thing that
+there like actually a useful thing that
+we can do or is this just going to be
+we can do or is this just going to be
+like the latest bandwagon thing, right?
+like the latest bandwagon thing, right?
+So like Puffer's ultra ultra high
+So like Puffer's ultra ultra high
+performance aura, right? We do training
+performance aura, right? We do training
+at this is literally a million and a
+at this is literally a million and a
+half steps per second and that's slow.
+half steps per second and that's slow.
+It should be two million steps per
+It should be two million steps per
+second. That's a regression.
+second. That's a regression.
+Um, so like when in llm land you're
+Um, so like when in llm land you're
+doing RL like two steps per
+doing RL like two steps per
+second, like you can write the dumbest
+second, like you can write the dumbest
+code imaginable and you're probably not
+code imaginable and you're probably not
+going to bottleneck anything when the
+going to bottleneck anything when the
+LLM is the slow part, right?
+So, like, yeah, I do actually hope that
+So, like, yeah, I do actually hope that
+some of the techniques and stuff that we
+some of the techniques and stuff that we
+come up with with Puffer are going to be
+come up with with Puffer are going to be
+useful for LLM land, but is there like
+useful for LLM land, but is there like
+anything we can really do with it in the
+anything we can really do with it in the
+meantime? I don't
+meantime? I don't
+know. If it prints enough free money for
+know. If it prints enough free money for
+me to fund a cool private industry lab
+me to fund a cool private industry lab
+for the next several years, then yeah,
+for the next several years, then yeah,
+that that'd be awesome, too.
+that that'd be awesome, too.
+But I'm kind of chilling just like
+But I'm kind of chilling just like
+working on solving the rest of RL right
+working on solving the rest of RL right
+now because nobody else is going to do
+now because nobody else is going to do
+it. And I can't I cannot bear to see RL
+it. And I can't I cannot bear to see RL
+be thrown to the wayside
+be thrown to the wayside
+when it has so so much
+when it has so so much
+potential. I think we're going to just
+potential. I think we're going to just
+have consistent, stable, and working
+have consistent, stable, and working
+this
+year. That's the goal.
+What the hell is
+What the hell is
+this? What are you doing?
+Beats. Okay. I thought that you didn't
+Beats. Okay. I thought that you didn't
+have to normally advantage the beach
+have to normally advantage the beach
+race,
+race,
+right? This breaks it, doesn't it? I
+right? This breaks it, doesn't it? I
+think that this like just instantly
+think that this like just instantly
+breaks
+it. If I do this, it instantly breaks,
+it. If I do this, it instantly breaks,
+doesn't
+it? Not that many
+grabs. Yeah. So, the kales are blowing
+grabs. Yeah. So, the kales are blowing
+up there.
+See, amusingly the spores are a little
+See, amusingly the spores are a little
+bit higher than before, but they're not
+bit higher than before, but they're not
+going to keep going up. It's not going
+going to keep going up. It's not going
+to be stable like that.
+Is it just the learn rate or
+something? Do I literally just have to
+something? Do I literally just have to
+do
+do
+this? All are really
+unwieldy. Huge
+unwieldy. Huge
+bandwagon doing chain of thought.
+bandwagon doing chain of thought.
+Yeah, but like bandwagons are boring,
+Yeah, but like bandwagons are boring,
+right? Like everybody doing a thing
+right? Like everybody doing a thing
+doesn't make me want to do it. It makes
+doesn't make me want to do it. It makes
+me want to go do something else.
+the super
+the super
+wacko.
+wacko.
+Um, where's
+Um, where's
+our have a run here, shouldn't
+our have a run here, shouldn't
+we? Yeah, we got to run there,
+we? Yeah, we got to run there,
+huh? Hang on. This is this
+huh? Hang on. This is this
+something? It's got a little bit of
+something? It's got a little bit of
+variation there
+variation there
+already. That's
+promising. True. If I'm being honest,
+promising. True. If I'm being honest,
+I'd rather get better at dev and
+I'd rather get better at dev and
+contribute to buffer. It's a fun
+time. I mean, this is the place to be if
+time. I mean, this is the place to be if
+you're looking to like actually make a
+you're looking to like actually make a
+difference in the science and like do so
+difference in the science and like do so
+without needing to like
+without needing to like
+I don't know. It's like one of the
+I don't know. It's like one of the
+places where like a lot of people with a
+places where like a lot of people with a
+lot of different skills can contribute
+lot of different skills can contribute
+meaningfully, right? If you're just good
+meaningfully, right? If you're just good
+at writing code, you can make really
+at writing code, you can make really
+useful research gems really, really
+useful research gems really, really
+fast. Um, you know, if you've got the
+fast. Um, you know, if you've got the
+science background, we have all sorts of
+science background, we have all sorts of
+science we're doing, right? If you've
+science we're doing, right? If you've
+got like perf engineering, make our [ __ ]
+faster. There's like so much stuff we
+faster. There's like so much stuff we
+can do and all the code is like
+can do and all the code is like
+relatively easy to work with.
+It moves really fast as
+It moves really fast as
+well. We have We have some hardware
+well. We have We have some hardware
+contributors, too, and we're going to
+contributors, too, and we're going to
+get more of
+get more of
+it. That just get a
+it. That just get a
+spike.
+Oh, well, let's not get our hopes up,
+Oh, well, let's not get our hopes up,
+but that could be really darn good. Did
+but that could be really darn good. Did
+that a 500 mil? comes off the ground at
+that a 500 mil? comes off the ground at
+mil. That's pretty
+mil. That's pretty
+cool. Prioritized replay for
+the I like just testing stuff on neural
+the I like just testing stuff on neural
+MMO cuz like it's the hard end and it's
+MMO cuz like it's the hard end and it's
+fast.
+No, my favorite side my favorite part
+No, my favorite side my favorite part
+with all this stuff like occasionally I
+with all this stuff like occasionally I
+like doing some of the research stuff. I
+like doing some of the research stuff. I
+guess I get bored so I jump around
+guess I get bored so I jump around
+between different things but I think
+between different things but I think
+like on the whole uh I prefer the
+like on the whole uh I prefer the
+engineering work. I really like low
+engineering work. I really like low
+level
+level
+dev pure math background recently
+dev pure math background recently
+getting into ML and especially
+getting into ML and especially
+RL I'll look around learn C and so on
+RL I'll look around learn C and so on
+hey I mean you know the one thing I
+hey I mean you know the one thing I
+don't have is a half decent math
+don't have is a half decent math
+background I don't know I took
+background I don't know I took
+like I took whatever joke math you take
+like I took whatever joke math you take
+when uh you really just want to do
+when uh you really just want to do
+engineering I don't know I guess I took
+Um, I took maybe like one actual math
+Um, I took maybe like one actual math
+department class, a few of like the CS
+department class, a few of like the CS
+proof based mathematics courses and like
+proof based mathematics courses and like
+you know your PTE and whatever else, but
+you know your PTE and whatever else, but
+that's it. Few linear algebra courses
+maybe. My math is definitely my weakest
+it. So, I like I'll like sit it like
+it. So, I like I'll like sit it like
+you'll see me working through papers on
+you'll see me working through papers on
+stream and like I'll get through stuff,
+stream and like I'll get through stuff,
+but it'll take me a long
+but it'll take me a long
+time. Um, like one of the things I was
+time. Um, like one of the things I was
+trying to figure out
+today, like I was looking at rainbow,
+today, like I was looking at rainbow,
+right? And I was looking at like this
+right? And I was looking at like this
+multi-step return.
+multi-step return.
+I'm pretty sure this totally breaks
+I'm pretty sure this totally breaks
+the off policy
+the off policy
+assumption because
+like you have an action condition value
+like you have an action condition value
+function. That's your Q function. But
+function. That's your Q function. But
+that only gives you the outcome of the
+that only gives you the outcome of the
+next step for every action. So if you
+next step for every action. So if you
+step several ahead, I don't think you
+step several ahead, I don't think you
+can still learn on those segments off
+can still learn on those segments off
+policy
+policy
+correctly. I don't know. But then
+correctly. I don't know. But then
+somebody linked me this other paper.
+somebody linked me this other paper.
+Where is it?
+Where is it?
+Meme
+Meme
+paper. Yeah, this
+paper. Yeah, this
+thing. And apparently this thing uses
+thing. And apparently this thing uses
+160 step trajectory
+160 step trajectory
+segments. So basically I've been looking
+segments. So basically I've been looking
+through some random papers trying to
+through some random papers trying to
+figure out a decent way to do like off
+figure out a decent way to do like off
+policy correction so that we can do PO
+policy correction so that we can do PO
+with an experience buffer.
+with an experience buffer.
+And so far I haven't gotten anything to
+work. You're you're getting here when
+work. You're you're getting here when
+I'm about to get off bed. But uh
+I'm about to get off bed. But uh
+welcome. We did implement Bra. It works
+welcome. We did implement Bra. It works
+on breakout mostly
+on breakout mostly
+pawn. Doesn't seem doing well very well
+pawn. Doesn't seem doing well very well
+on anything else though.
+Prioritize experience replay seems chill
+though. I don't freaking know. Maybe
+though. I don't freaking know. Maybe
+it's
+it's
+bugged. I think I pushed the code. You
+bugged. I think I pushed the code. You
+could look at it. It's a bunch of
+math. I mean, really, the only code for
+math. I mean, really, the only code for
+it
+it
+is. So it's in
+is. So it's in
+here. So it's just this piece of C code
+here. So it's just this piece of C code
+right
+right
+here. And everything else is kind of
+here. And everything else is kind of
+just bindings for this. Bindings for the
+just bindings for this. Bindings for the
+C extension, bindings for the CUDA
+extension. This is pretty much all it
+is. Took a hell of a long time to get
+is. Took a hell of a long time to get
+this to like even work at
+all. I did something kind of cool as
+all. I did something kind of cool as
+well. So
+well. So
+um you can run this in C on you can run
+um you can run this in C on you can run
+this exact code. This function will run
+this exact code. This function will run
+on the CPU or on the GPU because it's
+on the CPU or on the GPU because it's
+simultaneously valid C and valid CUDA.
+That's nice.
+Yeah, I actually I really like that I I
+Yeah, I actually I really like that I I
+did this. So
+did this. So
+like if you go to
+like if you go to
+pufferlib.cpp, vrace just runs a for
+pufferlib.cpp, vrace just runs a for
+loop over that function, right? But if
+loop over that function, right? But if
+you go to pufferlib.cu,
+you go to pufferlib.cu,
+CU then the vtrace kernel just gets the
+CU then the vtrace kernel just gets the
+CUDA like block variables the you know
+CUDA like block variables the you know
+the CUDA built into the block variables
+the CUDA built into the block variables
+and then it runs it there in
+and then it runs it there in
+parallel. Why does endstep return break
+parallel. Why does endstep return break
+off
+off
+policy? It seems like it would, doesn't
+policy? It seems like it would, doesn't
+it? Like
+it? Like
+um so the idea is that with the
+um so the idea is that with the
+bootstrap onestep turn, right? The Q
+bootstrap onestep turn, right? The Q
+function gives you the value of
+function gives you the value of
+essentially you can pick any action and
+essentially you can pick any action and
+then get the value associated with
+then get the value associated with
+taking that action and then following
+taking that action and then following
+the optimal policy thereafter. Right?
+the optimal policy thereafter. Right?
+But uh with the
+But uh with the
+endstep you can't get the outcome of
+endstep you can't get the outcome of
+taking the optimal policy thereafter
+taking the optimal policy thereafter
+because you have like several rewards
+because you have like several rewards
+several intermediate rewards from the
+several intermediate rewards from the
+old policy
+right I don't know maybe it is valid for
+right I don't know maybe it is valid for
+off policy it didn't seem like it was
+off policy it didn't seem like it was
+and the thing that suggests to me that
+and the thing that suggests to me that
+it isn't is that um you would think that
+it isn't is that um you would think that
+doing a longer bootstrap would be
+doing a longer bootstrap would be
+better, right? So, if this were valid,
+better, right? So, if this were valid,
+doing a longer bootstrap should be
+doing a longer bootstrap should be
+strictly better. Well, they literally
+strictly better. Well, they literally
+bootstrap three-step intervals and it's
+bootstrap three-step intervals and it's
+they say it starts doing worse if they
+they say it starts doing worse if they
+try to use like even fivestep intervals,
+try to use like even fivestep intervals,
+right? And on policy learning, we're
+right? And on policy learning, we're
+using like 32, 64, 128, right? The
+using like 32, 64, 128, right? The
+longer the
+better. So, something's screwing.
+Also, this paper is absolutely a meme
+Also, this paper is absolutely a meme
+because 200x faster actually means like
+because 200x faster actually means like
+20x slower but 200x fewer samples or
+20x slower but 200x fewer samples or
+whatever. Do they explain that? Of
+whatever. Do they explain that? Of
+course not.
+We'll see how this
+goes. I don't know. Read the paper. Just
+goes. I don't know. Read the paper. Just
+rainbow.
+My brain's kind of [ __ ] I've been
+My brain's kind of [ __ ] I've been
+implementing stuff all day and reading
+implementing stuff all day and reading
+papers and it's been a
+lot. But we did get the initial
+lot. But we did get the initial
+implementation of impala v trace and
+implementation of impala v trace and
+prioritize experience
+prioritize experience
+replay. So this
+thing we now have this in buffer.
+Yeah, there there it
+is. I can't think of why this would
+is. I can't think of why this would
+randomly fail on like why does this
+randomly fail on like why does this
+thing work on breakout and not
+thing work on breakout and not
+snake? Like snake isn't any harder than
+breakout. It could be, but completely
+breakout. It could be, but completely
+failing is
+failing is
+weird. It shouldn't like completely
+weird. It shouldn't like completely
+fail.
+do this. I don't think that does
+do this. I don't think that does
+anything
+right. Try to read the paper and figure
+right. Try to read the paper and figure
+out why more stuff don't
+work so
+much. You just get that stuff. Jeez.
+Well, I'm aware it's controlled in the
+Well, I'm aware it's controlled in the
+US, but I'm also I was pretty sure it's
+US, but I'm also I was pretty sure it's
+not even easy to get a script for
+that. I don't know.
+that. I don't know.
+I'm usually just on eight or nine hours
+I'm usually just on eight or nine hours
+of sleep and a black cup of coffee is
+of sleep and a black cup of coffee is
+more my
+speed generally.
+speed generally.
+Just No, some of those are a lot easier
+Just No, some of those are a lot easier
+to get.
+Yeah. I don't know. I still just
+Yeah. I don't know. I still just
+recommend getting enough sleep, getting
+recommend getting enough sleep, getting
+some exercise, and getting some coffee.
+Whatever. Yeah. Yeah. I They're like all
+Whatever. Yeah. Yeah. I They're like all
+people write all sorts of down threads
+people write all sorts of down threads
+about this [ __ ] But it wasn't it like
+about this [ __ ] But it wasn't it like
+for like for an arpsy or something,
+for like for an arpsy or something,
+right?
+Okay. Well, this doesn't work. It works
+Okay. Well, this doesn't work. It works
+on breakout. I don't know why it works
+on breakout. I don't know why it works
+like almost the same as P as a J on
+like almost the same as P as a J on
+breakout and it doesn't work on it does
+breakout and it doesn't work on it does
+work on pawn and then it doesn't work on
+work on pawn and then it doesn't work on
+any of the other so
+any of the other so
+far. Solve problem work back.
+I you can try that but you're probably
+I you can try that but you're probably
+not going to have a fun
+not going to have a fun
+time. I'm just tell you're probably not
+time. I'm just tell you're probably not
+going to have a fun
+going to have a fun
+time. It's going to be like the Python
+time. It's going to be like the Python
+API stuff but like 10 times
+API stuff but like 10 times
+worse. You will
+worse. You will
+try. Yeah.
+New conversions for bindings are
+New conversions for bindings are
+good. All right. So, here's the
+good. All right. So, here's the
+plan for folks
+watching. My steps at
+watching. My steps at
+puffer.ai. We're solving reinforcement
+puffer.ai. We're solving reinforcement
+learning. It's all going to be free and
+learning. It's all going to be free and
+open source and fast and simple.
+open source and fast and simple.
+If you want to follow all this and help
+If you want to follow all this and help
+us out for free, just star the repo.
+us out for free, just star the repo.
+We're really close to 2K stars. There
+We're really close to 2K stars. There
+not that many RL repos with 2K stars.
+not that many RL repos with 2K stars.
+It'd be awesome to hit that soon. If you
+It'd be awesome to hit that soon. If you
+want to get involved in depth,
+want to get involved in depth,
+discord.gg/puffer. Some of our best
+discord.gg/puffer. Some of our best
+contributors came in with zero RL
+contributors came in with zero RL
+background. Hebat came in with zero
+background. Hebat came in with zero
+programming background and has done a
+programming background and has done a
+lot of good stuff lately.
+lot of good stuff lately.
+And uh if
+And uh if
+you want some more RL content, we've got
+you want some more RL content, we've got
+a blog here. There's a quick start guide
+a blog here. There's a quick start guide
+that I recommend, but then also there's
+that I recommend, but then also there's
+more content on X that you can't find
+more content on X that you can't find
+anywhere
+anywhere
+else. So you can follow me there as
+well. I usually work six, six and a half
+well. I usually work six, six and a half
+days a week.
+days a week.
+So tomorrow is going to be get some
+So tomorrow is going to be get some
+exercise, get some RNR, do whatever
+exercise, get some RNR, do whatever
+stuff I haven't had to do throughout the
+stuff I haven't had to do throughout the
+week. I might be on for a little bit in
+week. I might be on for a little bit in
+the afternoon, early evening. We'll see.
+the afternoon, early evening. We'll see.
+But if not, I will be back on
+But if not, I will be back on
+Monday. Likely working on all this stuff
+Monday. Likely working on all this stuff
+more. Possibly switching over
+more. Possibly switching over
+to exploration algorithm side works.
+to exploration algorithm side works.
+Depends also on the results of this
+Depends also on the results of this
+guy. And uh also for contributors, I'm
+guy. And uh also for contributors, I'm
+having a technician over tomorrow. So
+having a technician over tomorrow. So
+hopefully the cluster gets back online
+hopefully the cluster gets back online
+appropriately and we're able to start
+appropriately and we're able to start
+you know supporting more contributor
+you know supporting more contributor
+uh research with that once again. So
+uh research with that once again. So
+other than that, thanks folks and uh
+other than that, thanks folks and uh
+yeah, enjoy your weekend and I will see
+yeah, enjoy your weekend and I will see
+you tomorrow or on
+
+Kind: captions
+Language: en
+Back live.
+Okay.
+Okay.
+Um, let's see what we've got here. First
+Um, let's see what we've got here. First
+of
+of
+all, that's a nice
+all, that's a nice
+soda. That's a nice
+soda. Let's just take a moment to uh to
+soda. Let's just take a moment to uh to
+appreciate that. is nice nice soda
+result. All
+right.
+Next. Yeah. So, uh this feature is
+Next. Yeah. So, uh this feature is
+supposed to be off policy
+correction, but it's not seeming very
+correction, but it's not seeming very
+off policy corrected to
+off policy corrected to
+me. But maybe we're doing something.
+Maybe we're doing it wrong.
+I guess we were going to just do
+I guess we were going to just do
+prioritized experience replay,
+right? That's a cool thing to do for a
+bit. Yeah. Yeah, that's what I was going
+bit. Yeah. Yeah, that's what I was going
+to do.
+Classic David silver
+binary key. That seems
+weird. I just really want to know their
+weird. I just really want to know their
+sampling, you
+sampling, you
+know, ratio.
+Where is the final
+Where is the final
+algorithm extensions?
+algorithm extensions?
+[Music]
+What's
+What's
+this? I'll get to that later. Uh, I
+this? I'll get to that later. Uh, I
+really want to get this implemented as
+really want to get this implemented as
+well today.
+Okay.
+So, prioritize replay. They
+do
+do
+P1 equals 1.
+Compute important sampling
+weight. I have no idea what this formula
+weight. I have no idea what this formula
+is.
+It uses TD error though.
+Did people use the rank base one or
+Did people use the rank base one or
+what?
+Okay. Did they not define these
+variables? Yeah. Okay. I've been uh I've
+variables? Yeah. Okay. I've been uh I've
+done like close to 10 hours of algorithm
+done like close to 10 hours of algorithm
+dev today. So, we're going to just go to
+dev today. So, we're going to just go to
+this for easy motive
+this for easy motive
+explain right out. The
+explain right out. The
+formula
+for Okay. N is the size the replay
+for Okay. N is the size the replay
+buffer. Okay.
+Duh. And this is P of
+Duh. And this is P of
+I. The heck is
+accumulate weight
+accumulate weight
+change. This is DQN, right?
+Yeah. Where do they use this weight?
+Oh,
+So there are just using the
+So there are just using the
+uh TD error.
+So they actually put a schedule on
+So they actually put a schedule on
+prioritize replay.
+Yeah. So the issue here right
+is this is what I was doing before.
+is this is what I was doing before.
+Really
+We could just go with J, right?
+Can I use the betray metric itself?
+your sampling segments
+your sampling segments
+non-uniformly. Use important sample
+non-uniformly. Use important sample
+waiting to correct
+waiting to correct
+bias in the policy
+bias in the policy
+gradient. Oh, that's probably actually
+gradient. Oh, that's probably actually
+important, isn't
+it? Hang on. Isn't the whole point of
+it? Hang on. Isn't the whole point of
+this to bias the policy gradient? I'm
+this to bias the policy gradient? I'm
+confused.
+And then what
+is I'm being a little stupid at this
+is I'm being a little stupid at this
+hour. This is uh this is actually very
+simple. Fully compensates for
+simple. Fully compensates for
+non-uniform probabilities if b equals 1.
+This is actually kind of good, isn't it?
+And then what's the
+alpha? P alpha over
+Okay, I mean we can kind of just
+Okay, I mean we can kind of just
+implement this,
+implement this,
+right? And then um alpha equals
+right? And then um alpha equals
+0, beta equals
+zero uh will just recover the original
+zero uh will just recover the original
+sampling. So that's actually totally
+sampling. So that's actually totally
+fine. 727. Let's implement that in a
+fine. 727. Let's implement that in a
+couple quick experiments and that will
+couple quick experiments and that will
+be awesome progress for today.
+What did they say? They
+said
+12.6 beta.
+We do beta
+So big cryop beta
+zero beta
+Yeah, that's good.
+Now, we'll just default this to
+torch multinnomial. We don't want right
+How do these problems get normalized?
+Oh, you can just you can call this with
+Oh, you can just you can call this with
+problems, right?
+Multial.
+And we have to do weights,
+right? I don't know where it came up
+right? I don't know where it came up
+with
+with
+this. This was definitely not the uh
+Not the gold.
+There you go.
+So apparently all we have to do is
+So apparently all we have to do is
+multiply by match
+dot. We just do
+See, let's see if we can get this to
+run. Cannot sample.
+All right. It's got to
+be Yeah, something like this, I assume.
+And these are all uniform right
+now. Sum to
+now. Sum to
+one. Pretty
+basic. We get some
+indices. Find our weights.
+advantages a mess.
+But I just want to get the initial
+But I just want to get the initial
+implementation
+in. Hello YouTube
+in. Hello YouTube
+folks.
+Welcome. All right. It runs. It does in
+Welcome. All right. It runs. It does in
+fact
+fact
+run.
+So this should now be
+So this should now be
+prioritized not across uh
+epochs. This was the thing that was
+epochs. This was the thing that was
+missing
+missing
+using importance weights.
+It stalled out a bit, but I think it's
+It stalled out a bit, but I think it's
+still pretty dang
+good. So, we get
+good. So, we get
+this. That's not bad.
+this. That's not bad.
+This is with the new
+This is with the new
+uh vrace. We should also do this
+for for
+J. Let's just add that for J. Why not,
+right? Batch. Cryo.
+Yeah. So, this is going to
+be Vantage
+equals file.
+equals file.
+Okay. So now this is without V
+trace. We didn't break
+trace. We didn't break
+anything. We
+anything. We
+didn't. Good.
+So, let me uh just disable a whole bunch
+So, let me uh just disable a whole bunch
+of
+of
+these these stupid
+runs. This seems perfectly good.
+I'm
+playing. Yeah, this seems like uh
+playing. Yeah, this seems like uh
+perfectly
+fine.
+fine.
+Great. So,
+Great. So,
+um Now the question is going to be B
+um Now the question is going to be B
+trace versus J E
+right B trace versus J
+E seems B trace does a little bit worse.
+Well, we now have prioritized
+sampling. We have this as our baseline.
+sampling. We have this as our baseline.
+This is our other
+This is our other
+baseline. So we actually what we can do
+baseline. So we actually what we can do
+is we can just
+Oops. Okay. So here is our V
+Oops. Okay. So here is our V
+trace. Here is our J.
+We're going to try a few more
+We're going to try a few more
+things since we're in a trying stuff
+things since we're in a trying stuff
+mode.
+We just want to be able to give this
+like a few extra trajectories, right?
+Okay, so this is now BRA with all policy
+Okay, so this is now BRA with all policy
+data only a little
+though. I'm seriously just crashes,
+right? Just crashes.
+I mean, it does still learn, but it
+I mean, it does still learn, but it
+learns slower.
+This is also a bad environment for this,
+This is also a bad environment for this,
+right? Yeah, this is a bad environment
+right? Yeah, this is a bad environment
+for
+for
+this. We should do
+this. We should do
+[Music]
+mazes. Let's do a maze benchmark.
+Assuming I haven't broken this
+thing. One
+thing. One
+map size 31
+and upper bridge.
+fun. So I think in this case I probably
+fun. So I think in this case I probably
+know how to fix this, right?
+How many do we have?
+56. That should be fine, shouldn't
+56. That should be fine, shouldn't
+it? Why is this thing not working?
+Maybe I didn't test this. Maybe I only
+Maybe I didn't test this. Maybe I only
+tested it this way.
+Yeah, that's it.
+Okay, cool.
+So, I'm probably just leave it like this
+So, I'm probably just leave it like this
+and see what the solve rate is, right?
+and see what the solve rate is, right?
+With the
+Let's just do 100
+mil. No
+betray. Yeah, this will be a good few
+betray. Yeah, this will be a good few
+experiments.
+retrace baseline's going to be
+Okay, so the PO baseline on this is
+Okay, so the PO baseline on this is
+pretty nice and smooth.
+We will also get to try this on
+We will also get to try this on
+um on Nurmo 3,
+um on Nurmo 3,
+right? We can just throw on
+right? We can just throw on
+prioritized prioritized
+prioritized prioritized
+replay now that we have
+it.
+Pretty clean curve though.
+And then we will compare retrace.
+Okay, stalls out low 70s.
+Okay, stalls out low 70s.
+Next will be B
+trades. Max uses goes from 27 to
+trades. Max uses goes from 27 to
+1918 and mean
+1918 and mean
+uses at So, there's definitely
+uses at So, there's definitely
+prioritization
+prioritization
+happening. There's definitely some
+happening. There's definitely some
+prioritization
+prioritization
+happening.
+happening.
+Uhoh. Does V trace just suck?
+No,
+It can't be that much worse.
+Let's see what the
+Let's see what the
+uh I had some original results in
+uh I had some original results in
+here. Find
+it. So, this did get over like 085 or
+it. So, this did get over like 085 or
+something in 100
+mil. Okay.
+Oh, that's not going to work, is it?
+We do this.
+I'm watching your stream on YouTube.
+I'm watching your stream on YouTube.
+Hello. You're allowed to ask stuff if
+Hello. You're allowed to ask stuff if
+you're stuck. You know, that's half the
+you're stuck. You know, that's half the
+reason I stream.
+So, I don't know what I did to this
+So, I don't know what I did to this
+environment, but
+environment, but
+um so far the prioritized replay seems
+um so far the prioritized replay seems
+fine.
+fine.
+It doesn't seem like I screwed anything
+It doesn't seem like I screwed anything
+up
+there. Yeah. If anything, this
+there. Yeah. If anything, this
+multinnomial is less
+consistent. So, it'll be worth throwing
+consistent. So, it'll be worth throwing
+this at
+this at
+um neural MMO 3 just to see prior
+Reapply priority play seems to have the
+Reapply priority play seems to have the
+cleaner curve.
+catching up a little bit. But
+um
+um
+Okay. So, uh I think the prioritize
+Okay. So, uh I think the prioritize
+replay
+replay
+is, you know, the prioritize replay is a
+is, you know, the prioritize replay is a
+good addition.
+Now then the question is just like what
+Now then the question is just like what
+the heck happened to
+um Vrace, right? What happened with
+um Vrace, right? What happened with
+Vrace? Cuz that's really weird for V
+Vrace? Cuz that's really weird for V
+trace to do
+that because it worked fine for
+that because it worked fine for
+breakout. Shouldn't just fail.
+You should be totally fine, right?
+Why is
+um why is betray not work on
+um why is betray not work on
+this? Hello. I was basically stuck
+this? Hello. I was basically stuck
+setting up on a run
+setting up on a run
+machine. When I make ocean breakout, it
+machine. When I make ocean breakout, it
+works fine. I print out the infos. I see
+works fine. I print out the infos. I see
+positive rewards and so
+positive rewards and so
+on. Okay. So, What's the setup issue
+then? Some reason observation stays the
+then? Some reason observation stays the
+same like after every step I'm getting
+same like after every step I'm getting
+the same.
+Um, so the only thing that I can think
+Um, so the only thing that I can think
+of that people get stuck on
+of that people get stuck on
+[Music]
+[Music]
+sometimes, what OS do those things
+run? So, let me find this for
+run? So, let me find this for
+you. The way that our native MS
+you. The way that our native MS
+work, so all our native MS define this
+work, so all our native MS define this
+buffer, observations, rewards,
+buffer, observations, rewards,
+whatever, and then they write stuff into
+whatever, and then they write stuff into
+that buffer.
+So if this is somehow go getting
+So if this is somehow go getting
+overwritten or
+overwritten or
+whatever, something weird can happen
+there. Try running with ve serial. See
+there. Try running with ve serial. See
+if that changes anything. And if not,
+if that changes anything. And if not,
+like link me the
+like link me the
+uh code you're
+uh code you're
+running because I've seen people do this
+running because I've seen people do this
+before. Oh, actually, I've literally had
+before. Oh, actually, I've literally had
+people write
+people write
+uh I've had people write this test
+uh I've had people write this test
+before and do it wrong. I've literally
+before and do it wrong. I've literally
+had people write this like test. Link me
+had people write this like test. Link me
+the test script you're running. It could
+the test script you're running. It could
+be if you're running a test script. I've
+be if you're running a test script. I've
+literally had people send me a test
+literally had people send me a test
+script where uh they have this exact
+script where uh they have this exact
+issue and it's just the way they write
+issue and it's just the way they write
+the
+script.
+script.
+VR, what's going on with you?
+Why do you work on proper breakout but
+Why do you work on proper breakout but
+then not on uh not on this m at
+all link in the Discord YouTube will
+all link in the Discord YouTube will
+yell at Okay.
+Let's do this
+Let's do this
+[Music]
+[Music]
+pryo
+method. Make sure it's not the sampling.
+Break out.
+Silly. Feed the Google
+fish. Is this German or what is Google
+fish. Is this German or what is Google
+fish? It's like something for proper
+fish? It's like something for proper
+fish, I'm sure.
+Hello. All right. So, it is genuinely
+Hello. All right. So, it is genuinely
+the case then
+the case then
+that irrespective of sampling it just
+that irrespective of sampling it just
+doesn't work
+doesn't work
+on this. Does it work on calm?
+I mean it works doesn't work as well.
+I mean it works doesn't work as well.
+It's not optimized for this though.
+not working at all on
+not working at all on
+um red is
+suspicious. And I just
+like do this.
+Oh, that's got E3B
+Oh, that's got E3B
+on. But I think I removed that already.
+channel wherever you can put it in the
+channel wherever you can put it in the
+jam. It's fine.
+Yep. So, here's the thing. Yeah, man. I
+Yep. So, here's the thing. Yeah, man. I
+need to add like some docs on this. I
+need to add like some docs on this. I
+thought I actually did add docs on this.
+thought I actually did add docs on this.
+So, it's just the way that you're
+So, it's just the way that you're
+testing this. Um, just like just copy
+testing this. Um, just like just copy
+this. I think you can like docopy or
+this. I think you can like docopy or
+whatever the
+whatever the
+array. So the obs update in place. It's
+array. So the obs update in place. It's
+the same tensor. That's the
+problem. You see? So this is giving you
+problem. You see? So this is giving you
+a handle to a
+a handle to a
+tensor, but then when you step the end,
+tensor, but then when you step the end,
+it writes the new data to that same
+it writes the new data to that same
+tensor.
+Like think about it because otherwise
+Like think about it because otherwise
+you end up making a new tensor every
+you end up making a new tensor every
+single time you step the end, right? And
+single time you step the end, right? And
+like nobody ever thinks about that. But
+like nobody ever thinks about that. But
+when you end up when you're doing
+when you end up when you're doing
+reinforcement learning at millions of
+reinforcement learning at millions of
+steps per second, you have to think
+steps per second, you have to think
+about stuff like that. So your thing is
+about stuff like that. So your thing is
+completely correct. You've got no issues
+completely correct. You've got no issues
+with it. It's just um yeah puffer native
+with it. It's just um yeah puffer native
+ms will update the temper in place. The
+ms will update the temper in place. The
+same will be true of the rewards dons
+same will be true of the rewards dons
+trunk like they all get updated in
+trunk like they all get updated in
+place.
+all written to shared buffer. Yeah, cuz
+all written to shared buffer. Yeah, cuz
+so the way the multipprocessing works,
+so the way the multipprocessing works,
+right?
+right?
+Um there's like this one big shared
+Um there's like this one big shared
+buffer and then it gives you it just
+buffer and then it gives you it just
+gives you slices of that buffer.
+gives you slices of that buffer.
+Sometimes it can copy. It depends. But
+Sometimes it can copy. It depends. But
+generally like the way to look at it is
+generally like the way to look at it is
+you should not assume that you're going
+you should not assume that you're going
+to be handed a unique
+to be handed a unique
+buffer. But the thing is like as soon as
+buffer. But the thing is like as soon as
+you do it like as soon as you put it
+you do it like as soon as you put it
+into a torch tensor and like move it to
+into a torch tensor and like move it to
+the GPU, it's going to get copied
+the GPU, it's going to get copied
+anyway. So you're never going to have a
+anyway. So you're never going to have a
+problem with that in practice.
+V trace just straight up doesn't work
+V trace just straight up doesn't work
+here. That's
+weird. It's very
+weird. It's very
+weird. Tra just straight up doesn't work
+weird. Tra just straight up doesn't work
+on the grids.
+Losses are fine. It just doesn't
+work. That's
+weird. So there's more work to do on V
+weird. So there's more work to do on V
+trace. I got the initial implementation
+trace. I got the initial implementation
+at
+at
+least. I guess I can rerun neural MMO
+least. I guess I can rerun neural MMO
+now with prioritized replay as well,
+now with prioritized replay as well,
+right?
+side invalid multial.
+I wonder if this is the thing that broke
+it. It can't be this.
+it. It can't be this.
+[Music]
+I might change stuff.
+Yep. All right, that works.
+Solid, solid
+Solid, solid
+progress. I need that box back
+progress. I need that box back
+though
+though
+because we need to run new job.
+That storage There.
+All right, this thing can report back in
+All right, this thing can report back in
+when it's uh played another thousand
+when it's uh played another thousand
+years of neural
+MMO. That's what 50 billion steps is.
+MMO. That's what 50 billion steps is.
+It's about a thousand years worth of
+It's about a thousand years worth of
+games
+games
+played right there. That is
+played right there. That is
+soda. But uh you know, we can't have
+soda. But uh you know, we can't have
+soda with a learning curve that looks
+soda with a learning curve that looks
+like this. I'm hoping that the
+like this. I'm hoping that the
+prioritize replay cleans this up a
+prioritize replay cleans this up a
+little bit. We will see. Maybe it does,
+little bit. We will see. Maybe it does,
+maybe it
+maybe it
+doesn't. Looks like another good end. I
+doesn't. Looks like another good end. I
+can chuck this
+out. This one mobile
+Do you like Pink
+Do you like Pink
+Floyd? I cannot name you a single Pink
+Floyd? I cannot name you a single Pink
+Floyd
+song. I listen to very little music in
+song. I listen to very little music in
+general.
+I kind of just like do reinforcement
+I kind of just like do reinforcement
+learning research, keep in shape,
+learning research, keep in shape,
+occasionally play a game or two. It's
+occasionally play a game or two. It's
+about it.
+about it.
+This is kind of the all
+This is kind of the all
+consuming pursuit of RL
+Yeah, it kind of
+has. I don't know. Like some number of
+has. I don't know. Like some number of
+months
+ago, I was on a date with like a really
+ago, I was on a date with like a really
+cute girl and she started talking about
+cute girl and she started talking about
+like music and stuff and I just went,
+like music and stuff and I just went,
+"Oh yeah, I have zero topics of
+"Oh yeah, I have zero topics of
+conversation cuz I do RL all day long. I
+conversation cuz I do RL all day long. I
+should probably just go finish all the
+should probably just go finish all the
+RL." I can just go solve that field so I
+RL." I can just go solve that field so I
+can do other
+stuff. Let's just go solve the field so
+stuff. Let's just go solve the field so
+I can move on to other things,
+I can move on to other things,
+right? Cuz nothing's going on in the
+right? Cuz nothing's going on in the
+meantime. Freaking all
+consuming. Funny as hell.
+Oh yeah. Oh yeah. I forgot about that.
+Oh yeah. Oh yeah. I forgot about that.
+People like listen to music and stuff,
+People like listen to music and stuff,
+right? Oh
+yeah. I got a I got a coil wine on this
+yeah. I got a I got a coil wine on this
+desktop next to me. Does that
+count? No. No. No. No. It plays
+count? No. No. No. No. It plays
+different notes depending on what jobs
+different notes depending on what jobs
+you run on the GPU. You know, if you
+you run on the GPU. You know, if you
+load it really heavy, you get one coil
+load it really heavy, you get one coil
+wind pattern. And if you load it
+wind pattern. And if you load it
+slightly less, you get another one.
+The hell is wrong with this thing? Why
+The hell is wrong with this thing? Why
+is this thing
+hanging? Is this V
+hanging? Is this V
+trace or is this just hanging?
+Okay, I think this is just like dev
+Okay, I think this is just like dev
+branch shenanigans.
+Can we get like something to work?
+Can we get like something to work?
+Maybe. How about puffer
+snake? Small time funs to try to do RL
+snake? Small time funs to try to do RL
+at a little more scale. And here I am
+at a little more scale. And here I am
+attempting to get puffer lip going, but
+attempting to get puffer lip going, but
+thanks. Yeah. Hey, I
+thanks. Yeah. Hey, I
+mean, here to help.
+I pretty much just build this thing
+I pretty much just build this thing
+24/7.
+24/7.
+So, this is going to be this kind of
+So, this is going to be this kind of
+already is the place to go for a wide
+already is the place to go for a wide
+range of RL
+range of RL
+applications. Like a ton of different RL
+applications. Like a ton of different RL
+problems you can think of. Popper is
+problems you can think of. Popper is
+kind of the best thing already and uh it
+kind of the best thing already and uh it
+will only continue to become the best
+will only continue to become the best
+thing for everything as we keep doing
+thing for everything as we keep doing
+stuff except LL. I don't really care to
+stuff except LL. I don't really care to
+bother with our
+bother with our
+LMLs, at least not at the moment. But
+LMLs, at least not at the moment. But
+other than
+other than
+that, probably the best place is
+here, you
+know. Can you learn snake, Mr. Beats?
+Okay. So slowly.
+Why? Okay. Definitely B trace is not
+Why? Okay. Definitely B trace is not
+uh V tracing.
+If someone else were to get the LM part
+If someone else were to get the LM part
+into
+into
+Popper, would you be down on what
+Popper, would you be down on what
+criteria to have for it? I mean, is
+criteria to have for it? I mean, is
+there like actually a useful thing that
+there like actually a useful thing that
+we can do or is this just going to be
+we can do or is this just going to be
+like the latest bandwagon thing, right?
+like the latest bandwagon thing, right?
+So like Puffer's ultra ultra high
+So like Puffer's ultra ultra high
+performance aura, right? We do training
+performance aura, right? We do training
+at this is literally a million and a
+at this is literally a million and a
+half steps per second and that's slow.
+half steps per second and that's slow.
+It should be two million steps per
+It should be two million steps per
+second. That's a regression.
+second. That's a regression.
+Um, so like when in llm land you're
+Um, so like when in llm land you're
+doing RL like two steps per
+doing RL like two steps per
+second, like you can write the dumbest
+second, like you can write the dumbest
+code imaginable and you're probably not
+code imaginable and you're probably not
+going to bottleneck anything when the
+going to bottleneck anything when the
+LLM is the slow part, right?
+So, like, yeah, I do actually hope that
+So, like, yeah, I do actually hope that
+some of the techniques and stuff that we
+some of the techniques and stuff that we
+come up with with Puffer are going to be
+come up with with Puffer are going to be
+useful for LLM land, but is there like
+useful for LLM land, but is there like
+anything we can really do with it in the
+anything we can really do with it in the
+meantime? I don't
+meantime? I don't
+know. If it prints enough free money for
+know. If it prints enough free money for
+me to fund a cool private industry lab
+me to fund a cool private industry lab
+for the next several years, then yeah,
+for the next several years, then yeah,
+that that'd be awesome, too.
+that that'd be awesome, too.
+But I'm kind of chilling just like
+But I'm kind of chilling just like
+working on solving the rest of RL right
+working on solving the rest of RL right
+now because nobody else is going to do
+now because nobody else is going to do
+it. And I can't I cannot bear to see RL
+it. And I can't I cannot bear to see RL
+be thrown to the wayside
+be thrown to the wayside
+when it has so so much
+when it has so so much
+potential. I think we're going to just
+potential. I think we're going to just
+have consistent, stable, and working
+have consistent, stable, and working
+this
+year. That's the goal.
+What the hell is
+What the hell is
+this? What are you doing?
+Beats. Okay. I thought that you didn't
+Beats. Okay. I thought that you didn't
+have to normally advantage the beach
+have to normally advantage the beach
+race,
+race,
+right? This breaks it, doesn't it? I
+right? This breaks it, doesn't it? I
+think that this like just instantly
+think that this like just instantly
+breaks
+it. If I do this, it instantly breaks,
+it. If I do this, it instantly breaks,
+doesn't
+it? Not that many
+grabs. Yeah. So, the kales are blowing
+grabs. Yeah. So, the kales are blowing
+up there.
+See, amusingly the spores are a little
+See, amusingly the spores are a little
+bit higher than before, but they're not
+bit higher than before, but they're not
+going to keep going up. It's not going
+going to keep going up. It's not going
+to be stable like that.
+Is it just the learn rate or
+something? Do I literally just have to
+something? Do I literally just have to
+do
+do
+this? All are really
+unwieldy. Huge
+unwieldy. Huge
+bandwagon doing chain of thought.
+bandwagon doing chain of thought.
+Yeah, but like bandwagons are boring,
+Yeah, but like bandwagons are boring,
+right? Like everybody doing a thing
+right? Like everybody doing a thing
+doesn't make me want to do it. It makes
+doesn't make me want to do it. It makes
+me want to go do something else.
+the super
+the super
+wacko.
+wacko.
+Um, where's
+Um, where's
+our have a run here, shouldn't
+our have a run here, shouldn't
+we? Yeah, we got to run there,
+we? Yeah, we got to run there,
+huh? Hang on. This is this
+huh? Hang on. This is this
+something? It's got a little bit of
+something? It's got a little bit of
+variation there
+variation there
+already. That's
+promising. True. If I'm being honest,
+promising. True. If I'm being honest,
+I'd rather get better at dev and
+I'd rather get better at dev and
+contribute to buffer. It's a fun
+time. I mean, this is the place to be if
+time. I mean, this is the place to be if
+you're looking to like actually make a
+you're looking to like actually make a
+difference in the science and like do so
+difference in the science and like do so
+without needing to like
+without needing to like
+I don't know. It's like one of the
+I don't know. It's like one of the
+places where like a lot of people with a
+places where like a lot of people with a
+lot of different skills can contribute
+lot of different skills can contribute
+meaningfully, right? If you're just good
+meaningfully, right? If you're just good
+at writing code, you can make really
+at writing code, you can make really
+useful research gems really, really
+useful research gems really, really
+fast. Um, you know, if you've got the
+fast. Um, you know, if you've got the
+science background, we have all sorts of
+science background, we have all sorts of
+science we're doing, right? If you've
+science we're doing, right? If you've
+got like perf engineering, make our [ __ ]
+faster. There's like so much stuff we
+faster. There's like so much stuff we
+can do and all the code is like
+can do and all the code is like
+relatively easy to work with.
+It moves really fast as
+It moves really fast as
+well. We have We have some hardware
+well. We have We have some hardware
+contributors, too, and we're going to
+contributors, too, and we're going to
+get more of
+get more of
+it. That just get a
+it. That just get a
+spike.
+Oh, well, let's not get our hopes up,
+Oh, well, let's not get our hopes up,
+but that could be really darn good. Did
+but that could be really darn good. Did
+that a 500 mil? comes off the ground at
+that a 500 mil? comes off the ground at
+mil. That's pretty
+mil. That's pretty
+cool. Prioritized replay for
+the I like just testing stuff on neural
+the I like just testing stuff on neural
+MMO cuz like it's the hard end and it's
+MMO cuz like it's the hard end and it's
+fast.
+No, my favorite side my favorite part
+No, my favorite side my favorite part
+with all this stuff like occasionally I
+with all this stuff like occasionally I
+like doing some of the research stuff. I
+like doing some of the research stuff. I
+guess I get bored so I jump around
+guess I get bored so I jump around
+between different things but I think
+between different things but I think
+like on the whole uh I prefer the
+like on the whole uh I prefer the
+engineering work. I really like low
+engineering work. I really like low
+level
+level
+dev pure math background recently
+dev pure math background recently
+getting into ML and especially
+getting into ML and especially
+RL I'll look around learn C and so on
+RL I'll look around learn C and so on
+hey I mean you know the one thing I
+hey I mean you know the one thing I
+don't have is a half decent math
+don't have is a half decent math
+background I don't know I took
+background I don't know I took
+like I took whatever joke math you take
+like I took whatever joke math you take
+when uh you really just want to do
+when uh you really just want to do
+engineering I don't know I guess I took
+Um, I took maybe like one actual math
+Um, I took maybe like one actual math
+department class, a few of like the CS
+department class, a few of like the CS
+proof based mathematics courses and like
+proof based mathematics courses and like
+you know your PTE and whatever else, but
+you know your PTE and whatever else, but
+that's it. Few linear algebra courses
+maybe. My math is definitely my weakest
+it. So, I like I'll like sit it like
+it. So, I like I'll like sit it like
+you'll see me working through papers on
+you'll see me working through papers on
+stream and like I'll get through stuff,
+stream and like I'll get through stuff,
+but it'll take me a long
+but it'll take me a long
+time. Um, like one of the things I was
+time. Um, like one of the things I was
+trying to figure out
+today, like I was looking at rainbow,
+today, like I was looking at rainbow,
+right? And I was looking at like this
+right? And I was looking at like this
+multi-step return.
+multi-step return.
+I'm pretty sure this totally breaks
+I'm pretty sure this totally breaks
+the off policy
+the off policy
+assumption because
+like you have an action condition value
+like you have an action condition value
+function. That's your Q function. But
+function. That's your Q function. But
+that only gives you the outcome of the
+that only gives you the outcome of the
+next step for every action. So if you
+next step for every action. So if you
+step several ahead, I don't think you
+step several ahead, I don't think you
+can still learn on those segments off
+can still learn on those segments off
+policy
+policy
+correctly. I don't know. But then
+correctly. I don't know. But then
+somebody linked me this other paper.
+somebody linked me this other paper.
+Where is it?
+Where is it?
+Meme
+Meme
+paper. Yeah, this
+paper. Yeah, this
+thing. And apparently this thing uses
+thing. And apparently this thing uses
+160 step trajectory
+160 step trajectory
+segments. So basically I've been looking
+segments. So basically I've been looking
+through some random papers trying to
+through some random papers trying to
+figure out a decent way to do like off
+figure out a decent way to do like off
+policy correction so that we can do PO
+policy correction so that we can do PO
+with an experience buffer.
+with an experience buffer.
+And so far I haven't gotten anything to
+work. You're you're getting here when
+work. You're you're getting here when
+I'm about to get off bed. But uh
+I'm about to get off bed. But uh
+welcome. We did implement Bra. It works
+welcome. We did implement Bra. It works
+on breakout mostly
+on breakout mostly
+pawn. Doesn't seem doing well very well
+pawn. Doesn't seem doing well very well
+on anything else though.
+Prioritize experience replay seems chill
+though. I don't freaking know. Maybe
+though. I don't freaking know. Maybe
+it's
+it's
+bugged. I think I pushed the code. You
+bugged. I think I pushed the code. You
+could look at it. It's a bunch of
+math. I mean, really, the only code for
+math. I mean, really, the only code for
+it
+it
+is. So it's in
+is. So it's in
+here. So it's just this piece of C code
+here. So it's just this piece of C code
+right
+right
+here. And everything else is kind of
+here. And everything else is kind of
+just bindings for this. Bindings for the
+just bindings for this. Bindings for the
+C extension, bindings for the CUDA
+extension. This is pretty much all it
+is. Took a hell of a long time to get
+is. Took a hell of a long time to get
+this to like even work at
+all. I did something kind of cool as
+all. I did something kind of cool as
+well. So
+well. So
+um you can run this in C on you can run
+um you can run this in C on you can run
+this exact code. This function will run
+this exact code. This function will run
+on the CPU or on the GPU because it's
+on the CPU or on the GPU because it's
+simultaneously valid C and valid CUDA.
+That's nice.
+Yeah, I actually I really like that I I
+Yeah, I actually I really like that I I
+did this. So
+did this. So
+like if you go to
+like if you go to
+pufferlib.cpp, vrace just runs a for
+pufferlib.cpp, vrace just runs a for
+loop over that function, right? But if
+loop over that function, right? But if
+you go to pufferlib.cu,
+you go to pufferlib.cu,
+CU then the vtrace kernel just gets the
+CU then the vtrace kernel just gets the
+CUDA like block variables the you know
+CUDA like block variables the you know
+the CUDA built into the block variables
+the CUDA built into the block variables
+and then it runs it there in
+and then it runs it there in
+parallel. Why does endstep return break
+parallel. Why does endstep return break
+off
+off
+policy? It seems like it would, doesn't
+policy? It seems like it would, doesn't
+it? Like
+it? Like
+um so the idea is that with the
+um so the idea is that with the
+bootstrap onestep turn, right? The Q
+bootstrap onestep turn, right? The Q
+function gives you the value of
+function gives you the value of
+essentially you can pick any action and
+essentially you can pick any action and
+then get the value associated with
+then get the value associated with
+taking that action and then following
+taking that action and then following
+the optimal policy thereafter. Right?
+the optimal policy thereafter. Right?
+But uh with the
+But uh with the
+endstep you can't get the outcome of
+endstep you can't get the outcome of
+taking the optimal policy thereafter
+taking the optimal policy thereafter
+because you have like several rewards
+because you have like several rewards
+several intermediate rewards from the
+several intermediate rewards from the
+old policy
+right I don't know maybe it is valid for
+right I don't know maybe it is valid for
+off policy it didn't seem like it was
+off policy it didn't seem like it was
+and the thing that suggests to me that
+and the thing that suggests to me that
+it isn't is that um you would think that
+it isn't is that um you would think that
+doing a longer bootstrap would be
+doing a longer bootstrap would be
+better, right? So, if this were valid,
+better, right? So, if this were valid,
+doing a longer bootstrap should be
+doing a longer bootstrap should be
+strictly better. Well, they literally
+strictly better. Well, they literally
+bootstrap three-step intervals and it's
+bootstrap three-step intervals and it's
+they say it starts doing worse if they
+they say it starts doing worse if they
+try to use like even fivestep intervals,
+try to use like even fivestep intervals,
+right? And on policy learning, we're
+right? And on policy learning, we're
+using like 32, 64, 128, right? The
+using like 32, 64, 128, right? The
+longer the
+better. So, something's screwing.
+Also, this paper is absolutely a meme
+Also, this paper is absolutely a meme
+because 200x faster actually means like
+because 200x faster actually means like
+20x slower but 200x fewer samples or
+20x slower but 200x fewer samples or
+whatever. Do they explain that? Of
+whatever. Do they explain that? Of
+course not.
+We'll see how this
+goes. I don't know. Read the paper. Just
+goes. I don't know. Read the paper. Just
+rainbow.
+My brain's kind of [ __ ] I've been
+My brain's kind of [ __ ] I've been
+implementing stuff all day and reading
+implementing stuff all day and reading
+papers and it's been a
+lot. But we did get the initial
+lot. But we did get the initial
+implementation of impala v trace and
+implementation of impala v trace and
+prioritize experience
+prioritize experience
+replay. So this
+thing we now have this in buffer.
+Yeah, there there it
+is. I can't think of why this would
+is. I can't think of why this would
+randomly fail on like why does this
+randomly fail on like why does this
+thing work on breakout and not
+thing work on breakout and not
+snake? Like snake isn't any harder than
+breakout. It could be, but completely
+breakout. It could be, but completely
+failing is
+failing is
+weird. It shouldn't like completely
+weird. It shouldn't like completely
+fail.
+do this. I don't think that does
+do this. I don't think that does
+anything
+right. Try to read the paper and figure
+right. Try to read the paper and figure
+out why more stuff don't
+work so
+much. You just get that stuff. Jeez.
+Well, I'm aware it's controlled in the
+Well, I'm aware it's controlled in the
+US, but I'm also I was pretty sure it's
+US, but I'm also I was pretty sure it's
+not even easy to get a script for
+that. I don't know.
+that. I don't know.
+I'm usually just on eight or nine hours
+I'm usually just on eight or nine hours
+of sleep and a black cup of coffee is
+of sleep and a black cup of coffee is
+more my
+speed generally.
+speed generally.
+Just No, some of those are a lot easier
+Just No, some of those are a lot easier
+to get.
+Yeah. I don't know. I still just
+Yeah. I don't know. I still just
+recommend getting enough sleep, getting
+recommend getting enough sleep, getting
+some exercise, and getting some coffee.
+Whatever. Yeah. Yeah. I They're like all
+Whatever. Yeah. Yeah. I They're like all
+people write all sorts of down threads
+people write all sorts of down threads
+about this [ __ ] But it wasn't it like
+about this [ __ ] But it wasn't it like
+for like for an arpsy or something,
+for like for an arpsy or something,
+right?
+Okay. Well, this doesn't work. It works
+Okay. Well, this doesn't work. It works
+on breakout. I don't know why it works
+on breakout. I don't know why it works
+like almost the same as P as a J on
+like almost the same as P as a J on
+breakout and it doesn't work on it does
+breakout and it doesn't work on it does
+work on pawn and then it doesn't work on
+work on pawn and then it doesn't work on
+any of the other so
+any of the other so
+far. Solve problem work back.
+I you can try that but you're probably
+I you can try that but you're probably
+not going to have a fun
+not going to have a fun
+time. I'm just tell you're probably not
+time. I'm just tell you're probably not
+going to have a fun
+going to have a fun
+time. It's going to be like the Python
+time. It's going to be like the Python
+API stuff but like 10 times
+API stuff but like 10 times
+worse. You will
+worse. You will
+try. Yeah.
+New conversions for bindings are
+New conversions for bindings are
+good. All right. So, here's the
+good. All right. So, here's the
+plan for folks
+watching. My steps at
+watching. My steps at
+puffer.ai. We're solving reinforcement
+puffer.ai. We're solving reinforcement
+learning. It's all going to be free and
+learning. It's all going to be free and
+open source and fast and simple.
+open source and fast and simple.
+If you want to follow all this and help
+If you want to follow all this and help
+us out for free, just star the repo.
+us out for free, just star the repo.
+We're really close to 2K stars. There
+We're really close to 2K stars. There
+not that many RL repos with 2K stars.
+not that many RL repos with 2K stars.
+It'd be awesome to hit that soon. If you
+It'd be awesome to hit that soon. If you
+want to get involved in depth,
+want to get involved in depth,
+discord.gg/puffer. Some of our best
+discord.gg/puffer. Some of our best
+contributors came in with zero RL
+contributors came in with zero RL
+background. Hebat came in with zero
+background. Hebat came in with zero
+programming background and has done a
+programming background and has done a
+lot of good stuff lately.
+lot of good stuff lately.
+And uh if
+And uh if
+you want some more RL content, we've got
+you want some more RL content, we've got
+a blog here. There's a quick start guide
+a blog here. There's a quick start guide
+that I recommend, but then also there's
+that I recommend, but then also there's
+more content on X that you can't find
+more content on X that you can't find
+anywhere
+anywhere
+else. So you can follow me there as
+well. I usually work six, six and a half
+well. I usually work six, six and a half
+days a week.
+days a week.
+So tomorrow is going to be get some
+So tomorrow is going to be get some
+exercise, get some RNR, do whatever
+exercise, get some RNR, do whatever
+stuff I haven't had to do throughout the
+stuff I haven't had to do throughout the
+week. I might be on for a little bit in
+week. I might be on for a little bit in
+the afternoon, early evening. We'll see.
+the afternoon, early evening. We'll see.
+But if not, I will be back on
+But if not, I will be back on
+Monday. Likely working on all this stuff
+Monday. Likely working on all this stuff
+more. Possibly switching over
+more. Possibly switching over
+to exploration algorithm side works.
+to exploration algorithm side works.
+Depends also on the results of this
+Depends also on the results of this
+guy. And uh also for contributors, I'm
+guy. And uh also for contributors, I'm
+having a technician over tomorrow. So
+having a technician over tomorrow. So
+hopefully the cluster gets back online
+hopefully the cluster gets back online
+appropriately and we're able to start
+appropriately and we're able to start
+you know supporting more contributor
+you know supporting more contributor
+uh research with that once again. So
+uh research with that once again. So
+other than that, thanks folks and uh
+other than that, thanks folks and uh
+yeah, enjoy your weekend and I will see
+yeah, enjoy your weekend and I will see
+you tomorrow or on

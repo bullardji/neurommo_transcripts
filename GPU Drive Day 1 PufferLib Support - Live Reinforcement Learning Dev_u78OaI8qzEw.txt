@@ -1,0 +1,6329 @@
+Kind: captions
+Language: en
+okay we are
+alive time to get to
+alive time to get to
+work have a late start
+today streamed pretty late last night
+today streamed pretty late last night
+and then just crashed but we're good now
+and then just crashed but we're good now
+and uh you can't take a morning off it
+and uh you can't take a morning off it
+seems
+seems
+because the field will do
+stuff we've got this awesome SIM from
+stuff we've got this awesome SIM from
+from Eugene's lab to look
+from Eugene's lab to look
+at GPU Drive GPU accelerated
+at GPU Drive GPU accelerated
+2.5d multi agent driving Sim over a
+2.5d multi agent driving Sim over a
+million
+million
+FPS this looks very nice so I think what
+FPS this looks very nice so I think what
+we're going to try to do today is we're
+we're going to try to do today is we're
+going to see if we can make this
+going to see if we can make this
+thing oh there's the stream we're going
+thing oh there's the stream we're going
+to see if we can make this thing work
+to see if we can make this thing work
+with puffer
+Leb let's get started
+Leb let's get started
+don't need
+this and I will also say that overnight
+this and I will also say that overnight
+we had some nice
+we had some nice
+progress just before you get started on
+progress just before you get started on
+GPU drive here we did have some very
+GPU drive here we did have some very
+nice progress overnight uh with some of
+nice progress overnight uh with some of
+these training runs you can see cubert
+these training runs you can see cubert
+takes a little longer for cubert to get
+takes a little longer for cubert to get
+started it looks like but uh no we we do
+started it looks like but uh no we we do
+have some decent runs here this is a the
+have some decent runs here this is a the
+good one up
+good one up
+here and uh we have I think beam rider
+here and uh we have I think beam rider
+was really good
+was really good
+and beam Rider is really
+and beam Rider is really
+good and I just I haven't even seen this
+good and I just I haven't even seen this
+one yet this one is halfway done on
+one yet this one is halfway done on
+Space Invaders I
+Space Invaders I
+think yeah halfway done on Space
+Invaders look at
+that you can see the
+that you can see the
+trend very
+trend very
+nice okay let's do um
+nice okay let's do um
+oops let's do this
+properly where's Eugene's
+properly where's Eugene's
+thing where's a
+GitHub here it
+GitHub here it
+is GPU
+is GPU
+Drive 3 hours ago that means we're three
+Drive 3 hours ago that means we're three
+hours
+hours
+late ippo perfect that's what we
+late ippo perfect that's what we
+have and O they don't have a package
+have and O they don't have a package
+guys you really need to have a a pip
+guys you really need to have a a pip
+package for this if you
+can no pip
+package oh do they
+package oh do they
+have
+have
+H okay well we'll start with we'll start
+H okay well we'll start with we'll start
+from here
+uh do I want to do this
+uh do I want to do this
+local or do I want to do this on puffer
+local or do I want to do this on puffer
+box I should do this local just in
+box I should do this local just in
+case unless we lose conductivity or
+case unless we lose conductivity or
+something
+something
+uh
+uh
+Docker let's get into our container
+didn't finish watching last stream
+didn't finish watching last stream
+watching from Europe
+welcome you're not obligated to watch
+welcome you're not obligated to watch
+all of the
+all of the
+streams um there's you know there's
+streams um there's you know there's
+always new stuff have you succeeded with
+always new stuff have you succeeded with
+the ELO we have a nice implementation I
+the ELO we have a nice implementation I
+need to probably add some policies to it
+need to probably add some policies to it
+but I'm pretty happy with how the
+but I'm pretty happy with how the
+implementation is looking out looking
+implementation is looking out looking
+we're doing something different today
+we're doing something different today
+because there's this awesome release
+because there's this awesome release
+from Eugene's lab they have a really
+from Eugene's lab they have a really
+fast driving Sim I was actually tempted
+fast driving Sim I was actually tempted
+to make one of these but it looks like
+to make one of these but it looks like
+he's gone ahead and done
+it this lab so we're going to see if we
+it this lab so we're going to see if we
+can get Day One support and puffer I
+can get Day One support and puffer I
+hope we should be able to
+hope we should be able to
+do thing could use some squash commits
+do thing could use some squash commits
+and maybe a pit
+package let's see data
+package let's see data
+set simulator
+set simulator
+gym
+M perfect they just have a gym a gym
+M perfect they just have a gym a gym
+wrapper I don't know how it's a gy m
+wrapper I don't know how it's a gy m
+though if it's gy is not
+though if it's gy is not
+multi-agent so we'll see how that
+works and um from
+works and um from
+there we have stuff to
+there we have stuff to
+do soon as this finishes
+do soon as this finishes
+cloning stuck oh yeah there we
+go
+go
+um oh right it's got uh it's got sub
+um oh right it's got uh it's got sub
+modules on
+it but yeah I see the stream is warming
+it but yeah I see the stream is warming
+up so uh for the YouTube folks today
+up so uh for the YouTube folks today
+what we're doing is we are adding
+what we're doing is we are adding
+bindings for this awesome driving Sim
+bindings for this awesome driving Sim
+apparently it's very fast and uh my goal
+apparently it's very fast and uh my goal
+is going to be to get this working which
+is going to be to get this working which
+is going to be the tough part I don't
+is going to be the tough part I don't
+know what like what stuff is under the
+know what like what stuff is under the
+hood with this and then I think the easy
+hood with this and then I think the easy
+part is just going to be making this
+part is just going to be making this
+thing stupidly fast and puffer I bet we
+thing stupidly fast and puffer I bet we
+can beat whatever whatever thing they
+can beat whatever whatever thing they
+have on this um speed wise if the
+have on this um speed wise if the
+question is going to be how fast it runs
+question is going to be how fast it runs
+on CPU because the goal is if it runs at
+on CPU because the goal is if it runs at
+like a million on
+like a million on
+GPU um and we're trying to train it a
+GPU um and we're trying to train it a
+million steps per second that's half of
+million steps per second that's half of
+your time gone so if I run this on the
+your time gone so if I run this on the
+CPU cores and get the data to GPU fast
+CPU cores and get the data to GPU fast
+then potentially I can do way better
+then potentially I can do way better
+which would be really really
+which would be really really
+funny but I've seen it happen
+before I'm a little bit concerned about
+before I'm a little bit concerned about
+the API compatibility stuff
+the API compatibility stuff
+because they say it's a gy EnV but it
+because they say it's a gy EnV but it
+can't possibly be a gym because it's
+multi-agent we'll do some fun stuff with
+multi-agent we'll do some fun stuff with
+this so we have uh we've got this thing
+this so we have uh we've got this thing
+now GPU
+now GPU
+drive and what do they say how do we
+drive and what do they say how do we
+install
+install
+this kind
+of Linux and Mac
+of Linux and Mac
+OS this is not bad
+right let's see
+some
+C++ was with the madona engine Madrona
+C++ was with the madona engine Madrona
+is like this GPU game engine type thing
+is like this GPU game engine type thing
+GPU environment
+engine which is kind of funny because
+engine which is kind of funny because
+I'm pretty sure with puffer you're no
+I'm pretty sure with puffer you're no
+longer going to need to implement M's
+longer going to need to implement M's
+for GPU it's perfectly fine if they are
+for GPU it's perfectly fine if they are
+GPU but we can make it fast either way
+there we
+there we
+go okay so this is just setting up
+go okay so this is just setting up
+madona
+where why can't I find her
+Twitter why can't I find uh Twitter for
+Twitter why can't I find uh Twitter for
+this
+should be in my retweets
+right
+set jeez you have to type this much in
+set jeez you have to type this much in
+order to get the name to show that's
+order to get the name to show that's
+ridiculous
+I've also got to say um
+it's pretty awesome what we've had with
+it's pretty awesome what we've had with
+puffer just while this is yeah 757
+puffer just while this is yeah 757
+that's
+that's
+crazy
+crazy
+okay so we have this built now
+okay so we have this built now
+apparently is there a
+test pie
+test can we just pie test this
+the fact that I do not have pest
+the fact that I do not have pest
+installed oh I do have
+it does it not
+it does it not
+work well probably this is good
+right okay so it
+right okay so it
+supports there's human data as well
+supports there's human data as well
+which I don't think we're going to play
+which I don't think we're going to play
+too much with because we're just going
+too much with because we're just going
+to do IPO to start
+to do IPO to start
+um and we're going to try to make that
+um and we're going to try to make that
+stupidly
+fast let's see where are their
+docks intro
+tutorials gy M demo I probably want this
+right so
+you can
+import okay there's quite a bit of stuff
+import okay there's quite a bit of stuff
+here
+here
+um torch and Jack gymnasium interface
+um torch and Jack gymnasium interface
+with the
+with the
+simulator I'm a bit confused how they do
+simulator I'm a bit confused how they do
+that because it's single
+agent make EnV
+agent make EnV
+you pass it a bunch of
+you pass it a bunch of
+configs and then agents this is probably
+configs and then agents this is probably
+like a gymnasium VEC interface then
+maybe uh episode with n parallel
+maybe uh episode with n parallel
+environments okay this is not that bad I
+environments okay this is not that bad I
+think we can get this working pretty
+think we can get this working pretty
+quick let me start by making a
+quick let me start by making a
+standalone and then we'll add a We'll
+standalone and then we'll add a We'll
+add this as a binding
+is this going to work from here if this
+is this going to work from here if this
+is not uh as a pit
+is not uh as a pit
+package oh they do this I see they they
+package oh they do this I see they they
+actually have to do yeah that's slightly
+actually have to do yeah that's slightly
+a pain we'll have to
+a pain we'll have to
+move are we going to do
+this I think this was the case for
+this I think this was the case for
+nocturn too I'd really suggest if you
+nocturn too I'd really suggest if you
+guys can get a pit package together um
+guys can get a pit package together um
+otherwise I'll just I'll just have to
+otherwise I'll just I'll just have to
+set the paths or something it's not that
+set the paths or something it's not that
+bad
+so uh puffer play your streams while
+so uh puffer play your streams while
+working hard to find any valuable Dev
+working hard to find any valuable Dev
+content everything is web or Game Dev
+content everything is web or Game Dev
+great for somewhere not in the field to
+great for somewhere not in the field to
+go at gra over yeah I mean hi I'm glad
+go at gra over yeah I mean hi I'm glad
+it's uh glad it's
+it's uh glad it's
+useful this is kind of Game Dev except
+useful this is kind of Game Dev except
+that the games are for reinforcement
+that the games are for reinforcement
+learning agents to play
+okay let's just make our little test
+file copy some of this
+stuff get this out of a notebook for
+now thank you very much copy
+paste wait
+uh working
+uh working
+dur if
+race this one goes up
+race this one goes up
+here and then yeah we're
+here and then yeah we're
+good okay that's that code
+good okay that's that code
+sample we'll get this GIF I don't think
+sample we'll get this GIF I don't think
+this will work because we're on WSL
+this will work because we're on WSL
+but okay that definitely did not
+work I
+see and this display function where does
+see and this display function where does
+this come
+from I don't see this dis
+from I don't see this dis
+play
+Anywhere okay so they have some
+Anywhere okay so they have some
+constants and put these up
+here initializing
+environments GPU Drive gy M class and
+environments GPU Drive gy M class and
+base M torch M and Jacks
+base M torch M and Jacks
+m one exports torch tensors in the other
+m one exports torch tensors in the other
+Jacks array
+so neither so this is not actually
+so neither so this is not actually
+gymnasium API it's just gymnasium like
+gymnasium API it's just gymnasium like
+API and we're going to have to rrap it
+API and we're going to have to rrap it
+which is mildly obnoxious because we
+which is mildly obnoxious because we
+actually have to get the data out of
+actually have to get the data out of
+from numai and then back into torch but
+from numai and then back into torch but
+whatever that's
+whatever that's
+fine um so we have scene config
+and N
+config
+oops this actually gives us the action
+oops this actually gives us the action
+space doesn't
+it yeah there's going to have to be some
+it yeah there's going to have to be some
+wrapper stuff going on um this is not
+wrapper stuff going on um this is not
+exactly a gem
+exactly a gem
+interface and then render config
+this is the
+this is the
+environment they do torch by default
+environment they do torch by default
+that is a good
+that is a good
+sign no more
+Jacks and then
+here's their parallel
+M's really wish I knew why copy paste is
+M's really wish I knew why copy paste is
+this
+this
+screwy but
+whatever not a big
+whatever not a big
+deal and perfect we can actually we're
+deal and perfect we can actually we're
+not going to need this display function
+not going to need this display function
+I don't
+think we can save this here
+think we can save this here
+though uh we can actually
+do import
+CV2 sure whatever
+let's try
+this it's doing something
+range what's episode length
+90 confused as to whether this is doing
+90 confused as to whether this is doing
+anything
+okay let's see where it's it's stopping
+okay let's see where it's it's stopping
+cuz something is it's getting hung up
+cuz something is it's getting hung up
+somewhere
+really oh
+jeez it just goes this is this is funny
+yeah it's
+yeah it's
+funny set working directory to the base
+funny set working directory to the base
+directory GPU Drive
+base directory
+GPU
+GPU
+um do I want to change the working
+um do I want to change the working
+directory or do I want to sim link it
+did I do that backwards
+I always forget what order it
+I always forget what order it
+is yeah it's
+Len okay perfect should not need to set
+Len okay perfect should not need to set
+the working directory
+now still no module Pi GPU Drive
+GPU GPU Drive okay so this
+GPU GPU Drive okay so this
+works uh so I think it's
+actually
+GP I
+GPU GPU Drive try this
+okay maybe this
+okay maybe this
+works just Sim linking to
+it 9
+it 9
+s o no module GPU Drive okay so this
+s o no module GPU Drive okay so this
+thing is really not designed to work um
+thing is really not designed to work um
+in a different directory
+in a different directory
+which is mildly mildly
+which is mildly mildly
+annoying that's okay
+annoying that's okay
+though oops let's go back
+to okay let's see what do
+to okay let's see what do
+we what do we think we
+we what do we think we
+are puffer tank SL GPU Drive
+do you need to have like the Poetry
+do you need to have like the Poetry
+install or something is there a setup.py
+there is a setup.py that we didn't run
+there is a setup.py that we didn't run
+right oh wait
+right oh wait
+no what about the
+no what about the
+toml is this thing installed correctly
+like oh there is a pip in Stall
+right that's bizarre
+H cannot
+import weird very
+weird okay I think there's something
+weird okay I think there's something
+wrong with the build we definitely need
+wrong with the build we definitely need
+to get this working without this like
+to get this working without this like
+path shenanigans is
+what's in the
+toml tool.
+toml tool.
+Poetry ah it actually does have to be
+Poetry ah it actually does have to be
+poetry
+fine we'll do
+poetry they have the tool it tooled for
+poetry they have the tool it tooled for
+that that's where the uh the missing
+that that's where the uh the missing
+file was all right my bad for wanting to
+file was all right my bad for wanting to
+use my own
+tools I just did it
+tools I just did it
+again just reflexively
+really do not like poetry though
+why is it adding Cuda
+why is it adding Cuda
+packages I already have those
+I don't think that this works you can't
+I don't think that this works you can't
+just
+just
+make the package because it doesn't give
+make the package because it doesn't give
+you the links
+right oh wait add
+it says that you should be able to do
+it says that you should be able to do
+this so this was supposed to work and it
+this so this was supposed to work and it
+didn't that's
+weird so I guess I'll try both of
+these this is always the bothersome and
+these this is always the bothersome and
+boring part right is getting the thing
+boring part right is getting the thing
+actually installed
+actually installed
+correctly um and then hopefully I'm
+correctly um and then hopefully I'm
+hopeful that this should be fairly quick
+hopeful that this should be fairly quick
+after that to get running and then get
+after that to get running and then get
+integrated with puffer it's going to
+integrated with puffer it's going to
+depend how heavily they
+depend how heavily they
+um they different they uh well how much
+um they different they uh well how much
+they diverge from the gymnasium API
+they diverge from the gymnasium API
+because it's not they say they have a
+because it's not they say they have a
+gymnasium interface but it's not quite a
+gymnasium interface but it's not quite a
+gymnasium
+gymnasium
+interface I assume that they mean they
+interface I assume that they mean they
+have like a torch tensor GP uh torch
+have like a torch tensor GP uh torch
+tensor gymnasium VC interface so if
+tensor gymnasium VC interface so if
+that's the case then I'm going to have
+that's the case then I'm going to have
+to take their interface I'm going to
+to take their interface I'm going to
+have to wrap it with puffer get those
+have to wrap it with puffer get those
+into numpy
+into numpy
+Rays on
+Rays on
+CPU and see how fast I can get it
+CPU and see how fast I can get it
+running multicore
+this thing not done
+this thing not done
+oh it is it's just like did something
+weird we'll see if it works with poetry
+weird we'll see if it works with poetry
+I'm hoping it works with just this this
+I'm hoping it works with just this this
+manual install should be
+manual install should be
+better but I was getting
+better but I was getting
+um I was getting like a link error with
+um I was getting like a link error with
+this it didn't link the package
+this it didn't link the package
+correctly
+let me see in the meantime if I can
+let me see in the meantime if I can
+figure out how this
+works uh
+oh uh is the stream
+down it's just slow not down right
+I'm getting a lot of dropped
+frames
+yeah stream will be back up if it's
+yeah stream will be back up if it's
+still on as soon as this blip is
+over what in the heck though
+that's wait the stream looks like it's
+that's wait the stream looks like it's
+still
+alive so hold on I think that it's just
+alive so hold on I think that it's just
+is it just that poetry is eating all my
+is it just that poetry is eating all my
+bandwidth is that what H what's
+happening let me check on my phone if
+happening let me check on my phone if
+the internet's
+down seems
+fine and I see the stream still being up
+fine and I see the stream still being up
+here so I'm going to get this I'm going
+here so I'm going to get this I'm going
+to give this a second to finish
+to give this a second to finish
+downloading and hopefully then it stops
+downloading and hopefully then it stops
+eating all my
+bandwidth it's the last time I triy
+bandwidth it's the last time I triy
+poetry for anything though
+I'm so weird I definitely have internet
+okay
+so will these
+so will these
+load
+tutorials looks like
+it controlling Road objects
+yeah okay this actually doesn't look too
+yeah okay this actually doesn't look too
+bad to get set up once we're uh once
+bad to get set up once we're uh once
+we're ready and they they have actually
+we're ready and they they have actually
+they have good versions of everything as
+they have good versions of everything as
+well these are the versions that puffer
+well these are the versions that puffer
+uses as well these are just the latest
+uses as well these are just the latest
+versions of everything so we should be
+versions of everything so we should be
+fine so I'll wait for a torch to finish
+fine so I'll wait for a torch to finish
+downloading I think that literally all
+downloading I think that literally all
+that happened is that this just uh
+that happened is that this just uh
+poetry just ate all of our bandwidth and
+poetry just ate all of our bandwidth and
+took the stream down for a second it
+took the stream down for a second it
+looks like we're good
+looks like we're good
+now so welcome back folks
+now so welcome back folks
+we're going to give it a second to
+we're going to give it a second to
+finish torch I think it just did like
+finish torch I think it just did like
+some crazy multi-threaded download and
+some crazy multi-threaded download and
+just took the like took all the
+bandwidth so I'll go over my plan while
+bandwidth so I'll go over my plan while
+I'm waiting for this um it looks to me
+I'm waiting for this um it looks to me
+that they have a they have a uh
+that they have a they have a uh
+multimodal action space or multi- a
+multimodal action space or multi- a
+structured action space I should
+structured action space I should
+say I think one of the tutorials had
+say I think one of the tutorials had
+what it was I hope it's not mixed
+what it was I hope it's not mixed
+discreet and
+discreet and
+continuous let me
+see what environment this is GPU Drive
+see what environment this is GPU Drive
+was just launched today
+was just launched today
+by where the heck did it
+go just launched today by Eugene's
+lab and we're going to try to make it
+lab and we're going to try to make it
+very very
+fast so it looks to me that they
+have it looks to me like they have um
+have it looks to me like they have um
+continuous steering and
+acceleration which is pretty easy for us
+acceleration which is pretty easy for us
+to handle and
+puffer haven't done much with the
+puffer haven't done much with the
+continuous
+environments je
+environments je
+okay can we
+still doesn't
+work cannot open shared object file I
+work cannot open shared object file I
+see it right here don't I buffer Li GPU
+see it right here don't I buffer Li GPU
+Drive
+Drive
+build GPU drive. cpython
+build GPU drive. cpython
+do oh
+that's
+that's
+weird it built it with
+310 uh hold
+on include cpython 311 but I have python
+on include cpython 311 but I have python
+right hm
+okay let me try this make let me try the
+okay let me try this make let me try the
+make version again the from
+Source they do have python 311 pinned
+Source they do have python 311 pinned
+here
+oops it's crazy that they actually made
+oops it's crazy that they actually made
+this thing build on Windows
+let me make this work first and then I
+let me make this work first and then I
+think if I just do
+import
+error cre created
+error cre created
+wheel stored in directory
+okay we'll go back to
+311 and it clearly is right here it's
+311 and it clearly is right here it's
+generating for some
+generating for some
+reason I don't know why it would be
+reason I don't know why it would be
+generating like this though why was it
+generating like this though why was it
+generating with 310
+yeah it says link shared module
+could not
+could not
+[Music]
+find can I just rename it
+what if I just do
+this okay it looks like it uh
+Imports it's like fault
+I'll make them uh an issue on
+that Madrona was not compiled with Cuda
+support okay
+how do I run Madrona in CPU mode because
+how do I run Madrona in CPU mode because
+I want to do that
+anyways just like this maybe
+oh look at that we got it
+oh look at that we got it
+running not
+bad make an issue for
+him we're going to get them lots of nice
+him we're going to get them lots of nice
+stuff on this today
+oops uh GPU
+Drive
+e e
+welcome but this
+welcome but this
+works
+works
+right you can see we have the car it
+right you can see we have the car it
+runs it does stuff
+um now we get to do some benchmarking
+right new to
+right new to
+python well this is going to be a bit
+python well this is going to be a bit
+much then we are doing uh high
+much then we are doing uh high
+performance reinforcement learning
+performance reinforcement learning
+development today a new GPU accelerated
+development today a new GPU accelerated
+driving simulator released from uh some
+driving simulator released from uh some
+buddies of mine at
+buddies of mine at
+NYU and they are doing uh it looks very
+NYU and they are doing uh it looks very
+good so I'm adding a binding to puffer
+good so I'm adding a binding to puffer
+lib so we can train neural networks to
+lib so we can train neural networks to
+drive cars
+drive cars
+fast or
+well yeah this is the environment we're
+well yeah this is the environment we're
+playing with right
+playing with right
+now to GPU driving end these are
+now to GPU driving end these are
+cars uh just started on porting
+cars uh just started on porting
+this but yeah that's the plan for
+this but yeah that's the plan for
+today so first thing I want to figure
+out how many how many cars are there in
+here 10 by 128 that is
+here 10 by 128 that is
+weird this is nice what libraries my
+weird this is nice what libraries my
+main stuff is in puffer
+lib cure the docks repo's right
+here put it in the
+here put it in the
+chat open source high performance
+chat open source high performance
+reinforcement
+reinforcement
+learning try to make everything very
+learning try to make everything very
+simple as
+well why do they have 128
+Ah that's
+Ah that's
+why so is this 128 per
+why so is this 128 per
+[Music]
+[Music]
+scene oh it's because yeah yeah so
+scene oh it's because yeah yeah so
+there's this scene is
+there's this scene is
+large right num
+large right num
+worlds so 10
+worlds so 10
+worlds up
+worlds up
+to 128 objects
+it's actually kind of hard for me to
+tell how I should be looking at
+tell how I should be looking at
+this I don't know if I do this if I do
+this I don't know if I do this if I do
+one is it going to be totally
+one is it going to be totally
+different is this going to be a
+different is this going to be a
+different
+map yeah totally different
+map but I only see one
+map but I only see one
+car right I and I I guess it's like
+car right I and I I guess it's like
+vaults if you don't close it properly
+vaults if you don't close it properly
+but I only see one car
+but I only see one car
+here which just
+disappeared
+disappeared
+H I'm not sure how to
+well let's not abuse This Thread I'll
+well let's not abuse This Thread I'll
+tweet
+him
+for e
+what I understand you're simulating cars
+what I understand you're simulating cars
+and trying to B find the best path for
+and trying to B find the best path for
+it to move something like that this is
+it to move something like that this is
+not my environment this is just released
+not my environment this is just released
+today by NYU what I'm trying to do is
+today by NYU what I'm trying to do is
+I'm trying to add support for this into
+I'm trying to add support for this into
+puffer lib so we can train RL to do
+puffer lib so we can train RL to do
+probably what you just said uh at very
+probably what you just said uh at very
+well we can do that very fast and easy
+well we can do that very fast and easy
+that's the
+goal video frames per second is four I
+goal video frames per second is four I
+cannot test how fast this is as is
+cannot test how fast this is as is
+though was
+though was
+annoying we'll be able to do that later
+annoying we'll be able to do that later
+I think for
+now basically what Tesla a i
+now basically what Tesla a i
+does sort
+does sort
+of much smaller
+of much smaller
+scale but yeah kind of I believe you can
+scale but yeah kind of I believe you can
+do it better man if you want me to do a
+do it better man if you want me to do a
+test does bit better I'll uh please give
+test does bit better I'll uh please give
+me my pick of like a th Engineers from
+me my pick of like a th Engineers from
+like a the Thousand best Engineers I
+like a the Thousand best Engineers I
+want and like several billion dollars
+want and like several billion dollars
+and then we'll
+talk you can't compete with that number
+talk you can't compete with that number
+of resources at this
+scale okay you want to see how funny
+scale okay you want to see how funny
+that is actually this is so
+Tesla do I have a picture of
+Tesla do I have a picture of
+it yeah okay
+it yeah okay
+so this is what their data centers look
+so this is what their data centers look
+like this is what my data center looks
+like little bit of a
+like little bit of a
+difference little bit of a
+difference all right so I think that we
+difference all right so I think that we
+can actually start adding this to puffer
+can actually start adding this to puffer
+already um there are a few things that
+already um there are a few things that
+are bothering me here let's make a
+are bothering me here let's make a
+little
+wrapper they have a I don't know how
+wrapper they have a I don't know how
+many billions of dollar cluster I have a
+many billions of dollar cluster I have a
+$30,000 cluster
+where did you learn
+where did you learn
+python I think I learned python when I
+python I think I learned python when I
+was like 16 by porting one of my crappy
+was like 16 by porting one of my crappy
+neural networks from mat lab so I don't
+know yeah
+you just start writing code and you keep
+you just start writing code and you keep
+writing code until the code stops
+writing code until the code stops
+looking
+bad oh then you're starting at a good
+bad oh then you're starting at a good
+age that's when I started doing research
+this actually should not be a rapper
+this actually should not be a rapper
+right this needs to
+be yeah all this stuff needs to go into
+be yeah all this stuff needs to go into
+the
+class I don't know if you're new to all
+class I don't know if you're new to all
+this stuff and you want to do some cool
+this stuff and you want to do some cool
+stuff in AI or whatnot I would just it's
+stuff in AI or whatnot I would just it's
+going to take a lot of time so be
+going to take a lot of time so be
+patient and also so just like start
+patient and also so just like start
+writing code and don't get too wrapped
+writing code and don't get too wrapped
+up in like doing fancy objectoriented
+up in like doing fancy objectoriented
+crap or fancy functional crap just like
+crap or fancy functional crap just like
+write simple code that that makes cool
+projects all
+projects all
+so now we have self.
+so now we have self.
+M
+um I want to take a look at the
+um I want to take a look at the
+observation spaces
+here what just
+here what just
+happened
+S.M class values must be non- negative
+S.M class values must be non- negative
+what's GPU Drive should I just put this
+what's GPU Drive should I just put this
+up on the side of the stream so that
+up on the side of the stream so that
+people can see
+it I'm just going to like put Eugene's
+it I'm just going to like put Eugene's
+post up on this screen okay this is GPU
+post up on this screen okay this is GPU
+drive this is I don't have enough screen
+drive this is I don't have enough screen
+space for it um but yeah this is GPU
+space for it um but yeah this is GPU
+Drive they have fancy driving Sim
+I have time done cool projects with some
+I have time done cool projects with some
+help classes suck because yeah classes
+suck oh well no I I thought you meant
+suck oh well no I I thought you meant
+like instructional classes like lectures
+like instructional classes like lectures
+but yes those whatever Noah this is
+but yes those whatever Noah this is
+supposedly a million step per second
+supposedly a million step per second
+environment we're going to see how much
+environment we're going to see how much
+better we can do it's a GPU environment
+better we can do it's a GPU environment
+my plan is to run it on CPU m mul core
+my plan is to run it on CPU m mul core
+with puffer so that we don't waste the
+with puffer so that we don't waste the
+GPU time on the m and we use all the GPU
+GPU time on the m and we use all the GPU
+time for the
+network since we've got like a newer
+network since we've got like a newer
+person to stuff here I'm just going to
+person to stuff here I'm just going to
+make one small detour
+comment if you just want to see like how
+comment if you just want to see like how
+far you can go in 10 years um this is
+far you can go in 10 years um this is
+some of my like absolute garbage work
+some of my like absolute garbage work
+from when I was
+from when I was
+16 I think I'm 16 in this
+16 I think I'm 16 in this
+photo this is like me training really
+photo this is like me training really
+really bad like neural networks on
+really bad like neural networks on
+convet or
+whatever that's also me at 140
+pounds
+pounds
+um yeah there's like some neural network
+um yeah there's like some neural network
+stuff in
+stuff in
+here but yeah this is some of the stuff
+here but yeah this is some of the stuff
+I built when I was way
+younger takes
+time how many SPS are you hoping to get
+time how many SPS are you hoping to get
+out of it I don't know we're going to
+out of it I don't know we're going to
+see how long it takes more than what
+see how long it takes more than what
+they currently have whatever they have
+they currently have whatever they have
+at the moment I want to do I want to get
+at the moment I want to do I want to get
+it to be faster than they have it
+what happened
+here I literally just pasted this into
+here I literally just pasted this into
+the class and now no longer
+works that's weird isn't it
+yeah no
+yeah no
+worries did you call the
+class yeah you'll see I mean if you're
+class yeah you'll see I mean if you're
+just hang around you'll see some
+just hang around you'll see some
+Dev
+um okay here's our environment
+okay so it actually it does have a
+okay so it actually it does have a
+proper observation space on it um but I
+proper observation space on it um but I
+don't think it's the correct observation
+don't think it's the correct observation
+space
+right
+yeah so if I do like
+this you see right here that this is not
+this you see right here that this is not
+what was get
+given they say it has 30 oh wait no is
+given they say it has 30 oh wait no is
+this
+right it's not exactly
+right it's not exactly
+right because they stacked it
+right because they stacked it
+weird this needs to be
+reshaped this needs to be
+reshaped this needs to be
+reshaped and what do they have for
+reshaped and what do they have for
+Action
+Action
+space discreet of nine
+space discreet of nine
+really discreet of
+really discreet of
+nine that doesn't look right does
+nine that doesn't look right does
+it steer
+actions we using Panda no there's no
+actions we using Panda no there's no
+pandas so this is reinforcement learning
+pandas so this is reinforcement learning
+this means that uh the data comes from a
+this means that uh the data comes from a
+simulator this data is generated in
+simulator this data is generated in
+memory by interacting with the simulator
+memory by interacting with the simulator
+so you do not need any tools for
+so you do not need any tools for
+interacting with large data sets what
+interacting with large data sets what
+you need is you need ultra high
+you need is you need ultra high
+performance ways of getting gigabytes of
+performance ways of getting gigabytes of
+data per second from multiple CPU cores
+data per second from multiple CPU cores
+onto the GPU or you need ultra high
+onto the GPU or you need ultra high
+performance ways of you know generally
+performance ways of you know generally
+coupling this back and forth simulator
+coupling this back and forth simulator
+runs simulation simulator returns data
+runs simulation simulator returns data
+neuron net acts on data neuronet returns
+neuron net acts on data neuronet returns
+actions to simulator simulator steps
+actions to simulator simulator steps
+forward that's the that is the loop that
+forward that's the that is the loop that
+needs to run fast
+I have no clue about what you just said
+I have no clue about what you just said
+good it would be kind of weird if you
+good it would be kind of weird if you
+did I'd be very
+impressed I would be very impressed if
+impressed I would be very impressed if
+you did
+if you're trying to pick up machine
+if you're trying to pick up machine
+learning though I would highly suggest
+learning though I would highly suggest
+yeah I will repeat that slower since
+yeah I will repeat that slower since
+other people are confused as well but um
+other people are confused as well but um
+if you're trying to learn AI stuff I
+if you're trying to learn AI stuff I
+would highly recommend cs231n the
+would highly recommend cs231n the
+lectures are online Stanford course it's
+lectures are online Stanford course it's
+a grad course but it's a very accessible
+a grad course but it's a very accessible
+grad course that's where I would start
+grad course that's where I would start
+yes let me repeat
+yes let me repeat
+so the way that this works in
+so the way that this works in
+reinforcement learning right
+reinforcement learning right
+reinforcement learning is not like
+reinforcement learning is not like
+supervised learning we don't have a big
+supervised learning we don't have a big
+data file with 10 terab of data that we
+data file with 10 terab of data that we
+then need to load off of the dis and
+then need to load off of the dis and
+like manage and get into the neural
+like manage and get into the neural
+network that's not what we're doing what
+network that's not what we're doing what
+we instead have is a simulator it's like
+we instead have is a simulator it's like
+a game in this case it's not a game it's
+a game in this case it's not a game it's
+a driving Sim but same thing and what
+a driving Sim but same thing and what
+we're going to do is we're going to run
+we're going to do is we're going to run
+many copies of this simulator on
+many copies of this simulator on
+different CPU cores okay and they're all
+different CPU cores okay and they're all
+going to run at the same time so what we
+going to run at the same time so what we
+need is we need a really fast way of
+need is we need a really fast way of
+getting all that data from all those
+getting all that data from all those
+different cores to the GPU they have to
+different cores to the GPU they have to
+get onto the main process and then they
+get onto the main process and then they
+get onto the GPU that's a lot of data
+get onto the GPU that's a lot of data
+that has to be processed very very fast
+that has to be processed very very fast
+we're talking like you have a few
+we're talking like you have a few
+microsc that you can waste here um but
+microsc that you can waste here um but
+it has to be very efficient overall and
+it has to be very efficient overall and
+then that data once it's on the GPU is
+then that data once it's on the GPU is
+run through a neural network the neural
+run through a neural network the neural
+network tells all the cars what to do
+network tells all the cars what to do
+where to steer how to accelerate so on
+where to steer how to accelerate so on
+and so forth that data gets sent back to
+and so forth that data gets sent back to
+all all the different
+all all the different
+processes and then the simulators step
+processes and then the simulators step
+forward using that information they say
+forward using that information they say
+okay the car is going to go this way and
+okay the car is going to go this way and
+then they return more data that process
+then they return more data that process
+has to be very fast that is what puffer
+has to be very fast that is what puffer
+lib
+does hi is it possible to create a
+does hi is it possible to create a
+Starcraft 2 AI like Alpha star using the
+Starcraft 2 AI like Alpha star using the
+reinforcement learning resources you
+reinforcement learning resources you
+have um the closest thing I have for you
+have um the closest thing I have for you
+for that is on my Twitter the main
+for that is on my Twitter the main
+project I was building at the uh one of
+project I was building at the uh one of
+the main projects I'm building at the
+moment where's the
+GIF we've got a MOA it's uh not not
+GIF we've got a MOA it's uh not not
+Alpha star it's closer to DOTA but I've
+Alpha star it's closer to DOTA but I've
+been building this this runs it like a
+been building this this runs it like a
+million steps per second per core so we
+million steps per second per core so we
+can actually train this with the
+can actually train this with the
+resources I have we're not going to be
+resources I have we're not going to be
+able to train on like Starcraft properly
+able to train on like Starcraft properly
+just because the game is too slow but
+just because the game is too slow but
+you could very easily do a project well
+you could very easily do a project well
+not EAS easily but with the about the
+not EAS easily but with the about the
+same amount of effort I could have done
+same amount of effort I could have done
+like an RTS instead of a MOA and had
+like an RTS instead of a MOA and had
+something like this as
+well at what point did you get into
+well at what point did you get into
+RL in your ml
+RL in your ml
+Journey practice it so RL is I've worked
+Journey practice it so RL is I've worked
+in Vision I've worked in natural
+in Vision I've worked in natural
+language processing I did both of those
+language processing I did both of those
+for about three years reinforcement
+for about three years reinforcement
+learning is much much harder not from a
+learning is much much harder not from a
+math perspective not from a research
+math perspective not from a research
+perspective necessarily but from a pure
+perspective necessarily but from a pure
+engineering perspective because you have
+engineering perspective because you have
+this giant additional stack of tools
+this giant additional stack of tools
+that has to work with complex
+that has to work with complex
+simulators so 80% of my work is
+simulators so 80% of my work is
+engineering building this type of stuff
+engineering building this type of stuff
+um that is what makes it hard but you
+um that is what makes it hard but you
+still have to know all the other stuff
+still have to know all the other stuff
+in ml now the nice thing is that I'm
+in ml now the nice thing is that I'm
+fixing this uh I've only been on this
+fixing this uh I've only been on this
+now for three months since I graduated
+now for three months since I graduated
+my PhD I've been doing reinforcement
+my PhD I've been doing reinforcement
+learning for like seven years but this
+learning for like seven years but this
+is where I finished my PhD and started
+is where I finished my PhD and started
+working on puffer lip full-time this has
+working on puffer lip full-time this has
+been the growth on the project in the
+been the growth on the project in the
+last couple two three months so we are
+last couple two three months so we are
+very very quickly making reinforcement
+very very quickly making reinforcement
+learning fast simple and
+easy also much harder in
+easy also much harder in
+theory I say I think it's harder than
+theory I say I think it's harder than
+everything in supervised learning except
+everything in supervised learning except
+for the uh the infra Engineers who have
+for the uh the infra Engineers who have
+to do the multi- noode uh the multi-
+to do the multi- noode uh the multi-
+node scaling on like large language
+node scaling on like large language
+models the multimachine scaling
+models the multimachine scaling
+infrastructure is probably as hard or
+infrastructure is probably as hard or
+harder than this but everything else
+no rl's
+hard the nice thing is we do kind of
+hard the nice thing is we do kind of
+have unlimited data so we don't have to
+have unlimited data so we don't have to
+worry about overfitting and
+worry about overfitting and
+regularization and stuff as
+regularization and stuff as
+much that's nice but uh we have every
+much that's nice but uh we have every
+other problem in the
+book okay let me figure out why the heck
+book okay let me figure out why the heck
+this thing wasn't
+working oh you are actually right I
+working oh you are actually right I
+forgot to instantiate the class before
+forgot to instantiate the class before
+that's
+that's
+funny I wasn't paying attention
+that's actually so
+funny
+38 there we go
+now what we have to do
+is
+is
+reset this is
+fine match API death step with
+fine match API death step with
+action and we'll see what this
+returns I don't know if it has a step
+returns I don't know if it has a step
+function
+it does have
+step let's just see how this what this
+does was not really until
+does was not really until
+RL that you started going hard into the
+RL that you started going hard into the
+engineering
+engineering
+aspect I mean this the engineering side
+aspect I mean this the engineering side
+has been relatively recent I did a lot
+has been relatively recent I did a lot
+of simulation development for neural MMO
+of simulation development for neural MMO
+that involved a fair bit of like
+that involved a fair bit of like
+engineering and components and stuff but
+engineering and components and stuff but
+uh the ultra high performance RL is
+uh the ultra high performance RL is
+something that has happened since I
+something that has happened since I
+graduated because it's not something
+graduated because it's not something
+that you can really work on well in
+that you can really work on well in
+Academia um so this is a relatively
+Academia um so this is a relatively
+recent thing that said it's been going
+recent thing that said it's been going
+incredibly well like in three months we
+incredibly well like in three months we
+have simulations that are 100 times
+have simulations that are 100 times
+faster than everything else
+mhm it's funny cuz I never really liked
+mhm it's funny cuz I never really liked
+um I never really liked low-l
+um I never really liked low-l
+engineering when I was in college or
+engineering when I was in college or
+whatever and I still don't but the only
+whatever and I still don't but the only
+reason I don't is because of fiddly
+reason I don't is because of fiddly
+tools that make it impossible to debug
+tools that make it impossible to debug
+stuff with the current stack of stuff I
+stuff with the current stack of stuff I
+have on puffer it's pretty painless I
+have on puffer it's pretty painless I
+can just like write super fast stuff
+right cuz obviously like I know how to
+right cuz obviously like I know how to
+do all of it right it's just a matter of
+do all of it right it's just a matter of
+having an interface for it that doesn't
+having an interface for it that doesn't
+suck
+we do all sorts of stuff for
+we do all sorts of stuff for
+um for the simulation code in puffer
+um for the simulation code in puffer
+though we do
+though we do
+like they are zero dynamic memory
+like they are zero dynamic memory
+accesses we have like all the memory
+accesses we have like all the memory
+pre-allocated for The Sims we do
+pre-allocated for The Sims we do
+occasionally we'll do stuff like um like
+occasionally we'll do stuff like um like
+flat circular buffers so that to avoid
+flat circular buffers so that to avoid
+copying data around we do a lot of like
+copying data around we do a lot of like
+memory views between Python and syon so
+memory views between Python and syon so
+we have zero uh zero copies that way
+we have zero uh zero copies that way
+we'll do stuff like we'll simulate
+we'll do stuff like we'll simulate
+everything inside of shared memory so
+everything inside of shared memory so
+that you actually don't even have to
+that you actually don't even have to
+like copy the data around to get it off
+like copy the data around to get it off
+onto the main
+onto the main
+process lots and lots of big
+process lots and lots of big
+optimizations is that why you use syon
+optimizations is that why you use syon
+yes syon is awesome do you do the
+yes syon is awesome do you do the
+simulations in puffer puffer has some
+simulations in puffer puffer has some
+first party simulations um um that I
+first party simulations um um that I
+have made and it also has uh
+have made and it also has uh
+optimizations for other environments as
+optimizations for other environments as
+well some depending on how fast your
+well some depending on how fast your
+environment is like generally the faster
+environment is like generally the faster
+your environment is the faster puffer
+your environment is the faster puffer
+can make it if that makes sense like if
+can make it if that makes sense like if
+your environment is slow then there's
+your environment is slow then there's
+like really not anything to optimize
+like really not anything to optimize
+because it's really easy to handle tiny
+because it's really easy to handle tiny
+amounts of data but as your environment
+amounts of data but as your environment
+gets faster puffer makes it even faster
+gets faster puffer makes it even faster
+so there's a compounding effect
+like it's going to be very very soon
+like it's going to be very very soon
+that the standard for reinforcement
+that the standard for reinforcement
+learning is your M has to run it a
+learning is your M has to run it a
+million steps per second and they're
+million steps per second and they're
+going to be lots of M that run at a
+going to be lots of M that run at a
+million steps per second and training is
+million steps per second and training is
+going to be at hundreds of thousands to
+going to be at hundreds of thousands to
+a million steps per second as well all
+a million steps per second as well all
+because of
+because of
+puffer and a few other Niche groups as
+puffer and a few other Niche groups as
+well that are like doing cool stuff like
+well that are like doing cool stuff like
+this group here at NYU is awesome
+oops what happened
+here Sig fault
+um this needs a bunch of API garbage
+um this needs a bunch of API garbage
+doesn't
+it what does poer do to speed the end up
+it what does poer do to speed the end up
+so much
+vectorization most
+vectorization most
+environments it it's very hard to get
+environments it it's very hard to get
+let's say your environment runs at a
+let's say your environment runs at a
+th000 steps per second right or no more
+th000 steps per second right or no more
+than that let's say it runs at like 5
+than that let's say it runs at like 5
+6,000 steps per second right and you
+6,000 steps per second right and you
+have 16 cores like the default
+have 16 cores like the default
+vectorization will run at like 10,000
+vectorization will run at like 10,000
+steps per second that's what the rest of
+steps per second that's what the rest of
+the field will use you get absolutely
+the field will use you get absolutely
+ter absolutely terrible scaling puffer
+ter absolutely terrible scaling puffer
+gives you good
+scaling if it gives you a lot more on
+scaling if it gives you a lot more on
+top of that but that's one of our killer
+top of that but that's one of our killer
+features is like really really good
+scaling not implemented error
+H oh that's
+H oh that's
+weird that's fine
+weird that's fine
+though we'll just do like this
+okay didn't know this sort of computing
+okay didn't know this sort of computing
+wasn't vectorized oh well they tried to
+wasn't vectorized oh well they tried to
+but they do it very
+but they do it very
+slowly I tried running demo. Pi with the
+slowly I tried running demo. Pi with the
+forging of in profile mode but I got an
+forging of in profile mode but I got an
+error do I have to do additional stuff
+error do I have to do additional stuff
+um I might just have a bug in it if you
+um I might just have a bug in it if you
+paste the error no I can debug it for
+paste the error no I can debug it for
+you real
+quick nice so we got uh we got this
+quick nice so we got uh we got this
+running the puffer
+wrapper and we have to
+wrapper and we have to
+do death
+do death
+render he world
+we can just run this now can't
+we yay and
+runs if the whole training Loop can be
+compiled well then it doesn't do
+compiled well then it doesn't do
+anything reu but like that's not going
+anything reu but like that's not going
+to be the case ever for every thing like
+to be the case ever for every thing like
+you have to write your entire Sim to be
+you have to write your entire Sim to be
+GPU which like okay look they have
+GPU which like okay look they have
+they've made this thing for GPU but how
+they've made this thing for GPU but how
+much work do you think this took to do
+much work do you think this took to do
+on GPU like how much less work do you
+on GPU like how much less work do you
+think this would be if I wrote it for
+think this would be if I wrote it for
+CPU right it's like a tenth of the
+CPU right it's like a tenth of the
+complexity to do stuff for just CPU um
+complexity to do stuff for just CPU um
+like if I were trying to write the MOBA
+like if I were trying to write the MOBA
+for GPU I'd be doing that for months
+for GPU I'd be doing that for months
+months and months and
+months and months and
+months and also gpus are just not good
+months and also gpus are just not good
+in general at doing arbitrary logic like
+in general at doing arbitrary logic like
+that's what CPUs are for right gpus are
+that's what CPUs are for right gpus are
+good for lots of dumb syy parallel
+good for lots of dumb syy parallel
+operations so it's way smarter in my
+operations so it's way smarter in my
+opinion to just bet on Sims having to be
+opinion to just bet on Sims having to be
+uh most Sims being on CPU and making
+uh most Sims being on CPU and making
+that really fast like the reason that
+that really fast like the reason that
+people came up with these fancy GPU Sim
+people came up with these fancy GPU Sim
+Frameworks in the first place is cu how
+Frameworks in the first place is cu how
+stupidly slow it was on CPU not because
+stupidly slow it was on CPU not because
+CPUs are slow but because the code stack
+CPUs are slow but because the code stack
+was bad
+error I get
+is let me fix that for you real quick
+is let me fix that for you real quick
+Noah
+B
+think people moved M to GPU because GPU
+think people moved M to GPU because GPU
+is like having a lot of
+is like having a lot of
+CPUs it's not though do you know the
+CPUs it's not though do you know the
+restrictions behind GP like have you
+restrictions behind GP like have you
+looked at like the Jack scan operations
+looked at like the Jack scan operations
+for instance it executes all possible
+for instance it executes all possible
+branches of your code at every step it's
+branches of your code at every step it's
+really hard to write arbitrary code on
+really hard to write arbitrary code on
+that
+like
+Vault try
+this it probably just didn't compile the
+this it probably just didn't compile the
+snake and
+I think this
+runs there there you go Noah I just uh
+runs there there you go Noah I just uh
+I'd forgotten something in the port so
+I'd forgotten something in the port so
+the way that that that function works
+the way that that that function works
+like you have to set it for like a short
+like you have to set it for like a short
+train run and then you'll get stats on
+train run and then you'll get stats on
+that train run I would generally suggest
+that train run I would generally suggest
+that you probably want to profile the
+that you probably want to profile the
+envit self not the entire train Loop and
+envit self not the entire train Loop and
+there's like their little profiling
+there's like their little profiling
+Snippets in most of the M's that you can
+Snippets in most of the M's that you can
+use for
+use for
+that Jack me vmap with conditionals also
+that Jack me vmap with conditionals also
+yeah that's what I mean
+yeah that's what I mean
+JBL it's really
+janky most of the time it's like why
+janky most of the time it's like why
+would I spend so much effort getting
+would I spend so much effort getting
+something to run a million steps per
+something to run a million steps per
+second on a GPU which is the big
+second on a GPU which is the big
+expensive piece right when I can make it
+expensive piece right when I can make it
+run easily a million steps per second on
+run easily a million steps per second on
+one CPU
+one CPU
+core right it's like oh no the
+core right it's like oh no the
+infrastructure is so hard in order to
+infrastructure is so hard in order to
+get that data onto the GPU efficiently
+get that data onto the GPU efficiently
+yeah but puffer doesn't and our whole
+yeah but puffer doesn't and our whole
+stack for doing that is a thousand
+stack for doing that is a thousand
+lines just nobody bothered to do this
+lines just nobody bothered to do this
+right
+right
+puffer does it now it
+works okay so this works
+um now we have to make this puffer
+um now we have to make this puffer
+environment
+environment
+compatible so what we're going to do is
+how do you get one mil steps per second
+how do you get one mil steps per second
+on a single CPU core very easily just by
+on a single CPU core very easily just by
+not writing an optimized garbage python
+not writing an optimized garbage python
+like any of the you can look at the
+like any of the you can look at the
+source code of any of my environments
+source code of any of my environments
+they're very simple they're single file
+they're very simple they're single file
+cython they're just single file of
+cython they're just single file of
+cython uh it runs pure C but it's a lot
+cython uh it runs pure C but it's a lot
+easier than writing pure
+C I'm pretty confident at this point
+C I'm pretty confident at this point
+that I can Implement practically any
+that I can Implement practically any
+environment out there like any type of
+environment out there like any type of
+game EnV I want I can make like a
+game EnV I want I can make like a
+reasonable version of at several hundred
+reasonable version of at several hundred
+thousand steps per second guaranteed a
+thousand steps per second guaranteed a
+million steps per second probably and in
+million steps per second probably and in
+many cases many millions of steps per
+many cases many millions of steps per
+second per
+core like I don't know I was playing
+core like I don't know I was playing
+slay the Spire the other day I could
+slay the Spire the other day I could
+make that game run a million steps per
+make that game run a million steps per
+second if I just implemented it like
+second if I just implemented it like
+this right do it for whatever I want
+python is
+flow what about
+flow what about
+robotics yeah if you need a physics Sim
+robotics yeah if you need a physics Sim
+that's the that is the actual use case
+that's the that is the actual use case
+for gpus is if you need an expensive
+for gpus is if you need an expensive
+physics Sim pretty much everything else
+physics Sim pretty much everything else
+though
+though
+nah so that is with no paralyzation yeah
+nah so that is with no paralyzation yeah
+you can get a million steps per second
+you can get a million steps per second
+without any
+without any
+paraliz it depends what you mean by
+paraliz it depends what you mean by
+parallelization if you mean multicore
+parallelization if you mean multicore
+yeah without multicore just one thread
+yeah without multicore just one thread
+you can do that I do end up running
+you can do that I do end up running
+multiple copies of the environment per
+multiple copies of the environment per
+core um for convenience but I can still
+core um for convenience but I can still
+get it to be pretty darn close to that
+get it to be pretty darn close to that
+even without it in fact you know if you
+even without it in fact you know if you
+just get rid of the the loop overhead
+just get rid of the the loop overhead
+from python you still get a million per
+from python you still get a million per
+second nothing fancy really there's
+second nothing fancy really there's
+nothing to it and go read like The Snake
+nothing to it and go read like The Snake
+code or the MOBA code there's nothing
+code or the MOBA code there's nothing
+crazy in
+there
+false Okay so
+need to get these OBS into a reasonable
+need to get these OBS into a reasonable
+format
+right class values must be non-
+right class values must be non-
+negative what did I
+do
+huh oh
+are you not allowed to put a break point
+are you not allowed to put a break point
+there you should be
+there you should be
+right well there we go it's fine
+OBS
+OBS
+NP
+NP
+reshape num
+worlds
+worlds
+times objects
+let's
+work
+work
+nice so is there there is significant
+nice so is there there is significant
+performance increase with puffer just
+performance increase with puffer just
+running one copy of an environment
+running one copy of an environment
+okay you're you're conflating two things
+okay you're you're conflating two things
+here right there are puffer's first
+here right there are puffer's first
+party environments which are the
+party environments which are the
+environments that I've written to be
+environments that I've written to be
+fast right those environments are going
+fast right those environments are going
+to be fast uh on their own but then if
+to be fast uh on their own but then if
+you try to run those vectorized with
+you try to run those vectorized with
+other vectorization like Jim's
+other vectorization like Jim's
+vectorization that's going to be slow
+vectorization that's going to be slow
+cuz their vectorization implementation
+cuz their vectorization implementation
+is bad so in order to have many copies
+is bad so in order to have many copies
+of the environment on many cores be even
+of the environment on many cores be even
+faster you need puffer Libs
+faster you need puffer Libs
+vectorization so in a way puffer Libs ve
+vectorization so in a way puffer Libs ve
+enables puffer Libs environments now if
+enables puffer Libs environments now if
+you just hand me any old arbitrary
+you just hand me any old arbitrary
+environment that's slow to begin with
+environment that's slow to begin with
+garbage and garbage out I can't make
+garbage and garbage out I can't make
+something that slow any faster but if
+something that slow any faster but if
+let's say you have a reasonably fast
+let's say you have a reasonably fast
+environment that's being bottlenecked by
+environment that's being bottlenecked by
+Jim's really stupidly slow vectorization
+Jim's really stupidly slow vectorization
+then yes puffer's vectorization will
+then yes puffer's vectorization will
+make it
+faster the limiting factor is python
+faster the limiting factor is python
+itself well yeah python a slow language
+itself well yeah python a slow language
+right you can't just write a you can't
+right you can't just write a you can't
+write a simulation in pure Python and
+write a simulation in pure Python and
+expect it to be fast like many of the um
+expect it to be fast like many of the um
+many of the simulations that researchers
+many of the simulations that researchers
+use are just garbage unoptimized Python
+use are just garbage unoptimized Python
+and it runs it like a few hundred steps
+and it runs it like a few hundred steps
+per second like I can't do anything with
+per second like I can't do anything with
+that right the easiest way for me to fix
+that right the easiest way for me to fix
+something like that is to throw the
+something like that is to throw the
+environment away and rewrite it in scyon
+environment away and rewrite it in scyon
+and then it'll be a million steps per
+and then it'll be a million steps per
+second this one here is an exception
+second this one here is an exception
+which is why I'm using it right this is
+which is why I'm using it right this is
+a really fast one on
+cool so this still
+works
+works
+mpai mpai
+what are these duns are these torch
+tensors it should not be done on step
+tensors it should not be done on step
+one that's really weird
+nice okay so this is actually getting
+nice okay so this is actually getting
+pretty close to being usable already
+pretty close to being usable already
+believe it or
+believe it or
+not I'm sure there's a little bit of API
+not I'm sure there's a little bit of API
+Shenanigans we've
+Shenanigans we've
+forgotten um but this now
+forgotten um but this now
+returns we need numb agents right
+returns we need numb agents right
+yeah self. Nom
+agents I want this the other way
+agents I want this the other way
+around all
+around all
+right and then we'll do like
+right and then we'll do like
+this
+agents I'm surprised that there's no
+agents I'm surprised that there's no
+infos returned by this
+thing random action is
+actually torch.
+tensor this actually uh is it a discret
+tensor this actually uh is it a discret
+action space am I reading this
+right guess so kind of weird I'll ask
+right guess so kind of weird I'll ask
+him if that's intentional but
+him if that's intentional but
+so here is our uh here's our
+so here is our uh here's our
+code don't really need this display gift
+code don't really need this display gift
+function I'll just put this down here
+function I'll just put this down here
+for
+for
+now where do I put
+now where do I put
+this n
+this n
+whatever
+whatever
+um let's grab all this
+um let's grab all this
+code and
+let's there
+let's there
+GPU
+GPU
+Drive um what are we going to copy for
+this yeah
+GPU
+GPU
+Drive okay so this is just code that we
+Drive okay so this is just code that we
+copied from
+before we can get rid of all this
+garbage this is just from uh these are
+garbage this is just from uh these are
+all the first party M code I just copied
+all the first party M code I just copied
+this as a template
+okay here is our environment
+wrapper so we've got en
+Creator and this can
+Creator and this can
+return I think this just can return the
+return I think this just can return the
+fun this can just return
+fun this can just return
+puffer CPU Drive right just be a
+class we put puffer
+here I don't know if we need this worked
+here I don't know if we need this worked
+or anything I hope we don't need this
+or anything I hope we don't need this
+anymore um we will put these constants
+anymore um we will put these constants
+down here whichever ones we're actually
+down here whichever ones we're actually
+going to use at
+least not
+least not
+used the name
+used the name
+not
+not
+used unique yeah this is used and these
+used unique yeah this is used and these
+other ones are used
+right we might need episode
+right we might need episode
+length we do not need
+length we do not need
+this we do not need
+this we do not need
+this
+this
+TCH
+TCH
+um we do need torch which is a little
+um we do need torch which is a little
+bit obnoxious
+and we need puffer of
+and we need puffer of
+course everything is better with
+puffer
+okay so we have M crator puffer CPU
+okay so we have M crator puffer CPU
+drive and now we have to add a binding
+drive and now we have to add a binding
+to puffer
+lib what is wrong why can't I type
+lib what is wrong why can't I type
+we go
+um copy
+um copy
+config uh
+config uh
+ocean what we say we copy like the snake
+config GPU drive. any
+[Music]
+okay we have some stuff in here
+okay we have some stuff in here
+right GPU
+right GPU
+Drive GPU
+Drive GPU
+drive now we have a config for
+drive now we have a config for
+it uh is that it
+data does not exist or is empty so I
+data does not exist or is empty so I
+assume that we need this annoying um
+assume that we need this annoying um
+this
+this
+changer that's a little bit
+changer that's a little bit
+silly
+oops it's a little silly isn't it
+no
+no
+dim actions is not
+none
+ah it is
+ah it is
+in 73
+in 73
+right this has to be a torch tensor is
+right this has to be a torch tensor is
+slightly
+annoying doesn't need to be put to GPU
+annoying doesn't need to be put to GPU
+puffer is a CPU library for
+now no attribute dim
+still oh action
+I've getting I've gotten this error
+before invalid action
+shape
+shape
+shape what did we say the uh
+shape what did we say the uh
+hold
+on what's the shape of the reaction
+on what's the shape of the reaction
+here num worlds Max num objects okay so
+here num worlds Max num objects okay so
+we do actually have to reshape
+we do actually have to reshape
+it slightly annoying no big
+deal so that is an in the the thing
+deal so that is an in the the thing
+itself come
+on GPU drive
+on GPU drive
+error LOL it
+error LOL it
+works
+works
+haha apparently this thing is
+haha apparently this thing is
+running cool didn't expect it to run
+running cool didn't expect it to run
+that quickly
+um cool I guess
+let's go look at their networks and like
+let's go look at their networks and like
+add a reasonable Network and then we'll
+add a reasonable Network and then we'll
+do optimizations and make this thing
+do optimizations and make this thing
+real
+fast 60% M time is
+concerning but we'll
+concerning but we'll
+see re
+that's so funny that Eugene actually
+that's so funny that Eugene actually
+like manages the bug issues and like
+like manages the bug issues and like
+assigns grad students to stuff that's so
+funny that's so funny
+where's the
+network policy
+network policy
+actor agents policy
+actor agents policy
+actor do you have documentation of all
+actor do you have documentation of all
+the outof thebox
+the outof thebox
+optimizations if I want to write my own
+optimizations if I want to write my own
+M inside python um the way to think
+M inside python um the way to think
+about it is that just puffer's
+about it is that just puffer's
+vectorization is really really fast so
+vectorization is really really fast so
+it's not going to cap your speed of your
+it's not going to cap your speed of your
+environments to be way lower than it
+environments to be way lower than it
+should be if you want a like a
+should be if you want a like a
+comparison or you want convincing yes
+comparison or you want convincing yes
+there's a white
+paper there's like a good page here of
+paper there's like a good page here of
+optimizations and there's also uh there
+optimizations and there's also uh there
+are some perf tests on on stuff the perf
+are some perf tests on on stuff the perf
+actually has gotten way better since
+actually has gotten way better since
+then because like I literally the
+then because like I literally the
+environments weren't even fast enough
+environments weren't even fast enough
+for me to show how good puffer is if
+for me to show how good puffer is if
+that makes sense because when you get
+that makes sense because when you get
+really fast environments that's when you
+really fast environments that's when you
+really start to see existing
+really start to see existing
+vectorization implementations just
+chug I guess I we kind of did right we
+chug I guess I we kind of did right we
+had like 4 million versus
+had like 4 million versus
+100,000 that's like a good
+100,000 that's like a good
+example yeah they just chug
+okay we're going to look for their
+okay we're going to look for their
+agents in
+here please don't be
+gigantic
+gigantic
+wait
+wait
+huh where's your network
+where are your
+policies give me a policy
+demo oh there was a DOT High I'm just
+demo oh there was a DOT High I'm just
+dumb oh no they didn't have it up there
+dumb oh no they didn't have it up there
+okay um
+okay um
+where but
+where but
+like policy
+actor I'm so confused
+actor I'm so confused
+saved model trained policy
+saved model trained policy
+path model learned
+path model learned
+sp3 where's your
+implementation oh it's freaking
+implementation oh it's freaking
+sb3 oh that's hilarious wait if this is
+sb3 oh that's hilarious wait if this is
+sb3 then I'm going to be way faster are
+sb3 then I'm going to be way faster are
+you planning on implementing any GPU
+you planning on implementing any GPU
+acceleration the thing is you don't need
+acceleration the thing is you don't need
+any of this if you have GPU acceleration
+any of this if you have GPU acceleration
+like you don't need parallelization and
+like you don't need parallelization and
+stuff cuz all you're in for it is fast
+stuff cuz all you're in for it is fast
+and it's easy right like the thing is
+and it's easy right like the thing is
+that you just you put all the difficulty
+that you just you put all the difficulty
+into writing the Sim um it depends how
+into writing the Sim um it depends how
+complicated your physics are though
+complicated your physics are though
+right like we have stuff with continuous
+right like we have stuff with continuous
+control now uh if you have really heavy
+control now uh if you have really heavy
+physics then yeah you're probably going
+physics then yeah you're probably going
+to want to keep it there but if you're
+to want to keep it there but if you're
+just like if you have some like light
+just like if you have some like light
+physics stuff and it's not super fine
+physics stuff and it's not super fine
+grained like it doesn't run jillion
+grained like it doesn't run jillion
+times per second then uh you can
+times per second then uh you can
+probably just do a CPU and and have it
+probably just do a CPU and and have it
+be faster with puffer you got to
+be faster with puffer you got to
+remember that your network is supposed
+remember that your network is supposed
+to train on the GPU so anytime you're
+to train on the GPU so anytime you're
+running the environment on the GPU is
+running the environment on the GPU is
+time that you're stealing from your
+time that you're stealing from your
+policy right so if your environment runs
+policy right so if your environment runs
+a million steps per second well you're
+a million steps per second well you're
+not going to train more than like
+not going to train more than like
+500,000 steps per second right cuz your
+500,000 steps per second right cuz your
+Network's going to take a m your
+Network's going to take a m your
+Network's going to take half the time
+Network's going to take half the time
+and your environment's going to take
+and your environment's going to take
+half the
+time and buffer is just going to keep
+time and buffer is just going to keep
+getting faster as well we have um we
+getting faster as well we have um we
+have like optimizations more and more
+have like optimizations more and more
+optimizations coming for CPU stuff so
+optimizations coming for CPU stuff so
+like ultimately it's just going to be I
+like ultimately it's just going to be I
+I think that this just
+wins doesn't mean that environments like
+wins doesn't mean that environments like
+this aren't useful though because I can
+this aren't useful though because I can
+just run this in CPU mode and it's still
+just run this in CPU mode and it's still
+going to be fast um and you know if you
+going to be fast um and you know if you
+want to not deal with puffer's whole
+want to not deal with puffer's whole
+stack of stuff and you want a really
+stack of stuff and you want a really
+really simple thing then yeah you know
+really simple thing then yeah you know
+you can just run it in GPU
+you can just run it in GPU
+mode but I think it's going to be less
+mode but I think it's going to be less
+and less necessary to have to suffer so
+and less necessary to have to suffer so
+much in order to get this level of speed
+much in order to get this level of speed
+that said this specific project is
+that said this specific project is
+really really good work I'm excited to
+really really good work I'm excited to
+make it even faster for them
+see thanks bro yeah no
+see thanks bro yeah no
+worries we're having good times with
+worries we're having good times with
+this if you haven't already go ahead and
+this if you haven't already go ahead and
+give puffer a star if you find any of
+give puffer a star if you find any of
+this useful helps me out a whole
+this useful helps me out a whole
+ton we're at 758 right now huge amounts
+ton we're at 758 right now huge amounts
+of progress
+where is their
+where is their
+thingy and has Eugene replied to
+thingy and has Eugene replied to
+me oh dapne
+me oh dapne
+did Max cont agents
+did Max cont agents
+determines maximum you want to
+determines maximum you want to
+control since number of different
+control since number of different
+vehicles can be controlled 10 may result
+vehicles can be controlled 10 may result
+in you controlling five agents in one
+in you controlling five agents in one
+and nine and another up to at most
+and nine and another up to at most
+ooh that might be a tough
+ooh that might be a tough
+one that might be a tough
+one thank
+you if you're not doing proper masking
+you if you're not doing proper masking
+that's going to create problems s
+that's going to create problems s
+luckily puffer does have a masking
+luckily puffer does have a masking
+feature but we might have to do some
+feature but we might have to do some
+modification of
+modification of
+stuff in order to make this go Zoom
+is in
+baselines probably in here
+right s
+right s
+sp3 yeah this is painful having to do
+sp3 yeah this is painful having to do
+this with SP
+sp3 where is
+sp3 where is
+their MLP class
+their MLP class
+policy
+policy
+is exp
+is exp
+config where's exp
+config where's exp
+config ipo.
+config late Fusion net and late Fusion
+config late Fusion net and late Fusion
+policy networks perm
+policy networks perm
+EQ all
+EQ all
+right down the rabbit hole looking for
+right down the rabbit hole looking for
+this
+aha perm EQ late
+aha perm EQ late
+Fusion what is a late Fusion
+Fusion what is a late Fusion
+architecture am I just
+architecture am I just
+dumb have I just am I just dumb for not
+dumb have I just am I just dumb for not
+having heard of
+this late Fusion Network
+what is this something really obvious
+what is this something really obvious
+and like really common that I've just
+and like really common that I've just
+never heard
+of fusion of different modalities no
+of fusion of different modalities no
+that's something different all right
+that's something different all right
+let's read the
+code build Network
+o
+o
+yikes they got a lot of
+stuff doesn't look they got like they
+stuff doesn't look they got like they
+have anything fancy outside of that
+have anything fancy outside of that
+though
+so they unpack this
+right bat size num
+objects that's hard
+I'm afraid this network is just going to
+I'm afraid this network is just going to
+be
+be
+slow the main problem
+oh
+oh
+wait up to at most 10
+h
+puffer fish
+puffer fish
+go puffer fish
+go puffer fish
+go absolutely puffer fish
+go buffer go
+Moon build out network is they do linear
+Moon build out network is they do linear
+layer Norm
+layer Norm
+Dropout linear layer
+Norm I do not believe that that is a
+Norm I do not believe that that is a
+good
+good
+policy I have to read their paper for
+policy I have to read their paper for
+ablations but I do not believe that is a
+ablations but I do not believe that is a
+good
+policy long time everything yep doing
+policy long time everything yep doing
+well lots of progress being made here
+well lots of progress being made here
+we're currently adding bindings
+we're currently adding bindings
+for this where is it
+for this where is it
+where's this
+where's this
+thing this awesome GPU driving Sim
+thing this awesome GPU driving Sim
+adding this to puffer lib and we're
+adding this to puffer lib and we're
+going to see if we can make it really
+fast I'm trying to figure out how much
+fast I'm trying to figure out how much
+of this I actually
+want
+want
+G I think that um
+ego State Road objects Road graph
+ego State Road objects Road graph
+right I think this is like this the
+right I think this is like this the
+stuff that I
+want let's start copying this stuff in
+want let's start copying this stuff in
+though to the uh the model not going to
+though to the uh the model not going to
+get anywhere
+get anywhere
+by m
+around do we use the snake M to
+around do we use the snake M to
+start we'll use
+start we'll use
+this
+policy your work and personal of firing
+policy your work and personal of firing
+hey I'm glad you find my stuff
+hey I'm glad you find my stuff
+interesting it is all really
+interesting it is all really
+available right here
+you're
+good but Day One support for a Sim like
+good but Day One support for a Sim like
+this is going to be real cool to
+this is going to be real cool to
+have they're going to be real cool to
+have ego State
+have ego State
+them I think what we really just care
+them I think what we really just care
+about here and it's so funny to see them
+about here and it's so funny to see them
+do this because this is what you do with
+do this because this is what you do with
+the puffer Advanced API is you basically
+the puffer Advanced API is you basically
+do this exact thing and they've done it
+do this exact thing and they've done it
+for me but um I can tell that this
+for me but um I can tell that this
+involved a lot of pain and suffering and
+involved a lot of pain and suffering and
+uh there is a much easier API in Puffer
+uh there is a much easier API in Puffer
+that prevents pain and suffering that
+that prevents pain and suffering that
+would let you do the same thing so we'll
+would let you do the same thing so we'll
+use their Advanced API and make it
+use their Advanced API and make it
+really fast for them since they've gone
+really fast for them since they've gone
+to the effort but uh you know much much
+to the effort but uh you know much much
+pain and suffering could have been
+saved definitely much pain and suffering
+saved definitely much pain and suffering
+could have been saved sa
+D can we save me some pain and suffering
+D can we save me some pain and suffering
+with this freaking terrible copy
+with this freaking terrible copy
+paste
+jeez I don't know why it does
+this the killer feature of vs code is
+this the killer feature of vs code is
+not like any anything that neovim
+not like any anything that neovim
+doesn't have it's being able to actually
+doesn't have it's being able to actually
+copy and paste
+stuff imagine being able to do
+that just going to do this for
+now unflatten Road objects
+[Music]
+so uh we have all these like config
+so uh we have all these like config
+thingies
+where's their
+where's their
+config I think it's baselines
+config yeah this thing right here
+config yeah this thing right here
+so
+so
+okay num worlds is going to be
+okay num worlds is going to be
+50 we defin definitely want this
+file it's pretty cool that they have
+file it's pretty cool that they have
+their lab is called emerge
+their lab is called emerge
+lab that's
+fun oh they even have hyper parameters
+fun oh they even have hyper parameters
+for us that's very nice of
+them I really hope we just solve this
+them I really hope we just solve this
+environment
+environment
+today that'd be just so funny ah they
+today that'd be just so funny ah they
+actually have a very tiny little
+actually have a very tiny little
+Network tiny tiny little Network look at
+Network tiny tiny little Network look at
+this tiny tiny little
+Network ego State partner state road map
+dim I don't see where this thing is in
+dim I don't see where this thing is in
+the config
+the config
+is it's supposed to be
+here maybe if I
+look
+ah if ego
+State they have a lot of stuff in here
+State they have a lot of stuff in here
+don't
+they oh that's so sad that they had to
+they oh that's so sad that they had to
+write this in pi
+write this in pi
+game that must have been very
+painful it's like so funny having just
+painful it's like so funny having just
+been in this space for long enough that
+been in this space for long enough that
+like I know which packages just suck to
+like I know which packages just suck to
+work with and like I can just look at
+work with and like I can just look at
+the code and just say oh they had to do
+the code and just say oh they had to do
+this with that man that must have been
+this with that man that must have been
+you know several weeks of somebody's
+you know several weeks of somebody's
+life
+o the goal is to get to a place where
+o the goal is to get to a place where
+those packages no longer exist and we
+those packages no longer exist and we
+only have good packages so we can write
+only have good packages so we can write
+stuff like this without it being
+stuff like this without it being
+painful uh ego State
+dim where's the config
+[Music]
+and
+baselines no it's where was it was in
+baselines no it's where was it was in
+networks build your own packages from
+networks build your own packages from
+scratch I do build my own packages from
+scratch I do build my own packages from
+scratch all the time
+I didn't like the Atari renderer
+I didn't like the Atari renderer
+yesterday so I wrote one with
+RB okay so ego input
+RB okay so ego input
+dim anywhere we see ego input Dem this
+dim anywhere we see ego input Dem this
+is ego State
+Dem and then this is row input
+Dem and then this is row input
+Dem so this
+Dem so this
+is partner
+demm there road map dim
+row input dim is partner
+dim this is Road mapap
+dim doesn't need to be configurable does
+it road map oh this is road map agent
+it road map oh this is road map agent
+feet dim
+personal pet peeve
+personal pet peeve
+but I do not like types in
+but I do not like types in
+Python I do not like typed
+code which would also mean I do not like
+typescript AR Max is road map agent
+no typing and function signatures is
+no typing and function signatures is
+crazy man no no no let me tell you
+crazy man no no no let me tell you
+what's crazy man what's crazy man is
+what's crazy man what's crazy man is
+having type
+having type
+signatures uh typing in function
+signatures uh typing in function
+signatures that is not even enforced and
+signatures that is not even enforced and
+doesn't make your code any faster that's
+doesn't make your code any faster that's
+what's
+what's
+crazy when it's literally just there
+crazy when it's literally just there
+telling you that this is the type and
+telling you that this is the type and
+that's not even necessarily the type
+that's not even necessarily the type
+that's what's
+crazy I like my types when they actually
+crazy I like my types when they actually
+make the code fast and actually do
+something not when they sit around and
+something not when they sit around and
+pretend to be
+useful why do you need typescript I
+useful why do you need typescript I
+already typed my script I type them with
+already typed my script I type them with
+a
+a
+keyboard it's for the readability n no
+keyboard it's for the readability n no
+no there's you know what's readable
+no there's you know what's readable
+readable is how what's readable is when
+readable is how what's readable is when
+there's less code because it's not
+there's less code because it's not
+littered with types all right I don't
+littered with types all right I don't
+need to know that this is of type int
+need to know that this is of type int
+okay I see it says 32 that's the default
+okay I see it says 32 that's the default
+I don't need to know that this EnV is of
+I don't need to know that this EnV is of
+type like environment it's called EnV
+type like environment it's called EnV
+we're
+we're
+good I will gladly use types in syon
+good I will gladly use types in syon
+when it gives me a million frames per
+when it gives me a million frames per
+second
+second
+not in Python where it does nothing
+like is this useful I know this is a
+like is this useful I know this is a
+torch tensor it's inside of a freaking
+torch tensor it's inside of a freaking
+torch policy right I know it's going to
+torch policy right I know it's going to
+return a tensor because it's returning a
+return a tensor because it's returning a
+thing and it's a torch
+policy we're good
+do does this thing need a CNN anywhere I
+do does this thing need a CNN anywhere I
+don't think so
+right we just need hidden size 128
+right we just need hidden size 128
+maybe this is something we'll never see
+maybe this is something we'll never see
+ey on you can look at my scon code like
+ey on you can look at my scon code like
+I use I it's like yeah it's it's typed
+I use I it's like yeah it's it's typed
+it's
+fine honestly like the thing is if I
+fine honestly like the thing is if I
+have to type my python code like it's
+have to type my python code like it's
+not even worth using python for me
+not even worth using python for me
+anymore it's that bad like if I'm going
+anymore it's that bad like if I'm going
+to be typing my code anyways I want them
+to be typing my code anyways I want them
+enforced and I want to have speed out of
+enforced and I want to have speed out of
+it like I I'll pick literally any other
+it like I I'll pick literally any other
+language rather than type my python code
+I'd rather just write the whole thing in
+I'd rather just write the whole thing in
+scyon at that
+point I don't know go pick up some go or
+something that is too crazy though
+I will sometimes type the function
+I will sometimes type the function
+signatures for like uh documentation of
+signatures for like uh documentation of
+exposed stuff like if I have like a very
+exposed stuff like if I have like a very
+small surface of exposed code then
+small surface of exposed code then
+sometimes I'll do it so that the autod
+sometimes I'll do it so that the autod
+do picks it up as well but uh anything
+do picks it up as well but uh anything
+internal is not getting no it's not
+internal is not getting no it's not
+getting
+typed is not happening
+typed is not happening
+you can't make
+me now we have the non-deterministic
+me now we have the non-deterministic
+bug love me some non-deterministic
+bugs very good
+okay okay um well that's mildly
+okay okay um well that's mildly
+irritating
+structure
+data Max 1D
+pool Max pool across
+features I'm confused
+features I'm confused
+used I don't think you need this I think
+used I don't think you need this I think
+this is literally just a
+Max Max across
+Max Max across
+objects well this isn't bad at
+objects well this isn't bad at
+least yeah this is not bad at
+all
+so I think I just up with a little
+so I think I just up with a little
+Network for this
+right ego and
+bed pop for a
+bed pop for a
+lib
+lib
+net oops
+hidden
+hidden
+hidden be 64
+okay this is what we wanted so we just
+okay this is what we wanted so we just
+have a linear REO
+have a linear REO
+linear and then what we do is we do a
+linear and then what we do is we do a
+Max
+Max I'd like to figure out how to do
+Max I'd like to figure out how to do
+that well but we'll start with
+that well but we'll start with
+this and
+then self.
+then self.
+rge is going to
+rge is going to
+be from 3 * the input size to the hidden
+be from 3 * the input size to the hidden
+size figure me
+size figure me
+that okay and then we
+that okay and then we
+do
+embed we're going to make this network
+embed we're going to make this network
+so
+so
+fast it's going to have memory it's
+fast it's going to have memory it's
+going to be awesome their network does
+going to be awesome their network does
+not have any memory by the way isn't
+not have any memory by the way isn't
+that funny the driving cars that have no
+that funny the driving cars that have no
+memory
+values
+values
+indices okay
+okay so we
+do no let's not do that let's just do it
+do no let's not do that let's just do it
+this
+way Max m equals 1
+uh app
+embed hold
+on this one doesn't need
+on this one doesn't need
+Max I don't think
+Max I don't think
+right yeah no this one doesn't need it
+that looks pretty good to
+that looks pretty good to
+me that looks pretty
+good what do we think we think this is
+good what do we think we think this is
+going to
+going to
+train once we uh figure that's an
+train once we uh figure that's an
+environment
+bug come
+bug come
+on there it
+on there it
+goes oh
+goes oh
+yeah we
+yeah we
+train we' be
+train we' be
+training solid
+uh
+so do we have an lstm
+here RNN names got to be recurrent
+here RNN names got to be recurrent
+Let's uh let's set some hyper parameters
+yeah
+yeah
+so policy name is policy RNN name is
+recurrent and we can use their
+recurrent and we can use their
+hypers they gave us some nice
+hypers wa
+99 G Lambda 0.9
+99 G Lambda 0.9
+5 clip
+5 clip
+coefficient 2 value function coefficient
+coefficient 2 value function coefficient
+0.5 uh VF clip coefficient I think is
+0.5 uh VF clip coefficient I think is
+going to be the same
+going to be the same
+0.2 grad
+0.2 grad
+Norm 0.5 will be a good default I don't
+Norm 0.5 will be a good default I don't
+see
+it entropy o1 learning rate 3 eus 4
+wait three e this is 4 e minus 3 did I
+wait three e this is 4 e minus 3 did I
+do it
+do it
+backwards what was it 3 e minus 4 yeah
+backwards what was it 3 e minus 4 yeah
+this num epox is
+this num epox is
+five are you guys sure about that that's
+five are you guys sure about that that's
+uh that's going to slow you down a
+uh that's going to slow you down a
+lot that's a bad sign right there I'm
+lot that's a bad sign right there I'm
+leave it at one for
+now any other hypers
+num
+num
+worlds stuff like
+worlds stuff like
+that
+that
+mhm so far so good
+mini batch
+mini batch
+size Let's uh do some
+size Let's uh do some
+optimizing
+384 okay can I figure out what the heck
+384 okay can I figure out what the heck
+is wrong with this
+I didn't change any of this stuff did I
+okay
+35,000 53% on the
+35,000 53% on the
+N so we didn't even do multicore yet
+what is it that they say they
+do 128 by
+10 I probably want 4096 per core right
+10 I probably want 4096 per core right
+so let me
+think that's 32m
+think that's 32m
+right seems like a
+right seems like a
+lot we'll try it for
+now this is where we're going to have to
+now this is where we're going to have to
+figure out that bug if we want to
+figure out that bug if we want to
+continue because it's so unlikely that
+continue because it's so unlikely that
+we're going to get a good one
+oh
+really that's a lot of
+really that's a lot of
+data it's a lot of data
+I mean we'll see whether this ends up
+I mean we'll see whether this ends up
+being reasonable or not but that's a lot
+being reasonable or not but that's a lot
+of
+data I bet this Sim is not going to end
+data I bet this Sim is not going to end
+up being crazy fast on
+up being crazy fast on
+CPU I'm going to think if I'm going to
+CPU I'm going to think if I'm going to
+do like
+do like
+24 24
+environments I probably want 1024
+instead let's let's do 1024 environments
+instead let's let's do 1024 environments
+instead so we'll divide this by four
+instead so we'll divide this by four
+we'll do eight
+we'll do eight
+worlds this gives
+and this
+and this
+is let's do like
+is let's do like
+eight num workers is
+eight num workers is
+eight do I have N8 core
+processor yeah I
+do I'm bad size
+it's m b size the pram
+it's m b size the pram
+name okay so what I'm doing now is I'm
+name okay so what I'm doing now is I'm
+setting Hardware optimal
+parameters okay that's good it's about
+parameters okay that's good it's about
+the same as what it was before
+and now we do
+this uhoh that's taking a
+while stuck
+something's
+wrong well that's definitely weird
+right okay so this is this bug that we
+right okay so this is this bug that we
+got to fix
+got to fix
+right one hun in code
+can I figure out what this
+is also let's see if I have any other
+is also let's see if I have any other
+replies from uh the creators of this
+I might hop off the stream for a few
+I might hop off the stream for a few
+minutes here in order
+minutes here in order
+to do
+this
+okay I'm going to hop off the stream for
+okay I'm going to hop off the stream for
+a quick second to do a call I'll be back
+a quick second to do a call I'll be back
+in a
+in a
+few oh
+few oh
+unless she is watching the live stream
+unless she is watching the live stream
+I'm one of the
+devs I'm going to close the stream I'll
+devs I'm going to close the stream I'll
+be back in a few
+
+Kind: captions
+Language: en
+okay we are
+alive time to get to
+alive time to get to
+work have a late start
+today streamed pretty late last night
+today streamed pretty late last night
+and then just crashed but we're good now
+and then just crashed but we're good now
+and uh you can't take a morning off it
+and uh you can't take a morning off it
+seems
+seems
+because the field will do
+stuff we've got this awesome SIM from
+stuff we've got this awesome SIM from
+from Eugene's lab to look
+from Eugene's lab to look
+at GPU Drive GPU accelerated
+at GPU Drive GPU accelerated
+2.5d multi agent driving Sim over a
+2.5d multi agent driving Sim over a
+million
+million
+FPS this looks very nice so I think what
+FPS this looks very nice so I think what
+we're going to try to do today is we're
+we're going to try to do today is we're
+going to see if we can make this
+going to see if we can make this
+thing oh there's the stream we're going
+thing oh there's the stream we're going
+to see if we can make this thing work
+to see if we can make this thing work
+with puffer
+Leb let's get started
+Leb let's get started
+don't need
+this and I will also say that overnight
+this and I will also say that overnight
+we had some nice
+we had some nice
+progress just before you get started on
+progress just before you get started on
+GPU drive here we did have some very
+GPU drive here we did have some very
+nice progress overnight uh with some of
+nice progress overnight uh with some of
+these training runs you can see cubert
+these training runs you can see cubert
+takes a little longer for cubert to get
+takes a little longer for cubert to get
+started it looks like but uh no we we do
+started it looks like but uh no we we do
+have some decent runs here this is a the
+have some decent runs here this is a the
+good one up
+good one up
+here and uh we have I think beam rider
+here and uh we have I think beam rider
+was really good
+was really good
+and beam Rider is really
+and beam Rider is really
+good and I just I haven't even seen this
+good and I just I haven't even seen this
+one yet this one is halfway done on
+one yet this one is halfway done on
+Space Invaders I
+Space Invaders I
+think yeah halfway done on Space
+Invaders look at
+that you can see the
+that you can see the
+trend very
+trend very
+nice okay let's do um
+nice okay let's do um
+oops let's do this
+properly where's Eugene's
+properly where's Eugene's
+thing where's a
+GitHub here it
+GitHub here it
+is GPU
+is GPU
+Drive 3 hours ago that means we're three
+Drive 3 hours ago that means we're three
+hours
+hours
+late ippo perfect that's what we
+late ippo perfect that's what we
+have and O they don't have a package
+have and O they don't have a package
+guys you really need to have a a pip
+guys you really need to have a a pip
+package for this if you
+can no pip
+package oh do they
+package oh do they
+have
+have
+H okay well we'll start with we'll start
+H okay well we'll start with we'll start
+from here
+uh do I want to do this
+uh do I want to do this
+local or do I want to do this on puffer
+local or do I want to do this on puffer
+box I should do this local just in
+box I should do this local just in
+case unless we lose conductivity or
+case unless we lose conductivity or
+something
+something
+uh
+uh
+Docker let's get into our container
+didn't finish watching last stream
+didn't finish watching last stream
+watching from Europe
+welcome you're not obligated to watch
+welcome you're not obligated to watch
+all of the
+all of the
+streams um there's you know there's
+streams um there's you know there's
+always new stuff have you succeeded with
+always new stuff have you succeeded with
+the ELO we have a nice implementation I
+the ELO we have a nice implementation I
+need to probably add some policies to it
+need to probably add some policies to it
+but I'm pretty happy with how the
+but I'm pretty happy with how the
+implementation is looking out looking
+implementation is looking out looking
+we're doing something different today
+we're doing something different today
+because there's this awesome release
+because there's this awesome release
+from Eugene's lab they have a really
+from Eugene's lab they have a really
+fast driving Sim I was actually tempted
+fast driving Sim I was actually tempted
+to make one of these but it looks like
+to make one of these but it looks like
+he's gone ahead and done
+it this lab so we're going to see if we
+it this lab so we're going to see if we
+can get Day One support and puffer I
+can get Day One support and puffer I
+hope we should be able to
+hope we should be able to
+do thing could use some squash commits
+do thing could use some squash commits
+and maybe a pit
+package let's see data
+package let's see data
+set simulator
+set simulator
+gym
+M perfect they just have a gym a gym
+M perfect they just have a gym a gym
+wrapper I don't know how it's a gy m
+wrapper I don't know how it's a gy m
+though if it's gy is not
+though if it's gy is not
+multi-agent so we'll see how that
+works and um from
+works and um from
+there we have stuff to
+there we have stuff to
+do soon as this finishes
+do soon as this finishes
+cloning stuck oh yeah there we
+go
+go
+um oh right it's got uh it's got sub
+um oh right it's got uh it's got sub
+modules on
+it but yeah I see the stream is warming
+it but yeah I see the stream is warming
+up so uh for the YouTube folks today
+up so uh for the YouTube folks today
+what we're doing is we are adding
+what we're doing is we are adding
+bindings for this awesome driving Sim
+bindings for this awesome driving Sim
+apparently it's very fast and uh my goal
+apparently it's very fast and uh my goal
+is going to be to get this working which
+is going to be to get this working which
+is going to be the tough part I don't
+is going to be the tough part I don't
+know what like what stuff is under the
+know what like what stuff is under the
+hood with this and then I think the easy
+hood with this and then I think the easy
+part is just going to be making this
+part is just going to be making this
+thing stupidly fast and puffer I bet we
+thing stupidly fast and puffer I bet we
+can beat whatever whatever thing they
+can beat whatever whatever thing they
+have on this um speed wise if the
+have on this um speed wise if the
+question is going to be how fast it runs
+question is going to be how fast it runs
+on CPU because the goal is if it runs at
+on CPU because the goal is if it runs at
+like a million on
+like a million on
+GPU um and we're trying to train it a
+GPU um and we're trying to train it a
+million steps per second that's half of
+million steps per second that's half of
+your time gone so if I run this on the
+your time gone so if I run this on the
+CPU cores and get the data to GPU fast
+CPU cores and get the data to GPU fast
+then potentially I can do way better
+then potentially I can do way better
+which would be really really
+which would be really really
+funny but I've seen it happen
+before I'm a little bit concerned about
+before I'm a little bit concerned about
+the API compatibility stuff
+the API compatibility stuff
+because they say it's a gy EnV but it
+because they say it's a gy EnV but it
+can't possibly be a gym because it's
+multi-agent we'll do some fun stuff with
+multi-agent we'll do some fun stuff with
+this so we have uh we've got this thing
+this so we have uh we've got this thing
+now GPU
+now GPU
+drive and what do they say how do we
+drive and what do they say how do we
+install
+install
+this kind
+of Linux and Mac
+of Linux and Mac
+OS this is not bad
+right let's see
+some
+C++ was with the madona engine Madrona
+C++ was with the madona engine Madrona
+is like this GPU game engine type thing
+is like this GPU game engine type thing
+GPU environment
+engine which is kind of funny because
+engine which is kind of funny because
+I'm pretty sure with puffer you're no
+I'm pretty sure with puffer you're no
+longer going to need to implement M's
+longer going to need to implement M's
+for GPU it's perfectly fine if they are
+for GPU it's perfectly fine if they are
+GPU but we can make it fast either way
+there we
+there we
+go okay so this is just setting up
+go okay so this is just setting up
+madona
+where why can't I find her
+Twitter why can't I find uh Twitter for
+Twitter why can't I find uh Twitter for
+this
+should be in my retweets
+right
+set jeez you have to type this much in
+set jeez you have to type this much in
+order to get the name to show that's
+order to get the name to show that's
+ridiculous
+I've also got to say um
+it's pretty awesome what we've had with
+it's pretty awesome what we've had with
+puffer just while this is yeah 757
+puffer just while this is yeah 757
+that's
+that's
+crazy
+crazy
+okay so we have this built now
+okay so we have this built now
+apparently is there a
+test pie
+test can we just pie test this
+the fact that I do not have pest
+the fact that I do not have pest
+installed oh I do have
+it does it not
+it does it not
+work well probably this is good
+right okay so it
+right okay so it
+supports there's human data as well
+supports there's human data as well
+which I don't think we're going to play
+which I don't think we're going to play
+too much with because we're just going
+too much with because we're just going
+to do IPO to start
+to do IPO to start
+um and we're going to try to make that
+um and we're going to try to make that
+stupidly
+fast let's see where are their
+docks intro
+tutorials gy M demo I probably want this
+right so
+you can
+import okay there's quite a bit of stuff
+import okay there's quite a bit of stuff
+here
+here
+um torch and Jack gymnasium interface
+um torch and Jack gymnasium interface
+with the
+with the
+simulator I'm a bit confused how they do
+simulator I'm a bit confused how they do
+that because it's single
+agent make EnV
+agent make EnV
+you pass it a bunch of
+you pass it a bunch of
+configs and then agents this is probably
+configs and then agents this is probably
+like a gymnasium VEC interface then
+maybe uh episode with n parallel
+maybe uh episode with n parallel
+environments okay this is not that bad I
+environments okay this is not that bad I
+think we can get this working pretty
+think we can get this working pretty
+quick let me start by making a
+quick let me start by making a
+standalone and then we'll add a We'll
+standalone and then we'll add a We'll
+add this as a binding
+is this going to work from here if this
+is this going to work from here if this
+is not uh as a pit
+is not uh as a pit
+package oh they do this I see they they
+package oh they do this I see they they
+actually have to do yeah that's slightly
+actually have to do yeah that's slightly
+a pain we'll have to
+a pain we'll have to
+move are we going to do
+this I think this was the case for
+this I think this was the case for
+nocturn too I'd really suggest if you
+nocturn too I'd really suggest if you
+guys can get a pit package together um
+guys can get a pit package together um
+otherwise I'll just I'll just have to
+otherwise I'll just I'll just have to
+set the paths or something it's not that
+set the paths or something it's not that
+bad
+so uh puffer play your streams while
+so uh puffer play your streams while
+working hard to find any valuable Dev
+working hard to find any valuable Dev
+content everything is web or Game Dev
+content everything is web or Game Dev
+great for somewhere not in the field to
+great for somewhere not in the field to
+go at gra over yeah I mean hi I'm glad
+go at gra over yeah I mean hi I'm glad
+it's uh glad it's
+it's uh glad it's
+useful this is kind of Game Dev except
+useful this is kind of Game Dev except
+that the games are for reinforcement
+that the games are for reinforcement
+learning agents to play
+okay let's just make our little test
+file copy some of this
+stuff get this out of a notebook for
+now thank you very much copy
+paste wait
+uh working
+uh working
+dur if
+race this one goes up
+race this one goes up
+here and then yeah we're
+here and then yeah we're
+good okay that's that code
+good okay that's that code
+sample we'll get this GIF I don't think
+sample we'll get this GIF I don't think
+this will work because we're on WSL
+this will work because we're on WSL
+but okay that definitely did not
+work I
+see and this display function where does
+see and this display function where does
+this come
+from I don't see this dis
+from I don't see this dis
+play
+Anywhere okay so they have some
+Anywhere okay so they have some
+constants and put these up
+here initializing
+environments GPU Drive gy M class and
+environments GPU Drive gy M class and
+base M torch M and Jacks
+base M torch M and Jacks
+m one exports torch tensors in the other
+m one exports torch tensors in the other
+Jacks array
+so neither so this is not actually
+so neither so this is not actually
+gymnasium API it's just gymnasium like
+gymnasium API it's just gymnasium like
+API and we're going to have to rrap it
+API and we're going to have to rrap it
+which is mildly obnoxious because we
+which is mildly obnoxious because we
+actually have to get the data out of
+actually have to get the data out of
+from numai and then back into torch but
+from numai and then back into torch but
+whatever that's
+whatever that's
+fine um so we have scene config
+and N
+config
+oops this actually gives us the action
+oops this actually gives us the action
+space doesn't
+it yeah there's going to have to be some
+it yeah there's going to have to be some
+wrapper stuff going on um this is not
+wrapper stuff going on um this is not
+exactly a gem
+exactly a gem
+interface and then render config
+this is the
+this is the
+environment they do torch by default
+environment they do torch by default
+that is a good
+that is a good
+sign no more
+Jacks and then
+here's their parallel
+M's really wish I knew why copy paste is
+M's really wish I knew why copy paste is
+this
+this
+screwy but
+whatever not a big
+whatever not a big
+deal and perfect we can actually we're
+deal and perfect we can actually we're
+not going to need this display function
+not going to need this display function
+I don't
+think we can save this here
+think we can save this here
+though uh we can actually
+do import
+CV2 sure whatever
+let's try
+this it's doing something
+range what's episode length
+90 confused as to whether this is doing
+90 confused as to whether this is doing
+anything
+okay let's see where it's it's stopping
+okay let's see where it's it's stopping
+cuz something is it's getting hung up
+cuz something is it's getting hung up
+somewhere
+really oh
+jeez it just goes this is this is funny
+yeah it's
+yeah it's
+funny set working directory to the base
+funny set working directory to the base
+directory GPU Drive
+base directory
+GPU
+GPU
+um do I want to change the working
+um do I want to change the working
+directory or do I want to sim link it
+did I do that backwards
+I always forget what order it
+I always forget what order it
+is yeah it's
+Len okay perfect should not need to set
+Len okay perfect should not need to set
+the working directory
+now still no module Pi GPU Drive
+GPU GPU Drive okay so this
+GPU GPU Drive okay so this
+works uh so I think it's
+actually
+GP I
+GPU GPU Drive try this
+okay maybe this
+okay maybe this
+works just Sim linking to
+it 9
+it 9
+s o no module GPU Drive okay so this
+s o no module GPU Drive okay so this
+thing is really not designed to work um
+thing is really not designed to work um
+in a different directory
+in a different directory
+which is mildly mildly
+which is mildly mildly
+annoying that's okay
+annoying that's okay
+though oops let's go back
+to okay let's see what do
+to okay let's see what do
+we what do we think we
+we what do we think we
+are puffer tank SL GPU Drive
+do you need to have like the Poetry
+do you need to have like the Poetry
+install or something is there a setup.py
+there is a setup.py that we didn't run
+there is a setup.py that we didn't run
+right oh wait
+right oh wait
+no what about the
+no what about the
+toml is this thing installed correctly
+like oh there is a pip in Stall
+right that's bizarre
+H cannot
+import weird very
+weird okay I think there's something
+weird okay I think there's something
+wrong with the build we definitely need
+wrong with the build we definitely need
+to get this working without this like
+to get this working without this like
+path shenanigans is
+what's in the
+toml tool.
+toml tool.
+Poetry ah it actually does have to be
+Poetry ah it actually does have to be
+poetry
+fine we'll do
+poetry they have the tool it tooled for
+poetry they have the tool it tooled for
+that that's where the uh the missing
+that that's where the uh the missing
+file was all right my bad for wanting to
+file was all right my bad for wanting to
+use my own
+tools I just did it
+tools I just did it
+again just reflexively
+really do not like poetry though
+why is it adding Cuda
+why is it adding Cuda
+packages I already have those
+I don't think that this works you can't
+I don't think that this works you can't
+just
+just
+make the package because it doesn't give
+make the package because it doesn't give
+you the links
+right oh wait add
+it says that you should be able to do
+it says that you should be able to do
+this so this was supposed to work and it
+this so this was supposed to work and it
+didn't that's
+weird so I guess I'll try both of
+these this is always the bothersome and
+these this is always the bothersome and
+boring part right is getting the thing
+boring part right is getting the thing
+actually installed
+actually installed
+correctly um and then hopefully I'm
+correctly um and then hopefully I'm
+hopeful that this should be fairly quick
+hopeful that this should be fairly quick
+after that to get running and then get
+after that to get running and then get
+integrated with puffer it's going to
+integrated with puffer it's going to
+depend how heavily they
+depend how heavily they
+um they different they uh well how much
+um they different they uh well how much
+they diverge from the gymnasium API
+they diverge from the gymnasium API
+because it's not they say they have a
+because it's not they say they have a
+gymnasium interface but it's not quite a
+gymnasium interface but it's not quite a
+gymnasium
+gymnasium
+interface I assume that they mean they
+interface I assume that they mean they
+have like a torch tensor GP uh torch
+have like a torch tensor GP uh torch
+tensor gymnasium VC interface so if
+tensor gymnasium VC interface so if
+that's the case then I'm going to have
+that's the case then I'm going to have
+to take their interface I'm going to
+to take their interface I'm going to
+have to wrap it with puffer get those
+have to wrap it with puffer get those
+into numpy
+into numpy
+Rays on
+Rays on
+CPU and see how fast I can get it
+CPU and see how fast I can get it
+running multicore
+this thing not done
+this thing not done
+oh it is it's just like did something
+weird we'll see if it works with poetry
+weird we'll see if it works with poetry
+I'm hoping it works with just this this
+I'm hoping it works with just this this
+manual install should be
+manual install should be
+better but I was getting
+better but I was getting
+um I was getting like a link error with
+um I was getting like a link error with
+this it didn't link the package
+this it didn't link the package
+correctly
+let me see in the meantime if I can
+let me see in the meantime if I can
+figure out how this
+works uh
+oh uh is the stream
+down it's just slow not down right
+I'm getting a lot of dropped
+frames
+yeah stream will be back up if it's
+yeah stream will be back up if it's
+still on as soon as this blip is
+over what in the heck though
+that's wait the stream looks like it's
+that's wait the stream looks like it's
+still
+alive so hold on I think that it's just
+alive so hold on I think that it's just
+is it just that poetry is eating all my
+is it just that poetry is eating all my
+bandwidth is that what H what's
+happening let me check on my phone if
+happening let me check on my phone if
+the internet's
+down seems
+fine and I see the stream still being up
+fine and I see the stream still being up
+here so I'm going to get this I'm going
+here so I'm going to get this I'm going
+to give this a second to finish
+to give this a second to finish
+downloading and hopefully then it stops
+downloading and hopefully then it stops
+eating all my
+bandwidth it's the last time I triy
+bandwidth it's the last time I triy
+poetry for anything though
+I'm so weird I definitely have internet
+okay
+so will these
+so will these
+load
+tutorials looks like
+it controlling Road objects
+yeah okay this actually doesn't look too
+yeah okay this actually doesn't look too
+bad to get set up once we're uh once
+bad to get set up once we're uh once
+we're ready and they they have actually
+we're ready and they they have actually
+they have good versions of everything as
+they have good versions of everything as
+well these are the versions that puffer
+well these are the versions that puffer
+uses as well these are just the latest
+uses as well these are just the latest
+versions of everything so we should be
+versions of everything so we should be
+fine so I'll wait for a torch to finish
+fine so I'll wait for a torch to finish
+downloading I think that literally all
+downloading I think that literally all
+that happened is that this just uh
+that happened is that this just uh
+poetry just ate all of our bandwidth and
+poetry just ate all of our bandwidth and
+took the stream down for a second it
+took the stream down for a second it
+looks like we're good
+looks like we're good
+now so welcome back folks
+now so welcome back folks
+we're going to give it a second to
+we're going to give it a second to
+finish torch I think it just did like
+finish torch I think it just did like
+some crazy multi-threaded download and
+some crazy multi-threaded download and
+just took the like took all the
+bandwidth so I'll go over my plan while
+bandwidth so I'll go over my plan while
+I'm waiting for this um it looks to me
+I'm waiting for this um it looks to me
+that they have a they have a uh
+that they have a they have a uh
+multimodal action space or multi- a
+multimodal action space or multi- a
+structured action space I should
+structured action space I should
+say I think one of the tutorials had
+say I think one of the tutorials had
+what it was I hope it's not mixed
+what it was I hope it's not mixed
+discreet and
+discreet and
+continuous let me
+see what environment this is GPU Drive
+see what environment this is GPU Drive
+was just launched today
+was just launched today
+by where the heck did it
+go just launched today by Eugene's
+lab and we're going to try to make it
+lab and we're going to try to make it
+very very
+fast so it looks to me that they
+have it looks to me like they have um
+have it looks to me like they have um
+continuous steering and
+acceleration which is pretty easy for us
+acceleration which is pretty easy for us
+to handle and
+puffer haven't done much with the
+puffer haven't done much with the
+continuous
+environments je
+environments je
+okay can we
+still doesn't
+work cannot open shared object file I
+work cannot open shared object file I
+see it right here don't I buffer Li GPU
+see it right here don't I buffer Li GPU
+Drive
+Drive
+build GPU drive. cpython
+build GPU drive. cpython
+do oh
+that's
+that's
+weird it built it with
+310 uh hold
+on include cpython 311 but I have python
+on include cpython 311 but I have python
+right hm
+okay let me try this make let me try the
+okay let me try this make let me try the
+make version again the from
+Source they do have python 311 pinned
+Source they do have python 311 pinned
+here
+oops it's crazy that they actually made
+oops it's crazy that they actually made
+this thing build on Windows
+let me make this work first and then I
+let me make this work first and then I
+think if I just do
+import
+error cre created
+error cre created
+wheel stored in directory
+okay we'll go back to
+311 and it clearly is right here it's
+311 and it clearly is right here it's
+generating for some
+generating for some
+reason I don't know why it would be
+reason I don't know why it would be
+generating like this though why was it
+generating like this though why was it
+generating with 310
+yeah it says link shared module
+could not
+could not
+[Music]
+find can I just rename it
+what if I just do
+this okay it looks like it uh
+Imports it's like fault
+I'll make them uh an issue on
+that Madrona was not compiled with Cuda
+support okay
+how do I run Madrona in CPU mode because
+how do I run Madrona in CPU mode because
+I want to do that
+anyways just like this maybe
+oh look at that we got it
+oh look at that we got it
+running not
+bad make an issue for
+him we're going to get them lots of nice
+him we're going to get them lots of nice
+stuff on this today
+oops uh GPU
+Drive
+e e
+welcome but this
+welcome but this
+works
+works
+right you can see we have the car it
+right you can see we have the car it
+runs it does stuff
+um now we get to do some benchmarking
+right new to
+right new to
+python well this is going to be a bit
+python well this is going to be a bit
+much then we are doing uh high
+much then we are doing uh high
+performance reinforcement learning
+performance reinforcement learning
+development today a new GPU accelerated
+development today a new GPU accelerated
+driving simulator released from uh some
+driving simulator released from uh some
+buddies of mine at
+buddies of mine at
+NYU and they are doing uh it looks very
+NYU and they are doing uh it looks very
+good so I'm adding a binding to puffer
+good so I'm adding a binding to puffer
+lib so we can train neural networks to
+lib so we can train neural networks to
+drive cars
+drive cars
+fast or
+well yeah this is the environment we're
+well yeah this is the environment we're
+playing with right
+playing with right
+now to GPU driving end these are
+now to GPU driving end these are
+cars uh just started on porting
+cars uh just started on porting
+this but yeah that's the plan for
+this but yeah that's the plan for
+today so first thing I want to figure
+out how many how many cars are there in
+here 10 by 128 that is
+here 10 by 128 that is
+weird this is nice what libraries my
+weird this is nice what libraries my
+main stuff is in puffer
+lib cure the docks repo's right
+here put it in the
+here put it in the
+chat open source high performance
+chat open source high performance
+reinforcement
+reinforcement
+learning try to make everything very
+learning try to make everything very
+simple as
+well why do they have 128
+Ah that's
+Ah that's
+why so is this 128 per
+why so is this 128 per
+[Music]
+[Music]
+scene oh it's because yeah yeah so
+scene oh it's because yeah yeah so
+there's this scene is
+there's this scene is
+large right num
+large right num
+worlds so 10
+worlds so 10
+worlds up
+worlds up
+to 128 objects
+it's actually kind of hard for me to
+tell how I should be looking at
+tell how I should be looking at
+this I don't know if I do this if I do
+this I don't know if I do this if I do
+one is it going to be totally
+one is it going to be totally
+different is this going to be a
+different is this going to be a
+different
+map yeah totally different
+map but I only see one
+map but I only see one
+car right I and I I guess it's like
+car right I and I I guess it's like
+vaults if you don't close it properly
+vaults if you don't close it properly
+but I only see one car
+but I only see one car
+here which just
+disappeared
+disappeared
+H I'm not sure how to
+well let's not abuse This Thread I'll
+well let's not abuse This Thread I'll
+tweet
+him
+for e
+what I understand you're simulating cars
+what I understand you're simulating cars
+and trying to B find the best path for
+and trying to B find the best path for
+it to move something like that this is
+it to move something like that this is
+not my environment this is just released
+not my environment this is just released
+today by NYU what I'm trying to do is
+today by NYU what I'm trying to do is
+I'm trying to add support for this into
+I'm trying to add support for this into
+puffer lib so we can train RL to do
+puffer lib so we can train RL to do
+probably what you just said uh at very
+probably what you just said uh at very
+well we can do that very fast and easy
+well we can do that very fast and easy
+that's the
+goal video frames per second is four I
+goal video frames per second is four I
+cannot test how fast this is as is
+cannot test how fast this is as is
+though was
+though was
+annoying we'll be able to do that later
+annoying we'll be able to do that later
+I think for
+now basically what Tesla a i
+now basically what Tesla a i
+does sort
+does sort
+of much smaller
+of much smaller
+scale but yeah kind of I believe you can
+scale but yeah kind of I believe you can
+do it better man if you want me to do a
+do it better man if you want me to do a
+test does bit better I'll uh please give
+test does bit better I'll uh please give
+me my pick of like a th Engineers from
+me my pick of like a th Engineers from
+like a the Thousand best Engineers I
+like a the Thousand best Engineers I
+want and like several billion dollars
+want and like several billion dollars
+and then we'll
+talk you can't compete with that number
+talk you can't compete with that number
+of resources at this
+scale okay you want to see how funny
+scale okay you want to see how funny
+that is actually this is so
+Tesla do I have a picture of
+Tesla do I have a picture of
+it yeah okay
+it yeah okay
+so this is what their data centers look
+so this is what their data centers look
+like this is what my data center looks
+like little bit of a
+like little bit of a
+difference little bit of a
+difference all right so I think that we
+difference all right so I think that we
+can actually start adding this to puffer
+can actually start adding this to puffer
+already um there are a few things that
+already um there are a few things that
+are bothering me here let's make a
+are bothering me here let's make a
+little
+wrapper they have a I don't know how
+wrapper they have a I don't know how
+many billions of dollar cluster I have a
+many billions of dollar cluster I have a
+$30,000 cluster
+where did you learn
+where did you learn
+python I think I learned python when I
+python I think I learned python when I
+was like 16 by porting one of my crappy
+was like 16 by porting one of my crappy
+neural networks from mat lab so I don't
+know yeah
+you just start writing code and you keep
+you just start writing code and you keep
+writing code until the code stops
+writing code until the code stops
+looking
+bad oh then you're starting at a good
+bad oh then you're starting at a good
+age that's when I started doing research
+this actually should not be a rapper
+this actually should not be a rapper
+right this needs to
+be yeah all this stuff needs to go into
+be yeah all this stuff needs to go into
+the
+class I don't know if you're new to all
+class I don't know if you're new to all
+this stuff and you want to do some cool
+this stuff and you want to do some cool
+stuff in AI or whatnot I would just it's
+stuff in AI or whatnot I would just it's
+going to take a lot of time so be
+going to take a lot of time so be
+patient and also so just like start
+patient and also so just like start
+writing code and don't get too wrapped
+writing code and don't get too wrapped
+up in like doing fancy objectoriented
+up in like doing fancy objectoriented
+crap or fancy functional crap just like
+crap or fancy functional crap just like
+write simple code that that makes cool
+projects all
+projects all
+so now we have self.
+so now we have self.
+M
+um I want to take a look at the
+um I want to take a look at the
+observation spaces
+here what just
+here what just
+happened
+S.M class values must be non- negative
+S.M class values must be non- negative
+what's GPU Drive should I just put this
+what's GPU Drive should I just put this
+up on the side of the stream so that
+up on the side of the stream so that
+people can see
+it I'm just going to like put Eugene's
+it I'm just going to like put Eugene's
+post up on this screen okay this is GPU
+post up on this screen okay this is GPU
+drive this is I don't have enough screen
+drive this is I don't have enough screen
+space for it um but yeah this is GPU
+space for it um but yeah this is GPU
+Drive they have fancy driving Sim
+I have time done cool projects with some
+I have time done cool projects with some
+help classes suck because yeah classes
+suck oh well no I I thought you meant
+suck oh well no I I thought you meant
+like instructional classes like lectures
+like instructional classes like lectures
+but yes those whatever Noah this is
+but yes those whatever Noah this is
+supposedly a million step per second
+supposedly a million step per second
+environment we're going to see how much
+environment we're going to see how much
+better we can do it's a GPU environment
+better we can do it's a GPU environment
+my plan is to run it on CPU m mul core
+my plan is to run it on CPU m mul core
+with puffer so that we don't waste the
+with puffer so that we don't waste the
+GPU time on the m and we use all the GPU
+GPU time on the m and we use all the GPU
+time for the
+network since we've got like a newer
+network since we've got like a newer
+person to stuff here I'm just going to
+person to stuff here I'm just going to
+make one small detour
+comment if you just want to see like how
+comment if you just want to see like how
+far you can go in 10 years um this is
+far you can go in 10 years um this is
+some of my like absolute garbage work
+some of my like absolute garbage work
+from when I was
+from when I was
+16 I think I'm 16 in this
+16 I think I'm 16 in this
+photo this is like me training really
+photo this is like me training really
+really bad like neural networks on
+really bad like neural networks on
+convet or
+whatever that's also me at 140
+pounds
+pounds
+um yeah there's like some neural network
+um yeah there's like some neural network
+stuff in
+stuff in
+here but yeah this is some of the stuff
+here but yeah this is some of the stuff
+I built when I was way
+younger takes
+time how many SPS are you hoping to get
+time how many SPS are you hoping to get
+out of it I don't know we're going to
+out of it I don't know we're going to
+see how long it takes more than what
+see how long it takes more than what
+they currently have whatever they have
+they currently have whatever they have
+at the moment I want to do I want to get
+at the moment I want to do I want to get
+it to be faster than they have it
+what happened
+here I literally just pasted this into
+here I literally just pasted this into
+the class and now no longer
+works that's weird isn't it
+yeah no
+yeah no
+worries did you call the
+class yeah you'll see I mean if you're
+class yeah you'll see I mean if you're
+just hang around you'll see some
+just hang around you'll see some
+Dev
+um okay here's our environment
+okay so it actually it does have a
+okay so it actually it does have a
+proper observation space on it um but I
+proper observation space on it um but I
+don't think it's the correct observation
+don't think it's the correct observation
+space
+right
+yeah so if I do like
+this you see right here that this is not
+this you see right here that this is not
+what was get
+given they say it has 30 oh wait no is
+given they say it has 30 oh wait no is
+this
+right it's not exactly
+right it's not exactly
+right because they stacked it
+right because they stacked it
+weird this needs to be
+reshaped this needs to be
+reshaped this needs to be
+reshaped and what do they have for
+reshaped and what do they have for
+Action
+Action
+space discreet of nine
+space discreet of nine
+really discreet of
+really discreet of
+nine that doesn't look right does
+nine that doesn't look right does
+it steer
+actions we using Panda no there's no
+actions we using Panda no there's no
+pandas so this is reinforcement learning
+pandas so this is reinforcement learning
+this means that uh the data comes from a
+this means that uh the data comes from a
+simulator this data is generated in
+simulator this data is generated in
+memory by interacting with the simulator
+memory by interacting with the simulator
+so you do not need any tools for
+so you do not need any tools for
+interacting with large data sets what
+interacting with large data sets what
+you need is you need ultra high
+you need is you need ultra high
+performance ways of getting gigabytes of
+performance ways of getting gigabytes of
+data per second from multiple CPU cores
+data per second from multiple CPU cores
+onto the GPU or you need ultra high
+onto the GPU or you need ultra high
+performance ways of you know generally
+performance ways of you know generally
+coupling this back and forth simulator
+coupling this back and forth simulator
+runs simulation simulator returns data
+runs simulation simulator returns data
+neuron net acts on data neuronet returns
+neuron net acts on data neuronet returns
+actions to simulator simulator steps
+actions to simulator simulator steps
+forward that's the that is the loop that
+forward that's the that is the loop that
+needs to run fast
+I have no clue about what you just said
+I have no clue about what you just said
+good it would be kind of weird if you
+good it would be kind of weird if you
+did I'd be very
+impressed I would be very impressed if
+impressed I would be very impressed if
+you did
+if you're trying to pick up machine
+if you're trying to pick up machine
+learning though I would highly suggest
+learning though I would highly suggest
+yeah I will repeat that slower since
+yeah I will repeat that slower since
+other people are confused as well but um
+other people are confused as well but um
+if you're trying to learn AI stuff I
+if you're trying to learn AI stuff I
+would highly recommend cs231n the
+would highly recommend cs231n the
+lectures are online Stanford course it's
+lectures are online Stanford course it's
+a grad course but it's a very accessible
+a grad course but it's a very accessible
+grad course that's where I would start
+grad course that's where I would start
+yes let me repeat
+yes let me repeat
+so the way that this works in
+so the way that this works in
+reinforcement learning right
+reinforcement learning right
+reinforcement learning is not like
+reinforcement learning is not like
+supervised learning we don't have a big
+supervised learning we don't have a big
+data file with 10 terab of data that we
+data file with 10 terab of data that we
+then need to load off of the dis and
+then need to load off of the dis and
+like manage and get into the neural
+like manage and get into the neural
+network that's not what we're doing what
+network that's not what we're doing what
+we instead have is a simulator it's like
+we instead have is a simulator it's like
+a game in this case it's not a game it's
+a game in this case it's not a game it's
+a driving Sim but same thing and what
+a driving Sim but same thing and what
+we're going to do is we're going to run
+we're going to do is we're going to run
+many copies of this simulator on
+many copies of this simulator on
+different CPU cores okay and they're all
+different CPU cores okay and they're all
+going to run at the same time so what we
+going to run at the same time so what we
+need is we need a really fast way of
+need is we need a really fast way of
+getting all that data from all those
+getting all that data from all those
+different cores to the GPU they have to
+different cores to the GPU they have to
+get onto the main process and then they
+get onto the main process and then they
+get onto the GPU that's a lot of data
+get onto the GPU that's a lot of data
+that has to be processed very very fast
+that has to be processed very very fast
+we're talking like you have a few
+we're talking like you have a few
+microsc that you can waste here um but
+microsc that you can waste here um but
+it has to be very efficient overall and
+it has to be very efficient overall and
+then that data once it's on the GPU is
+then that data once it's on the GPU is
+run through a neural network the neural
+run through a neural network the neural
+network tells all the cars what to do
+network tells all the cars what to do
+where to steer how to accelerate so on
+where to steer how to accelerate so on
+and so forth that data gets sent back to
+and so forth that data gets sent back to
+all all the different
+all all the different
+processes and then the simulators step
+processes and then the simulators step
+forward using that information they say
+forward using that information they say
+okay the car is going to go this way and
+okay the car is going to go this way and
+then they return more data that process
+then they return more data that process
+has to be very fast that is what puffer
+has to be very fast that is what puffer
+lib
+does hi is it possible to create a
+does hi is it possible to create a
+Starcraft 2 AI like Alpha star using the
+Starcraft 2 AI like Alpha star using the
+reinforcement learning resources you
+reinforcement learning resources you
+have um the closest thing I have for you
+have um the closest thing I have for you
+for that is on my Twitter the main
+for that is on my Twitter the main
+project I was building at the uh one of
+project I was building at the uh one of
+the main projects I'm building at the
+moment where's the
+GIF we've got a MOA it's uh not not
+GIF we've got a MOA it's uh not not
+Alpha star it's closer to DOTA but I've
+Alpha star it's closer to DOTA but I've
+been building this this runs it like a
+been building this this runs it like a
+million steps per second per core so we
+million steps per second per core so we
+can actually train this with the
+can actually train this with the
+resources I have we're not going to be
+resources I have we're not going to be
+able to train on like Starcraft properly
+able to train on like Starcraft properly
+just because the game is too slow but
+just because the game is too slow but
+you could very easily do a project well
+you could very easily do a project well
+not EAS easily but with the about the
+not EAS easily but with the about the
+same amount of effort I could have done
+same amount of effort I could have done
+like an RTS instead of a MOA and had
+like an RTS instead of a MOA and had
+something like this as
+well at what point did you get into
+well at what point did you get into
+RL in your ml
+RL in your ml
+Journey practice it so RL is I've worked
+Journey practice it so RL is I've worked
+in Vision I've worked in natural
+in Vision I've worked in natural
+language processing I did both of those
+language processing I did both of those
+for about three years reinforcement
+for about three years reinforcement
+learning is much much harder not from a
+learning is much much harder not from a
+math perspective not from a research
+math perspective not from a research
+perspective necessarily but from a pure
+perspective necessarily but from a pure
+engineering perspective because you have
+engineering perspective because you have
+this giant additional stack of tools
+this giant additional stack of tools
+that has to work with complex
+that has to work with complex
+simulators so 80% of my work is
+simulators so 80% of my work is
+engineering building this type of stuff
+engineering building this type of stuff
+um that is what makes it hard but you
+um that is what makes it hard but you
+still have to know all the other stuff
+still have to know all the other stuff
+in ml now the nice thing is that I'm
+in ml now the nice thing is that I'm
+fixing this uh I've only been on this
+fixing this uh I've only been on this
+now for three months since I graduated
+now for three months since I graduated
+my PhD I've been doing reinforcement
+my PhD I've been doing reinforcement
+learning for like seven years but this
+learning for like seven years but this
+is where I finished my PhD and started
+is where I finished my PhD and started
+working on puffer lip full-time this has
+working on puffer lip full-time this has
+been the growth on the project in the
+been the growth on the project in the
+last couple two three months so we are
+last couple two three months so we are
+very very quickly making reinforcement
+very very quickly making reinforcement
+learning fast simple and
+easy also much harder in
+easy also much harder in
+theory I say I think it's harder than
+theory I say I think it's harder than
+everything in supervised learning except
+everything in supervised learning except
+for the uh the infra Engineers who have
+for the uh the infra Engineers who have
+to do the multi- noode uh the multi-
+to do the multi- noode uh the multi-
+node scaling on like large language
+node scaling on like large language
+models the multimachine scaling
+models the multimachine scaling
+infrastructure is probably as hard or
+infrastructure is probably as hard or
+harder than this but everything else
+no rl's
+hard the nice thing is we do kind of
+hard the nice thing is we do kind of
+have unlimited data so we don't have to
+have unlimited data so we don't have to
+worry about overfitting and
+worry about overfitting and
+regularization and stuff as
+regularization and stuff as
+much that's nice but uh we have every
+much that's nice but uh we have every
+other problem in the
+book okay let me figure out why the heck
+book okay let me figure out why the heck
+this thing wasn't
+working oh you are actually right I
+working oh you are actually right I
+forgot to instantiate the class before
+forgot to instantiate the class before
+that's
+that's
+funny I wasn't paying attention
+that's actually so
+funny
+38 there we go
+now what we have to do
+is
+is
+reset this is
+fine match API death step with
+fine match API death step with
+action and we'll see what this
+returns I don't know if it has a step
+returns I don't know if it has a step
+function
+it does have
+step let's just see how this what this
+does was not really until
+does was not really until
+RL that you started going hard into the
+RL that you started going hard into the
+engineering
+engineering
+aspect I mean this the engineering side
+aspect I mean this the engineering side
+has been relatively recent I did a lot
+has been relatively recent I did a lot
+of simulation development for neural MMO
+of simulation development for neural MMO
+that involved a fair bit of like
+that involved a fair bit of like
+engineering and components and stuff but
+engineering and components and stuff but
+uh the ultra high performance RL is
+uh the ultra high performance RL is
+something that has happened since I
+something that has happened since I
+graduated because it's not something
+graduated because it's not something
+that you can really work on well in
+that you can really work on well in
+Academia um so this is a relatively
+Academia um so this is a relatively
+recent thing that said it's been going
+recent thing that said it's been going
+incredibly well like in three months we
+incredibly well like in three months we
+have simulations that are 100 times
+have simulations that are 100 times
+faster than everything else
+mhm it's funny cuz I never really liked
+mhm it's funny cuz I never really liked
+um I never really liked low-l
+um I never really liked low-l
+engineering when I was in college or
+engineering when I was in college or
+whatever and I still don't but the only
+whatever and I still don't but the only
+reason I don't is because of fiddly
+reason I don't is because of fiddly
+tools that make it impossible to debug
+tools that make it impossible to debug
+stuff with the current stack of stuff I
+stuff with the current stack of stuff I
+have on puffer it's pretty painless I
+have on puffer it's pretty painless I
+can just like write super fast stuff
+right cuz obviously like I know how to
+right cuz obviously like I know how to
+do all of it right it's just a matter of
+do all of it right it's just a matter of
+having an interface for it that doesn't
+having an interface for it that doesn't
+suck
+we do all sorts of stuff for
+we do all sorts of stuff for
+um for the simulation code in puffer
+um for the simulation code in puffer
+though we do
+though we do
+like they are zero dynamic memory
+like they are zero dynamic memory
+accesses we have like all the memory
+accesses we have like all the memory
+pre-allocated for The Sims we do
+pre-allocated for The Sims we do
+occasionally we'll do stuff like um like
+occasionally we'll do stuff like um like
+flat circular buffers so that to avoid
+flat circular buffers so that to avoid
+copying data around we do a lot of like
+copying data around we do a lot of like
+memory views between Python and syon so
+memory views between Python and syon so
+we have zero uh zero copies that way
+we have zero uh zero copies that way
+we'll do stuff like we'll simulate
+we'll do stuff like we'll simulate
+everything inside of shared memory so
+everything inside of shared memory so
+that you actually don't even have to
+that you actually don't even have to
+like copy the data around to get it off
+like copy the data around to get it off
+onto the main
+onto the main
+process lots and lots of big
+process lots and lots of big
+optimizations is that why you use syon
+optimizations is that why you use syon
+yes syon is awesome do you do the
+yes syon is awesome do you do the
+simulations in puffer puffer has some
+simulations in puffer puffer has some
+first party simulations um um that I
+first party simulations um um that I
+have made and it also has uh
+have made and it also has uh
+optimizations for other environments as
+optimizations for other environments as
+well some depending on how fast your
+well some depending on how fast your
+environment is like generally the faster
+environment is like generally the faster
+your environment is the faster puffer
+your environment is the faster puffer
+can make it if that makes sense like if
+can make it if that makes sense like if
+your environment is slow then there's
+your environment is slow then there's
+like really not anything to optimize
+like really not anything to optimize
+because it's really easy to handle tiny
+because it's really easy to handle tiny
+amounts of data but as your environment
+amounts of data but as your environment
+gets faster puffer makes it even faster
+gets faster puffer makes it even faster
+so there's a compounding effect
+like it's going to be very very soon
+like it's going to be very very soon
+that the standard for reinforcement
+that the standard for reinforcement
+learning is your M has to run it a
+learning is your M has to run it a
+million steps per second and they're
+million steps per second and they're
+going to be lots of M that run at a
+going to be lots of M that run at a
+million steps per second and training is
+million steps per second and training is
+going to be at hundreds of thousands to
+going to be at hundreds of thousands to
+a million steps per second as well all
+a million steps per second as well all
+because of
+because of
+puffer and a few other Niche groups as
+puffer and a few other Niche groups as
+well that are like doing cool stuff like
+well that are like doing cool stuff like
+this group here at NYU is awesome
+oops what happened
+here Sig fault
+um this needs a bunch of API garbage
+um this needs a bunch of API garbage
+doesn't
+it what does poer do to speed the end up
+it what does poer do to speed the end up
+so much
+vectorization most
+vectorization most
+environments it it's very hard to get
+environments it it's very hard to get
+let's say your environment runs at a
+let's say your environment runs at a
+th000 steps per second right or no more
+th000 steps per second right or no more
+than that let's say it runs at like 5
+than that let's say it runs at like 5
+6,000 steps per second right and you
+6,000 steps per second right and you
+have 16 cores like the default
+have 16 cores like the default
+vectorization will run at like 10,000
+vectorization will run at like 10,000
+steps per second that's what the rest of
+steps per second that's what the rest of
+the field will use you get absolutely
+the field will use you get absolutely
+ter absolutely terrible scaling puffer
+ter absolutely terrible scaling puffer
+gives you good
+scaling if it gives you a lot more on
+scaling if it gives you a lot more on
+top of that but that's one of our killer
+top of that but that's one of our killer
+features is like really really good
+scaling not implemented error
+H oh that's
+H oh that's
+weird that's fine
+weird that's fine
+though we'll just do like this
+okay didn't know this sort of computing
+okay didn't know this sort of computing
+wasn't vectorized oh well they tried to
+wasn't vectorized oh well they tried to
+but they do it very
+but they do it very
+slowly I tried running demo. Pi with the
+slowly I tried running demo. Pi with the
+forging of in profile mode but I got an
+forging of in profile mode but I got an
+error do I have to do additional stuff
+error do I have to do additional stuff
+um I might just have a bug in it if you
+um I might just have a bug in it if you
+paste the error no I can debug it for
+paste the error no I can debug it for
+you real
+quick nice so we got uh we got this
+quick nice so we got uh we got this
+running the puffer
+wrapper and we have to
+wrapper and we have to
+do death
+do death
+render he world
+we can just run this now can't
+we yay and
+runs if the whole training Loop can be
+compiled well then it doesn't do
+compiled well then it doesn't do
+anything reu but like that's not going
+anything reu but like that's not going
+to be the case ever for every thing like
+to be the case ever for every thing like
+you have to write your entire Sim to be
+you have to write your entire Sim to be
+GPU which like okay look they have
+GPU which like okay look they have
+they've made this thing for GPU but how
+they've made this thing for GPU but how
+much work do you think this took to do
+much work do you think this took to do
+on GPU like how much less work do you
+on GPU like how much less work do you
+think this would be if I wrote it for
+think this would be if I wrote it for
+CPU right it's like a tenth of the
+CPU right it's like a tenth of the
+complexity to do stuff for just CPU um
+complexity to do stuff for just CPU um
+like if I were trying to write the MOBA
+like if I were trying to write the MOBA
+for GPU I'd be doing that for months
+for GPU I'd be doing that for months
+months and months and
+months and months and
+months and also gpus are just not good
+months and also gpus are just not good
+in general at doing arbitrary logic like
+in general at doing arbitrary logic like
+that's what CPUs are for right gpus are
+that's what CPUs are for right gpus are
+good for lots of dumb syy parallel
+good for lots of dumb syy parallel
+operations so it's way smarter in my
+operations so it's way smarter in my
+opinion to just bet on Sims having to be
+opinion to just bet on Sims having to be
+uh most Sims being on CPU and making
+uh most Sims being on CPU and making
+that really fast like the reason that
+that really fast like the reason that
+people came up with these fancy GPU Sim
+people came up with these fancy GPU Sim
+Frameworks in the first place is cu how
+Frameworks in the first place is cu how
+stupidly slow it was on CPU not because
+stupidly slow it was on CPU not because
+CPUs are slow but because the code stack
+CPUs are slow but because the code stack
+was bad
+error I get
+is let me fix that for you real quick
+is let me fix that for you real quick
+Noah
+B
+think people moved M to GPU because GPU
+think people moved M to GPU because GPU
+is like having a lot of
+is like having a lot of
+CPUs it's not though do you know the
+CPUs it's not though do you know the
+restrictions behind GP like have you
+restrictions behind GP like have you
+looked at like the Jack scan operations
+looked at like the Jack scan operations
+for instance it executes all possible
+for instance it executes all possible
+branches of your code at every step it's
+branches of your code at every step it's
+really hard to write arbitrary code on
+really hard to write arbitrary code on
+that
+like
+Vault try
+this it probably just didn't compile the
+this it probably just didn't compile the
+snake and
+I think this
+runs there there you go Noah I just uh
+runs there there you go Noah I just uh
+I'd forgotten something in the port so
+I'd forgotten something in the port so
+the way that that that function works
+the way that that that function works
+like you have to set it for like a short
+like you have to set it for like a short
+train run and then you'll get stats on
+train run and then you'll get stats on
+that train run I would generally suggest
+that train run I would generally suggest
+that you probably want to profile the
+that you probably want to profile the
+envit self not the entire train Loop and
+envit self not the entire train Loop and
+there's like their little profiling
+there's like their little profiling
+Snippets in most of the M's that you can
+Snippets in most of the M's that you can
+use for
+use for
+that Jack me vmap with conditionals also
+that Jack me vmap with conditionals also
+yeah that's what I mean
+yeah that's what I mean
+JBL it's really
+janky most of the time it's like why
+janky most of the time it's like why
+would I spend so much effort getting
+would I spend so much effort getting
+something to run a million steps per
+something to run a million steps per
+second on a GPU which is the big
+second on a GPU which is the big
+expensive piece right when I can make it
+expensive piece right when I can make it
+run easily a million steps per second on
+run easily a million steps per second on
+one CPU
+one CPU
+core right it's like oh no the
+core right it's like oh no the
+infrastructure is so hard in order to
+infrastructure is so hard in order to
+get that data onto the GPU efficiently
+get that data onto the GPU efficiently
+yeah but puffer doesn't and our whole
+yeah but puffer doesn't and our whole
+stack for doing that is a thousand
+stack for doing that is a thousand
+lines just nobody bothered to do this
+lines just nobody bothered to do this
+right
+right
+puffer does it now it
+works okay so this works
+um now we have to make this puffer
+um now we have to make this puffer
+environment
+environment
+compatible so what we're going to do is
+how do you get one mil steps per second
+how do you get one mil steps per second
+on a single CPU core very easily just by
+on a single CPU core very easily just by
+not writing an optimized garbage python
+not writing an optimized garbage python
+like any of the you can look at the
+like any of the you can look at the
+source code of any of my environments
+source code of any of my environments
+they're very simple they're single file
+they're very simple they're single file
+cython they're just single file of
+cython they're just single file of
+cython uh it runs pure C but it's a lot
+cython uh it runs pure C but it's a lot
+easier than writing pure
+C I'm pretty confident at this point
+C I'm pretty confident at this point
+that I can Implement practically any
+that I can Implement practically any
+environment out there like any type of
+environment out there like any type of
+game EnV I want I can make like a
+game EnV I want I can make like a
+reasonable version of at several hundred
+reasonable version of at several hundred
+thousand steps per second guaranteed a
+thousand steps per second guaranteed a
+million steps per second probably and in
+million steps per second probably and in
+many cases many millions of steps per
+many cases many millions of steps per
+second per
+core like I don't know I was playing
+core like I don't know I was playing
+slay the Spire the other day I could
+slay the Spire the other day I could
+make that game run a million steps per
+make that game run a million steps per
+second if I just implemented it like
+second if I just implemented it like
+this right do it for whatever I want
+python is
+flow what about
+flow what about
+robotics yeah if you need a physics Sim
+robotics yeah if you need a physics Sim
+that's the that is the actual use case
+that's the that is the actual use case
+for gpus is if you need an expensive
+for gpus is if you need an expensive
+physics Sim pretty much everything else
+physics Sim pretty much everything else
+though
+though
+nah so that is with no paralyzation yeah
+nah so that is with no paralyzation yeah
+you can get a million steps per second
+you can get a million steps per second
+without any
+without any
+paraliz it depends what you mean by
+paraliz it depends what you mean by
+parallelization if you mean multicore
+parallelization if you mean multicore
+yeah without multicore just one thread
+yeah without multicore just one thread
+you can do that I do end up running
+you can do that I do end up running
+multiple copies of the environment per
+multiple copies of the environment per
+core um for convenience but I can still
+core um for convenience but I can still
+get it to be pretty darn close to that
+get it to be pretty darn close to that
+even without it in fact you know if you
+even without it in fact you know if you
+just get rid of the the loop overhead
+just get rid of the the loop overhead
+from python you still get a million per
+from python you still get a million per
+second nothing fancy really there's
+second nothing fancy really there's
+nothing to it and go read like The Snake
+nothing to it and go read like The Snake
+code or the MOBA code there's nothing
+code or the MOBA code there's nothing
+crazy in
+there
+false Okay so
+need to get these OBS into a reasonable
+need to get these OBS into a reasonable
+format
+right class values must be non-
+right class values must be non-
+negative what did I
+do
+huh oh
+are you not allowed to put a break point
+are you not allowed to put a break point
+there you should be
+there you should be
+right well there we go it's fine
+OBS
+OBS
+NP
+NP
+reshape num
+worlds
+worlds
+times objects
+let's
+work
+work
+nice so is there there is significant
+nice so is there there is significant
+performance increase with puffer just
+performance increase with puffer just
+running one copy of an environment
+running one copy of an environment
+okay you're you're conflating two things
+okay you're you're conflating two things
+here right there are puffer's first
+here right there are puffer's first
+party environments which are the
+party environments which are the
+environments that I've written to be
+environments that I've written to be
+fast right those environments are going
+fast right those environments are going
+to be fast uh on their own but then if
+to be fast uh on their own but then if
+you try to run those vectorized with
+you try to run those vectorized with
+other vectorization like Jim's
+other vectorization like Jim's
+vectorization that's going to be slow
+vectorization that's going to be slow
+cuz their vectorization implementation
+cuz their vectorization implementation
+is bad so in order to have many copies
+is bad so in order to have many copies
+of the environment on many cores be even
+of the environment on many cores be even
+faster you need puffer Libs
+faster you need puffer Libs
+vectorization so in a way puffer Libs ve
+vectorization so in a way puffer Libs ve
+enables puffer Libs environments now if
+enables puffer Libs environments now if
+you just hand me any old arbitrary
+you just hand me any old arbitrary
+environment that's slow to begin with
+environment that's slow to begin with
+garbage and garbage out I can't make
+garbage and garbage out I can't make
+something that slow any faster but if
+something that slow any faster but if
+let's say you have a reasonably fast
+let's say you have a reasonably fast
+environment that's being bottlenecked by
+environment that's being bottlenecked by
+Jim's really stupidly slow vectorization
+Jim's really stupidly slow vectorization
+then yes puffer's vectorization will
+then yes puffer's vectorization will
+make it
+faster the limiting factor is python
+faster the limiting factor is python
+itself well yeah python a slow language
+itself well yeah python a slow language
+right you can't just write a you can't
+right you can't just write a you can't
+write a simulation in pure Python and
+write a simulation in pure Python and
+expect it to be fast like many of the um
+expect it to be fast like many of the um
+many of the simulations that researchers
+many of the simulations that researchers
+use are just garbage unoptimized Python
+use are just garbage unoptimized Python
+and it runs it like a few hundred steps
+and it runs it like a few hundred steps
+per second like I can't do anything with
+per second like I can't do anything with
+that right the easiest way for me to fix
+that right the easiest way for me to fix
+something like that is to throw the
+something like that is to throw the
+environment away and rewrite it in scyon
+environment away and rewrite it in scyon
+and then it'll be a million steps per
+and then it'll be a million steps per
+second this one here is an exception
+second this one here is an exception
+which is why I'm using it right this is
+which is why I'm using it right this is
+a really fast one on
+cool so this still
+works
+works
+mpai mpai
+what are these duns are these torch
+tensors it should not be done on step
+tensors it should not be done on step
+one that's really weird
+nice okay so this is actually getting
+nice okay so this is actually getting
+pretty close to being usable already
+pretty close to being usable already
+believe it or
+believe it or
+not I'm sure there's a little bit of API
+not I'm sure there's a little bit of API
+Shenanigans we've
+Shenanigans we've
+forgotten um but this now
+forgotten um but this now
+returns we need numb agents right
+returns we need numb agents right
+yeah self. Nom
+agents I want this the other way
+agents I want this the other way
+around all
+around all
+right and then we'll do like
+right and then we'll do like
+this
+agents I'm surprised that there's no
+agents I'm surprised that there's no
+infos returned by this
+thing random action is
+actually torch.
+tensor this actually uh is it a discret
+tensor this actually uh is it a discret
+action space am I reading this
+right guess so kind of weird I'll ask
+right guess so kind of weird I'll ask
+him if that's intentional but
+him if that's intentional but
+so here is our uh here's our
+so here is our uh here's our
+code don't really need this display gift
+code don't really need this display gift
+function I'll just put this down here
+function I'll just put this down here
+for
+for
+now where do I put
+now where do I put
+this n
+this n
+whatever
+whatever
+um let's grab all this
+um let's grab all this
+code and
+let's there
+let's there
+GPU
+GPU
+Drive um what are we going to copy for
+this yeah
+GPU
+GPU
+Drive okay so this is just code that we
+Drive okay so this is just code that we
+copied from
+before we can get rid of all this
+garbage this is just from uh these are
+garbage this is just from uh these are
+all the first party M code I just copied
+all the first party M code I just copied
+this as a template
+okay here is our environment
+wrapper so we've got en
+Creator and this can
+Creator and this can
+return I think this just can return the
+return I think this just can return the
+fun this can just return
+fun this can just return
+puffer CPU Drive right just be a
+class we put puffer
+here I don't know if we need this worked
+here I don't know if we need this worked
+or anything I hope we don't need this
+or anything I hope we don't need this
+anymore um we will put these constants
+anymore um we will put these constants
+down here whichever ones we're actually
+down here whichever ones we're actually
+going to use at
+least not
+least not
+used the name
+used the name
+not
+not
+used unique yeah this is used and these
+used unique yeah this is used and these
+other ones are used
+right we might need episode
+right we might need episode
+length we do not need
+length we do not need
+this we do not need
+this we do not need
+this
+this
+TCH
+TCH
+um we do need torch which is a little
+um we do need torch which is a little
+bit obnoxious
+and we need puffer of
+and we need puffer of
+course everything is better with
+puffer
+okay so we have M crator puffer CPU
+okay so we have M crator puffer CPU
+drive and now we have to add a binding
+drive and now we have to add a binding
+to puffer
+lib what is wrong why can't I type
+lib what is wrong why can't I type
+we go
+um copy
+um copy
+config uh
+config uh
+ocean what we say we copy like the snake
+config GPU drive. any
+[Music]
+okay we have some stuff in here
+okay we have some stuff in here
+right GPU
+right GPU
+Drive GPU
+Drive GPU
+drive now we have a config for
+drive now we have a config for
+it uh is that it
+data does not exist or is empty so I
+data does not exist or is empty so I
+assume that we need this annoying um
+assume that we need this annoying um
+this
+this
+changer that's a little bit
+changer that's a little bit
+silly
+oops it's a little silly isn't it
+no
+no
+dim actions is not
+none
+ah it is
+ah it is
+in 73
+in 73
+right this has to be a torch tensor is
+right this has to be a torch tensor is
+slightly
+annoying doesn't need to be put to GPU
+annoying doesn't need to be put to GPU
+puffer is a CPU library for
+now no attribute dim
+still oh action
+I've getting I've gotten this error
+before invalid action
+shape
+shape
+shape what did we say the uh
+shape what did we say the uh
+hold
+on what's the shape of the reaction
+on what's the shape of the reaction
+here num worlds Max num objects okay so
+here num worlds Max num objects okay so
+we do actually have to reshape
+we do actually have to reshape
+it slightly annoying no big
+deal so that is an in the the thing
+deal so that is an in the the thing
+itself come
+on GPU drive
+on GPU drive
+error LOL it
+error LOL it
+works
+works
+haha apparently this thing is
+haha apparently this thing is
+running cool didn't expect it to run
+running cool didn't expect it to run
+that quickly
+um cool I guess
+let's go look at their networks and like
+let's go look at their networks and like
+add a reasonable Network and then we'll
+add a reasonable Network and then we'll
+do optimizations and make this thing
+do optimizations and make this thing
+real
+fast 60% M time is
+concerning but we'll
+concerning but we'll
+see re
+that's so funny that Eugene actually
+that's so funny that Eugene actually
+like manages the bug issues and like
+like manages the bug issues and like
+assigns grad students to stuff that's so
+funny that's so funny
+where's the
+network policy
+network policy
+actor agents policy
+actor agents policy
+actor do you have documentation of all
+actor do you have documentation of all
+the outof thebox
+the outof thebox
+optimizations if I want to write my own
+optimizations if I want to write my own
+M inside python um the way to think
+M inside python um the way to think
+about it is that just puffer's
+about it is that just puffer's
+vectorization is really really fast so
+vectorization is really really fast so
+it's not going to cap your speed of your
+it's not going to cap your speed of your
+environments to be way lower than it
+environments to be way lower than it
+should be if you want a like a
+should be if you want a like a
+comparison or you want convincing yes
+comparison or you want convincing yes
+there's a white
+paper there's like a good page here of
+paper there's like a good page here of
+optimizations and there's also uh there
+optimizations and there's also uh there
+are some perf tests on on stuff the perf
+are some perf tests on on stuff the perf
+actually has gotten way better since
+actually has gotten way better since
+then because like I literally the
+then because like I literally the
+environments weren't even fast enough
+environments weren't even fast enough
+for me to show how good puffer is if
+for me to show how good puffer is if
+that makes sense because when you get
+that makes sense because when you get
+really fast environments that's when you
+really fast environments that's when you
+really start to see existing
+really start to see existing
+vectorization implementations just
+chug I guess I we kind of did right we
+chug I guess I we kind of did right we
+had like 4 million versus
+had like 4 million versus
+100,000 that's like a good
+100,000 that's like a good
+example yeah they just chug
+okay we're going to look for their
+okay we're going to look for their
+agents in
+here please don't be
+gigantic
+gigantic
+wait
+wait
+huh where's your network
+where are your
+policies give me a policy
+demo oh there was a DOT High I'm just
+demo oh there was a DOT High I'm just
+dumb oh no they didn't have it up there
+dumb oh no they didn't have it up there
+okay um
+okay um
+where but
+where but
+like policy
+actor I'm so confused
+actor I'm so confused
+saved model trained policy
+saved model trained policy
+path model learned
+path model learned
+sp3 where's your
+implementation oh it's freaking
+implementation oh it's freaking
+sb3 oh that's hilarious wait if this is
+sb3 oh that's hilarious wait if this is
+sb3 then I'm going to be way faster are
+sb3 then I'm going to be way faster are
+you planning on implementing any GPU
+you planning on implementing any GPU
+acceleration the thing is you don't need
+acceleration the thing is you don't need
+any of this if you have GPU acceleration
+any of this if you have GPU acceleration
+like you don't need parallelization and
+like you don't need parallelization and
+stuff cuz all you're in for it is fast
+stuff cuz all you're in for it is fast
+and it's easy right like the thing is
+and it's easy right like the thing is
+that you just you put all the difficulty
+that you just you put all the difficulty
+into writing the Sim um it depends how
+into writing the Sim um it depends how
+complicated your physics are though
+complicated your physics are though
+right like we have stuff with continuous
+right like we have stuff with continuous
+control now uh if you have really heavy
+control now uh if you have really heavy
+physics then yeah you're probably going
+physics then yeah you're probably going
+to want to keep it there but if you're
+to want to keep it there but if you're
+just like if you have some like light
+just like if you have some like light
+physics stuff and it's not super fine
+physics stuff and it's not super fine
+grained like it doesn't run jillion
+grained like it doesn't run jillion
+times per second then uh you can
+times per second then uh you can
+probably just do a CPU and and have it
+probably just do a CPU and and have it
+be faster with puffer you got to
+be faster with puffer you got to
+remember that your network is supposed
+remember that your network is supposed
+to train on the GPU so anytime you're
+to train on the GPU so anytime you're
+running the environment on the GPU is
+running the environment on the GPU is
+time that you're stealing from your
+time that you're stealing from your
+policy right so if your environment runs
+policy right so if your environment runs
+a million steps per second well you're
+a million steps per second well you're
+not going to train more than like
+not going to train more than like
+500,000 steps per second right cuz your
+500,000 steps per second right cuz your
+Network's going to take a m your
+Network's going to take a m your
+Network's going to take half the time
+Network's going to take half the time
+and your environment's going to take
+and your environment's going to take
+half the
+time and buffer is just going to keep
+time and buffer is just going to keep
+getting faster as well we have um we
+getting faster as well we have um we
+have like optimizations more and more
+have like optimizations more and more
+optimizations coming for CPU stuff so
+optimizations coming for CPU stuff so
+like ultimately it's just going to be I
+like ultimately it's just going to be I
+I think that this just
+wins doesn't mean that environments like
+wins doesn't mean that environments like
+this aren't useful though because I can
+this aren't useful though because I can
+just run this in CPU mode and it's still
+just run this in CPU mode and it's still
+going to be fast um and you know if you
+going to be fast um and you know if you
+want to not deal with puffer's whole
+want to not deal with puffer's whole
+stack of stuff and you want a really
+stack of stuff and you want a really
+really simple thing then yeah you know
+really simple thing then yeah you know
+you can just run it in GPU
+you can just run it in GPU
+mode but I think it's going to be less
+mode but I think it's going to be less
+and less necessary to have to suffer so
+and less necessary to have to suffer so
+much in order to get this level of speed
+much in order to get this level of speed
+that said this specific project is
+that said this specific project is
+really really good work I'm excited to
+really really good work I'm excited to
+make it even faster for them
+see thanks bro yeah no
+see thanks bro yeah no
+worries we're having good times with
+worries we're having good times with
+this if you haven't already go ahead and
+this if you haven't already go ahead and
+give puffer a star if you find any of
+give puffer a star if you find any of
+this useful helps me out a whole
+this useful helps me out a whole
+ton we're at 758 right now huge amounts
+ton we're at 758 right now huge amounts
+of progress
+where is their
+where is their
+thingy and has Eugene replied to
+thingy and has Eugene replied to
+me oh dapne
+me oh dapne
+did Max cont agents
+did Max cont agents
+determines maximum you want to
+determines maximum you want to
+control since number of different
+control since number of different
+vehicles can be controlled 10 may result
+vehicles can be controlled 10 may result
+in you controlling five agents in one
+in you controlling five agents in one
+and nine and another up to at most
+and nine and another up to at most
+ooh that might be a tough
+ooh that might be a tough
+one that might be a tough
+one thank
+you if you're not doing proper masking
+you if you're not doing proper masking
+that's going to create problems s
+that's going to create problems s
+luckily puffer does have a masking
+luckily puffer does have a masking
+feature but we might have to do some
+feature but we might have to do some
+modification of
+modification of
+stuff in order to make this go Zoom
+is in
+baselines probably in here
+right s
+right s
+sp3 yeah this is painful having to do
+sp3 yeah this is painful having to do
+this with SP
+sp3 where is
+sp3 where is
+their MLP class
+their MLP class
+policy
+policy
+is exp
+is exp
+config where's exp
+config where's exp
+config ipo.
+config late Fusion net and late Fusion
+config late Fusion net and late Fusion
+policy networks perm
+policy networks perm
+EQ all
+EQ all
+right down the rabbit hole looking for
+right down the rabbit hole looking for
+this
+aha perm EQ late
+aha perm EQ late
+Fusion what is a late Fusion
+Fusion what is a late Fusion
+architecture am I just
+architecture am I just
+dumb have I just am I just dumb for not
+dumb have I just am I just dumb for not
+having heard of
+this late Fusion Network
+what is this something really obvious
+what is this something really obvious
+and like really common that I've just
+and like really common that I've just
+never heard
+of fusion of different modalities no
+of fusion of different modalities no
+that's something different all right
+that's something different all right
+let's read the
+code build Network
+o
+o
+yikes they got a lot of
+stuff doesn't look they got like they
+stuff doesn't look they got like they
+have anything fancy outside of that
+have anything fancy outside of that
+though
+so they unpack this
+right bat size num
+objects that's hard
+I'm afraid this network is just going to
+I'm afraid this network is just going to
+be
+be
+slow the main problem
+oh
+oh
+wait up to at most 10
+h
+puffer fish
+puffer fish
+go puffer fish
+go puffer fish
+go absolutely puffer fish
+go buffer go
+Moon build out network is they do linear
+Moon build out network is they do linear
+layer Norm
+layer Norm
+Dropout linear layer
+Norm I do not believe that that is a
+Norm I do not believe that that is a
+good
+good
+policy I have to read their paper for
+policy I have to read their paper for
+ablations but I do not believe that is a
+ablations but I do not believe that is a
+good
+policy long time everything yep doing
+policy long time everything yep doing
+well lots of progress being made here
+well lots of progress being made here
+we're currently adding bindings
+we're currently adding bindings
+for this where is it
+for this where is it
+where's this
+where's this
+thing this awesome GPU driving Sim
+thing this awesome GPU driving Sim
+adding this to puffer lib and we're
+adding this to puffer lib and we're
+going to see if we can make it really
+fast I'm trying to figure out how much
+fast I'm trying to figure out how much
+of this I actually
+want
+want
+G I think that um
+ego State Road objects Road graph
+ego State Road objects Road graph
+right I think this is like this the
+right I think this is like this the
+stuff that I
+want let's start copying this stuff in
+want let's start copying this stuff in
+though to the uh the model not going to
+though to the uh the model not going to
+get anywhere
+get anywhere
+by m
+around do we use the snake M to
+around do we use the snake M to
+start we'll use
+start we'll use
+this
+policy your work and personal of firing
+policy your work and personal of firing
+hey I'm glad you find my stuff
+hey I'm glad you find my stuff
+interesting it is all really
+interesting it is all really
+available right here
+you're
+good but Day One support for a Sim like
+good but Day One support for a Sim like
+this is going to be real cool to
+this is going to be real cool to
+have they're going to be real cool to
+have ego State
+have ego State
+them I think what we really just care
+them I think what we really just care
+about here and it's so funny to see them
+about here and it's so funny to see them
+do this because this is what you do with
+do this because this is what you do with
+the puffer Advanced API is you basically
+the puffer Advanced API is you basically
+do this exact thing and they've done it
+do this exact thing and they've done it
+for me but um I can tell that this
+for me but um I can tell that this
+involved a lot of pain and suffering and
+involved a lot of pain and suffering and
+uh there is a much easier API in Puffer
+uh there is a much easier API in Puffer
+that prevents pain and suffering that
+that prevents pain and suffering that
+would let you do the same thing so we'll
+would let you do the same thing so we'll
+use their Advanced API and make it
+use their Advanced API and make it
+really fast for them since they've gone
+really fast for them since they've gone
+to the effort but uh you know much much
+to the effort but uh you know much much
+pain and suffering could have been
+saved definitely much pain and suffering
+saved definitely much pain and suffering
+could have been saved sa
+D can we save me some pain and suffering
+D can we save me some pain and suffering
+with this freaking terrible copy
+with this freaking terrible copy
+paste
+jeez I don't know why it does
+this the killer feature of vs code is
+this the killer feature of vs code is
+not like any anything that neovim
+not like any anything that neovim
+doesn't have it's being able to actually
+doesn't have it's being able to actually
+copy and paste
+stuff imagine being able to do
+that just going to do this for
+now unflatten Road objects
+[Music]
+so uh we have all these like config
+so uh we have all these like config
+thingies
+where's their
+where's their
+config I think it's baselines
+config yeah this thing right here
+config yeah this thing right here
+so
+so
+okay num worlds is going to be
+okay num worlds is going to be
+50 we defin definitely want this
+file it's pretty cool that they have
+file it's pretty cool that they have
+their lab is called emerge
+their lab is called emerge
+lab that's
+fun oh they even have hyper parameters
+fun oh they even have hyper parameters
+for us that's very nice of
+them I really hope we just solve this
+them I really hope we just solve this
+environment
+environment
+today that'd be just so funny ah they
+today that'd be just so funny ah they
+actually have a very tiny little
+actually have a very tiny little
+Network tiny tiny little Network look at
+Network tiny tiny little Network look at
+this tiny tiny little
+Network ego State partner state road map
+dim I don't see where this thing is in
+dim I don't see where this thing is in
+the config
+the config
+is it's supposed to be
+here maybe if I
+look
+ah if ego
+State they have a lot of stuff in here
+State they have a lot of stuff in here
+don't
+they oh that's so sad that they had to
+they oh that's so sad that they had to
+write this in pi
+write this in pi
+game that must have been very
+painful it's like so funny having just
+painful it's like so funny having just
+been in this space for long enough that
+been in this space for long enough that
+like I know which packages just suck to
+like I know which packages just suck to
+work with and like I can just look at
+work with and like I can just look at
+the code and just say oh they had to do
+the code and just say oh they had to do
+this with that man that must have been
+this with that man that must have been
+you know several weeks of somebody's
+you know several weeks of somebody's
+life
+o the goal is to get to a place where
+o the goal is to get to a place where
+those packages no longer exist and we
+those packages no longer exist and we
+only have good packages so we can write
+only have good packages so we can write
+stuff like this without it being
+stuff like this without it being
+painful uh ego State
+dim where's the config
+[Music]
+and
+baselines no it's where was it was in
+baselines no it's where was it was in
+networks build your own packages from
+networks build your own packages from
+scratch I do build my own packages from
+scratch I do build my own packages from
+scratch all the time
+I didn't like the Atari renderer
+I didn't like the Atari renderer
+yesterday so I wrote one with
+RB okay so ego input
+RB okay so ego input
+dim anywhere we see ego input Dem this
+dim anywhere we see ego input Dem this
+is ego State
+Dem and then this is row input
+Dem and then this is row input
+Dem so this
+Dem so this
+is partner
+demm there road map dim
+row input dim is partner
+dim this is Road mapap
+dim doesn't need to be configurable does
+it road map oh this is road map agent
+it road map oh this is road map agent
+feet dim
+personal pet peeve
+personal pet peeve
+but I do not like types in
+but I do not like types in
+Python I do not like typed
+code which would also mean I do not like
+typescript AR Max is road map agent
+no typing and function signatures is
+no typing and function signatures is
+crazy man no no no let me tell you
+crazy man no no no let me tell you
+what's crazy man what's crazy man is
+what's crazy man what's crazy man is
+having type
+having type
+signatures uh typing in function
+signatures uh typing in function
+signatures that is not even enforced and
+signatures that is not even enforced and
+doesn't make your code any faster that's
+doesn't make your code any faster that's
+what's
+what's
+crazy when it's literally just there
+crazy when it's literally just there
+telling you that this is the type and
+telling you that this is the type and
+that's not even necessarily the type
+that's not even necessarily the type
+that's what's
+crazy I like my types when they actually
+crazy I like my types when they actually
+make the code fast and actually do
+something not when they sit around and
+something not when they sit around and
+pretend to be
+useful why do you need typescript I
+useful why do you need typescript I
+already typed my script I type them with
+already typed my script I type them with
+a
+a
+keyboard it's for the readability n no
+keyboard it's for the readability n no
+no there's you know what's readable
+no there's you know what's readable
+readable is how what's readable is when
+readable is how what's readable is when
+there's less code because it's not
+there's less code because it's not
+littered with types all right I don't
+littered with types all right I don't
+need to know that this is of type int
+need to know that this is of type int
+okay I see it says 32 that's the default
+okay I see it says 32 that's the default
+I don't need to know that this EnV is of
+I don't need to know that this EnV is of
+type like environment it's called EnV
+type like environment it's called EnV
+we're
+we're
+good I will gladly use types in syon
+good I will gladly use types in syon
+when it gives me a million frames per
+when it gives me a million frames per
+second
+second
+not in Python where it does nothing
+like is this useful I know this is a
+like is this useful I know this is a
+torch tensor it's inside of a freaking
+torch tensor it's inside of a freaking
+torch policy right I know it's going to
+torch policy right I know it's going to
+return a tensor because it's returning a
+return a tensor because it's returning a
+thing and it's a torch
+policy we're good
+do does this thing need a CNN anywhere I
+do does this thing need a CNN anywhere I
+don't think so
+right we just need hidden size 128
+right we just need hidden size 128
+maybe this is something we'll never see
+maybe this is something we'll never see
+ey on you can look at my scon code like
+ey on you can look at my scon code like
+I use I it's like yeah it's it's typed
+I use I it's like yeah it's it's typed
+it's
+fine honestly like the thing is if I
+fine honestly like the thing is if I
+have to type my python code like it's
+have to type my python code like it's
+not even worth using python for me
+not even worth using python for me
+anymore it's that bad like if I'm going
+anymore it's that bad like if I'm going
+to be typing my code anyways I want them
+to be typing my code anyways I want them
+enforced and I want to have speed out of
+enforced and I want to have speed out of
+it like I I'll pick literally any other
+it like I I'll pick literally any other
+language rather than type my python code
+I'd rather just write the whole thing in
+I'd rather just write the whole thing in
+scyon at that
+point I don't know go pick up some go or
+something that is too crazy though
+I will sometimes type the function
+I will sometimes type the function
+signatures for like uh documentation of
+signatures for like uh documentation of
+exposed stuff like if I have like a very
+exposed stuff like if I have like a very
+small surface of exposed code then
+small surface of exposed code then
+sometimes I'll do it so that the autod
+sometimes I'll do it so that the autod
+do picks it up as well but uh anything
+do picks it up as well but uh anything
+internal is not getting no it's not
+internal is not getting no it's not
+getting
+typed is not happening
+typed is not happening
+you can't make
+me now we have the non-deterministic
+me now we have the non-deterministic
+bug love me some non-deterministic
+bugs very good
+okay okay um well that's mildly
+okay okay um well that's mildly
+irritating
+structure
+data Max 1D
+pool Max pool across
+features I'm confused
+features I'm confused
+used I don't think you need this I think
+used I don't think you need this I think
+this is literally just a
+Max Max across
+Max Max across
+objects well this isn't bad at
+objects well this isn't bad at
+least yeah this is not bad at
+all
+so I think I just up with a little
+so I think I just up with a little
+Network for this
+right ego and
+bed pop for a
+bed pop for a
+lib
+lib
+net oops
+hidden
+hidden
+hidden be 64
+okay this is what we wanted so we just
+okay this is what we wanted so we just
+have a linear REO
+have a linear REO
+linear and then what we do is we do a
+linear and then what we do is we do a
+Max
+Max I'd like to figure out how to do
+Max I'd like to figure out how to do
+that well but we'll start with
+that well but we'll start with
+this and
+then self.
+then self.
+rge is going to
+rge is going to
+be from 3 * the input size to the hidden
+be from 3 * the input size to the hidden
+size figure me
+size figure me
+that okay and then we
+that okay and then we
+do
+embed we're going to make this network
+embed we're going to make this network
+so
+so
+fast it's going to have memory it's
+fast it's going to have memory it's
+going to be awesome their network does
+going to be awesome their network does
+not have any memory by the way isn't
+not have any memory by the way isn't
+that funny the driving cars that have no
+that funny the driving cars that have no
+memory
+values
+values
+indices okay
+okay so we
+do no let's not do that let's just do it
+do no let's not do that let's just do it
+this
+way Max m equals 1
+uh app
+embed hold
+on this one doesn't need
+on this one doesn't need
+Max I don't think
+Max I don't think
+right yeah no this one doesn't need it
+that looks pretty good to
+that looks pretty good to
+me that looks pretty
+good what do we think we think this is
+good what do we think we think this is
+going to
+going to
+train once we uh figure that's an
+train once we uh figure that's an
+environment
+bug come
+bug come
+on there it
+on there it
+goes oh
+goes oh
+yeah we
+yeah we
+train we' be
+train we' be
+training solid
+uh
+so do we have an lstm
+here RNN names got to be recurrent
+here RNN names got to be recurrent
+Let's uh let's set some hyper parameters
+yeah
+yeah
+so policy name is policy RNN name is
+recurrent and we can use their
+recurrent and we can use their
+hypers they gave us some nice
+hypers wa
+99 G Lambda 0.9
+99 G Lambda 0.9
+5 clip
+5 clip
+coefficient 2 value function coefficient
+coefficient 2 value function coefficient
+0.5 uh VF clip coefficient I think is
+0.5 uh VF clip coefficient I think is
+going to be the same
+going to be the same
+0.2 grad
+0.2 grad
+Norm 0.5 will be a good default I don't
+Norm 0.5 will be a good default I don't
+see
+it entropy o1 learning rate 3 eus 4
+wait three e this is 4 e minus 3 did I
+wait three e this is 4 e minus 3 did I
+do it
+do it
+backwards what was it 3 e minus 4 yeah
+backwards what was it 3 e minus 4 yeah
+this num epox is
+this num epox is
+five are you guys sure about that that's
+five are you guys sure about that that's
+uh that's going to slow you down a
+uh that's going to slow you down a
+lot that's a bad sign right there I'm
+lot that's a bad sign right there I'm
+leave it at one for
+now any other hypers
+num
+num
+worlds stuff like
+worlds stuff like
+that
+that
+mhm so far so good
+mini batch
+mini batch
+size Let's uh do some
+size Let's uh do some
+optimizing
+384 okay can I figure out what the heck
+384 okay can I figure out what the heck
+is wrong with this
+I didn't change any of this stuff did I
+okay
+35,000 53% on the
+35,000 53% on the
+N so we didn't even do multicore yet
+what is it that they say they
+do 128 by
+10 I probably want 4096 per core right
+10 I probably want 4096 per core right
+so let me
+think that's 32m
+think that's 32m
+right seems like a
+right seems like a
+lot we'll try it for
+now this is where we're going to have to
+now this is where we're going to have to
+figure out that bug if we want to
+figure out that bug if we want to
+continue because it's so unlikely that
+continue because it's so unlikely that
+we're going to get a good one
+oh
+really that's a lot of
+really that's a lot of
+data it's a lot of data
+I mean we'll see whether this ends up
+I mean we'll see whether this ends up
+being reasonable or not but that's a lot
+being reasonable or not but that's a lot
+of
+data I bet this Sim is not going to end
+data I bet this Sim is not going to end
+up being crazy fast on
+up being crazy fast on
+CPU I'm going to think if I'm going to
+CPU I'm going to think if I'm going to
+do like
+do like
+24 24
+environments I probably want 1024
+instead let's let's do 1024 environments
+instead let's let's do 1024 environments
+instead so we'll divide this by four
+instead so we'll divide this by four
+we'll do eight
+we'll do eight
+worlds this gives
+and this
+and this
+is let's do like
+is let's do like
+eight num workers is
+eight num workers is
+eight do I have N8 core
+processor yeah I
+do I'm bad size
+it's m b size the pram
+it's m b size the pram
+name okay so what I'm doing now is I'm
+name okay so what I'm doing now is I'm
+setting Hardware optimal
+parameters okay that's good it's about
+parameters okay that's good it's about
+the same as what it was before
+and now we do
+this uhoh that's taking a
+while stuck
+something's
+wrong well that's definitely weird
+right okay so this is this bug that we
+right okay so this is this bug that we
+got to fix
+got to fix
+right one hun in code
+can I figure out what this
+is also let's see if I have any other
+is also let's see if I have any other
+replies from uh the creators of this
+I might hop off the stream for a few
+I might hop off the stream for a few
+minutes here in order
+minutes here in order
+to do
+this
+okay I'm going to hop off the stream for
+okay I'm going to hop off the stream for
+a quick second to do a call I'll be back
+a quick second to do a call I'll be back
+in a
+in a
+few oh
+few oh
+unless she is watching the live stream
+unless she is watching the live stream
+I'm one of the
+devs I'm going to close the stream I'll
+devs I'm going to close the stream I'll
+be back in a few

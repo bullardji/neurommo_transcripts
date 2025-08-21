@@ -1,0 +1,3793 @@
+Kind: captions
+Language: en
+Okay, we are live here.
+Morning. Let's
+uh are we
+back? I think the internet just cut out
+back? I think the internet just cut out
+for a
+for a
+second. Looks like it's stable now.
+That's
+funny.
+funny.
+Okay, starting today, uh here's the
+Okay, starting today, uh here's the
+plan.
+plan.
+We are going to first do a little bit of
+We are going to first do a little bit of
+analysis on the experiments that run LA
+analysis on the experiments that run LA
+that ran last night and then after that
+that ran last night and then after that
+I have a couple different methods that I
+I have a couple different methods that I
+want to integrate uh with puffer. I want
+want to integrate uh with puffer. I want
+to do probably cosine analing. That's an
+to do probably cosine analing. That's an
+easy one. And I definitely want to do um
+easy one. And I definitely want to do um
+MUP. That is the different
+MUP. That is the different
+initialization that makes it easier to
+initialization that makes it easier to
+scale learning rate. And uh I'm
+scale learning rate. And uh I'm
+definitely want to look into that a
+definitely want to look into that a
+little bit more
+little bit more
+deeply. First of
+deeply. First of
+all, let's take a look at a couple of
+all, let's take a look at a couple of
+these because we should have a few
+these because we should have a few
+hundred
+hundred
+experiments. Looks like there are some
+experiments. Looks like there are some
+still running.
+And
+okay. Oh, that's very nice. Look at
+okay. Oh, that's very nice. Look at
+that.
+that.
+So, this
+is Yeah, this is the
+is Yeah, this is the
+completed hyper pram sweep. Let's now
+completed hyper pram sweep. Let's now
+compare this to what we had before.
+compare this to what we had before.
+Let's see if there's a significant
+Let's see if there's a significant
+difference. So, this should be identical
+difference. So, this should be identical
+to our initial baseline sweep except
+to our initial baseline sweep except
+that this time we swept the atom
+that this time we swept the atom
+parameters. People don't usually sweep
+parameters. People don't usually sweep
+those, but I have a friend in
+those, but I have a friend in
+optimization who told me, "Yeah,
+optimization who told me, "Yeah,
+definitely sweep those."
+You know, it really looks like it's
+You know, it really looks like it's
+about the same, doesn't
+it? I guess cost 84 maybe
+it? I guess cost 84 maybe
+here. It's kind of tough to
+here. It's kind of tough to
+see. Let's put them side by
+side.
+Oops. Okay. So we'll side by side
+this I mean this is like a little better
+this I mean this is like a little better
+but I don't even know if this is
+but I don't even know if this is
+statistically significant
+statistically significant
+whatsoever. Now I guess the other thing
+whatsoever. Now I guess the other thing
+that we can do what are you trying to
+that we can do what are you trying to
+optimize here? So this is just more
+optimize here? So this is just more
+hyperparameter sweep. This is just on a
+hyperparameter sweep. This is just on a
+quick breakout test. End. The key here
+quick breakout test. End. The key here
+though is we uh we're sweeping the atom
+though is we uh we're sweeping the atom
+hyperparameters beta 1, beta 2 and the
+hyperparameters beta 1, beta 2 and the
+epsilon. So we were seeing basically if
+epsilon. So we were seeing basically if
+there is any value in tuning that even
+there is any value in tuning that even
+in like the simplest case. Now um you
+in like the simplest case. Now um you
+know we have to run this type of stuff
+know we have to run this type of stuff
+over way more
+over way more
+environments. But this isn't just like
+environments. But this isn't just like
+initial hey is there something obvious
+initial hey is there something obvious
+here that people have missed?
+here that people have missed?
+because I had some optimization friends
+because I had some optimization friends
+who tell me that there
+is. Let me look at
+is. Let me look at
+the There's some things we should look
+the There's some things we should look
+at here though to
+at here though to
+confirm what we're
+seeing. Where's the uh the
+seeing. Where's the uh the
+time? There should be a time one in here
+time? There should be a time one in here
+somewhere.
+this. Yeah. Right. So, this is total
+this. Yeah. Right. So, this is total
+time steps and then we have
+SPS. Okay. Interesting. So, it looks
+SPS. Okay. Interesting. So, it looks
+like the one on the right ran way
+like the one on the right ran way
+faster.
+So, did the one on the right want Did
+So, did the one on the right want Did
+the one on the
+right let me see why it ran faster.
+right let me see why it ran faster.
+Because if there's like one machine is
+Because if there's like one machine is
+faster than the other, right? That's the
+faster than the other, right? That's the
+the one issue with using wall clock as
+the one issue with using wall clock as
+your time is that if the machines are
+your time is that if the machines are
+faster than the other, then there's an
+faster than the other, then there's an
+issue with that. Um, but it can also
+issue with that. Um, but it can also
+just be that we didn't get lucky and
+just be that we didn't get lucky and
+discover the right hypers
+discover the right hypers
+here. In fact, I think what we're going
+here. In fact, I think what we're going
+to do is we're going to just
+take let's just take a
+take let's just take a
+point. Maybe we'll take a couple of
+them. I think this one's a little bit of
+them. I think this one's a little bit of
+an
+an
+outlier. This one looks good.
+outlier. This one looks good.
+242. This one's like nice and stable,
+right? And then here we'll pick
+right? And then here we'll pick
+um we'll pick a
+point. I just want to get a sense of
+point. I just want to get a sense of
+what the hyperparameters look like and
+what the hyperparameters look like and
+if they're very different or
+if they're very different or
+not. And I guess we'll take this point
+not. And I guess we'll take this point
+here. This is like the
+here. This is like the
+closest
+analog 21536.
+X. Okay.
+So this one ran way fewer
+samples. So So these found like
+samples. So So these found like
+completely different
+hyperparameters. Ignore
+hyperparameters. Ignore
+this. We
+this. We
+get this is like the current learning
+get this is like the current learning
+rate. It got annealed.
+512 M's only. This is
+2048. Hi, I was wondering, oops, hang
+2048. Hi, I was wondering, oops, hang
+on. I was wondering if anyone has made
+on. I was wondering if anyone has made
+any breakthroughs on
+completing Pokemon using Puffer Lib. Uh
+completing Pokemon using Puffer Lib. Uh
+the original project does use puffer
+lip. That was uh you know we uh that's a
+lip. That was uh you know we uh that's a
+powered by puffer project right there.
+powered by puffer project right there.
+Let me find it. Where's the
+blog? Where's the new blog?
+Where' the uh where' the site
+Where' the uh where' the site
+go? Where did the blog
+go? Where did the blog
+go? Oh, there it is. Okay. Yeah. See,
+go? Oh, there it is. Okay. Yeah. See,
+powered by
+powered by
+Puffer. The compute for this came from
+Puffer. The compute for this came from
+Puffer Lib. the tools like the library,
+Puffer Lib. the tools like the library,
+the training code, vectorization and
+the training code, vectorization and
+everything came from Puffer. So, we've
+everything came from Puffer. So, we've
+been collaborating on this project since
+been collaborating on this project since
+uh since P-Dubs did the initial, you
+uh since P-Dubs did the initial, you
+know, beat the first gym release.
+It would have been a lot harder without
+It would have been a lot harder without
+puffer lip because it would have been at
+puffer lip because it would have been at
+least like 30 50%
+slower. Not to mention all our other
+slower. Not to mention all our other
+tools.
+Okay. So, here we have our
+betas. These are a bit different from
+betas. These are a bit different from
+the
+defaults. Small batch
+defaults. Small batch
+size, but fewer M. So, that makes sense.
+size, but fewer M. So, that makes sense.
+And actually, proportionally fewer. So,
+And actually, proportionally fewer. So,
+that's interesting.
+that's interesting.
+What do BPT arise
+in? About the same
+entropy. Uh, lambda is way higher. Gamma
+entropy. Uh, lambda is way higher. Gamma
+is very
+is very
+similar. Lower learning
+similar. Lower learning
+rate. Gradient norm size.
+rate. Gradient norm size.
+Cool. Three update epochs.
+I mean, this is at least interesting in
+I mean, this is at least interesting in
+that it's dramatically dramatically more
+that it's dramatically dramatically more
+sample efficient,
+right? I don't think we've ever seen
+right? I don't think we've ever seen
+um maybe we've seen something solved
+um maybe we've seen something solved
+this fast, but this is now
+this fast, but this is now
+like I think this is far far far beating
+like I think this is far far far beating
+like the original sample uh efficiency
+like the original sample uh efficiency
+of PO. Uh, and this is still
+of PO. Uh, and this is still
+like maybe 300 times faster than the
+like maybe 300 times faster than the
+original. So, this is kind of cool that
+original. So, this is kind of cool that
+we're winning on both fronts.
+Now, I think what I want to do first
+Now, I think what I want to do first
+is let's go grab I think we probably
+is let's go grab I think we probably
+already have these hyperparameters in
+already have these hyperparameters in
+place. Let's just put these betas in and
+place. Let's just put these betas in and
+see if it helps or if it like really
+see if it helps or if it like really
+does change all the optimal
+does change all the optimal
+hyperparameters. That'll be a quick
+hyperparameters. That'll be a quick
+experiment to
+run. Oops. Uh, this is frozen for some
+run. Oops. Uh, this is frozen for some
+reason. There we
+reason. There we
+go. Let's put this not blocking the
+go. Let's put this not blocking the
+screen. I really got to get some
+screen. I really got to get some
+overlays so I don't cover like the chat
+overlays so I don't cover like the chat
+and stuff when I do that.
+mess that
+up. There we
+up. There we
+go. And that'll only take like a
+minute. And then we will copy and
+Whoops. Something screwed up here.
+Oh
+yeah, I totally forgot about that. Okay,
+yeah, I totally forgot about that. Okay,
+we'll do this on the other branch
+we'll do this on the other branch
+then and then I'll I'll fix that after.
+I believe this is the one that this is a
+I believe this is the one that this is a
+uh solving
+uh solving
+config. Kind of
+slow. This kind of
+slow. This kind of
+slow. I don't think these are the
+slow. I don't think these are the
+optimal params for
+this. Yeah. Let me go get better
+params. Yeah, you can see actually here
+params. Yeah, you can see actually here
+I was using parameters for the new
+I was using parameters for the new
+algorithm which are different from the
+algorithm which are different from the
+DPO parameters a little
+bit. See how this looks.
+Oh, and actually hang on. Is this the
+Oh, and actually hang on. Is this the
+wrong
+algorithm? Yeah, this is the wrong
+algorithm? Yeah, this is the wrong
+algorithm, too.
+All right, we can start with this. This
+All right, we can start with this. This
+is like decent enough.
+Okay, here's our initial
+Okay, here's our initial
+baseline. And now let's take our atom
+parameters are here.
+I like how it just makes up a
+number. Morning. What are you working
+number. Morning. What are you working
+on? Uh, I'm testing the atom hyperparam
+on? Uh, I'm testing the atom hyperparam
+sweeps for now and then we're probably
+sweeps for now and then we're probably
+going to do
+going to do
+muup different initialization stuff and
+muup different initialization stuff and
+then we're probably going to do cosine
+then we're probably going to do cosine
+and aling. So, it's like a whole bunch
+and aling. So, it's like a whole bunch
+of little algorithm things I've wanted
+of little algorithm things I've wanted
+to do. Maybe E3B after we'll
+see. And there's GG there's GGE stuff to
+see. And there's GG there's GGE stuff to
+do. There's lots and lots of things to
+do. There's lots and lots of things to
+work on.
+work on.
+Got to kick puffer into overdrive
+Got to kick puffer into overdrive
+already.
+How much did atom prams help? They did
+How much did atom prams help? They did
+something
+something
+weird. They found
+weird. They found
+um so they found a very different set of
+um so they found a very different set of
+hyperparameters that solves in about the
+hyperparameters that solves in about the
+same amount of time, runs way slower,
+same amount of time, runs way slower,
+and uses way fewer
+and uses way fewer
+samples. So it like it runs about half
+samples. So it like it runs about half
+the steps per second, but it solves in
+the steps per second, but it solves in
+like less than half the number of
+like less than half the number of
+samples.
+Well, this is
+something. Well, you can't say epsilon
+something. Well, you can't say epsilon
+has a big impact. We got to look at I'll
+has a big impact. We got to look at I'll
+show you how we'll do that analysis in a
+show you how we'll do that analysis in a
+second. So, I mean, it's hard to say if
+second. So, I mean, it's hard to say if
+this is statistically significant. I'd
+this is statistically significant. I'd
+have to run it a whole bunch of times.
+have to run it a whole bunch of times.
+But like, you know, maybe this is
+But like, you know, maybe this is
+helping. All I just did here is I took
+helping. All I just did here is I took
+the optimal runs um atom beta
+the optimal runs um atom beta
+params and I just threw them on the
+params and I just threw them on the
+existing breakout params.
+But I wouldn't call that a failure.
+But I wouldn't call that a failure.
+Like, you know, it's like, okay, maybe
+Like, you know, it's like, okay, maybe
+there's a little bit of alpha in the
+there's a little bit of alpha in the
+atoms. The sample efficiency thing was
+atoms. The sample efficiency thing was
+actually the most interesting. I would
+actually the most interesting. I would
+say, you know, maybe there's something
+say, you know, maybe there's something
+with it reusing the same data.
+And we'll do a little bit of the
+And we'll do a little bit of the
+ablation analysis right now because why
+ablation analysis right now because why
+not? Um, so what you do for
+not? Um, so what you do for
+that is a trick that I like to
+do. So we do uh cost where this
+cost less
+cost less
+than and we'll pick like
+We say
+We say
+100. Maybe we'll do
+100. Ah, shoot. The dashboard's
+100. Ah, shoot. The dashboard's
+glitched. Hang on.
+90.
+Cool. All right. So, these are all the
+Cool. All right. So, these are all the
+faster
+runs. And now we can look at the betas
+runs. And now we can look at the betas
+from
+here
+here
+97. What was what did we use? I think we
+97. What was what did we use? I think we
+did use that point. Yeah, 97. So it
+did use that point. Yeah, 97. So it
+actually it changed the beta from the
+original. Oh, it increased
+it. It's a little bit like annoying
+it. It's a little bit like annoying
+because I know that you can get a high
+because I know that you can get a high
+score in that amount of time, right,
+score in that amount of time, right,
+with a beta like this. So this could
+with a beta like this. So this could
+just be sample bias.
+It looks like if anything
+It looks like if anything
+though, maybe the uh beta one is a
+though, maybe the uh beta one is a
+little low by
+little low by
+default. Filtering to find I'm filtering
+default. Filtering to find I'm filtering
+to find the fastest hyper because
+to find the fastest hyper because
+anything will solve it if you give it
+anything will solve it if you give it
+five minutes.
+Yeah, the thing that I'm seeing most
+Yeah, the thing that I'm seeing most
+here
+here
+is that um maybe this first beta needs
+is that um maybe this first beta needs
+to be increased a little bit from the
+default and all the runs over here.
+Okay. So, we'll keep that. You know,
+Okay. So, we'll keep that. You know,
+we'll we have that as a experiment and
+we'll we have that as a experiment and
+an option
+an option
+now. And then the next thing I wanted to
+see is
+this. We
+this. We
+have 115 second solves
+have 115 second solves
+uh with the new
+uh with the new
+algorithm. This is still running as
+well. 62 seconds 700 is pretty good.
+Let me think how uh how we can think
+Let me think how uh how we can think
+about this as
+about this as
+well.
+Sample. Oh, I guess I left this in. So,
+Sample. Oh, I guess I left this in. So,
+I was sweeping Adam in here as well. No
+I was sweeping Adam in here as well. No
+big
+big
+deal. Okay, so we're still up here to
+deal. Okay, so we're still up here to
+900,000 steps per
+900,000 steps per
+second. I know with some of these faster
+runs we
+runs we
+[Music]
+[Music]
+getting 8K mini batch is
+getting 8K mini batch is
+good. Total time steps is reasonable.
+good. Total time steps is reasonable.
+Batch
+Batch
+size pretty
+size pretty
+reasonable. Uh found a few of these
+reasonable. Uh found a few of these
+numms. It didn't really go this way too
+numms. It didn't really go this way too
+much.
+much.
+But it's
+fine. I guess I would want to try the
+fine. I guess I would want to try the
+optimal breakout params real
+quick. I think if I just want to play
+quick. I think if I just want to play
+with this for a
+with this for a
+second. Yeah, I kind of just want to
+second. Yeah, I kind of just want to
+play with the uh the breakout params in
+play with the uh the breakout params in
+this new algorithm for a few minutes
+this new algorithm for a few minutes
+just to see if I can find anything
+interesting. It's always interesting
+interesting. It's always interesting
+when you find like very different
+when you find like very different
+optimal hypers or stuff like that.
+This is basically 100 mil,
+right? Why does this have plus
+right? Why does this have plus
+120? Didn't I just click this and had uh
+I'm confused here. Hang
+on. 21
+335. This opened a completely different
+335. This opened a completely different
+window.
+Okay, this is good. This is the right
+one. 1024
+M. Soon more of us are doing research
+M. Soon more of us are doing research
+more often. We should rank the puffer m
+more often. We should rank the puffer m
+by training speed and
+by training speed and
+difficulty might be helpful. low
+difficulty might be helpful. low
+difficulty. The thing is that the
+difficulty. The thing is that the
+training speed you're going to be able
+training speed you're going to be able
+to get to be pretty decent on on any of
+them. We're going to be using all of
+them. We're going to be using all of
+them, I would
+them, I would
+think, as well. And the only way to rank
+think, as well. And the only way to rank
+them is to do full hyperp sweeps
+them is to do full hyperp sweeps
+anyways.
+Oh, got to get more people doing
+Oh, got to get more people doing
+research.
+Oh, wait. Is it 70? What's this?
+71. It's only 70 mil time steps.
+and two update
+and two update
+epox.
+epox.
+Okay, see how this
+Okay, see how this
+works. Train with torch deterministic
+works. Train with torch deterministic
+true.
+Whatever the default is, I think Clean
+Whatever the default is, I think Clean
+Arrow has that on for
+Arrow has that on for
+reproducibility. I don't think that that
+reproducibility. I don't think that that
+would make any difference though,
+right? What does that pram even do?
+Uh, I can go benchmark
+it.
+Here, let me get this in first.
+Dashboard's really annoying how it does
+this.
+this.
+Okay. Why does this look
+Okay. Why does this look
+worse? Oh, I guess this is with
+worse? Oh, I guess this is with
+P301.
+P301.
+Shouldn't be
+Shouldn't be
+though. Probably must I must have a
+though. Probably must I must have a
+difference in hypers or
+something. See 830k.
+Okay, that didn't work at all.
+Two updated
+Two updated
+epox two mills total
+epox two mills total
+steps
+steps
+entropy
+gamma the lambda gamma learning rate
+gamma the lambda gamma learning rate
+gradient
+norm. Uh, these params all look fine.
+norm. Uh, these params all look fine.
+So, what did I
+So, what did I
+do? I must have done
+something.
+something.
+50. It's a minute 13, a minute 11 or
+50. It's a minute 13, a minute 11 or
+whatever.
+kPS, 1024 m
+Yeah, something screwy
+here cuz that did not replicate at
+here cuz that did not replicate at
+all. Unless I broke something in the
+all. Unless I broke something in the
+meanwhile. I think I
+meanwhile. I think I
+did. But this is sketchy because this
+did. But this is sketchy because this
+should definitely
+replicate or something in the base
+replicate or something in the base
+config.
+I don't see anything.
+Horizon's correct
+Uh yeah, that's just
+bizarre. It's also a tad slower than
+bizarre. It's also a tad slower than
+before.
+Only thing I can think of.
+Get out of here,
+bot. Morning,
+folks. Doing some experimental analysis
+folks. Doing some experimental analysis
+here.
+and hopefully coming up with some good
+and hopefully coming up with some good
+uh good tweaks for
+puffer. I'm going to have to run this
+puffer. I'm going to have to run this
+experiment again because I got a
+experiment again because I got a
+completely different result
+completely different result
+here. It's possible this is just like an
+here. It's possible this is just like an
+inconsistent set of
+hypers. It's also possible that the atom
+hypers. It's also possible that the atom
+pra actually matter. So there's the
+pra actually matter. So there's the
+replication.
+Where is it? This one? No, not this one.
+Where is it? This one? No, not this one.
+This
+This
+one. So, right
+here. Meantime, I will go look up the
+here. Meantime, I will go look up the
+default atom
+default atom
+params. It's 0.9 and.999, which is what
+params. It's 0.9 and.999, which is what
+I set it to.
+Is it the epsilon that makes the
+Is it the epsilon that makes the
+difference
+there? That's the only thing I can see
+there? That's the only thing I can see
+is it's a very different
+epsilon. We'll we will see. It could
+epsilon. We'll we will see. It could
+also just be inconsistency in the um in
+also just be inconsistency in the um in
+the
+the
+seed. Some of these arcade ms are a
+seed. Some of these arcade ms are a
+little sketchy that way. We will fix
+little sketchy that way. We will fix
+that. But for now,
+Yeah, it's just seed
+Yeah, it's just seed
+inconsistency. Why Adam and not Adam
+W? Is there any evidence Adam W is like
+W? Is there any evidence Adam W is like
+consistently
+better
+better
+decoupled. People don't even use weight
+decoupled. People don't even use weight
+decay at the moment in RL. That's one of
+decay at the moment in RL. That's one of
+the things I've been meaning to run some
+the things I've been meaning to run some
+experiments
+experiments
+on. But um yeah, people don't even use
+on. But um yeah, people don't even use
+weight decay.
+Yeah. So this would be equivalent to
+Yeah. So this would be equivalent to
+atom I would think without weight
+atom I would think without weight
+decay and then we would have to try them
+decay and then we would have to try them
+both with weight decay.
+Okay. Yeah, this matches. So, it was
+Okay. Yeah, this matches. So, it was
+just uh some seed noise. That's fine. I
+just uh some seed noise. That's fine. I
+mean, that's cool that we have uh what's
+mean, that's cool that we have uh what's
+this? Uh 118. So, that's uh 80ish second
+this? Uh 118. So, that's uh 80ish second
+solve. And now we can
+solve. And now we can
+try. Let me see if the new atom params
+try. Let me see if the new atom params
+made any difference.
+should look into learning rate
+should look into learning rate
+schedulers. Yeah, actually I'm going to
+schedulers. Yeah, actually I'm going to
+do that
+do that
+today. That's part of what I'm going to
+today. That's part of what I'm going to
+do today if I get to
+do today if I get to
+it. Oh, that one. Is that just auler? I
+it. Oh, that one. Is that just auler? I
+thought that was a whole different
+algorithm. Yeah, I know. Lucas
+of parameters simultaneously.
+schedule
+Breathe. I've also heard about
+Muan. We can play with these. It'd be
+Muan. We can play with these. It'd be
+pretty easy to play with
+them. Let's get our like basic stuff
+them. Let's get our like basic stuff
+done first
+though. I think um order of priorities
+though. I think um order of priorities
+today is I want to do I want to finish
+today is I want to do I want to finish
+up this analysis. I probably want to do
+up this analysis. I probably want to do
+stuff on mu
+stuff on mu
+mup and then I want to do uh optimizer
+stuff. I mean this doesn't really count,
+stuff. I mean this doesn't really count,
+right? This what I'm doing here. This is
+right? This what I'm doing here. This is
+pretty
+basic. MUP is this thing that LM people
+basic. MUP is this thing that LM people
+use a bunch that lets you use the same
+use a bunch that lets you use the same
+set of hyperparameters uh or same
+set of hyperparameters uh or same
+learning rate in particular as you make
+learning rate in particular as you make
+the network
+the network
+larger cuz I want to add the network
+larger cuz I want to add the network
+size as h as the uh as a hyperparameter
+size as h as the uh as a hyperparameter
+to the sweep you
+know we'll see what this
+know we'll see what this
+does so this is now
+does so this is now
+the same experiment as before so
+the same experiment as before so
+optimized breakout pars but with
+optimized breakout pars but with
+um the tuned atom coefficients. So, it's
+um the tuned atom coefficients. So, it's
+apples to oranges, but the hope is that
+apples to oranges, but the hope is that
+it just is better. You know, it's per
+it just is better. You know, it's per
+environment. That'd be cool. Yeah. I got
+environment. That'd be cool. Yeah. I got
+to stop like putting white background
+to stop like putting white background
+stuff on my
+stuff on my
+chat. I've been really meaning to just
+chat. I've been really meaning to just
+get like a basic overlay made for this.
+Does that just crash everything right
+Does that just crash everything right
+here? Is that what I'm seeing?
+It's
+bizarre. Again though, there is some
+bizarre. Again though, there is some
+seed varian. So I will try it again.
+few more experiments and we move on to
+few more experiments and we move on to
+MUP. Uh I just want to check
+MUP. Uh I just want to check
+this. I think it's going to be slightly
+this. I think it's going to be slightly
+more complicated than anticipated with
+more complicated than anticipated with
+this. We'll see.
+And then I wanted to try
+And then I wanted to try
+um I wanted to try the latest version
+um I wanted to try the latest version
+of the new algorithm on
+of the new algorithm on
+this with these params as well.
+Yeah, that's just awful performance.
+Yeah, that's just awful performance.
+That's
+That's
+crazy. Okay, so it's not as easy as just
+crazy. Okay, so it's not as easy as just
+shifting the params and calling it a
+shifting the params and calling it a
+day.
+Not quite so easy.
+So, I made this cool modification late
+So, I made this cool modification late
+last night to
+last night to
+P3. Um, I was having this problem where
+P3. Um, I was having this problem where
+as you would increase the
+as you would increase the
+horizon, the allowable horizon, it would
+horizon, the allowable horizon, it would
+change the algorithm. It would make it
+change the algorithm. It would make it
+so you couldn't reuse the same
+so you couldn't reuse the same
+hyperparameters. Now, it has an adaptive
+hyperparameters. Now, it has an adaptive
+horizon. So it starts at 16 and you will
+horizon. So it starts at 16 and you will
+see it increase once the uh the score
+see it increase once the uh the score
+gets a little
+higher. And the horizon in this case uh
+higher. And the horizon in this case uh
+is the number of samples into the future
+is the number of samples into the future
+it's
+considering settles on it. The horizon
+considering settles on it. The horizon
+just tends to increase over time because
+just tends to increase over time because
+it's based on what it can predict. So
+it's based on what it can predict. So
+the farther out it can predict the uh
+the farther out it can predict the uh
+the farther out it uses
+samples. Now these hyperparameters are
+samples. Now these hyperparameters are
+not for this algorithm. I was just
+not for this algorithm. I was just
+trying this. This doesn't seem to work
+trying this. This doesn't seem to work
+particularly well
+particularly well
+uh with these
+hypers. It's a start though.
+different from the horizon that Yes, it
+different from the horizon that Yes, it
+is. It's
+is. It's
+different. Okay, so it doesn't work with
+different. Okay, so it doesn't work with
+these hypers. That's what I was
+these hypers. That's what I was
+checking. I will run it one more time
+checking. I will run it one more time
+just in case there's like seed variants,
+just in case there's like seed variants,
+though I highly doubt
+it. And uh I think we'll just go to MUP
+it. And uh I think we'll just go to MUP
+so I can, you know, not get stuck on
+so I can, you know, not get stuck on
+this all morning.
+So, I've had my eye on this for a
+So, I've had my eye on this for a
+while. This is the core graph right
+here. is they find
+here. is they find
+that
+normally the optimum learning rate
+normally the optimum learning rate
+changes when you shift batch size not
+changes when you shift batch size not
+batch size when you shift the learning
+batch size when you shift the learning
+rate optimal learning rate changes when
+rate optimal learning rate changes when
+you shift the model size. So there we
+you shift the model size. So there we
+go. Whereas here they keep it pretty
+go. Whereas here they keep it pretty
+darn, you know, consistent.
+So these are all uh
+So these are all uh
+transferable it says. So any of these
+transferable it says. So any of these
+atom
+parameters? Does anybody know there
+parameters? Does anybody know there
+aren't follow-ups to this? Right. This
+aren't follow-ups to this? Right. This
+is this is still what people use, right?
+They have code for
+They have code for
+this. Let's
+see. Yes, they do.
+Okay, we'll use their library to start
+Okay, we'll use their library to start
+with and maybe we'll like integrate it
+with and maybe we'll like integrate it
+properly if uh if it works.
+Yeah. So, it wasn't just seed noise.
+Yeah. So, it wasn't just seed noise.
+Cool.
+How do they get a threeletter package
+name? Basic
+usage in model definition. Replace
+usage in model definition. Replace
+output with a new
+readout. I might want to make a brand
+readout. I might want to make a brand
+for this real quick.
+Not
+really.
+Okay. So, we're going to do this
+one. Multidiscreet
+continuous. Yeah, it's this one.
+move readout hidden
+size and action space N.
+That's it. They don't change the uh the
+That's it. They don't change the uh the
+rest of the
+model. Oh, I think that theirs will
+model. Oh, I think that theirs will
+change your initializations for you.
+Wait, let me I got to read these
+Wait, let me I got to read these
+comments.
+comments.
+So instantiate a base
+model optionally use torch dist xx
+model optionally use torch dist xx
+deferred init deferred in
+deferred init deferred in
+it. Okay, that's like if you don't want
+it. Okay, that's like if you don't want
+to double initialize a big
+model. Instantiate a delta model that
+model. Instantiate a delta model that
+differs from the base model in all
+differs from the base model in all
+dimensions that one wishes to scale.
+instantiate the target model, the model
+instantiate the target model, the model
+you actually want to
+you actually want to
+train. This should be the same as the
+train. This should be the same as the
+base
+base
+model except the widths could be
+model except the widths could be
+potentially different.
+Okay. When model has same parameters
+parameter shapes as base model. Model
+parameter shapes as base model. Model
+behaves exactly the same as base
+model. When model has the same has same
+model. When model has the same has same
+parameter
+parameter
+shapes as base model. Model behaves
+shapes as base model. Model behaves
+exactly the same as base
+exactly the same as base
+model which is PyTorch's which is in
+model which is PyTorch's which is in
+PyTorch's default parameterization.
+PyTorch's default parameterization.
+This provides backwards
+compatibility. Oh, okay. So, this
+is So, what this does then is
+is So, what this does then is
+[Music]
+[Music]
+you you set up like what model you want
+you you set up like what model you want
+new P to use as a starting point and
+new P to use as a starting point and
+then it keeps that the same and it
+then it keeps that the same and it
+scales around that I guess.
+That's fine.
+Base and delta models do not need to be
+trained. Okay.
+Do you need delta
+model kind of a weird thing that they've
+model kind of a weird thing that they've
+done. Whatever
+done. Whatever
+though. I think it should be fairly
+easy. We'll see if it works with the
+easy. We'll see if it works with the
+RNN.
+the
+the
+policy. You passed the policy
+policy. You passed the policy
+in. That's annoying.
+We can just hack uh something for now, I
+We can just hack uh something for now, I
+think. Right.
+[Music]
+[Music]
+I mean, this is kind of
+crazy. Let me look at their source. See
+crazy. Let me look at their source. See
+how how complicated it is.
+confusing code.
+So this is just a multiplier.
+Fine
+Fine
+net. What about
+this
+this
+uniform drop in replacement for uniform?
+Normal drop in replacement for
+normal. I see.
+So then why do they have
+um what is it that they need this crazy
+um what is it that they need this crazy
+thing that they're doing
+for set base
+shapes. I think I have to read a little
+shapes. I think I have to read a little
+bit more in the paper to figure out what
+bit more in the paper to figure out what
+this is actually trying to do.
+We need to
+We need to
+modify initialization of the last
+layer and its learning rates of the
+layer and its learning rates of the
+first and last layer as well as of the
+first and last layer as well as of the
+biases.
+Initialize. So ADA is master learning
+rate. We highlight in not purple but
+rate. We highlight in not purple but
+whatever the differences of two
+parameterizations scaling with width n
+parameterizations scaling with width n
+of the
+parameterization. We often insert
+parameterization. We often insert
+multiplicative constants of each
+multiplicative constants of each
+appearance of n.
+We highlight in difference then purple
+We highlight in difference then purple
+the differences in the two
+the differences in the two
+parameterizations. So hang
+on and w
+Wait a not, but whatever.
+I'm trying to figure out if there's just
+I'm trying to figure out if there's just
+like a simple ver like a simple how does
+like a simple ver like a simple how does
+this work that I can just implement
+this work that I can just implement
+without having to do this mess.
+Okay. Okay. So for the MLP in section
+three, so they gave a specific
+three, so they gave a specific
+initialization
+initialization
+here and they said, hey, if you use this
+here and they said, hey, if you use this
+instead, then it transfers
+This is a little bit annoying because of
+This is a little bit annoying because of
+the way that I have my policy set up.
+wider is always better.
+You should always see performance
+You should always see performance
+improvement with width at any point in
+training. Okay, you know this is
+training. Okay, you know this is
+actually
+actually
+possible. This would be very useful.
+I think we will just try to force this
+I think we will just try to force this
+uh their original for now and then we'll
+uh their original for now and then we'll
+go from here. I don't really like adding
+go from here. I don't really like adding
+this as a
+this as a
+dependency, but I think for dev branch
+dependency, but I think for dev branch
+for playing around with stuff, it's
+fine cuz we'd like to add this as a flag
+fine cuz we'd like to add this as a flag
+anyways.
+Okay, let's try this.
+Yes. Let's actually do this one
+Yes. Let's actually do this one
+first. Like this, right?
+policy and then base policy. So we do
+policy and then base policy. So we do
+arg policy hidden size is equal to
+arg policy hidden size is equal to
+one base
+policy. Okay. And then we do delta pol
+policy. Okay. And then we do delta pol
+delta
+delta
+model which just has this attribute
+model which just has this attribute
+changed or
+whatever. Where is it? Just like this.
+This will be
+delta delta
+delta delta
+policy. Let's flip to
+two and we'll
+two and we'll
+do
+save policy.
+All set base shapes. This stuff
+All set base shapes. This stuff
+is this goes at the
+top. We don't need this.
+Actually, I think you could even do
+Actually, I think you could even do
+easier than this, can't you? Hang on. We
+easier than this, can't you? Hang on. We
+can make this
+easier. Hang on.
+I can do it right
+I can do it right
+here. That's not that bad. Actually, I
+here. That's not that bad. Actually, I
+don't like having more stuff like this
+don't like having more stuff like this
+in the demo file, but I think for dev
+in the demo file, but I think for dev
+branch
+Oops. I think for dev branch, this is
+Oops. I think for dev branch, this is
+fine.
+Now I need just these separate shapes,
+Now I need just these separate shapes,
+right?
+policy base policy
+delta. Replace your custom in it if
+any. Replace with the same
+any. Replace with the same
+Okay, I think we'll leave this as
+is make base. They don't even call this,
+is make base. They don't even call this,
+do they? They just call set base shape.
+do they? They just call set base shape.
+So, we can just do
+that. This should be called before
+that. This should be called before
+optimizer definition.
+Fine. Then the
+optimizer. The
+optimizer. All we need
+is let's put this here.
+Move
+Adam. Cool. So, this
+Adam. Cool. So, this
+hopefully this should train the same way
+hopefully this should train the same way
+as
+as
+before according to the authors.
+Let's not screw this up with
+Let's not screw this up with
+uh a new algorithm or anything. Well,
+uh a new algorithm or anything. Well,
+base shapes has extra
+names and base
+shapes decoder.weight
+Is there get bay shapes
+Is there get bay shapes
+anywhere or make bay shapes? Did I miss
+anywhere or make bay shapes? Did I miss
+something? They imported
+it.
+No. So I set the base shapes
+here. Base shapes has extra
+names. Let me see what I did.
+Do you still have to do evaluating of to
+Do you still have to do evaluating of to
+decide if it's worth it or not? Um, I
+decide if it's worth it or not? Um, I
+think that there's definitely something
+think that there's definitely something
+in that vein of research, I will say.
+in that vein of research, I will say.
+And, uh, it got us a really good result
+And, uh, it got us a really good result
+on
+on
+Snake. So, I'm probably going to merge
+Snake. So, I'm probably going to merge
+that into
+that into
+dev. And, uh, I have I cleaned up a
+dev. And, uh, I have I cleaned up a
+bunch of stuff in dev, so it's a lot
+bunch of stuff in dev, so it's a lot
+easier to like try different methods as
+easier to like try different methods as
+flags. uh we don't want to keep them all
+flags. uh we don't want to keep them all
+longterm, but what I really want to do
+longterm, but what I really want to do
+soon, I want to get all these methods
+soon, I want to get all these methods
+in, right? And I want to start running
+in, right? And I want to start running
+them on way more environments than I
+them on way more environments than I
+currently am. I'm mostly just running
+currently am. I'm mostly just running
+quick stuff on Breakout and Pong these
+quick stuff on Breakout and Pong these
+days. I really want to be running stuff
+days. I really want to be running stuff
+on like Neural MMO and all the other MS
+on like Neural MMO and all the other MS
+we have.
+Oh, here it is. You messed uh right
+Oh, here it is. You messed uh right
+here. This one
+delta
+boom policy value has
+infinite change f out to an infinite
+dimension. Okay.
+ability. So I think that you need to set
+ability. So I think that you need to set
+base to
+be 128.
+Oh, this didn't work. What the
+Oh, this didn't work. What the
+hell? Let's run it
+hell? Let's run it
+again. But this did not
+work. Let's see if it's just jank.
+I also have one other idea thing I might
+I also have one other idea thing I might
+have messed up.
+What is this heavy ball optimizer? You
+What is this heavy ball optimizer? You
+linked me
+Let's just ask
+Let's just ask
+Twitter. I have a group chat with uh the
+Twitter. I have a group chat with uh the
+guys that did the heavy ball stuff.
+So, wrong chat. Hang on.
+See if we get any reply on that.
+And did this fail? Yes, this still
+And did this fail? Yes, this still
+fails. So, we got to figure out a couple
+fails. So, we got to figure out a couple
+things with this then. First
+thing, these to
+128. Do
+128. Do
+that. Okay. Okay, let's see if that
+that. Okay. Okay, let's see if that
+changes
+changes
+anything. Hey,
+welcome. So, I went to implement the
+welcome. So, I went to implement the
+thing that we were talking about uh
+thing that we were talking about uh
+yesterday and I realized it's actually
+yesterday and I realized it's actually
+kind of hard to do that without imple
+kind of hard to do that without imple
+without changing the um the learn target
+without changing the um the learn target
+uh of the optimizer. I can show you what
+uh of the optimizer. I can show you what
+I ended up doing.
+I ended up doing.
+I came up with something I think is
+I came up with something I think is
+pretty
+cool cuz basically anything I so I
+cool cuz basically anything I so I
+confirmed for certain that the the
+confirmed for certain that the the
+reason that it doesn't train at longer
+reason that it doesn't train at longer
+horizons is uh it's not because of the
+horizons is uh it's not because of the
+bias. It's just because of the
+bias. It's just because of the
+noise that you get from those extra
+noise that you get from those extra
+steps.
+steps.
+So what I did is I made it variable
+horizon. Let me find
+it. Yeah. So right here horizon starts
+it. Yeah. So right here horizon starts
+at
+at
+16. Yeah. The variance ends up being
+16. Yeah. The variance ends up being
+greater. Well, it's the variance in the
+greater. Well, it's the variance in the
+value function for whatever reason. It
+value function for whatever reason. It
+actually doesn't matter as much if you
+actually doesn't matter as much if you
+clip uh the advantage. Like there's way
+clip uh the advantage. Like there's way
+less noise than that because
+less noise than that because
+like if the rewards shift a little bit,
+like if the rewards shift a little bit,
+it's fine, right? Cuz you're computing a
+it's fine, right? Cuz you're computing a
+sub. But uh it's way more of a big deal
+sub. But uh it's way more of a big deal
+in the advantage function because that's
+in the advantage function because that's
+like a per term loss. But anyways, what
+like a per term loss. But anyways, what
+I did is I just take the first value uh
+I did is I just take the first value uh
+where it is greater than 95% of the
+where it is greater than 95% of the
+standard deviation you would expect from
+standard deviation you would expect from
+random. So like I'm looking for the
+random. So like I'm looking for the
+first one where you basically have no
+first one where you basically have no
+signal. It's all noise. And then I clip
+signal. It's all noise. And then I clip
+the horizon to that. And then in the uh
+the horizon to that. And then in the uh
+the
+the
+loss, I just get rid of the terms that
+loss, I just get rid of the terms that
+uh you know are either up to the horizon
+uh you know are either up to the horizon
+or sometimes you give it a few extra
+or sometimes you give it a few extra
+elements because you know you have to
+elements because you know you have to
+start training those values. Uh and this
+start training those values. Uh and this
+actually it still doesn't work as well
+actually it still doesn't work as well
+as PO. But the cool thing about this is
+as PO. But the cool thing about this is
+uh now you can
+uh now you can
+provably you can set that horizon
+provably you can set that horizon
+parameter however large you want and it
+parameter however large you want and it
+will not screw up your training. it
+will not screw up your training. it
+strictly allows you to learn longer
+strictly allows you to learn longer
+horizons uh as you're able to predict
+horizons uh as you're able to predict
+them. So that's pretty
+cool. So we got that
+cool. So we got that
+going and now we're doing other
+going and now we're doing other
+algorithm stuff. Currently trying to get
+algorithm stuff. Currently trying to get
+MUP working and it's not working.
+MUP is this thing that LLM people use a
+MUP is this thing that LLM people use a
+lot.
+lot.
+Um they change the initializations and
+Um they change the initializations and
+the optimizer rates such that the
+the optimizer rates such that the
+optimal learning rate stays fixed as you
+optimal learning rate stays fixed as you
+change the network
+change the network
+size. So it's a really nice technique
+size. So it's a really nice technique
+for like stable training though it
+for like stable training though it
+doesn't seem to be working right now.
+Yeah, cuz I have this layer in it right
+Yeah, cuz I have this layer in it right
+now. Right on
+this. I have listening, studying for an
+this. I have listening, studying for an
+exam.
+exam.
+Best of
+luck. I'm glad I no longer have to be
+luck. I'm glad I no longer have to be
+doing that.
+Let's see this.
+Mhm.
+There's also the orthogonal in it the
+There's also the orthogonal in it the
+recurrent net,
+right? Let me think about this.
+right? Let me think about this.
+Oh
+yeah. No, we
+yeah. No, we
+haven't. It's such a pain though because
+haven't. It's such a pain though because
+initialization is one of those stupid
+initialization is one of those stupid
+rabbit hole topics because the search
+rabbit hole topics because the search
+space is massive.
+I guess I should probably look at what
+I guess I should probably look at what
+the LLM people are doing at the moment,
+the LLM people are doing at the moment,
+but I don't know if there's much
+but I don't know if there's much
+um I don't know if there's much to be
+um I don't know if there's much to be
+gain
+gain
+there. There are like other places I
+there. There are like other places I
+would look
+first. Let's do this one first.
+I mean, the thing is those methods just
+I mean, the thing is those methods just
+don't work,
+don't work,
+right? So, like the people that are
+right? So, like the people that are
+like, "Oh, well, we're going to use this
+like, "Oh, well, we're going to use this
+cuz it's explainable." This actually
+cuz it's explainable." This actually
+happens very often in industry, by the
+happens very often in industry, by the
+way. Like people in finance will do this
+way. Like people in finance will do this
+or whatever, and it's just like, "Oh,
+or whatever, and it's just like, "Oh,
+well, we need it to be explainable." So
+well, we need it to be explainable." So
+we can rationalize the decisions. It's
+we can rationalize the decisions. It's
+like, okay, well, every decision it
+like, okay, well, every decision it
+makes is wrong. Um, so you can just
+makes is wrong. Um, so you can just
+explain that you're stupid, right? Cuz
+explain that you're stupid, right? Cuz
+you used a bad model. But it's like, oh,
+you used a bad model. But it's like, oh,
+but you know, it's it made this bad
+but you know, it's it made this bad
+decision because of this, this, and
+decision because of this, this, and
+that. Like, I don't know. Look,
+that. Like, I don't know. Look,
+interpretability work on neural nets is
+interpretability work on neural nets is
+good.
+Um, but yeah, the other methods just are
+Um, but yeah, the other methods just are
+not very promising.
+I mean the thing with the like
+I mean the thing with the like
+regulation is the whole thing is just
+regulation is the whole thing is just
+dumb because a lot of uh explanability
+dumb because a lot of uh explanability
+work also just gives you the illusion of
+work also just gives you the illusion of
+understanding
+understanding
+anyways like you're not going to get
+anyways like you're not going to get
+you're not going to understand the
+you're not going to understand the
+decision from start to end
+Right? It's like when somebody tries to
+Right? It's like when somebody tries to
+explain to you why they did something.
+explain to you why they did something.
+It's not actually why they did
+It's not actually why they did
+something. It's an explanation of why
+something. It's an explanation of why
+they did something.
+So it's like, oh, neural nets aren't
+So it's like, oh, neural nets aren't
+explainable. Congratulations, humans
+explainable. Congratulations, humans
+aren't
+explainable. Now, it's a little bit
+explainable. Now, it's a little bit
+reduction. Like it's a little bit uh
+reduction. Like it's a little bit uh
+reductive, but still
+See if this
+works. Mine doesn't have orth does it
+works. Mine doesn't have orth does it
+really not have orthogonal?
+doesn't have orthogonal. Lovely.
+Oops, that's the wrong
+language. Why does it screw this up so
+language. Why does it screw this up so
+badly, though?
+badly, though?
+It's kind of crazy, isn't it?
+what
+what
+version? Uh, you know, I probably should
+version? Uh, you know, I probably should
+be back on those because I do need to
+be back on those because I do need to
+put some weight back on.
+put some weight back on.
+Um, the problem
+Um, the problem
+is I need to put about 10 pounds back on
+is I need to put about 10 pounds back on
+that I lost um from the hospital.
+that I lost um from the hospital.
+But like in order to actually not just
+But like in order to actually not just
+get fat doing that, you have to be
+get fat doing that, you have to be
+training really hard. And my work
+training really hard. And my work
+capacity is still like way way down from
+capacity is still like way way down from
+what it used to be. So, I'm kind of just
+what it used to be. So, I'm kind of just
+like eating normal food as much as I
+like eating normal food as much as I
+can. Yeah, that mug like you really have
+can. Yeah, that mug like you really have
+to be training hard for that mug to do
+to be training hard for that mug to do
+what it's supposed to do. Um, and I'm
+what it's supposed to do. Um, and I'm
+training, but I like I do not have the
+training, but I like I do not have the
+uh the capacity to train hard enough to
+uh the capacity to train hard enough to
+sustain like a thousand calorie
+sustain like a thousand calorie
+surplus. Yeah.
+This is just
+tea. The mug is a pretty legitimate uh
+tea. The mug is a pretty legitimate uh
+it's a pretty legitimate thing though if
+it's a pretty legitimate thing though if
+like you just need a ton of calories and
+like you just need a ton of calories and
+don't have the
+don't have the
+uh
+uh
+appetite. It's pretty damn good. Gets
+appetite. It's pretty damn good. Gets
+you most of your protein for the day.
+you most of your protein for the day.
+Not terrible.
+I'm trying to think why this thing
+I'm trying to think why this thing
+wouldn't be working right now. I guess
+wouldn't be working right now. I guess
+it's just because it doesn't have the
+it's just because it doesn't have the
+initializations I would
+want. New Adam
+And it's like it stops training, doesn't
+it? Try this.
+Oh, maybe it's this. Hang
+on. Times equals
+2. It's probably this.
+It's probably that you need the analing
+It's probably that you need the analing
+and you're doing it wrong.
+How do you do this though?
+How do you do this?
+Hang on.
+Let me just see if this does
+Let me just see if this does
+anything. 99.
+I'll be right back in these restaurant.
+I'll be right back in these restaurant.
+I'm back in a minute.
+Yeah, that's annoying. It still doesn't
+Yeah, that's annoying. It still doesn't
+fix
+it. Does it feel like that was
+better? Minute 22 seconds. 368.
+Yeah, there we go.
+Yeah, this is fine.
+Oh, actually it is correct here,
+Oh, actually it is correct here,
+right? Yeah.
+Let's see how this
+goes. That looks much
+goes. That looks much
+better. Is this uh the run that I'm
+better. Is this uh the run that I'm
+looking
+looking
+for? Think it is.
+Does it just get stuck here still?
+Okay. So, it was just a scheduler being
+wonky. That's a nice
+improvement. Perfect.
+improvement. Perfect.
+So now we have MUP
+working according to
+this. I should now be able to just use a
+this. I should now be able to just use a
+larger network and do
+better. Can I just do
+this? Not in wall clock, but in samples.
+this? Not in wall clock, but in samples.
+I should be able to just do
+better. Expected
+128. What's that?
+Got 512 expected
+128. Hang on.
+Oh, I think it's input size. Hang on.
+Oh, I think it's input size. Hang on.
+Yeah, it's input size.
+So this has this takes hidden size but
+So this has this takes hidden size but
+the RNN takes input and hidden size.
+Yep. Input size.
+Oh, and also before I screw this
+up, box hidden
+size two.
+This one actually goes
+here. Hang
+on
+on
+there. Now we have the scaling factor,
+there. Now we have the scaling factor,
+right?
+MUP. So this is now 512 hidden dimension
+MUP. So this is now 512 hidden dimension
+with the same params other than the
+with the same params other than the
+tweaked uh learning
+rate. We'll see how the curve looks.
+Uh, it's the fact that I quadrupled the
+Uh, it's the fact that I quadrupled the
+model hidden dimension.
+Yeah, a bigger model doesn't
+Yeah, a bigger model doesn't
+seem like substantially better, but also
+seem like substantially better, but also
+not substantially
+not substantially
+worse. It's
+actually does this even make sense that
+actually does this even make sense that
+it's still that
+fast? Oh, it's not that fast, right?
+fast? Oh, it's not that fast, right?
+Because now it's going to run. It's not
+Because now it's going to run. It's not
+going to run eval and be a little
+slower. Yeah. Okay. So, it is a little
+slower. Yeah. Okay. So, it is a little
+slower.
+slower.
+Cool. But now we actually have the
+Cool. But now we actually have the
+option to do
+that. Why would torch compile
+that. Why would torch compile
+help? It should help less for the bigger
+help? It should help less for the bigger
+policies.
+I mean, that's a 2 million parameter
+I mean, that's a 2 million parameter
+model that's running at 575 mil in eager
+model that's running at 575 mil in eager
+mode is pretty damn good.
+Why would it help less for larger
+Why would it help less for larger
+models? Because you have less of a
+models? Because you have less of a
+percentage of the time devoted to uh
+percentage of the time devoted to uh
+CUDA kernel launch overhead, which
+CUDA kernel launch overhead, which
+actually the standard torch compile
+actually the standard torch compile
+doesn't really help with. You need to
+doesn't really help with. You need to
+like fiddle with CUDA graphs a bunch,
+like fiddle with CUDA graphs a bunch,
+which I haven't done. It's probably a
+which I haven't done. It's probably a
+good a big source of perf improvement,
+good a big source of perf improvement,
+but it's kind of a mess at the same
+but it's kind of a mess at the same
+time.
+And we'd have to be able to also fully
+And we'd have to be able to also fully
+trace the backwards pass, which is
+annoying. You can't trace the backwards
+annoying. You can't trace the backwards
+pass as it is right
+pass as it is right
+now. Okay. But these are good
+now. Okay. But these are good
+results. Very brittle. Yeah,
+results. Very brittle. Yeah,
+exactly. I mean, these are good results
+exactly. I mean, these are good results
+though.
+So I think that
+um I see it's
+um I see it's
+11. Do I want to play with anything else
+11. Do I want to play with anything else
+initially?
+Let me try a couple more
+things. I think it's still cosign and
+things. I think it's still cosign and
+kneeling is the most commonly used,
+kneeling is the most commonly used,
+right?
+Yeah, still co sign.
+Let's try cosine and healing first I
+Let's try cosine and healing first I
+guess.
+I think I'm going to just
+I think I'm going to just
+um I'm going to leave most of this
+um I'm going to leave most of this
+fiddling until after
+fiddling until after
+lunch. Uh I'm going to get some food.
+lunch. Uh I'm going to get some food.
+I'm going to do a couple things and then
+I'm going to do a couple things and then
+I will be back with more
+I will be back with more
+dev. I think that's what we're going to
+dev. I think that's what we're going to
+do right now. So I'll be back soon. Um
+do right now. So I'll be back soon. Um
+we're going to do today learning rate
+we're going to do today learning rate
+schedulers finish MUP integration see if
+schedulers finish MUP integration see if
+that works. Uh we're going to integrate
+that works. Uh we're going to integrate
+model size with hyperparameter sweeps.
+model size with hyperparameter sweeps.
+That's going to be cool. There's going
+That's going to be cool. There's going
+to be some more testing around that. We
+to be some more testing around that. We
+might do some work on my new advantage
+might do some work on my new advantage
+function. Several like algorithm side
+function. Several like algorithm side
+things and cleanly integrating all this
+things and cleanly integrating all this
+with the dev branch as well so people
+with the dev branch as well so people
+can play with it. So I'll be back soon.
+can play with it. So I'll be back soon.
+And in the meantime, if you're
+And in the meantime, if you're
+interested in following my stuff,
+interested in following my stuff,
+saltpuffer.ai, star the GitHub to help
+saltpuffer.ai, star the GitHub to help
+us out. Join the Discord if you want to
+us out. Join the Discord if you want to
+get involved with development
+get involved with development
+contribution or just using it in
+contribution or just using it in
+general.
+
+Kind: captions
+Language: en
+Okay, we are live here.
+Morning. Let's
+uh are we
+back? I think the internet just cut out
+back? I think the internet just cut out
+for a
+for a
+second. Looks like it's stable now.
+That's
+funny.
+funny.
+Okay, starting today, uh here's the
+Okay, starting today, uh here's the
+plan.
+plan.
+We are going to first do a little bit of
+We are going to first do a little bit of
+analysis on the experiments that run LA
+analysis on the experiments that run LA
+that ran last night and then after that
+that ran last night and then after that
+I have a couple different methods that I
+I have a couple different methods that I
+want to integrate uh with puffer. I want
+want to integrate uh with puffer. I want
+to do probably cosine analing. That's an
+to do probably cosine analing. That's an
+easy one. And I definitely want to do um
+easy one. And I definitely want to do um
+MUP. That is the different
+MUP. That is the different
+initialization that makes it easier to
+initialization that makes it easier to
+scale learning rate. And uh I'm
+scale learning rate. And uh I'm
+definitely want to look into that a
+definitely want to look into that a
+little bit more
+little bit more
+deeply. First of
+deeply. First of
+all, let's take a look at a couple of
+all, let's take a look at a couple of
+these because we should have a few
+these because we should have a few
+hundred
+hundred
+experiments. Looks like there are some
+experiments. Looks like there are some
+still running.
+And
+okay. Oh, that's very nice. Look at
+okay. Oh, that's very nice. Look at
+that.
+that.
+So, this
+is Yeah, this is the
+is Yeah, this is the
+completed hyper pram sweep. Let's now
+completed hyper pram sweep. Let's now
+compare this to what we had before.
+compare this to what we had before.
+Let's see if there's a significant
+Let's see if there's a significant
+difference. So, this should be identical
+difference. So, this should be identical
+to our initial baseline sweep except
+to our initial baseline sweep except
+that this time we swept the atom
+that this time we swept the atom
+parameters. People don't usually sweep
+parameters. People don't usually sweep
+those, but I have a friend in
+those, but I have a friend in
+optimization who told me, "Yeah,
+optimization who told me, "Yeah,
+definitely sweep those."
+You know, it really looks like it's
+You know, it really looks like it's
+about the same, doesn't
+it? I guess cost 84 maybe
+it? I guess cost 84 maybe
+here. It's kind of tough to
+here. It's kind of tough to
+see. Let's put them side by
+side.
+Oops. Okay. So we'll side by side
+this I mean this is like a little better
+this I mean this is like a little better
+but I don't even know if this is
+but I don't even know if this is
+statistically significant
+statistically significant
+whatsoever. Now I guess the other thing
+whatsoever. Now I guess the other thing
+that we can do what are you trying to
+that we can do what are you trying to
+optimize here? So this is just more
+optimize here? So this is just more
+hyperparameter sweep. This is just on a
+hyperparameter sweep. This is just on a
+quick breakout test. End. The key here
+quick breakout test. End. The key here
+though is we uh we're sweeping the atom
+though is we uh we're sweeping the atom
+hyperparameters beta 1, beta 2 and the
+hyperparameters beta 1, beta 2 and the
+epsilon. So we were seeing basically if
+epsilon. So we were seeing basically if
+there is any value in tuning that even
+there is any value in tuning that even
+in like the simplest case. Now um you
+in like the simplest case. Now um you
+know we have to run this type of stuff
+know we have to run this type of stuff
+over way more
+over way more
+environments. But this isn't just like
+environments. But this isn't just like
+initial hey is there something obvious
+initial hey is there something obvious
+here that people have missed?
+here that people have missed?
+because I had some optimization friends
+because I had some optimization friends
+who tell me that there
+is. Let me look at
+is. Let me look at
+the There's some things we should look
+the There's some things we should look
+at here though to
+at here though to
+confirm what we're
+seeing. Where's the uh the
+seeing. Where's the uh the
+time? There should be a time one in here
+time? There should be a time one in here
+somewhere.
+this. Yeah. Right. So, this is total
+this. Yeah. Right. So, this is total
+time steps and then we have
+SPS. Okay. Interesting. So, it looks
+SPS. Okay. Interesting. So, it looks
+like the one on the right ran way
+like the one on the right ran way
+faster.
+So, did the one on the right want Did
+So, did the one on the right want Did
+the one on the
+right let me see why it ran faster.
+right let me see why it ran faster.
+Because if there's like one machine is
+Because if there's like one machine is
+faster than the other, right? That's the
+faster than the other, right? That's the
+the one issue with using wall clock as
+the one issue with using wall clock as
+your time is that if the machines are
+your time is that if the machines are
+faster than the other, then there's an
+faster than the other, then there's an
+issue with that. Um, but it can also
+issue with that. Um, but it can also
+just be that we didn't get lucky and
+just be that we didn't get lucky and
+discover the right hypers
+discover the right hypers
+here. In fact, I think what we're going
+here. In fact, I think what we're going
+to do is we're going to just
+take let's just take a
+take let's just take a
+point. Maybe we'll take a couple of
+them. I think this one's a little bit of
+them. I think this one's a little bit of
+an
+an
+outlier. This one looks good.
+outlier. This one looks good.
+242. This one's like nice and stable,
+right? And then here we'll pick
+right? And then here we'll pick
+um we'll pick a
+point. I just want to get a sense of
+point. I just want to get a sense of
+what the hyperparameters look like and
+what the hyperparameters look like and
+if they're very different or
+if they're very different or
+not. And I guess we'll take this point
+not. And I guess we'll take this point
+here. This is like the
+here. This is like the
+closest
+analog 21536.
+X. Okay.
+So this one ran way fewer
+samples. So So these found like
+samples. So So these found like
+completely different
+hyperparameters. Ignore
+hyperparameters. Ignore
+this. We
+this. We
+get this is like the current learning
+get this is like the current learning
+rate. It got annealed.
+512 M's only. This is
+2048. Hi, I was wondering, oops, hang
+2048. Hi, I was wondering, oops, hang
+on. I was wondering if anyone has made
+on. I was wondering if anyone has made
+any breakthroughs on
+completing Pokemon using Puffer Lib. Uh
+completing Pokemon using Puffer Lib. Uh
+the original project does use puffer
+lip. That was uh you know we uh that's a
+lip. That was uh you know we uh that's a
+powered by puffer project right there.
+powered by puffer project right there.
+Let me find it. Where's the
+blog? Where's the new blog?
+Where' the uh where' the site
+Where' the uh where' the site
+go? Where did the blog
+go? Where did the blog
+go? Oh, there it is. Okay. Yeah. See,
+go? Oh, there it is. Okay. Yeah. See,
+powered by
+powered by
+Puffer. The compute for this came from
+Puffer. The compute for this came from
+Puffer Lib. the tools like the library,
+Puffer Lib. the tools like the library,
+the training code, vectorization and
+the training code, vectorization and
+everything came from Puffer. So, we've
+everything came from Puffer. So, we've
+been collaborating on this project since
+been collaborating on this project since
+uh since P-Dubs did the initial, you
+uh since P-Dubs did the initial, you
+know, beat the first gym release.
+It would have been a lot harder without
+It would have been a lot harder without
+puffer lip because it would have been at
+puffer lip because it would have been at
+least like 30 50%
+slower. Not to mention all our other
+slower. Not to mention all our other
+tools.
+Okay. So, here we have our
+betas. These are a bit different from
+betas. These are a bit different from
+the
+defaults. Small batch
+defaults. Small batch
+size, but fewer M. So, that makes sense.
+size, but fewer M. So, that makes sense.
+And actually, proportionally fewer. So,
+And actually, proportionally fewer. So,
+that's interesting.
+that's interesting.
+What do BPT arise
+in? About the same
+entropy. Uh, lambda is way higher. Gamma
+entropy. Uh, lambda is way higher. Gamma
+is very
+is very
+similar. Lower learning
+similar. Lower learning
+rate. Gradient norm size.
+rate. Gradient norm size.
+Cool. Three update epochs.
+I mean, this is at least interesting in
+I mean, this is at least interesting in
+that it's dramatically dramatically more
+that it's dramatically dramatically more
+sample efficient,
+right? I don't think we've ever seen
+right? I don't think we've ever seen
+um maybe we've seen something solved
+um maybe we've seen something solved
+this fast, but this is now
+this fast, but this is now
+like I think this is far far far beating
+like I think this is far far far beating
+like the original sample uh efficiency
+like the original sample uh efficiency
+of PO. Uh, and this is still
+of PO. Uh, and this is still
+like maybe 300 times faster than the
+like maybe 300 times faster than the
+original. So, this is kind of cool that
+original. So, this is kind of cool that
+we're winning on both fronts.
+Now, I think what I want to do first
+Now, I think what I want to do first
+is let's go grab I think we probably
+is let's go grab I think we probably
+already have these hyperparameters in
+already have these hyperparameters in
+place. Let's just put these betas in and
+place. Let's just put these betas in and
+see if it helps or if it like really
+see if it helps or if it like really
+does change all the optimal
+does change all the optimal
+hyperparameters. That'll be a quick
+hyperparameters. That'll be a quick
+experiment to
+run. Oops. Uh, this is frozen for some
+run. Oops. Uh, this is frozen for some
+reason. There we
+reason. There we
+go. Let's put this not blocking the
+go. Let's put this not blocking the
+screen. I really got to get some
+screen. I really got to get some
+overlays so I don't cover like the chat
+overlays so I don't cover like the chat
+and stuff when I do that.
+mess that
+up. There we
+up. There we
+go. And that'll only take like a
+minute. And then we will copy and
+Whoops. Something screwed up here.
+Oh
+yeah, I totally forgot about that. Okay,
+yeah, I totally forgot about that. Okay,
+we'll do this on the other branch
+we'll do this on the other branch
+then and then I'll I'll fix that after.
+I believe this is the one that this is a
+I believe this is the one that this is a
+uh solving
+uh solving
+config. Kind of
+slow. This kind of
+slow. This kind of
+slow. I don't think these are the
+slow. I don't think these are the
+optimal params for
+this. Yeah. Let me go get better
+params. Yeah, you can see actually here
+params. Yeah, you can see actually here
+I was using parameters for the new
+I was using parameters for the new
+algorithm which are different from the
+algorithm which are different from the
+DPO parameters a little
+bit. See how this looks.
+Oh, and actually hang on. Is this the
+Oh, and actually hang on. Is this the
+wrong
+algorithm? Yeah, this is the wrong
+algorithm? Yeah, this is the wrong
+algorithm, too.
+All right, we can start with this. This
+All right, we can start with this. This
+is like decent enough.
+Okay, here's our initial
+Okay, here's our initial
+baseline. And now let's take our atom
+parameters are here.
+I like how it just makes up a
+number. Morning. What are you working
+number. Morning. What are you working
+on? Uh, I'm testing the atom hyperparam
+on? Uh, I'm testing the atom hyperparam
+sweeps for now and then we're probably
+sweeps for now and then we're probably
+going to do
+going to do
+muup different initialization stuff and
+muup different initialization stuff and
+then we're probably going to do cosine
+then we're probably going to do cosine
+and aling. So, it's like a whole bunch
+and aling. So, it's like a whole bunch
+of little algorithm things I've wanted
+of little algorithm things I've wanted
+to do. Maybe E3B after we'll
+see. And there's GG there's GGE stuff to
+see. And there's GG there's GGE stuff to
+do. There's lots and lots of things to
+do. There's lots and lots of things to
+work on.
+work on.
+Got to kick puffer into overdrive
+Got to kick puffer into overdrive
+already.
+How much did atom prams help? They did
+How much did atom prams help? They did
+something
+something
+weird. They found
+weird. They found
+um so they found a very different set of
+um so they found a very different set of
+hyperparameters that solves in about the
+hyperparameters that solves in about the
+same amount of time, runs way slower,
+same amount of time, runs way slower,
+and uses way fewer
+and uses way fewer
+samples. So it like it runs about half
+samples. So it like it runs about half
+the steps per second, but it solves in
+the steps per second, but it solves in
+like less than half the number of
+like less than half the number of
+samples.
+Well, this is
+something. Well, you can't say epsilon
+something. Well, you can't say epsilon
+has a big impact. We got to look at I'll
+has a big impact. We got to look at I'll
+show you how we'll do that analysis in a
+show you how we'll do that analysis in a
+second. So, I mean, it's hard to say if
+second. So, I mean, it's hard to say if
+this is statistically significant. I'd
+this is statistically significant. I'd
+have to run it a whole bunch of times.
+have to run it a whole bunch of times.
+But like, you know, maybe this is
+But like, you know, maybe this is
+helping. All I just did here is I took
+helping. All I just did here is I took
+the optimal runs um atom beta
+the optimal runs um atom beta
+params and I just threw them on the
+params and I just threw them on the
+existing breakout params.
+But I wouldn't call that a failure.
+But I wouldn't call that a failure.
+Like, you know, it's like, okay, maybe
+Like, you know, it's like, okay, maybe
+there's a little bit of alpha in the
+there's a little bit of alpha in the
+atoms. The sample efficiency thing was
+atoms. The sample efficiency thing was
+actually the most interesting. I would
+actually the most interesting. I would
+say, you know, maybe there's something
+say, you know, maybe there's something
+with it reusing the same data.
+And we'll do a little bit of the
+And we'll do a little bit of the
+ablation analysis right now because why
+ablation analysis right now because why
+not? Um, so what you do for
+not? Um, so what you do for
+that is a trick that I like to
+do. So we do uh cost where this
+cost less
+cost less
+than and we'll pick like
+We say
+We say
+100. Maybe we'll do
+100. Ah, shoot. The dashboard's
+100. Ah, shoot. The dashboard's
+glitched. Hang on.
+90.
+Cool. All right. So, these are all the
+Cool. All right. So, these are all the
+faster
+runs. And now we can look at the betas
+runs. And now we can look at the betas
+from
+here
+here
+97. What was what did we use? I think we
+97. What was what did we use? I think we
+did use that point. Yeah, 97. So it
+did use that point. Yeah, 97. So it
+actually it changed the beta from the
+original. Oh, it increased
+it. It's a little bit like annoying
+it. It's a little bit like annoying
+because I know that you can get a high
+because I know that you can get a high
+score in that amount of time, right,
+score in that amount of time, right,
+with a beta like this. So this could
+with a beta like this. So this could
+just be sample bias.
+It looks like if anything
+It looks like if anything
+though, maybe the uh beta one is a
+though, maybe the uh beta one is a
+little low by
+little low by
+default. Filtering to find I'm filtering
+default. Filtering to find I'm filtering
+to find the fastest hyper because
+to find the fastest hyper because
+anything will solve it if you give it
+anything will solve it if you give it
+five minutes.
+Yeah, the thing that I'm seeing most
+Yeah, the thing that I'm seeing most
+here
+here
+is that um maybe this first beta needs
+is that um maybe this first beta needs
+to be increased a little bit from the
+default and all the runs over here.
+Okay. So, we'll keep that. You know,
+Okay. So, we'll keep that. You know,
+we'll we have that as a experiment and
+we'll we have that as a experiment and
+an option
+an option
+now. And then the next thing I wanted to
+see is
+this. We
+this. We
+have 115 second solves
+have 115 second solves
+uh with the new
+uh with the new
+algorithm. This is still running as
+well. 62 seconds 700 is pretty good.
+Let me think how uh how we can think
+Let me think how uh how we can think
+about this as
+about this as
+well.
+Sample. Oh, I guess I left this in. So,
+Sample. Oh, I guess I left this in. So,
+I was sweeping Adam in here as well. No
+I was sweeping Adam in here as well. No
+big
+big
+deal. Okay, so we're still up here to
+deal. Okay, so we're still up here to
+900,000 steps per
+900,000 steps per
+second. I know with some of these faster
+runs we
+runs we
+[Music]
+[Music]
+getting 8K mini batch is
+getting 8K mini batch is
+good. Total time steps is reasonable.
+good. Total time steps is reasonable.
+Batch
+Batch
+size pretty
+size pretty
+reasonable. Uh found a few of these
+reasonable. Uh found a few of these
+numms. It didn't really go this way too
+numms. It didn't really go this way too
+much.
+much.
+But it's
+fine. I guess I would want to try the
+fine. I guess I would want to try the
+optimal breakout params real
+quick. I think if I just want to play
+quick. I think if I just want to play
+with this for a
+with this for a
+second. Yeah, I kind of just want to
+second. Yeah, I kind of just want to
+play with the uh the breakout params in
+play with the uh the breakout params in
+this new algorithm for a few minutes
+this new algorithm for a few minutes
+just to see if I can find anything
+interesting. It's always interesting
+interesting. It's always interesting
+when you find like very different
+when you find like very different
+optimal hypers or stuff like that.
+This is basically 100 mil,
+right? Why does this have plus
+right? Why does this have plus
+120? Didn't I just click this and had uh
+I'm confused here. Hang
+on. 21
+335. This opened a completely different
+335. This opened a completely different
+window.
+Okay, this is good. This is the right
+one. 1024
+M. Soon more of us are doing research
+M. Soon more of us are doing research
+more often. We should rank the puffer m
+more often. We should rank the puffer m
+by training speed and
+by training speed and
+difficulty might be helpful. low
+difficulty might be helpful. low
+difficulty. The thing is that the
+difficulty. The thing is that the
+training speed you're going to be able
+training speed you're going to be able
+to get to be pretty decent on on any of
+them. We're going to be using all of
+them. We're going to be using all of
+them, I would
+them, I would
+think, as well. And the only way to rank
+think, as well. And the only way to rank
+them is to do full hyperp sweeps
+them is to do full hyperp sweeps
+anyways.
+Oh, got to get more people doing
+Oh, got to get more people doing
+research.
+Oh, wait. Is it 70? What's this?
+71. It's only 70 mil time steps.
+and two update
+and two update
+epox.
+epox.
+Okay, see how this
+Okay, see how this
+works. Train with torch deterministic
+works. Train with torch deterministic
+true.
+Whatever the default is, I think Clean
+Whatever the default is, I think Clean
+Arrow has that on for
+Arrow has that on for
+reproducibility. I don't think that that
+reproducibility. I don't think that that
+would make any difference though,
+right? What does that pram even do?
+Uh, I can go benchmark
+it.
+Here, let me get this in first.
+Dashboard's really annoying how it does
+this.
+this.
+Okay. Why does this look
+Okay. Why does this look
+worse? Oh, I guess this is with
+worse? Oh, I guess this is with
+P301.
+P301.
+Shouldn't be
+Shouldn't be
+though. Probably must I must have a
+though. Probably must I must have a
+difference in hypers or
+something. See 830k.
+Okay, that didn't work at all.
+Two updated
+Two updated
+epox two mills total
+epox two mills total
+steps
+steps
+entropy
+gamma the lambda gamma learning rate
+gamma the lambda gamma learning rate
+gradient
+norm. Uh, these params all look fine.
+norm. Uh, these params all look fine.
+So, what did I
+So, what did I
+do? I must have done
+something.
+something.
+50. It's a minute 13, a minute 11 or
+50. It's a minute 13, a minute 11 or
+whatever.
+kPS, 1024 m
+Yeah, something screwy
+here cuz that did not replicate at
+here cuz that did not replicate at
+all. Unless I broke something in the
+all. Unless I broke something in the
+meanwhile. I think I
+meanwhile. I think I
+did. But this is sketchy because this
+did. But this is sketchy because this
+should definitely
+replicate or something in the base
+replicate or something in the base
+config.
+I don't see anything.
+Horizon's correct
+Uh yeah, that's just
+bizarre. It's also a tad slower than
+bizarre. It's also a tad slower than
+before.
+Only thing I can think of.
+Get out of here,
+bot. Morning,
+folks. Doing some experimental analysis
+folks. Doing some experimental analysis
+here.
+and hopefully coming up with some good
+and hopefully coming up with some good
+uh good tweaks for
+puffer. I'm going to have to run this
+puffer. I'm going to have to run this
+experiment again because I got a
+experiment again because I got a
+completely different result
+completely different result
+here. It's possible this is just like an
+here. It's possible this is just like an
+inconsistent set of
+hypers. It's also possible that the atom
+hypers. It's also possible that the atom
+pra actually matter. So there's the
+pra actually matter. So there's the
+replication.
+Where is it? This one? No, not this one.
+Where is it? This one? No, not this one.
+This
+This
+one. So, right
+here. Meantime, I will go look up the
+here. Meantime, I will go look up the
+default atom
+default atom
+params. It's 0.9 and.999, which is what
+params. It's 0.9 and.999, which is what
+I set it to.
+Is it the epsilon that makes the
+Is it the epsilon that makes the
+difference
+there? That's the only thing I can see
+there? That's the only thing I can see
+is it's a very different
+epsilon. We'll we will see. It could
+epsilon. We'll we will see. It could
+also just be inconsistency in the um in
+also just be inconsistency in the um in
+the
+the
+seed. Some of these arcade ms are a
+seed. Some of these arcade ms are a
+little sketchy that way. We will fix
+little sketchy that way. We will fix
+that. But for now,
+Yeah, it's just seed
+Yeah, it's just seed
+inconsistency. Why Adam and not Adam
+W? Is there any evidence Adam W is like
+W? Is there any evidence Adam W is like
+consistently
+better
+better
+decoupled. People don't even use weight
+decoupled. People don't even use weight
+decay at the moment in RL. That's one of
+decay at the moment in RL. That's one of
+the things I've been meaning to run some
+the things I've been meaning to run some
+experiments
+experiments
+on. But um yeah, people don't even use
+on. But um yeah, people don't even use
+weight decay.
+Yeah. So this would be equivalent to
+Yeah. So this would be equivalent to
+atom I would think without weight
+atom I would think without weight
+decay and then we would have to try them
+decay and then we would have to try them
+both with weight decay.
+Okay. Yeah, this matches. So, it was
+Okay. Yeah, this matches. So, it was
+just uh some seed noise. That's fine. I
+just uh some seed noise. That's fine. I
+mean, that's cool that we have uh what's
+mean, that's cool that we have uh what's
+this? Uh 118. So, that's uh 80ish second
+this? Uh 118. So, that's uh 80ish second
+solve. And now we can
+solve. And now we can
+try. Let me see if the new atom params
+try. Let me see if the new atom params
+made any difference.
+should look into learning rate
+should look into learning rate
+schedulers. Yeah, actually I'm going to
+schedulers. Yeah, actually I'm going to
+do that
+do that
+today. That's part of what I'm going to
+today. That's part of what I'm going to
+do today if I get to
+do today if I get to
+it. Oh, that one. Is that just auler? I
+it. Oh, that one. Is that just auler? I
+thought that was a whole different
+algorithm. Yeah, I know. Lucas
+of parameters simultaneously.
+schedule
+Breathe. I've also heard about
+Muan. We can play with these. It'd be
+Muan. We can play with these. It'd be
+pretty easy to play with
+them. Let's get our like basic stuff
+them. Let's get our like basic stuff
+done first
+though. I think um order of priorities
+though. I think um order of priorities
+today is I want to do I want to finish
+today is I want to do I want to finish
+up this analysis. I probably want to do
+up this analysis. I probably want to do
+stuff on mu
+stuff on mu
+mup and then I want to do uh optimizer
+stuff. I mean this doesn't really count,
+stuff. I mean this doesn't really count,
+right? This what I'm doing here. This is
+right? This what I'm doing here. This is
+pretty
+basic. MUP is this thing that LM people
+basic. MUP is this thing that LM people
+use a bunch that lets you use the same
+use a bunch that lets you use the same
+set of hyperparameters uh or same
+set of hyperparameters uh or same
+learning rate in particular as you make
+learning rate in particular as you make
+the network
+the network
+larger cuz I want to add the network
+larger cuz I want to add the network
+size as h as the uh as a hyperparameter
+size as h as the uh as a hyperparameter
+to the sweep you
+know we'll see what this
+know we'll see what this
+does so this is now
+does so this is now
+the same experiment as before so
+the same experiment as before so
+optimized breakout pars but with
+optimized breakout pars but with
+um the tuned atom coefficients. So, it's
+um the tuned atom coefficients. So, it's
+apples to oranges, but the hope is that
+apples to oranges, but the hope is that
+it just is better. You know, it's per
+it just is better. You know, it's per
+environment. That'd be cool. Yeah. I got
+environment. That'd be cool. Yeah. I got
+to stop like putting white background
+to stop like putting white background
+stuff on my
+stuff on my
+chat. I've been really meaning to just
+chat. I've been really meaning to just
+get like a basic overlay made for this.
+Does that just crash everything right
+Does that just crash everything right
+here? Is that what I'm seeing?
+It's
+bizarre. Again though, there is some
+bizarre. Again though, there is some
+seed varian. So I will try it again.
+few more experiments and we move on to
+few more experiments and we move on to
+MUP. Uh I just want to check
+MUP. Uh I just want to check
+this. I think it's going to be slightly
+this. I think it's going to be slightly
+more complicated than anticipated with
+more complicated than anticipated with
+this. We'll see.
+And then I wanted to try
+And then I wanted to try
+um I wanted to try the latest version
+um I wanted to try the latest version
+of the new algorithm on
+of the new algorithm on
+this with these params as well.
+Yeah, that's just awful performance.
+Yeah, that's just awful performance.
+That's
+That's
+crazy. Okay, so it's not as easy as just
+crazy. Okay, so it's not as easy as just
+shifting the params and calling it a
+shifting the params and calling it a
+day.
+Not quite so easy.
+So, I made this cool modification late
+So, I made this cool modification late
+last night to
+last night to
+P3. Um, I was having this problem where
+P3. Um, I was having this problem where
+as you would increase the
+as you would increase the
+horizon, the allowable horizon, it would
+horizon, the allowable horizon, it would
+change the algorithm. It would make it
+change the algorithm. It would make it
+so you couldn't reuse the same
+so you couldn't reuse the same
+hyperparameters. Now, it has an adaptive
+hyperparameters. Now, it has an adaptive
+horizon. So it starts at 16 and you will
+horizon. So it starts at 16 and you will
+see it increase once the uh the score
+see it increase once the uh the score
+gets a little
+higher. And the horizon in this case uh
+higher. And the horizon in this case uh
+is the number of samples into the future
+is the number of samples into the future
+it's
+considering settles on it. The horizon
+considering settles on it. The horizon
+just tends to increase over time because
+just tends to increase over time because
+it's based on what it can predict. So
+it's based on what it can predict. So
+the farther out it can predict the uh
+the farther out it can predict the uh
+the farther out it uses
+samples. Now these hyperparameters are
+samples. Now these hyperparameters are
+not for this algorithm. I was just
+not for this algorithm. I was just
+trying this. This doesn't seem to work
+trying this. This doesn't seem to work
+particularly well
+particularly well
+uh with these
+hypers. It's a start though.
+different from the horizon that Yes, it
+different from the horizon that Yes, it
+is. It's
+is. It's
+different. Okay, so it doesn't work with
+different. Okay, so it doesn't work with
+these hypers. That's what I was
+these hypers. That's what I was
+checking. I will run it one more time
+checking. I will run it one more time
+just in case there's like seed variants,
+just in case there's like seed variants,
+though I highly doubt
+it. And uh I think we'll just go to MUP
+it. And uh I think we'll just go to MUP
+so I can, you know, not get stuck on
+so I can, you know, not get stuck on
+this all morning.
+So, I've had my eye on this for a
+So, I've had my eye on this for a
+while. This is the core graph right
+here. is they find
+here. is they find
+that
+normally the optimum learning rate
+normally the optimum learning rate
+changes when you shift batch size not
+changes when you shift batch size not
+batch size when you shift the learning
+batch size when you shift the learning
+rate optimal learning rate changes when
+rate optimal learning rate changes when
+you shift the model size. So there we
+you shift the model size. So there we
+go. Whereas here they keep it pretty
+go. Whereas here they keep it pretty
+darn, you know, consistent.
+So these are all uh
+So these are all uh
+transferable it says. So any of these
+transferable it says. So any of these
+atom
+parameters? Does anybody know there
+parameters? Does anybody know there
+aren't follow-ups to this? Right. This
+aren't follow-ups to this? Right. This
+is this is still what people use, right?
+They have code for
+They have code for
+this. Let's
+see. Yes, they do.
+Okay, we'll use their library to start
+Okay, we'll use their library to start
+with and maybe we'll like integrate it
+with and maybe we'll like integrate it
+properly if uh if it works.
+Yeah. So, it wasn't just seed noise.
+Yeah. So, it wasn't just seed noise.
+Cool.
+How do they get a threeletter package
+name? Basic
+usage in model definition. Replace
+usage in model definition. Replace
+output with a new
+readout. I might want to make a brand
+readout. I might want to make a brand
+for this real quick.
+Not
+really.
+Okay. So, we're going to do this
+one. Multidiscreet
+continuous. Yeah, it's this one.
+move readout hidden
+size and action space N.
+That's it. They don't change the uh the
+That's it. They don't change the uh the
+rest of the
+model. Oh, I think that theirs will
+model. Oh, I think that theirs will
+change your initializations for you.
+Wait, let me I got to read these
+Wait, let me I got to read these
+comments.
+comments.
+So instantiate a base
+model optionally use torch dist xx
+model optionally use torch dist xx
+deferred init deferred in
+deferred init deferred in
+it. Okay, that's like if you don't want
+it. Okay, that's like if you don't want
+to double initialize a big
+model. Instantiate a delta model that
+model. Instantiate a delta model that
+differs from the base model in all
+differs from the base model in all
+dimensions that one wishes to scale.
+instantiate the target model, the model
+instantiate the target model, the model
+you actually want to
+you actually want to
+train. This should be the same as the
+train. This should be the same as the
+base
+base
+model except the widths could be
+model except the widths could be
+potentially different.
+Okay. When model has same parameters
+parameter shapes as base model. Model
+parameter shapes as base model. Model
+behaves exactly the same as base
+model. When model has the same has same
+model. When model has the same has same
+parameter
+parameter
+shapes as base model. Model behaves
+shapes as base model. Model behaves
+exactly the same as base
+exactly the same as base
+model which is PyTorch's which is in
+model which is PyTorch's which is in
+PyTorch's default parameterization.
+PyTorch's default parameterization.
+This provides backwards
+compatibility. Oh, okay. So, this
+is So, what this does then is
+is So, what this does then is
+[Music]
+[Music]
+you you set up like what model you want
+you you set up like what model you want
+new P to use as a starting point and
+new P to use as a starting point and
+then it keeps that the same and it
+then it keeps that the same and it
+scales around that I guess.
+That's fine.
+Base and delta models do not need to be
+trained. Okay.
+Do you need delta
+model kind of a weird thing that they've
+model kind of a weird thing that they've
+done. Whatever
+done. Whatever
+though. I think it should be fairly
+easy. We'll see if it works with the
+easy. We'll see if it works with the
+RNN.
+the
+the
+policy. You passed the policy
+policy. You passed the policy
+in. That's annoying.
+We can just hack uh something for now, I
+We can just hack uh something for now, I
+think. Right.
+[Music]
+[Music]
+I mean, this is kind of
+crazy. Let me look at their source. See
+crazy. Let me look at their source. See
+how how complicated it is.
+confusing code.
+So this is just a multiplier.
+Fine
+Fine
+net. What about
+this
+this
+uniform drop in replacement for uniform?
+Normal drop in replacement for
+normal. I see.
+So then why do they have
+um what is it that they need this crazy
+um what is it that they need this crazy
+thing that they're doing
+for set base
+shapes. I think I have to read a little
+shapes. I think I have to read a little
+bit more in the paper to figure out what
+bit more in the paper to figure out what
+this is actually trying to do.
+We need to
+We need to
+modify initialization of the last
+layer and its learning rates of the
+layer and its learning rates of the
+first and last layer as well as of the
+first and last layer as well as of the
+biases.
+Initialize. So ADA is master learning
+rate. We highlight in not purple but
+rate. We highlight in not purple but
+whatever the differences of two
+parameterizations scaling with width n
+parameterizations scaling with width n
+of the
+parameterization. We often insert
+parameterization. We often insert
+multiplicative constants of each
+multiplicative constants of each
+appearance of n.
+We highlight in difference then purple
+We highlight in difference then purple
+the differences in the two
+the differences in the two
+parameterizations. So hang
+on and w
+Wait a not, but whatever.
+I'm trying to figure out if there's just
+I'm trying to figure out if there's just
+like a simple ver like a simple how does
+like a simple ver like a simple how does
+this work that I can just implement
+this work that I can just implement
+without having to do this mess.
+Okay. Okay. So for the MLP in section
+three, so they gave a specific
+three, so they gave a specific
+initialization
+initialization
+here and they said, hey, if you use this
+here and they said, hey, if you use this
+instead, then it transfers
+This is a little bit annoying because of
+This is a little bit annoying because of
+the way that I have my policy set up.
+wider is always better.
+You should always see performance
+You should always see performance
+improvement with width at any point in
+training. Okay, you know this is
+training. Okay, you know this is
+actually
+actually
+possible. This would be very useful.
+I think we will just try to force this
+I think we will just try to force this
+uh their original for now and then we'll
+uh their original for now and then we'll
+go from here. I don't really like adding
+go from here. I don't really like adding
+this as a
+this as a
+dependency, but I think for dev branch
+dependency, but I think for dev branch
+for playing around with stuff, it's
+fine cuz we'd like to add this as a flag
+fine cuz we'd like to add this as a flag
+anyways.
+Okay, let's try this.
+Yes. Let's actually do this one
+Yes. Let's actually do this one
+first. Like this, right?
+policy and then base policy. So we do
+policy and then base policy. So we do
+arg policy hidden size is equal to
+arg policy hidden size is equal to
+one base
+policy. Okay. And then we do delta pol
+policy. Okay. And then we do delta pol
+delta
+delta
+model which just has this attribute
+model which just has this attribute
+changed or
+whatever. Where is it? Just like this.
+This will be
+delta delta
+delta delta
+policy. Let's flip to
+two and we'll
+two and we'll
+do
+save policy.
+All set base shapes. This stuff
+All set base shapes. This stuff
+is this goes at the
+top. We don't need this.
+Actually, I think you could even do
+Actually, I think you could even do
+easier than this, can't you? Hang on. We
+easier than this, can't you? Hang on. We
+can make this
+easier. Hang on.
+I can do it right
+I can do it right
+here. That's not that bad. Actually, I
+here. That's not that bad. Actually, I
+don't like having more stuff like this
+don't like having more stuff like this
+in the demo file, but I think for dev
+in the demo file, but I think for dev
+branch
+Oops. I think for dev branch, this is
+Oops. I think for dev branch, this is
+fine.
+Now I need just these separate shapes,
+Now I need just these separate shapes,
+right?
+policy base policy
+delta. Replace your custom in it if
+any. Replace with the same
+any. Replace with the same
+Okay, I think we'll leave this as
+is make base. They don't even call this,
+is make base. They don't even call this,
+do they? They just call set base shape.
+do they? They just call set base shape.
+So, we can just do
+that. This should be called before
+that. This should be called before
+optimizer definition.
+Fine. Then the
+optimizer. The
+optimizer. All we need
+is let's put this here.
+Move
+Adam. Cool. So, this
+Adam. Cool. So, this
+hopefully this should train the same way
+hopefully this should train the same way
+as
+as
+before according to the authors.
+Let's not screw this up with
+Let's not screw this up with
+uh a new algorithm or anything. Well,
+uh a new algorithm or anything. Well,
+base shapes has extra
+names and base
+shapes decoder.weight
+Is there get bay shapes
+Is there get bay shapes
+anywhere or make bay shapes? Did I miss
+anywhere or make bay shapes? Did I miss
+something? They imported
+it.
+No. So I set the base shapes
+here. Base shapes has extra
+names. Let me see what I did.
+Do you still have to do evaluating of to
+Do you still have to do evaluating of to
+decide if it's worth it or not? Um, I
+decide if it's worth it or not? Um, I
+think that there's definitely something
+think that there's definitely something
+in that vein of research, I will say.
+in that vein of research, I will say.
+And, uh, it got us a really good result
+And, uh, it got us a really good result
+on
+on
+Snake. So, I'm probably going to merge
+Snake. So, I'm probably going to merge
+that into
+that into
+dev. And, uh, I have I cleaned up a
+dev. And, uh, I have I cleaned up a
+bunch of stuff in dev, so it's a lot
+bunch of stuff in dev, so it's a lot
+easier to like try different methods as
+easier to like try different methods as
+flags. uh we don't want to keep them all
+flags. uh we don't want to keep them all
+longterm, but what I really want to do
+longterm, but what I really want to do
+soon, I want to get all these methods
+soon, I want to get all these methods
+in, right? And I want to start running
+in, right? And I want to start running
+them on way more environments than I
+them on way more environments than I
+currently am. I'm mostly just running
+currently am. I'm mostly just running
+quick stuff on Breakout and Pong these
+quick stuff on Breakout and Pong these
+days. I really want to be running stuff
+days. I really want to be running stuff
+on like Neural MMO and all the other MS
+on like Neural MMO and all the other MS
+we have.
+Oh, here it is. You messed uh right
+Oh, here it is. You messed uh right
+here. This one
+delta
+boom policy value has
+infinite change f out to an infinite
+dimension. Okay.
+ability. So I think that you need to set
+ability. So I think that you need to set
+base to
+be 128.
+Oh, this didn't work. What the
+Oh, this didn't work. What the
+hell? Let's run it
+hell? Let's run it
+again. But this did not
+work. Let's see if it's just jank.
+I also have one other idea thing I might
+I also have one other idea thing I might
+have messed up.
+What is this heavy ball optimizer? You
+What is this heavy ball optimizer? You
+linked me
+Let's just ask
+Let's just ask
+Twitter. I have a group chat with uh the
+Twitter. I have a group chat with uh the
+guys that did the heavy ball stuff.
+So, wrong chat. Hang on.
+See if we get any reply on that.
+And did this fail? Yes, this still
+And did this fail? Yes, this still
+fails. So, we got to figure out a couple
+fails. So, we got to figure out a couple
+things with this then. First
+thing, these to
+128. Do
+128. Do
+that. Okay. Okay, let's see if that
+that. Okay. Okay, let's see if that
+changes
+changes
+anything. Hey,
+welcome. So, I went to implement the
+welcome. So, I went to implement the
+thing that we were talking about uh
+thing that we were talking about uh
+yesterday and I realized it's actually
+yesterday and I realized it's actually
+kind of hard to do that without imple
+kind of hard to do that without imple
+without changing the um the learn target
+without changing the um the learn target
+uh of the optimizer. I can show you what
+uh of the optimizer. I can show you what
+I ended up doing.
+I ended up doing.
+I came up with something I think is
+I came up with something I think is
+pretty
+cool cuz basically anything I so I
+cool cuz basically anything I so I
+confirmed for certain that the the
+confirmed for certain that the the
+reason that it doesn't train at longer
+reason that it doesn't train at longer
+horizons is uh it's not because of the
+horizons is uh it's not because of the
+bias. It's just because of the
+bias. It's just because of the
+noise that you get from those extra
+noise that you get from those extra
+steps.
+steps.
+So what I did is I made it variable
+horizon. Let me find
+it. Yeah. So right here horizon starts
+it. Yeah. So right here horizon starts
+at
+at
+16. Yeah. The variance ends up being
+16. Yeah. The variance ends up being
+greater. Well, it's the variance in the
+greater. Well, it's the variance in the
+value function for whatever reason. It
+value function for whatever reason. It
+actually doesn't matter as much if you
+actually doesn't matter as much if you
+clip uh the advantage. Like there's way
+clip uh the advantage. Like there's way
+less noise than that because
+less noise than that because
+like if the rewards shift a little bit,
+like if the rewards shift a little bit,
+it's fine, right? Cuz you're computing a
+it's fine, right? Cuz you're computing a
+sub. But uh it's way more of a big deal
+sub. But uh it's way more of a big deal
+in the advantage function because that's
+in the advantage function because that's
+like a per term loss. But anyways, what
+like a per term loss. But anyways, what
+I did is I just take the first value uh
+I did is I just take the first value uh
+where it is greater than 95% of the
+where it is greater than 95% of the
+standard deviation you would expect from
+standard deviation you would expect from
+random. So like I'm looking for the
+random. So like I'm looking for the
+first one where you basically have no
+first one where you basically have no
+signal. It's all noise. And then I clip
+signal. It's all noise. And then I clip
+the horizon to that. And then in the uh
+the horizon to that. And then in the uh
+the
+the
+loss, I just get rid of the terms that
+loss, I just get rid of the terms that
+uh you know are either up to the horizon
+uh you know are either up to the horizon
+or sometimes you give it a few extra
+or sometimes you give it a few extra
+elements because you know you have to
+elements because you know you have to
+start training those values. Uh and this
+start training those values. Uh and this
+actually it still doesn't work as well
+actually it still doesn't work as well
+as PO. But the cool thing about this is
+as PO. But the cool thing about this is
+uh now you can
+uh now you can
+provably you can set that horizon
+provably you can set that horizon
+parameter however large you want and it
+parameter however large you want and it
+will not screw up your training. it
+will not screw up your training. it
+strictly allows you to learn longer
+strictly allows you to learn longer
+horizons uh as you're able to predict
+horizons uh as you're able to predict
+them. So that's pretty
+cool. So we got that
+cool. So we got that
+going and now we're doing other
+going and now we're doing other
+algorithm stuff. Currently trying to get
+algorithm stuff. Currently trying to get
+MUP working and it's not working.
+MUP is this thing that LLM people use a
+MUP is this thing that LLM people use a
+lot.
+lot.
+Um they change the initializations and
+Um they change the initializations and
+the optimizer rates such that the
+the optimizer rates such that the
+optimal learning rate stays fixed as you
+optimal learning rate stays fixed as you
+change the network
+change the network
+size. So it's a really nice technique
+size. So it's a really nice technique
+for like stable training though it
+for like stable training though it
+doesn't seem to be working right now.
+Yeah, cuz I have this layer in it right
+Yeah, cuz I have this layer in it right
+now. Right on
+this. I have listening, studying for an
+this. I have listening, studying for an
+exam.
+exam.
+Best of
+luck. I'm glad I no longer have to be
+luck. I'm glad I no longer have to be
+doing that.
+Let's see this.
+Mhm.
+There's also the orthogonal in it the
+There's also the orthogonal in it the
+recurrent net,
+right? Let me think about this.
+right? Let me think about this.
+Oh
+yeah. No, we
+yeah. No, we
+haven't. It's such a pain though because
+haven't. It's such a pain though because
+initialization is one of those stupid
+initialization is one of those stupid
+rabbit hole topics because the search
+rabbit hole topics because the search
+space is massive.
+I guess I should probably look at what
+I guess I should probably look at what
+the LLM people are doing at the moment,
+the LLM people are doing at the moment,
+but I don't know if there's much
+but I don't know if there's much
+um I don't know if there's much to be
+um I don't know if there's much to be
+gain
+gain
+there. There are like other places I
+there. There are like other places I
+would look
+first. Let's do this one first.
+I mean, the thing is those methods just
+I mean, the thing is those methods just
+don't work,
+don't work,
+right? So, like the people that are
+right? So, like the people that are
+like, "Oh, well, we're going to use this
+like, "Oh, well, we're going to use this
+cuz it's explainable." This actually
+cuz it's explainable." This actually
+happens very often in industry, by the
+happens very often in industry, by the
+way. Like people in finance will do this
+way. Like people in finance will do this
+or whatever, and it's just like, "Oh,
+or whatever, and it's just like, "Oh,
+well, we need it to be explainable." So
+well, we need it to be explainable." So
+we can rationalize the decisions. It's
+we can rationalize the decisions. It's
+like, okay, well, every decision it
+like, okay, well, every decision it
+makes is wrong. Um, so you can just
+makes is wrong. Um, so you can just
+explain that you're stupid, right? Cuz
+explain that you're stupid, right? Cuz
+you used a bad model. But it's like, oh,
+you used a bad model. But it's like, oh,
+but you know, it's it made this bad
+but you know, it's it made this bad
+decision because of this, this, and
+decision because of this, this, and
+that. Like, I don't know. Look,
+that. Like, I don't know. Look,
+interpretability work on neural nets is
+interpretability work on neural nets is
+good.
+Um, but yeah, the other methods just are
+Um, but yeah, the other methods just are
+not very promising.
+I mean the thing with the like
+I mean the thing with the like
+regulation is the whole thing is just
+regulation is the whole thing is just
+dumb because a lot of uh explanability
+dumb because a lot of uh explanability
+work also just gives you the illusion of
+work also just gives you the illusion of
+understanding
+understanding
+anyways like you're not going to get
+anyways like you're not going to get
+you're not going to understand the
+you're not going to understand the
+decision from start to end
+Right? It's like when somebody tries to
+Right? It's like when somebody tries to
+explain to you why they did something.
+explain to you why they did something.
+It's not actually why they did
+It's not actually why they did
+something. It's an explanation of why
+something. It's an explanation of why
+they did something.
+So it's like, oh, neural nets aren't
+So it's like, oh, neural nets aren't
+explainable. Congratulations, humans
+explainable. Congratulations, humans
+aren't
+explainable. Now, it's a little bit
+explainable. Now, it's a little bit
+reduction. Like it's a little bit uh
+reduction. Like it's a little bit uh
+reductive, but still
+See if this
+works. Mine doesn't have orth does it
+works. Mine doesn't have orth does it
+really not have orthogonal?
+doesn't have orthogonal. Lovely.
+Oops, that's the wrong
+language. Why does it screw this up so
+language. Why does it screw this up so
+badly, though?
+badly, though?
+It's kind of crazy, isn't it?
+what
+what
+version? Uh, you know, I probably should
+version? Uh, you know, I probably should
+be back on those because I do need to
+be back on those because I do need to
+put some weight back on.
+put some weight back on.
+Um, the problem
+Um, the problem
+is I need to put about 10 pounds back on
+is I need to put about 10 pounds back on
+that I lost um from the hospital.
+that I lost um from the hospital.
+But like in order to actually not just
+But like in order to actually not just
+get fat doing that, you have to be
+get fat doing that, you have to be
+training really hard. And my work
+training really hard. And my work
+capacity is still like way way down from
+capacity is still like way way down from
+what it used to be. So, I'm kind of just
+what it used to be. So, I'm kind of just
+like eating normal food as much as I
+like eating normal food as much as I
+can. Yeah, that mug like you really have
+can. Yeah, that mug like you really have
+to be training hard for that mug to do
+to be training hard for that mug to do
+what it's supposed to do. Um, and I'm
+what it's supposed to do. Um, and I'm
+training, but I like I do not have the
+training, but I like I do not have the
+uh the capacity to train hard enough to
+uh the capacity to train hard enough to
+sustain like a thousand calorie
+sustain like a thousand calorie
+surplus. Yeah.
+This is just
+tea. The mug is a pretty legitimate uh
+tea. The mug is a pretty legitimate uh
+it's a pretty legitimate thing though if
+it's a pretty legitimate thing though if
+like you just need a ton of calories and
+like you just need a ton of calories and
+don't have the
+don't have the
+uh
+uh
+appetite. It's pretty damn good. Gets
+appetite. It's pretty damn good. Gets
+you most of your protein for the day.
+you most of your protein for the day.
+Not terrible.
+I'm trying to think why this thing
+I'm trying to think why this thing
+wouldn't be working right now. I guess
+wouldn't be working right now. I guess
+it's just because it doesn't have the
+it's just because it doesn't have the
+initializations I would
+want. New Adam
+And it's like it stops training, doesn't
+it? Try this.
+Oh, maybe it's this. Hang
+on. Times equals
+2. It's probably this.
+It's probably that you need the analing
+It's probably that you need the analing
+and you're doing it wrong.
+How do you do this though?
+How do you do this?
+Hang on.
+Let me just see if this does
+Let me just see if this does
+anything. 99.
+I'll be right back in these restaurant.
+I'll be right back in these restaurant.
+I'm back in a minute.
+Yeah, that's annoying. It still doesn't
+Yeah, that's annoying. It still doesn't
+fix
+it. Does it feel like that was
+better? Minute 22 seconds. 368.
+Yeah, there we go.
+Yeah, this is fine.
+Oh, actually it is correct here,
+Oh, actually it is correct here,
+right? Yeah.
+Let's see how this
+goes. That looks much
+goes. That looks much
+better. Is this uh the run that I'm
+better. Is this uh the run that I'm
+looking
+looking
+for? Think it is.
+Does it just get stuck here still?
+Okay. So, it was just a scheduler being
+wonky. That's a nice
+improvement. Perfect.
+improvement. Perfect.
+So now we have MUP
+working according to
+this. I should now be able to just use a
+this. I should now be able to just use a
+larger network and do
+better. Can I just do
+this? Not in wall clock, but in samples.
+this? Not in wall clock, but in samples.
+I should be able to just do
+better. Expected
+128. What's that?
+Got 512 expected
+128. Hang on.
+Oh, I think it's input size. Hang on.
+Oh, I think it's input size. Hang on.
+Yeah, it's input size.
+So this has this takes hidden size but
+So this has this takes hidden size but
+the RNN takes input and hidden size.
+Yep. Input size.
+Oh, and also before I screw this
+up, box hidden
+size two.
+This one actually goes
+here. Hang
+on
+on
+there. Now we have the scaling factor,
+there. Now we have the scaling factor,
+right?
+MUP. So this is now 512 hidden dimension
+MUP. So this is now 512 hidden dimension
+with the same params other than the
+with the same params other than the
+tweaked uh learning
+rate. We'll see how the curve looks.
+Uh, it's the fact that I quadrupled the
+Uh, it's the fact that I quadrupled the
+model hidden dimension.
+Yeah, a bigger model doesn't
+Yeah, a bigger model doesn't
+seem like substantially better, but also
+seem like substantially better, but also
+not substantially
+not substantially
+worse. It's
+actually does this even make sense that
+actually does this even make sense that
+it's still that
+fast? Oh, it's not that fast, right?
+fast? Oh, it's not that fast, right?
+Because now it's going to run. It's not
+Because now it's going to run. It's not
+going to run eval and be a little
+slower. Yeah. Okay. So, it is a little
+slower. Yeah. Okay. So, it is a little
+slower.
+slower.
+Cool. But now we actually have the
+Cool. But now we actually have the
+option to do
+that. Why would torch compile
+that. Why would torch compile
+help? It should help less for the bigger
+help? It should help less for the bigger
+policies.
+I mean, that's a 2 million parameter
+I mean, that's a 2 million parameter
+model that's running at 575 mil in eager
+model that's running at 575 mil in eager
+mode is pretty damn good.
+Why would it help less for larger
+Why would it help less for larger
+models? Because you have less of a
+models? Because you have less of a
+percentage of the time devoted to uh
+percentage of the time devoted to uh
+CUDA kernel launch overhead, which
+CUDA kernel launch overhead, which
+actually the standard torch compile
+actually the standard torch compile
+doesn't really help with. You need to
+doesn't really help with. You need to
+like fiddle with CUDA graphs a bunch,
+like fiddle with CUDA graphs a bunch,
+which I haven't done. It's probably a
+which I haven't done. It's probably a
+good a big source of perf improvement,
+good a big source of perf improvement,
+but it's kind of a mess at the same
+but it's kind of a mess at the same
+time.
+And we'd have to be able to also fully
+And we'd have to be able to also fully
+trace the backwards pass, which is
+annoying. You can't trace the backwards
+annoying. You can't trace the backwards
+pass as it is right
+pass as it is right
+now. Okay. But these are good
+now. Okay. But these are good
+results. Very brittle. Yeah,
+results. Very brittle. Yeah,
+exactly. I mean, these are good results
+exactly. I mean, these are good results
+though.
+So I think that
+um I see it's
+um I see it's
+11. Do I want to play with anything else
+11. Do I want to play with anything else
+initially?
+Let me try a couple more
+things. I think it's still cosign and
+things. I think it's still cosign and
+kneeling is the most commonly used,
+kneeling is the most commonly used,
+right?
+Yeah, still co sign.
+Let's try cosine and healing first I
+Let's try cosine and healing first I
+guess.
+I think I'm going to just
+I think I'm going to just
+um I'm going to leave most of this
+um I'm going to leave most of this
+fiddling until after
+fiddling until after
+lunch. Uh I'm going to get some food.
+lunch. Uh I'm going to get some food.
+I'm going to do a couple things and then
+I'm going to do a couple things and then
+I will be back with more
+I will be back with more
+dev. I think that's what we're going to
+dev. I think that's what we're going to
+do right now. So I'll be back soon. Um
+do right now. So I'll be back soon. Um
+we're going to do today learning rate
+we're going to do today learning rate
+schedulers finish MUP integration see if
+schedulers finish MUP integration see if
+that works. Uh we're going to integrate
+that works. Uh we're going to integrate
+model size with hyperparameter sweeps.
+model size with hyperparameter sweeps.
+That's going to be cool. There's going
+That's going to be cool. There's going
+to be some more testing around that. We
+to be some more testing around that. We
+might do some work on my new advantage
+might do some work on my new advantage
+function. Several like algorithm side
+function. Several like algorithm side
+things and cleanly integrating all this
+things and cleanly integrating all this
+with the dev branch as well so people
+with the dev branch as well so people
+can play with it. So I'll be back soon.
+can play with it. So I'll be back soon.
+And in the meantime, if you're
+And in the meantime, if you're
+interested in following my stuff,
+interested in following my stuff,
+saltpuffer.ai, star the GitHub to help
+saltpuffer.ai, star the GitHub to help
+us out. Join the Discord if you want to
+us out. Join the Discord if you want to
+get involved with development
+get involved with development
+contribution or just using it in
+contribution or just using it in
+general.

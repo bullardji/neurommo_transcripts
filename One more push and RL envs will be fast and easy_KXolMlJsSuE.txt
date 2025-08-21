@@ -1,0 +1,4833 @@
+Kind: captions
+Language: en
+heck happened with my microphone
+heck happened with my microphone
+here that was weird Okay
+here that was weird Okay
+um we got some stuff to do today we got
+um we got some stuff to do today we got
+some stuff to
+some stuff to
+do I think I'm feeling good um there are
+do I think I'm feeling good um there are
+a couple last problems that I have to
+a couple last problems that I have to
+solve essentially right now and then we
+solve essentially right now and then we
+will be oops and then we should be set
+will be oops and then we should be set
+on the whole structure for how we add
+on the whole structure for how we add
+new environments to puffer just a couple
+new environments to puffer just a couple
+last things that I need to solve here
+last things that I need to solve here
+and we should be set
+and we should be set
+um actually we have to solve a few
+um actually we have to solve a few
+things today in order for that to happen
+things today in order for that to happen
+um and I think really the thing that I
+um and I think really the thing that I
+want to do today is I want to be done
+want to do today is I want to be done
+with the full end to end in uh way in
+with the full end to end in uh way in
+which we make new environments for
+which we make new environments for
+puffer and we make that process simple
+puffer and we make that process simple
+and
+and
+easy that's what I want to do right now
+I don't think it should be that hard I
+I don't think it should be that hard I
+think we've already solved the hard
+think we've already solved the hard
+stuff there's just a little bit of
+stuff there's just a little bit of
+organization and then one kind of
+organization and then one kind of
+technical thing I got to figure out
+technical thing I got to figure out
+let's start with the hard
+problem so here's the issue right now
+problem so here's the issue right now
+let me show this
+this is the binding for breakout right
+this is the binding for breakout right
+now so this stuff
+here the reason that this needs to be
+here the reason that this needs to be
+kept is because we create the
+kept is because we create the
+environment inside of
+reset that's the reason this needs to be
+reset that's the reason this needs to be
+kept
+the reason that we have to make the
+the reason that we have to make the
+environment inside of
+reset is that puffer lib uh the way
+reset is that puffer lib uh the way
+puffer lib allocates
+puffer lib allocates
+buffers is a little bit weird
+the reason in fact that we have to do
+the reason in fact that we have to do
+this at
+this at
+all is right
+here so technically speaking
+here so technically speaking
+here most of this stuff is supposed to
+here most of this stuff is supposed to
+be
+redundant really the only thing that we
+redundant really the only thing that we
+should need to
+know we need to know the number of
+know we need to know the number of
+Agents don't
+we we need to know the number of Agents
+yeah that's
+yeah that's
+standard we need to know the observation
+standard we need to know the observation
+and action
+and action
+spaces but this buffer stuff this
+spaces but this buffer stuff this
+emulated this done all this stuff should
+emulated this done all this stuff should
+be able to be deleted single action
+be able to be deleted single action
+space single OB space this should all be
+space single OB space this should all be
+able to be
+able to be
+deleted M agents yeah all this stuff
+deleted M agents yeah all this stuff
+render mode like a lot of these things
+render mode like a lot of these things
+should just be
+handled reason I didn't have this at the
+handled reason I didn't have this at the
+moment is I didn't want to have I mean
+moment is I didn't want to have I mean
+if we look at this Base
+Class this doesn't do anything right
+Class this doesn't do anything right
+it's just like this
+it's just like this
+silly base that I use just to check the
+silly base that I use just to check the
+type
+because I wanted this to be an API not
+because I wanted this to be an API not
+like a base class right cuz Jim has way
+like a base class right cuz Jim has way
+too much garbage essentially as part of
+too much garbage essentially as part of
+the base
+the base
+class and I wanted this to not have to
+class and I wanted this to not have to
+do
+that so let me think about that let me
+that so let me think about that let me
+think about that
+the tricky part
+the tricky part
+here is
+here is
+handling observation action know buffer
+data that's the tricky
+part let me check the
+part let me check the
+vectorization I haven't looked at this
+vectorization I haven't looked at this
+code in a while maybe maybe I'll uh I'll
+code in a while maybe maybe I'll uh I'll
+think of something here that I missed
+think of something here that I missed
+before welcome YouTube
+before welcome YouTube
+folks we're making progress today we're
+folks we're making progress today we're
+going to make this
+going to make this
+work it's been too long that there's
+work it's been too long that there's
+just been like this last little bit of
+just been like this last little bit of
+Jank with puffer cuz I've been building
+Jank with puffer cuz I've been building
+Sims and we really I want this to be
+Sims and we really I want this to be
+gone
+today trying to see how this works so
+here you see we make the environment
+here you see we make the environment
+right we make all the
+right we make all the
+environments and then we have assign
+environments and then we have assign
+buffers this thing here which gets
+buffers this thing here which gets
+called in
+reset and they get made right
+reset and they get made right
+here and if you do this
+here and if you do this
+multiprocess then um they get assigned
+multiprocess then um they get assigned
+externally
+why is it like
+this so the reason I did it this
+this so the reason I did it this
+way there are a lot of different things
+way there are a lot of different things
+that can happen here
+that can happen here
+and basically the the difficulty here of
+and basically the the difficulty here of
+making all this
+making all this
+simple is I want to make it very easy
+simple is I want to make it very easy
+for people to design environments of
+for people to design environments of
+various levels of
+various levels of
+optimization I want basically like
+optimization I want basically like
+however much effort you want to put into
+however much effort you want to put into
+making an environment puffer is going to
+making an environment puffer is going to
+give you the best return on investment
+give you the best return on investment
+regardless so if you just want to make a
+regardless so if you just want to make a
+python M puffer should make that easy
+python M puffer should make that easy
+and fast right if you want to make like
+and fast right if you want to make like
+a vectorized python M puffer should make
+a vectorized python M puffer should make
+that easier easy and
+that easier easy and
+faster if you want to do cython puffer
+faster if you want to do cython puffer
+will make that even faster and then if
+will make that even faster and then if
+you want to do c you get
+everything and because of
+everything and because of
+that we have this serial
+that we have this serial
+thing serial assumes that you could want
+thing serial assumes that you could want
+to
+to
+run you could want to run the loop over
+run you could want to run the loop over
+environments in Python that is why this
+environments in Python that is why this
+thing
+exists if we assume that every
+exists if we assume that every
+environment has the ability to create
+environment has the ability to create
+multiple copies of itself and manage
+multiple copies of itself and manage
+itself then we do not need
+this
+yeah but that's a very important
+ability it's a very important ability
+can we bypass cereal for our custom
+Ms like native or
+something that's an
+idea we do
+idea we do
+a native Veen
+a native Veen
+format it doesn't need
+cereal does that make it harder for
+cereal does that make it harder for
+people
+though say when you write custom M's you
+though say when you write custom M's you
+also have to handle the loopover
+also have to handle the loopover
+environments that does kind of make it
+environments that does kind of make it
+hard for people doesn't
+hard for people doesn't
+it it adds extra
+logic who does it make it hard
+logic who does it make it hard
+for it makes it hard
+for it makes it hard
+for a user that who wants to implement
+for a user that who wants to implement
+custom
+environments who wants to use our native
+environments who wants to use our native
+a but doesn't want to do scyon
+a but doesn't want to do scyon
+RC does that user
+exist I'm trying to think if that user
+exist I'm trying to think if that user
+even
+exists h
+pull up some diagramming
+stuff I don't know if it's the lack of
+stuff I don't know if it's the lack of
+whiteboards in my recent
+whiteboards in my recent
+work but um keep going back to drawing
+stuff so
+stuff so
+like the way we have this now right that
+like the way we have this now right that
+we have
+we have
+multi-processing is the main
+box and then inside of
+box and then inside of
+this you do they're like your cores or
+whatever and you have like cereal
+cereal
+cereal and then inside of this you've
+cereal and then inside of this you've
+got
+like this is
+emulation really it should be like this
+emulation really it should be like this
+there a lot of these
+so this is the standard puffer
+so this is the standard puffer
+model you have multi-processing you have
+model you have multi-processing you have
+the ability to run multiple environments
+the ability to run multiple environments
+per core using the serial implementation
+per core using the serial implementation
+so you kind of it's kind of funny that
+so you kind of it's kind of funny that
+you run Vector on Vector but it makes
+you run Vector on Vector but it makes
+sense because you need a way to do this
+sense because you need a way to do this
+Loop is what serial
+Loop is what serial
+does serial does that Loop for you
+and the reason that serial has to do
+and the reason that serial has to do
+this Loop for you is that the emulation
+this Loop for you is that the emulation
+layer is not a vectorized API the ve the
+layer is not a vectorized API the ve the
+emulation layer is standard
+emulation layer is standard
+API gym
+API gym
+API it's kind of funny that that API
+API it's kind of funny that that API
+even exists though isn't it
+isn't that API completely
+useless like when the heck do you ever
+useless like when the heck do you ever
+want when do you ever use the gym
+API instead of
+API instead of
+VC I guess we need it for compatibility
+VC I guess we need it for compatibility
+with other libraries at least until
+with other libraries at least until
+puffer's
+puffer's
+bigger yeah we don't want to break
+bigger yeah we don't want to break
+compatibility with other stuff that's
+compatibility with other stuff that's
+kind of one of the nicest things with
+kind of one of the nicest things with
+puffers it's just compatible with
+puffers it's just compatible with
+everything so technically there's a
+everything so technically there's a
+layer of infrastructure we could cut out
+layer of infrastructure we could cut out
+completely like if we just said hey
+completely like if we just said hey
+there is no gym API there is no petting
+there is no gym API there is no petting
+zoo API there's one API it's the VC
+zoo API there's one API it's the VC
+API you know you can use the VC API it
+API you know you can use the VC API it
+has multiple backends right it can be
+has multiple backends right it can be
+serial or multiprocess that cuts out a
+serial or multiprocess that cuts out a
+layer that cuts out a
+layer we're not ready to do that yet
+layer we're not ready to do that yet
+but we can think about
+it we can definitely think about
+it so what if instead right we have
+it so what if instead right we have
+native as a back end what if we just do
+native as a back end what if we just do
+like
+native like this right
+and then when you write your custom Ms
+and then when you write your custom Ms
+you just write them as a
+you just write them as a
+native
+environment the native API the native
+environment the native API the native
+API is the VC
+API is the VC
+API and then you can run multiple like
+API and then you can run multiple like
+you can run one of these on each process
+you can run one of these on each process
+and you're good that's all you ever need
+and you're good that's all you ever need
+ever that's kind of nice isn't it
+and then what we do is we make a
+wrapper that
+wrapper that
+does what native to gymnasium or
+does what native to gymnasium or
+something like that
+native to gymnasium native to petting
+zoo that we don't have to do
+zoo that we don't have to do
+today that we don't have to do
+today that we don't have to do
+today it's not a high priority to
+today it's not a high priority to
+introduce compatibility rappers for
+introduce compatibility rappers for
+people to be able to take our like
+people to be able to take our like
+beautifully optimized environments and
+beautifully optimized environments and
+run them way slower
+run them way slower
+right might be important for getting
+right might be important for getting
+some s sp3 users to try out puffer in
+some s sp3 users to try out puffer in
+the like longer term but
+the like longer term but
+um I mean that's a dumb thing to do in
+um I mean that's a dumb thing to do in
+my mind right rappers that slow stuff
+my mind right rappers that slow stuff
+down for compatibility with slower
+Tools Plus these things should be able
+Tools Plus these things should be able
+to support a v
+anyways do I lose anything by doing this
+anyways do I lose anything by doing this
+I don't think I
+I don't think I
+do I don't think I lose a single thing
+do I don't think I lose a single thing
+by doing
+by doing
+this I guess technically it makes you
+this I guess technically it makes you
+have to it makes you guaranteed have to
+have to it makes you guaranteed have to
+handle the loop um in the environment
+handle the loop um in the environment
+itself but you want to do that anyways
+itself but you want to do that anyways
+don't
+you I think you want to do that anyways
+the loops happen in scon
+should be fairly
+straightforward and technically you
+straightforward and technically you
+don't even have to do a loop if you want
+don't even have to do a loop if you want
+your native M to like not support
+that but puffer makes it easy because
+that but puffer makes it easy because
+the native M gives you uh the
+the native M gives you uh the
+observation buffers and such already so
+observation buffers and such already so
+that's the advantage
+okay so this is a good idea if I can
+okay so this is a good idea if I can
+make it
+make it
+simple can I make it
+simple can I make it
+simple what's native
+H it's interesting
+there's a bunch of Jank in
+here I hate the idea of subclassing this
+here I hate the idea of subclassing this
+so much but I'm trying to think of
+so much but I'm trying to think of
+another way of doing
+it well hold on
+maybe can I pass the buffers on a
+knit I thought about that
+knit I thought about that
+maybe it's time to do
+maybe it's time to do
+it basically I'm trying to figure out is
+it basically I'm trying to figure out is
+where all these shared memory buffers
+where all these shared memory buffers
+need to be
+passed I think the reason that I didn't
+passed I think the reason that I didn't
+do this
+do this
+before uh I didn't want to do it that
+before uh I didn't want to do it that
+way before was because let's say that
+way before was because let's say that
+you want to like make a standalone set
+you want to like make a standalone set
+as a
+test then you need to allocate those
+test then you need to allocate those
+buffers which doesn't make any
+sense subclassing fixes this but I
+sense subclassing fixes this but I
+really don't want to do that unless it's
+really don't want to do that unless it's
+absolutely
+necessary wait wait a second hold
+on maybe it is a subass
+on maybe it is a subass
+angle
+angle
+[Music]
+[Music]
+because is a wrapper angle or a subass
+because is a wrapper angle or a subass
+angle
+it needs to have a base class
+regardless just to check the type of it
+regardless just to check the type of it
+doesn't
+it I mean technically I don't have to
+it I mean technically I don't have to
+have a base class I could literally just
+have a base class I could literally just
+say yeah you write it this is the
+API to
+API to
+follow it's like an it could be a purely
+follow it's like an it could be a purely
+abstract based
+class it's close to what I have now
+it is kind of awkward now that I'm
+it is kind of awkward now that I'm
+looking at
+looking at
+it the way multiprocessing has to
+it the way multiprocessing has to
+interact with this
+am I going to bananas
+am I going to bananas
+here the question I'm trying to figure
+here the question I'm trying to figure
+out right is like multiprocessing at the
+out right is like multiprocessing at the
+moment it spawns several processes duh
+moment it spawns several processes duh
+and each of those is Cal each Cal
+and each of those is Cal each Cal
+materal can contain many
+materal can contain many
+environments what I could do
+instead actually don't know if that
+instead actually don't know if that
+makes it any easier I guess it replaces
+makes it any easier I guess it replaces
+the Cal inside of multiprocessing with a
+native that do
+anything I mean it's slightly simpler
+anything I mean it's slightly simpler
+code Maybe
+slightly simpler
+code then you have to figure
+out I guess this is a pretty easy check
+out I guess this is a pretty easy check
+right right here
+you just have to add I'd have to add
+you just have to add I'd have to add
+something right here to see if it's a
+something right here to see if it's a
+native environment or not
+this can have a freaking make function
+this can have a freaking make function
+though that's
+though that's
+annoying I guess it's just a a Boolean
+annoying I guess it's just a a Boolean
+that we passed from the driver and is
+native so lot of stuff to change I think
+native so lot of stuff to change I think
+we could do it right now
+though I think we could do
+it and then the benefit to this hold on
+it and then the benefit to this hold on
+let me make sure there's benefit
+is this still going to be a rapper class
+is this still going to be a rapper class
+though
+this is still going to end up being a
+this is still going to end up being a
+rapper class isn't
+it it's too much
+it it's too much
+garbage too much garbage
+per
+batch shot M's
+the thing I'm stuck here
+the thing I'm stuck here
+is whether I want this to just
+is whether I want this to just
+be you accept the evil of having a base
+be you accept the evil of having a base
+class and you directly subclass
+class and you directly subclass
+native and then your TCH stack it just
+native and then your TCH stack it just
+becomes multiprocess of native done
+becomes multiprocess of native done
+multiprocess of native done nice shallow
+multiprocess of native done nice shallow
+stack all
+stack all
+right
+right
+versus we literally have puffer M just
+versus we literally have puffer M just
+be a strict API it's just like abstract
+be a strict API it's just like abstract
+base class and then this thing wraps it
+well how does this play with
+well how does this play with
+buffers how does this play with buffers
+buffers how does this play with buffers
+let me
+see reset assigns
+see reset assigns
+buffers
+here and then where's the multi
+processing you make the
+M's okay they don't want to you don't
+M's okay they don't want to you don't
+want to pass the shapes
+want to pass the shapes
+here I
+here I
+see cuz otherwise you have to pass all
+see cuz otherwise you have to pass all
+this stuff from the main process all
+this stuff from the main process all
+this stuff you got to pass it
+this is so silly
+this is so silly
+though isn't this kind of
+silly look you do this driver M you get
+silly look you do this driver M you get
+all this
+all this
+data right and then you basically
+data right and then you basically
+recompute all of
+it you have all this nice shared
+memory for
+I mean
+I mean
+regardless I think I can get this if I
+regardless I think I can get this if I
+want it right if I want to have this
+want it right if I want to have this
+data available before I make
+data available before I make
+this before I make these environments I
+this before I make these environments I
+can have it cuz I get it off the driver
+Ms yeah I can get it off the driver
+Ms at least I assume
+Ms at least I assume
+so so
+then okay let's say that we do
+that then we get this buffer
+we pass the
+we pass the
+slice this buffer creation goes up here
+slice this buffer creation goes up here
+we pass the slices
+here that's still going to mess it up
+still going to mess it
+up there needs to be a default way of
+up there needs to be a default way of
+creating
+creating
+buffers that's the tough
+part the default way of creating buffers
+part the default way of creating buffers
+has to propagate all the way down to the
+has to propagate all the way down to the
+environment
+level which is subass which I
+hate it's not worth it you know I
+mean yeah it's just it's not not worth
+mean yeah it's just it's not not worth
+it because
+like you f so I F so hard to keep this
+like you f so I F so hard to keep this
+thing
+thing
+flat the reason I don't like subclassing
+flat the reason I don't like subclassing
+at all wherever possible especially not
+at all wherever possible especially not
+in user space is subclassing implies
+in user space is subclassing implies
+complexity if you think about it right
+complexity if you think about it right
+if I give you a class or if I give you a
+if I give you a class or if I give you a
+function everything you need to know is
+function everything you need to know is
+contained in that piece of code if I
+contained in that piece of code if I
+give you something that is like API
+give you something that is like API
+where you have to subass now what that
+where you have to subass now what that
+says is that hey there's more stuff here
+says is that hey there's more stuff here
+it's like black magic that you don't
+it's like black magic that you don't
+know about that's hidden inside of this
+know about that's hidden inside of this
+whatever this super class
+whatever this super class
+is so I really really try to avoid that
+is so I really really try to avoid that
+whenever I
+whenever I
+can I mean to the extent that I would
+can I mean to the extent that I would
+rather duplicate little bits of code
+rather duplicate little bits of code
+here and
+here and
+there just to have it be
+self-contained so like if I say I
+self-contained so like if I say I
+categorically am not going to let
+categorically am not going to let
+subclassing be a
+subclassing be a
+thing if I were to say
+that
+that
+then how do we get the buffer
+then how do we get the buffer
+data in the environment how do we get
+data in the environment how do we get
+the buffer data
+in how do we get that in nicely
+the problem
+the problem
+here maybe if I explain
+bindings for this are right
+here really what we want is we want to
+here really what we want is we want to
+be able to re make we want to be able to
+be able to re make we want to be able to
+make the environment right here in a it
+make the environment right here in a it
+not in reset
+it's so easy if I were to just
+it's so easy if I were to just
+subass right it's so
+subass right it's so
+easy if I just
+subclassed what is it that subclassing
+subclassed what is it that subclassing
+gets
+gets
+me it's so damn annoying to replace
+it's
+it's
+um it's really just the allocation of
+um it's really just the allocation of
+these buffers
+nerd right back at you bud nerd
+Nation I'm trying to figure this
+out this is so close to being perfect
+don't code you
+should code is
+great just playing chest on another tab
+great just playing chest on another tab
+does that
+does that
+count you know I've been wanting to add
+count you know I've been wanting to add
+chess to this Library as a while for a
+chess to this Library as a while for a
+while now see if we can get
+while now see if we can get
+reinforcement learning to play
+reinforcement learning to play
+chess might be a little tricky but I
+chess might be a little tricky but I
+think in theory should be a lot easier
+think in theory should be a lot easier
+to learn than go even with the
+to learn than go even with the
+additional technical
+additional technical
+difficulties that'd be kind of
+difficulties that'd be kind of
+fun I am terrible at chess I can program
+fun I am terrible at chess I can program
+something that will I can program
+something that will I can program
+something that will play chess better
+something that will play chess better
+than me very very easily it is much
+than me very very easily it is much
+easier for me to make something that
+easier for me to make something that
+plays chess than it is for me to play
+plays chess than it is for me to play
+chess are you so may nerd oh
+chess are you so may nerd oh
+yeah oh yeah
+I am a uh newly minted MIT PhD in
+I am a uh newly minted MIT PhD in
+reinforcement learning and I am
+reinforcement learning and I am
+currently attempting to fix the mess the
+currently attempting to fix the mess the
+scientific field is in so this is just
+scientific field is in so this is just
+live this is live Dev on exactly
+live this is live Dev on exactly
+that which involves a lot of code but
+that which involves a lot of code but
+also a lot of me staring at code and
+also a lot of me staring at code and
+trying to figure out how I want to
+trying to figure out how I want to
+design
+design
+things amb at Vandy very
+good more into Finance
+I took a few MBA courses while I was at
+I took a few MBA courses while I was at
+uh MIT just cuz you know I had them
+uh MIT just cuz you know I had them
+available there with
+Sloan mainly just enough to be competent
+Sloan mainly just enough to be competent
+on that side of things though no Tech is
+on that side of things though no Tech is
+my
+main how old are you 27
+finishing PhD at 24 would be very
+good but no it usually takes till
+27 that will be the average graduating
+27 that will be the average graduating
+age if you do your PhD directly after
+age if you do your PhD directly after
+undergrad
+this thing is just bothering
+this thing is just bothering
+me I'll be
+pilot I have no idea how you play chess
+pilot I have no idea how you play chess
+and type at the same time I don't know
+and type at the same time I don't know
+probably a game I could
+learn consistently Land by
+itself isn't that already a
+itself isn't that already a
+thing I thought the autopilot already
+thing I thought the autopilot already
+lands the plane most of the time
+now does but not
+now does but not
+interesting you know the fun thing with
+interesting you know the fun thing with
+AI is um when you first designed systems
+AI is um when you first designed systems
+you have to have a human to take over
+you have to have a human to take over
+when the AI messes up but when the
+when the AI messes up but when the
+systems get really good then the AI
+systems get really good then the AI
+takes over when a human messes
+up bothers me so much that I can't
+up bothers me so much that I can't
+figure out a way to do this like I see
+figure out a way to do this like I see
+the way to it I just don't want I don't
+the way to it I just don't want I don't
+like the
+like the
+answer bothers
+me it really shouldn't bother me that
+me it really shouldn't bother me that
+much come to think of it
+much come to think of it
+either coding looks like a really boring
+either coding looks like a really boring
+job to
+[Music]
+[Music]
+me compared to anything else that requ
+me compared to anything else that requ
+that is mainly typing on a keyboard
+no but compared to anything that is is
+no but compared to anything that is is
+not simply typing on a keyboard all day
+maybe say at home and
+maybe say at home and
+type like to
+travel can't say I like traveling much I
+travel can't say I like traveling much I
+get plenty of exercise
+get plenty of exercise
+though offsets all the the desk
+work I think I'm just going to have to
+work I think I'm just going to have to
+do this the way I don't really want to
+do this the way I don't really want to
+do it for now
+pretty sure that's how it's going to
+work
+work
+yeah that's it's obnoxious but it'll
+yeah that's it's obnoxious but it'll
+work hey what's up
+work hey what's up
+I'm trying to strip the last bit of fat
+I'm trying to strip the last bit of fat
+out of the um the custom environment
+out of the um the custom environment
+stuff I'm trying to make it really easy
+stuff I'm trying to make it really easy
+and I found a way to do it but it
+and I found a way to do it but it
+involves I have to add a base class for
+involves I have to add a base class for
+the uh the native environments like the
+the uh the native environments like the
+new SE environments the python rappers
+new SE environments the python rappers
+they need a native a a base class and I
+they need a native a a base class and I
+hate having to subass stuff I really
+hate having to subass stuff I really
+hate having to have any amount of
+hate having to have any amount of
+inheritance ever but like when I'm
+inheritance ever but like when I'm
+thinking about it here there has to be
+thinking about it here there has to be
+at least an abstract Base Class
+at least an abstract Base Class
+anyways because if there isn't then you
+anyways because if there isn't then you
+can't tell that something is a native
+can't tell that something is a native
+environment it needs to just have like
+environment it needs to just have like
+that thing there just to signify it so
+that thing there just to signify it so
+if we have to have that anyways I might
+if we have to have that anyways I might
+as well put just a little bit of stuff
+as well put just a little bit of stuff
+in there to make it easier I
+in there to make it easier I
+guess maybe that's
+guess maybe that's
+cope I can't think of a better way of
+cope I can't think of a better way of
+doing it though for
+now this freaking buffer right
+now this freaking buffer right
+here this needs to have a way of being
+here this needs to have a way of being
+allocated without the user having to put
+allocated without the user having to put
+this
+this
+here that's the main
+thing as the the main
+thing I guess we just do
+thing I guess we just do
+it
+right let me make sure I'm not being
+right let me make sure I'm not being
+dumb and missing meetings because I had
+dumb and missing meetings because I had
+a whole bunch of stuff let me just make
+a whole bunch of stuff let me just make
+sure I'm not being dumb and missing
+sure I'm not being dumb and missing
+something I'm pretty sure I did my stuff
+something I'm pretty sure I did my stuff
+for today
+already I think we're good
+I have been hacking on a Tic Tac Toom
+I have been hacking on a Tic Tac Toom
+now at around 1.1 mil SPS with some kind
+now at around 1.1 mil SPS with some kind
+of
+of
+stuff you know what's funny cuz I
+stuff you know what's funny cuz I
+actually I wanted to Tic Tac Toe EnV
+actually I wanted to Tic Tac Toe EnV
+because there was some guy on Twitter
+because there was some guy on Twitter
+saying that you can't solve tic-tac-toe
+saying that you can't solve tic-tac-toe
+with RL which is
+nuts meetings lame
+yeah so if you want to just go ahead and
+yeah so if you want to just go ahead and
+uh run like just Auto solve Tic-Tac toe
+uh run like just Auto solve Tic-Tac toe
+I will gladly you know put put that as a
+I will gladly you know put put that as a
+reply to what whoever the hell that was
+reply to what whoever the hell that was
+on Twitter cuz it's like yeah RL should
+on Twitter cuz it's like yeah RL should
+just solve that game in like instantly
+just solve that game in like instantly
+right it's very
+easy first RL course was with tic taac
+easy first RL course was with tic taac
+toe yeah it should like it should be
+toe yeah it should like it should be
+easy
+easy
+right I don't know like people get these
+right I don't know like people get these
+really degenerate
+really degenerate
+ideas about a lot of stuff in RL like
+ideas about a lot of stuff in RL like
+like it not working or whatever and it's
+like it not working or whatever and it's
+always always because they have really
+always always because they have really
+bad infrastructure that's just like
+bad infrastructure that's just like
+doing the wrong thing and doing it
+slowly like there's some base the thing
+slowly like there's some base the thing
+is like with RL is there's some base
+is like with RL is there's some base
+level of infrastructure you kind of need
+level of infrastructure you kind of need
+in order to make everything easy and
+in order to make everything easy and
+then you can just solve anything with it
+then you can just solve anything with it
+dqn code solve the m in 30 seconds yeah
+dqn code solve the m in 30 seconds yeah
+it should
+it should
+I mean it should be less than that with
+I mean it should be less than that with
+puffer but yeah it's like a simple
+puffer but yeah it's like a simple
+little
+little
+environment hey we put whatever online
+environment hey we put whatever online
+though I mean if you want to if you want
+though I mean if you want to if you want
+to do the the full
+to do the the full
+thing we'll just put whatever people
+thing we'll just put whatever people
+build on
+build on
+here like we're just accumulating the
+here like we're just accumulating the
+set of environments right here this one
+set of environments right here this one
+was just uh contributed
+was just uh contributed
+yesterday are you still using a bun
+yesterday are you still using a bun
+220 uh on this or on puffer
+220 uh on this or on puffer
+tank let's check puffer
+tank star the puffer by the way helps us
+tank star the puffer by the way helps us
+out a
+lot
+poer um
+22.4 on puffer tank I have no idea what
+22.4 on puffer tank I have no idea what
+my local is but it's uh the Nvidia
+my local is but it's uh the Nvidia
+container on 2204 for latest puffer
+tank yeah let's actually get started on
+tank yeah let's actually get started on
+this proper
+implementation's really
+implementation's really
+messy learn what makes difference more
+messy learn what makes difference more
+complex ounds yeah I mean we have way
+complex ounds yeah I mean we have way
+better examples now if you look in the
+better examples now if you look in the
+dev Branch at breakout and pong they're
+dev Branch at breakout and pong they're
+very simple welcome Spencer Spencer made
+very simple welcome Spencer Spencer made
+the connect 4M and I imagine there's a
+the connect 4M and I imagine there's a
+Triad PR in the on the way triple Triad
+PR actually this is good timing is there
+PR actually this is good timing is there
+PR I should merge on this right now cuz
+PR I should merge on this right now cuz
+if not I just figured out
+if not I just figured out
+um I kind of decided on the way that
+um I kind of decided on the way that
+we're going to strip the last little bit
+we're going to strip the last little bit
+of fat out of uh the puffer API stuff
+of fat out of uh the puffer API stuff
+for new
+for new
+M's so that's happening today but I'll
+M's so that's happening today but I'll
+gladly merge triple Triad first if you
+gladly merge triple Triad first if you
+have it
+fresh one is
+fresh one is
+in let's do
+it live
+merging yeah all
+right okay got
+right okay got
+this got this
+you've got the C file which is the test
+good try.
+good try.
+PI right
+here you can't pass
+here you can't pass
+um you can't pass by reference easily in
+um you can't pass by reference easily in
+Python is the problem the way you do
+Python is the problem the way you do
+that is by encapsulating an array cuz
+that is by encapsulating an array cuz
+python doesn't have the idea of a
+python doesn't have the idea of a
+pointer right it has pass by reference
+pointer right it has pass by reference
+pass by value and the arrays are pass by
+pass by value and the arrays are pass by
+value that's why you have to do this
+value that's why you have to do this
+slicing actually see this mis logging
+slicing actually see this mis logging
+thing here this is I'm pretty sure this
+thing here this is I'm pretty sure this
+is
+is
+wrong I think if you don't pass a slice
+wrong I think if you don't pass a slice
+well it depends on the dimensions of
+well it depends on the dimensions of
+this thing but if you don't pass a slice
+this thing but if you don't pass a slice
+it might not get copied over correctly
+it might not get copied over correctly
+so I'd be careful with that it depends
+so I'd be careful with that it depends
+on the dimensionality I believe so you
+on the dimensionality I believe so you
+might be okay but you should be careful
+might be okay but you should be careful
+with that
+yeah it's weird so if you slice into an
+yeah it's weird so if you slice into an
+array and it returns an INT it'll just
+array and it returns an INT it'll just
+return the int by
+return the int by
+value you have to make sure you're
+value you have to make sure you're
+getting a
+slice otherwise this looks
+good only 15 actions is reasonable
+y I told you about these uh pointers and
+y I told you about these uh pointers and
+stuff but you can do this you know
+stuff but you can do this you know
+later my recommendation is not to do
+later my recommendation is not to do
+these types of things if you can avoid
+these types of things if you can avoid
+it it actually will make your life
+it it actually will make your life
+easier in some cases as well believe it
+easier in some cases as well believe it
+or
+or
+not like for
+not like for
+example these memory allocations here
+example these memory allocations here
+this would just be one giant calic this
+this would just be one giant calic this
+would be one calic this would be one
+would be one calic this would be one
+line all these things would be on
+liners and then the freeze would also be
+liners and then the freeze would also be
+on
+on
+liners some additional init and reset
+liners some additional init and reset
+stuff is ends up being one line flat
+stuff is ends up being one line flat
+indexing is kind of
+nice this makes sense though I see how
+nice this makes sense though I see how
+you're doing this
+things that can be improved is the deck
+things that can be improved is the deck
+generation cards to start with a random
+generation cards to start with a random
+on both
+on both
+sides did I tell you I think I told you
+sides did I tell you I think I told you
+about the uh the MTG thing
+about the uh the MTG thing
+right I'm talking with uh I'm talking
+right I'm talking with uh I'm talking
+with an MTG guy on Friday who wants to
+with an MTG guy on Friday who wants to
+build like an MTG style rln and I also
+build like an MTG style rln and I also
+have uh I have a you know a very capable
+have uh I have a you know a very capable
+p PhD student I know who also wants to
+p PhD student I know who also wants to
+do this and says that they he has got um
+do this and says that they he has got um
+bandwidth to do this relatively
+soon I'm absolutely sure they would be
+soon I'm absolutely sure they would be
+more than happy to Loop you in as
+well I mean this is straight engineering
+well I mean this is straight engineering
+work
+right and I mean if you're just if
+right and I mean if you're just if
+you're Dev in competent C code then
+you're Dev in competent C code then
+you've got the qualifications to
+you've got the qualifications to
+contribute
+contribute
+stuff there are a couple small things I
+stuff there are a couple small things I
+would suggest you know improving with
+would suggest you know improving with
+the uh the code here but it they're
+the uh the code here but it they're
+relatively minor complaints I would say
+relatively minor complaints I would say
+uh I'll ignore the stalis ones cuz like
+uh I'll ignore the stalis ones cuz like
+who cares but uh the the really big one
+who cares but uh the the really big one
+is the double and triple
+pointers I mean that's not far off from
+pointers I mean that's not far off from
+MTG
+MTG
+yeah I'll let me do the initial meeting
+yeah I'll let me do the initial meeting
+cuz I haven't met the guy
+cuz I haven't met the guy
+and then uh I will Loop you in and I'll
+and then uh I will Loop you in and I'll
+Loop the other PhD friend of mine
+in just making sure everything looks
+reasonable MH
+cool we merge we
+merge can you check the reward
+merge can you check the reward
+Ving yeah but I can also I'll fix it in
+Ving yeah but I can also I'll fix it in
+the I'll fix it in the merge if I need
+[Music]
+to for
+very
+nice so one to five to select a card let
+nice so one to five to select a card let
+me
+see so his strongest
+six anything better than six
+six anything better than six
+there I don't know how it breaks
+ties I actually have no intuition for
+ties I actually have no intuition for
+this game which is very kind of like
+this game which is very kind of like
+that's kind of funny to
+me so like
+sh
+huh I think I
+huh I think I
+win there we
+go cool this is like a random opponent
+go cool this is like a random opponent
+or something though isn't
+or something though isn't
+it nice game
+we're going to have this on the website
+we're going to have this on the website
+in a few minutes
+see if you can track down um South CX in
+see if you can track down um South CX in
+the Discord I haven't seen him in a
+the Discord I haven't seen him in a
+couple of weeks but he was doing a bunch
+couple of weeks but he was doing a bunch
+of cool
+of cool
+artwork I don't know where he went I
+artwork I don't know where he went I
+hope the guy is okay
+[Music]
+[Music]
+all right there's your web
+build
+build okay
+other sets of rolls
+yeah it's going to need some opponents
+yeah it's going to need some opponents
+and
+stuff I actually have no idea how hard
+stuff I actually have no idea how hard
+that game is like thinking off the top
+that game is like thinking off the top
+of my head
+I have no idea I have like no intuition
+I have no idea I have like no intuition
+for how complicated that game is to
+for how complicated that game is to
+understand
+we need the thumbnail here
+grab the
+thumbnail out
+download
+download
+Tri asset
+slash there
+getting artwork on the cards
+absolutely for
+okay and then this
+okay and then this
+is oh what did I do I was not paying
+is oh what did I do I was not paying
+attention and I just freaking hold
+onle is it with
+space yeah triple
+Triad that copyrighted
+it's probably
+not looks like it's
+fine that's a good idea
+[Music]
+tryad let's just not let's just not uh
+tryad let's just not let's just not uh
+invite
+things well let's uh
+[Music]
+does it
+work Oho
+interesting ah it's
+interesting ah it's
+misspelled this is why we
+test really
+Tipple
+triple is it just
+cashing there we
+go kind of
+go kind of
+big not bad though
+big not bad though
+I do like
+this just do like
+this yeah there it
+goes oh for
+goes oh for
+[Music]
+tryad it's okay for
+tryad it's okay for
+now we might change some
+now we might change some
+stuff let me make sure it's
+stuff let me make sure it's
+online I mean we'll see
+online I mean we'll see
+but
+but
+[Music]
+um we also where you need to start
+um we also where you need to start
+getting some policies playing these so
+getting some policies playing these so
+you can play against the policy I'll be
+you can play against the policy I'll be
+next boom there you go one minute
+deploy e
+which one is it
+I've heard you're saying that you don't
+I've heard you're saying that you don't
+care about sample efficiency but that
+care about sample efficiency but that
+only makes case for where you don't have
+only makes case for where you don't have
+access to a fast
+access to a fast
+simulator have you seen the iceberg
+simulator have you seen the iceberg
+video I go over this in a lot of detail
+video I go over this in a lot of detail
+it's uh you have to go you have to go
+it's uh you have to go you have to go
+fast in order to make progress on those
+fast in order to make progress on those
+M's basically so yes uh focusing on this
+M's basically so yes uh focusing on this
+is how we get to More Sample efficient
+is how we get to More Sample efficient
+stuff anyways
+there we go
+here we
+here we
+go we've been
+go we've been
+uh farming a bit of
+Engagement 50 to go until
+5K right there's your environment online
+5K right there's your environment online
+well done thanks for the
+contributions
+um there cases in robotics where you
+um there cases in robotics where you
+have to train your
+have to train your
+robot yeah but Peter like I go through
+robot yeah but Peter like I go through
+this in the iceberg video like the tldr
+this in the iceberg video like the tldr
+on it is that like the whole field is
+on it is that like the whole field is
+stuck and we're doing really bad science
+stuck and we're doing really bad science
+because our M's are too slow to run
+because our M's are too slow to run
+enough experiments and such so we just
+enough experiments and such so we just
+don't run them so like half of all RL
+don't run them so like half of all RL
+results are just wrong like half of all
+results are just wrong like half of all
+the conference papers being published
+the conference papers being published
+are just wrong it's like an absolutely
+are just wrong it's like an absolutely
+terrible situation and the only way that
+terrible situation and the only way that
+we're actually going to fix anything is
+we're actually going to fix anything is
+by having these super fast environments
+by having these super fast environments
+to test stuff prop uh properly and like
+to test stuff prop uh properly and like
+we will actually be able to discover
+we will actually be able to discover
+more sample efficient methods uh by
+more sample efficient methods uh by
+doing this but the thing is like we need
+doing this but the thing is like we need
+to to be able to run these comprehensive
+to to be able to run these comprehensive
+experiments and it's just not possible
+experiments and it's just not possible
+now like you never want to be in a
+now like you never want to be in a
+situation where in order to make
+situation where in order to make
+progress like you're limited on the
+progress like you're limited on the
+number of experiments that you can run
+number of experiments that you can run
+and that's just it's literally killed
+and that's just it's literally killed
+the field like rl's been stuck since
+the field like rl's been stuck since
+2019 because of this so that's kind of
+2019 because of this so that's kind of
+the idea here it's not that caring about
+the idea here it's not that caring about
+sample efficiency is dumb it's that the
+sample efficiency is dumb it's that the
+way that it's been approached in the
+way that it's been approached in the
+field has caused lasting damage I cover
+field has caused lasting damage I cover
+this much more eloquently in the video
+this much more eloquently in the video
+um but that's like the quick
+version anything else Spencer or should
+version anything else Spencer or should
+I get stuck into this um these
+I get stuck into this um these
+environment
+environment
+fixes for the uh like for the API
+isn't standard practice to run 25 seeds
+isn't standard practice to run 25 seeds
+per
+per
+experiment people don't do that and also
+experiment people don't do that and also
+25 seeds per experiment what about hyper
+25 seeds per experiment what about hyper
+parameters you take your method you
+parameters you take your method you
+compare to Baseline Baseline doesn't
+compare to Baseline Baseline doesn't
+have t hyper parameters you have tuned
+have t hyper parameters you have tuned
+hyper parameters you win 2 weeks later
+hyper parameters you win 2 weeks later
+somebody goes and tunes the hyper
+somebody goes and tunes the hyper
+parameters for the Baseline and now it
+parameters for the Baseline and now it
+does three times better than yours this
+does three times better than yours this
+happens RL hyper parameters can have a
+happens RL hyper parameters can have a
+two to threefold or more impact on
+two to threefold or more impact on
+performance
+performance
+uh without changing anything
+else there are problems there are big
+else there are problems there are big
+problems like for instance po Poo's been
+problems like for instance po Poo's been
+benchmarked on a lot of different Atari
+benchmarked on a lot of different Atari
+environments a ton of different times
+environments a ton of different times
+right well why are puffers two to three
+right well why are puffers two to three
+times better for a lot of the
+times better for a lot of the
+environments we tuned hyper parameters
+environments we tuned hyper parameters
+that's all we did it's very
+silly it's very very silly
+also people are just straight up not
+also people are just straight up not
+running 25 seats per experiment like if
+running 25 seats per experiment like if
+your experiments take multiple days
+your experiments take multiple days
+you're not running 25 of
+you're not running 25 of
+them well publishing without tuning
+them well publishing without tuning
+hyper parameter sounds kind of stupid
+hyper parameter sounds kind of stupid
+well it's not stupid though it's that
+well it's not stupid though it's that
+there're no resources right Labs don't
+there're no resources right Labs don't
+have hundreds of gpus and the stupid
+have hundreds of gpus and the stupid
+like the experiments are so slow because
+like the experiments are so slow because
+of the lack of focus on wall clock train
+of the lack of focus on wall clock train
+time that like the experiments take days
+time that like the experiments take days
+when they should take hours or maybe
+when they should take hours or maybe
+even minutes
+can you check on models.py update for M
+can you check on models.py update for M
+training not certain we should change
+training not certain we should change
+OBS with the latest version in Dev uh
+OBS with the latest version in Dev uh
+let me fix that
+thing I should have done that last night
+thing I should have done that last night
+my bad
+even when running experiments that take
+even when running experiments that take
+days isn't it easily done by running
+days isn't it easily done by running
+them on an HPC yeah if you have one like
+them on an HPC yeah if you have one like
+this is where I would put my HPC if I
+this is where I would put my HPC if I
+had one
+had one
+right I mean I was at MIT and our
+right I mean I was at MIT and our
+cluster was so garbage that I never even
+cluster was so garbage that I never even
+used it we had no Hardware zero
+used it we had no Hardware zero
+zilch you think there aren't dozens or
+zilch you think there aren't dozens or
+hundreds of labs that similarly have
+hundreds of labs that similarly have
+garbage
+garbage
+Hardware it's not a fun place to be in
+Hardware it's not a fun place to be in
+you can run 100 experiments on a GPU on
+you can run 100 experiments on a GPU on
+a desktop then then we're talking right
+[Music]
+I again guessed every un had a decent
+I again guessed every un had a decent
+clusterer
+clusterer
+nope I was in a lab at Stanford the
+nope I was in a lab at Stanford the
+resources sucked I was in a lab at MIT
+resources sucked I was in a lab at MIT
+the resources sucked
+like what wait did I even change stuff
+like what wait did I even change stuff
+here I don't even see any commits on
+this when did this get merged
+in uni budget was spent on buying 50
+in uni budget was spent on buying 50
+workstations that in the background ran
+workstations that in the background ran
+scheduled Computing jobs one of those
+scheduled Computing jobs one of those
+labs had a GPU each for that purpose no
+labs had a GPU each for that purpose no
+it didn't make things good
+really well I guess the scheduled
+really well I guess the scheduled
+Computing jobs no but 50 workstations is
+Computing jobs no but 50 workstations is
+solid um
+solid um
+if there if you have like a couple of
+if there if you have like a couple of
+those allocated to each student you can
+those allocated to each student you can
+actually do
+actually do
+stuff what are MIT and Stanford doing
+stuff what are MIT and Stanford doing
+with all their money paying stupid
+with all their money paying stupid
+numbers of
+numbers of
+admins um I don't know it's it's
+admins um I don't know it's it's
+embarrassing it's not better at most
+embarrassing it's not better at most
+other universities too it's not like oh
+other universities too it's not like oh
+it's worse the better the university is
+it's worse the better the university is
+most people are just doing dumb things
+most people are just doing dumb things
+with it like you can say like yeah
+with it like you can say like yeah
+technically we've got gpus on paper
+technically we've got gpus on paper
+right but like you give all the grad
+right but like you give all the grad
+students pseudo access and you let them
+students pseudo access and you let them
+abuse AFS and NFS and quickly like you
+abuse AFS and NFS and quickly like you
+got a bunch of expensive paper
+weights I'm actually kind of surprised
+weights I'm actually kind of surprised
+that didn't make things good because uh
+that didn't make things good because uh
+we've got this is what we have for
+we've got this is what we have for
+puffer right now and this is way better
+puffer right now and this is way better
+than anything I had at MIT we just got
+than anything I had at MIT we just got
+we just bought eight
+we just bought eight
+desktops and they're really
+desktops and they're really
+nice I mean we had some issues because
+nice I mean we had some issues because
+of the dumb Intel chip glitch this
+of the dumb Intel chip glitch this
+generation but outside of that this has
+generation but outside of that this has
+been great
+the background Ram scheduled Computing I
+the background Ram scheduled Computing I
+think the scheduled Computing jobs is
+think the scheduled Computing jobs is
+going to be the issue people mess up
+going to be the issue people mess up
+scheduling a
+lot esoteric knowledge students access
+lot esoteric knowledge students access
+that
+that
+cluster yeah that's
+cluster yeah that's
+ridiculous no no no no the way that you
+ridiculous no no no no the way that you
+can do this reasonably is you just buy
+can do this reasonably is you just buy
+four of these per student and you're
+four of these per student and you're
+done
+done
+right you just buy four or five or six
+right you just buy four or five or six
+however many of these per student and
+however many of these per student and
+you're good PR
+97 why does this say modified 3 weeks
+97 why does this say modified 3 weeks
+ago then am I dumb
+what are you making we're Devon puffer
+what are you making we're Devon puffer
+lib we're doing ultra high performance
+lib we're doing ultra high performance
+reinforcement learning you want a quick
+reinforcement learning you want a quick
+demo of stuff puffer Dogg we got some
+demo of stuff puffer Dogg we got some
+environments you can play around with
+environments you can play around with
+this one actually has some decent bosss
+this one actually has some decent bosss
+you can play against you're the yellow
+you can play against you're the yellow
+snake we also got some fancier
+stuff no it was 50 PCS with 150 students
+stuff no it was 50 PCS with 150 students
+enrolling to it each year many yeah no
+enrolling to it each year many yeah no
+that's ridiculous I mean that's just
+that's ridiculous I mean that's just
+like you have no Hardware right you
+like you have no Hardware right you
+added a scheduler to solve a resource
+added a scheduler to solve a resource
+scarcity problem that doesn't
+work and also the other problem is that
+work and also the other problem is that
+you bought workstations those are marked
+you bought workstations those are marked
+up like
+double so you could have had good 100
+double so you could have had good 100
+100 or 150 desktops
+50 we in cluster yeah that's
+rough I mean I literally was considering
+rough I mean I literally was considering
+like if I just buy 50 of these I think
+like if I just buy 50 of these I think
+we're kind of good the trick is we don't
+we're kind of good the trick is we don't
+have a scheduling system or anything on
+have a scheduling system or anything on
+these I just give people direct SSH
+these I just give people direct SSH
+access to a couple boxes or however many
+access to a couple boxes or however many
+boxes um and I say okay you get these
+boxes um and I say okay you get these
+boxes you get these boxes for now and
+boxes you get these boxes for now and
+it's very very easy there's no like
+it's very very easy there's no like
+extra scheduling software
+extra scheduling software
+there's no AFS there's no NFS uh the
+there's no AFS there's no NFS uh the
+only infra is like there is a shared
+only infra is like there is a shared
+Docker image that we use as the base and
+Docker image that we use as the base and
+then you can spin up Docker on the
+then you can spin up Docker on the
+machines like when you boot in you get
+machines like when you boot in you get
+booted directly into your Docker and if
+booted directly into your Docker and if
+you want to make other Dockers to try
+you want to make other Dockers to try
+stuff out you can do that but like
+stuff out you can do that but like
+immediately you have instant setup it
+immediately you have instant setup it
+takes literally five minutes to onboard
+people it's like if you can't do the
+people it's like if you can't do the
+fancy thing correctly just do the brain
+fancy thing correctly just do the brain
+dead thing it'll be better
+do I just need to copy this file from
+uh oh I see it's because it's
+uh oh I see it's because it's
+from yeah cuz this is when the commits
+from yeah cuz this is when the commits
+were okay that's weird I didn't know
+were okay that's weird I didn't know
+that GitHub does its dating that way
+I can just go try to fix it real quick
+I can just go try to fix it real quick
+as the other thing instead of reverting
+as the other thing instead of reverting
+it that would probably be better that
+it that would probably be better that
+doesn't Kick the Can what's not what
+doesn't Kick the Can what's not what
+doesn't work you have an example it's
+doesn't work you have an example it's
+like puffer or python
+like puffer or python
+demo and connect for mode train this
+demo and connect for mode train this
+doesn't work
+you don't have to prefix stuff with my
+you don't have to prefix stuff with my
+that was just because there a name conf
+that was just because there a name conf
+oh I guess there is a name conflict with
+oh I guess there is a name conflict with
+open Spiel
+[Music]
+mind yeah that's really
+mind yeah that's really
+silly I don't know what the heck it is
+silly I don't know what the heck it is
+with these universities I mean you when
+with these universities I mean you when
+you ask like what the money is being
+you ask like what the money is being
+spent on like they assess more than six
+spent on like they assess more than six
+figures of cost per PhD student per year
+figures of cost per PhD student per year
+so the money is going
+so the money is going
+somewhere not going into
+Hardware okay found your bug let me
+Hardware okay found your bug let me
+figure out what the heck this
+is damn it
+is damn it
+linky I swear I asked him to test this
+what is
+this what's the difference between this
+this what's the difference between this
+and just normal reinforcement
+and just normal reinforcement
+learning uh well puffer is very fast and
+learning uh well puffer is very fast and
+a lot simpler it's gener I mean what
+a lot simpler it's gener I mean what
+What's Happening Here is this is me
+What's Happening Here is this is me
+trying to fix all the stuff that caused
+trying to fix all the stuff that caused
+pain and suffering throughout my PhD
+pain and suffering throughout my PhD
+this is me making things fast making
+this is me making things fast making
+things simple and making things work on
+things simple and making things work on
+much more interesting
+environments that's the idea with
+puffer dude what is this
+oh I see why he did this
+oh I see why he did this
+okay I see why he did
+this kind of
+this kind of
+weird let me figure
+does this wait is this not the
+default I don't feel real bad if I was
+uh if I'm wrong here I'm pretty sure
+uh if I'm wrong here I'm pretty sure
+this is linky's
+thing might not
+be policy
+no this is
+no this is
+default so
+uh
+uh
+linky damn it
+man you
+serious this goes here
+really well there you go
+e
+all right let's actually fix the the
+all right let's actually fix the the
+rest of the stuff
+now I'm assuming you cannot hear desktop
+now I'm assuming you cannot hear desktop
+audio
+audio
+right I can mute it
+right I can mute it
+regardless I'm going to just toss
+regardless I'm going to just toss
+something up on the background
+it's time to get some code
+done still answer questions and stuff
+done still answer questions and stuff
+but
+but
+uh hold
+on oops wrong
+on oops wrong
+one we're going to fix some stuff today
+all right let me grab uh let me grab a
+all right let me grab uh let me grab a
+drink and we'll be get ready to get
+drink and we'll be get ready to get
+going on this I think it'll only take me
+going on this I think it'll only take me
+an hour to do this if I'm quick
+here's the
+here's the
+plan we're going to make the V API the
+plan we're going to make the V API the
+native API work we're going to Port all
+native API work we're going to Port all
+the environments to use it we're going
+the environments to use it we're going
+to clean some stuff up we going to go
+to clean some stuff up we going to go
+from there there are a few other
+from there there are a few other
+structural changes I want to make but
+structural changes I want to make but
+we're going to start with
+this
+for
+e e
+can't do it there going do it here
+okay we want this buffer code
+I have to also not break GPU
+I have to also not break GPU
+drive that's not hard
+don't like this M's thing
+yeah this doesn't need
+anything doesn't need
+anything creators
+doesn't need
+this star star
+quars going to be
+quars going to be
+Stars this
+emulated
+that this Falls for
+now not implemented
+I don't know if you can do this on a
+property cuz you can't override
+property cuz you can't override
+properties I'm pretty
+sure you can but it's
+awkward yeah we'll hold on for that
+this also doesn't
+work none of these things should matter
+should
+matter
+for e
+okay this
+works this also should work
+what's this numb
+Ops this is required to be a box
+right
+right
+oops for
+we'll leave this like this for now
+n agents num
+mobs is there any reason we need this
+mobs is there any reason we need this
+otherwise I don't think so
+no there isn't
+we want to add actions
+here not
+initially not initially
+do like
+this
+this
+reset
+step
+step
+ready what is self. ready
+oh yeah that's
+fine
+uh this needs to
+uh this needs to
+be
+there like
+this for
+let's
+see un implemented error okay
+that's nice we get a reasonable error
+that's nice we get a reasonable error
+that's what we
+want so you go like this right num
+want so you go like this right num
+Ms
+Ms
+agents I don't think we need n m we just
+agents I don't think we need n m we just
+need n agents
+right and then we'll get a different
+right and then we'll get a different
+error
+and this is the
+error
+error
+right the
+error and what do we have for reset and
+error and what do we have for reset and
+step
+step
+here these are fine
+here these are fine
+yeah and now we get a reasonable
+yeah and now we get a reasonable
+AR is exactly what we want we want users
+AR is exactly what we want we want users
+to hit
+to hit
+this so we go like this
+right this num actions is going to be
+before action space like
+this I'm agents before net right
+this is numb agents
+we have to not break GPU drive with
+this be a little
+tricky you don't need this anymore
+don't need
+don't need
+this literally don't need any of this
+[Music]
+you need no Ms as well
+yeah you do need n
+yeah you do need n
+Ms that's
+fine also this
+fine also this
+is
+bad for
+no
+done if
+M.D for
+okay is this thing actually already
+okay is this thing actually already
+running really that
+running really that
+easy cool
+we're going to need to do some stuff but
+uh that's good
+this will have to be updated a little
+this will have to be updated a little
+bit
+bit
+here but this is fine for now
+it's crazy how puffer just works
+the heck s
+the heck s
+Broadway
+breakout okay this needs some sort
+breakout okay this needs some sort
+of reward
+signal cuz we really didn't add anything
+here and
+there's no reset in here
+there's no reset in here
+either little awkward
+presumably this is done in
+this is kind of
+this is kind of
+weird is it missing the
+loops I swear I did it on one of these
+maybe
+not in the
+H is in the dotage
+H is in the dotage
+somewhere no
+let me
+see I thought I had like a little piece
+see I thought I had like a little piece
+of C code somewhere here for
+this Maybe
+this Maybe
+not maybe not
+yeah it's not in C yet okay that was a
+yeah it's not in C yet okay that was a
+two do
+okay the resets handled here this is why
+me make sure that's not something
+okay hey
+okay hey
+Nathan let me pause this a second and I
+Nathan let me pause this a second and I
+will tell
+will tell
+you so there's a lot of stuff that's new
+you so there's a lot of stuff that's new
+um first of
+all two new environments from
+all two new environments from
+Spencer got Connect Four and also this
+Spencer got Connect Four and also this
+cool card game pretty sweet
+cool card game pretty sweet
+if you play randomly it doesn't go very
+if you play randomly it doesn't go very
+well um and then also I figured out how
+well um and then also I figured out how
+to trim the rest of the fat off of all
+to trim the rest of the fat off of all
+the binding layers so basically it's
+the binding layers so basically it's
+going to be really easy and really
+going to be really easy and really
+simple uh like the python to scon to C
+simple uh like the python to scon to C
+line is going to be really really simple
+line is going to be really really simple
+I just need to finish coding it which is
+I just need to finish coding it which is
+what I've been doing now it's a little
+what I've been doing now it's a little
+bit
+bit
+tricky um I'm not 100% satis ifed with
+tricky um I'm not 100% satis ifed with
+it but I think it's way better and it's
+it but I think it's way better and it's
+going to cut a lot of the pain points
+going to cut a lot of the pain points
+and boil their plate off and really make
+and boil their plate off and really make
+stuff a lot easier speed should be about
+stuff a lot easier speed should be about
+the same I don't think it's going to
+the same I don't think it's going to
+have there's no overhead to it I don't
+have there's no overhead to it I don't
+think it'll make anything really much
+think it'll make anything really much
+faster either um but it will make stuff
+faster either um but it will make stuff
+substantially
+substantially
+easier that's what I'm on at the
+easier that's what I'm on at the
+moment you make any progress on your
+moment you make any progress on your
+environment
+work
+for for
+trying to work on tactical let me know
+trying to work on tactical let me know
+how to trim it down and the code's going
+how to trim it down and the code's going
+to be basically identical it's just
+to be basically identical it's just
+going to fix um it's going to basically
+going to fix um it's going to basically
+you're going to be able to remove a
+you're going to be able to remove a
+couple of the obnoxious like really long
+couple of the obnoxious like really long
+init method signatures so The scon
+init method signatures so The scon
+Binding gets a little bit simpler um and
+Binding gets a little bit simpler um and
+then like the weird buffer stuff and
+then like the weird buffer stuff and
+some of the weird like magic variables
+some of the weird like magic variables
+that you have to have in a knit for
+that you have to have in a knit for
+puffer Ms to work aren't going to be
+puffer Ms to work aren't going to be
+there just stuff like that basic
+there just stuff like that basic
+convenient stuff but uh you know it'll
+convenient stuff but uh you know it'll
+make stuff look a lot smoother for the
+make stuff look a lot smoother for the
+least at the very
+least six SS here in growing
+it' be so cool we have like tons and
+it' be so cool we have like tons and
+tons of
+these all right we go back to this any
+these all right we go back to this any
+if you have something to share on the
+if you have something to share on the
+Tactical I'd be glad to take a look if
+Tactical I'd be glad to take a look if
+not uh code
+for e
+not today but soon sounds good
+was not doing
+it for
+[Music]
+this should be
+set oh I know what's going
+on you don't call reset here
+the heck is wrong with this
+the heck is wrong with this
+oh
+oh
+go. okay so here this is where reset
+go. okay so here this is where reset
+gets
+called still no
+really oh you didn't recompile
+dummy come
+on me make sure my brain dead self is
+on me make sure my brain dead self is
+not missing
+not missing
+stuff there are way too many places
+stuff there are way too many places
+where I like contact people to schedule
+where I like contact people to schedule
+meetings and they don't just all get
+meetings and they don't just all get
+into my calendar
+no attribute episode return
+think I forgot a
+think I forgot a
+binding
+yep got
+yep got
+it
+for they should be showing up in
+stats yeah this should be showing up in
+stats yeah this should be showing up in
+stats oh cuz you're dumb
+here there we go
+is this actually real
+data if it trains this quickly RL is God
+like I'm kind of curious wait does it
+like I'm kind of curious wait does it
+actually is this policy actually this
+actually is this policy actually this
+good
+I mean we'll see in a second
+we got a
+model we'll fix clothes
+well this is not it right
+oh do I have
+oh do I have
+negative this is
+negative this is
+negative yeah so this is what's
+happening yeah it doesn't actually work
+happening yeah it doesn't actually work
+that fast that's okay it will work that
+that fast that's okay it will work that
+fast once we fix it
+oh that's
+weird yeah something
+scre
+for e
+where's reset being
+where's reset being
+called uh from python right
+called uh from python right
+now we're going to fix that but it's
+now we're going to fix that but it's
+still not going to be called
+here try this
+what the
+huh3 that was
+weird something's probably passing bad
+data for
+what happened
+what happened
+oh look at
+that
+e e
+this is very
+this is very
+weird PA
+try
+this okay so this plays right I
+this okay so this plays right I
+lose yeah
+negative for
+there
+what happens
+now does it not launch the ball
+oh it does just it takes it a
+second
+perfect let's see if this works now
+mhm this looks more reasonable now
+so it needs to tuned hyper parameters as
+well let's also implement
+well let's also implement
+the the close method
+there we go
+this is
+this is
+good we need to fix buffers
+next
+for e
+that
+works now in multiprocessing I guess in
+works now in multiprocessing I guess in
+serial EV
+I just do Dash ve
+I just do Dash ve
+native do
+anything
+e e
+this is where you pass
+this is where you pass
+it I guess I just have to add the native
+it I guess I just have to add the native
+option for
+make and
+f
+this is going to get awkward very
+quickly
+for e
+driver
+and
+okay for
+[Music]
+where is
+this oh yeah it should have it here
+go here
+and now we actually get to get rid of
+code love doing that
+that
+that
+nicer no longer need
+nicer no longer need
+this we
+this we
+actually don't need this either
+by this maybe
+got
+got
+two
+receive
+ah I think I made the API different for
+ah I think I made the API different for
+this right
+yeah we don't need
+this for
+goes into a native
+yes should
+Beed seven got five what's the signature
+Beed seven got five what's the signature
+that I missed mask I
+that I missed mask I
+think what else
+terminals truncations Agent H there's a
+terminals truncations Agent H there's a
+lot of girl there's a lot of uh garbage
+lot of girl there's a lot of uh garbage
+here
+runs again
+okay um we've got some progress
+okay um we've got some progress
+here I've got to go do a couple quick
+here I've got to go do a couple quick
+things um and then I will be back in a
+things um and then I will be back in a
+little bit not very long I don't know 20
+little bit not very long I don't know 20
+30 minutes um and we'll finish this I
+30 minutes um and we'll finish this I
+really want to have this thing done
+really want to have this thing done
+today at least like a prototype of
+today at least like a prototype of
+it anyways I'll
+
+Kind: captions
+Language: en
+heck happened with my microphone
+heck happened with my microphone
+here that was weird Okay
+here that was weird Okay
+um we got some stuff to do today we got
+um we got some stuff to do today we got
+some stuff to
+some stuff to
+do I think I'm feeling good um there are
+do I think I'm feeling good um there are
+a couple last problems that I have to
+a couple last problems that I have to
+solve essentially right now and then we
+solve essentially right now and then we
+will be oops and then we should be set
+will be oops and then we should be set
+on the whole structure for how we add
+on the whole structure for how we add
+new environments to puffer just a couple
+new environments to puffer just a couple
+last things that I need to solve here
+last things that I need to solve here
+and we should be set
+and we should be set
+um actually we have to solve a few
+um actually we have to solve a few
+things today in order for that to happen
+things today in order for that to happen
+um and I think really the thing that I
+um and I think really the thing that I
+want to do today is I want to be done
+want to do today is I want to be done
+with the full end to end in uh way in
+with the full end to end in uh way in
+which we make new environments for
+which we make new environments for
+puffer and we make that process simple
+puffer and we make that process simple
+and
+and
+easy that's what I want to do right now
+I don't think it should be that hard I
+I don't think it should be that hard I
+think we've already solved the hard
+think we've already solved the hard
+stuff there's just a little bit of
+stuff there's just a little bit of
+organization and then one kind of
+organization and then one kind of
+technical thing I got to figure out
+technical thing I got to figure out
+let's start with the hard
+problem so here's the issue right now
+problem so here's the issue right now
+let me show this
+this is the binding for breakout right
+this is the binding for breakout right
+now so this stuff
+here the reason that this needs to be
+here the reason that this needs to be
+kept is because we create the
+kept is because we create the
+environment inside of
+reset that's the reason this needs to be
+reset that's the reason this needs to be
+kept
+the reason that we have to make the
+the reason that we have to make the
+environment inside of
+reset is that puffer lib uh the way
+reset is that puffer lib uh the way
+puffer lib allocates
+puffer lib allocates
+buffers is a little bit weird
+the reason in fact that we have to do
+the reason in fact that we have to do
+this at
+this at
+all is right
+here so technically speaking
+here so technically speaking
+here most of this stuff is supposed to
+here most of this stuff is supposed to
+be
+redundant really the only thing that we
+redundant really the only thing that we
+should need to
+know we need to know the number of
+know we need to know the number of
+Agents don't
+we we need to know the number of Agents
+yeah that's
+yeah that's
+standard we need to know the observation
+standard we need to know the observation
+and action
+and action
+spaces but this buffer stuff this
+spaces but this buffer stuff this
+emulated this done all this stuff should
+emulated this done all this stuff should
+be able to be deleted single action
+be able to be deleted single action
+space single OB space this should all be
+space single OB space this should all be
+able to be
+able to be
+deleted M agents yeah all this stuff
+deleted M agents yeah all this stuff
+render mode like a lot of these things
+render mode like a lot of these things
+should just be
+handled reason I didn't have this at the
+handled reason I didn't have this at the
+moment is I didn't want to have I mean
+moment is I didn't want to have I mean
+if we look at this Base
+Class this doesn't do anything right
+Class this doesn't do anything right
+it's just like this
+it's just like this
+silly base that I use just to check the
+silly base that I use just to check the
+type
+because I wanted this to be an API not
+because I wanted this to be an API not
+like a base class right cuz Jim has way
+like a base class right cuz Jim has way
+too much garbage essentially as part of
+too much garbage essentially as part of
+the base
+the base
+class and I wanted this to not have to
+class and I wanted this to not have to
+do
+that so let me think about that let me
+that so let me think about that let me
+think about that
+the tricky part
+the tricky part
+here is
+here is
+handling observation action know buffer
+data that's the tricky
+part let me check the
+part let me check the
+vectorization I haven't looked at this
+vectorization I haven't looked at this
+code in a while maybe maybe I'll uh I'll
+code in a while maybe maybe I'll uh I'll
+think of something here that I missed
+think of something here that I missed
+before welcome YouTube
+before welcome YouTube
+folks we're making progress today we're
+folks we're making progress today we're
+going to make this
+going to make this
+work it's been too long that there's
+work it's been too long that there's
+just been like this last little bit of
+just been like this last little bit of
+Jank with puffer cuz I've been building
+Jank with puffer cuz I've been building
+Sims and we really I want this to be
+Sims and we really I want this to be
+gone
+today trying to see how this works so
+here you see we make the environment
+here you see we make the environment
+right we make all the
+right we make all the
+environments and then we have assign
+environments and then we have assign
+buffers this thing here which gets
+buffers this thing here which gets
+called in
+reset and they get made right
+reset and they get made right
+here and if you do this
+here and if you do this
+multiprocess then um they get assigned
+multiprocess then um they get assigned
+externally
+why is it like
+this so the reason I did it this
+this so the reason I did it this
+way there are a lot of different things
+way there are a lot of different things
+that can happen here
+that can happen here
+and basically the the difficulty here of
+and basically the the difficulty here of
+making all this
+making all this
+simple is I want to make it very easy
+simple is I want to make it very easy
+for people to design environments of
+for people to design environments of
+various levels of
+various levels of
+optimization I want basically like
+optimization I want basically like
+however much effort you want to put into
+however much effort you want to put into
+making an environment puffer is going to
+making an environment puffer is going to
+give you the best return on investment
+give you the best return on investment
+regardless so if you just want to make a
+regardless so if you just want to make a
+python M puffer should make that easy
+python M puffer should make that easy
+and fast right if you want to make like
+and fast right if you want to make like
+a vectorized python M puffer should make
+a vectorized python M puffer should make
+that easier easy and
+that easier easy and
+faster if you want to do cython puffer
+faster if you want to do cython puffer
+will make that even faster and then if
+will make that even faster and then if
+you want to do c you get
+everything and because of
+everything and because of
+that we have this serial
+that we have this serial
+thing serial assumes that you could want
+thing serial assumes that you could want
+to
+to
+run you could want to run the loop over
+run you could want to run the loop over
+environments in Python that is why this
+environments in Python that is why this
+thing
+exists if we assume that every
+exists if we assume that every
+environment has the ability to create
+environment has the ability to create
+multiple copies of itself and manage
+multiple copies of itself and manage
+itself then we do not need
+this
+yeah but that's a very important
+ability it's a very important ability
+can we bypass cereal for our custom
+Ms like native or
+something that's an
+idea we do
+idea we do
+a native Veen
+a native Veen
+format it doesn't need
+cereal does that make it harder for
+cereal does that make it harder for
+people
+though say when you write custom M's you
+though say when you write custom M's you
+also have to handle the loopover
+also have to handle the loopover
+environments that does kind of make it
+environments that does kind of make it
+hard for people doesn't
+hard for people doesn't
+it it adds extra
+logic who does it make it hard
+logic who does it make it hard
+for it makes it hard
+for it makes it hard
+for a user that who wants to implement
+for a user that who wants to implement
+custom
+environments who wants to use our native
+environments who wants to use our native
+a but doesn't want to do scyon
+a but doesn't want to do scyon
+RC does that user
+exist I'm trying to think if that user
+exist I'm trying to think if that user
+even
+exists h
+pull up some diagramming
+stuff I don't know if it's the lack of
+stuff I don't know if it's the lack of
+whiteboards in my recent
+whiteboards in my recent
+work but um keep going back to drawing
+stuff so
+stuff so
+like the way we have this now right that
+like the way we have this now right that
+we have
+we have
+multi-processing is the main
+box and then inside of
+box and then inside of
+this you do they're like your cores or
+whatever and you have like cereal
+cereal
+cereal and then inside of this you've
+cereal and then inside of this you've
+got
+like this is
+emulation really it should be like this
+emulation really it should be like this
+there a lot of these
+so this is the standard puffer
+so this is the standard puffer
+model you have multi-processing you have
+model you have multi-processing you have
+the ability to run multiple environments
+the ability to run multiple environments
+per core using the serial implementation
+per core using the serial implementation
+so you kind of it's kind of funny that
+so you kind of it's kind of funny that
+you run Vector on Vector but it makes
+you run Vector on Vector but it makes
+sense because you need a way to do this
+sense because you need a way to do this
+Loop is what serial
+Loop is what serial
+does serial does that Loop for you
+and the reason that serial has to do
+and the reason that serial has to do
+this Loop for you is that the emulation
+this Loop for you is that the emulation
+layer is not a vectorized API the ve the
+layer is not a vectorized API the ve the
+emulation layer is standard
+emulation layer is standard
+API gym
+API gym
+API it's kind of funny that that API
+API it's kind of funny that that API
+even exists though isn't it
+isn't that API completely
+useless like when the heck do you ever
+useless like when the heck do you ever
+want when do you ever use the gym
+API instead of
+API instead of
+VC I guess we need it for compatibility
+VC I guess we need it for compatibility
+with other libraries at least until
+with other libraries at least until
+puffer's
+puffer's
+bigger yeah we don't want to break
+bigger yeah we don't want to break
+compatibility with other stuff that's
+compatibility with other stuff that's
+kind of one of the nicest things with
+kind of one of the nicest things with
+puffers it's just compatible with
+puffers it's just compatible with
+everything so technically there's a
+everything so technically there's a
+layer of infrastructure we could cut out
+layer of infrastructure we could cut out
+completely like if we just said hey
+completely like if we just said hey
+there is no gym API there is no petting
+there is no gym API there is no petting
+zoo API there's one API it's the VC
+zoo API there's one API it's the VC
+API you know you can use the VC API it
+API you know you can use the VC API it
+has multiple backends right it can be
+has multiple backends right it can be
+serial or multiprocess that cuts out a
+serial or multiprocess that cuts out a
+layer that cuts out a
+layer we're not ready to do that yet
+layer we're not ready to do that yet
+but we can think about
+it we can definitely think about
+it so what if instead right we have
+it so what if instead right we have
+native as a back end what if we just do
+native as a back end what if we just do
+like
+native like this right
+and then when you write your custom Ms
+and then when you write your custom Ms
+you just write them as a
+you just write them as a
+native
+environment the native API the native
+environment the native API the native
+API is the VC
+API is the VC
+API and then you can run multiple like
+API and then you can run multiple like
+you can run one of these on each process
+you can run one of these on each process
+and you're good that's all you ever need
+and you're good that's all you ever need
+ever that's kind of nice isn't it
+and then what we do is we make a
+wrapper that
+wrapper that
+does what native to gymnasium or
+does what native to gymnasium or
+something like that
+native to gymnasium native to petting
+zoo that we don't have to do
+zoo that we don't have to do
+today that we don't have to do
+today that we don't have to do
+today it's not a high priority to
+today it's not a high priority to
+introduce compatibility rappers for
+introduce compatibility rappers for
+people to be able to take our like
+people to be able to take our like
+beautifully optimized environments and
+beautifully optimized environments and
+run them way slower
+run them way slower
+right might be important for getting
+right might be important for getting
+some s sp3 users to try out puffer in
+some s sp3 users to try out puffer in
+the like longer term but
+the like longer term but
+um I mean that's a dumb thing to do in
+um I mean that's a dumb thing to do in
+my mind right rappers that slow stuff
+my mind right rappers that slow stuff
+down for compatibility with slower
+Tools Plus these things should be able
+Tools Plus these things should be able
+to support a v
+anyways do I lose anything by doing this
+anyways do I lose anything by doing this
+I don't think I
+I don't think I
+do I don't think I lose a single thing
+do I don't think I lose a single thing
+by doing
+by doing
+this I guess technically it makes you
+this I guess technically it makes you
+have to it makes you guaranteed have to
+have to it makes you guaranteed have to
+handle the loop um in the environment
+handle the loop um in the environment
+itself but you want to do that anyways
+itself but you want to do that anyways
+don't
+you I think you want to do that anyways
+the loops happen in scon
+should be fairly
+straightforward and technically you
+straightforward and technically you
+don't even have to do a loop if you want
+don't even have to do a loop if you want
+your native M to like not support
+that but puffer makes it easy because
+that but puffer makes it easy because
+the native M gives you uh the
+the native M gives you uh the
+observation buffers and such already so
+observation buffers and such already so
+that's the advantage
+okay so this is a good idea if I can
+okay so this is a good idea if I can
+make it
+make it
+simple can I make it
+simple can I make it
+simple what's native
+H it's interesting
+there's a bunch of Jank in
+here I hate the idea of subclassing this
+here I hate the idea of subclassing this
+so much but I'm trying to think of
+so much but I'm trying to think of
+another way of doing
+it well hold on
+maybe can I pass the buffers on a
+knit I thought about that
+knit I thought about that
+maybe it's time to do
+maybe it's time to do
+it basically I'm trying to figure out is
+it basically I'm trying to figure out is
+where all these shared memory buffers
+where all these shared memory buffers
+need to be
+passed I think the reason that I didn't
+passed I think the reason that I didn't
+do this
+do this
+before uh I didn't want to do it that
+before uh I didn't want to do it that
+way before was because let's say that
+way before was because let's say that
+you want to like make a standalone set
+you want to like make a standalone set
+as a
+test then you need to allocate those
+test then you need to allocate those
+buffers which doesn't make any
+sense subclassing fixes this but I
+sense subclassing fixes this but I
+really don't want to do that unless it's
+really don't want to do that unless it's
+absolutely
+necessary wait wait a second hold
+on maybe it is a subass
+on maybe it is a subass
+angle
+angle
+[Music]
+[Music]
+because is a wrapper angle or a subass
+because is a wrapper angle or a subass
+angle
+it needs to have a base class
+regardless just to check the type of it
+regardless just to check the type of it
+doesn't
+it I mean technically I don't have to
+it I mean technically I don't have to
+have a base class I could literally just
+have a base class I could literally just
+say yeah you write it this is the
+API to
+API to
+follow it's like an it could be a purely
+follow it's like an it could be a purely
+abstract based
+class it's close to what I have now
+it is kind of awkward now that I'm
+it is kind of awkward now that I'm
+looking at
+looking at
+it the way multiprocessing has to
+it the way multiprocessing has to
+interact with this
+am I going to bananas
+am I going to bananas
+here the question I'm trying to figure
+here the question I'm trying to figure
+out right is like multiprocessing at the
+out right is like multiprocessing at the
+moment it spawns several processes duh
+moment it spawns several processes duh
+and each of those is Cal each Cal
+and each of those is Cal each Cal
+materal can contain many
+materal can contain many
+environments what I could do
+instead actually don't know if that
+instead actually don't know if that
+makes it any easier I guess it replaces
+makes it any easier I guess it replaces
+the Cal inside of multiprocessing with a
+native that do
+anything I mean it's slightly simpler
+anything I mean it's slightly simpler
+code Maybe
+slightly simpler
+code then you have to figure
+out I guess this is a pretty easy check
+out I guess this is a pretty easy check
+right right here
+you just have to add I'd have to add
+you just have to add I'd have to add
+something right here to see if it's a
+something right here to see if it's a
+native environment or not
+this can have a freaking make function
+this can have a freaking make function
+though that's
+though that's
+annoying I guess it's just a a Boolean
+annoying I guess it's just a a Boolean
+that we passed from the driver and is
+native so lot of stuff to change I think
+native so lot of stuff to change I think
+we could do it right now
+though I think we could do
+it and then the benefit to this hold on
+it and then the benefit to this hold on
+let me make sure there's benefit
+is this still going to be a rapper class
+is this still going to be a rapper class
+though
+this is still going to end up being a
+this is still going to end up being a
+rapper class isn't
+it it's too much
+it it's too much
+garbage too much garbage
+per
+batch shot M's
+the thing I'm stuck here
+the thing I'm stuck here
+is whether I want this to just
+is whether I want this to just
+be you accept the evil of having a base
+be you accept the evil of having a base
+class and you directly subclass
+class and you directly subclass
+native and then your TCH stack it just
+native and then your TCH stack it just
+becomes multiprocess of native done
+becomes multiprocess of native done
+multiprocess of native done nice shallow
+multiprocess of native done nice shallow
+stack all
+stack all
+right
+right
+versus we literally have puffer M just
+versus we literally have puffer M just
+be a strict API it's just like abstract
+be a strict API it's just like abstract
+base class and then this thing wraps it
+well how does this play with
+well how does this play with
+buffers how does this play with buffers
+buffers how does this play with buffers
+let me
+see reset assigns
+see reset assigns
+buffers
+here and then where's the multi
+processing you make the
+M's okay they don't want to you don't
+M's okay they don't want to you don't
+want to pass the shapes
+want to pass the shapes
+here I
+here I
+see cuz otherwise you have to pass all
+see cuz otherwise you have to pass all
+this stuff from the main process all
+this stuff from the main process all
+this stuff you got to pass it
+this is so silly
+this is so silly
+though isn't this kind of
+silly look you do this driver M you get
+silly look you do this driver M you get
+all this
+all this
+data right and then you basically
+data right and then you basically
+recompute all of
+it you have all this nice shared
+memory for
+I mean
+I mean
+regardless I think I can get this if I
+regardless I think I can get this if I
+want it right if I want to have this
+want it right if I want to have this
+data available before I make
+data available before I make
+this before I make these environments I
+this before I make these environments I
+can have it cuz I get it off the driver
+Ms yeah I can get it off the driver
+Ms at least I assume
+Ms at least I assume
+so so
+then okay let's say that we do
+that then we get this buffer
+we pass the
+we pass the
+slice this buffer creation goes up here
+slice this buffer creation goes up here
+we pass the slices
+here that's still going to mess it up
+still going to mess it
+up there needs to be a default way of
+up there needs to be a default way of
+creating
+creating
+buffers that's the tough
+part the default way of creating buffers
+part the default way of creating buffers
+has to propagate all the way down to the
+has to propagate all the way down to the
+environment
+level which is subass which I
+hate it's not worth it you know I
+mean yeah it's just it's not not worth
+mean yeah it's just it's not not worth
+it because
+like you f so I F so hard to keep this
+like you f so I F so hard to keep this
+thing
+thing
+flat the reason I don't like subclassing
+flat the reason I don't like subclassing
+at all wherever possible especially not
+at all wherever possible especially not
+in user space is subclassing implies
+in user space is subclassing implies
+complexity if you think about it right
+complexity if you think about it right
+if I give you a class or if I give you a
+if I give you a class or if I give you a
+function everything you need to know is
+function everything you need to know is
+contained in that piece of code if I
+contained in that piece of code if I
+give you something that is like API
+give you something that is like API
+where you have to subass now what that
+where you have to subass now what that
+says is that hey there's more stuff here
+says is that hey there's more stuff here
+it's like black magic that you don't
+it's like black magic that you don't
+know about that's hidden inside of this
+know about that's hidden inside of this
+whatever this super class
+whatever this super class
+is so I really really try to avoid that
+is so I really really try to avoid that
+whenever I
+whenever I
+can I mean to the extent that I would
+can I mean to the extent that I would
+rather duplicate little bits of code
+rather duplicate little bits of code
+here and
+here and
+there just to have it be
+self-contained so like if I say I
+self-contained so like if I say I
+categorically am not going to let
+categorically am not going to let
+subclassing be a
+subclassing be a
+thing if I were to say
+that
+that
+then how do we get the buffer
+then how do we get the buffer
+data in the environment how do we get
+data in the environment how do we get
+the buffer data
+in how do we get that in nicely
+the problem
+the problem
+here maybe if I explain
+bindings for this are right
+here really what we want is we want to
+here really what we want is we want to
+be able to re make we want to be able to
+be able to re make we want to be able to
+make the environment right here in a it
+make the environment right here in a it
+not in reset
+it's so easy if I were to just
+it's so easy if I were to just
+subass right it's so
+subass right it's so
+easy if I just
+subclassed what is it that subclassing
+subclassed what is it that subclassing
+gets
+gets
+me it's so damn annoying to replace
+it's
+it's
+um it's really just the allocation of
+um it's really just the allocation of
+these buffers
+nerd right back at you bud nerd
+Nation I'm trying to figure this
+out this is so close to being perfect
+don't code you
+should code is
+great just playing chest on another tab
+great just playing chest on another tab
+does that
+does that
+count you know I've been wanting to add
+count you know I've been wanting to add
+chess to this Library as a while for a
+chess to this Library as a while for a
+while now see if we can get
+while now see if we can get
+reinforcement learning to play
+reinforcement learning to play
+chess might be a little tricky but I
+chess might be a little tricky but I
+think in theory should be a lot easier
+think in theory should be a lot easier
+to learn than go even with the
+to learn than go even with the
+additional technical
+additional technical
+difficulties that'd be kind of
+difficulties that'd be kind of
+fun I am terrible at chess I can program
+fun I am terrible at chess I can program
+something that will I can program
+something that will I can program
+something that will play chess better
+something that will play chess better
+than me very very easily it is much
+than me very very easily it is much
+easier for me to make something that
+easier for me to make something that
+plays chess than it is for me to play
+plays chess than it is for me to play
+chess are you so may nerd oh
+chess are you so may nerd oh
+yeah oh yeah
+I am a uh newly minted MIT PhD in
+I am a uh newly minted MIT PhD in
+reinforcement learning and I am
+reinforcement learning and I am
+currently attempting to fix the mess the
+currently attempting to fix the mess the
+scientific field is in so this is just
+scientific field is in so this is just
+live this is live Dev on exactly
+live this is live Dev on exactly
+that which involves a lot of code but
+that which involves a lot of code but
+also a lot of me staring at code and
+also a lot of me staring at code and
+trying to figure out how I want to
+trying to figure out how I want to
+design
+design
+things amb at Vandy very
+good more into Finance
+I took a few MBA courses while I was at
+I took a few MBA courses while I was at
+uh MIT just cuz you know I had them
+uh MIT just cuz you know I had them
+available there with
+Sloan mainly just enough to be competent
+Sloan mainly just enough to be competent
+on that side of things though no Tech is
+on that side of things though no Tech is
+my
+main how old are you 27
+finishing PhD at 24 would be very
+good but no it usually takes till
+27 that will be the average graduating
+27 that will be the average graduating
+age if you do your PhD directly after
+age if you do your PhD directly after
+undergrad
+this thing is just bothering
+this thing is just bothering
+me I'll be
+pilot I have no idea how you play chess
+pilot I have no idea how you play chess
+and type at the same time I don't know
+and type at the same time I don't know
+probably a game I could
+learn consistently Land by
+itself isn't that already a
+itself isn't that already a
+thing I thought the autopilot already
+thing I thought the autopilot already
+lands the plane most of the time
+now does but not
+now does but not
+interesting you know the fun thing with
+interesting you know the fun thing with
+AI is um when you first designed systems
+AI is um when you first designed systems
+you have to have a human to take over
+you have to have a human to take over
+when the AI messes up but when the
+when the AI messes up but when the
+systems get really good then the AI
+systems get really good then the AI
+takes over when a human messes
+up bothers me so much that I can't
+up bothers me so much that I can't
+figure out a way to do this like I see
+figure out a way to do this like I see
+the way to it I just don't want I don't
+the way to it I just don't want I don't
+like the
+like the
+answer bothers
+me it really shouldn't bother me that
+me it really shouldn't bother me that
+much come to think of it
+much come to think of it
+either coding looks like a really boring
+either coding looks like a really boring
+job to
+[Music]
+[Music]
+me compared to anything else that requ
+me compared to anything else that requ
+that is mainly typing on a keyboard
+no but compared to anything that is is
+no but compared to anything that is is
+not simply typing on a keyboard all day
+maybe say at home and
+maybe say at home and
+type like to
+travel can't say I like traveling much I
+travel can't say I like traveling much I
+get plenty of exercise
+get plenty of exercise
+though offsets all the the desk
+work I think I'm just going to have to
+work I think I'm just going to have to
+do this the way I don't really want to
+do this the way I don't really want to
+do it for now
+pretty sure that's how it's going to
+work
+work
+yeah that's it's obnoxious but it'll
+yeah that's it's obnoxious but it'll
+work hey what's up
+work hey what's up
+I'm trying to strip the last bit of fat
+I'm trying to strip the last bit of fat
+out of the um the custom environment
+out of the um the custom environment
+stuff I'm trying to make it really easy
+stuff I'm trying to make it really easy
+and I found a way to do it but it
+and I found a way to do it but it
+involves I have to add a base class for
+involves I have to add a base class for
+the uh the native environments like the
+the uh the native environments like the
+new SE environments the python rappers
+new SE environments the python rappers
+they need a native a a base class and I
+they need a native a a base class and I
+hate having to subass stuff I really
+hate having to subass stuff I really
+hate having to have any amount of
+hate having to have any amount of
+inheritance ever but like when I'm
+inheritance ever but like when I'm
+thinking about it here there has to be
+thinking about it here there has to be
+at least an abstract Base Class
+at least an abstract Base Class
+anyways because if there isn't then you
+anyways because if there isn't then you
+can't tell that something is a native
+can't tell that something is a native
+environment it needs to just have like
+environment it needs to just have like
+that thing there just to signify it so
+that thing there just to signify it so
+if we have to have that anyways I might
+if we have to have that anyways I might
+as well put just a little bit of stuff
+as well put just a little bit of stuff
+in there to make it easier I
+in there to make it easier I
+guess maybe that's
+guess maybe that's
+cope I can't think of a better way of
+cope I can't think of a better way of
+doing it though for
+now this freaking buffer right
+now this freaking buffer right
+here this needs to have a way of being
+here this needs to have a way of being
+allocated without the user having to put
+allocated without the user having to put
+this
+this
+here that's the main
+thing as the the main
+thing I guess we just do
+thing I guess we just do
+it
+right let me make sure I'm not being
+right let me make sure I'm not being
+dumb and missing meetings because I had
+dumb and missing meetings because I had
+a whole bunch of stuff let me just make
+a whole bunch of stuff let me just make
+sure I'm not being dumb and missing
+sure I'm not being dumb and missing
+something I'm pretty sure I did my stuff
+something I'm pretty sure I did my stuff
+for today
+already I think we're good
+I have been hacking on a Tic Tac Toom
+I have been hacking on a Tic Tac Toom
+now at around 1.1 mil SPS with some kind
+now at around 1.1 mil SPS with some kind
+of
+of
+stuff you know what's funny cuz I
+stuff you know what's funny cuz I
+actually I wanted to Tic Tac Toe EnV
+actually I wanted to Tic Tac Toe EnV
+because there was some guy on Twitter
+because there was some guy on Twitter
+saying that you can't solve tic-tac-toe
+saying that you can't solve tic-tac-toe
+with RL which is
+nuts meetings lame
+yeah so if you want to just go ahead and
+yeah so if you want to just go ahead and
+uh run like just Auto solve Tic-Tac toe
+uh run like just Auto solve Tic-Tac toe
+I will gladly you know put put that as a
+I will gladly you know put put that as a
+reply to what whoever the hell that was
+reply to what whoever the hell that was
+on Twitter cuz it's like yeah RL should
+on Twitter cuz it's like yeah RL should
+just solve that game in like instantly
+just solve that game in like instantly
+right it's very
+easy first RL course was with tic taac
+easy first RL course was with tic taac
+toe yeah it should like it should be
+toe yeah it should like it should be
+easy
+easy
+right I don't know like people get these
+right I don't know like people get these
+really degenerate
+really degenerate
+ideas about a lot of stuff in RL like
+ideas about a lot of stuff in RL like
+like it not working or whatever and it's
+like it not working or whatever and it's
+always always because they have really
+always always because they have really
+bad infrastructure that's just like
+bad infrastructure that's just like
+doing the wrong thing and doing it
+slowly like there's some base the thing
+slowly like there's some base the thing
+is like with RL is there's some base
+is like with RL is there's some base
+level of infrastructure you kind of need
+level of infrastructure you kind of need
+in order to make everything easy and
+in order to make everything easy and
+then you can just solve anything with it
+then you can just solve anything with it
+dqn code solve the m in 30 seconds yeah
+dqn code solve the m in 30 seconds yeah
+it should
+it should
+I mean it should be less than that with
+I mean it should be less than that with
+puffer but yeah it's like a simple
+puffer but yeah it's like a simple
+little
+little
+environment hey we put whatever online
+environment hey we put whatever online
+though I mean if you want to if you want
+though I mean if you want to if you want
+to do the the full
+to do the the full
+thing we'll just put whatever people
+thing we'll just put whatever people
+build on
+build on
+here like we're just accumulating the
+here like we're just accumulating the
+set of environments right here this one
+set of environments right here this one
+was just uh contributed
+was just uh contributed
+yesterday are you still using a bun
+yesterday are you still using a bun
+220 uh on this or on puffer
+220 uh on this or on puffer
+tank let's check puffer
+tank star the puffer by the way helps us
+tank star the puffer by the way helps us
+out a
+lot
+poer um
+22.4 on puffer tank I have no idea what
+22.4 on puffer tank I have no idea what
+my local is but it's uh the Nvidia
+my local is but it's uh the Nvidia
+container on 2204 for latest puffer
+tank yeah let's actually get started on
+tank yeah let's actually get started on
+this proper
+implementation's really
+implementation's really
+messy learn what makes difference more
+messy learn what makes difference more
+complex ounds yeah I mean we have way
+complex ounds yeah I mean we have way
+better examples now if you look in the
+better examples now if you look in the
+dev Branch at breakout and pong they're
+dev Branch at breakout and pong they're
+very simple welcome Spencer Spencer made
+very simple welcome Spencer Spencer made
+the connect 4M and I imagine there's a
+the connect 4M and I imagine there's a
+Triad PR in the on the way triple Triad
+PR actually this is good timing is there
+PR actually this is good timing is there
+PR I should merge on this right now cuz
+PR I should merge on this right now cuz
+if not I just figured out
+if not I just figured out
+um I kind of decided on the way that
+um I kind of decided on the way that
+we're going to strip the last little bit
+we're going to strip the last little bit
+of fat out of uh the puffer API stuff
+of fat out of uh the puffer API stuff
+for new
+for new
+M's so that's happening today but I'll
+M's so that's happening today but I'll
+gladly merge triple Triad first if you
+gladly merge triple Triad first if you
+have it
+fresh one is
+fresh one is
+in let's do
+it live
+merging yeah all
+right okay got
+right okay got
+this got this
+you've got the C file which is the test
+good try.
+good try.
+PI right
+here you can't pass
+here you can't pass
+um you can't pass by reference easily in
+um you can't pass by reference easily in
+Python is the problem the way you do
+Python is the problem the way you do
+that is by encapsulating an array cuz
+that is by encapsulating an array cuz
+python doesn't have the idea of a
+python doesn't have the idea of a
+pointer right it has pass by reference
+pointer right it has pass by reference
+pass by value and the arrays are pass by
+pass by value and the arrays are pass by
+value that's why you have to do this
+value that's why you have to do this
+slicing actually see this mis logging
+slicing actually see this mis logging
+thing here this is I'm pretty sure this
+thing here this is I'm pretty sure this
+is
+is
+wrong I think if you don't pass a slice
+wrong I think if you don't pass a slice
+well it depends on the dimensions of
+well it depends on the dimensions of
+this thing but if you don't pass a slice
+this thing but if you don't pass a slice
+it might not get copied over correctly
+it might not get copied over correctly
+so I'd be careful with that it depends
+so I'd be careful with that it depends
+on the dimensionality I believe so you
+on the dimensionality I believe so you
+might be okay but you should be careful
+might be okay but you should be careful
+with that
+yeah it's weird so if you slice into an
+yeah it's weird so if you slice into an
+array and it returns an INT it'll just
+array and it returns an INT it'll just
+return the int by
+return the int by
+value you have to make sure you're
+value you have to make sure you're
+getting a
+slice otherwise this looks
+good only 15 actions is reasonable
+y I told you about these uh pointers and
+y I told you about these uh pointers and
+stuff but you can do this you know
+stuff but you can do this you know
+later my recommendation is not to do
+later my recommendation is not to do
+these types of things if you can avoid
+these types of things if you can avoid
+it it actually will make your life
+it it actually will make your life
+easier in some cases as well believe it
+easier in some cases as well believe it
+or
+or
+not like for
+not like for
+example these memory allocations here
+example these memory allocations here
+this would just be one giant calic this
+this would just be one giant calic this
+would be one calic this would be one
+would be one calic this would be one
+line all these things would be on
+liners and then the freeze would also be
+liners and then the freeze would also be
+on
+on
+liners some additional init and reset
+liners some additional init and reset
+stuff is ends up being one line flat
+stuff is ends up being one line flat
+indexing is kind of
+nice this makes sense though I see how
+nice this makes sense though I see how
+you're doing this
+things that can be improved is the deck
+things that can be improved is the deck
+generation cards to start with a random
+generation cards to start with a random
+on both
+on both
+sides did I tell you I think I told you
+sides did I tell you I think I told you
+about the uh the MTG thing
+about the uh the MTG thing
+right I'm talking with uh I'm talking
+right I'm talking with uh I'm talking
+with an MTG guy on Friday who wants to
+with an MTG guy on Friday who wants to
+build like an MTG style rln and I also
+build like an MTG style rln and I also
+have uh I have a you know a very capable
+have uh I have a you know a very capable
+p PhD student I know who also wants to
+p PhD student I know who also wants to
+do this and says that they he has got um
+do this and says that they he has got um
+bandwidth to do this relatively
+soon I'm absolutely sure they would be
+soon I'm absolutely sure they would be
+more than happy to Loop you in as
+well I mean this is straight engineering
+well I mean this is straight engineering
+work
+right and I mean if you're just if
+right and I mean if you're just if
+you're Dev in competent C code then
+you're Dev in competent C code then
+you've got the qualifications to
+you've got the qualifications to
+contribute
+contribute
+stuff there are a couple small things I
+stuff there are a couple small things I
+would suggest you know improving with
+would suggest you know improving with
+the uh the code here but it they're
+the uh the code here but it they're
+relatively minor complaints I would say
+relatively minor complaints I would say
+uh I'll ignore the stalis ones cuz like
+uh I'll ignore the stalis ones cuz like
+who cares but uh the the really big one
+who cares but uh the the really big one
+is the double and triple
+pointers I mean that's not far off from
+pointers I mean that's not far off from
+MTG
+MTG
+yeah I'll let me do the initial meeting
+yeah I'll let me do the initial meeting
+cuz I haven't met the guy
+cuz I haven't met the guy
+and then uh I will Loop you in and I'll
+and then uh I will Loop you in and I'll
+Loop the other PhD friend of mine
+in just making sure everything looks
+reasonable MH
+cool we merge we
+merge can you check the reward
+merge can you check the reward
+Ving yeah but I can also I'll fix it in
+Ving yeah but I can also I'll fix it in
+the I'll fix it in the merge if I need
+[Music]
+to for
+very
+nice so one to five to select a card let
+nice so one to five to select a card let
+me
+see so his strongest
+six anything better than six
+six anything better than six
+there I don't know how it breaks
+ties I actually have no intuition for
+ties I actually have no intuition for
+this game which is very kind of like
+this game which is very kind of like
+that's kind of funny to
+me so like
+sh
+huh I think I
+huh I think I
+win there we
+go cool this is like a random opponent
+go cool this is like a random opponent
+or something though isn't
+or something though isn't
+it nice game
+we're going to have this on the website
+we're going to have this on the website
+in a few minutes
+see if you can track down um South CX in
+see if you can track down um South CX in
+the Discord I haven't seen him in a
+the Discord I haven't seen him in a
+couple of weeks but he was doing a bunch
+couple of weeks but he was doing a bunch
+of cool
+of cool
+artwork I don't know where he went I
+artwork I don't know where he went I
+hope the guy is okay
+[Music]
+[Music]
+all right there's your web
+build
+build okay
+other sets of rolls
+yeah it's going to need some opponents
+yeah it's going to need some opponents
+and
+stuff I actually have no idea how hard
+stuff I actually have no idea how hard
+that game is like thinking off the top
+that game is like thinking off the top
+of my head
+I have no idea I have like no intuition
+I have no idea I have like no intuition
+for how complicated that game is to
+for how complicated that game is to
+understand
+we need the thumbnail here
+grab the
+thumbnail out
+download
+download
+Tri asset
+slash there
+getting artwork on the cards
+absolutely for
+okay and then this
+okay and then this
+is oh what did I do I was not paying
+is oh what did I do I was not paying
+attention and I just freaking hold
+onle is it with
+space yeah triple
+Triad that copyrighted
+it's probably
+not looks like it's
+fine that's a good idea
+[Music]
+tryad let's just not let's just not uh
+tryad let's just not let's just not uh
+invite
+things well let's uh
+[Music]
+does it
+work Oho
+interesting ah it's
+interesting ah it's
+misspelled this is why we
+test really
+Tipple
+triple is it just
+cashing there we
+go kind of
+go kind of
+big not bad though
+big not bad though
+I do like
+this just do like
+this yeah there it
+goes oh for
+goes oh for
+[Music]
+tryad it's okay for
+tryad it's okay for
+now we might change some
+now we might change some
+stuff let me make sure it's
+stuff let me make sure it's
+online I mean we'll see
+online I mean we'll see
+but
+but
+[Music]
+um we also where you need to start
+um we also where you need to start
+getting some policies playing these so
+getting some policies playing these so
+you can play against the policy I'll be
+you can play against the policy I'll be
+next boom there you go one minute
+deploy e
+which one is it
+I've heard you're saying that you don't
+I've heard you're saying that you don't
+care about sample efficiency but that
+care about sample efficiency but that
+only makes case for where you don't have
+only makes case for where you don't have
+access to a fast
+access to a fast
+simulator have you seen the iceberg
+simulator have you seen the iceberg
+video I go over this in a lot of detail
+video I go over this in a lot of detail
+it's uh you have to go you have to go
+it's uh you have to go you have to go
+fast in order to make progress on those
+fast in order to make progress on those
+M's basically so yes uh focusing on this
+M's basically so yes uh focusing on this
+is how we get to More Sample efficient
+is how we get to More Sample efficient
+stuff anyways
+there we go
+here we
+here we
+go we've been
+go we've been
+uh farming a bit of
+Engagement 50 to go until
+5K right there's your environment online
+5K right there's your environment online
+well done thanks for the
+contributions
+um there cases in robotics where you
+um there cases in robotics where you
+have to train your
+have to train your
+robot yeah but Peter like I go through
+robot yeah but Peter like I go through
+this in the iceberg video like the tldr
+this in the iceberg video like the tldr
+on it is that like the whole field is
+on it is that like the whole field is
+stuck and we're doing really bad science
+stuck and we're doing really bad science
+because our M's are too slow to run
+because our M's are too slow to run
+enough experiments and such so we just
+enough experiments and such so we just
+don't run them so like half of all RL
+don't run them so like half of all RL
+results are just wrong like half of all
+results are just wrong like half of all
+the conference papers being published
+the conference papers being published
+are just wrong it's like an absolutely
+are just wrong it's like an absolutely
+terrible situation and the only way that
+terrible situation and the only way that
+we're actually going to fix anything is
+we're actually going to fix anything is
+by having these super fast environments
+by having these super fast environments
+to test stuff prop uh properly and like
+to test stuff prop uh properly and like
+we will actually be able to discover
+we will actually be able to discover
+more sample efficient methods uh by
+more sample efficient methods uh by
+doing this but the thing is like we need
+doing this but the thing is like we need
+to to be able to run these comprehensive
+to to be able to run these comprehensive
+experiments and it's just not possible
+experiments and it's just not possible
+now like you never want to be in a
+now like you never want to be in a
+situation where in order to make
+situation where in order to make
+progress like you're limited on the
+progress like you're limited on the
+number of experiments that you can run
+number of experiments that you can run
+and that's just it's literally killed
+and that's just it's literally killed
+the field like rl's been stuck since
+the field like rl's been stuck since
+2019 because of this so that's kind of
+2019 because of this so that's kind of
+the idea here it's not that caring about
+the idea here it's not that caring about
+sample efficiency is dumb it's that the
+sample efficiency is dumb it's that the
+way that it's been approached in the
+way that it's been approached in the
+field has caused lasting damage I cover
+field has caused lasting damage I cover
+this much more eloquently in the video
+this much more eloquently in the video
+um but that's like the quick
+version anything else Spencer or should
+version anything else Spencer or should
+I get stuck into this um these
+I get stuck into this um these
+environment
+environment
+fixes for the uh like for the API
+isn't standard practice to run 25 seeds
+isn't standard practice to run 25 seeds
+per
+per
+experiment people don't do that and also
+experiment people don't do that and also
+25 seeds per experiment what about hyper
+25 seeds per experiment what about hyper
+parameters you take your method you
+parameters you take your method you
+compare to Baseline Baseline doesn't
+compare to Baseline Baseline doesn't
+have t hyper parameters you have tuned
+have t hyper parameters you have tuned
+hyper parameters you win 2 weeks later
+hyper parameters you win 2 weeks later
+somebody goes and tunes the hyper
+somebody goes and tunes the hyper
+parameters for the Baseline and now it
+parameters for the Baseline and now it
+does three times better than yours this
+does three times better than yours this
+happens RL hyper parameters can have a
+happens RL hyper parameters can have a
+two to threefold or more impact on
+two to threefold or more impact on
+performance
+performance
+uh without changing anything
+else there are problems there are big
+else there are problems there are big
+problems like for instance po Poo's been
+problems like for instance po Poo's been
+benchmarked on a lot of different Atari
+benchmarked on a lot of different Atari
+environments a ton of different times
+environments a ton of different times
+right well why are puffers two to three
+right well why are puffers two to three
+times better for a lot of the
+times better for a lot of the
+environments we tuned hyper parameters
+environments we tuned hyper parameters
+that's all we did it's very
+silly it's very very silly
+also people are just straight up not
+also people are just straight up not
+running 25 seats per experiment like if
+running 25 seats per experiment like if
+your experiments take multiple days
+your experiments take multiple days
+you're not running 25 of
+you're not running 25 of
+them well publishing without tuning
+them well publishing without tuning
+hyper parameter sounds kind of stupid
+hyper parameter sounds kind of stupid
+well it's not stupid though it's that
+well it's not stupid though it's that
+there're no resources right Labs don't
+there're no resources right Labs don't
+have hundreds of gpus and the stupid
+have hundreds of gpus and the stupid
+like the experiments are so slow because
+like the experiments are so slow because
+of the lack of focus on wall clock train
+of the lack of focus on wall clock train
+time that like the experiments take days
+time that like the experiments take days
+when they should take hours or maybe
+when they should take hours or maybe
+even minutes
+can you check on models.py update for M
+can you check on models.py update for M
+training not certain we should change
+training not certain we should change
+OBS with the latest version in Dev uh
+OBS with the latest version in Dev uh
+let me fix that
+thing I should have done that last night
+thing I should have done that last night
+my bad
+even when running experiments that take
+even when running experiments that take
+days isn't it easily done by running
+days isn't it easily done by running
+them on an HPC yeah if you have one like
+them on an HPC yeah if you have one like
+this is where I would put my HPC if I
+this is where I would put my HPC if I
+had one
+had one
+right I mean I was at MIT and our
+right I mean I was at MIT and our
+cluster was so garbage that I never even
+cluster was so garbage that I never even
+used it we had no Hardware zero
+used it we had no Hardware zero
+zilch you think there aren't dozens or
+zilch you think there aren't dozens or
+hundreds of labs that similarly have
+hundreds of labs that similarly have
+garbage
+garbage
+Hardware it's not a fun place to be in
+Hardware it's not a fun place to be in
+you can run 100 experiments on a GPU on
+you can run 100 experiments on a GPU on
+a desktop then then we're talking right
+[Music]
+I again guessed every un had a decent
+I again guessed every un had a decent
+clusterer
+clusterer
+nope I was in a lab at Stanford the
+nope I was in a lab at Stanford the
+resources sucked I was in a lab at MIT
+resources sucked I was in a lab at MIT
+the resources sucked
+like what wait did I even change stuff
+like what wait did I even change stuff
+here I don't even see any commits on
+this when did this get merged
+in uni budget was spent on buying 50
+in uni budget was spent on buying 50
+workstations that in the background ran
+workstations that in the background ran
+scheduled Computing jobs one of those
+scheduled Computing jobs one of those
+labs had a GPU each for that purpose no
+labs had a GPU each for that purpose no
+it didn't make things good
+really well I guess the scheduled
+really well I guess the scheduled
+Computing jobs no but 50 workstations is
+Computing jobs no but 50 workstations is
+solid um
+solid um
+if there if you have like a couple of
+if there if you have like a couple of
+those allocated to each student you can
+those allocated to each student you can
+actually do
+actually do
+stuff what are MIT and Stanford doing
+stuff what are MIT and Stanford doing
+with all their money paying stupid
+with all their money paying stupid
+numbers of
+numbers of
+admins um I don't know it's it's
+admins um I don't know it's it's
+embarrassing it's not better at most
+embarrassing it's not better at most
+other universities too it's not like oh
+other universities too it's not like oh
+it's worse the better the university is
+it's worse the better the university is
+most people are just doing dumb things
+most people are just doing dumb things
+with it like you can say like yeah
+with it like you can say like yeah
+technically we've got gpus on paper
+technically we've got gpus on paper
+right but like you give all the grad
+right but like you give all the grad
+students pseudo access and you let them
+students pseudo access and you let them
+abuse AFS and NFS and quickly like you
+abuse AFS and NFS and quickly like you
+got a bunch of expensive paper
+weights I'm actually kind of surprised
+weights I'm actually kind of surprised
+that didn't make things good because uh
+that didn't make things good because uh
+we've got this is what we have for
+we've got this is what we have for
+puffer right now and this is way better
+puffer right now and this is way better
+than anything I had at MIT we just got
+than anything I had at MIT we just got
+we just bought eight
+we just bought eight
+desktops and they're really
+desktops and they're really
+nice I mean we had some issues because
+nice I mean we had some issues because
+of the dumb Intel chip glitch this
+of the dumb Intel chip glitch this
+generation but outside of that this has
+generation but outside of that this has
+been great
+the background Ram scheduled Computing I
+the background Ram scheduled Computing I
+think the scheduled Computing jobs is
+think the scheduled Computing jobs is
+going to be the issue people mess up
+going to be the issue people mess up
+scheduling a
+lot esoteric knowledge students access
+lot esoteric knowledge students access
+that
+that
+cluster yeah that's
+cluster yeah that's
+ridiculous no no no no the way that you
+ridiculous no no no no the way that you
+can do this reasonably is you just buy
+can do this reasonably is you just buy
+four of these per student and you're
+four of these per student and you're
+done
+done
+right you just buy four or five or six
+right you just buy four or five or six
+however many of these per student and
+however many of these per student and
+you're good PR
+97 why does this say modified 3 weeks
+97 why does this say modified 3 weeks
+ago then am I dumb
+what are you making we're Devon puffer
+what are you making we're Devon puffer
+lib we're doing ultra high performance
+lib we're doing ultra high performance
+reinforcement learning you want a quick
+reinforcement learning you want a quick
+demo of stuff puffer Dogg we got some
+demo of stuff puffer Dogg we got some
+environments you can play around with
+environments you can play around with
+this one actually has some decent bosss
+this one actually has some decent bosss
+you can play against you're the yellow
+you can play against you're the yellow
+snake we also got some fancier
+stuff no it was 50 PCS with 150 students
+stuff no it was 50 PCS with 150 students
+enrolling to it each year many yeah no
+enrolling to it each year many yeah no
+that's ridiculous I mean that's just
+that's ridiculous I mean that's just
+like you have no Hardware right you
+like you have no Hardware right you
+added a scheduler to solve a resource
+added a scheduler to solve a resource
+scarcity problem that doesn't
+work and also the other problem is that
+work and also the other problem is that
+you bought workstations those are marked
+you bought workstations those are marked
+up like
+double so you could have had good 100
+double so you could have had good 100
+100 or 150 desktops
+50 we in cluster yeah that's
+rough I mean I literally was considering
+rough I mean I literally was considering
+like if I just buy 50 of these I think
+like if I just buy 50 of these I think
+we're kind of good the trick is we don't
+we're kind of good the trick is we don't
+have a scheduling system or anything on
+have a scheduling system or anything on
+these I just give people direct SSH
+these I just give people direct SSH
+access to a couple boxes or however many
+access to a couple boxes or however many
+boxes um and I say okay you get these
+boxes um and I say okay you get these
+boxes you get these boxes for now and
+boxes you get these boxes for now and
+it's very very easy there's no like
+it's very very easy there's no like
+extra scheduling software
+extra scheduling software
+there's no AFS there's no NFS uh the
+there's no AFS there's no NFS uh the
+only infra is like there is a shared
+only infra is like there is a shared
+Docker image that we use as the base and
+Docker image that we use as the base and
+then you can spin up Docker on the
+then you can spin up Docker on the
+machines like when you boot in you get
+machines like when you boot in you get
+booted directly into your Docker and if
+booted directly into your Docker and if
+you want to make other Dockers to try
+you want to make other Dockers to try
+stuff out you can do that but like
+stuff out you can do that but like
+immediately you have instant setup it
+immediately you have instant setup it
+takes literally five minutes to onboard
+people it's like if you can't do the
+people it's like if you can't do the
+fancy thing correctly just do the brain
+fancy thing correctly just do the brain
+dead thing it'll be better
+do I just need to copy this file from
+uh oh I see it's because it's
+uh oh I see it's because it's
+from yeah cuz this is when the commits
+from yeah cuz this is when the commits
+were okay that's weird I didn't know
+were okay that's weird I didn't know
+that GitHub does its dating that way
+I can just go try to fix it real quick
+I can just go try to fix it real quick
+as the other thing instead of reverting
+as the other thing instead of reverting
+it that would probably be better that
+it that would probably be better that
+doesn't Kick the Can what's not what
+doesn't Kick the Can what's not what
+doesn't work you have an example it's
+doesn't work you have an example it's
+like puffer or python
+like puffer or python
+demo and connect for mode train this
+demo and connect for mode train this
+doesn't work
+you don't have to prefix stuff with my
+you don't have to prefix stuff with my
+that was just because there a name conf
+that was just because there a name conf
+oh I guess there is a name conflict with
+oh I guess there is a name conflict with
+open Spiel
+[Music]
+mind yeah that's really
+mind yeah that's really
+silly I don't know what the heck it is
+silly I don't know what the heck it is
+with these universities I mean you when
+with these universities I mean you when
+you ask like what the money is being
+you ask like what the money is being
+spent on like they assess more than six
+spent on like they assess more than six
+figures of cost per PhD student per year
+figures of cost per PhD student per year
+so the money is going
+so the money is going
+somewhere not going into
+Hardware okay found your bug let me
+Hardware okay found your bug let me
+figure out what the heck this
+is damn it
+is damn it
+linky I swear I asked him to test this
+what is
+this what's the difference between this
+this what's the difference between this
+and just normal reinforcement
+and just normal reinforcement
+learning uh well puffer is very fast and
+learning uh well puffer is very fast and
+a lot simpler it's gener I mean what
+a lot simpler it's gener I mean what
+What's Happening Here is this is me
+What's Happening Here is this is me
+trying to fix all the stuff that caused
+trying to fix all the stuff that caused
+pain and suffering throughout my PhD
+pain and suffering throughout my PhD
+this is me making things fast making
+this is me making things fast making
+things simple and making things work on
+things simple and making things work on
+much more interesting
+environments that's the idea with
+puffer dude what is this
+oh I see why he did this
+oh I see why he did this
+okay I see why he did
+this kind of
+this kind of
+weird let me figure
+does this wait is this not the
+default I don't feel real bad if I was
+uh if I'm wrong here I'm pretty sure
+uh if I'm wrong here I'm pretty sure
+this is linky's
+thing might not
+be policy
+no this is
+no this is
+default so
+uh
+uh
+linky damn it
+man you
+serious this goes here
+really well there you go
+e
+all right let's actually fix the the
+all right let's actually fix the the
+rest of the stuff
+now I'm assuming you cannot hear desktop
+now I'm assuming you cannot hear desktop
+audio
+audio
+right I can mute it
+right I can mute it
+regardless I'm going to just toss
+regardless I'm going to just toss
+something up on the background
+it's time to get some code
+done still answer questions and stuff
+done still answer questions and stuff
+but
+but
+uh hold
+on oops wrong
+on oops wrong
+one we're going to fix some stuff today
+all right let me grab uh let me grab a
+all right let me grab uh let me grab a
+drink and we'll be get ready to get
+drink and we'll be get ready to get
+going on this I think it'll only take me
+going on this I think it'll only take me
+an hour to do this if I'm quick
+here's the
+here's the
+plan we're going to make the V API the
+plan we're going to make the V API the
+native API work we're going to Port all
+native API work we're going to Port all
+the environments to use it we're going
+the environments to use it we're going
+to clean some stuff up we going to go
+to clean some stuff up we going to go
+from there there are a few other
+from there there are a few other
+structural changes I want to make but
+structural changes I want to make but
+we're going to start with
+this
+for
+e e
+can't do it there going do it here
+okay we want this buffer code
+I have to also not break GPU
+I have to also not break GPU
+drive that's not hard
+don't like this M's thing
+yeah this doesn't need
+anything doesn't need
+anything creators
+doesn't need
+this star star
+quars going to be
+quars going to be
+Stars this
+emulated
+that this Falls for
+now not implemented
+I don't know if you can do this on a
+property cuz you can't override
+property cuz you can't override
+properties I'm pretty
+sure you can but it's
+awkward yeah we'll hold on for that
+this also doesn't
+work none of these things should matter
+should
+matter
+for e
+okay this
+works this also should work
+what's this numb
+Ops this is required to be a box
+right
+right
+oops for
+we'll leave this like this for now
+n agents num
+mobs is there any reason we need this
+mobs is there any reason we need this
+otherwise I don't think so
+no there isn't
+we want to add actions
+here not
+initially not initially
+do like
+this
+this
+reset
+step
+step
+ready what is self. ready
+oh yeah that's
+fine
+uh this needs to
+uh this needs to
+be
+there like
+this for
+let's
+see un implemented error okay
+that's nice we get a reasonable error
+that's nice we get a reasonable error
+that's what we
+want so you go like this right num
+want so you go like this right num
+Ms
+Ms
+agents I don't think we need n m we just
+agents I don't think we need n m we just
+need n agents
+right and then we'll get a different
+right and then we'll get a different
+error
+and this is the
+error
+error
+right the
+error and what do we have for reset and
+error and what do we have for reset and
+step
+step
+here these are fine
+here these are fine
+yeah and now we get a reasonable
+yeah and now we get a reasonable
+AR is exactly what we want we want users
+AR is exactly what we want we want users
+to hit
+to hit
+this so we go like this
+right this num actions is going to be
+before action space like
+this I'm agents before net right
+this is numb agents
+we have to not break GPU drive with
+this be a little
+tricky you don't need this anymore
+don't need
+don't need
+this literally don't need any of this
+[Music]
+you need no Ms as well
+yeah you do need n
+yeah you do need n
+Ms that's
+fine also this
+fine also this
+is
+bad for
+no
+done if
+M.D for
+okay is this thing actually already
+okay is this thing actually already
+running really that
+running really that
+easy cool
+we're going to need to do some stuff but
+uh that's good
+this will have to be updated a little
+this will have to be updated a little
+bit
+bit
+here but this is fine for now
+it's crazy how puffer just works
+the heck s
+the heck s
+Broadway
+breakout okay this needs some sort
+breakout okay this needs some sort
+of reward
+signal cuz we really didn't add anything
+here and
+there's no reset in here
+there's no reset in here
+either little awkward
+presumably this is done in
+this is kind of
+this is kind of
+weird is it missing the
+loops I swear I did it on one of these
+maybe
+not in the
+H is in the dotage
+H is in the dotage
+somewhere no
+let me
+see I thought I had like a little piece
+see I thought I had like a little piece
+of C code somewhere here for
+this Maybe
+this Maybe
+not maybe not
+yeah it's not in C yet okay that was a
+yeah it's not in C yet okay that was a
+two do
+okay the resets handled here this is why
+me make sure that's not something
+okay hey
+okay hey
+Nathan let me pause this a second and I
+Nathan let me pause this a second and I
+will tell
+will tell
+you so there's a lot of stuff that's new
+you so there's a lot of stuff that's new
+um first of
+all two new environments from
+all two new environments from
+Spencer got Connect Four and also this
+Spencer got Connect Four and also this
+cool card game pretty sweet
+cool card game pretty sweet
+if you play randomly it doesn't go very
+if you play randomly it doesn't go very
+well um and then also I figured out how
+well um and then also I figured out how
+to trim the rest of the fat off of all
+to trim the rest of the fat off of all
+the binding layers so basically it's
+the binding layers so basically it's
+going to be really easy and really
+going to be really easy and really
+simple uh like the python to scon to C
+simple uh like the python to scon to C
+line is going to be really really simple
+line is going to be really really simple
+I just need to finish coding it which is
+I just need to finish coding it which is
+what I've been doing now it's a little
+what I've been doing now it's a little
+bit
+bit
+tricky um I'm not 100% satis ifed with
+tricky um I'm not 100% satis ifed with
+it but I think it's way better and it's
+it but I think it's way better and it's
+going to cut a lot of the pain points
+going to cut a lot of the pain points
+and boil their plate off and really make
+and boil their plate off and really make
+stuff a lot easier speed should be about
+stuff a lot easier speed should be about
+the same I don't think it's going to
+the same I don't think it's going to
+have there's no overhead to it I don't
+have there's no overhead to it I don't
+think it'll make anything really much
+think it'll make anything really much
+faster either um but it will make stuff
+faster either um but it will make stuff
+substantially
+substantially
+easier that's what I'm on at the
+easier that's what I'm on at the
+moment you make any progress on your
+moment you make any progress on your
+environment
+work
+for for
+trying to work on tactical let me know
+trying to work on tactical let me know
+how to trim it down and the code's going
+how to trim it down and the code's going
+to be basically identical it's just
+to be basically identical it's just
+going to fix um it's going to basically
+going to fix um it's going to basically
+you're going to be able to remove a
+you're going to be able to remove a
+couple of the obnoxious like really long
+couple of the obnoxious like really long
+init method signatures so The scon
+init method signatures so The scon
+Binding gets a little bit simpler um and
+Binding gets a little bit simpler um and
+then like the weird buffer stuff and
+then like the weird buffer stuff and
+some of the weird like magic variables
+some of the weird like magic variables
+that you have to have in a knit for
+that you have to have in a knit for
+puffer Ms to work aren't going to be
+puffer Ms to work aren't going to be
+there just stuff like that basic
+there just stuff like that basic
+convenient stuff but uh you know it'll
+convenient stuff but uh you know it'll
+make stuff look a lot smoother for the
+make stuff look a lot smoother for the
+least at the very
+least six SS here in growing
+it' be so cool we have like tons and
+it' be so cool we have like tons and
+tons of
+these all right we go back to this any
+these all right we go back to this any
+if you have something to share on the
+if you have something to share on the
+Tactical I'd be glad to take a look if
+Tactical I'd be glad to take a look if
+not uh code
+for e
+not today but soon sounds good
+was not doing
+it for
+[Music]
+this should be
+set oh I know what's going
+on you don't call reset here
+the heck is wrong with this
+the heck is wrong with this
+oh
+oh
+go. okay so here this is where reset
+go. okay so here this is where reset
+gets
+called still no
+really oh you didn't recompile
+dummy come
+on me make sure my brain dead self is
+on me make sure my brain dead self is
+not missing
+not missing
+stuff there are way too many places
+stuff there are way too many places
+where I like contact people to schedule
+where I like contact people to schedule
+meetings and they don't just all get
+meetings and they don't just all get
+into my calendar
+no attribute episode return
+think I forgot a
+think I forgot a
+binding
+yep got
+yep got
+it
+for they should be showing up in
+stats yeah this should be showing up in
+stats yeah this should be showing up in
+stats oh cuz you're dumb
+here there we go
+is this actually real
+data if it trains this quickly RL is God
+like I'm kind of curious wait does it
+like I'm kind of curious wait does it
+actually is this policy actually this
+actually is this policy actually this
+good
+I mean we'll see in a second
+we got a
+model we'll fix clothes
+well this is not it right
+oh do I have
+oh do I have
+negative this is
+negative this is
+negative yeah so this is what's
+happening yeah it doesn't actually work
+happening yeah it doesn't actually work
+that fast that's okay it will work that
+that fast that's okay it will work that
+fast once we fix it
+oh that's
+weird yeah something
+scre
+for e
+where's reset being
+where's reset being
+called uh from python right
+called uh from python right
+now we're going to fix that but it's
+now we're going to fix that but it's
+still not going to be called
+here try this
+what the
+huh3 that was
+weird something's probably passing bad
+data for
+what happened
+what happened
+oh look at
+that
+e e
+this is very
+this is very
+weird PA
+try
+this okay so this plays right I
+this okay so this plays right I
+lose yeah
+negative for
+there
+what happens
+now does it not launch the ball
+oh it does just it takes it a
+second
+perfect let's see if this works now
+mhm this looks more reasonable now
+so it needs to tuned hyper parameters as
+well let's also implement
+well let's also implement
+the the close method
+there we go
+this is
+this is
+good we need to fix buffers
+next
+for e
+that
+works now in multiprocessing I guess in
+works now in multiprocessing I guess in
+serial EV
+I just do Dash ve
+I just do Dash ve
+native do
+anything
+e e
+this is where you pass
+this is where you pass
+it I guess I just have to add the native
+it I guess I just have to add the native
+option for
+make and
+f
+this is going to get awkward very
+quickly
+for e
+driver
+and
+okay for
+[Music]
+where is
+this oh yeah it should have it here
+go here
+and now we actually get to get rid of
+code love doing that
+that
+that
+nicer no longer need
+nicer no longer need
+this we
+this we
+actually don't need this either
+by this maybe
+got
+got
+two
+receive
+ah I think I made the API different for
+ah I think I made the API different for
+this right
+yeah we don't need
+this for
+goes into a native
+yes should
+Beed seven got five what's the signature
+Beed seven got five what's the signature
+that I missed mask I
+that I missed mask I
+think what else
+terminals truncations Agent H there's a
+terminals truncations Agent H there's a
+lot of girl there's a lot of uh garbage
+lot of girl there's a lot of uh garbage
+here
+runs again
+okay um we've got some progress
+okay um we've got some progress
+here I've got to go do a couple quick
+here I've got to go do a couple quick
+things um and then I will be back in a
+things um and then I will be back in a
+little bit not very long I don't know 20
+little bit not very long I don't know 20
+30 minutes um and we'll finish this I
+30 minutes um and we'll finish this I
+really want to have this thing done
+really want to have this thing done
+today at least like a prototype of
+today at least like a prototype of
+it anyways I'll

@@ -1,0 +1,3633 @@
+Kind: captions
+Language: en
+okay we are back
+live mainly just going to be trying to
+live mainly just going to be trying to
+get GPU drive to
+get GPU drive to
+be what we'd like it to
+be what we'd like it to
+be let's
+see
+um looks
+um looks
+good uhhuh
+good uhhuh
+and
+and
+ooh very
+ooh very
+spiky very spiky
+indeed oh that's because of the resample
+indeed oh that's because of the resample
+though
+though
+okay I think it should be good enough by
+okay I think it should be good enough by
+200 mil
+200 mil
+hopefully we will
+hopefully we will
+see but yeah this is just because of
+resample it's like every 5 mil or
+resample it's like every 5 mil or
+something
+something
+probably um let's
+see I am waiting at the moment to see if
+see I am waiting at the moment to see if
+we're going to
+we're going to
+have any meeting with uh NYU folks but
+have any meeting with uh NYU folks but
+in the meantime I'll be here
+in the meantime I'll be here
+streaming and it's going to take a
+streaming and it's going to take a
+little while for this model to finish
+little while for this model to finish
+training and to think what to do in the
+meanwhile I have this training locally I
+meanwhile I have this training locally I
+guess I could try to get um let's take a
+guess I could try to get um let's take a
+quick look at some of our hyper pram
+quick look at some of our hyper pram
+stuff in the meanwhile maybe be
+stuff in the meanwhile maybe be
+good so we've got um you know all this
+good so we've got um you know all this
+hyper pram work I've been trying to
+do and I think we have Connect 4 maybe
+do and I think we have Connect 4 maybe
+done by now let's
+done by now let's
+see tag just
+see tag just
+tag no only 50 one
+tag no only 50 one
+experiments I mean it's
+solved but solved in 200
+solved but solved in 200
+mil some's weird with that hold on cuz
+mil some's weird with that hold on cuz
+if we look at
+if we look at
+Cost jump to very high cost very
+Cost jump to very high cost very
+quickly do Paro run on
+this yeah no this is not um
+this yeah no this is not um
+you know it's interesting that it's
+you know it's interesting that it's
+pushed the cost up that
+pushed the cost up that
+high it probably shouldn't have done
+high it probably shouldn't have done
+that oh you know what it
+that oh you know what it
+is
+is
+um it's that it knows
+that it has a good predictive model of
+that it has a good predictive model of
+cost because it knows that it's going to
+cost because it knows that it's going to
+just solve
+just solve
+it
+it
+h didn't think about that
+we kind of don't bias to lower cost do
+we kind of don't bias to lower cost do
+we if you think no wait we do we bias to
+we if you think no wait we do we bias to
+highest
+performance we don't really
+performance we don't really
+bias away from cost really except in
+bias away from cost really except in
+terms of confidence I
+suppose well that's new Improvement that
+suppose well that's new Improvement that
+can be made on the algorithm I
+can be made on the algorithm I
+suppose I'm not going to mess with it at
+suppose I'm not going to mess with it at
+the moment because it's already very
+the moment because it's already very
+good I mean look it
+good I mean look it
+has it has the hyper prems here and we
+has it has the hyper prems here and we
+got this one is very nice you know I
+got this one is very nice you know I
+would have liked to have seen this more
+would have liked to have seen this more
+in this area here
+maybe but yeah that's a little bit of a
+maybe but yeah that's a little bit of a
+quirk if it has too good of a predictive
+quirk if it has too good of a predictive
+model it kind of just gets stuck yeah
+model it kind of just gets stuck yeah
+let push gamma up to Max
+oh is there any point in leaving
+oh is there any point in leaving
+this I guess there is because it might
+this I guess there is because it might
+try to let's see if it tries to push
+try to let's see if it tries to push
+cost down on its
+cost down on its
+own I mean
+own I mean
+technically it will resample parito
+technically it will resample parito
+points but I don't think it's going to
+points but I don't think it's going to
+search around the resampled parito
+search around the resampled parito
+points on its own oh yeah look it's
+points on its own oh yeah look it's
+pushed num Ms all the way to the bottom
+pushed num Ms all the way to the bottom
+okay
+okay
+so there is a big improvement over carbs
+so there is a big improvement over carbs
+but not quite the god algorithm
+but not quite the god algorithm
+yet missing a few a few
+yet missing a few a few
+things I mean we could try to think
+things I mean we could try to think
+about that in the
+meanwhile we could go through the carbs
+meanwhile we could go through the carbs
+math a little bit and see if we can
+math a little bit and see if we can
+figure out how to do this
+I mean I guess I'm going to kind of keep
+I mean I guess I'm going to kind of keep
+this as a uh a
+this as a uh a
+puzzle over the next few weeks to see if
+puzzle over the next few weeks to see if
+I
+can see if I can crack
+can see if I can crack
+this so here's the
+this so here's the
+map let's move this to
+review all right so we got these Gan
+review all right so we got these Gan
+processes
+this was originally preventing you
+this was originally preventing you
+from choosing hyper parameters too far
+from choosing hyper parameters too far
+away from your current set of hyper
+away from your current set of hyper
+parameters um that doesn't really do
+parameters um that doesn't really do
+anything for me so we got rid of
+anything for me so we got rid of
+that we replaced this with a
+that we replaced this with a
+conservative estimate of absolute
+conservative estimate of absolute
+performance so it we've replace it
+performance so it we've replace it
+specifically with
+specifically with
+GP y
+GP y
+which is a gaussian process that
+which is a gaussian process that
+estimates that takes in the hyper
+estimates that takes in the hyper
+parameters you've chosen and estimates
+parameters you've chosen and estimates
+how well it thinks they're going to
+how well it thinks they're going to
+do and we've subtracted the variance of
+do and we've subtracted the variance of
+that or the standard deviation of that
+that or the standard deviation of that
+to get a conservative estimate of the
+to get a conservative estimate of the
+performance so this is a local estimate
+performance so this is a local estimate
+how well do you think you're going to
+how well do you think you're going to
+improve over the
+improve over the
+current and then we
+have this term uh not this term we
+have this term uh not this term we
+replace this with the absolute
+replace this with the absolute
+Improvement
+Improvement
+estimate
+estimate
+now because the absolute
+now because the absolute
+estimate is
+estimate is
+conservative you get penalized for
+conservative you get penalized for
+trying to explore regions uh for which
+trying to explore regions uh for which
+the model doesn't have any support So
+the model doesn't have any support So
+for which you're likely
+for which you're likely
+to uh you get penalized for exploring
+to uh you get penalized for exploring
+unconfident
+regions but we don't actually factor in
+regions but we don't actually factor in
+cost explicitly it's just that those two
+cost explicitly it's just that those two
+things are
+things are
+correlated so in fact if you have an
+correlated so in fact if you have an
+accurate predictive model of
+performance if you have an accurate
+performance if you have an accurate
+predictive model of performance then
+predictive model of performance then
+you're going to get pushed to explore
+you're going to get pushed to explore
+higher and higher
+higher and higher
+cost
+cost
+Solutions no you're going to get Pro to
+Solutions no you're going to get Pro to
+perform to higher and higher performance
+perform to higher and higher performance
+solutions which may or may not be higher
+solutions which may or may not be higher
+cost but there's no term that's trying
+cost but there's no term that's trying
+to pull you towards lower
+to pull you towards lower
+cost
+cost
+right so that's a bit of a
+problem because there's a little bit of
+problem because there's a little bit of
+a balance to this thing right you know
+a balance to this thing right you know
+you don't want to be you don't want to
+you don't want to be you don't want to
+not explore high cost stuff when it's
+not explore high cost stuff when it's
+needed
+but you also want to try to find the
+but you also want to try to find the
+most efficient
+solution what can we do mathematically
+solution what can we do mathematically
+to represent
+to represent
+that we have estimates of
+that we have estimates of
+cost we have estimates of
+cost we have estimates of
+performance how do we mathematically
+performance how do we mathematically
+Express that we want
+to we want the highest
+to we want the highest
+performing lowest cost
+solution we can simplify a little bit in
+solution we can simplify a little bit in
+the sense that some environments you
+the sense that some environments you
+know we can just solve the environment
+know we can just solve the environment
+uh and in that case you know there is a
+uh and in that case you know there is a
+hard cap on the
+score you know it's a little tricky
+score you know it's a little tricky
+because all the scores have different
+because all the scores have different
+magnitudes so there's no way for us to
+magnitudes so there's no way for us to
+express you know how much perform like
+express you know how much perform like
+how much score we're willing to trade
+how much score we're willing to trade
+for a faster
+solution I mean okay one version of this
+solution I mean okay one version of this
+is just that we want to explore the
+is just that we want to explore the
+entire parito front
+right well let's think about
+right well let's think about
+that this
+that this
+term is evenly weighted across the Paro
+term is evenly weighted across the Paro
+front
+this
+term is likely going to be biased
+term is likely going to be biased
+towards the higher cost
+towards the higher cost
+regions not this term the one that we
+regions not this term the one that we
+replace this term with
+what happens if instead of multiplying
+what happens if instead of multiplying
+the two
+the two
+terms we just do one half the time in
+terms we just do one half the time in
+the other or the other half the
+time so one of these will be evenly
+time so one of these will be evenly
+sampled on the Pito
+sampled on the Pito
+front and the other is absolute highest
+performance that still doesn't really
+performance that still doesn't really
+cap what I want you know the opt like
+cap what I want you know the opt like
+the best hyperparameter algorithm should
+the best hyperparameter algorithm should
+be able to view its
+be able to view its
+experiments as a budget right it's
+experiments as a budget right it's
+spending a specific amount of compute to
+spending a specific amount of compute to
+run each
+run each
+experiment and it should be trying to
+experiment and it should be trying to
+maximize the results over the
+maximize the results over the
+entire
+sweep but when we say maximize the
+results we don't just mean find the
+results we don't just mean find the
+absolute highest performing point right
+absolute highest performing point right
+that's always going to be almost always
+that's always going to be almost always
+going to be the most expensive
+going to be the most expensive
+point we really do want the entire Paro
+front you know this term here or this
+front you know this term here or this
+the absolute term pushes you towards
+the absolute term pushes you towards
+higher cost cost it pushes you to higher
+higher cost cost it pushes you to higher
+cost slowly
+cost slowly
+conservatively but that's what it does
+I mean one half the time the other half
+I mean one half the time the other half
+the time isn't
+bad there should be some mathematical
+bad there should be some mathematical
+formalism that allows you to formulate
+formalism that allows you to formulate
+your like you want to be able to
+your like you want to be able to
+formulate your experiments as a
+budget now let's ask Claud I don't think
+budget now let's ask Claud I don't think
+that I'm missing anything
+that I'm missing anything
+obvious I don't like no maap like
+obvious I don't like no maap like
+there's no specific math that comes to
+there's no specific math that comes to
+mind
+mind
+here but let me see if I can formalize
+here but let me see if I can formalize
+this
+this
+so
+so
+POS have
+access
+e e
+welcome YouTube folks we're just doing a
+welcome YouTube folks we're just doing a
+little bit of stuff on neoc carbs the
+little bit of stuff on neoc carbs the
+new hyper pram sweep algorithm while I'm
+new hyper pram sweep algorithm while I'm
+waiting for this GPU driving Sim
+waiting for this GPU driving Sim
+experiment to finish up
+experiment to finish up
+here um I'm trying to reformulate this a
+here um I'm trying to reformulate this a
+little bit I I think that there's a math
+little bit I I think that there's a math
+that might exist for this what I'm
+that might exist for this what I'm
+trying to do but it doesn't come to mind
+trying to do but it doesn't come to mind
+I'm trying to see if I can find a
+reference for
+is your goal to discover the parito
+is your goal to discover the parito
+front
+or is your goal to
+or is your goal to
+discover a specific set of
+parameters your goal is probably to
+parameters your goal is probably to
+discover the Pito front and the reason
+discover the Pito front and the reason
+for this is that you don't know the
+for this is that you don't know the
+shape of the Pito front right very often
+shape of the Pito front right very often
+the Pito front is very sharp so you just
+the Pito front is very sharp so you just
+pick the corner point right but it could
+pick the corner point right but it could
+be sort of
+be sort of
+smoother in which case you can kind of
+smoother in which case you can kind of
+get the uh the parameters you want for
+get the uh the parameters you want for
+your cost do a lot of analysis there
+you to front
+let's see if there's anything obvious
+let's see if there's anything obvious
+that I've
+that I've
+missed I don't think there's anything
+missed I don't think there's anything
+like super obvious like oh just use you
+like super obvious like oh just use you
+know this specific
+know this specific
+model welcome YouTube folks
+model welcome YouTube folks
+that's kind of cool viewership is kind
+that's kind of cool viewership is kind
+of gone nicely back
+of gone nicely back
+up I'm going to try to be streaming a
+up I'm going to try to be streaming a
+lot more now um I got a small trip lined
+lot more now um I got a small trip lined
+up for next week but other than that I'm
+up for next week but other than that I'm
+pretty much just streaming all my
+pretty much just streaming all my
+Dev and all the
+research so let me see what this is
+research so let me see what this is
+so acquisition
+function divided by compute cost of
+function divided by compute cost of
+evaluation see that's not a
+evaluation see that's not a
+good function I don't
+good function I don't
+think wait hold on it's
+estimated well estimated
+estimated well estimated
+Improvement divided by
+cost have I tried that
+one local improve movement over
+cost okay so the thing that's tricky
+cost okay so the thing that's tricky
+here
+here
+is that this is improvement over your
+is that this is improvement over your
+model of cost this is not actual
+model of cost this is not actual
+improvement over your existing hyper
+improvement over your existing hyper
+parameters so I got stuck on this before
+parameters so I got stuck on this before
+because if you replace uh if you replace
+because if you replace uh if you replace
+this with like improvement over your
+this with like improvement over your
+existing hyper parameters you just keep
+existing hyper parameters you just keep
+shifting up to higher and higher compute
+shifting up to higher and higher compute
+um and that kind of just goes on
+um and that kind of just goes on
+forever but you know what we could do
+forever but you know what we could do
+what if we used
+what if we used
+instead of using your existing parito
+instead of using your existing parito
+Point what if we did nearest
+neighbor how about we use the Paro
+point of the next highest
+cost then what would that do that would
+cost then what would that do that would
+give you
+that's pretty darn good hang
+on for any
+point wait wait let me see did this this
+point wait wait let me see did this this
+actually just do it hold on estimate
+cost I don't think this is quite
+good um
+it
+uh
+uh
+weights cost by
+weights cost by
+estimated the cost at specific point
+estimated the cost at specific point
+regardless whe this
+yeah the other thing we could do is we
+yeah the other thing we could do is we
+could use a conservative estimate of
+could use a conservative estimate of
+cost cost Minus cost
+cost cost Minus cost
+variance no that's bad because that
+variance no that's bad because that
+gives
+you if you do Cost Plus cost variance
+you if you do Cost Plus cost variance
+that's even
+that's even
+worse that just pushes you away from
+worse that just pushes you away from
+high cost regions
+so yeah this plus
+here this is just going to push you very
+here this is just going to push you very
+far away from high clost I
+think let me see if I can develop this a
+think let me see if I can develop this a
+little bit
+little bit
+more let me move this so I can see the
+more let me move this so I can see the
+chat as well and how far are we on this
+chat as well and how far are we on this
+okay 26 minutes uh I can probably even
+okay 26 minutes uh I can probably even
+eval what
+eval what
+the oh it's just doing the uh it's fine
+the oh it's just doing the uh it's fine
+it's a noisy estimate um that's fine
+so so the problem with using the
+so so the problem with using the
+estimate
+right these are both scoring functions
+right these are both scoring functions
+they're not
+they're not
+generative so this doesn't actually tell
+generative so this doesn't actually tell
+you the optimal hyper parameters at a
+you the optimal hyper parameters at a
+specific
+point for a specific
+cost that would be really
+cool but that would just give you like a
+cool but that would just give you like a
+a single estimate
+maybe can you have a gaan process on
+maybe can you have a gaan process on
+multiple
+variables multi output
+involving slightly
+H
+interesting the reason for the gan
+interesting the reason for the gan
+process is that they give you um they
+process is that they give you um they
+give you this nice estimate of
+variance e
+I don't know if this is a good
+idea log variances
+I don't know if this is a good idea to
+I don't know if this is a good idea to
+be honest
+[Music]
+h e
+H this is too big of a change to be
+H this is too big of a change to be
+exploring at the moment I think
+exploring at the moment I think
+I think the other thing I was on was
+better so let me go back and just
+better so let me go back and just
+finally formalize this so the goal is
+finally formalize this so the goal is
+that a key problem with carbs is it
+that a key problem with carbs is it
+develops a model of the Pito front but
+develops a model of the Pito front but
+it's not really incentivized to actually
+it's not really incentivized to actually
+like fill in the model of the Paro front
+like fill in the model of the Paro front
+to check it properly
+to check it properly
+because you get
+um you have basically these two
+um you have basically these two
+competing gaussian processes where one
+competing gaussian processes where one
+says how good how good can you do with a
+says how good how good can you do with a
+set of hyper parameters and the other
+set of hyper parameters and the other
+says what's the best you could do with
+says what's the best you could do with
+any set of hyper parameters and the only
+any set of hyper parameters and the only
+time you really sample stuff is when you
+time you really sample stuff is when you
+think uh that you can do better than
+think uh that you can do better than
+your best set of hyper parameters right
+your best set of hyper parameters right
+uh the best set of hyper parameters but
+uh the best set of hyper parameters but
+basically if you have a op optimal uh
+basically if you have a op optimal uh
+prediction of hyper
+parameters actually let me think if you
+parameters actually let me think if you
+have an optimal set of hyper parameters
+have an optimal set of hyper parameters
+then uh this term where is
+then uh this term where is
+it then this term goes to zero so ignore
+it then this term goes to zero so ignore
+P search we got rid of that this term
+P search we got rid of that this term
+goes to zero and you sample uniformly
+goes to zero and you sample uniformly
+across the pero
+across the pero
+front which is actually good that's what
+front which is actually good that's what
+you want
+so you're incentivized to make progress
+so you're incentivized to make progress
+evenly across the Pito front really
+we already tried making this estimate
+we already tried making this estimate
+conservative and it was
+worse I like the idea of a conservative
+worse I like the idea of a conservative
+estimate because it kind of it it means
+estimate because it kind of it it means
+that your experiments um you're going to
+that your experiments um you're going to
+make them where you're very
+make them where you're very
+confident that you can
+improve but the thing is that hampers
+improve but the thing is that hampers
+your exploration
+ation hampers your exploration because
+ation hampers your exploration because
+you don't go to uh new regions you kind
+you don't go to uh new regions you kind
+of stick too close to existing hyper
+of stick too close to existing hyper
+parameters and then we got the absolute
+parameters and then we got the absolute
+term which pushes you towards regions of
+term which pushes you towards regions of
+high performance as your predictive
+high performance as your predictive
+model gets better and we're currently
+model gets better and we're currently
+we're multiplying those
+we're multiplying those
+two the problem with multiplying those
+two the problem with multiplying those
+two terms is that you do get pushed
+two terms is that you do get pushed
+to regions of higher
+to regions of higher
+cost as soon as your predictive model
+cost as soon as your predictive model
+gets
+good but you don't just want regions of
+good but you don't just want regions of
+higher cost you really want to fill in
+higher cost you really want to fill in
+the entire Paro front
+and also this doesn't fill in the Pito
+and also this doesn't fill in the Pito
+front right this only fills
+front right this only fills
+in this only fills in
+in this only fills in
+where you think you can improve over the
+where you think you can improve over the
+Pito front so if you have no samples in
+Pito front so if you have no samples in
+a region but you think you've modeled it
+a region but you think you've modeled it
+well and then you don't sample there
+ever okay so there are two separate
+ever okay so there are two separate
+things I'm thinking about here one is is
+things I'm thinking about here one is is
+breaking this into a conditional so
+breaking this into a conditional so
+instead of multiplying these two terms
+instead of multiplying these two terms
+and always biasing you towards the high
+and always biasing you towards the high
+end of cost um you could do a local
+end of cost um you could do a local
+Improvement for some samples and you
+Improvement for some samples and you
+could do the global Improvement for
+could do the global Improvement for
+others so every time you take a global
+others so every time you take a global
+sample right that's going to push the
+sample right that's going to push the
+maximum cost up for most environments
+maximum cost up for most environments
+which then gives you more things to
+which then gives you more things to
+sample with the local function but since
+sample with the local function but since
+it's conservative it's not going to
+it's conservative it's not going to
+really push the cost up until the uh
+really push the cost up until the uh
+predictive model of cost gets to be or
+predictive model of cost gets to be or
+of performance gets to be pretty good so
+of performance gets to be pretty good so
+it's still rather
+it's still rather
+conservative um and it kind of balances
+conservative um and it kind of balances
+pushing up the cost with flushing out
+pushing up the cost with flushing out
+the rest of the predo front if if I
+the rest of the predo front if if I
+modify the first
+modify the first
+term and what the first term needs to do
+term and what the first term needs to do
+I think the problem with this is that it
+I think the problem with this is that it
+is right here it is the improvement over
+is right here it is the improvement over
+your model of performance it's not your
+your model of performance it's not your
+improvement over actual data so
+improvement over actual data so
+basically you're drawing a line in and
+basically you're drawing a line in and
+you're trying to make sure that you're
+you're trying to make sure that you're
+very confident about this line but you
+very confident about this line but you
+don't actually fill in the points on the
+don't actually fill in the points on the
+line so let me show you what this looks
+line so let me show you what this looks
+like in uh on real
+data so right here we have score but if
+data so right here we have score but if
+we look at the Paro front for
+we look at the Paro front for
+this you see how there's this big gap
+this you see how there's this big gap
+right here
+right here
+and
+and
+here it doesn't it really it's pretty
+here it doesn't it really it's pretty
+darn confident that you know this is
+darn confident that you know this is
+0.91 and this is 099 and it's going to
+0.91 and this is 099 and it's going to
+be about a line you know from here to
+be about a line you know from here to
+here so it really doesn't feel obligated
+here so it really doesn't feel obligated
+to actually run the experiments to fill
+to actually run the experiments to fill
+the data in and that's not great because
+the data in and that's not great because
+that means we actually don't know what
+that means we actually don't know what
+hyper parameters are here I guess
+hyper parameters are here I guess
+technically we do have the gaussian
+technically we do have the gaussian
+process so
+process so
+like we could just assume the gaussian
+like we could just assume the gaussian
+process is good and we could fill in the
+process is good and we could fill in the
+whole front just based on whatever the
+whole front just based on whatever the
+gaussian process comes up
+gaussian process comes up
+with that's an interesting
+take oh actually you know what we should
+take oh actually you know what we should
+totally do we should actually we should
+totally do we should actually we should
+totally do this we should do analysis on
+totally do this we should do analysis on
+the gaussian process of the hyper
+the gaussian process of the hyper
+parameter space as it's modeled it and
+parameter space as it's modeled it and
+uh we should account for errors that's
+uh we should account for errors that's
+going to be a lot of nice and is
+going to be a lot of nice and is
+actually that's a pretty darn nice
+actually that's a pretty darn nice
+project to come to think of
+project to come to think of
+it so we'll look into that later but
+it so we'll look into that later but
+separately if I want to actually have
+separately if I want to actually have
+the if I actually want the whole parito
+the if I actually want the whole parito
+front to be filled
+in do I want the whole Paro front filled
+in do I want the whole Paro front filled
+in
+I guess in my mind I'm pretty confident
+I guess in my mind I'm pretty confident
+that it can do this
+that it can do this
+faster why am I confident that it can do
+faster why am I confident that it can do
+this
+this
+faster I have any reason to think it
+faster I have any reason to think it
+should be able to do this
+should be able to do this
+faster fre can connect four it shouldn't
+faster fre can connect four it shouldn't
+be that
+be that
+hard well I can also I can just see that
+hard well I can also I can just see that
+the it's really stopped exploring here
+the it's really stopped exploring here
+so the predictive model aren't going to
+so the predictive model aren't going to
+be that good so I'm actually I'm not
+be that good so I'm actually I'm not
+very confident in this parito front
+very confident in this parito front
+essentially and basically it's giving
+essentially and basically it's giving
+itself repeated training dat okay so I
+itself repeated training dat okay so I
+see why I see why my intuition is that
+see why I see why my intuition is that
+this is bad yes you do want to actually
+this is bad yes you do want to actually
+fill in the parito front otherwise your
+fill in the parito front otherwise your
+predictive model will be worse so your
+predictive model will be worse so your
+parito front will be inaccurate okay so
+parito front will be inaccurate okay so
+the way to do
+this I think it's through this term here
+this I think it's through this term here
+so this is your estimate of how good you
+so this is your estimate of how good you
+can possibly do uh at a point on the
+can possibly do uh at a point on the
+parito
+parito
+front right so what if
+instead I
+take if I take the next point to the
+right if I take the next point to the
+right if I take the next point to the
+right here and I say how much better do
+right here and I say how much better do
+you do than this point
+you're never going to sample it because
+you're never going to sample it because
+this point is too far
+away okay hold on
+away okay hold on
+I can do this another
+I can do this another
+way if we were actually to draw the Pito
+way if we were actually to draw the Pito
+front
+here right we can actually draw the
+here right we can actually draw the
+parito front it's defined just as the
+parito front it's defined just as the
+set of points for which you can't do
+set of points for which you can't do
+both better and faster so it's like this
+both better and faster so it's like this
+point here this point this point this
+point here this point this point this
+point this point this
+point this point this
+point and I think that's it
+point and I think that's it
+so what if we were to find
+the what if we were to try to
+find a point of a specific
+find a point of a specific
+cost and we try to find a cost that's
+cost and we try to find a cost that's
+wherever the currently the biggest Gap
+wherever the currently the biggest Gap
+is in the Paro front
+that's a little tricky to do
+is the current approach somewhat similar
+is the current approach somewhat similar
+to constrain basing
+to constrain basing
+optimization
+optimization
+um yeah it's a basing method it is the
+um yeah it's a basing method it is the
+current approach is carbs uh neoc carbs
+current approach is carbs uh neoc carbs
+really we've modified it quite
+really we've modified it quite
+substantially it uses three different
+substantially it uses three different
+Delian processes it's a cost aware
+Delian processes it's a cost aware
+basian search where the goal is to well
+basian search where the goal is to well
+on paper it's supposed to be a cost
+on paper it's supposed to be a cost
+Weare basing search doesn't really work
+Weare basing search doesn't really work
+that way but the goal of the algorithm
+that way but the goal of the algorithm
+is to model the Paro front so your goal
+is to model the Paro front so your goal
+is to find the points for which you
+is to find the points for which you
+cannot do both higher score in faster
+cannot do both higher score in faster
+time so they're like they're optimal in
+time so they're like they're optimal in
+that sense that no point is better in
+that sense that no point is better in
+both cost and time uh cost and
+both cost and time uh cost and
+performance so this point this point
+performance so this point this point
+this point this point and this point are
+this point this point and this point are
+the parito points uh for this experiment
+the parito points uh for this experiment
+so
+far and the problem I'm addressing dring
+far and the problem I'm addressing dring
+at the moment is that this algorithm
+at the moment is that this algorithm
+likes to model the predo front without
+likes to model the predo front without
+actually filling it
+actually filling it
+in which is not
+in which is not
+great I'd like it to actually fill in
+great I'd like it to actually fill in
+the Frito front because the thing is the
+the Frito front because the thing is the
+model is likely to be wrong if it
+model is likely to be wrong if it
+doesn't actually fill in the front and
+doesn't actually fill in the front and
+get the
+feedback got 10 minutes to keep thinking
+feedback got 10 minutes to keep thinking
+about this before this experiment over
+about this before this experiment over
+here is
+here is
+done and that's complicated
+done and that's complicated
+though okay so like
+I guess what you try to do right is you
+I guess what you try to do right is you
+try to generate Pito points uh and you
+try to generate Pito points uh and you
+decide if they're Paro based on your
+decide if they're Paro based on your
+model so you generate a whole bunch of
+model so you generate a whole bunch of
+Paro
+Paro
+points
+points
+around I guess whatever Paro point is
+around I guess whatever Paro point is
+nearest to the Gap
+and then you rank them by how far away
+and then you rank them by how far away
+they are from an existing Paro point in
+they are from an existing Paro point in
+terms of
+cost trying to think of what like good
+cost trying to think of what like good
+synthetic test I could come up with for
+this there's all sorts of stuff sure
+I think it's probably just give it a
+I think it's probably just give it a
+really easy problem right if you okay
+really easy problem right if you okay
+let's say you have a synthetic
+let's say you have a synthetic
+hyperparameter test where the goal is
+you what if the score function is
+you what if the score function is
+literally just
+literally just
+um time
+um time
+spent right so you spend more time you
+spent right so you spend more time you
+get more score
+get more score
+so like the tri like most trivial
+so like the tri like most trivial
+possible optimization
+possible optimization
+problem and then what you do is you
+problem and then what you do is you
+basically you see how well the algorithm
+basically you see how well the algorithm
+fills in the front of
+that that's actually a really good
+test let's do test hold
+test let's do test hold
+on oh um
+on oh um
+uh I need my other window for
+this we might not do this right
+this we might not do this right
+now we might come back to this because
+now we might come back to this because
+this is done in six minutes let me just
+this is done in six minutes let me just
+see if I can walk
+see if I can walk
+through what the uh the approach would
+through what the uh the approach would
+be so
+you score each Paro
+Point based on the distance to the next
+Point based on the distance to the next
+quickest or to the quicker to next
+quickest or to the quicker to next
+quicker Paro point so you score each of
+quicker Paro point so you score each of
+them so for this one it's this distance
+them so for this one it's this distance
+for this one it's uh this little
+for this one it's uh this little
+distance this one it's this
+distance this one it's this
+distance this distance this distance and
+distance this distance this distance and
+this distance okay and then you take the
+this distance okay and then you take the
+max of
+max of
+those so you take this
+those so you take this
+point right
+here do you want this point or this
+here do you want this point or this
+point
+you probably want this
+you probably want this
+point okay so you score them on distance
+point okay so you score them on distance
+to the next Point here and the one the
+to the next Point here and the one the
+max point you uh you
+exclude so you start from this point
+exclude so you start from this point
+here you generate your samples you're
+here you generate your samples you're
+going to generate you know a radius of
+going to generate you know a radius of
+samples like
+this let's say say right and then you're
+this let's say say right and then you're
+going to generate those samples and uh
+going to generate those samples and uh
+you're going to use your model to
+you're going to use your model to
+estimate which of those samples you
+estimate which of those samples you
+think is going to be
+Paro and then among this the parito
+Paro and then among this the parito
+samples you take the one with the
+samples you take the one with the
+highest predicted
+cost not the highest predicted cost the
+cost not the highest predicted cost the
+closest predicted cost to this point
+closest predicted cost to this point
+here here which is between here and here
+here here which is between here and here
+that's kind of a
+that's kind of a
+complicated thing it's pretty easy to
+complicated thing it's pretty easy to
+code that up that's kind of a
+code that up that's kind of a
+complicated roundabout thing but it does
+complicated roundabout thing but it does
+get you this
+get you this
+point but it does get you explicitly
+point but it does get you explicitly
+trying to sample this point
+so I guess which of these points are
+so I guess which of these points are
+Paro is the bad part here because none
+Paro is the bad part here because none
+of them might be parito
+kind of
+tricky we're kind of on to something
+tricky we're kind of on to something
+here though I like the idea of having
+here though I like the idea of having
+having samples to fill in the parito
+front I also don't like the way that
+front I also don't like the way that
+carbs samples parito points
+though cuz it samples randomly among the
+though cuz it samples randomly among the
+parito points and you could have a ton
+parito points and you could have a ton
+of clustered parito points
+of clustered parito points
+man there actually now that I'm thinking
+man there actually now that I'm thinking
+about it there's so many details with
+about it there's so many details with
+carbs that could quite obviously be
+carbs that could quite obviously be
+improved even after what I've done with
+it I think what we're going to have to
+it I think what we're going to have to
+do is we're going to have to I mean this
+do is we're going to have to I mean this
+is going to have to be something I put
+is going to have to be something I put
+some time into so you know I got some
+some time into so you know I got some
+clients to deal with I got labs to deal
+clients to deal with I got labs to deal
+with I got a bunch of stuff to deal with
+with I got a bunch of stuff to deal with
+for the next few days but um you know
+for the next few days but um you know
+sometime in the next couple of weeks I
+sometime in the next couple of weeks I
+think I'm going to just have to set
+think I'm going to just have to set
+aside a few days make a really nice
+aside a few days make a really nice
+synthetic Benchmark and test all of
+synthetic Benchmark and test all of
+these things out like we want something
+these things out like we want something
+that fills in the Paro
+that fills in the Paro
+front that only explores the higher cost
+front that only explores the higher cost
+region on it's it's confident that the
+region on it's it's confident that the
+results are going to be good so
+results are going to be good so
+basically we don't want this point here
+basically we don't want this point here
+shouldn't
+shouldn't
+exist this point shouldn't exist this
+exist this point shouldn't exist this
+point shouldn't exist we should never
+point shouldn't exist we should never
+have EXP expensive experiments that are
+have EXP expensive experiments that are
+bad you can have cheap experiments that
+bad you can have cheap experiments that
+are bad but you should never have
+are bad but you should never have
+expensive experiments that are
+expensive experiments that are
+bad uh except in environments that are
+bad uh except in environments that are
+like naturally very very high variant
+like naturally very very high variant
+where the same set of hyper parameters
+where the same set of hyper parameters
+can be good one trial bad the
+can be good one trial bad the
+next then it's kind of
+okay yeah we're going to have to try all
+okay yeah we're going to have to try all
+this stuff out I'm really optimistic
+this stuff out I'm really optimistic
+here though because I'm actually like
+here though because I'm actually like
+it's clicking you know I'm seeing all
+it's clicking you know I'm seeing all
+the different things that you want your
+the different things that you want your
+hyper pram algorithm to do I'm seeing
+hyper pram algorithm to do I'm seeing
+how they're really AB just not covered
+how they're really AB just not covered
+At All by any existing
+At All by any existing
+algorithm
+um and there my experiment is done so
+um and there my experiment is done so
+we'll go look at that but yeah it's
+we'll go look at that but yeah it's
+there's going to be a lot to think about
+there's going to be a lot to think about
+here it's pretty exciting it's pretty
+here it's pretty exciting it's pretty
+exciting let me see so where's my
+okay
+okay
+95 it's about what we expect
+95 it's about what we expect
+here goal
+here goal
+achieved and we're going to go eval this
+oh
+oh
+oh okay so this is our experiment
+oh okay so this is our experiment
+file and we're going to go
+file and we're going to go
+into
+examples eval
+examples eval
+config eval config
+config eval config
+now model
+now model
+conf put this here and we're going to
+conf put this here and we're going to
+see how good this model
+is so one to
+is so one to
+be run
+I'm a new user to stream sorry does
+I'm a new user to stream sorry does
+search
+search
+radius in the paper and force that you
+radius in the paper and force that you
+explore that front in a local search way
+explore that front in a local search way
+possibly avoiding diving to high clost
+possibly avoiding diving to high clost
+solution so quickly yes so to look at
+solution so quickly yes so to look at
+the paper here they have this pearch
+the paper here they have this pearch
+term um which keeps you close to your
+term um which keeps you close to your
+existing Paro points but this is a very
+existing Paro points but this is a very
+very bad way of doing uh this search
+very bad way of doing uh this search
+because you really you don't want to
+because you really you don't want to
+stick close to your existing points
+stick close to your existing points
+right for no reason you only want to
+right for no reason you only want to
+stay close to your existing too points
+stay close to your existing too points
+when you're not confident in your
+when you're not confident in your
+ability to explore so what I did is I
+ability to explore so what I did is I
+replaced this P search term with using
+replaced this P search term with using
+gpy I get an absolute estimate of
+gpy I get an absolute estimate of
+performance so what is the score that
+performance so what is the score that
+your point is going is is going to get
+your point is going is is going to get
+and I subtract the standard deviation of
+and I subtract the standard deviation of
+that prediction so I get a conservative
+that prediction so I get a conservative
+estimate of absolute score so what that
+estimate of absolute score so what that
+will do is that will slowly push you to
+will do is that will slowly push you to
+higher cost regions uh higher
+higher cost regions uh higher
+performance regions which may have
+performance regions which may have
+higher cost but only as you're confident
+higher cost but only as you're confident
+in those predictions because you get
+in those predictions because you get
+penalized by the standard deviation of
+penalized by the standard deviation of
+the prediction you get penalized for the
+the prediction you get penalized for the
+lack of confidence in your prediction so
+lack of confidence in your prediction so
+that's what I've done so far uh I've
+that's what I've done so far uh I've
+done a few other changes as well it does
+done a few other changes as well it does
+massively better than the original you
+massively better than the original you
+know there's going to be a new algorithm
+know there's going to be a new algorithm
+it's going to be neoc carbs and it's
+it's going to be neoc carbs and it's
+going to be amazing for RL but it still
+going to be amazing for RL but it still
+needs a little bit more you know I'm not
+needs a little bit more you know I'm not
+fully satisfied with it it's better it's
+fully satisfied with it it's better it's
+massively better it's not perfect yet
+massively better it's not perfect yet
+it's got some
+it's got some
+quirks so we're still going to work on
+quirks so we're still going to work on
+that in between all the other stuff I'm
+that in between all the other stuff I'm
+doing welcome YouTube folks going back
+doing welcome YouTube folks going back
+and forth here between now we hit 10 uh
+and forth here between now we hit 10 uh
+10 viewers on stream awesome um yeah I'm
+10 viewers on stream awesome um yeah I'm
+going back and forth between this hyper
+going back and forth between this hyper
+parameter tuning stuff and then GPU
+parameter tuning stuff and then GPU
+Drive nyu's GPU accelerated driving
+Drive nyu's GPU accelerated driving
+simulator uh which I'm trying to
+simulator uh which I'm trying to
+massively accelerate for them so that
+massively accelerate for them so that
+they can run lots of cool experiments
+they can run lots of cool experiments
+very quickly and let's
+very quickly and let's
+see see I've been having some
+see see I've been having some
+trouble
+trouble
+78%
+man
+78 let's run the full set at the very
+78 let's run the full set at the very
+least I don't know how it gets
+least I don't know how it gets
+78 there's like this huge gap between um
+78 there's like this huge gap between um
+what I'm seeing in training and what I'm
+what I'm seeing in training and what I'm
+seeing
+here let me say return
+I mean the curve is really volatile to
+I mean the curve is really volatile to
+be
+be
+fair also are they taking account the
+fair also are they taking account the
+um hold on they're they're penalizing me
+um hold on they're they're penalizing me
+a few agents here for no reason because
+a few agents here for no reason because
+this should
+this should
+be this is not controlled agents per is
+it oh yeah this is controlled agent mask
+okay no this is correctly implemented
+okay no this is correctly implemented
+they're not penalizing
+they're not penalizing
+me and that's the performance should be
+me and that's the performance should be
+higher than in training if you're
+higher than in training if you're
+removing the bugged
+agents 78
+this is very
+this is very
+odd this Gap is like almost entirely
+unexplained I really don't know where
+unexplained I really don't know where
+this would come
+this would come
+from so I have these curves right and uh
+from so I have these curves right and uh
+the latest curve is trained on a
+the latest curve is trained on a
+thousand
+thousand
+scenes you can see this is the curve
+scenes you can see this is the curve
+here gets up
+here gets up
+to oh 95% I should edit that message
+5% so it gets
+5% so it gets
+95% but then when I evalid on the exact
+95% but then when I evalid on the exact
+same scenes it only gets
+78 it doesn't make sense to
+78 it doesn't make sense to
+me let me see if there's anything else
+me let me see if there's anything else
+in here that would tell us what's going
+in here that would tell us what's going
+on
+on
+so
+so
+coverage it's probably in
+coverage it's probably in
+percentage new files in
+batch okay you unique scenarios and
+batch coverage okay you can see these
+batch coverage okay you can see these
+are all
+are all
+good metrics are
+good control density is very
+low let me see if I have um their
+low let me see if I have um their
+experiments to compare
+to they sent me some of their
+to they sent me some of their
+experiments
+hopefully they don't mind me
+showing
+showing
+ah want be so
+ah want be so
+slow so here's some of
+slow so here's some of
+their we'll use this one yeah this one's
+their we'll use this one yeah this one's
+good so they
+have in metric control density
+metrix okay we have the same thing here
+metrix okay we have the same thing here
+and then mean reward
+and then mean reward
+89 this is this what it looks
+like mean
+reward .95
+yeah it's about what it looks like their
+yeah it's about what it looks like their
+access is out to here so yeah that's
+access is out to here so yeah that's
+about what it looks
+like mean agent we don't have speed
+like mean agent we don't have speed
+logged everything else is
+logged episode
+logged episode
+length interestingly it goes way down
+length interestingly it goes way down
+and then it goes back up
+our curves look the
+same curves look very
+similar I wonder if they have a
+similar I wonder if they have a
+checkpoints committed for
+this maybe they do hold on maybe they
+this maybe they do hold on maybe they
+have checkpoints
+I don't see artifacts logged
+unfortunately
+unfortunately
+files
+code oh wait they do have
+code oh wait they do have
+checkpoints that's
+nice hi bet
+okay so they
+okay so they
+have this
+have this
+seven so if this is 5 million
+seven so if this is 5 million
+steps then I want to evaluate this
+one500 I just like
+yeah we got
+Baseline Baseline
+buy this instead
+why does
+why does
+this excuse
+me the freaking
+just do dot is this
+it valid load key
+this should be fine
+so presumably this is uh
+so presumably this is uh
+not curling correctly or
+something e
+4K okay so this is
+4K okay so this is
+wrong
+wrong
+um can I just copy this on the
+container oh it's zipped what the
+what I this is
+not oh
+not oh
+I I see I
+I I see I
+think yeah okay I see um that's
+think yeah okay I see um that's
+weird I guess that's the internal
+weird I guess that's the internal
+structure I didn't know
+structure I didn't know
+Zips um
+it's not mounted here damn
+it why does this not work this always
+it why does this not work this always
+works this is so
+works this is so
+silly usually you can just curl
+this for
+H I don't want to have to reset this
+up so obnoxious um how do I get this
+up so obnoxious um how do I get this
+onto the
+onto the
+container
+uh oh wait there I can just dock or CP
+uh oh wait there I can just dock or CP
+it I'm
+it I'm
+dumb yeah that's stupid I can totally
+dumb yeah that's stupid I can totally
+just offer CP it
+perfect
+longer than I would have liked
+longer than I would have liked
+but
+oops okay there we go valuating this
+13 oh it's loading it wrong I'm pretty
+13 oh it's loading it wrong I'm pretty
+sure hold
+sure hold
+on loading it wrong
+buff foret code assumes discrete or
+buff foret code assumes discrete or
+multi-
+multi-
+discreete that will
+discreete that will
+be well yeah we have to add continuous
+be well yeah we have to add continuous
+actions you have to add more stuff to
+actions you have to add more stuff to
+it you
+it you
+what no idea what that
+means
+uh I don't know not a robot generally
+uh I don't know not a robot generally
+eat food not
+oil not try to go about
+oil not try to go about
+this well you just add it's like I added
+this well you just add it's like I added
+multi- discreet Joseph who is
+this welcome as well
+uh see if this now
+loads some screwy
+loads some screwy
+here cuz now I can't get their models to
+here cuz now I can't get their models to
+eval
+yo Joseph what's up
+yo Joseph what's up
+who do who is
+who do who is
+5m I don't know from the Twitter
+5m I don't know from the Twitter
+handle
+uh still doesn't freaking work what the
+uh still doesn't freaking work what the
+heck
+okay well
+that okay it's loading the freaking
+that okay it's loading the freaking
+Network wrong I don't know how
+is
+is
+it I can't freaking tell I can't get
+it I can't freaking tell I can't get
+there n to eval
+there n to eval
+now
+now
+[Music]
+[Music]
+um where is this
+GPU Drive get tired
+here where's dhany why are you working
+here where's dhany why are you working
+at
+800m damn it stuck on this
+wait I literally copied this from them
+wait I literally copied this from them
+right so there's literally no
+way hold
+way hold
+on I copied this from
+them offer
+them offer
+wait it's in examples
+no not
+external okay so they do have 1 192 for
+external okay so they do have 1 192 for
+hidden in here
+or 128 I
+mean I don't think that fixes it
+man what are the odds that this
+man what are the odds that this
+checkpoint actually does this poorly I
+checkpoint actually does this poorly I
+think that's close to random
+think that's close to random
+though and 14 should be close to random
+maybe they changed the architecture
+maybe they changed the architecture
+since uh uploading it and it screwed
+since uh uploading it and it screwed
+stuff up I don't
+know maybe they got a custom
+know maybe they got a custom
+branches I don't know but this doesn't
+eval mine does at least eval
+let's go get it
+back e
+add
+this we knows training logs are an
+this we knows training logs are an
+optimistic
+optimistic
+estimate solve multiple
+times for
+may be available to meet let's see
+oops
+okay they're sending me over a
+okay they're sending me over a
+checkpoint what the hell's wrong with
+checkpoint what the hell's wrong with
+this oh
+okay
+do we have
+answers using a sta center from the
+answers using a sta center from the
+cluster data is slightly shuffled
+okay I don't know what that
+does you're basically evaluating on a
+does you're basically evaluating on a
+different data set
+different data set
+H weird
+I mean I've got here the 78%
+they were processed on a different day
+they were processed on a different day
+another
+another
+relevance don't worry about evaluating
+relevance don't worry about evaluating
+my
+models e
+you want the standard deviation to be
+2% well I don't understand
+how is this literally just
+what
+you link the Curve
+don't see another
+metric I like the w
+b e
+this looks
+this looks
+like this looks like their
+like this looks like their
+curve to me this looks like their
+curve to me this looks like their
+curve like very very closely
+curve like very very closely
+and8
+yep I mean it's like very hard for me to
+yep I mean it's like very hard for me to
+imagine I could have messed this up
+somehow let me look their uh their
+somehow let me look their uh their
+standard deviation
+where is the darn
+where is the darn
+[Music]
+thing let me
+thing let me
+see so they
+have oh I see
+standard oh yeah their standard
+standard oh yeah their standard
+deviation is
+deviation is
+lower why is their standard deviation
+lower why is their standard deviation
+that much
+that much
+lower
+007 yeah mine are a bit
+higher okay so why the heck could that
+higher okay so why the heck could that
+happen
+happen
+me look at their
+settings they have 500
+worlds me say
+worlds kique seems they got
+worlds kique seems they got
+five it's pretty close otherwise
+think I match
+hypers I resample a little less
+hypers I resample a little less
+frequently
+
+Kind: captions
+Language: en
+okay we are back
+live mainly just going to be trying to
+live mainly just going to be trying to
+get GPU drive to
+get GPU drive to
+be what we'd like it to
+be what we'd like it to
+be let's
+see
+um looks
+um looks
+good uhhuh
+good uhhuh
+and
+and
+ooh very
+ooh very
+spiky very spiky
+indeed oh that's because of the resample
+indeed oh that's because of the resample
+though
+though
+okay I think it should be good enough by
+okay I think it should be good enough by
+200 mil
+200 mil
+hopefully we will
+hopefully we will
+see but yeah this is just because of
+resample it's like every 5 mil or
+resample it's like every 5 mil or
+something
+something
+probably um let's
+see I am waiting at the moment to see if
+see I am waiting at the moment to see if
+we're going to
+we're going to
+have any meeting with uh NYU folks but
+have any meeting with uh NYU folks but
+in the meantime I'll be here
+in the meantime I'll be here
+streaming and it's going to take a
+streaming and it's going to take a
+little while for this model to finish
+little while for this model to finish
+training and to think what to do in the
+meanwhile I have this training locally I
+meanwhile I have this training locally I
+guess I could try to get um let's take a
+guess I could try to get um let's take a
+quick look at some of our hyper pram
+quick look at some of our hyper pram
+stuff in the meanwhile maybe be
+stuff in the meanwhile maybe be
+good so we've got um you know all this
+good so we've got um you know all this
+hyper pram work I've been trying to
+do and I think we have Connect 4 maybe
+do and I think we have Connect 4 maybe
+done by now let's
+done by now let's
+see tag just
+see tag just
+tag no only 50 one
+tag no only 50 one
+experiments I mean it's
+solved but solved in 200
+solved but solved in 200
+mil some's weird with that hold on cuz
+mil some's weird with that hold on cuz
+if we look at
+if we look at
+Cost jump to very high cost very
+Cost jump to very high cost very
+quickly do Paro run on
+this yeah no this is not um
+this yeah no this is not um
+you know it's interesting that it's
+you know it's interesting that it's
+pushed the cost up that
+pushed the cost up that
+high it probably shouldn't have done
+high it probably shouldn't have done
+that oh you know what it
+that oh you know what it
+is
+is
+um it's that it knows
+that it has a good predictive model of
+that it has a good predictive model of
+cost because it knows that it's going to
+cost because it knows that it's going to
+just solve
+just solve
+it
+it
+h didn't think about that
+we kind of don't bias to lower cost do
+we kind of don't bias to lower cost do
+we if you think no wait we do we bias to
+we if you think no wait we do we bias to
+highest
+performance we don't really
+performance we don't really
+bias away from cost really except in
+bias away from cost really except in
+terms of confidence I
+suppose well that's new Improvement that
+suppose well that's new Improvement that
+can be made on the algorithm I
+can be made on the algorithm I
+suppose I'm not going to mess with it at
+suppose I'm not going to mess with it at
+the moment because it's already very
+the moment because it's already very
+good I mean look it
+good I mean look it
+has it has the hyper prems here and we
+has it has the hyper prems here and we
+got this one is very nice you know I
+got this one is very nice you know I
+would have liked to have seen this more
+would have liked to have seen this more
+in this area here
+maybe but yeah that's a little bit of a
+maybe but yeah that's a little bit of a
+quirk if it has too good of a predictive
+quirk if it has too good of a predictive
+model it kind of just gets stuck yeah
+model it kind of just gets stuck yeah
+let push gamma up to Max
+oh is there any point in leaving
+oh is there any point in leaving
+this I guess there is because it might
+this I guess there is because it might
+try to let's see if it tries to push
+try to let's see if it tries to push
+cost down on its
+cost down on its
+own I mean
+own I mean
+technically it will resample parito
+technically it will resample parito
+points but I don't think it's going to
+points but I don't think it's going to
+search around the resampled parito
+search around the resampled parito
+points on its own oh yeah look it's
+points on its own oh yeah look it's
+pushed num Ms all the way to the bottom
+pushed num Ms all the way to the bottom
+okay
+okay
+so there is a big improvement over carbs
+so there is a big improvement over carbs
+but not quite the god algorithm
+but not quite the god algorithm
+yet missing a few a few
+yet missing a few a few
+things I mean we could try to think
+things I mean we could try to think
+about that in the
+meanwhile we could go through the carbs
+meanwhile we could go through the carbs
+math a little bit and see if we can
+math a little bit and see if we can
+figure out how to do this
+I mean I guess I'm going to kind of keep
+I mean I guess I'm going to kind of keep
+this as a uh a
+this as a uh a
+puzzle over the next few weeks to see if
+puzzle over the next few weeks to see if
+I
+can see if I can crack
+can see if I can crack
+this so here's the
+this so here's the
+map let's move this to
+review all right so we got these Gan
+review all right so we got these Gan
+processes
+this was originally preventing you
+this was originally preventing you
+from choosing hyper parameters too far
+from choosing hyper parameters too far
+away from your current set of hyper
+away from your current set of hyper
+parameters um that doesn't really do
+parameters um that doesn't really do
+anything for me so we got rid of
+anything for me so we got rid of
+that we replaced this with a
+that we replaced this with a
+conservative estimate of absolute
+conservative estimate of absolute
+performance so it we've replace it
+performance so it we've replace it
+specifically with
+specifically with
+GP y
+GP y
+which is a gaussian process that
+which is a gaussian process that
+estimates that takes in the hyper
+estimates that takes in the hyper
+parameters you've chosen and estimates
+parameters you've chosen and estimates
+how well it thinks they're going to
+how well it thinks they're going to
+do and we've subtracted the variance of
+do and we've subtracted the variance of
+that or the standard deviation of that
+that or the standard deviation of that
+to get a conservative estimate of the
+to get a conservative estimate of the
+performance so this is a local estimate
+performance so this is a local estimate
+how well do you think you're going to
+how well do you think you're going to
+improve over the
+improve over the
+current and then we
+have this term uh not this term we
+have this term uh not this term we
+replace this with the absolute
+replace this with the absolute
+Improvement
+Improvement
+estimate
+estimate
+now because the absolute
+now because the absolute
+estimate is
+estimate is
+conservative you get penalized for
+conservative you get penalized for
+trying to explore regions uh for which
+trying to explore regions uh for which
+the model doesn't have any support So
+the model doesn't have any support So
+for which you're likely
+for which you're likely
+to uh you get penalized for exploring
+to uh you get penalized for exploring
+unconfident
+regions but we don't actually factor in
+regions but we don't actually factor in
+cost explicitly it's just that those two
+cost explicitly it's just that those two
+things are
+things are
+correlated so in fact if you have an
+correlated so in fact if you have an
+accurate predictive model of
+performance if you have an accurate
+performance if you have an accurate
+predictive model of performance then
+predictive model of performance then
+you're going to get pushed to explore
+you're going to get pushed to explore
+higher and higher
+higher and higher
+cost
+cost
+Solutions no you're going to get Pro to
+Solutions no you're going to get Pro to
+perform to higher and higher performance
+perform to higher and higher performance
+solutions which may or may not be higher
+solutions which may or may not be higher
+cost but there's no term that's trying
+cost but there's no term that's trying
+to pull you towards lower
+to pull you towards lower
+cost
+cost
+right so that's a bit of a
+problem because there's a little bit of
+problem because there's a little bit of
+a balance to this thing right you know
+a balance to this thing right you know
+you don't want to be you don't want to
+you don't want to be you don't want to
+not explore high cost stuff when it's
+not explore high cost stuff when it's
+needed
+but you also want to try to find the
+but you also want to try to find the
+most efficient
+solution what can we do mathematically
+solution what can we do mathematically
+to represent
+to represent
+that we have estimates of
+that we have estimates of
+cost we have estimates of
+cost we have estimates of
+performance how do we mathematically
+performance how do we mathematically
+Express that we want
+to we want the highest
+to we want the highest
+performing lowest cost
+solution we can simplify a little bit in
+solution we can simplify a little bit in
+the sense that some environments you
+the sense that some environments you
+know we can just solve the environment
+know we can just solve the environment
+uh and in that case you know there is a
+uh and in that case you know there is a
+hard cap on the
+score you know it's a little tricky
+score you know it's a little tricky
+because all the scores have different
+because all the scores have different
+magnitudes so there's no way for us to
+magnitudes so there's no way for us to
+express you know how much perform like
+express you know how much perform like
+how much score we're willing to trade
+how much score we're willing to trade
+for a faster
+solution I mean okay one version of this
+solution I mean okay one version of this
+is just that we want to explore the
+is just that we want to explore the
+entire parito front
+right well let's think about
+right well let's think about
+that this
+that this
+term is evenly weighted across the Paro
+term is evenly weighted across the Paro
+front
+this
+term is likely going to be biased
+term is likely going to be biased
+towards the higher cost
+towards the higher cost
+regions not this term the one that we
+regions not this term the one that we
+replace this term with
+what happens if instead of multiplying
+what happens if instead of multiplying
+the two
+the two
+terms we just do one half the time in
+terms we just do one half the time in
+the other or the other half the
+time so one of these will be evenly
+time so one of these will be evenly
+sampled on the Pito
+sampled on the Pito
+front and the other is absolute highest
+performance that still doesn't really
+performance that still doesn't really
+cap what I want you know the opt like
+cap what I want you know the opt like
+the best hyperparameter algorithm should
+the best hyperparameter algorithm should
+be able to view its
+be able to view its
+experiments as a budget right it's
+experiments as a budget right it's
+spending a specific amount of compute to
+spending a specific amount of compute to
+run each
+run each
+experiment and it should be trying to
+experiment and it should be trying to
+maximize the results over the
+maximize the results over the
+entire
+sweep but when we say maximize the
+results we don't just mean find the
+results we don't just mean find the
+absolute highest performing point right
+absolute highest performing point right
+that's always going to be almost always
+that's always going to be almost always
+going to be the most expensive
+going to be the most expensive
+point we really do want the entire Paro
+front you know this term here or this
+front you know this term here or this
+the absolute term pushes you towards
+the absolute term pushes you towards
+higher cost cost it pushes you to higher
+higher cost cost it pushes you to higher
+cost slowly
+cost slowly
+conservatively but that's what it does
+I mean one half the time the other half
+I mean one half the time the other half
+the time isn't
+bad there should be some mathematical
+bad there should be some mathematical
+formalism that allows you to formulate
+formalism that allows you to formulate
+your like you want to be able to
+your like you want to be able to
+formulate your experiments as a
+budget now let's ask Claud I don't think
+budget now let's ask Claud I don't think
+that I'm missing anything
+that I'm missing anything
+obvious I don't like no maap like
+obvious I don't like no maap like
+there's no specific math that comes to
+there's no specific math that comes to
+mind
+mind
+here but let me see if I can formalize
+here but let me see if I can formalize
+this
+this
+so
+so
+POS have
+access
+e e
+welcome YouTube folks we're just doing a
+welcome YouTube folks we're just doing a
+little bit of stuff on neoc carbs the
+little bit of stuff on neoc carbs the
+new hyper pram sweep algorithm while I'm
+new hyper pram sweep algorithm while I'm
+waiting for this GPU driving Sim
+waiting for this GPU driving Sim
+experiment to finish up
+experiment to finish up
+here um I'm trying to reformulate this a
+here um I'm trying to reformulate this a
+little bit I I think that there's a math
+little bit I I think that there's a math
+that might exist for this what I'm
+that might exist for this what I'm
+trying to do but it doesn't come to mind
+trying to do but it doesn't come to mind
+I'm trying to see if I can find a
+reference for
+is your goal to discover the parito
+is your goal to discover the parito
+front
+or is your goal to
+or is your goal to
+discover a specific set of
+parameters your goal is probably to
+parameters your goal is probably to
+discover the Pito front and the reason
+discover the Pito front and the reason
+for this is that you don't know the
+for this is that you don't know the
+shape of the Pito front right very often
+shape of the Pito front right very often
+the Pito front is very sharp so you just
+the Pito front is very sharp so you just
+pick the corner point right but it could
+pick the corner point right but it could
+be sort of
+be sort of
+smoother in which case you can kind of
+smoother in which case you can kind of
+get the uh the parameters you want for
+get the uh the parameters you want for
+your cost do a lot of analysis there
+you to front
+let's see if there's anything obvious
+let's see if there's anything obvious
+that I've
+that I've
+missed I don't think there's anything
+missed I don't think there's anything
+like super obvious like oh just use you
+like super obvious like oh just use you
+know this specific
+know this specific
+model welcome YouTube folks
+model welcome YouTube folks
+that's kind of cool viewership is kind
+that's kind of cool viewership is kind
+of gone nicely back
+of gone nicely back
+up I'm going to try to be streaming a
+up I'm going to try to be streaming a
+lot more now um I got a small trip lined
+lot more now um I got a small trip lined
+up for next week but other than that I'm
+up for next week but other than that I'm
+pretty much just streaming all my
+pretty much just streaming all my
+Dev and all the
+research so let me see what this is
+research so let me see what this is
+so acquisition
+function divided by compute cost of
+function divided by compute cost of
+evaluation see that's not a
+evaluation see that's not a
+good function I don't
+good function I don't
+think wait hold on it's
+estimated well estimated
+estimated well estimated
+Improvement divided by
+cost have I tried that
+one local improve movement over
+cost okay so the thing that's tricky
+cost okay so the thing that's tricky
+here
+here
+is that this is improvement over your
+is that this is improvement over your
+model of cost this is not actual
+model of cost this is not actual
+improvement over your existing hyper
+improvement over your existing hyper
+parameters so I got stuck on this before
+parameters so I got stuck on this before
+because if you replace uh if you replace
+because if you replace uh if you replace
+this with like improvement over your
+this with like improvement over your
+existing hyper parameters you just keep
+existing hyper parameters you just keep
+shifting up to higher and higher compute
+shifting up to higher and higher compute
+um and that kind of just goes on
+um and that kind of just goes on
+forever but you know what we could do
+forever but you know what we could do
+what if we used
+what if we used
+instead of using your existing parito
+instead of using your existing parito
+Point what if we did nearest
+neighbor how about we use the Paro
+point of the next highest
+cost then what would that do that would
+cost then what would that do that would
+give you
+that's pretty darn good hang
+on for any
+point wait wait let me see did this this
+point wait wait let me see did this this
+actually just do it hold on estimate
+cost I don't think this is quite
+good um
+it
+uh
+uh
+weights cost by
+weights cost by
+estimated the cost at specific point
+estimated the cost at specific point
+regardless whe this
+yeah the other thing we could do is we
+yeah the other thing we could do is we
+could use a conservative estimate of
+could use a conservative estimate of
+cost cost Minus cost
+cost cost Minus cost
+variance no that's bad because that
+variance no that's bad because that
+gives
+you if you do Cost Plus cost variance
+you if you do Cost Plus cost variance
+that's even
+that's even
+worse that just pushes you away from
+worse that just pushes you away from
+high cost regions
+so yeah this plus
+here this is just going to push you very
+here this is just going to push you very
+far away from high clost I
+think let me see if I can develop this a
+think let me see if I can develop this a
+little bit
+little bit
+more let me move this so I can see the
+more let me move this so I can see the
+chat as well and how far are we on this
+chat as well and how far are we on this
+okay 26 minutes uh I can probably even
+okay 26 minutes uh I can probably even
+eval what
+eval what
+the oh it's just doing the uh it's fine
+the oh it's just doing the uh it's fine
+it's a noisy estimate um that's fine
+so so the problem with using the
+so so the problem with using the
+estimate
+right these are both scoring functions
+right these are both scoring functions
+they're not
+they're not
+generative so this doesn't actually tell
+generative so this doesn't actually tell
+you the optimal hyper parameters at a
+you the optimal hyper parameters at a
+specific
+point for a specific
+cost that would be really
+cool but that would just give you like a
+cool but that would just give you like a
+a single estimate
+maybe can you have a gaan process on
+maybe can you have a gaan process on
+multiple
+variables multi output
+involving slightly
+H
+interesting the reason for the gan
+interesting the reason for the gan
+process is that they give you um they
+process is that they give you um they
+give you this nice estimate of
+variance e
+I don't know if this is a good
+idea log variances
+I don't know if this is a good idea to
+I don't know if this is a good idea to
+be honest
+[Music]
+h e
+H this is too big of a change to be
+H this is too big of a change to be
+exploring at the moment I think
+exploring at the moment I think
+I think the other thing I was on was
+better so let me go back and just
+better so let me go back and just
+finally formalize this so the goal is
+finally formalize this so the goal is
+that a key problem with carbs is it
+that a key problem with carbs is it
+develops a model of the Pito front but
+develops a model of the Pito front but
+it's not really incentivized to actually
+it's not really incentivized to actually
+like fill in the model of the Paro front
+like fill in the model of the Paro front
+to check it properly
+to check it properly
+because you get
+um you have basically these two
+um you have basically these two
+competing gaussian processes where one
+competing gaussian processes where one
+says how good how good can you do with a
+says how good how good can you do with a
+set of hyper parameters and the other
+set of hyper parameters and the other
+says what's the best you could do with
+says what's the best you could do with
+any set of hyper parameters and the only
+any set of hyper parameters and the only
+time you really sample stuff is when you
+time you really sample stuff is when you
+think uh that you can do better than
+think uh that you can do better than
+your best set of hyper parameters right
+your best set of hyper parameters right
+uh the best set of hyper parameters but
+uh the best set of hyper parameters but
+basically if you have a op optimal uh
+basically if you have a op optimal uh
+prediction of hyper
+parameters actually let me think if you
+parameters actually let me think if you
+have an optimal set of hyper parameters
+have an optimal set of hyper parameters
+then uh this term where is
+then uh this term where is
+it then this term goes to zero so ignore
+it then this term goes to zero so ignore
+P search we got rid of that this term
+P search we got rid of that this term
+goes to zero and you sample uniformly
+goes to zero and you sample uniformly
+across the pero
+across the pero
+front which is actually good that's what
+front which is actually good that's what
+you want
+so you're incentivized to make progress
+so you're incentivized to make progress
+evenly across the Pito front really
+we already tried making this estimate
+we already tried making this estimate
+conservative and it was
+worse I like the idea of a conservative
+worse I like the idea of a conservative
+estimate because it kind of it it means
+estimate because it kind of it it means
+that your experiments um you're going to
+that your experiments um you're going to
+make them where you're very
+make them where you're very
+confident that you can
+improve but the thing is that hampers
+improve but the thing is that hampers
+your exploration
+ation hampers your exploration because
+ation hampers your exploration because
+you don't go to uh new regions you kind
+you don't go to uh new regions you kind
+of stick too close to existing hyper
+of stick too close to existing hyper
+parameters and then we got the absolute
+parameters and then we got the absolute
+term which pushes you towards regions of
+term which pushes you towards regions of
+high performance as your predictive
+high performance as your predictive
+model gets better and we're currently
+model gets better and we're currently
+we're multiplying those
+we're multiplying those
+two the problem with multiplying those
+two the problem with multiplying those
+two terms is that you do get pushed
+two terms is that you do get pushed
+to regions of higher
+to regions of higher
+cost as soon as your predictive model
+cost as soon as your predictive model
+gets
+good but you don't just want regions of
+good but you don't just want regions of
+higher cost you really want to fill in
+higher cost you really want to fill in
+the entire Paro front
+and also this doesn't fill in the Pito
+and also this doesn't fill in the Pito
+front right this only fills
+front right this only fills
+in this only fills in
+in this only fills in
+where you think you can improve over the
+where you think you can improve over the
+Pito front so if you have no samples in
+Pito front so if you have no samples in
+a region but you think you've modeled it
+a region but you think you've modeled it
+well and then you don't sample there
+ever okay so there are two separate
+ever okay so there are two separate
+things I'm thinking about here one is is
+things I'm thinking about here one is is
+breaking this into a conditional so
+breaking this into a conditional so
+instead of multiplying these two terms
+instead of multiplying these two terms
+and always biasing you towards the high
+and always biasing you towards the high
+end of cost um you could do a local
+end of cost um you could do a local
+Improvement for some samples and you
+Improvement for some samples and you
+could do the global Improvement for
+could do the global Improvement for
+others so every time you take a global
+others so every time you take a global
+sample right that's going to push the
+sample right that's going to push the
+maximum cost up for most environments
+maximum cost up for most environments
+which then gives you more things to
+which then gives you more things to
+sample with the local function but since
+sample with the local function but since
+it's conservative it's not going to
+it's conservative it's not going to
+really push the cost up until the uh
+really push the cost up until the uh
+predictive model of cost gets to be or
+predictive model of cost gets to be or
+of performance gets to be pretty good so
+of performance gets to be pretty good so
+it's still rather
+it's still rather
+conservative um and it kind of balances
+conservative um and it kind of balances
+pushing up the cost with flushing out
+pushing up the cost with flushing out
+the rest of the predo front if if I
+the rest of the predo front if if I
+modify the first
+modify the first
+term and what the first term needs to do
+term and what the first term needs to do
+I think the problem with this is that it
+I think the problem with this is that it
+is right here it is the improvement over
+is right here it is the improvement over
+your model of performance it's not your
+your model of performance it's not your
+improvement over actual data so
+improvement over actual data so
+basically you're drawing a line in and
+basically you're drawing a line in and
+you're trying to make sure that you're
+you're trying to make sure that you're
+very confident about this line but you
+very confident about this line but you
+don't actually fill in the points on the
+don't actually fill in the points on the
+line so let me show you what this looks
+line so let me show you what this looks
+like in uh on real
+data so right here we have score but if
+data so right here we have score but if
+we look at the Paro front for
+we look at the Paro front for
+this you see how there's this big gap
+this you see how there's this big gap
+right here
+right here
+and
+and
+here it doesn't it really it's pretty
+here it doesn't it really it's pretty
+darn confident that you know this is
+darn confident that you know this is
+0.91 and this is 099 and it's going to
+0.91 and this is 099 and it's going to
+be about a line you know from here to
+be about a line you know from here to
+here so it really doesn't feel obligated
+here so it really doesn't feel obligated
+to actually run the experiments to fill
+to actually run the experiments to fill
+the data in and that's not great because
+the data in and that's not great because
+that means we actually don't know what
+that means we actually don't know what
+hyper parameters are here I guess
+hyper parameters are here I guess
+technically we do have the gaussian
+technically we do have the gaussian
+process so
+process so
+like we could just assume the gaussian
+like we could just assume the gaussian
+process is good and we could fill in the
+process is good and we could fill in the
+whole front just based on whatever the
+whole front just based on whatever the
+gaussian process comes up
+gaussian process comes up
+with that's an interesting
+take oh actually you know what we should
+take oh actually you know what we should
+totally do we should actually we should
+totally do we should actually we should
+totally do this we should do analysis on
+totally do this we should do analysis on
+the gaussian process of the hyper
+the gaussian process of the hyper
+parameter space as it's modeled it and
+parameter space as it's modeled it and
+uh we should account for errors that's
+uh we should account for errors that's
+going to be a lot of nice and is
+going to be a lot of nice and is
+actually that's a pretty darn nice
+actually that's a pretty darn nice
+project to come to think of
+project to come to think of
+it so we'll look into that later but
+it so we'll look into that later but
+separately if I want to actually have
+separately if I want to actually have
+the if I actually want the whole parito
+the if I actually want the whole parito
+front to be filled
+in do I want the whole Paro front filled
+in do I want the whole Paro front filled
+in
+I guess in my mind I'm pretty confident
+I guess in my mind I'm pretty confident
+that it can do this
+that it can do this
+faster why am I confident that it can do
+faster why am I confident that it can do
+this
+this
+faster I have any reason to think it
+faster I have any reason to think it
+should be able to do this
+should be able to do this
+faster fre can connect four it shouldn't
+faster fre can connect four it shouldn't
+be that
+be that
+hard well I can also I can just see that
+hard well I can also I can just see that
+the it's really stopped exploring here
+the it's really stopped exploring here
+so the predictive model aren't going to
+so the predictive model aren't going to
+be that good so I'm actually I'm not
+be that good so I'm actually I'm not
+very confident in this parito front
+very confident in this parito front
+essentially and basically it's giving
+essentially and basically it's giving
+itself repeated training dat okay so I
+itself repeated training dat okay so I
+see why I see why my intuition is that
+see why I see why my intuition is that
+this is bad yes you do want to actually
+this is bad yes you do want to actually
+fill in the parito front otherwise your
+fill in the parito front otherwise your
+predictive model will be worse so your
+predictive model will be worse so your
+parito front will be inaccurate okay so
+parito front will be inaccurate okay so
+the way to do
+this I think it's through this term here
+this I think it's through this term here
+so this is your estimate of how good you
+so this is your estimate of how good you
+can possibly do uh at a point on the
+can possibly do uh at a point on the
+parito
+parito
+front right so what if
+instead I
+take if I take the next point to the
+right if I take the next point to the
+right if I take the next point to the
+right here and I say how much better do
+right here and I say how much better do
+you do than this point
+you're never going to sample it because
+you're never going to sample it because
+this point is too far
+away okay hold on
+away okay hold on
+I can do this another
+I can do this another
+way if we were actually to draw the Pito
+way if we were actually to draw the Pito
+front
+here right we can actually draw the
+here right we can actually draw the
+parito front it's defined just as the
+parito front it's defined just as the
+set of points for which you can't do
+set of points for which you can't do
+both better and faster so it's like this
+both better and faster so it's like this
+point here this point this point this
+point here this point this point this
+point this point this
+point this point this
+point and I think that's it
+point and I think that's it
+so what if we were to find
+the what if we were to try to
+find a point of a specific
+find a point of a specific
+cost and we try to find a cost that's
+cost and we try to find a cost that's
+wherever the currently the biggest Gap
+wherever the currently the biggest Gap
+is in the Paro front
+that's a little tricky to do
+is the current approach somewhat similar
+is the current approach somewhat similar
+to constrain basing
+to constrain basing
+optimization
+optimization
+um yeah it's a basing method it is the
+um yeah it's a basing method it is the
+current approach is carbs uh neoc carbs
+current approach is carbs uh neoc carbs
+really we've modified it quite
+really we've modified it quite
+substantially it uses three different
+substantially it uses three different
+Delian processes it's a cost aware
+Delian processes it's a cost aware
+basian search where the goal is to well
+basian search where the goal is to well
+on paper it's supposed to be a cost
+on paper it's supposed to be a cost
+Weare basing search doesn't really work
+Weare basing search doesn't really work
+that way but the goal of the algorithm
+that way but the goal of the algorithm
+is to model the Paro front so your goal
+is to model the Paro front so your goal
+is to find the points for which you
+is to find the points for which you
+cannot do both higher score in faster
+cannot do both higher score in faster
+time so they're like they're optimal in
+time so they're like they're optimal in
+that sense that no point is better in
+that sense that no point is better in
+both cost and time uh cost and
+both cost and time uh cost and
+performance so this point this point
+performance so this point this point
+this point this point and this point are
+this point this point and this point are
+the parito points uh for this experiment
+the parito points uh for this experiment
+so
+far and the problem I'm addressing dring
+far and the problem I'm addressing dring
+at the moment is that this algorithm
+at the moment is that this algorithm
+likes to model the predo front without
+likes to model the predo front without
+actually filling it
+actually filling it
+in which is not
+in which is not
+great I'd like it to actually fill in
+great I'd like it to actually fill in
+the Frito front because the thing is the
+the Frito front because the thing is the
+model is likely to be wrong if it
+model is likely to be wrong if it
+doesn't actually fill in the front and
+doesn't actually fill in the front and
+get the
+feedback got 10 minutes to keep thinking
+feedback got 10 minutes to keep thinking
+about this before this experiment over
+about this before this experiment over
+here is
+here is
+done and that's complicated
+done and that's complicated
+though okay so like
+I guess what you try to do right is you
+I guess what you try to do right is you
+try to generate Pito points uh and you
+try to generate Pito points uh and you
+decide if they're Paro based on your
+decide if they're Paro based on your
+model so you generate a whole bunch of
+model so you generate a whole bunch of
+Paro
+Paro
+points
+points
+around I guess whatever Paro point is
+around I guess whatever Paro point is
+nearest to the Gap
+and then you rank them by how far away
+and then you rank them by how far away
+they are from an existing Paro point in
+they are from an existing Paro point in
+terms of
+cost trying to think of what like good
+cost trying to think of what like good
+synthetic test I could come up with for
+this there's all sorts of stuff sure
+I think it's probably just give it a
+I think it's probably just give it a
+really easy problem right if you okay
+really easy problem right if you okay
+let's say you have a synthetic
+let's say you have a synthetic
+hyperparameter test where the goal is
+you what if the score function is
+you what if the score function is
+literally just
+literally just
+um time
+um time
+spent right so you spend more time you
+spent right so you spend more time you
+get more score
+get more score
+so like the tri like most trivial
+so like the tri like most trivial
+possible optimization
+possible optimization
+problem and then what you do is you
+problem and then what you do is you
+basically you see how well the algorithm
+basically you see how well the algorithm
+fills in the front of
+that that's actually a really good
+test let's do test hold
+test let's do test hold
+on oh um
+on oh um
+uh I need my other window for
+this we might not do this right
+this we might not do this right
+now we might come back to this because
+now we might come back to this because
+this is done in six minutes let me just
+this is done in six minutes let me just
+see if I can walk
+see if I can walk
+through what the uh the approach would
+through what the uh the approach would
+be so
+you score each Paro
+Point based on the distance to the next
+Point based on the distance to the next
+quickest or to the quicker to next
+quickest or to the quicker to next
+quicker Paro point so you score each of
+quicker Paro point so you score each of
+them so for this one it's this distance
+them so for this one it's this distance
+for this one it's uh this little
+for this one it's uh this little
+distance this one it's this
+distance this one it's this
+distance this distance this distance and
+distance this distance this distance and
+this distance okay and then you take the
+this distance okay and then you take the
+max of
+max of
+those so you take this
+those so you take this
+point right
+here do you want this point or this
+here do you want this point or this
+point
+you probably want this
+you probably want this
+point okay so you score them on distance
+point okay so you score them on distance
+to the next Point here and the one the
+to the next Point here and the one the
+max point you uh you
+exclude so you start from this point
+exclude so you start from this point
+here you generate your samples you're
+here you generate your samples you're
+going to generate you know a radius of
+going to generate you know a radius of
+samples like
+this let's say say right and then you're
+this let's say say right and then you're
+going to generate those samples and uh
+going to generate those samples and uh
+you're going to use your model to
+you're going to use your model to
+estimate which of those samples you
+estimate which of those samples you
+think is going to be
+Paro and then among this the parito
+Paro and then among this the parito
+samples you take the one with the
+samples you take the one with the
+highest predicted
+cost not the highest predicted cost the
+cost not the highest predicted cost the
+closest predicted cost to this point
+closest predicted cost to this point
+here here which is between here and here
+here here which is between here and here
+that's kind of a
+that's kind of a
+complicated thing it's pretty easy to
+complicated thing it's pretty easy to
+code that up that's kind of a
+code that up that's kind of a
+complicated roundabout thing but it does
+complicated roundabout thing but it does
+get you this
+get you this
+point but it does get you explicitly
+point but it does get you explicitly
+trying to sample this point
+so I guess which of these points are
+so I guess which of these points are
+Paro is the bad part here because none
+Paro is the bad part here because none
+of them might be parito
+kind of
+tricky we're kind of on to something
+tricky we're kind of on to something
+here though I like the idea of having
+here though I like the idea of having
+having samples to fill in the parito
+front I also don't like the way that
+front I also don't like the way that
+carbs samples parito points
+though cuz it samples randomly among the
+though cuz it samples randomly among the
+parito points and you could have a ton
+parito points and you could have a ton
+of clustered parito points
+of clustered parito points
+man there actually now that I'm thinking
+man there actually now that I'm thinking
+about it there's so many details with
+about it there's so many details with
+carbs that could quite obviously be
+carbs that could quite obviously be
+improved even after what I've done with
+it I think what we're going to have to
+it I think what we're going to have to
+do is we're going to have to I mean this
+do is we're going to have to I mean this
+is going to have to be something I put
+is going to have to be something I put
+some time into so you know I got some
+some time into so you know I got some
+clients to deal with I got labs to deal
+clients to deal with I got labs to deal
+with I got a bunch of stuff to deal with
+with I got a bunch of stuff to deal with
+for the next few days but um you know
+for the next few days but um you know
+sometime in the next couple of weeks I
+sometime in the next couple of weeks I
+think I'm going to just have to set
+think I'm going to just have to set
+aside a few days make a really nice
+aside a few days make a really nice
+synthetic Benchmark and test all of
+synthetic Benchmark and test all of
+these things out like we want something
+these things out like we want something
+that fills in the Paro
+that fills in the Paro
+front that only explores the higher cost
+front that only explores the higher cost
+region on it's it's confident that the
+region on it's it's confident that the
+results are going to be good so
+results are going to be good so
+basically we don't want this point here
+basically we don't want this point here
+shouldn't
+shouldn't
+exist this point shouldn't exist this
+exist this point shouldn't exist this
+point shouldn't exist we should never
+point shouldn't exist we should never
+have EXP expensive experiments that are
+have EXP expensive experiments that are
+bad you can have cheap experiments that
+bad you can have cheap experiments that
+are bad but you should never have
+are bad but you should never have
+expensive experiments that are
+expensive experiments that are
+bad uh except in environments that are
+bad uh except in environments that are
+like naturally very very high variant
+like naturally very very high variant
+where the same set of hyper parameters
+where the same set of hyper parameters
+can be good one trial bad the
+can be good one trial bad the
+next then it's kind of
+okay yeah we're going to have to try all
+okay yeah we're going to have to try all
+this stuff out I'm really optimistic
+this stuff out I'm really optimistic
+here though because I'm actually like
+here though because I'm actually like
+it's clicking you know I'm seeing all
+it's clicking you know I'm seeing all
+the different things that you want your
+the different things that you want your
+hyper pram algorithm to do I'm seeing
+hyper pram algorithm to do I'm seeing
+how they're really AB just not covered
+how they're really AB just not covered
+At All by any existing
+At All by any existing
+algorithm
+um and there my experiment is done so
+um and there my experiment is done so
+we'll go look at that but yeah it's
+we'll go look at that but yeah it's
+there's going to be a lot to think about
+there's going to be a lot to think about
+here it's pretty exciting it's pretty
+here it's pretty exciting it's pretty
+exciting let me see so where's my
+okay
+okay
+95 it's about what we expect
+95 it's about what we expect
+here goal
+here goal
+achieved and we're going to go eval this
+oh
+oh
+oh okay so this is our experiment
+oh okay so this is our experiment
+file and we're going to go
+file and we're going to go
+into
+examples eval
+examples eval
+config eval config
+config eval config
+now model
+now model
+conf put this here and we're going to
+conf put this here and we're going to
+see how good this model
+is so one to
+is so one to
+be run
+I'm a new user to stream sorry does
+I'm a new user to stream sorry does
+search
+search
+radius in the paper and force that you
+radius in the paper and force that you
+explore that front in a local search way
+explore that front in a local search way
+possibly avoiding diving to high clost
+possibly avoiding diving to high clost
+solution so quickly yes so to look at
+solution so quickly yes so to look at
+the paper here they have this pearch
+the paper here they have this pearch
+term um which keeps you close to your
+term um which keeps you close to your
+existing Paro points but this is a very
+existing Paro points but this is a very
+very bad way of doing uh this search
+very bad way of doing uh this search
+because you really you don't want to
+because you really you don't want to
+stick close to your existing points
+stick close to your existing points
+right for no reason you only want to
+right for no reason you only want to
+stay close to your existing too points
+stay close to your existing too points
+when you're not confident in your
+when you're not confident in your
+ability to explore so what I did is I
+ability to explore so what I did is I
+replaced this P search term with using
+replaced this P search term with using
+gpy I get an absolute estimate of
+gpy I get an absolute estimate of
+performance so what is the score that
+performance so what is the score that
+your point is going is is going to get
+your point is going is is going to get
+and I subtract the standard deviation of
+and I subtract the standard deviation of
+that prediction so I get a conservative
+that prediction so I get a conservative
+estimate of absolute score so what that
+estimate of absolute score so what that
+will do is that will slowly push you to
+will do is that will slowly push you to
+higher cost regions uh higher
+higher cost regions uh higher
+performance regions which may have
+performance regions which may have
+higher cost but only as you're confident
+higher cost but only as you're confident
+in those predictions because you get
+in those predictions because you get
+penalized by the standard deviation of
+penalized by the standard deviation of
+the prediction you get penalized for the
+the prediction you get penalized for the
+lack of confidence in your prediction so
+lack of confidence in your prediction so
+that's what I've done so far uh I've
+that's what I've done so far uh I've
+done a few other changes as well it does
+done a few other changes as well it does
+massively better than the original you
+massively better than the original you
+know there's going to be a new algorithm
+know there's going to be a new algorithm
+it's going to be neoc carbs and it's
+it's going to be neoc carbs and it's
+going to be amazing for RL but it still
+going to be amazing for RL but it still
+needs a little bit more you know I'm not
+needs a little bit more you know I'm not
+fully satisfied with it it's better it's
+fully satisfied with it it's better it's
+massively better it's not perfect yet
+massively better it's not perfect yet
+it's got some
+it's got some
+quirks so we're still going to work on
+quirks so we're still going to work on
+that in between all the other stuff I'm
+that in between all the other stuff I'm
+doing welcome YouTube folks going back
+doing welcome YouTube folks going back
+and forth here between now we hit 10 uh
+and forth here between now we hit 10 uh
+10 viewers on stream awesome um yeah I'm
+10 viewers on stream awesome um yeah I'm
+going back and forth between this hyper
+going back and forth between this hyper
+parameter tuning stuff and then GPU
+parameter tuning stuff and then GPU
+Drive nyu's GPU accelerated driving
+Drive nyu's GPU accelerated driving
+simulator uh which I'm trying to
+simulator uh which I'm trying to
+massively accelerate for them so that
+massively accelerate for them so that
+they can run lots of cool experiments
+they can run lots of cool experiments
+very quickly and let's
+very quickly and let's
+see see I've been having some
+see see I've been having some
+trouble
+trouble
+78%
+man
+78 let's run the full set at the very
+78 let's run the full set at the very
+least I don't know how it gets
+least I don't know how it gets
+78 there's like this huge gap between um
+78 there's like this huge gap between um
+what I'm seeing in training and what I'm
+what I'm seeing in training and what I'm
+seeing
+here let me say return
+I mean the curve is really volatile to
+I mean the curve is really volatile to
+be
+be
+fair also are they taking account the
+fair also are they taking account the
+um hold on they're they're penalizing me
+um hold on they're they're penalizing me
+a few agents here for no reason because
+a few agents here for no reason because
+this should
+this should
+be this is not controlled agents per is
+it oh yeah this is controlled agent mask
+okay no this is correctly implemented
+okay no this is correctly implemented
+they're not penalizing
+they're not penalizing
+me and that's the performance should be
+me and that's the performance should be
+higher than in training if you're
+higher than in training if you're
+removing the bugged
+agents 78
+this is very
+this is very
+odd this Gap is like almost entirely
+unexplained I really don't know where
+unexplained I really don't know where
+this would come
+this would come
+from so I have these curves right and uh
+from so I have these curves right and uh
+the latest curve is trained on a
+the latest curve is trained on a
+thousand
+thousand
+scenes you can see this is the curve
+scenes you can see this is the curve
+here gets up
+here gets up
+to oh 95% I should edit that message
+5% so it gets
+5% so it gets
+95% but then when I evalid on the exact
+95% but then when I evalid on the exact
+same scenes it only gets
+78 it doesn't make sense to
+78 it doesn't make sense to
+me let me see if there's anything else
+me let me see if there's anything else
+in here that would tell us what's going
+in here that would tell us what's going
+on
+on
+so
+so
+coverage it's probably in
+coverage it's probably in
+percentage new files in
+batch okay you unique scenarios and
+batch coverage okay you can see these
+batch coverage okay you can see these
+are all
+are all
+good metrics are
+good control density is very
+low let me see if I have um their
+low let me see if I have um their
+experiments to compare
+to they sent me some of their
+to they sent me some of their
+experiments
+hopefully they don't mind me
+showing
+showing
+ah want be so
+ah want be so
+slow so here's some of
+slow so here's some of
+their we'll use this one yeah this one's
+their we'll use this one yeah this one's
+good so they
+have in metric control density
+metrix okay we have the same thing here
+metrix okay we have the same thing here
+and then mean reward
+and then mean reward
+89 this is this what it looks
+like mean
+reward .95
+yeah it's about what it looks like their
+yeah it's about what it looks like their
+access is out to here so yeah that's
+access is out to here so yeah that's
+about what it looks
+like mean agent we don't have speed
+like mean agent we don't have speed
+logged everything else is
+logged episode
+logged episode
+length interestingly it goes way down
+length interestingly it goes way down
+and then it goes back up
+our curves look the
+same curves look very
+similar I wonder if they have a
+similar I wonder if they have a
+checkpoints committed for
+this maybe they do hold on maybe they
+this maybe they do hold on maybe they
+have checkpoints
+I don't see artifacts logged
+unfortunately
+unfortunately
+files
+code oh wait they do have
+code oh wait they do have
+checkpoints that's
+nice hi bet
+okay so they
+okay so they
+have this
+have this
+seven so if this is 5 million
+seven so if this is 5 million
+steps then I want to evaluate this
+one500 I just like
+yeah we got
+Baseline Baseline
+buy this instead
+why does
+why does
+this excuse
+me the freaking
+just do dot is this
+it valid load key
+this should be fine
+so presumably this is uh
+so presumably this is uh
+not curling correctly or
+something e
+4K okay so this is
+4K okay so this is
+wrong
+wrong
+um can I just copy this on the
+container oh it's zipped what the
+what I this is
+not oh
+not oh
+I I see I
+I I see I
+think yeah okay I see um that's
+think yeah okay I see um that's
+weird I guess that's the internal
+weird I guess that's the internal
+structure I didn't know
+structure I didn't know
+Zips um
+it's not mounted here damn
+it why does this not work this always
+it why does this not work this always
+works this is so
+works this is so
+silly usually you can just curl
+this for
+H I don't want to have to reset this
+up so obnoxious um how do I get this
+up so obnoxious um how do I get this
+onto the
+onto the
+container
+uh oh wait there I can just dock or CP
+uh oh wait there I can just dock or CP
+it I'm
+it I'm
+dumb yeah that's stupid I can totally
+dumb yeah that's stupid I can totally
+just offer CP it
+perfect
+longer than I would have liked
+longer than I would have liked
+but
+oops okay there we go valuating this
+13 oh it's loading it wrong I'm pretty
+13 oh it's loading it wrong I'm pretty
+sure hold
+sure hold
+on loading it wrong
+buff foret code assumes discrete or
+buff foret code assumes discrete or
+multi-
+multi-
+discreete that will
+discreete that will
+be well yeah we have to add continuous
+be well yeah we have to add continuous
+actions you have to add more stuff to
+actions you have to add more stuff to
+it you
+it you
+what no idea what that
+means
+uh I don't know not a robot generally
+uh I don't know not a robot generally
+eat food not
+oil not try to go about
+oil not try to go about
+this well you just add it's like I added
+this well you just add it's like I added
+multi- discreet Joseph who is
+this welcome as well
+uh see if this now
+loads some screwy
+loads some screwy
+here cuz now I can't get their models to
+here cuz now I can't get their models to
+eval
+yo Joseph what's up
+yo Joseph what's up
+who do who is
+who do who is
+5m I don't know from the Twitter
+5m I don't know from the Twitter
+handle
+uh still doesn't freaking work what the
+uh still doesn't freaking work what the
+heck
+okay well
+that okay it's loading the freaking
+that okay it's loading the freaking
+Network wrong I don't know how
+is
+is
+it I can't freaking tell I can't get
+it I can't freaking tell I can't get
+there n to eval
+there n to eval
+now
+now
+[Music]
+[Music]
+um where is this
+GPU Drive get tired
+here where's dhany why are you working
+here where's dhany why are you working
+at
+800m damn it stuck on this
+wait I literally copied this from them
+wait I literally copied this from them
+right so there's literally no
+way hold
+way hold
+on I copied this from
+them offer
+them offer
+wait it's in examples
+no not
+external okay so they do have 1 192 for
+external okay so they do have 1 192 for
+hidden in here
+or 128 I
+mean I don't think that fixes it
+man what are the odds that this
+man what are the odds that this
+checkpoint actually does this poorly I
+checkpoint actually does this poorly I
+think that's close to random
+think that's close to random
+though and 14 should be close to random
+maybe they changed the architecture
+maybe they changed the architecture
+since uh uploading it and it screwed
+since uh uploading it and it screwed
+stuff up I don't
+know maybe they got a custom
+know maybe they got a custom
+branches I don't know but this doesn't
+eval mine does at least eval
+let's go get it
+back e
+add
+this we knows training logs are an
+this we knows training logs are an
+optimistic
+optimistic
+estimate solve multiple
+times for
+may be available to meet let's see
+oops
+okay they're sending me over a
+okay they're sending me over a
+checkpoint what the hell's wrong with
+checkpoint what the hell's wrong with
+this oh
+okay
+do we have
+answers using a sta center from the
+answers using a sta center from the
+cluster data is slightly shuffled
+okay I don't know what that
+does you're basically evaluating on a
+does you're basically evaluating on a
+different data set
+different data set
+H weird
+I mean I've got here the 78%
+they were processed on a different day
+they were processed on a different day
+another
+another
+relevance don't worry about evaluating
+relevance don't worry about evaluating
+my
+models e
+you want the standard deviation to be
+2% well I don't understand
+how is this literally just
+what
+you link the Curve
+don't see another
+metric I like the w
+b e
+this looks
+this looks
+like this looks like their
+like this looks like their
+curve to me this looks like their
+curve to me this looks like their
+curve like very very closely
+curve like very very closely
+and8
+yep I mean it's like very hard for me to
+yep I mean it's like very hard for me to
+imagine I could have messed this up
+somehow let me look their uh their
+somehow let me look their uh their
+standard deviation
+where is the darn
+where is the darn
+[Music]
+thing let me
+thing let me
+see so they
+have oh I see
+standard oh yeah their standard
+standard oh yeah their standard
+deviation is
+deviation is
+lower why is their standard deviation
+lower why is their standard deviation
+that much
+that much
+lower
+007 yeah mine are a bit
+higher okay so why the heck could that
+higher okay so why the heck could that
+happen
+happen
+me look at their
+settings they have 500
+worlds me say
+worlds kique seems they got
+worlds kique seems they got
+five it's pretty close otherwise
+think I match
+hypers I resample a little less
+hypers I resample a little less
+frequently
