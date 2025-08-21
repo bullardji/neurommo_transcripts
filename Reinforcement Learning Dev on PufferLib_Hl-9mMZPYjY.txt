@@ -1,0 +1,497 @@
+Kind: captions
+Language: en
+Okay, good
+morning. Plan today
+morning. Plan today
+is quick hour and a half session right
+now. Okay, that was weird. Internet just
+now. Okay, that was weird. Internet just
+flipped for some reason. That might just
+flipped for some reason. That might just
+be reream switching servers. Uh anyways,
+be reream switching servers. Uh anyways,
+the goal for
+the goal for
+today, get the sweeps code into a
+today, get the sweeps code into a
+reasonable
+reasonable
+place. Clean up all the comments in the
+place. Clean up all the comments in the
+protein
+protein
+algorithm. Probably clean up all the new
+algorithm. Probably clean up all the new
+configs since we made big changes to the
+configs since we made big changes to the
+way configuration works. Fix
+way configuration works. Fix
+that. And uh yeah, then we will go from
+that. And uh yeah, then we will go from
+there. I think there's still stuff that
+there. I think there's still stuff that
+we want to do with the main script and
+we want to do with the main script and
+the way that everything is launched.
+the way that everything is launched.
+Uh but also we want to be like we want
+Uh but also we want to be like we want
+to get to this place where we can start
+to get to this place where we can start
+running final or close to final
+running final or close to final
+experiments as soon as
+experiments as soon as
+possible. That would be ideal. Um but
+possible. That would be ideal. Um but
+the closer to the final version of the
+the closer to the final version of the
+code we get before we do that the
+code we get before we do that the
+better. Uh, I also know that there's
+better. Uh, I also know that there's
+going to be probably multiple days of
+going to be probably multiple days of
+annoying packaging to do for this
+annoying packaging to do for this
+release because we have to ship CUDA
+release because we have to ship CUDA
+kernels, which means we have to ship
+kernels, which means we have to ship
+binaries. Uh, and the process of
+binaries. Uh, and the process of
+building those is not fun. Unless I find
+building those is not fun. Unless I find
+some clever way around that, we're just
+some clever way around that, we're just
+going to have to figure that
+going to have to figure that
+out. Let's get started
+out. Let's get started
+here. We're going to start
+here. We're going to start
+on
+on
+protein. First of all, let me make sure
+protein. First of all, let me make sure
+that we have a
+clean setup. We
+do. All right. So, here
+is our sweep file. It's
+is our sweep file. It's
+currently a lot longer than I remember
+it. We have this data here for
+it. We have this data here for
+hyperparam testing.
+hyperparam testing.
+So, this I actually think we're going to
+So, this I actually think we're going to
+keep because we're going to want this
+keep because we're going to want this
+for like
+for like
+initial experiments. We might even want
+initial experiments. We might even want
+to clean it up. I think I want to go
+to clean it up. I think I want to go
+through all these comments and see if
+through all these comments and see if
+any of these look like applicable
+stuff. So, what's this? Less than num
+stuff. So, what's this? Less than num
+samples. We do a random
+samples. We do a random
+sample. Yeah. So what I did instead is
+sample. Yeah. So what I did instead is
+the first one is the best set of
+the first one is the best set of
+hyperparames that you currently
+have. We can basically start it from
+have. We can basically start it from
+saying defaults.
+I wonder how that's actually going to
+I wonder how that's actually going to
+work
+work
+[Music]
+with. You know, it's a little bit odd
+with. You know, it's a little bit odd
+actually because like this is going to
+actually because like this is going to
+make it hard to compare
+So what we'll do is we'll do
+if we'll add this as like an
+extra. Okay. So
+now we only use this uh we use it by
+now we only use this uh we use it by
+default but we have an option to not use
+default but we have an option to not use
+it. What's this? Clip random samples to
+it. What's this? Clip random samples to
+bound so we don't get high bad cost
+samples. Yeah, there's no clipping on
+samples. Yeah, there's no clipping on
+these. But all the any changes to the
+these. But all the any changes to the
+core algorithm are going to require
+core algorithm are going to require
+quite extensive experiments to resolve.
+quite extensive experiments to resolve.
+Um, it actually might make sense to
+Um, it actually might make sense to
+start
+start
+drafting the
+drafting the
+article while I'm doing this because or
+article while I'm doing this because or
+at least make some notes for the
+at least make some notes for the
+article because we are going to write
+article because we are going to write
+like a
+like a
+big a big blog post on this.
+I think it's going to be 2.5. We might
+I think it's going to be 2.5. We might
+make it 300 if it's really good, but I
+make it 300 if it's really good, but I
+think more likely this is a 2.5.
+I should put this not in front of the
+I should put this not in front of the
+chat. So the original goal with
+chat. So the original goal with
+protein was to eliminate edge
+cases and carbs.
+stops exploring when you have perfect
+stops exploring when you have perfect
+model
+of it. But also it doesn't actually give
+of it. But also it doesn't actually give
+you it doesn't actually run experiments.
+So protein uh protein should actually
+So protein uh protein should actually
+run
+experiments along the
+experiments along the
+entire
+frontier much
+frontier much
+simpler as well.
+simpler as well.
+Now I what we want to do is like protein
+Now I what we want to do is like protein
+other stuff
+tried because I tried like a dozens of
+tried because I tried like a dozens of
+different things.
+different things.
+So dozens of different scoring
+normalization objective functions tested
+normalization objective functions tested
+during
+development. A few things we
+development. A few things we
+tried to like
+One of the big things I think that was
+One of the big things I think that was
+like one of the really difficult things
+like one of the really difficult things
+was like
+was like
+um how we get it to explore
+um how we get it to explore
+uh score like percentile
+scores. I'm trying to remember what we
+scores. I'm trying to remember what we
+ended up doing for this.
+Let me look at the current algorithm and
+Let me look at the current algorithm and
+like refresh my memory a little bit on
+like refresh my memory a little bit on
+what we did here.
+what we did here.
+So the y value which is your score
+So the y value which is your score
+variable just gets
+normalized. Then you train GP score on
+normalized. Then you train GP score on
+that. You
+that. You
+train linearly normed um log cost
+function and then you have this norm on
+function and then you have this norm on
+here. You so you
+here. You so you
+unnorm the
+predictions just used for logging. Okay.
+predictions just used for logging. Okay.
+Hey, welcome
+Hey, welcome
+boxing. Um, we're looking at we're
+boxing. Um, we're looking at we're
+starting to actually go through all the
+starting to actually go through all the
+different components now, make some
+different components now, make some
+notes, and clean up the final
+notes, and clean up the final
+code. Twitter stream is down. Damn it.
+code. Twitter stream is down. Damn it.
+How do I fix that? It just didn't go
+How do I fix that? It just didn't go
+back up when
+I All right, you know what? Let me just
+I All right, you know what? Let me just
+let me just start stop and start the
+let me just start stop and start the
+whole thing. is ridiculous.
+
+Kind: captions
+Language: en
+Okay, good
+morning. Plan today
+morning. Plan today
+is quick hour and a half session right
+now. Okay, that was weird. Internet just
+now. Okay, that was weird. Internet just
+flipped for some reason. That might just
+flipped for some reason. That might just
+be reream switching servers. Uh anyways,
+be reream switching servers. Uh anyways,
+the goal for
+the goal for
+today, get the sweeps code into a
+today, get the sweeps code into a
+reasonable
+reasonable
+place. Clean up all the comments in the
+place. Clean up all the comments in the
+protein
+protein
+algorithm. Probably clean up all the new
+algorithm. Probably clean up all the new
+configs since we made big changes to the
+configs since we made big changes to the
+way configuration works. Fix
+way configuration works. Fix
+that. And uh yeah, then we will go from
+that. And uh yeah, then we will go from
+there. I think there's still stuff that
+there. I think there's still stuff that
+we want to do with the main script and
+we want to do with the main script and
+the way that everything is launched.
+the way that everything is launched.
+Uh but also we want to be like we want
+Uh but also we want to be like we want
+to get to this place where we can start
+to get to this place where we can start
+running final or close to final
+running final or close to final
+experiments as soon as
+experiments as soon as
+possible. That would be ideal. Um but
+possible. That would be ideal. Um but
+the closer to the final version of the
+the closer to the final version of the
+code we get before we do that the
+code we get before we do that the
+better. Uh, I also know that there's
+better. Uh, I also know that there's
+going to be probably multiple days of
+going to be probably multiple days of
+annoying packaging to do for this
+annoying packaging to do for this
+release because we have to ship CUDA
+release because we have to ship CUDA
+kernels, which means we have to ship
+kernels, which means we have to ship
+binaries. Uh, and the process of
+binaries. Uh, and the process of
+building those is not fun. Unless I find
+building those is not fun. Unless I find
+some clever way around that, we're just
+some clever way around that, we're just
+going to have to figure that
+going to have to figure that
+out. Let's get started
+out. Let's get started
+here. We're going to start
+here. We're going to start
+on
+on
+protein. First of all, let me make sure
+protein. First of all, let me make sure
+that we have a
+clean setup. We
+do. All right. So, here
+is our sweep file. It's
+is our sweep file. It's
+currently a lot longer than I remember
+it. We have this data here for
+it. We have this data here for
+hyperparam testing.
+hyperparam testing.
+So, this I actually think we're going to
+So, this I actually think we're going to
+keep because we're going to want this
+keep because we're going to want this
+for like
+for like
+initial experiments. We might even want
+initial experiments. We might even want
+to clean it up. I think I want to go
+to clean it up. I think I want to go
+through all these comments and see if
+through all these comments and see if
+any of these look like applicable
+stuff. So, what's this? Less than num
+stuff. So, what's this? Less than num
+samples. We do a random
+samples. We do a random
+sample. Yeah. So what I did instead is
+sample. Yeah. So what I did instead is
+the first one is the best set of
+the first one is the best set of
+hyperparames that you currently
+have. We can basically start it from
+have. We can basically start it from
+saying defaults.
+I wonder how that's actually going to
+I wonder how that's actually going to
+work
+work
+[Music]
+with. You know, it's a little bit odd
+with. You know, it's a little bit odd
+actually because like this is going to
+actually because like this is going to
+make it hard to compare
+So what we'll do is we'll do
+if we'll add this as like an
+extra. Okay. So
+now we only use this uh we use it by
+now we only use this uh we use it by
+default but we have an option to not use
+default but we have an option to not use
+it. What's this? Clip random samples to
+it. What's this? Clip random samples to
+bound so we don't get high bad cost
+samples. Yeah, there's no clipping on
+samples. Yeah, there's no clipping on
+these. But all the any changes to the
+these. But all the any changes to the
+core algorithm are going to require
+core algorithm are going to require
+quite extensive experiments to resolve.
+quite extensive experiments to resolve.
+Um, it actually might make sense to
+Um, it actually might make sense to
+start
+start
+drafting the
+drafting the
+article while I'm doing this because or
+article while I'm doing this because or
+at least make some notes for the
+at least make some notes for the
+article because we are going to write
+article because we are going to write
+like a
+like a
+big a big blog post on this.
+I think it's going to be 2.5. We might
+I think it's going to be 2.5. We might
+make it 300 if it's really good, but I
+make it 300 if it's really good, but I
+think more likely this is a 2.5.
+I should put this not in front of the
+I should put this not in front of the
+chat. So the original goal with
+chat. So the original goal with
+protein was to eliminate edge
+cases and carbs.
+stops exploring when you have perfect
+stops exploring when you have perfect
+model
+of it. But also it doesn't actually give
+of it. But also it doesn't actually give
+you it doesn't actually run experiments.
+So protein uh protein should actually
+So protein uh protein should actually
+run
+experiments along the
+experiments along the
+entire
+frontier much
+frontier much
+simpler as well.
+simpler as well.
+Now I what we want to do is like protein
+Now I what we want to do is like protein
+other stuff
+tried because I tried like a dozens of
+tried because I tried like a dozens of
+different things.
+different things.
+So dozens of different scoring
+normalization objective functions tested
+normalization objective functions tested
+during
+development. A few things we
+development. A few things we
+tried to like
+One of the big things I think that was
+One of the big things I think that was
+like one of the really difficult things
+like one of the really difficult things
+was like
+was like
+um how we get it to explore
+um how we get it to explore
+uh score like percentile
+scores. I'm trying to remember what we
+scores. I'm trying to remember what we
+ended up doing for this.
+Let me look at the current algorithm and
+Let me look at the current algorithm and
+like refresh my memory a little bit on
+like refresh my memory a little bit on
+what we did here.
+what we did here.
+So the y value which is your score
+So the y value which is your score
+variable just gets
+normalized. Then you train GP score on
+normalized. Then you train GP score on
+that. You
+that. You
+train linearly normed um log cost
+function and then you have this norm on
+function and then you have this norm on
+here. You so you
+here. You so you
+unnorm the
+predictions just used for logging. Okay.
+predictions just used for logging. Okay.
+Hey, welcome
+Hey, welcome
+boxing. Um, we're looking at we're
+boxing. Um, we're looking at we're
+starting to actually go through all the
+starting to actually go through all the
+different components now, make some
+different components now, make some
+notes, and clean up the final
+notes, and clean up the final
+code. Twitter stream is down. Damn it.
+code. Twitter stream is down. Damn it.
+How do I fix that? It just didn't go
+How do I fix that? It just didn't go
+back up when
+I All right, you know what? Let me just
+I All right, you know what? Let me just
+let me just start stop and start the
+let me just start stop and start the
+whole thing. is ridiculous.

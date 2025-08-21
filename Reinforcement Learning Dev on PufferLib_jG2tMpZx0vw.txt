@@ -1,0 +1,2359 @@
+Kind: captions
+Language: en
+Let me just make sure this is going
+through.
+through.
+Perfect. So, here's the plan. Today, I'm
+Perfect. So, here's the plan. Today, I'm
+going to be live all day,
+going to be live all day,
+uh,
+uh,
+minus breakfast and dinner from now
+minus breakfast and dinner from now
+until probably like 8:00
+until probably like 8:00
+p.m. Try to get a minimum of 10 hours
+p.m. Try to get a minimum of 10 hours
+streamed in. Um, we're going to try to
+streamed in. Um, we're going to try to
+really clean
+really clean
+up all of our training code for next
+up all of our training code for next
+release. And I think that
+release. And I think that
+today compared to yesterday, uh, we're
+today compared to yesterday, uh, we're
+actually going to start looking at more
+actually going to start looking at more
+of the features that we currently have
+of the features that we currently have
+in place and deciding which ones
+in place and deciding which ones
+actually matter uh, and which ones
+actually matter uh, and which ones
+don't. So, pretty much anything that I
+don't. So, pretty much anything that I
+haven't used in months, uh, we will just
+drop. And there are a few things that I
+drop. And there are a few things that I
+want to try out. I want to try out this
+want to try out. I want to try out this
+distributional thing really quick. I
+distributional thing really quick. I
+think I might have been a little
+think I might have been a little
+overeager to start on this yesterday.
+overeager to start on this yesterday.
+But, uh, since I got a little bit of
+But, uh, since I got a little bit of
+progress in on it, I think I'm going to
+progress in on it, I think I'm going to
+spend just we'll probably give this like
+spend just we'll probably give this like
+the first hour, hour and a half today.
+the first hour, hour and a half today.
+And if I make any progress, I make some
+And if I make any progress, I make some
+progress. If I don't, I don't. And uh
+progress. If I don't, I don't. And uh
+yeah, we will just continue from
+there. The first thing that I want to
+there. The first thing that I want to
+do, take a look at uh this run here is
+do, take a look at uh this run here is
+doing quite
+doing quite
+well. We will see how this does when it
+well. We will see how this does when it
+finishes. It's going to take quite a
+while. And then
+while. And then
+next I want to take a look at the
+next I want to take a look at the
+distributional Q-learning
+paper because I want to see how
+uh how Belair and everyone does
+this. Now it's not going to be one to
+this. Now it's not going to be one to
+one because this is for Q-learning.
+Okay.
+So they say skip this
+section. This is background.
+I believe they have the algorithm
+I believe they have the algorithm
+definition
+definition
+here. So this is a very
+here. So this is a very
+simple
+simple
+distribution. They're just saying that
+distribution. They're just saying that
+you pick a minimum and a maximum value.
+you pick a minimum and a maximum value.
+You bucket your value function into n
+You bucket your value function into n
+intervals uniformly over
+intervals uniformly over
+that. And then you take softmax uh over
+that. And then you take softmax uh over
+the outputs of each value head in order
+the outputs of each value head in order
+to get the probability of being in each
+bucket. Now how do they actually sample
+bucket. Now how do they actually sample
+this thing? I'd like to
+know. Okay. Using a discrete
+know. Okay. Using a discrete
+distribution poses a problem. The
+distribution poses a problem. The
+Bellman
+Bellman
+update and our
+update and our
+parameterization almost always have
+parameterization almost always have
+disjoint
+supports. Okay, I haven't seen enough of
+supports. Okay, I haven't seen enough of
+their math for that, but we'll come back
+their math for that, but we'll come back
+to
+to
+this. It would seem natural to minimize
+this. It would seem natural to minimize
+the Werstein
+the Werstein
+metric between these which is also
+metric between these which is also
+conveniently robust to discrepancies in
+conveniently robust to discrepancies in
+support. In practice, we're typically
+support. In practice, we're typically
+restricted to learning from sample
+restricted to learning from sample
+transitions which is not possible under
+transitions which is not possible under
+the Werstein
+the Werstein
+loss. Instead, we project the sample
+loss. Instead, we project the sample
+Bellman update onto the
+Bellman update onto the
+support effectively reducing the Bellman
+support effectively reducing the Bellman
+update to multiclass classification.
+Let pi be a greedy
+policy. Given a sample transition, we
+policy. Given a sample transition, we
+compute the Bellman
+update reward plus discounted ZJ for
+update reward plus discounted ZJ for
+each atom Zj. Okay, so this isn't what I
+each atom Zj. Okay, so this isn't what I
+was thinking. And then we distribute its
+was thinking. And then we distribute its
+probability to the immediate neighbors
+probability to the immediate neighbors
+of of this H.
+Okay, this is not what I was thinking
+Okay, this is not what I was thinking
+about or this is not how I was thinking
+about or this is not how I was thinking
+about
+it, but I think it gets simpler in the
+it, but I think it gets simpler in the
+on policy case.
+Anyways, the E component of the
+Anyways, the E component of the
+projected update is
+The heck is this?
+Okay. So this is
+Okay. So this is
+just reward plus
+just reward plus
+discounted
+value. And then
+this this is the bucketing operation. So
+this this is the bucketing operation. So
+this is them just doing really annoying
+this is them just doing really annoying
+fancy floor ceiling stuff. But this is I
+fancy floor ceiling stuff. But this is I
+think that this is just them bucketing
+think that this is just them bucketing
+the value function here.
+Okay, so it's good that I found this.
+Okay, so it's good that I found this.
+They actually need like 51 buckets.
+They actually need like 51 buckets.
+That's a lot.
+The fact that this doesn't work at all
+The fact that this doesn't work at all
+on sequest until you go to 51 is very
+on sequest until you go to 51 is very
+sketchy.
+Yeah. I don't understand what this thing
+Yeah. I don't understand what this thing
+is doing here though at the
+bottom. So, this loss is just
+Wonder if this is in
+clean. It is.
+and it is quite
+short. Okay. So let's see the output of
+short. Okay. So let's see the output of
+this
+thing. Okay. So it's n times the number
+thing. Okay. So it's n times the number
+of atoms.
+And that gives you the
+And that gives you the
+value uh it gives you like this
+value uh it gives you like this
+discretized value for each predicted
+discretized value for each predicted
+action which is going to be different
+action which is going to be different
+from what we do in the online
+case. Okay. Okay. And now here we have
+case. Okay. Okay. And now here we have
+we have potentially what we're looking
+we have potentially what we're looking
+for.
+You get
+actions
+PMFS. Okay. So this is the probability
+PMFS. Okay. So this is the probability
+mass function for each action is what
+mass function for each action is what
+this
+is. And then this
+is. And then this
+uh this is going to only return the
+uh this is going to only return the
+probability for the action that you
+probability for the action that you
+actually take I
+actually take I
+believe which is good because that's how
+believe which is good because that's how
+we're going to do it in online case
+we're going to do it in online case
+anyways
+anyways
+um or on policy case anyways. So we
+um or on policy case anyways. So we
+should be really easily able to figure
+should be really easily able to figure
+this out from here. So this is just our
+this out from here. So this is just our
+value function output softmax of our
+value function output softmax of our
+value function output right here.
+value function output right here.
+And then they do next
+atoms reward plus gamma times
+atoms. Yeah. Now we have to figure out
+atoms. Yeah. Now we have to figure out
+this mess here.
+So we have delta
+So we have delta
+Z target networks of one minus target
+Z target networks of one minus target
+network atoms of
+zero
+H. Let's figure that
+H. Let's figure that
+out. I think this is the
+out. I think this is the
+delta atoms.
+Uh, I don't see atoms
+here. Target
+networks. This is the only network they
+have. Register buffer. Okay, here it's a
+have. Register buffer. Okay, here it's a
+lin space right here. So this is
+lin space right here. So this is
+literally just going to be uh the step
+literally just going to be uh the step
+delta. So if it's like 0 one or 0.5 1
+delta. So if it's like 0 one or 0.5 1
+1.5 and then it's just
+0.5. And then what are we doing here?
+0.5. And then what are we doing here?
+We're going to
+clamp clamp this to min and
+max. Okay.
+And then how do they set V min and V max
+also? Oh, these are arguments.
+also? Oh, these are arguments.
+Yeah, that's
+Yeah, that's
+interesting. Ah, but they just set these
+interesting. Ah, but they just set these
+to like big
+values. Okay, so those are just
+values. Okay, so those are just
+constants. If there if that's all it is,
+constants. If there if that's all it is,
+then that's actually not that
+then that's actually not that
+bad. That's not that
+bad. I thought it was going to have to
+bad. I thought it was going to have to
+be some weird dynamic
+thing, but then we take
+B.Flo. Okay.
+Now, the thing that's a little sketchy
+Now, the thing that's a little sketchy
+here, right, this
+is there's going to be a difference here
+is there's going to be a difference here
+between the Q-learning version and our
+between the Q-learning version and our
+on policy
+version. So let's see what we have so
+version. So let's see what we have so
+far. We get the probability distribution
+far. We get the probability distribution
+over actions.
+Oh, this
+Oh, this
+is yeah so this is this doesn't depend
+is yeah so this is this doesn't depend
+on this at all. So this is just this
+on this at all. So this is just this
+next Adams thing
+next Adams thing
+is just for every possible uh value that
+is just for every possible uh value that
+you could have rewards plus discounted
+value. Okay. So then there's the
+projection. This still doesn't depend on
+projection. This still doesn't depend on
+this at all.
+And we actually we don't get we don't
+And we actually we don't get we don't
+depend on this at
+depend on this at
+all until
+here. So all this is building the
+here. So all this is building the
+targets I guess
+targets I guess
+right? All of this is just building the
+right? All of this is just building the
+targets.
+And then this
+becomes I believe this is just a
+becomes I believe this is just a
+categorical Huh?
+Why are they?
+Okay. So you get your action here and
+Okay. So you get your action here and
+then the loss
+is your
+is your
+actions or your
+actions or your
+log. This is your action log
+props. I'm pretty sure this is just
+props. I'm pretty sure this is just
+cross entropy.
+Yeah, I'm pretty pretty darn
+Yeah, I'm pretty pretty darn
+sure. So, this is just your action
+sure. So, this is just your action
+probability or action log props. It's a
+probability or action log props. It's a
+cross entropy from your action
+cross entropy from your action
+logs to whatever they've decided this uh
+logs to whatever they've decided this uh
+target PMF action index is. So, all of
+target PMF action index is. So, all of
+this is just computing an index. Um
+this is just computing an index. Um
+there's nothing fancier going on that I
+there's nothing fancier going on that I
+can see.
+So if we can figure out how they're
+So if we can figure out how they're
+computing an index and how we modify it
+computing an index and how we modify it
+specifically
+for for on policy we will be
+good. Hang on.
+This building was specifically uh
+This building was specifically uh
+constructed to
+constructed to
+avoid having
+avoid having
+uh sun glare.
+uh sun glare.
+But my table is
+reflective.
+Okay. So, what are they doing here?
+Okay. So, what are they doing here?
+They're
+saying they take rewards plus discounted
+values and then here is this
+delta. Who wrote this code? I wonder is
+delta. Who wrote this code? I wonder is
+this Costa's
+code? some of it.
+So, it's a little confusing because
+So, it's a little confusing because
+these are out of order
+here, but they are just
+here, but they are just
+clamping this like discounted reward
+clamping this like discounted reward
+thing between the min and the max.
+Then they apply this
+transformation. I think they're
+transformation. I think they're
+splitting it between two adjacent
+splitting it between two adjacent
+buckets or something here.
+Ah, wait. Is this too
+Ah, wait. Is this too
+hot? L of
+I.Long. Okay. I don't understand this
+I.Long. Okay. I don't understand this
+transform here.
+You're
+normalizing.
+normalizing.
+Wait, you're This is not depending on
+Wait, you're This is not depending on
+next PMFs at all,
+next PMFs at all,
+right? Yeah. No, this does not depend on
+right? Yeah. No, this does not depend on
+next PMFS
+next PMFS
+uh at all.
+uh at all.
+It does depend on the rewards. So you're
+It does depend on the rewards. So you're
+using the rewards to construct the
+using the rewards to construct the
+targets. You're doing this like
+targets. You're doing this like
+normalized
+normalized
+uh this reward minus discount value
+uh this reward minus discount value
+whatever. This is a
+whatever. This is a
+norm. And then you clamp this.
+You're getting two integers out of this.
+You're getting two integers out of this.
+The floor and the
+The floor and the
+ceiling, like previous bucket, next
+ceiling, like previous bucket, next
+bucket, something like
+that. And then
+It's a very fiddly
+operation. I'm having difficulty
+operation. I'm having difficulty
+figuring out what the heck they're
+figuring out what the heck they're
+doing.
+Do you need to do this? Do they have
+Do you need to do this? Do they have
+ablations?
+Huh? That's
+crazy. This was
+uh accepted with a way higher mean
+uh accepted with a way higher mean
+score. Uh but their median was correct.
+It helps on almost every game.
+I actually don't know if we should
+I actually don't know if we should
+really even do this right now because
+really even do this right now because
+like does this make sense outside of the
+like does this make sense outside of the
+off policy context? You learn the
+off policy context? You learn the
+distribution
+You don't know the action yet, right?
+You don't know the action yet, right?
+It's not action
+conditioned. I think that the smartest
+conditioned. I think that the smartest
+thing to do with this given that there's
+thing to do with this given that there's
+actually like some complexity here and
+actually like some complexity here and
+I'm not just implementing it one to one.
+I'm not just implementing it one to one.
+that would have to be a modified version
+that would have to be a modified version
+for uh on
+policy. I think we just stash this for
+policy. I think we just stash this for
+now.
+And I mean we see here though that the
+And I mean we see here though that the
+way I was thinking about uh P30 is
+way I was thinking about uh P30 is
+completely
+completely
+different from this
+It's going to be like
+ridiculously Yeah. And then the way this
+ridiculously Yeah. And then the way this
+is the version of P3 I had in mind would
+is the version of P3 I had in mind would
+become ludicrously expensive as well
+become ludicrously expensive as well
+because this is now
+predicting. I mean honestly this alone
+predicting. I mean honestly this alone
+is probably already somewhat
+expensive. Yeah. I don't want to just go
+expensive. Yeah. I don't want to just go
+do this wrong and like conclude that
+do this wrong and like conclude that
+this doesn't work because there's
+this doesn't work because there's
+actually like a pretty non-trivial
+actually like a pretty non-trivial
+modification. I think that this should
+modification. I think that this should
+be like on the top of the stack for
+be like on the top of the stack for
+after the update. Uh is this is
+after the update. Uh is this is
+something that I should look at here.
+something that I should look at here.
+But like the the thing is that this is
+But like the the thing is that this is
+going to require quite some modification
+going to require quite some modification
+because like this is going to
+because like this is going to
+essentially require me to decide or to
+essentially require me to decide or to
+figure out the whole on policy versus
+figure out the whole on policy versus
+off policy split that happened with what
+off policy split that happened with what
+most of what DeepMind did and most of
+most of what DeepMind did and most of
+what OpenAI did in like late 2010s early
+what OpenAI did in like late 2010s early
+2020s.
+2020s.
+Um so I think that's going to be part of
+Um so I think that's going to be part of
+the next research
+the next research
+segment. So, I don't think it makes
+segment. So, I don't think it makes
+sense to spend like another hour on this
+sense to spend like another hour on this
+to do that. Here's what we're going to
+do. We're going to just remove all P30
+do. We're going to just remove all P30
+stuff for now.
+We'll do the C++
+later. Okay, we're at 1294
+later. Okay, we're at 1294
+lines from that.
+lines from that.
+Uh we still have the V
+Uh we still have the V
+trace experiments to
+trace experiments to
+do. So those will actually have to do
+do. So those will actually have to do
+the experiments on. And then there's the
+the experiments on. And then there's the
+question of can we get Diane to do
+question of can we get Diane to do
+anything as
+well. Let me see what are the key
+well. Let me see what are the key
+questions we have to answer in order to
+questions we have to answer in order to
+like
+like
+really get this thing to work.
+Project name, please. This is Puffer
+Project name, please. This is Puffer
+Lib. All my stuff is at puffer AI.
+Lib. All my stuff is at puffer AI.
+Whoops, not this one.
+Puffer.ai. And we have ultra high perf
+Puffer.ai. And we have ultra high perf
+reinforcement learning M. You can play
+reinforcement learning M. You can play
+them in your
+them in your
+browser. You can take over. You can
+browser. You can take over. You can
+watch. This is me playing. I hit control
+watch. This is me playing. I hit control
+here. This guy will now be playing. We
+here. This guy will now be playing. We
+have everything from like simple arcade
+have everything from like simple arcade
+games like this miniature version of
+games like this miniature version of
+OpenAI
+OpenAI
+5 and lots in
+5 and lots in
+between. This is really a comprehensive
+between. This is really a comprehensive
+effort to fix everything wrong with
+effort to fix everything wrong with
+reinforcement
+learning. Let's just like get a quick
+Mult benchmarking normalized for I did
+Mult benchmarking normalized for I did
+that.
+We need
+um let's see sampling
+um let's see sampling
+methods or batch or
+replay form
+replay form
+clip flags.
+off
+policy a e first bet trace puff.
+Did I miss
+Did I miss
+anything? What other like options are
+anything? What other like options are
+there? So, there's like this Vray
+stuff I guess optimizer choice.
+So like the difficult thing here is some
+So like the difficult thing here is some
+of
+of
+these get rid of this.
+some of these. Um, we we want to run
+some of these. Um, we we want to run
+like a bunch of experiments prior to
+like a bunch of experiments prior to
+release on
+these. There's a clip value loss and
+these. There's a clip value loss and
+there's normalized advantage. These two
+What
+else? We can do perf stuff on AM and
+else? We can do perf stuff on AM and
+distributed today. That's a pretty easy
+distributed today. That's a pretty easy
+one to
+one to
+conclude. Um the J vtrace puff advantage
+conclude. Um the J vtrace puff advantage
+that will be experiments.
+that will be experiments.
+Diane will be we need to run some
+Diane will be we need to run some
+experiments. Off policy has never
+experiments. Off policy has never
+worked.
+Welcome
+boxing. Get rid of this.
+Did you manage to get yesterday's stuff
+Did you manage to get yesterday's stuff
+working? Uh, the PyTorch stuff I did.
+working? Uh, the PyTorch stuff I did.
+Yeah. The distributional stuff that I
+Yeah. The distributional stuff that I
+started towards the end, I looked at
+started towards the end, I looked at
+again this morning. It's more
+again this morning. It's more
+complicated than I thought and it's
+complicated than I thought and it's
+going to be like that's going to end up
+going to be like that's going to end up
+being a multi-day thing. And I think
+being a multi-day thing. And I think
+that it makes more sense to do that once
+that it makes more sense to do that once
+I have this release done as part of my
+I have this release done as part of my
+next effort, which is going to be a lot
+next effort, which is going to be a lot
+of algo side stuff.
+What about this target kale? This is
+What about this target kale? This is
+like something that it seems like we
+like something that it seems like we
+should use but don't,
+right? We can play with this as well.
+I kind of just want to like get rid of
+I kind of just want to like get rid of
+all the options and flags here. I don't
+all the options and flags here. I don't
+want this to be like, oh yeah, you have
+want this to be like, oh yeah, you have
+the options to do whatever. Like this
+the options to do whatever. Like this
+should just be the best set of things
+should just be the best set of things
+that works. That's it.
+that works. That's it.
+Done. And like anything that a question
+Done. And like anything that a question
+comes up, we will test
+comes up, we will test
+it and we'll figure it out definitively.
+Okay, so we still have this working.
+Okay, so we still have this working.
+1271 lines, 3 million steps per second
+training. Looks
+good. There we go.
+Let's do
+um I think we can't do compile yet. We
+um I think we can't do compile yet. We
+should be able to do AM though.
+Uh, why does this not have
+this be float 16?
+So, uh, this still trains, but did it do
+So, uh, this still trains, but did it do
+anything?
+float
+32. Okay, so I must have messed this up
+32. Okay, so I must have messed this up
+at some point.
+backward passes under autocast are not
+recommended. Okay.
+We're not going to leave it this way,
+obviously. The backward
+obviously. The backward
+pass right here.
+And we can actually check um we can
+And we can actually check um we can
+check dev branch to make sure we do this
+check dev branch to make sure we do this
+right.
+So this is slower.
+performs worse.
+Okay. So, there is something
+Okay. So, there is something
+here. Um, what we should do
+here. Um, what we should do
+though here, we're going to save this
+Now we will reapply all this stuff.
+So, um, automatic mix precision is
+So, um, automatic mix precision is
+supposed to just be faster. It's
+supposed to just be faster. It's
+supposed to just work everywhere.
+supposed to just work everywhere.
+Um, it's very possible though that there
+Um, it's very possible though that there
+is something screwy with small models
+is something screwy with small models
+with it just being slower. But it's also
+with it just being slower. But it's also
+possible that there's like some weird
+possible that there's like some weird
+backend set and that I've just been
+backend set and that I've just been
+doing it wrong. So that's what we're
+doing it wrong. So that's what we're
+going to figure out
+going to figure out
+today and figure out if this is
+today and figure out if this is
+valuable, if this should be an always
+valuable, if this should be an always
+enable or if there should be uh a
+enable or if there should be uh a
+toggle.
+So, here's your float 32 training. This
+So, here's your float 32 training. This
+should work.
+and actions has a D type and this has
+and actions has a D type and this has
+its own DT type. Cool.
+See if this still
+runs. Okay, this still runs. It's nice
+runs. Okay, this still runs. It's nice
+and
+and
+fast. Float
+16. All tensors must be float 32.
+16. All tensors must be float 32.
+Lovely.
+Is there any way around
+that? No, cuz it's in place as well.
+Uh yeah, that's
+sketchy. Okay, so maybe I can't store it
+sketchy. Okay, so maybe I can't store it
+like this just yet.
+like this just yet.
+We should still be able to make it
+We should still be able to make it
+faster. If this works, if this works
+faster. If this works, if this works
+well, then I will consider
+well, then I will consider
+uh making the
+uh making the
+kernel support multiple D
+types. Okay, so it's definitely slower.
+types. Okay, so it's definitely slower.
+So, let's see if it trains
+So, let's see if it trains
+stable. Get out of here,
+bot. We train the bots around here.
+Okay, so this does still
+Okay, so this does still
+train potentially a very small
+train potentially a very small
+drop. Maybe not at
+all. Yeah, it's about on par. Uh but it
+all. Yeah, it's about on par. Uh but it
+is slower.
+is slower.
+Now if I run with float
+16 it is still
+16 it is still
+slower. Is it stable
+though? Seems to
+though? Seems to
+be. Uh let's see if we're actually doing
+be. Uh let's see if we're actually doing
+what we expect
+here like is this
+actually Yeah, this is float 16. Okay,
+actually Yeah, this is float 16. Okay,
+so this is doing what we
+expect. If I don't set this
+It's redoing something.
+Running out of shared memory somehow
+Running out of shared memory somehow
+here.
+Ah, there we go. So, this was
+Ah, there we go. So, this was
+actually screwing with something it
+actually screwing with something it
+seems.
+What are you building? I am working on
+What are you building? I am working on
+Puffer Lib. This is ultra high
+Puffer Lib. This is ultra high
+performance reinforcement learning
+performance reinforcement learning
+library. We have lots of demos on
+puffer.ai. It's all open source and I
+puffer.ai. It's all open source and I
+stream all the dev
+I'm curious if Bflat now gets faster all
+I'm curious if Bflat now gets faster all
+of a
+sudden. Now see, so Bflat is still
+sudden. Now see, so Bflat is still
+slow. Bloat is still slow.
+Is that expected? I don't think that
+Is that expected? I don't think that
+should be expected.
+so FP16 should be faster.
+Oh, this is lightning.
+Let's try a larger model.
+Yeah. Okay. So, this is original full
+precision. 450 is about
+right. Okay. So this is a little bit
+right. Okay. So this is a little bit
+faster. Not
+much. I mean that is something
+though. It's a pretty
+though. It's a pretty
+disappointing difference though for uh
+disappointing difference though for uh
+going to 16
+bit. Oh, hang on. Now, do we see the
+bit. Oh, hang on. Now, do we see the
+speed up from
+speed up from
+Bflat? Yeah, no, we do see this speed up
+Bflat? Yeah, no, we do see this speed up
+from Bflat now,
+from Bflat now,
+right? Okay. So that's actually worth
+right? Okay. So that's actually worth
+considering. It's
+considering. It's
+small about
+10%. But it's
+10%. But it's
+there. And that should let us optimize
+there. And that should let us optimize
+other stuff more, right? Because
+now No, we actually have very little
+now No, we actually have very little
+overhead on this either way.
+overhead on this either way.
+I think neural link on discord has done
+I think neural link on discord has done
+quite some research on precision
+quite some research on precision
+stuff RL discord discussion discord
+stuff RL discord discussion discord
+maybe you could answer some
+questions the like the old big RL
+questions the like the old big RL
+discord is that still active
+I guess the main question would
+I guess the main question would
+be how much relative to what it has
+be how much relative to what it has
+been. Yeah. I I guess the main thing is
+been. Yeah. I I guess the main thing is
+like
+like
+We see the speed up uh only on the
+We see the speed up uh only on the
+larger models and it's way less than we
+larger models and it's way less than we
+would
+would
+expect I
+think. And it's not like we
+think. And it's not like we
+see Yeah, it's not like there's
+see Yeah, it's not like there's
+additional MISK time or anything.
+Uh this also could be Hang on.
+I think there is
+actually. Do we do like
+float
+float
+16 or let's just do float 16.
+Let's see if this does anything
+different. Float
+16. Maybe then we get the expected speed
+up. Okay, that's something, right?
+up. Okay, that's something, right?
+Yeah, now that's a reasonable speed
+up. So, yeah, we have these casts in
+up. So, yeah, we have these casts in
+here. So, you have to be very careful
+here. So, you have to be very careful
+with your casts.
+How do you
+cast? Maybe it will autocast.
+two. Now we're getting the expected perf
+two. Now we're getting the expected perf
+improvements at least not the well not I
+improvements at least not the well not I
+wouldn't say the expected but we're
+wouldn't say the expected but we're
+getting something
+getting something
+substantial and we get most of it with
+substantial and we get most of it with
+be load as
+well. Cool.
+So now we see that this is that this is
+So now we see that this is that this is
+a
+a
+thing and we try it on like snake
+perhaps. This should be a fast end.
+Reoptimize a bit.
+2.8 mil.
+And if we go to float See?
+tiniest bit
+faster. If we go to Bflat, much slower.
+So worth
+So worth
+using.
+Um, we probably want to default this
+Um, we probably want to default this
+based on model
+based on model
+size, I would guess.
+I'm trying to think why it should be
+I'm trying to think why it should be
+slower. It's just like there's extra
+slower. It's just like there's extra
+cast and
+stuff. It could be worth putting all the
+stuff. It could be worth putting all the
+buffers into this format.
+Oh, interesting. The learning path got
+Oh, interesting. The learning path got
+slower. You see
+that? The learning path got way slower.
+Okay, let's figure that
+out. Cuz maybe I did that wrong.
+can remove scaler if only using
+BF-16. Let's see.
+Uh, you need grad scaler with BF-16.
+Okay. So, we don't need this.
+still
+still
+slow. So it's not the scaling
+Very odd. Very very odd.
+What if I do just
+What if I do just
+uh just the inference?
+Now, what are we
+Now, what are we
+at? 25 22 23
+Okay, so this is
+comparable. It doesn't help now, but it
+comparable. It doesn't help now, but it
+doesn't hurt either.
+Check nural
+MMO could be 450.
+Yeah. So, you actually you do want it on
+Yeah. So, you actually you do want it on
+the backward
+pass, but for whatever reason, it's
+pass, but for whatever reason, it's
+worse with Snake and with the smaller
+worse with Snake and with the smaller
+models in general.
+It can't be the comms because Breakout
+It can't be the comms because Breakout
+doesn't use comms.
+This is 2.8.
+Yeah. So very marginal.
+There's something, but it's very
+marginal. I'm trying to think if there
+marginal. I'm trying to think if there
+are any other M's I could play with for
+are any other M's I could play with for
+this.
+a new
+a new
+meta. Does that work
+now? Yeah, I gota
+equal to
+segments. Now we have the slightest
+segments. Now we have the slightest
+annoyances. Lovely.
+Yeah, I just needed this for an extra
+Yeah, I just needed this for an extra
+test, an extra test M because this is
+test, an extra test M because this is
+like a very slightly larger model.
+Yes. So, there's 500K.
+Okay, so that should be everything.
+and then nothing
+and then nothing
+here.
+Okay,
+interesting. Oh, this has MPF issues.
+interesting. Oh, this has MPF issues.
+I
+see. That shouldn't have end issues. So
+see. That shouldn't have end issues. So
+that's weird.
+Yes. So float 16 actually does help
+Yes. So float 16 actually does help
+though.
+So yeah, that's this is what I was
+So yeah, that's this is what I was
+looking for,
+right? Does anybody know what LLM people
+right? Does anybody know what LLM people
+do these days?
+What are people doing these days for LM?
+Okay, so they're quantized. They're
+Okay, so they're quantized. They're
+still trained on this.
+Okay. I had thought that maybe people
+Okay. I had thought that maybe people
+had gotten lower precision training to
+had gotten lower precision training to
+work by now.
+So I mean this does train here with
+um with FP16.
+FP16 non-tens tensor core has especially
+FP16 non-tens tensor core has especially
+high throughput.
+very weird.
+I really would like to know why there is
+I really would like to know why there is
+a perk
+a perk
+difference. Um because it makes it very
+difference. Um because it makes it very
+difficult to benchmark
+difficult to benchmark
+stuff. Like I'd really rather not have
+stuff. Like I'd really rather not have
+to have float 16 at all if I can get
+to have float 16 at all if I can get
+around it.
+That's definitely a speed
+difference. I wonder if it's hardware
+difference. I wonder if it's hardware
+dependent.
+Yeah, these are supposed to be the
+same unless something is getting cash
+same unless something is getting cash
+weirdly,
+weirdly,
+right? But it would have to be doing
+right? But it would have to be doing
+this in every single one, which is
+unlikely. Let's try pawn.
+Make sure I don't see any out of memory
+errors. So there's Pong. Pong is
+errors. So there's Pong. Pong is
+ridiculously fast. 4.7 4.8 Donate
+mil. Cuts the perf in half immediately.
+and float 16.
+is
+slower
+slightly. That could just be the
+slightly. That could just be the
+additional data cast though.
+I mean, I guess it's something like the
+I mean, I guess it's something like the
+cast has to be unoptimized or whatever
+cast has to be unoptimized or whatever
+because you do get the performance in
+because you do get the performance in
+bigger models.
+for bigger models. The B float and the
+for bigger models. The B float and the
+float is about the same as well. Right?
+float is about the same as well. Right?
+If I do like neural MMO
+3, well, I've already tested this. It's
+3, well, I've already tested this. It's
+it's about the
+it's about the
+same. So, I don't even really think we
+same. So, I don't even really think we
+want to mess with FP16 as much.
+Like, do we really want to
+guess? I don't really think we want to
+guess? I don't really think we want to
+guess at stability
+guess at stability
+issues being like from
+FP16. But I think for now
+Well, how hard is it to write your
+Well, how hard is it to write your
+kernel with FP16?
+it also. Maybe we don't have to do it in
+it also. Maybe we don't have to do it in
+place.
+Okay, maybe I don't have to write custom
+Okay, maybe I don't have to write custom
+kernel here. Maybe we'll do here. Let's
+kernel here. Maybe we'll do here. Let's
+do
+this. Move this for now. I know what
+this. Move this for now. I know what
+we're going to do. Oops. Is it uh 9:51?
+we're going to do. Oops. Is it uh 9:51?
+Okay. Lost track of time. I'm
+Okay. Lost track of time. I'm
+uh I'm uh I will be back right after
+uh I'm uh I will be back right after
+breakfast. Uh and then we will finish AM
+breakfast. Uh and then we will finish AM
+and we will keep optimizing this stuff.
+and we will keep optimizing this stuff.
+So thanks
+folks. Uh puffer.ai for all the things.
+folks. Uh puffer.ai for all the things.
+Go to the GitHub to help us out. Uh come
+Go to the GitHub to help us out. Uh come
+join us on Discord if you want to get
+join us on Discord if you want to get
+involved with dev. And I will be back.
+
+Kind: captions
+Language: en
+Let me just make sure this is going
+through.
+through.
+Perfect. So, here's the plan. Today, I'm
+Perfect. So, here's the plan. Today, I'm
+going to be live all day,
+going to be live all day,
+uh,
+uh,
+minus breakfast and dinner from now
+minus breakfast and dinner from now
+until probably like 8:00
+until probably like 8:00
+p.m. Try to get a minimum of 10 hours
+p.m. Try to get a minimum of 10 hours
+streamed in. Um, we're going to try to
+streamed in. Um, we're going to try to
+really clean
+really clean
+up all of our training code for next
+up all of our training code for next
+release. And I think that
+release. And I think that
+today compared to yesterday, uh, we're
+today compared to yesterday, uh, we're
+actually going to start looking at more
+actually going to start looking at more
+of the features that we currently have
+of the features that we currently have
+in place and deciding which ones
+in place and deciding which ones
+actually matter uh, and which ones
+actually matter uh, and which ones
+don't. So, pretty much anything that I
+don't. So, pretty much anything that I
+haven't used in months, uh, we will just
+drop. And there are a few things that I
+drop. And there are a few things that I
+want to try out. I want to try out this
+want to try out. I want to try out this
+distributional thing really quick. I
+distributional thing really quick. I
+think I might have been a little
+think I might have been a little
+overeager to start on this yesterday.
+overeager to start on this yesterday.
+But, uh, since I got a little bit of
+But, uh, since I got a little bit of
+progress in on it, I think I'm going to
+progress in on it, I think I'm going to
+spend just we'll probably give this like
+spend just we'll probably give this like
+the first hour, hour and a half today.
+the first hour, hour and a half today.
+And if I make any progress, I make some
+And if I make any progress, I make some
+progress. If I don't, I don't. And uh
+progress. If I don't, I don't. And uh
+yeah, we will just continue from
+there. The first thing that I want to
+there. The first thing that I want to
+do, take a look at uh this run here is
+do, take a look at uh this run here is
+doing quite
+doing quite
+well. We will see how this does when it
+well. We will see how this does when it
+finishes. It's going to take quite a
+while. And then
+while. And then
+next I want to take a look at the
+next I want to take a look at the
+distributional Q-learning
+paper because I want to see how
+uh how Belair and everyone does
+this. Now it's not going to be one to
+this. Now it's not going to be one to
+one because this is for Q-learning.
+Okay.
+So they say skip this
+section. This is background.
+I believe they have the algorithm
+I believe they have the algorithm
+definition
+definition
+here. So this is a very
+here. So this is a very
+simple
+simple
+distribution. They're just saying that
+distribution. They're just saying that
+you pick a minimum and a maximum value.
+you pick a minimum and a maximum value.
+You bucket your value function into n
+You bucket your value function into n
+intervals uniformly over
+intervals uniformly over
+that. And then you take softmax uh over
+that. And then you take softmax uh over
+the outputs of each value head in order
+the outputs of each value head in order
+to get the probability of being in each
+bucket. Now how do they actually sample
+bucket. Now how do they actually sample
+this thing? I'd like to
+know. Okay. Using a discrete
+know. Okay. Using a discrete
+distribution poses a problem. The
+distribution poses a problem. The
+Bellman
+Bellman
+update and our
+update and our
+parameterization almost always have
+parameterization almost always have
+disjoint
+supports. Okay, I haven't seen enough of
+supports. Okay, I haven't seen enough of
+their math for that, but we'll come back
+their math for that, but we'll come back
+to
+to
+this. It would seem natural to minimize
+this. It would seem natural to minimize
+the Werstein
+the Werstein
+metric between these which is also
+metric between these which is also
+conveniently robust to discrepancies in
+conveniently robust to discrepancies in
+support. In practice, we're typically
+support. In practice, we're typically
+restricted to learning from sample
+restricted to learning from sample
+transitions which is not possible under
+transitions which is not possible under
+the Werstein
+the Werstein
+loss. Instead, we project the sample
+loss. Instead, we project the sample
+Bellman update onto the
+Bellman update onto the
+support effectively reducing the Bellman
+support effectively reducing the Bellman
+update to multiclass classification.
+Let pi be a greedy
+policy. Given a sample transition, we
+policy. Given a sample transition, we
+compute the Bellman
+update reward plus discounted ZJ for
+update reward plus discounted ZJ for
+each atom Zj. Okay, so this isn't what I
+each atom Zj. Okay, so this isn't what I
+was thinking. And then we distribute its
+was thinking. And then we distribute its
+probability to the immediate neighbors
+probability to the immediate neighbors
+of of this H.
+Okay, this is not what I was thinking
+Okay, this is not what I was thinking
+about or this is not how I was thinking
+about or this is not how I was thinking
+about
+it, but I think it gets simpler in the
+it, but I think it gets simpler in the
+on policy case.
+Anyways, the E component of the
+Anyways, the E component of the
+projected update is
+The heck is this?
+Okay. So this is
+Okay. So this is
+just reward plus
+just reward plus
+discounted
+value. And then
+this this is the bucketing operation. So
+this this is the bucketing operation. So
+this is them just doing really annoying
+this is them just doing really annoying
+fancy floor ceiling stuff. But this is I
+fancy floor ceiling stuff. But this is I
+think that this is just them bucketing
+think that this is just them bucketing
+the value function here.
+Okay, so it's good that I found this.
+Okay, so it's good that I found this.
+They actually need like 51 buckets.
+They actually need like 51 buckets.
+That's a lot.
+The fact that this doesn't work at all
+The fact that this doesn't work at all
+on sequest until you go to 51 is very
+on sequest until you go to 51 is very
+sketchy.
+Yeah. I don't understand what this thing
+Yeah. I don't understand what this thing
+is doing here though at the
+bottom. So, this loss is just
+Wonder if this is in
+clean. It is.
+and it is quite
+short. Okay. So let's see the output of
+short. Okay. So let's see the output of
+this
+thing. Okay. So it's n times the number
+thing. Okay. So it's n times the number
+of atoms.
+And that gives you the
+And that gives you the
+value uh it gives you like this
+value uh it gives you like this
+discretized value for each predicted
+discretized value for each predicted
+action which is going to be different
+action which is going to be different
+from what we do in the online
+case. Okay. Okay. And now here we have
+case. Okay. Okay. And now here we have
+we have potentially what we're looking
+we have potentially what we're looking
+for.
+You get
+actions
+PMFS. Okay. So this is the probability
+PMFS. Okay. So this is the probability
+mass function for each action is what
+mass function for each action is what
+this
+is. And then this
+is. And then this
+uh this is going to only return the
+uh this is going to only return the
+probability for the action that you
+probability for the action that you
+actually take I
+actually take I
+believe which is good because that's how
+believe which is good because that's how
+we're going to do it in online case
+we're going to do it in online case
+anyways
+anyways
+um or on policy case anyways. So we
+um or on policy case anyways. So we
+should be really easily able to figure
+should be really easily able to figure
+this out from here. So this is just our
+this out from here. So this is just our
+value function output softmax of our
+value function output softmax of our
+value function output right here.
+value function output right here.
+And then they do next
+atoms reward plus gamma times
+atoms. Yeah. Now we have to figure out
+atoms. Yeah. Now we have to figure out
+this mess here.
+So we have delta
+So we have delta
+Z target networks of one minus target
+Z target networks of one minus target
+network atoms of
+zero
+H. Let's figure that
+H. Let's figure that
+out. I think this is the
+out. I think this is the
+delta atoms.
+Uh, I don't see atoms
+here. Target
+networks. This is the only network they
+have. Register buffer. Okay, here it's a
+have. Register buffer. Okay, here it's a
+lin space right here. So this is
+lin space right here. So this is
+literally just going to be uh the step
+literally just going to be uh the step
+delta. So if it's like 0 one or 0.5 1
+delta. So if it's like 0 one or 0.5 1
+1.5 and then it's just
+0.5. And then what are we doing here?
+0.5. And then what are we doing here?
+We're going to
+clamp clamp this to min and
+max. Okay.
+And then how do they set V min and V max
+also? Oh, these are arguments.
+also? Oh, these are arguments.
+Yeah, that's
+Yeah, that's
+interesting. Ah, but they just set these
+interesting. Ah, but they just set these
+to like big
+values. Okay, so those are just
+values. Okay, so those are just
+constants. If there if that's all it is,
+constants. If there if that's all it is,
+then that's actually not that
+then that's actually not that
+bad. That's not that
+bad. I thought it was going to have to
+bad. I thought it was going to have to
+be some weird dynamic
+thing, but then we take
+B.Flo. Okay.
+Now, the thing that's a little sketchy
+Now, the thing that's a little sketchy
+here, right, this
+is there's going to be a difference here
+is there's going to be a difference here
+between the Q-learning version and our
+between the Q-learning version and our
+on policy
+version. So let's see what we have so
+version. So let's see what we have so
+far. We get the probability distribution
+far. We get the probability distribution
+over actions.
+Oh, this
+Oh, this
+is yeah so this is this doesn't depend
+is yeah so this is this doesn't depend
+on this at all. So this is just this
+on this at all. So this is just this
+next Adams thing
+next Adams thing
+is just for every possible uh value that
+is just for every possible uh value that
+you could have rewards plus discounted
+value. Okay. So then there's the
+projection. This still doesn't depend on
+projection. This still doesn't depend on
+this at all.
+And we actually we don't get we don't
+And we actually we don't get we don't
+depend on this at
+depend on this at
+all until
+here. So all this is building the
+here. So all this is building the
+targets I guess
+targets I guess
+right? All of this is just building the
+right? All of this is just building the
+targets.
+And then this
+becomes I believe this is just a
+becomes I believe this is just a
+categorical Huh?
+Why are they?
+Okay. So you get your action here and
+Okay. So you get your action here and
+then the loss
+is your
+is your
+actions or your
+actions or your
+log. This is your action log
+props. I'm pretty sure this is just
+props. I'm pretty sure this is just
+cross entropy.
+Yeah, I'm pretty pretty darn
+Yeah, I'm pretty pretty darn
+sure. So, this is just your action
+sure. So, this is just your action
+probability or action log props. It's a
+probability or action log props. It's a
+cross entropy from your action
+cross entropy from your action
+logs to whatever they've decided this uh
+logs to whatever they've decided this uh
+target PMF action index is. So, all of
+target PMF action index is. So, all of
+this is just computing an index. Um
+this is just computing an index. Um
+there's nothing fancier going on that I
+there's nothing fancier going on that I
+can see.
+So if we can figure out how they're
+So if we can figure out how they're
+computing an index and how we modify it
+computing an index and how we modify it
+specifically
+for for on policy we will be
+good. Hang on.
+This building was specifically uh
+This building was specifically uh
+constructed to
+constructed to
+avoid having
+avoid having
+uh sun glare.
+uh sun glare.
+But my table is
+reflective.
+Okay. So, what are they doing here?
+Okay. So, what are they doing here?
+They're
+saying they take rewards plus discounted
+values and then here is this
+delta. Who wrote this code? I wonder is
+delta. Who wrote this code? I wonder is
+this Costa's
+code? some of it.
+So, it's a little confusing because
+So, it's a little confusing because
+these are out of order
+here, but they are just
+here, but they are just
+clamping this like discounted reward
+clamping this like discounted reward
+thing between the min and the max.
+Then they apply this
+transformation. I think they're
+transformation. I think they're
+splitting it between two adjacent
+splitting it between two adjacent
+buckets or something here.
+Ah, wait. Is this too
+Ah, wait. Is this too
+hot? L of
+I.Long. Okay. I don't understand this
+I.Long. Okay. I don't understand this
+transform here.
+You're
+normalizing.
+normalizing.
+Wait, you're This is not depending on
+Wait, you're This is not depending on
+next PMFs at all,
+next PMFs at all,
+right? Yeah. No, this does not depend on
+right? Yeah. No, this does not depend on
+next PMFS
+next PMFS
+uh at all.
+uh at all.
+It does depend on the rewards. So you're
+It does depend on the rewards. So you're
+using the rewards to construct the
+using the rewards to construct the
+targets. You're doing this like
+targets. You're doing this like
+normalized
+normalized
+uh this reward minus discount value
+uh this reward minus discount value
+whatever. This is a
+whatever. This is a
+norm. And then you clamp this.
+You're getting two integers out of this.
+You're getting two integers out of this.
+The floor and the
+The floor and the
+ceiling, like previous bucket, next
+ceiling, like previous bucket, next
+bucket, something like
+that. And then
+It's a very fiddly
+operation. I'm having difficulty
+operation. I'm having difficulty
+figuring out what the heck they're
+figuring out what the heck they're
+doing.
+Do you need to do this? Do they have
+Do you need to do this? Do they have
+ablations?
+Huh? That's
+crazy. This was
+uh accepted with a way higher mean
+uh accepted with a way higher mean
+score. Uh but their median was correct.
+It helps on almost every game.
+I actually don't know if we should
+I actually don't know if we should
+really even do this right now because
+really even do this right now because
+like does this make sense outside of the
+like does this make sense outside of the
+off policy context? You learn the
+off policy context? You learn the
+distribution
+You don't know the action yet, right?
+You don't know the action yet, right?
+It's not action
+conditioned. I think that the smartest
+conditioned. I think that the smartest
+thing to do with this given that there's
+thing to do with this given that there's
+actually like some complexity here and
+actually like some complexity here and
+I'm not just implementing it one to one.
+I'm not just implementing it one to one.
+that would have to be a modified version
+that would have to be a modified version
+for uh on
+policy. I think we just stash this for
+policy. I think we just stash this for
+now.
+And I mean we see here though that the
+And I mean we see here though that the
+way I was thinking about uh P30 is
+way I was thinking about uh P30 is
+completely
+completely
+different from this
+It's going to be like
+ridiculously Yeah. And then the way this
+ridiculously Yeah. And then the way this
+is the version of P3 I had in mind would
+is the version of P3 I had in mind would
+become ludicrously expensive as well
+become ludicrously expensive as well
+because this is now
+predicting. I mean honestly this alone
+predicting. I mean honestly this alone
+is probably already somewhat
+expensive. Yeah. I don't want to just go
+expensive. Yeah. I don't want to just go
+do this wrong and like conclude that
+do this wrong and like conclude that
+this doesn't work because there's
+this doesn't work because there's
+actually like a pretty non-trivial
+actually like a pretty non-trivial
+modification. I think that this should
+modification. I think that this should
+be like on the top of the stack for
+be like on the top of the stack for
+after the update. Uh is this is
+after the update. Uh is this is
+something that I should look at here.
+something that I should look at here.
+But like the the thing is that this is
+But like the the thing is that this is
+going to require quite some modification
+going to require quite some modification
+because like this is going to
+because like this is going to
+essentially require me to decide or to
+essentially require me to decide or to
+figure out the whole on policy versus
+figure out the whole on policy versus
+off policy split that happened with what
+off policy split that happened with what
+most of what DeepMind did and most of
+most of what DeepMind did and most of
+what OpenAI did in like late 2010s early
+what OpenAI did in like late 2010s early
+2020s.
+2020s.
+Um so I think that's going to be part of
+Um so I think that's going to be part of
+the next research
+the next research
+segment. So, I don't think it makes
+segment. So, I don't think it makes
+sense to spend like another hour on this
+sense to spend like another hour on this
+to do that. Here's what we're going to
+do. We're going to just remove all P30
+do. We're going to just remove all P30
+stuff for now.
+We'll do the C++
+later. Okay, we're at 1294
+later. Okay, we're at 1294
+lines from that.
+lines from that.
+Uh we still have the V
+Uh we still have the V
+trace experiments to
+trace experiments to
+do. So those will actually have to do
+do. So those will actually have to do
+the experiments on. And then there's the
+the experiments on. And then there's the
+question of can we get Diane to do
+question of can we get Diane to do
+anything as
+well. Let me see what are the key
+well. Let me see what are the key
+questions we have to answer in order to
+questions we have to answer in order to
+like
+like
+really get this thing to work.
+Project name, please. This is Puffer
+Project name, please. This is Puffer
+Lib. All my stuff is at puffer AI.
+Lib. All my stuff is at puffer AI.
+Whoops, not this one.
+Puffer.ai. And we have ultra high perf
+Puffer.ai. And we have ultra high perf
+reinforcement learning M. You can play
+reinforcement learning M. You can play
+them in your
+them in your
+browser. You can take over. You can
+browser. You can take over. You can
+watch. This is me playing. I hit control
+watch. This is me playing. I hit control
+here. This guy will now be playing. We
+here. This guy will now be playing. We
+have everything from like simple arcade
+have everything from like simple arcade
+games like this miniature version of
+games like this miniature version of
+OpenAI
+OpenAI
+5 and lots in
+5 and lots in
+between. This is really a comprehensive
+between. This is really a comprehensive
+effort to fix everything wrong with
+effort to fix everything wrong with
+reinforcement
+learning. Let's just like get a quick
+Mult benchmarking normalized for I did
+Mult benchmarking normalized for I did
+that.
+We need
+um let's see sampling
+um let's see sampling
+methods or batch or
+replay form
+replay form
+clip flags.
+off
+policy a e first bet trace puff.
+Did I miss
+Did I miss
+anything? What other like options are
+anything? What other like options are
+there? So, there's like this Vray
+stuff I guess optimizer choice.
+So like the difficult thing here is some
+So like the difficult thing here is some
+of
+of
+these get rid of this.
+some of these. Um, we we want to run
+some of these. Um, we we want to run
+like a bunch of experiments prior to
+like a bunch of experiments prior to
+release on
+these. There's a clip value loss and
+these. There's a clip value loss and
+there's normalized advantage. These two
+What
+else? We can do perf stuff on AM and
+else? We can do perf stuff on AM and
+distributed today. That's a pretty easy
+distributed today. That's a pretty easy
+one to
+one to
+conclude. Um the J vtrace puff advantage
+conclude. Um the J vtrace puff advantage
+that will be experiments.
+that will be experiments.
+Diane will be we need to run some
+Diane will be we need to run some
+experiments. Off policy has never
+experiments. Off policy has never
+worked.
+Welcome
+boxing. Get rid of this.
+Did you manage to get yesterday's stuff
+Did you manage to get yesterday's stuff
+working? Uh, the PyTorch stuff I did.
+working? Uh, the PyTorch stuff I did.
+Yeah. The distributional stuff that I
+Yeah. The distributional stuff that I
+started towards the end, I looked at
+started towards the end, I looked at
+again this morning. It's more
+again this morning. It's more
+complicated than I thought and it's
+complicated than I thought and it's
+going to be like that's going to end up
+going to be like that's going to end up
+being a multi-day thing. And I think
+being a multi-day thing. And I think
+that it makes more sense to do that once
+that it makes more sense to do that once
+I have this release done as part of my
+I have this release done as part of my
+next effort, which is going to be a lot
+next effort, which is going to be a lot
+of algo side stuff.
+What about this target kale? This is
+What about this target kale? This is
+like something that it seems like we
+like something that it seems like we
+should use but don't,
+right? We can play with this as well.
+I kind of just want to like get rid of
+I kind of just want to like get rid of
+all the options and flags here. I don't
+all the options and flags here. I don't
+want this to be like, oh yeah, you have
+want this to be like, oh yeah, you have
+the options to do whatever. Like this
+the options to do whatever. Like this
+should just be the best set of things
+should just be the best set of things
+that works. That's it.
+that works. That's it.
+Done. And like anything that a question
+Done. And like anything that a question
+comes up, we will test
+comes up, we will test
+it and we'll figure it out definitively.
+Okay, so we still have this working.
+Okay, so we still have this working.
+1271 lines, 3 million steps per second
+training. Looks
+good. There we go.
+Let's do
+um I think we can't do compile yet. We
+um I think we can't do compile yet. We
+should be able to do AM though.
+Uh, why does this not have
+this be float 16?
+So, uh, this still trains, but did it do
+So, uh, this still trains, but did it do
+anything?
+float
+32. Okay, so I must have messed this up
+32. Okay, so I must have messed this up
+at some point.
+backward passes under autocast are not
+recommended. Okay.
+We're not going to leave it this way,
+obviously. The backward
+obviously. The backward
+pass right here.
+And we can actually check um we can
+And we can actually check um we can
+check dev branch to make sure we do this
+check dev branch to make sure we do this
+right.
+So this is slower.
+performs worse.
+Okay. So, there is something
+Okay. So, there is something
+here. Um, what we should do
+here. Um, what we should do
+though here, we're going to save this
+Now we will reapply all this stuff.
+So, um, automatic mix precision is
+So, um, automatic mix precision is
+supposed to just be faster. It's
+supposed to just be faster. It's
+supposed to just work everywhere.
+supposed to just work everywhere.
+Um, it's very possible though that there
+Um, it's very possible though that there
+is something screwy with small models
+is something screwy with small models
+with it just being slower. But it's also
+with it just being slower. But it's also
+possible that there's like some weird
+possible that there's like some weird
+backend set and that I've just been
+backend set and that I've just been
+doing it wrong. So that's what we're
+doing it wrong. So that's what we're
+going to figure out
+going to figure out
+today and figure out if this is
+today and figure out if this is
+valuable, if this should be an always
+valuable, if this should be an always
+enable or if there should be uh a
+enable or if there should be uh a
+toggle.
+So, here's your float 32 training. This
+So, here's your float 32 training. This
+should work.
+and actions has a D type and this has
+and actions has a D type and this has
+its own DT type. Cool.
+See if this still
+runs. Okay, this still runs. It's nice
+runs. Okay, this still runs. It's nice
+and
+and
+fast. Float
+16. All tensors must be float 32.
+16. All tensors must be float 32.
+Lovely.
+Is there any way around
+that? No, cuz it's in place as well.
+Uh yeah, that's
+sketchy. Okay, so maybe I can't store it
+sketchy. Okay, so maybe I can't store it
+like this just yet.
+like this just yet.
+We should still be able to make it
+We should still be able to make it
+faster. If this works, if this works
+faster. If this works, if this works
+well, then I will consider
+well, then I will consider
+uh making the
+uh making the
+kernel support multiple D
+types. Okay, so it's definitely slower.
+types. Okay, so it's definitely slower.
+So, let's see if it trains
+So, let's see if it trains
+stable. Get out of here,
+bot. We train the bots around here.
+Okay, so this does still
+Okay, so this does still
+train potentially a very small
+train potentially a very small
+drop. Maybe not at
+all. Yeah, it's about on par. Uh but it
+all. Yeah, it's about on par. Uh but it
+is slower.
+is slower.
+Now if I run with float
+16 it is still
+16 it is still
+slower. Is it stable
+though? Seems to
+though? Seems to
+be. Uh let's see if we're actually doing
+be. Uh let's see if we're actually doing
+what we expect
+here like is this
+actually Yeah, this is float 16. Okay,
+actually Yeah, this is float 16. Okay,
+so this is doing what we
+expect. If I don't set this
+It's redoing something.
+Running out of shared memory somehow
+Running out of shared memory somehow
+here.
+Ah, there we go. So, this was
+Ah, there we go. So, this was
+actually screwing with something it
+actually screwing with something it
+seems.
+What are you building? I am working on
+What are you building? I am working on
+Puffer Lib. This is ultra high
+Puffer Lib. This is ultra high
+performance reinforcement learning
+performance reinforcement learning
+library. We have lots of demos on
+puffer.ai. It's all open source and I
+puffer.ai. It's all open source and I
+stream all the dev
+I'm curious if Bflat now gets faster all
+I'm curious if Bflat now gets faster all
+of a
+sudden. Now see, so Bflat is still
+sudden. Now see, so Bflat is still
+slow. Bloat is still slow.
+Is that expected? I don't think that
+Is that expected? I don't think that
+should be expected.
+so FP16 should be faster.
+Oh, this is lightning.
+Let's try a larger model.
+Yeah. Okay. So, this is original full
+precision. 450 is about
+right. Okay. So this is a little bit
+right. Okay. So this is a little bit
+faster. Not
+much. I mean that is something
+though. It's a pretty
+though. It's a pretty
+disappointing difference though for uh
+disappointing difference though for uh
+going to 16
+bit. Oh, hang on. Now, do we see the
+bit. Oh, hang on. Now, do we see the
+speed up from
+speed up from
+Bflat? Yeah, no, we do see this speed up
+Bflat? Yeah, no, we do see this speed up
+from Bflat now,
+from Bflat now,
+right? Okay. So that's actually worth
+right? Okay. So that's actually worth
+considering. It's
+considering. It's
+small about
+10%. But it's
+10%. But it's
+there. And that should let us optimize
+there. And that should let us optimize
+other stuff more, right? Because
+now No, we actually have very little
+now No, we actually have very little
+overhead on this either way.
+overhead on this either way.
+I think neural link on discord has done
+I think neural link on discord has done
+quite some research on precision
+quite some research on precision
+stuff RL discord discussion discord
+stuff RL discord discussion discord
+maybe you could answer some
+questions the like the old big RL
+questions the like the old big RL
+discord is that still active
+I guess the main question would
+I guess the main question would
+be how much relative to what it has
+be how much relative to what it has
+been. Yeah. I I guess the main thing is
+been. Yeah. I I guess the main thing is
+like
+like
+We see the speed up uh only on the
+We see the speed up uh only on the
+larger models and it's way less than we
+larger models and it's way less than we
+would
+would
+expect I
+think. And it's not like we
+think. And it's not like we
+see Yeah, it's not like there's
+see Yeah, it's not like there's
+additional MISK time or anything.
+Uh this also could be Hang on.
+I think there is
+actually. Do we do like
+float
+float
+16 or let's just do float 16.
+Let's see if this does anything
+different. Float
+16. Maybe then we get the expected speed
+up. Okay, that's something, right?
+up. Okay, that's something, right?
+Yeah, now that's a reasonable speed
+up. So, yeah, we have these casts in
+up. So, yeah, we have these casts in
+here. So, you have to be very careful
+here. So, you have to be very careful
+with your casts.
+How do you
+cast? Maybe it will autocast.
+two. Now we're getting the expected perf
+two. Now we're getting the expected perf
+improvements at least not the well not I
+improvements at least not the well not I
+wouldn't say the expected but we're
+wouldn't say the expected but we're
+getting something
+getting something
+substantial and we get most of it with
+substantial and we get most of it with
+be load as
+well. Cool.
+So now we see that this is that this is
+So now we see that this is that this is
+a
+a
+thing and we try it on like snake
+perhaps. This should be a fast end.
+Reoptimize a bit.
+2.8 mil.
+And if we go to float See?
+tiniest bit
+faster. If we go to Bflat, much slower.
+So worth
+So worth
+using.
+Um, we probably want to default this
+Um, we probably want to default this
+based on model
+based on model
+size, I would guess.
+I'm trying to think why it should be
+I'm trying to think why it should be
+slower. It's just like there's extra
+slower. It's just like there's extra
+cast and
+stuff. It could be worth putting all the
+stuff. It could be worth putting all the
+buffers into this format.
+Oh, interesting. The learning path got
+Oh, interesting. The learning path got
+slower. You see
+that? The learning path got way slower.
+Okay, let's figure that
+out. Cuz maybe I did that wrong.
+can remove scaler if only using
+BF-16. Let's see.
+Uh, you need grad scaler with BF-16.
+Okay. So, we don't need this.
+still
+still
+slow. So it's not the scaling
+Very odd. Very very odd.
+What if I do just
+What if I do just
+uh just the inference?
+Now, what are we
+Now, what are we
+at? 25 22 23
+Okay, so this is
+comparable. It doesn't help now, but it
+comparable. It doesn't help now, but it
+doesn't hurt either.
+Check nural
+MMO could be 450.
+Yeah. So, you actually you do want it on
+Yeah. So, you actually you do want it on
+the backward
+pass, but for whatever reason, it's
+pass, but for whatever reason, it's
+worse with Snake and with the smaller
+worse with Snake and with the smaller
+models in general.
+It can't be the comms because Breakout
+It can't be the comms because Breakout
+doesn't use comms.
+This is 2.8.
+Yeah. So very marginal.
+There's something, but it's very
+marginal. I'm trying to think if there
+marginal. I'm trying to think if there
+are any other M's I could play with for
+are any other M's I could play with for
+this.
+a new
+a new
+meta. Does that work
+now? Yeah, I gota
+equal to
+segments. Now we have the slightest
+segments. Now we have the slightest
+annoyances. Lovely.
+Yeah, I just needed this for an extra
+Yeah, I just needed this for an extra
+test, an extra test M because this is
+test, an extra test M because this is
+like a very slightly larger model.
+Yes. So, there's 500K.
+Okay, so that should be everything.
+and then nothing
+and then nothing
+here.
+Okay,
+interesting. Oh, this has MPF issues.
+interesting. Oh, this has MPF issues.
+I
+see. That shouldn't have end issues. So
+see. That shouldn't have end issues. So
+that's weird.
+Yes. So float 16 actually does help
+Yes. So float 16 actually does help
+though.
+So yeah, that's this is what I was
+So yeah, that's this is what I was
+looking for,
+right? Does anybody know what LLM people
+right? Does anybody know what LLM people
+do these days?
+What are people doing these days for LM?
+Okay, so they're quantized. They're
+Okay, so they're quantized. They're
+still trained on this.
+Okay. I had thought that maybe people
+Okay. I had thought that maybe people
+had gotten lower precision training to
+had gotten lower precision training to
+work by now.
+So I mean this does train here with
+um with FP16.
+FP16 non-tens tensor core has especially
+FP16 non-tens tensor core has especially
+high throughput.
+very weird.
+I really would like to know why there is
+I really would like to know why there is
+a perk
+a perk
+difference. Um because it makes it very
+difference. Um because it makes it very
+difficult to benchmark
+difficult to benchmark
+stuff. Like I'd really rather not have
+stuff. Like I'd really rather not have
+to have float 16 at all if I can get
+to have float 16 at all if I can get
+around it.
+That's definitely a speed
+difference. I wonder if it's hardware
+difference. I wonder if it's hardware
+dependent.
+Yeah, these are supposed to be the
+same unless something is getting cash
+same unless something is getting cash
+weirdly,
+weirdly,
+right? But it would have to be doing
+right? But it would have to be doing
+this in every single one, which is
+unlikely. Let's try pawn.
+Make sure I don't see any out of memory
+errors. So there's Pong. Pong is
+errors. So there's Pong. Pong is
+ridiculously fast. 4.7 4.8 Donate
+mil. Cuts the perf in half immediately.
+and float 16.
+is
+slower
+slightly. That could just be the
+slightly. That could just be the
+additional data cast though.
+I mean, I guess it's something like the
+I mean, I guess it's something like the
+cast has to be unoptimized or whatever
+cast has to be unoptimized or whatever
+because you do get the performance in
+because you do get the performance in
+bigger models.
+for bigger models. The B float and the
+for bigger models. The B float and the
+float is about the same as well. Right?
+float is about the same as well. Right?
+If I do like neural MMO
+3, well, I've already tested this. It's
+3, well, I've already tested this. It's
+it's about the
+it's about the
+same. So, I don't even really think we
+same. So, I don't even really think we
+want to mess with FP16 as much.
+Like, do we really want to
+guess? I don't really think we want to
+guess? I don't really think we want to
+guess at stability
+guess at stability
+issues being like from
+FP16. But I think for now
+Well, how hard is it to write your
+Well, how hard is it to write your
+kernel with FP16?
+it also. Maybe we don't have to do it in
+it also. Maybe we don't have to do it in
+place.
+Okay, maybe I don't have to write custom
+Okay, maybe I don't have to write custom
+kernel here. Maybe we'll do here. Let's
+kernel here. Maybe we'll do here. Let's
+do
+this. Move this for now. I know what
+this. Move this for now. I know what
+we're going to do. Oops. Is it uh 9:51?
+we're going to do. Oops. Is it uh 9:51?
+Okay. Lost track of time. I'm
+Okay. Lost track of time. I'm
+uh I'm uh I will be back right after
+uh I'm uh I will be back right after
+breakfast. Uh and then we will finish AM
+breakfast. Uh and then we will finish AM
+and we will keep optimizing this stuff.
+and we will keep optimizing this stuff.
+So thanks
+folks. Uh puffer.ai for all the things.
+folks. Uh puffer.ai for all the things.
+Go to the GitHub to help us out. Uh come
+Go to the GitHub to help us out. Uh come
+join us on Discord if you want to get
+join us on Discord if you want to get
+involved with dev. And I will be back.

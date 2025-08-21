@@ -1,0 +1,995 @@
+Kind: captions
+Language: en
+okay we should be
+live just going to do a very short
+live just going to do a very short
+stream here um have to head to the gym
+stream here um have to head to the gym
+in a bit I'll get back on my normal
+in a bit I'll get back on my normal
+schedule just been messed up with
+schedule just been messed up with
+Christmas and
+all hey how's it going
+all hey how's it going
+man I owe you some uh
+man I owe you some uh
+integration assistance I presume with
+integration assistance I presume with
+the
+the
+optimizer uh where is this
+optimizer uh where is this
+thing
+eror check
+space effect
+39 all right so we'll comment this for
+39 all right so we'll comment this for
+now because Captain says it needs to be
+now because Captain says it needs to be
+commented
+merry Christmas as
+well holy what is
+this uh interesting
+150k yeah this is too slow uh let's
+150k yeah this is too slow uh let's
+figure out what's wrong with this
+figure out what's wrong with this
+thing
+so I think he messed with this ve a
+so I think he messed with this ve a
+whole bunch right yeah look he messed
+whole bunch right yeah look he messed
+with back a whole
+bunch oh no this is Evo what about train
+train
+arcs
+arcs
+uh I'm confused as to what he did
+here he made like a custom version of
+here he made like a custom version of
+our trainer
+our trainer
+okay so he does have
+multiprocessing okay so I got to just
+multiprocessing okay so I got to just
+see what the heck is going on here
+see what the heck is going on here
+because he's got some
+ARS he's got zero copy set to
+ARS he's got zero copy set to
+True 8 m eight workers B size of
+four I don't know about that
+okay so that doesn't seem to make a
+okay so that doesn't seem to make a
+difference if anything that's slower
+M yeah keep the eight
+try this
+maybe okay so no this does not
+help so the m is definitely just too
+help so the m is definitely just too
+damn slow at the moment we'll figure
+damn slow at the moment we'll figure
+that out
+um so his 88 settings are kind of fine
+um so his 88 settings are kind of fine
+then by
+then by
+default
+default
+interesting wait num drones num
+agents
+um hang on maybe this is not what I
+um hang on maybe this is not what I
+think it
+think it
+is and 15 okay hopefully he's on in time
+is and 15 okay hopefully he's on in time
+so num
+ends is
+256 okay he took my advice correctly I
+256 okay he took my advice correctly I
+believe
+what's the policy
+[Music]
+so what's making this so
+slow map
+CNN it could just be this map CNN to be
+CNN it could just be this map CNN to be
+fair
+why did you do
+stri well that's
+stri well that's
+Jank five at Stride two does that even
+Jank five at Stride two does that even
+make
+sense I think you'd want this at Stride
+sense I think you'd want this at Stride
+three and and then you can't do this at
+three and and then you can't do this at
+Stride two either that doesn't
+help I think the most likely thing is is
+help I think the most likely thing is is
+just his OBS are too damn
+big have this be fully observed like
+this for
+yeah so this is all
+fine it actually doesn't have any of the
+fine it actually doesn't have any of the
+normal errors in
+here which is hidden
+dim CNN
+channels what's
+channels what's
+this
+this
+32 yeah so he's already cut this
+32 yeah so he's already cut this
+down quite a
+down quite a
+lot
+lot
+I it's hard to
+I it's hard to
+see he's messed with all the training
+see he's messed with all the training
+harness 230k that's not
+harness 230k that's not
+huge it's pretty small
+still maybe as many batches are the
+still maybe as many batches are the
+wrong
+size let me
+size let me
+see there's no config though he just
+like got one update yeah hold on right
+here yeah so this has got to go down
+to 32k
+there we
+there we
+go 270
+300 yeah he's just above the there's a
+300 yeah he's just above the there's a
+point at which the GPU is just like no
+point at which the GPU is just like no
+that's too much data
+let's just double check to make
+let's just double check to make
+sure this isn't
+faster nope this is
+slower so I think that
+32 oops this will be good for
+32 oops this will be good for
+him what El
+him what El
+else
+Amo see now I have to actually go look
+Amo see now I have to actually go look
+at my parameters from one of my runs
+at my parameters from one of my runs
+because I got to make sure he didn't
+because I got to make sure he didn't
+mess anything
+up I just let's just check this
+and let me start drinking this as
+well back to th calorie
+mug so he's messed this up here
+oh no wait store yeah no he's got it
+oh no wait store yeah no he's got it
+right never
+right never
+mind this is true by default
+it doesn't seem to
+matter made that kind of
+matter made that kind of
+long learning rate a Neal yep
+long learning rate a Neal yep
+he mess with the grad
+Norm Norm
+Advantage okay
+you shouldn't need
+you shouldn't need
+this but you know fair
+enough B size no more for Ms zero
+enough B size no more for Ms zero
+copy cool so now
+um let's see ends percent time
+okay 260 20% time lost to the
+okay 260 20% time lost to the
+environment right
+there no
+difference m is fine
+it's the forward pass batch size
+oh this is
+oh this is
+[Music]
+wrong yeah that's
+wrong it's not big
+enough for
+okay so that should have helped so why
+okay so that should have helped so why
+didn't
+didn't
+it that should have helped
+massively let me get my second term
+massively let me get my second term
+window up
+okay point
+question
+question
+mark did not use this
+thing oh duh goes
+here okay so this is now
+here okay so this is now
+good this is 4096
+yeah so that should be massively faster
+yeah so that should be massively faster
+so what happened
+and is only
+17% 10
+17% 10
+4 for is 31%
+interestingly that seems not to make a
+interestingly that seems not to make a
+difference I guess the policy is a
+difference I guess the policy is a
+little bit
+little bit
+bigger also the data is just way
+larger
+larger
+uh Hey Spencer how's it going
+there's a slight difference
+here not really code review just helping
+here not really code review just helping
+Captain with his his environment he's
+Captain with his his environment he's
+stuck on some
+stuff I'm looking for where he's leaking
+stuff I'm looking for where he's leaking
+perf and
+perf and
+stuff to start with
+he's done most of it right
+probably going to mostly then be the the
+probably going to mostly then be the the
+com architector here
+no apparently
+no apparently
+not oh no that is
+faster I think it's mostly the map but
+faster I think it's mostly the map but
+let's take a look
+okay this is after they get encoded
+so so map OB siiz
+is how's that make any sense wait OB
+size yeah it's basically all in the
+map pretty much it's all in the map
+this net is like both too large and too
+this net is like both too large and too
+small at the same time it's weird
+small at the same time it's weird
+I think the com is probably just
+slow so let me think if I were to do
+slow so let me think if I were to do
+this for him
+this for him
+correctly I don't know if you're going
+correctly I don't know if you're going
+to be able to do it with 7 by seven is
+to be able to do it with 7 by seven is
+the
+problem I might just be too big
+okay so here we have
+okay so this
+okay so this
+is 21 so if I did stride
+is 21 so if I did stride
+four so that would be like to
+four so that would be like to
+here then one
+two to here
+I don't think that
+fits if we try to figure out to like
+fit non overlapping it fits but that's
+sketchy yeah doesn't fit
+sketchy yeah doesn't fit
+um I think 7 by seven like 7 by S conss
+um I think 7 by seven like 7 by S conss
+are just massive as
+well could we do fewer
+filters I don't know if that
+helps let me see you only have 32
+helps let me see you only have 32
+channels to begin with
+Am I Wrong maybe it's not even the map
+Am I Wrong maybe it's not even the map
+CNN hold on
+hey captain we're at
+hey captain we're at
+300K um I'm trying to figure
+300K um I'm trying to figure
+out if your com is slow or what because
+out if your com is slow or what because
+this is like
+silly do not have hidden size here
+lstm output size encoder output
+lstm output size encoder output
+size I guess this is just encoder output
+size yeah I'm looking um so Captain the
+size yeah I'm looking um so Captain the
+first there was only you actually did
+first there was only you actually did
+pretty much everything correctly um the
+pretty much everything correctly um the
+only big error that you had was uh you
+only big error that you had was uh you
+had six 64,000 mini batch size that is
+had six 64,000 mini batch size that is
+too big when you when the mini batch
+too big when you when the mini batch
+size like you get better and better curf
+size like you get better and better curf
+up to a threshold and then it just
+up to a threshold and then it just
+catastrophically drops off um so 32k is
+catastrophically drops off um so 32k is
+usually the max for policies this size
+is that a learning per thing it's a
+is that a learning per thing it's a
+hardware thing it's just straight up
+hardware thing it's just straight up
+that the GPU like you just shove too
+that the GPU like you just shove too
+much data per batch into the GPU
+okay so this is without the
+comp yeah so without the com you see
+comp yeah so without the com you see
+this thing would be like 6 700,000 it
+this thing would be like 6 700,000 it
+looks like because look at the 41% M
+time so this com is just slow
+um see
+no don't have compile
+no don't have compile
+on nural MMO gets 500k without
+compile yeah so right here it's the
+compile yeah so right here it's the
+policy I'm trying to think what to do
+policy I'm trying to think what to do
+for you here
+for you here
+because you just have too big of
+because you just have too big of
+a of a field
+a of a field
+here I mean I don't want to go down to
+here I mean I don't want to go down to
+16 channels but
+like I was fiddling with the bigger
+like I was fiddling with the bigger
+receptive field maybe but that's also
+receptive field maybe but that's also
+kind of
+sketchy I did mess with the stride to
+sketchy I did mess with the stride to
+put that up to three
+speed's less of a concern well I can't
+speed's less of a concern well I can't
+run experiments if it's slow but I guess
+run experiments if it's slow but I guess
+I've gotten it to be a little
+faster okay so let's see you got one V
+faster okay so let's see you got one V
+the link
+okay we'll do a short session on this
+okay we'll do a short session on this
+now hopefully I will find something
+now hopefully I will find something
+before I go to gym if not I will go back
+before I go to gym if not I will go back
+uh later okay so this
+is oh okay sure whatever you just turn
+is oh okay sure whatever you just turn
+this back on so the funny thing with
+this back on so the funny thing with
+this thing that you just did
+this thing that you just did
+here right like cost performance you can
+here right like cost performance you can
+literally just do that like this created
+literally just do that like this created
+timestamp this just goes time process
+timestamp this just goes time process
+and this is a parito curve
+yeah I'm
+yeah I'm
+aware we didn't bother though because um
+aware we didn't bother though because um
+parito front you can get just from The
+Sweep it's like so
+Sweep it's like so
+silly and I'm sure it's got some
+silly and I'm sure it's got some
+degenerate
+parameters is this all you're sweeping
+parameters is this all you're sweeping
+here
+here
+no you
+no you
+have you're sweeping a ton of
+stuff okay yeah you're throwing like
+stuff okay yeah you're throwing like
+everything in
+everything in
+there the
+heck which ones are
+hardcoded cuz I see all the these
+hardcoded cuz I see all the these
+observations
+here this is all that's being swept okay
+that seems bizarre to me
+.8 is like
+crazy for physics sound
+especially what happens if I just run
+especially what happens if I just run
+this stuff track still
+it's
+this is a very this is a silly graph
+this is a very this is a silly graph
+right here
+okay so you
+okay so you
+have all your logging in here
+let's see what let's see what is in the
+let's see what let's see what is in the
+do
+do
+H all right
+there's your compute
+obs for
+how much how much time have you spent
+how much how much time have you spent
+looking at your
+looking at your
+observations like as they're going into
+observations like as they're going into
+the
+policy not a lot
+what is this
+so compute Rewards
+compute reward based off of how much
+compute reward based off of how much
+projectile
+shot hit reward k
+yeah okay
+yeah okay
+so even without looking at observations
+so even without looking at observations
+and stuff
+and stuff
+um this thing is like numerically
+um this thing is like numerically
+horribly horribly unstable
+let me figure that
+out yeah you're just getting wrecked
+out yeah you're just getting wrecked
+numerically
+here
+here
+okay even track
+hey YouTube folks hey twitch
+folks your observations are normed
+folks your observations are normed
+reasonably enough
+so it's not that
+how about
+this that's reasonable
+h
+okay so value loss actually doesn't go
+okay so value loss actually doesn't go
+nuts it's clip fraction
+oh this could very well be the
+oh this could very well be the
+uh this is continuous actions
+uh this is continuous actions
+right or is this discr right now
+
+Kind: captions
+Language: en
+okay we should be
+live just going to do a very short
+live just going to do a very short
+stream here um have to head to the gym
+stream here um have to head to the gym
+in a bit I'll get back on my normal
+in a bit I'll get back on my normal
+schedule just been messed up with
+schedule just been messed up with
+Christmas and
+all hey how's it going
+all hey how's it going
+man I owe you some uh
+man I owe you some uh
+integration assistance I presume with
+integration assistance I presume with
+the
+the
+optimizer uh where is this
+optimizer uh where is this
+thing
+eror check
+space effect
+39 all right so we'll comment this for
+39 all right so we'll comment this for
+now because Captain says it needs to be
+now because Captain says it needs to be
+commented
+merry Christmas as
+well holy what is
+this uh interesting
+150k yeah this is too slow uh let's
+150k yeah this is too slow uh let's
+figure out what's wrong with this
+figure out what's wrong with this
+thing
+so I think he messed with this ve a
+so I think he messed with this ve a
+whole bunch right yeah look he messed
+whole bunch right yeah look he messed
+with back a whole
+bunch oh no this is Evo what about train
+train
+arcs
+arcs
+uh I'm confused as to what he did
+here he made like a custom version of
+here he made like a custom version of
+our trainer
+our trainer
+okay so he does have
+multiprocessing okay so I got to just
+multiprocessing okay so I got to just
+see what the heck is going on here
+see what the heck is going on here
+because he's got some
+ARS he's got zero copy set to
+ARS he's got zero copy set to
+True 8 m eight workers B size of
+four I don't know about that
+okay so that doesn't seem to make a
+okay so that doesn't seem to make a
+difference if anything that's slower
+M yeah keep the eight
+try this
+maybe okay so no this does not
+help so the m is definitely just too
+help so the m is definitely just too
+damn slow at the moment we'll figure
+damn slow at the moment we'll figure
+that out
+um so his 88 settings are kind of fine
+um so his 88 settings are kind of fine
+then by
+then by
+default
+default
+interesting wait num drones num
+agents
+um hang on maybe this is not what I
+um hang on maybe this is not what I
+think it
+think it
+is and 15 okay hopefully he's on in time
+is and 15 okay hopefully he's on in time
+so num
+ends is
+256 okay he took my advice correctly I
+256 okay he took my advice correctly I
+believe
+what's the policy
+[Music]
+so what's making this so
+slow map
+CNN it could just be this map CNN to be
+CNN it could just be this map CNN to be
+fair
+why did you do
+stri well that's
+stri well that's
+Jank five at Stride two does that even
+Jank five at Stride two does that even
+make
+sense I think you'd want this at Stride
+sense I think you'd want this at Stride
+three and and then you can't do this at
+three and and then you can't do this at
+Stride two either that doesn't
+help I think the most likely thing is is
+help I think the most likely thing is is
+just his OBS are too damn
+big have this be fully observed like
+this for
+yeah so this is all
+fine it actually doesn't have any of the
+fine it actually doesn't have any of the
+normal errors in
+here which is hidden
+dim CNN
+channels what's
+channels what's
+this
+this
+32 yeah so he's already cut this
+32 yeah so he's already cut this
+down quite a
+down quite a
+lot
+lot
+I it's hard to
+I it's hard to
+see he's messed with all the training
+see he's messed with all the training
+harness 230k that's not
+harness 230k that's not
+huge it's pretty small
+still maybe as many batches are the
+still maybe as many batches are the
+wrong
+size let me
+size let me
+see there's no config though he just
+like got one update yeah hold on right
+here yeah so this has got to go down
+to 32k
+there we
+there we
+go 270
+300 yeah he's just above the there's a
+300 yeah he's just above the there's a
+point at which the GPU is just like no
+point at which the GPU is just like no
+that's too much data
+let's just double check to make
+let's just double check to make
+sure this isn't
+faster nope this is
+slower so I think that
+32 oops this will be good for
+32 oops this will be good for
+him what El
+him what El
+else
+Amo see now I have to actually go look
+Amo see now I have to actually go look
+at my parameters from one of my runs
+at my parameters from one of my runs
+because I got to make sure he didn't
+because I got to make sure he didn't
+mess anything
+up I just let's just check this
+and let me start drinking this as
+well back to th calorie
+mug so he's messed this up here
+oh no wait store yeah no he's got it
+oh no wait store yeah no he's got it
+right never
+right never
+mind this is true by default
+it doesn't seem to
+matter made that kind of
+matter made that kind of
+long learning rate a Neal yep
+long learning rate a Neal yep
+he mess with the grad
+Norm Norm
+Advantage okay
+you shouldn't need
+you shouldn't need
+this but you know fair
+enough B size no more for Ms zero
+enough B size no more for Ms zero
+copy cool so now
+um let's see ends percent time
+okay 260 20% time lost to the
+okay 260 20% time lost to the
+environment right
+there no
+difference m is fine
+it's the forward pass batch size
+oh this is
+oh this is
+[Music]
+wrong yeah that's
+wrong it's not big
+enough for
+okay so that should have helped so why
+okay so that should have helped so why
+didn't
+didn't
+it that should have helped
+massively let me get my second term
+massively let me get my second term
+window up
+okay point
+question
+question
+mark did not use this
+thing oh duh goes
+here okay so this is now
+here okay so this is now
+good this is 4096
+yeah so that should be massively faster
+yeah so that should be massively faster
+so what happened
+and is only
+17% 10
+17% 10
+4 for is 31%
+interestingly that seems not to make a
+interestingly that seems not to make a
+difference I guess the policy is a
+difference I guess the policy is a
+little bit
+little bit
+bigger also the data is just way
+larger
+larger
+uh Hey Spencer how's it going
+there's a slight difference
+here not really code review just helping
+here not really code review just helping
+Captain with his his environment he's
+Captain with his his environment he's
+stuck on some
+stuff I'm looking for where he's leaking
+stuff I'm looking for where he's leaking
+perf and
+perf and
+stuff to start with
+he's done most of it right
+probably going to mostly then be the the
+probably going to mostly then be the the
+com architector here
+no apparently
+no apparently
+not oh no that is
+faster I think it's mostly the map but
+faster I think it's mostly the map but
+let's take a look
+okay this is after they get encoded
+so so map OB siiz
+is how's that make any sense wait OB
+size yeah it's basically all in the
+map pretty much it's all in the map
+this net is like both too large and too
+this net is like both too large and too
+small at the same time it's weird
+small at the same time it's weird
+I think the com is probably just
+slow so let me think if I were to do
+slow so let me think if I were to do
+this for him
+this for him
+correctly I don't know if you're going
+correctly I don't know if you're going
+to be able to do it with 7 by seven is
+to be able to do it with 7 by seven is
+the
+problem I might just be too big
+okay so here we have
+okay so this
+okay so this
+is 21 so if I did stride
+is 21 so if I did stride
+four so that would be like to
+four so that would be like to
+here then one
+two to here
+I don't think that
+fits if we try to figure out to like
+fit non overlapping it fits but that's
+sketchy yeah doesn't fit
+sketchy yeah doesn't fit
+um I think 7 by seven like 7 by S conss
+um I think 7 by seven like 7 by S conss
+are just massive as
+well could we do fewer
+filters I don't know if that
+helps let me see you only have 32
+helps let me see you only have 32
+channels to begin with
+Am I Wrong maybe it's not even the map
+Am I Wrong maybe it's not even the map
+CNN hold on
+hey captain we're at
+hey captain we're at
+300K um I'm trying to figure
+300K um I'm trying to figure
+out if your com is slow or what because
+out if your com is slow or what because
+this is like
+silly do not have hidden size here
+lstm output size encoder output
+lstm output size encoder output
+size I guess this is just encoder output
+size yeah I'm looking um so Captain the
+size yeah I'm looking um so Captain the
+first there was only you actually did
+first there was only you actually did
+pretty much everything correctly um the
+pretty much everything correctly um the
+only big error that you had was uh you
+only big error that you had was uh you
+had six 64,000 mini batch size that is
+had six 64,000 mini batch size that is
+too big when you when the mini batch
+too big when you when the mini batch
+size like you get better and better curf
+size like you get better and better curf
+up to a threshold and then it just
+up to a threshold and then it just
+catastrophically drops off um so 32k is
+catastrophically drops off um so 32k is
+usually the max for policies this size
+is that a learning per thing it's a
+is that a learning per thing it's a
+hardware thing it's just straight up
+hardware thing it's just straight up
+that the GPU like you just shove too
+that the GPU like you just shove too
+much data per batch into the GPU
+okay so this is without the
+comp yeah so without the com you see
+comp yeah so without the com you see
+this thing would be like 6 700,000 it
+this thing would be like 6 700,000 it
+looks like because look at the 41% M
+time so this com is just slow
+um see
+no don't have compile
+no don't have compile
+on nural MMO gets 500k without
+compile yeah so right here it's the
+compile yeah so right here it's the
+policy I'm trying to think what to do
+policy I'm trying to think what to do
+for you here
+for you here
+because you just have too big of
+because you just have too big of
+a of a field
+a of a field
+here I mean I don't want to go down to
+here I mean I don't want to go down to
+16 channels but
+like I was fiddling with the bigger
+like I was fiddling with the bigger
+receptive field maybe but that's also
+receptive field maybe but that's also
+kind of
+sketchy I did mess with the stride to
+sketchy I did mess with the stride to
+put that up to three
+speed's less of a concern well I can't
+speed's less of a concern well I can't
+run experiments if it's slow but I guess
+run experiments if it's slow but I guess
+I've gotten it to be a little
+faster okay so let's see you got one V
+faster okay so let's see you got one V
+the link
+okay we'll do a short session on this
+okay we'll do a short session on this
+now hopefully I will find something
+now hopefully I will find something
+before I go to gym if not I will go back
+before I go to gym if not I will go back
+uh later okay so this
+is oh okay sure whatever you just turn
+is oh okay sure whatever you just turn
+this back on so the funny thing with
+this back on so the funny thing with
+this thing that you just did
+this thing that you just did
+here right like cost performance you can
+here right like cost performance you can
+literally just do that like this created
+literally just do that like this created
+timestamp this just goes time process
+timestamp this just goes time process
+and this is a parito curve
+yeah I'm
+yeah I'm
+aware we didn't bother though because um
+aware we didn't bother though because um
+parito front you can get just from The
+Sweep it's like so
+Sweep it's like so
+silly and I'm sure it's got some
+silly and I'm sure it's got some
+degenerate
+parameters is this all you're sweeping
+parameters is this all you're sweeping
+here
+here
+no you
+no you
+have you're sweeping a ton of
+stuff okay yeah you're throwing like
+stuff okay yeah you're throwing like
+everything in
+everything in
+there the
+heck which ones are
+hardcoded cuz I see all the these
+hardcoded cuz I see all the these
+observations
+here this is all that's being swept okay
+that seems bizarre to me
+.8 is like
+crazy for physics sound
+especially what happens if I just run
+especially what happens if I just run
+this stuff track still
+it's
+this is a very this is a silly graph
+this is a very this is a silly graph
+right here
+okay so you
+okay so you
+have all your logging in here
+let's see what let's see what is in the
+let's see what let's see what is in the
+do
+do
+H all right
+there's your compute
+obs for
+how much how much time have you spent
+how much how much time have you spent
+looking at your
+looking at your
+observations like as they're going into
+observations like as they're going into
+the
+policy not a lot
+what is this
+so compute Rewards
+compute reward based off of how much
+compute reward based off of how much
+projectile
+shot hit reward k
+yeah okay
+yeah okay
+so even without looking at observations
+so even without looking at observations
+and stuff
+and stuff
+um this thing is like numerically
+um this thing is like numerically
+horribly horribly unstable
+let me figure that
+out yeah you're just getting wrecked
+out yeah you're just getting wrecked
+numerically
+here
+here
+okay even track
+hey YouTube folks hey twitch
+folks your observations are normed
+folks your observations are normed
+reasonably enough
+so it's not that
+how about
+this that's reasonable
+h
+okay so value loss actually doesn't go
+okay so value loss actually doesn't go
+nuts it's clip fraction
+oh this could very well be the
+oh this could very well be the
+uh this is continuous actions
+uh this is continuous actions
+right or is this discr right now

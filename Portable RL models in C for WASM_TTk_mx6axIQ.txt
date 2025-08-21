@@ -1,0 +1,2865 @@
+Kind: captions
+Language: en
+looks like we're back I'm going to have
+looks like we're back I'm going to have
+to update all the router
+to update all the router
+modem firmware later tonight because
+modem firmware later tonight because
+this just keeps cutting out and we'll
+this just keeps cutting out and we'll
+see if that fixes it hopefully it does
+see if that fixes it hopefully it does
+otherwise I'm going to have to be on
+otherwise I'm going to have to be on
+support with the
+support with the
+moronic
+moronic
+VY we'll see looks like we're back for
+VY we'll see looks like we're back for
+now
+though e
+that re to
+that re to
+cat
+cat
+output wait RE 2
+here this has got to be 64
+right but how does this make it break
+right but how does this make it break
+how does this make it
+how does this make it
+break let's
+break let's
+see
+see
+oh hold on I think I fixed
+oh hold on I think I fixed
+it
+so why aren they doing
+anything they should be doing stuff
+anything they should be doing stuff
+right
+this
+this
+lagging yeah you can see it's dropping
+lagging yeah you can see it's dropping
+some frames we're going to have to
+some frames we're going to have to
+improve the uh the com implementation I
+suppose but still not bad that I have a
+suppose but still not bad that I have a
+network like this
+network like this
+running um completely unoptimized
+C and it's still 45
+C and it's still 45
+FPS we'll fix the perf but this is not
+FPS we'll fix the perf but this is not
+bad at
+bad at
+all it's funny that the neutrals just
+all it's funny that the neutrals just
+like wreck
+you what did I forget to
+you what did I forget to
+deallocate oh the texture yeah that's
+fine so
+we got to figure out the
+actions what's going on with the
+actions and we've also got to load uh
+actions and we've also got to load uh
+weights into this don't we and the next
+weights into this don't we and the next
+two things to do
+I'm trying to think how I want to go
+I'm trying to think how I want to go
+about doing
+this let's check the load function
+Waits
+I like this implementation to be
+honest it's just tricky because
+honest it's just tricky because
+like
+like
+yeah we'll mess with it a little bit for
+yeah we'll mess with it a little bit for
+now
+okay so we're going to init the Moet
+it's pretty awkward actually now that
+it's pretty awkward actually now that
+I'm looking at
+I'm looking at
+it well let's just
+do yeah it's like it's awkward because
+do yeah it's like it's awkward because
+you're going to need to
+compute the size is and offset for
+compute the size is and offset for
+everything
+I think what we have to do
+we're going to have to change stuff
+we're going to have to change stuff
+quite a
+quite a
+bit because I didn't account for this
+bit because I didn't account for this
+properly before
+wrong
+wrong
+tab this is cool to
+see
+so yeah
+I know how we're going to do
+this loaded
+weights loaded
+weights
+weights and then what we'll do is we'll
+weights and then what we'll do is we'll
+do struct
+do struct
+weights it's going to be it's going to
+weights it's going to be it's going to
+contain float star
+data just going to in star or in
+idx and then what we're going to
+idx and then what we're going to
+do is we're going to do weight star load
+weights num
+weights I kind of
+weights I kind of
+like how do I want to do this
+I'm getting caught up in like a lot of
+I'm getting caught up in like a lot of
+little details that don't
+little details that don't
+matter let's just do it the way that
+matter let's just do it the way that
+I've been doing it so we'll do like this
+I've been doing it so we'll do like this
+data load weights
+data load weights
+right and this has to go down
+right and this has to go down
+here so now we have this loaded into a
+here so now we have this loaded into a
+struct that also has this index here and
+then now how do I actually use it is the
+then now how do I actually use it is the
+question
+oh I think it just has to
+do let's just do float star get
+do let's just do float star get
+weights into num
+weights
+weights
+data index and weights return data
+data index and weights return data
+this is
+it and let's just do in
+size wait size num
+size wait size num
+wavs and then we can just
+wavs and then we can just
+assert then this is weights index less
+assert then this is weights index less
+than equal weight size
+than equal weight size
+perfect and then what we can do is we
+perfect and then what we can do is we
+can modify
+can modify
+the the init functions of our
+the the init functions of our
+layers to take this weights buffer thing
+right get
+weights we'll see whether that ends up
+weights we'll see whether that ends up
+being a good idea or not
+being a good idea or not
+but I think that's what we're going to
+but I think that's what we're going to
+do for now
+make
+make
+linear so this has got to
+linear so this has got to
+be weight star weights
+right layer weights is going to be get
+right layer weights is going to be get
+weights
+weights
+this layer bias going to get
+this layer bias going to get
+weights output
+weights output
+DM that's
+DM that's
+nice it's nice and easy
+uhoh something just happened with the
+xtram are we uh are we
+xtram are we uh are we
+down
+down
+no oh that's actually on the X servers
+no oh that's actually on the X servers
+for once that's
+for once that's
+interesting uh it's doing something
+interesting uh it's doing something
+weird it's definitely doing something
+weird it's definitely doing something
+weird
+I don't know how to doal about
+that linear
+don't need it for
+don't need it for
+reos do it for here wait our
+weights let me just make sure it's not
+weights let me just make sure it's not
+making a million posts on my channel
+no it's not
+no it's not
+okay it still says live but I don't know
+okay it still says live but I don't know
+what it's doing because I have unable to
+what it's doing because I have unable to
+connect in my restream
+connect in my restream
+iio so if you're watching on X and it's
+iio so if you're watching on X and it's
+freezing or whatever try YouTube neurl
+freezing or whatever try YouTube neurl
+MMO where twitch jar is
+5341 uh lstm
+layer eight star
+layer eight star
+weights wait state
+state and actually almost all of these
+state and actually almost all of these
+[Music]
+[Music]
+need
+wait State H is get State H gets
+wait State H is get State H gets
+this St C gets
+this St C gets
+this bias
+put by
+put by
+state okay so we get the weights for the
+state okay so we get the weights for the
+lstm and I think that's everything that
+lstm and I think that's everything that
+actually has
+weights so now all I have to do is
+add you
+load star weights or
+weights and now I have to actually
+weights and now I have to actually
+figure out the exact size of the
+figure out the exact size of the
+network um so we'll figure that
+network um so we'll figure that
+out I think it's like 150k
+that
+here it
+is
+160k now we give it
+weights weights
+cool now this thing has
+cool now this thing has
+weights well let's see if we uh we can
+weights well let's see if we uh we can
+build this getting ahead of myself
+here okay unknown type
+weights H that's weird
+weights H that's weird
+right it's right
+right it's right
+here Ty death struct weights
+really oh this has to go at the top is
+why yeah all this stuff has to go at the
+top I always forget about
+that conflicting types for load
+that conflicting types for load
+weights oh right I
+uh can be underscore load
+weights initializing
+okay that's
+okay that's
+better float
+better float
+data weights
+data weights
+data this is
+and and then you have to Hash include
+and and then you have to Hash include
+assert do
+expected
+expression oh I forgot to
+type net
+Moet it's got to
+be like
+be like
+this okay
+no such file or
+directory
+directory
+um so all the agents are like very
+um so all the agents are like very
+slowly
+moving which is interesting
+and I can't control the agent anymore
+and I can't control the agent anymore
+which is even
+weirder oh also I'm realizing that this
+weirder oh also I'm realizing that this
+doesn't need to run every
+doesn't need to run every
+frame this only needs to run there
+frame this only needs to run there
+right so that should actually way speed
+right so that should actually way speed
+us up I was trying to do the Nets every
+us up I was trying to do the Nets every
+single
+single
+frame so now we're back to 60 FPS
+frame so now we're back to 60 FPS
+running the neurom met at least without
+running the neurom met at least without
+any
+optimization
+optimization
+but ORD
+but ORD
+wrong this is
+wrong this is
+Neo grand total of two
+Neo grand total of two
+plugins NE
+uh SEI because python syntax
+uh SEI because python syntax
+highlighting is a total pain and uh the
+highlighting is a total pain and uh the
+main reason I have it is for super
+main reason I have it is for super
+Maven the code complete
+I don't advise using you know GPT YK or
+I don't advise using you know GPT YK or
+um Sonet to like give you giant chunks
+um Sonet to like give you giant chunks
+of code but like on line autocomplete is
+of code but like on line autocomplete is
+basically just a typing buff right look
+basically just a typing buff right look
+how fast it
+how fast it
+is no LSP no
+is no LSP no
+formatter uh no formatter no LSP I don't
+formatter uh no formatter no LSP I don't
+have I don't have any opposition I just
+have I don't have any opposition I just
+don't have
+don't have
+one mainly because I like I was
+one mainly because I like I was
+previously coding in Python so much that
+previously coding in Python so much that
+like you can't do all that much with
+like you can't do all that much with
+those anyways since it's not statically
+those anyways since it's not statically
+typed I probably could get one for C it
+typed I probably could get one for C it
+would help a little bit but not a huge
+deal I see why I can't control the
+deal I see why I can't control the
+character here it's just cuz I have this
+character here it's just cuz I have this
+in a weird order
+in a weird order
+right if I did hold
+right if I did hold
+on Step
+on Step
+n and then you do
+n and then you do
+forward and do it like
+this
+this
+ah okay look I can control the
+ah okay look I can control the
+character and now I'm controlling this
+character and now I'm controlling this
+one and this one is being taken over by
+one and this one is being taken over by
+the neural Net's clearly not being
+the neural Net's clearly not being
+loaded correctly or something right
+loaded correctly or something right
+we'll have to debug it but like I have
+we'll have to debug it but like I have
+control now I have control over this one
+control now I have control over this one
+now I have control over this one and
+now I have control over this one and
+like you can see the other ones moving a
+like you can see the other ones moving a
+little bit so the general setup of this
+little bit so the general setup of this
+is good and it's 60fps running in a
+is good and it's 60fps running in a
+single core with like this giant well
+single core with like this giant well
+not giant it's really small but you know
+not giant it's really small but you know
+this multi-layer convet lstm everything
+this multi-layer convet lstm everything
+works we have like typical mobile
+works we have like typical mobile
+controls we've got click to to move
+controls we've got click to to move
+we've got hold to move which you know is
+we've got hold to move which you know is
+fine but you know you have click to move
+fine but you know you have click to move
+we should probably make it so that like
+we should probably make it so that like
+you get like responsiveness like for
+you get like responsiveness like for
+where you click or
+where you click or
+whatever but you have this you've got
+whatever but you have this you've got
+your abilities so like you
+your abilities so like you
+know uh well there's something wrong
+know uh well there's something wrong
+with the ability hot keys I think but
+yeah can you explain why it's not
+yeah can you explain why it's not
+possible to use the C file you get
+that's a good
+that's a good
+question I have not tried that to be
+question I have not tried that to be
+fair it's kind of a mess though I
+mean where is
+it why can't I see the
+file I'm sure I have one somewhere
+oh wait
+that's
+that's
+so include python. is there like python
+so include python. is there like python
+stuff in here or can you use
+stuff in here or can you use
+this I mean this is a freaking 55,000
+this I mean this is a freaking 55,000
+line file
+which is kind of
+gross if you want to go ahead and try
+gross if you want to go ahead and try
+that like let me
+know standard
+death that could work
+I mean to be fair I didn't try that hard
+I mean to be fair I didn't try that hard
+but the thing is like at this point it's
+but the thing is like at this point it's
+become it's let's see it would be it
+become it's let's see it would be it
+would work that would be super cool to
+would work that would be super cool to
+get the m to play on yeah and I mean
+get the m to play on yeah and I mean
+absolutely that would be great for
+absolutely that would be great for
+contributors
+contributors
+um I've been writing these CMS for like
+um I've been writing these CMS for like
+a couple of weeks and already it's not
+a couple of weeks and already it's not
+really any harder for me to write in C
+really any harder for me to write in C
+versus scon the one thing that you have
+versus scon the one thing that you have
+to realize though with scon though is
+to realize though with scon though is
+like it includes the python interpreter
+like it includes the python interpreter
+by default and it will call back into
+by default and it will call back into
+python so even though that this is C it
+python so even though that this is C it
+like this has calls back into python so
+like this has calls back into python so
+you have to make sure your program has
+you have to make sure your program has
+zero of those and then you probably will
+zero of those and then you probably will
+have to do something to like cut out the
+have to do something to like cut out the
+python interpreter entirely so it won't
+python interpreter entirely so it won't
+be
+be
+trivial if you have a way of doing that
+trivial if you have a way of doing that
+let me know but I mean for now you know
+let me know but I mean for now you know
+I I contributors are perfectly welcome
+I I contributors are perfectly welcome
+to contribute uh you know in scyon or
+to contribute uh you know in scyon or
+whatever they want to write it in as
+whatever they want to write it in as
+long as it's fast and uh you know if you
+long as it's fast and uh you know if you
+want help getting it onto the web I can
+want help getting it onto the web I can
+help with that but really the C is not
+help with that but really the C is not
+hard like I've been doing this for a
+hard like I've been doing this for a
+couple of weeks and it's already just as
+couple of weeks and it's already just as
+easy to do it in C in fact I actually
+easy to do it in C in fact I actually
+think it's easier in C and I know that
+think it's easier in C and I know that
+sounds crazy but the thing is like the
+sounds crazy but the thing is like the
+build times are so much faster and the
+build times are so much faster and the
+error message are the error messages are
+error message are the error messages are
+much better so like the dev cycle is
+much better so like the dev cycle is
+just so much easier and
+just so much easier and
+Tighter
+overall so I've been enjoying
+it I've been enjoying it at the very
+it I've been enjoying it at the very
+least train the agent in Python and then
+least train the agent in Python and then
+use C to run with wome yep exactly now
+use C to run with wome yep exactly now
+the tricky thing here which is why this
+the tricky thing here which is why this
+file exists is you have to be able to
+file exists is you have to be able to
+load the net Indy which is why I have
+load the net Indy which is why I have
+this C puffer net uh I'm currently
+this C puffer net uh I'm currently
+debugging this but like right now I have
+debugging this but like right now I have
+it running it's just either loading the
+it running it's just either loading the
+wrong weights are doing something weird
+wrong weights are doing something weird
+I just you know this has only been in
+I just you know this has only been in
+development for a few days now um these
+development for a few days now um these
+guys are technically being controlled by
+guys are technically being controlled by
+a neural net so we have 10 agents
+a neural net so we have 10 agents
+controlled by neural net 60 FPS is you
+controlled by neural net 60 FPS is you
+know zero lag One Core running a two
+know zero lag One Core running a two
+layer CNN plus MLP plus lstm uh
+layer CNN plus MLP plus lstm uh
+Inc is it not POS possible use Python
+Inc is it not POS possible use Python
+with a W nope you can't really do that
+with a W nope you can't really do that
+as far as I'm
+as far as I'm
+aware got to compile the web
+assembly pytorch doesn't have great web
+assembly pytorch doesn't have great web
+support either like I tried to like get
+support either like I tried to like get
+pytorch for web that didn't work they
+pytorch for web that didn't work they
+have a C++ API but you can't just easily
+have a C++ API but you can't just easily
+compile it for web so like I mean at end
+compile it for web so like I mean at end
+of the day though this is a 445 line
+of the day though this is a 445 line
+file that has lstm comms mop has a bunch
+file that has lstm comms mop has a bunch
+of stuff in
+of stuff in
+it right
+now I got to figure out what's wrong
+now I got to figure out what's wrong
+with
+these um easiest way is going to be to
+these um easiest way is going to be to
+go layer by
+go layer by
+layer and print out the weights
+right you don't use torch did you
+right you don't use torch did you
+implement everything in the network
+implement everything in the network
+yourself or yeah I just implemented it
+yourself or yeah I just implemented it
+all
+all
+myself when I load the weights but like
+myself when I load the weights but like
+look I have this puffet file it's again
+look I have this puffet file it's again
+it's 445 lines and most of that is just
+it's 445 lines and most of that is just
+for user API to make it a little easier
+for user API to make it a little easier
+to store weights and stuff like this is
+to store weights and stuff like this is
+the com
+the com
+2D this is your lstm right here they're
+2D this is your lstm right here they're
+like you know half screen a code a piece
+like you know half screen a code a piece
+so like when you actually get down to
+so like when you actually get down to
+the low level of what these things are
+the low level of what these things are
+they don't take a lot of code to
+implement that's
+implement that's
+it pretty cool
+it pretty cool
+right four Loops from
+right four Loops from
+hell I mean yes to know right like I
+hell I mean yes to know right like I
+actually I posted this on Twitter and
+actually I posted this on Twitter and
+people like a seven4 Loops but like this
+people like a seven4 Loops but like this
+is how you write a con
+is how you write a con
+right messages are
+right messages are
+censored that's weird they shouldn't be
+censored that's weird they shouldn't be
+I turned off the profanity filter though
+I turned off the profanity filter though
+I don't know if uh it might reset it
+I don't know if uh it might reset it
+every stream by default which is
+every stream by default which is
+obnoxious but yeah like this is how you
+obnoxious but yeah like this is how you
+implement a comp right like there's no
+implement a comp right like there's no
+reason to try to split this up into
+reason to try to split this up into
+multiple functions that's just dumb
+multiple functions that's just dumb
+because then like you you add additional
+because then like you you add additional
+stuff to the stack technically you can
+stuff to the stack technically you can
+inline it but like there's really no
+inline it but like there's really no
+reason not to just have this be seven4
+reason not to just have this be seven4
+Loops like when you're processing data
+Loops like when you're processing data
+you know when you're processing data in
+you know when you're processing data in
+a way that truly requires seven4 Loops
+a way that truly requires seven4 Loops
+you just write seven4 Loops right
+let's print out some weights here let's
+let's print out some weights here let's
+print out the
+weights
+oops print out the
+weights did I forget something
+weights did I forget something
+[Music]
+bind
+compile what is it
+compile what is it
+what are you doing
+Nathan oh that's
+Nathan oh that's
+funny I I don't know YouTube is really
+funny I I don't know YouTube is really
+weird
+zero
+zero
+oops no dots allowed yeah I think it
+oops no dots allowed yeah I think it
+doesn't it tries to censor all types of
+doesn't it tries to censor all types of
+URLs I've tried to find a setting to
+URLs I've tried to find a setting to
+disable that and I
+can't which is really weird because like
+can't which is really weird because like
+I've gotten zero bots on YouTube and I
+I've gotten zero bots on YouTube and I
+get like tons of twitch Bots tons of
+get like tons of twitch Bots tons of
+twitch
+Bots I got one that was like either a
+Bots I got one that was like either a
+script or a language model as well the
+script or a language model as well the
+other day where it was like timing its
+other day where it was like timing its
+messages to try to like you know guess
+messages to try to like you know guess
+what I was going to reply and then try
+what I was going to reply and then try
+to sell me stuff it was like trying to
+to sell me stuff it was like trying to
+fake having a conversation it was so
+fake having a conversation it was so
+stupid
+right so what the the plan here is going
+right so what the the plan here is going
+to be to uh to print this stuff out and
+to be to uh to print this stuff out and
+then we have this save net flat file
+then we have this save net flat file
+here where's
+here where's
+this test
+lstm question sent but you didn't read
+lstm question sent but you didn't read
+it oh should I look in at m.p and m.h
+it oh should I look in at m.p and m.h
+for writing the MC how do you bind and
+for writing the MC how do you bind and
+comile okay so if you want to write it
+comile okay so if you want to write it
+and see then yeah you should look at
+and see then yeah you should look at
+these files um and then I have like a
+these files um and then I have like a
+build. P it's literally clang it's so
+build. P it's literally clang it's so
+easy uh now when you want to run to
+easy uh now when you want to run to
+python there is a PIX file that is a
+python there is a PIX file that is a
+very thin binding that literally just
+very thin binding that literally just
+goes between Python and c and the reason
+goes between Python and c and the reason
+I do that is then you have like The
+I do that is then you have like The
+Binding as its own thing and you don't
+Binding as its own thing and you don't
+have to clutter your python or clutter
+have to clutter your python or clutter
+your C code and you can use the C
+your C code and you can use the C
+Standalone you can use the python
+Standalone you can use the python
+Standalone and it's just in the middle
+Standalone and it's just in the middle
+so that's what I would suggest and I'll
+so that's what I would suggest and I'll
+be here you can ask me stuff like I said
+be here you can ask me stuff like I said
+I will help you a ton with that
+I will help you a ton with that
+environment because it's awesome hey
+environment because it's awesome hey
+welcome what is this this is me
+welcome what is this this is me
+currently trying to get a network
+currently trying to get a network
+working
+working
+for this MOBA I
+for this MOBA I
+have so I'm trying to get neuronet to
+have so I'm trying to get neuronet to
+play this and I have trained agents that
+play this and I have trained agents that
+will play it but the thing is I have to
+will play it but the thing is I have to
+Port them into C so that I can run them
+Port them into C so that I can run them
+on the web so I'm currently writing
+on the web so I'm currently writing
+neural net layers in C for this it's a
+neural net layers in C for this it's a
+fair complicated one it's like a MLP CNN
+fair complicated one it's like a MLP CNN
+lstm that I'm getting to work here and
+lstm that I'm getting to work here and
+we actually have it almost done I just
+we actually have it almost done I just
+have to debug
+it and I have to basically figure out
+it and I have to basically figure out
+where it is that my implementation isn't
+where it is that my implementation isn't
+matching the P torch
+matching the P torch
+reference so that's
+it
+it
+ram ram
+tape
+tape
+data cpu.
+numpy
+numpy
+Z does this
+work let's see if this works
+holy
+okay no knowledge when it comes to this
+okay no knowledge when it comes to this
+that's an interesting
+that's an interesting
+project my main thing is I do ultra high
+project my main thing is I do ultra high
+performance reinforcement learning and
+performance reinforcement learning and
+um these days the push is on high
+um these days the push is on high
+performance simulators uh which we have
+performance simulators uh which we have
+some of but in order to show them off
+some of but in order to show them off
+I've been putting them on the web lately
+I've been putting them on the web lately
+I've just been porting a bunch of stuff
+I've just been porting a bunch of stuff
+bunch of these M to C and then also now
+bunch of these M to C and then also now
+porting the networks to C so that we can
+porting the networks to C so that we can
+run them end to end on web like 100%
+run them end to end on web like 100%
+client side and they're actually fast
+client side and they're actually fast
+enough that we can run the M we can run
+enough that we can run the M we can run
+like thousand times real time easily but
+like thousand times real time easily but
+now we can even run the networks real
+now we can even run the networks real
+time uh on one CPU core which is pretty
+time uh on one CPU core which is pretty
+cool like Comet
+cool like Comet
+lstm one CPU core
+lstm one CPU core
+so it's 100% client
+so it's 100% client
+side is cool very
+cool let's see what's wrong
+here does this pram tell me
+anything how do I figure out what layer
+anything how do I figure out what layer
+this is
+from I
+from I
+torch
+torch
+get layer
+get layer
+of
+ram named named
+parameters Okay so
+let's see if this
+works a very very
+works a very very
+nice very nice
+indeed so this is what we wanted out of
+indeed so this is what we wanted out of
+this is now I I can run
+this is now I I can run
+this and yeah you see I get the first
+this and yeah you see I get the first
+weight of every
+weight of every
+layer so then what I'm going to do is
+layer so then what I'm going to do is
+I'm going to build this
+locally and then I'm going to run
+it and if I scroll up
+here why do I not
+here why do I not
+have I thought that I uh on
+oh cuz they didn't do
+oh cuz they didn't do
+wait why do I not get these
+prints I should have gotten print
+prints I should have gotten print
+statements here
+what did I do wrong I have the slash
+ends oh the return is in the the return
+ends oh the return is in the the return
+is up
+here yeah I'm just saw
+here yeah I'm just saw
+that okay perfect so
+now now we can see that we have the
+now now we can see that we have the
+wrong Network parameters right
+we can see very clearly like hey look
+we can see very clearly like hey look
+the parameters don't
+match good
+evening this is exciting though as soon
+evening this is exciting though as soon
+as I debug this we're going to be able
+as I debug this we're going to be able
+to upgrade the AI uh on the Moa we're
+to upgrade the AI uh on the Moa we're
+going to be able to
+going to be able to
+like actually run this thing online with
+like actually run this thing online with
+proper
+proper
+AI so either goes
+AI so either goes
+m.p plusi plus.
+m.p plusi plus.
+H during
+H during
+training or Mah h plus neural
+network Inc for web rendering yeah comma
+network Inc for web rendering yeah comma
+correct question mark
+correct question mark
+God that's so
+God that's so
+ridiculous here let me open the Discord
+ridiculous here let me open the Discord
+as well just in case that's
+easier but yeah that's
+easier but yeah that's
+um that's how it works and I want to be
+um that's how it works and I want to be
+fair Nathan I have
+fair Nathan I have
+not I haven't been using the C ports for
+not I haven't been using the C ports for
+training just
+training just
+yet so that might be a little bit of a
+yet so that might be a little bit of a
+different
+different
+ordeal I got to do
+ordeal I got to do
+that but yeah it's whatever is easier
+that but yeah it's whatever is easier
+for you you can
+do so when you write it in C technically
+do so when you write it in C technically
+yeah you end up with this extra layer
+yeah you end up with this extra layer
+because like you need the scon anyways
+because like you need the scon anyways
+but the scon just becomes a very thin
+but the scon just becomes a very thin
+wrapper with no logic in it
+that's how it
+that's how it
+goes okay so why don't these two
+match uh I'm a little bit concerned with
+match uh I'm a little bit concerned with
+that I thought at least we'd get like
+that I thought at least we'd get like
+the first layer to match Maybe
+because like we call
+because like we call
+make com 2D on weights
+right now something's got to be wrong
+right now something's got to be wrong
+there
+okay so it says first weight is equal to
+okay so it says first weight is equal to
+zero which is not
+zero which is not
+correct
+right something's definitely weird
+there is this how I load though do I
+there is this how I load though do I
+just load from a PT oh no I don't load
+just load from a PT oh no I don't load
+from PT right why do I have a PT here
+from PT right why do I have a PT here
+that doesn't make any sense
+um
+here mobile weights. bin
+maybe could also just be I have a
+maybe could also just be I have a
+different model
+okay so Copy mobile
+okay so Copy mobile
+weights
+weights
+bin or live environments ocean
+MOA in and then
+MOA in and then
+wa St in ah is this the same size or is
+wa St in ah is this the same size or is
+this changed I think it's changed
+right one
+right one
+six yeah it changed
+six yeah it changed
+look8 5 six that actually did
+change okay I think I see it correct
+now look at
+this first weight is now
+correct up here but it's not correct in
+correct up here but it's not correct in
+the
+the
+comp yeah so something's just getting
+comp yeah so something's just getting
+screwed up
+then we can see that the file's loading
+we have weights
+we have weights
+here make Comm
+2D
+index let me make sure it has not
+index let me make sure it has not
+Advanced the
+Advanced the
+index ah wait wait idx is wrong isn't
+index ah wait wait idx is wrong isn't
+it yeah I think I have the init function
+wrong
+wait wait what weights idx to
+wait wait what weights idx to
+zero right when you load
+zero right when you load
+it which data
+it which data
+we size we
+index how'd that
+happen how is this
+uh oh okay
+uh oh okay
+I
+I
+see we're good on the weight
+see we're good on the weight
+index and then con
+one
+one
+that see what
+happens get weights
+float star
+float star
+data weights data of Weights
+data weights data of Weights
+Index right
+has got this many weights from index
+has got this many weights from index
+zero and then it got 15K
+weights
+interesting oh well right here is the
+interesting oh well right here is the
+issue
+yeah okay conv weight should match
+yeah okay conv weight should match
+now hello what are we doing we're
+now hello what are we doing we're
+finally getting this network to work in
+finally getting this network to work in
+pure
+pure
+CA pretty darn fancy Network to have to
+CA pretty darn fancy Network to have to
+port to Pure native
+port to Pure native
+sea um but it's going to be really cool
+sea um but it's going to be really cool
+because we're going to have a AET MLP
+because we're going to have a AET MLP
+lstm running in the browser on One Core
+lstm running in the browser on One Core
+in real time so that's going to be
+in real time so that's going to be
+pretty cool and all we have to do to get
+pretty cool and all we have to do to get
+there we're quite close
+actually eight holy does this just work
+actually eight holy does this just work
+immediately projection
+immediately projection
+bias projection weight
+bias projection weight
+actor weight okay we get the actor
+actor weight okay we get the actor
+weight is wrong
+here so we have to fix this I think it
+here so we have to fix this I think it
+does the recurrent before the actor or
+does the recurrent before the actor or
+something yeah yeah totally this is it
+something yeah yeah totally this is it
+right here no is it
+right here no is it
+h almost we got all the way down to the
+h almost we got all the way down to the
+projection before it screws
+up projection bias actually actually we
+up projection bias actually actually we
+get all the way to the actor don't
+get all the way to the actor don't
+we so it says
+07 wait actor
+07 wait actor
+weight projection
+weight projection
+bias then actor the actor weight is
+bias then actor the actor weight is
+wrong why is the actor weight wrong
+let's figure this
+let's figure this
+out projection is Right actor is right
+oh it's cuz the it does the lstm
+last let's
+see maybe it's this
+okay so we
+okay so we
+have actor
+have actor
+weight matches bias
+weight matches bias
+matches value function
+matches value function
+matches and
+matches and
+then and then we don't have the waight
+then and then we don't have the waight
+for the lstm great so we have to get
+for the lstm great so we have to get
+that
+then we do print
+then we do print
+F lstm
+weight and the lstm is
+weight and the lstm is
+Jank okay let's see why it's
+Jank okay let's see why it's
+Jank let me just briefly vanity check
+Jank let me just briefly vanity check
+this
+this
+first oh we don't pass it anything
+first oh we don't pass it anything
+duh weight
+duh weight
+star
+weights okay we do like
+this so we pass it
+weights and then it gets underscore
+weights and then it gets underscore
+linear oh wait no I'm I'm dumb this is
+linear oh wait no I'm I'm dumb this is
+this doesn't need to get
+this doesn't need to get
+this make
+this make
+lspm
+lspm
+weights c yeah so this is wrong here
+weights c yeah so this is wrong here
+this needs to be
+Cal I don't know why it likes to do to
+Cal I don't know why it likes to do to
+do this is
+wrong
+layer the
+okay and then weight input needs to
+be yeah so you just did it wrong
+here right now we actually have some
+numbers this 14 here is
+numbers this 14 here is
+correct and then
+these are
+these are
+correct can this be faster than P
+torch not without extensive
+optimization
+optimization
+technically for like a specific very
+technically for like a specific very
+specific Network coding it in see would
+specific Network coding it in see would
+be faster than like naively optimized
+be faster than like naively optimized
+python maybe eager mode python it could
+python maybe eager mode python it could
+be faster um it depends on like what
+be faster um it depends on like what
+code it generates in compiled mode
+though so why aren't these guys doing
+anything we'll have to look at the data
+anything we'll have to look at the data
+but we are loading everything in
+but we are loading everything in
+correctly
+correctly
+now is pretty
+cool at least we should be pretty
+cool at least we should be pretty
+confident we're loading stuff
+confident we're loading stuff
+incorrectly
+I think what I want to do with this I
+I think what I want to do with this I
+want to go about this
+[Music]
+uh mile.
+C open this
+I mean I'm seeing the multi- discreet as
+I mean I'm seeing the multi- discreet as
+a possible candidate
+here so let's try like right like this
+okay okay this should be all zeros right
+okay okay this should be all zeros right
+and then what do we
+do the
+do the
+3 2
+3 2
+1 5
+eight yeah they got lots of actions
+right so they should definitely be doing
+right so they should definitely be doing
+something so possibly the action
+something so possibly the action
+handling logic is
+screwy let me think about
+that let's see how it's working here
+the
+renderer and where is
+renderer and where is
+it be in the step function towards the
+it be in the step function towards the
+bottom forgot how much code this
+bottom forgot how much code this
+was step
+players for step players
+players okay so actions
+players okay so actions
+ah right
+here divided by 100.0
+here divided by 100.0
+F that's not
+good so this is why it's screwy at least
+good so this is why it's screwy at least
+this is why it's slow not why it's
+this is why it's slow not why it's
+screwy
+two get mouse
+position 100 times DX
+why did I do it this way again
+that's kind of janky isn't
+that dividing by
+that dividing by
+100 what if I just
+like okay
+oops I do
+this
+this
+what just let me move
+weird divide by equal to
+magnitude I think it's supposed to be
+magnitude I think it's supposed to be
+times three isn't it
+or what's up with
+this oh it's for the continuous movement
+right yeah I see this is for continuous
+movement so I I think it's supposed to
+movement so I I think it's supposed to
+be like 3 * Dy + 3 or
+something plus
+three and I think that this is
+now
+uh divided by 3.0 F minus
+uh divided by 3.0 F minus
+3 something like
+3 something like
+this do minus three is
+fine oh that does something
+fine oh that does something
+they just went
+flying yeah they go
+flying so this is definitely an incode
+flying so this is definitely an incode
+issue let me grab something real quick
+issue let me grab something real quick
+one second
+for
+7 by seven right
+probably this needs to be rounded but
+probably this needs to be rounded but
+what's wrong with this
+no
+no
+Precision okay hold
+on let's go back to
+on let's go back to
+this maybe I had a point
+here and let's edit
+the let's edit the
+M.C and then what we'll do is for
+what did we say the type of the actions
+what did we say the type of the actions
+are inar
+so we should be able to
+do minus
+do minus
+3 times 100 right
+ah
+what happened
+what happened
+here misleading
+here misleading
+indentation
+there well my movement's back to normal
+there well my movement's back to normal
+right but now they're stationary again
+my e button also doesn't
+work
+e e
+it's always selecting
+it's always selecting
+three
+always is that coincidence
+I mean assumedly these things should be
+I mean assumedly these things should be
+doing something right
+invalid
+key be mile. PT
+seg Bol
+what's print I don't know what's
+what's print I don't know what's
+printing but this is a valid
+Network let's see what the heck is
+printing ah this is
+printing so this is a valid model right
+printing so this is a valid model right
+that we're loading here we can see that
+that we're loading here we can see that
+when I load this this is now the local
+when I load this this is now the local
+version the uh the pytorch version
+version the uh the pytorch version
+right we have they're not super smart
+right we have they're not super smart
+but they do something and
+but they do something and
+then let's see yep there goes the
+Knight we can follow him into
+Knight we can follow him into
+battle oh yep there he goes there's his
+battle oh yep there he goes there's his
+engage there he goes he's going to tank
+engage there he goes he's going to tank
+the tower for
+me oh look at that he took the tower I
+me oh look at that he took the tower I
+he might I can't tell if he was supposed
+he might I can't tell if he was supposed
+to die there yeah there he
+goes okay
+goes okay
+so we definitely do have an
+so we definitely do have an
+inconsistency of some type here
+right the question is going to be what's
+right the question is going to be what's
+the best way to find
+it so it going to be fixed data through
+it so it going to be fixed data through
+each Network
+probably
+probably
+right we put fixed data through each
+right we put fixed data through each
+Network and we see what
+happens it's pretty obnoxious to set
+happens it's pretty obnoxious to set
+that up but uh we can do
+that up but uh we can do
+it probably that'll be the fastest
+I'm going to take uh a quick break
+I'm going to take uh a quick break
+now and then I'm going to come back and
+now and then I'm going to come back and
+I'm going to do that I got to do a
+I'm going to do that I got to do a
+couple quick things and then uh I'm
+couple quick things and then uh I'm
+going to come back and we're going to
+going to come back and we're going to
+finish this all
+finish this all
+right I've got to uh do a couple quick
+right I've got to uh do a couple quick
+things in chat with a guy and then I'll
+things in chat with a guy and then I'll
+be back and my hope is that tonight
+be back and my hope is that tonight
+we'll get this working that's my goal so
+
+Kind: captions
+Language: en
+looks like we're back I'm going to have
+looks like we're back I'm going to have
+to update all the router
+to update all the router
+modem firmware later tonight because
+modem firmware later tonight because
+this just keeps cutting out and we'll
+this just keeps cutting out and we'll
+see if that fixes it hopefully it does
+see if that fixes it hopefully it does
+otherwise I'm going to have to be on
+otherwise I'm going to have to be on
+support with the
+support with the
+moronic
+moronic
+VY we'll see looks like we're back for
+VY we'll see looks like we're back for
+now
+though e
+that re to
+that re to
+cat
+cat
+output wait RE 2
+here this has got to be 64
+right but how does this make it break
+right but how does this make it break
+how does this make it
+how does this make it
+break let's
+break let's
+see
+see
+oh hold on I think I fixed
+oh hold on I think I fixed
+it
+so why aren they doing
+anything they should be doing stuff
+anything they should be doing stuff
+right
+this
+this
+lagging yeah you can see it's dropping
+lagging yeah you can see it's dropping
+some frames we're going to have to
+some frames we're going to have to
+improve the uh the com implementation I
+suppose but still not bad that I have a
+suppose but still not bad that I have a
+network like this
+network like this
+running um completely unoptimized
+C and it's still 45
+C and it's still 45
+FPS we'll fix the perf but this is not
+FPS we'll fix the perf but this is not
+bad at
+bad at
+all it's funny that the neutrals just
+all it's funny that the neutrals just
+like wreck
+you what did I forget to
+you what did I forget to
+deallocate oh the texture yeah that's
+fine so
+we got to figure out the
+actions what's going on with the
+actions and we've also got to load uh
+actions and we've also got to load uh
+weights into this don't we and the next
+weights into this don't we and the next
+two things to do
+I'm trying to think how I want to go
+I'm trying to think how I want to go
+about doing
+this let's check the load function
+Waits
+I like this implementation to be
+honest it's just tricky because
+honest it's just tricky because
+like
+like
+yeah we'll mess with it a little bit for
+yeah we'll mess with it a little bit for
+now
+okay so we're going to init the Moet
+it's pretty awkward actually now that
+it's pretty awkward actually now that
+I'm looking at
+I'm looking at
+it well let's just
+do yeah it's like it's awkward because
+do yeah it's like it's awkward because
+you're going to need to
+compute the size is and offset for
+compute the size is and offset for
+everything
+I think what we have to do
+we're going to have to change stuff
+we're going to have to change stuff
+quite a
+quite a
+bit because I didn't account for this
+bit because I didn't account for this
+properly before
+wrong
+wrong
+tab this is cool to
+see
+so yeah
+I know how we're going to do
+this loaded
+weights loaded
+weights
+weights and then what we'll do is we'll
+weights and then what we'll do is we'll
+do struct
+do struct
+weights it's going to be it's going to
+weights it's going to be it's going to
+contain float star
+data just going to in star or in
+idx and then what we're going to
+idx and then what we're going to
+do is we're going to do weight star load
+weights num
+weights I kind of
+weights I kind of
+like how do I want to do this
+I'm getting caught up in like a lot of
+I'm getting caught up in like a lot of
+little details that don't
+little details that don't
+matter let's just do it the way that
+matter let's just do it the way that
+I've been doing it so we'll do like this
+I've been doing it so we'll do like this
+data load weights
+data load weights
+right and this has to go down
+right and this has to go down
+here so now we have this loaded into a
+here so now we have this loaded into a
+struct that also has this index here and
+then now how do I actually use it is the
+then now how do I actually use it is the
+question
+oh I think it just has to
+do let's just do float star get
+do let's just do float star get
+weights into num
+weights
+weights
+data index and weights return data
+data index and weights return data
+this is
+it and let's just do in
+size wait size num
+size wait size num
+wavs and then we can just
+wavs and then we can just
+assert then this is weights index less
+assert then this is weights index less
+than equal weight size
+than equal weight size
+perfect and then what we can do is we
+perfect and then what we can do is we
+can modify
+can modify
+the the init functions of our
+the the init functions of our
+layers to take this weights buffer thing
+right get
+weights we'll see whether that ends up
+weights we'll see whether that ends up
+being a good idea or not
+being a good idea or not
+but I think that's what we're going to
+but I think that's what we're going to
+do for now
+make
+make
+linear so this has got to
+linear so this has got to
+be weight star weights
+right layer weights is going to be get
+right layer weights is going to be get
+weights
+weights
+this layer bias going to get
+this layer bias going to get
+weights output
+weights output
+DM that's
+DM that's
+nice it's nice and easy
+uhoh something just happened with the
+xtram are we uh are we
+xtram are we uh are we
+down
+down
+no oh that's actually on the X servers
+no oh that's actually on the X servers
+for once that's
+for once that's
+interesting uh it's doing something
+interesting uh it's doing something
+weird it's definitely doing something
+weird it's definitely doing something
+weird
+I don't know how to doal about
+that linear
+don't need it for
+don't need it for
+reos do it for here wait our
+weights let me just make sure it's not
+weights let me just make sure it's not
+making a million posts on my channel
+no it's not
+no it's not
+okay it still says live but I don't know
+okay it still says live but I don't know
+what it's doing because I have unable to
+what it's doing because I have unable to
+connect in my restream
+connect in my restream
+iio so if you're watching on X and it's
+iio so if you're watching on X and it's
+freezing or whatever try YouTube neurl
+freezing or whatever try YouTube neurl
+MMO where twitch jar is
+5341 uh lstm
+layer eight star
+layer eight star
+weights wait state
+state and actually almost all of these
+state and actually almost all of these
+[Music]
+[Music]
+need
+wait State H is get State H gets
+wait State H is get State H gets
+this St C gets
+this St C gets
+this bias
+put by
+put by
+state okay so we get the weights for the
+state okay so we get the weights for the
+lstm and I think that's everything that
+lstm and I think that's everything that
+actually has
+weights so now all I have to do is
+add you
+load star weights or
+weights and now I have to actually
+weights and now I have to actually
+figure out the exact size of the
+figure out the exact size of the
+network um so we'll figure that
+network um so we'll figure that
+out I think it's like 150k
+that
+here it
+is
+160k now we give it
+weights weights
+cool now this thing has
+cool now this thing has
+weights well let's see if we uh we can
+weights well let's see if we uh we can
+build this getting ahead of myself
+here okay unknown type
+weights H that's weird
+weights H that's weird
+right it's right
+right it's right
+here Ty death struct weights
+really oh this has to go at the top is
+why yeah all this stuff has to go at the
+top I always forget about
+that conflicting types for load
+that conflicting types for load
+weights oh right I
+uh can be underscore load
+weights initializing
+okay that's
+okay that's
+better float
+better float
+data weights
+data weights
+data this is
+and and then you have to Hash include
+and and then you have to Hash include
+assert do
+expected
+expression oh I forgot to
+type net
+Moet it's got to
+be like
+be like
+this okay
+no such file or
+directory
+directory
+um so all the agents are like very
+um so all the agents are like very
+slowly
+moving which is interesting
+and I can't control the agent anymore
+and I can't control the agent anymore
+which is even
+weirder oh also I'm realizing that this
+weirder oh also I'm realizing that this
+doesn't need to run every
+doesn't need to run every
+frame this only needs to run there
+frame this only needs to run there
+right so that should actually way speed
+right so that should actually way speed
+us up I was trying to do the Nets every
+us up I was trying to do the Nets every
+single
+single
+frame so now we're back to 60 FPS
+frame so now we're back to 60 FPS
+running the neurom met at least without
+running the neurom met at least without
+any
+optimization
+optimization
+but ORD
+but ORD
+wrong this is
+wrong this is
+Neo grand total of two
+Neo grand total of two
+plugins NE
+uh SEI because python syntax
+uh SEI because python syntax
+highlighting is a total pain and uh the
+highlighting is a total pain and uh the
+main reason I have it is for super
+main reason I have it is for super
+Maven the code complete
+I don't advise using you know GPT YK or
+I don't advise using you know GPT YK or
+um Sonet to like give you giant chunks
+um Sonet to like give you giant chunks
+of code but like on line autocomplete is
+of code but like on line autocomplete is
+basically just a typing buff right look
+basically just a typing buff right look
+how fast it
+how fast it
+is no LSP no
+is no LSP no
+formatter uh no formatter no LSP I don't
+formatter uh no formatter no LSP I don't
+have I don't have any opposition I just
+have I don't have any opposition I just
+don't have
+don't have
+one mainly because I like I was
+one mainly because I like I was
+previously coding in Python so much that
+previously coding in Python so much that
+like you can't do all that much with
+like you can't do all that much with
+those anyways since it's not statically
+those anyways since it's not statically
+typed I probably could get one for C it
+typed I probably could get one for C it
+would help a little bit but not a huge
+deal I see why I can't control the
+deal I see why I can't control the
+character here it's just cuz I have this
+character here it's just cuz I have this
+in a weird order
+in a weird order
+right if I did hold
+right if I did hold
+on Step
+on Step
+n and then you do
+n and then you do
+forward and do it like
+this
+this
+ah okay look I can control the
+ah okay look I can control the
+character and now I'm controlling this
+character and now I'm controlling this
+one and this one is being taken over by
+one and this one is being taken over by
+the neural Net's clearly not being
+the neural Net's clearly not being
+loaded correctly or something right
+loaded correctly or something right
+we'll have to debug it but like I have
+we'll have to debug it but like I have
+control now I have control over this one
+control now I have control over this one
+now I have control over this one and
+now I have control over this one and
+like you can see the other ones moving a
+like you can see the other ones moving a
+little bit so the general setup of this
+little bit so the general setup of this
+is good and it's 60fps running in a
+is good and it's 60fps running in a
+single core with like this giant well
+single core with like this giant well
+not giant it's really small but you know
+not giant it's really small but you know
+this multi-layer convet lstm everything
+this multi-layer convet lstm everything
+works we have like typical mobile
+works we have like typical mobile
+controls we've got click to to move
+controls we've got click to to move
+we've got hold to move which you know is
+we've got hold to move which you know is
+fine but you know you have click to move
+fine but you know you have click to move
+we should probably make it so that like
+we should probably make it so that like
+you get like responsiveness like for
+you get like responsiveness like for
+where you click or
+where you click or
+whatever but you have this you've got
+whatever but you have this you've got
+your abilities so like you
+your abilities so like you
+know uh well there's something wrong
+know uh well there's something wrong
+with the ability hot keys I think but
+yeah can you explain why it's not
+yeah can you explain why it's not
+possible to use the C file you get
+that's a good
+that's a good
+question I have not tried that to be
+question I have not tried that to be
+fair it's kind of a mess though I
+mean where is
+it why can't I see the
+file I'm sure I have one somewhere
+oh wait
+that's
+that's
+so include python. is there like python
+so include python. is there like python
+stuff in here or can you use
+stuff in here or can you use
+this I mean this is a freaking 55,000
+this I mean this is a freaking 55,000
+line file
+which is kind of
+gross if you want to go ahead and try
+gross if you want to go ahead and try
+that like let me
+know standard
+death that could work
+I mean to be fair I didn't try that hard
+I mean to be fair I didn't try that hard
+but the thing is like at this point it's
+but the thing is like at this point it's
+become it's let's see it would be it
+become it's let's see it would be it
+would work that would be super cool to
+would work that would be super cool to
+get the m to play on yeah and I mean
+get the m to play on yeah and I mean
+absolutely that would be great for
+absolutely that would be great for
+contributors
+contributors
+um I've been writing these CMS for like
+um I've been writing these CMS for like
+a couple of weeks and already it's not
+a couple of weeks and already it's not
+really any harder for me to write in C
+really any harder for me to write in C
+versus scon the one thing that you have
+versus scon the one thing that you have
+to realize though with scon though is
+to realize though with scon though is
+like it includes the python interpreter
+like it includes the python interpreter
+by default and it will call back into
+by default and it will call back into
+python so even though that this is C it
+python so even though that this is C it
+like this has calls back into python so
+like this has calls back into python so
+you have to make sure your program has
+you have to make sure your program has
+zero of those and then you probably will
+zero of those and then you probably will
+have to do something to like cut out the
+have to do something to like cut out the
+python interpreter entirely so it won't
+python interpreter entirely so it won't
+be
+be
+trivial if you have a way of doing that
+trivial if you have a way of doing that
+let me know but I mean for now you know
+let me know but I mean for now you know
+I I contributors are perfectly welcome
+I I contributors are perfectly welcome
+to contribute uh you know in scyon or
+to contribute uh you know in scyon or
+whatever they want to write it in as
+whatever they want to write it in as
+long as it's fast and uh you know if you
+long as it's fast and uh you know if you
+want help getting it onto the web I can
+want help getting it onto the web I can
+help with that but really the C is not
+help with that but really the C is not
+hard like I've been doing this for a
+hard like I've been doing this for a
+couple of weeks and it's already just as
+couple of weeks and it's already just as
+easy to do it in C in fact I actually
+easy to do it in C in fact I actually
+think it's easier in C and I know that
+think it's easier in C and I know that
+sounds crazy but the thing is like the
+sounds crazy but the thing is like the
+build times are so much faster and the
+build times are so much faster and the
+error message are the error messages are
+error message are the error messages are
+much better so like the dev cycle is
+much better so like the dev cycle is
+just so much easier and
+just so much easier and
+Tighter
+overall so I've been enjoying
+it I've been enjoying it at the very
+it I've been enjoying it at the very
+least train the agent in Python and then
+least train the agent in Python and then
+use C to run with wome yep exactly now
+use C to run with wome yep exactly now
+the tricky thing here which is why this
+the tricky thing here which is why this
+file exists is you have to be able to
+file exists is you have to be able to
+load the net Indy which is why I have
+load the net Indy which is why I have
+this C puffer net uh I'm currently
+this C puffer net uh I'm currently
+debugging this but like right now I have
+debugging this but like right now I have
+it running it's just either loading the
+it running it's just either loading the
+wrong weights are doing something weird
+wrong weights are doing something weird
+I just you know this has only been in
+I just you know this has only been in
+development for a few days now um these
+development for a few days now um these
+guys are technically being controlled by
+guys are technically being controlled by
+a neural net so we have 10 agents
+a neural net so we have 10 agents
+controlled by neural net 60 FPS is you
+controlled by neural net 60 FPS is you
+know zero lag One Core running a two
+know zero lag One Core running a two
+layer CNN plus MLP plus lstm uh
+layer CNN plus MLP plus lstm uh
+Inc is it not POS possible use Python
+Inc is it not POS possible use Python
+with a W nope you can't really do that
+with a W nope you can't really do that
+as far as I'm
+as far as I'm
+aware got to compile the web
+assembly pytorch doesn't have great web
+assembly pytorch doesn't have great web
+support either like I tried to like get
+support either like I tried to like get
+pytorch for web that didn't work they
+pytorch for web that didn't work they
+have a C++ API but you can't just easily
+have a C++ API but you can't just easily
+compile it for web so like I mean at end
+compile it for web so like I mean at end
+of the day though this is a 445 line
+of the day though this is a 445 line
+file that has lstm comms mop has a bunch
+file that has lstm comms mop has a bunch
+of stuff in
+of stuff in
+it right
+now I got to figure out what's wrong
+now I got to figure out what's wrong
+with
+these um easiest way is going to be to
+these um easiest way is going to be to
+go layer by
+go layer by
+layer and print out the weights
+right you don't use torch did you
+right you don't use torch did you
+implement everything in the network
+implement everything in the network
+yourself or yeah I just implemented it
+yourself or yeah I just implemented it
+all
+all
+myself when I load the weights but like
+myself when I load the weights but like
+look I have this puffet file it's again
+look I have this puffet file it's again
+it's 445 lines and most of that is just
+it's 445 lines and most of that is just
+for user API to make it a little easier
+for user API to make it a little easier
+to store weights and stuff like this is
+to store weights and stuff like this is
+the com
+the com
+2D this is your lstm right here they're
+2D this is your lstm right here they're
+like you know half screen a code a piece
+like you know half screen a code a piece
+so like when you actually get down to
+so like when you actually get down to
+the low level of what these things are
+the low level of what these things are
+they don't take a lot of code to
+implement that's
+implement that's
+it pretty cool
+it pretty cool
+right four Loops from
+right four Loops from
+hell I mean yes to know right like I
+hell I mean yes to know right like I
+actually I posted this on Twitter and
+actually I posted this on Twitter and
+people like a seven4 Loops but like this
+people like a seven4 Loops but like this
+is how you write a con
+is how you write a con
+right messages are
+right messages are
+censored that's weird they shouldn't be
+censored that's weird they shouldn't be
+I turned off the profanity filter though
+I turned off the profanity filter though
+I don't know if uh it might reset it
+I don't know if uh it might reset it
+every stream by default which is
+every stream by default which is
+obnoxious but yeah like this is how you
+obnoxious but yeah like this is how you
+implement a comp right like there's no
+implement a comp right like there's no
+reason to try to split this up into
+reason to try to split this up into
+multiple functions that's just dumb
+multiple functions that's just dumb
+because then like you you add additional
+because then like you you add additional
+stuff to the stack technically you can
+stuff to the stack technically you can
+inline it but like there's really no
+inline it but like there's really no
+reason not to just have this be seven4
+reason not to just have this be seven4
+Loops like when you're processing data
+Loops like when you're processing data
+you know when you're processing data in
+you know when you're processing data in
+a way that truly requires seven4 Loops
+a way that truly requires seven4 Loops
+you just write seven4 Loops right
+let's print out some weights here let's
+let's print out some weights here let's
+print out the
+weights
+oops print out the
+weights did I forget something
+weights did I forget something
+[Music]
+bind
+compile what is it
+compile what is it
+what are you doing
+Nathan oh that's
+Nathan oh that's
+funny I I don't know YouTube is really
+funny I I don't know YouTube is really
+weird
+zero
+zero
+oops no dots allowed yeah I think it
+oops no dots allowed yeah I think it
+doesn't it tries to censor all types of
+doesn't it tries to censor all types of
+URLs I've tried to find a setting to
+URLs I've tried to find a setting to
+disable that and I
+can't which is really weird because like
+can't which is really weird because like
+I've gotten zero bots on YouTube and I
+I've gotten zero bots on YouTube and I
+get like tons of twitch Bots tons of
+get like tons of twitch Bots tons of
+twitch
+Bots I got one that was like either a
+Bots I got one that was like either a
+script or a language model as well the
+script or a language model as well the
+other day where it was like timing its
+other day where it was like timing its
+messages to try to like you know guess
+messages to try to like you know guess
+what I was going to reply and then try
+what I was going to reply and then try
+to sell me stuff it was like trying to
+to sell me stuff it was like trying to
+fake having a conversation it was so
+fake having a conversation it was so
+stupid
+right so what the the plan here is going
+right so what the the plan here is going
+to be to uh to print this stuff out and
+to be to uh to print this stuff out and
+then we have this save net flat file
+then we have this save net flat file
+here where's
+here where's
+this test
+lstm question sent but you didn't read
+lstm question sent but you didn't read
+it oh should I look in at m.p and m.h
+it oh should I look in at m.p and m.h
+for writing the MC how do you bind and
+for writing the MC how do you bind and
+comile okay so if you want to write it
+comile okay so if you want to write it
+and see then yeah you should look at
+and see then yeah you should look at
+these files um and then I have like a
+these files um and then I have like a
+build. P it's literally clang it's so
+build. P it's literally clang it's so
+easy uh now when you want to run to
+easy uh now when you want to run to
+python there is a PIX file that is a
+python there is a PIX file that is a
+very thin binding that literally just
+very thin binding that literally just
+goes between Python and c and the reason
+goes between Python and c and the reason
+I do that is then you have like The
+I do that is then you have like The
+Binding as its own thing and you don't
+Binding as its own thing and you don't
+have to clutter your python or clutter
+have to clutter your python or clutter
+your C code and you can use the C
+your C code and you can use the C
+Standalone you can use the python
+Standalone you can use the python
+Standalone and it's just in the middle
+Standalone and it's just in the middle
+so that's what I would suggest and I'll
+so that's what I would suggest and I'll
+be here you can ask me stuff like I said
+be here you can ask me stuff like I said
+I will help you a ton with that
+I will help you a ton with that
+environment because it's awesome hey
+environment because it's awesome hey
+welcome what is this this is me
+welcome what is this this is me
+currently trying to get a network
+currently trying to get a network
+working
+working
+for this MOBA I
+for this MOBA I
+have so I'm trying to get neuronet to
+have so I'm trying to get neuronet to
+play this and I have trained agents that
+play this and I have trained agents that
+will play it but the thing is I have to
+will play it but the thing is I have to
+Port them into C so that I can run them
+Port them into C so that I can run them
+on the web so I'm currently writing
+on the web so I'm currently writing
+neural net layers in C for this it's a
+neural net layers in C for this it's a
+fair complicated one it's like a MLP CNN
+fair complicated one it's like a MLP CNN
+lstm that I'm getting to work here and
+lstm that I'm getting to work here and
+we actually have it almost done I just
+we actually have it almost done I just
+have to debug
+it and I have to basically figure out
+it and I have to basically figure out
+where it is that my implementation isn't
+where it is that my implementation isn't
+matching the P torch
+matching the P torch
+reference so that's
+it
+it
+ram ram
+tape
+tape
+data cpu.
+numpy
+numpy
+Z does this
+work let's see if this works
+holy
+okay no knowledge when it comes to this
+okay no knowledge when it comes to this
+that's an interesting
+that's an interesting
+project my main thing is I do ultra high
+project my main thing is I do ultra high
+performance reinforcement learning and
+performance reinforcement learning and
+um these days the push is on high
+um these days the push is on high
+performance simulators uh which we have
+performance simulators uh which we have
+some of but in order to show them off
+some of but in order to show them off
+I've been putting them on the web lately
+I've been putting them on the web lately
+I've just been porting a bunch of stuff
+I've just been porting a bunch of stuff
+bunch of these M to C and then also now
+bunch of these M to C and then also now
+porting the networks to C so that we can
+porting the networks to C so that we can
+run them end to end on web like 100%
+run them end to end on web like 100%
+client side and they're actually fast
+client side and they're actually fast
+enough that we can run the M we can run
+enough that we can run the M we can run
+like thousand times real time easily but
+like thousand times real time easily but
+now we can even run the networks real
+now we can even run the networks real
+time uh on one CPU core which is pretty
+time uh on one CPU core which is pretty
+cool like Comet
+cool like Comet
+lstm one CPU core
+lstm one CPU core
+so it's 100% client
+so it's 100% client
+side is cool very
+cool let's see what's wrong
+here does this pram tell me
+anything how do I figure out what layer
+anything how do I figure out what layer
+this is
+from I
+from I
+torch
+torch
+get layer
+get layer
+of
+ram named named
+parameters Okay so
+let's see if this
+works a very very
+works a very very
+nice very nice
+indeed so this is what we wanted out of
+indeed so this is what we wanted out of
+this is now I I can run
+this is now I I can run
+this and yeah you see I get the first
+this and yeah you see I get the first
+weight of every
+weight of every
+layer so then what I'm going to do is
+layer so then what I'm going to do is
+I'm going to build this
+locally and then I'm going to run
+it and if I scroll up
+here why do I not
+here why do I not
+have I thought that I uh on
+oh cuz they didn't do
+oh cuz they didn't do
+wait why do I not get these
+prints I should have gotten print
+prints I should have gotten print
+statements here
+what did I do wrong I have the slash
+ends oh the return is in the the return
+ends oh the return is in the the return
+is up
+here yeah I'm just saw
+here yeah I'm just saw
+that okay perfect so
+now now we can see that we have the
+now now we can see that we have the
+wrong Network parameters right
+we can see very clearly like hey look
+we can see very clearly like hey look
+the parameters don't
+match good
+evening this is exciting though as soon
+evening this is exciting though as soon
+as I debug this we're going to be able
+as I debug this we're going to be able
+to upgrade the AI uh on the Moa we're
+to upgrade the AI uh on the Moa we're
+going to be able to
+going to be able to
+like actually run this thing online with
+like actually run this thing online with
+proper
+proper
+AI so either goes
+AI so either goes
+m.p plusi plus.
+m.p plusi plus.
+H during
+H during
+training or Mah h plus neural
+network Inc for web rendering yeah comma
+network Inc for web rendering yeah comma
+correct question mark
+correct question mark
+God that's so
+God that's so
+ridiculous here let me open the Discord
+ridiculous here let me open the Discord
+as well just in case that's
+easier but yeah that's
+easier but yeah that's
+um that's how it works and I want to be
+um that's how it works and I want to be
+fair Nathan I have
+fair Nathan I have
+not I haven't been using the C ports for
+not I haven't been using the C ports for
+training just
+training just
+yet so that might be a little bit of a
+yet so that might be a little bit of a
+different
+different
+ordeal I got to do
+ordeal I got to do
+that but yeah it's whatever is easier
+that but yeah it's whatever is easier
+for you you can
+do so when you write it in C technically
+do so when you write it in C technically
+yeah you end up with this extra layer
+yeah you end up with this extra layer
+because like you need the scon anyways
+because like you need the scon anyways
+but the scon just becomes a very thin
+but the scon just becomes a very thin
+wrapper with no logic in it
+that's how it
+that's how it
+goes okay so why don't these two
+match uh I'm a little bit concerned with
+match uh I'm a little bit concerned with
+that I thought at least we'd get like
+that I thought at least we'd get like
+the first layer to match Maybe
+because like we call
+because like we call
+make com 2D on weights
+right now something's got to be wrong
+right now something's got to be wrong
+there
+okay so it says first weight is equal to
+okay so it says first weight is equal to
+zero which is not
+zero which is not
+correct
+right something's definitely weird
+there is this how I load though do I
+there is this how I load though do I
+just load from a PT oh no I don't load
+just load from a PT oh no I don't load
+from PT right why do I have a PT here
+from PT right why do I have a PT here
+that doesn't make any sense
+um
+here mobile weights. bin
+maybe could also just be I have a
+maybe could also just be I have a
+different model
+okay so Copy mobile
+okay so Copy mobile
+weights
+weights
+bin or live environments ocean
+MOA in and then
+MOA in and then
+wa St in ah is this the same size or is
+wa St in ah is this the same size or is
+this changed I think it's changed
+right one
+right one
+six yeah it changed
+six yeah it changed
+look8 5 six that actually did
+change okay I think I see it correct
+now look at
+this first weight is now
+correct up here but it's not correct in
+correct up here but it's not correct in
+the
+the
+comp yeah so something's just getting
+comp yeah so something's just getting
+screwed up
+then we can see that the file's loading
+we have weights
+we have weights
+here make Comm
+2D
+index let me make sure it has not
+index let me make sure it has not
+Advanced the
+Advanced the
+index ah wait wait idx is wrong isn't
+index ah wait wait idx is wrong isn't
+it yeah I think I have the init function
+wrong
+wait wait what weights idx to
+wait wait what weights idx to
+zero right when you load
+zero right when you load
+it which data
+it which data
+we size we
+index how'd that
+happen how is this
+uh oh okay
+uh oh okay
+I
+I
+see we're good on the weight
+see we're good on the weight
+index and then con
+one
+one
+that see what
+happens get weights
+float star
+float star
+data weights data of Weights
+data weights data of Weights
+Index right
+has got this many weights from index
+has got this many weights from index
+zero and then it got 15K
+weights
+interesting oh well right here is the
+interesting oh well right here is the
+issue
+yeah okay conv weight should match
+yeah okay conv weight should match
+now hello what are we doing we're
+now hello what are we doing we're
+finally getting this network to work in
+finally getting this network to work in
+pure
+pure
+CA pretty darn fancy Network to have to
+CA pretty darn fancy Network to have to
+port to Pure native
+port to Pure native
+sea um but it's going to be really cool
+sea um but it's going to be really cool
+because we're going to have a AET MLP
+because we're going to have a AET MLP
+lstm running in the browser on One Core
+lstm running in the browser on One Core
+in real time so that's going to be
+in real time so that's going to be
+pretty cool and all we have to do to get
+pretty cool and all we have to do to get
+there we're quite close
+actually eight holy does this just work
+actually eight holy does this just work
+immediately projection
+immediately projection
+bias projection weight
+bias projection weight
+actor weight okay we get the actor
+actor weight okay we get the actor
+weight is wrong
+here so we have to fix this I think it
+here so we have to fix this I think it
+does the recurrent before the actor or
+does the recurrent before the actor or
+something yeah yeah totally this is it
+something yeah yeah totally this is it
+right here no is it
+right here no is it
+h almost we got all the way down to the
+h almost we got all the way down to the
+projection before it screws
+up projection bias actually actually we
+up projection bias actually actually we
+get all the way to the actor don't
+get all the way to the actor don't
+we so it says
+07 wait actor
+07 wait actor
+weight projection
+weight projection
+bias then actor the actor weight is
+bias then actor the actor weight is
+wrong why is the actor weight wrong
+let's figure this
+let's figure this
+out projection is Right actor is right
+oh it's cuz the it does the lstm
+last let's
+see maybe it's this
+okay so we
+okay so we
+have actor
+have actor
+weight matches bias
+weight matches bias
+matches value function
+matches value function
+matches and
+matches and
+then and then we don't have the waight
+then and then we don't have the waight
+for the lstm great so we have to get
+for the lstm great so we have to get
+that
+then we do print
+then we do print
+F lstm
+weight and the lstm is
+weight and the lstm is
+Jank okay let's see why it's
+Jank okay let's see why it's
+Jank let me just briefly vanity check
+Jank let me just briefly vanity check
+this
+this
+first oh we don't pass it anything
+first oh we don't pass it anything
+duh weight
+duh weight
+star
+weights okay we do like
+this so we pass it
+weights and then it gets underscore
+weights and then it gets underscore
+linear oh wait no I'm I'm dumb this is
+linear oh wait no I'm I'm dumb this is
+this doesn't need to get
+this doesn't need to get
+this make
+this make
+lspm
+lspm
+weights c yeah so this is wrong here
+weights c yeah so this is wrong here
+this needs to be
+Cal I don't know why it likes to do to
+Cal I don't know why it likes to do to
+do this is
+wrong
+layer the
+okay and then weight input needs to
+be yeah so you just did it wrong
+here right now we actually have some
+numbers this 14 here is
+numbers this 14 here is
+correct and then
+these are
+these are
+correct can this be faster than P
+torch not without extensive
+optimization
+optimization
+technically for like a specific very
+technically for like a specific very
+specific Network coding it in see would
+specific Network coding it in see would
+be faster than like naively optimized
+be faster than like naively optimized
+python maybe eager mode python it could
+python maybe eager mode python it could
+be faster um it depends on like what
+be faster um it depends on like what
+code it generates in compiled mode
+though so why aren't these guys doing
+anything we'll have to look at the data
+anything we'll have to look at the data
+but we are loading everything in
+but we are loading everything in
+correctly
+correctly
+now is pretty
+cool at least we should be pretty
+cool at least we should be pretty
+confident we're loading stuff
+confident we're loading stuff
+incorrectly
+I think what I want to do with this I
+I think what I want to do with this I
+want to go about this
+[Music]
+uh mile.
+C open this
+I mean I'm seeing the multi- discreet as
+I mean I'm seeing the multi- discreet as
+a possible candidate
+here so let's try like right like this
+okay okay this should be all zeros right
+okay okay this should be all zeros right
+and then what do we
+do the
+do the
+3 2
+3 2
+1 5
+eight yeah they got lots of actions
+right so they should definitely be doing
+right so they should definitely be doing
+something so possibly the action
+something so possibly the action
+handling logic is
+screwy let me think about
+that let's see how it's working here
+the
+renderer and where is
+renderer and where is
+it be in the step function towards the
+it be in the step function towards the
+bottom forgot how much code this
+bottom forgot how much code this
+was step
+players for step players
+players okay so actions
+players okay so actions
+ah right
+here divided by 100.0
+here divided by 100.0
+F that's not
+good so this is why it's screwy at least
+good so this is why it's screwy at least
+this is why it's slow not why it's
+this is why it's slow not why it's
+screwy
+two get mouse
+position 100 times DX
+why did I do it this way again
+that's kind of janky isn't
+that dividing by
+that dividing by
+100 what if I just
+like okay
+oops I do
+this
+this
+what just let me move
+weird divide by equal to
+magnitude I think it's supposed to be
+magnitude I think it's supposed to be
+times three isn't it
+or what's up with
+this oh it's for the continuous movement
+right yeah I see this is for continuous
+movement so I I think it's supposed to
+movement so I I think it's supposed to
+be like 3 * Dy + 3 or
+something plus
+three and I think that this is
+now
+uh divided by 3.0 F minus
+uh divided by 3.0 F minus
+3 something like
+3 something like
+this do minus three is
+fine oh that does something
+fine oh that does something
+they just went
+flying yeah they go
+flying so this is definitely an incode
+flying so this is definitely an incode
+issue let me grab something real quick
+issue let me grab something real quick
+one second
+for
+7 by seven right
+probably this needs to be rounded but
+probably this needs to be rounded but
+what's wrong with this
+no
+no
+Precision okay hold
+on let's go back to
+on let's go back to
+this maybe I had a point
+here and let's edit
+the let's edit the
+M.C and then what we'll do is for
+what did we say the type of the actions
+what did we say the type of the actions
+are inar
+so we should be able to
+do minus
+do minus
+3 times 100 right
+ah
+what happened
+what happened
+here misleading
+here misleading
+indentation
+there well my movement's back to normal
+there well my movement's back to normal
+right but now they're stationary again
+my e button also doesn't
+work
+e e
+it's always selecting
+it's always selecting
+three
+always is that coincidence
+I mean assumedly these things should be
+I mean assumedly these things should be
+doing something right
+invalid
+key be mile. PT
+seg Bol
+what's print I don't know what's
+what's print I don't know what's
+printing but this is a valid
+Network let's see what the heck is
+printing ah this is
+printing so this is a valid model right
+printing so this is a valid model right
+that we're loading here we can see that
+that we're loading here we can see that
+when I load this this is now the local
+when I load this this is now the local
+version the uh the pytorch version
+version the uh the pytorch version
+right we have they're not super smart
+right we have they're not super smart
+but they do something and
+but they do something and
+then let's see yep there goes the
+Knight we can follow him into
+Knight we can follow him into
+battle oh yep there he goes there's his
+battle oh yep there he goes there's his
+engage there he goes he's going to tank
+engage there he goes he's going to tank
+the tower for
+me oh look at that he took the tower I
+me oh look at that he took the tower I
+he might I can't tell if he was supposed
+he might I can't tell if he was supposed
+to die there yeah there he
+goes okay
+goes okay
+so we definitely do have an
+so we definitely do have an
+inconsistency of some type here
+right the question is going to be what's
+right the question is going to be what's
+the best way to find
+it so it going to be fixed data through
+it so it going to be fixed data through
+each Network
+probably
+probably
+right we put fixed data through each
+right we put fixed data through each
+Network and we see what
+happens it's pretty obnoxious to set
+happens it's pretty obnoxious to set
+that up but uh we can do
+that up but uh we can do
+it probably that'll be the fastest
+I'm going to take uh a quick break
+I'm going to take uh a quick break
+now and then I'm going to come back and
+now and then I'm going to come back and
+I'm going to do that I got to do a
+I'm going to do that I got to do a
+couple quick things and then uh I'm
+couple quick things and then uh I'm
+going to come back and we're going to
+going to come back and we're going to
+finish this all
+finish this all
+right I've got to uh do a couple quick
+right I've got to uh do a couple quick
+things in chat with a guy and then I'll
+things in chat with a guy and then I'll
+be back and my hope is that tonight
+be back and my hope is that tonight
+we'll get this working that's my goal so

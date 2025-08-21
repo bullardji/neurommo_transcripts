@@ -1,0 +1,2395 @@
+Kind: captions
+Language: en
+blue. Whoops. That's no
+camera. There we
+camera. There we
+go. That ISO is
+terrible. It's going to be so much
+terrible. It's going to be so much
+better when I actually have lights
+better when I actually have lights
+behind me. I've got like a couple
+behind me. I've got like a couple
+dangling like utility lights. All right,
+dangling like utility lights. All right,
+morning.
+morning.
+As promised, I am back bright and early
+As promised, I am back bright and early
+for uh more
+dev. Good stream view
+dev. Good stream view
+up. All right, let's check on the
+experiments. Ah, okay. That's the one I
+experiments. Ah, okay. That's the one I
+really wanted to
+work. That's crazy that this doesn't
+work. That's crazy that this doesn't
+repro though. That is
+crazy.
+Okay. At least we have something for
+Okay. At least we have something for
+comparison
+comparison
+now. No, like at least we have something
+now. No, like at least we have something
+to go off of maybe.
+Wait, is it Why do we have two of
+these? Wait, hang
+these? Wait, hang
+on. Is
+on. Is
+this
+Oh.
+Huh. I see.
+We got to run another one of those
+unfortunately. I know what happened
+unfortunately. I know what happened
+exactly. It's freaking bet. It's your
+exactly. It's freaking bet. It's your
+fault.
+fault.
+Now that's
+cool. All
+right. This the one that's totally
+right. This the one that's totally
+crashed.
+Yeah.
+9%. Yes. So, what we got to
+do? We got to do the
+uh deck crap.
+What?
+Okay. In the loop
+Okay. In the loop
+here where we're
+here where we're
+decreasing, we're decrementing the
+decreasing, we're decrementing the
+quarks.
+That took me a whole day to find that
+That took me a whole day to find that
+bug last time. I'm not going to forget
+bug last time. I'm not going to forget
+about
+Cool. So, we got all
+that. That'll just
+run. Okay. So, sadly, neither of these
+run. Okay. So, sadly, neither of these
+is really working,
+is really working,
+but it's kind of tough to say.
+but it's kind of tough to say.
+I mean, we do have 85 runs and nothing
+I mean, we do have 85 runs and nothing
+amazing, but the fact that this goes out
+amazing, but the fact that this goes out
+to
+300k. How far does this go out? Yeah,
+300k. How far does this go out? Yeah,
+see this doesn't go out as far. This is
+see this doesn't go out as far. This is
+only out to
+100k. So, there might still be something
+100k. So, there might still be something
+there, you know.
+Now other than that we got to look at
+Now other than that we got to look at
+neural MMO.
+Oh, is this our GDP run? What is this?
+I think this is our DDP
+run. CUDA
+run. CUDA
+error unspecified launch failure. So
+error unspecified launch failure. So
+yeah, this thing must have gotten some
+yeah, this thing must have gotten some
+nans at some
+nans at some
+point. That's rough.
+point. That's rough.
+But we did
+get 32 billion
+steps. We get to
+4.6. That's pretty decent.
+And then we can see that this is failing
+And then we can see that this is failing
+at that logic norm.
+Let's go compare this
+run. Two
+run. Two
+These
+guys. Where'd my uh Where'd my run go,
+man? Okay. So, this is the latest run
+man? Okay. So, this is the latest run
+that I had.
+that I had.
+have this
+have this
+one. That's not
+one. That's not
+bad. It does seem to sat a little
+earlier. I don't like the direction it's
+earlier. I don't like the direction it's
+headed in,
+but the rerun sweeps
+That's reasonable
+That's reasonable
+though. Okay.
+One of two things potentially. Like one
+One of two things potentially. Like one
+of two things
+fixed. This is just going to have to run
+fixed. This is just going to have to run
+for a good chunk of today. this
+for a good chunk of today. this
+repro. Let me think what we what we can
+repro. Let me think what we what we can
+do with this here though with this
+knowledge. Something with neural MMOs,
+knowledge. Something with neural MMOs,
+it's really just hard to run big sweeps
+it's really just hard to run big sweeps
+on neural MMO, right?
+I mean, can't we
+technically probably technically we
+technically probably technically we
+should be able to make it so that uh
+should be able to make it so that uh
+this sweep stuff like sweep runs DDP
+It's 8:15. I think we're going to have
+It's 8:15. I think we're going to have
+some drone guys coming by today for uh
+some drone guys coming by today for uh
+submit their drone in, which will be
+submit their drone in, which will be
+cool.
+I think the main thing for today is
+I think the main thing for today is
+going to
+going to
+be Well, let's get a sweep going on
+be Well, let's get a sweep going on
+meta. First of
+all, our sweeps aren't perfect
+yet. I don't want to bottleneck waiting
+yet. I don't want to bottleneck waiting
+for sweeps. Let me think what we can
+for sweeps. Let me think what we can
+what we can do in the meantime here
+what we can do in the meantime here
+productively.
+There's some stuff to fix up around
+DDP. I also have profiling stuff I can
+DDP. I also have profiling stuff I can
+do on meta, right?
+Why don't we just like start messing
+Why don't we just like start messing
+with with DDP a little
+with with DDP a little
+bit?
+bit?
+Um, yeah, let's just start messing with
+Um, yeah, let's just start messing with
+DDP a little
+DDP a little
+bit. Get meta set up and we'll see what
+bit. Get meta set up and we'll see what
+happens from there.
+me also go grab my morning
+me also go grab my morning
+coffee on the
+Okay. Mug has so many equations on it. I
+Okay. Mug has so many equations on it. I
+could probably learn my particle physics
+could probably learn my particle physics
+off of just this
+mug and
+chemistry. It's literally just random
+chemistry. It's literally just random
+random well-known equations from math,
+random well-known equations from math,
+physics, chemistry.
+The
+heck failed.
+There we go. I just
+There we go. I just
+copied thing
+wrong.
+Okay. Where's our torch on command?
+This is current train
+speed. CUDA unknown
+speed. CUDA unknown
+error. Oh, this is actually the thing
+error. Oh, this is actually the thing
+that's breaking. I think this is just
+that's breaking. I think this is just
+CUDA drivers dropping.
+CUDA drivers dropping.
+Huh. That's super
+annoying. That's probably what broke it.
+NVML. Uhhuh.
+That's weird.
+I just have to reboot this
+thing. We'll try it.
+Give this a second to come back
+Give this a second to come back
+on. What we want to get is we want to
+on. What we want to get is we want to
+get some like really nice
+get some like really nice
+solid perf numbers on GDP.
+I don't know though if we're going to be
+I don't know though if we're going to be
+able to get it to train well with um
+able to get it to train well with um
+giant giant
+batches.
+batches.
+Actually, let's see how OpenAI 5 like
+Actually, let's see how OpenAI 5 like
+their batch is.
+The effective batch
+The effective batch
+size
+is 120
+is 120
+* 16
+samples. I mean they had bat size 3
+samples. I mean they had bat size 3
+million
+I think this is the mini batch size
+I think this is the mini batch size
+honestly.
+They got good training out of batsized 3
+They got good training out of batsized 3
+million on
+Dota. It's going to be on us to do that
+Dota. It's going to be on us to do that
+here.
+What's going on with tiny box?
+and go check what's this thing has come
+and go check what's this thing has come
+back on.
+See if that comes back on now. Oh
+man, hardware thing is tough.
+That's going to be a problem because I
+That's going to be a problem because I
+don't have the cable that I need coming
+don't have the cable that I need coming
+until tomorrow. Unless I randomly have a
+until tomorrow. Unless I randomly have a
+VGA
+somewhere. Definitely need these things
+running. What happened? Some driver
+running. What happened? Some driver
+shenanigans.
+shenanigans.
+I did is reboot
+I did is reboot
+it. There we
+are. Lovely. Or actually we are set.
+We actually don't even need Neptune for
+now.
+This I want to get speeds first.
+This is 750k,
+right? What if I do this?
+million. They're like some
+reason it's a batch size maybe.
+We should be able to get way more than
+We should be able to get way more than
+that. Like close to 2 mil.
+Got to be this numb M
+Got to be this numb M
+right up to like four M's
+here.
+Yeah. The original was it
+Yeah. The original was it
+16? Was it eight? I think it was eight.
+Eight is double buffered. You need 64
+Eight is double buffered. You need 64
+cores for that. So the most I can do is
+cores for that. So the most I can do is
+four.
+do five, but that doesn't help.
+I could
+technically you see this
+Okay, so that gets us 1.1. But then the
+Okay, so that gets us 1.1. But then the
+trick is going to be if we do
+eight or what is it?
+eight or what is it?
+N it should be like this, right? Two.
+N it should be like this, right? Two.
+Two.
+Two.
+One.
+One.
+Two. Be
+better. Okay. 1.1 mil.
+But
+But
+four, two, and
+four, two, and
+two. Or was it? Was it
+two. Or was it? Was it
+four, four?
+Yeah.
+1.5. This actually gets us like
+1.5. This actually gets us like
+decentish
+scaling. Let's actually see how close
+scaling. Let's actually see how close
+this is to just
+this is to just
+um single GPU.
+Oh, this matches. This is basically
+Oh, this matches. This is basically
+linear. This is
+400k. Little bit of end time leak.
+400k. Little bit of end time leak.
+Little bit of copy time leak.
+Little bit of copy time leak.
+Really shouldn't be any end time leak
+Really shouldn't be any end time leak
+because M is really
+fast. We can profile for
+that. But okay. So
+like with this
+Do you lose if you
+do? Let's see if you lose. If you do
+this, you lose a little bit.
+a little
+bit. The problem though is I
+can't hard pass. This is
+rough. Yeah. How many M's did they have
+rough. Yeah. How many M's did they have
+in Dota? They had like a lot of M's.
+57,000 I believe.
+Let's leave this for now just because
+Let's leave this for now just because
+it's like the direct
+replica and like this should be
+replica and like this should be
+basically this should repro the original
+basically this should repro the original
+uh train run with these
+uh train run with these
+settings. Now the total time steps thing
+settings. Now the total time steps thing
+we have to account for
+we have to account for
+separately. But if I just do
+separately. But if I just do
+this, I get two million step a second
+training
+really can't initialize NVML.
+Can't initialize. That's ridiculous.
+It's got to be this, right? This is like
+It's got to be this, right? This is like
+a well-known thing.
+the Nvidia runtime it
+needs. Let me make sure I have
+needs. Let me make sure I have
+everything
+everything
+committed. That's super annoying.
+That's
+fine. Let's see if I can even start the
+fine. Let's see if I can even start the
+darn container now.
+NVML error.
+I just set run
+I just set run
+time. I just set the Nvidia run Time.
+I'm hitting chat GPK. This shit's
+I'm hitting chat GPK. This shit's
+[ __ ] Like, I don't I don't know
+[ __ ] Like, I don't I don't know
+what the [ __ ] is wrong with like
+what the [ __ ] is wrong with like
+literally Grock just stops working after
+literally Grock just stops working after
+two or three messages 80% of the time
+two or three messages 80% of the time
+now. I'm mad. Like, I don't I don't know
+now. I'm mad. Like, I don't I don't know
+what the hell to be fair. It's like it's
+what the hell to be fair. It's like it's
+not like I haven't seen it with GPT as
+not like I haven't seen it with GPT as
+well,
+but drives me nuts.
+Why is this not just
+Why is this not just
+autoed? Absurd.
+is this
+even there's nothing in
+There. That's like
+There. That's like
+absurd. Oops. Where'd my chat
+absurd. Oops. Where'd my chat
+go? There we go. I always forgot to
+go? There we go. I always forgot to
+leave that
+up. Okay, we get a different error.
+He enters bad state.
+Hey,
+boxing. Couple hours. I'll fix what you
+boxing. Couple hours. I'll fix what you
+wanted me to fix on common pool.
+wanted me to fix on common pool.
+Awesome. Yeah, let's get that stuff in,
+Awesome. Yeah, let's get that stuff in,
+man. Like, there's so many cool
+man. Like, there's so many cool
+multi-agent experiments that we have
+multi-agent experiments that we have
+that should just work now. Like,
+that should just work now. Like,
+puffer's gotten pretty pretty darn solid
+puffer's gotten pretty pretty darn solid
+on the RL side. You just en has to be
+on the RL side. You just en has to be
+correct. Resources like rewards,
+correct. Resources like rewards,
+observations, all that stuff has to be
+observations, all that stuff has to be
+correct. Get a sane experiment config
+correct. Get a sane experiment config
+and it should you should actually be
+and it should you should actually be
+able to do some pretty cool science
+able to do some pretty cool science
+there.
+driver and toolkit
+versions. Huh. Look, GPT doesn't work
+versions. Huh. Look, GPT doesn't work
+either. None of them work.
+Try to restarting this one.
+Nope. Oh, that's just infuriating,
+Nope. Oh, that's just infuriating,
+man. How about Docker? Maybe it's
+Docker. Nope.
+570 CUDA
+128. You already have drivers
+128. You already have drivers
+updated. That doesn't make any bloody
+updated. That doesn't make any bloody
+sense.
+app
+update. already newest
+version. Yep.
+freaking Docker,
+man. I could technically go to a VN
+man. I could technically go to a VN
+based
+based
+thing. I don't think it's the right
+thing. I don't think it's the right
+approach though.
+like nuking Docker entirely because of
+like nuking Docker entirely because of
+this
+this
+is such a bad bad play. Docker gives us
+is such a bad bad play. Docker gives us
+a lot. It's like the only heavy thing I
+a lot. It's like the only heavy thing I
+actually think is useful and worth
+actually think is useful and worth
+it. Holy hell is the driver stuff bad.
+We'll spend a few minutes on it and then
+We'll spend a few minutes on it and then
+I'll just do
+Yeah, I
+Yeah, I
+know. It's just like making just adding
+know. It's just like making just adding
+crap. Okay. Well, we'll try the uh we'll
+crap. Okay. Well, we'll try the uh we'll
+try the lightweight
+one. Driver shenanigans are just
+one. Driver shenanigans are just
+ridiculous.
+the UV setup might just be easier these
+the UV setup might just be easier these
+days.
+and I want to like I got to come up with
+and I want to like I got to come up with
+like a decent way to just put like a put
+like a decent way to just put like a put
+like reasonable bounties on shitty infra
+like reasonable bounties on shitty infra
+bugs like
+bugs like
+this so I can just like use the quick
+this so I can just like use the quick
+workaround for now and then like I don't
+workaround for now and then like I don't
+know
+Like if I put a few hundred bucks on
+Like if I put a few hundred bucks on
+stuff like this,
+stuff like this,
+probably people would uh just like fix
+probably people would uh just like fix
+[ __ ] like
+[ __ ] like
+this. We're at the point here where I
+this. We're at the point here where I
+really need to focus on the uh the RL
+really need to focus on the uh the RL
+side, not just like you can pour
+side, not just like you can pour
+unlimited hours into dealing with
+unlimited hours into dealing with
+shitty shitty infrastructure, but it's
+shitty shitty infrastructure, but it's
+like I need to get the RL going here.
+Morning to folks on Twitch and YouTube.
+Morning to folks on Twitch and YouTube.
+Hello. I'm going to try to make today a
+Hello. I'm going to try to make today a
+cool get high perf distributed training
+cool get high perf distributed training
+stuff
+stuff
+stream of a fight stupid infrastructure
+stream. We also have uh the guys that
+stream. We also have uh the guys that
+work on the drone environment be coming
+work on the drone environment be coming
+by in a bit some point today.
+Um, we'll get that merged into Puffer
+Um, we'll get that merged into Puffer
+Lib today as
+well. We still have some fixes to make
+well. We still have some fixes to make
+for 300, but other than that, it's
+for 300, but other than that, it's
+pretty
+pretty
+stable. Some Indian companies. I That's
+stable. Some Indian companies. I That's
+not going to work, man. Yeah, that's not
+not going to work, man. Yeah, that's not
+going to freaking
+going to freaking
+work. I think just putting a bounty on
+work. I think just putting a bounty on
+stuff is way more effective.
+cuz you have to pay for the deliverable,
+cuz you have to pay for the deliverable,
+not for the labor. Cuz otherwise they'll
+not for the labor. Cuz otherwise they'll
+just charge you for labor and like not
+just charge you for labor and like not
+and not fix
+it. Like it's not dumb work, right? It's
+it. Like it's not dumb work, right? It's
+like you
+actually like you need somebody who's
+actually like you need somebody who's
+fought like who's just like fought
+fought like who's just like fought
+Docker a bunch and knows all the
+Docker a bunch and knows all the
+possible things that can screw up with
+Oh, it's on the host
+now. Are we not training on Cuda though?
+How does that make any
+sense? Oh, it's on. Is this just This
+sense? Oh, it's on. Is this just This
+can't be training on CPU. It's not
+can't be training on CPU. It's not
+training
+training
+at
+at
+What? How does that make any sense?
+Okay, it is training on GPU.
+H. That's really
+weird. Torch works fine. It's just
+um P. It's something with
+NVML. That's just dumb.
+NVML. That's just dumb.
+Okay. Well, I can
+train
+train
+468. Is that faster?
+It is faster. Let's see what the fastest
+It is faster. Let's see what the fastest
+the fastest possible training we can
+get. Okay, it's
+get. Okay, it's
+470k SPS roughly.
+So if we just put this to be num m's is
+So if we just put this to be num m's is
+like
+like
+four then we do
+two. Okay. Okay. So you lose a bit to
+two. Okay. Okay. So you lose a bit to
+the environment here. So if we fix
+the environment here. So if we fix
+environment, this will be exact same
+speed.
+Okay. But
+420k. Where's the torch run command?
+Hello again. Great stream. Thank you,
+Kirthy. Okay,
+so this actually does still
+break. It seems
+What's your educational
+What's your educational
+background? I finished my uh my PhD at
+background? I finished my uh my PhD at
+MIT a little over a year
+ago. I've been working on AI since I was
+ago. I've been working on AI since I was
+like 16.
+This can't just be lib Nvidia
+This can't just be lib Nvidia
+containers. So this this recommendation
+containers. So this this recommendation
+makes no
+sense. What?
+Oh,
+It's not just a container
+error. Crazy.
+That's
+crazy. The Nvidia SMI works fine. I have
+crazy. The Nvidia SMI works fine. I have
+correct driver versions.
+correct driver versions.
+I didn't mess with driver versions and
+I didn't mess with driver versions and
+it just randomly drops NVML.
+Yeah, this is now on the host is the
+Yeah, this is now on the host is the
+thing. This is not just the
+um container.
+The
+heck can't initialize
+ML. What is doesn't that just come with
+ML. What is doesn't that just come with
+CUDA? Is there like a version conflict
+CUDA? Is there like a version conflict
+possible?
+I can reboot it for now and see if it
+I can reboot it for now and see if it
+drops again on the host without the
+drops again on the host without the
+container. I don't know what else I
+container. I don't know what else I
+would
+would
+do. That's like
+absurd. That's crazy,
+man. Hardware's got some demons.
+I thought it was just a Docker error. I
+I thought it was just a Docker error. I
+don't know. Maybe somehow it propagated
+don't know. Maybe somehow it propagated
+so like it fails in the Docker. This at
+so like it fails in the Docker. This at
+least should let me run a couple things
+least should let me run a couple things
+and we'll see if it drops again.
+Like the thing is that this error also
+Like the thing is that this error also
+happens if you're just dumb and have the
+happens if you're just dumb and have the
+wrong like if you just have the drivers
+wrong like if you just have the drivers
+and
+and
+library different versions. But like I
+library different versions. But like I
+don't have that and like I don't get the
+don't have that and like I don't get the
+usual like the drivers work. Nvidia SMI
+usual like the drivers work. Nvidia SMI
+runs all
+that. Like all this stuff is wrong.
+Oh
+The crazy thing about this is there's
+The crazy thing about this is there's
+literally no way around it. Like this is
+literally no way around it. Like this is
+why people don't like maintaining their
+why people don't like maintaining their
+own hardware because like you have to
+own hardware because like you have to
+deal with stuff like this. But the thing
+deal with stuff like this. But the thing
+is the alternative, right? If you tried
+is the alternative, right? If you tried
+to rent a box uh that's as good as this
+to rent a box uh that's as good as this
+for RL specifically, like you're going
+for RL specifically, like you're going
+to be paying over a hundred grand a year
+to be paying over a hundred grand a year
+um to rent equivalent hardware. Like
+um to rent equivalent hardware. Like
+literally, this thing pays for itself in
+literally, this thing pays for itself in
+two to three months of
+two to three months of
+usage. So, it's like you can't And
+usage. So, it's like you can't And
+that's actually at um and that's at like
+that's actually at um and that's at like
+the ridiculously low H prices now. like
+the ridiculously low H prices now. like
+it's even worse. Uh outside of the ones
+it's even worse. Uh outside of the ones
+that are basically selling extra
+that are basically selling extra
+capacity/selling at a
+capacity/selling at a
+loss, it's because like the consumer
+loss, it's because like the consumer
+chips that you want to run stuff on are
+chips that you want to run stuff on are
+a tenth of the price of the data center
+a tenth of the price of the data center
+chips, even though they're the exact
+chips, even though they're the exact
+same
+speed. It doesn't do a clean reboot
+speed. It doesn't do a clean reboot
+either, which is sketch. I'm going to
+either, which is sketch. I'm going to
+give this a minute to come back on just
+give this a minute to come back on just
+saying like maybe it takes us maybe it
+saying like maybe it takes us maybe it
+just takes a bit but then we're going to
+just takes a bit but then we're going to
+just go reboot that and then we'll make
+just go reboot that and then we'll make
+sure that this works.
+and I'm going to go check on the box.
+any more coffee.
+Fighting cuda drivers. Not not a good
+Fighting cuda drivers. Not not a good
+way to be spending my time here.
+This should come back up in a second. It
+This should come back up in a second. It
+This one does actually I know takes a
+This one does actually I know takes a
+second to
+reboot. Fighting through the driver is
+reboot. Fighting through the driver is
+not ideal.
+Damn. Yeah.
+These guys are cool. I've got like some
+These guys are cool. I've got like some
+optimizer people
+here. Okay.
+Let's see how long the uh the Cuda
+Let's see how long the uh the Cuda
+drivers last for this
+time. Okay, this is
+fine. What's the command for
+this? Uh
+VN. No, there's no VN bin activate.
+Really? There we go. I don't know why it
+Really? There we go. I don't know why it
+wasn't showing up on LS.
+Let's see if the driver version survives
+Let's see if the driver version survives
+a reboot.
+Okay. Is that the same speed as
+before? Yeah, this is the same as
+before? Yeah, this is the same as
+beforeish. Oh, this is fine. Now what we
+beforeish. Oh, this is fine. Now what we
+have to do is we got to do torch run on
+have to do is we got to do torch run on
+this
+thing. This should be six.
+So four uh 400k up
+to Okay, that's like linear
+to Okay, that's like linear
+scaling. Yeah, that's perfect. Linear
+scaling. Yeah, that's perfect. Linear
+scaling.
+So,
+So,
+um, we do have some stuff to fix on
+um, we do have some stuff to fix on
+Neptune with it like logging it logging
+Neptune with it like logging it logging
+weird,
+weird,
+but I'm trying to think if it's like is
+but I'm trying to think if it's like is
+it worth just running this
+it worth just running this
+uh to see what this
+does. It probably is, right?
+And then what like total time steps has
+And then what like total time steps has
+to be cut in six I
+believe 20 1 2 3 1 Okay.
+going to need Neptune
+password. He
+Uhoh. What do we have
+Uhoh. What do we have
+in no
+module really?
+What did I have in the uh the hyperbolic
+What did I have in the uh the hyperbolic
+command? Did I not install
+train? I
+train? I
+did. Am I not in the
+VM? That's probably it.
+Okay. Whoops. We don't need that. We
+Okay. Whoops. We don't need that. We
+need this.
+Yeah. And actually, I'm not going to
+Yeah. And actually, I'm not going to
+um I'm not going to let this full run
+um I'm not going to let this full run
+right now yet because I also want to get
+right now yet because I also want to get
+meta working first.
+This is another env. I'm trying to help
+This is another env. I'm trying to help
+these guys get their training real uh
+these guys get their training real uh
+running super fast.
+In fact, I can probably even just run
+In fact, I can probably even just run
+their training on this
+their training on this
+because this doesn't take very
+Was it Omega? Where is
+it? I think I actually just added their
+it? I think I actually just added their
+depths because it was annoying me.
+What is this thing
+What is this thing
+doing? This was supposed to install like
+doing? This was supposed to install like
+three
+three
+packages. They must have added some
+packages. They must have added some
+crap. I don't freaking know,
+man. Do we still need
+And they broke paper lip. Very nice. Uh,
+And they broke paper lip. Very nice. Uh,
+do we still need episode
+return or score enough as a minimum? So,
+return or score enough as a minimum? So,
+none of those are required. It's just
+none of those are required. It's just
+like they're good metrics to
+log. I don't know why this uninstalled
+log. I don't know why this uninstalled
+puffer. What the hell is this? Antler
+puffer. What the hell is this? Antler
+three python. What is this
+garbage? What the heck is
+antler? Why the hell is this in
+there? What's the fundamental
+there? What's the fundamental
+difference? Episode return is the sum of
+difference? Episode return is the sum of
+rewards over the course of an episode.
+rewards over the course of an episode.
+The score is completely unrelated,
+The score is completely unrelated,
+right? It could be. It's just like if
+right? It could be. It's just like if
+you have a game, right? Like in Enduro,
+you have a game, right? Like in Enduro,
+there's a score. That's what the score
+there's a score. That's what the score
+is.
+is.
+Um it has like you're not even
+Um it has like you're not even
+necessarily rewarding based on score.
+Oh, I know what happened. God damn
+it. No build isolation.
+Python ecosystem. I swear.
+Okay,
+Okay,
+there. So, this is default meta. We get
+there. So, this is default meta. We get
+500k with a little bit of end of time.
+now. It's a little tricky cuz I only
+now. It's a little tricky cuz I only
+have four workers, I believe.
+Okay. So if you have 39% end of
+time 300 somewhat. Okay.
+time 300 somewhat. Okay.
+And
+And
+then go up to
+this kind of need
+to that's actually faster as well.
+to that's actually faster as well.
+70% of
+time. Okay. So now what we get to
+time. Okay. So now what we get to
+do
+for we get to
+do this
+run apps
+run apps
+This will be basically identical run to
+before. What? Where's my freaking
+before. What? Where's my freaking
+cursor? What is wrong with like what has
+cursor? What is wrong with like what has
+this done to my terminal? I have no
+this done to my terminal? I have no
+cursor.
+The amount of dumb [ __ ] that
+The amount of dumb [ __ ] that
+breaks. Holy
+hell. Wait, what? Nodes. N proc per
+hell. Wait, what? Nodes. N proc per
+node.
+That's like Oh, per nodes.
+Hello. Why is this spamming whites
+space?
+space?
+Hello. Why Why is this spamming whites
+Hello. Why Why is this spamming whites
+space?
+literally just spamming whites
+Yes. Okay, there we go. There's
+Yes. Okay, there we go. There's
+something.
+1.7
+No. Heat.
+this not log. Oh, this does log. It just
+this not log. Oh, this does log. It just
+logs
+repeatedly. Okay. And this actually does
+repeatedly. Okay. And this actually does
+seem to be training.
+that great
+company. Let me just see what these guys
+company. Let me just see what these guys
+are and I'll let this run. And I got to
+are and I'll let this run. And I got to
+go check what this freight delivery is.
+I was just making sure that wasn't the
+I was just making sure that wasn't the
+lights for my building showing
+up. Still haven't gotten those
+in. Okay, what do we got here? We got
+in. Okay, what do we got here? We got
+heart.
+yet. We should have some older meta
+yet. We should have some older meta
+runs,
+maybe. Yeah.
+maybe. Yeah.
+So, this is the run that we're trying to
+So, this is the run that we're trying to
+match. Got to do this,
+though.
+though.
+Interesting. Not doing as well so far.
+I mean, I'm going to be able to match
+I mean, I'm going to be able to match
+this curve. So, if this run doesn't
+this curve. So, if this run doesn't
+work, like no big deal. I will just
+work, like no big deal. I will just
+adjust the param so that the curve
+adjust the param so that the curve
+matches and then it will just be a
+matches and then it will just be a
+matter of uh figuring
+matter of uh figuring
+out, you know, how to get this thing to
+out, you know, how to get this thing to
+effectively train with larger batches
+effectively train with larger batches
+and
+whatnot. This should have like nice
+whatnot. This should have like nice
+stable updates. We'll see.
+Oh god, are you kidding me? This
+again. Unspecified launch failure.
+still
+NVML. I don't have mismatch drive
+NVML. I don't have mismatch drive
+version library though.
+Super
+obnoxious. What the heck,
+man? Hi, NVML.
+What do you even do when something fails
+What do you even do when something fails
+like that?
+for the new binding code. How do we
+for the new binding code. How do we
+unpack into C
+arrays? N why is pause a keyword
+arg? What is n pause supposed to be?
+XYZ is it just one of those? Is it like
+XYZ is it just one of those? Is it like
+initials position or
+initials position or
+something? You would just do XYZ. If
+something? You would just do XYZ. If
+so, like technically you can do it like
+so, like technically you can do it like
+you can do it if you if you want to mess
+you can do it if you if you want to mess
+with the Python C API to pass a TPLE,
+with the Python C API to pass a TPLE,
+but it's going to be a heck of a lot
+but it's going to be a heck of a lot
+easier to just pass three
+args. Python C API kind of sucks.
+I'm getting breakfast in uh like 5 10
+I'm getting breakfast in uh like 5 10
+minutes, Sam. And then I will be back
+minutes, Sam. And then I will be back
+afterwards and uh I can help you merge
+afterwards and uh I can help you merge
+in that env get some cool training runs,
+in that env get some cool training runs,
+all that. We actually really wanted to
+all that. We actually really wanted to
+start doing drone stuff. So, I'm glad
+start doing drone stuff. So, I'm glad
+that you've got like NN because I'm
+that you've got like NN because I'm
+probably going to be jumping in and
+probably going to be jumping in and
+helping do a whole bunch of stuff in
+helping do a whole bunch of stuff in
+this area
+soon. Oh, this threaded
+That's
+interesting. Yeah, man. There's so much
+interesting. Yeah, man. There's so much
+there's going to be like so much cool RL
+there's going to be like so much cool RL
+around
+around
+here. Currently working on distributed
+here. Currently working on distributed
+stuff.
+I'm have to go in a
+couple. But uh for the folks watching, I
+couple. But uh for the folks watching, I
+will be back right after breakfast and
+will be back right after breakfast and
+we will be getting more distributed
+we will be getting more distributed
+stuff working
+stuff working
+today. Um
+Okay, we do
+Okay, we do
+this. Of course, I have to now reboot
+this. Of course, I have to now reboot
+the machine, don't I? Because it's like
+the machine, don't I? Because it's like
+it's just
+crashed in order to see if this then
+crashed in order to see if this then
+doesn't crash anymore.
+doesn't crash anymore.
+That's crazy that just accessing it will
+That's crazy that just accessing it will
+crash the driver that
+in
+use.
+use.
+Uhoh.
+Great. Maybe just Python didn't get
+Great. Maybe just Python didn't get
+killed
+correctly. Well, I'm going to have to go
+correctly. Well, I'm going to have to go
+in literally like a minute. So, for the
+in literally like a minute. So, for the
+folks watching here, um, all this dev is
+folks watching here, um, all this dev is
+open source. It's on puffer.ai. If you
+open source. It's on puffer.ai. If you
+want to help me out for free, just start
+want to help me out for free, just start
+the repo. And, uh, if you want to get
+the repo. And, uh, if you want to get
+involved with high perf reinforcement
+involved with high perf reinforcement
+learning, building M, getting involved
+learning, building M, getting involved
+with training infrastructure, all that,
+with training infrastructure, all that,
+join the
+Discord. I will keep on this until
+Discord. I will keep on this until
+breakfast, but
+This is the only command that actually
+This is the only command that actually
+freaking works. I
+freaking works. I
+swear. One stack overflow
+post. Huh?
+This just kills my turn. Like we're
+This just kills my turn. Like we're
+gonna have to go hard reboot.
+That's like super super obnoxious, but
+That's like super super obnoxious, but
+what else are we going to do?
+what else are we going to do?
+So, the hope is that if I'm no longer um
+So, the hope is that if I'm no longer um
+have this like multi-threaded
+have this like multi-threaded
+utilization shenanigans that we should
+utilization shenanigans that we should
+no longer kill the
+driver. And then I'll basically I'll
+driver. And then I'll basically I'll
+just have to refactor the transcript a
+just have to refactor the transcript a
+little bit to more elegantly include um
+little bit to more elegantly include um
+all
+all
+the basically to make it like easier to
+the basically to make it like easier to
+use uh multiGPU training without having
+use uh multiGPU training without having
+to like have a whole bunch of crap
+to like have a whole bunch of crap
+everywhere. We'll just kind of like
+everywhere. We'll just kind of like
+refactor it a little
+refactor it a little
+bit and then that will be a
+okay and this will be good to find out
+okay and this will be good to find out
+on this box. Actually, this will fix the
+on this box. Actually, this will fix the
+Docker issue as well. So, we should be
+Docker issue as well. So, we should be
+fine with uh we'll probably be fine
+fine with uh we'll probably be fine
+using Docker again after this as well,
+using Docker again after this as well,
+which will be nice. Yeah, like this will
+which will be nice. Yeah, like this will
+kind of fix all our problems.
+kind of fix all our problems.
+All right, I'm heading for breakfast.
+All right, I'm heading for breakfast.
+Thanks, folks. Star Repo really helps
+Thanks, folks. Star Repo really helps
+out.
+
+Kind: captions
+Language: en
+blue. Whoops. That's no
+camera. There we
+camera. There we
+go. That ISO is
+terrible. It's going to be so much
+terrible. It's going to be so much
+better when I actually have lights
+better when I actually have lights
+behind me. I've got like a couple
+behind me. I've got like a couple
+dangling like utility lights. All right,
+dangling like utility lights. All right,
+morning.
+morning.
+As promised, I am back bright and early
+As promised, I am back bright and early
+for uh more
+dev. Good stream view
+dev. Good stream view
+up. All right, let's check on the
+experiments. Ah, okay. That's the one I
+experiments. Ah, okay. That's the one I
+really wanted to
+work. That's crazy that this doesn't
+work. That's crazy that this doesn't
+repro though. That is
+crazy.
+Okay. At least we have something for
+Okay. At least we have something for
+comparison
+comparison
+now. No, like at least we have something
+now. No, like at least we have something
+to go off of maybe.
+Wait, is it Why do we have two of
+these? Wait, hang
+these? Wait, hang
+on. Is
+on. Is
+this
+Oh.
+Huh. I see.
+We got to run another one of those
+unfortunately. I know what happened
+unfortunately. I know what happened
+exactly. It's freaking bet. It's your
+exactly. It's freaking bet. It's your
+fault.
+fault.
+Now that's
+cool. All
+right. This the one that's totally
+right. This the one that's totally
+crashed.
+Yeah.
+9%. Yes. So, what we got to
+do? We got to do the
+uh deck crap.
+What?
+Okay. In the loop
+Okay. In the loop
+here where we're
+here where we're
+decreasing, we're decrementing the
+decreasing, we're decrementing the
+quarks.
+That took me a whole day to find that
+That took me a whole day to find that
+bug last time. I'm not going to forget
+bug last time. I'm not going to forget
+about
+Cool. So, we got all
+that. That'll just
+run. Okay. So, sadly, neither of these
+run. Okay. So, sadly, neither of these
+is really working,
+is really working,
+but it's kind of tough to say.
+but it's kind of tough to say.
+I mean, we do have 85 runs and nothing
+I mean, we do have 85 runs and nothing
+amazing, but the fact that this goes out
+amazing, but the fact that this goes out
+to
+300k. How far does this go out? Yeah,
+300k. How far does this go out? Yeah,
+see this doesn't go out as far. This is
+see this doesn't go out as far. This is
+only out to
+100k. So, there might still be something
+100k. So, there might still be something
+there, you know.
+Now other than that we got to look at
+Now other than that we got to look at
+neural MMO.
+Oh, is this our GDP run? What is this?
+I think this is our DDP
+run. CUDA
+run. CUDA
+error unspecified launch failure. So
+error unspecified launch failure. So
+yeah, this thing must have gotten some
+yeah, this thing must have gotten some
+nans at some
+nans at some
+point. That's rough.
+point. That's rough.
+But we did
+get 32 billion
+steps. We get to
+4.6. That's pretty decent.
+And then we can see that this is failing
+And then we can see that this is failing
+at that logic norm.
+Let's go compare this
+run. Two
+run. Two
+These
+guys. Where'd my uh Where'd my run go,
+man? Okay. So, this is the latest run
+man? Okay. So, this is the latest run
+that I had.
+that I had.
+have this
+have this
+one. That's not
+one. That's not
+bad. It does seem to sat a little
+earlier. I don't like the direction it's
+earlier. I don't like the direction it's
+headed in,
+but the rerun sweeps
+That's reasonable
+That's reasonable
+though. Okay.
+One of two things potentially. Like one
+One of two things potentially. Like one
+of two things
+fixed. This is just going to have to run
+fixed. This is just going to have to run
+for a good chunk of today. this
+for a good chunk of today. this
+repro. Let me think what we what we can
+repro. Let me think what we what we can
+do with this here though with this
+knowledge. Something with neural MMOs,
+knowledge. Something with neural MMOs,
+it's really just hard to run big sweeps
+it's really just hard to run big sweeps
+on neural MMO, right?
+I mean, can't we
+technically probably technically we
+technically probably technically we
+should be able to make it so that uh
+should be able to make it so that uh
+this sweep stuff like sweep runs DDP
+It's 8:15. I think we're going to have
+It's 8:15. I think we're going to have
+some drone guys coming by today for uh
+some drone guys coming by today for uh
+submit their drone in, which will be
+submit their drone in, which will be
+cool.
+I think the main thing for today is
+I think the main thing for today is
+going to
+going to
+be Well, let's get a sweep going on
+be Well, let's get a sweep going on
+meta. First of
+all, our sweeps aren't perfect
+yet. I don't want to bottleneck waiting
+yet. I don't want to bottleneck waiting
+for sweeps. Let me think what we can
+for sweeps. Let me think what we can
+what we can do in the meantime here
+what we can do in the meantime here
+productively.
+There's some stuff to fix up around
+DDP. I also have profiling stuff I can
+DDP. I also have profiling stuff I can
+do on meta, right?
+Why don't we just like start messing
+Why don't we just like start messing
+with with DDP a little
+with with DDP a little
+bit?
+bit?
+Um, yeah, let's just start messing with
+Um, yeah, let's just start messing with
+DDP a little
+DDP a little
+bit. Get meta set up and we'll see what
+bit. Get meta set up and we'll see what
+happens from there.
+me also go grab my morning
+me also go grab my morning
+coffee on the
+Okay. Mug has so many equations on it. I
+Okay. Mug has so many equations on it. I
+could probably learn my particle physics
+could probably learn my particle physics
+off of just this
+mug and
+chemistry. It's literally just random
+chemistry. It's literally just random
+random well-known equations from math,
+random well-known equations from math,
+physics, chemistry.
+The
+heck failed.
+There we go. I just
+There we go. I just
+copied thing
+wrong.
+Okay. Where's our torch on command?
+This is current train
+speed. CUDA unknown
+speed. CUDA unknown
+error. Oh, this is actually the thing
+error. Oh, this is actually the thing
+that's breaking. I think this is just
+that's breaking. I think this is just
+CUDA drivers dropping.
+CUDA drivers dropping.
+Huh. That's super
+annoying. That's probably what broke it.
+NVML. Uhhuh.
+That's weird.
+I just have to reboot this
+thing. We'll try it.
+Give this a second to come back
+Give this a second to come back
+on. What we want to get is we want to
+on. What we want to get is we want to
+get some like really nice
+get some like really nice
+solid perf numbers on GDP.
+I don't know though if we're going to be
+I don't know though if we're going to be
+able to get it to train well with um
+able to get it to train well with um
+giant giant
+batches.
+batches.
+Actually, let's see how OpenAI 5 like
+Actually, let's see how OpenAI 5 like
+their batch is.
+The effective batch
+The effective batch
+size
+is 120
+is 120
+* 16
+samples. I mean they had bat size 3
+samples. I mean they had bat size 3
+million
+I think this is the mini batch size
+I think this is the mini batch size
+honestly.
+They got good training out of batsized 3
+They got good training out of batsized 3
+million on
+Dota. It's going to be on us to do that
+Dota. It's going to be on us to do that
+here.
+What's going on with tiny box?
+and go check what's this thing has come
+and go check what's this thing has come
+back on.
+See if that comes back on now. Oh
+man, hardware thing is tough.
+That's going to be a problem because I
+That's going to be a problem because I
+don't have the cable that I need coming
+don't have the cable that I need coming
+until tomorrow. Unless I randomly have a
+until tomorrow. Unless I randomly have a
+VGA
+somewhere. Definitely need these things
+running. What happened? Some driver
+running. What happened? Some driver
+shenanigans.
+shenanigans.
+I did is reboot
+I did is reboot
+it. There we
+are. Lovely. Or actually we are set.
+We actually don't even need Neptune for
+now.
+This I want to get speeds first.
+This is 750k,
+right? What if I do this?
+million. They're like some
+reason it's a batch size maybe.
+We should be able to get way more than
+We should be able to get way more than
+that. Like close to 2 mil.
+Got to be this numb M
+Got to be this numb M
+right up to like four M's
+here.
+Yeah. The original was it
+Yeah. The original was it
+16? Was it eight? I think it was eight.
+Eight is double buffered. You need 64
+Eight is double buffered. You need 64
+cores for that. So the most I can do is
+cores for that. So the most I can do is
+four.
+do five, but that doesn't help.
+I could
+technically you see this
+Okay, so that gets us 1.1. But then the
+Okay, so that gets us 1.1. But then the
+trick is going to be if we do
+eight or what is it?
+eight or what is it?
+N it should be like this, right? Two.
+N it should be like this, right? Two.
+Two.
+Two.
+One.
+One.
+Two. Be
+better. Okay. 1.1 mil.
+But
+But
+four, two, and
+four, two, and
+two. Or was it? Was it
+two. Or was it? Was it
+four, four?
+Yeah.
+1.5. This actually gets us like
+1.5. This actually gets us like
+decentish
+scaling. Let's actually see how close
+scaling. Let's actually see how close
+this is to just
+this is to just
+um single GPU.
+Oh, this matches. This is basically
+Oh, this matches. This is basically
+linear. This is
+400k. Little bit of end time leak.
+400k. Little bit of end time leak.
+Little bit of copy time leak.
+Little bit of copy time leak.
+Really shouldn't be any end time leak
+Really shouldn't be any end time leak
+because M is really
+fast. We can profile for
+that. But okay. So
+like with this
+Do you lose if you
+do? Let's see if you lose. If you do
+this, you lose a little bit.
+a little
+bit. The problem though is I
+can't hard pass. This is
+rough. Yeah. How many M's did they have
+rough. Yeah. How many M's did they have
+in Dota? They had like a lot of M's.
+57,000 I believe.
+Let's leave this for now just because
+Let's leave this for now just because
+it's like the direct
+replica and like this should be
+replica and like this should be
+basically this should repro the original
+basically this should repro the original
+uh train run with these
+uh train run with these
+settings. Now the total time steps thing
+settings. Now the total time steps thing
+we have to account for
+we have to account for
+separately. But if I just do
+separately. But if I just do
+this, I get two million step a second
+training
+really can't initialize NVML.
+Can't initialize. That's ridiculous.
+It's got to be this, right? This is like
+It's got to be this, right? This is like
+a well-known thing.
+the Nvidia runtime it
+needs. Let me make sure I have
+needs. Let me make sure I have
+everything
+everything
+committed. That's super annoying.
+That's
+fine. Let's see if I can even start the
+fine. Let's see if I can even start the
+darn container now.
+NVML error.
+I just set run
+I just set run
+time. I just set the Nvidia run Time.
+I'm hitting chat GPK. This shit's
+I'm hitting chat GPK. This shit's
+[ __ ] Like, I don't I don't know
+[ __ ] Like, I don't I don't know
+what the [ __ ] is wrong with like
+what the [ __ ] is wrong with like
+literally Grock just stops working after
+literally Grock just stops working after
+two or three messages 80% of the time
+two or three messages 80% of the time
+now. I'm mad. Like, I don't I don't know
+now. I'm mad. Like, I don't I don't know
+what the hell to be fair. It's like it's
+what the hell to be fair. It's like it's
+not like I haven't seen it with GPT as
+not like I haven't seen it with GPT as
+well,
+but drives me nuts.
+Why is this not just
+Why is this not just
+autoed? Absurd.
+is this
+even there's nothing in
+There. That's like
+There. That's like
+absurd. Oops. Where'd my chat
+absurd. Oops. Where'd my chat
+go? There we go. I always forgot to
+go? There we go. I always forgot to
+leave that
+up. Okay, we get a different error.
+He enters bad state.
+Hey,
+boxing. Couple hours. I'll fix what you
+boxing. Couple hours. I'll fix what you
+wanted me to fix on common pool.
+wanted me to fix on common pool.
+Awesome. Yeah, let's get that stuff in,
+Awesome. Yeah, let's get that stuff in,
+man. Like, there's so many cool
+man. Like, there's so many cool
+multi-agent experiments that we have
+multi-agent experiments that we have
+that should just work now. Like,
+that should just work now. Like,
+puffer's gotten pretty pretty darn solid
+puffer's gotten pretty pretty darn solid
+on the RL side. You just en has to be
+on the RL side. You just en has to be
+correct. Resources like rewards,
+correct. Resources like rewards,
+observations, all that stuff has to be
+observations, all that stuff has to be
+correct. Get a sane experiment config
+correct. Get a sane experiment config
+and it should you should actually be
+and it should you should actually be
+able to do some pretty cool science
+able to do some pretty cool science
+there.
+driver and toolkit
+versions. Huh. Look, GPT doesn't work
+versions. Huh. Look, GPT doesn't work
+either. None of them work.
+Try to restarting this one.
+Nope. Oh, that's just infuriating,
+Nope. Oh, that's just infuriating,
+man. How about Docker? Maybe it's
+Docker. Nope.
+570 CUDA
+128. You already have drivers
+128. You already have drivers
+updated. That doesn't make any bloody
+updated. That doesn't make any bloody
+sense.
+app
+update. already newest
+version. Yep.
+freaking Docker,
+man. I could technically go to a VN
+man. I could technically go to a VN
+based
+based
+thing. I don't think it's the right
+thing. I don't think it's the right
+approach though.
+like nuking Docker entirely because of
+like nuking Docker entirely because of
+this
+this
+is such a bad bad play. Docker gives us
+is such a bad bad play. Docker gives us
+a lot. It's like the only heavy thing I
+a lot. It's like the only heavy thing I
+actually think is useful and worth
+actually think is useful and worth
+it. Holy hell is the driver stuff bad.
+We'll spend a few minutes on it and then
+We'll spend a few minutes on it and then
+I'll just do
+Yeah, I
+Yeah, I
+know. It's just like making just adding
+know. It's just like making just adding
+crap. Okay. Well, we'll try the uh we'll
+crap. Okay. Well, we'll try the uh we'll
+try the lightweight
+one. Driver shenanigans are just
+one. Driver shenanigans are just
+ridiculous.
+the UV setup might just be easier these
+the UV setup might just be easier these
+days.
+and I want to like I got to come up with
+and I want to like I got to come up with
+like a decent way to just put like a put
+like a decent way to just put like a put
+like reasonable bounties on shitty infra
+like reasonable bounties on shitty infra
+bugs like
+bugs like
+this so I can just like use the quick
+this so I can just like use the quick
+workaround for now and then like I don't
+workaround for now and then like I don't
+know
+Like if I put a few hundred bucks on
+Like if I put a few hundred bucks on
+stuff like this,
+stuff like this,
+probably people would uh just like fix
+probably people would uh just like fix
+[ __ ] like
+[ __ ] like
+this. We're at the point here where I
+this. We're at the point here where I
+really need to focus on the uh the RL
+really need to focus on the uh the RL
+side, not just like you can pour
+side, not just like you can pour
+unlimited hours into dealing with
+unlimited hours into dealing with
+shitty shitty infrastructure, but it's
+shitty shitty infrastructure, but it's
+like I need to get the RL going here.
+Morning to folks on Twitch and YouTube.
+Morning to folks on Twitch and YouTube.
+Hello. I'm going to try to make today a
+Hello. I'm going to try to make today a
+cool get high perf distributed training
+cool get high perf distributed training
+stuff
+stuff
+stream of a fight stupid infrastructure
+stream. We also have uh the guys that
+stream. We also have uh the guys that
+work on the drone environment be coming
+work on the drone environment be coming
+by in a bit some point today.
+Um, we'll get that merged into Puffer
+Um, we'll get that merged into Puffer
+Lib today as
+well. We still have some fixes to make
+well. We still have some fixes to make
+for 300, but other than that, it's
+for 300, but other than that, it's
+pretty
+pretty
+stable. Some Indian companies. I That's
+stable. Some Indian companies. I That's
+not going to work, man. Yeah, that's not
+not going to work, man. Yeah, that's not
+going to freaking
+going to freaking
+work. I think just putting a bounty on
+work. I think just putting a bounty on
+stuff is way more effective.
+cuz you have to pay for the deliverable,
+cuz you have to pay for the deliverable,
+not for the labor. Cuz otherwise they'll
+not for the labor. Cuz otherwise they'll
+just charge you for labor and like not
+just charge you for labor and like not
+and not fix
+it. Like it's not dumb work, right? It's
+it. Like it's not dumb work, right? It's
+like you
+actually like you need somebody who's
+actually like you need somebody who's
+fought like who's just like fought
+fought like who's just like fought
+Docker a bunch and knows all the
+Docker a bunch and knows all the
+possible things that can screw up with
+Oh, it's on the host
+now. Are we not training on Cuda though?
+How does that make any
+sense? Oh, it's on. Is this just This
+sense? Oh, it's on. Is this just This
+can't be training on CPU. It's not
+can't be training on CPU. It's not
+training
+training
+at
+at
+What? How does that make any sense?
+Okay, it is training on GPU.
+H. That's really
+weird. Torch works fine. It's just
+um P. It's something with
+NVML. That's just dumb.
+NVML. That's just dumb.
+Okay. Well, I can
+train
+train
+468. Is that faster?
+It is faster. Let's see what the fastest
+It is faster. Let's see what the fastest
+the fastest possible training we can
+get. Okay, it's
+get. Okay, it's
+470k SPS roughly.
+So if we just put this to be num m's is
+So if we just put this to be num m's is
+like
+like
+four then we do
+two. Okay. Okay. So you lose a bit to
+two. Okay. Okay. So you lose a bit to
+the environment here. So if we fix
+the environment here. So if we fix
+environment, this will be exact same
+speed.
+Okay. But
+420k. Where's the torch run command?
+Hello again. Great stream. Thank you,
+Kirthy. Okay,
+so this actually does still
+break. It seems
+What's your educational
+What's your educational
+background? I finished my uh my PhD at
+background? I finished my uh my PhD at
+MIT a little over a year
+ago. I've been working on AI since I was
+ago. I've been working on AI since I was
+like 16.
+This can't just be lib Nvidia
+This can't just be lib Nvidia
+containers. So this this recommendation
+containers. So this this recommendation
+makes no
+sense. What?
+Oh,
+It's not just a container
+error. Crazy.
+That's
+crazy. The Nvidia SMI works fine. I have
+crazy. The Nvidia SMI works fine. I have
+correct driver versions.
+correct driver versions.
+I didn't mess with driver versions and
+I didn't mess with driver versions and
+it just randomly drops NVML.
+Yeah, this is now on the host is the
+Yeah, this is now on the host is the
+thing. This is not just the
+um container.
+The
+heck can't initialize
+ML. What is doesn't that just come with
+ML. What is doesn't that just come with
+CUDA? Is there like a version conflict
+CUDA? Is there like a version conflict
+possible?
+I can reboot it for now and see if it
+I can reboot it for now and see if it
+drops again on the host without the
+drops again on the host without the
+container. I don't know what else I
+container. I don't know what else I
+would
+would
+do. That's like
+absurd. That's crazy,
+man. Hardware's got some demons.
+I thought it was just a Docker error. I
+I thought it was just a Docker error. I
+don't know. Maybe somehow it propagated
+don't know. Maybe somehow it propagated
+so like it fails in the Docker. This at
+so like it fails in the Docker. This at
+least should let me run a couple things
+least should let me run a couple things
+and we'll see if it drops again.
+Like the thing is that this error also
+Like the thing is that this error also
+happens if you're just dumb and have the
+happens if you're just dumb and have the
+wrong like if you just have the drivers
+wrong like if you just have the drivers
+and
+and
+library different versions. But like I
+library different versions. But like I
+don't have that and like I don't get the
+don't have that and like I don't get the
+usual like the drivers work. Nvidia SMI
+usual like the drivers work. Nvidia SMI
+runs all
+that. Like all this stuff is wrong.
+Oh
+The crazy thing about this is there's
+The crazy thing about this is there's
+literally no way around it. Like this is
+literally no way around it. Like this is
+why people don't like maintaining their
+why people don't like maintaining their
+own hardware because like you have to
+own hardware because like you have to
+deal with stuff like this. But the thing
+deal with stuff like this. But the thing
+is the alternative, right? If you tried
+is the alternative, right? If you tried
+to rent a box uh that's as good as this
+to rent a box uh that's as good as this
+for RL specifically, like you're going
+for RL specifically, like you're going
+to be paying over a hundred grand a year
+to be paying over a hundred grand a year
+um to rent equivalent hardware. Like
+um to rent equivalent hardware. Like
+literally, this thing pays for itself in
+literally, this thing pays for itself in
+two to three months of
+two to three months of
+usage. So, it's like you can't And
+usage. So, it's like you can't And
+that's actually at um and that's at like
+that's actually at um and that's at like
+the ridiculously low H prices now. like
+the ridiculously low H prices now. like
+it's even worse. Uh outside of the ones
+it's even worse. Uh outside of the ones
+that are basically selling extra
+that are basically selling extra
+capacity/selling at a
+capacity/selling at a
+loss, it's because like the consumer
+loss, it's because like the consumer
+chips that you want to run stuff on are
+chips that you want to run stuff on are
+a tenth of the price of the data center
+a tenth of the price of the data center
+chips, even though they're the exact
+chips, even though they're the exact
+same
+speed. It doesn't do a clean reboot
+speed. It doesn't do a clean reboot
+either, which is sketch. I'm going to
+either, which is sketch. I'm going to
+give this a minute to come back on just
+give this a minute to come back on just
+saying like maybe it takes us maybe it
+saying like maybe it takes us maybe it
+just takes a bit but then we're going to
+just takes a bit but then we're going to
+just go reboot that and then we'll make
+just go reboot that and then we'll make
+sure that this works.
+and I'm going to go check on the box.
+any more coffee.
+Fighting cuda drivers. Not not a good
+Fighting cuda drivers. Not not a good
+way to be spending my time here.
+This should come back up in a second. It
+This should come back up in a second. It
+This one does actually I know takes a
+This one does actually I know takes a
+second to
+reboot. Fighting through the driver is
+reboot. Fighting through the driver is
+not ideal.
+Damn. Yeah.
+These guys are cool. I've got like some
+These guys are cool. I've got like some
+optimizer people
+here. Okay.
+Let's see how long the uh the Cuda
+Let's see how long the uh the Cuda
+drivers last for this
+time. Okay, this is
+fine. What's the command for
+this? Uh
+VN. No, there's no VN bin activate.
+Really? There we go. I don't know why it
+Really? There we go. I don't know why it
+wasn't showing up on LS.
+Let's see if the driver version survives
+Let's see if the driver version survives
+a reboot.
+Okay. Is that the same speed as
+before? Yeah, this is the same as
+before? Yeah, this is the same as
+beforeish. Oh, this is fine. Now what we
+beforeish. Oh, this is fine. Now what we
+have to do is we got to do torch run on
+have to do is we got to do torch run on
+this
+thing. This should be six.
+So four uh 400k up
+to Okay, that's like linear
+to Okay, that's like linear
+scaling. Yeah, that's perfect. Linear
+scaling. Yeah, that's perfect. Linear
+scaling.
+So,
+So,
+um, we do have some stuff to fix on
+um, we do have some stuff to fix on
+Neptune with it like logging it logging
+Neptune with it like logging it logging
+weird,
+weird,
+but I'm trying to think if it's like is
+but I'm trying to think if it's like is
+it worth just running this
+it worth just running this
+uh to see what this
+does. It probably is, right?
+And then what like total time steps has
+And then what like total time steps has
+to be cut in six I
+believe 20 1 2 3 1 Okay.
+going to need Neptune
+password. He
+Uhoh. What do we have
+Uhoh. What do we have
+in no
+module really?
+What did I have in the uh the hyperbolic
+What did I have in the uh the hyperbolic
+command? Did I not install
+train? I
+train? I
+did. Am I not in the
+VM? That's probably it.
+Okay. Whoops. We don't need that. We
+Okay. Whoops. We don't need that. We
+need this.
+Yeah. And actually, I'm not going to
+Yeah. And actually, I'm not going to
+um I'm not going to let this full run
+um I'm not going to let this full run
+right now yet because I also want to get
+right now yet because I also want to get
+meta working first.
+This is another env. I'm trying to help
+This is another env. I'm trying to help
+these guys get their training real uh
+these guys get their training real uh
+running super fast.
+In fact, I can probably even just run
+In fact, I can probably even just run
+their training on this
+their training on this
+because this doesn't take very
+Was it Omega? Where is
+it? I think I actually just added their
+it? I think I actually just added their
+depths because it was annoying me.
+What is this thing
+What is this thing
+doing? This was supposed to install like
+doing? This was supposed to install like
+three
+three
+packages. They must have added some
+packages. They must have added some
+crap. I don't freaking know,
+man. Do we still need
+And they broke paper lip. Very nice. Uh,
+And they broke paper lip. Very nice. Uh,
+do we still need episode
+return or score enough as a minimum? So,
+return or score enough as a minimum? So,
+none of those are required. It's just
+none of those are required. It's just
+like they're good metrics to
+log. I don't know why this uninstalled
+log. I don't know why this uninstalled
+puffer. What the hell is this? Antler
+puffer. What the hell is this? Antler
+three python. What is this
+garbage? What the heck is
+antler? Why the hell is this in
+there? What's the fundamental
+there? What's the fundamental
+difference? Episode return is the sum of
+difference? Episode return is the sum of
+rewards over the course of an episode.
+rewards over the course of an episode.
+The score is completely unrelated,
+The score is completely unrelated,
+right? It could be. It's just like if
+right? It could be. It's just like if
+you have a game, right? Like in Enduro,
+you have a game, right? Like in Enduro,
+there's a score. That's what the score
+there's a score. That's what the score
+is.
+is.
+Um it has like you're not even
+Um it has like you're not even
+necessarily rewarding based on score.
+Oh, I know what happened. God damn
+it. No build isolation.
+Python ecosystem. I swear.
+Okay,
+Okay,
+there. So, this is default meta. We get
+there. So, this is default meta. We get
+500k with a little bit of end of time.
+now. It's a little tricky cuz I only
+now. It's a little tricky cuz I only
+have four workers, I believe.
+Okay. So if you have 39% end of
+time 300 somewhat. Okay.
+time 300 somewhat. Okay.
+And
+And
+then go up to
+this kind of need
+to that's actually faster as well.
+to that's actually faster as well.
+70% of
+time. Okay. So now what we get to
+time. Okay. So now what we get to
+do
+for we get to
+do this
+run apps
+run apps
+This will be basically identical run to
+before. What? Where's my freaking
+before. What? Where's my freaking
+cursor? What is wrong with like what has
+cursor? What is wrong with like what has
+this done to my terminal? I have no
+this done to my terminal? I have no
+cursor.
+The amount of dumb [ __ ] that
+The amount of dumb [ __ ] that
+breaks. Holy
+hell. Wait, what? Nodes. N proc per
+hell. Wait, what? Nodes. N proc per
+node.
+That's like Oh, per nodes.
+Hello. Why is this spamming whites
+space?
+space?
+Hello. Why Why is this spamming whites
+Hello. Why Why is this spamming whites
+space?
+literally just spamming whites
+Yes. Okay, there we go. There's
+Yes. Okay, there we go. There's
+something.
+1.7
+No. Heat.
+this not log. Oh, this does log. It just
+this not log. Oh, this does log. It just
+logs
+repeatedly. Okay. And this actually does
+repeatedly. Okay. And this actually does
+seem to be training.
+that great
+company. Let me just see what these guys
+company. Let me just see what these guys
+are and I'll let this run. And I got to
+are and I'll let this run. And I got to
+go check what this freight delivery is.
+I was just making sure that wasn't the
+I was just making sure that wasn't the
+lights for my building showing
+up. Still haven't gotten those
+in. Okay, what do we got here? We got
+in. Okay, what do we got here? We got
+heart.
+yet. We should have some older meta
+yet. We should have some older meta
+runs,
+maybe. Yeah.
+maybe. Yeah.
+So, this is the run that we're trying to
+So, this is the run that we're trying to
+match. Got to do this,
+though.
+though.
+Interesting. Not doing as well so far.
+I mean, I'm going to be able to match
+I mean, I'm going to be able to match
+this curve. So, if this run doesn't
+this curve. So, if this run doesn't
+work, like no big deal. I will just
+work, like no big deal. I will just
+adjust the param so that the curve
+adjust the param so that the curve
+matches and then it will just be a
+matches and then it will just be a
+matter of uh figuring
+matter of uh figuring
+out, you know, how to get this thing to
+out, you know, how to get this thing to
+effectively train with larger batches
+effectively train with larger batches
+and
+whatnot. This should have like nice
+whatnot. This should have like nice
+stable updates. We'll see.
+Oh god, are you kidding me? This
+again. Unspecified launch failure.
+still
+NVML. I don't have mismatch drive
+NVML. I don't have mismatch drive
+version library though.
+Super
+obnoxious. What the heck,
+man? Hi, NVML.
+What do you even do when something fails
+What do you even do when something fails
+like that?
+for the new binding code. How do we
+for the new binding code. How do we
+unpack into C
+arrays? N why is pause a keyword
+arg? What is n pause supposed to be?
+XYZ is it just one of those? Is it like
+XYZ is it just one of those? Is it like
+initials position or
+initials position or
+something? You would just do XYZ. If
+something? You would just do XYZ. If
+so, like technically you can do it like
+so, like technically you can do it like
+you can do it if you if you want to mess
+you can do it if you if you want to mess
+with the Python C API to pass a TPLE,
+with the Python C API to pass a TPLE,
+but it's going to be a heck of a lot
+but it's going to be a heck of a lot
+easier to just pass three
+args. Python C API kind of sucks.
+I'm getting breakfast in uh like 5 10
+I'm getting breakfast in uh like 5 10
+minutes, Sam. And then I will be back
+minutes, Sam. And then I will be back
+afterwards and uh I can help you merge
+afterwards and uh I can help you merge
+in that env get some cool training runs,
+in that env get some cool training runs,
+all that. We actually really wanted to
+all that. We actually really wanted to
+start doing drone stuff. So, I'm glad
+start doing drone stuff. So, I'm glad
+that you've got like NN because I'm
+that you've got like NN because I'm
+probably going to be jumping in and
+probably going to be jumping in and
+helping do a whole bunch of stuff in
+helping do a whole bunch of stuff in
+this area
+soon. Oh, this threaded
+That's
+interesting. Yeah, man. There's so much
+interesting. Yeah, man. There's so much
+there's going to be like so much cool RL
+there's going to be like so much cool RL
+around
+around
+here. Currently working on distributed
+here. Currently working on distributed
+stuff.
+I'm have to go in a
+couple. But uh for the folks watching, I
+couple. But uh for the folks watching, I
+will be back right after breakfast and
+will be back right after breakfast and
+we will be getting more distributed
+we will be getting more distributed
+stuff working
+stuff working
+today. Um
+Okay, we do
+Okay, we do
+this. Of course, I have to now reboot
+this. Of course, I have to now reboot
+the machine, don't I? Because it's like
+the machine, don't I? Because it's like
+it's just
+crashed in order to see if this then
+crashed in order to see if this then
+doesn't crash anymore.
+doesn't crash anymore.
+That's crazy that just accessing it will
+That's crazy that just accessing it will
+crash the driver that
+in
+use.
+use.
+Uhoh.
+Great. Maybe just Python didn't get
+Great. Maybe just Python didn't get
+killed
+correctly. Well, I'm going to have to go
+correctly. Well, I'm going to have to go
+in literally like a minute. So, for the
+in literally like a minute. So, for the
+folks watching here, um, all this dev is
+folks watching here, um, all this dev is
+open source. It's on puffer.ai. If you
+open source. It's on puffer.ai. If you
+want to help me out for free, just start
+want to help me out for free, just start
+the repo. And, uh, if you want to get
+the repo. And, uh, if you want to get
+involved with high perf reinforcement
+involved with high perf reinforcement
+learning, building M, getting involved
+learning, building M, getting involved
+with training infrastructure, all that,
+with training infrastructure, all that,
+join the
+Discord. I will keep on this until
+Discord. I will keep on this until
+breakfast, but
+This is the only command that actually
+This is the only command that actually
+freaking works. I
+freaking works. I
+swear. One stack overflow
+post. Huh?
+This just kills my turn. Like we're
+This just kills my turn. Like we're
+gonna have to go hard reboot.
+That's like super super obnoxious, but
+That's like super super obnoxious, but
+what else are we going to do?
+what else are we going to do?
+So, the hope is that if I'm no longer um
+So, the hope is that if I'm no longer um
+have this like multi-threaded
+have this like multi-threaded
+utilization shenanigans that we should
+utilization shenanigans that we should
+no longer kill the
+driver. And then I'll basically I'll
+driver. And then I'll basically I'll
+just have to refactor the transcript a
+just have to refactor the transcript a
+little bit to more elegantly include um
+little bit to more elegantly include um
+all
+all
+the basically to make it like easier to
+the basically to make it like easier to
+use uh multiGPU training without having
+use uh multiGPU training without having
+to like have a whole bunch of crap
+to like have a whole bunch of crap
+everywhere. We'll just kind of like
+everywhere. We'll just kind of like
+refactor it a little
+refactor it a little
+bit and then that will be a
+okay and this will be good to find out
+okay and this will be good to find out
+on this box. Actually, this will fix the
+on this box. Actually, this will fix the
+Docker issue as well. So, we should be
+Docker issue as well. So, we should be
+fine with uh we'll probably be fine
+fine with uh we'll probably be fine
+using Docker again after this as well,
+using Docker again after this as well,
+which will be nice. Yeah, like this will
+which will be nice. Yeah, like this will
+kind of fix all our problems.
+kind of fix all our problems.
+All right, I'm heading for breakfast.
+All right, I'm heading for breakfast.
+Thanks, folks. Star Repo really helps
+Thanks, folks. Star Repo really helps
+out.

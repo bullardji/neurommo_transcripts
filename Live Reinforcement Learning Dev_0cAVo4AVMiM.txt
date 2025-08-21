@@ -1,0 +1,1415 @@
+Kind: captions
+Language: en
+let's dive a bit deeper level three is
+let's dive a bit deeper level three is
+algorithms open AI beat top pros at DOTA
+algorithms open AI beat top pros at DOTA
+in 2019 I consider this the top result
+in 2019 I consider this the top result
+in the field how advanced was the
+in the field how advanced was the
+algorithm used for this feed pause and
+algorithm used for this feed pause and
+guess ready the solution was Po and 158
+guess ready the solution was Po and 158
+million parameter network with a on
+million parameter network with a on
+layer
+layer
+lstm that's a model you can run at home
+lstm that's a model you can run at home
+and while the 1024 gpus used to train it
+and while the 1024 gpus used to train it
+were a lot by 2019 standards that's only
+were a lot by 2019 standards that's only
+around 1% of the scale of
+around 1% of the scale of
+gp4 Po was published in 2017 and is
+gp4 Po was published in 2017 and is
+still the most widely used algorithm in
+still the most widely used algorithm in
+RL outside of maybe soft after critic in
+RL outside of maybe soft after critic in
+parts of Robotics keep in mind
+parts of Robotics keep in mind
+algorithms are academic bread and butter
+algorithms are academic bread and butter
+there is tremendous incentive to make
+there is tremendous incentive to make
+progress in publish here and there have
+progress in publish here and there have
+been dozens to hundreds of papers
+been dozens to hundreds of papers
+claiming to beat
+claiming to beat
+po but none of them have caught on more
+po but none of them have caught on more
+generally as you might expect from the
+generally as you might expect from the
+previous section it's a common story in
+previous section it's a common story in
+RL to try out a newly published method
+RL to try out a newly published method
+on a different environment only for it
+on a different environment only for it
+to significantly underperform the much
+to significantly underperform the much
+simpler Bas Line This is going to change
+simpler Bas Line This is going to change
+with puffer lib algorithmic progress is
+with puffer lib algorithmic progress is
+not our immediate goal because it will
+not our immediate goal because it will
+soon become an inevitable byproduct you
+soon become an inevitable byproduct you
+can already run exhaustive experiments
+can already run exhaustive experiments
+on a few environments overnight with
+on a few environments overnight with
+puffer lip as soon as we accumulate just
+puffer lip as soon as we accumulate just
+a few more fast environments of varying
+a few more fast environments of varying
+type and complexity the pace and
+type and complexity the pace and
+accuracy of evaluating methods will
+accuracy of evaluating methods will
+increase so so dramatically as to
+increase so so dramatically as to
+virtually automate this process but
+virtually automate this process but
+until then po solves DOTA and it will
+until then po solves DOTA and it will
+probably solve your problem
+probably solve your problem
+too level four is libraries in language
+too level four is libraries in language
+and vision most researchers just need
+and vision most researchers just need
+pie torch a data set and a stack of
+pie torch a data set and a stack of
+papers to read reinforcement learning
+papers to read reinforcement learning
+isn't like that our data comes from
+isn't like that our data comes from
+simulators we'll talk about all the
+simulators we'll talk about all the
+different tools that go into dealing
+different tools that go into dealing
+with these but for now let's just look
+with these but for now let's just look
+at off the-shelf bundles of tools the
+at off the-shelf bundles of tools the
+best known one is probably stable
+best known one is probably stable
+baselines 3 which makes something
+baselines 3 which makes something
+getting something working quick for
+getting something working quick for
+beginners tan show shares a similar
+beginners tan show shares a similar
+design but is much less known in the US
+design but is much less known in the US
+then there are higher perf libraries
+then there are higher perf libraries
+like sample Factory and mulb which run
+like sample Factory and mulb which run
+like Swiss watches smooth and beautiful
+like Swiss watches smooth and beautiful
+just don't try to modify them yourself
+just don't try to modify them yourself
+there's also torch lib a newer library
+there's also torch lib a newer library
+with quite a bit of Promise all these
+with quite a bit of Promise all these
+take some time to learn and none of them
+take some time to learn and none of them
+will suit your needs in all cases My
+will suit your needs in all cases My
+overall pick is clean RL which provides
+overall pick is clean RL which provides
+short single file implementations of
+short single file implementations of
+major algorithms RL is an emerging field
+major algorithms RL is an emerging field
+and users need white box software that
+and users need white box software that
+they can easily edit any portion of so
+they can easily edit any portion of so
+how does puffer lib fit in our demos run
+how does puffer lib fit in our demos run
+on an optimized version of clean RL with
+on an optimized version of clean RL with
+a severalfold increase in performance
+a severalfold increase in performance
+but really the core of puffer lib is not
+but really the core of puffer lib is not
+just another training Library we instead
+just another training Library we instead
+focus on lower level optimizations that
+focus on lower level optimizations that
+enable efficient and general simulation
+enable efficient and general simulation
+and for that we'll have to dive
+and for that we'll have to dive
+deeper this is where we start getting
+deeper this is where we start getting
+into major advancements exclusive to
+into major advancements exclusive to
+puffer Li level five is vectorization
+puffer Li level five is vectorization
+the process of getting data from
+the process of getting data from
+parallel simulators running on different
+parallel simulators running on different
+cores to the GPU to illustrate just how
+cores to the GPU to illustrate just how
+difficult this is llms with thousands of
+difficult this is llms with thousands of
+gpus are trained on the order of tens of
+gpus are trained on the order of tens of
+terabytes of data total our single GPU
+terabytes of data total our single GPU
+demos can consume over a terabyte of
+demos can consume over a terabyte of
+data per hour and this is not read from
+data per hour and this is not read from
+disk but gathered from over a billion
+disk but gathered from over a billion
+interactions with hundreds to tens of
+interactions with hundreds to tens of
+thousands of parallel simulations
+thousands of parallel simulations
+nothing else matters if you can't get
+nothing else matters if you can't get
+that data fast enough if your
+that data fast enough if your
+vectorization caps out at 5,000 frames
+vectorization caps out at 5,000 frames
+per second your training caps out at
+per second your training caps out at
+5,000 frames per second optimizing this
+5,000 frames per second optimizing this
+process is hard because vectorization
+process is hard because vectorization
+has to handle a ton of different types
+has to handle a ton of different types
+of simulators to name but a few
+of simulators to name but a few
+complications some en very some
+complications some en very some
+environments run at inconsistent rates
+environments run at inconsistent rates
+some have high bandwidth requirements
+some have high bandwidth requirements
+ments some have variable numbers of
+ments some have variable numbers of
+agents and many require handling highly
+agents and many require handling highly
+structured data I rewrote this layer of
+structured data I rewrote this layer of
+the RL stack from the ground up based on
+the RL stack from the ground up based on
+my experience developing neural MMO
+my experience developing neural MMO
+throughout my PhD puffer lip
+throughout my PhD puffer lip
+vectorization can handle tens of
+vectorization can handle tens of
+gigabytes of data per second with
+gigabytes of data per second with
+virtually zero overhead from
+virtually zero overhead from
+interprocess communication you can read
+interprocess communication you can read
+the full details of our architecture in
+the full details of our architecture in
+the puffer lib white paper but as a
+the puffer lib white paper but as a
+quick summary our biggest improvements
+quick summary our biggest improvements
+include optimized shared memory layout
+include optimized shared memory layout
+asynchronous buffering custom signaling
+asynchronous buffering custom signaling
+between processes and multiple
+between processes and multiple
+strategies based on an automatic profile
+strategies based on an automatic profile
+of your
+of your
+environment in more practical terms if
+environment in more practical terms if
+your environment is a is complex puffer
+your environment is a is complex puffer
+lib will make it work where Alternatives
+lib will make it work where Alternatives
+will not run if your environment is slow
+will not run if your environment is slow
+puffer lib will make it faster than
+puffer lib will make it faster than
+existing Alternatives and if your
+existing Alternatives and if your
+environment is fast puffer lib can scale
+environment is fast puffer lib can scale
+linearly where existing methods are
+linearly where existing methods are
+often slower than single
+often slower than single
+thread level six is compatibility making
+thread level six is compatibility making
+RL work with tons of different types of
+RL work with tons of different types of
+simulators until just a few months ago
+simulators until just a few months ago
+this was the biggest bottleneck in
+this was the biggest bottleneck in
+pushing reinforcement learning to work
+pushing reinforcement learning to work
+on more interesting problems and it was
+on more interesting problems and it was
+the bane of my existence developing
+the bane of my existence developing
+neural MMO during my PhD I saw many
+neural MMO during my PhD I saw many
+amazing RL projects fail because of it
+amazing RL projects fail because of it
+there was just no efficient method for
+there was just no efficient method for
+getting structur data from complex
+getting structur data from complex
+simulators into standard learning
+simulators into standard learning
+implementations the solution was so
+implementations the solution was so
+obvious in retrospect but I can
+obvious in retrospect but I can
+confidently say it is unique to puffer
+confidently say it is unique to puffer
+lip because if anybody had come up with
+lip because if anybody had come up with
+a general formulation it would be
+a general formulation it would be
+everywhere by now puffer lib packs up
+everywhere by now puffer lib packs up
+all the data from your environment into
+all the data from your environment into
+flat buffers then right before your
+flat buffers then right before your
+model needs to know the structure of
+model needs to know the structure of
+that data it unpacks it simple right
+that data it unpacks it simple right
+well this means that the whole
+well this means that the whole
+vectorization library and algorithm
+vectorization library and algorithm
+layers do not need to care what your
+layers do not need to care what your
+data looks like your simulator can be
+data looks like your simulator can be
+anything and you can eliminate thousands
+anything and you can eliminate thousands
+of lines of inefficient structure data
+of lines of inefficient structure data
+processing code from your RL
+processing code from your RL
+infrastructure instead of keeping this
+infrastructure instead of keeping this
+technique a secret I've made it
+technique a secret I've made it
+available for free in puffer
+available for free in puffer
+lib we're nearing the Bottom now these
+lib we're nearing the Bottom now these
+are the esoteric depths where
+are the esoteric depths where
+discoveries are made level seven is
+discoveries are made level seven is
+rappers code that runs on top of
+rappers code that runs on top of
+existing environments to modify how they
+existing environments to modify how they
+behave wrappers are pervasive virtually
+behave wrappers are pervasive virtually
+all commonly used environments have
+all commonly used environments have
+several post-processing steps such as
+several post-processing steps such as
+gray staling or resizing frames stacking
+gray staling or resizing frames stacking
+observations together repeating actions
+observations together repeating actions
+for multiple frames and adding extra
+for multiple frames and adding extra
+logging and they're almost all
+logging and they're almost all
+unoptimized python this is the resize
+unoptimized python this is the resize
+operation used in the most common rapper
+operation used in the most common rapper
+for Atari this one little interpolation
+for Atari this one little interpolation
+right here probably accounts for a
+right here probably accounts for a
+quarter of the CPU time allocated to
+quarter of the CPU time allocated to
+reinforcement learning in the last
+reinforcement learning in the last
+decade I rewrote it in one line and
+decade I rewrote it in one line and
+immediately doubled the overall training
+immediately doubled the overall training
+speed of Atari with no performance
+speed of Atari with no performance
+degradation shortly thereafter I found
+degradation shortly thereafter I found
+an error in another standard rapper that
+an error in another standard rapper that
+prevented Agents from learning multiple
+prevented Agents from learning multiple
+different games the same day I removed
+different games the same day I removed
+the rest of the python wrappers and
+the rest of the python wrappers and
+replace them with C++ which ironically
+replace them with C++ which ironically
+enough was already available in the Bas
+enough was already available in the Bas
+Atari package other common errors I see
+Atari package other common errors I see
+include rendering the environment at a
+include rendering the environment at a
+high resolution and then downscaling
+high resolution and then downscaling
+instead of rendering at a low resolution
+instead of rendering at a low resolution
+to begin with I found this in the
+to begin with I found this in the
+standard Doom package and got a several
+standard Doom package and got a several
+fold speed up just by enabling an unused
+fold speed up just by enabling an unused
+resolution option that was in an obscure
+resolution option that was in an obscure
+config file for ultra high performance
+config file for ultra high performance
+environments the standard rla apis
+environments the standard rla apis
+provided by Jim and petting zoo
+provided by Jim and petting zoo
+themselves are too slow because they
+themselves are too slow because they
+they require processing python
+they require processing python
+dictionaries though this really only
+dictionaries though this really only
+becomes a concern above a million steps
+becomes a concern above a million steps
+per second speaking of which level eight
+per second speaking of which level eight
+is environments the set of existing
+is environments the set of existing
+simulations available there are tons of
+simulations available there are tons of
+interesting RL environments but few of
+interesting RL environments but few of
+them are fast in many cases I question
+them are fast in many cases I question
+how it is even possible for them to be
+how it is even possible for them to be
+this slow here's the popular crafter
+this slow here's the popular crafter
+environment designed in part to reduce
+environment designed in part to reduce
+computational requirements it runs at
+computational requirements it runs at
+320 steps per second on a high-end
+320 steps per second on a high-end
+desktop and it also receives no
+desktop and it also receives no
+noticeable acceleration with standard
+noticeable acceleration with standard
+vectorization methods it does run up to
+vectorization methods it does run up to
+2,800 steps per second with puffer lib
+2,800 steps per second with puffer lib
+but that's still unusably
+but that's still unusably
+slow the reason atrociously optimize
+slow the reason atrociously optimize
+python this trend continues in several
+python this trend continues in several
+other environments such as this racing
+other environments such as this racing
+environment which runs at low hundreds
+environment which runs at low hundreds
+of steps per second and this traffic
+of steps per second and this traffic
+simulator which somehow runs dozens of
+simulator which somehow runs dozens of
+steps per second we do have some at
+steps per second we do have some at
+least reasonably fast environments that
+least reasonably fast environments that
+would be usable if we sto slowing them
+would be usable if we sto slowing them
+down with bad wrappers I've gotten Atari
+down with bad wrappers I've gotten Atari
+up to 60,000 frames per second on a
+up to 60,000 frames per second on a
+desktop and proc gen to 150k that's
+desktop and proc gen to 150k that's
+still not amazing but it's pretty good
+still not amazing but it's pretty good
+for something being rendered to pixels
+for something being rendered to pixels
+Doom is reasonably fast as well but the
+Doom is reasonably fast as well but the
+project would need quite some work some
+project would need quite some work some
+older M's are surprisingly fast one of
+older M's are surprisingly fast one of
+my favorites being net hack which is an
+my favorites being net hack which is an
+80s terminal based Dungeon Crawler it's
+80s terminal based Dungeon Crawler it's
+an insanely complicated M but I can run
+an insanely complicated M but I can run
+it at 100 100,000 steps per second in
+it at 100 100,000 steps per second in
+puffer lib many environments are 10
+puffer lib many environments are 10
+times slower outside puffer lib
+times slower outside puffer lib
+especially with gym or sp3 vectorization
+especially with gym or sp3 vectorization
+but if you know of any others that are
+but if you know of any others that are
+at least fast single threaded let me
+at least fast single threaded let me
+know there are some newer GPU
+know there are some newer GPU
+accelerated environments but only a few
+accelerated environments but only a few
+of them like GPU Drive U Madrona
+of them like GPU Drive U Madrona
+hide-and seek and craftex are complex
+hide-and seek and craftex are complex
+enough to be worth
+enough to be worth
+mentioning welcome to the trenches this
+mentioning welcome to the trenches this
+is the realm of things nobody has ever
+is the realm of things nobody has ever
+even attempted
+even attempted
+level nine is custom simulation what if
+level nine is custom simulation what if
+we replaced all the standard training
+we replaced all the standard training
+environments with ones that run a
+environments with ones that run a
+thousand times faster that's what puffer
+thousand times faster that's what puffer
+AI is doing right now Atari games run at
+AI is doing right now Atari games run at
+a few thousand steps per second per core
+a few thousand steps per second per core
+this snake game runs at over 10 million
+this snake game runs at over 10 million
+steps per second per core this common
+steps per second per core this common
+grid environment runs at 16,000 steps
+grid environment runs at 16,000 steps
+per second ours runs at over 10 million
+per second ours runs at over 10 million
+it's not just limited to simple
+it's not just limited to simple
+simulations either this mini MOBA runs
+simulations either this mini MOBA runs
+at over a million steps per second per
+at over a million steps per second per
+core and it has many of the elements of
+core and it has many of the elements of
+DOTA we have a couple more projects in
+DOTA we have a couple more projects in
+the works too so how's this possible
+the works too so how's this possible
+these simulations all run in pure C with
+these simulations all run in pure C with
+zero dynamic memory
+zero dynamic memory
+allocations but provided you understand
+allocations but provided you understand
+the computational requirements of RL
+the computational requirements of RL
+they don't take that long to build most
+they don't take that long to build most
+of these are written in scon that reads
+of these are written in scon that reads
+like simple procedural python the snake
+like simple procedural python the snake
+and grid environments are a few hundred
+and grid environments are a few hundred
+lines of code each and the m is
+lines of code each and the m is
+currently around 1400 I did a port of
+currently around 1400 I did a port of
+the snake game to Native C but really
+the snake game to Native C but really
+that was just so we could run it on our
+that was just so we could run it on our
+website as a demo try it
+website as a demo try it
+out all these Sims are publicly
+out all these Sims are publicly
+available in the dev branch and you can
+available in the dev branch and you can
+often find me building them live these
+often find me building them live these
+will be part of our next update and I
+will be part of our next update and I
+believe they will be the basis for a
+believe they will be the basis for a
+whole new wave of progress in
+whole new wave of progress in
+reinforcement
+reinforcement
+learning level 10 is
+learning level 10 is
+open-endedness for the last stop I'd
+open-endedness for the last stop I'd
+like to talk about the only problem on
+like to talk about the only problem on
+this list that I don't know how to solve
+this list that I don't know how to solve
+building an environment in which agents
+building an environment in which agents
+can continue to learn and develop
+can continue to learn and develop
+interesting Solutions
+interesting Solutions
+forever we only have one example of what
+forever we only have one example of what
+might be an open-ended system human
+might be an open-ended system human
+civilization the original motivation for
+civilization the original motivation for
+neural MMO the topic of my PhD was to
+neural MMO the topic of my PhD was to
+get as close as possible to this with a
+get as close as possible to this with a
+known simulation format namely MMOs or
+known simulation format namely MMOs or
+massively multiplayer online games I
+massively multiplayer online games I
+still think that this would work and
+still think that this would work and
+done at scale using some of the
+done at scale using some of the
+techniques I now know could produce
+techniques I now know could produce
+something in order of a magnitude more
+something in order of a magnitude more
+interesting than open AI DOTA bot
+interesting than open AI DOTA bot
+but beyond that I don't know yet if you
+but beyond that I don't know yet if you
+have any ideas let me know in the
+have any ideas let me know in the
+comments but before we wrap up let's
+comments but before we wrap up let's
+look at the whole picture the master
+look at the whole picture the master
+plan of how puffer AI will fix
+plan of how puffer AI will fix
+everything wrong with reinforcement
+everything wrong with reinforcement
+learning we're building fast simulators
+learning we're building fast simulators
+of varying types and complexities these
+of varying types and complexities these
+will replace the slow simulators in
+will replace the slow simulators in
+environments used in Academia and in
+environments used in Academia and in
+industry for testing new methods they
+industry for testing new methods they
+will not be slowed down by clunky
+will not be slowed down by clunky
+rappers or by compatibility issues they
+rappers or by compatibility issues they
+will run with linear speed UPS across
+will run with linear speed UPS across
+processes fast enough to saturate even
+processes fast enough to saturate even
+multi-gpu machines using only locally
+multi-gpu machines using only locally
+available cores puffer Li simple demos
+available cores puffer Li simple demos
+already train at over a million steps
+already train at over a million steps
+per second and will soon scale linearly
+per second and will soon scale linearly
+with more gpus too well we will not
+with more gpus too well we will not
+initially focus on developing new
+initially focus on developing new
+algorithms or improving sample
+algorithms or improving sample
+efficiency these improvements are
+efficiency these improvements are
+inevitable byproducts of running tens of
+inevitable byproducts of running tens of
+billions of steps per experiments per
+billions of steps per experiments per
+GPU per
+GPU per
+day if you're an industry working on
+day if you're an industry working on
+reinforcement learning our tools are
+reinforcement learning our tools are
+free an open source as of right now you
+free an open source as of right now you
+can also purchase extended support
+can also purchase extended support
+priority features and other services
+priority features and other services
+email J Suarez at puffer doai or message
+email J Suarez at puffer doai or message
+me on X for more information we also
+me on X for more information we also
+have special deals available for small
+have special deals available for small
+startups if you're an Academia and would
+startups if you're an Academia and would
+like to collaborate let us know puffer
+like to collaborate let us know puffer
+AI provides free support to multiple
+AI provides free support to multiple
+academic labs and we intend to expand
+academic labs and we intend to expand
+this program in the future and if you're
+this program in the future and if you're
+just generally interested in
+just generally interested in
+reinforcement learning you can follow me
+reinforcement learning you can follow me
+on X chat with us on Discord . g/p
+on X chat with us on Discord . g/p
+puffer and swing by the dev streams to
+puffer and swing by the dev streams to
+see many of these tools being built live
+see many of these tools being built live
+thank you for your interest and don't
+thank you for your interest and don't
+forget to feed the puffer
+
+Kind: captions
+Language: en
+let's dive a bit deeper level three is
+let's dive a bit deeper level three is
+algorithms open AI beat top pros at DOTA
+algorithms open AI beat top pros at DOTA
+in 2019 I consider this the top result
+in 2019 I consider this the top result
+in the field how advanced was the
+in the field how advanced was the
+algorithm used for this feed pause and
+algorithm used for this feed pause and
+guess ready the solution was Po and 158
+guess ready the solution was Po and 158
+million parameter network with a on
+million parameter network with a on
+layer
+layer
+lstm that's a model you can run at home
+lstm that's a model you can run at home
+and while the 1024 gpus used to train it
+and while the 1024 gpus used to train it
+were a lot by 2019 standards that's only
+were a lot by 2019 standards that's only
+around 1% of the scale of
+around 1% of the scale of
+gp4 Po was published in 2017 and is
+gp4 Po was published in 2017 and is
+still the most widely used algorithm in
+still the most widely used algorithm in
+RL outside of maybe soft after critic in
+RL outside of maybe soft after critic in
+parts of Robotics keep in mind
+parts of Robotics keep in mind
+algorithms are academic bread and butter
+algorithms are academic bread and butter
+there is tremendous incentive to make
+there is tremendous incentive to make
+progress in publish here and there have
+progress in publish here and there have
+been dozens to hundreds of papers
+been dozens to hundreds of papers
+claiming to beat
+claiming to beat
+po but none of them have caught on more
+po but none of them have caught on more
+generally as you might expect from the
+generally as you might expect from the
+previous section it's a common story in
+previous section it's a common story in
+RL to try out a newly published method
+RL to try out a newly published method
+on a different environment only for it
+on a different environment only for it
+to significantly underperform the much
+to significantly underperform the much
+simpler Bas Line This is going to change
+simpler Bas Line This is going to change
+with puffer lib algorithmic progress is
+with puffer lib algorithmic progress is
+not our immediate goal because it will
+not our immediate goal because it will
+soon become an inevitable byproduct you
+soon become an inevitable byproduct you
+can already run exhaustive experiments
+can already run exhaustive experiments
+on a few environments overnight with
+on a few environments overnight with
+puffer lip as soon as we accumulate just
+puffer lip as soon as we accumulate just
+a few more fast environments of varying
+a few more fast environments of varying
+type and complexity the pace and
+type and complexity the pace and
+accuracy of evaluating methods will
+accuracy of evaluating methods will
+increase so so dramatically as to
+increase so so dramatically as to
+virtually automate this process but
+virtually automate this process but
+until then po solves DOTA and it will
+until then po solves DOTA and it will
+probably solve your problem
+probably solve your problem
+too level four is libraries in language
+too level four is libraries in language
+and vision most researchers just need
+and vision most researchers just need
+pie torch a data set and a stack of
+pie torch a data set and a stack of
+papers to read reinforcement learning
+papers to read reinforcement learning
+isn't like that our data comes from
+isn't like that our data comes from
+simulators we'll talk about all the
+simulators we'll talk about all the
+different tools that go into dealing
+different tools that go into dealing
+with these but for now let's just look
+with these but for now let's just look
+at off the-shelf bundles of tools the
+at off the-shelf bundles of tools the
+best known one is probably stable
+best known one is probably stable
+baselines 3 which makes something
+baselines 3 which makes something
+getting something working quick for
+getting something working quick for
+beginners tan show shares a similar
+beginners tan show shares a similar
+design but is much less known in the US
+design but is much less known in the US
+then there are higher perf libraries
+then there are higher perf libraries
+like sample Factory and mulb which run
+like sample Factory and mulb which run
+like Swiss watches smooth and beautiful
+like Swiss watches smooth and beautiful
+just don't try to modify them yourself
+just don't try to modify them yourself
+there's also torch lib a newer library
+there's also torch lib a newer library
+with quite a bit of Promise all these
+with quite a bit of Promise all these
+take some time to learn and none of them
+take some time to learn and none of them
+will suit your needs in all cases My
+will suit your needs in all cases My
+overall pick is clean RL which provides
+overall pick is clean RL which provides
+short single file implementations of
+short single file implementations of
+major algorithms RL is an emerging field
+major algorithms RL is an emerging field
+and users need white box software that
+and users need white box software that
+they can easily edit any portion of so
+they can easily edit any portion of so
+how does puffer lib fit in our demos run
+how does puffer lib fit in our demos run
+on an optimized version of clean RL with
+on an optimized version of clean RL with
+a severalfold increase in performance
+a severalfold increase in performance
+but really the core of puffer lib is not
+but really the core of puffer lib is not
+just another training Library we instead
+just another training Library we instead
+focus on lower level optimizations that
+focus on lower level optimizations that
+enable efficient and general simulation
+enable efficient and general simulation
+and for that we'll have to dive
+and for that we'll have to dive
+deeper this is where we start getting
+deeper this is where we start getting
+into major advancements exclusive to
+into major advancements exclusive to
+puffer Li level five is vectorization
+puffer Li level five is vectorization
+the process of getting data from
+the process of getting data from
+parallel simulators running on different
+parallel simulators running on different
+cores to the GPU to illustrate just how
+cores to the GPU to illustrate just how
+difficult this is llms with thousands of
+difficult this is llms with thousands of
+gpus are trained on the order of tens of
+gpus are trained on the order of tens of
+terabytes of data total our single GPU
+terabytes of data total our single GPU
+demos can consume over a terabyte of
+demos can consume over a terabyte of
+data per hour and this is not read from
+data per hour and this is not read from
+disk but gathered from over a billion
+disk but gathered from over a billion
+interactions with hundreds to tens of
+interactions with hundreds to tens of
+thousands of parallel simulations
+thousands of parallel simulations
+nothing else matters if you can't get
+nothing else matters if you can't get
+that data fast enough if your
+that data fast enough if your
+vectorization caps out at 5,000 frames
+vectorization caps out at 5,000 frames
+per second your training caps out at
+per second your training caps out at
+5,000 frames per second optimizing this
+5,000 frames per second optimizing this
+process is hard because vectorization
+process is hard because vectorization
+has to handle a ton of different types
+has to handle a ton of different types
+of simulators to name but a few
+of simulators to name but a few
+complications some en very some
+complications some en very some
+environments run at inconsistent rates
+environments run at inconsistent rates
+some have high bandwidth requirements
+some have high bandwidth requirements
+ments some have variable numbers of
+ments some have variable numbers of
+agents and many require handling highly
+agents and many require handling highly
+structured data I rewrote this layer of
+structured data I rewrote this layer of
+the RL stack from the ground up based on
+the RL stack from the ground up based on
+my experience developing neural MMO
+my experience developing neural MMO
+throughout my PhD puffer lip
+throughout my PhD puffer lip
+vectorization can handle tens of
+vectorization can handle tens of
+gigabytes of data per second with
+gigabytes of data per second with
+virtually zero overhead from
+virtually zero overhead from
+interprocess communication you can read
+interprocess communication you can read
+the full details of our architecture in
+the full details of our architecture in
+the puffer lib white paper but as a
+the puffer lib white paper but as a
+quick summary our biggest improvements
+quick summary our biggest improvements
+include optimized shared memory layout
+include optimized shared memory layout
+asynchronous buffering custom signaling
+asynchronous buffering custom signaling
+between processes and multiple
+between processes and multiple
+strategies based on an automatic profile
+strategies based on an automatic profile
+of your
+of your
+environment in more practical terms if
+environment in more practical terms if
+your environment is a is complex puffer
+your environment is a is complex puffer
+lib will make it work where Alternatives
+lib will make it work where Alternatives
+will not run if your environment is slow
+will not run if your environment is slow
+puffer lib will make it faster than
+puffer lib will make it faster than
+existing Alternatives and if your
+existing Alternatives and if your
+environment is fast puffer lib can scale
+environment is fast puffer lib can scale
+linearly where existing methods are
+linearly where existing methods are
+often slower than single
+often slower than single
+thread level six is compatibility making
+thread level six is compatibility making
+RL work with tons of different types of
+RL work with tons of different types of
+simulators until just a few months ago
+simulators until just a few months ago
+this was the biggest bottleneck in
+this was the biggest bottleneck in
+pushing reinforcement learning to work
+pushing reinforcement learning to work
+on more interesting problems and it was
+on more interesting problems and it was
+the bane of my existence developing
+the bane of my existence developing
+neural MMO during my PhD I saw many
+neural MMO during my PhD I saw many
+amazing RL projects fail because of it
+amazing RL projects fail because of it
+there was just no efficient method for
+there was just no efficient method for
+getting structur data from complex
+getting structur data from complex
+simulators into standard learning
+simulators into standard learning
+implementations the solution was so
+implementations the solution was so
+obvious in retrospect but I can
+obvious in retrospect but I can
+confidently say it is unique to puffer
+confidently say it is unique to puffer
+lip because if anybody had come up with
+lip because if anybody had come up with
+a general formulation it would be
+a general formulation it would be
+everywhere by now puffer lib packs up
+everywhere by now puffer lib packs up
+all the data from your environment into
+all the data from your environment into
+flat buffers then right before your
+flat buffers then right before your
+model needs to know the structure of
+model needs to know the structure of
+that data it unpacks it simple right
+that data it unpacks it simple right
+well this means that the whole
+well this means that the whole
+vectorization library and algorithm
+vectorization library and algorithm
+layers do not need to care what your
+layers do not need to care what your
+data looks like your simulator can be
+data looks like your simulator can be
+anything and you can eliminate thousands
+anything and you can eliminate thousands
+of lines of inefficient structure data
+of lines of inefficient structure data
+processing code from your RL
+processing code from your RL
+infrastructure instead of keeping this
+infrastructure instead of keeping this
+technique a secret I've made it
+technique a secret I've made it
+available for free in puffer
+available for free in puffer
+lib we're nearing the Bottom now these
+lib we're nearing the Bottom now these
+are the esoteric depths where
+are the esoteric depths where
+discoveries are made level seven is
+discoveries are made level seven is
+rappers code that runs on top of
+rappers code that runs on top of
+existing environments to modify how they
+existing environments to modify how they
+behave wrappers are pervasive virtually
+behave wrappers are pervasive virtually
+all commonly used environments have
+all commonly used environments have
+several post-processing steps such as
+several post-processing steps such as
+gray staling or resizing frames stacking
+gray staling or resizing frames stacking
+observations together repeating actions
+observations together repeating actions
+for multiple frames and adding extra
+for multiple frames and adding extra
+logging and they're almost all
+logging and they're almost all
+unoptimized python this is the resize
+unoptimized python this is the resize
+operation used in the most common rapper
+operation used in the most common rapper
+for Atari this one little interpolation
+for Atari this one little interpolation
+right here probably accounts for a
+right here probably accounts for a
+quarter of the CPU time allocated to
+quarter of the CPU time allocated to
+reinforcement learning in the last
+reinforcement learning in the last
+decade I rewrote it in one line and
+decade I rewrote it in one line and
+immediately doubled the overall training
+immediately doubled the overall training
+speed of Atari with no performance
+speed of Atari with no performance
+degradation shortly thereafter I found
+degradation shortly thereafter I found
+an error in another standard rapper that
+an error in another standard rapper that
+prevented Agents from learning multiple
+prevented Agents from learning multiple
+different games the same day I removed
+different games the same day I removed
+the rest of the python wrappers and
+the rest of the python wrappers and
+replace them with C++ which ironically
+replace them with C++ which ironically
+enough was already available in the Bas
+enough was already available in the Bas
+Atari package other common errors I see
+Atari package other common errors I see
+include rendering the environment at a
+include rendering the environment at a
+high resolution and then downscaling
+high resolution and then downscaling
+instead of rendering at a low resolution
+instead of rendering at a low resolution
+to begin with I found this in the
+to begin with I found this in the
+standard Doom package and got a several
+standard Doom package and got a several
+fold speed up just by enabling an unused
+fold speed up just by enabling an unused
+resolution option that was in an obscure
+resolution option that was in an obscure
+config file for ultra high performance
+config file for ultra high performance
+environments the standard rla apis
+environments the standard rla apis
+provided by Jim and petting zoo
+provided by Jim and petting zoo
+themselves are too slow because they
+themselves are too slow because they
+they require processing python
+they require processing python
+dictionaries though this really only
+dictionaries though this really only
+becomes a concern above a million steps
+becomes a concern above a million steps
+per second speaking of which level eight
+per second speaking of which level eight
+is environments the set of existing
+is environments the set of existing
+simulations available there are tons of
+simulations available there are tons of
+interesting RL environments but few of
+interesting RL environments but few of
+them are fast in many cases I question
+them are fast in many cases I question
+how it is even possible for them to be
+how it is even possible for them to be
+this slow here's the popular crafter
+this slow here's the popular crafter
+environment designed in part to reduce
+environment designed in part to reduce
+computational requirements it runs at
+computational requirements it runs at
+320 steps per second on a high-end
+320 steps per second on a high-end
+desktop and it also receives no
+desktop and it also receives no
+noticeable acceleration with standard
+noticeable acceleration with standard
+vectorization methods it does run up to
+vectorization methods it does run up to
+2,800 steps per second with puffer lib
+2,800 steps per second with puffer lib
+but that's still unusably
+but that's still unusably
+slow the reason atrociously optimize
+slow the reason atrociously optimize
+python this trend continues in several
+python this trend continues in several
+other environments such as this racing
+other environments such as this racing
+environment which runs at low hundreds
+environment which runs at low hundreds
+of steps per second and this traffic
+of steps per second and this traffic
+simulator which somehow runs dozens of
+simulator which somehow runs dozens of
+steps per second we do have some at
+steps per second we do have some at
+least reasonably fast environments that
+least reasonably fast environments that
+would be usable if we sto slowing them
+would be usable if we sto slowing them
+down with bad wrappers I've gotten Atari
+down with bad wrappers I've gotten Atari
+up to 60,000 frames per second on a
+up to 60,000 frames per second on a
+desktop and proc gen to 150k that's
+desktop and proc gen to 150k that's
+still not amazing but it's pretty good
+still not amazing but it's pretty good
+for something being rendered to pixels
+for something being rendered to pixels
+Doom is reasonably fast as well but the
+Doom is reasonably fast as well but the
+project would need quite some work some
+project would need quite some work some
+older M's are surprisingly fast one of
+older M's are surprisingly fast one of
+my favorites being net hack which is an
+my favorites being net hack which is an
+80s terminal based Dungeon Crawler it's
+80s terminal based Dungeon Crawler it's
+an insanely complicated M but I can run
+an insanely complicated M but I can run
+it at 100 100,000 steps per second in
+it at 100 100,000 steps per second in
+puffer lib many environments are 10
+puffer lib many environments are 10
+times slower outside puffer lib
+times slower outside puffer lib
+especially with gym or sp3 vectorization
+especially with gym or sp3 vectorization
+but if you know of any others that are
+but if you know of any others that are
+at least fast single threaded let me
+at least fast single threaded let me
+know there are some newer GPU
+know there are some newer GPU
+accelerated environments but only a few
+accelerated environments but only a few
+of them like GPU Drive U Madrona
+of them like GPU Drive U Madrona
+hide-and seek and craftex are complex
+hide-and seek and craftex are complex
+enough to be worth
+enough to be worth
+mentioning welcome to the trenches this
+mentioning welcome to the trenches this
+is the realm of things nobody has ever
+is the realm of things nobody has ever
+even attempted
+even attempted
+level nine is custom simulation what if
+level nine is custom simulation what if
+we replaced all the standard training
+we replaced all the standard training
+environments with ones that run a
+environments with ones that run a
+thousand times faster that's what puffer
+thousand times faster that's what puffer
+AI is doing right now Atari games run at
+AI is doing right now Atari games run at
+a few thousand steps per second per core
+a few thousand steps per second per core
+this snake game runs at over 10 million
+this snake game runs at over 10 million
+steps per second per core this common
+steps per second per core this common
+grid environment runs at 16,000 steps
+grid environment runs at 16,000 steps
+per second ours runs at over 10 million
+per second ours runs at over 10 million
+it's not just limited to simple
+it's not just limited to simple
+simulations either this mini MOBA runs
+simulations either this mini MOBA runs
+at over a million steps per second per
+at over a million steps per second per
+core and it has many of the elements of
+core and it has many of the elements of
+DOTA we have a couple more projects in
+DOTA we have a couple more projects in
+the works too so how's this possible
+the works too so how's this possible
+these simulations all run in pure C with
+these simulations all run in pure C with
+zero dynamic memory
+zero dynamic memory
+allocations but provided you understand
+allocations but provided you understand
+the computational requirements of RL
+the computational requirements of RL
+they don't take that long to build most
+they don't take that long to build most
+of these are written in scon that reads
+of these are written in scon that reads
+like simple procedural python the snake
+like simple procedural python the snake
+and grid environments are a few hundred
+and grid environments are a few hundred
+lines of code each and the m is
+lines of code each and the m is
+currently around 1400 I did a port of
+currently around 1400 I did a port of
+the snake game to Native C but really
+the snake game to Native C but really
+that was just so we could run it on our
+that was just so we could run it on our
+website as a demo try it
+website as a demo try it
+out all these Sims are publicly
+out all these Sims are publicly
+available in the dev branch and you can
+available in the dev branch and you can
+often find me building them live these
+often find me building them live these
+will be part of our next update and I
+will be part of our next update and I
+believe they will be the basis for a
+believe they will be the basis for a
+whole new wave of progress in
+whole new wave of progress in
+reinforcement
+reinforcement
+learning level 10 is
+learning level 10 is
+open-endedness for the last stop I'd
+open-endedness for the last stop I'd
+like to talk about the only problem on
+like to talk about the only problem on
+this list that I don't know how to solve
+this list that I don't know how to solve
+building an environment in which agents
+building an environment in which agents
+can continue to learn and develop
+can continue to learn and develop
+interesting Solutions
+interesting Solutions
+forever we only have one example of what
+forever we only have one example of what
+might be an open-ended system human
+might be an open-ended system human
+civilization the original motivation for
+civilization the original motivation for
+neural MMO the topic of my PhD was to
+neural MMO the topic of my PhD was to
+get as close as possible to this with a
+get as close as possible to this with a
+known simulation format namely MMOs or
+known simulation format namely MMOs or
+massively multiplayer online games I
+massively multiplayer online games I
+still think that this would work and
+still think that this would work and
+done at scale using some of the
+done at scale using some of the
+techniques I now know could produce
+techniques I now know could produce
+something in order of a magnitude more
+something in order of a magnitude more
+interesting than open AI DOTA bot
+interesting than open AI DOTA bot
+but beyond that I don't know yet if you
+but beyond that I don't know yet if you
+have any ideas let me know in the
+have any ideas let me know in the
+comments but before we wrap up let's
+comments but before we wrap up let's
+look at the whole picture the master
+look at the whole picture the master
+plan of how puffer AI will fix
+plan of how puffer AI will fix
+everything wrong with reinforcement
+everything wrong with reinforcement
+learning we're building fast simulators
+learning we're building fast simulators
+of varying types and complexities these
+of varying types and complexities these
+will replace the slow simulators in
+will replace the slow simulators in
+environments used in Academia and in
+environments used in Academia and in
+industry for testing new methods they
+industry for testing new methods they
+will not be slowed down by clunky
+will not be slowed down by clunky
+rappers or by compatibility issues they
+rappers or by compatibility issues they
+will run with linear speed UPS across
+will run with linear speed UPS across
+processes fast enough to saturate even
+processes fast enough to saturate even
+multi-gpu machines using only locally
+multi-gpu machines using only locally
+available cores puffer Li simple demos
+available cores puffer Li simple demos
+already train at over a million steps
+already train at over a million steps
+per second and will soon scale linearly
+per second and will soon scale linearly
+with more gpus too well we will not
+with more gpus too well we will not
+initially focus on developing new
+initially focus on developing new
+algorithms or improving sample
+algorithms or improving sample
+efficiency these improvements are
+efficiency these improvements are
+inevitable byproducts of running tens of
+inevitable byproducts of running tens of
+billions of steps per experiments per
+billions of steps per experiments per
+GPU per
+GPU per
+day if you're an industry working on
+day if you're an industry working on
+reinforcement learning our tools are
+reinforcement learning our tools are
+free an open source as of right now you
+free an open source as of right now you
+can also purchase extended support
+can also purchase extended support
+priority features and other services
+priority features and other services
+email J Suarez at puffer doai or message
+email J Suarez at puffer doai or message
+me on X for more information we also
+me on X for more information we also
+have special deals available for small
+have special deals available for small
+startups if you're an Academia and would
+startups if you're an Academia and would
+like to collaborate let us know puffer
+like to collaborate let us know puffer
+AI provides free support to multiple
+AI provides free support to multiple
+academic labs and we intend to expand
+academic labs and we intend to expand
+this program in the future and if you're
+this program in the future and if you're
+just generally interested in
+just generally interested in
+reinforcement learning you can follow me
+reinforcement learning you can follow me
+on X chat with us on Discord . g/p
+on X chat with us on Discord . g/p
+puffer and swing by the dev streams to
+puffer and swing by the dev streams to
+see many of these tools being built live
+see many of these tools being built live
+thank you for your interest and don't
+thank you for your interest and don't
+forget to feed the puffer

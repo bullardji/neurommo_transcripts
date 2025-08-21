@@ -1,0 +1,951 @@
+Kind: captions
+Language: en
+we're back
+live oh maybe this did work hang
+on see here I was all ready to come back
+on see here I was all ready to come back
+and not have anything
+and not have anything
+work but it's kind of doing
+stuff let me
+see very odd the way it is
+what's this point here
+850 parameters should we have here
+850 parameters should we have here
+okay tiny number of
+M's mini
+M's mini
+batch tiny
+batch two updated
+pox so this thing runs
+pox so this thing runs
+at quite slow
+at quite slow
+SPS interesting
+not super confidence inspiring though
+not super confidence inspiring though
+either
+either
+way I think I want to look at
+way I think I want to look at
+the J formula
+again e
+the sum of
+the sum of
+Deltas what are these
+Deltas difference in value
+functions but then these all cancel out
+I was trying to see if there's a way to
+I was trying to see if there's a way to
+make sure that my formula could
+make sure that my formula could
+Implement J on its own
+delta
+T difference of values
+but then the value function
+is H on maybe I'm doing this
+wrong to train to predict the reward or
+the discounted
+return where's the value lost the value
+return where's the value lost the value
+loss
+rat and then a rat comes
+from Return discounted
+return
+return
+okay
+for e
+depending the formula that I would use
+depending the formula that I would use
+for this
+maybe it's time to start doing
+maybe it's time to start doing
+uh some stuff in here whoops where is it
+yma
+equ
+for for
+I like
+this there po
+paper why do they have this with a hat
+paper why do they have this with a hat
+on it
+CU it's an
+estimate it's
+annoying e
+I start learning RL can I follow you
+I start learning RL can I follow you
+please create a
+please create a
+structured playlist which people can
+structured playlist which people can
+follow so these are all these are just
+follow so these are all these are just
+all my Dev streams right these are not
+all my Dev streams right these are not
+necessarily educational you can
+necessarily educational you can
+definitely learn stuff cuz this is just
+definitely learn stuff cuz this is just
+watch RL research happen live but if
+watch RL research happen live but if
+you're looking for educational
+you're looking for educational
+resources my RL quick start guide and
+resources my RL quick start guide and
+then like start adding uh like start
+then like start adding uh like start
+building M for puffet these are the two
+building M for puffet these are the two
+things and that's outlined there as well
+things and that's outlined there as well
+like that guide kind of has everything
+like that guide kind of has everything
+you need to get
+you need to get
+started this at the moment is me um
+started this at the moment is me um
+trying to come up with uh better
+trying to come up with uh better
+formulations of a new algorithm I'm
+formulations of a new algorithm I'm
+working on
+hey how's it
+going
+e e
+right so this is what we have so far I
+believe then we have po
+here this is delta T
+here this is delta T
+here lowercase delta
+T e
+so this is our new formula
+It's tricky because their value function
+It's tricky because their value function
+is defined differently
+is defined differently
+because the value function is a
+because the value function is a
+difference in estimated
+returns was this function even
+right it looks kind of weird
+gamma value of the next
+state is that
+right oh no because you look at it
+right oh no because you look at it
+normally This is the End term
+normally This is the End term
+so you normally look at it this
+so you normally look at it this
+way so it's reward minus value
+here I think these are actually the same
+here I think these are actually the same
+because the way I have my value function
+because the way I have my value function
+defined right the way I have my value
+defined right the way I have my value
+function defined um
+it's so obnoxious
+though maybe we look at the value
+though maybe we look at the value
+function first
+cuz right now I'm just training value
+cuz right now I'm just training value
+function to predict reward
+so if I Define uh maybe I just Define
+so if I Define uh maybe I just Define
+discounted return
+next
+e
+e
+e
+e
+e e
+that makes sense
+I think so
+what do we think about this as a
+what do we think about this as a
+um as a
+return it's a discounted
+return it's a discounted
+it's a variance discounted
+sum e
+okay so now if if we have this can we do
+okay so now if if we have this can we do
+PO with
+PO with
+this or can we do J with this let me see
+well value is Sigma representing Sigma
+well value is Sigma representing Sigma
+is the uh standard deviation that is
+is the uh standard deviation that is
+output by the value function because
+output by the value function because
+we've made the value function
+we've made the value function
+variational so the value function
+variational so the value function
+outputs a mean and standard deviation
+estimate basically I like there's a
+estimate basically I like there's a
+bunch of math here but all I'm trying to
+bunch of math here but all I'm trying to
+do is I'm trying to replace Lambda and
+do is I'm trying to replace Lambda and
+Gamma with a learned estimate um based
+Gamma with a learned estimate um based
+on the confidence of the value function
+on the confidence of the value function
+that is what I'm trying to
+do have 500 on this one
+holy e
+I mean the way that they Define this
+I mean the way that they Define this
+thing can I not just do this
+thing can I not just do this
+no you can't because you don't have
+no you can't because you don't have
+gamma but maybe you do have gamma
+gamma but maybe you do have gamma
+right maybe you do have
+gamma didn't you Define
+gamma didn't you Define
+gamma you did Define
+gamma so can't you just compute J then
+and you Define gamma subt so you don't
+and you Define gamma subt so you don't
+need this
+discounting what if you just did this
+discounting what if you just did this
+does this make any
+sense because really
+gamma Lambda to the
+gamma Lambda to the
+L Sigma V
+this is guaranteed to be zero pretty
+this is guaranteed to be zero pretty
+much
+hang on isn't
+this man I hate
+this man I hate
+mathematicians maybe not in like pure
+mathematicians maybe not in like pure
+math but in CS holy do they make
+math but in CS holy do they make
+things confus
+things confus
+using this the worst possible notation
+using this the worst possible notation
+for
+for
+this okay because here's the thing this
+this okay because here's the thing this
+value function is trained to predict
+value function is trained to predict
+this isn't
+it isn't it train to predict
+this I think it
+is B
+returns so this
+here it's advantages plus
+values right and and then if you go to
+values right and and then if you go to
+here
+here
+it's just
+this so ignoring this K term at the
+end it
+is so all this is is the difference
+is so all this is is the difference
+between the discounted the discounted
+between the discounted the discounted
+return and your prediction of the
+return and your prediction of the
+discounted return right
+and then for some reason we
+and then for some reason we
+exponentially wait again
+but the hope is that we delete this
+but the hope is that we delete this
+parameter because now we have a learned
+parameter e
+oops hang
+on we
+leaving got you yeah I'm
+leaving got you yeah I'm
+ready
+yeah all
+yeah all
+right I have to go to dinner in a little
+right I have to go to dinner in a little
+bit but I think that we actually hit on
+bit but I think that we actually hit on
+something here here so for the folks on
+something here here so for the folks on
+YouTube let me explain what this is and
+YouTube let me explain what this is and
+why this is so exciting um the key
+why this is so exciting um the key
+Advantage estimation here right this is
+Advantage estimation here right this is
+po this is like probably the most
+po this is like probably the most
+important algorithm in RL uh the key
+important algorithm in RL uh the key
+Advantage estimation you can kind of
+Advantage estimation you can kind of
+ignore this term because this goes to
+ignore this term because this goes to
+zero for long large enough K is this
+zero for long large enough K is this
+what is this this is your value function
+what is this this is your value function
+what is the value function train to
+what is the value function train to
+predict a discounted sum of rewards this
+predict a discounted sum of rewards this
+is a discounted sum of rewards so all
+is a discounted sum of rewards so all
+this Advantage function is is it is the
+this Advantage function is is it is the
+discounted reward uh discounted reward
+discounted reward uh discounted reward
+sum which is called the return so it is
+sum which is called the return so it is
+the return minus your prediction of the
+the return minus your prediction of the
+return okay and then they do this mess
+return okay and then they do this mess
+to get this additional waiting term on
+to get this additional waiting term on
+the different terms of Advantage we
+the different terms of Advantage we
+don't care about this because we don't
+don't care about this because we don't
+have the problem that uh we don't have
+have the problem that uh we don't have
+we can learn a more flexible gamma than
+we can learn a more flexible gamma than
+they can
+they can
+so I think that all we have to do is
+so I think that all we have to do is
+take this function right here we
+replace gamma t with our learned
+replace gamma t with our learned
+estimate for gamma
+estimate for gamma
+T which is going to take into account
+T which is going to take into account
+this is the variance essentially this is
+this is the variance essentially this is
+just one over the variance of uh our
+just one over the variance of uh our
+prediction
+prediction
+minus a baseline this is essentially
+minus a baseline this is essentially
+just saying uh how much how much more
+just saying uh how much how much more
+confident this is just saying how
+confident this is just saying how
+confident are we in our prediction
+confident are we in our prediction
+knowing the underlying like how accurate
+knowing the underlying like how accurate
+you're likely to be by guessing so this
+you're likely to be by guessing so this
+is our discount factor
+is our discount factor
+and uh we can Define likewise our return
+and uh we can Define likewise our return
+as a sum over these and then I think we
+as a sum over these and then I think we
+can just use this original Advantage
+can just use this original Advantage
+function and just predict the discounted
+function and just predict the discounted
+return and I think this actually solves
+return and I think this actually solves
+our
+problem what kind of attribution
+problem what kind of attribution
+linking uh it depends what you're using
+linking uh it depends what you're using
+it for hang on let me check that but
+it for hang on let me check that but
+yeah that's why that is so big because I
+yeah that's why that is so big because I
+think that I think that this will let us
+think that I think that this will let us
+replace
+replace
+J with this um I do have a DM on here
+J with this um I do have a DM on here
+request accept
+well it depends what you're using it for
+right
+um let me send you the image I sent to
+um let me send you the image I sent to
+that
+guy where did we send
+guy where did we send
+this copy
+this copy
+[Music]
+[Music]
+image I have this Banner you can use
+image I have this Banner you can use
+it's a nice
+Banner anyways yeah for folks on YouTube
+Banner anyways yeah for folks on YouTube
+I think what's going to happen is uh
+I think what's going to happen is uh
+we're going to try this I don't have
+we're going to try this I don't have
+time to implement this right now but
+time to implement this right now but
+this is very quick to implement based on
+this is very quick to implement based on
+what we have now and uh I think that
+what we have now and uh I think that
+this should allow us to essentially
+this should allow us to essentially
+learn a flexible set of discounting
+learn a flexible set of discounting
+parameters without having to specify
+parameters without having to specify
+them which should allow us to improve
+them which should allow us to improve
+over po so right now we're not even
+over po so right now we're not even
+doing this discounting at all we're kind
+doing this discounting at all we're kind
+of just
+of just
+like we're like doing it element wise or
+like we're like doing it element wise or
+something I actually have to think about
+something I actually have to think about
+what the thing we're doing now even does
+what the thing we're doing now even does
+because it's not that it's like failing
+because it's not that it's like failing
+it's still kind of working it's just not
+it's still kind of working it's just not
+working as well as we would like so I'm
+working as well as we would like so I'm
+going to this run I'm going to get
+going to this run I'm going to get
+dinner um I may be back later tonight
+dinner um I may be back later tonight
+maybe not but sometime in the next few
+maybe not but sometime in the next few
+days we will work on this probably
+days we will work on this probably
+tomorrow is going to be all day on
+tomorrow is going to be all day on
+stream doing research on uh exploration
+stream doing research on uh exploration
+methods in RL that's another area that
+methods in RL that's another area that
+we are investing in so yeah you can drop
+we are investing in so yeah you can drop
+by for that but for folks
+by for that but for folks
+watching all my stuff's at puffer
+watching all my stuff's at puffer
+doai start the GitHub to support the
+doai start the GitHub to support the
+project and otherwise check check out
+project and otherwise check check out
+the Discord can get involved here and
+the Discord can get involved here and
+follow me on X for more yes do star the
+follow me on X for more yes do star the
+repo really really helps us when people
+repo really really helps us when people
+start a repo this is the fastest growing
+start a repo this is the fastest growing
+project in reinforcement learning it's
+project in reinforcement learning it's
+now one of the largest ones as well
+now one of the largest ones as well
+based on Stars so yeah this really
+based on Stars so yeah this really
+helps anyways
+
+Kind: captions
+Language: en
+we're back
+live oh maybe this did work hang
+on see here I was all ready to come back
+on see here I was all ready to come back
+and not have anything
+and not have anything
+work but it's kind of doing
+stuff let me
+see very odd the way it is
+what's this point here
+850 parameters should we have here
+850 parameters should we have here
+okay tiny number of
+M's mini
+M's mini
+batch tiny
+batch two updated
+pox so this thing runs
+pox so this thing runs
+at quite slow
+at quite slow
+SPS interesting
+not super confidence inspiring though
+not super confidence inspiring though
+either
+either
+way I think I want to look at
+way I think I want to look at
+the J formula
+again e
+the sum of
+the sum of
+Deltas what are these
+Deltas difference in value
+functions but then these all cancel out
+I was trying to see if there's a way to
+I was trying to see if there's a way to
+make sure that my formula could
+make sure that my formula could
+Implement J on its own
+delta
+T difference of values
+but then the value function
+is H on maybe I'm doing this
+wrong to train to predict the reward or
+the discounted
+return where's the value lost the value
+return where's the value lost the value
+loss
+rat and then a rat comes
+from Return discounted
+return
+return
+okay
+for e
+depending the formula that I would use
+depending the formula that I would use
+for this
+maybe it's time to start doing
+maybe it's time to start doing
+uh some stuff in here whoops where is it
+yma
+equ
+for for
+I like
+this there po
+paper why do they have this with a hat
+paper why do they have this with a hat
+on it
+CU it's an
+estimate it's
+annoying e
+I start learning RL can I follow you
+I start learning RL can I follow you
+please create a
+please create a
+structured playlist which people can
+structured playlist which people can
+follow so these are all these are just
+follow so these are all these are just
+all my Dev streams right these are not
+all my Dev streams right these are not
+necessarily educational you can
+necessarily educational you can
+definitely learn stuff cuz this is just
+definitely learn stuff cuz this is just
+watch RL research happen live but if
+watch RL research happen live but if
+you're looking for educational
+you're looking for educational
+resources my RL quick start guide and
+resources my RL quick start guide and
+then like start adding uh like start
+then like start adding uh like start
+building M for puffet these are the two
+building M for puffet these are the two
+things and that's outlined there as well
+things and that's outlined there as well
+like that guide kind of has everything
+like that guide kind of has everything
+you need to get
+you need to get
+started this at the moment is me um
+started this at the moment is me um
+trying to come up with uh better
+trying to come up with uh better
+formulations of a new algorithm I'm
+formulations of a new algorithm I'm
+working on
+hey how's it
+going
+e e
+right so this is what we have so far I
+believe then we have po
+here this is delta T
+here this is delta T
+here lowercase delta
+T e
+so this is our new formula
+It's tricky because their value function
+It's tricky because their value function
+is defined differently
+is defined differently
+because the value function is a
+because the value function is a
+difference in estimated
+returns was this function even
+right it looks kind of weird
+gamma value of the next
+state is that
+right oh no because you look at it
+right oh no because you look at it
+normally This is the End term
+normally This is the End term
+so you normally look at it this
+so you normally look at it this
+way so it's reward minus value
+here I think these are actually the same
+here I think these are actually the same
+because the way I have my value function
+because the way I have my value function
+defined right the way I have my value
+defined right the way I have my value
+function defined um
+it's so obnoxious
+though maybe we look at the value
+though maybe we look at the value
+function first
+cuz right now I'm just training value
+cuz right now I'm just training value
+function to predict reward
+so if I Define uh maybe I just Define
+so if I Define uh maybe I just Define
+discounted return
+next
+e
+e
+e
+e
+e e
+that makes sense
+I think so
+what do we think about this as a
+what do we think about this as a
+um as a
+return it's a discounted
+return it's a discounted
+it's a variance discounted
+sum e
+okay so now if if we have this can we do
+okay so now if if we have this can we do
+PO with
+PO with
+this or can we do J with this let me see
+well value is Sigma representing Sigma
+well value is Sigma representing Sigma
+is the uh standard deviation that is
+is the uh standard deviation that is
+output by the value function because
+output by the value function because
+we've made the value function
+we've made the value function
+variational so the value function
+variational so the value function
+outputs a mean and standard deviation
+estimate basically I like there's a
+estimate basically I like there's a
+bunch of math here but all I'm trying to
+bunch of math here but all I'm trying to
+do is I'm trying to replace Lambda and
+do is I'm trying to replace Lambda and
+Gamma with a learned estimate um based
+Gamma with a learned estimate um based
+on the confidence of the value function
+on the confidence of the value function
+that is what I'm trying to
+do have 500 on this one
+holy e
+I mean the way that they Define this
+I mean the way that they Define this
+thing can I not just do this
+thing can I not just do this
+no you can't because you don't have
+no you can't because you don't have
+gamma but maybe you do have gamma
+gamma but maybe you do have gamma
+right maybe you do have
+gamma didn't you Define
+gamma didn't you Define
+gamma you did Define
+gamma so can't you just compute J then
+and you Define gamma subt so you don't
+and you Define gamma subt so you don't
+need this
+discounting what if you just did this
+discounting what if you just did this
+does this make any
+sense because really
+gamma Lambda to the
+gamma Lambda to the
+L Sigma V
+this is guaranteed to be zero pretty
+this is guaranteed to be zero pretty
+much
+hang on isn't
+this man I hate
+this man I hate
+mathematicians maybe not in like pure
+mathematicians maybe not in like pure
+math but in CS holy do they make
+math but in CS holy do they make
+things confus
+things confus
+using this the worst possible notation
+using this the worst possible notation
+for
+for
+this okay because here's the thing this
+this okay because here's the thing this
+value function is trained to predict
+value function is trained to predict
+this isn't
+it isn't it train to predict
+this I think it
+is B
+returns so this
+here it's advantages plus
+values right and and then if you go to
+values right and and then if you go to
+here
+here
+it's just
+this so ignoring this K term at the
+end it
+is so all this is is the difference
+is so all this is is the difference
+between the discounted the discounted
+between the discounted the discounted
+return and your prediction of the
+return and your prediction of the
+discounted return right
+and then for some reason we
+and then for some reason we
+exponentially wait again
+but the hope is that we delete this
+but the hope is that we delete this
+parameter because now we have a learned
+parameter e
+oops hang
+on we
+leaving got you yeah I'm
+leaving got you yeah I'm
+ready
+yeah all
+yeah all
+right I have to go to dinner in a little
+right I have to go to dinner in a little
+bit but I think that we actually hit on
+bit but I think that we actually hit on
+something here here so for the folks on
+something here here so for the folks on
+YouTube let me explain what this is and
+YouTube let me explain what this is and
+why this is so exciting um the key
+why this is so exciting um the key
+Advantage estimation here right this is
+Advantage estimation here right this is
+po this is like probably the most
+po this is like probably the most
+important algorithm in RL uh the key
+important algorithm in RL uh the key
+Advantage estimation you can kind of
+Advantage estimation you can kind of
+ignore this term because this goes to
+ignore this term because this goes to
+zero for long large enough K is this
+zero for long large enough K is this
+what is this this is your value function
+what is this this is your value function
+what is the value function train to
+what is the value function train to
+predict a discounted sum of rewards this
+predict a discounted sum of rewards this
+is a discounted sum of rewards so all
+is a discounted sum of rewards so all
+this Advantage function is is it is the
+this Advantage function is is it is the
+discounted reward uh discounted reward
+discounted reward uh discounted reward
+sum which is called the return so it is
+sum which is called the return so it is
+the return minus your prediction of the
+the return minus your prediction of the
+return okay and then they do this mess
+return okay and then they do this mess
+to get this additional waiting term on
+to get this additional waiting term on
+the different terms of Advantage we
+the different terms of Advantage we
+don't care about this because we don't
+don't care about this because we don't
+have the problem that uh we don't have
+have the problem that uh we don't have
+we can learn a more flexible gamma than
+we can learn a more flexible gamma than
+they can
+they can
+so I think that all we have to do is
+so I think that all we have to do is
+take this function right here we
+replace gamma t with our learned
+replace gamma t with our learned
+estimate for gamma
+estimate for gamma
+T which is going to take into account
+T which is going to take into account
+this is the variance essentially this is
+this is the variance essentially this is
+just one over the variance of uh our
+just one over the variance of uh our
+prediction
+prediction
+minus a baseline this is essentially
+minus a baseline this is essentially
+just saying uh how much how much more
+just saying uh how much how much more
+confident this is just saying how
+confident this is just saying how
+confident are we in our prediction
+confident are we in our prediction
+knowing the underlying like how accurate
+knowing the underlying like how accurate
+you're likely to be by guessing so this
+you're likely to be by guessing so this
+is our discount factor
+is our discount factor
+and uh we can Define likewise our return
+and uh we can Define likewise our return
+as a sum over these and then I think we
+as a sum over these and then I think we
+can just use this original Advantage
+can just use this original Advantage
+function and just predict the discounted
+function and just predict the discounted
+return and I think this actually solves
+return and I think this actually solves
+our
+problem what kind of attribution
+problem what kind of attribution
+linking uh it depends what you're using
+linking uh it depends what you're using
+it for hang on let me check that but
+it for hang on let me check that but
+yeah that's why that is so big because I
+yeah that's why that is so big because I
+think that I think that this will let us
+think that I think that this will let us
+replace
+replace
+J with this um I do have a DM on here
+J with this um I do have a DM on here
+request accept
+well it depends what you're using it for
+right
+um let me send you the image I sent to
+um let me send you the image I sent to
+that
+guy where did we send
+guy where did we send
+this copy
+this copy
+[Music]
+[Music]
+image I have this Banner you can use
+image I have this Banner you can use
+it's a nice
+Banner anyways yeah for folks on YouTube
+Banner anyways yeah for folks on YouTube
+I think what's going to happen is uh
+I think what's going to happen is uh
+we're going to try this I don't have
+we're going to try this I don't have
+time to implement this right now but
+time to implement this right now but
+this is very quick to implement based on
+this is very quick to implement based on
+what we have now and uh I think that
+what we have now and uh I think that
+this should allow us to essentially
+this should allow us to essentially
+learn a flexible set of discounting
+learn a flexible set of discounting
+parameters without having to specify
+parameters without having to specify
+them which should allow us to improve
+them which should allow us to improve
+over po so right now we're not even
+over po so right now we're not even
+doing this discounting at all we're kind
+doing this discounting at all we're kind
+of just
+of just
+like we're like doing it element wise or
+like we're like doing it element wise or
+something I actually have to think about
+something I actually have to think about
+what the thing we're doing now even does
+what the thing we're doing now even does
+because it's not that it's like failing
+because it's not that it's like failing
+it's still kind of working it's just not
+it's still kind of working it's just not
+working as well as we would like so I'm
+working as well as we would like so I'm
+going to this run I'm going to get
+going to this run I'm going to get
+dinner um I may be back later tonight
+dinner um I may be back later tonight
+maybe not but sometime in the next few
+maybe not but sometime in the next few
+days we will work on this probably
+days we will work on this probably
+tomorrow is going to be all day on
+tomorrow is going to be all day on
+stream doing research on uh exploration
+stream doing research on uh exploration
+methods in RL that's another area that
+methods in RL that's another area that
+we are investing in so yeah you can drop
+we are investing in so yeah you can drop
+by for that but for folks
+by for that but for folks
+watching all my stuff's at puffer
+watching all my stuff's at puffer
+doai start the GitHub to support the
+doai start the GitHub to support the
+project and otherwise check check out
+project and otherwise check check out
+the Discord can get involved here and
+the Discord can get involved here and
+follow me on X for more yes do star the
+follow me on X for more yes do star the
+repo really really helps us when people
+repo really really helps us when people
+start a repo this is the fastest growing
+start a repo this is the fastest growing
+project in reinforcement learning it's
+project in reinforcement learning it's
+now one of the largest ones as well
+now one of the largest ones as well
+based on Stars so yeah this really
+based on Stars so yeah this really
+helps anyways

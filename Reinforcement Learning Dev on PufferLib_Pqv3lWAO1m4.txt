@@ -1,0 +1,871 @@
+Kind: captions
+Language: en
+Good
+Good
+morning. We are back live.
+morning. We are back live.
+Hi. Quick morning session right
+Hi. Quick morning session right
+now. Just like a half hour stream and uh
+now. Just like a half hour stream and uh
+we're going to be looking at the results
+we're going to be looking at the results
+from last night's experiments. Launching
+from last night's experiments. Launching
+a few new ones. I'll grab breakfast and
+a few new ones. I'll grab breakfast and
+then we will come back and be here for
+then we will come back and be here for
+the whole rest of the day working on
+the whole rest of the day working on
+various bits of research.
+mostly pre-release
+stuff. We have
+stuff. We have
+here the full completed maze
+here the full completed maze
+runs.
+runs.
+90% on mazes is very very good. These
+90% on mazes is very very good. These
+are very good
+are very good
+results. I'd like to see some of the
+results. I'd like to see some of the
+curves.
+These are pretty good.
+If we just filter this
+to there 18 runs that get above
+85%. Not bad.
+We
+We
+do few too
+do few too
+many
+many
+7% other nine runs. This is a reasonable
+number. These are
+number. These are
+reasonable. We look at the hyperparams
+reasonable. We look at the hyperparams
+for this.
+we get our stable hyperparameter
+ranges. Pretty
+cool. I actually think we can just like
+cool. I actually think we can just like
+set up the uh the meta sweep,
+set up the uh the meta sweep,
+right? Probably just set up the meta
+right? Probably just set up the meta
+sweep right now.
+Let's do it this
+way. All
+right, that's all
+set, I
+set, I
+believe. I forget what machine we have
+believe. I forget what machine we have
+this set up to run on, though. meta to
+this set up to run on, though. meta to
+run on
+specifically. Uh, we do have meta, but
+specifically. Uh, we do have meta, but
+we don't even have Python 311 on this
+we don't even have Python 311 on this
+box.
+box.
+Let's try the other
+one. We have
+one. We have
+Metagrid. We do not have Python 311 on
+Metagrid. We do not have Python 311 on
+this
+this
+either. That's a little silly.
+either. That's a little silly.
+May as well get it set up on on the big
+May as well get it set up on on the big
+box
+then be a good
+idea. And let's see if we can just in
+idea. And let's see if we can just in
+the next 15 minutes or so, 20 minutes,
+the next 15 minutes or so, 20 minutes,
+get a a sweep running on meta. That
+get a a sweep running on meta. That
+would be the best.
+Huh? That's bizarre,
+right?
+right?
+Oh, 3.4 terabytes of experiments.
+Lovely. That is from old
+Lovely. That is from old
+uh errors on the way that we were saving
+uh errors on the way that we were saving
+models.
+Go.
+We also need
+dev. No record file is found for
+pip. Interesting.
+Yeah, this already exists
+Yeah, this already exists
+anyways. We don't need to update
+alternatives. We do need this. And I
+alternatives. We do need this. And I
+believe
+believe
+it's CUDA 128, right? Let's
+actually Yeah, CUDA
+128. Get ourselves full set up for
+311. I don't actually know what the best
+311. I don't actually know what the best
+way is to manage all this crap, right?
+way is to manage all this crap, right?
+Like we don't want to distribute a
+Like we don't want to distribute a
+docker that has a massive docker that
+docker that has a massive docker that
+has 311 12 13 and stuff on it, do
+has 311 12 13 and stuff on it, do
+we? I don't know. Maybe we do. Maybe it
+we? I don't know. Maybe we do. Maybe it
+is better to just have a docker and be
+done. That does kind of appeal to me.
+done. That does kind of appeal to me.
+The only trade-off is download size.
+we can figure out like what the
+we can figure out like what the
+difference would be in in file size,
+difference would be in in file size,
+right? Because
+like I think most of this space comes
+like I think most of this space comes
+from base CUDA which you only need the
+from base CUDA which you only need the
+one version for your GPU
+of. Welcome Twitch
+of. Welcome Twitch
+folks. The plan for uh right now is to
+folks. The plan for uh right now is to
+get actually I can show off the
+get actually I can show off the
+environment that we're going to be
+environment that we're going to be
+running sweeps on.
+have it
+here. So, this
+is Okay, they massively changed the
+is Okay, they massively changed the
+graphic since I last looked at it. It
+graphic since I last looked at it. It
+looks like they got themselves an
+looks like they got themselves an
+artist. Very nice. Um, cool. So, yeah,
+artist. Very nice. Um, cool. So, yeah,
+it's this grid- based environment where
+it's this grid- based environment where
+you have like resources. You convert
+you have like resources. You convert
+resources to different
+resources to different
+types. This is very cool.
+I was
+I was
+like, I looked at this and I immediately
+like, I looked at this and I immediately
+get like Binding of Isaac vibes. Maybe
+get like Binding of Isaac vibes. Maybe
+it's just because of the
+character. Anyone else? This is like
+character. Anyone else? This is like
+total Binding of Isaac vibes, right?
+Wait. The fact that they leave
+trails. Oh, they're doing something
+trails. Oh, they're doing something
+different with this because they have
+trails. Huh.
+And this would look so much better with
+And this would look so much better with
+smooth graphics.
+Okay, so we have this
+now.
+now.
+Oops. Hang
+Oops. Hang
+on. We on the right
+spot. Yeah, we are in the right spot.
+Yeah, we're not dealing with this right
+now. We're just going to sink our fork.
+where we're just going to actually like
+where we're just going to actually like
+regrab our fork in
+Okay, that's what we wanted.
+That should be the Syon build and any
+That should be the Syon build and any
+other things that we
+other things that we
+need we will install
+separate. I don't want to install their
+separate. I don't want to install their
+requirements file because it like
+requirements file because it like
+installs annoying versions of torch and
+installs annoying versions of torch and
+stuff.
+Oh, also the guys that build uh this
+Oh, also the guys that build uh this
+Metagrid environment are hiring quite a
+Metagrid environment are hiring quite a
+bit right now. So, if you're looking for
+bit right now. So, if you're looking for
+a way to get a cool job in RL, doing
+a way to get a cool job in RL, doing
+some open source contributions, pretty
+some open source contributions, pretty
+good
+idea. Now, Puffer is not exactly hiring
+idea. Now, Puffer is not exactly hiring
+full-time, but we do pull in uh major
+full-time, but we do pull in uh major
+contributors for contract work.
+The bar is pretty high there
+though. Mhm.
+Do I need
+Do I need
+scypiestats? I think that's a dead
+dependency. That would be a good thing
+dependency. That would be a good thing
+for me to do clean up on just like
+for me to do clean up on just like
+really cut down number of depths for
+really cut down number of depths for
+puffer.
+Right. We do need to do the jank build
+Right. We do need to do the jank build
+stuff. There's some jank build stuff to
+stuff. There's some jank build stuff to
+be done.
+I think that this is the torch
+I think that this is the torch
+extensions being
+weird. So, I need to like make this
+weird. So, I need to like make this
+whole setup file work better.
+Okay. Yeah. So, this is going to build
+Okay. Yeah. So, this is going to build
+torch
+extensions. I'm really sick of all this
+extensions. I'm really sick of all this
+silly packaging and like cleanup work. I
+silly packaging and like cleanup work. I
+think probably what I will do is in
+think probably what I will do is in
+between the next puffer release and um
+between the next puffer release and um
+when I start doing algorithm work, I'll
+when I start doing algorithm work, I'll
+probably take like a couple days off off
+probably take like a couple days off off
+and then take a few days to like just
+and then take a few days to like just
+build some little cool toy environment.
+build some little cool toy environment.
+Just like think of some fun thing to do
+Just like think of some fun thing to do
+for Puffer that would like give us
+for Puffer that would like give us
+another thing just to like
+another thing just to like
+mentally get out of this and really
+mentally get out of this and really
+start like enjoying the stuff a lot
+more. No module named Metagrid.
+If this starts installing torch, I'm
+If this starts installing torch, I'm
+killing it.
+I don't know why I did that. It's
+I don't know why I did that. It's
+already installed.
+Hydra. I hate all these different config
+packages. They're like so
+bad. Uh I think the package is not
+bad. Uh I think the package is not
+called Hydra, right?
+Hydra
+core. Okay, we do run the
+core. Okay, we do run the
+environment and we do get stats
+environment and we do get stats
+out. So what we are going to do
+out. So what we are going to do
+now, we have this nice new uh sweep
+now, we have this nice new uh sweep
+configuration
+configuration
+here. Commented update epochs.
+mini batch
+mini batch
+size kind of
+sweeps. Oh, this mean is totally
+wrong. We're going to do is we're just
+wrong. We're going to do is we're just
+going to
+going to
+delete all these defaults.
+We do what is
+it? Total time steps can go
+from 100 mil
+from 100 mil
+to 400 mil maybe.
+unit 200
+unit 200
+mil auto
+mil auto
+scale and then we will see what this
+scale and then we will see what this
+does.
+does.
+288. Oh no, that's max and mean. Yeah,
+288. Oh no, that's max and mean. Yeah,
+this is
+good. Uh are these batch sizes what we
+want? which let's see 16 128 * 16 agents
+want? which let's see 16 128 * 16 agents
+per n is way too
+per n is way too
+small. We would ideally like this to
+small. We would ideally like this to
+be 4x
+be 4x
+larger. So this is going to be
+environments batch size of
+256. Make sure we get a good brain speed
+config completely unbottlenecked.
+config completely unbottlenecked.
+Oh, okay.
+500k. Not
+terrible. 100k train
+speed. I believe we no longer sweep
+speed. I believe we no longer sweep
+these things, right?
+We just
+like let's try it like this for now.
+Huh? Uh, this just Oh, Python 311.
+CFFI back
+end.
+EFFI. Um, why do I have Rust errors in
+EFFI. Um, why do I have Rust errors in
+my code? Hey, Boxing.
+Why do I have Rust
+Why do I have Rust
+errors? Oh, Neptune uses Rust,
+errors? Oh, Neptune uses Rust,
+huh? So, this is probably like a login
+thing. Okay, I like Neptune less because
+thing. Okay, I like Neptune less because
+Rust
+See if we can get Neptune to just
+start. Is this like all of Neptune right
+start. Is this like all of Neptune right
+now?
+No, we have Neptune working here.
+Python API call
+Python API call
+failed. Well, that
+failed. Well, that
+sucks. I haven't tested the wand in a
+sucks. I haven't tested the wand in a
+while. Does it work?
+like really obnoxious.
+Let me do this.
+The heck is this? CFI back end.
+The heck is this? CFI back end.
+Oh.
+Oh.
+Uh, probably just install CFFI,
+right?
+right?
+Okay, that was a little silly of me.
+Boom. And if this works, then I go for
+Boom. And if this works, then I go for
+breakfast and I will be back for the
+breakfast and I will be back for the
+whole rest of the day
+whole rest of the day
+thereafter.
+thereafter.
+650k. Lovely.
+Cool. So, we now have this seeming to be
+running. Is it stuck? No, we're
+good. So, this will run a sweep and then
+good. So, this will run a sweep and then
+I will be be uh I will be back after
+I will be be uh I will be back after
+breakfast and we will continue working
+breakfast and we will continue working
+on all of the pre-release stuff. If
+on all of the pre-release stuff. If
+Spencer's around, maybe we'll do some
+Spencer's around, maybe we'll do some
+stuff on GPU drive. If Captain's around,
+stuff on GPU drive. If Captain's around,
+maybe we'll do stuff on impulse wars.
+maybe we'll do stuff on impulse wars.
+But generally, it's going to be a cycle
+But generally, it's going to be a cycle
+of like have sweeps going in the
+of like have sweeps going in the
+background, make sure that the results
+background, make sure that the results
+are good, keep improving stuff, and then
+are good, keep improving stuff, and then
+like keep just simplifying,
+like keep just simplifying,
+streamlining, error checking all the
+streamlining, error checking all the
+stuff in main puffer lib. Uh yeah, so
+stuff in main puffer lib. Uh yeah, so
+thank you and I will be Oh, one thing
+thank you and I will be Oh, one thing
+before I go. Did we hit 2k stars
+before I go. Did we hit 2k stars
+officially?
+one star off of 2K. Start it if you
+one star off of 2K. Start it if you
+haven't. All right. Thanks.
+
+Kind: captions
+Language: en
+Good
+Good
+morning. We are back live.
+morning. We are back live.
+Hi. Quick morning session right
+Hi. Quick morning session right
+now. Just like a half hour stream and uh
+now. Just like a half hour stream and uh
+we're going to be looking at the results
+we're going to be looking at the results
+from last night's experiments. Launching
+from last night's experiments. Launching
+a few new ones. I'll grab breakfast and
+a few new ones. I'll grab breakfast and
+then we will come back and be here for
+then we will come back and be here for
+the whole rest of the day working on
+the whole rest of the day working on
+various bits of research.
+mostly pre-release
+stuff. We have
+stuff. We have
+here the full completed maze
+here the full completed maze
+runs.
+runs.
+90% on mazes is very very good. These
+90% on mazes is very very good. These
+are very good
+are very good
+results. I'd like to see some of the
+results. I'd like to see some of the
+curves.
+These are pretty good.
+If we just filter this
+to there 18 runs that get above
+85%. Not bad.
+We
+We
+do few too
+do few too
+many
+many
+7% other nine runs. This is a reasonable
+number. These are
+number. These are
+reasonable. We look at the hyperparams
+reasonable. We look at the hyperparams
+for this.
+we get our stable hyperparameter
+ranges. Pretty
+cool. I actually think we can just like
+cool. I actually think we can just like
+set up the uh the meta sweep,
+set up the uh the meta sweep,
+right? Probably just set up the meta
+right? Probably just set up the meta
+sweep right now.
+Let's do it this
+way. All
+right, that's all
+set, I
+set, I
+believe. I forget what machine we have
+believe. I forget what machine we have
+this set up to run on, though. meta to
+this set up to run on, though. meta to
+run on
+specifically. Uh, we do have meta, but
+specifically. Uh, we do have meta, but
+we don't even have Python 311 on this
+we don't even have Python 311 on this
+box.
+box.
+Let's try the other
+one. We have
+one. We have
+Metagrid. We do not have Python 311 on
+Metagrid. We do not have Python 311 on
+this
+this
+either. That's a little silly.
+either. That's a little silly.
+May as well get it set up on on the big
+May as well get it set up on on the big
+box
+then be a good
+idea. And let's see if we can just in
+idea. And let's see if we can just in
+the next 15 minutes or so, 20 minutes,
+the next 15 minutes or so, 20 minutes,
+get a a sweep running on meta. That
+get a a sweep running on meta. That
+would be the best.
+Huh? That's bizarre,
+right?
+right?
+Oh, 3.4 terabytes of experiments.
+Lovely. That is from old
+Lovely. That is from old
+uh errors on the way that we were saving
+uh errors on the way that we were saving
+models.
+Go.
+We also need
+dev. No record file is found for
+pip. Interesting.
+Yeah, this already exists
+Yeah, this already exists
+anyways. We don't need to update
+alternatives. We do need this. And I
+alternatives. We do need this. And I
+believe
+believe
+it's CUDA 128, right? Let's
+actually Yeah, CUDA
+128. Get ourselves full set up for
+311. I don't actually know what the best
+311. I don't actually know what the best
+way is to manage all this crap, right?
+way is to manage all this crap, right?
+Like we don't want to distribute a
+Like we don't want to distribute a
+docker that has a massive docker that
+docker that has a massive docker that
+has 311 12 13 and stuff on it, do
+has 311 12 13 and stuff on it, do
+we? I don't know. Maybe we do. Maybe it
+we? I don't know. Maybe we do. Maybe it
+is better to just have a docker and be
+done. That does kind of appeal to me.
+done. That does kind of appeal to me.
+The only trade-off is download size.
+we can figure out like what the
+we can figure out like what the
+difference would be in in file size,
+difference would be in in file size,
+right? Because
+like I think most of this space comes
+like I think most of this space comes
+from base CUDA which you only need the
+from base CUDA which you only need the
+one version for your GPU
+of. Welcome Twitch
+of. Welcome Twitch
+folks. The plan for uh right now is to
+folks. The plan for uh right now is to
+get actually I can show off the
+get actually I can show off the
+environment that we're going to be
+environment that we're going to be
+running sweeps on.
+have it
+here. So, this
+is Okay, they massively changed the
+is Okay, they massively changed the
+graphic since I last looked at it. It
+graphic since I last looked at it. It
+looks like they got themselves an
+looks like they got themselves an
+artist. Very nice. Um, cool. So, yeah,
+artist. Very nice. Um, cool. So, yeah,
+it's this grid- based environment where
+it's this grid- based environment where
+you have like resources. You convert
+you have like resources. You convert
+resources to different
+resources to different
+types. This is very cool.
+I was
+I was
+like, I looked at this and I immediately
+like, I looked at this and I immediately
+get like Binding of Isaac vibes. Maybe
+get like Binding of Isaac vibes. Maybe
+it's just because of the
+character. Anyone else? This is like
+character. Anyone else? This is like
+total Binding of Isaac vibes, right?
+Wait. The fact that they leave
+trails. Oh, they're doing something
+trails. Oh, they're doing something
+different with this because they have
+trails. Huh.
+And this would look so much better with
+And this would look so much better with
+smooth graphics.
+Okay, so we have this
+now.
+now.
+Oops. Hang
+Oops. Hang
+on. We on the right
+spot. Yeah, we are in the right spot.
+Yeah, we're not dealing with this right
+now. We're just going to sink our fork.
+where we're just going to actually like
+where we're just going to actually like
+regrab our fork in
+Okay, that's what we wanted.
+That should be the Syon build and any
+That should be the Syon build and any
+other things that we
+other things that we
+need we will install
+separate. I don't want to install their
+separate. I don't want to install their
+requirements file because it like
+requirements file because it like
+installs annoying versions of torch and
+installs annoying versions of torch and
+stuff.
+Oh, also the guys that build uh this
+Oh, also the guys that build uh this
+Metagrid environment are hiring quite a
+Metagrid environment are hiring quite a
+bit right now. So, if you're looking for
+bit right now. So, if you're looking for
+a way to get a cool job in RL, doing
+a way to get a cool job in RL, doing
+some open source contributions, pretty
+some open source contributions, pretty
+good
+idea. Now, Puffer is not exactly hiring
+idea. Now, Puffer is not exactly hiring
+full-time, but we do pull in uh major
+full-time, but we do pull in uh major
+contributors for contract work.
+The bar is pretty high there
+though. Mhm.
+Do I need
+Do I need
+scypiestats? I think that's a dead
+dependency. That would be a good thing
+dependency. That would be a good thing
+for me to do clean up on just like
+for me to do clean up on just like
+really cut down number of depths for
+really cut down number of depths for
+puffer.
+Right. We do need to do the jank build
+Right. We do need to do the jank build
+stuff. There's some jank build stuff to
+stuff. There's some jank build stuff to
+be done.
+I think that this is the torch
+I think that this is the torch
+extensions being
+weird. So, I need to like make this
+weird. So, I need to like make this
+whole setup file work better.
+Okay. Yeah. So, this is going to build
+Okay. Yeah. So, this is going to build
+torch
+extensions. I'm really sick of all this
+extensions. I'm really sick of all this
+silly packaging and like cleanup work. I
+silly packaging and like cleanup work. I
+think probably what I will do is in
+think probably what I will do is in
+between the next puffer release and um
+between the next puffer release and um
+when I start doing algorithm work, I'll
+when I start doing algorithm work, I'll
+probably take like a couple days off off
+probably take like a couple days off off
+and then take a few days to like just
+and then take a few days to like just
+build some little cool toy environment.
+build some little cool toy environment.
+Just like think of some fun thing to do
+Just like think of some fun thing to do
+for Puffer that would like give us
+for Puffer that would like give us
+another thing just to like
+another thing just to like
+mentally get out of this and really
+mentally get out of this and really
+start like enjoying the stuff a lot
+more. No module named Metagrid.
+If this starts installing torch, I'm
+If this starts installing torch, I'm
+killing it.
+I don't know why I did that. It's
+I don't know why I did that. It's
+already installed.
+Hydra. I hate all these different config
+packages. They're like so
+bad. Uh I think the package is not
+bad. Uh I think the package is not
+called Hydra, right?
+Hydra
+core. Okay, we do run the
+core. Okay, we do run the
+environment and we do get stats
+environment and we do get stats
+out. So what we are going to do
+out. So what we are going to do
+now, we have this nice new uh sweep
+now, we have this nice new uh sweep
+configuration
+configuration
+here. Commented update epochs.
+mini batch
+mini batch
+size kind of
+sweeps. Oh, this mean is totally
+wrong. We're going to do is we're just
+wrong. We're going to do is we're just
+going to
+going to
+delete all these defaults.
+We do what is
+it? Total time steps can go
+from 100 mil
+from 100 mil
+to 400 mil maybe.
+unit 200
+unit 200
+mil auto
+mil auto
+scale and then we will see what this
+scale and then we will see what this
+does.
+does.
+288. Oh no, that's max and mean. Yeah,
+288. Oh no, that's max and mean. Yeah,
+this is
+good. Uh are these batch sizes what we
+want? which let's see 16 128 * 16 agents
+want? which let's see 16 128 * 16 agents
+per n is way too
+per n is way too
+small. We would ideally like this to
+small. We would ideally like this to
+be 4x
+be 4x
+larger. So this is going to be
+environments batch size of
+256. Make sure we get a good brain speed
+config completely unbottlenecked.
+config completely unbottlenecked.
+Oh, okay.
+500k. Not
+terrible. 100k train
+speed. I believe we no longer sweep
+speed. I believe we no longer sweep
+these things, right?
+We just
+like let's try it like this for now.
+Huh? Uh, this just Oh, Python 311.
+CFFI back
+end.
+EFFI. Um, why do I have Rust errors in
+EFFI. Um, why do I have Rust errors in
+my code? Hey, Boxing.
+Why do I have Rust
+Why do I have Rust
+errors? Oh, Neptune uses Rust,
+errors? Oh, Neptune uses Rust,
+huh? So, this is probably like a login
+thing. Okay, I like Neptune less because
+thing. Okay, I like Neptune less because
+Rust
+See if we can get Neptune to just
+start. Is this like all of Neptune right
+start. Is this like all of Neptune right
+now?
+No, we have Neptune working here.
+Python API call
+Python API call
+failed. Well, that
+failed. Well, that
+sucks. I haven't tested the wand in a
+sucks. I haven't tested the wand in a
+while. Does it work?
+like really obnoxious.
+Let me do this.
+The heck is this? CFI back end.
+The heck is this? CFI back end.
+Oh.
+Oh.
+Uh, probably just install CFFI,
+right?
+right?
+Okay, that was a little silly of me.
+Boom. And if this works, then I go for
+Boom. And if this works, then I go for
+breakfast and I will be back for the
+breakfast and I will be back for the
+whole rest of the day
+whole rest of the day
+thereafter.
+thereafter.
+650k. Lovely.
+Cool. So, we now have this seeming to be
+running. Is it stuck? No, we're
+good. So, this will run a sweep and then
+good. So, this will run a sweep and then
+I will be be uh I will be back after
+I will be be uh I will be back after
+breakfast and we will continue working
+breakfast and we will continue working
+on all of the pre-release stuff. If
+on all of the pre-release stuff. If
+Spencer's around, maybe we'll do some
+Spencer's around, maybe we'll do some
+stuff on GPU drive. If Captain's around,
+stuff on GPU drive. If Captain's around,
+maybe we'll do stuff on impulse wars.
+maybe we'll do stuff on impulse wars.
+But generally, it's going to be a cycle
+But generally, it's going to be a cycle
+of like have sweeps going in the
+of like have sweeps going in the
+background, make sure that the results
+background, make sure that the results
+are good, keep improving stuff, and then
+are good, keep improving stuff, and then
+like keep just simplifying,
+like keep just simplifying,
+streamlining, error checking all the
+streamlining, error checking all the
+stuff in main puffer lib. Uh yeah, so
+stuff in main puffer lib. Uh yeah, so
+thank you and I will be Oh, one thing
+thank you and I will be Oh, one thing
+before I go. Did we hit 2k stars
+before I go. Did we hit 2k stars
+officially?
+one star off of 2K. Start it if you
+one star off of 2K. Start it if you
+haven't. All right. Thanks.

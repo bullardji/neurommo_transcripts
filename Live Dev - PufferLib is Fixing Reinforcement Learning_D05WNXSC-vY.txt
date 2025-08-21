@@ -1,0 +1,1459 @@
+Kind: captions
+Language: en
+We're back
+live. Just plug in this watch and then
+live. Just plug in this watch and then
+we'll uh we'll get to what we're doing.
+Okay. Whatever.
+I think this is just going to be like a
+I think this is just going to be like a
+chill chill and
+chill chill and
+debug kind of a vibe right
+now. Get the dev branch working.
+Hey
+Ben
+weird. Yeah, this data looks fine.
+Um, so what's exactly wrong with this
+Um, so what's exactly wrong with this
+thing? This seems fine to me.
+Is this supposed to be
+minus? That seems very wrong.
+Oh, it is
+backwards.
+So that's still slow.
+Ah, I think I
+Ah, I think I
+know. Saw the big
+know. Saw the big
+merge. Yellow's interesting. You do any
+merge. Yellow's interesting. You do any
+preliminary
+preliminary
+testing? Uh, yeah, it seemed like it
+testing? Uh, yeah, it seemed like it
+helped a little bit with Breakout. I'm
+helped a little bit with Breakout. I'm
+not super set on it, but that cosign and
+not super set on it, but that cosign and
+kneeling, Muan, there's a whole bunch of
+kneeling, Muan, there's a whole bunch of
+stuff in there. I'm just working on like
+stuff in there. I'm just working on like
+making it all actually function together
+making it all actually function together
+because I had to merge that with like um
+because I had to merge that with like um
+a dev branch that had advanced a little
+a dev branch that had advanced a little
+bit. I also made a threading based um
+bit. I also made a threading based um
+vectorzation back end, but that's not
+vectorzation back end, but that's not
+really going to be useful until Python
+really going to be useful until Python
+314, and that's assuming that they
+314, and that's assuming that they
+actually get it right in
+actually get it right in
+314. So, yeah.
+What the heck is screwing this up so
+badly?
+Crazy. We don't have like stupid
+Crazy. We don't have like stupid
+hyperparameters, do we?
+No. Testing heavy ball. Yeah, I uh I
+No. Testing heavy ball. Yeah, I uh I
+have Muan in place. Muan seems
+have Muan in place. Muan seems
+chill. I mean, it seems like it can't
+chill. I mean, it seems like it can't
+really hurt and it's uh it doesn't
+really hurt and it's uh it doesn't
+really add any per overhead over at
+really add any per overhead over at
+Adam, so it's worth running. Like, I'm
+Adam, so it's worth running. Like, I'm
+making it so you can just sweep
+making it so you can just sweep
+everything. So, that's what we're going
+everything. So, that's what we're going
+to do.
+Now, you would think that this would be
+Now, you would think that this would be
+the detach or something, but I don't
+the detach or something, but I don't
+know what the heck it is making this so
+know what the heck it is making this so
+slow.
+I'm working on it, but this is like a
+I'm working on it, but this is like a
+massive
+massive
+thing. I don't know what the heck I've
+thing. I don't know what the heck I've
+screwed up in this merge that's making
+screwed up in this merge that's making
+everything slow either.
+Well, I mean, this is more that they got
+Well, I mean, this is more that they got
+desynced, right? So, I did stuff that
+desynced, right? So, I did stuff that
+people asked for on dev and I had this
+people asked for on dev and I had this
+other branch where I was doing all this
+other branch where I was doing all this
+J hacking.
+It's really the merge.
+This doesn't get used anyways.
+Not the
+optimizer. It's all in
+optimizer. It's all in
+learn somehow.
+It' be nice to know what the heck it is.
+How much do you
+eat? I don't know. More than I'd like.
+eat? I don't know. More than I'd like.
+Less than I should.
+Usually
+twice like eight or nine. I get good
+twice like eight or nine. I get good
+sleep.
+I mean, what is this? You got to take me
+I mean, what is this? You got to take me
+out to dinner or something first.
+What the heck did I screw up here,
+What the heck did I screw up here,
+man? That's
+ridiculous. Think on this.
+Like, you're not using the wrong LSTM,
+Like, you're not using the wrong LSTM,
+right? It's just literally a bad merge
+right? It's just literally a bad merge
+that did this.
+You have recurrent, you have recurrent
+You have recurrent, you have recurrent
+cell,
+right?
+self.recurrent, it's called on
+this decode
+this decode
+actions gives you logits and
+values. Put observations gives you
+hidden. This all looks correct to me.
+Sh messaging
+Okay. I'm trying to think of like stuff
+Okay. I'm trying to think of like stuff
+I've ended up screwing up like this
+I've ended up screwing up like this
+before.
+Yeah, that's annoying.
+Maybe it's in the losses
+somewhere. No, I don't see redundant
+somewhere. No, I don't see redundant
+losses. Let's see redundant losses.
+Is this indented too
+far? Should be aligned with this,
+far? Should be aligned with this,
+right? And it
+is. It's a loss model scaler.
+Now it lost the
+scaler, man.
+Maybe I can just see the
+uh maybe I can see the diff.
+This file doesn't
+This file doesn't
+matter. You got this
+diff. You did up the batch size.
+diff. You did up the batch size.
+Doesn't
+matter.
+Positive. Same
+Positive. Same
+size.
+CUDA. Your
+encoder. Got your
+encoder. Got your
+decoder.
+Let's test. So I guess it's in clean
+Let's test. So I guess it's in clean
+puff somewhere.
+Not seeing anything yet.
+Back down
+receive. Well, our eval should be the
+receive. Well, our eval should be the
+same. A better training.
+returns as B
+returns. If LSTMH is
+none, forward
+none, forward
+train. Unpack
+these. Um
+Something's got to get like be getting
+Something's got to get like be getting
+broadcasted or something stupid, right?
+broadcasted or something stupid, right?
+I don't know what else it could possibly
+be. Like some stupid thing's getting
+be. Like some stupid thing's getting
+broadcasted. Like I I just don't know
+broadcasted. Like I I just don't know
+how else it would work. Oh, wait. You
+how else it would work. Oh, wait. You
+know what? Where is
+it? Found it, you bastard.
+Yeah, there you go. PieTorch is stupid,
+Yeah, there you go. PieTorch is stupid,
+guys. PieTorch is really stupid. If you
+guys. PieTorch is really stupid. If you
+just like if you forget to compress a
+just like if you forget to compress a
+dimension, it'll just
+dimension, it'll just
+broadcast and uh then you're you know
+broadcast and uh then you're you know
+you're doing some crazy operation that
+you're doing some crazy operation that
+doesn't even make
+doesn't even make
+sense. Okay, so that's back to training.
+sense. Okay, so that's back to training.
+At
+least we have a million things to make
+least we have a million things to make
+work, but this is the base.
+60-second solves are pretty cool.
+Ah, there we
+go. That's a funny workound.
+Okay, that's AM working.
+this. Yeah, this for
+train. It's going to feel so nice when
+train. It's going to feel so nice when
+this branch is just cleaned up.
+It's not going to finish today, though.
+It's not going to finish today, though.
+It's too much work. I'm going to try to
+It's too much work. I'm going to try to
+get it all to run, but it's not going to
+get it all to run, but it's not going to
+be pretty.
+Okay, that works.
+Oh yeah, these don't get flattened,
+Oh yeah, these don't get flattened,
+right?
+right?
+Yes,
+that's Yeah, this is why I screwed it up
+that's Yeah, this is why I screwed it up
+because it has to go like that.
+There you go. So that's P3
+working. Yep.
+Eat me.
+Ah,
+You have ends.
+the
+heck. Oh, I see.
+Okay, there's E3B
+running. Just
+running. Just
+missing. Diversity is all you
+missing. Diversity is all you
+need. Yay.
+No
+attribute. Okay, this is just because
+attribute. Okay, this is just because
+you need to pass some
+args.
+args.
+Oops. The heck. What's wrong with
+Oops. The heck. What's wrong with
+this? Oh,
+this? Oh,
+dummy. Perhaps you forgot a comma.
+It says
+state.
+Uh, do you not store
+state the heck?
+Um
+really Oh, I see.
+Yeah, you need this
+Yeah, you need this
+batch. Thank you. Got rid of the
+batch. Thank you. Got rid of the
+batching logic for no reason here.
+No attribute
+hidden really.
+compiling stuff.
+Okay, this one runs
+Okay, this one runs
+too. The only thing I haven't fixed is
+MUP. That one's a little
+MUP. That one's a little
+harder. I think the priority is just
+harder. I think the priority is just
+getting a sweep going, though.
+getting a sweep going, though.
+That should be the
+That should be the
+priority.
+Yeah. So this
+Okay, that seems good to
+Okay, that seems good to
+me. It's on
+false breakouts on a good sweep
+schedule. have anything stupid
+schedule. have anything stupid
+set. Oh, policy hidden
+set. Oh, policy hidden
+size.
+Yeah. Yeah, this
+Yeah. Yeah, this
+works well.
+Okay, that's like mostly
+Okay, that's like mostly
+stableish. I mean, it has all the fixes
+stableish. I mean, it has all the fixes
+in it and they
+in it and they
+run. Let's see what we have on our
+run. Let's see what we have on our
+sweeps.
+Oh, you know, our variable horizon
+Oh, you know, our variable horizon
+actually did pretty
+actually did pretty
+well. Got 93 at the
+well. Got 93 at the
+end. 93
+versus 88.
+versus 88.
+Really? I think that's pretty damn good.
+Really? I think that's pretty damn good.
+Okay.
+Okay.
+You know, our our algorithm is actually
+You know, our our algorithm is actually
+starting to do stuff. That's nice to
+starting to do stuff. That's nice to
+know.
+I know I installed
+Muan. I think that's imported still.
+I know what that is.
+Oh, you know, one thing I
+Oh, you know, one thing I
+realized, I have to fix the uh the start
+time. Yeah, I got to fix the start time.
+Let's see if that fixes the uh the
+Let's see if that fixes the uh the
+profile just moving into there.
+It
+doesn't. Yeah.
+That's a
+problem. Okay. Well, then what we'll do
+problem. Okay. Well, then what we'll do
+is we'll do
+is we'll do
+two two separate
+runs. Okay. So, this should start
+runs. Okay. So, this should start
+immediately now,
+right? Yeah. So this starts
+immediately. So this is what we'll
+do. This one will not sweep the policy.
+So this sweep will be called mu on
+This other sweep is going to be
+Adam so that we don't have the uh the
+Adam so that we don't have the uh the
+compile overhead.
+So this is now
+Adam kind of sweeps everything.
+Good.
+Cool. That is
+Cool. That is
+two two sweeps up and
+running.
+running.
+Right. has two sweeps up and
+running. Ridiculously fast as
+running. Ridiculously fast as
+well. Can we just take a moment to
+well. Can we just take a moment to
+appreciate that these are probably going
+appreciate that these are probably going
+to run somewhere in the realm of like I
+to run somewhere in the realm of like I
+don't know just shy of 10 billion steps
+don't know just shy of 10 billion steps
+an hour total worth of sweeps with a
+an hour total worth of sweeps with a
+grand total of two
+grand total of two
+GPUs. That's pretty solid.
+Promote your work
+Promote your work
+guys. So people use
+it. Check this out. Decent little
+it. Check this out. Decent little
+repo. Haven't had any major issues so
+repo. Haven't had any major issues so
+far.
+Okay, so that's uh those are our sweeps.
+Okay, so that's uh those are our sweeps.
+Let me just make sure they're actually
+running. We'll see if we get anything
+running. We'll see if we get anything
+cool out of these. I mean, I think we
+cool out of these. I mean, I think we
+should at least get a little bit of a
+should at least get a little bit of a
+performance bump just because we've
+performance bump just because we've
+we've also made stuff faster in the
+we've also made stuff faster in the
+process. So, I mean, this isn't going to
+process. So, I mean, this isn't going to
+be apples to apples, but I think Muan's
+be apples to apples, but I think Muan's
+probably a good idea. You know, this is
+probably a good idea. You know, this is
+probably a good idea. So, I think we
+probably a good idea. So, I think we
+should be good with both of
+should be good with both of
+these. Anybody yammering at me in dev
+these. Anybody yammering at me in dev
+over stuff I broke
+Why do I think I misspelled
+empirical? I didn't. Just
+tired. Cool.
+Nice. Removed update grid cell code was
+Nice. Removed update grid cell code was
+what was
+what was
+unstable fixed entities. Yeah. So the
+unstable fixed entities. Yeah. So the
+suggestion I gave him worked for that.
+suggestion I gave him worked for that.
+Good.
+Anybody have anything
+Anybody have anything
+else that they want looked at at the
+else that they want looked at at the
+moment? I'm just going through
+moment? I'm just going through
+contributor stuff
+contributor stuff
+here. This is nice that BET did this.
+here. This is nice that BET did this.
+Just having like our own fast version of
+Just having like our own fast version of
+Cartpole that doesn't have other
+Cartpole that doesn't have other
+dependencies as like a test dem. This is
+dependencies as like a test dem. This is
+really nice. Good job,
+B. If you're new to RL, even something
+B. If you're new to RL, even something
+like this, like a simple like classic N,
+like this, like a simple like classic N,
+uh, no dependencies, fast, you know,
+uh, no dependencies, fast, you know,
+simple code like this one is, um, is
+simple code like this one is, um, is
+actually very useful. You know, we can
+actually very useful. You know, we can
+always run these to like test if new
+always run these to like test if new
+stuff, new things are broken. You can
+stuff, new things are broken. You can
+get them to train in like 5 seconds.
+get them to train in like 5 seconds.
+Stuff like this is nice. And then
+Stuff like this is nice. And then
+obviously at the high end you have stuff
+obviously at the high end you have stuff
+like this which is like a 7,000 some odd
+like this which is like a 7,000 some odd
+line
+PREG. This is good.
+PREG. This is good.
+Okay. I think we have everything
+Okay. I think we have everything
+set.
+set.
+So, I guess maybe let's just uh I'll go
+So, I guess maybe let's just uh I'll go
+through some of my thoughts and my plans
+through some of my thoughts and my plans
+for all of this stuff.
+for all of this stuff.
+uh the purpose of what I was doing today
+uh the purpose of what I was doing today
+and they're 10 hours of bods from today
+and they're 10 hours of bods from today
+uh from all you know all the stuff I was
+uh from all you know all the stuff I was
+doing but the main goal of what I wanted
+doing but the main goal of what I wanted
+to do today was to just like go through
+to do today was to just like go through
+all the stuff that is commonly used in
+all the stuff that is commonly used in
+the rest of AI that's been popularized
+the rest of AI that's been popularized
+over the last several years that RL has
+over the last several years that RL has
+just not really picked up on. So, you
+just not really picked up on. So, you
+know, we got cosine and kneeling, we got
+know, we got cosine and kneeling, we got
+the new
+the new
+optimizer, we messed a little bit with
+optimizer, we messed a little bit with
+MUP,
+MUP,
+um, you know, several other tricks in
+um, you know, several other tricks in
+there as
+there as
+well,
+Gelloo's. The goal was just to like
+Gelloo's. The goal was just to like
+modernize a little bit, right, and make
+modernize a little bit, right, and make
+sure we weren't missing out on anything
+sure we weren't missing out on anything
+obvious. I think we found some stuff
+obvious. I think we found some stuff
+that will probably give us, you know, a
+that will probably give us, you know, a
+few small improvements here and there.
+few small improvements here and there.
+Uh, Muan will probably be
+Uh, Muan will probably be
+good. You know, maybe the activations
+good. You know, maybe the activations
+matter, maybe they don't. We'll
+matter, maybe they don't. We'll
+see. We still haven't done architecture
+see. We still haven't done architecture
+work for the main reason being just that
+work for the main reason being just that
+um it's a little tricky in RL because
+um it's a little tricky in RL because
+you want the networks to run so fast.
+you want the networks to run so fast.
+Data is really king. A lot of these
+Data is really king. A lot of these
+problems, at least the test problems are
+problems, at least the test problems are
+pretty simple. So like when you start
+pretty simple. So like when you start
+slowing the network down,
+slowing the network down,
+uh you really don't do yourself any
+uh you really don't do yourself any
+favors. And uh the main thing is you
+favors. And uh the main thing is you
+just need to get lots of small batches
+just need to get lots of small batches
+of data through the
+of data through the
+optimizer. But we'll do that stuff more
+optimizer. But we'll do that stuff more
+when we get on to more complex M. So the
+when we get on to more complex M. So the
+hope is that with all these different
+hope is that with all these different
+methods, we're going to be able to run a
+methods, we're going to be able to run a
+bunch of experiments. We're going to be
+bunch of experiments. We're going to be
+able to confirm which of these actually
+able to confirm which of these actually
+matter, which of these don't. Hopefully,
+matter, which of these don't. Hopefully,
+we get to delete a few of these. You
+we get to delete a few of these. You
+know, if E3B doesn't work, we'll get rid
+know, if E3B doesn't work, we'll get rid
+of it. Um, I think it might work. Uh,
+of it. Um, I think it might work. Uh,
+diversity is all you need. We'll see
+diversity is all you need. We'll see
+whether it is in fact all you need. Uh,
+whether it is in fact all you need. Uh,
+we'll either get rid of it or keep it or
+we'll either get rid of it or keep it or
+integrate it properly or something like
+integrate it properly or something like
+that, right? And there are a few other
+that, right? And there are a few other
+sort of methods around that are a little
+sort of methods around that are a little
+larger, but I think this covered most of
+larger, but I think this covered most of
+the nuts and bolts that I wanted to deal
+the nuts and bolts that I wanted to deal
+with
+with
+today. And hopefully it should get us a
+today. And hopefully it should get us a
+little bit of a faster training speed
+little bit of a faster training speed
+run, if you will, on uh on Breakout. So,
+run, if you will, on uh on Breakout. So,
+going forward, there's still the big uh
+going forward, there's still the big uh
+advantage estimation algorithm that I've
+advantage estimation algorithm that I've
+been working on. That's still not fully
+been working on. That's still not fully
+done. I don't think that's going to be
+done. I don't think that's going to be
+fully done until we start running
+fully done until we start running
+benchmarks on some harder Ms. So maybe
+benchmarks on some harder Ms. So maybe
+we'll do that next. Try to get some
+we'll do that next. Try to get some
+harder M's in as benchmarks and start
+harder M's in as benchmarks and start
+trying to like really get these methods
+trying to like really get these methods
+working on those as well. Um but I think
+working on those as well. Um but I think
+that generally we're in a pretty good
+that generally we're in a pretty good
+spot for the next update. Now, I want
+spot for the next update. Now, I want
+the next update to be here's a
+the next update to be here's a
+collection of stuff we've done to
+collection of stuff we've done to
+improve
+improve
+uh training and algorithm side stuff in
+uh training and algorithm side stuff in
+puffer lib. You can get really really
+puffer lib. You can get really really
+fast training results on a bunch of
+fast training results on a bunch of
+different M's stuff is more stable. All
+different M's stuff is more stable. All
+of that. I still don't know what I'm
+of that. I still don't know what I'm
+going to do about mu because it doesn't
+going to do about mu because it doesn't
+work with muon out of the box. I might
+work with muon out of the box. I might
+have to make some adjustments there so
+have to make some adjustments there so
+that it
+that it
+does because that could be
+does because that could be
+useful. It's going to depend, right?
+useful. It's going to depend, right?
+That's going to
+That's going to
+depend. But anyways, I think that's
+depend. But anyways, I think that's
+going to be about it for today. I'm
+going to be about it for today. I'm
+going to just go answer a few
+going to just go answer a few
+messages. Um, send a pe some people some
+messages. Um, send a pe some people some
+notifications. Hey, you know, we're
+notifications. Hey, you know, we're
+working on all this
+working on all this
+stuff. And then tomorrow, I'll probably
+stuff. And then tomorrow, I'll probably
+be on streaming a bit in the afternoon.
+be on streaming a bit in the afternoon.
+I usually go for a somewhat longer run
+I usually go for a somewhat longer run
+in the mornings on
+in the mornings on
+Sundays. Uh but yeah, I'm probably going
+Sundays. Uh but yeah, I'm probably going
+to be doing just like some environment
+to be doing just like some environment
+bindings and maybe tweaking some
+bindings and maybe tweaking some
+experiments, right? Getting the results
+experiments, right? Getting the results
+of these experiments that they've run
+of these experiments that they've run
+that we've run and uh yeah, going from
+that we've run and uh yeah, going from
+there. So, uh for folks
+watching, all of my stuff is on
+puffer.ai. If you're interested in the
+puffer.ai. If you're interested in the
+project, you can check out our demos
+project, you can check out our demos
+right here. star the GitHub to help us
+right here. star the GitHub to help us
+out. That really helps us. If you want
+out. That really helps us. If you want
+to get involved with development or just
+to get involved with development or just
+have some questions that you want
+have some questions that you want
+answered by the community or
+answered by the community or
+myself,
+myself,
+discord.gg/puffer. If you're looking for
+discord.gg/puffer. If you're looking for
+more RL content, we've got a blog here
+more RL content, we've got a blog here
+with a really nice quick start guide and
+with a really nice quick start guide and
+a few more cutting edge things as well.
+a few more cutting edge things as well.
+And for more, you can follow me on X
+And for more, you can follow me on X
+where there's some articles that you
+where there's some articles that you
+can't find anywhere else. All RL
+can't find anywhere else. All RL
+content. Thanks, and I will see you
+content. Thanks, and I will see you
+tomorrow.
+tomorrow.
+Enjoy your
+
+Kind: captions
+Language: en
+We're back
+live. Just plug in this watch and then
+live. Just plug in this watch and then
+we'll uh we'll get to what we're doing.
+Okay. Whatever.
+I think this is just going to be like a
+I think this is just going to be like a
+chill chill and
+chill chill and
+debug kind of a vibe right
+now. Get the dev branch working.
+Hey
+Ben
+weird. Yeah, this data looks fine.
+Um, so what's exactly wrong with this
+Um, so what's exactly wrong with this
+thing? This seems fine to me.
+Is this supposed to be
+minus? That seems very wrong.
+Oh, it is
+backwards.
+So that's still slow.
+Ah, I think I
+Ah, I think I
+know. Saw the big
+know. Saw the big
+merge. Yellow's interesting. You do any
+merge. Yellow's interesting. You do any
+preliminary
+preliminary
+testing? Uh, yeah, it seemed like it
+testing? Uh, yeah, it seemed like it
+helped a little bit with Breakout. I'm
+helped a little bit with Breakout. I'm
+not super set on it, but that cosign and
+not super set on it, but that cosign and
+kneeling, Muan, there's a whole bunch of
+kneeling, Muan, there's a whole bunch of
+stuff in there. I'm just working on like
+stuff in there. I'm just working on like
+making it all actually function together
+making it all actually function together
+because I had to merge that with like um
+because I had to merge that with like um
+a dev branch that had advanced a little
+a dev branch that had advanced a little
+bit. I also made a threading based um
+bit. I also made a threading based um
+vectorzation back end, but that's not
+vectorzation back end, but that's not
+really going to be useful until Python
+really going to be useful until Python
+314, and that's assuming that they
+314, and that's assuming that they
+actually get it right in
+actually get it right in
+314. So, yeah.
+What the heck is screwing this up so
+badly?
+Crazy. We don't have like stupid
+Crazy. We don't have like stupid
+hyperparameters, do we?
+No. Testing heavy ball. Yeah, I uh I
+No. Testing heavy ball. Yeah, I uh I
+have Muan in place. Muan seems
+have Muan in place. Muan seems
+chill. I mean, it seems like it can't
+chill. I mean, it seems like it can't
+really hurt and it's uh it doesn't
+really hurt and it's uh it doesn't
+really add any per overhead over at
+really add any per overhead over at
+Adam, so it's worth running. Like, I'm
+Adam, so it's worth running. Like, I'm
+making it so you can just sweep
+making it so you can just sweep
+everything. So, that's what we're going
+everything. So, that's what we're going
+to do.
+Now, you would think that this would be
+Now, you would think that this would be
+the detach or something, but I don't
+the detach or something, but I don't
+know what the heck it is making this so
+know what the heck it is making this so
+slow.
+I'm working on it, but this is like a
+I'm working on it, but this is like a
+massive
+massive
+thing. I don't know what the heck I've
+thing. I don't know what the heck I've
+screwed up in this merge that's making
+screwed up in this merge that's making
+everything slow either.
+Well, I mean, this is more that they got
+Well, I mean, this is more that they got
+desynced, right? So, I did stuff that
+desynced, right? So, I did stuff that
+people asked for on dev and I had this
+people asked for on dev and I had this
+other branch where I was doing all this
+other branch where I was doing all this
+J hacking.
+It's really the merge.
+This doesn't get used anyways.
+Not the
+optimizer. It's all in
+optimizer. It's all in
+learn somehow.
+It' be nice to know what the heck it is.
+How much do you
+eat? I don't know. More than I'd like.
+eat? I don't know. More than I'd like.
+Less than I should.
+Usually
+twice like eight or nine. I get good
+twice like eight or nine. I get good
+sleep.
+I mean, what is this? You got to take me
+I mean, what is this? You got to take me
+out to dinner or something first.
+What the heck did I screw up here,
+What the heck did I screw up here,
+man? That's
+ridiculous. Think on this.
+Like, you're not using the wrong LSTM,
+Like, you're not using the wrong LSTM,
+right? It's just literally a bad merge
+right? It's just literally a bad merge
+that did this.
+You have recurrent, you have recurrent
+You have recurrent, you have recurrent
+cell,
+right?
+self.recurrent, it's called on
+this decode
+this decode
+actions gives you logits and
+values. Put observations gives you
+hidden. This all looks correct to me.
+Sh messaging
+Okay. I'm trying to think of like stuff
+Okay. I'm trying to think of like stuff
+I've ended up screwing up like this
+I've ended up screwing up like this
+before.
+Yeah, that's annoying.
+Maybe it's in the losses
+somewhere. No, I don't see redundant
+somewhere. No, I don't see redundant
+losses. Let's see redundant losses.
+Is this indented too
+far? Should be aligned with this,
+far? Should be aligned with this,
+right? And it
+is. It's a loss model scaler.
+Now it lost the
+scaler, man.
+Maybe I can just see the
+uh maybe I can see the diff.
+This file doesn't
+This file doesn't
+matter. You got this
+diff. You did up the batch size.
+diff. You did up the batch size.
+Doesn't
+matter.
+Positive. Same
+Positive. Same
+size.
+CUDA. Your
+encoder. Got your
+encoder. Got your
+decoder.
+Let's test. So I guess it's in clean
+Let's test. So I guess it's in clean
+puff somewhere.
+Not seeing anything yet.
+Back down
+receive. Well, our eval should be the
+receive. Well, our eval should be the
+same. A better training.
+returns as B
+returns. If LSTMH is
+none, forward
+none, forward
+train. Unpack
+these. Um
+Something's got to get like be getting
+Something's got to get like be getting
+broadcasted or something stupid, right?
+broadcasted or something stupid, right?
+I don't know what else it could possibly
+be. Like some stupid thing's getting
+be. Like some stupid thing's getting
+broadcasted. Like I I just don't know
+broadcasted. Like I I just don't know
+how else it would work. Oh, wait. You
+how else it would work. Oh, wait. You
+know what? Where is
+it? Found it, you bastard.
+Yeah, there you go. PieTorch is stupid,
+Yeah, there you go. PieTorch is stupid,
+guys. PieTorch is really stupid. If you
+guys. PieTorch is really stupid. If you
+just like if you forget to compress a
+just like if you forget to compress a
+dimension, it'll just
+dimension, it'll just
+broadcast and uh then you're you know
+broadcast and uh then you're you know
+you're doing some crazy operation that
+you're doing some crazy operation that
+doesn't even make
+doesn't even make
+sense. Okay, so that's back to training.
+sense. Okay, so that's back to training.
+At
+least we have a million things to make
+least we have a million things to make
+work, but this is the base.
+60-second solves are pretty cool.
+Ah, there we
+go. That's a funny workound.
+Okay, that's AM working.
+this. Yeah, this for
+train. It's going to feel so nice when
+train. It's going to feel so nice when
+this branch is just cleaned up.
+It's not going to finish today, though.
+It's not going to finish today, though.
+It's too much work. I'm going to try to
+It's too much work. I'm going to try to
+get it all to run, but it's not going to
+get it all to run, but it's not going to
+be pretty.
+Okay, that works.
+Oh yeah, these don't get flattened,
+Oh yeah, these don't get flattened,
+right?
+right?
+Yes,
+that's Yeah, this is why I screwed it up
+that's Yeah, this is why I screwed it up
+because it has to go like that.
+There you go. So that's P3
+working. Yep.
+Eat me.
+Ah,
+You have ends.
+the
+heck. Oh, I see.
+Okay, there's E3B
+running. Just
+running. Just
+missing. Diversity is all you
+missing. Diversity is all you
+need. Yay.
+No
+attribute. Okay, this is just because
+attribute. Okay, this is just because
+you need to pass some
+args.
+args.
+Oops. The heck. What's wrong with
+Oops. The heck. What's wrong with
+this? Oh,
+this? Oh,
+dummy. Perhaps you forgot a comma.
+It says
+state.
+Uh, do you not store
+state the heck?
+Um
+really Oh, I see.
+Yeah, you need this
+Yeah, you need this
+batch. Thank you. Got rid of the
+batch. Thank you. Got rid of the
+batching logic for no reason here.
+No attribute
+hidden really.
+compiling stuff.
+Okay, this one runs
+Okay, this one runs
+too. The only thing I haven't fixed is
+MUP. That one's a little
+MUP. That one's a little
+harder. I think the priority is just
+harder. I think the priority is just
+getting a sweep going, though.
+getting a sweep going, though.
+That should be the
+That should be the
+priority.
+Yeah. So this
+Okay, that seems good to
+Okay, that seems good to
+me. It's on
+false breakouts on a good sweep
+schedule. have anything stupid
+schedule. have anything stupid
+set. Oh, policy hidden
+set. Oh, policy hidden
+size.
+Yeah. Yeah, this
+Yeah. Yeah, this
+works well.
+Okay, that's like mostly
+Okay, that's like mostly
+stableish. I mean, it has all the fixes
+stableish. I mean, it has all the fixes
+in it and they
+in it and they
+run. Let's see what we have on our
+run. Let's see what we have on our
+sweeps.
+Oh, you know, our variable horizon
+Oh, you know, our variable horizon
+actually did pretty
+actually did pretty
+well. Got 93 at the
+well. Got 93 at the
+end. 93
+versus 88.
+versus 88.
+Really? I think that's pretty damn good.
+Really? I think that's pretty damn good.
+Okay.
+Okay.
+You know, our our algorithm is actually
+You know, our our algorithm is actually
+starting to do stuff. That's nice to
+starting to do stuff. That's nice to
+know.
+I know I installed
+Muan. I think that's imported still.
+I know what that is.
+Oh, you know, one thing I
+Oh, you know, one thing I
+realized, I have to fix the uh the start
+time. Yeah, I got to fix the start time.
+Let's see if that fixes the uh the
+Let's see if that fixes the uh the
+profile just moving into there.
+It
+doesn't. Yeah.
+That's a
+problem. Okay. Well, then what we'll do
+problem. Okay. Well, then what we'll do
+is we'll do
+is we'll do
+two two separate
+runs. Okay. So, this should start
+runs. Okay. So, this should start
+immediately now,
+right? Yeah. So this starts
+immediately. So this is what we'll
+do. This one will not sweep the policy.
+So this sweep will be called mu on
+This other sweep is going to be
+Adam so that we don't have the uh the
+Adam so that we don't have the uh the
+compile overhead.
+So this is now
+Adam kind of sweeps everything.
+Good.
+Cool. That is
+Cool. That is
+two two sweeps up and
+running.
+running.
+Right. has two sweeps up and
+running. Ridiculously fast as
+running. Ridiculously fast as
+well. Can we just take a moment to
+well. Can we just take a moment to
+appreciate that these are probably going
+appreciate that these are probably going
+to run somewhere in the realm of like I
+to run somewhere in the realm of like I
+don't know just shy of 10 billion steps
+don't know just shy of 10 billion steps
+an hour total worth of sweeps with a
+an hour total worth of sweeps with a
+grand total of two
+grand total of two
+GPUs. That's pretty solid.
+Promote your work
+Promote your work
+guys. So people use
+it. Check this out. Decent little
+it. Check this out. Decent little
+repo. Haven't had any major issues so
+repo. Haven't had any major issues so
+far.
+Okay, so that's uh those are our sweeps.
+Okay, so that's uh those are our sweeps.
+Let me just make sure they're actually
+running. We'll see if we get anything
+running. We'll see if we get anything
+cool out of these. I mean, I think we
+cool out of these. I mean, I think we
+should at least get a little bit of a
+should at least get a little bit of a
+performance bump just because we've
+performance bump just because we've
+we've also made stuff faster in the
+we've also made stuff faster in the
+process. So, I mean, this isn't going to
+process. So, I mean, this isn't going to
+be apples to apples, but I think Muan's
+be apples to apples, but I think Muan's
+probably a good idea. You know, this is
+probably a good idea. You know, this is
+probably a good idea. So, I think we
+probably a good idea. So, I think we
+should be good with both of
+should be good with both of
+these. Anybody yammering at me in dev
+these. Anybody yammering at me in dev
+over stuff I broke
+Why do I think I misspelled
+empirical? I didn't. Just
+tired. Cool.
+Nice. Removed update grid cell code was
+Nice. Removed update grid cell code was
+what was
+what was
+unstable fixed entities. Yeah. So the
+unstable fixed entities. Yeah. So the
+suggestion I gave him worked for that.
+suggestion I gave him worked for that.
+Good.
+Anybody have anything
+Anybody have anything
+else that they want looked at at the
+else that they want looked at at the
+moment? I'm just going through
+moment? I'm just going through
+contributor stuff
+contributor stuff
+here. This is nice that BET did this.
+here. This is nice that BET did this.
+Just having like our own fast version of
+Just having like our own fast version of
+Cartpole that doesn't have other
+Cartpole that doesn't have other
+dependencies as like a test dem. This is
+dependencies as like a test dem. This is
+really nice. Good job,
+B. If you're new to RL, even something
+B. If you're new to RL, even something
+like this, like a simple like classic N,
+like this, like a simple like classic N,
+uh, no dependencies, fast, you know,
+uh, no dependencies, fast, you know,
+simple code like this one is, um, is
+simple code like this one is, um, is
+actually very useful. You know, we can
+actually very useful. You know, we can
+always run these to like test if new
+always run these to like test if new
+stuff, new things are broken. You can
+stuff, new things are broken. You can
+get them to train in like 5 seconds.
+get them to train in like 5 seconds.
+Stuff like this is nice. And then
+Stuff like this is nice. And then
+obviously at the high end you have stuff
+obviously at the high end you have stuff
+like this which is like a 7,000 some odd
+like this which is like a 7,000 some odd
+line
+PREG. This is good.
+PREG. This is good.
+Okay. I think we have everything
+Okay. I think we have everything
+set.
+set.
+So, I guess maybe let's just uh I'll go
+So, I guess maybe let's just uh I'll go
+through some of my thoughts and my plans
+through some of my thoughts and my plans
+for all of this stuff.
+for all of this stuff.
+uh the purpose of what I was doing today
+uh the purpose of what I was doing today
+and they're 10 hours of bods from today
+and they're 10 hours of bods from today
+uh from all you know all the stuff I was
+uh from all you know all the stuff I was
+doing but the main goal of what I wanted
+doing but the main goal of what I wanted
+to do today was to just like go through
+to do today was to just like go through
+all the stuff that is commonly used in
+all the stuff that is commonly used in
+the rest of AI that's been popularized
+the rest of AI that's been popularized
+over the last several years that RL has
+over the last several years that RL has
+just not really picked up on. So, you
+just not really picked up on. So, you
+know, we got cosine and kneeling, we got
+know, we got cosine and kneeling, we got
+the new
+the new
+optimizer, we messed a little bit with
+optimizer, we messed a little bit with
+MUP,
+MUP,
+um, you know, several other tricks in
+um, you know, several other tricks in
+there as
+there as
+well,
+Gelloo's. The goal was just to like
+Gelloo's. The goal was just to like
+modernize a little bit, right, and make
+modernize a little bit, right, and make
+sure we weren't missing out on anything
+sure we weren't missing out on anything
+obvious. I think we found some stuff
+obvious. I think we found some stuff
+that will probably give us, you know, a
+that will probably give us, you know, a
+few small improvements here and there.
+few small improvements here and there.
+Uh, Muan will probably be
+Uh, Muan will probably be
+good. You know, maybe the activations
+good. You know, maybe the activations
+matter, maybe they don't. We'll
+matter, maybe they don't. We'll
+see. We still haven't done architecture
+see. We still haven't done architecture
+work for the main reason being just that
+work for the main reason being just that
+um it's a little tricky in RL because
+um it's a little tricky in RL because
+you want the networks to run so fast.
+you want the networks to run so fast.
+Data is really king. A lot of these
+Data is really king. A lot of these
+problems, at least the test problems are
+problems, at least the test problems are
+pretty simple. So like when you start
+pretty simple. So like when you start
+slowing the network down,
+slowing the network down,
+uh you really don't do yourself any
+uh you really don't do yourself any
+favors. And uh the main thing is you
+favors. And uh the main thing is you
+just need to get lots of small batches
+just need to get lots of small batches
+of data through the
+of data through the
+optimizer. But we'll do that stuff more
+optimizer. But we'll do that stuff more
+when we get on to more complex M. So the
+when we get on to more complex M. So the
+hope is that with all these different
+hope is that with all these different
+methods, we're going to be able to run a
+methods, we're going to be able to run a
+bunch of experiments. We're going to be
+bunch of experiments. We're going to be
+able to confirm which of these actually
+able to confirm which of these actually
+matter, which of these don't. Hopefully,
+matter, which of these don't. Hopefully,
+we get to delete a few of these. You
+we get to delete a few of these. You
+know, if E3B doesn't work, we'll get rid
+know, if E3B doesn't work, we'll get rid
+of it. Um, I think it might work. Uh,
+of it. Um, I think it might work. Uh,
+diversity is all you need. We'll see
+diversity is all you need. We'll see
+whether it is in fact all you need. Uh,
+whether it is in fact all you need. Uh,
+we'll either get rid of it or keep it or
+we'll either get rid of it or keep it or
+integrate it properly or something like
+integrate it properly or something like
+that, right? And there are a few other
+that, right? And there are a few other
+sort of methods around that are a little
+sort of methods around that are a little
+larger, but I think this covered most of
+larger, but I think this covered most of
+the nuts and bolts that I wanted to deal
+the nuts and bolts that I wanted to deal
+with
+with
+today. And hopefully it should get us a
+today. And hopefully it should get us a
+little bit of a faster training speed
+little bit of a faster training speed
+run, if you will, on uh on Breakout. So,
+run, if you will, on uh on Breakout. So,
+going forward, there's still the big uh
+going forward, there's still the big uh
+advantage estimation algorithm that I've
+advantage estimation algorithm that I've
+been working on. That's still not fully
+been working on. That's still not fully
+done. I don't think that's going to be
+done. I don't think that's going to be
+fully done until we start running
+fully done until we start running
+benchmarks on some harder Ms. So maybe
+benchmarks on some harder Ms. So maybe
+we'll do that next. Try to get some
+we'll do that next. Try to get some
+harder M's in as benchmarks and start
+harder M's in as benchmarks and start
+trying to like really get these methods
+trying to like really get these methods
+working on those as well. Um but I think
+working on those as well. Um but I think
+that generally we're in a pretty good
+that generally we're in a pretty good
+spot for the next update. Now, I want
+spot for the next update. Now, I want
+the next update to be here's a
+the next update to be here's a
+collection of stuff we've done to
+collection of stuff we've done to
+improve
+improve
+uh training and algorithm side stuff in
+uh training and algorithm side stuff in
+puffer lib. You can get really really
+puffer lib. You can get really really
+fast training results on a bunch of
+fast training results on a bunch of
+different M's stuff is more stable. All
+different M's stuff is more stable. All
+of that. I still don't know what I'm
+of that. I still don't know what I'm
+going to do about mu because it doesn't
+going to do about mu because it doesn't
+work with muon out of the box. I might
+work with muon out of the box. I might
+have to make some adjustments there so
+have to make some adjustments there so
+that it
+that it
+does because that could be
+does because that could be
+useful. It's going to depend, right?
+useful. It's going to depend, right?
+That's going to
+That's going to
+depend. But anyways, I think that's
+depend. But anyways, I think that's
+going to be about it for today. I'm
+going to be about it for today. I'm
+going to just go answer a few
+going to just go answer a few
+messages. Um, send a pe some people some
+messages. Um, send a pe some people some
+notifications. Hey, you know, we're
+notifications. Hey, you know, we're
+working on all this
+working on all this
+stuff. And then tomorrow, I'll probably
+stuff. And then tomorrow, I'll probably
+be on streaming a bit in the afternoon.
+be on streaming a bit in the afternoon.
+I usually go for a somewhat longer run
+I usually go for a somewhat longer run
+in the mornings on
+in the mornings on
+Sundays. Uh but yeah, I'm probably going
+Sundays. Uh but yeah, I'm probably going
+to be doing just like some environment
+to be doing just like some environment
+bindings and maybe tweaking some
+bindings and maybe tweaking some
+experiments, right? Getting the results
+experiments, right? Getting the results
+of these experiments that they've run
+of these experiments that they've run
+that we've run and uh yeah, going from
+that we've run and uh yeah, going from
+there. So, uh for folks
+watching, all of my stuff is on
+puffer.ai. If you're interested in the
+puffer.ai. If you're interested in the
+project, you can check out our demos
+project, you can check out our demos
+right here. star the GitHub to help us
+right here. star the GitHub to help us
+out. That really helps us. If you want
+out. That really helps us. If you want
+to get involved with development or just
+to get involved with development or just
+have some questions that you want
+have some questions that you want
+answered by the community or
+answered by the community or
+myself,
+myself,
+discord.gg/puffer. If you're looking for
+discord.gg/puffer. If you're looking for
+more RL content, we've got a blog here
+more RL content, we've got a blog here
+with a really nice quick start guide and
+with a really nice quick start guide and
+a few more cutting edge things as well.
+a few more cutting edge things as well.
+And for more, you can follow me on X
+And for more, you can follow me on X
+where there's some articles that you
+where there's some articles that you
+can't find anywhere else. All RL
+can't find anywhere else. All RL
+content. Thanks, and I will see you
+content. Thanks, and I will see you
+tomorrow.
+tomorrow.
+Enjoy your

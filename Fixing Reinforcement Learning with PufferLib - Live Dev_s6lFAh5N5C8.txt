@@ -1,0 +1,2391 @@
+Kind: captions
+Language: en
+on a bit late this morning but uh we are
+here okay interesting so this
+here okay interesting so this
+actually we have parameters that seem to
+actually we have parameters that seem to
+solve
+breakout expensive solve but it is a
+solve and where's our Paro
+front right
+here this is not terrible right
+here this is not terrible right
+here but uh we know that we can solve
+here but uh we know that we can solve
+this like this
+this like this
+fast so I think what we're going to
+fast so I think what we're going to
+do hey
+do hey
+welcome not in
+welcome not in
+California if that's what you're asking
+California if that's what you're asking
+we'll be over the
+summer
+uh I think what we're going to do is
+uh I think what we're going to do is
+we're going to spend a good chunk of
+we're going to spend a good chunk of
+time today just really trying to
+time today just really trying to
+understand some of the quirks with
+understand some of the quirks with
+sweeps and figuring out some
+sweeps and figuring out some
+fixes yeah let's do that
+this so here's Spencers
+breakout and it looks like oh this is a
+breakout and it looks like oh this is a
+new sweep and he's
+new sweep and he's
+got ah no you see his new sweep here has
+got ah no you see his new sweep here has
+the same
+issue so we're able to get good stuff
+issue so we're able to get good stuff
+too but he's
+too but he's
+uh yeah his old sweep not so much
+maybe it's this
+one yes
+one yes
+so right here this experiment I wanted
+so right here this experiment I wanted
+to check these
+to check these
+parameters versus
+what we have
+now okay so this is a 1024 en
+run with a very high
+batch
+sense entropy
+lowish
+entropy uh a very weird
+entropy uh a very weird
+Lambda and not that weird I
+Lambda and not that weird I
+guess
+guess
+gamma actually this is not too
+gamma actually this is not too
+bad it's a little odd for breakout
+bad it's a little odd for breakout
+because you'd expect these to be
+because you'd expect these to be
+higher but um I mean I could see it and
+higher but um I mean I could see it and
+this learning rate
+Low Max gradient
+norm and then a very low value
+fun ah and four update
+fun ah and four update
+Epoch we get the mini batch SI very low
+Epoch we get the mini batch SI very low
+mini batch
+mini batch
+size and I
+size and I
+believe this is on r as well
+150 million total time
+steps this is supposed to work in like 5
+steps this is supposed to work in like 5
+minutes I believe
+and in the
+meantime I want to look at
+meantime I want to look at
+the plots for this
+okay so in
+particular the value loss
+particular the value loss
+here is very
+here is very
+high this is essentially no
+high this is essentially no
+value uh no value
+function so
+what happens to
+what happens to
+GAE with no value
+function should reduce to something
+function should reduce to something
+right
+to
+going to be a great Saturday I hope
+so I'd really like to get uh some good
+so I'd really like to get uh some good
+progress in on
+this okay so here
+this okay so here
+is the advantage formula
+right but hang on
+yeah this is it
+yeah this is it
+right so if both of these are set to a
+constant then this essentially reduces
+constant then this essentially reduces
+to discounted rewards right
+and let's see how
+ours so this is
+this is our curve
+this is our curve
+here at 80
+mil yeah
+and yeah we get the same exploding value
+and yeah we get the same exploding value
+loss so this
+loss so this
+is these parameters do somehow
+work possibly a bit unstable right we'll
+work possibly a bit unstable right we'll
+see if it actually solves fully but um
+these do
+work policy law Spike
+I'm trying to think why having a value
+I'm trying to think why having a value
+bu a value Base Line would actually hurt
+learning hey welcome
+mind dud this doesn't look like it
+mind dud this doesn't look like it
+perfectly reproduces the original but
+perfectly reproduces the original but
+there's a lot of variant in
+breakout so I'm pretty happy with this
+breakout so I'm pretty happy with this
+overall um especially given this is a f
+overall um especially given this is a f
+minute
+run 717
+run 717
+yes you can see it's still going up
+yes you can see it's still going up
+here now the question is why does this
+happen do I need to look at my J
+happen do I need to look at my J
+implementation
+if I set this to 0.5 right it'll break
+it we'll just
+compare and then we'll look at J in the
+compare and then we'll look at J in the
+meantime
+so this gets called from here and it
+so this gets called from here and it
+gets called
+gets called
+on dun's values rewards gamma
+on dun's values rewards gamma
+Lambda
+okay this is our
+implementation e
+where do they Define delta vs
+is this the case hang on
+I think that's how it
+worked me look at
+theirs poo Atari
+so this is the original clean RL
+so this is the original clean RL
+implementation
+so they say Delta
+so they say Delta
+is rewards plus gamma next
+values time next non okay minus value so
+values time next non okay minus value so
+this is they have this
+right yeah so they do this explicitly
+right yeah so they do this explicitly
+and then um I mean these terms
+and then um I mean these terms
+cancel but they explicit do this and
+cancel but they explicit do this and
+then advantages of
+then advantages of
+T is equal
+to Delta
+to Delta
+plus
+gamma it's not terminal
+the one question is I am missing the
+the one question is I am missing the
+last
+value
+H if not
+done oh hang
+done oh hang
+on is this similar
+performance
+wait now I'm
+confused look this is actually a very
+confused look this is actually a very
+similar curve
+similar curve
+right very Sim
+right very Sim
+curve how's the value
+function oh but the value loss is still
+function oh but the value loss is still
+up
+here why would the value LW still be up
+there e
+are our rewards not well
+scaled
+e 7 minus
+possibly the rewards just aren't
+possibly the rewards just aren't
+normalized
+brick index
+count
+seven points
+seven points
+Max let me say so minus 3
+Max let me say so minus 3
+* brick index
+probably this gets this goes to
+zero yeah so over seven
+something didn't work here because these
+something didn't work here because these
+numbers should no longer be the
+numbers should no longer be the
+same right
+uh unless maybe it just hasn't hit
+uh unless maybe it just hasn't hit
+anything in the second row yet that's
+anything in the second row yet that's
+weird
+no those definitely shouldn't match
+ah
+we
+go so uh this will change the hyper
+go so uh this will change the hyper
+parameters
+parameters
+obviously that are required but I just
+obviously that are required but I just
+want to see if this does anything with
+want to see if this does anything with
+the value function
+also do we have reward
+clipping or did they make it a rapper
+clipping or did they make it a rapper
+yeah they do make it a
+yeah they do make it a
+wrapper reward clipping is just you know
+wrapper reward clipping is just you know
+any reward above one goes to one any
+any reward above one goes to one any
+reward less than negative one goes to
+reward less than negative one goes to
+negative one you know clip the
+reward so they do have reward clipping
+reward so they do have reward clipping
+and then clip reward
+and then clip reward
+and I think they do this from
+sp3 but let's see if it actually does
+much uh they
+do wait
+do wait
+clip by its
+sign oh
+it literally converts it to zero
+it literally converts it to zero
+okay
+interesting interesting the curve looks
+interesting interesting the curve looks
+more stable maybe that's just
+more stable maybe that's just
+me why do you not use
+me why do you not use
+I have super Maven for single line Auto
+I have super Maven for single line Auto
+completes I mean I'd like they don't
+completes I mean I'd like they don't
+really do anything for me I don't like I
+really do anything for me I don't like I
+don't use AI to write full blocks of
+don't use AI to write full blocks of
+code it just writes bad
+code it just writes bad
+code I use uh super Maven for single
+code I use uh super Maven for single
+line completes so it's basically just a
+line completes so it's basically just a
+typing buff more than anything
+that's generally what I recommend as
+that's generally what I recommend as
+well AI is not better than yeah exactly
+I mean the researcher saying that it's
+I mean the researcher saying that it's
+like it's so good for writing code I've
+like it's so good for writing code I've
+read their code they don't know how to
+read their code they don't know how to
+code plain and simple the vast majority
+code plain and simple the vast majority
+of research code is just awful like
+of research code is just awful like
+truly truly awful like I don't even know
+truly truly awful like I don't even know
+how you warp your head around writing
+how you warp your head around writing
+code that bad level of awful
+so the value loss should be something
+so the value loss should be something
+here
+right is a value
+right is a value
+loss oh look at that
+High LEL program yep has ruined a
+High LEL program yep has ruined a
+lot I
+lot I
+agree it's why so much of the puffer Li
+agree it's why so much of the puffer Li
+code bases in C it's honestly just super
+code bases in C it's honestly just super
+chill and
+chill and
+easy okay interestingly the looks like
+easy okay interestingly the looks like
+the policy H our policy loss is still
+the policy H our policy loss is still
+good it's just the old
+but everything else roughly
+matches I mean the score is like a
+matches I mean the score is like a
+little bit worse but again we
+little bit worse but again we
+haven't uh we didn't retune the hyper
+haven't uh we didn't retune the hyper
+parameters or
+anything we could also try clipping
+anything we could also try clipping
+which probably would be
+which probably would be
+closer to the
+original we'll try clipping
+next okay so here we have this one
+okay
+and actually there's no negative in
+here like
+this e
+see with
+clipping actually clipping makes sense
+clipping actually clipping makes sense
+for this
+for this
+game
+potentially makes the value function way
+potentially makes the value function way
+easier to
+learn oh
+yeah e
+and keep in mind we didn't even retune
+and keep in mind we didn't even retune
+hyper parameters or
+anything how's the value function
+anything how's the value function
+learning is uh my
+question
+question
+03 okay but that's on larger scaled
+03 okay but that's on larger scaled
+rewards than before so it's yeah it's is
+rewards than before so it's yeah it's is
+very easy for it to learn
+so we should probably just add reward
+so we should probably just add reward
+clipping to the PO implementation
+clipping to the PO implementation
+instead of the N
+see if this is stable or
+not oh yeah
+h
+well that's nutty that's just the reward
+well that's nutty that's just the reward
+clipping uh lack of reward clipping
+clipping uh lack of reward clipping
+screwing
+screwing
+you okay
+so we can actually do this in probably
+so we can actually do this in probably
+four minutes
+four minutes
+now e
+from Dr
+from Dr
+wangs oh is this Lillian
+Wang wasn't she
+Wang wasn't she
+uh oh okay she joined she joined mea's
+uh oh okay she joined she joined mea's
+thing was it open Ai and join mir's
+thing was it open Ai and join mir's
+thing it looks like right oh co-founder
+thing it looks like right oh co-founder
+cool
+yeah she has a nice blog I think this
+is likes to write a
+lot not too much only a few of them a
+lot not too much only a few of them a
+year it's cool
+well she had open AI here I
+forgot she just updated this like
+forgot she just updated this like
+several times that's funny
+we use po for pretty much
+everything honestly I should read
+this but I'm pretty sure po just
+this but I'm pretty sure po just
+generally does the
+generally does the
+best overall
+all well the thing is that like if you
+all well the thing is that like if you
+understand what po does it's even
+understand what po does it's even
+simpler then uh it looks at first
+glance look how stable this
+glance look how stable this
+is
+863 so now we're I'm going to try this
+863 so now we're I'm going to try this
+without a kneeling
+I think this will break
+it actually this would make a nice
+post for
+that e
+yes the math in RL is pretty simple
+in fact the whole algorithm like the big
+in fact the whole algorithm like the big
+term cancels out if uh Pi new is equal
+term cancels out if uh Pi new is equal
+to Pi old so you can actually see it's
+to Pi old so you can actually see it's
+literally just a clipping
+term
+e e
+if the
+defined it's literally like it's the
+defined it's literally like it's the
+simplest thing possible you get a reward
+simplest thing possible you get a reward
+right that can be some number you clip
+right that can be some number you clip
+it from negative -1 to one that's it
+for
+e
+e
+e e
+here we
+go what if the probability for
+flipping no there's no probability
+flipping no there's no probability
+involved it anything it's literally it's
+involved it anything it's literally it's
+just you take the reward that comes out
+just you take the reward that comes out
+of the environment whatever it is and
+of the environment whatever it is and
+you just if it's zero it's zero if it's
+you just if it's zero it's zero if it's
+I well to be fair that the way that they
+I well to be fair that the way that they
+do it in sp3 only works cuz they're
+do it in sp3 only works cuz they're
+arcade games that only return integers
+arcade games that only return integers
+but you just take the you just take the
+but you just take the you just take the
+reward and if it's greater than one you
+reward and if it's greater than one you
+set it to one if it's less than negative
+set it to one if it's less than negative
+one you set it to negative one that's
+it I don't know this guy I don't know if
+it I don't know this guy I don't know if
+this guy's a new follower or just a bot
+that looks like
+bot yeah no like you have to realize a
+bot yeah no like you have to realize a
+lot of the stuff in RL the math isn't
+lot of the stuff in RL the math isn't
+complicated okay the thing that makes it
+complicated okay the thing that makes it
+hard is it's a really heavily
+hard is it's a really heavily
+experimental empirical science that
+experimental empirical science that
+requires a lot of engineering that's the
+requires a lot of engineering that's the
+hard
+hard
+part there's no fancy math anywhere I I
+part there's no fancy math anywhere I I
+can guarantee you there isn't because
+can guarantee you there isn't because
+I'm doing this stuff and I don't know
+I'm doing this stuff and I don't know
+the fanasy
+the fanasy
+math all
+right oh look at that that's a nice
+right oh look at that that's a nice
+surprise this works without
+analing this works without ailing lovely
+it's a lot less stable but I think we
+it's a lot less stable but I think we
+can still tune this within without an
+can still tune this within without an
+knealing now and this will be a pretty
+knealing now and this will be a pretty
+quick
+job I've liked your Tweet yeah thanks
+job I've liked your Tweet yeah thanks
+aning in RL okay another really simple
+aning in RL okay another really simple
+thing you take the so you're going to
+thing you take the so you're going to
+train it for a certain number of steps
+train it for a certain number of steps
+right you're you're going to Tain it for
+right you're you're going to Tain it for
+100 million steps okay you just take uh
+100 million steps okay you just take uh
+what's the what's the
+what's the what's the
+term I think it's you just multiply the
+term I think it's you just multiply the
+learning rate by 1 minus one over the
+learning rate by 1 minus one over the
+current step over the total number of
+current step over the total number of
+steps so you just like you just take a
+steps so you just like you just take a
+line and you multiply you know a line by
+line and you multiply you know a line by
+your learning value so it decays to Zero
+your learning value so it decays to Zero
+by the time the run is over that's
+by the time the run is over that's
+it these techniques are all like on line
+it these techniques are all like on line
+like on line middle school
+math we don't have fantasy things
+he we hit 1.7k
+he we hit 1.7k
+1.7k
+Stars making undergrad student come in
+Stars making undergrad student come in
+he didn't get his objective
+done
+brutal I pretty much never went into
+brutal I pretty much never went into
+anywhere like in undergrad or today like
+anywhere like in undergrad or today like
+the thing is though I would always be I
+the thing is though I would always be I
+would be doing I literally uh okay
+would be doing I literally uh okay
+here's a fun story so I'm I I
+here's a fun story so I'm I I
+missed I missed the uh I missed having
+missed I missed the uh I missed having
+lunch with Andrew ing because I was
+lunch with Andrew ing because I was
+doing research and they sent the they
+doing research and they sent the they
+sent the notification like in the
+sent the notification like in the
+morning that oh yeah we have a lunch
+morning that oh yeah we have a lunch
+today and I was doing research until
+today and I was doing research until
+like 4: in the morning so I slept until
+like 4: in the morning so I slept until
+the afternoon
+I mean I got stuff done in undergrad it
+I mean I got stuff done in undergrad it
+was like absolutely horribly
+unhealthy I'm pretty sure combined I had
+unhealthy I'm pretty sure combined I had
+more like Monster Energy and like
+more like Monster Energy and like
+whiskey than I had actual
+whiskey than I had actual
+water but I got stuff
+water but I got stuff
+done he's a professor at Stanford man
+Andrew in NG no not yang
+well this is pretty
+good can we just YOLO something real
+quick let me just yellow something real
+quick let me just yellow something real
+quick
+top
+top
+guys and isn't Andrew Yang the
+guys and isn't Andrew Yang the
+politician Andrew Y is like one of the
+politician Andrew Y is like one of the
+older ml
+older ml
+people I think he like one of uh one of
+people I think he like one of uh one of
+the first papers I read of his that I
+the first papers I read of his that I
+thought was really cool is he was one of
+thought was really cool is he was one of
+the first people to just go buy a whole
+the first people to just go buy a whole
+bunch of uh go buy a whole bunch of
+bunch of uh go buy a whole bunch of
+Nvidia gpus wire him up and train big
+Nvidia gpus wire him up and train big
+neural
+Nets so that was
+Nets so that was
+cool I remember was in high school when
+cool I remember was in high school when
+that was uh that research was
+new I don't know I emailed him about
+new I don't know I emailed him about
+working in his lab in high school he
+working in his lab in high school he
+didn't reply but uh faay did so I ended
+didn't reply but uh faay did so I ended
+up working in Fay's lab
+up working in Fay's lab
+um in high school so I was doing
+um in high school so I was doing
+like various computer vision
+things e
+I don't think the YOLO run is
+I don't think the YOLO run is
+uh is going to do it we'll see
+uh
+maybe maybe it's just the genius you
+maybe maybe it's just the genius you
+know hyper parameter intuition we'll see
+know hyper parameter intuition we'll see
+I I doubt it though I probably have to
+I I doubt it though I probably have to
+redo a full tuning
+run I think we're also going to take the
+run I think we're also going to take the
+reward out of the en rapper we're going
+reward out of the en rapper we're going
+to take the reward out of the
+to take the reward out of the
+environment and we're gonna put it into
+environment and we're gonna put it into
+the algorithm I
+the algorithm I
+think
+think
+yeah
+fortunate earning curve is so wonky on
+fortunate earning curve is so wonky on
+these
+this I so the guess here was that
+this I so the guess here was that
+because it was working better with the
+because it was working better with the
+kneeling before maybe I could just cut
+kneeling before maybe I could just cut
+the learning rate in half and that would
+the learning rate in half and that would
+be good
+be good
+enough probably not I mean I'll let the
+enough probably not I mean I'll let the
+full thing
+full thing
+run it's not doing too
+bad manual hyperparameter
+tuning e
+generalized Advantage
+generalized Advantage
+estimation I think link to this thing
+estimation I think link to this thing
+right but if you're looking to get a lot
+right but if you're looking to get a lot
+of RL information pretty darn
+quick we have the quickart guide on the
+quick we have the quickart guide on the
+uh on the blog just on buffer. it's a
+uh on the blog just on buffer. it's a
+pretty quick read and it links all the
+pretty quick read and it links all the
+papers and this is
+it for
+okay so it ends up at about the same
+spot so not
+spot so not
+terrible probably better with an
+terrible probably better with an
+kneeling
+I wonder about pong pong should have a
+I wonder about pong pong should have a
+kneeling as well
+where is this guy
+we'll leave this one for
+now e
+okay so this is something we can do
+okay so this is something we can do
+now let's go mess with the
+now let's go mess with the
+uh the
+uh the
+environment cuz we don't want to
+environment cuz we don't want to
+actually clip
+clipping so I'm clipping in the N now
+clipping so I'm clipping in the N now
+but I'm actually don't want to do that
+but I'm actually don't want to do that
+so I'm going to move it into the
+so I'm going to move it into the
+environment and then we're going to
+environment and then we're going to
+rerun it just to make sure it works and
+rerun it just to make sure it works and
+then I think we should be
+good for
+I mean we have all these graphs the uh
+I mean we have all these graphs the uh
+the green one is the reward clipped
+the green one is the reward clipped
+one you can see though there's not a
+one you can see though there's not a
+huge gap with the other ones obviously
+huge gap with the other ones obviously
+it's going to be smoother with a
+kneeling isn't it just outputting one or
+two the value function value functions
+two the value function value functions
+contain continuous it's trying to
+contain continuous it's trying to
+predict the reward the rewarded breakout
+predict the reward the rewarded breakout
+is uh from 0 to
+7 so if you have if you get a seven
+7 so if you have if you get a seven
+reward and you predict zero then you get
+reward and you predict zero then you get
+a a squared error of
+49 e
+so that's nice though that means that we
+so that's nice though that means that we
+can run
+can run
+um we can run our sweeps way
+um we can run our sweeps way
+faster was that now we're I uh I did it
+faster was that now we're I uh I did it
+in the environment to begin with but I
+in the environment to begin with but I
+think we're just going to add it to
+think we're just going to add it to
+clean puff Al for
+now
+for e
+see how that
+goes good time to remind folks to start
+goes good time to remind folks to start
+the puffer really helps us out got to
+the puffer really helps us out got to
+keep up the puffer growth
+how do you not have a get up
+account if you do like any code on
+anything ah don't you guys have to write
+anything ah don't you guys have to write
+a little bit of code in E once in a
+a little bit of code in E once in a
+while
+there we go
+I write code then how do you not have a
+I write code then how do you not have a
+how do you not have a GitHub account
+how do you not have a GitHub account
+like
+what s crazy
+all right so this is nice and consistent
+right looking at how rewards are being
+right looking at how rewards are being
+set plus one it's clipped it's just
+set plus one it's clipped it's just
+clipped at the
+clipped at the
+moment I tried normalizing over seven it
+moment I tried normalizing over seven it
+did a little worse possibly you just
+did a little worse possibly you just
+retune hyper parameters and that could
+retune hyper parameters and that could
+do better um
+do better um
+but the clipping one is very
+effective I mean for that game it makes
+effective I mean for that game it makes
+sense right like you're just trying to
+sense right like you're just trying to
+break the bricks and it makes it really
+break the bricks and it makes it really
+easy to learn the value function so
+easy to learn the value function so
+that's probably why this is such a
+that's probably why this is such a
+strong Baseline yeah there are obviously
+strong Baseline yeah there are obviously
+cases in which you're going to need to
+cases in which you're going to need to
+have it not just be clipped in which
+have it not just be clipped in which
+case you should do some better
+case you should do some better
+normalization this is pretty decent
+let's add reward clipping
+and this doesn't mess with episode
+and this doesn't mess with episode
+return
+perfect okay
+perfect okay
+so we can now keep this this is good
+oh
+oh
+Haw no I don't know him
+okay did you manage to solve it oh I
+okay did you manage to solve it oh I
+just used I used your old optimal
+just used I used your old optimal
+parameters
+parameters
+Spencer so here I ran we have a few
+Spencer so here I ran we have a few
+points of data
+here but I I set the value fun I set the
+here but I I set the value fun I set the
+VF coefficient back up to 0.5 so I
+VF coefficient back up to 0.5 so I
+tested all these things and that wasn't
+tested all these things and that wasn't
+it uh aeling I got it to mostly work
+it uh aeling I got it to mostly work
+with or without a kneeling it was really
+with or without a kneeling it was really
+the reward the reward scale was the
+issue so here's the
+issue so here's the
+sweep uh the solve time is like four
+sweep uh the solve time is like four
+minutes with those parameters now we
+minutes with those parameters now we
+haven't run the Sweep with reward
+haven't run the Sweep with reward
+clipping cuz I just found that out but
+clipping cuz I just found that out but
+this is what protein does uh with the
+this is what protein does uh with the
+old parameters where it takes forever to
+old parameters where it takes forever to
+solve so you can see it doesn't take
+solve so you can see it doesn't take
+very many experiments for it to figure
+very many experiments for it to figure
+out a a high scoring solve now it runs
+out a a high scoring solve now it runs
+it for very long here if we check the
+it for very long here if we check the
+parito
+parito
+front yeah it's doing crazy things with
+front yeah it's doing crazy things with
+gamma as well if we check the yeah it's
+gamma as well if we check the yeah it's
+one update Epoch uh if we check the pero
+one update Epoch uh if we check the pero
+front
+like 1300
+like 1300
+is it looks
+like but this is again without the
+like but this is again without the
+clipping or
+clipping or
+anything so now what we can do is we can
+anything so now what we can do is we can
+rerun this uh we can rerun this sweep in
+rerun this uh we can rerun this sweep in
+fact I may as well I may as well just
+fact I may as well I may as well just
+put that on in the background right
+Dev symbol
+why is it on dev simple
+oh I forgot that I did
+that probably just merge these
+up e
+this looks
+good e
+okay so this will now
+okay so this will now
+run two minute run
+run two minute run
+perfect so now we've actually gotten
+perfect so now we've actually gotten
+this back to a point where it'll uh it
+this back to a point where it'll uh it
+will run in a reasonable amount of time
+will run in a reasonable amount of time
+for our
+sweeps as pong and break
+sweeps as pong and break
+out we obviously want to start running
+out we obviously want to start running
+this on way more environments
+though I got box four back as well so I
+though I got box four back as well so I
+can plug that in today
+well so nothing wrong with J
+implementation whatever do we do next
+implementation whatever do we do next
+what's a good environment
+if those new changes are in Dev yeah I
+if those new changes are in Dev yeah I
+didn't actually have to change the
+didn't actually have to change the
+breakout file at all so you can just PR
+breakout file at all so you can just PR
+that and uh yeah the continuous
+that and uh yeah the continuous
+continuous versus discret would be a big
+continuous versus discret would be a big
+thing I also just added the latest sweep
+thing I also just added the latest sweep
+algorithm to Dev it's simpler uh and you
+algorithm to Dev it's simpler uh and you
+have to be a little careful if you set
+have to be a little careful if you set
+the total time steps Max too high it
+the total time steps Max too high it
+will push up too high so you be a little
+will push up too high so you be a little
+careful with that but it's a it's like
+careful with that but it's a it's like
+way more stable uh than the more
+way more stable uh than the more
+complicated one so I'm trying to think
+complicated one so I'm trying to think
+what uh which one of these we should do
+now maybe snake or rware
+did I run this on the wrong
+did I run this on the wrong
+machine I think I
+machine I think I
+did hang on I'm
+confused how I manage to do that
+running I don't know what I would is
+running I don't know what I would is
+running but I'm running
+something clipping changes are not
+something clipping changes are not
+needed I added it into clean RL yes I
+needed I added it into clean RL yes I
+just added it to the demo
+file I think that's better because we
+file I think that's better because we
+should actually have something we should
+should actually have something we should
+have some sort of test right to make
+have some sort of test right to make
+sure that we can handle variable rewards
+sure that we can handle variable rewards
+even if it's just by
+even if it's just by
+clipping so that we don't get screwed on
+clipping so that we don't get screwed on
+that by like forgetting any sort of
+that by like forgetting any sort of
+normalization so breakout will be a good
+normalization so breakout will be a good
+check for that
+score is sakeel perfect
+snake RNN is
+recurrent this doesn't have a policy
+recurrent this doesn't have a policy
+name
+1.3 million SPS by the
+1.3 million SPS by the
+way that's
+way that's
+something
+e
+e
+e e
+interesting score goes back
+down 200 million steps
+see what these guys do
+uh oh is it
+stuck might be
+stuck
+e e
+something is screwy here
+something is screwy here
+so uh we'll have to figure that see what
+so uh we'll have to figure that see what
+the policy looks
+like all right there isn't a simple
+like all right there isn't a simple
+number
+e3b thing is
+obnoxious I think it's a bad
+obnoxious I think it's a bad
+method but we will see
+uh I don't know if you should uh we're
+uh I don't know if you should uh we're
+playing with it for other purposes but I
+playing with it for other purposes but I
+don't think it's likely we'll adopt it
+don't think it's likely we'll adopt it
+into puffer at
+into puffer at
+all it seems to me that just all like
+all it seems to me that just all like
+the exploration lit in RL sucks and none
+the exploration lit in RL sucks and none
+of it works and all it does is slow your
+of it works and all it does is slow your
+code down a bunch
+I mean it's
+I mean it's
+like that's kind of how it was
+frankly that's kind of how it was a
+frankly that's kind of how it was a
+while
+while
+ago like in 2018 it was kind of not a
+ago like in 2018 it was kind of not a
+promising area and uh it seems like it's
+promising area and uh it seems like it's
+pretty much stayed the same it's just
+pretty much stayed the same it's just
+not a particularly promising
+not a particularly promising
+area and a lot of the research doesn't
+area and a lot of the research doesn't
+make much sense okay so the are fine but
+make much sense okay so the are fine but
+you can see they're biased to the left
+you can see they're biased to the left
+here we'll figure that
+out we should probably have like a
+out we should probably have like a
+single agent snake version of this as
+single agent snake version of this as
+well
+huh e
+question mark what
+that looks like a Cuda Cuda screw up
+right for
+equivalent no it's equivalent to the
+reward you're not clipping the return
+reward you're not clipping the return
+you're clipping the
+reward is this actually an issue
+hang
+hang
+on something is really
+oh that's yeah that's totally broken
+oh that's yeah that's totally broken
+has broken my
+terminal
+terminal
+nine okay was the max observation
+for for
+snake
+colors what
+plus
+four
+e yeah that's going to break it
+huh well we'll do this for now
+how come on how
+oh hold on I am
+dumb yeah this is
+seven all right that was off by off by
+seven all right that was off by off by
+two error it's a new one
+two error it's a new one
+okay
+damn it this is why I have to keep
+damn it this is why I have to keep
+restream open because I can't delete the
+restream open because I can't delete the
+damn
+damn
+messages if I uh if I don't have it
+open it should show you the history but
+open it should show you the history but
+it doesn't
+this is
+irritating
+e e
+thing is so incredibly [ __ ]
+obious for
+at all the stuff that you have to
+at all the stuff that you have to
+pass
+pass
+crazy do some experiments
+that's insanely
+that's insanely
+obnoxious that it like it adds [ __ ] to
+obnoxious that it like it adds [ __ ] to
+the to the policy like
+the to the policy like
+that just going to do this for
+now and we'll see how this
+goes
+okay e
+and now we can actually
+see
+for
+e
+e e
+perfect
+mil uh we
+mil uh we
+want
+587 288
+there we
+there we
+go and uh I don't think we
+need anything else
+de enough
+steps
+great so I'm going to go get
+great so I'm going to go get
+lunch and then I'm going to be back
+lunch and then I'm going to be back
+working
+working
+on getting this up on up and running on
+on getting this up on up and running on
+more ends we really want this to be to
+more ends we really want this to be to
+the point that we can just crank out
+the point that we can just crank out
+experiments
+experiments
+automatically uh I may or may not go
+automatically uh I may or may not go
+also install the new machine while I'm
+also install the new machine while I'm
+there just so we have one extra to be
+there just so we have one extra to be
+able to run stuff on in the event thanks
+able to run stuff on in the event thanks
+folks um if you want to check out the
+folks um if you want to check out the
+project puff. start on GitHub join the
+project puff. start on GitHub join the
+Discord follow on a all that good stuff
+Discord follow on a all that good stuff
+and I'll be back in a bit
+
+Kind: captions
+Language: en
+on a bit late this morning but uh we are
+here okay interesting so this
+here okay interesting so this
+actually we have parameters that seem to
+actually we have parameters that seem to
+solve
+breakout expensive solve but it is a
+solve and where's our Paro
+front right
+here this is not terrible right
+here this is not terrible right
+here but uh we know that we can solve
+here but uh we know that we can solve
+this like this
+this like this
+fast so I think what we're going to
+fast so I think what we're going to
+do hey
+do hey
+welcome not in
+welcome not in
+California if that's what you're asking
+California if that's what you're asking
+we'll be over the
+summer
+uh I think what we're going to do is
+uh I think what we're going to do is
+we're going to spend a good chunk of
+we're going to spend a good chunk of
+time today just really trying to
+time today just really trying to
+understand some of the quirks with
+understand some of the quirks with
+sweeps and figuring out some
+sweeps and figuring out some
+fixes yeah let's do that
+this so here's Spencers
+breakout and it looks like oh this is a
+breakout and it looks like oh this is a
+new sweep and he's
+new sweep and he's
+got ah no you see his new sweep here has
+got ah no you see his new sweep here has
+the same
+issue so we're able to get good stuff
+issue so we're able to get good stuff
+too but he's
+too but he's
+uh yeah his old sweep not so much
+maybe it's this
+one yes
+one yes
+so right here this experiment I wanted
+so right here this experiment I wanted
+to check these
+to check these
+parameters versus
+what we have
+now okay so this is a 1024 en
+run with a very high
+batch
+sense entropy
+lowish
+entropy uh a very weird
+entropy uh a very weird
+Lambda and not that weird I
+Lambda and not that weird I
+guess
+guess
+gamma actually this is not too
+gamma actually this is not too
+bad it's a little odd for breakout
+bad it's a little odd for breakout
+because you'd expect these to be
+because you'd expect these to be
+higher but um I mean I could see it and
+higher but um I mean I could see it and
+this learning rate
+Low Max gradient
+norm and then a very low value
+fun ah and four update
+fun ah and four update
+Epoch we get the mini batch SI very low
+Epoch we get the mini batch SI very low
+mini batch
+mini batch
+size and I
+size and I
+believe this is on r as well
+150 million total time
+steps this is supposed to work in like 5
+steps this is supposed to work in like 5
+minutes I believe
+and in the
+meantime I want to look at
+meantime I want to look at
+the plots for this
+okay so in
+particular the value loss
+particular the value loss
+here is very
+here is very
+high this is essentially no
+high this is essentially no
+value uh no value
+function so
+what happens to
+what happens to
+GAE with no value
+function should reduce to something
+function should reduce to something
+right
+to
+going to be a great Saturday I hope
+so I'd really like to get uh some good
+so I'd really like to get uh some good
+progress in on
+this okay so here
+this okay so here
+is the advantage formula
+right but hang on
+yeah this is it
+yeah this is it
+right so if both of these are set to a
+constant then this essentially reduces
+constant then this essentially reduces
+to discounted rewards right
+and let's see how
+ours so this is
+this is our curve
+this is our curve
+here at 80
+mil yeah
+and yeah we get the same exploding value
+and yeah we get the same exploding value
+loss so this
+loss so this
+is these parameters do somehow
+work possibly a bit unstable right we'll
+work possibly a bit unstable right we'll
+see if it actually solves fully but um
+these do
+work policy law Spike
+I'm trying to think why having a value
+I'm trying to think why having a value
+bu a value Base Line would actually hurt
+learning hey welcome
+mind dud this doesn't look like it
+mind dud this doesn't look like it
+perfectly reproduces the original but
+perfectly reproduces the original but
+there's a lot of variant in
+breakout so I'm pretty happy with this
+breakout so I'm pretty happy with this
+overall um especially given this is a f
+overall um especially given this is a f
+minute
+run 717
+run 717
+yes you can see it's still going up
+yes you can see it's still going up
+here now the question is why does this
+happen do I need to look at my J
+happen do I need to look at my J
+implementation
+if I set this to 0.5 right it'll break
+it we'll just
+compare and then we'll look at J in the
+compare and then we'll look at J in the
+meantime
+so this gets called from here and it
+so this gets called from here and it
+gets called
+gets called
+on dun's values rewards gamma
+on dun's values rewards gamma
+Lambda
+okay this is our
+implementation e
+where do they Define delta vs
+is this the case hang on
+I think that's how it
+worked me look at
+theirs poo Atari
+so this is the original clean RL
+so this is the original clean RL
+implementation
+so they say Delta
+so they say Delta
+is rewards plus gamma next
+values time next non okay minus value so
+values time next non okay minus value so
+this is they have this
+right yeah so they do this explicitly
+right yeah so they do this explicitly
+and then um I mean these terms
+and then um I mean these terms
+cancel but they explicit do this and
+cancel but they explicit do this and
+then advantages of
+then advantages of
+T is equal
+to Delta
+to Delta
+plus
+gamma it's not terminal
+the one question is I am missing the
+the one question is I am missing the
+last
+value
+H if not
+done oh hang
+done oh hang
+on is this similar
+performance
+wait now I'm
+confused look this is actually a very
+confused look this is actually a very
+similar curve
+similar curve
+right very Sim
+right very Sim
+curve how's the value
+function oh but the value loss is still
+function oh but the value loss is still
+up
+here why would the value LW still be up
+there e
+are our rewards not well
+scaled
+e 7 minus
+possibly the rewards just aren't
+possibly the rewards just aren't
+normalized
+brick index
+count
+seven points
+seven points
+Max let me say so minus 3
+Max let me say so minus 3
+* brick index
+probably this gets this goes to
+zero yeah so over seven
+something didn't work here because these
+something didn't work here because these
+numbers should no longer be the
+numbers should no longer be the
+same right
+uh unless maybe it just hasn't hit
+uh unless maybe it just hasn't hit
+anything in the second row yet that's
+anything in the second row yet that's
+weird
+no those definitely shouldn't match
+ah
+we
+go so uh this will change the hyper
+go so uh this will change the hyper
+parameters
+parameters
+obviously that are required but I just
+obviously that are required but I just
+want to see if this does anything with
+want to see if this does anything with
+the value function
+also do we have reward
+clipping or did they make it a rapper
+clipping or did they make it a rapper
+yeah they do make it a
+yeah they do make it a
+wrapper reward clipping is just you know
+wrapper reward clipping is just you know
+any reward above one goes to one any
+any reward above one goes to one any
+reward less than negative one goes to
+reward less than negative one goes to
+negative one you know clip the
+reward so they do have reward clipping
+reward so they do have reward clipping
+and then clip reward
+and then clip reward
+and I think they do this from
+sp3 but let's see if it actually does
+much uh they
+do wait
+do wait
+clip by its
+sign oh
+it literally converts it to zero
+it literally converts it to zero
+okay
+interesting interesting the curve looks
+interesting interesting the curve looks
+more stable maybe that's just
+more stable maybe that's just
+me why do you not use
+me why do you not use
+I have super Maven for single line Auto
+I have super Maven for single line Auto
+completes I mean I'd like they don't
+completes I mean I'd like they don't
+really do anything for me I don't like I
+really do anything for me I don't like I
+don't use AI to write full blocks of
+don't use AI to write full blocks of
+code it just writes bad
+code it just writes bad
+code I use uh super Maven for single
+code I use uh super Maven for single
+line completes so it's basically just a
+line completes so it's basically just a
+typing buff more than anything
+that's generally what I recommend as
+that's generally what I recommend as
+well AI is not better than yeah exactly
+I mean the researcher saying that it's
+I mean the researcher saying that it's
+like it's so good for writing code I've
+like it's so good for writing code I've
+read their code they don't know how to
+read their code they don't know how to
+code plain and simple the vast majority
+code plain and simple the vast majority
+of research code is just awful like
+of research code is just awful like
+truly truly awful like I don't even know
+truly truly awful like I don't even know
+how you warp your head around writing
+how you warp your head around writing
+code that bad level of awful
+so the value loss should be something
+so the value loss should be something
+here
+right is a value
+right is a value
+loss oh look at that
+High LEL program yep has ruined a
+High LEL program yep has ruined a
+lot I
+lot I
+agree it's why so much of the puffer Li
+agree it's why so much of the puffer Li
+code bases in C it's honestly just super
+code bases in C it's honestly just super
+chill and
+chill and
+easy okay interestingly the looks like
+easy okay interestingly the looks like
+the policy H our policy loss is still
+the policy H our policy loss is still
+good it's just the old
+but everything else roughly
+matches I mean the score is like a
+matches I mean the score is like a
+little bit worse but again we
+little bit worse but again we
+haven't uh we didn't retune the hyper
+haven't uh we didn't retune the hyper
+parameters or
+anything we could also try clipping
+anything we could also try clipping
+which probably would be
+which probably would be
+closer to the
+original we'll try clipping
+next okay so here we have this one
+okay
+and actually there's no negative in
+here like
+this e
+see with
+clipping actually clipping makes sense
+clipping actually clipping makes sense
+for this
+for this
+game
+potentially makes the value function way
+potentially makes the value function way
+easier to
+learn oh
+yeah e
+and keep in mind we didn't even retune
+and keep in mind we didn't even retune
+hyper parameters or
+anything how's the value function
+anything how's the value function
+learning is uh my
+question
+question
+03 okay but that's on larger scaled
+03 okay but that's on larger scaled
+rewards than before so it's yeah it's is
+rewards than before so it's yeah it's is
+very easy for it to learn
+so we should probably just add reward
+so we should probably just add reward
+clipping to the PO implementation
+clipping to the PO implementation
+instead of the N
+see if this is stable or
+not oh yeah
+h
+well that's nutty that's just the reward
+well that's nutty that's just the reward
+clipping uh lack of reward clipping
+clipping uh lack of reward clipping
+screwing
+screwing
+you okay
+so we can actually do this in probably
+so we can actually do this in probably
+four minutes
+four minutes
+now e
+from Dr
+from Dr
+wangs oh is this Lillian
+Wang wasn't she
+Wang wasn't she
+uh oh okay she joined she joined mea's
+uh oh okay she joined she joined mea's
+thing was it open Ai and join mir's
+thing was it open Ai and join mir's
+thing it looks like right oh co-founder
+thing it looks like right oh co-founder
+cool
+yeah she has a nice blog I think this
+is likes to write a
+lot not too much only a few of them a
+lot not too much only a few of them a
+year it's cool
+well she had open AI here I
+forgot she just updated this like
+forgot she just updated this like
+several times that's funny
+we use po for pretty much
+everything honestly I should read
+this but I'm pretty sure po just
+this but I'm pretty sure po just
+generally does the
+generally does the
+best overall
+all well the thing is that like if you
+all well the thing is that like if you
+understand what po does it's even
+understand what po does it's even
+simpler then uh it looks at first
+glance look how stable this
+glance look how stable this
+is
+863 so now we're I'm going to try this
+863 so now we're I'm going to try this
+without a kneeling
+I think this will break
+it actually this would make a nice
+post for
+that e
+yes the math in RL is pretty simple
+in fact the whole algorithm like the big
+in fact the whole algorithm like the big
+term cancels out if uh Pi new is equal
+term cancels out if uh Pi new is equal
+to Pi old so you can actually see it's
+to Pi old so you can actually see it's
+literally just a clipping
+term
+e e
+if the
+defined it's literally like it's the
+defined it's literally like it's the
+simplest thing possible you get a reward
+simplest thing possible you get a reward
+right that can be some number you clip
+right that can be some number you clip
+it from negative -1 to one that's it
+for
+e
+e
+e e
+here we
+go what if the probability for
+flipping no there's no probability
+flipping no there's no probability
+involved it anything it's literally it's
+involved it anything it's literally it's
+just you take the reward that comes out
+just you take the reward that comes out
+of the environment whatever it is and
+of the environment whatever it is and
+you just if it's zero it's zero if it's
+you just if it's zero it's zero if it's
+I well to be fair that the way that they
+I well to be fair that the way that they
+do it in sp3 only works cuz they're
+do it in sp3 only works cuz they're
+arcade games that only return integers
+arcade games that only return integers
+but you just take the you just take the
+but you just take the you just take the
+reward and if it's greater than one you
+reward and if it's greater than one you
+set it to one if it's less than negative
+set it to one if it's less than negative
+one you set it to negative one that's
+it I don't know this guy I don't know if
+it I don't know this guy I don't know if
+this guy's a new follower or just a bot
+that looks like
+bot yeah no like you have to realize a
+bot yeah no like you have to realize a
+lot of the stuff in RL the math isn't
+lot of the stuff in RL the math isn't
+complicated okay the thing that makes it
+complicated okay the thing that makes it
+hard is it's a really heavily
+hard is it's a really heavily
+experimental empirical science that
+experimental empirical science that
+requires a lot of engineering that's the
+requires a lot of engineering that's the
+hard
+hard
+part there's no fancy math anywhere I I
+part there's no fancy math anywhere I I
+can guarantee you there isn't because
+can guarantee you there isn't because
+I'm doing this stuff and I don't know
+I'm doing this stuff and I don't know
+the fanasy
+the fanasy
+math all
+right oh look at that that's a nice
+right oh look at that that's a nice
+surprise this works without
+analing this works without ailing lovely
+it's a lot less stable but I think we
+it's a lot less stable but I think we
+can still tune this within without an
+can still tune this within without an
+knealing now and this will be a pretty
+knealing now and this will be a pretty
+quick
+job I've liked your Tweet yeah thanks
+job I've liked your Tweet yeah thanks
+aning in RL okay another really simple
+aning in RL okay another really simple
+thing you take the so you're going to
+thing you take the so you're going to
+train it for a certain number of steps
+train it for a certain number of steps
+right you're you're going to Tain it for
+right you're you're going to Tain it for
+100 million steps okay you just take uh
+100 million steps okay you just take uh
+what's the what's the
+what's the what's the
+term I think it's you just multiply the
+term I think it's you just multiply the
+learning rate by 1 minus one over the
+learning rate by 1 minus one over the
+current step over the total number of
+current step over the total number of
+steps so you just like you just take a
+steps so you just like you just take a
+line and you multiply you know a line by
+line and you multiply you know a line by
+your learning value so it decays to Zero
+your learning value so it decays to Zero
+by the time the run is over that's
+by the time the run is over that's
+it these techniques are all like on line
+it these techniques are all like on line
+like on line middle school
+math we don't have fantasy things
+he we hit 1.7k
+he we hit 1.7k
+1.7k
+Stars making undergrad student come in
+Stars making undergrad student come in
+he didn't get his objective
+done
+brutal I pretty much never went into
+brutal I pretty much never went into
+anywhere like in undergrad or today like
+anywhere like in undergrad or today like
+the thing is though I would always be I
+the thing is though I would always be I
+would be doing I literally uh okay
+would be doing I literally uh okay
+here's a fun story so I'm I I
+here's a fun story so I'm I I
+missed I missed the uh I missed having
+missed I missed the uh I missed having
+lunch with Andrew ing because I was
+lunch with Andrew ing because I was
+doing research and they sent the they
+doing research and they sent the they
+sent the notification like in the
+sent the notification like in the
+morning that oh yeah we have a lunch
+morning that oh yeah we have a lunch
+today and I was doing research until
+today and I was doing research until
+like 4: in the morning so I slept until
+like 4: in the morning so I slept until
+the afternoon
+I mean I got stuff done in undergrad it
+I mean I got stuff done in undergrad it
+was like absolutely horribly
+unhealthy I'm pretty sure combined I had
+unhealthy I'm pretty sure combined I had
+more like Monster Energy and like
+more like Monster Energy and like
+whiskey than I had actual
+whiskey than I had actual
+water but I got stuff
+water but I got stuff
+done he's a professor at Stanford man
+Andrew in NG no not yang
+well this is pretty
+good can we just YOLO something real
+quick let me just yellow something real
+quick let me just yellow something real
+quick
+top
+top
+guys and isn't Andrew Yang the
+guys and isn't Andrew Yang the
+politician Andrew Y is like one of the
+politician Andrew Y is like one of the
+older ml
+older ml
+people I think he like one of uh one of
+people I think he like one of uh one of
+the first papers I read of his that I
+the first papers I read of his that I
+thought was really cool is he was one of
+thought was really cool is he was one of
+the first people to just go buy a whole
+the first people to just go buy a whole
+bunch of uh go buy a whole bunch of
+bunch of uh go buy a whole bunch of
+Nvidia gpus wire him up and train big
+Nvidia gpus wire him up and train big
+neural
+Nets so that was
+Nets so that was
+cool I remember was in high school when
+cool I remember was in high school when
+that was uh that research was
+new I don't know I emailed him about
+new I don't know I emailed him about
+working in his lab in high school he
+working in his lab in high school he
+didn't reply but uh faay did so I ended
+didn't reply but uh faay did so I ended
+up working in Fay's lab
+up working in Fay's lab
+um in high school so I was doing
+um in high school so I was doing
+like various computer vision
+things e
+I don't think the YOLO run is
+I don't think the YOLO run is
+uh is going to do it we'll see
+uh
+maybe maybe it's just the genius you
+maybe maybe it's just the genius you
+know hyper parameter intuition we'll see
+know hyper parameter intuition we'll see
+I I doubt it though I probably have to
+I I doubt it though I probably have to
+redo a full tuning
+run I think we're also going to take the
+run I think we're also going to take the
+reward out of the en rapper we're going
+reward out of the en rapper we're going
+to take the reward out of the
+to take the reward out of the
+environment and we're gonna put it into
+environment and we're gonna put it into
+the algorithm I
+the algorithm I
+think
+think
+yeah
+fortunate earning curve is so wonky on
+fortunate earning curve is so wonky on
+these
+this I so the guess here was that
+this I so the guess here was that
+because it was working better with the
+because it was working better with the
+kneeling before maybe I could just cut
+kneeling before maybe I could just cut
+the learning rate in half and that would
+the learning rate in half and that would
+be good
+be good
+enough probably not I mean I'll let the
+enough probably not I mean I'll let the
+full thing
+full thing
+run it's not doing too
+bad manual hyperparameter
+tuning e
+generalized Advantage
+generalized Advantage
+estimation I think link to this thing
+estimation I think link to this thing
+right but if you're looking to get a lot
+right but if you're looking to get a lot
+of RL information pretty darn
+quick we have the quickart guide on the
+quick we have the quickart guide on the
+uh on the blog just on buffer. it's a
+uh on the blog just on buffer. it's a
+pretty quick read and it links all the
+pretty quick read and it links all the
+papers and this is
+it for
+okay so it ends up at about the same
+spot so not
+spot so not
+terrible probably better with an
+terrible probably better with an
+kneeling
+I wonder about pong pong should have a
+I wonder about pong pong should have a
+kneeling as well
+where is this guy
+we'll leave this one for
+now e
+okay so this is something we can do
+okay so this is something we can do
+now let's go mess with the
+now let's go mess with the
+uh the
+uh the
+environment cuz we don't want to
+environment cuz we don't want to
+actually clip
+clipping so I'm clipping in the N now
+clipping so I'm clipping in the N now
+but I'm actually don't want to do that
+but I'm actually don't want to do that
+so I'm going to move it into the
+so I'm going to move it into the
+environment and then we're going to
+environment and then we're going to
+rerun it just to make sure it works and
+rerun it just to make sure it works and
+then I think we should be
+good for
+I mean we have all these graphs the uh
+I mean we have all these graphs the uh
+the green one is the reward clipped
+the green one is the reward clipped
+one you can see though there's not a
+one you can see though there's not a
+huge gap with the other ones obviously
+huge gap with the other ones obviously
+it's going to be smoother with a
+kneeling isn't it just outputting one or
+two the value function value functions
+two the value function value functions
+contain continuous it's trying to
+contain continuous it's trying to
+predict the reward the rewarded breakout
+predict the reward the rewarded breakout
+is uh from 0 to
+7 so if you have if you get a seven
+7 so if you have if you get a seven
+reward and you predict zero then you get
+reward and you predict zero then you get
+a a squared error of
+49 e
+so that's nice though that means that we
+so that's nice though that means that we
+can run
+can run
+um we can run our sweeps way
+um we can run our sweeps way
+faster was that now we're I uh I did it
+faster was that now we're I uh I did it
+in the environment to begin with but I
+in the environment to begin with but I
+think we're just going to add it to
+think we're just going to add it to
+clean puff Al for
+now
+for e
+see how that
+goes good time to remind folks to start
+goes good time to remind folks to start
+the puffer really helps us out got to
+the puffer really helps us out got to
+keep up the puffer growth
+how do you not have a get up
+account if you do like any code on
+anything ah don't you guys have to write
+anything ah don't you guys have to write
+a little bit of code in E once in a
+a little bit of code in E once in a
+while
+there we go
+I write code then how do you not have a
+I write code then how do you not have a
+how do you not have a GitHub account
+how do you not have a GitHub account
+like
+what s crazy
+all right so this is nice and consistent
+right looking at how rewards are being
+right looking at how rewards are being
+set plus one it's clipped it's just
+set plus one it's clipped it's just
+clipped at the
+clipped at the
+moment I tried normalizing over seven it
+moment I tried normalizing over seven it
+did a little worse possibly you just
+did a little worse possibly you just
+retune hyper parameters and that could
+retune hyper parameters and that could
+do better um
+do better um
+but the clipping one is very
+effective I mean for that game it makes
+effective I mean for that game it makes
+sense right like you're just trying to
+sense right like you're just trying to
+break the bricks and it makes it really
+break the bricks and it makes it really
+easy to learn the value function so
+easy to learn the value function so
+that's probably why this is such a
+that's probably why this is such a
+strong Baseline yeah there are obviously
+strong Baseline yeah there are obviously
+cases in which you're going to need to
+cases in which you're going to need to
+have it not just be clipped in which
+have it not just be clipped in which
+case you should do some better
+case you should do some better
+normalization this is pretty decent
+let's add reward clipping
+and this doesn't mess with episode
+and this doesn't mess with episode
+return
+perfect okay
+perfect okay
+so we can now keep this this is good
+oh
+oh
+Haw no I don't know him
+okay did you manage to solve it oh I
+okay did you manage to solve it oh I
+just used I used your old optimal
+just used I used your old optimal
+parameters
+parameters
+Spencer so here I ran we have a few
+Spencer so here I ran we have a few
+points of data
+here but I I set the value fun I set the
+here but I I set the value fun I set the
+VF coefficient back up to 0.5 so I
+VF coefficient back up to 0.5 so I
+tested all these things and that wasn't
+tested all these things and that wasn't
+it uh aeling I got it to mostly work
+it uh aeling I got it to mostly work
+with or without a kneeling it was really
+with or without a kneeling it was really
+the reward the reward scale was the
+issue so here's the
+issue so here's the
+sweep uh the solve time is like four
+sweep uh the solve time is like four
+minutes with those parameters now we
+minutes with those parameters now we
+haven't run the Sweep with reward
+haven't run the Sweep with reward
+clipping cuz I just found that out but
+clipping cuz I just found that out but
+this is what protein does uh with the
+this is what protein does uh with the
+old parameters where it takes forever to
+old parameters where it takes forever to
+solve so you can see it doesn't take
+solve so you can see it doesn't take
+very many experiments for it to figure
+very many experiments for it to figure
+out a a high scoring solve now it runs
+out a a high scoring solve now it runs
+it for very long here if we check the
+it for very long here if we check the
+parito
+parito
+front yeah it's doing crazy things with
+front yeah it's doing crazy things with
+gamma as well if we check the yeah it's
+gamma as well if we check the yeah it's
+one update Epoch uh if we check the pero
+one update Epoch uh if we check the pero
+front
+like 1300
+like 1300
+is it looks
+like but this is again without the
+like but this is again without the
+clipping or
+clipping or
+anything so now what we can do is we can
+anything so now what we can do is we can
+rerun this uh we can rerun this sweep in
+rerun this uh we can rerun this sweep in
+fact I may as well I may as well just
+fact I may as well I may as well just
+put that on in the background right
+Dev symbol
+why is it on dev simple
+oh I forgot that I did
+that probably just merge these
+up e
+this looks
+good e
+okay so this will now
+okay so this will now
+run two minute run
+run two minute run
+perfect so now we've actually gotten
+perfect so now we've actually gotten
+this back to a point where it'll uh it
+this back to a point where it'll uh it
+will run in a reasonable amount of time
+will run in a reasonable amount of time
+for our
+sweeps as pong and break
+sweeps as pong and break
+out we obviously want to start running
+out we obviously want to start running
+this on way more environments
+though I got box four back as well so I
+though I got box four back as well so I
+can plug that in today
+well so nothing wrong with J
+implementation whatever do we do next
+implementation whatever do we do next
+what's a good environment
+if those new changes are in Dev yeah I
+if those new changes are in Dev yeah I
+didn't actually have to change the
+didn't actually have to change the
+breakout file at all so you can just PR
+breakout file at all so you can just PR
+that and uh yeah the continuous
+that and uh yeah the continuous
+continuous versus discret would be a big
+continuous versus discret would be a big
+thing I also just added the latest sweep
+thing I also just added the latest sweep
+algorithm to Dev it's simpler uh and you
+algorithm to Dev it's simpler uh and you
+have to be a little careful if you set
+have to be a little careful if you set
+the total time steps Max too high it
+the total time steps Max too high it
+will push up too high so you be a little
+will push up too high so you be a little
+careful with that but it's a it's like
+careful with that but it's a it's like
+way more stable uh than the more
+way more stable uh than the more
+complicated one so I'm trying to think
+complicated one so I'm trying to think
+what uh which one of these we should do
+now maybe snake or rware
+did I run this on the wrong
+did I run this on the wrong
+machine I think I
+machine I think I
+did hang on I'm
+confused how I manage to do that
+running I don't know what I would is
+running I don't know what I would is
+running but I'm running
+something clipping changes are not
+something clipping changes are not
+needed I added it into clean RL yes I
+needed I added it into clean RL yes I
+just added it to the demo
+file I think that's better because we
+file I think that's better because we
+should actually have something we should
+should actually have something we should
+have some sort of test right to make
+have some sort of test right to make
+sure that we can handle variable rewards
+sure that we can handle variable rewards
+even if it's just by
+even if it's just by
+clipping so that we don't get screwed on
+clipping so that we don't get screwed on
+that by like forgetting any sort of
+that by like forgetting any sort of
+normalization so breakout will be a good
+normalization so breakout will be a good
+check for that
+score is sakeel perfect
+snake RNN is
+recurrent this doesn't have a policy
+recurrent this doesn't have a policy
+name
+1.3 million SPS by the
+1.3 million SPS by the
+way that's
+way that's
+something
+e
+e
+e e
+interesting score goes back
+down 200 million steps
+see what these guys do
+uh oh is it
+stuck might be
+stuck
+e e
+something is screwy here
+something is screwy here
+so uh we'll have to figure that see what
+so uh we'll have to figure that see what
+the policy looks
+like all right there isn't a simple
+like all right there isn't a simple
+number
+e3b thing is
+obnoxious I think it's a bad
+obnoxious I think it's a bad
+method but we will see
+uh I don't know if you should uh we're
+uh I don't know if you should uh we're
+playing with it for other purposes but I
+playing with it for other purposes but I
+don't think it's likely we'll adopt it
+don't think it's likely we'll adopt it
+into puffer at
+into puffer at
+all it seems to me that just all like
+all it seems to me that just all like
+the exploration lit in RL sucks and none
+the exploration lit in RL sucks and none
+of it works and all it does is slow your
+of it works and all it does is slow your
+code down a bunch
+I mean it's
+I mean it's
+like that's kind of how it was
+frankly that's kind of how it was a
+frankly that's kind of how it was a
+while
+while
+ago like in 2018 it was kind of not a
+ago like in 2018 it was kind of not a
+promising area and uh it seems like it's
+promising area and uh it seems like it's
+pretty much stayed the same it's just
+pretty much stayed the same it's just
+not a particularly promising
+not a particularly promising
+area and a lot of the research doesn't
+area and a lot of the research doesn't
+make much sense okay so the are fine but
+make much sense okay so the are fine but
+you can see they're biased to the left
+you can see they're biased to the left
+here we'll figure that
+out we should probably have like a
+out we should probably have like a
+single agent snake version of this as
+single agent snake version of this as
+well
+huh e
+question mark what
+that looks like a Cuda Cuda screw up
+right for
+equivalent no it's equivalent to the
+reward you're not clipping the return
+reward you're not clipping the return
+you're clipping the
+reward is this actually an issue
+hang
+hang
+on something is really
+oh that's yeah that's totally broken
+oh that's yeah that's totally broken
+has broken my
+terminal
+terminal
+nine okay was the max observation
+for for
+snake
+colors what
+plus
+four
+e yeah that's going to break it
+huh well we'll do this for now
+how come on how
+oh hold on I am
+dumb yeah this is
+seven all right that was off by off by
+seven all right that was off by off by
+two error it's a new one
+two error it's a new one
+okay
+damn it this is why I have to keep
+damn it this is why I have to keep
+restream open because I can't delete the
+restream open because I can't delete the
+damn
+damn
+messages if I uh if I don't have it
+open it should show you the history but
+open it should show you the history but
+it doesn't
+this is
+irritating
+e e
+thing is so incredibly [ __ ]
+obious for
+at all the stuff that you have to
+at all the stuff that you have to
+pass
+pass
+crazy do some experiments
+that's insanely
+that's insanely
+obnoxious that it like it adds [ __ ] to
+obnoxious that it like it adds [ __ ] to
+the to the policy like
+the to the policy like
+that just going to do this for
+now and we'll see how this
+goes
+okay e
+and now we can actually
+see
+for
+e
+e e
+perfect
+mil uh we
+mil uh we
+want
+587 288
+there we
+there we
+go and uh I don't think we
+need anything else
+de enough
+steps
+great so I'm going to go get
+great so I'm going to go get
+lunch and then I'm going to be back
+lunch and then I'm going to be back
+working
+working
+on getting this up on up and running on
+on getting this up on up and running on
+more ends we really want this to be to
+more ends we really want this to be to
+the point that we can just crank out
+the point that we can just crank out
+experiments
+experiments
+automatically uh I may or may not go
+automatically uh I may or may not go
+also install the new machine while I'm
+also install the new machine while I'm
+there just so we have one extra to be
+there just so we have one extra to be
+able to run stuff on in the event thanks
+able to run stuff on in the event thanks
+folks um if you want to check out the
+folks um if you want to check out the
+project puff. start on GitHub join the
+project puff. start on GitHub join the
+Discord follow on a all that good stuff
+Discord follow on a all that good stuff
+and I'll be back in a bit

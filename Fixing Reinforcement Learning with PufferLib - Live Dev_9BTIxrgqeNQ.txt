@@ -1,0 +1,1653 @@
+Kind: captions
+Language: en
+I
+am going to be working on a little bit
+am going to be working on a little bit
+of just optimization on this
+environment me's see
+here first things first let's move this
+here first things first let's move this
+this do this
+they're going to be some Basics to
+check question mark
+HC
+HC
+puffer
+hello there's a break point
+here is it not installed an editable mod
+here is it not installed an editable mod
+or something
+oh that's how long it takes to load the
+oh that's how long it takes to load the
+bloody data
+okay
+observations uh
+observ the
+that's like nothing
+that's like nothing
+right that's four
+Megs okay so this shouldn't be taking up
+anything I think we're going to for
+anything I think we're going to for
+testing we're going to
+do there we go
+B
+e
+e
+e
+e
+e
+e e
+I got distracted by something for a
+second
+for e
+okay good synced up there
+okay good synced up there
+so yeah all I have to do at this point
+so yeah all I have to do at this point
+is figure out how to optimize this EMP a
+is figure out how to optimize this EMP a
+bit got some information on on this we
+bit got some information on on this we
+should be
+good
+good
+um memory ain't coming from buffers
+oh hey there you are
+oh hey there you are
+K so actually I can tell you this right
+K so actually I can tell you this right
+now then because this is this is just a
+now then because this is this is just a
+very very useful technique um so what I
+very very useful technique um so what I
+tend to find is like when you're taught
+tend to find is like when you're taught
+to program in and I don't I don't know
+to program in and I don't I don't know
+if I think it's just cuz you started
+if I think it's just cuz you started
+from the original like phc code I don't
+from the original like phc code I don't
+think it's cuz like you intentionally
+think it's cuz like you intentionally
+like you know restructured the thing
+like you know restructured the thing
+that I did but um they teach you this
+that I did but um they teach you this
+thing when you taught to program where
+thing when you taught to program where
+it's like keep your method short
+it's like keep your method short
+um literally the most useful technique I
+um literally the most useful technique I
+have for cleaning up research code bases
+have for cleaning up research code bases
+is to just unroll all of the methods
+is to just unroll all of the methods
+everywhere where it doesn't require
+everywhere where it doesn't require
+duplicating code just unroll all the
+duplicating code just unroll all the
+methods because what you find is like
+methods because what you find is like
+stuff is declared several times stuff is
+stuff is declared several times stuff is
+redundant to give you an idea I did this
+redundant to give you an idea I did this
+on the carbs database yesterday and I
+on the carbs database yesterday and I
+cut out 600 lines of code just by doing
+cut out 600 lines of code just by doing
+that um you can put some of the methods
+that um you can put some of the methods
+back after you've done that after you've
+back after you've done that after you've
+cleaned stuff up if you want but uh
+cleaned stuff up if you want but uh
+generally there
+generally there
+are two things I like two ways I decide
+are two things I like two ways I decide
+to like put stuff into a function uh the
+to like put stuff into a function uh the
+first is if I'm going to have to copy
+first is if I'm going to have to copy
+paste code otherwise like a big block of
+paste code otherwise like a big block of
+code I'll put it in a separate function
+code I'll put it in a separate function
+uh and the second one is if stuff gets
+uh and the second one is if stuff gets
+nested super deep but if like I have
+nested super deep but if like I have
+like a 300 line in it and it's just like
+like a 300 line in it and it's just like
+you big block of stuff that's like not
+you big block of stuff that's like not
+deeply nested pretty clean to follow
+deeply nested pretty clean to follow
+I'll just block it with comments and
+I'll just block it with comments and
+I'll just put it all in the one method
+I'll just put it all in the one method
+and then you can actually see what
+and then you can actually see what
+everything's doing and it's easier to
+everything's doing and it's easier to
+dup
+dup
+stuff so that was the one thing that was
+stuff so that was the one thing that was
+the one comment I had on that I'm going
+the one comment I had on that I'm going
+to work right now on figuring
+to work right now on figuring
+out where perf is
+leaking yeah but I just wanted to make
+leaking yeah but I just wanted to make
+sure you got that that uh trick because
+sure you got that that uh trick because
+it is very useful
+first thing I want to try is loading all
+first thing I want to try is loading all
+the Bots into one
+the Bots into one
+environment I think I saw the Bots are
+environment I think I saw the Bots are
+now being loaded into separate MS
+yeah
+so there's a small perf boost but I'm
+so there's a small perf boost but I'm
+also wondering about
+also wondering about
+memory I'm wondering if there's a memory
+memory I'm wondering if there's a memory
+impact difference
+okay so this is just generating data and
+okay so this is just generating data and
+we're already up to 6
+we're already up to 6
+Gigabytes this isn't even running the
+Gigabytes this isn't even running the
+M that part I wanted to go later but
+M that part I wanted to go later but
+cool yeah yeah yeah so that's uh I'm
+cool yeah yeah yeah so that's uh I'm
+going to work on this m stuff but yeah
+going to work on this m stuff but yeah
+unrolling code like that is it's a very
+unrolling code like that is it's a very
+very powerful technique because like you
+very powerful technique because like you
+have to kind realize and assume that
+have to kind realize and assume that
+when you're looking at an academic code
+when you're looking at an academic code
+base or a researcher code base
+base or a researcher code base
+scientists just suck at writing code and
+scientists just suck at writing code and
+they overly abstract everything so like
+they overly abstract everything so like
+if you unroll all the methods it becomes
+if you unroll all the methods it becomes
+very clear that the thing that they did
+very clear that the thing that they did
+doesn't make any sense and you can start
+doesn't make any sense and you can start
+cutting
+cutting
+stuff that's typically the reason for
+it like the carbs repo is actually
+it like the carbs repo is actually
+completely broken
+completely broken
+um now I can realize that now that I did
+that I actually wasn't looking at the
+that I actually wasn't looking at the
+damn I forgot to look at the the memory
+increase actually hold on no before we
+increase actually hold on no before we
+do this there's
+do this there's
+something something deeply
+screwy yeah they The Sweep stuff is
+screwy yeah they The Sweep stuff is
+going to take me a little longer but
+going to take me a little longer but
+it's very
+promising something else I wanted to do
+promising something else I wanted to do
+which is
+which is
+where you have reset
+where you have reset
+here and then reset loads the data
+here and then reset loads the data
+right but
+then is it load motion data load
+motion
+uh well that's weird
+hold on need an extra terminal so I can
+hold on need an extra terminal so I can
+watch memory usage and just put this up
+watch memory usage and just put this up
+on this
+side okay so we have
+side okay so we have
+okay 2.9
+GB seems to be what I'm actually
+GB seems to be what I'm actually
+using I don't actually know there's this
+using I don't actually know there's this
+one weird process on here I don't know
+one weird process on here I don't know
+what I'm using it for it's probably just
+what I'm using it for it's probably just
+xor or something so 3
+xor or something so 3
+gigs and then loading
+this we're at 6 gigs right
+this we're at 6 gigs right
+now from
+now from
+this okay and if I do load
+motion good the motion loading isn't
+motion good the motion loading isn't
+taking more
+memory so I mean 3 GB of memory is not
+memory so I mean 3 GB of memory is not
+terrible um you said 20 gigs of vram for
+terrible um you said 20 gigs of vram for
+2048 that's pretty rough we'll have to
+2048 that's pretty rough we'll have to
+look if figure that out if that's the
+look if figure that out if that's the
+case
+ideally as well we should just
+ideally as well we should just
+pre-process all of it and then dump it
+pre-process all of it and then dump it
+to file so we don't have to deal with
+that yeah
+that yeah
+exactly so I'm only seeing three
+gigs so I'm trying to figure out
+where
+oops or where this is
+caused I don't actually know how much
+caused I don't actually know how much
+SPS we get above 2048 though it's not
+SPS we get above 2048 though it's not
+going to be permanently linear
+so here we're going to allocate buffers
+so here we're going to allocate buffers
+and we're at 6.8
+right and because most of those are cop
+right and because most of those are cop
+are not
+copies yeah so that doesn't increase at
+all and now I'm going to watch the perf
+all and now I'm going to watch the perf
+test
+goes from six up to
+eight are you sure it uses 20
+eight are you sure it uses 20
+gigs I only see uh it only goes up to
+gigs I only see uh it only goes up to
+eight for me K goes from 3 to eight five
+gigs clear will be clear when I have
+gigs clear will be clear when I have
+training Loop unrolled yeah just like
+training Loop unrolled yeah just like
+that's what I suggest with the academic
+that's what I suggest with the academic
+code you literally just anytime you
+code you literally just anytime you
+don't have to actually copy the code
+don't have to actually copy the code
+twice or more um by unrolling it just
+twice or more um by unrolling it just
+unroll it so like any function that's
+unroll it so like any function that's
+called once basically you just
+called once basically you just
+unroll that was 2048 so I don't see
+unroll that was 2048 so I don't see
+where you're getting 20 gigs usage were
+where you're getting 20 gigs usage were
+you getting 20 gigs usage on a training
+you getting 20 gigs usage on a training
+test by any chance or were you getting
+test by any chance or were you getting
+it just from this perf test I'm not
+it just from this perf test I'm not
+seeing your 20
+gigs see I'm filing everything
+that means you're using 12 gigs of
+that means you're using 12 gigs of
+training and you're probably we're
+training and you're probably we're
+probably going to want a CPU
+probably going to want a CPU
+offload don't worry about that the m is
+offload don't worry about that the m is
+not
+not
+ridiculously bad in this department but
+ridiculously bad in this department but
+I don't know if you've tested it with um
+I don't know if you've tested it with um
+with
+more we really should attach the um the
+more we really should attach the um the
+data as well so that uh it's not this
+slow let me see
+slow let me see
+your you just linked me that
+thing right here's your w
+b and hopefully you kept the
+um are you missing the uh the usual
+um are you missing the uh the usual
+stuff that puffer
+logs like the dashboard and
+logs like the dashboard and
+stuff cuz the dashboard should be
+stuff cuz the dashboard should be
+logging M time um train time it should
+logging M time um train time it should
+be logging all those things
+that's not oh this is not from puffer I
+that's not oh this is not from puffer I
+see is this not from clean puff
+either should just be in clean
+puffero okay well I'm not going to be
+puffero okay well I'm not going to be
+able to tell very much from this
+able to tell very much from this
+unfortunately on its own
+RL games yeah okay unfortunately though
+RL games yeah okay unfortunately though
+you're not going to get any more um
+you're not going to get any more um
+SPS you're capped at
+SPS you're capped at
+2048 the only thing that it could do is
+2048 the only thing that it could do is
+it could potentially make training a
+it could potentially make training a
+little bit faster but I think that
+little bit faster but I think that
+usually 2048 to
+usually 2048 to
+4096 um on the slightly larger Nets were
+4096 um on the slightly larger Nets were
+likely to be using probably you won't
+likely to be using probably you won't
+see much of a
+see much of a
+difference so the only thing we can
+difference so the only thing we can
+really do here here is look for other
+optimizations how did you disable self
+optimizations how did you disable self
+Collision uh without putting all the
+Collision uh without putting all the
+bots in the same
+bots in the same
+n actually that's kind of
+n actually that's kind of
+suspicious you cuz you saw I saw you
+suspicious you cuz you saw I saw you
+have the flag for
+it just the memory oh yeah
+it just the memory oh yeah
+well they're probably just like I can
+well they're probably just like I can
+see the environment is not taking that
+see the environment is not taking that
+so that just must be the buffers
+right oh also layer Norm can sometimes
+right oh also layer Norm can sometimes
+I think glorm sometimes does weird stuff
+I think glorm sometimes does weird stuff
+maybe not in the memory maybe it's just
+speed lorm can be slow
+though let's see if I instantly see
+though let's see if I instantly see
+speed up
+okay you do instantly see some speed
+okay you do instantly see some speed
+up not what I was
+up not what I was
+expecting I probably have to run the
+expecting I probably have to run the
+full
+full
+test it's 40K
+test it's 40K
+before this should be very noticeable
+before this should be very noticeable
+though this should
+though this should
+be more than double I believe
+and if it isn't then I'll be suspicious
+and if it isn't then I'll be suspicious
+as to how this is being
+disabled Collision off yeah but I put
+disabled Collision off yeah but I put
+them into the same
+M actually I think I tested both ways to
+M actually I think I tested both ways to
+be fair and I don't think there was a
+be fair and I don't think there was a
+difference other than like
+4% cuz see Isaac Jim will actually just
+4% cuz see Isaac Jim will actually just
+put them them all into the same end for
+put them them all into the same end for
+you but you have to pay the little
+you but you have to pay the little
+conversion
+price this is weird that you're only
+price this is weird that you're only
+getting an extra um 50% this is the same
+getting an extra um 50% this is the same
+model and everything isn't
+model and everything isn't
+it the same
+humanoid the same humanoid
+humanoid the same humanoid
+well I saw that there were some changes
+well I saw that there were some changes
+to some of these parameters as well
+to some of these parameters as well
+weren't
+there okay solver
+these are all the
+same this Flex thing is gone I don't
+same this Flex thing is gone I don't
+know if this was
+know if this was
+important Max GPU contact
+important Max GPU contact
+pairs these are the
+same I don't know if that changes
+same I don't know if that changes
+anything we can play with it
+don't need Flex
+don't need Flex
+gotcha some friction coefficients and
+gotcha some friction coefficients and
+stuff changed as
+stuff changed as
+well I
+noticed did you get this uh where is it
+noticed did you get this uh where is it
+the angular damping or
+the angular damping or
+whatever I think I told you there was
+whatever I think I told you there was
+some damping that was
+required yeah okay you kept this
+oh no here this
+one so these were the ones that were
+one so these were the ones that were
+required to prevent the bot from like
+required to prevent the bot from like
+flying off into
+space okay we'll see
+then I know if you don't have those it
+then I know if you don't have those it
+will fly off into space
+okay if you've tested that then that's
+okay if you've tested that then that's
+[Music]
+[Music]
+fine looking for anything else that
+fine looking for anything else that
+could be different
+o
+and let's just do
+think it's fine
+see it's going to be good
+the academic repos they just chip down
+the academic repos they just chip down
+their perf they chip their per down they
+their perf they chip their per down they
+chip it down and then there's nothing
+left it's very
+silly e
+okay
+okay
+so three time
+so this thing is not doing anything this
+so this thing is not doing anything this
+is
+free it's mostly in the M step itself
+free it's mostly in the M step itself
+but there is a substantial overhead to
+but there is a substantial overhead to
+this post step
+would this account for
+would this account for
+it I don't think this would quite
+it I don't think this would quite
+account for it cuz we had
+account for it cuz we had
+10 130k before so I think that the base
+10 130k before so I think that the base
+Sim itself is slow lower as
+Sim itself is slow lower as
+well is there anything changed to the
+well is there anything changed to the
+configuration of the Sim or the bot
+configuration of the Sim or the bot
+itself that would slow it
+itself that would slow it
+down versus my
+130 CU I do see that there's a bit of
+130 CU I do see that there's a bit of
+overhead added by this Ops computation
+overhead added by this Ops computation
+and stuff which is a little weird but
+key is contact this looks the
+same am OB steps
+well there's no reason not to put them
+well there's no reason not to put them
+all in the same
+all in the same
+M pretty sure
+is this code right
+is this code right
+here create Sim upper lower
+[Music]
+[Music]
+CL and then you need do you have num
+CL and then you need do you have num
+actors
+anywhere build single n
+so this is where I'd be suspicious
+potentially is this filtering
+everything this looks like it's only
+everything this looks like it's only
+filtering specific
+collisions for
+see
+user aggregate size exceeded
+user aggregate size exceeded
+I think we got that before I think
+I think we got that before I think
+that's
+fine oh but the thing is that you have
+fine oh but the thing is that you have
+to put them
+to put them
+um you need to spread the uh the agents
+um you need to spread the uh the agents
+out if you do
+this you have to set their
+position cuz this I think will be slower
+yeah so what's happening here is that
+yeah so what's happening here is that
+there
+are there are too many uh BFF they're
+are there are too many uh BFF they're
+all stacked on top of each
+all stacked on top of each
+other and this is why the SPs sucks
+you want to do is manually spread them
+you want to do is manually spread them
+out a little bit
+we can do that in there
+uh seg fful if we do not randomize the
+uh seg fful if we do not randomize the
+position that's moderately
+insane for
+it's XYZ I
+believe doesn't matter
+though that's a very weird seful T have
+though that's a very weird seful T have
+I don't trust that but whatever
+these all of the keys
+motion key is converted from the
+motion key is converted from the
+original
+format this
+thises pause get used it does right
+thises pause get used it does right
+start pose
+these things like run a super far
+these things like run a super far
+distance or
+something it
+something it
+shouldn't and that still wouldn't cause
+shouldn't and that still wouldn't cause
+this because then they would yeah they
+this because then they would yeah they
+shouldn't cause
+this this worked when I I had this in
+this this worked when I I had this in
+the repo so what happened
+here I spread them out and they still uh
+here I spread them out and they still uh
+still don't work
+do the start post get overridden
+somehow
+somehow
+yeah so uh something is wrong with the
+yeah so uh something is wrong with the
+scene because when I set this up this
+scene because when I set this up this
+didn't
+happen me
+happen me
+see build and
+oh wait hold on it's the
+grouping it's got to be the
+grouping group zero Phil fter
+one humanoid
+Enid let me just try real quick what
+Enid let me just try real quick what
+happens if I hard code
+happens if I hard code
+01 this
+work e
+huh
+anything else that would interfere with
+this
+uh look at that
+h
+okay it could possibly be these filter
+okay it could possibly be these filter
+RS yeah cuz you're overriding the filter
+RS yeah cuz you're overriding the filter
+okay
+okay
+disable S
+we're going to get this bloody thing
+we're going to get this bloody thing
+back to
+back to
+130 130 FPS thank you very mucher
+still know
+h h
+for e
+and let's just go look at our Sim and
+and let's just go look at our Sim and
+see where it's different I
+guess get
+asset set doof
+props handles
+props handles
+it's got a unique ID
+howy
+it's still XYZ
+right
+yeah
+yeah
+wait want from oril X
+zyx is it
+zyx is it
+zyx no cuz I
+zyx no cuz I
+have start pose it's going to be a
+have start pose it's going to be a
+transform
+is this thing
+backwards I guess the most productive
+backwards I guess the most productive
+thing is to try to just pull up the
+thing is to try to just pull up the
+renderer on this
+right I don't know what the heck is
+right I don't know what the heck is
+wrong with
+wrong with
+it
+headless this D down there
+smaller one first
+no
+render provide headless to phc puffer
+m i see
+there is our
+there is our
+renderer see a renderer
+trying to remember if there was anything
+trying to remember if there was anything
+special that needed to be done to get
+special that needed to be done to get
+this thing to show
+this thing to show
+up didn't think
+so this is the same
+container oh well this doesn't have a
+render so wait does do this thing need
+render so wait does do this thing need
+to
+have how does this thing not
+have how does this thing not
+error when I do this
+I'm
+dumb didn't have the freaking Argan
+stupid there we go
+so as I
+so as I
+expected the uh the position arcs don't
+expected the uh the position arcs don't
+seem to be taking
+seem to be taking
+here
+right it's a cluster
+for
+for e
+[Music]
+oh is spacing getting overridden
+where the heck is spacing and where is
+where the heck is spacing and where is
+it getting
+it getting
+[Music]
+overridden spacing this five
+overridden spacing this five
+hey Spencer um working on Isaac Jim
+hey Spencer um working on Isaac Jim
+stuff at the moment that we did make
+stuff at the moment that we did make
+some progress on sweeps as well
+did I just do something utterly
+stupid hi again back second stream
+stupid hi again back second stream
+yep always working on stuff that's how
+yep always working on stuff that's how
+it goes
+oh this is literally
+hang
+on I think this a literally order of
+on I think this a literally order of
+operations that's funny
+the
+so this is on
+me oh no it's still
+up how's that happen
+huh
+for e
+no no it is not
+no no it is not
+okay so this is what your nested methods
+okay so this is what your nested methods
+will do I had to go down four layers to
+will do I had to go down four layers to
+find this
+so presumably this
+does this gets called after create M
+right I actually have no idea how the
+right I actually have no idea how the
+how that
+worked
+worked
+still hang
+still hang
+on something is getting zeroed
+on something is getting zeroed
+here this is bad because it means that
+here this is bad because it means that
+you're not resetting correctly either
+okay so you set velocity and angular
+okay so you set velocity and angular
+velocity to
+zero e
+I think I have a call to
+do let me double check
+at 400 p.m. so I got an hour
+I might have to have another call in the
+meanwhile I can definitely tell you this
+meanwhile I can definitely tell you this
+is not resetting
+is not resetting
+correctly oh okay um I got to go take a
+correctly oh okay um I got to go take a
+call couple calls actually um I will try
+call couple calls actually um I will try
+to be back later though uh K this is not
+to be back later though uh K this is not
+resetting correctly if you're still
+resetting correctly if you're still
+around I'm going to try to find it but
+around I'm going to try to find it but
+uh it's when you set the initial pause
+uh it's when you set the initial pause
+it doesn't get set correctly so I
+it doesn't get set correctly so I
+suspect that's probably causing other
+suspect that's probably causing other
+issues
+
+Kind: captions
+Language: en
+I
+am going to be working on a little bit
+am going to be working on a little bit
+of just optimization on this
+environment me's see
+here first things first let's move this
+here first things first let's move this
+this do this
+they're going to be some Basics to
+check question mark
+HC
+HC
+puffer
+hello there's a break point
+here is it not installed an editable mod
+here is it not installed an editable mod
+or something
+oh that's how long it takes to load the
+oh that's how long it takes to load the
+bloody data
+okay
+observations uh
+observ the
+that's like nothing
+that's like nothing
+right that's four
+Megs okay so this shouldn't be taking up
+anything I think we're going to for
+anything I think we're going to for
+testing we're going to
+do there we go
+B
+e
+e
+e
+e
+e
+e e
+I got distracted by something for a
+second
+for e
+okay good synced up there
+okay good synced up there
+so yeah all I have to do at this point
+so yeah all I have to do at this point
+is figure out how to optimize this EMP a
+is figure out how to optimize this EMP a
+bit got some information on on this we
+bit got some information on on this we
+should be
+good
+good
+um memory ain't coming from buffers
+oh hey there you are
+oh hey there you are
+K so actually I can tell you this right
+K so actually I can tell you this right
+now then because this is this is just a
+now then because this is this is just a
+very very useful technique um so what I
+very very useful technique um so what I
+tend to find is like when you're taught
+tend to find is like when you're taught
+to program in and I don't I don't know
+to program in and I don't I don't know
+if I think it's just cuz you started
+if I think it's just cuz you started
+from the original like phc code I don't
+from the original like phc code I don't
+think it's cuz like you intentionally
+think it's cuz like you intentionally
+like you know restructured the thing
+like you know restructured the thing
+that I did but um they teach you this
+that I did but um they teach you this
+thing when you taught to program where
+thing when you taught to program where
+it's like keep your method short
+it's like keep your method short
+um literally the most useful technique I
+um literally the most useful technique I
+have for cleaning up research code bases
+have for cleaning up research code bases
+is to just unroll all of the methods
+is to just unroll all of the methods
+everywhere where it doesn't require
+everywhere where it doesn't require
+duplicating code just unroll all the
+duplicating code just unroll all the
+methods because what you find is like
+methods because what you find is like
+stuff is declared several times stuff is
+stuff is declared several times stuff is
+redundant to give you an idea I did this
+redundant to give you an idea I did this
+on the carbs database yesterday and I
+on the carbs database yesterday and I
+cut out 600 lines of code just by doing
+cut out 600 lines of code just by doing
+that um you can put some of the methods
+that um you can put some of the methods
+back after you've done that after you've
+back after you've done that after you've
+cleaned stuff up if you want but uh
+cleaned stuff up if you want but uh
+generally there
+generally there
+are two things I like two ways I decide
+are two things I like two ways I decide
+to like put stuff into a function uh the
+to like put stuff into a function uh the
+first is if I'm going to have to copy
+first is if I'm going to have to copy
+paste code otherwise like a big block of
+paste code otherwise like a big block of
+code I'll put it in a separate function
+code I'll put it in a separate function
+uh and the second one is if stuff gets
+uh and the second one is if stuff gets
+nested super deep but if like I have
+nested super deep but if like I have
+like a 300 line in it and it's just like
+like a 300 line in it and it's just like
+you big block of stuff that's like not
+you big block of stuff that's like not
+deeply nested pretty clean to follow
+deeply nested pretty clean to follow
+I'll just block it with comments and
+I'll just block it with comments and
+I'll just put it all in the one method
+I'll just put it all in the one method
+and then you can actually see what
+and then you can actually see what
+everything's doing and it's easier to
+everything's doing and it's easier to
+dup
+dup
+stuff so that was the one thing that was
+stuff so that was the one thing that was
+the one comment I had on that I'm going
+the one comment I had on that I'm going
+to work right now on figuring
+to work right now on figuring
+out where perf is
+leaking yeah but I just wanted to make
+leaking yeah but I just wanted to make
+sure you got that that uh trick because
+sure you got that that uh trick because
+it is very useful
+first thing I want to try is loading all
+first thing I want to try is loading all
+the Bots into one
+the Bots into one
+environment I think I saw the Bots are
+environment I think I saw the Bots are
+now being loaded into separate MS
+yeah
+so there's a small perf boost but I'm
+so there's a small perf boost but I'm
+also wondering about
+also wondering about
+memory I'm wondering if there's a memory
+memory I'm wondering if there's a memory
+impact difference
+okay so this is just generating data and
+okay so this is just generating data and
+we're already up to 6
+we're already up to 6
+Gigabytes this isn't even running the
+Gigabytes this isn't even running the
+M that part I wanted to go later but
+M that part I wanted to go later but
+cool yeah yeah yeah so that's uh I'm
+cool yeah yeah yeah so that's uh I'm
+going to work on this m stuff but yeah
+going to work on this m stuff but yeah
+unrolling code like that is it's a very
+unrolling code like that is it's a very
+very powerful technique because like you
+very powerful technique because like you
+have to kind realize and assume that
+have to kind realize and assume that
+when you're looking at an academic code
+when you're looking at an academic code
+base or a researcher code base
+base or a researcher code base
+scientists just suck at writing code and
+scientists just suck at writing code and
+they overly abstract everything so like
+they overly abstract everything so like
+if you unroll all the methods it becomes
+if you unroll all the methods it becomes
+very clear that the thing that they did
+very clear that the thing that they did
+doesn't make any sense and you can start
+doesn't make any sense and you can start
+cutting
+cutting
+stuff that's typically the reason for
+it like the carbs repo is actually
+it like the carbs repo is actually
+completely broken
+completely broken
+um now I can realize that now that I did
+that I actually wasn't looking at the
+that I actually wasn't looking at the
+damn I forgot to look at the the memory
+increase actually hold on no before we
+increase actually hold on no before we
+do this there's
+do this there's
+something something deeply
+screwy yeah they The Sweep stuff is
+screwy yeah they The Sweep stuff is
+going to take me a little longer but
+going to take me a little longer but
+it's very
+promising something else I wanted to do
+promising something else I wanted to do
+which is
+which is
+where you have reset
+where you have reset
+here and then reset loads the data
+here and then reset loads the data
+right but
+then is it load motion data load
+motion
+uh well that's weird
+hold on need an extra terminal so I can
+hold on need an extra terminal so I can
+watch memory usage and just put this up
+watch memory usage and just put this up
+on this
+side okay so we have
+side okay so we have
+okay 2.9
+GB seems to be what I'm actually
+GB seems to be what I'm actually
+using I don't actually know there's this
+using I don't actually know there's this
+one weird process on here I don't know
+one weird process on here I don't know
+what I'm using it for it's probably just
+what I'm using it for it's probably just
+xor or something so 3
+xor or something so 3
+gigs and then loading
+this we're at 6 gigs right
+this we're at 6 gigs right
+now from
+now from
+this okay and if I do load
+motion good the motion loading isn't
+motion good the motion loading isn't
+taking more
+memory so I mean 3 GB of memory is not
+memory so I mean 3 GB of memory is not
+terrible um you said 20 gigs of vram for
+terrible um you said 20 gigs of vram for
+2048 that's pretty rough we'll have to
+2048 that's pretty rough we'll have to
+look if figure that out if that's the
+look if figure that out if that's the
+case
+ideally as well we should just
+ideally as well we should just
+pre-process all of it and then dump it
+pre-process all of it and then dump it
+to file so we don't have to deal with
+that yeah
+that yeah
+exactly so I'm only seeing three
+gigs so I'm trying to figure out
+where
+oops or where this is
+caused I don't actually know how much
+caused I don't actually know how much
+SPS we get above 2048 though it's not
+SPS we get above 2048 though it's not
+going to be permanently linear
+so here we're going to allocate buffers
+so here we're going to allocate buffers
+and we're at 6.8
+right and because most of those are cop
+right and because most of those are cop
+are not
+copies yeah so that doesn't increase at
+all and now I'm going to watch the perf
+all and now I'm going to watch the perf
+test
+goes from six up to
+eight are you sure it uses 20
+eight are you sure it uses 20
+gigs I only see uh it only goes up to
+gigs I only see uh it only goes up to
+eight for me K goes from 3 to eight five
+gigs clear will be clear when I have
+gigs clear will be clear when I have
+training Loop unrolled yeah just like
+training Loop unrolled yeah just like
+that's what I suggest with the academic
+that's what I suggest with the academic
+code you literally just anytime you
+code you literally just anytime you
+don't have to actually copy the code
+don't have to actually copy the code
+twice or more um by unrolling it just
+twice or more um by unrolling it just
+unroll it so like any function that's
+unroll it so like any function that's
+called once basically you just
+called once basically you just
+unroll that was 2048 so I don't see
+unroll that was 2048 so I don't see
+where you're getting 20 gigs usage were
+where you're getting 20 gigs usage were
+you getting 20 gigs usage on a training
+you getting 20 gigs usage on a training
+test by any chance or were you getting
+test by any chance or were you getting
+it just from this perf test I'm not
+it just from this perf test I'm not
+seeing your 20
+gigs see I'm filing everything
+that means you're using 12 gigs of
+that means you're using 12 gigs of
+training and you're probably we're
+training and you're probably we're
+probably going to want a CPU
+probably going to want a CPU
+offload don't worry about that the m is
+offload don't worry about that the m is
+not
+not
+ridiculously bad in this department but
+ridiculously bad in this department but
+I don't know if you've tested it with um
+I don't know if you've tested it with um
+with
+more we really should attach the um the
+more we really should attach the um the
+data as well so that uh it's not this
+slow let me see
+slow let me see
+your you just linked me that
+thing right here's your w
+b and hopefully you kept the
+um are you missing the uh the usual
+um are you missing the uh the usual
+stuff that puffer
+logs like the dashboard and
+logs like the dashboard and
+stuff cuz the dashboard should be
+stuff cuz the dashboard should be
+logging M time um train time it should
+logging M time um train time it should
+be logging all those things
+that's not oh this is not from puffer I
+that's not oh this is not from puffer I
+see is this not from clean puff
+either should just be in clean
+puffero okay well I'm not going to be
+puffero okay well I'm not going to be
+able to tell very much from this
+able to tell very much from this
+unfortunately on its own
+RL games yeah okay unfortunately though
+RL games yeah okay unfortunately though
+you're not going to get any more um
+you're not going to get any more um
+SPS you're capped at
+SPS you're capped at
+2048 the only thing that it could do is
+2048 the only thing that it could do is
+it could potentially make training a
+it could potentially make training a
+little bit faster but I think that
+little bit faster but I think that
+usually 2048 to
+usually 2048 to
+4096 um on the slightly larger Nets were
+4096 um on the slightly larger Nets were
+likely to be using probably you won't
+likely to be using probably you won't
+see much of a
+see much of a
+difference so the only thing we can
+difference so the only thing we can
+really do here here is look for other
+optimizations how did you disable self
+optimizations how did you disable self
+Collision uh without putting all the
+Collision uh without putting all the
+bots in the same
+bots in the same
+n actually that's kind of
+n actually that's kind of
+suspicious you cuz you saw I saw you
+suspicious you cuz you saw I saw you
+have the flag for
+it just the memory oh yeah
+it just the memory oh yeah
+well they're probably just like I can
+well they're probably just like I can
+see the environment is not taking that
+see the environment is not taking that
+so that just must be the buffers
+right oh also layer Norm can sometimes
+right oh also layer Norm can sometimes
+I think glorm sometimes does weird stuff
+I think glorm sometimes does weird stuff
+maybe not in the memory maybe it's just
+speed lorm can be slow
+though let's see if I instantly see
+though let's see if I instantly see
+speed up
+okay you do instantly see some speed
+okay you do instantly see some speed
+up not what I was
+up not what I was
+expecting I probably have to run the
+expecting I probably have to run the
+full
+full
+test it's 40K
+test it's 40K
+before this should be very noticeable
+before this should be very noticeable
+though this should
+though this should
+be more than double I believe
+and if it isn't then I'll be suspicious
+and if it isn't then I'll be suspicious
+as to how this is being
+disabled Collision off yeah but I put
+disabled Collision off yeah but I put
+them into the same
+M actually I think I tested both ways to
+M actually I think I tested both ways to
+be fair and I don't think there was a
+be fair and I don't think there was a
+difference other than like
+4% cuz see Isaac Jim will actually just
+4% cuz see Isaac Jim will actually just
+put them them all into the same end for
+put them them all into the same end for
+you but you have to pay the little
+you but you have to pay the little
+conversion
+price this is weird that you're only
+price this is weird that you're only
+getting an extra um 50% this is the same
+getting an extra um 50% this is the same
+model and everything isn't
+model and everything isn't
+it the same
+humanoid the same humanoid
+humanoid the same humanoid
+well I saw that there were some changes
+well I saw that there were some changes
+to some of these parameters as well
+to some of these parameters as well
+weren't
+there okay solver
+these are all the
+same this Flex thing is gone I don't
+same this Flex thing is gone I don't
+know if this was
+know if this was
+important Max GPU contact
+important Max GPU contact
+pairs these are the
+same I don't know if that changes
+same I don't know if that changes
+anything we can play with it
+don't need Flex
+don't need Flex
+gotcha some friction coefficients and
+gotcha some friction coefficients and
+stuff changed as
+stuff changed as
+well I
+noticed did you get this uh where is it
+noticed did you get this uh where is it
+the angular damping or
+the angular damping or
+whatever I think I told you there was
+whatever I think I told you there was
+some damping that was
+required yeah okay you kept this
+oh no here this
+one so these were the ones that were
+one so these were the ones that were
+required to prevent the bot from like
+required to prevent the bot from like
+flying off into
+space okay we'll see
+then I know if you don't have those it
+then I know if you don't have those it
+will fly off into space
+okay if you've tested that then that's
+okay if you've tested that then that's
+[Music]
+[Music]
+fine looking for anything else that
+fine looking for anything else that
+could be different
+o
+and let's just do
+think it's fine
+see it's going to be good
+the academic repos they just chip down
+the academic repos they just chip down
+their perf they chip their per down they
+their perf they chip their per down they
+chip it down and then there's nothing
+left it's very
+silly e
+okay
+okay
+so three time
+so this thing is not doing anything this
+so this thing is not doing anything this
+is
+free it's mostly in the M step itself
+free it's mostly in the M step itself
+but there is a substantial overhead to
+but there is a substantial overhead to
+this post step
+would this account for
+would this account for
+it I don't think this would quite
+it I don't think this would quite
+account for it cuz we had
+account for it cuz we had
+10 130k before so I think that the base
+10 130k before so I think that the base
+Sim itself is slow lower as
+Sim itself is slow lower as
+well is there anything changed to the
+well is there anything changed to the
+configuration of the Sim or the bot
+configuration of the Sim or the bot
+itself that would slow it
+itself that would slow it
+down versus my
+130 CU I do see that there's a bit of
+130 CU I do see that there's a bit of
+overhead added by this Ops computation
+overhead added by this Ops computation
+and stuff which is a little weird but
+key is contact this looks the
+same am OB steps
+well there's no reason not to put them
+well there's no reason not to put them
+all in the same
+all in the same
+M pretty sure
+is this code right
+is this code right
+here create Sim upper lower
+[Music]
+[Music]
+CL and then you need do you have num
+CL and then you need do you have num
+actors
+anywhere build single n
+so this is where I'd be suspicious
+potentially is this filtering
+everything this looks like it's only
+everything this looks like it's only
+filtering specific
+collisions for
+see
+user aggregate size exceeded
+user aggregate size exceeded
+I think we got that before I think
+I think we got that before I think
+that's
+fine oh but the thing is that you have
+fine oh but the thing is that you have
+to put them
+to put them
+um you need to spread the uh the agents
+um you need to spread the uh the agents
+out if you do
+this you have to set their
+position cuz this I think will be slower
+yeah so what's happening here is that
+yeah so what's happening here is that
+there
+are there are too many uh BFF they're
+are there are too many uh BFF they're
+all stacked on top of each
+all stacked on top of each
+other and this is why the SPs sucks
+you want to do is manually spread them
+you want to do is manually spread them
+out a little bit
+we can do that in there
+uh seg fful if we do not randomize the
+uh seg fful if we do not randomize the
+position that's moderately
+insane for
+it's XYZ I
+believe doesn't matter
+though that's a very weird seful T have
+though that's a very weird seful T have
+I don't trust that but whatever
+these all of the keys
+motion key is converted from the
+motion key is converted from the
+original
+format this
+thises pause get used it does right
+thises pause get used it does right
+start pose
+these things like run a super far
+these things like run a super far
+distance or
+something it
+something it
+shouldn't and that still wouldn't cause
+shouldn't and that still wouldn't cause
+this because then they would yeah they
+this because then they would yeah they
+shouldn't cause
+this this worked when I I had this in
+this this worked when I I had this in
+the repo so what happened
+here I spread them out and they still uh
+here I spread them out and they still uh
+still don't work
+do the start post get overridden
+somehow
+somehow
+yeah so uh something is wrong with the
+yeah so uh something is wrong with the
+scene because when I set this up this
+scene because when I set this up this
+didn't
+happen me
+happen me
+see build and
+oh wait hold on it's the
+grouping it's got to be the
+grouping group zero Phil fter
+one humanoid
+Enid let me just try real quick what
+Enid let me just try real quick what
+happens if I hard code
+happens if I hard code
+01 this
+work e
+huh
+anything else that would interfere with
+this
+uh look at that
+h
+okay it could possibly be these filter
+okay it could possibly be these filter
+RS yeah cuz you're overriding the filter
+RS yeah cuz you're overriding the filter
+okay
+okay
+disable S
+we're going to get this bloody thing
+we're going to get this bloody thing
+back to
+back to
+130 130 FPS thank you very mucher
+still know
+h h
+for e
+and let's just go look at our Sim and
+and let's just go look at our Sim and
+see where it's different I
+guess get
+asset set doof
+props handles
+props handles
+it's got a unique ID
+howy
+it's still XYZ
+right
+yeah
+yeah
+wait want from oril X
+zyx is it
+zyx is it
+zyx no cuz I
+zyx no cuz I
+have start pose it's going to be a
+have start pose it's going to be a
+transform
+is this thing
+backwards I guess the most productive
+backwards I guess the most productive
+thing is to try to just pull up the
+thing is to try to just pull up the
+renderer on this
+right I don't know what the heck is
+right I don't know what the heck is
+wrong with
+wrong with
+it
+headless this D down there
+smaller one first
+no
+render provide headless to phc puffer
+m i see
+there is our
+there is our
+renderer see a renderer
+trying to remember if there was anything
+trying to remember if there was anything
+special that needed to be done to get
+special that needed to be done to get
+this thing to show
+this thing to show
+up didn't think
+so this is the same
+container oh well this doesn't have a
+render so wait does do this thing need
+render so wait does do this thing need
+to
+have how does this thing not
+have how does this thing not
+error when I do this
+I'm
+dumb didn't have the freaking Argan
+stupid there we go
+so as I
+so as I
+expected the uh the position arcs don't
+expected the uh the position arcs don't
+seem to be taking
+seem to be taking
+here
+right it's a cluster
+for
+for e
+[Music]
+oh is spacing getting overridden
+where the heck is spacing and where is
+where the heck is spacing and where is
+it getting
+it getting
+[Music]
+overridden spacing this five
+overridden spacing this five
+hey Spencer um working on Isaac Jim
+hey Spencer um working on Isaac Jim
+stuff at the moment that we did make
+stuff at the moment that we did make
+some progress on sweeps as well
+did I just do something utterly
+stupid hi again back second stream
+stupid hi again back second stream
+yep always working on stuff that's how
+yep always working on stuff that's how
+it goes
+oh this is literally
+hang
+on I think this a literally order of
+on I think this a literally order of
+operations that's funny
+the
+so this is on
+me oh no it's still
+up how's that happen
+huh
+for e
+no no it is not
+no no it is not
+okay so this is what your nested methods
+okay so this is what your nested methods
+will do I had to go down four layers to
+will do I had to go down four layers to
+find this
+so presumably this
+does this gets called after create M
+right I actually have no idea how the
+right I actually have no idea how the
+how that
+worked
+worked
+still hang
+still hang
+on something is getting zeroed
+on something is getting zeroed
+here this is bad because it means that
+here this is bad because it means that
+you're not resetting correctly either
+okay so you set velocity and angular
+okay so you set velocity and angular
+velocity to
+zero e
+I think I have a call to
+do let me double check
+at 400 p.m. so I got an hour
+I might have to have another call in the
+meanwhile I can definitely tell you this
+meanwhile I can definitely tell you this
+is not resetting
+is not resetting
+correctly oh okay um I got to go take a
+correctly oh okay um I got to go take a
+call couple calls actually um I will try
+call couple calls actually um I will try
+to be back later though uh K this is not
+to be back later though uh K this is not
+resetting correctly if you're still
+resetting correctly if you're still
+around I'm going to try to find it but
+around I'm going to try to find it but
+uh it's when you set the initial pause
+uh it's when you set the initial pause
+it doesn't get set correctly so I
+it doesn't get set correctly so I
+suspect that's probably causing other
+suspect that's probably causing other
+issues

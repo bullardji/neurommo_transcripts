@@ -1,0 +1,2117 @@
+Kind: captions
+Language: en
+Good
+morning. We are back
+morning. We are back
+live.
+Hi. Plan for today is to continue
+Hi. Plan for today is to continue
+working on
+working on
+release. Got a good hour and a half,
+release. Got a good hour and a half,
+hour 40 right now and uh
+hour 40 right now and uh
+thereafter be back for a good chunk of
+thereafter be back for a good chunk of
+the rest of the
+day. I really want to get the final
+day. I really want to get the final
+experiments done. Um, there are a few
+experiments done. Um, there are a few
+things that are still weird with the
+things that are still weird with the
+hyperparameter
+hyperparameter
+sweeps, and I want to figure out
+sweeps, and I want to figure out
+why. They work generally pretty darn
+why. They work generally pretty darn
+well, but they don't work exactly the
+well, but they don't work exactly the
+way I want them
+to, right? So, we have a few different
+to, right? So, we have a few different
+things to look at here. So the first one
+things to look at here. So the first one
+here this
+experiment. So what I did here is I
+experiment. So what I did here is I
+changed the way that clipping works
+changed the way that clipping works
+quite substantially.
+Okay. So, this is actually slightly
+Okay. So, this is actually slightly
+worse. I'm
+using Check the Clip
+coefficient. So, here's the F
+coefficient. So, here's the F
+coefficient.
+Where's VF
+clip? All right. So, this doesn't even
+clip? All right. So, this doesn't even
+really get used. So what I tried to do
+really get used. So what I tried to do
+here, I reformulated the
+here, I reformulated the
+clipping process a bit
+clipping process a bit
+differently and it actually it does a
+differently and it actually it does a
+fair bit worse. Now the one thing I do
+fair bit worse. Now the one thing I do
+want to look
+want to look
+at, let me just compare one thing here.
+at, let me just compare one thing here.
+This is like 21 22 seconds,
+This is like 21 22 seconds,
+right? We've also got these experiments.
+We have the clip
+coefficient. We have a lot of these runs
+coefficient. We have a lot of these runs
+down at the lowest possible end. What I
+down at the lowest possible end. What I
+want to do here is I'm going to do a
+want to do here is I'm going to do a
+filter. We're going to do VF clip coat.
+um range slashvf
+clip and we're going to set this to be
+clip and we're going to set this to be
+less than or equal to
+0.1. Okay, so now we only have 93
+0.1. Okay, so now we only have 93
+runs. And if I look at these
+do relative
+time. Okay, so we actually still do
+time. Okay, so we actually still do
+have like 19 or 20
+have like 19 or 20
+seconds. It is still
+seconds. It is still
+better. Like if we have 19 or 20 seconds
+better. Like if we have 19 or 20 seconds
+over
+over
+here for a full solve with 93 runs and
+here for a full solve with 93 runs and
+then if I take this filter
+off
+one you know it is actually very similar
+here. It's just that this one run got
+here. It's just that this one run got
+kind of lucky. I
+think I think we can still set like a
+think I think we can still set like a
+20-ish second solve even if we prevent
+20-ish second solve even if we prevent
+it from doing like ridiculously
+it from doing like ridiculously
+aggressive clip.
+Can we do
+Can we do
+um we take a quick look at
+um we take a quick look at
+like if there is a substantial
+like if there is a substantial
+correlation like we actually have good
+correlation like we actually have good
+runs at any clip co-op. I guess we can
+runs at any clip co-op. I guess we can
+do like
+do like
+time less than 25
+seconds and see what this gives us.
+Most of the really good runs over here
+Most of the really good runs over here
+are just at the lowest possible
+end. Bit
+odd. All
+odd. All
+right. So, we have uh we do have that
+right. So, we have uh we do have that
+for
+for
+starters.
+starters.
+Oops. And now we want to look at our
+Oops. And now we want to look at our
+maze
+results. Yeah. So, this is like this is
+results. Yeah. So, this is like this is
+quite substantially better than
+quite substantially better than
+before because we we did this sweep and
+before because we we did this sweep and
+we did this sweep.
+The heck is up with these?
+Um, they're like right on top of each
+other like the same
+other like the same
+curve. Tiny bits of shifting.
+Oh, it's locked to minimum total time
+steps. This is actually probably like a
+steps. This is actually probably like a
+uh an eval problem,
+uh an eval problem,
+right? Like it not getting an accurate
+right? Like it not getting an accurate
+evaluation maybe.
+Well, I mean, this is not surprising
+Well, I mean, this is not surprising
+that this hasn't done particularly well
+that this hasn't done particularly well
+then. And we have to figure out why it's
+then. And we have to figure out why it's
+locked to
+locked to
+uh to so
+low. Probably just not a very good
+eval. These curves are super janky.
+Is this like
+Is this like
+BPT Horizon or like numbum M's too big
+BPT Horizon or like numbum M's too big
+or something
+or something
+weird? Pick one of these.
+This was
+one 50 million
+steps. Becknum Ms is
+steps. Becknum Ms is
+four. I think that's
+four. I think that's
+large. Yeah. So, it actually does have a
+large. Yeah. So, it actually does have a
+bunch of M's.
+64 horizon.
+Still batch
+Still batch
+size. Batch size is
+auto mini
+auto mini
+batch. Small mini batches.
+Okay, we can uh we can get some ideas
+Okay, we can uh we can get some ideas
+for runs from here.
+So, I say we limit VClip. Hang
+So, I say we limit VClip. Hang
+on. Let's actually do some of this
+stuff. Oh, hey Linky. Hey. Uh, hey
+stuff. Oh, hey Linky. Hey. Uh, hey
+folks. I uh I didn't have the chat up.
+folks. I uh I didn't have the chat up.
+One second.
+One second.
+I can only see it on this little tiny
+preview. I was checking
+experiments.
+experiments.
+Curious. Okay. Link is just saying
+Curious. Okay. Link is just saying
+puffer. Curious why you didn't join a
+puffer. Curious why you didn't join a
+lab or do a posttock but still building
+lab or do a posttock but still building
+puffer li full time.
+puffer li full time.
+Well, I mean, I made my own lab
+Well, I mean, I made my own lab
+basically, right? Like I'm doing my own
+basically, right? Like I'm doing my own
+thing here. I don't want to do a
+thing here. I don't want to do a
+posttock because the whole way that I've
+posttock because the whole way that I've
+gotten all this stuff done with Puffer
+gotten all this stuff done with Puffer
+is to move very very far away from the
+is to move very very far away from the
+way academia does work.
+way academia does work.
+Um, yeah, that's that's pretty much it.
+Um, yeah, that's that's pretty much it.
+Like it's really a postoc is just not an
+Like it's really a postoc is just not an
+appealing position at all either, right?
+appealing position at all either, right?
+like you get paid nothing anyways and
+like you get paid nothing anyways and
+like you have academic obligations and
+like you have academic obligations and
+the only thing it lets you do that a PhD
+the only thing it lets you do that a PhD
+doesn't already let me do is like go to
+doesn't already let me do is like go to
+a professorship position which I have no
+a professorship position which I have no
+interest in like why would I do
+interest in like why would I do
+that and like existing labs aren't doing
+that and like existing labs aren't doing
+the thing that I wanted to do so I had
+the thing that I wanted to do so I had
+to do my own thing Okay.
+Oops, not this one.
+Oops, not this one.
+We're going to set this to 0.1. One.
+actually just go grab some
+actually just go grab some
+uh some defaults to
+use. Got
+use. Got
+like gradient norm, right?
+I think we start these at 0.2
+now. Start the 0 point
+2. Alpha and beta.
+and the main thing I wanted to do was
+and the main thing I wanted to do was
+the
+evals. This eval function that I have is
+evals. This eval function that I have is
+not very good.
+Yeah. So, this needs to have like a
+Yeah. So, this needs to have like a
+pretty decent
+pretty decent
+sized additional eval, I would
+think.
+Wait, this is and not
+Wait, this is and not
+stats. This should be
+stats. This should be
+ore. Yeah, there should be
+ore. Yeah, there should be
+ore. That's probably all it
+was cuz
+was cuz
+like 64 time steps.
+do like
+25. This should always be reasonable. I
+25. This should always be reasonable. I
+think if I just do
+this. Okay. So now what do we do
+this. Okay. So now what do we do
+additionally for breakout?
+additionally for breakout?
+This actually maybe changes the uh the
+This actually maybe changes the uh the
+sweeps a little bit already. I'm trying
+sweeps a little bit already. I'm trying
+to think if there's anything else we can
+to think if there's anything else we can
+do on breakout speedrun
+specifically or if we're kind of just
+specifically or if we're kind of just
+good. Do I believe that this is capped
+out? I mean, I can sweep the uh this the
+out? I mean, I can sweep the uh this the
+frame skip,
+frame skip,
+right? We have not tried free sweeping
+right? We have not tried free sweeping
+frame skip.
+Yeah. So, frame skip can go 0 to 5, 0 to
+Yeah. So, frame skip can go 0 to 5, 0 to
+6, something, 0 to 8, whatever.
+Okay. So, that actually should produce I
+Okay. So, that actually should produce I
+think that's worth running these as uh
+think that's worth running these as uh
+as new experiments now. Like these
+as new experiments now. Like these
+should be
+should be
+substantially different results.
+change anything major
+here. Oh, this is fine.
+Welcome YouTube folks. We are looking at
+Welcome YouTube folks. We are looking at
+the results of last night's experiment
+the results of last night's experiment
+and launching some new ones here.
+Okay, the goal kind of um with what I'm
+Okay, the goal kind of um with what I'm
+doing at the moment, I'm just sort of
+doing at the moment, I'm just sort of
+fine-tuning our sweep
+fine-tuning our sweep
+stuff, there like a bunch of little
+stuff, there like a bunch of little
+things I wanted to test that could make
+things I wanted to test that could make
+a difference just so we have our
+a difference just so we have our
+strongest possible results for uh for
+launch. I'd really like to have um a sub
+launch. I'd really like to have um a sub
+202 set of breakout parameters in
+202 set of breakout parameters in
+particular. I think that would be very
+particular. I think that would be very
+nice. Like a consistent solve in sub 20.
+nice. Like a consistent solve in sub 20.
+That'd be pretty
+cool. Move this out of the
+way. Let me go look at the to-dos now
+way. Let me go look at the to-dos now
+because I think if I spend a third day
+because I think if I spend a third day
+in a row just working on blog post, I'm
+in a row just working on blog post, I'm
+going to go nuts.
+And I also I want to make sure we
+And I also I want to make sure we
+getting the rest of our stuff into a
+getting the rest of our stuff into a
+good
+spot. Hey Linky, did you finalize
+spot. Hey Linky, did you finalize
+merging release into dev?
+merging release into dev?
+Yes, it's in dev.
+The new end bindings you can look at
+The new end bindings you can look at
+like snake or neural MMO. Um it should
+like snake or neural MMO. Um it should
+be quite easy to bind in most cases. If
+be quite easy to bind in most cases. If
+you find yourself doing like weird
+you find yourself doing like weird
+Python API C API stuff, you probably are
+Python API C API stuff, you probably are
+over complicating it.
+And once we have the final sweeps here,
+And once we have the final sweeps here,
+we really just need to do like the add
+we really just need to do like the add
+ones, drop
+ones. The few things that still bother
+ones. The few things that still bother
+me, I don't know if we want to
+me, I don't know if we want to
+have the 10 points per
+have the 10 points per
+run, like the down sample
+trajectories. We probably do
+trajectories. We probably do
+You know, we probably do because like
+You know, we probably do because like
+the
+um cosign and nailing should give you
+um cosign and nailing should give you
+pretty darn smooth learning curves. So,
+pretty darn smooth learning curves. So,
+I think it's fine to have to have
+I think it's fine to have to have
+that. Give release a look over and seem
+that. Give release a look over and seem
+pretty clear. Yeah, I'm trying to make
+pretty clear. Yeah, I'm trying to make
+it very simple. The hope is that the new
+it very simple. The hope is that the new
+release should be very very simple.
+It's like I almost shoot myself on the
+It's like I almost shoot myself on the
+foot because like I work so hard to make
+foot because like I work so hard to make
+it look simple and then if you don't
+it look simple and then if you don't
+know any better in RL people go well
+know any better in RL people go well
+that's easy like you know why is he
+that's easy like you know why is he
+working on this forever if it's that so
+working on this forever if it's that so
+easy it's like well it took a lot of
+easy it's like well it took a lot of
+work to make it this easy for
+I finally got like an actual coffee
+I finally got like an actual coffee
+maker as well for here, which I've
+maker as well for here, which I've
+wanted for a while.
+Most of these just need some sweeps
+now. We need to lock in like a good set
+now. We need to lock in like a good set
+of
+of
+defaults and we need to run some sweeps.
+A little weird how uh neural MMO doesn't
+A little weird how uh neural MMO doesn't
+sweep
+right. Uh it's possible there that just
+right. Uh it's possible there that just
+the search centers are not very good.
+I think I have a tendency to like just
+I think I have a tendency to like just
+kind of agonize and stew over um every
+kind of agonize and stew over um every
+release and I want to avoid doing that
+release and I want to avoid doing that
+as much as possible. I'm trying to think
+as much as possible. I'm trying to think
+like what really things I want to have
+like what really things I want to have
+done in order to like cap this off. Like
+done in order to like cap this off. Like
+I got to move some files around and do
+I got to move some files around and do
+some pretty minor cleanups.
+I think probably just the process of
+I think probably just the process of
+running all the
+experiments. Welcome motion.
+I'm trying to think almost if it's worth
+I'm trying to think almost if it's worth
+like
+like
+um am I if I'm ready to just like run
+um am I if I'm ready to just like run
+all the dang experiments and be done
+all the dang experiments and be done
+with it.
+with it.
+Like do I just spin up a whole bunch of
+Like do I just spin up a whole bunch of
+extra
+extra
+machines and just go for it?
+No, I don't I don't quite think so
+No, I don't I don't quite think so
+because there's still
+because there's still
+like there's still like little extra
+like there's still like little extra
+annoyances around that I like I don't
+annoyances around that I like I don't
+feel like we perfectly understand quite
+feel like we perfectly understand quite
+everything yet on this.
+I think what I do is I assume that I am
+I think what I do is I assume that I am
+going to keep the 10 down sample points
+going to keep the 10 down sample points
+thing
+thing
+um for protein. That's probably a good
+um for protein. That's probably a good
+idea.
+Well, I think that's probably a good
+Well, I think that's probably a good
+idea at
+least. I don't know if I should ablade
+least. I don't know if I should ablade
+it or not.
+it or not.
+The maze sweeps in particular bother me
+The maze sweeps in particular bother me
+because like the maze sweep domain is
+because like the maze sweep domain is
+the one where it should be really darn
+the one where it should be really darn
+good and I thought I actually had
+good and I thought I actually had
+something on this before. Can you access
+something on this before. Can you access
+a PNG in an asset folder through an
+a PNG in an asset folder through an
+import? It might be nice to have all
+import? It might be nice to have all
+puffer assets.
+um you get into relative path
+um you get into relative path
+things like you can't just import an
+things like you can't just import an
+asset folder like import from Python.
+asset folder like import from Python.
+You can give it the
+You can give it the
+path but then you get into relative like
+path but then you get into relative like
+path
+issues. They're not in the end folder
+issues. They're not in the end folder
+though the puffer assets linky. They're
+though the puffer assets linky. They're
+in uh resources.
+in uh resources.
+Like there's a resources folder that has
+Like there's a resources folder that has
+some shared ones and then it has like
+some shared ones and then it has like
+some uh some MS specific ones.
+So what what are like the remaining
+I didn't do
+this
+this
+external m clean
+external m clean
+up move uh brand files.
+That's pretty much
+That's pretty much
+it. I just installed puffer lip pip.
+it. I just installed puffer lip pip.
+Yeah, I'm also I'm going to
+Yeah, I'm also I'm going to
+um I'm going to move the train stuff
+um I'm going to move the train stuff
+into there as well. So, it's like you're
+into there as well. So, it's like you're
+literally going to be able to have like
+literally going to be able to have like
+a one one command or whatever to do it.
+a one one command or whatever to do it.
+should be quite
+good. I know I definitely just need to
+good. I know I definitely just need to
+like a whole bunch of experiments to run
+like a whole bunch of experiments to run
+is the
+thing. It's not even that I don't want
+thing. It's not even that I don't want
+to spend a few hundred bucks on like
+to spend a few hundred bucks on like
+compute over the next week. like that's
+compute over the next week. like that's
+not a big deal. It's that I don't want
+not a big deal. It's that I don't want
+to have to deal with like spinning up
+to have to deal with like spinning up
+and tearing down machines and like not
+and tearing down machines and like not
+knowing if they're undervolted and like
+knowing if they're undervolted and like
+whether the PF is actually reasonable or
+whether the PF is actually reasonable or
+not.
+Um, but there's actually there's quite a
+Um, but there's actually there's quite a
+bit of stuff I'm looking now that I'm
+bit of stuff I'm looking now that I'm
+looking here that like I can kind of
+looking here that like I can kind of
+just
+do cuz we still need to clean up all the
+do cuz we still need to clean up all the
+external M's and make sure stuff runs.
+We still need
+We still need
+to we need to clean up the configs for
+to we need to clean up the configs for
+those as well. We need to move some
+those as well. We need to move some
+train
+train
+files. Quite a bit of stuff we need to
+files. Quite a bit of stuff we need to
+do. And honestly, like all the
+do. And honestly, like all the
+deprecated ends that nobody
+uses, we can get rid of those as well,
+uses, we can get rid of those as well,
+right?
+right?
+We keep like Majoko, Atari, Procgen, and
+We keep like Majoko, Atari, Procgen, and
+like the other ones that people actually
+use. Okay, so I think we start
+use. Okay, so I think we start
+by I think we actually
+start cleaning some stuff up here.
+Okay, this
+runs. What other like random files do I
+runs. What other like random files do I
+have in here? I guess I've got like the
+have in here? I guess I've got like the
+C++ and
+stuff C++ which we don't use anymore.
+Let me just look how uh how torch
+Let me just look how uh how torch
+extensions does
+Yeah, Linky.
+Yes, this no longer
+builds. There's like some name conflict,
+builds. There's like some name conflict,
+isn't there?
+I think the easiest thing is going to
+I think the easiest thing is going to
+just be to like do
+their like their annoying extra step
+their like their annoying extra step
+with either make like put them each in
+with either make like put them each in
+their own folder or something.
+We do like
+We don't need extensions.c
+See? Yeah, it's pretty
+See? Yeah, it's pretty
+decent. We've got this
+extensions barracuda.
+Damn it. That is not what I meant to do.
+Damn it. That is not what I meant to do.
+Me go get my code
+back. Yeah, I think if I do some of this
+back. Yeah, I think if I do some of this
+cleanup work today, this will be good
+cleanup work today, this will be good
+because I'm sick of writing. I kind of
+because I'm sick of writing. I kind of
+want to just do some code and move some
+want to just do some code and move some
+stuff
+stuff
+around. This will be
+better. I lose a lot of steam when I
+better. I lose a lot of steam when I
+spend too much time on like fiddly
+spend too much time on like fiddly
+fiddly bits.
+Give myself an extra turn.
+All right. See if this
+compiles. Still no.
+There we go. Yeah, these need to be in
+There we go. Yeah, these need to be in
+different folders for whatever reason,
+different folders for whatever reason,
+even though they have different
+even though they have different
+extensions. I don't know. It's kind of
+extensions. I don't know. It's kind of
+weird.
+We should set the uh the defaults to be
+Reasonable. Oh, just train by
+Reasonable. Oh, just train by
+default. M should pop or break out.
+default. M should pop or break out.
+Let's do this.
+Okay, so this still works.
+Ah,
+Ah,
+shoot. What is uh this giant
+file pix?
+Wait, delete
+mode.
+Rename. Oh, there it is.
+There we are.
+So, want to see what the root structure
+So, want to see what the root structure
+looks like.
+I still have all this
+I still have all this
+stuff. C advantage.cu and
+stuff. I don't need this
+anymore. Yeah, we can get rid of all
+anymore. Yeah, we can get rid of all
+this.
+What else do we not
+What else do we not
+need?
+SP3 of
+SP3 of
+that SBC advantage.
+UN.Py. We don't use
+UN.Py. We don't use
+this. Well, it's not committed
+this. Well, it's not committed
+anyways. GPU drive test.
+I'm going to get rid of these files and
+I'm going to get rid of these files and
+Spencer can yell at me if he needs
+them. Evaluate ELOS.
+them. Evaluate ELOS.
+Don't use
+this. I just
+this. I just
+made you have thread.
+made you have thread.
+Gotcha. I'm happy to help stuff if you
+Gotcha. I'm happy to help stuff if you
+get stuck on things. Like a lot of it is
+get stuck on things. Like a lot of it is
+we need to have uh we need to have all
+we need to have uh we need to have all
+this stuff like cleaned nicely so it's
+easier. Can we do something like this?
+Yeah, I can do that.
+Give me one second.
+I'm just thinking about how I want to uh
+I'm just thinking about how I want to uh
+do it specifically.
+Yeah, I don't want to like look
+Yeah, I don't want to like look
+everywhere for binding files though. I
+everywhere for binding files though. I
+think I only want to look
+in in here specifically.
+and I just do like this.
+Hey, there's your oneliner that gives
+Hey, there's your oneliner that gives
+you uh your binding files, right?
+Okay. So, this does
+Okay. So, this does
+this. Um, I think
+that I might be able to like get auto
+that I might be able to like get auto
+rebuild to work. But yeah, Linky, that's
+rebuild to work. But yeah, Linky, that's
+a good suggestion. Thank you. I'll often
+a good suggestion. Thank you. I'll often
+like I'll take the idea, but I'll just
+like I'll take the idea, but I'll just
+want to like implement it a little bit
+want to like implement it a little bit
+like
+like
+simpler. So like you know this is the
+simpler. So like you know this is the
+oneliner that'll look for binding.c
+oneliner that'll look for binding.c
+anywhere in any of the ocean
+subdirectories but I think this does
+subdirectories but I think this does
+what you want. Yeah.
+We'll see how that goes. And now if I
+We'll see how that goes. And now if I
+refresh
+refresh
+this, got a lot less crap in here.
+I think we call it like model.bin or
+whatever.
+Yeah. Or weights.bin.
+And that looks
+And that looks
+good. It gives us our export
+[Music]
+Okay. What else is there to tweak?
+[Music]
+Yeah, we really didn't end up needing
+Yeah, we really didn't end up needing
+this very much,
+this very much,
+huh?
+Anything we don't use, we get rid of.
+Anything we don't use, we get rid of.
+That's the rule.
+Okay, so this was supposed to be some
+Okay, so this was supposed to be some
+sort of test for new bindings.
+visualize. Use this
+visualize. Use this
+either though. We'll probably end up
+either though. We'll probably end up
+taking some of this back at least.
+And then this thing we have to like
+move. Where's a good spot for this?
+just move it in for now.
+Okay, so now we just have
+Okay, so now we just have
+setup.py com license. Yeah, now we all
+setup.py com license. Yeah, now we all
+just have the standard
+stuff. And now we have config, puffer,
+stuff. And now we have config, puffer,
+lib, scripts, and test.
+Now, I don't think that this config can
+Now, I don't think that this config can
+live here is the problem,
+right? Cuz like you're not going to have
+right? Cuz like you're not going to have
+access like this is not going to get
+access like this is not going to get
+packaged up for
+you. So, I think we have to move the
+you. So, I think we have to move the
+config into puffer lib, right?
+Unless there's a way to tell.
+Unless there's a way to tell.
+Um, no, there isn't. If it's just if
+Um, no, there isn't. If it's just if
+it's not in here, it's not in here,
+it's not in here, it's not in here,
+right? So, we have to do we can probably
+right? So, we have to do we can probably
+sim link
+sim link
+it. Hang on. So we do like get
+it. Hang on. So we do like get
+move config upper lib.
+Okay. So, this is just move
+everything. Is it What's the sim link?
+everything. Is it What's the sim link?
+Is it the
+desk? Okay, let me double check. Set an
+desk? Okay, let me double check. Set an
+alarm for a meeting. I think it's in a
+alarm for a meeting. I think it's in a
+couple hours,
+couple hours,
+though. Welcome, YouTube folks.
+though. Welcome, YouTube folks.
+I think I've got breakfast in 30 and
+I think I've got breakfast in 30 and
+then I got a meeting at like 11
+something. Double check this and then we
+something. Double check this and then we
+will keep working on this for a bit.
+One second,
+folks.
+folks.
+11:30. Me set myself an alarm for that
+11:30. Me set myself an alarm for that
+and then we will
+and then we will
+finish the
+refactor. All
+right. I always forget the sim link
+right. I always forget the sim link
+syntax.
+Uh it's file run link. Okay.
+Now we've got puffer
+lib. Got two sim
+lib. Got two sim
+links. Got the
+links. Got the
+readme. If I open puffer
+readme. If I open puffer
+lab, we have a few things in
+lab, we have a few things in
+here. Fairly small.
+This definitely needs to be here. This
+This definitely needs to be here. This
+probably needs to be here. This needs to
+probably needs to be here. This needs to
+be
+here. Yeah. Now we actually we
+here. Yeah. Now we actually we
+have this is a pretty nice file
+have this is a pretty nice file
+structure. I'd say this is a pretty nice
+structure. I'd say this is a pretty nice
+file structure.
+Some of this can get cleaned up as well.
+I wonder if it makes sense now to put
+I wonder if it makes sense now to put
+the configs files with the source here
+the configs files with the source here
+or if it makes sense to separate
+them cuz like before you know we weren't
+them cuz like before you know we weren't
+shipping the config files.
+I think we'll like leave it like this
+I think we'll like leave it like this
+for now and then we'll we'll think about
+it. Let's see if this still works.
+It still
+It still
+runs. This still runs
+I'd like an entry point
+here. This looks cool, right?
+named
+named
+Jim. kind of
+silly. Oh, yeah. That does need gem,
+silly. Oh, yeah. That does need gem,
+doesn't it?
+Wait, this is
+already we have
+gem. Why the heck is it Isaac Puffer?
+Makes no bloody
+sense. It's a good time to get UV pep.
+Hip install UV.
+Okay. Oops.
+required project.name is not set. Okay.
+required project.name is not set. Okay.
+So there's additional validation I
+So there's additional validation I
+guess.
+you
+require. Yeah, this is not what I Why
+require. Yeah, this is not what I Why
+the hell you be using uh this version?
+That's so obnoxious.
+It's weird that this is failing in like
+It's weird that this is failing in like
+something that should not even get be
+something that should not even get be
+getting imported at
+getting imported at
+all. Python tooling system just
+sucks. Python 3.8. Oh, wait. Hang on.
+That
+is We'll just like pin We'll just like
+is We'll just like pin We'll just like
+pin 312 default.
+Definitely a lot of packaging stuff I'm
+Definitely a lot of packaging stuff I'm
+going to have to figure out with this.
+going to have to figure out with this.
+But
+um the main thing is now at least the
+um the main thing is now at least the
+files are in a reasonable spot and we
+files are in a reasonable spot and we
+can start looking at stuff like the
+can start looking at stuff like the
+entry points and like how we're going to
+entry points and like how we're going to
+want people to be able to
+want people to be able to
+uh to use Puffer just from the pit
+uh to use Puffer just from the pit
+package.
+It should be pretty
+It should be pretty
+helpful, All right.
+I don't know what it thinks it's
+I don't know what it thinks it's
+installing here.
+There are like several things I just do
+There are like several things I just do
+not like here.
+How the heck is this still
+How the heck is this still
+failing? Now we're failing on
+gymnasium. Like what?
+Oh, this is probably cuz it's build
+Oh, this is probably cuz it's build
+time,
+right? I see.
+And then what I guess then this is
+like this is why you don't import your
+like this is why you don't import your
+your version string like
+this. See if this works.
+What in the heck?
+Where's the error?
+Python
+requires. So I guess a lot of this has
+requires. So I guess a lot of this has
+to get moved to the toml for the toml to
+behave kind of. Okay.
+Yeah, this is like so stupid. I think
+Yeah, this is like so stupid. I think
+you have to like duplicate the damn
+you have to like duplicate the damn
+version. We'll do stuff for now, but I
+version. We'll do stuff for now, but I
+remember the TOML setup just being kind
+remember the TOML setup just being kind
+of
+dumb. Is this just because of this the
+dumb. Is this just because of this the
+thing in the TOML?
+Okay, this is what we were looking
+Okay, this is what we were looking
+for. The setup.py version.
+And this actually seems to
+And this actually seems to
+run. I don't know why the hell it's
+run. I don't know why the hell it's
+installed. It's uh trying to break my
+installed. It's uh trying to break my
+CUDA now. That's kind of
+obnoxious. Requirement already set.
+obnoxious. Requirement already set.
+Okay. Okay. So, it didn't reinstall CUD.
+Okay. Okay. So, it didn't reinstall CUD.
+It's just really really slow in
+It's just really really slow in
+checking. Fine. Cool. So, what we'll do
+checking. Fine. Cool. So, what we'll do
+is uh I'm going to go for breakfast. I
+is uh I'm going to go for breakfast. I
+got a meeting afterwards.
+got a meeting afterwards.
+Um, and then in the afternoon I will be
+Um, and then in the afternoon I will be
+back and the goal will be to get
+back and the goal will be to get
+packaging in a good spot today, get all
+packaging in a good spot today, get all
+of the uh the things where they should
+of the uh the things where they should
+be, get entry points the way they should
+be, get entry points the way they should
+be, kind of do all that side of things,
+be, kind of do all that side of things,
+probably move some code around quite a
+probably move some code around quite a
+bit, and uh yeah, I think that that will
+bit, and uh yeah, I think that that will
+have us
+have us
+in a bit of a better spot for uh for the
+in a bit of a better spot for uh for the
+release as well. Cool. So, uh, thanks
+release as well. Cool. So, uh, thanks
+for tuning in. All my stuff's free and
+for tuning in. All my stuff's free and
+open source. Usually I'm working on
+open source. Usually I'm working on
+actual RL and not packaging
+actual RL and not packaging
+RL. This release week for you. Um,
+RL. This release week for you. Um,
+puffer.ai. start to get up to help me
+puffer.ai. start to get up to help me
+out
+
+Kind: captions
+Language: en
+Good
+morning. We are back
+morning. We are back
+live.
+Hi. Plan for today is to continue
+Hi. Plan for today is to continue
+working on
+working on
+release. Got a good hour and a half,
+release. Got a good hour and a half,
+hour 40 right now and uh
+hour 40 right now and uh
+thereafter be back for a good chunk of
+thereafter be back for a good chunk of
+the rest of the
+day. I really want to get the final
+day. I really want to get the final
+experiments done. Um, there are a few
+experiments done. Um, there are a few
+things that are still weird with the
+things that are still weird with the
+hyperparameter
+hyperparameter
+sweeps, and I want to figure out
+sweeps, and I want to figure out
+why. They work generally pretty darn
+why. They work generally pretty darn
+well, but they don't work exactly the
+well, but they don't work exactly the
+way I want them
+to, right? So, we have a few different
+to, right? So, we have a few different
+things to look at here. So the first one
+things to look at here. So the first one
+here this
+experiment. So what I did here is I
+experiment. So what I did here is I
+changed the way that clipping works
+changed the way that clipping works
+quite substantially.
+Okay. So, this is actually slightly
+Okay. So, this is actually slightly
+worse. I'm
+using Check the Clip
+coefficient. So, here's the F
+coefficient. So, here's the F
+coefficient.
+Where's VF
+clip? All right. So, this doesn't even
+clip? All right. So, this doesn't even
+really get used. So what I tried to do
+really get used. So what I tried to do
+here, I reformulated the
+here, I reformulated the
+clipping process a bit
+clipping process a bit
+differently and it actually it does a
+differently and it actually it does a
+fair bit worse. Now the one thing I do
+fair bit worse. Now the one thing I do
+want to look
+want to look
+at, let me just compare one thing here.
+at, let me just compare one thing here.
+This is like 21 22 seconds,
+This is like 21 22 seconds,
+right? We've also got these experiments.
+We have the clip
+coefficient. We have a lot of these runs
+coefficient. We have a lot of these runs
+down at the lowest possible end. What I
+down at the lowest possible end. What I
+want to do here is I'm going to do a
+want to do here is I'm going to do a
+filter. We're going to do VF clip coat.
+um range slashvf
+clip and we're going to set this to be
+clip and we're going to set this to be
+less than or equal to
+0.1. Okay, so now we only have 93
+0.1. Okay, so now we only have 93
+runs. And if I look at these
+do relative
+time. Okay, so we actually still do
+time. Okay, so we actually still do
+have like 19 or 20
+have like 19 or 20
+seconds. It is still
+seconds. It is still
+better. Like if we have 19 or 20 seconds
+better. Like if we have 19 or 20 seconds
+over
+over
+here for a full solve with 93 runs and
+here for a full solve with 93 runs and
+then if I take this filter
+off
+one you know it is actually very similar
+here. It's just that this one run got
+here. It's just that this one run got
+kind of lucky. I
+think I think we can still set like a
+think I think we can still set like a
+20-ish second solve even if we prevent
+20-ish second solve even if we prevent
+it from doing like ridiculously
+it from doing like ridiculously
+aggressive clip.
+Can we do
+Can we do
+um we take a quick look at
+um we take a quick look at
+like if there is a substantial
+like if there is a substantial
+correlation like we actually have good
+correlation like we actually have good
+runs at any clip co-op. I guess we can
+runs at any clip co-op. I guess we can
+do like
+do like
+time less than 25
+seconds and see what this gives us.
+Most of the really good runs over here
+Most of the really good runs over here
+are just at the lowest possible
+end. Bit
+odd. All
+odd. All
+right. So, we have uh we do have that
+right. So, we have uh we do have that
+for
+for
+starters.
+starters.
+Oops. And now we want to look at our
+Oops. And now we want to look at our
+maze
+results. Yeah. So, this is like this is
+results. Yeah. So, this is like this is
+quite substantially better than
+quite substantially better than
+before because we we did this sweep and
+before because we we did this sweep and
+we did this sweep.
+The heck is up with these?
+Um, they're like right on top of each
+other like the same
+other like the same
+curve. Tiny bits of shifting.
+Oh, it's locked to minimum total time
+steps. This is actually probably like a
+steps. This is actually probably like a
+uh an eval problem,
+uh an eval problem,
+right? Like it not getting an accurate
+right? Like it not getting an accurate
+evaluation maybe.
+Well, I mean, this is not surprising
+Well, I mean, this is not surprising
+that this hasn't done particularly well
+that this hasn't done particularly well
+then. And we have to figure out why it's
+then. And we have to figure out why it's
+locked to
+locked to
+uh to so
+low. Probably just not a very good
+eval. These curves are super janky.
+Is this like
+Is this like
+BPT Horizon or like numbum M's too big
+BPT Horizon or like numbum M's too big
+or something
+or something
+weird? Pick one of these.
+This was
+one 50 million
+steps. Becknum Ms is
+steps. Becknum Ms is
+four. I think that's
+four. I think that's
+large. Yeah. So, it actually does have a
+large. Yeah. So, it actually does have a
+bunch of M's.
+64 horizon.
+Still batch
+Still batch
+size. Batch size is
+auto mini
+auto mini
+batch. Small mini batches.
+Okay, we can uh we can get some ideas
+Okay, we can uh we can get some ideas
+for runs from here.
+So, I say we limit VClip. Hang
+So, I say we limit VClip. Hang
+on. Let's actually do some of this
+stuff. Oh, hey Linky. Hey. Uh, hey
+stuff. Oh, hey Linky. Hey. Uh, hey
+folks. I uh I didn't have the chat up.
+folks. I uh I didn't have the chat up.
+One second.
+One second.
+I can only see it on this little tiny
+preview. I was checking
+experiments.
+experiments.
+Curious. Okay. Link is just saying
+Curious. Okay. Link is just saying
+puffer. Curious why you didn't join a
+puffer. Curious why you didn't join a
+lab or do a posttock but still building
+lab or do a posttock but still building
+puffer li full time.
+puffer li full time.
+Well, I mean, I made my own lab
+Well, I mean, I made my own lab
+basically, right? Like I'm doing my own
+basically, right? Like I'm doing my own
+thing here. I don't want to do a
+thing here. I don't want to do a
+posttock because the whole way that I've
+posttock because the whole way that I've
+gotten all this stuff done with Puffer
+gotten all this stuff done with Puffer
+is to move very very far away from the
+is to move very very far away from the
+way academia does work.
+way academia does work.
+Um, yeah, that's that's pretty much it.
+Um, yeah, that's that's pretty much it.
+Like it's really a postoc is just not an
+Like it's really a postoc is just not an
+appealing position at all either, right?
+appealing position at all either, right?
+like you get paid nothing anyways and
+like you get paid nothing anyways and
+like you have academic obligations and
+like you have academic obligations and
+the only thing it lets you do that a PhD
+the only thing it lets you do that a PhD
+doesn't already let me do is like go to
+doesn't already let me do is like go to
+a professorship position which I have no
+a professorship position which I have no
+interest in like why would I do
+interest in like why would I do
+that and like existing labs aren't doing
+that and like existing labs aren't doing
+the thing that I wanted to do so I had
+the thing that I wanted to do so I had
+to do my own thing Okay.
+Oops, not this one.
+Oops, not this one.
+We're going to set this to 0.1. One.
+actually just go grab some
+actually just go grab some
+uh some defaults to
+use. Got
+use. Got
+like gradient norm, right?
+I think we start these at 0.2
+now. Start the 0 point
+2. Alpha and beta.
+and the main thing I wanted to do was
+and the main thing I wanted to do was
+the
+evals. This eval function that I have is
+evals. This eval function that I have is
+not very good.
+Yeah. So, this needs to have like a
+Yeah. So, this needs to have like a
+pretty decent
+pretty decent
+sized additional eval, I would
+think.
+Wait, this is and not
+Wait, this is and not
+stats. This should be
+stats. This should be
+ore. Yeah, there should be
+ore. Yeah, there should be
+ore. That's probably all it
+was cuz
+was cuz
+like 64 time steps.
+do like
+25. This should always be reasonable. I
+25. This should always be reasonable. I
+think if I just do
+this. Okay. So now what do we do
+this. Okay. So now what do we do
+additionally for breakout?
+additionally for breakout?
+This actually maybe changes the uh the
+This actually maybe changes the uh the
+sweeps a little bit already. I'm trying
+sweeps a little bit already. I'm trying
+to think if there's anything else we can
+to think if there's anything else we can
+do on breakout speedrun
+specifically or if we're kind of just
+specifically or if we're kind of just
+good. Do I believe that this is capped
+out? I mean, I can sweep the uh this the
+out? I mean, I can sweep the uh this the
+frame skip,
+frame skip,
+right? We have not tried free sweeping
+right? We have not tried free sweeping
+frame skip.
+Yeah. So, frame skip can go 0 to 5, 0 to
+Yeah. So, frame skip can go 0 to 5, 0 to
+6, something, 0 to 8, whatever.
+Okay. So, that actually should produce I
+Okay. So, that actually should produce I
+think that's worth running these as uh
+think that's worth running these as uh
+as new experiments now. Like these
+as new experiments now. Like these
+should be
+should be
+substantially different results.
+change anything major
+here. Oh, this is fine.
+Welcome YouTube folks. We are looking at
+Welcome YouTube folks. We are looking at
+the results of last night's experiment
+the results of last night's experiment
+and launching some new ones here.
+Okay, the goal kind of um with what I'm
+Okay, the goal kind of um with what I'm
+doing at the moment, I'm just sort of
+doing at the moment, I'm just sort of
+fine-tuning our sweep
+fine-tuning our sweep
+stuff, there like a bunch of little
+stuff, there like a bunch of little
+things I wanted to test that could make
+things I wanted to test that could make
+a difference just so we have our
+a difference just so we have our
+strongest possible results for uh for
+launch. I'd really like to have um a sub
+launch. I'd really like to have um a sub
+202 set of breakout parameters in
+202 set of breakout parameters in
+particular. I think that would be very
+particular. I think that would be very
+nice. Like a consistent solve in sub 20.
+nice. Like a consistent solve in sub 20.
+That'd be pretty
+cool. Move this out of the
+way. Let me go look at the to-dos now
+way. Let me go look at the to-dos now
+because I think if I spend a third day
+because I think if I spend a third day
+in a row just working on blog post, I'm
+in a row just working on blog post, I'm
+going to go nuts.
+And I also I want to make sure we
+And I also I want to make sure we
+getting the rest of our stuff into a
+getting the rest of our stuff into a
+good
+spot. Hey Linky, did you finalize
+spot. Hey Linky, did you finalize
+merging release into dev?
+merging release into dev?
+Yes, it's in dev.
+The new end bindings you can look at
+The new end bindings you can look at
+like snake or neural MMO. Um it should
+like snake or neural MMO. Um it should
+be quite easy to bind in most cases. If
+be quite easy to bind in most cases. If
+you find yourself doing like weird
+you find yourself doing like weird
+Python API C API stuff, you probably are
+Python API C API stuff, you probably are
+over complicating it.
+And once we have the final sweeps here,
+And once we have the final sweeps here,
+we really just need to do like the add
+we really just need to do like the add
+ones, drop
+ones. The few things that still bother
+ones. The few things that still bother
+me, I don't know if we want to
+me, I don't know if we want to
+have the 10 points per
+have the 10 points per
+run, like the down sample
+trajectories. We probably do
+trajectories. We probably do
+You know, we probably do because like
+You know, we probably do because like
+the
+um cosign and nailing should give you
+um cosign and nailing should give you
+pretty darn smooth learning curves. So,
+pretty darn smooth learning curves. So,
+I think it's fine to have to have
+I think it's fine to have to have
+that. Give release a look over and seem
+that. Give release a look over and seem
+pretty clear. Yeah, I'm trying to make
+pretty clear. Yeah, I'm trying to make
+it very simple. The hope is that the new
+it very simple. The hope is that the new
+release should be very very simple.
+It's like I almost shoot myself on the
+It's like I almost shoot myself on the
+foot because like I work so hard to make
+foot because like I work so hard to make
+it look simple and then if you don't
+it look simple and then if you don't
+know any better in RL people go well
+know any better in RL people go well
+that's easy like you know why is he
+that's easy like you know why is he
+working on this forever if it's that so
+working on this forever if it's that so
+easy it's like well it took a lot of
+easy it's like well it took a lot of
+work to make it this easy for
+I finally got like an actual coffee
+I finally got like an actual coffee
+maker as well for here, which I've
+maker as well for here, which I've
+wanted for a while.
+Most of these just need some sweeps
+now. We need to lock in like a good set
+now. We need to lock in like a good set
+of
+of
+defaults and we need to run some sweeps.
+A little weird how uh neural MMO doesn't
+A little weird how uh neural MMO doesn't
+sweep
+right. Uh it's possible there that just
+right. Uh it's possible there that just
+the search centers are not very good.
+I think I have a tendency to like just
+I think I have a tendency to like just
+kind of agonize and stew over um every
+kind of agonize and stew over um every
+release and I want to avoid doing that
+release and I want to avoid doing that
+as much as possible. I'm trying to think
+as much as possible. I'm trying to think
+like what really things I want to have
+like what really things I want to have
+done in order to like cap this off. Like
+done in order to like cap this off. Like
+I got to move some files around and do
+I got to move some files around and do
+some pretty minor cleanups.
+I think probably just the process of
+I think probably just the process of
+running all the
+experiments. Welcome motion.
+I'm trying to think almost if it's worth
+I'm trying to think almost if it's worth
+like
+like
+um am I if I'm ready to just like run
+um am I if I'm ready to just like run
+all the dang experiments and be done
+all the dang experiments and be done
+with it.
+with it.
+Like do I just spin up a whole bunch of
+Like do I just spin up a whole bunch of
+extra
+extra
+machines and just go for it?
+No, I don't I don't quite think so
+No, I don't I don't quite think so
+because there's still
+because there's still
+like there's still like little extra
+like there's still like little extra
+annoyances around that I like I don't
+annoyances around that I like I don't
+feel like we perfectly understand quite
+feel like we perfectly understand quite
+everything yet on this.
+I think what I do is I assume that I am
+I think what I do is I assume that I am
+going to keep the 10 down sample points
+going to keep the 10 down sample points
+thing
+thing
+um for protein. That's probably a good
+um for protein. That's probably a good
+idea.
+Well, I think that's probably a good
+Well, I think that's probably a good
+idea at
+least. I don't know if I should ablade
+least. I don't know if I should ablade
+it or not.
+it or not.
+The maze sweeps in particular bother me
+The maze sweeps in particular bother me
+because like the maze sweep domain is
+because like the maze sweep domain is
+the one where it should be really darn
+the one where it should be really darn
+good and I thought I actually had
+good and I thought I actually had
+something on this before. Can you access
+something on this before. Can you access
+a PNG in an asset folder through an
+a PNG in an asset folder through an
+import? It might be nice to have all
+import? It might be nice to have all
+puffer assets.
+um you get into relative path
+um you get into relative path
+things like you can't just import an
+things like you can't just import an
+asset folder like import from Python.
+asset folder like import from Python.
+You can give it the
+You can give it the
+path but then you get into relative like
+path but then you get into relative like
+path
+issues. They're not in the end folder
+issues. They're not in the end folder
+though the puffer assets linky. They're
+though the puffer assets linky. They're
+in uh resources.
+in uh resources.
+Like there's a resources folder that has
+Like there's a resources folder that has
+some shared ones and then it has like
+some shared ones and then it has like
+some uh some MS specific ones.
+So what what are like the remaining
+I didn't do
+this
+this
+external m clean
+external m clean
+up move uh brand files.
+That's pretty much
+That's pretty much
+it. I just installed puffer lip pip.
+it. I just installed puffer lip pip.
+Yeah, I'm also I'm going to
+Yeah, I'm also I'm going to
+um I'm going to move the train stuff
+um I'm going to move the train stuff
+into there as well. So, it's like you're
+into there as well. So, it's like you're
+literally going to be able to have like
+literally going to be able to have like
+a one one command or whatever to do it.
+a one one command or whatever to do it.
+should be quite
+good. I know I definitely just need to
+good. I know I definitely just need to
+like a whole bunch of experiments to run
+like a whole bunch of experiments to run
+is the
+thing. It's not even that I don't want
+thing. It's not even that I don't want
+to spend a few hundred bucks on like
+to spend a few hundred bucks on like
+compute over the next week. like that's
+compute over the next week. like that's
+not a big deal. It's that I don't want
+not a big deal. It's that I don't want
+to have to deal with like spinning up
+to have to deal with like spinning up
+and tearing down machines and like not
+and tearing down machines and like not
+knowing if they're undervolted and like
+knowing if they're undervolted and like
+whether the PF is actually reasonable or
+whether the PF is actually reasonable or
+not.
+Um, but there's actually there's quite a
+Um, but there's actually there's quite a
+bit of stuff I'm looking now that I'm
+bit of stuff I'm looking now that I'm
+looking here that like I can kind of
+looking here that like I can kind of
+just
+do cuz we still need to clean up all the
+do cuz we still need to clean up all the
+external M's and make sure stuff runs.
+We still need
+We still need
+to we need to clean up the configs for
+to we need to clean up the configs for
+those as well. We need to move some
+those as well. We need to move some
+train
+train
+files. Quite a bit of stuff we need to
+files. Quite a bit of stuff we need to
+do. And honestly, like all the
+do. And honestly, like all the
+deprecated ends that nobody
+uses, we can get rid of those as well,
+uses, we can get rid of those as well,
+right?
+right?
+We keep like Majoko, Atari, Procgen, and
+We keep like Majoko, Atari, Procgen, and
+like the other ones that people actually
+use. Okay, so I think we start
+use. Okay, so I think we start
+by I think we actually
+start cleaning some stuff up here.
+Okay, this
+runs. What other like random files do I
+runs. What other like random files do I
+have in here? I guess I've got like the
+have in here? I guess I've got like the
+C++ and
+stuff C++ which we don't use anymore.
+Let me just look how uh how torch
+Let me just look how uh how torch
+extensions does
+Yeah, Linky.
+Yes, this no longer
+builds. There's like some name conflict,
+builds. There's like some name conflict,
+isn't there?
+I think the easiest thing is going to
+I think the easiest thing is going to
+just be to like do
+their like their annoying extra step
+their like their annoying extra step
+with either make like put them each in
+with either make like put them each in
+their own folder or something.
+We do like
+We don't need extensions.c
+See? Yeah, it's pretty
+See? Yeah, it's pretty
+decent. We've got this
+extensions barracuda.
+Damn it. That is not what I meant to do.
+Damn it. That is not what I meant to do.
+Me go get my code
+back. Yeah, I think if I do some of this
+back. Yeah, I think if I do some of this
+cleanup work today, this will be good
+cleanup work today, this will be good
+because I'm sick of writing. I kind of
+because I'm sick of writing. I kind of
+want to just do some code and move some
+want to just do some code and move some
+stuff
+stuff
+around. This will be
+better. I lose a lot of steam when I
+better. I lose a lot of steam when I
+spend too much time on like fiddly
+spend too much time on like fiddly
+fiddly bits.
+Give myself an extra turn.
+All right. See if this
+compiles. Still no.
+There we go. Yeah, these need to be in
+There we go. Yeah, these need to be in
+different folders for whatever reason,
+different folders for whatever reason,
+even though they have different
+even though they have different
+extensions. I don't know. It's kind of
+extensions. I don't know. It's kind of
+weird.
+We should set the uh the defaults to be
+Reasonable. Oh, just train by
+Reasonable. Oh, just train by
+default. M should pop or break out.
+default. M should pop or break out.
+Let's do this.
+Okay, so this still works.
+Ah,
+Ah,
+shoot. What is uh this giant
+file pix?
+Wait, delete
+mode.
+Rename. Oh, there it is.
+There we are.
+So, want to see what the root structure
+So, want to see what the root structure
+looks like.
+I still have all this
+I still have all this
+stuff. C advantage.cu and
+stuff. I don't need this
+anymore. Yeah, we can get rid of all
+anymore. Yeah, we can get rid of all
+this.
+What else do we not
+What else do we not
+need?
+SP3 of
+SP3 of
+that SBC advantage.
+UN.Py. We don't use
+UN.Py. We don't use
+this. Well, it's not committed
+this. Well, it's not committed
+anyways. GPU drive test.
+I'm going to get rid of these files and
+I'm going to get rid of these files and
+Spencer can yell at me if he needs
+them. Evaluate ELOS.
+them. Evaluate ELOS.
+Don't use
+this. I just
+this. I just
+made you have thread.
+made you have thread.
+Gotcha. I'm happy to help stuff if you
+Gotcha. I'm happy to help stuff if you
+get stuck on things. Like a lot of it is
+get stuck on things. Like a lot of it is
+we need to have uh we need to have all
+we need to have uh we need to have all
+this stuff like cleaned nicely so it's
+easier. Can we do something like this?
+Yeah, I can do that.
+Give me one second.
+I'm just thinking about how I want to uh
+I'm just thinking about how I want to uh
+do it specifically.
+Yeah, I don't want to like look
+Yeah, I don't want to like look
+everywhere for binding files though. I
+everywhere for binding files though. I
+think I only want to look
+in in here specifically.
+and I just do like this.
+Hey, there's your oneliner that gives
+Hey, there's your oneliner that gives
+you uh your binding files, right?
+Okay. So, this does
+Okay. So, this does
+this. Um, I think
+that I might be able to like get auto
+that I might be able to like get auto
+rebuild to work. But yeah, Linky, that's
+rebuild to work. But yeah, Linky, that's
+a good suggestion. Thank you. I'll often
+a good suggestion. Thank you. I'll often
+like I'll take the idea, but I'll just
+like I'll take the idea, but I'll just
+want to like implement it a little bit
+want to like implement it a little bit
+like
+like
+simpler. So like you know this is the
+simpler. So like you know this is the
+oneliner that'll look for binding.c
+oneliner that'll look for binding.c
+anywhere in any of the ocean
+subdirectories but I think this does
+subdirectories but I think this does
+what you want. Yeah.
+We'll see how that goes. And now if I
+We'll see how that goes. And now if I
+refresh
+refresh
+this, got a lot less crap in here.
+I think we call it like model.bin or
+whatever.
+Yeah. Or weights.bin.
+And that looks
+And that looks
+good. It gives us our export
+[Music]
+Okay. What else is there to tweak?
+[Music]
+Yeah, we really didn't end up needing
+Yeah, we really didn't end up needing
+this very much,
+this very much,
+huh?
+Anything we don't use, we get rid of.
+Anything we don't use, we get rid of.
+That's the rule.
+Okay, so this was supposed to be some
+Okay, so this was supposed to be some
+sort of test for new bindings.
+visualize. Use this
+visualize. Use this
+either though. We'll probably end up
+either though. We'll probably end up
+taking some of this back at least.
+And then this thing we have to like
+move. Where's a good spot for this?
+just move it in for now.
+Okay, so now we just have
+Okay, so now we just have
+setup.py com license. Yeah, now we all
+setup.py com license. Yeah, now we all
+just have the standard
+stuff. And now we have config, puffer,
+stuff. And now we have config, puffer,
+lib, scripts, and test.
+Now, I don't think that this config can
+Now, I don't think that this config can
+live here is the problem,
+right? Cuz like you're not going to have
+right? Cuz like you're not going to have
+access like this is not going to get
+access like this is not going to get
+packaged up for
+you. So, I think we have to move the
+you. So, I think we have to move the
+config into puffer lib, right?
+Unless there's a way to tell.
+Unless there's a way to tell.
+Um, no, there isn't. If it's just if
+Um, no, there isn't. If it's just if
+it's not in here, it's not in here,
+it's not in here, it's not in here,
+right? So, we have to do we can probably
+right? So, we have to do we can probably
+sim link
+sim link
+it. Hang on. So we do like get
+it. Hang on. So we do like get
+move config upper lib.
+Okay. So, this is just move
+everything. Is it What's the sim link?
+everything. Is it What's the sim link?
+Is it the
+desk? Okay, let me double check. Set an
+desk? Okay, let me double check. Set an
+alarm for a meeting. I think it's in a
+alarm for a meeting. I think it's in a
+couple hours,
+couple hours,
+though. Welcome, YouTube folks.
+though. Welcome, YouTube folks.
+I think I've got breakfast in 30 and
+I think I've got breakfast in 30 and
+then I got a meeting at like 11
+something. Double check this and then we
+something. Double check this and then we
+will keep working on this for a bit.
+One second,
+folks.
+folks.
+11:30. Me set myself an alarm for that
+11:30. Me set myself an alarm for that
+and then we will
+and then we will
+finish the
+refactor. All
+right. I always forget the sim link
+right. I always forget the sim link
+syntax.
+Uh it's file run link. Okay.
+Now we've got puffer
+lib. Got two sim
+lib. Got two sim
+links. Got the
+links. Got the
+readme. If I open puffer
+readme. If I open puffer
+lab, we have a few things in
+lab, we have a few things in
+here. Fairly small.
+This definitely needs to be here. This
+This definitely needs to be here. This
+probably needs to be here. This needs to
+probably needs to be here. This needs to
+be
+here. Yeah. Now we actually we
+here. Yeah. Now we actually we
+have this is a pretty nice file
+have this is a pretty nice file
+structure. I'd say this is a pretty nice
+structure. I'd say this is a pretty nice
+file structure.
+Some of this can get cleaned up as well.
+I wonder if it makes sense now to put
+I wonder if it makes sense now to put
+the configs files with the source here
+the configs files with the source here
+or if it makes sense to separate
+them cuz like before you know we weren't
+them cuz like before you know we weren't
+shipping the config files.
+I think we'll like leave it like this
+I think we'll like leave it like this
+for now and then we'll we'll think about
+it. Let's see if this still works.
+It still
+It still
+runs. This still runs
+I'd like an entry point
+here. This looks cool, right?
+named
+named
+Jim. kind of
+silly. Oh, yeah. That does need gem,
+silly. Oh, yeah. That does need gem,
+doesn't it?
+Wait, this is
+already we have
+gem. Why the heck is it Isaac Puffer?
+Makes no bloody
+sense. It's a good time to get UV pep.
+Hip install UV.
+Okay. Oops.
+required project.name is not set. Okay.
+required project.name is not set. Okay.
+So there's additional validation I
+So there's additional validation I
+guess.
+you
+require. Yeah, this is not what I Why
+require. Yeah, this is not what I Why
+the hell you be using uh this version?
+That's so obnoxious.
+It's weird that this is failing in like
+It's weird that this is failing in like
+something that should not even get be
+something that should not even get be
+getting imported at
+getting imported at
+all. Python tooling system just
+sucks. Python 3.8. Oh, wait. Hang on.
+That
+is We'll just like pin We'll just like
+is We'll just like pin We'll just like
+pin 312 default.
+Definitely a lot of packaging stuff I'm
+Definitely a lot of packaging stuff I'm
+going to have to figure out with this.
+going to have to figure out with this.
+But
+um the main thing is now at least the
+um the main thing is now at least the
+files are in a reasonable spot and we
+files are in a reasonable spot and we
+can start looking at stuff like the
+can start looking at stuff like the
+entry points and like how we're going to
+entry points and like how we're going to
+want people to be able to
+want people to be able to
+uh to use Puffer just from the pit
+uh to use Puffer just from the pit
+package.
+It should be pretty
+It should be pretty
+helpful, All right.
+I don't know what it thinks it's
+I don't know what it thinks it's
+installing here.
+There are like several things I just do
+There are like several things I just do
+not like here.
+How the heck is this still
+How the heck is this still
+failing? Now we're failing on
+gymnasium. Like what?
+Oh, this is probably cuz it's build
+Oh, this is probably cuz it's build
+time,
+right? I see.
+And then what I guess then this is
+like this is why you don't import your
+like this is why you don't import your
+your version string like
+this. See if this works.
+What in the heck?
+Where's the error?
+Python
+requires. So I guess a lot of this has
+requires. So I guess a lot of this has
+to get moved to the toml for the toml to
+behave kind of. Okay.
+Yeah, this is like so stupid. I think
+Yeah, this is like so stupid. I think
+you have to like duplicate the damn
+you have to like duplicate the damn
+version. We'll do stuff for now, but I
+version. We'll do stuff for now, but I
+remember the TOML setup just being kind
+remember the TOML setup just being kind
+of
+dumb. Is this just because of this the
+dumb. Is this just because of this the
+thing in the TOML?
+Okay, this is what we were looking
+Okay, this is what we were looking
+for. The setup.py version.
+And this actually seems to
+And this actually seems to
+run. I don't know why the hell it's
+run. I don't know why the hell it's
+installed. It's uh trying to break my
+installed. It's uh trying to break my
+CUDA now. That's kind of
+obnoxious. Requirement already set.
+obnoxious. Requirement already set.
+Okay. Okay. So, it didn't reinstall CUD.
+Okay. Okay. So, it didn't reinstall CUD.
+It's just really really slow in
+It's just really really slow in
+checking. Fine. Cool. So, what we'll do
+checking. Fine. Cool. So, what we'll do
+is uh I'm going to go for breakfast. I
+is uh I'm going to go for breakfast. I
+got a meeting afterwards.
+got a meeting afterwards.
+Um, and then in the afternoon I will be
+Um, and then in the afternoon I will be
+back and the goal will be to get
+back and the goal will be to get
+packaging in a good spot today, get all
+packaging in a good spot today, get all
+of the uh the things where they should
+of the uh the things where they should
+be, get entry points the way they should
+be, get entry points the way they should
+be, kind of do all that side of things,
+be, kind of do all that side of things,
+probably move some code around quite a
+probably move some code around quite a
+bit, and uh yeah, I think that that will
+bit, and uh yeah, I think that that will
+have us
+have us
+in a bit of a better spot for uh for the
+in a bit of a better spot for uh for the
+release as well. Cool. So, uh, thanks
+release as well. Cool. So, uh, thanks
+for tuning in. All my stuff's free and
+for tuning in. All my stuff's free and
+open source. Usually I'm working on
+open source. Usually I'm working on
+actual RL and not packaging
+actual RL and not packaging
+RL. This release week for you. Um,
+RL. This release week for you. Um,
+puffer.ai. start to get up to help me
+puffer.ai. start to get up to help me
+out

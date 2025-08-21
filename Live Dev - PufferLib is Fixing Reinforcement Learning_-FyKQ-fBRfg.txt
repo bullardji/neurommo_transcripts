@@ -1,0 +1,1503 @@
+Kind: captions
+Language: en
+It is 8:00 p.m. 8:06 on a Saturday and
+It is 8:00 p.m. 8:06 on a Saturday and
+uh I figured I'd come back and do
+uh I figured I'd come back and do
+another hour or so worth of
+another hour or so worth of
+experiments to see if I can figure
+experiments to see if I can figure
+something out with the model based
+something out with the model based
+stuff.
+So, I guess the first obvious thing is
+So, I guess the first obvious thing is
+why don't we just make it
+why don't we just make it
+bigger,
+bigger,
+right?
+Like just make it bigger. I doubt this
+Like just make it bigger. I doubt this
+does anything.
+Just do like four times input size
+Just do like four times input size
+something like I
+guess. See if that does
+guess. See if that does
+anything. Inconsistent yada
+yada. I believe these both need to be
+yada. I believe these both need to be
+512.
+How do we have both of these to be 512?
+I guess we just project the
+I guess we just project the
+um state embedding.
+um state embedding.
+Maybe just project the
+state. It's only the cell state that we
+state. It's only the cell state that we
+need to project, right?
+It's like really annoying to actually
+It's like really annoying to actually
+make this bigger, isn't
+make this bigger, isn't
+it? That's like really annoying.
+I could make them both a bit bigger just
+I could make them both a bit bigger just
+for now. That's probably pretty easy,
+right? Make them both bigger.
+And then we got to start really looking
+And then we got to start really looking
+at all the losses and seeing if I've
+at all the losses and seeing if I've
+done stuff wrong.
+Super slow.
+Let's look at the uh the call to the
+Let's look at the uh the call to the
+model
+first. It's 100% GPU pretty
+much. So this is the uh actual logic of
+much. So this is the uh actual logic of
+it. 32
+way
+parallel. Five steps rolled out
+forwards, actions and log
+forwards, actions and log
+props computed from original
+props computed from original
+logits. And then we call the world model
+logits. And then we call the world model
+on those
+on those
+actions and the current state.
+actions and the current state.
+which is formed
+which is formed
+by the observation embedding and the
+by the observation embedding and the
+current LSTMC
+state. That could be zero to be fair. We
+state. That could be zero to be fair. We
+could just set that to
+zero because you never get it at
+zero because you never get it at
+um at train time come to think of it.
+says
+says
+160 episode return. So that's still very
+160 episode return. So that's still very
+very
+low. You add the
+low. You add the
+rewards to this
+Okay.
+Next thing I'm going to try is zeroing
+Next thing I'm going to try is zeroing
+the LSTM.
+Try
+Try
+this since I believe when we're training
+this since I believe when we're training
+it, we never get out of
+Okay. I'm also if we need to train it
+Okay. I'm also if we need to train it
+with like shorter
+with like shorter
+segments since it only rolls out
+five. Could be we need to train it with
+five. Could be we need to train it with
+shorter segments.
+Okay. Uh, it's
+unstable. It's weird.
+I could technically train it on length
+I could technically train it on length
+one
+segments. I don't think that's what we
+segments. I don't think that's what we
+want to do, right?
+I really was hoping we could get this
+I really was hoping we could get this
+thing to work today.
+I mean, I rather like this over the
+I mean, I rather like this over the
+dreamer style
+dreamer style
+formulation. Uh, this is lower score
+formulation. Uh, this is lower score
+actually though than the
+actually though than the
+previous, isn't
+previous, isn't
+it? So, maybe there is something to
+this. Okay.
+What? Can we just like roll this out one
+What? Can we just like roll this out one
+and then get something to
+and then get something to
+train? Like it technically even if you
+train? Like it technically even if you
+roll out one step it should be better.
+Quick question. What are the essential
+Quick question. What are the essential
+methods that need to be implemented for
+methods that need to be implemented for
+an
+ocean? So we have squared as like our
+ocean? So we have squared as like our
+default
+default
+and needs a step
+and needs a step
+method, needs a reset
+method, needs a reset
+method, probably should have a render
+method, probably should have a render
+and a
+and a
+close. But the thing is
+close. But the thing is
+like, yeah, technically these have to
+like, yeah, technically these have to
+exist for the new bindings that we're
+exist for the new bindings that we're
+adding, but other than
+adding, but other than
+that, I mean, there's a Python anyways.
+that, I mean, there's a Python anyways.
+You just call this stuff from Python.
+Like that's all the code for
+squared. It's like a kind of like a
+squared. It's like a kind of like a
+vectorzed gym
+interface. I have them both in the same
+interface. I have them both in the same
+file. C step reset C render. Yeah,
+file. C step reset C render. Yeah,
+that's what we use at the moment. Now
+that's what we use at the moment. Now
+you're catching us in between binding
+you're catching us in between binding
+methods here. Um because like what we're
+methods here. Um because like what we're
+trying to do is instead of having Syon
+trying to do is instead of having Syon
+We're trying to have like this type of a
+binding where you can write this instead
+binding where you can write this instead
+of Syon. This is way shorter and
+easier. Yeah. Then you just check the
+easier. Yeah. Then you just check the
+Syon. If you're just doing the Sython,
+Syon. If you're just doing the Sython,
+then the names literally really don't
+then the names literally really don't
+even matter because like you just make
+even matter because like you just make
+sure that they match, right? Because
+sure that they match, right? Because
+you're just calling the Syon from
+you're just calling the Syon from
+Python. There's like no fancy special
+Python. There's like no fancy special
+binding for the Sython. It's just like
+binding for the Sython. It's just like
+whatever binds to C. If you just like
+whatever binds to C. If you just like
+copy the way we've done it with the
+copy the way we've done it with the
+other Ms, you'll see like there's no
+magic. What methods are expected from
+magic. What methods are expected from
+the Python code? Okay, that's a
+the Python code? Okay, that's a
+reasonable one.
+reasonable one.
+So if you just look at the environment,
+So if you just look at the environment,
+right? This is what we do. Whoops, wrong
+one. So we have this thing for puffer
+one. So we have this thing for puffer
+end. This is the entire code. Um these
+end. This is the entire code. Um these
+are handled for you. It just needs a
+are handled for you. It just needs a
+reset, a step, and a close. That's
+it. Your Sython can expose whatever you
+it. Your Sython can expose whatever you
+want, right? It's the Python has to have
+want, right? It's the Python has to have
+a reset, a step, and a
+close. But like I would suggest just
+close. But like I would suggest just
+doing it the way you see that we have
+doing it the way you see that we have
+our M's done here. It's a pretty good
+our M's done here. It's a pretty good
+way of doing it. Like so here's the
+way of doing it. Like so here's the
+squared M. So this is like a pure
+squared M. So this is like a pure
+Python. Uh where is it? This is the new
+Python. Uh where is it? This is the new
+binding example here. This is the Sython
+binding example here. This is the Sython
+one. Logging is just for displaying
+one. Logging is just for displaying
+stats. Yeah, the stuff that pops up here
+stats. Yeah, the stuff that pops up here
+when I run experiments that you see, it
+when I run experiments that you see, it
+comes from here.
+comes from here.
+So like this is the example with Syon
+So like this is the example with Syon
+here,
+right? It's a render method. It just
+right? It's a render method. It just
+calls
+calls
+render step. The only gotcha here,
+render step. The only gotcha here,
+right, is that you have to init with
+right, is that you have to init with
+this buffer and then this buffer set
+this buffer and then this buffer set
+selfobservations actions. It sets all
+selfobservations actions. It sets all
+these things
+these things
+up and then these are like shared
+up and then these are like shared
+buffers.
+buffers.
+So like this data gets shared between
+So like this data gets shared between
+the Python, the C and the Python because
+the Python, the C and the Python because
+it's just the same memory
+it's just the same memory
+address. And like you see how we
+address. And like you see how we
+populate the actions here. We do self
+populate the actions here. We do self
+actions equals
+actions equals
+actions. And then the step doesn't take
+actions. And then the step doesn't take
+any arguments. That's because we already
+any arguments. That's because we already
+told that this is the action tensor.
+told that this is the action tensor.
+Here's the memory where the actions are
+Here's the memory where the actions are
+going to be. And then we just put these
+going to be. And then we just put these
+into memory. So when it steps, it knows
+into memory. So when it steps, it knows
+that they're here. That's the only
+that they're here. That's the only
+tricky bit. The rest is pretty
+tricky bit. The rest is pretty
+self-explanatory. And if it's not, you
+self-explanatory. And if it's not, you
+come back to
+come back to
+me. I will be live back again most of
+Monday break
+Monday break
+out. Yeah. So you check the snake emb if
+out. Yeah. So you check the snake emb if
+you want. I wrote the snake emb. It's a
+you want. I wrote the snake emb. It's a
+lot more concise. I didn't write pong or
+breakout. Oh, you're still doing voids.
+breakout. Oh, you're still doing voids.
+That's awesome. Um, yeah, we were
+That's awesome. Um, yeah, we were
+actually just check talking about that
+actually just check talking about that
+because like we were thinking of doing
+because like we were thinking of doing
+like flocking type stuff more broadly
+like flocking type stuff more broadly
+with puffer. It'll be
+with puffer. It'll be
+cool. What should the agents go
+cool. What should the agents go
+actually? If you just look up voids,
+actually? If you just look up voids,
+right? You just turn these rules into
+right? You just turn these rules into
+rewards.
+like you'll find the rules somewhere
+like you'll find the rules somewhere
+like
+this. Yeah. So, what they do here is
+this. Yeah. So, what they do here is
+they like they code these behaviors. All
+they like they code these behaviors. All
+you would do is you turn these into
+rewards. Coherent separation alignment
+rewards. Coherent separation alignment
+agent be a predator. It doesn't have to
+agent be a predator. It doesn't have to
+be. You literally just like give it.
+be. You literally just like give it.
+So this is like what they try to do
+So this is like what they try to do
+here. If you find the algorithm code
+like look see somebody has a really big
+like look see somebody has a really big
+one
+here. It's pretty cool
+here. It's pretty cool
+right? I think it's following my cursor
+right? I think it's following my cursor
+in this one.
+agent schools to adjust the params. I
+agent schools to adjust the params. I
+the way so vids is a rulebased system
+the way so vids is a rulebased system
+originally, right? So like they will
+originally, right? So like they will
+just they have like a deterministic
+just they have like a deterministic
+rule-based behavior. So the agent the
+rule-based behavior. So the agent the
+actions are just going to be like turn
+actions are just going to be like turn
+left, turn right or whatever by a
+left, turn right or whatever by a
+certain amount and uh you just give them
+certain amount and uh you just give them
+a reward for like aligning with nearby
+a reward for like aligning with nearby
+agent, being coherent, whatever.
+like yeah, this is a decent article
+like yeah, this is a decent article
+because look this here it has
+because look this here it has
+um a description of the algorithm. So
+um a description of the algorithm. So
+you can pretty easily see how to adjust
+you can pretty easily see how to adjust
+this for a
+reward. See like this is cohesion. this
+reward. See like this is cohesion. this
+is how they script it to like do this
+is how they script it to like do this
+and then you just think okay well
+and then you just think okay well
+cohesion is defined by how close bird is
+cohesion is defined by how close bird is
+to other bird or whatever give reward
+to other bird or whatever give reward
+that's
+that's
+it and if you get stuck let me know but
+it and if you get stuck let me know but
+definitely go try that
+first will be an agent so think of it
+first will be an agent so think of it
+this way, right? Just think of
+this way, right? Just think of
+everything in terms of actions. Okay? So
+everything in terms of actions. Okay? So
+in the original voids, there are rules
+in the original voids, there are rules
+that tell the agent which way to turn,
+that tell the agent which way to turn,
+right? In your case, instead of giving
+right? In your case, instead of giving
+it rules for which way to turn, the
+it rules for which way to turn, the
+neural net gives it an action, which is
+neural net gives it an action, which is
+which way to turn. And the way that it
+which way to turn. And the way that it
+decides that action, right? or learns
+decides that action, right? or learns
+what action it should take is you
+what action it should take is you
+convert the stuff like that before it
+convert the stuff like that before it
+was saying uh turn so as to cohhere with
+was saying uh turn so as to cohhere with
+other agents or align with other agents
+other agents or align with other agents
+or whatever. Just turn those scripted
+or whatever. Just turn those scripted
+rules into rewards so it learns to do it
+instead. That's how to think about
+RL. And it's a lot more flexible too,
+RL. And it's a lot more flexible too,
+right? Because like scripting behaviors,
+right? Because like scripting behaviors,
+you have to be able to precisely script
+you have to be able to precisely script
+for what happens in what circumstance.
+for what happens in what circumstance.
+Um, RL's a lot fuzzier because you just
+Um, RL's a lot fuzzier because you just
+give it a
+reward. Yeah. The traditional rules
+reward. Yeah. The traditional rules
+become the rewards.
+Exactly. Yeah. This one like don't
+Exactly. Yeah. This one like don't
+overthink it. It should be a very very
+overthink it. It should be a very very
+simple end. I intentionally gave this
+simple end. I intentionally gave this
+one to you because I think it's a very
+one to you because I think it's a very
+simple amp that has the potential to
+simple amp that has the potential to
+look very cool if you do it well.
+Syon binds.
+Syon binds.
+So how S Python like Syon is just an
+So how S Python like Syon is just an
+intermediary layer. Look, there isn't
+intermediary layer. Look, there isn't
+really an API for anything except like
+really an API for anything except like
+the actual Python environment has to
+the actual Python environment has to
+have a step, a reset, and a whatever,
+have a step, a reset, and a whatever,
+right? the Syon and the C. It's not
+right? the Syon and the C. It's not
+really an API, at least until we go to
+really an API, at least until we go to
+the new binding stuff. It's just like
+the new binding stuff. It's just like
+you write the end code and then whatever
+you write the end code and then whatever
+methods you need to call, you call them
+methods you need to call, you call them
+via the Sython. I suggest doing it with
+via the Sython. I suggest doing it with
+like step, reset, render, whatever the
+like step, reset, render, whatever the
+way we have it because it makes it
+way we have it because it makes it
+easier, but like it's kind of just a
+easier, but like it's kind of just a
+convention. It's just like what we've
+convention. It's just like what we've
+found to make it easier. We structure
+found to make it easier. We structure
+stuff that way.
+Client client is the renderer. Client is
+Client client is the renderer. Client is
+like the front
+end. It'll be way clearer in the C code.
+Yeah, in Syon it's
+Yeah, in Syon it's
+not the Syon just like makes makes an
+not the Syon just like makes makes an
+instance of it. So it'll
+render. Look, it's going to be way clear
+render. Look, it's going to be way clear
+if you just look at the snake end. Oh
+if you just look at the snake end. Oh
+we, it rounded to 2K
+we, it rounded to 2K
+stars. That's
+stars. That's
+awesome. That's cool.
+Uh, that's really
+Uh, that's really
+nice. There are not that many RL repos
+nice. There are not that many RL repos
+this
+this
+big. Look, so the snake amp is really
+big. Look, so the snake amp is really
+simple, okay?
+simple, okay?
+Like the client is like a screen of
+Like the client is like a screen of
+code, right? It's got this render
+code, right? It's got this render
+function. That's all it does. The client
+function. That's all it does. The client
+just has a couple like properties.
+just has a couple like properties.
+That's it. And then like the Sython is
+just this is just a header, right? This
+just this is just a header, right? This
+is just a header.
+is just a header.
+And then this makes all the items right
+And then this makes all the items right
+here. Pulls a net. Reset step render.
+here. Pulls a net. Reset step render.
+Close. That's
+Close. That's
+it. And this client here, this make
+it. And this client here, this make
+client that is literally just makes a
+client that is literally just makes a
+renderer. That's all it is. And this
+renderer. That's all it is. And this
+make function is just a C
+function. Python's just an easy way to
+function. Python's just an easy way to
+expose C methods to Python. That's all
+expose C methods to Python. That's all
+it is.
+I've been trying to replace Syon, not
+I've been trying to replace Syon, not
+because necessarily the Sython's hard.
+because necessarily the Sython's hard.
+It's just it's more annoying to debug
+It's just it's more annoying to debug
+Syon than it is to debug straight C.
+Syon than it is to debug straight C.
+Straight C is very easy to
+Straight C is very easy to
+debug, provided you're compiling with
+debug, provided you're compiling with
+address sanitizer at least.
+death struck name
+name. Uh that's me being lazy, but
+yeah, it's a type
+defr there's literally no reason. It's
+defr there's literally no reason. It's
+just me being lazy, not not liking
+just me being lazy, not not liking
+having It's me being lazy doing it in
+having It's me being lazy doing it in
+two lines because I don't like having to
+two lines because I don't like having to
+read all the way to the bottom to have
+read all the way to the bottom to have
+the to see where the name of this truck
+the to see where the name of this truck
+is. There's no good reason.
+Yeah, you can do it's like some of the
+Yeah, you can do it's like some of the
+conventions are there for a good reason
+conventions are there for a good reason
+and some of the conventions are there
+and some of the conventions are there
+because it's like I I wrote Python for
+because it's like I I wrote Python for
+10 years and then started doing this
+10 years and then started doing this
+like a few months ago, like maybe six
+like a few months ago, like maybe six
+months ago or whatever and like I'm
+months ago or whatever and like I'm
+still finding better ways to uh to write
+still finding better ways to uh to write
+like clean concise
+C. So, possibly I'll just get used to
+C. So, possibly I'll just get used to
+having this rock name at the end. It
+having this rock name at the end. It
+kind of annoys me that it's not at the
+kind of annoys me that it's not at the
+top because the trucks can get really
+top because the trucks can get really
+big, but
+man, not a big deal.
+Can we just
+like model
+like model
+state start working around not messing
+state start working around not messing
+around in demos? Yeah. Have a nice
+around in demos? Yeah. Have a nice
+evening. I'm going to bed soon. I just
+evening. I'm going to bed soon. I just
+want to see if I can try one or two more
+want to see if I can try one or two more
+things to maybe get this thing to work.
+But this value loss is screwed,
+right? Oh, hang
+right? Oh, hang
+on. New
+value. New value.
+Let's make
+Let's make
+sure this should be a really good way to
+sure this should be a really good way to
+test
+honestly. Finish this
+today actions.
+should be the
+should be the
+value. I think the value is just the
+value. I think the value is just the
+value
+policy loss.
+I think it's just predicting the value,
+I think it's just predicting the value,
+isn't
+it? Or is it new value? Hang on. New
+it? Or is it new value? Hang on. New
+value should be
+predicting return,
+predicting return,
+right? Isn't this just return?
+That's should be predicting return.
+Okay, so this does better, but the value
+Okay, so this does better, but the value
+law sucks.
+I don't know why this would not work.
+I don't know why this would not work.
+Very
+Very
+weird. Logic reward value state, right?
+weird. Logic reward value state, right?
+Logit's reward value state. Yep.
+Does it need to be a clipped value loss?
+crashed. Pretty damn sure that they
+crashed. Pretty damn sure that they
+should have
+value,
+right? Maybe it is like
+I don't know. Maybe it is
+this. I'd be kind of surprised if that
+this. I'd be kind of surprised if that
+made the difference.
+Reward loss
+is low enough. I
+guess why wouldn't you be able to
+guess why wouldn't you be able to
+predict this is my question.
+embedding. Totally should be able to,
+right? Freaking
+no. If we're going to do this
+Except
+supposed to give you
+supposed to give you
+logits, reward, value, and
+logits, reward, value, and
+state. That make any bloody sense?
+You take the
+action. No, you have this completely
+action. No, you have this completely
+wrong. This doesn't make any bloody
+wrong. This doesn't make any bloody
+sense. All right. I think I just got
+sense. All right. I think I just got
+tired doing this.
+I think I'm going to call it a night.
+I think I'm going to call it a night.
+I'm like too tired to fully finish this
+I'm like too tired to fully finish this
+stuff. We made some good progress. Um,
+stuff. We made some good progress. Um,
+we
+we
+got it like it's not like we've gotten
+got it like it's not like we've gotten
+nothing to train all day. We've gotten
+nothing to train all day. We've gotten
+plenty of things to train. We just can't
+plenty of things to train. We just can't
+beat the odd policy. have to be pretty
+beat the odd policy. have to be pretty
+careful about the implementation for
+careful about the implementation for
+that. Um, I'm still not completely sure
+that. Um, I'm still not completely sure
+about this versus other world model
+about this versus other world model
+based approaches. I mean, I really like
+based approaches. I mean, I really like
+this one in theory. I just don't know
+this one in theory. I just don't know
+how much compute this uses.
+like
+like
+Efficient zero.
+I probably should have checked this.
+Okay. So, there is a thing. We should
+Okay. So, there is a thing. We should
+probably look at
+probably look at
+this. Look at efficient zero
+this. Look at efficient zero
+next. This will like there's some
+next. This will like there's some
+improvements.
+improvements.
+Okay. Well, this is less wrong.
+Okay. Well, this is less wrong.
+God damn
+God damn
+it.
+it.
+Whatever. We'll actually check the
+Whatever. We'll actually check the
+proper paper at some point. Um, I'm
+proper paper at some point. Um, I'm
+getting some
+sleep. All the
+sleep. All the
+things.ai try to get up to help us out.
+things.ai try to get up to help us out.
+Go in
+Go in
+Discord. Follow me on X for more RL
+Discord. Follow me on X for more RL
+content. Thanks. And I will be
+
+Kind: captions
+Language: en
+It is 8:00 p.m. 8:06 on a Saturday and
+It is 8:00 p.m. 8:06 on a Saturday and
+uh I figured I'd come back and do
+uh I figured I'd come back and do
+another hour or so worth of
+another hour or so worth of
+experiments to see if I can figure
+experiments to see if I can figure
+something out with the model based
+something out with the model based
+stuff.
+So, I guess the first obvious thing is
+So, I guess the first obvious thing is
+why don't we just make it
+why don't we just make it
+bigger,
+bigger,
+right?
+Like just make it bigger. I doubt this
+Like just make it bigger. I doubt this
+does anything.
+Just do like four times input size
+Just do like four times input size
+something like I
+guess. See if that does
+guess. See if that does
+anything. Inconsistent yada
+yada. I believe these both need to be
+yada. I believe these both need to be
+512.
+How do we have both of these to be 512?
+I guess we just project the
+I guess we just project the
+um state embedding.
+um state embedding.
+Maybe just project the
+state. It's only the cell state that we
+state. It's only the cell state that we
+need to project, right?
+It's like really annoying to actually
+It's like really annoying to actually
+make this bigger, isn't
+make this bigger, isn't
+it? That's like really annoying.
+I could make them both a bit bigger just
+I could make them both a bit bigger just
+for now. That's probably pretty easy,
+right? Make them both bigger.
+And then we got to start really looking
+And then we got to start really looking
+at all the losses and seeing if I've
+at all the losses and seeing if I've
+done stuff wrong.
+Super slow.
+Let's look at the uh the call to the
+Let's look at the uh the call to the
+model
+first. It's 100% GPU pretty
+much. So this is the uh actual logic of
+much. So this is the uh actual logic of
+it. 32
+way
+parallel. Five steps rolled out
+forwards, actions and log
+forwards, actions and log
+props computed from original
+props computed from original
+logits. And then we call the world model
+logits. And then we call the world model
+on those
+on those
+actions and the current state.
+actions and the current state.
+which is formed
+which is formed
+by the observation embedding and the
+by the observation embedding and the
+current LSTMC
+state. That could be zero to be fair. We
+state. That could be zero to be fair. We
+could just set that to
+zero because you never get it at
+zero because you never get it at
+um at train time come to think of it.
+says
+says
+160 episode return. So that's still very
+160 episode return. So that's still very
+very
+low. You add the
+low. You add the
+rewards to this
+Okay.
+Next thing I'm going to try is zeroing
+Next thing I'm going to try is zeroing
+the LSTM.
+Try
+Try
+this since I believe when we're training
+this since I believe when we're training
+it, we never get out of
+Okay. I'm also if we need to train it
+Okay. I'm also if we need to train it
+with like shorter
+with like shorter
+segments since it only rolls out
+five. Could be we need to train it with
+five. Could be we need to train it with
+shorter segments.
+Okay. Uh, it's
+unstable. It's weird.
+I could technically train it on length
+I could technically train it on length
+one
+segments. I don't think that's what we
+segments. I don't think that's what we
+want to do, right?
+I really was hoping we could get this
+I really was hoping we could get this
+thing to work today.
+I mean, I rather like this over the
+I mean, I rather like this over the
+dreamer style
+dreamer style
+formulation. Uh, this is lower score
+formulation. Uh, this is lower score
+actually though than the
+actually though than the
+previous, isn't
+previous, isn't
+it? So, maybe there is something to
+this. Okay.
+What? Can we just like roll this out one
+What? Can we just like roll this out one
+and then get something to
+and then get something to
+train? Like it technically even if you
+train? Like it technically even if you
+roll out one step it should be better.
+Quick question. What are the essential
+Quick question. What are the essential
+methods that need to be implemented for
+methods that need to be implemented for
+an
+ocean? So we have squared as like our
+ocean? So we have squared as like our
+default
+default
+and needs a step
+and needs a step
+method, needs a reset
+method, needs a reset
+method, probably should have a render
+method, probably should have a render
+and a
+and a
+close. But the thing is
+close. But the thing is
+like, yeah, technically these have to
+like, yeah, technically these have to
+exist for the new bindings that we're
+exist for the new bindings that we're
+adding, but other than
+adding, but other than
+that, I mean, there's a Python anyways.
+that, I mean, there's a Python anyways.
+You just call this stuff from Python.
+Like that's all the code for
+squared. It's like a kind of like a
+squared. It's like a kind of like a
+vectorzed gym
+interface. I have them both in the same
+interface. I have them both in the same
+file. C step reset C render. Yeah,
+file. C step reset C render. Yeah,
+that's what we use at the moment. Now
+that's what we use at the moment. Now
+you're catching us in between binding
+you're catching us in between binding
+methods here. Um because like what we're
+methods here. Um because like what we're
+trying to do is instead of having Syon
+trying to do is instead of having Syon
+We're trying to have like this type of a
+binding where you can write this instead
+binding where you can write this instead
+of Syon. This is way shorter and
+easier. Yeah. Then you just check the
+easier. Yeah. Then you just check the
+Syon. If you're just doing the Sython,
+Syon. If you're just doing the Sython,
+then the names literally really don't
+then the names literally really don't
+even matter because like you just make
+even matter because like you just make
+sure that they match, right? Because
+sure that they match, right? Because
+you're just calling the Syon from
+you're just calling the Syon from
+Python. There's like no fancy special
+Python. There's like no fancy special
+binding for the Sython. It's just like
+binding for the Sython. It's just like
+whatever binds to C. If you just like
+whatever binds to C. If you just like
+copy the way we've done it with the
+copy the way we've done it with the
+other Ms, you'll see like there's no
+magic. What methods are expected from
+magic. What methods are expected from
+the Python code? Okay, that's a
+the Python code? Okay, that's a
+reasonable one.
+reasonable one.
+So if you just look at the environment,
+So if you just look at the environment,
+right? This is what we do. Whoops, wrong
+one. So we have this thing for puffer
+one. So we have this thing for puffer
+end. This is the entire code. Um these
+end. This is the entire code. Um these
+are handled for you. It just needs a
+are handled for you. It just needs a
+reset, a step, and a close. That's
+it. Your Sython can expose whatever you
+it. Your Sython can expose whatever you
+want, right? It's the Python has to have
+want, right? It's the Python has to have
+a reset, a step, and a
+close. But like I would suggest just
+close. But like I would suggest just
+doing it the way you see that we have
+doing it the way you see that we have
+our M's done here. It's a pretty good
+our M's done here. It's a pretty good
+way of doing it. Like so here's the
+way of doing it. Like so here's the
+squared M. So this is like a pure
+squared M. So this is like a pure
+Python. Uh where is it? This is the new
+Python. Uh where is it? This is the new
+binding example here. This is the Sython
+binding example here. This is the Sython
+one. Logging is just for displaying
+one. Logging is just for displaying
+stats. Yeah, the stuff that pops up here
+stats. Yeah, the stuff that pops up here
+when I run experiments that you see, it
+when I run experiments that you see, it
+comes from here.
+comes from here.
+So like this is the example with Syon
+So like this is the example with Syon
+here,
+right? It's a render method. It just
+right? It's a render method. It just
+calls
+calls
+render step. The only gotcha here,
+render step. The only gotcha here,
+right, is that you have to init with
+right, is that you have to init with
+this buffer and then this buffer set
+this buffer and then this buffer set
+selfobservations actions. It sets all
+selfobservations actions. It sets all
+these things
+these things
+up and then these are like shared
+up and then these are like shared
+buffers.
+buffers.
+So like this data gets shared between
+So like this data gets shared between
+the Python, the C and the Python because
+the Python, the C and the Python because
+it's just the same memory
+it's just the same memory
+address. And like you see how we
+address. And like you see how we
+populate the actions here. We do self
+populate the actions here. We do self
+actions equals
+actions equals
+actions. And then the step doesn't take
+actions. And then the step doesn't take
+any arguments. That's because we already
+any arguments. That's because we already
+told that this is the action tensor.
+told that this is the action tensor.
+Here's the memory where the actions are
+Here's the memory where the actions are
+going to be. And then we just put these
+going to be. And then we just put these
+into memory. So when it steps, it knows
+into memory. So when it steps, it knows
+that they're here. That's the only
+that they're here. That's the only
+tricky bit. The rest is pretty
+tricky bit. The rest is pretty
+self-explanatory. And if it's not, you
+self-explanatory. And if it's not, you
+come back to
+come back to
+me. I will be live back again most of
+Monday break
+Monday break
+out. Yeah. So you check the snake emb if
+out. Yeah. So you check the snake emb if
+you want. I wrote the snake emb. It's a
+you want. I wrote the snake emb. It's a
+lot more concise. I didn't write pong or
+breakout. Oh, you're still doing voids.
+breakout. Oh, you're still doing voids.
+That's awesome. Um, yeah, we were
+That's awesome. Um, yeah, we were
+actually just check talking about that
+actually just check talking about that
+because like we were thinking of doing
+because like we were thinking of doing
+like flocking type stuff more broadly
+like flocking type stuff more broadly
+with puffer. It'll be
+with puffer. It'll be
+cool. What should the agents go
+cool. What should the agents go
+actually? If you just look up voids,
+actually? If you just look up voids,
+right? You just turn these rules into
+right? You just turn these rules into
+rewards.
+like you'll find the rules somewhere
+like you'll find the rules somewhere
+like
+this. Yeah. So, what they do here is
+this. Yeah. So, what they do here is
+they like they code these behaviors. All
+they like they code these behaviors. All
+you would do is you turn these into
+rewards. Coherent separation alignment
+rewards. Coherent separation alignment
+agent be a predator. It doesn't have to
+agent be a predator. It doesn't have to
+be. You literally just like give it.
+be. You literally just like give it.
+So this is like what they try to do
+So this is like what they try to do
+here. If you find the algorithm code
+like look see somebody has a really big
+like look see somebody has a really big
+one
+here. It's pretty cool
+here. It's pretty cool
+right? I think it's following my cursor
+right? I think it's following my cursor
+in this one.
+agent schools to adjust the params. I
+agent schools to adjust the params. I
+the way so vids is a rulebased system
+the way so vids is a rulebased system
+originally, right? So like they will
+originally, right? So like they will
+just they have like a deterministic
+just they have like a deterministic
+rule-based behavior. So the agent the
+rule-based behavior. So the agent the
+actions are just going to be like turn
+actions are just going to be like turn
+left, turn right or whatever by a
+left, turn right or whatever by a
+certain amount and uh you just give them
+certain amount and uh you just give them
+a reward for like aligning with nearby
+a reward for like aligning with nearby
+agent, being coherent, whatever.
+like yeah, this is a decent article
+like yeah, this is a decent article
+because look this here it has
+because look this here it has
+um a description of the algorithm. So
+um a description of the algorithm. So
+you can pretty easily see how to adjust
+you can pretty easily see how to adjust
+this for a
+reward. See like this is cohesion. this
+reward. See like this is cohesion. this
+is how they script it to like do this
+is how they script it to like do this
+and then you just think okay well
+and then you just think okay well
+cohesion is defined by how close bird is
+cohesion is defined by how close bird is
+to other bird or whatever give reward
+to other bird or whatever give reward
+that's
+that's
+it and if you get stuck let me know but
+it and if you get stuck let me know but
+definitely go try that
+first will be an agent so think of it
+first will be an agent so think of it
+this way, right? Just think of
+this way, right? Just think of
+everything in terms of actions. Okay? So
+everything in terms of actions. Okay? So
+in the original voids, there are rules
+in the original voids, there are rules
+that tell the agent which way to turn,
+that tell the agent which way to turn,
+right? In your case, instead of giving
+right? In your case, instead of giving
+it rules for which way to turn, the
+it rules for which way to turn, the
+neural net gives it an action, which is
+neural net gives it an action, which is
+which way to turn. And the way that it
+which way to turn. And the way that it
+decides that action, right? or learns
+decides that action, right? or learns
+what action it should take is you
+what action it should take is you
+convert the stuff like that before it
+convert the stuff like that before it
+was saying uh turn so as to cohhere with
+was saying uh turn so as to cohhere with
+other agents or align with other agents
+other agents or align with other agents
+or whatever. Just turn those scripted
+or whatever. Just turn those scripted
+rules into rewards so it learns to do it
+instead. That's how to think about
+RL. And it's a lot more flexible too,
+RL. And it's a lot more flexible too,
+right? Because like scripting behaviors,
+right? Because like scripting behaviors,
+you have to be able to precisely script
+you have to be able to precisely script
+for what happens in what circumstance.
+for what happens in what circumstance.
+Um, RL's a lot fuzzier because you just
+Um, RL's a lot fuzzier because you just
+give it a
+reward. Yeah. The traditional rules
+reward. Yeah. The traditional rules
+become the rewards.
+Exactly. Yeah. This one like don't
+Exactly. Yeah. This one like don't
+overthink it. It should be a very very
+overthink it. It should be a very very
+simple end. I intentionally gave this
+simple end. I intentionally gave this
+one to you because I think it's a very
+one to you because I think it's a very
+simple amp that has the potential to
+simple amp that has the potential to
+look very cool if you do it well.
+Syon binds.
+Syon binds.
+So how S Python like Syon is just an
+So how S Python like Syon is just an
+intermediary layer. Look, there isn't
+intermediary layer. Look, there isn't
+really an API for anything except like
+really an API for anything except like
+the actual Python environment has to
+the actual Python environment has to
+have a step, a reset, and a whatever,
+have a step, a reset, and a whatever,
+right? the Syon and the C. It's not
+right? the Syon and the C. It's not
+really an API, at least until we go to
+really an API, at least until we go to
+the new binding stuff. It's just like
+the new binding stuff. It's just like
+you write the end code and then whatever
+you write the end code and then whatever
+methods you need to call, you call them
+methods you need to call, you call them
+via the Sython. I suggest doing it with
+via the Sython. I suggest doing it with
+like step, reset, render, whatever the
+like step, reset, render, whatever the
+way we have it because it makes it
+way we have it because it makes it
+easier, but like it's kind of just a
+easier, but like it's kind of just a
+convention. It's just like what we've
+convention. It's just like what we've
+found to make it easier. We structure
+found to make it easier. We structure
+stuff that way.
+Client client is the renderer. Client is
+Client client is the renderer. Client is
+like the front
+end. It'll be way clearer in the C code.
+Yeah, in Syon it's
+Yeah, in Syon it's
+not the Syon just like makes makes an
+not the Syon just like makes makes an
+instance of it. So it'll
+render. Look, it's going to be way clear
+render. Look, it's going to be way clear
+if you just look at the snake end. Oh
+if you just look at the snake end. Oh
+we, it rounded to 2K
+we, it rounded to 2K
+stars. That's
+stars. That's
+awesome. That's cool.
+Uh, that's really
+Uh, that's really
+nice. There are not that many RL repos
+nice. There are not that many RL repos
+this
+this
+big. Look, so the snake amp is really
+big. Look, so the snake amp is really
+simple, okay?
+simple, okay?
+Like the client is like a screen of
+Like the client is like a screen of
+code, right? It's got this render
+code, right? It's got this render
+function. That's all it does. The client
+function. That's all it does. The client
+just has a couple like properties.
+just has a couple like properties.
+That's it. And then like the Sython is
+just this is just a header, right? This
+just this is just a header, right? This
+is just a header.
+is just a header.
+And then this makes all the items right
+And then this makes all the items right
+here. Pulls a net. Reset step render.
+here. Pulls a net. Reset step render.
+Close. That's
+Close. That's
+it. And this client here, this make
+it. And this client here, this make
+client that is literally just makes a
+client that is literally just makes a
+renderer. That's all it is. And this
+renderer. That's all it is. And this
+make function is just a C
+function. Python's just an easy way to
+function. Python's just an easy way to
+expose C methods to Python. That's all
+expose C methods to Python. That's all
+it is.
+I've been trying to replace Syon, not
+I've been trying to replace Syon, not
+because necessarily the Sython's hard.
+because necessarily the Sython's hard.
+It's just it's more annoying to debug
+It's just it's more annoying to debug
+Syon than it is to debug straight C.
+Syon than it is to debug straight C.
+Straight C is very easy to
+Straight C is very easy to
+debug, provided you're compiling with
+debug, provided you're compiling with
+address sanitizer at least.
+death struck name
+name. Uh that's me being lazy, but
+yeah, it's a type
+defr there's literally no reason. It's
+defr there's literally no reason. It's
+just me being lazy, not not liking
+just me being lazy, not not liking
+having It's me being lazy doing it in
+having It's me being lazy doing it in
+two lines because I don't like having to
+two lines because I don't like having to
+read all the way to the bottom to have
+read all the way to the bottom to have
+the to see where the name of this truck
+the to see where the name of this truck
+is. There's no good reason.
+Yeah, you can do it's like some of the
+Yeah, you can do it's like some of the
+conventions are there for a good reason
+conventions are there for a good reason
+and some of the conventions are there
+and some of the conventions are there
+because it's like I I wrote Python for
+because it's like I I wrote Python for
+10 years and then started doing this
+10 years and then started doing this
+like a few months ago, like maybe six
+like a few months ago, like maybe six
+months ago or whatever and like I'm
+months ago or whatever and like I'm
+still finding better ways to uh to write
+still finding better ways to uh to write
+like clean concise
+C. So, possibly I'll just get used to
+C. So, possibly I'll just get used to
+having this rock name at the end. It
+having this rock name at the end. It
+kind of annoys me that it's not at the
+kind of annoys me that it's not at the
+top because the trucks can get really
+top because the trucks can get really
+big, but
+man, not a big deal.
+Can we just
+like model
+like model
+state start working around not messing
+state start working around not messing
+around in demos? Yeah. Have a nice
+around in demos? Yeah. Have a nice
+evening. I'm going to bed soon. I just
+evening. I'm going to bed soon. I just
+want to see if I can try one or two more
+want to see if I can try one or two more
+things to maybe get this thing to work.
+But this value loss is screwed,
+right? Oh, hang
+right? Oh, hang
+on. New
+value. New value.
+Let's make
+Let's make
+sure this should be a really good way to
+sure this should be a really good way to
+test
+honestly. Finish this
+today actions.
+should be the
+should be the
+value. I think the value is just the
+value. I think the value is just the
+value
+policy loss.
+I think it's just predicting the value,
+I think it's just predicting the value,
+isn't
+it? Or is it new value? Hang on. New
+it? Or is it new value? Hang on. New
+value should be
+predicting return,
+predicting return,
+right? Isn't this just return?
+That's should be predicting return.
+Okay, so this does better, but the value
+Okay, so this does better, but the value
+law sucks.
+I don't know why this would not work.
+I don't know why this would not work.
+Very
+Very
+weird. Logic reward value state, right?
+weird. Logic reward value state, right?
+Logit's reward value state. Yep.
+Does it need to be a clipped value loss?
+crashed. Pretty damn sure that they
+crashed. Pretty damn sure that they
+should have
+value,
+right? Maybe it is like
+I don't know. Maybe it is
+this. I'd be kind of surprised if that
+this. I'd be kind of surprised if that
+made the difference.
+Reward loss
+is low enough. I
+guess why wouldn't you be able to
+guess why wouldn't you be able to
+predict this is my question.
+embedding. Totally should be able to,
+right? Freaking
+no. If we're going to do this
+Except
+supposed to give you
+supposed to give you
+logits, reward, value, and
+logits, reward, value, and
+state. That make any bloody sense?
+You take the
+action. No, you have this completely
+action. No, you have this completely
+wrong. This doesn't make any bloody
+wrong. This doesn't make any bloody
+sense. All right. I think I just got
+sense. All right. I think I just got
+tired doing this.
+I think I'm going to call it a night.
+I think I'm going to call it a night.
+I'm like too tired to fully finish this
+I'm like too tired to fully finish this
+stuff. We made some good progress. Um,
+stuff. We made some good progress. Um,
+we
+we
+got it like it's not like we've gotten
+got it like it's not like we've gotten
+nothing to train all day. We've gotten
+nothing to train all day. We've gotten
+plenty of things to train. We just can't
+plenty of things to train. We just can't
+beat the odd policy. have to be pretty
+beat the odd policy. have to be pretty
+careful about the implementation for
+careful about the implementation for
+that. Um, I'm still not completely sure
+that. Um, I'm still not completely sure
+about this versus other world model
+about this versus other world model
+based approaches. I mean, I really like
+based approaches. I mean, I really like
+this one in theory. I just don't know
+this one in theory. I just don't know
+how much compute this uses.
+like
+like
+Efficient zero.
+I probably should have checked this.
+Okay. So, there is a thing. We should
+Okay. So, there is a thing. We should
+probably look at
+probably look at
+this. Look at efficient zero
+this. Look at efficient zero
+next. This will like there's some
+next. This will like there's some
+improvements.
+improvements.
+Okay. Well, this is less wrong.
+Okay. Well, this is less wrong.
+God damn
+God damn
+it.
+it.
+Whatever. We'll actually check the
+Whatever. We'll actually check the
+proper paper at some point. Um, I'm
+proper paper at some point. Um, I'm
+getting some
+sleep. All the
+sleep. All the
+things.ai try to get up to help us out.
+things.ai try to get up to help us out.
+Go in
+Go in
+Discord. Follow me on X for more RL
+Discord. Follow me on X for more RL
+content. Thanks. And I will be

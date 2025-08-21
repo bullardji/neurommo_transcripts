@@ -1,0 +1,593 @@
+Kind: captions
+Language: en
+Good to be back
+Good to be back
+live. There's uh network maintenance
+live. There's uh network maintenance
+today and
+today and
+uh lots of cutouts on this, but it's
+uh lots of cutouts on this, but it's
+probably still uh it's probably fine
+probably still uh it's probably fine
+now.
+We are seeing dropped frames on
+We are seeing dropped frames on
+here. Let me see if that's
+here. Let me see if that's
+stable. I just dropped a few. Okay.
+stable. I just dropped a few. Okay.
+Well, hopefully it's fine. We'll see
+Well, hopefully it's fine. We'll see
+very quickly if it's not.
+very quickly if it's not.
+Um I'm thinking we should
+probably try to match the old perf on
+probably try to match the old perf on
+this real quick.
+this real quick.
+Yeah, we should probably do
+that just because
+that just because
+like this not working is bothering
+like this not working is bothering
+me. First of all, it's map size
+me. First of all, it's map size
+31. Max size didn't
+specified. Map size. So, max size
+specified. Map size. So, max size
+doesn't get specified.
+doesn't get specified.
+And then 512
+And then 512
+m. Uh, we need more than
+m. Uh, we need more than
+that. I think you need 1024
+that. I think you need 1024
+minimum and the map say
+192. See if this works.
+need to specify max size I
+need to specify max size I
+suppose.
+Okay, now this is the one that didn't
+Okay, now this is the one that didn't
+work. I think it was
+I think it was do
+this. Yeah. So there you
+go. So we see how this trains. Then we
+go. So we see how this trains. Then we
+try with the old
+try with the old
+hypers. We go from there.
+hypers. We go from there.
+and make sure reream
+shows. So, we were able to get like 60
+shows. So, we were able to get like 60
+to 80 on this task, I'm pretty
+to 80 on this task, I'm pretty
+sure. So, I want to make sure that I
+sure. So, I want to make sure that I
+didn't either break something in the end
+didn't either break something in the end
+or in the
+trainer. It's completely different
+trainer. It's completely different
+hypers. So,
+Okay, we will
+Okay, we will
+try most of these to start
+with. What just happened?
+Try
+these gamma
+lambda. Uh, we don't do that
+lambda. Uh, we don't do that
+anymore. We don't do this. Well, maybe
+anymore. We don't do this. Well, maybe
+this is
+fine. Let's see how this does.
+Is this like immediately way
+better? This is the only end I'm a bit
+better? This is the only end I'm a bit
+worried about because we're using this
+worried about because we're using this
+actively for curriculum stuff.
+Um, okay. So, the fact that this just
+Um, okay. So, the fact that this just
+like
+like
+doesn't do
+doesn't do
+anything is concerning.
+I think what I'm going to do is I'm
+I think what I'm going to do is I'm
+going to leave the
+going to leave the
+params the way I had them like this and
+params the way I had them like this and
+then we're going to go see if we can
+then we're going to go see if we can
+figure out the experience buffer
+figure out the experience buffer
+thing. That's going to be a pain, but
+thing. That's going to be a pain, but
+we'll have to figure it
+we'll have to figure it
+out.
+Okay, so this is what I was trying to do
+Okay, so this is what I was trying to do
+last night, but I just got too tired.
+Um, I think we can probably figure this
+Um, I think we can probably figure this
+out if we make that the goal to figure
+out if we make that the goal to figure
+this out today.
+you need to have on policy rows
+you need to have on policy rows
+be a multiple of uh the free index or
+be a multiple of uh the free index or
+whatever. Right? The big issue here was
+whatever. Right? The big issue here was
+this less than
+sign. So this should be less than equals
+sign. So this should be less than equals
+but it doesn't train when you have less
+but it doesn't train when you have less
+than equals.
+Um, the issue is that there are a bunch
+Um, the issue is that there are a bunch
+of trajectory
+of trajectory
+segments and as you collect data, you
+segments and as you collect data, you
+fill up trajectory
+fill up trajectory
+segments, but you need a way to figure
+segments, but you need a way to figure
+out when you're
+out when you're
+done when you're done collecting
+done when you're done collecting
+data. I'm trying to think like what
+data. I'm trying to think like what
+would be a good stable replacement for
+would be a good stable replacement for
+this check
+this check
+here
+here
+because this is not doing it.
+I'm kind of tempted
+to I'm kind of tempted to revert back to
+to I'm kind of tempted to revert back to
+like my old back impulse check or
+like my old back impulse check or
+whatever.
+So just collect as many steps as you
+So just collect as many steps as you
+need in the
+need in the
+batch and then we just throw errors if
+batch and then we just throw errors if
+that doesn't work
+out. It's probably the best way of doing
+out. It's probably the best way of doing
+it. Let me see how we used to do this.
+while not experienced full
+Pointer greater than equal batch
+Pointer greater than equal batch
+size.
+Okay. We can do something like that.
+We don't get any indexing bugs from
+We don't get any indexing bugs from
+this. Apparently not.
+Was this eight or
+16? I think this was 16 before, wasn't
+16? I think this was 16 before, wasn't
+it?
+If this breaks
+it. Okay. So, this doesn't break
+it. This is faster as well.
+There should be a way to break this
+There should be a way to break this
+though. Like if I just do a 64, this
+though. Like if I just do a 64, this
+should just break,
+right? Yep.
+Okay.
+I Okay, I don't know what's going on
+I Okay, I don't know what's going on
+today with um with the internet. It
+today with um with the internet. It
+seems like this is reream because I go
+seems like this is reream because I go
+and I check speed test and it
+and I check speed test and it
+immediately works. So, I don't know if
+immediately works. So, I don't know if
+this is unstable reream server today or
+this is unstable reream server today or
+what, but I'm just going to work around
+what, but I'm just going to work around
+it as best I can for now. And if it
+it as best I can for now. And if it
+keeps happening, then we'll figure
+keeps happening, then we'll figure
+something out
+something out
+tomorrow. But I want to make sure we
+tomorrow. But I want to make sure we
+finish this
+today. So, we have
+524. Okay, this is perfectly 8192
+524. Okay, this is perfectly 8192
+agents, right?
+So it would make sense to have
+So it would make sense to have
+4K forward pass batch size with this,
+right? And we'll just see if that works.
+right? And we'll just see if that works.
+So num ms here should be
+16. Also, wouldn't this be like way
+16. Also, wouldn't this be like way
+better if I just
+did like like something like this?
+Let's see what this does.
+1.5 million step per second
+1.5 million step per second
+training. A lot of miscellaneous
+training. A lot of miscellaneous
+overhead.
+Yeah, we'll see how this trains.
+We should probably make sure that we're
+We should probably make sure that we're
+not um slower because of the horizon as
+not um slower because of the horizon as
+well.
+We'll do that after.
+seems we are able to train a good
+seems we are able to train a good
+policy. Okay.
+It's very close to um what we had
+before. Now let's see if there is any
+before. Now let's see if there is any
+perf overhead with the
+perf overhead with the
+BP4 as well.
+Now there is not any perf penalty with a
+Now there is not any perf penalty with a
+longer horizon. We are very well set up
+longer horizon. We are very well set up
+in fact right
+there. Possibly mini batch size has to
+there. Possibly mini batch size has to
+go up come to think of it
+go up come to think of it
+now. And possibly mini batch size has to
+now. And possibly mini batch size has to
+go
+up. I think we'll have to test. That
+up. I think we'll have to test. That
+one's like potentially a lot more of a
+one's like potentially a lot more of a
+disruptive change.
+Yeah, but this seems totally
+fine. Can I just delete all this and
+fine. Can I just delete all this and
+have it work?
+Why is this
+Why is this
+not this does not show up here? I guess
+not this does not show up here? I guess
+it's not
+indexed. The hell is this?
+There we
+go. Score is still
+go. Score is still
+fine.
+fine.
+Matches 1.8 mills per second. Rins quite
+Matches 1.8 mills per second. Rins quite
+nicely.
+need this
+either. How
+about we'll see if we actually get logs
+about we'll see if we actually get logs
+back from this. That's the main
+issue. There we go.
+
+Kind: captions
+Language: en
+Good to be back
+Good to be back
+live. There's uh network maintenance
+live. There's uh network maintenance
+today and
+today and
+uh lots of cutouts on this, but it's
+uh lots of cutouts on this, but it's
+probably still uh it's probably fine
+probably still uh it's probably fine
+now.
+We are seeing dropped frames on
+We are seeing dropped frames on
+here. Let me see if that's
+here. Let me see if that's
+stable. I just dropped a few. Okay.
+stable. I just dropped a few. Okay.
+Well, hopefully it's fine. We'll see
+Well, hopefully it's fine. We'll see
+very quickly if it's not.
+very quickly if it's not.
+Um I'm thinking we should
+probably try to match the old perf on
+probably try to match the old perf on
+this real quick.
+this real quick.
+Yeah, we should probably do
+that just because
+that just because
+like this not working is bothering
+like this not working is bothering
+me. First of all, it's map size
+me. First of all, it's map size
+31. Max size didn't
+specified. Map size. So, max size
+specified. Map size. So, max size
+doesn't get specified.
+doesn't get specified.
+And then 512
+And then 512
+m. Uh, we need more than
+m. Uh, we need more than
+that. I think you need 1024
+that. I think you need 1024
+minimum and the map say
+192. See if this works.
+need to specify max size I
+need to specify max size I
+suppose.
+Okay, now this is the one that didn't
+Okay, now this is the one that didn't
+work. I think it was
+I think it was do
+this. Yeah. So there you
+go. So we see how this trains. Then we
+go. So we see how this trains. Then we
+try with the old
+try with the old
+hypers. We go from there.
+hypers. We go from there.
+and make sure reream
+shows. So, we were able to get like 60
+shows. So, we were able to get like 60
+to 80 on this task, I'm pretty
+to 80 on this task, I'm pretty
+sure. So, I want to make sure that I
+sure. So, I want to make sure that I
+didn't either break something in the end
+didn't either break something in the end
+or in the
+trainer. It's completely different
+trainer. It's completely different
+hypers. So,
+Okay, we will
+Okay, we will
+try most of these to start
+with. What just happened?
+Try
+these gamma
+lambda. Uh, we don't do that
+lambda. Uh, we don't do that
+anymore. We don't do this. Well, maybe
+anymore. We don't do this. Well, maybe
+this is
+fine. Let's see how this does.
+Is this like immediately way
+better? This is the only end I'm a bit
+better? This is the only end I'm a bit
+worried about because we're using this
+worried about because we're using this
+actively for curriculum stuff.
+Um, okay. So, the fact that this just
+Um, okay. So, the fact that this just
+like
+like
+doesn't do
+doesn't do
+anything is concerning.
+I think what I'm going to do is I'm
+I think what I'm going to do is I'm
+going to leave the
+going to leave the
+params the way I had them like this and
+params the way I had them like this and
+then we're going to go see if we can
+then we're going to go see if we can
+figure out the experience buffer
+figure out the experience buffer
+thing. That's going to be a pain, but
+thing. That's going to be a pain, but
+we'll have to figure it
+we'll have to figure it
+out.
+Okay, so this is what I was trying to do
+Okay, so this is what I was trying to do
+last night, but I just got too tired.
+Um, I think we can probably figure this
+Um, I think we can probably figure this
+out if we make that the goal to figure
+out if we make that the goal to figure
+this out today.
+you need to have on policy rows
+you need to have on policy rows
+be a multiple of uh the free index or
+be a multiple of uh the free index or
+whatever. Right? The big issue here was
+whatever. Right? The big issue here was
+this less than
+sign. So this should be less than equals
+sign. So this should be less than equals
+but it doesn't train when you have less
+but it doesn't train when you have less
+than equals.
+Um, the issue is that there are a bunch
+Um, the issue is that there are a bunch
+of trajectory
+of trajectory
+segments and as you collect data, you
+segments and as you collect data, you
+fill up trajectory
+fill up trajectory
+segments, but you need a way to figure
+segments, but you need a way to figure
+out when you're
+out when you're
+done when you're done collecting
+done when you're done collecting
+data. I'm trying to think like what
+data. I'm trying to think like what
+would be a good stable replacement for
+would be a good stable replacement for
+this check
+this check
+here
+here
+because this is not doing it.
+I'm kind of tempted
+to I'm kind of tempted to revert back to
+to I'm kind of tempted to revert back to
+like my old back impulse check or
+like my old back impulse check or
+whatever.
+So just collect as many steps as you
+So just collect as many steps as you
+need in the
+need in the
+batch and then we just throw errors if
+batch and then we just throw errors if
+that doesn't work
+out. It's probably the best way of doing
+out. It's probably the best way of doing
+it. Let me see how we used to do this.
+while not experienced full
+Pointer greater than equal batch
+Pointer greater than equal batch
+size.
+Okay. We can do something like that.
+We don't get any indexing bugs from
+We don't get any indexing bugs from
+this. Apparently not.
+Was this eight or
+16? I think this was 16 before, wasn't
+16? I think this was 16 before, wasn't
+it?
+If this breaks
+it. Okay. So, this doesn't break
+it. This is faster as well.
+There should be a way to break this
+There should be a way to break this
+though. Like if I just do a 64, this
+though. Like if I just do a 64, this
+should just break,
+right? Yep.
+Okay.
+I Okay, I don't know what's going on
+I Okay, I don't know what's going on
+today with um with the internet. It
+today with um with the internet. It
+seems like this is reream because I go
+seems like this is reream because I go
+and I check speed test and it
+and I check speed test and it
+immediately works. So, I don't know if
+immediately works. So, I don't know if
+this is unstable reream server today or
+this is unstable reream server today or
+what, but I'm just going to work around
+what, but I'm just going to work around
+it as best I can for now. And if it
+it as best I can for now. And if it
+keeps happening, then we'll figure
+keeps happening, then we'll figure
+something out
+something out
+tomorrow. But I want to make sure we
+tomorrow. But I want to make sure we
+finish this
+today. So, we have
+524. Okay, this is perfectly 8192
+524. Okay, this is perfectly 8192
+agents, right?
+So it would make sense to have
+So it would make sense to have
+4K forward pass batch size with this,
+right? And we'll just see if that works.
+right? And we'll just see if that works.
+So num ms here should be
+16. Also, wouldn't this be like way
+16. Also, wouldn't this be like way
+better if I just
+did like like something like this?
+Let's see what this does.
+1.5 million step per second
+1.5 million step per second
+training. A lot of miscellaneous
+training. A lot of miscellaneous
+overhead.
+Yeah, we'll see how this trains.
+We should probably make sure that we're
+We should probably make sure that we're
+not um slower because of the horizon as
+not um slower because of the horizon as
+well.
+We'll do that after.
+seems we are able to train a good
+seems we are able to train a good
+policy. Okay.
+It's very close to um what we had
+before. Now let's see if there is any
+before. Now let's see if there is any
+perf overhead with the
+perf overhead with the
+BP4 as well.
+Now there is not any perf penalty with a
+Now there is not any perf penalty with a
+longer horizon. We are very well set up
+longer horizon. We are very well set up
+in fact right
+there. Possibly mini batch size has to
+there. Possibly mini batch size has to
+go up come to think of it
+go up come to think of it
+now. And possibly mini batch size has to
+now. And possibly mini batch size has to
+go
+up. I think we'll have to test. That
+up. I think we'll have to test. That
+one's like potentially a lot more of a
+one's like potentially a lot more of a
+disruptive change.
+Yeah, but this seems totally
+fine. Can I just delete all this and
+fine. Can I just delete all this and
+have it work?
+Why is this
+Why is this
+not this does not show up here? I guess
+not this does not show up here? I guess
+it's not
+indexed. The hell is this?
+There we
+go. Score is still
+go. Score is still
+fine.
+fine.
+Matches 1.8 mills per second. Rins quite
+Matches 1.8 mills per second. Rins quite
+nicely.
+need this
+either. How
+about we'll see if we actually get logs
+about we'll see if we actually get logs
+back from this. That's the main
+issue. There we go.

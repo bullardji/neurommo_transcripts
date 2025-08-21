@@ -1,0 +1,1491 @@
+Kind: captions
+Language: en
+muted
+muted
+microphone. Am I hour
+microphone. Am I hour
+here?
+Hi. We're just going to have a short
+Hi. We're just going to have a short
+little stream
+little stream
+today. I've been on site for
+today. I've been on site for
+Puffer and post a picture in here. I
+Puffer and post a picture in here. I
+did. I've been on site for Puffer.
+did. I've been on site for Puffer.
+So,
+So,
+um, we're gonna have some cool stuff
+um, we're gonna have some cool stuff
+here very
+soon. Going to have some
+machines. Haven't ordered the machines
+machines. Haven't ordered the machines
+yet, and they're going to take a while,
+yet, and they're going to take a while,
+but I'm working on putting that
+but I'm working on putting that
+together. Um,
+together. Um,
+really, there are a few things I want to
+really, there are a few things I want to
+do today.
+Um really though, the main thing is just
+Um really though, the main thing is just
+there's this new experience buffer
+there's this new experience buffer
+refactor that I tried to get some stuff
+refactor that I tried to get some stuff
+on done on over the weekend, but I was
+on done on over the weekend, but I was
+traveling and of course I picked the
+traveling and of course I picked the
+hardest possible thing to work on to
+hardest possible thing to work on to
+take with me traveling, not some like
+take with me traveling, not some like
+light easy work to catch up on. So we're
+light easy work to catch up on. So we're
+going to just look at it a little bit
+going to just look at it a little bit
+right now. I'll look at a couple of the
+right now. I'll look at a couple of the
+things that I've done. Maybe we'll see
+things that I've done. Maybe we'll see
+if we can hack something together. I
+if we can hack something together. I
+have a I thought of a way of just
+have a I thought of a way of just
+simplifying it for now. That'll probably
+simplifying it for now. That'll probably
+be good enough. And yeah, we will go
+be good enough. And yeah, we will go
+from there. We will go from
+from there. We will go from
+there. I got like very very little
+there. I got like very very little
+sleep.
+sleep.
+So today is just going to
+So today is just going to
+be getting back into it a little bit
+be getting back into it a little bit
+day. And then tomorrow when I come
+day. And then tomorrow when I come
+back, we will have full workday on
+back, we will have full workday on
+this. And really over the next couple
+this. And really over the next couple
+weeks, I'm going to try to
+weeks, I'm going to try to
+like stream a lot, dev a lot, not have
+like stream a lot, dev a lot, not have
+my schedule taken up by like too much
+my schedule taken up by like too much
+Really just try to crank it on
+Really just try to crank it on
+Puffer. I want to work towards a 2.5
+Puffer. I want to work towards a 2.5
+release, maybe a 3.0 release, depending
+release, maybe a 3.0 release, depending
+on how big it is. we'll see what we
+on how big it is. we'll see what we
+version it. That's going to be the goal.
+version it. That's going to be the goal.
+And in order to do that, we need to have
+And in order to do that, we need to have
+this file right here cleaned up fast and
+this file right here cleaned up fast and
+uh doing what we want. And it's kind of
+uh doing what we want. And it's kind of
+gotten a bit
+gotten a bit
+bloated. It's gotten a bit
+bloated. It's gotten a bit
+bloated.
+So, there's all this crap
+here. Yeah. I think what we're going to
+here. Yeah. I think what we're going to
+do
+is we're probably going to staff some of
+this.
+Well, there's actually a lot of work
+Well, there's actually a lot of work
+here. I don't want to lose it.
+All
+right, we'll push that. Then I will pull
+right, we'll push that. Then I will pull
+down the work that I did over the
+down the work that I did over the
+weekend and I will show you what we're
+weekend and I will show you what we're
+looking at because uh it's a pretty big
+looking at because uh it's a pretty big
+change the way that we are doing things.
+change the way that we are doing things.
+And I'm not sure I'm completely happy
+And I'm not sure I'm completely happy
+with it yet either, frankly.
+The idea is that we want to
+store Hello, welcome. Thank you.
+store Hello, welcome. Thank you.
+Um the idea
+here so right now we have this way of
+here so right now we have this way of
+storing all of the experience in this
+storing all of the experience in this
+flat buffer. Uh the problem is that
+flat buffer. Uh the problem is that
+makes it really hard to
+makes it really hard to
+do some new techniques that we're
+do some new techniques that we're
+thinking about implementing. Also it's a
+thinking about implementing. Also it's a
+little bit slow because you have to sort
+little bit slow because you have to sort
+the data before you train with it and
+the data before you train with it and
+you have to like do this big index copy.
+you have to like do this big index copy.
+So the goal is to come up with a way
+So the goal is to come up with a way
+to store experience in segments. So you
+to store experience in segments. So you
+store in contiguous memory like 128
+store in contiguous memory like 128
+steps from one environment or something
+steps from one environment or something
+like that. Uh and we're going to try to
+like that. Uh and we're going to try to
+just do that. Now there are a whole
+just do that. Now there are a whole
+bunch of edge cases where this thing
+bunch of edge cases where this thing
+fails where the previous one doesn't.
+fails where the previous one doesn't.
+Um, and I have some thoughts on how to
+Um, and I have some thoughts on how to
+work around it, but I think for now
+work around it, but I think for now
+we're just going to do this and we're
+we're just going to do this and we're
+going to see what happens. I think
+going to see what happens. I think
+that's what we're going to
+that's what we're going to
+do. There are like absolutely ways for
+do. There are like absolutely ways for
+this thing to completely
+this thing to completely
+break.
+break.
+But I guess this is what we're doing for
+But I guess this is what we're doing for
+now.
+now.
+I
+mean, maybe I should think about it a
+mean, maybe I should think about it a
+little more before we go for it. I don't
+know. I already have the code mostly
+know. I already have the code mostly
+written. I think it'll be more
+written. I think it'll be more
+interesting to just start writing and uh
+interesting to just start writing and uh
+see where this gets us.
+the
+the
+advantages. Okay, so this
+advantages. Okay, so this
+is simple version right
+here. So this store
+here. So this store
+oops this is a 2D
+oops this is a 2D
+buffer of trajectories, trajectory
+buffer of trajectories, trajectory
+length. That's all this
+length. That's all this
+does. I was getting some
+does. I was getting some
+errors, but they might have been
+errors, but they might have been
+hardware
+specific.
+specific.
+See, no CUDA GPUs. Lovely. I have to
+See, no CUDA GPUs. Lovely. I have to
+reboot this container.
+One second
+shape of
+shape of
+mask. Okay, at least we get a real
+mask. Okay, at least we get a real
+error.
+and length. Okay, so these are very
+different. How did I allocate this?
+There should be
+There should be
+numros, shouldn't it?
+Length of M is one.
+This is quickly going to get very
+This is quickly going to get very
+complicated. I kind of want to diagram
+complicated. I kind of want to diagram
+some stuff out cuz I don't trust myself
+some stuff out cuz I don't trust myself
+to do this uh zero
+shot. I'm on good like four hours of
+sleep capacity.
+sleep capacity.
+not at all peak
+capacity. Okay,
+so we have this
+so we have this
+buffer where we're going to fill up data
+buffer where we're going to fill up data
+like
+this. And these are empty.
+There are a few different ways you can
+There are a few different ways you can
+model
+model
+this. Post a link to your Neptune
+this. Post a link to your Neptune
+ablation so I can steal charts.
+Yes. Hey, Cat.
+So the issue here,
+So the issue here,
+right, is when do you fill up this
+buffer? It's a very different answer if
+buffer? It's a very different answer if
+we're going to assume it's a puffer
+we're going to assume it's a puffer
+musth.
+We really don't want to
+We really don't want to
+break We really don't want to break
+break We really don't want to break
+learning for everything that's not a
+learning for everything that's not a
+puffer
+end. And I don't want two different
+end. And I don't want two different
+buffers.
+These are two very different ways you
+These are two very different ways you
+would implement this
+thing. Does this actually even do what
+thing. Does this actually even do what
+we want? Let me think.
+we want? Let me think.
+So if you have a very long
+episode, how they do J and Dota
+And this is yet another reason we want
+And this is yet another reason we want
+to delete
+to delete
+J. Causes such
+J. Causes such
+pain. But J is one of the things we're
+pain. But J is one of the things we're
+like anything that I replace it is going
+like anything that I replace it is going
+to with it's going to have similar info
+to with it's going to have similar info
+requirements. It's tricky.
+Where's the uh the sample thing? I was
+Where's the uh the sample thing? I was
+pretty sure they had a uh a
+pretty sure they had a uh a
+figure where they talk about their
+figure where they talk about their
+trajectory buffering. Yeah, right
+here. Okay. So 16 time
+steps times 16
+steps times 16
+samples is
+samples is
+128 labeled together J and sent to OP
+128 labeled together J and sent to OP
+sent to
+sent to
+optimizer. So they're only rolling out
+optimizer. So they're only rolling out
+they're using 128
+seconds they're only using 128 steps it
+seconds they're only using 128 steps it
+looks like
+looks like
+right to me this figure
+right to me this figure
+says that GA is only computed backward
+says that GA is only computed backward
+over 128 steps.
+400 frames per policy step. So that's a
+400 frames per policy step. So that's a
+frame skip.
+So it is truly 128
+steps. They have to have played with
+steps. They have to have played with
+that as well,
+right? Lambda stays n5.
+and J
+Horizon. And what's
+this? They listed this instead of the
+parameter. I don't have a comment on
+parameter. I don't have a comment on
+this.
+see equation three. Okay, so they're
+see equation three. Okay, so they're
+just giving this to you in terms of the
+just giving this to you in terms of the
+equation, but they're not actually doing
+equation, but they're not actually doing
+this. So this is a little confusing
+this. So this is a little confusing
+here, right? This is the this is a good
+here, right? This is the this is a good
+find though. So they have this equation
+find though. So they have this equation
+that's like one over one minus lambda or
+that's like one over one minus lambda or
+whatever that gives you the time horizon
+whatever that gives you the time horizon
+from the parameter. And they're saying
+from the parameter. And they're saying
+that look that they're using J over a
+that look that they're using J over a
+horizon of up to 840 seconds or 360 per
+horizon of up to 840 seconds or 360 per
+rerun. But if you look
+rerun. But if you look
+here, J is only computing over 34
+here, J is only computing over 34
+seconds. So they only get dr ground
+seconds. So they only get dr ground
+truth for J over 34 seconds and then the
+truth for J over 34 seconds and then the
+rest of it they have to be relying on
+rest of it they have to be relying on
+the value function bootstrap.
+So if this works for
+So if this works for
+Dota, I mean this suggests to
+Dota, I mean this suggests to
+me that having some fixed buffer
+me that having some fixed buffer
+128 is a okay in principle.
+128 is a okay in principle.
+Now, the only thing we have to deal with
+Now, the only thing we have to deal with
+is like some of these not getting filled
+up realistically though,
+right? Is this going to be a big
+problem? I think realistically not. And
+problem? I think realistically not. And
+here's why. So the fast m in puffer are
+here's why. So the fast m in puffer are
+all
+all
+vectorzed and uh we're going to get like
+vectorzed and uh we're going to get like
+contiguous buffers of
+data. Is that true?
+seems like it should be.
+What about the LSTM Hey,
+Okay, here there's a paragraph on this.
+Okay, here there's a paragraph on this.
+We train agents on 30 secondond segments
+We train agents on 30 secondond segments
+of the
+of the
+game and any given 30 secondond ground
+game and any given 30 secondond ground
+snippet may not contain the ground
+truth. We address this by training these
+truth. We address this by training these
+heads in a similar fashion to how we
+heads in a similar fashion to how we
+train value functions.
+If a segment contains the ground truth
+label, we use ground truth label for all
+label, we use ground truth label for all
+time steps. If not, we use the model's
+time steps. If not, we use the model's
+prediction at the end of the segment as
+prediction at the end of the segment as
+the label.
+Oh, but these are just for the head
+predictors. I need to think about this
+predictors. I need to think about this
+very carefully.
+This seems like a fundamental problem
+This seems like a fundamental problem
+though. You can't collect more than 128
+though. You can't collect more than 128
+steps realistically or it'll be stale.
+steps realistically or it'll be stale.
+And I think data staleness is a bigger
+And I think data staleness is a bigger
+problem than anything.
+We also have to think about the
+We also have to think about the
+historical replay
+historical replay
+here because one of the ideas here is to
+here because one of the ideas here is to
+add historical
+replay. Now that's going to mess it up.
+Well, what do we need in order to
+Well, what do we need in order to
+compute advantage?
+Don't back off.
+I'm trying to think the best way to do a
+I'm trying to think the best way to do a
+buffer of this
+buffer of this
+variety. I mean, it's still better to
+variety. I mean, it's still better to
+store them in rows.
+as the networks get
+larger. Well, we'll deal with that once
+larger. Well, we'll deal with that once
+we get to it.
+Can we just store this like in a
+Can we just store this like in a
+different memory
+layout to make it easier?
+We probably
+could. So basically we would store it in
+could. So basically we would store it in
+roughly the format that we have
+roughly the format that we have
+now like the final format we have now
+now like the final format we have now
+that's actually mini bath appropriately.
+I don't know if I like that though
+because how do we swap in new data?
+Right. I think our dim is
+Right. I think our dim is
+like mini
+batch. What's our dim right now?
+Mini batches, mini batch size, PO
+horizon. So it would be like all mini
+horizon. So it would be like all mini
+batches a window of mini batch size into
+batches a window of mini batch size into
+all of
+this. Not many patches.
+still doesn't fix the LSTM shenanigans
+still doesn't fix the LSTM shenanigans
+either.
+still doesn't fix the LSTM shenanigans.
+This is like rapidly getting very
+complicated. I don't want the code to be
+complicated. How do we think about this
+complicated. How do we think about this
+simpler?
+The simplest thing I think is just what
+The simplest thing I think is just what
+I have now.
+And the current implementation
+should it should end up roughly the same
+should it should end up roughly the same
+as the next implement as the uh the new
+implementation. I think it should
+It is going to get awkward though if you
+It is going to get awkward though if you
+want a
+want a
+longer BPT
+horizon. Yeah. See they they have this
+horizon. Yeah. See they they have this
+very separate here. This is the LSTM on
+very separate here. This is the LSTM on
+roll and this is J.
+Whoops. So, what you want is not 128.
+Whoops. So, what you want is not 128.
+Okay. So, that's off.
+I think I can do all of this such that
+I think I can do all of this such that
+the final code ends up being pretty
+the final code ends up being pretty
+compact. It's just a little tricky.
+Yeah.
+Yeah.
+Okay.
+Okay.
+Um, we can try this and then
+Yeah, I think we just straight up we try
+Yeah, I think we just straight up we try
+this,
+right? LSTM state gets carried, but
+right? LSTM state gets carried, but
+that's not a big
+that's not a big
+deal. And other than LSTM get state
+deal. And other than LSTM get state
+getting carried, this should be
+getting carried, this should be
+perfectly
+correct. This will do BPD over arbitrary
+correct. This will do BPD over arbitrary
+horizons and we will miss like at most a
+horizons and we will miss like at most a
+few small samples.
+few small samples.
+Let's do
+that. What are we going to do about
+that. What are we going to do about
+lengths and indices?
+I guess we do it the slow and fully
+I guess we do it the slow and fully
+correct way first.
+So episode length is going to
+So episode length is going to
+be num
+be num
+rows and then this is LSTM total
+agents and store it in just as number
+agents and store it in just as number
+rows.
+And now numbum rows batch size over
+And now numbum rows batch size over
+horizon. Okay, this is good. So I
+horizon. Okay, this is good. So I
+actually had this mostly on my first
+actually had this mostly on my first
+pass. I just had to go through lots of
+pass. I just had to go through lots of
+different various
+different various
+alternatives. And uh the key thing is
+alternatives. And uh the key thing is
+that we actually do have to do
+the we actually do have to do this part
+the we actually do have to do this part
+this tricky part
+this tricky part
+here. So this isn't going to cut it. We
+here. So this isn't going to cut it. We
+have to do this part.
+Full ids is end ID of full
+Cool. It
+Cool. It
+runs. I'm expecting to have broken
+everything. Yep. So, we did break
+everything. Yep. So, we did break
+everything. Kind of expected.
+everything. Kind of expected.
+But it does
+But it does
+run.
+run.
+Cool.
+Cool.
+Um, so the algorithm here that we have
+Um, so the algorithm here that we have
+to get right, there a couple pieces to
+to get right, there a couple pieces to
+this. So there's a whole bunch of
+this. So there's a whole bunch of
+indexing now we have to keep track of
+indexing now we have to keep track of
+with this
+with this
+buffer to figure out
+buffer to figure out
+essentially where we're storing data.
+essentially where we're storing data.
+We need to keep track of how long each
+We need to keep track of how long each
+segment is and uh which environment gets
+segment is and uh which environment gets
+written to reach which
+written to reach which
+segment. That is
+important. None do
+Holy cam.
+Eval has to reset these buffers
+Eval has to reset these buffers
+presumably, right?
+presumably, right?
+Every time you call eval, you have to
+Every time you call eval, you have to
+reset
+these or on flatten batch I guess.
+Let's just see what's
+Let's just see what's
+happening. Okay, so first 2048 m are
+happening. Okay, so first 2048 m are
+done.
+Same ID is
+here at blends get
+reset. That doesn't look right to me.
+64. Something's free here.
+How do we get 8192 out of
+this? 2 M's 2048
+this? 2 M's 2048
+each would be 4096. Somehow we have
+each would be 4096. Somehow we have
+double
+How's this
+happen? 4096, right?
+Oh, because that's Yeah, that is
+Oh, because that's Yeah, that is
+separate.
+separate.
+Okay. Yeah, that is
+separate. So, this is actually This
+separate. So, this is actually This
+looks good to me.
+And then you don't even need to do this
+And then you don't even need to do this
+either.
+Okay,
+Okay,
+[Music]
+[Music]
+2048. First 2048 M's are
+2048. First 2048 M's are
+done and explodes.
+done and explodes.
+Okay. What we're going
+for? Uhhuh.
+Why is free index
+zero be like that?
+What in the
+What in the
+heck? Oh no. Is this not correct?
+All incredibly annoying because the M's
+All incredibly annoying because the M's
+are
+are
+async. That's what it comes down
+async. That's what it comes down
+to. The M's are async. It's very
+to. The M's are async. It's very
+annoying.
+Got my GP. Got my guy building an end
+Got my GP. Got my guy building an end
+for circuits. Might stop by stream
+for circuits. Might stop by stream
+questions. Really excited. Awesome. I'm
+questions. Really excited. Awesome. I'm
+half dead today from uh traveling at odd
+half dead today from uh traveling at odd
+hours. So, Uh, I do have pretty much
+hours. So, Uh, I do have pretty much
+from tomorrow for the next few weeks,
+from tomorrow for the next few weeks,
+it's going to be a lot of just me
+it's going to be a lot of just me
+sitting here streaming and building
+sitting here streaming and building
+stuff. So, it's good
+timing. The new facility is going to be
+timing. The new facility is going to be
+really cool. I got to figure out when
+really cool. I got to figure out when
+I'm going to put the GPU order
+in. Oops. Hang on.
+And that's actually my call to end
+And that's actually my call to end
+stream. Did prices go down? Uh prices
+stream. Did prices go down? Uh prices
+should be going up with tariffs, I would
+should be going up with tariffs, I would
+think, but we will have to look at
+think, but we will have to look at
+things. Um anyways, I got to go. I got
+things. Um anyways, I got to go. I got
+to get some food. Uh, I will be back
+to get some food. Uh, I will be back
+probably tomorrow. Honestly, I'm
+probably tomorrow. Honestly, I'm
+exhausted. But the goal is going to be
+exhausted. But the goal is going to be
+to get this new experience buffer
+to get this new experience buffer
+working
+working
+tomorrow and
+tomorrow and
+hopefully really clean up this file. Uh,
+hopefully really clean up this file. Uh,
+so that the dev branch can be like good
+so that the dev branch can be like good
+usable code in addition to being ultra
+usable code in addition to being ultra
+ultra fast with all the new features.
+ultra fast with all the new features.
+So, thanks folks for those of you who
+So, thanks folks for those of you who
+drop
+drop
+by. If you're interested in following
+by. If you're interested in following
+this over the next few weeks, all my
+this over the next few weeks, all my
+stuff's at puffer.ai. AI. If you want to
+stuff's at puffer.ai. AI. If you want to
+help us out for free, start the repo.
+help us out for free, start the repo.
+Really helps. Join the Discord to get
+Really helps. Join the Discord to get
+involved. And other than that, follow me
+involved. And other than that, follow me
+on X for more RL content. Thanks since
+on X for more RL content. Thanks since
+you're
+
+Kind: captions
+Language: en
+muted
+muted
+microphone. Am I hour
+microphone. Am I hour
+here?
+Hi. We're just going to have a short
+Hi. We're just going to have a short
+little stream
+little stream
+today. I've been on site for
+today. I've been on site for
+Puffer and post a picture in here. I
+Puffer and post a picture in here. I
+did. I've been on site for Puffer.
+did. I've been on site for Puffer.
+So,
+So,
+um, we're gonna have some cool stuff
+um, we're gonna have some cool stuff
+here very
+soon. Going to have some
+machines. Haven't ordered the machines
+machines. Haven't ordered the machines
+yet, and they're going to take a while,
+yet, and they're going to take a while,
+but I'm working on putting that
+but I'm working on putting that
+together. Um,
+together. Um,
+really, there are a few things I want to
+really, there are a few things I want to
+do today.
+Um really though, the main thing is just
+Um really though, the main thing is just
+there's this new experience buffer
+there's this new experience buffer
+refactor that I tried to get some stuff
+refactor that I tried to get some stuff
+on done on over the weekend, but I was
+on done on over the weekend, but I was
+traveling and of course I picked the
+traveling and of course I picked the
+hardest possible thing to work on to
+hardest possible thing to work on to
+take with me traveling, not some like
+take with me traveling, not some like
+light easy work to catch up on. So we're
+light easy work to catch up on. So we're
+going to just look at it a little bit
+going to just look at it a little bit
+right now. I'll look at a couple of the
+right now. I'll look at a couple of the
+things that I've done. Maybe we'll see
+things that I've done. Maybe we'll see
+if we can hack something together. I
+if we can hack something together. I
+have a I thought of a way of just
+have a I thought of a way of just
+simplifying it for now. That'll probably
+simplifying it for now. That'll probably
+be good enough. And yeah, we will go
+be good enough. And yeah, we will go
+from there. We will go from
+from there. We will go from
+there. I got like very very little
+there. I got like very very little
+sleep.
+sleep.
+So today is just going to
+So today is just going to
+be getting back into it a little bit
+be getting back into it a little bit
+day. And then tomorrow when I come
+day. And then tomorrow when I come
+back, we will have full workday on
+back, we will have full workday on
+this. And really over the next couple
+this. And really over the next couple
+weeks, I'm going to try to
+weeks, I'm going to try to
+like stream a lot, dev a lot, not have
+like stream a lot, dev a lot, not have
+my schedule taken up by like too much
+my schedule taken up by like too much
+Really just try to crank it on
+Really just try to crank it on
+Puffer. I want to work towards a 2.5
+Puffer. I want to work towards a 2.5
+release, maybe a 3.0 release, depending
+release, maybe a 3.0 release, depending
+on how big it is. we'll see what we
+on how big it is. we'll see what we
+version it. That's going to be the goal.
+version it. That's going to be the goal.
+And in order to do that, we need to have
+And in order to do that, we need to have
+this file right here cleaned up fast and
+this file right here cleaned up fast and
+uh doing what we want. And it's kind of
+uh doing what we want. And it's kind of
+gotten a bit
+gotten a bit
+bloated. It's gotten a bit
+bloated. It's gotten a bit
+bloated.
+So, there's all this crap
+here. Yeah. I think what we're going to
+here. Yeah. I think what we're going to
+do
+is we're probably going to staff some of
+this.
+Well, there's actually a lot of work
+Well, there's actually a lot of work
+here. I don't want to lose it.
+All
+right, we'll push that. Then I will pull
+right, we'll push that. Then I will pull
+down the work that I did over the
+down the work that I did over the
+weekend and I will show you what we're
+weekend and I will show you what we're
+looking at because uh it's a pretty big
+looking at because uh it's a pretty big
+change the way that we are doing things.
+change the way that we are doing things.
+And I'm not sure I'm completely happy
+And I'm not sure I'm completely happy
+with it yet either, frankly.
+The idea is that we want to
+store Hello, welcome. Thank you.
+store Hello, welcome. Thank you.
+Um the idea
+here so right now we have this way of
+here so right now we have this way of
+storing all of the experience in this
+storing all of the experience in this
+flat buffer. Uh the problem is that
+flat buffer. Uh the problem is that
+makes it really hard to
+makes it really hard to
+do some new techniques that we're
+do some new techniques that we're
+thinking about implementing. Also it's a
+thinking about implementing. Also it's a
+little bit slow because you have to sort
+little bit slow because you have to sort
+the data before you train with it and
+the data before you train with it and
+you have to like do this big index copy.
+you have to like do this big index copy.
+So the goal is to come up with a way
+So the goal is to come up with a way
+to store experience in segments. So you
+to store experience in segments. So you
+store in contiguous memory like 128
+store in contiguous memory like 128
+steps from one environment or something
+steps from one environment or something
+like that. Uh and we're going to try to
+like that. Uh and we're going to try to
+just do that. Now there are a whole
+just do that. Now there are a whole
+bunch of edge cases where this thing
+bunch of edge cases where this thing
+fails where the previous one doesn't.
+fails where the previous one doesn't.
+Um, and I have some thoughts on how to
+Um, and I have some thoughts on how to
+work around it, but I think for now
+work around it, but I think for now
+we're just going to do this and we're
+we're just going to do this and we're
+going to see what happens. I think
+going to see what happens. I think
+that's what we're going to
+that's what we're going to
+do. There are like absolutely ways for
+do. There are like absolutely ways for
+this thing to completely
+this thing to completely
+break.
+break.
+But I guess this is what we're doing for
+But I guess this is what we're doing for
+now.
+now.
+I
+mean, maybe I should think about it a
+mean, maybe I should think about it a
+little more before we go for it. I don't
+know. I already have the code mostly
+know. I already have the code mostly
+written. I think it'll be more
+written. I think it'll be more
+interesting to just start writing and uh
+interesting to just start writing and uh
+see where this gets us.
+the
+the
+advantages. Okay, so this
+advantages. Okay, so this
+is simple version right
+here. So this store
+here. So this store
+oops this is a 2D
+oops this is a 2D
+buffer of trajectories, trajectory
+buffer of trajectories, trajectory
+length. That's all this
+length. That's all this
+does. I was getting some
+does. I was getting some
+errors, but they might have been
+errors, but they might have been
+hardware
+specific.
+specific.
+See, no CUDA GPUs. Lovely. I have to
+See, no CUDA GPUs. Lovely. I have to
+reboot this container.
+One second
+shape of
+shape of
+mask. Okay, at least we get a real
+mask. Okay, at least we get a real
+error.
+and length. Okay, so these are very
+different. How did I allocate this?
+There should be
+There should be
+numros, shouldn't it?
+Length of M is one.
+This is quickly going to get very
+This is quickly going to get very
+complicated. I kind of want to diagram
+complicated. I kind of want to diagram
+some stuff out cuz I don't trust myself
+some stuff out cuz I don't trust myself
+to do this uh zero
+shot. I'm on good like four hours of
+sleep capacity.
+sleep capacity.
+not at all peak
+capacity. Okay,
+so we have this
+so we have this
+buffer where we're going to fill up data
+buffer where we're going to fill up data
+like
+this. And these are empty.
+There are a few different ways you can
+There are a few different ways you can
+model
+model
+this. Post a link to your Neptune
+this. Post a link to your Neptune
+ablation so I can steal charts.
+Yes. Hey, Cat.
+So the issue here,
+So the issue here,
+right, is when do you fill up this
+buffer? It's a very different answer if
+buffer? It's a very different answer if
+we're going to assume it's a puffer
+we're going to assume it's a puffer
+musth.
+We really don't want to
+We really don't want to
+break We really don't want to break
+break We really don't want to break
+learning for everything that's not a
+learning for everything that's not a
+puffer
+end. And I don't want two different
+end. And I don't want two different
+buffers.
+These are two very different ways you
+These are two very different ways you
+would implement this
+thing. Does this actually even do what
+thing. Does this actually even do what
+we want? Let me think.
+we want? Let me think.
+So if you have a very long
+episode, how they do J and Dota
+And this is yet another reason we want
+And this is yet another reason we want
+to delete
+to delete
+J. Causes such
+J. Causes such
+pain. But J is one of the things we're
+pain. But J is one of the things we're
+like anything that I replace it is going
+like anything that I replace it is going
+to with it's going to have similar info
+to with it's going to have similar info
+requirements. It's tricky.
+Where's the uh the sample thing? I was
+Where's the uh the sample thing? I was
+pretty sure they had a uh a
+pretty sure they had a uh a
+figure where they talk about their
+figure where they talk about their
+trajectory buffering. Yeah, right
+here. Okay. So 16 time
+steps times 16
+steps times 16
+samples is
+samples is
+128 labeled together J and sent to OP
+128 labeled together J and sent to OP
+sent to
+sent to
+optimizer. So they're only rolling out
+optimizer. So they're only rolling out
+they're using 128
+seconds they're only using 128 steps it
+seconds they're only using 128 steps it
+looks like
+looks like
+right to me this figure
+right to me this figure
+says that GA is only computed backward
+says that GA is only computed backward
+over 128 steps.
+400 frames per policy step. So that's a
+400 frames per policy step. So that's a
+frame skip.
+So it is truly 128
+steps. They have to have played with
+steps. They have to have played with
+that as well,
+right? Lambda stays n5.
+and J
+Horizon. And what's
+this? They listed this instead of the
+parameter. I don't have a comment on
+parameter. I don't have a comment on
+this.
+see equation three. Okay, so they're
+see equation three. Okay, so they're
+just giving this to you in terms of the
+just giving this to you in terms of the
+equation, but they're not actually doing
+equation, but they're not actually doing
+this. So this is a little confusing
+this. So this is a little confusing
+here, right? This is the this is a good
+here, right? This is the this is a good
+find though. So they have this equation
+find though. So they have this equation
+that's like one over one minus lambda or
+that's like one over one minus lambda or
+whatever that gives you the time horizon
+whatever that gives you the time horizon
+from the parameter. And they're saying
+from the parameter. And they're saying
+that look that they're using J over a
+that look that they're using J over a
+horizon of up to 840 seconds or 360 per
+horizon of up to 840 seconds or 360 per
+rerun. But if you look
+rerun. But if you look
+here, J is only computing over 34
+here, J is only computing over 34
+seconds. So they only get dr ground
+seconds. So they only get dr ground
+truth for J over 34 seconds and then the
+truth for J over 34 seconds and then the
+rest of it they have to be relying on
+rest of it they have to be relying on
+the value function bootstrap.
+So if this works for
+So if this works for
+Dota, I mean this suggests to
+Dota, I mean this suggests to
+me that having some fixed buffer
+me that having some fixed buffer
+128 is a okay in principle.
+128 is a okay in principle.
+Now, the only thing we have to deal with
+Now, the only thing we have to deal with
+is like some of these not getting filled
+up realistically though,
+right? Is this going to be a big
+problem? I think realistically not. And
+problem? I think realistically not. And
+here's why. So the fast m in puffer are
+here's why. So the fast m in puffer are
+all
+all
+vectorzed and uh we're going to get like
+vectorzed and uh we're going to get like
+contiguous buffers of
+data. Is that true?
+seems like it should be.
+What about the LSTM Hey,
+Okay, here there's a paragraph on this.
+Okay, here there's a paragraph on this.
+We train agents on 30 secondond segments
+We train agents on 30 secondond segments
+of the
+of the
+game and any given 30 secondond ground
+game and any given 30 secondond ground
+snippet may not contain the ground
+truth. We address this by training these
+truth. We address this by training these
+heads in a similar fashion to how we
+heads in a similar fashion to how we
+train value functions.
+If a segment contains the ground truth
+label, we use ground truth label for all
+label, we use ground truth label for all
+time steps. If not, we use the model's
+time steps. If not, we use the model's
+prediction at the end of the segment as
+prediction at the end of the segment as
+the label.
+Oh, but these are just for the head
+predictors. I need to think about this
+predictors. I need to think about this
+very carefully.
+This seems like a fundamental problem
+This seems like a fundamental problem
+though. You can't collect more than 128
+though. You can't collect more than 128
+steps realistically or it'll be stale.
+steps realistically or it'll be stale.
+And I think data staleness is a bigger
+And I think data staleness is a bigger
+problem than anything.
+We also have to think about the
+We also have to think about the
+historical replay
+historical replay
+here because one of the ideas here is to
+here because one of the ideas here is to
+add historical
+replay. Now that's going to mess it up.
+Well, what do we need in order to
+Well, what do we need in order to
+compute advantage?
+Don't back off.
+I'm trying to think the best way to do a
+I'm trying to think the best way to do a
+buffer of this
+buffer of this
+variety. I mean, it's still better to
+variety. I mean, it's still better to
+store them in rows.
+as the networks get
+larger. Well, we'll deal with that once
+larger. Well, we'll deal with that once
+we get to it.
+Can we just store this like in a
+Can we just store this like in a
+different memory
+layout to make it easier?
+We probably
+could. So basically we would store it in
+could. So basically we would store it in
+roughly the format that we have
+roughly the format that we have
+now like the final format we have now
+now like the final format we have now
+that's actually mini bath appropriately.
+I don't know if I like that though
+because how do we swap in new data?
+Right. I think our dim is
+Right. I think our dim is
+like mini
+batch. What's our dim right now?
+Mini batches, mini batch size, PO
+horizon. So it would be like all mini
+horizon. So it would be like all mini
+batches a window of mini batch size into
+batches a window of mini batch size into
+all of
+this. Not many patches.
+still doesn't fix the LSTM shenanigans
+still doesn't fix the LSTM shenanigans
+either.
+still doesn't fix the LSTM shenanigans.
+This is like rapidly getting very
+complicated. I don't want the code to be
+complicated. How do we think about this
+complicated. How do we think about this
+simpler?
+The simplest thing I think is just what
+The simplest thing I think is just what
+I have now.
+And the current implementation
+should it should end up roughly the same
+should it should end up roughly the same
+as the next implement as the uh the new
+implementation. I think it should
+It is going to get awkward though if you
+It is going to get awkward though if you
+want a
+want a
+longer BPT
+horizon. Yeah. See they they have this
+horizon. Yeah. See they they have this
+very separate here. This is the LSTM on
+very separate here. This is the LSTM on
+roll and this is J.
+Whoops. So, what you want is not 128.
+Whoops. So, what you want is not 128.
+Okay. So, that's off.
+I think I can do all of this such that
+I think I can do all of this such that
+the final code ends up being pretty
+the final code ends up being pretty
+compact. It's just a little tricky.
+Yeah.
+Yeah.
+Okay.
+Okay.
+Um, we can try this and then
+Yeah, I think we just straight up we try
+Yeah, I think we just straight up we try
+this,
+right? LSTM state gets carried, but
+right? LSTM state gets carried, but
+that's not a big
+that's not a big
+deal. And other than LSTM get state
+deal. And other than LSTM get state
+getting carried, this should be
+getting carried, this should be
+perfectly
+correct. This will do BPD over arbitrary
+correct. This will do BPD over arbitrary
+horizons and we will miss like at most a
+horizons and we will miss like at most a
+few small samples.
+few small samples.
+Let's do
+that. What are we going to do about
+that. What are we going to do about
+lengths and indices?
+I guess we do it the slow and fully
+I guess we do it the slow and fully
+correct way first.
+So episode length is going to
+So episode length is going to
+be num
+be num
+rows and then this is LSTM total
+agents and store it in just as number
+agents and store it in just as number
+rows.
+And now numbum rows batch size over
+And now numbum rows batch size over
+horizon. Okay, this is good. So I
+horizon. Okay, this is good. So I
+actually had this mostly on my first
+actually had this mostly on my first
+pass. I just had to go through lots of
+pass. I just had to go through lots of
+different various
+different various
+alternatives. And uh the key thing is
+alternatives. And uh the key thing is
+that we actually do have to do
+the we actually do have to do this part
+the we actually do have to do this part
+this tricky part
+this tricky part
+here. So this isn't going to cut it. We
+here. So this isn't going to cut it. We
+have to do this part.
+Full ids is end ID of full
+Cool. It
+Cool. It
+runs. I'm expecting to have broken
+everything. Yep. So, we did break
+everything. Yep. So, we did break
+everything. Kind of expected.
+everything. Kind of expected.
+But it does
+But it does
+run.
+run.
+Cool.
+Cool.
+Um, so the algorithm here that we have
+Um, so the algorithm here that we have
+to get right, there a couple pieces to
+to get right, there a couple pieces to
+this. So there's a whole bunch of
+this. So there's a whole bunch of
+indexing now we have to keep track of
+indexing now we have to keep track of
+with this
+with this
+buffer to figure out
+buffer to figure out
+essentially where we're storing data.
+essentially where we're storing data.
+We need to keep track of how long each
+We need to keep track of how long each
+segment is and uh which environment gets
+segment is and uh which environment gets
+written to reach which
+written to reach which
+segment. That is
+important. None do
+Holy cam.
+Eval has to reset these buffers
+Eval has to reset these buffers
+presumably, right?
+presumably, right?
+Every time you call eval, you have to
+Every time you call eval, you have to
+reset
+these or on flatten batch I guess.
+Let's just see what's
+Let's just see what's
+happening. Okay, so first 2048 m are
+happening. Okay, so first 2048 m are
+done.
+Same ID is
+here at blends get
+reset. That doesn't look right to me.
+64. Something's free here.
+How do we get 8192 out of
+this? 2 M's 2048
+this? 2 M's 2048
+each would be 4096. Somehow we have
+each would be 4096. Somehow we have
+double
+How's this
+happen? 4096, right?
+Oh, because that's Yeah, that is
+Oh, because that's Yeah, that is
+separate.
+separate.
+Okay. Yeah, that is
+separate. So, this is actually This
+separate. So, this is actually This
+looks good to me.
+And then you don't even need to do this
+And then you don't even need to do this
+either.
+Okay,
+Okay,
+[Music]
+[Music]
+2048. First 2048 M's are
+2048. First 2048 M's are
+done and explodes.
+done and explodes.
+Okay. What we're going
+for? Uhhuh.
+Why is free index
+zero be like that?
+What in the
+What in the
+heck? Oh no. Is this not correct?
+All incredibly annoying because the M's
+All incredibly annoying because the M's
+are
+are
+async. That's what it comes down
+async. That's what it comes down
+to. The M's are async. It's very
+to. The M's are async. It's very
+annoying.
+Got my GP. Got my guy building an end
+Got my GP. Got my guy building an end
+for circuits. Might stop by stream
+for circuits. Might stop by stream
+questions. Really excited. Awesome. I'm
+questions. Really excited. Awesome. I'm
+half dead today from uh traveling at odd
+half dead today from uh traveling at odd
+hours. So, Uh, I do have pretty much
+hours. So, Uh, I do have pretty much
+from tomorrow for the next few weeks,
+from tomorrow for the next few weeks,
+it's going to be a lot of just me
+it's going to be a lot of just me
+sitting here streaming and building
+sitting here streaming and building
+stuff. So, it's good
+timing. The new facility is going to be
+timing. The new facility is going to be
+really cool. I got to figure out when
+really cool. I got to figure out when
+I'm going to put the GPU order
+in. Oops. Hang on.
+And that's actually my call to end
+And that's actually my call to end
+stream. Did prices go down? Uh prices
+stream. Did prices go down? Uh prices
+should be going up with tariffs, I would
+should be going up with tariffs, I would
+think, but we will have to look at
+think, but we will have to look at
+things. Um anyways, I got to go. I got
+things. Um anyways, I got to go. I got
+to get some food. Uh, I will be back
+to get some food. Uh, I will be back
+probably tomorrow. Honestly, I'm
+probably tomorrow. Honestly, I'm
+exhausted. But the goal is going to be
+exhausted. But the goal is going to be
+to get this new experience buffer
+to get this new experience buffer
+working
+working
+tomorrow and
+tomorrow and
+hopefully really clean up this file. Uh,
+hopefully really clean up this file. Uh,
+so that the dev branch can be like good
+so that the dev branch can be like good
+usable code in addition to being ultra
+usable code in addition to being ultra
+ultra fast with all the new features.
+ultra fast with all the new features.
+So, thanks folks for those of you who
+So, thanks folks for those of you who
+drop
+drop
+by. If you're interested in following
+by. If you're interested in following
+this over the next few weeks, all my
+this over the next few weeks, all my
+stuff's at puffer.ai. AI. If you want to
+stuff's at puffer.ai. AI. If you want to
+help us out for free, start the repo.
+help us out for free, start the repo.
+Really helps. Join the Discord to get
+Really helps. Join the Discord to get
+involved. And other than that, follow me
+involved. And other than that, follow me
+on X for more RL content. Thanks since
+on X for more RL content. Thanks since
+you're

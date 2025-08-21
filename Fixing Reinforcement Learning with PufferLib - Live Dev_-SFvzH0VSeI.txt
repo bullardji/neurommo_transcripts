@@ -1,0 +1,2245 @@
+Kind: captions
+Language: en
+let's see if I can figure this out just
+let's see if I can figure this out just
+going to see if I can optimize the uh
+going to see if I can optimize the uh
+control tasks here a little
+bit much work to be done on
+this gy. acquire
+oh wait hold
+on see if I can figure this thing
+out one
+did he use my code for this or did he
+did he use my code for this or did he
+use the original
+Okay so
+Okay so
+he kind of did a mix a mix of both
+uh where does this come
+from wait you didn't
+call okay wait you call refresh
+here for
+I had
+I had
+this I had this set up
+see but now I don't even want to mess
+see but now I don't even want to mess
+with it
+because let me look at the observation
+because let me look at the observation
+at
+least I don't want to have a chance well
+least I don't want to have a chance well
+I guess we'll see if the train curves
+I guess we'll see if the train curves
+match match the
+match match the
+original so we will be able to verify
+uh let me see
+difference
+between yeah so um clean puff RL is just
+between yeah so um clean puff RL is just
+like that's going to have all the clean
+like that's going to have all the clean
+RL style code demo is just a wrapper
+RL style code demo is just a wrapper
+around it that passes all the arguments
+around it that passes all the arguments
+so that you can load in whatever EnV you
+so that you can load in whatever EnV you
+want and it lets you run sweeps and
+want and it lets you run sweeps and
+stuff like that so yes you can use the
+stuff like that so yes you can use the
+demo file to run all of the ocean M out
+demo file to run all of the ocean M out
+of the box and yes it supports
+of the box and yes it supports
+continuous actions as
+well also since apparently Google's
+well also since apparently Google's
+linking people the wrong docks
+it's right here we have a full walk
+through it's hopefully all up to date as
+well what is
+this cute humanoid
+cheers yeah no worries see now I'm
+cheers yeah no worries see now I'm
+worried about this CU it this doesn't
+worried about this CU it this doesn't
+look like it relativizes the data
+correctly damn it
+for
+e e
+yeah this is a tough position to be in
+here might be better to just straight up
+here might be better to just straight up
+wait for Kung and work on my other stuff
+wait for Kung and work on my other stuff
+in the
+meantime and just know that I'm going to
+meantime and just know that I'm going to
+have to allocate a big block of time to
+have to allocate a big block of time to
+this once he's
+ready I think that's what we're going to
+ready I think that's what we're going to
+do so I'll just spend like an hour now
+do so I'll just spend like an hour now
+on the uh the hyper tram stuff
+maybe let me try that
+[Music]
+just kind of tired
+just kind of tired
+today let me see if we can still fig
+today let me see if we can still fig
+make some uh figure out and make some
+make some uh figure out and make some
+progress here it's just the last couple
+progress here it's just the last couple
+days of work have been uh pretty
+days of work have been uh pretty
+intensive it's been a pretty deep dive
+intensive it's been a pretty deep dive
+into a lot of these
+things let me see what what produced
+things let me see what what produced
+this graph
+this graph
+right
+oops okay
+oops okay
+so this one versus this one
+okay this is not divided by
+cost this one is divided by cost
+let me think about why this is so
+let me think about why this is so
+unnormalized for
+mean unnormalized nearest parito score
+mean unnormalized nearest parito score
+is this what we got
+yes so you subtract
+out the score
+here and multiply the distance to the
+here and multiply the distance to the
+nearest
+nearest
+burito I think I need to make the cost
+burito I think I need to make the cost
+estimate conservative I think that's the
+problem and do some logging here
+I all these transforms is really
+I all these transforms is really
+obnoxious
+I don't know why we're working in log
+I don't know why we're working in log
+space anyways here
+how do I do
+this e
+do you just X the
+variance okay this is
+obnoxious I see why they wanted to just
+obnoxious I see why they wanted to just
+get these transforms from
+somewhere the SK learn ones are not very
+good and this is apparent because Gan
+processes this is so screwy
+none of this data is freaking normally
+distributed maybe the input variables
+distributed maybe the input variables
+are but the outputs definitely are not
+I know what I can do there's a
+I know what I can do there's a
+trick there is a
+trick normalized log cost
+trick normalized log cost
+mean we'll just
+mean we'll just
+do watch this this is a trick
+do watch this this is a trick
+normalized
+conservative plus I and I hate these
+conservative plus I and I hate these
+variable names I'm going to redo this at
+variable names I'm going to redo this at
+some
+point e
+and then did I do this
+correctly now this should be plus
+and I want to also change the prints
+and I want to also change the prints
+here we can tell what's going on
+so we're going to do this is going to
+so we're going to do this is going to
+be predicted so this is going to be
+then we'll be score will
+then we'll be score will
+be a normalized score
+mean oh no wait best this is
+still let's do this
+for
+nearby then let's see this one is going
+nearby then let's see this one is going
+to
+be unnormalized
+be unnormalized
+foran this is going to
+foran this is going to
+be unnormalized nearest Frito score
+nearby
+okay it still goes straight to 200
+let's see so we have
+let's see so we have
+score
+score
+nearby here's your
+distance and there's the predicted
+cost so it actually gets this pretty
+cost so it actually gets this pretty
+much correct but it says that this is
+much correct but it says that this is
+the best you can do here
+okay so it's got to be my I think it's
+okay so it's got to be my I think it's
+my math that's Frey not the algorithm
+my math that's Frey not the algorithm
+here let me think about
+this we're going to do
+this we're going to do
+some freaking grade
+some freaking grade
+school like free high school math is
+school like free high school math is
+what we're going to do
+here people messaging
+me deleted
+me deleted
+weird Okay so we're going to make a new
+weird Okay so we're going to make a new
+one of
+these this one thank you
+and okay
+and okay
+so say you have a point
+so say you have a point
+here
+here
+okay and then this Point's here and this
+okay and then this Point's here and this
+is 200
+is 200
+and
+and
+200 then this
+200 then this
+formula it's unnormalized form this is
+formula it's unnormalized form this is
+this
+this
+prediction nearest parito so this
+is
+is
+200 -
+0 *
+200 divide by
+200 divide by
+200 okay so now we see the
+200 okay so now we see the
+problem these go away and you still have
+problem these go away and you still have
+so if there's no point to the
+so if there's no point to the
+right this is going to incentivize you
+right this is going to incentivize you
+to do crazy
+to do crazy
+things e
+if we make everything conservative is it
+if we make everything conservative is it
+going to
+going to
+help it really screwed up performance in
+help it really screwed up performance in
+the old model but the old model had
+the old model but the old model had
+terrible gaan
+processes let me
+processes let me
+think well first of all how's this doing
+yeah you see it started it's it got away
+yeah you see it started it's it got away
+from it quicker actually but it started
+from it quicker actually but it started
+with some very high cost
+experiments e
+is just making the score
+oops Conservative
+oops Conservative
+[Music]
+[Music]
+normalized then this is going to be
+minus score standard deviation
+so next thing we can
+do conservative unnormalized
+sportman we'll see what this does
+because you start sampling your random
+because you start sampling your random
+samples are seated
+in okay I think I know how this works
+in okay I think I know how this works
+so this is what you would
+so this is what you would
+want you would want both of these
+want you would want both of these
+quantities to be conservative
+because everything else is pulling you
+because everything else is pulling you
+to high cost
+to high cost
+exploration this is what pulls you away
+exploration this is what pulls you away
+from it so this is what guards you
+from it so this is what guards you
+against a bad model now the problem is
+against a bad model now the problem is
+that in the old version of this
+that in the old version of this
+algorithm um before I messed with it
+algorithm um before I messed with it
+they had really bad Gan processes uh and
+they had really bad Gan processes uh and
+using a conservative estimate it depends
+using a conservative estimate it depends
+on gum processes actually getting
+on gum processes actually getting
+good uh because if your gsum processes
+good uh because if your gsum processes
+are bad and do not generalize then it'll
+are bad and do not generalize then it'll
+just prevent me from ever exploring
+just prevent me from ever exploring
+anything so hopefully now this is
+okay do you need to re this
+you might need to this actually
+we'll see if something weird happens
+it's
+nice okay so
+here so this is what we had
+before is that a bit
+better about the same
+okay so making the cost estimate
+okay so making the cost estimate
+conservative it's apparently not enough
+conservative it's apparently not enough
+it seems like it helped
+prevent now you see we still have all
+prevent now you see we still have all
+these points at 200 this is what we're
+these points at 200 this is what we're
+trying to prevent right
+trying to prevent right
+now so we're going to try this next
+we're not going to run the whole thing
+we're not going to run the whole thing
+we're just going to watch the first
+we're just going to watch the first
+few
+few
+samples 200
+samples 200
+cost 100
+cost okay it only did one bad sample oh
+cost okay it only did one bad sample oh
+there's another
+one nope still taking bad samples
+let me look at this
+let me look at this
+though because this says something
+let's fix one thing first for
+try again
+okay this distance is still
+okay this distance is still
+wrong let me see
+why oh wait this
+is nearby
+maybe
+not it's crazy that the cost estimate is
+not it's crazy that the cost estimate is
+that
+that
+screwy how's this the
+case let me see
+that looks
+that looks
+good that adds like a good amount of
+good that adds like a good amount of
+uncertainty
+I should be taking square root even
+I should be taking square root even
+shouldn't I
+square root of
+variance so I'm adding I'm literally
+variance so I'm adding I'm literally
+adding this squared standard
+adding this squared standard
+deviation and it's still not
+deviation and it's still not
+enough which is an insane thing to do I
+enough which is an insane thing to do I
+just forgot to take square
+root e
+I'm getting to be very skeptical here
+is this the
+kernel hang on is this the
+kernel there's literally like one point
+kernel there's literally like one point
+at
+e e
+ER grows quadratically
+distance from the
+distance from the
+origin
+oh e
+I'm trying to figure out if the problem
+I'm trying to figure out if the problem
+I'm having is an expected problem or if
+I'm having is an expected problem or if
+this is
+weird so you can see right here
+right
+right
+score this is a pesm ISC
+score this is a pesm ISC
+score uh
+calculation there's just a lot of error
+calculation there's just a lot of error
+even with a
+pessimistic the variant should be
+huge e
+and this is with a whole bunch of points
+and this is with a whole bunch of points
+the start as well random trials which
+the start as well random trials which
+you're not going to
+have
+e
+e e
+let me think about
+this see the problem with the sample
+this see the problem with the sample
+based metrics right the problem with
+this you're not necessarily rewarding
+this you're not necessarily rewarding
+good samples you're rewarding samples
+good samples you're rewarding samples
+outside of the
+support this like
+there are two sources well let me think
+there are two sources well let me think
+are there multiple sources of err here
+are there multiple sources of err here
+no the model should be just the model
+no the model should be just the model
+should just be good within its
+support for
+how about
+this let me see this rating
+I what it is SE
+right
+right
+so this point of
+so this point of
+200 got
+200 got
+assigned a rating of
+three because the cost
+prediction conservative cost
+prediction conservative cost
+mean was
+28 you can see I didn't get any high
+28 you can see I didn't get any high
+points
+points
+here so you can
+here so you can
+see it was
+28 but the actual was 200
+see if I can catch one of these
+live
+live
+okay
+okay
+holy
+holy
+seven okay it predicts a cost of 31
+it says that it's going to score
+54 the nearest Point Paro point is at
+54 the nearest Point Paro point is at
+23 can that be the
+case
+54 at cost of
+31 does anything score higher
+31 does anything score higher
+than 54 at
+NOP
+no
+no
+no nope okay so that is a Paro point
+they say but they say the nearest Paro
+they say but they say the nearest Paro
+point is at
+23 which gets a score 23.2
+23 which gets a score 23.2
+n which gets a score of 23 so does
+n which gets a score of 23 so does
+anything get a score better than
+this do 47
+51 cost is
+30 it's going to be cost less than
+30 it's going to be cost less than
+31 okay I buy
+31 okay I buy
+that I buy that this is a Paro point and
+that I buy that this is a Paro point and
+this is the nearest one then says the
+this is the nearest one then says the
+distance to the next Paro point is
+distance to the next Paro point is
+seven so that's going to be what like 61
+should be like
+should be like
+61 I'm see a
+61 I'm see a
+61 wait is it
+61 no I'm Dum Hold
+On 30
+On 30
+should be like 40
+plus let make sure I get this
+plus let make sure I get this
+right oh wait so that's
+right oh wait so that's
+41 hold on wait
+41 hold on wait
+what
+what
+cost no 30
+39 here it is this gets a score of
+32 what the other one3 so yeah okay so I
+32 what the other one3 so yeah okay so I
+buy that this is these distance C are
+buy that this is these distance C are
+correct
+and it says it's going to get a score of
+and it says it's going to get a score of
+54 so I know based on this problem this
+54 so I know based on this problem this
+is impossible the optimal score is equal
+is impossible the optimal score is equal
+to
+to
+cost um and this is supposed to
+be un
+yeah so this is the pessimistic one as
+yeah so this is the pessimistic one as
+well because you can see
+well because you can see
+here the unnormalized one says
+72 but the variance is
+72 but the variance is
+way way too low
+it has no business being this
+it has no business being this
+confident this is in fact the main
+confident this is in fact the main
+reason we use these
+models
+for e
+length scale might be too short
+okay so this is
+possible for
+predicting a cost of 14
+yeah that is substantially reduced
+so let me see so unnormalized
+so let me see so unnormalized
+forming says
+forming says
+this and then the cost
+this and then the cost
+mean so this is a or
+prediction okay this is actually
+better do you have any tips for starting
+better do you have any tips for starting
+a new project
+I
+struggle um
+try just copying the template and
+try just copying the template and
+editing from
+there gives you all the boiler plate I
+there gives you all the boiler plate I
+mean ideally what you want is you want
+mean ideally what you want is you want
+to be able to be in a spot where your
+to be able to be in a spot where your
+projects just don't require hardly any
+projects just don't require hardly any
+boiler plate and then you won't have
+boiler plate and then you won't have
+that annoying block um I've tried
+that annoying block um I've tried
+working to get the boiler plate down but
+working to get the boiler plate down but
+it's kind of tough with the like the
+it's kind of tough with the like the
+python to see like with the scon
+python to see like with the scon
+intermediary
+like if you want to build a new M like
+like if you want to build a new M like
+just go copy
+squared I in this case specifically it's
+squared I in this case specifically it's
+probably that and other stuff like you
+probably that and other stuff like you
+should kind of be excited to start a new
+should kind of be excited to start a new
+project because you don't have any of
+project because you don't have any of
+your old garbage code to deal
+with e
+like most of the stuff I do I look at it
+like most of the stuff I do I look at it
+I'm like I have no idea how I'm going to
+I'm like I have no idea how I'm going to
+do this but I'm confident I'll figure it
+out it's like I have the exact set of
+out it's like I have the exact set of
+skills required to figure this thing out
+skills required to figure this thing out
+so I am going to figure it
+out including this thing right
+here
+e e
+mean getting a rating of three because
+mean getting a rating of three because
+it's underestimating the cost by a
+it's underestimating the cost by a
+factor of
+two
+jeez e
+I should probably plot confidence
+this is tricky in a way because
+um e
+I don't think I'm I don't think I can
+penalize but divide by the
+penalize but divide by the
+variance that really penalizes
+but statistically that doesn't make any
+but statistically that doesn't make any
+bloody sense to
+bloody sense to
+divide your prediction by the
+variance I can see what happens for the
+variance I can see what happens for the
+hell of it
+it's annoying that it's all
+it's annoying that it's all
+[Music]
+[Music]
+normed
+this
+for
+e
+e e
+just I'm curious just to see what this
+just I'm curious just to see what this
+does
+still you get an immediate 200 look at
+still you get an immediate 200 look at
+this
+that's crazy
+cuz then let me see it's going to
+cuz then let me see it's going to
+be score minus
+nearby they get like
+35 well they say the freaking cost is 15
+35 well they say the freaking cost is 15
+when it's
+when it's
+200 so it rates High cuz they're so
+wrong it's just R the wrong the most
+wrong it's just R the wrong the most
+wrong
+wrong
+predictions damn it I don't know why
+predictions damn it I don't know why
+they have the same
+variance what are these all the bad
+variance what are these all the bad
+predictions hang
+on yeah
+let me run it a little
+let me run it a little
+longer I think what's happening is we're
+longer I think what's happening is we're
+just selecting for the worst
+predictions
+e e
+okay so now it's
+learned now it is
+learned now it is
+learned and the variance is way
+lower e
+you
+know I
+wonder I
+wonder I
+wonder let me try something here
+I wonder what
+happens oh didn't do it hold on
+does this start you with a good model
+right gelian processes don't like it
+right gelian processes don't like it
+when you have a lot of points do
+they they really don't seem to like it
+they they really don't seem to like it
+when you have a lot of
+points
+holy there we
+go why is the cost rating still bad
+hang on that doesn't make sense I gave
+hang on that doesn't make sense I gave
+it 200
+it 200
+points give 400 just to be sure 300 just
+points give 400 just to be sure 300 just
+to be
+sure there's pretty decent coverage at
+sure there's pretty decent coverage at
+least the lower end
+least the lower end
+here it's completely
+wrong yeah completely wrong
+okay we got to figure out why the model
+okay we got to figure out why the model
+is this well this far
+off
+for
+for e
+okay this
+works see if it's still works
+yes this still works and it works nearly
+yes this still works and it works nearly
+perfectly okay
+so
+now
+250 first 200 being random
+here's what we're going to
+do me last 50
+points for
+you have an accurate mind
+what does this give you
+how we doing
+how we doing
+today it's
+today it's
+[Music]
+[Music]
+going it's
+going it's
+uh so many different sources of error on
+uh so many different sources of error on
+this this thing
+man lot of sources of potential
+error this looks better not perfect but
+better we'll see how this ends up
+looking e
+go for dinner in a
+go for dinner in a
+second but I'd like to at least have
+second but I'd like to at least have
+some idea if this is decent
+I think this will be a more fruitful
+I think this will be a more fruitful
+approach is to First assume that you
+approach is to First assume that you
+have good gaussian
+have good gaussian
+processes get the algorith them to work
+processes get the algorith them to work
+get it to work on the various different
+get it to work on the various different
+synthetic problems then figure out uh
+synthetic problems then figure out uh
+how to make sure that it doesn't do
+how to make sure that it doesn't do
+weird like run expensive experiments too
+weird like run expensive experiments too
+early while it's still
+early while it's still
+fitting there's your first cost
+200 e
+look at that
+I mean that's pretty
+I mean that's pretty
+good it's definitely an
+good it's definitely an
+improvement it even goes back and runs
+improvement it even goes back and runs
+some lower cost
+some lower cost
+experiments they're nicely
+spaced we don't like it running high
+spaced we don't like it running high
+cost experiments like this and getting
+cost experiments like this and getting
+them
+them
+wrong these
+ones it looks like it it just Misfit
+ones it looks like it it just Misfit
+this line a little
+bit hey Joseph what's good about to go
+bit hey Joseph what's good about to go
+for dinner but uh I've been working on
+for dinner but uh I've been working on
+hyper pram sweep there's so many
+hyper pram sweep there's so many
+different versions of this thing we
+different versions of this thing we
+managed to get a hyper parameter sweep
+managed to get a hyper parameter sweep
+to do this I mean my health is what it
+to do this I mean my health is what it
+is it's going to take 6 months to get
+is it's going to take 6 months to get
+back in proper shape I I ran five miles
+back in proper shape I I ran five miles
+yesterday so I'm like I can
+yesterday so I'm like I can
+function but uh you know like before
+function but uh you know like before
+this it could have been 15
+miles this is very funny so I had an
+miles this is very funny so I had an
+original formula that managed to like
+original formula that managed to like
+pick a bunch of different pido points
+pick a bunch of different pido points
+and then kind of like slide down
+and then kind of like slide down
+starting from the individual points like
+starting from the individual points like
+there there there and
+there there there and
+there we had this this one's
+there we had this this one's
+Jank this is better but this is like
+Jank this is better but this is like
+again there's too much over here going
+again there's too much over here going
+on this shouldn't be here this shouldn't
+on this shouldn't be here this shouldn't
+be here and now this is better maybe a
+be here and now this is better maybe a
+standing desk now I'm going to I'm going
+standing desk now I'm going to I'm going
+to be comfortable while I'm working and
+to be comfortable while I'm working and
+do real exercise right I run and I power
+do real exercise right I run and I power
+lift
+what's the command to compile the
+Pix
+this yeah I've got a nice comfortable
+this yeah I've got a nice comfortable
+chair here thank you very much I'd
+chair here thank you very much I'd
+rather just get my exercise in and I did
+rather just get my exercise in and I did
+I Ran So like the reason I'm still here
+I Ran So like the reason I'm still here
+um is because I ran 50 00 miles last
+um is because I ran 50 00 miles last
+year as well as hit a th000 total so I
+year as well as hit a th000 total so I
+basically did like exercise is a
+basically did like exercise is a
+part-time job doing all that and uh I
+part-time job doing all that and uh I
+mean that saved
+mean that saved
+me so I take it very seriously but I
+me so I take it very seriously but I
+also don't want to hurt myself too early
+also don't want to hurt myself too early
+so I'm not running every day
+so I'm not running every day
+yet
+yet
+um we'll get that back soon though yeah
+um we'll get that back soon though yeah
+there you go
+I have my barbells coming on um on
+I have my barbells coming on um on
+Wednesday the rack's going to take a
+Wednesday the rack's going to take a
+little longer but at least I can start
+little longer but at least I can start
+doing some RDL some overhead press some
+doing some RDL some overhead press some
+bent rows stuff like
+that I don't know maybe I'll rig
+that I don't know maybe I'll rig
+something so I can at least bench a
+something so I can at least bench a
+little bit we'll
+see isn't that supposed to spit
+see isn't that supposed to spit
+out yeah it will but you don't have to
+out yeah it will but you don't have to
+touch that
+touch that
+file the only thing that you have to do
+file the only thing that you have to do
+in order to get this to get picked up by
+python it
+just add your Robo code like right there
+just add your Robo code like right there
+or somewhere right all you have to do is
+or somewhere right all you have to do is
+add it as an extension and then it'll
+add it as an extension and then it'll
+spit out your Robo code
+file and then you should just be able to
+file and then you should just be able to
+import it from python
+you know wait I realized there's a
+you know wait I realized there's a
+problem with this the way I did
+problem with this the way I did
+this there's still a problem
+last one and then I'm going for
+dinner see if this did anything
+dinner see if this did anything
+better
+2350 this is up here
+2350 this is up here
+here yep
+here yep
+okay that'll give you a better
+model e
+just need to clean up syon
+just need to clean up syon
+yep that ought to work for
+you okay so
+you okay so
+now hey how you
+now hey how you
+doing working on some hyper parameter
+doing working on some hyper parameter
+sweet stuff
+it's tough because there's so many
+it's tough because there's so many
+different sources of error that are not
+different sources of error that are not
+explicitly accounted for that you have
+explicitly accounted for that you have
+to think about
+here I'm actually getting suspicious as
+here I'm actually getting suspicious as
+to
+to
+um whether the gaussian processes are
+um whether the gaussian processes are
+really going to be able to
+really going to be able to
+do everything on their own or
+do everything on their own or
+not because they seem to really under
+not because they seem to really under
+report their error
+report their error
+though to be fair I guess what I'll
+though to be fair I guess what I'll
+probably do is I'll fix this then I'll
+probably do is I'll fix this then I'll
+go figure out why they under report the
+go figure out why they under report the
+error I'll correct for
+that it's very
+weird
+e e
+huh that looks like it works pretty well
+huh that looks like it works pretty well
+if you have a perfect model
+fills this in very
+nicely I said last one but this one will
+nicely I said last one but this one will
+be very quick
+AR's coming back at us fast what do you
+AR's coming back at us fast what do you
+say the best way to apply RL the
+say the best way to apply RL the
+circuits would be how can I treat the
+circuits would be how can I treat the
+circuits there was a company that I was
+circuits there was a company that I was
+considering uh or that was considering
+considering uh or that was considering
+hiring puffer for
+hiring puffer for
+this um they do
+that yeah
+you just have to make a simulator and
+you just have to make a simulator and
+make it
+make it
+fast is the main thing you define your
+fast is the main thing you define your
+reward you define your action space of
+reward you define your action space of
+placing chips you have to make your Sims
+placing chips you have to make your Sims
+very fast that's the key to
+everything not perfect yet
+it almost should be
+it almost should be
+like no I mean it has a perfect
+like no I mean it has a perfect
+model in fact you know what I might do I
+model in fact you know what I might do I
+might literally give it a perfect model
+might literally give it a perfect model
+because it should be doing binary search
+because it should be doing binary search
+like the perfect model case it should be
+like the perfect model case it should be
+doing binary
+search that actually would be very
+elegant okay I like that
+elegant okay I like that
+idea um I got to go get food I may or
+idea um I got to go get food I may or
+may not stream after dinner we will see
+may not stream after dinner we will see
+I will definitely be back tomorrow
+I will definitely be back tomorrow
+though working on stuff um thanks folks
+though working on stuff um thanks folks
+for tuning in if you're interested in
+for tuning in if you're interested in
+following any of my stuff here this is
+following any of my stuff here this is
+all free and open source if you want to
+all free and open source if you want to
+help us out for free just star the
+help us out for free just star the
+repository really helps us out you can
+repository really helps us out you can
+join the Discord to get involved with
+join the Discord to get involved with
+development or if you want some
+development or if you want some
+assistance in using puffer we've got all
+assistance in using puffer we've got all
+sorts of fun Dem deos right here on the
+sorts of fun Dem deos right here on the
+ocean tab everything from as simple as
+ocean tab everything from as simple as
+breakout as complex as this MOA neural
+breakout as complex as this MOA neural
+MMO and other Sims if you're looking to
+MMO and other Sims if you're looking to
+read a bit more about Cutting Edge RL or
+read a bit more about Cutting Edge RL or
+learn RL if you're new we've got a bunch
+learn RL if you're new we've got a bunch
+of blog posts for both of those and if
+of blog posts for both of those and if
+you want even more
+you want even more
+content there are some articles on my ex
+content there are some articles on my ex
+that you cannot find anywhere else as
+that you cannot find anywhere else as
+well as a bunch of RL related
+well as a bunch of RL related
+posts me answer this question and then
+posts me answer this question and then
+sign out here board that is nice the
+sign out here board that is nice the
+technical physics based stuff
+technical physics based stuff
+applications related to for Science and
+applications related to for Science and
+fusion Center at MIT part of a company
+fusion Center at MIT part of a company
+that I'm trying to get
+going I mean if you have a serious
+going I mean if you have a serious
+application then yeah like message me on
+application then yeah like message me on
+the uh on the Discord because we work
+the uh on the Discord because we work
+with startups as
+with startups as
+well if uh if you're trying to do
+well if uh if you're trying to do
+something there
+I'd have to see like what type of thing
+I'd have to see like what type of thing
+you're trying to learn and whether it's
+you're trying to learn and whether it's
+feasible to write a fast SIM for it
+feasible to write a fast SIM for it
+generally where RL is at the moment you
+generally where RL is at the moment you
+want to be in a space where whatever the
+want to be in a space where whatever the
+problem is you're trying to solve
+problem is you're trying to solve
+ideally you can have a fast SIM for it
+ideally you can have a fast SIM for it
+so I can I can look at that and see if
+so I can I can look at that and see if
+that is feasible with the uh the
+that is feasible with the uh the
+techniques that we use yeah thank you
+techniques that we use yeah thank you
+yeah we're pretty good with uh I mean I
+yeah we're pretty good with uh I mean I
+really like working with startups so uh
+really like working with startups so uh
+yeah we have we have some good terms
+yeah we have we have some good terms
+there potentially and uh know only if it
+there potentially and uh know only if it
+makes sense of course for what you're
+makes sense of course for what you're
+trying to do but anyways thanks for
+
+Kind: captions
+Language: en
+let's see if I can figure this out just
+let's see if I can figure this out just
+going to see if I can optimize the uh
+going to see if I can optimize the uh
+control tasks here a little
+bit much work to be done on
+this gy. acquire
+oh wait hold
+on see if I can figure this thing
+out one
+did he use my code for this or did he
+did he use my code for this or did he
+use the original
+Okay so
+Okay so
+he kind of did a mix a mix of both
+uh where does this come
+from wait you didn't
+call okay wait you call refresh
+here for
+I had
+I had
+this I had this set up
+see but now I don't even want to mess
+see but now I don't even want to mess
+with it
+because let me look at the observation
+because let me look at the observation
+at
+least I don't want to have a chance well
+least I don't want to have a chance well
+I guess we'll see if the train curves
+I guess we'll see if the train curves
+match match the
+match match the
+original so we will be able to verify
+uh let me see
+difference
+between yeah so um clean puff RL is just
+between yeah so um clean puff RL is just
+like that's going to have all the clean
+like that's going to have all the clean
+RL style code demo is just a wrapper
+RL style code demo is just a wrapper
+around it that passes all the arguments
+around it that passes all the arguments
+so that you can load in whatever EnV you
+so that you can load in whatever EnV you
+want and it lets you run sweeps and
+want and it lets you run sweeps and
+stuff like that so yes you can use the
+stuff like that so yes you can use the
+demo file to run all of the ocean M out
+demo file to run all of the ocean M out
+of the box and yes it supports
+of the box and yes it supports
+continuous actions as
+well also since apparently Google's
+well also since apparently Google's
+linking people the wrong docks
+it's right here we have a full walk
+through it's hopefully all up to date as
+well what is
+this cute humanoid
+cheers yeah no worries see now I'm
+cheers yeah no worries see now I'm
+worried about this CU it this doesn't
+worried about this CU it this doesn't
+look like it relativizes the data
+correctly damn it
+for
+e e
+yeah this is a tough position to be in
+here might be better to just straight up
+here might be better to just straight up
+wait for Kung and work on my other stuff
+wait for Kung and work on my other stuff
+in the
+meantime and just know that I'm going to
+meantime and just know that I'm going to
+have to allocate a big block of time to
+have to allocate a big block of time to
+this once he's
+ready I think that's what we're going to
+ready I think that's what we're going to
+do so I'll just spend like an hour now
+do so I'll just spend like an hour now
+on the uh the hyper tram stuff
+maybe let me try that
+[Music]
+just kind of tired
+just kind of tired
+today let me see if we can still fig
+today let me see if we can still fig
+make some uh figure out and make some
+make some uh figure out and make some
+progress here it's just the last couple
+progress here it's just the last couple
+days of work have been uh pretty
+days of work have been uh pretty
+intensive it's been a pretty deep dive
+intensive it's been a pretty deep dive
+into a lot of these
+things let me see what what produced
+things let me see what what produced
+this graph
+this graph
+right
+oops okay
+oops okay
+so this one versus this one
+okay this is not divided by
+cost this one is divided by cost
+let me think about why this is so
+let me think about why this is so
+unnormalized for
+mean unnormalized nearest parito score
+mean unnormalized nearest parito score
+is this what we got
+yes so you subtract
+out the score
+here and multiply the distance to the
+here and multiply the distance to the
+nearest
+nearest
+burito I think I need to make the cost
+burito I think I need to make the cost
+estimate conservative I think that's the
+problem and do some logging here
+I all these transforms is really
+I all these transforms is really
+obnoxious
+I don't know why we're working in log
+I don't know why we're working in log
+space anyways here
+how do I do
+this e
+do you just X the
+variance okay this is
+obnoxious I see why they wanted to just
+obnoxious I see why they wanted to just
+get these transforms from
+somewhere the SK learn ones are not very
+good and this is apparent because Gan
+processes this is so screwy
+none of this data is freaking normally
+distributed maybe the input variables
+distributed maybe the input variables
+are but the outputs definitely are not
+I know what I can do there's a
+I know what I can do there's a
+trick there is a
+trick normalized log cost
+trick normalized log cost
+mean we'll just
+mean we'll just
+do watch this this is a trick
+do watch this this is a trick
+normalized
+conservative plus I and I hate these
+conservative plus I and I hate these
+variable names I'm going to redo this at
+variable names I'm going to redo this at
+some
+point e
+and then did I do this
+correctly now this should be plus
+and I want to also change the prints
+and I want to also change the prints
+here we can tell what's going on
+so we're going to do this is going to
+so we're going to do this is going to
+be predicted so this is going to be
+then we'll be score will
+then we'll be score will
+be a normalized score
+mean oh no wait best this is
+still let's do this
+for
+nearby then let's see this one is going
+nearby then let's see this one is going
+to
+be unnormalized
+be unnormalized
+foran this is going to
+foran this is going to
+be unnormalized nearest Frito score
+nearby
+okay it still goes straight to 200
+let's see so we have
+let's see so we have
+score
+score
+nearby here's your
+distance and there's the predicted
+cost so it actually gets this pretty
+cost so it actually gets this pretty
+much correct but it says that this is
+much correct but it says that this is
+the best you can do here
+okay so it's got to be my I think it's
+okay so it's got to be my I think it's
+my math that's Frey not the algorithm
+my math that's Frey not the algorithm
+here let me think about
+this we're going to do
+this we're going to do
+some freaking grade
+some freaking grade
+school like free high school math is
+school like free high school math is
+what we're going to do
+here people messaging
+me deleted
+me deleted
+weird Okay so we're going to make a new
+weird Okay so we're going to make a new
+one of
+these this one thank you
+and okay
+and okay
+so say you have a point
+so say you have a point
+here
+here
+okay and then this Point's here and this
+okay and then this Point's here and this
+is 200
+is 200
+and
+and
+200 then this
+200 then this
+formula it's unnormalized form this is
+formula it's unnormalized form this is
+this
+this
+prediction nearest parito so this
+is
+is
+200 -
+0 *
+200 divide by
+200 divide by
+200 okay so now we see the
+200 okay so now we see the
+problem these go away and you still have
+problem these go away and you still have
+so if there's no point to the
+so if there's no point to the
+right this is going to incentivize you
+right this is going to incentivize you
+to do crazy
+to do crazy
+things e
+if we make everything conservative is it
+if we make everything conservative is it
+going to
+going to
+help it really screwed up performance in
+help it really screwed up performance in
+the old model but the old model had
+the old model but the old model had
+terrible gaan
+processes let me
+processes let me
+think well first of all how's this doing
+yeah you see it started it's it got away
+yeah you see it started it's it got away
+from it quicker actually but it started
+from it quicker actually but it started
+with some very high cost
+experiments e
+is just making the score
+oops Conservative
+oops Conservative
+[Music]
+[Music]
+normalized then this is going to be
+minus score standard deviation
+so next thing we can
+do conservative unnormalized
+sportman we'll see what this does
+because you start sampling your random
+because you start sampling your random
+samples are seated
+in okay I think I know how this works
+in okay I think I know how this works
+so this is what you would
+so this is what you would
+want you would want both of these
+want you would want both of these
+quantities to be conservative
+because everything else is pulling you
+because everything else is pulling you
+to high cost
+to high cost
+exploration this is what pulls you away
+exploration this is what pulls you away
+from it so this is what guards you
+from it so this is what guards you
+against a bad model now the problem is
+against a bad model now the problem is
+that in the old version of this
+that in the old version of this
+algorithm um before I messed with it
+algorithm um before I messed with it
+they had really bad Gan processes uh and
+they had really bad Gan processes uh and
+using a conservative estimate it depends
+using a conservative estimate it depends
+on gum processes actually getting
+on gum processes actually getting
+good uh because if your gsum processes
+good uh because if your gsum processes
+are bad and do not generalize then it'll
+are bad and do not generalize then it'll
+just prevent me from ever exploring
+just prevent me from ever exploring
+anything so hopefully now this is
+okay do you need to re this
+you might need to this actually
+we'll see if something weird happens
+it's
+nice okay so
+here so this is what we had
+before is that a bit
+better about the same
+okay so making the cost estimate
+okay so making the cost estimate
+conservative it's apparently not enough
+conservative it's apparently not enough
+it seems like it helped
+prevent now you see we still have all
+prevent now you see we still have all
+these points at 200 this is what we're
+these points at 200 this is what we're
+trying to prevent right
+trying to prevent right
+now so we're going to try this next
+we're not going to run the whole thing
+we're not going to run the whole thing
+we're just going to watch the first
+we're just going to watch the first
+few
+few
+samples 200
+samples 200
+cost 100
+cost okay it only did one bad sample oh
+cost okay it only did one bad sample oh
+there's another
+one nope still taking bad samples
+let me look at this
+let me look at this
+though because this says something
+let's fix one thing first for
+try again
+okay this distance is still
+okay this distance is still
+wrong let me see
+why oh wait this
+is nearby
+maybe
+not it's crazy that the cost estimate is
+not it's crazy that the cost estimate is
+that
+that
+screwy how's this the
+case let me see
+that looks
+that looks
+good that adds like a good amount of
+good that adds like a good amount of
+uncertainty
+I should be taking square root even
+I should be taking square root even
+shouldn't I
+square root of
+variance so I'm adding I'm literally
+variance so I'm adding I'm literally
+adding this squared standard
+adding this squared standard
+deviation and it's still not
+deviation and it's still not
+enough which is an insane thing to do I
+enough which is an insane thing to do I
+just forgot to take square
+root e
+I'm getting to be very skeptical here
+is this the
+kernel hang on is this the
+kernel there's literally like one point
+kernel there's literally like one point
+at
+e e
+ER grows quadratically
+distance from the
+distance from the
+origin
+oh e
+I'm trying to figure out if the problem
+I'm trying to figure out if the problem
+I'm having is an expected problem or if
+I'm having is an expected problem or if
+this is
+weird so you can see right here
+right
+right
+score this is a pesm ISC
+score this is a pesm ISC
+score uh
+calculation there's just a lot of error
+calculation there's just a lot of error
+even with a
+pessimistic the variant should be
+huge e
+and this is with a whole bunch of points
+and this is with a whole bunch of points
+the start as well random trials which
+the start as well random trials which
+you're not going to
+have
+e
+e e
+let me think about
+this see the problem with the sample
+this see the problem with the sample
+based metrics right the problem with
+this you're not necessarily rewarding
+this you're not necessarily rewarding
+good samples you're rewarding samples
+good samples you're rewarding samples
+outside of the
+support this like
+there are two sources well let me think
+there are two sources well let me think
+are there multiple sources of err here
+are there multiple sources of err here
+no the model should be just the model
+no the model should be just the model
+should just be good within its
+support for
+how about
+this let me see this rating
+I what it is SE
+right
+right
+so this point of
+so this point of
+200 got
+200 got
+assigned a rating of
+three because the cost
+prediction conservative cost
+prediction conservative cost
+mean was
+28 you can see I didn't get any high
+28 you can see I didn't get any high
+points
+points
+here so you can
+here so you can
+see it was
+28 but the actual was 200
+see if I can catch one of these
+live
+live
+okay
+okay
+holy
+holy
+seven okay it predicts a cost of 31
+it says that it's going to score
+54 the nearest Point Paro point is at
+54 the nearest Point Paro point is at
+23 can that be the
+case
+54 at cost of
+31 does anything score higher
+31 does anything score higher
+than 54 at
+NOP
+no
+no
+no nope okay so that is a Paro point
+they say but they say the nearest Paro
+they say but they say the nearest Paro
+point is at
+23 which gets a score 23.2
+23 which gets a score 23.2
+n which gets a score of 23 so does
+n which gets a score of 23 so does
+anything get a score better than
+this do 47
+51 cost is
+30 it's going to be cost less than
+30 it's going to be cost less than
+31 okay I buy
+31 okay I buy
+that I buy that this is a Paro point and
+that I buy that this is a Paro point and
+this is the nearest one then says the
+this is the nearest one then says the
+distance to the next Paro point is
+distance to the next Paro point is
+seven so that's going to be what like 61
+should be like
+should be like
+61 I'm see a
+61 I'm see a
+61 wait is it
+61 no I'm Dum Hold
+On 30
+On 30
+should be like 40
+plus let make sure I get this
+plus let make sure I get this
+right oh wait so that's
+right oh wait so that's
+41 hold on wait
+41 hold on wait
+what
+what
+cost no 30
+39 here it is this gets a score of
+32 what the other one3 so yeah okay so I
+32 what the other one3 so yeah okay so I
+buy that this is these distance C are
+buy that this is these distance C are
+correct
+and it says it's going to get a score of
+and it says it's going to get a score of
+54 so I know based on this problem this
+54 so I know based on this problem this
+is impossible the optimal score is equal
+is impossible the optimal score is equal
+to
+to
+cost um and this is supposed to
+be un
+yeah so this is the pessimistic one as
+yeah so this is the pessimistic one as
+well because you can see
+well because you can see
+here the unnormalized one says
+72 but the variance is
+72 but the variance is
+way way too low
+it has no business being this
+it has no business being this
+confident this is in fact the main
+confident this is in fact the main
+reason we use these
+models
+for e
+length scale might be too short
+okay so this is
+possible for
+predicting a cost of 14
+yeah that is substantially reduced
+so let me see so unnormalized
+so let me see so unnormalized
+forming says
+forming says
+this and then the cost
+this and then the cost
+mean so this is a or
+prediction okay this is actually
+better do you have any tips for starting
+better do you have any tips for starting
+a new project
+I
+struggle um
+try just copying the template and
+try just copying the template and
+editing from
+there gives you all the boiler plate I
+there gives you all the boiler plate I
+mean ideally what you want is you want
+mean ideally what you want is you want
+to be able to be in a spot where your
+to be able to be in a spot where your
+projects just don't require hardly any
+projects just don't require hardly any
+boiler plate and then you won't have
+boiler plate and then you won't have
+that annoying block um I've tried
+that annoying block um I've tried
+working to get the boiler plate down but
+working to get the boiler plate down but
+it's kind of tough with the like the
+it's kind of tough with the like the
+python to see like with the scon
+python to see like with the scon
+intermediary
+like if you want to build a new M like
+like if you want to build a new M like
+just go copy
+squared I in this case specifically it's
+squared I in this case specifically it's
+probably that and other stuff like you
+probably that and other stuff like you
+should kind of be excited to start a new
+should kind of be excited to start a new
+project because you don't have any of
+project because you don't have any of
+your old garbage code to deal
+with e
+like most of the stuff I do I look at it
+like most of the stuff I do I look at it
+I'm like I have no idea how I'm going to
+I'm like I have no idea how I'm going to
+do this but I'm confident I'll figure it
+out it's like I have the exact set of
+out it's like I have the exact set of
+skills required to figure this thing out
+skills required to figure this thing out
+so I am going to figure it
+out including this thing right
+here
+e e
+mean getting a rating of three because
+mean getting a rating of three because
+it's underestimating the cost by a
+it's underestimating the cost by a
+factor of
+two
+jeez e
+I should probably plot confidence
+this is tricky in a way because
+um e
+I don't think I'm I don't think I can
+penalize but divide by the
+penalize but divide by the
+variance that really penalizes
+but statistically that doesn't make any
+but statistically that doesn't make any
+bloody sense to
+bloody sense to
+divide your prediction by the
+variance I can see what happens for the
+variance I can see what happens for the
+hell of it
+it's annoying that it's all
+it's annoying that it's all
+[Music]
+[Music]
+normed
+this
+for
+e
+e e
+just I'm curious just to see what this
+just I'm curious just to see what this
+does
+still you get an immediate 200 look at
+still you get an immediate 200 look at
+this
+that's crazy
+cuz then let me see it's going to
+cuz then let me see it's going to
+be score minus
+nearby they get like
+35 well they say the freaking cost is 15
+35 well they say the freaking cost is 15
+when it's
+when it's
+200 so it rates High cuz they're so
+wrong it's just R the wrong the most
+wrong it's just R the wrong the most
+wrong
+wrong
+predictions damn it I don't know why
+predictions damn it I don't know why
+they have the same
+variance what are these all the bad
+variance what are these all the bad
+predictions hang
+on yeah
+let me run it a little
+let me run it a little
+longer I think what's happening is we're
+longer I think what's happening is we're
+just selecting for the worst
+predictions
+e e
+okay so now it's
+learned now it is
+learned now it is
+learned and the variance is way
+lower e
+you
+know I
+wonder I
+wonder I
+wonder let me try something here
+I wonder what
+happens oh didn't do it hold on
+does this start you with a good model
+right gelian processes don't like it
+right gelian processes don't like it
+when you have a lot of points do
+they they really don't seem to like it
+they they really don't seem to like it
+when you have a lot of
+points
+holy there we
+go why is the cost rating still bad
+hang on that doesn't make sense I gave
+hang on that doesn't make sense I gave
+it 200
+it 200
+points give 400 just to be sure 300 just
+points give 400 just to be sure 300 just
+to be
+sure there's pretty decent coverage at
+sure there's pretty decent coverage at
+least the lower end
+least the lower end
+here it's completely
+wrong yeah completely wrong
+okay we got to figure out why the model
+okay we got to figure out why the model
+is this well this far
+off
+for
+for e
+okay this
+works see if it's still works
+yes this still works and it works nearly
+yes this still works and it works nearly
+perfectly okay
+so
+now
+250 first 200 being random
+here's what we're going to
+do me last 50
+points for
+you have an accurate mind
+what does this give you
+how we doing
+how we doing
+today it's
+today it's
+[Music]
+[Music]
+going it's
+going it's
+uh so many different sources of error on
+uh so many different sources of error on
+this this thing
+man lot of sources of potential
+error this looks better not perfect but
+better we'll see how this ends up
+looking e
+go for dinner in a
+go for dinner in a
+second but I'd like to at least have
+second but I'd like to at least have
+some idea if this is decent
+I think this will be a more fruitful
+I think this will be a more fruitful
+approach is to First assume that you
+approach is to First assume that you
+have good gaussian
+have good gaussian
+processes get the algorith them to work
+processes get the algorith them to work
+get it to work on the various different
+get it to work on the various different
+synthetic problems then figure out uh
+synthetic problems then figure out uh
+how to make sure that it doesn't do
+how to make sure that it doesn't do
+weird like run expensive experiments too
+weird like run expensive experiments too
+early while it's still
+early while it's still
+fitting there's your first cost
+200 e
+look at that
+I mean that's pretty
+I mean that's pretty
+good it's definitely an
+good it's definitely an
+improvement it even goes back and runs
+improvement it even goes back and runs
+some lower cost
+some lower cost
+experiments they're nicely
+spaced we don't like it running high
+spaced we don't like it running high
+cost experiments like this and getting
+cost experiments like this and getting
+them
+them
+wrong these
+ones it looks like it it just Misfit
+ones it looks like it it just Misfit
+this line a little
+bit hey Joseph what's good about to go
+bit hey Joseph what's good about to go
+for dinner but uh I've been working on
+for dinner but uh I've been working on
+hyper pram sweep there's so many
+hyper pram sweep there's so many
+different versions of this thing we
+different versions of this thing we
+managed to get a hyper parameter sweep
+managed to get a hyper parameter sweep
+to do this I mean my health is what it
+to do this I mean my health is what it
+is it's going to take 6 months to get
+is it's going to take 6 months to get
+back in proper shape I I ran five miles
+back in proper shape I I ran five miles
+yesterday so I'm like I can
+yesterday so I'm like I can
+function but uh you know like before
+function but uh you know like before
+this it could have been 15
+miles this is very funny so I had an
+miles this is very funny so I had an
+original formula that managed to like
+original formula that managed to like
+pick a bunch of different pido points
+pick a bunch of different pido points
+and then kind of like slide down
+and then kind of like slide down
+starting from the individual points like
+starting from the individual points like
+there there there and
+there there there and
+there we had this this one's
+there we had this this one's
+Jank this is better but this is like
+Jank this is better but this is like
+again there's too much over here going
+again there's too much over here going
+on this shouldn't be here this shouldn't
+on this shouldn't be here this shouldn't
+be here and now this is better maybe a
+be here and now this is better maybe a
+standing desk now I'm going to I'm going
+standing desk now I'm going to I'm going
+to be comfortable while I'm working and
+to be comfortable while I'm working and
+do real exercise right I run and I power
+do real exercise right I run and I power
+lift
+what's the command to compile the
+Pix
+this yeah I've got a nice comfortable
+this yeah I've got a nice comfortable
+chair here thank you very much I'd
+chair here thank you very much I'd
+rather just get my exercise in and I did
+rather just get my exercise in and I did
+I Ran So like the reason I'm still here
+I Ran So like the reason I'm still here
+um is because I ran 50 00 miles last
+um is because I ran 50 00 miles last
+year as well as hit a th000 total so I
+year as well as hit a th000 total so I
+basically did like exercise is a
+basically did like exercise is a
+part-time job doing all that and uh I
+part-time job doing all that and uh I
+mean that saved
+mean that saved
+me so I take it very seriously but I
+me so I take it very seriously but I
+also don't want to hurt myself too early
+also don't want to hurt myself too early
+so I'm not running every day
+so I'm not running every day
+yet
+yet
+um we'll get that back soon though yeah
+um we'll get that back soon though yeah
+there you go
+I have my barbells coming on um on
+I have my barbells coming on um on
+Wednesday the rack's going to take a
+Wednesday the rack's going to take a
+little longer but at least I can start
+little longer but at least I can start
+doing some RDL some overhead press some
+doing some RDL some overhead press some
+bent rows stuff like
+that I don't know maybe I'll rig
+that I don't know maybe I'll rig
+something so I can at least bench a
+something so I can at least bench a
+little bit we'll
+see isn't that supposed to spit
+see isn't that supposed to spit
+out yeah it will but you don't have to
+out yeah it will but you don't have to
+touch that
+touch that
+file the only thing that you have to do
+file the only thing that you have to do
+in order to get this to get picked up by
+python it
+just add your Robo code like right there
+just add your Robo code like right there
+or somewhere right all you have to do is
+or somewhere right all you have to do is
+add it as an extension and then it'll
+add it as an extension and then it'll
+spit out your Robo code
+file and then you should just be able to
+file and then you should just be able to
+import it from python
+you know wait I realized there's a
+you know wait I realized there's a
+problem with this the way I did
+problem with this the way I did
+this there's still a problem
+last one and then I'm going for
+dinner see if this did anything
+dinner see if this did anything
+better
+2350 this is up here
+2350 this is up here
+here yep
+here yep
+okay that'll give you a better
+model e
+just need to clean up syon
+just need to clean up syon
+yep that ought to work for
+you okay so
+you okay so
+now hey how you
+now hey how you
+doing working on some hyper parameter
+doing working on some hyper parameter
+sweet stuff
+it's tough because there's so many
+it's tough because there's so many
+different sources of error that are not
+different sources of error that are not
+explicitly accounted for that you have
+explicitly accounted for that you have
+to think about
+here I'm actually getting suspicious as
+here I'm actually getting suspicious as
+to
+to
+um whether the gaussian processes are
+um whether the gaussian processes are
+really going to be able to
+really going to be able to
+do everything on their own or
+do everything on their own or
+not because they seem to really under
+not because they seem to really under
+report their error
+report their error
+though to be fair I guess what I'll
+though to be fair I guess what I'll
+probably do is I'll fix this then I'll
+probably do is I'll fix this then I'll
+go figure out why they under report the
+go figure out why they under report the
+error I'll correct for
+that it's very
+weird
+e e
+huh that looks like it works pretty well
+huh that looks like it works pretty well
+if you have a perfect model
+fills this in very
+nicely I said last one but this one will
+nicely I said last one but this one will
+be very quick
+AR's coming back at us fast what do you
+AR's coming back at us fast what do you
+say the best way to apply RL the
+say the best way to apply RL the
+circuits would be how can I treat the
+circuits would be how can I treat the
+circuits there was a company that I was
+circuits there was a company that I was
+considering uh or that was considering
+considering uh or that was considering
+hiring puffer for
+hiring puffer for
+this um they do
+that yeah
+you just have to make a simulator and
+you just have to make a simulator and
+make it
+make it
+fast is the main thing you define your
+fast is the main thing you define your
+reward you define your action space of
+reward you define your action space of
+placing chips you have to make your Sims
+placing chips you have to make your Sims
+very fast that's the key to
+everything not perfect yet
+it almost should be
+it almost should be
+like no I mean it has a perfect
+like no I mean it has a perfect
+model in fact you know what I might do I
+model in fact you know what I might do I
+might literally give it a perfect model
+might literally give it a perfect model
+because it should be doing binary search
+because it should be doing binary search
+like the perfect model case it should be
+like the perfect model case it should be
+doing binary
+search that actually would be very
+elegant okay I like that
+elegant okay I like that
+idea um I got to go get food I may or
+idea um I got to go get food I may or
+may not stream after dinner we will see
+may not stream after dinner we will see
+I will definitely be back tomorrow
+I will definitely be back tomorrow
+though working on stuff um thanks folks
+though working on stuff um thanks folks
+for tuning in if you're interested in
+for tuning in if you're interested in
+following any of my stuff here this is
+following any of my stuff here this is
+all free and open source if you want to
+all free and open source if you want to
+help us out for free just star the
+help us out for free just star the
+repository really helps us out you can
+repository really helps us out you can
+join the Discord to get involved with
+join the Discord to get involved with
+development or if you want some
+development or if you want some
+assistance in using puffer we've got all
+assistance in using puffer we've got all
+sorts of fun Dem deos right here on the
+sorts of fun Dem deos right here on the
+ocean tab everything from as simple as
+ocean tab everything from as simple as
+breakout as complex as this MOA neural
+breakout as complex as this MOA neural
+MMO and other Sims if you're looking to
+MMO and other Sims if you're looking to
+read a bit more about Cutting Edge RL or
+read a bit more about Cutting Edge RL or
+learn RL if you're new we've got a bunch
+learn RL if you're new we've got a bunch
+of blog posts for both of those and if
+of blog posts for both of those and if
+you want even more
+you want even more
+content there are some articles on my ex
+content there are some articles on my ex
+that you cannot find anywhere else as
+that you cannot find anywhere else as
+well as a bunch of RL related
+well as a bunch of RL related
+posts me answer this question and then
+posts me answer this question and then
+sign out here board that is nice the
+sign out here board that is nice the
+technical physics based stuff
+technical physics based stuff
+applications related to for Science and
+applications related to for Science and
+fusion Center at MIT part of a company
+fusion Center at MIT part of a company
+that I'm trying to get
+going I mean if you have a serious
+going I mean if you have a serious
+application then yeah like message me on
+application then yeah like message me on
+the uh on the Discord because we work
+the uh on the Discord because we work
+with startups as
+with startups as
+well if uh if you're trying to do
+well if uh if you're trying to do
+something there
+I'd have to see like what type of thing
+I'd have to see like what type of thing
+you're trying to learn and whether it's
+you're trying to learn and whether it's
+feasible to write a fast SIM for it
+feasible to write a fast SIM for it
+generally where RL is at the moment you
+generally where RL is at the moment you
+want to be in a space where whatever the
+want to be in a space where whatever the
+problem is you're trying to solve
+problem is you're trying to solve
+ideally you can have a fast SIM for it
+ideally you can have a fast SIM for it
+so I can I can look at that and see if
+so I can I can look at that and see if
+that is feasible with the uh the
+that is feasible with the uh the
+techniques that we use yeah thank you
+techniques that we use yeah thank you
+yeah we're pretty good with uh I mean I
+yeah we're pretty good with uh I mean I
+really like working with startups so uh
+really like working with startups so uh
+yeah we have we have some good terms
+yeah we have we have some good terms
+there potentially and uh know only if it
+there potentially and uh know only if it
+makes sense of course for what you're
+makes sense of course for what you're
+trying to do but anyways thanks for

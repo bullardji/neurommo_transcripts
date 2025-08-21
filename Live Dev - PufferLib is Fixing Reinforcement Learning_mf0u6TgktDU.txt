@@ -1,0 +1,1725 @@
+Kind: captions
+Language: en
+morning. There we go. We're just going
+morning. There we go. We're just going
+to do a quick little stream
+to do a quick little stream
+here. Work on a few
+here. Work on a few
+things. Cryo Replay did not work out of
+things. Cryo Replay did not work out of
+the box on Neural MMO. No big
+the box on Neural MMO. No big
+surprise, but uh you know, there's a lot
+surprise, but uh you know, there's a lot
+more to fix with this before we draw any
+more to fix with this before we draw any
+conclusions.
+Yeah, the plan for today is short
+Yeah, the plan for today is short
+stream, break for breakfast and
+stream, break for breakfast and
+exercise, come back, long stream, and
+exercise, come back, long stream, and
+hopefully by then this thing will be in
+hopefully by then this thing will be in
+a decent
+shape. We're getting pretty close to the
+shape. We're getting pretty close to the
+point where I can start running serious
+point where I can start running serious
+experiments on this. I
+experiments on this. I
+think pretty close.
+Man, this like pre-step post step
+Man, this like pre-step post step
+is really annoying.
+There's just a lot of branching logic in
+There's just a lot of branching logic in
+here. A lot of branching
+logic. Maybe we can fix the maze
+environment. That would like that is a
+environment. That would like that is a
+case where prioritize replay should
+case where prioritize replay should
+definitely help, right? All
+right. I think this is also a case where
+right. I think this is also a case where
+I need to leave the siphon in place for
+I need to leave the siphon in place for
+now.
+This has got to be the OBS,
+right?
+Actually, we can just do
+if we'll just do
+this. Hopefully, we figure out what is
+this. Hopefully, we figure out what is
+wrong with this end.
+Oh, wrong
+end. Okay, so this didn't catch it,
+end. Okay, so this didn't catch it,
+oddly
+enough. Maybe this indexing over here is
+enough. Maybe this indexing over here is
+wrong.
+It's fine,
+It's fine,
+right? No, it's not
+right? No, it's not
+fine. Okay. How's this happen?
+OBS is the right
+size. Oh, it's because E3B is
+on. Where is this thing? Yeah, this is
+on. Where is this thing? Yeah, this is
+This cannot be on because I haven't
+This cannot be on because I haven't
+fixed it
+yet. All right. So, that
+yet. All right. So, that
+train should do something.
+No reward
+No reward
+ever. Interesting.
+Okay. What about now with
+this? That's semi
+prioritized. Doesn't seem to be getting
+prioritized. Doesn't seem to be getting
+any score whatsoever.
+Interesting. Could have sworn that that
+Interesting. Could have sworn that that
+did get some reward
+before. What about this?
+Let me make a quick sanity because I'm
+Let me make a quick sanity because I'm
+uh I'm getting a little suspicious. Oh,
+uh I'm getting a little suspicious. Oh,
+wait. No, there it is. It It actually
+wait. No, there it is. It It actually
+did get
+did get
+um a bit of reward in
+there. I'm fine.
+do like do I just need to make this
+do like do I just need to make this
+smaller? This should work.
+Yeah, that works.
+Okay. Yeah. So, there's the initial
+Okay. Yeah. So, there's the initial
+problem right there that we're seeing,
+problem right there that we're seeing,
+which is it getting some reward and then
+which is it getting some reward and then
+just not doing anything with it.
+So the idea with the
+So the idea with the
+uh prioritize replay is like if I take
+uh prioritize replay is like if I take
+top K, it should never get rid of that
+top K, it should never get rid of that
+data from the train set.
+Hey, welcome. Currently testing out our
+Hey, welcome. Currently testing out our
+prioritize experience replay
+prioritize experience replay
+implementation. Seeing how I can improve
+implementation. Seeing how I can improve
+some
+things. I mean, this does look like it's
+things. I mean, this does look like it's
+doing better. At least it's not just
+doing better. At least it's not just
+dropped all the way to zero immediately.
+dropped all the way to zero immediately.
+But this is not what we'd expect yet. Is
+But this is not what we'd expect yet. Is
+this that snake? Now, this is like a
+this that snake? Now, this is like a
+procedurally generated maze end. The
+procedurally generated maze end. The
+idea with that is uh it's really sparse.
+idea with that is uh it's really sparse.
+And uh one of the goals with prioritized
+And uh one of the goals with prioritized
+replay is if you get if you're on a
+replay is if you get if you're on a
+deterministic end and you get the reward
+deterministic end and you get the reward
+once, then you should basically just
+once, then you should basically just
+keep that sample uh in your replay
+keep that sample uh in your replay
+buffer for quite a
+buffer for quite a
+while and you should latch on to that
+while and you should latch on to that
+reward a lot
+faster. Okay. Well, this is probably a
+faster. Okay. Well, this is probably a
+culprit right
+culprit right
+here. Can I do like 128 on this?
+still now. Huh?
+Do you use TD error as priority? Not
+Do you use TD error as priority? Not
+quite. You use the advantage as the
+quite. You use the advantage as the
+priority signal. I believe J will give
+priority signal. I believe J will give
+you TD of one uh when you
+you TD of one uh when you
+have gamma equal no lambda equals zero
+have gamma equal no lambda equals zero
+and gamma equal one is like baseline
+and gamma equal one is like baseline
+discounted return and then it's this
+discounted return and then it's this
+weird exponential
+weird exponential
+interpolation of them otherwise
+Yes. It's interesting that it keeps
+Yes. It's interesting that it keeps
+getting a bit of
+reward, but like not quite enough.
+It's a fixed map in this
+test. Maybe we just need
+test. Maybe we just need
+like crazy BPT horizon for this.
+That's not going to fit. Maybe this
+That's not going to fit. Maybe this
+fits.
+Maybe
+Maybe
+this this will give
+this this will give
+us weighted random
+us weighted random
+sampling during
+sampling during
+training. But then it should make sure
+training. But then it should make sure
+that we keep samples in the cryobuffer.
+Sum of probabilities less than equal
+Sum of probabilities less than equal
+Z.
+Really? They're all zero.
+What is this?
+These are all the right shape.
+Oh, it's in comput
+J. Interesting.
+There must be like bad data in there or
+There must be like bad data in there or
+something, right?
+steps
+horizon. Maybe my G is wrong.
+How does this block idx get divided up?
+How does this block idx get divided up?
+Hang
+on. Threads per block.
+Num steps plus thread per
+block. 256 blocks.
+Is that
+correct? That should give you the row,
+correct? That should give you the row,
+shouldn't it? Block index, block dim.
+This should actually give you the
+This should actually give you the
+correct row.
+How the heck is this out of
+bounds? How the heck is this out of
+bounds? How the heck is this out of
+bounds?
+Oh, I guess cuz it doesn't line up with
+Oh, I guess cuz it doesn't line up with
+a block. Is that the
+issue? I bet that's it.
+Is that not a multiple of
+um Maybe it's not a multiple. Hang
+on. I think it has to be a multiple of
+on. I think it has to be a multiple of
+256. That's an easy check.
+It's taking forever to
+compile something
+screwy. Uh, this thing got partial
+screwy. Uh, this thing got partial
+compiled, I assume.
+You build this.
+when the stats suddenly go down.
+So I guess then the question is going to
+So I guess then the question is going to
+be
+um on the advantage
+prioritization. Oh, is it training?
+Hey, look at that.
+So,
+So,
+um, that's pretty
+crazy. Is this 21 size or 31 size? I
+crazy. Is this 21 size or 31 size? I
+think this is still 21
+size. 21 size.
+This is solving though.
+This is solving though.
+Um, that's not an easy
+task. We'll see what the actual episode
+task. We'll see what the actual episode
+length ends up being.
+Okay. And we actually will be able to
+Okay. And we actually will be able to
+compare
+now. We'll be able to compare a couple
+now. We'll be able to compare a couple
+of these
+And I think we'll be able to see whether
+And I think we'll be able to see whether
+this works the way we uh we want it to.
+So this is it getting lucky a few times
+So this is it getting lucky a few times
+from random search. What usually happens
+from random search. What usually happens
+is it gets such a small fraction of
+is it gets such a small fraction of
+rewards
+rewards
+um that when you train on the whole
+um that when you train on the whole
+batch you actually don't latch on to the
+batch you actually don't latch on to the
+reward because you get it too
+reward because you get it too
+infrequently. It looks like, oh, it's
+infrequently. It looks like, oh, it's
+very high here. But actually, this is
+very high here. But actually, this is
+just like the first trajectory that
+just like the first trajectory that
+finishes is always going to be one where
+finishes is always going to be one where
+you got
+lucky. And boom, there you go. It
+solves. So, that's pretty solid. It took
+solves. So, that's pretty solid. It took
+longer last time, didn't it? Yeah. 80
+longer last time, didn't it? Yeah. 80
+mil.
+mil.
+So there's going to be some
+So there's going to be some
+inconsistency as to how long it takes to
+inconsistency as to how long it takes to
+do that, but still not
+do that, but still not
+bad. And now if we go
+to we just do
+to we just do
+mal
+random. Does it still solve?
+This one might still solve actually
+This one might still solve actually
+because this is only the 21x
+because this is only the 21x
+21s. We will see.
+Yeah. So this one still
+solves. I believe 31 is where it starts
+solves. I believe 31 is where it starts
+to get very difficult.
+So this is too
+easy. You need to be able to at least
+easy. You need to be able to at least
+get some reward in order for either of
+get some reward in order for either of
+these methods to work. We will see
+these methods to work. We will see
+whether we get any reward at
+all. So far enough
+So 21 might just be doable and 31 might
+So 21 might just be doable and 31 might
+just be
+impossible. Yeah. So that's just zero
+impossible. Yeah. So that's just zero
+reward.
+reward.
+No method will be able to solve that. Um
+No method will be able to solve that. Um
+at least without like explicit
+at least without like explicit
+exploration
+stuff. We go sort of somewhere in
+stuff. We go sort of somewhere in
+between. Need it needs to be something
+between. Need it needs to be something
+that consistently gets some
+reward. Five maybe.
+Also don't know how this thing is
+Also don't know how this thing is
+seated.
+It got some I think it got like one
+It got some I think it got like one
+solve.
+solve.
+Okay, there you go. That's a very sparse
+Okay, there you go. That's a very sparse
+small amount of reward right
+there. So, this is what we're going for.
+there. So, this is what we're going for.
+This is the like if you run it for long
+This is the like if you run it for long
+enough, you will eventually get a
+solve. But as you can see, it's not like
+solve. But as you can see, it's not like
+solving it again at all thereafter.
+Okay, so this is where we would
+Okay, so this is where we would
+expect to maybe be able to do something
+expect to maybe be able to do something
+with prioritized replay that we This is
+with prioritized replay that we This is
+like crazy crazy sparse. I guess if we
+like crazy crazy sparse. I guess if we
+get the trajectory twice, it should be
+get the trajectory twice, it should be
+enough.
+Okay. So now we do
+prioritized. Got the little score spike
+here. Now we do prioritized.
+And if that's consistent, we're
+And if that's consistent, we're
+good, right? If that is a consistent
+good, right? If that is a consistent
+result, we are
+good. It's a crazy sparse task.
+Okay, let's just run it again to see if
+Okay, let's just run it again to see if
+it
+replicates because we don't get the
+replicates because we don't get the
+lucky early solve at this one. Oh,
+lucky early solve at this one. Oh,
+there's
+one. And it does a pretty good job of
+one. And it does a pretty good job of
+um getting more solves
+Good day.
+Welcome. Okay. So, this is a perfect
+Welcome. Okay. So, this is a perfect
+test if it's able to solve based on
+test if it's able to solve based on
+this.
+I would think that it should be able to
+I would think that it should be able to
+because as long as it's getting some
+because as long as it's getting some
+reward, it's going to run a whole bunch
+reward, it's going to run a whole bunch
+of
+of
+epochs on uh those
+epochs on uh those
+trajectories. It's still a hard problem,
+trajectories. It's still a hard problem,
+mind
+mind
+you.
+you.
+So, it's fine if it takes a while.
+So, it's fine if it takes a while.
+We just want to see if it actually
+We just want to see if it actually
+can get something with this.
+It shouldn't be possible for it to just
+It shouldn't be possible for it to just
+be permanently stuck
+be permanently stuck
+here based on the new algorithm. In PO
+here based on the new algorithm. In PO
+without prioritized replay, um what can
+without prioritized replay, um what can
+happen is that the reward is so
+happen is that the reward is so
+infrequent that you just get drowned out
+infrequent that you just get drowned out
+by noise.
+But here, since you're running so many
+But here, since you're running so many
+update epochs on the good
+update epochs on the good
+samples, we should see this
+solve. Yeah.
+Okay. So, it seems that
+Okay. So, it seems that
+um those are very good signs of life for
+um those are very good signs of life for
+prioritized
+prioritized
+replay. Very, very good signs of
+life. Um running on one map like this is
+life. Um running on one map like this is
+going to be really inconsistent.
+but solving 31 by 31 mazes um without
+but solving 31 by 31 mazes um without
+curriculum or anything is kind of
+curriculum or anything is kind of
+crazy. You can see there this is a
+crazy. You can see there this is a
+currently a 800 horizon task with one
+currently a 800 horizon task with one
+reward.
+reward.
+So, yeah, I'm taking 91 million steps
+So, yeah, I'm taking 91 million steps
+just to solve a maze, but this was like
+just to solve a maze, but this was like
+800 steps, one
+reward. So, that's pretty
+good as far as like exploration tasks
+good as far as like exploration tasks
+go.
+go.
+um like benchmark exploration task. This
+um like benchmark exploration task. This
+is ridiculously harder than pretty much
+is ridiculously harder than pretty much
+anything I've seen in academia and this
+works. Cool.
+works. Cool.
+Now we do the randomized version of this
+Now we do the randomized version of this
+thing and we see what
+happens. So now it's got a whole bunch
+happens. So now it's got a whole bunch
+of
+maps. Is this going to be easier or
+maps. Is this going to be easier or
+harder? PO did not solve this.
+PPO actually got like zero zero score on
+And again, if this takes it a bunch of
+And again, if this takes it a bunch of
+steps, we're not concerned. We just want
+steps, we're not concerned. We just want
+to see if it
+to see if it
+solves. What was the yellow
+run? Same thing as before, captain. Uh,
+run? Same thing as before, captain. Uh,
+it's the environment is very sparse. So,
+it's the environment is very sparse. So,
+if you get lucky and you get reward at
+if you get lucky and you get reward at
+the start of training, it's a lot
+the start of training, it's a lot
+easier. These are the same
+run. But the main thing is I've
+run. But the main thing is I've
+literally I've never seen PPO solve
+thought you got some solves before. Uh
+thought you got some solves before. Uh
+the ones
+the ones
+with so with on single maps it doesn't
+with so with on single maps it doesn't
+solve uh plain PO there's a curriculum
+solve uh plain PO there's a curriculum
+thing that does solve but this doesn't
+thing that does solve but this doesn't
+include that. This is just straight up
+include that. This is just straight up
+prioritized experience
+replay. Yeah. Now, whether it solves the
+replay. Yeah. Now, whether it solves the
+randomized maps, this might be harder
+randomized maps, this might be harder
+because on the randomized
+maps, there's not really a way for to
+maps, there's not really a way for to
+learn a robust exploration strategy when
+learn a robust exploration strategy when
+it can't just memorize some
+it can't just memorize some
+maps. The mazes are just too big.
+This is now 8,000
+maps. So, intriguingly,
+maps. So, intriguingly,
+like this keeps getting some
+like this keeps getting some
+support. I see PO often just drop to
+support. I see PO often just drop to
+straight up zero. PO will just
+straight up zero. PO will just
+collapse. So, this keeps getting a small
+collapse. So, this keeps getting a small
+amount of
+amount of
+score, but it doesn't seem like it's
+score, but it doesn't seem like it's
+able to do very much with that,
+able to do very much with that,
+which I think this makes sense. This
+which I think this makes sense. This
+result makes
+sense. It would be really cool if this
+sense. It would be really cool if this
+just solved, but
+um yeah, I think there are too many
+maps. Why do you think it got one to me?
+maps. Why do you think it got one to me?
+That's just
+That's just
+luck. It's literally just like brownie
+luck. It's literally just like brownie
+in motion in a big
+maze. You don't get samples back until
+maze. You don't get samples back until
+you finish a maze or whatever. So,
+you finish a maze or whatever. So,
+uh, if you're going to get lucky, you
+uh, if you're going to get lucky, you
+actually have a decent chance for it to
+actually have a decent chance for it to
+be right at the
+be right at the
+start. That's just a property of the
+start. That's just a property of the
+logging.
+Is it worth just like increasing map
+Is it worth just like increasing map
+size or not a map size model size or
+size or not a map size model size or
+something here?
+Maybe we just do the curriculum version
+Maybe we just do the curriculum version
+or not the I guess domain randomized
+or not the I guess domain randomized
+version, not curriculum
+version, not curriculum
+version. Oh, this is 25 by 25 maps.
+version. Oh, this is 25 by 25 maps.
+Okay, this is still not the craziest
+result. Let's try this.
+I don't want to spend very long doing
+I don't want to spend very long doing
+this. I think I just want to run this
+this. I think I just want to run this
+and one other and then we'll uh we go
+and one other and then we'll uh we go
+back to deving on it and I'm at least
+back to deving on it and I'm at least
+satisfied it does something
+Turns very slowly.
+and give it 100 mil. And then we'll try
+and give it 100 mil. And then we'll try
+the other one. And then we'll be done
+the other one. And then we'll be done
+with this. And we will uh continue
+with this. And we will uh continue
+cleaning up code and all of
+cleaning up code and all of
+that for a little bit.
+So this will be prior replay
+So this will be prior replay
+versus random
+This doesn't seem to be performing crazy
+This doesn't seem to be performing crazy
+well,
+though. Yeah, if random immediately
+though. Yeah, if random immediately
+beats this, we're going to have to go
+beats this, we're going to have to go
+tune some stuff.
+So, we'll see how this does by
+So, we'll see how this does by
+comparison.
+Is this going to just do way
+better? Yeah. So, this is just going to
+better? Yeah. So, this is just going to
+immediately do better.
+Well, this is a good thing to wonder
+Well, this is a good thing to wonder
+like why, right?
+This is not going to get 100%
+This is not going to get 100%
+solved. It should level
+off. But then the question is why is
+off. But then the question is why is
+prioritize not better here? I saw it be
+prioritize not better here? I saw it be
+better on the single task.
+value is the only thing that changes,
+right? Because when you compute the
+advantage, values, rewards, done, gamma,
+advantage, values, rewards, done, gamma,
+lambda. Yeah. So the only thing that
+changes
+There's the
+value and you do recomputee the
+value and you do recomputee the
+value every mini
+value every mini
+batch. You do recomputee
+J E every mini batch.
+Okay. So this is the curve that we
+have. Let's see how mean
+have. Let's see how mean
+samples mean sample uses should be
+samples mean sample uses should be
+two
+right
+maxes. Get out of here,
+bot. All
+right. So, it's not crazy different
+right. So, it's not crazy different
+really.
+It's not really prioritizing, is
+It's not really prioritizing, is
+it? Well, that's weird. It should
+it? Well, that's weird. It should
+definitely
+definitely
+be. We would expect this to be way
+be. We would expect this to be way
+higher.
+I wonder if there is something screwy
+I wonder if there is something screwy
+here where
+like it's probably way easier to train
+like it's probably way easier to train
+the value function than the
+the value function than the
+policy. Does that make sense?
+policy. Does that make sense?
+Like if the value
+function learns the correct
+value actually wait if if you have a
+value actually wait if if you have a
+perfect value function in PPL what
+perfect value function in PPL what
+happens?
+You don't learn anything,
+right? I think this hang on maybe.
+right? I think this hang on maybe.
+What's the value loss?
+Value loss is still higher but we are
+Value loss is still higher but we are
+selecting for the highest value loss
+things. It's not dipping though.
+Managers sum is
+zero.
+Okay, we have advantages.
+This is all zeros.
+Why are any of these
+things? Oh, right. Because it's going to
+things? Oh, right. Because it's going to
+be Yeah, there's going to be uh some
+be Yeah, there's going to be uh some
+noise on fire.
+So this isn't good, right?
+This one just happens to be bigger.
+Yeah, you can't even
+Yeah, you can't even
+tell what has the
+advantages about
+this. Is there like an off by one or
+this. Is there like an off by one or
+something? Why is this um
+It's like there's an off by one.
+There's
+brewing. If I do
+this, that doesn't seem like it'll be
+this, that doesn't seem like it'll be
+good either,
+good either,
+though. That'll just give you all the
+though. That'll just give you all the
+easy segments.
+easy segments.
+We'll let this run, but I'm gonna undo
+this. Why is advantage not giving you
+advantage? Delta
+rewards minus
+values. I see
+Well, whatever I did here just doesn't
+Well, whatever I did here just doesn't
+work.
+We have to just like give it a couple
+We have to just like give it a couple
+epochs.
+Maybe we just give it a couple epox.
+could have had some time to learn some
+could have had some time to learn some
+stuff, All right.
+Maybe the advantages. Hang on. Do these
+Maybe the advantages. Hang on. Do these
+line up?
+Did I put the break point in the wrong
+spot? Maybe we need to do it
+spot? Maybe we need to do it
+here before I do this
+here before I do this
+assign. Just make sure I'm not screwing
+assign. Just make sure I'm not screwing
+this up.
+Okay. Your
+advantages. Well, I like the advantages
+advantages. Well, I like the advantages
+at the end there. you have a positive
+at the end there. you have a positive
+advantage. So if we do
+A lot of these have rewards,
+right? Yeah, a lot of these have
+right? Yeah, a lot of these have
+rewards.
+whereas it's ways parser overall. So
+whereas it's ways parser overall. So
+here you actually do get a lot of these
+here you actually do get a lot of these
+higher
+higher
+reward samples into the prioritized
+reward samples into the prioritized
+buffer.
+So why is this not just immediately a
+So why is this not just immediately a
+free win then?
+value functions trained to predict
+value functions trained to predict
+discounted
+returns. Well, maybe this is the
+returns. Well, maybe this is the
+stailness. Hang on.
+Is it because the value function isn't
+Is it because the value function isn't
+action condition?
+I might have missed something here.
+I'm going to have to think about this a
+I'm going to have to think about this a
+little
+bit. So, basically, I'm trying to see if
+bit. So, basically, I'm trying to see if
+there is actually an on policy thing.
+The value
+The value
+function is being trained to
+predict either this or this. If we use
+predict either this or this. If we use
+this simple
+case, it's going to be trying to predict
+case, it's going to be trying to predict
+the rewards going
+the rewards going
+forward. that those rewards are a
+forward. that those rewards are a
+function of the current
+function of the current
+policy implicitly.
+I see.
+Okay. But
+like we have uh we have stuff to play
+like we have uh we have stuff to play
+around with this for sure.
+around with this for sure.
+We have out we have options
+We have out we have options
+here
+here
+because even if this is going to take
+because even if this is going to take
+more changes before we can use
+more changes before we can use
+prioritized replay, we're still going to
+prioritized replay, we're still going to
+be able to use this as advantage
+be able to use this as advantage
+filtering. All right, I've got to do a
+filtering. All right, I've got to do a
+few things. I've got to get some
+few things. I've got to get some
+exercise. I got to get some food. And
+exercise. I got to get some food. And
+then the goal is going to be to be back
+then the goal is going to be to be back
+around 11ish Easter. Um, and get in like
+around 11ish Easter. Um, and get in like
+a full day stream from there. So for
+a full day stream from there. So for
+folks watching, I'm going to be working
+folks watching, I'm going to be working
+on this algorithm and this
+on this algorithm and this
+implementation a lot more later. If
+implementation a lot more later. If
+you're interested in following all this
+you're interested in following all this
+RLD dev live, buffer.ai, start the
+RLD dev live, buffer.ai, start the
+GitHub to help us out. Really helps out
+GitHub to help us out. Really helps out
+a lot. We're trying to hit 2K stars. If
+a lot. We're trying to hit 2K stars. If
+you want to get involved in dev, just
+you want to get involved in dev, just
+join the Discord and you can follow me
+join the Discord and you can follow me
+on X for more RL content. Thanks and
+on X for more RL content. Thanks and
+I'll be
+
+Kind: captions
+Language: en
+morning. There we go. We're just going
+morning. There we go. We're just going
+to do a quick little stream
+to do a quick little stream
+here. Work on a few
+here. Work on a few
+things. Cryo Replay did not work out of
+things. Cryo Replay did not work out of
+the box on Neural MMO. No big
+the box on Neural MMO. No big
+surprise, but uh you know, there's a lot
+surprise, but uh you know, there's a lot
+more to fix with this before we draw any
+more to fix with this before we draw any
+conclusions.
+Yeah, the plan for today is short
+Yeah, the plan for today is short
+stream, break for breakfast and
+stream, break for breakfast and
+exercise, come back, long stream, and
+exercise, come back, long stream, and
+hopefully by then this thing will be in
+hopefully by then this thing will be in
+a decent
+shape. We're getting pretty close to the
+shape. We're getting pretty close to the
+point where I can start running serious
+point where I can start running serious
+experiments on this. I
+experiments on this. I
+think pretty close.
+Man, this like pre-step post step
+Man, this like pre-step post step
+is really annoying.
+There's just a lot of branching logic in
+There's just a lot of branching logic in
+here. A lot of branching
+logic. Maybe we can fix the maze
+environment. That would like that is a
+environment. That would like that is a
+case where prioritize replay should
+case where prioritize replay should
+definitely help, right? All
+right. I think this is also a case where
+right. I think this is also a case where
+I need to leave the siphon in place for
+I need to leave the siphon in place for
+now.
+This has got to be the OBS,
+right?
+Actually, we can just do
+if we'll just do
+this. Hopefully, we figure out what is
+this. Hopefully, we figure out what is
+wrong with this end.
+Oh, wrong
+end. Okay, so this didn't catch it,
+end. Okay, so this didn't catch it,
+oddly
+enough. Maybe this indexing over here is
+enough. Maybe this indexing over here is
+wrong.
+It's fine,
+It's fine,
+right? No, it's not
+right? No, it's not
+fine. Okay. How's this happen?
+OBS is the right
+size. Oh, it's because E3B is
+on. Where is this thing? Yeah, this is
+on. Where is this thing? Yeah, this is
+This cannot be on because I haven't
+This cannot be on because I haven't
+fixed it
+yet. All right. So, that
+yet. All right. So, that
+train should do something.
+No reward
+No reward
+ever. Interesting.
+Okay. What about now with
+this? That's semi
+prioritized. Doesn't seem to be getting
+prioritized. Doesn't seem to be getting
+any score whatsoever.
+Interesting. Could have sworn that that
+Interesting. Could have sworn that that
+did get some reward
+before. What about this?
+Let me make a quick sanity because I'm
+Let me make a quick sanity because I'm
+uh I'm getting a little suspicious. Oh,
+uh I'm getting a little suspicious. Oh,
+wait. No, there it is. It It actually
+wait. No, there it is. It It actually
+did get
+did get
+um a bit of reward in
+there. I'm fine.
+do like do I just need to make this
+do like do I just need to make this
+smaller? This should work.
+Yeah, that works.
+Okay. Yeah. So, there's the initial
+Okay. Yeah. So, there's the initial
+problem right there that we're seeing,
+problem right there that we're seeing,
+which is it getting some reward and then
+which is it getting some reward and then
+just not doing anything with it.
+So the idea with the
+So the idea with the
+uh prioritize replay is like if I take
+uh prioritize replay is like if I take
+top K, it should never get rid of that
+top K, it should never get rid of that
+data from the train set.
+Hey, welcome. Currently testing out our
+Hey, welcome. Currently testing out our
+prioritize experience replay
+prioritize experience replay
+implementation. Seeing how I can improve
+implementation. Seeing how I can improve
+some
+things. I mean, this does look like it's
+things. I mean, this does look like it's
+doing better. At least it's not just
+doing better. At least it's not just
+dropped all the way to zero immediately.
+dropped all the way to zero immediately.
+But this is not what we'd expect yet. Is
+But this is not what we'd expect yet. Is
+this that snake? Now, this is like a
+this that snake? Now, this is like a
+procedurally generated maze end. The
+procedurally generated maze end. The
+idea with that is uh it's really sparse.
+idea with that is uh it's really sparse.
+And uh one of the goals with prioritized
+And uh one of the goals with prioritized
+replay is if you get if you're on a
+replay is if you get if you're on a
+deterministic end and you get the reward
+deterministic end and you get the reward
+once, then you should basically just
+once, then you should basically just
+keep that sample uh in your replay
+keep that sample uh in your replay
+buffer for quite a
+buffer for quite a
+while and you should latch on to that
+while and you should latch on to that
+reward a lot
+faster. Okay. Well, this is probably a
+faster. Okay. Well, this is probably a
+culprit right
+culprit right
+here. Can I do like 128 on this?
+still now. Huh?
+Do you use TD error as priority? Not
+Do you use TD error as priority? Not
+quite. You use the advantage as the
+quite. You use the advantage as the
+priority signal. I believe J will give
+priority signal. I believe J will give
+you TD of one uh when you
+you TD of one uh when you
+have gamma equal no lambda equals zero
+have gamma equal no lambda equals zero
+and gamma equal one is like baseline
+and gamma equal one is like baseline
+discounted return and then it's this
+discounted return and then it's this
+weird exponential
+weird exponential
+interpolation of them otherwise
+Yes. It's interesting that it keeps
+Yes. It's interesting that it keeps
+getting a bit of
+reward, but like not quite enough.
+It's a fixed map in this
+test. Maybe we just need
+test. Maybe we just need
+like crazy BPT horizon for this.
+That's not going to fit. Maybe this
+That's not going to fit. Maybe this
+fits.
+Maybe
+Maybe
+this this will give
+this this will give
+us weighted random
+us weighted random
+sampling during
+sampling during
+training. But then it should make sure
+training. But then it should make sure
+that we keep samples in the cryobuffer.
+Sum of probabilities less than equal
+Sum of probabilities less than equal
+Z.
+Really? They're all zero.
+What is this?
+These are all the right shape.
+Oh, it's in comput
+J. Interesting.
+There must be like bad data in there or
+There must be like bad data in there or
+something, right?
+steps
+horizon. Maybe my G is wrong.
+How does this block idx get divided up?
+How does this block idx get divided up?
+Hang
+on. Threads per block.
+Num steps plus thread per
+block. 256 blocks.
+Is that
+correct? That should give you the row,
+correct? That should give you the row,
+shouldn't it? Block index, block dim.
+This should actually give you the
+This should actually give you the
+correct row.
+How the heck is this out of
+bounds? How the heck is this out of
+bounds? How the heck is this out of
+bounds?
+Oh, I guess cuz it doesn't line up with
+Oh, I guess cuz it doesn't line up with
+a block. Is that the
+issue? I bet that's it.
+Is that not a multiple of
+um Maybe it's not a multiple. Hang
+on. I think it has to be a multiple of
+on. I think it has to be a multiple of
+256. That's an easy check.
+It's taking forever to
+compile something
+screwy. Uh, this thing got partial
+screwy. Uh, this thing got partial
+compiled, I assume.
+You build this.
+when the stats suddenly go down.
+So I guess then the question is going to
+So I guess then the question is going to
+be
+um on the advantage
+prioritization. Oh, is it training?
+Hey, look at that.
+So,
+So,
+um, that's pretty
+crazy. Is this 21 size or 31 size? I
+crazy. Is this 21 size or 31 size? I
+think this is still 21
+size. 21 size.
+This is solving though.
+This is solving though.
+Um, that's not an easy
+task. We'll see what the actual episode
+task. We'll see what the actual episode
+length ends up being.
+Okay. And we actually will be able to
+Okay. And we actually will be able to
+compare
+now. We'll be able to compare a couple
+now. We'll be able to compare a couple
+of these
+And I think we'll be able to see whether
+And I think we'll be able to see whether
+this works the way we uh we want it to.
+So this is it getting lucky a few times
+So this is it getting lucky a few times
+from random search. What usually happens
+from random search. What usually happens
+is it gets such a small fraction of
+is it gets such a small fraction of
+rewards
+rewards
+um that when you train on the whole
+um that when you train on the whole
+batch you actually don't latch on to the
+batch you actually don't latch on to the
+reward because you get it too
+reward because you get it too
+infrequently. It looks like, oh, it's
+infrequently. It looks like, oh, it's
+very high here. But actually, this is
+very high here. But actually, this is
+just like the first trajectory that
+just like the first trajectory that
+finishes is always going to be one where
+finishes is always going to be one where
+you got
+lucky. And boom, there you go. It
+solves. So, that's pretty solid. It took
+solves. So, that's pretty solid. It took
+longer last time, didn't it? Yeah. 80
+longer last time, didn't it? Yeah. 80
+mil.
+mil.
+So there's going to be some
+So there's going to be some
+inconsistency as to how long it takes to
+inconsistency as to how long it takes to
+do that, but still not
+do that, but still not
+bad. And now if we go
+to we just do
+to we just do
+mal
+random. Does it still solve?
+This one might still solve actually
+This one might still solve actually
+because this is only the 21x
+because this is only the 21x
+21s. We will see.
+Yeah. So this one still
+solves. I believe 31 is where it starts
+solves. I believe 31 is where it starts
+to get very difficult.
+So this is too
+easy. You need to be able to at least
+easy. You need to be able to at least
+get some reward in order for either of
+get some reward in order for either of
+these methods to work. We will see
+these methods to work. We will see
+whether we get any reward at
+all. So far enough
+So 21 might just be doable and 31 might
+So 21 might just be doable and 31 might
+just be
+impossible. Yeah. So that's just zero
+impossible. Yeah. So that's just zero
+reward.
+reward.
+No method will be able to solve that. Um
+No method will be able to solve that. Um
+at least without like explicit
+at least without like explicit
+exploration
+stuff. We go sort of somewhere in
+stuff. We go sort of somewhere in
+between. Need it needs to be something
+between. Need it needs to be something
+that consistently gets some
+reward. Five maybe.
+Also don't know how this thing is
+Also don't know how this thing is
+seated.
+It got some I think it got like one
+It got some I think it got like one
+solve.
+solve.
+Okay, there you go. That's a very sparse
+Okay, there you go. That's a very sparse
+small amount of reward right
+there. So, this is what we're going for.
+there. So, this is what we're going for.
+This is the like if you run it for long
+This is the like if you run it for long
+enough, you will eventually get a
+solve. But as you can see, it's not like
+solve. But as you can see, it's not like
+solving it again at all thereafter.
+Okay, so this is where we would
+Okay, so this is where we would
+expect to maybe be able to do something
+expect to maybe be able to do something
+with prioritized replay that we This is
+with prioritized replay that we This is
+like crazy crazy sparse. I guess if we
+like crazy crazy sparse. I guess if we
+get the trajectory twice, it should be
+get the trajectory twice, it should be
+enough.
+Okay. So now we do
+prioritized. Got the little score spike
+here. Now we do prioritized.
+And if that's consistent, we're
+And if that's consistent, we're
+good, right? If that is a consistent
+good, right? If that is a consistent
+result, we are
+good. It's a crazy sparse task.
+Okay, let's just run it again to see if
+Okay, let's just run it again to see if
+it
+replicates because we don't get the
+replicates because we don't get the
+lucky early solve at this one. Oh,
+lucky early solve at this one. Oh,
+there's
+one. And it does a pretty good job of
+one. And it does a pretty good job of
+um getting more solves
+Good day.
+Welcome. Okay. So, this is a perfect
+Welcome. Okay. So, this is a perfect
+test if it's able to solve based on
+test if it's able to solve based on
+this.
+I would think that it should be able to
+I would think that it should be able to
+because as long as it's getting some
+because as long as it's getting some
+reward, it's going to run a whole bunch
+reward, it's going to run a whole bunch
+of
+of
+epochs on uh those
+epochs on uh those
+trajectories. It's still a hard problem,
+trajectories. It's still a hard problem,
+mind
+mind
+you.
+you.
+So, it's fine if it takes a while.
+So, it's fine if it takes a while.
+We just want to see if it actually
+We just want to see if it actually
+can get something with this.
+It shouldn't be possible for it to just
+It shouldn't be possible for it to just
+be permanently stuck
+be permanently stuck
+here based on the new algorithm. In PO
+here based on the new algorithm. In PO
+without prioritized replay, um what can
+without prioritized replay, um what can
+happen is that the reward is so
+happen is that the reward is so
+infrequent that you just get drowned out
+infrequent that you just get drowned out
+by noise.
+But here, since you're running so many
+But here, since you're running so many
+update epochs on the good
+update epochs on the good
+samples, we should see this
+solve. Yeah.
+Okay. So, it seems that
+Okay. So, it seems that
+um those are very good signs of life for
+um those are very good signs of life for
+prioritized
+prioritized
+replay. Very, very good signs of
+life. Um running on one map like this is
+life. Um running on one map like this is
+going to be really inconsistent.
+but solving 31 by 31 mazes um without
+but solving 31 by 31 mazes um without
+curriculum or anything is kind of
+curriculum or anything is kind of
+crazy. You can see there this is a
+crazy. You can see there this is a
+currently a 800 horizon task with one
+currently a 800 horizon task with one
+reward.
+reward.
+So, yeah, I'm taking 91 million steps
+So, yeah, I'm taking 91 million steps
+just to solve a maze, but this was like
+just to solve a maze, but this was like
+800 steps, one
+reward. So, that's pretty
+good as far as like exploration tasks
+good as far as like exploration tasks
+go.
+go.
+um like benchmark exploration task. This
+um like benchmark exploration task. This
+is ridiculously harder than pretty much
+is ridiculously harder than pretty much
+anything I've seen in academia and this
+works. Cool.
+works. Cool.
+Now we do the randomized version of this
+Now we do the randomized version of this
+thing and we see what
+happens. So now it's got a whole bunch
+happens. So now it's got a whole bunch
+of
+maps. Is this going to be easier or
+maps. Is this going to be easier or
+harder? PO did not solve this.
+PPO actually got like zero zero score on
+And again, if this takes it a bunch of
+And again, if this takes it a bunch of
+steps, we're not concerned. We just want
+steps, we're not concerned. We just want
+to see if it
+to see if it
+solves. What was the yellow
+run? Same thing as before, captain. Uh,
+run? Same thing as before, captain. Uh,
+it's the environment is very sparse. So,
+it's the environment is very sparse. So,
+if you get lucky and you get reward at
+if you get lucky and you get reward at
+the start of training, it's a lot
+the start of training, it's a lot
+easier. These are the same
+run. But the main thing is I've
+run. But the main thing is I've
+literally I've never seen PPO solve
+thought you got some solves before. Uh
+thought you got some solves before. Uh
+the ones
+the ones
+with so with on single maps it doesn't
+with so with on single maps it doesn't
+solve uh plain PO there's a curriculum
+solve uh plain PO there's a curriculum
+thing that does solve but this doesn't
+thing that does solve but this doesn't
+include that. This is just straight up
+include that. This is just straight up
+prioritized experience
+replay. Yeah. Now, whether it solves the
+replay. Yeah. Now, whether it solves the
+randomized maps, this might be harder
+randomized maps, this might be harder
+because on the randomized
+maps, there's not really a way for to
+maps, there's not really a way for to
+learn a robust exploration strategy when
+learn a robust exploration strategy when
+it can't just memorize some
+it can't just memorize some
+maps. The mazes are just too big.
+This is now 8,000
+maps. So, intriguingly,
+maps. So, intriguingly,
+like this keeps getting some
+like this keeps getting some
+support. I see PO often just drop to
+support. I see PO often just drop to
+straight up zero. PO will just
+straight up zero. PO will just
+collapse. So, this keeps getting a small
+collapse. So, this keeps getting a small
+amount of
+amount of
+score, but it doesn't seem like it's
+score, but it doesn't seem like it's
+able to do very much with that,
+able to do very much with that,
+which I think this makes sense. This
+which I think this makes sense. This
+result makes
+sense. It would be really cool if this
+sense. It would be really cool if this
+just solved, but
+um yeah, I think there are too many
+maps. Why do you think it got one to me?
+maps. Why do you think it got one to me?
+That's just
+That's just
+luck. It's literally just like brownie
+luck. It's literally just like brownie
+in motion in a big
+maze. You don't get samples back until
+maze. You don't get samples back until
+you finish a maze or whatever. So,
+you finish a maze or whatever. So,
+uh, if you're going to get lucky, you
+uh, if you're going to get lucky, you
+actually have a decent chance for it to
+actually have a decent chance for it to
+be right at the
+be right at the
+start. That's just a property of the
+start. That's just a property of the
+logging.
+Is it worth just like increasing map
+Is it worth just like increasing map
+size or not a map size model size or
+size or not a map size model size or
+something here?
+Maybe we just do the curriculum version
+Maybe we just do the curriculum version
+or not the I guess domain randomized
+or not the I guess domain randomized
+version, not curriculum
+version, not curriculum
+version. Oh, this is 25 by 25 maps.
+version. Oh, this is 25 by 25 maps.
+Okay, this is still not the craziest
+result. Let's try this.
+I don't want to spend very long doing
+I don't want to spend very long doing
+this. I think I just want to run this
+this. I think I just want to run this
+and one other and then we'll uh we go
+and one other and then we'll uh we go
+back to deving on it and I'm at least
+back to deving on it and I'm at least
+satisfied it does something
+Turns very slowly.
+and give it 100 mil. And then we'll try
+and give it 100 mil. And then we'll try
+the other one. And then we'll be done
+the other one. And then we'll be done
+with this. And we will uh continue
+with this. And we will uh continue
+cleaning up code and all of
+cleaning up code and all of
+that for a little bit.
+So this will be prior replay
+So this will be prior replay
+versus random
+This doesn't seem to be performing crazy
+This doesn't seem to be performing crazy
+well,
+though. Yeah, if random immediately
+though. Yeah, if random immediately
+beats this, we're going to have to go
+beats this, we're going to have to go
+tune some stuff.
+So, we'll see how this does by
+So, we'll see how this does by
+comparison.
+Is this going to just do way
+better? Yeah. So, this is just going to
+better? Yeah. So, this is just going to
+immediately do better.
+Well, this is a good thing to wonder
+Well, this is a good thing to wonder
+like why, right?
+This is not going to get 100%
+This is not going to get 100%
+solved. It should level
+off. But then the question is why is
+off. But then the question is why is
+prioritize not better here? I saw it be
+prioritize not better here? I saw it be
+better on the single task.
+value is the only thing that changes,
+right? Because when you compute the
+advantage, values, rewards, done, gamma,
+advantage, values, rewards, done, gamma,
+lambda. Yeah. So the only thing that
+changes
+There's the
+value and you do recomputee the
+value and you do recomputee the
+value every mini
+value every mini
+batch. You do recomputee
+J E every mini batch.
+Okay. So this is the curve that we
+have. Let's see how mean
+have. Let's see how mean
+samples mean sample uses should be
+samples mean sample uses should be
+two
+right
+maxes. Get out of here,
+bot. All
+right. So, it's not crazy different
+right. So, it's not crazy different
+really.
+It's not really prioritizing, is
+It's not really prioritizing, is
+it? Well, that's weird. It should
+it? Well, that's weird. It should
+definitely
+definitely
+be. We would expect this to be way
+be. We would expect this to be way
+higher.
+I wonder if there is something screwy
+I wonder if there is something screwy
+here where
+like it's probably way easier to train
+like it's probably way easier to train
+the value function than the
+the value function than the
+policy. Does that make sense?
+policy. Does that make sense?
+Like if the value
+function learns the correct
+value actually wait if if you have a
+value actually wait if if you have a
+perfect value function in PPL what
+perfect value function in PPL what
+happens?
+You don't learn anything,
+right? I think this hang on maybe.
+right? I think this hang on maybe.
+What's the value loss?
+Value loss is still higher but we are
+Value loss is still higher but we are
+selecting for the highest value loss
+things. It's not dipping though.
+Managers sum is
+zero.
+Okay, we have advantages.
+This is all zeros.
+Why are any of these
+things? Oh, right. Because it's going to
+things? Oh, right. Because it's going to
+be Yeah, there's going to be uh some
+be Yeah, there's going to be uh some
+noise on fire.
+So this isn't good, right?
+This one just happens to be bigger.
+Yeah, you can't even
+Yeah, you can't even
+tell what has the
+advantages about
+this. Is there like an off by one or
+this. Is there like an off by one or
+something? Why is this um
+It's like there's an off by one.
+There's
+brewing. If I do
+this, that doesn't seem like it'll be
+this, that doesn't seem like it'll be
+good either,
+good either,
+though. That'll just give you all the
+though. That'll just give you all the
+easy segments.
+easy segments.
+We'll let this run, but I'm gonna undo
+this. Why is advantage not giving you
+advantage? Delta
+rewards minus
+values. I see
+Well, whatever I did here just doesn't
+Well, whatever I did here just doesn't
+work.
+We have to just like give it a couple
+We have to just like give it a couple
+epochs.
+Maybe we just give it a couple epox.
+could have had some time to learn some
+could have had some time to learn some
+stuff, All right.
+Maybe the advantages. Hang on. Do these
+Maybe the advantages. Hang on. Do these
+line up?
+Did I put the break point in the wrong
+spot? Maybe we need to do it
+spot? Maybe we need to do it
+here before I do this
+here before I do this
+assign. Just make sure I'm not screwing
+assign. Just make sure I'm not screwing
+this up.
+Okay. Your
+advantages. Well, I like the advantages
+advantages. Well, I like the advantages
+at the end there. you have a positive
+at the end there. you have a positive
+advantage. So if we do
+A lot of these have rewards,
+right? Yeah, a lot of these have
+right? Yeah, a lot of these have
+rewards.
+whereas it's ways parser overall. So
+whereas it's ways parser overall. So
+here you actually do get a lot of these
+here you actually do get a lot of these
+higher
+higher
+reward samples into the prioritized
+reward samples into the prioritized
+buffer.
+So why is this not just immediately a
+So why is this not just immediately a
+free win then?
+value functions trained to predict
+value functions trained to predict
+discounted
+returns. Well, maybe this is the
+returns. Well, maybe this is the
+stailness. Hang on.
+Is it because the value function isn't
+Is it because the value function isn't
+action condition?
+I might have missed something here.
+I'm going to have to think about this a
+I'm going to have to think about this a
+little
+bit. So, basically, I'm trying to see if
+bit. So, basically, I'm trying to see if
+there is actually an on policy thing.
+The value
+The value
+function is being trained to
+predict either this or this. If we use
+predict either this or this. If we use
+this simple
+case, it's going to be trying to predict
+case, it's going to be trying to predict
+the rewards going
+the rewards going
+forward. that those rewards are a
+forward. that those rewards are a
+function of the current
+function of the current
+policy implicitly.
+I see.
+Okay. But
+like we have uh we have stuff to play
+like we have uh we have stuff to play
+around with this for sure.
+around with this for sure.
+We have out we have options
+We have out we have options
+here
+here
+because even if this is going to take
+because even if this is going to take
+more changes before we can use
+more changes before we can use
+prioritized replay, we're still going to
+prioritized replay, we're still going to
+be able to use this as advantage
+be able to use this as advantage
+filtering. All right, I've got to do a
+filtering. All right, I've got to do a
+few things. I've got to get some
+few things. I've got to get some
+exercise. I got to get some food. And
+exercise. I got to get some food. And
+then the goal is going to be to be back
+then the goal is going to be to be back
+around 11ish Easter. Um, and get in like
+around 11ish Easter. Um, and get in like
+a full day stream from there. So for
+a full day stream from there. So for
+folks watching, I'm going to be working
+folks watching, I'm going to be working
+on this algorithm and this
+on this algorithm and this
+implementation a lot more later. If
+implementation a lot more later. If
+you're interested in following all this
+you're interested in following all this
+RLD dev live, buffer.ai, start the
+RLD dev live, buffer.ai, start the
+GitHub to help us out. Really helps out
+GitHub to help us out. Really helps out
+a lot. We're trying to hit 2K stars. If
+a lot. We're trying to hit 2K stars. If
+you want to get involved in dev, just
+you want to get involved in dev, just
+join the Discord and you can follow me
+join the Discord and you can follow me
+on X for more RL content. Thanks and
+on X for more RL content. Thanks and
+I'll be

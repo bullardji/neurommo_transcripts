@@ -1,0 +1,1327 @@
+Kind: captions
+Language: en
+Okay.
+Okay.
+Hi folks.
+Hi folks.
+Be live here.
+Be live here.
+Short stream today. I have a bunch of
+Short stream today. I have a bunch of
+meetings and things to attend to.
+meetings and things to attend to.
+Um
+I want to keep doing some stuff on
+I want to keep doing some stuff on
+offpaul.
+Been thinking a lot about core
+Been thinking a lot about core
+algorithm. ton of stuff to go through.
+algorithm. ton of stuff to go through.
+Um, first thing I want to do,
+Um, first thing I want to do,
+I want to look at
+want to look at our current
+want to look at our current
+vantage estimate.
+This is clipped important sampling.
+This is clipped important sampling.
+This is actually this algorithm I've
+This is actually this algorithm I've
+come up with is very similar to retrace.
+come up with is very similar to retrace.
+Didn't realize that.
+Didn't realize that.
+Now the question I have is am I actually
+Now the question I have is am I actually
+computing the important sampling
+computing the important sampling
+correctly?
+A little suspicious of this.
+Come on.
+Come on.
+Okay, here um
+Okay, here um
+ratio
+it gets initialized to one
+health ratio.
+new policy minus.
+Okay, I think that this is
+Huh?
+No, wait, wait. So, you sample your
+No, wait, wait. So, you sample your
+data, right?
+data, right?
+And then you compute the ratio.
+Okay, I actually think that this is
+Okay, I actually think that this is
+correct.
+Let me just look at retrace real quick.
+I think I I've basically come up with
+I think I I've basically come up with
+retrace and applied it to on policy. So
+retrace and applied it to on policy. So
+it's the ratio of
+it's the ratio of
+new policy to old policy, right?
+new policy to old policy, right?
+New policy minus old policy. So yeah,
+New policy minus old policy. So yeah,
+this turns into
+this turns into
+this is the same as new log props
+this is the same as new log props
+divided by the same as new props divide
+divided by the same as new props divide
+by old props, right?
+So I have actually come up with
+So I have actually come up with
+something that's almost identical to
+something that's almost identical to
+retrace here.
+And what is this? Gamma
+X.
+So it's ne gamma v next
+So it's ne gamma v next
+minus values of t. So gamma this is v
+minus values of t. So gamma this is v
+next.
+Okay. So this is
+Okay. So this is
+this is pretty much it.
+uh
+expectation over
+expectation over
+pi is a little weird, but I think this
+pi is a little weird, but I think this
+is pretty much
+is pretty much
+this is pretty much the algorithm that I
+But now how do you get the probability?
+So the probability under the old policy
+So the probability under the old policy
+versus the new policy is sketchy because
+versus the new policy is sketchy because
+you have this epsilon greedy thing with
+you have this epsilon greedy thing with
+um
+um
+with off policy work, right?
+super sketchy.
+look at a few other there are a few
+look at a few other there are a few
+other papers I wanted to look at Now,
+on.
+on.
+Okay.
+This is off policy. Now,
+Funny that we actually have uh faster
+Funny that we actually have uh faster
+performance than this.
+Yeah, the Atari uh being faster is
+Yeah, the Atari uh being faster is
+but we really haven't optimized for
+but we really haven't optimized for
+Atari
+Atari
+because this thing like you get
+because this thing like you get
+bottlenecked more by the environment
+bottlenecked more by the environment
+than anything.
+Wait, but does this have anything about
+Wait, but does this have anything about
+off policy
+bastard?
+Wait, setting the search was bottleneck.
+Couple the acting batch size learning
+Couple the acting batch size learning
+batch size.
+This still has the off policy problems,
+This still has the off policy problems,
+doesn't it?
+I'm pretty sure this is only for um
+only the slow environments. This really
+only the slow environments. This really
+doesn't do all that much.
+Yeah. So, this is basically just Yeah.
+Yeah. So, this is basically just Yeah.
+TPUs are fast.
+TPUs are fast.
+Congratulations.
+Yeah. So they use an entire freaking pod
+Yeah. So they use an entire freaking pod
+to solve pong.
+to solve pong.
+I don't know why I was linked this paper
+I don't know why I was linked this paper
+as like something useful.
+as like something useful.
+They do anything for off policy.
+48 cores. Yeah.
+The whole pod
+The whole pod
+2048 cores. I think it's eight or 16
+2048 cores. I think it's eight or 16
+cores per, but still it's a stupid
+cores per, but still it's a stupid
+amount of compute for Pong.
+I mean, unless these are in lock step,
+I mean, unless these are in lock step,
+right?
+right?
+Yeah. But these can't be in lock step.
+I don't think this does anything other
+I don't think this does anything other
+than um
+than um
+yeah, this really doesn't do anything
+yeah, this really doesn't do anything
+other than screw up
+other than screw up
+uh your data. This is off policy
+I think Costa's implementation of this
+I think Costa's implementation of this
+allows you to lag exactly one step
+allows you to lag exactly one step
+behind. So, it's not that off policy,
+behind. So, it's not that off policy,
+but ideally like
+but ideally like
+you're still playing with fire doing
+you're still playing with fire doing
+this.
+this.
+Let me check some of the other papers.
+This Costa
+No, it's clearly inspired by it though
+to clean out. Cool. They actually have a
+to clean out. Cool. They actually have a
+bunch of algorithms here.
+Okay.
+Fire data.
+The heck is this?
+What?
+Oh, this is a totally different
+Oh, this is a totally different
+Yeah, this is a totally different thing.
+Yeah, this is a totally different thing.
+This is very silly. Yeah, this is very,
+This is very silly. Yeah, this is very,
+very silly. We don't have to care about
+very silly. We don't have to care about
+this.
+Um,
+what is This
+combo pul.
+combo pul.
+Yeah, I don't like that.
+bank.
+We'll keep making this more and more
+We'll keep making this more and more
+freaking complicated architecture.
+This
+Okay, this is like better.
+This is much better.
+Okay, so this paper is actually a useful
+Okay, so this paper is actually a useful
+reference. Um, but the question, right,
+reference. Um, but the question, right,
+hang on. Does this use
+efficient online reinforcement learning
+efficient online reinforcement learning
+with offline data? Why would you do it
+with offline data? Why would you do it
+this way instead of the other way
+this way instead of the other way
+around?
+What's with this ensemble?
+Oh, this ensemble thing is Why do people
+Oh, this ensemble thing is Why do people
+keep doing this? That's such a freaking
+keep doing this? That's such a freaking
+mess. Hang on. Let me Let me see if I
+mess. Hang on. Let me Let me see if I
+can figure out
+layer normalization.
+Okay. So, this is
+interesting.
+They do I don't understand where the uh
+They do I don't understand where the uh
+the multiple critics come. Hang on.
+where do they talk about multiple
+where do they talk about multiple
+critics?
+Yeah, layer being a key to this is
+Yeah, layer being a key to this is
+crazy. Okay.
+You need this ensemble.
+Large ensembles are
+Large ensembles are
+the heck.
+the heck.
+Uh, I thought we got rid of this jank.
+But like regardless, it's combine online
+But like regardless, it's combine online
+and offline updates. They have a way to
+and offline updates. They have a way to
+do this.
+do this.
+Um, is this what we want?
+problems. Kind of made a mess of the uh
+of the repo in the process of
+of the repo in the process of
+experimenting with
+standard dempling is different. It's uh
+standard dempling is different. It's uh
+quite a bit different. It's a
+quite a bit different. It's a
+combination of online and offline.
+I'm trying to think though now what I
+I'm trying to think though now what I
+want to
+want to
+go after because basically I figured out
+go after because basically I figured out
+that the advantage estimate that I have
+that the advantage estimate that I have
+is already basically the one that we
+just turns out that the work that I did
+just turns out that the work that I did
+on puffer advantage is very similar to
+on puffer advantage is very similar to
+retrace
+very very similar
+very very similar
+also I've got a call in a half hour only
+also I've got a call in a half hour only
+really do short stream today I might
+really do short stream today I might
+leave stream up and then come back for
+leave stream up and then come back for
+an hour we'll
+That
+Um,
+[Music]
+The only version of this that wasn't
+The only version of this that wasn't
+super jank was the original DQN, and it
+super jank was the original DQN, and it
+was still not like amazing.
+I figure out
+I figure out
+the issue with this is
+I think the issue with this is that the
+I think the issue with this is that the
+policy gradient update is just a better
+policy gradient update is just a better
+update rule than um
+than the Q-learning update because the
+than the Q-learning update because the
+Q-learning update's a quadratic loss.
+Oh, and also the Q-learning update by
+Oh, and also the Q-learning update by
+default is just the onestep bootstrap.
+So you have to do this janky projection
+because you're estimating values instead
+because you're estimating values instead
+of actions, right?
+Okay. So,
+Okay. So,
+it's actually kind of easier
+it's actually kind of easier
+when you're not using the Q function
+when you're not using the Q function
+take action. Just using it as a target.
+take action. Just using it as a target.
+I think it's actually easier, right?
+I think it's actually easier, right?
+Because you can just throw HL Gaus on
+Because you can just throw HL Gaus on
+the output continuous value to output.
+Whole thing is sketchy.
+I mean, we do have a way to apply
+I mean, we do have a way to apply
+we do have a way to apply off policy
+we do have a way to apply off policy
+updates
+updates
+um
+without a Q function, right? It's called
+without a Q function, right? It's called
+behavioral cloning.
+H hang on. So if you train,
+let's say that you train the Q function
+let's say that you train the Q function
+with whatever objective you're going to
+with whatever objective you're going to
+do.
+the actions can still come from
+a policy
+basically would be relying on
+Wait, hang on. Does this solve it?
+Wait, hang on. Does this solve it?
+Wait, wait. The reason that you can't
+Wait, wait. The reason that you can't
+apply off policy updates is because of
+apply off policy updates is because of
+the value function, right? It's not
+the value function, right? It's not
+because of the policy. You can apply
+because of the policy. You can apply
+whatever the heck updates you want to
+whatever the heck updates you want to
+the policy. It's just that the uh the
+the policy. It's just that the uh the
+value function will get stale.
+That how it works.
+Yes. Yes, it is.
+But wait, if we actually apply
+if we actually have an action condition
+if we actually have an action condition
+value function, we apply retrace.
+Does this not fix it?
+Well, it prevents us from applying off
+Well, it prevents us from applying off
+policy updates.
+I'm trying to fundamentally understand
+I'm trying to fundamentally understand
+like where and where like where off
+like where and where like where off
+policiness hurts you and where it
+policiness hurts you and where it
+doesn't All right.
+So you have
+you have um your data that you collect
+you have um your data that you collect
+like
+like
+action
+And you have a policy pi
+right sample this action.
+So if I want to learn from this
+So if I want to learn from this
+trajectory
+trajectory
+behavioral cloning
+works
+works
+matter where this comes from right
+I mean
+I'm pretty sure of this.
+Of course,
+Of course,
+I ask the LM that lies half the time.
+I ask the LM that lies half the time.
+Um
+I mean if we think about it from first
+I mean if we think about it from first
+principles though there's no way that it
+principles though there's no way that it
+can get stale right you're literally
+can get stale right you're literally
+just pushing
+just pushing
+probabilities
+probabilities
+towards a specific set of actions right
+towards a specific set of actions right
+I believe it's the value function as
+I believe it's the value function as
+soon as you have a value function
+soon as you have a value function
+baseline
+vanilla
+policy gradients
+The problem comes when you do like some
+gamma
+I
+and
+plus
+plus
+value
+something like this, right?
+Problem is this guy getting st.
+No, the statement is not correct really.
+I don't think this is correct. Is it?
+I don't think this is correct. Is it?
+Unless I have a major error here.
+You can do behavioral cloning and you
+You can do behavioral cloning and you
+can write behavioral cloning as just a
+can write behavioral cloning as just a
+different update,
+a different waiting of the same update.
+a different waiting of the same update.
+That doesn't seem correct to me.
+was under the impression it's just the
+was under the impression it's just the
+value function.
+Oh, hang on. Is it this
+But you can just do this with
+But you can just do this with
+I don't think this is correct.
+Yeah. So, okay. So, this is fine.
+Yeah. So, okay. So, this is fine.
+Okay. But I don't think this implies
+Okay. But I don't think this implies
+that
+So I see why in the original derivation
+So I see why in the original derivation
+here, right? And this is this is written
+here, right? And this is this is written
+as a pro like under probability of
+as a pro like under probability of
+trajectory with the current
+trajectory with the current
+um the current policy. You immediately
+um the current policy. You immediately
+encode the on policy assumption here.
+encode the on policy assumption here.
+But if you look at the final rule, this
+But if you look at the final rule, this
+is the same as behavioral clothing,
+is the same as behavioral clothing,
+right?
+And behavioral cloning works with any
+And behavioral cloning works with any
+data.
+There's no on policy assumption. It's
+There's no on policy assumption. It's
+just a match actions.
+I think the actual on policy like the
+I think the actual on policy like the
+actual problem comes from the value
+actual problem comes from the value
+function getting scale doesn't it?
+No, really.
+I don't think this is correct.
+I don't think this is correct.
+Let me see if I find an error.
+price loss or fixed data set.
+But you can do this online as well. This
+But you can do this online as well. This
+doesn't matter.
+Expected return on policy.
+Expected return on policy.
+Yeah, you're just trying to match
+Yeah, you're just trying to match
+action.
+action longer matches
+all.
+This is true.
+literally the same freaking objective,
+literally the same freaking objective,
+right?
+right?
+It's the same freaking objective.
+It's the same freaking objective.
+It's just that you're waiting by the
+It's just that you're waiting by the
+returns here.
+does seem like regardless this
+whether it is true or not this
+whether it is true or not this
+encoding here is is the major problem
+encoding here is is the major problem
+because what happens right
+because what happens right
+is DQN is just written without this
+is DQN is just written without this
+dependence on trajectories.
+dependence on trajectories.
+If you look up DQN,
+you'll see it's like a one-step
+you'll see it's like a one-step
+bootstrap. You just get around this
+bootstrap. You just get around this
+problem,
+problem,
+right? This is a onestep bootstrap. This
+right? This is a onestep bootstrap. This
+is the target. Yeah, there you go.
+is the target. Yeah, there you go.
+Onestep bootstrap here.
+Onestep bootstrap here.
+So there's no like, oh, the data wasn't
+So there's no like, oh, the data wasn't
+generated by the policy or whatever
+generated by the policy or whatever
+because you're literally just looking at
+because you're literally just looking at
+um state action errors, transitions.
+um state action errors, transitions.
+you're looking at individual
+you're looking at individual
+transitions.
+transitions.
+Um, and then you're relying on the
+Um, and then you're relying on the
+bootstrap the bootstrap to chain it out.
+But the thing is like this doesn't
+But the thing is like this doesn't
+actually freaking work, right?
+Like this doesn't work at all.
+Like this doesn't work at all.
+And uh what people often do, right, is
+And uh what people often do, right, is
+they'll write out like they'll write
+they'll write out like they'll write
+this out for a few steps. Like I think
+this out for a few steps. Like I think
+Rainbow, they write this out for three
+Rainbow, they write this out for three
+steps. So it's a three-step bootstrap.
+steps. So it's a three-step bootstrap.
+Uh that is actually off policy, right?
+Uh that is actually off policy, right?
+Because the data there, those three
+Because the data there, those three
+straps don't necessarily come from the
+straps don't necessarily come from the
+original policy you have. So you should
+original policy you have. So you should
+have the identical problem. And then
+have the identical problem. And then
+what you do is you do something like
+what you do is you do something like
+retrace that uses uh important sampling.
+retrace that uses uh important sampling.
+But important sampling doesn't magically
+But important sampling doesn't magically
+fix the issue. It basically just like
+fix the issue. It basically just like
+downweights off policy data.
+downweights off policy data.
+So like in the worst case you converge
+So like in the worst case you converge
+back to this. If you have fully off
+back to this. If you have fully off
+policy data, you converge back to this.
+which is not what you want.
+So I think this is the
+So I think this is the
+the core problem
+like you really really need this
+like you really really need this
+multi-step estimate.
+In fact, we need it for like six plus
+In fact, we need it for like six plus
+steps in the on policy.
+steps in the on policy.
+Probably helps in the off policy case if
+Probably helps in the off policy case if
+you could do it correctly.
+you could do it correctly.
+Um, we really need this multi-step
+Um, we really need this multi-step
+estimate,
+but like all the methods actually under
+but like all the methods actually under
+the hood, they kind of just punt on it,
+right?
+Me double check my cal.
+I think I might have stacked meetings
+I think I might have stacked meetings
+for the rest of the day.
+Wrong Cal.
+Yeah, I do. Okay.
+Yeah, I do. Okay.
+Uh, I'll end stream here. I suppose
+Uh, I'll end stream here. I suppose
+there will be longer stream tomorrow,
+there will be longer stream tomorrow,
+but I have a whole bunch of meetings
+but I have a whole bunch of meetings
+throughout the rest of today.
+throughout the rest of today.
+I really want to get
+I really want to get
+I really want to like figure this out. I
+I really want to like figure this out. I
+want to get this figured out
+want to get this figured out
+because it really seems to me like
+because it really seems to me like
+the base off policy algorithm makes
+the base off policy algorithm makes
+sense and works. It's just really bad
+sense and works. It's just really bad
+and then like all the things that
+and then like all the things that
+actually make it work or a hack that
+actually make it work or a hack that
+depend on data being kind of on policy.
+Okay. Well, thank you folks. I will be
+Okay. Well, thank you folks. I will be
+back tomorrow. Buffer.ai for all the
+back tomorrow. Buffer.ai for all the
+things.
+things.
+Our GitHub, join Discord, follow X, all
+Our GitHub, join Discord, follow X, all
+that. And I will
+
+Kind: captions
+Language: en
+Okay.
+Okay.
+Hi folks.
+Hi folks.
+Be live here.
+Be live here.
+Short stream today. I have a bunch of
+Short stream today. I have a bunch of
+meetings and things to attend to.
+meetings and things to attend to.
+Um
+I want to keep doing some stuff on
+I want to keep doing some stuff on
+offpaul.
+Been thinking a lot about core
+Been thinking a lot about core
+algorithm. ton of stuff to go through.
+algorithm. ton of stuff to go through.
+Um, first thing I want to do,
+Um, first thing I want to do,
+I want to look at
+want to look at our current
+want to look at our current
+vantage estimate.
+This is clipped important sampling.
+This is clipped important sampling.
+This is actually this algorithm I've
+This is actually this algorithm I've
+come up with is very similar to retrace.
+come up with is very similar to retrace.
+Didn't realize that.
+Didn't realize that.
+Now the question I have is am I actually
+Now the question I have is am I actually
+computing the important sampling
+computing the important sampling
+correctly?
+A little suspicious of this.
+Come on.
+Come on.
+Okay, here um
+Okay, here um
+ratio
+it gets initialized to one
+health ratio.
+new policy minus.
+Okay, I think that this is
+Huh?
+No, wait, wait. So, you sample your
+No, wait, wait. So, you sample your
+data, right?
+data, right?
+And then you compute the ratio.
+Okay, I actually think that this is
+Okay, I actually think that this is
+correct.
+Let me just look at retrace real quick.
+I think I I've basically come up with
+I think I I've basically come up with
+retrace and applied it to on policy. So
+retrace and applied it to on policy. So
+it's the ratio of
+it's the ratio of
+new policy to old policy, right?
+new policy to old policy, right?
+New policy minus old policy. So yeah,
+New policy minus old policy. So yeah,
+this turns into
+this turns into
+this is the same as new log props
+this is the same as new log props
+divided by the same as new props divide
+divided by the same as new props divide
+by old props, right?
+So I have actually come up with
+So I have actually come up with
+something that's almost identical to
+something that's almost identical to
+retrace here.
+And what is this? Gamma
+X.
+So it's ne gamma v next
+So it's ne gamma v next
+minus values of t. So gamma this is v
+minus values of t. So gamma this is v
+next.
+Okay. So this is
+Okay. So this is
+this is pretty much it.
+uh
+expectation over
+expectation over
+pi is a little weird, but I think this
+pi is a little weird, but I think this
+is pretty much
+is pretty much
+this is pretty much the algorithm that I
+But now how do you get the probability?
+So the probability under the old policy
+So the probability under the old policy
+versus the new policy is sketchy because
+versus the new policy is sketchy because
+you have this epsilon greedy thing with
+you have this epsilon greedy thing with
+um
+um
+with off policy work, right?
+super sketchy.
+look at a few other there are a few
+look at a few other there are a few
+other papers I wanted to look at Now,
+on.
+on.
+Okay.
+This is off policy. Now,
+Funny that we actually have uh faster
+Funny that we actually have uh faster
+performance than this.
+Yeah, the Atari uh being faster is
+Yeah, the Atari uh being faster is
+but we really haven't optimized for
+but we really haven't optimized for
+Atari
+Atari
+because this thing like you get
+because this thing like you get
+bottlenecked more by the environment
+bottlenecked more by the environment
+than anything.
+Wait, but does this have anything about
+Wait, but does this have anything about
+off policy
+bastard?
+Wait, setting the search was bottleneck.
+Couple the acting batch size learning
+Couple the acting batch size learning
+batch size.
+This still has the off policy problems,
+This still has the off policy problems,
+doesn't it?
+I'm pretty sure this is only for um
+only the slow environments. This really
+only the slow environments. This really
+doesn't do all that much.
+Yeah. So, this is basically just Yeah.
+Yeah. So, this is basically just Yeah.
+TPUs are fast.
+TPUs are fast.
+Congratulations.
+Yeah. So they use an entire freaking pod
+Yeah. So they use an entire freaking pod
+to solve pong.
+to solve pong.
+I don't know why I was linked this paper
+I don't know why I was linked this paper
+as like something useful.
+as like something useful.
+They do anything for off policy.
+48 cores. Yeah.
+The whole pod
+The whole pod
+2048 cores. I think it's eight or 16
+2048 cores. I think it's eight or 16
+cores per, but still it's a stupid
+cores per, but still it's a stupid
+amount of compute for Pong.
+I mean, unless these are in lock step,
+I mean, unless these are in lock step,
+right?
+right?
+Yeah. But these can't be in lock step.
+I don't think this does anything other
+I don't think this does anything other
+than um
+than um
+yeah, this really doesn't do anything
+yeah, this really doesn't do anything
+other than screw up
+other than screw up
+uh your data. This is off policy
+I think Costa's implementation of this
+I think Costa's implementation of this
+allows you to lag exactly one step
+allows you to lag exactly one step
+behind. So, it's not that off policy,
+behind. So, it's not that off policy,
+but ideally like
+but ideally like
+you're still playing with fire doing
+you're still playing with fire doing
+this.
+this.
+Let me check some of the other papers.
+This Costa
+No, it's clearly inspired by it though
+to clean out. Cool. They actually have a
+to clean out. Cool. They actually have a
+bunch of algorithms here.
+Okay.
+Fire data.
+The heck is this?
+What?
+Oh, this is a totally different
+Oh, this is a totally different
+Yeah, this is a totally different thing.
+Yeah, this is a totally different thing.
+This is very silly. Yeah, this is very,
+This is very silly. Yeah, this is very,
+very silly. We don't have to care about
+very silly. We don't have to care about
+this.
+Um,
+what is This
+combo pul.
+combo pul.
+Yeah, I don't like that.
+bank.
+We'll keep making this more and more
+We'll keep making this more and more
+freaking complicated architecture.
+This
+Okay, this is like better.
+This is much better.
+Okay, so this paper is actually a useful
+Okay, so this paper is actually a useful
+reference. Um, but the question, right,
+reference. Um, but the question, right,
+hang on. Does this use
+efficient online reinforcement learning
+efficient online reinforcement learning
+with offline data? Why would you do it
+with offline data? Why would you do it
+this way instead of the other way
+this way instead of the other way
+around?
+What's with this ensemble?
+Oh, this ensemble thing is Why do people
+Oh, this ensemble thing is Why do people
+keep doing this? That's such a freaking
+keep doing this? That's such a freaking
+mess. Hang on. Let me Let me see if I
+mess. Hang on. Let me Let me see if I
+can figure out
+layer normalization.
+Okay. So, this is
+interesting.
+They do I don't understand where the uh
+They do I don't understand where the uh
+the multiple critics come. Hang on.
+where do they talk about multiple
+where do they talk about multiple
+critics?
+Yeah, layer being a key to this is
+Yeah, layer being a key to this is
+crazy. Okay.
+You need this ensemble.
+Large ensembles are
+Large ensembles are
+the heck.
+the heck.
+Uh, I thought we got rid of this jank.
+But like regardless, it's combine online
+But like regardless, it's combine online
+and offline updates. They have a way to
+and offline updates. They have a way to
+do this.
+do this.
+Um, is this what we want?
+problems. Kind of made a mess of the uh
+of the repo in the process of
+of the repo in the process of
+experimenting with
+standard dempling is different. It's uh
+standard dempling is different. It's uh
+quite a bit different. It's a
+quite a bit different. It's a
+combination of online and offline.
+I'm trying to think though now what I
+I'm trying to think though now what I
+want to
+want to
+go after because basically I figured out
+go after because basically I figured out
+that the advantage estimate that I have
+that the advantage estimate that I have
+is already basically the one that we
+just turns out that the work that I did
+just turns out that the work that I did
+on puffer advantage is very similar to
+on puffer advantage is very similar to
+retrace
+very very similar
+very very similar
+also I've got a call in a half hour only
+also I've got a call in a half hour only
+really do short stream today I might
+really do short stream today I might
+leave stream up and then come back for
+leave stream up and then come back for
+an hour we'll
+That
+Um,
+[Music]
+The only version of this that wasn't
+The only version of this that wasn't
+super jank was the original DQN, and it
+super jank was the original DQN, and it
+was still not like amazing.
+I figure out
+I figure out
+the issue with this is
+I think the issue with this is that the
+I think the issue with this is that the
+policy gradient update is just a better
+policy gradient update is just a better
+update rule than um
+than the Q-learning update because the
+than the Q-learning update because the
+Q-learning update's a quadratic loss.
+Oh, and also the Q-learning update by
+Oh, and also the Q-learning update by
+default is just the onestep bootstrap.
+So you have to do this janky projection
+because you're estimating values instead
+because you're estimating values instead
+of actions, right?
+Okay. So,
+Okay. So,
+it's actually kind of easier
+it's actually kind of easier
+when you're not using the Q function
+when you're not using the Q function
+take action. Just using it as a target.
+take action. Just using it as a target.
+I think it's actually easier, right?
+I think it's actually easier, right?
+Because you can just throw HL Gaus on
+Because you can just throw HL Gaus on
+the output continuous value to output.
+Whole thing is sketchy.
+I mean, we do have a way to apply
+I mean, we do have a way to apply
+we do have a way to apply off policy
+we do have a way to apply off policy
+updates
+updates
+um
+without a Q function, right? It's called
+without a Q function, right? It's called
+behavioral cloning.
+H hang on. So if you train,
+let's say that you train the Q function
+let's say that you train the Q function
+with whatever objective you're going to
+with whatever objective you're going to
+do.
+the actions can still come from
+a policy
+basically would be relying on
+Wait, hang on. Does this solve it?
+Wait, hang on. Does this solve it?
+Wait, wait. The reason that you can't
+Wait, wait. The reason that you can't
+apply off policy updates is because of
+apply off policy updates is because of
+the value function, right? It's not
+the value function, right? It's not
+because of the policy. You can apply
+because of the policy. You can apply
+whatever the heck updates you want to
+whatever the heck updates you want to
+the policy. It's just that the uh the
+the policy. It's just that the uh the
+value function will get stale.
+That how it works.
+Yes. Yes, it is.
+But wait, if we actually apply
+if we actually have an action condition
+if we actually have an action condition
+value function, we apply retrace.
+Does this not fix it?
+Well, it prevents us from applying off
+Well, it prevents us from applying off
+policy updates.
+I'm trying to fundamentally understand
+I'm trying to fundamentally understand
+like where and where like where off
+like where and where like where off
+policiness hurts you and where it
+policiness hurts you and where it
+doesn't All right.
+So you have
+you have um your data that you collect
+you have um your data that you collect
+like
+like
+action
+And you have a policy pi
+right sample this action.
+So if I want to learn from this
+So if I want to learn from this
+trajectory
+trajectory
+behavioral cloning
+works
+works
+matter where this comes from right
+I mean
+I'm pretty sure of this.
+Of course,
+Of course,
+I ask the LM that lies half the time.
+I ask the LM that lies half the time.
+Um
+I mean if we think about it from first
+I mean if we think about it from first
+principles though there's no way that it
+principles though there's no way that it
+can get stale right you're literally
+can get stale right you're literally
+just pushing
+just pushing
+probabilities
+probabilities
+towards a specific set of actions right
+towards a specific set of actions right
+I believe it's the value function as
+I believe it's the value function as
+soon as you have a value function
+soon as you have a value function
+baseline
+vanilla
+policy gradients
+The problem comes when you do like some
+gamma
+I
+and
+plus
+plus
+value
+something like this, right?
+Problem is this guy getting st.
+No, the statement is not correct really.
+I don't think this is correct. Is it?
+I don't think this is correct. Is it?
+Unless I have a major error here.
+You can do behavioral cloning and you
+You can do behavioral cloning and you
+can write behavioral cloning as just a
+can write behavioral cloning as just a
+different update,
+a different waiting of the same update.
+a different waiting of the same update.
+That doesn't seem correct to me.
+was under the impression it's just the
+was under the impression it's just the
+value function.
+Oh, hang on. Is it this
+But you can just do this with
+But you can just do this with
+I don't think this is correct.
+Yeah. So, okay. So, this is fine.
+Yeah. So, okay. So, this is fine.
+Okay. But I don't think this implies
+Okay. But I don't think this implies
+that
+So I see why in the original derivation
+So I see why in the original derivation
+here, right? And this is this is written
+here, right? And this is this is written
+as a pro like under probability of
+as a pro like under probability of
+trajectory with the current
+trajectory with the current
+um the current policy. You immediately
+um the current policy. You immediately
+encode the on policy assumption here.
+encode the on policy assumption here.
+But if you look at the final rule, this
+But if you look at the final rule, this
+is the same as behavioral clothing,
+is the same as behavioral clothing,
+right?
+And behavioral cloning works with any
+And behavioral cloning works with any
+data.
+There's no on policy assumption. It's
+There's no on policy assumption. It's
+just a match actions.
+I think the actual on policy like the
+I think the actual on policy like the
+actual problem comes from the value
+actual problem comes from the value
+function getting scale doesn't it?
+No, really.
+I don't think this is correct.
+I don't think this is correct.
+Let me see if I find an error.
+price loss or fixed data set.
+But you can do this online as well. This
+But you can do this online as well. This
+doesn't matter.
+Expected return on policy.
+Expected return on policy.
+Yeah, you're just trying to match
+Yeah, you're just trying to match
+action.
+action longer matches
+all.
+This is true.
+literally the same freaking objective,
+literally the same freaking objective,
+right?
+right?
+It's the same freaking objective.
+It's the same freaking objective.
+It's just that you're waiting by the
+It's just that you're waiting by the
+returns here.
+does seem like regardless this
+whether it is true or not this
+whether it is true or not this
+encoding here is is the major problem
+encoding here is is the major problem
+because what happens right
+because what happens right
+is DQN is just written without this
+is DQN is just written without this
+dependence on trajectories.
+dependence on trajectories.
+If you look up DQN,
+you'll see it's like a one-step
+you'll see it's like a one-step
+bootstrap. You just get around this
+bootstrap. You just get around this
+problem,
+problem,
+right? This is a onestep bootstrap. This
+right? This is a onestep bootstrap. This
+is the target. Yeah, there you go.
+is the target. Yeah, there you go.
+Onestep bootstrap here.
+Onestep bootstrap here.
+So there's no like, oh, the data wasn't
+So there's no like, oh, the data wasn't
+generated by the policy or whatever
+generated by the policy or whatever
+because you're literally just looking at
+because you're literally just looking at
+um state action errors, transitions.
+um state action errors, transitions.
+you're looking at individual
+you're looking at individual
+transitions.
+transitions.
+Um, and then you're relying on the
+Um, and then you're relying on the
+bootstrap the bootstrap to chain it out.
+But the thing is like this doesn't
+But the thing is like this doesn't
+actually freaking work, right?
+Like this doesn't work at all.
+Like this doesn't work at all.
+And uh what people often do, right, is
+And uh what people often do, right, is
+they'll write out like they'll write
+they'll write out like they'll write
+this out for a few steps. Like I think
+this out for a few steps. Like I think
+Rainbow, they write this out for three
+Rainbow, they write this out for three
+steps. So it's a three-step bootstrap.
+steps. So it's a three-step bootstrap.
+Uh that is actually off policy, right?
+Uh that is actually off policy, right?
+Because the data there, those three
+Because the data there, those three
+straps don't necessarily come from the
+straps don't necessarily come from the
+original policy you have. So you should
+original policy you have. So you should
+have the identical problem. And then
+have the identical problem. And then
+what you do is you do something like
+what you do is you do something like
+retrace that uses uh important sampling.
+retrace that uses uh important sampling.
+But important sampling doesn't magically
+But important sampling doesn't magically
+fix the issue. It basically just like
+fix the issue. It basically just like
+downweights off policy data.
+downweights off policy data.
+So like in the worst case you converge
+So like in the worst case you converge
+back to this. If you have fully off
+back to this. If you have fully off
+policy data, you converge back to this.
+which is not what you want.
+So I think this is the
+So I think this is the
+the core problem
+like you really really need this
+like you really really need this
+multi-step estimate.
+In fact, we need it for like six plus
+In fact, we need it for like six plus
+steps in the on policy.
+steps in the on policy.
+Probably helps in the off policy case if
+Probably helps in the off policy case if
+you could do it correctly.
+you could do it correctly.
+Um, we really need this multi-step
+Um, we really need this multi-step
+estimate,
+but like all the methods actually under
+but like all the methods actually under
+the hood, they kind of just punt on it,
+right?
+Me double check my cal.
+I think I might have stacked meetings
+I think I might have stacked meetings
+for the rest of the day.
+Wrong Cal.
+Yeah, I do. Okay.
+Yeah, I do. Okay.
+Uh, I'll end stream here. I suppose
+Uh, I'll end stream here. I suppose
+there will be longer stream tomorrow,
+there will be longer stream tomorrow,
+but I have a whole bunch of meetings
+but I have a whole bunch of meetings
+throughout the rest of today.
+throughout the rest of today.
+I really want to get
+I really want to get
+I really want to like figure this out. I
+I really want to like figure this out. I
+want to get this figured out
+want to get this figured out
+because it really seems to me like
+because it really seems to me like
+the base off policy algorithm makes
+the base off policy algorithm makes
+sense and works. It's just really bad
+sense and works. It's just really bad
+and then like all the things that
+and then like all the things that
+actually make it work or a hack that
+actually make it work or a hack that
+depend on data being kind of on policy.
+Okay. Well, thank you folks. I will be
+Okay. Well, thank you folks. I will be
+back tomorrow. Buffer.ai for all the
+back tomorrow. Buffer.ai for all the
+things.
+things.
+Our GitHub, join Discord, follow X, all
+Our GitHub, join Discord, follow X, all
+that. And I will

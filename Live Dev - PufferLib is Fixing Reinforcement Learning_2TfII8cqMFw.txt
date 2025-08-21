@@ -1,0 +1,1945 @@
+Kind: captions
+Language: en
+Okay.
+Okay.
+Hi. We should be back
+live. There we go.
+So, it is
+So, it is
+currently 100
+currently 100
+p.m. I should have
+p.m. I should have
+roughly almost 5
+roughly almost 5
+hours to just hammer
+hours to just hammer
+on all these different M's and baselines
+on all these different M's and baselines
+uh and experiments. I think that the
+uh and experiments. I think that the
+major goal right now is going to be to
+major goal right now is going to be to
+get all or as many as possible of the Ms
+get all or as many as possible of the Ms
+to have a single score metric that is
+to have a single score metric that is
+normalized from 0 to one. Um to get
+normalized from 0 to one. Um to get
+reasonable defaults for all the
+reasonable defaults for all the
+different M's so that we can then with
+different M's so that we can then with
+one script run all the M's
+one script run all the M's
+uh and
+uh and
+get scores out of one on one plot.
+get scores out of one on one plot.
+and then even get a combined plot. So
+and then even get a combined plot. So
+that will give us a very robust
+that will give us a very robust
+comparison
+comparison
+uh between these ms and other stuff.
+uh between these ms and other stuff.
+That's going to be the goal. Welcome
+That's going to be the goal. Welcome
+YouTube folks. Welcome Twitch folks. So
+YouTube folks. Welcome Twitch folks. So
+should just be some chill dev, some
+should just be some chill dev, some
+chill
+chill
+experimenting. And uh yeah, this should
+experimenting. And uh yeah, this should
+put us in a pretty good spot for
+put us in a pretty good spot for
+tomorrow. Um because if we get all this
+tomorrow. Um because if we get all this
+done then I will be very well set up to
+done then I will be very well set up to
+do either experiment side stuff or like
+do either experiment side stuff or like
+new algorithm stuff. Usually I try to
+new algorithm stuff. Usually I try to
+make Saturday like a long like deep dive
+make Saturday like a long like deep dive
+algorithm day or whatever or deep dive
+algorithm day or whatever or deep dive
+edge day. So this should set us up
+edge day. So this should set us up
+pretty well for that. Um because there
+pretty well for that. Um because there
+is one bug right now that I'm pretty
+is one bug right now that I'm pretty
+sure exists in the experience buffer uh
+sure exists in the experience buffer uh
+that we're going to have to fix before
+that we're going to have to fix before
+we can do a ton of new stuff and this
+we can do a ton of new stuff and this
+should help with that.
+should help with that.
+Okay, so let's get started with
+Okay, so let's get started with
+it. I believe we have Enduro working.
+it. I believe we have Enduro working.
+Yes, this has normalized score. Uh the
+Yes, this has normalized score. Uh the
+one thing that I would like to do if I
+one thing that I would like to do if I
+could is reorder these so that they show
+could is reorder these so that they show
+up in a better
+up in a better
+order. Do you think reinforcement
+order. Do you think reinforcement
+learning will be as much useful
+learning will be as much useful
+efficient like other machine learning
+efficient like other machine learning
+techniques or can it surpass them a
+techniques or can it surpass them a
+different use cases for things? I think
+different use cases for things? I think
+it is very very likely that
+it is very very likely that
+reinforcement learning is going to be
+reinforcement learning is going to be
+essential for long-term AI progress.
+essential for long-term AI progress.
+Recent use of RL even on LLMs would
+Recent use of RL even on LLMs would
+suggest I'm right on that. Uh the thing
+suggest I'm right on that. Uh the thing
+that is yet to be determined is uh
+that is yet to be determined is uh
+whether we will need like RL of the type
+whether we will need like RL of the type
+that I'm doing completely separate from
+that I'm doing completely separate from
+LLMs. I still think it is very likely
+LLMs. I still think it is very likely
+that we will. And even if I'm wrong
+that we will. And even if I'm wrong
+there, I think that the type of work I'm
+there, I think that the type of work I'm
+doing now is a really really effective
+doing now is a really really effective
+way to develop new general purpose RL
+way to develop new general purpose RL
+techniques. Um, like I can basically do
+techniques. Um, like I can basically do
+experiments here that would otherwise
+experiments here that would otherwise
+require a thousandx the compute because
+require a thousandx the compute because
+of how fast everything is. It's also
+of how fast everything is. It's also
+really a great way to just get open
+really a great way to just get open
+source involvement, right? It's really
+source involvement, right? It's really
+easy for people to get involved with
+easy for people to get involved with
+Puffer doing it this
+way. Okay.
+Um, it goes it goes like this, right?
+Um, it goes it goes like this, right?
+So, what do we think? Probably
+So, what do we think? Probably
+normalized four is the most important
+metric. We do like maybe
+metric. We do like maybe
+this normalized score return
+this normalized score return
+length. I think that's good.
+So if I recompile
+this, we should see
+We should see uh stats
+cleanly. Pong doesn't report stats very
+cleanly. Pong doesn't report stats very
+frequently though. That's the other
+frequently though. That's the other
+thing I want to do is I want to change
+thing I want to do is I want to change
+it so we get like consistent
+it so we get like consistent
+printouts. I don't think I have to
+printouts. I don't think I have to
+change anything on the M side for that
+change anything on the M side for that
+though. I think that that's just I have
+though. I think that that's just I have
+to make it so that when you get stats to
+to make it so that when you get stats to
+the dashboard, they continue in place
+the dashboard, they continue in place
+there. Okay. Normalize force for return
+there. Okay. Normalize force for return
+length and then this N at the
+length and then this N at the
+bottom doesn't super matter,
+right? I could technically just make it
+right? I could technically just make it
+so that you have to have all these
+so that you have to have all these
+attributes, right?
+And then we don't need any of
+this. I think we'll think about that
+this. I think we'll think about that
+after though. I think we'll do it this
+after though. I think we'll do it this
+way first. We'll manually define all
+way first. We'll manually define all
+these different things and then uh later
+these different things and then uh later
+we'll see whether it makes sense to have
+we'll see whether it makes sense to have
+like a default log that just does all
+like a default log that just does all
+this for you. But I think that this will
+this for you. But I think that this will
+be good for now.
+So I think that the only thing that'll
+So I think that the only thing that'll
+be a little tricky with what I'm doing
+be a little tricky with what I'm doing
+right now, uh, there are a few
+right now, uh, there are a few
+environments where it's kind of tough to
+environments where it's kind of tough to
+think of a normalized score metric.
+think of a normalized score metric.
+Other than that, this should be pretty
+Other than that, this should be pretty
+straightforward. So plan is just to jam
+straightforward. So plan is just to jam
+on this. This will probably take me an
+on this. This will probably take me an
+hour or two uh, to get all the M's the
+hour or two uh, to get all the M's the
+way I like them. So happy to answer
+way I like them. So happy to answer
+random RL questions and stuff. In the
+random RL questions and stuff. In the
+meantime, we're really trying to start
+meantime, we're really trying to start
+scaling to more contributors as well. Um
+scaling to more contributors as well. Um
+I'm looking into acquiring much more
+I'm looking into acquiring much more
+hardware for essentially to give
+hardware for essentially to give
+contributors access to like real
+contributors access to like real
+training compute. Um but I do have to
+training compute. Um but I do have to
+wait for the tariff prices to come down
+wait for the tariff prices to come down
+a little bit
+first because the machines are expensive
+first because the machines are expensive
+right now.
+Way too many metrics in Enduro. I'd say
+Way too many metrics in Enduro. I'd say
+I'll chat with like the authors of all
+I'll chat with like the authors of all
+these ends about like which metrics are
+these ends about like which metrics are
+actually
+actually
+useful. There is such a thing as too
+useful. There is such a thing as too
+many
+many
+metrics. When you have stuff that's not
+metrics. When you have stuff that's not
+useful, it's uh if you have a metric
+useful, it's uh if you have a metric
+that you basically there's no point in
+that you basically there's no point in
+ever looking at, you're better off not
+ever looking at, you're better off not
+having it is what I would say.
+That's breakout.
+Cool.
+Um, does it make sense to call it
+Um, does it make sense to call it
+normalized score when it's not always
+normalized score when it's not always
+going to
+be? Because some of these things like
+be? Because some of these things like
+this one, right? This score metric is
+this one, right? This score metric is
+not actually what we're normalizing,
+not actually what we're normalizing,
+right? The actual metric that matters is
+right? The actual metric that matters is
+um like days completed or whatever.
+Is there a better thing we could call
+this? It's a little misleading, right,
+this? It's a little misleading, right,
+to call it normalized score if it's not
+to call it normalized score if it's not
+actually based on the score
+always. You know
+what? Let's see if dumb LLM can come up
+what? Let's see if dumb LLM can come up
+with random
+with random
+thing. I have
+an score in
+an score in
+RLM. I want to
+RLM. I want to
+define 01
+define 01
+normaliz often but not always.
+Don't
+want
+Perf stat is
+Nothing. Perf is good, but Perf is
+like, "What do we think about Perf?
+performance or just
+performance or just
+perf. I think that's better, right? Just
+perf. I think that's better, right? Just
+call it perf.
+I try not to spend too long on naming
+I try not to spend too long on naming
+things,
+things,
+but sometimes it's useful.
+What other
+ends?
+Okay, that will break if you make that
+Okay, that will break if you make that
+an int.
+I don't know what max score is in blast
+are five times player max
+lives. So we do
+lives. So we do
+uh
+Let's see what this does.
+What did I mess up?
+It should be
+perfect. I'm thinking what the hard
+perfect. I'm thinking what the hard
+environments are going to be for this. A
+environments are going to be for this. A
+lot of the ones that don't have like
+lot of the ones that don't have like
+clean score have um win rate or
+clean score have um win rate or
+something that we can use instead.
+There are a few like ourware I guess
+There are a few like ourware I guess
+where it's a little
+tricky. Not that hard though.
+So they should now have
+So they should now have
+per
+perfect. Yeah. So we can actually make
+perfect. Yeah. So we can actually make
+it so score doesn't have to be uh a
+it so score doesn't have to be uh a
+mandatory variable, right? We can make
+mandatory variable, right? We can make
+it so like if it's win rate, it can just
+it so like if it's win rate, it can just
+be win rate or
+whatever. But we still need two metrics,
+whatever. But we still need two metrics,
+right? Because one has to be
+normalized.
+Yeah, that's fine.
+Yeah, that's fine.
+So blaster
+So blaster
+breakout fix
+car. This does not have a binding
+car. This does not have a binding
+function.
+function.
+So,
+uh, I guess not all of them are bound
+uh, I guess not all of them are bound
+yet,
+right? Bed is uh working on that for us.
+Even stuff as simple as like partful can
+Even stuff as simple as like partful can
+be really useful frankly like it's just
+be really useful frankly like it's just
+like a classic task and now we have it.
+like a classic task and now we have it.
+So you know thanks bet for
+that. Ah so this here is not okay. I
+that. Ah so this here is not okay. I
+forgot that I actually do have to
+forgot that I actually do have to
+adjust if if we have Syon, I actually do
+adjust if if we have Syon, I actually do
+have to adjust
+this because um yeah, this log here.
+Syon will pick up changes and just redo
+Syon will pick up changes and just redo
+for us. That's
+nice. Perf score return and length.
+nice. Perf score return and length.
+Perfect.
+Oops. Uh, connect four.
+This does not have
+N. Think that does
+N. Think that does
+it. We have to add this to
+Syon. Then Syon just picks it up for
+us. We are getting rid of
+us. We are getting rid of
+Syon but that is working on that.
+Syon but that is working on that.
+The new binding system is like way
+The new binding system is like way
+easier than
+Syon. I don't hate Syon. It's like nice
+Syon. I don't hate Syon. It's like nice
+for what it is,
+but we kind of just have better
+but we kind of just have better
+now. I forgot to do anything with perk,
+now. I forgot to do anything with perk,
+didn't I?
+Wait,
+Wait,
+what?
+what?
+Uh oh.
+There we
+are. I don't like that it can be
+negative. Does that matter?
+It doesn't super matter,
+right? Kind of
+right? Kind of
+does actually.
+Oops.
+Uh, it's not Fab Zap. What am I
+doing? It should just be like
+Something like that.
+No, that not recompile or
+something. Oh, player win.
+There we
+are. So now per is a different
+are. So now per is a different
+number and we'll go
+number and we'll go
+up to
+one. Very nice.
+So then technically not everything has
+So then technically not everything has
+to have score right it can have a
+to have score right it can have a
+different
+metric. I can probably put bed on that.
+That would be
+That would be
+good. Okay.
+Um, any of these other ones? I think
+Um, any of these other ones? I think
+Pong would potentially have screwed this
+Pong would potentially have screwed this
+up, right?
+Yeah. Okay. So, I'm a little concerned
+Yeah. Okay. So, I'm a little concerned
+with
+punk because I think uh per is probably
+punk because I think uh per is probably
+going to be screwy
+going to be screwy
+here.
+here.
+Score. Yeah, this can be negative,
+Score. Yeah, this can be negative,
+right?
+So we should just do
+something like this,
+something like this,
+right? And then this will give you
+right? And then this will give you
+percentage of points one.
+long is just really long games. I guess
+long is just really long games. I guess
+takes a while to
+log. There you go.
+So, this should hit
+So, this should hit
+one. We're close to one. Yeah, there it
+one. We're close to one. Yeah, there it
+is. That's
+one. So, breakouts work. Um,
+one. So, breakouts work. Um,
+Blastar, I think Blastar works. Last bet
+Blastar, I think Blastar works. Last bet
+on that one. Purple
+on that one. Purple
+works. Purple
+work. That looks good, right?
+So, connect four, we just fixed
+So, connect four, we just fixed
+uh
+CPR. I haven't really played with this
+CPR. I haven't really played with this
+end yet. We got this one submitted in a
+end yet. We got this one submitted in a
+PR relatively
+recently. May as well fix it real quick.
+How many agents is it
+How many agents is it
+per? Is it like three agents per or
+per? Is it like three agents per or
+something
+awkward? Oh, it's eight agents,
+right? So, eight agents. We want
+right? So, eight agents. We want
+uh 4096 total. So, we want 2048 in here.
+uh 4096 total. So, we want 2048 in here.
+Uh, so divide by 4 is 256, I
+believe. Oh, but they put 12 agents in
+believe. Oh, but they put 12 agents in
+here. Is there a reason it needs to be
+here. Is there a reason it needs to be
+12? 12 is an awkward number. Can I just
+12? 12 is an awkward number. Can I just
+do
+eight? Okay. What's
+eight? Okay. What's
+wrong? Seed.
+Easy. Okay. So, this gets score and
+Easy. Okay. So, this gets score and
+moves or
+moves or
+whatever. We'll just check source.
+Uh, this is missing a bunch of stuff.
+Um, interest.
+This also needs n
+Okay. So then this
+Okay. So then this
+is n logs of
+i reward agents.
+Uh yeah, this is not how logging should
+work. Yeah, this is absolutely not how
+work. Yeah, this is absolutely not how
+logging should work.
+Let me see how logs is
+allocated. Logs
+Okay. Yeah, this is very
+screwy. This is a cool end though. So, I
+screwy. This is a cool end though. So, I
+would like to have this working.
+Oh, here it is. The agents. No, this is
+Oh, here it is. The agents. No, this is
+fine. We just have to They're just using
+fine. We just have to They're just using
+the log buffer wrong. Okay, that's
+the log buffer wrong. Okay, that's
+totally fine. That's a lot easier than
+totally fine. That's a lot easier than
+what I
+thought. It is allocated correctly. It's
+thought. It is allocated correctly. It's
+just getting used wrong. So, this is
+just getting used wrong. So, this is
+reset. Reset logs. That's fine.
+reset. Reset logs. That's fine.
+Uh reward agents
+near. This is fine. This is
+not. This is fine. This is fine.
+That's crazy that he got a seating issue
+That's crazy that he got a seating issue
+with the card.
+I guess the end doesn't reset or
+I guess the end doesn't reset or
+whatever. Oh, so he gives it reward when
+whatever. Oh, so he gives it reward when
+uh the agent gets
+uh the agent gets
+food
+because cuz the end never resets,
+because cuz the end never resets,
+right? Okay, hang on. That is
+different. How are we going to do that?
+because I can define a score and a
+because I can define a score and a
+reward with that. But how do we define
+reward with that. But how do we define
+perf? It's the same problem as Rword,
+perf? It's the same problem as Rword,
+right?
+right?
+You want like minimum time to get food,
+You want like minimum time to get food,
+but it's um
+That's slightly
+That's slightly
+obnoxious. I guess if we look at all the
+obnoxious. I guess if we look at all the
+ends that we have,
+right? So, blaster these ones you can
+right? So, blaster these ones you can
+just normalize reward go is win rate.
+just normalize reward go is win rate.
+Grid is win rate. Mo is win rate. Neural
+Grid is win rate. Mo is win rate. Neural
+MMO 3 has a rough max score. Hong has a
+MMO 3 has a rough max score. Hong has a
+max score. This one's not done. This
+max score. This one's not done. This
+one's not done. Owware is the same
+one's not done. Owware is the same
+problem as this
+problem as this
+one. Uh,
+one. Uh,
+Snake. Snake's kind of hard, but we can
+Snake. Snake's kind of hard, but we can
+kind of just arbitrarily define a max
+kind of just arbitrarily define a max
+score. Squared as a max score. This
+score. Squared as a max score. This
+one's not done. This one's not done.
+one's not done. This one's not done.
+This one has the win
+This one has the win
+rate. Uh, this one has the exact same
+rate. Uh, this one has the exact same
+problem and this one has So, okay. So,
+problem and this one has So, okay. So,
+the only one that we have, we have three
+the only one that we have, we have three
+problem M's and they all have the issue
+problem M's and they all have the issue
+that the reward is
+that the reward is
+basically go get the thing and how well
+basically go get the thing and how well
+you're doing is how quickly do you get
+you're doing is how quickly do you get
+the
+the
+thing, right?
+How do we handle
+that? I mean, one thing we could do is
+that? I mean, one thing we could do is
+just like
+estimate a minimum
+estimate a minimum
+time. That's not
+amazing. That would be the punt though,
+amazing. That would be the punt though,
+right? Is we just like guess a minimum
+right? Is we just like guess a minimum
+amount of time.
+How would I do this on like snake for
+instance? You really don't know what the
+instance? You really don't know what the
+max score is, right?
+I think we punt on it for now. We just
+I think we punt on it for now. We just
+like pick them. We just pick
+one. Okay. So, they were actually
+one. Okay. So, they were actually
+correct then in these the way that
+correct then in these the way that
+they're logging here.
+they're logging here.
+So
+So
+um then we
+um then we
+do add
+do add
+log and then this is also what add log
+All
+right.
+Okay. So now score is
+one and then perf will just
+be I guess one over the episode length
+be I guess one over the episode length
+is the really easy one, right?
+But that's going to be like a stupidly
+But that's going to be like a stupidly
+no low
+I could do it that way for now. To be
+I could do it that way for now. To be
+honest,
+I don't like it that way
+I don't like it that way
+though. What is a good score function?
+though. What is a good score function?
+Damn it.
+It could just be one minus a fraction of
+It could just be one minus a fraction of
+the episode length. That's better, isn't
+the episode length. That's better, isn't
+it?
+Yeah, let's do it that way.
+That's a pretty good one, right?
+Yeah, that's pretty good. That'll like
+Yeah, that's pretty good. That'll like
+produce a reasonable curve, I
+think. Let me try
+think. Let me try
+this. And uh we have to collect. Let's
+this. And uh we have to collect. Let's
+have Syon,
+right? Yeah, let's have Syon.
+Okay. And then this actually gets worse
+Okay. And then this actually gets worse
+over time, but it's because of uh the M
+over time, but it's because of uh the M
+dynamics. Well, I think this will work
+dynamics. Well, I think this will work
+generally and this should produce
+generally and this should produce
+something clean for like hardware and
+something clean for like hardware and
+other
+other
+stuff. Uh did we do go? I don't think we
+stuff. Uh did we do go? I don't think we
+did go yet correctly. We were really
+did go yet correctly. We were really
+close to doing go.
+Yeah. So, this wants we want to put
+Yeah. So, this wants we want to put
+this
+this
+here. Don't need win rate.
+And actually this fits perfectly.
+The heck happened here, man? Man,
+Um. Oh, this is just log buffer
+things.
+things.
+Yep. It's this
+This is kind of just doing
+This is kind of just doing
+like environment janitor work, but it's
+chill. And this actually like
+chill. And this actually like
+meaningfully improves the uh usability
+meaningfully improves the uh usability
+of puffer as
+of puffer as
+well. So, it's quite good.
+Is this not winning? Hang
+on. Well, we know it isn't winning
+on. Well, we know it isn't winning
+though, right?
+30% of
+30% of
+games. Oh, did go kind of just start
+games. Oh, did go kind of just start
+working. Yes, it
+working. Yes, it
+did.
+did.
+Cool. Good to know.
+uh grid. We have to come back
+to we have episode return episode
+to we have episode return episode
+length. We need
+score and we need
+um we need perf
+So perf is going to be radiant radiant
+victory. We'll do this in towers alive
+victory. We'll do this in towers alive
+or
+or
+whatever. And this is still Syon, I
+whatever. And this is still Syon, I
+believe.
+believe.
+So, this is going to need to have purple
+So, this is going to need to have purple
+and score
+added like
+so. Uh, no attribute per really.
+Oh, [ __ ] You put it in the wrong
+Oh, [ __ ] You put it in the wrong
+one. Go here.
+And now we can train
+Moa. Uh, we know what that is.
+This
+one. This should be good. This should be
+one. This should be good. This should be
+very good.
+It does annoy me that it takes so long
+It does annoy me that it takes so long
+to log, but it takes a while to finish
+to log, but it takes a while to finish
+the games, I
+believe.
+believe.
+Yep. So, here you
+Yep. So, here you
+are. That is win rate.
+are. That is win rate.
+This tower is
+This tower is
+alive and then episode return uh not
+alive and then episode return uh not
+being anything is kind of
+awkward. We'll have to fix that.
+Confused how
+Confused how
+this does stuff.
+Aggregate and
+clear. How does this aggregated stuff
+do do anything?
+Okay. Well, this will be part of the
+Okay. Well, this will be part of the
+binding change, I assume. We'll uh we'll
+binding change, I assume. We'll uh we'll
+leave it like this for
+leave it like this for
+now. Don't want to spend too much time
+now. Don't want to spend too much time
+on any one
+ends. Then neural MO 3. My
+favorite still has old. Oh, it has new
+favorite still has old. Oh, it has new
+login. We already I already did that.
+login. We already I already did that.
+Okay. So, this needs
+glo. So, return episode
+length score is min
+compro equals
+divided
+divided
+by Is there a max
+level
+Right. I guess we have
+tiers into
+levels. It should be
+levels. So, we'll do float and levels
+levels. So, we'll do float and levels
+like this.
+And we're not even really going to be
+And we're not even really going to be
+able to see this do much of anything
+able to see this do much of anything
+because
+because
+um it uh takes forever to
+train because it's
+train because it's
+hard. But we should at least be able to
+hard. But we should at least be able to
+see our logs.
+And hopefully they're
+correct. Oh, lovely. We don't get uh
+correct. Oh, lovely. We don't get uh
+agent steps
+now. Uh so we want two
+now. Uh so we want two
+ends. I should probably put a
+ends. I should probably put a
+note in fifth for now because of
+Uh, I'm not seeing my
+logs. I forgot to do this.
+Okay. So score shouldn't be one. Oh no,
+Okay. So score shouldn't be one. Oh no,
+it should be
+one. Yeah, that's
+one. Yeah, that's
+fine because min com prop is going to be
+fine because min com prop is going to be
+one and this will be
+one and this will be
+0.025. We're good with that.
+So that's neural m3. We already did
+So that's neural m3. We already did
+pong. Roboc's not done. Rocket lender is
+pong. Roboc's not done. Rocket lender is
+not done.
+Rareware.
+Rareware. This has return
+Rareware. This has return
+length curves.
+Okay.
+So this will work.
+So this will work.
+Hopefully there'll be
+something. And we also need to modify
+something. And we also need to modify
+Syon real quick.
+Yep.
+Okay. So perf will be
+uh curve could be
+uh curve could be
+already already good. So that's bad.
+Stay.
+Where did I decide to make
+score take up shell?
+place
+agent. I just have to figure out where
+agent. I just have to figure out where
+the delivery code is.
+What the heck is this? I'm
+sure. Oh, there we
+are. Should be something like this,
+are. Should be something like this,
+maybe.
+I actually think we will end up doing
+I actually think we will end up doing
+something with this end because if we
+something with this end because if we
+were to like jazz this up a little bit,
+were to like jazz this up a little bit,
+we could probably make like a decent
+we could probably make like a decent
+warehouse type simulator.
+Okay. So this is not logging the score
+Okay. So this is not logging the score
+correctly.
+There we are.
+reasonable
+reasonable
+snake. What's our current
+snake? This just has return length and
+snake? This just has return length and
+score. So, we'll do Oh, I guess I
+score. So, we'll do Oh, I guess I
+haven't updated my snake that because
+haven't updated my snake that because
+that was going to do
+that was going to do
+that. So, we'll just do this one for
+that. So, we'll just do this one for
+now.
+the minimum 150 and the
+score I can actually just
+score I can actually just
+do over 150. Was it min
+do over 150. Was it min
+one? Was it 1.0?
+by 15.
+I could also just do
+um like return over length or something
+um like return over length or something
+or score divide by length.
+That probably does something right.
+score. Almost done. Few more ends.
+I wonder if this starts going down over
+I wonder if this starts going down over
+time because
+like when the snakes get longer, do they
+like when the snakes get longer, do they
+just live for longer but not get any
+just live for longer but not get any
+food. I don't
+food. I don't
+know. We'll leave it like this for now.
+know. We'll leave it like this for now.
+And I guess we'll find out, won't
+we? Good first approximation at
+we? Good first approximation at
+least. I would like it if it were a
+least. I would like it if it were a
+higher metric by default,
+higher metric by default,
+but guess this is fine.
+Snake. Did we do squared
+already? Apparently
+not. I could have sworn that I'd fix
+this. Maybe not, though.
+Uh, this also doesn't have
+Uh, this also doesn't have
+per float
+per float
+per it's going to be the same as
+score. Reward is one, right?
+This is just got to be like a
+This is just got to be like a
+conditional.
+Oh, hold on.
+I'll uh I'll be back in a few minutes. I
+I'll uh I'll be back in a few minutes. I
+got to go check on something with the
+got to go check on something with the
+network.
+
+Kind: captions
+Language: en
+Okay.
+Okay.
+Hi. We should be back
+live. There we go.
+So, it is
+So, it is
+currently 100
+currently 100
+p.m. I should have
+p.m. I should have
+roughly almost 5
+roughly almost 5
+hours to just hammer
+hours to just hammer
+on all these different M's and baselines
+on all these different M's and baselines
+uh and experiments. I think that the
+uh and experiments. I think that the
+major goal right now is going to be to
+major goal right now is going to be to
+get all or as many as possible of the Ms
+get all or as many as possible of the Ms
+to have a single score metric that is
+to have a single score metric that is
+normalized from 0 to one. Um to get
+normalized from 0 to one. Um to get
+reasonable defaults for all the
+reasonable defaults for all the
+different M's so that we can then with
+different M's so that we can then with
+one script run all the M's
+one script run all the M's
+uh and
+uh and
+get scores out of one on one plot.
+get scores out of one on one plot.
+and then even get a combined plot. So
+and then even get a combined plot. So
+that will give us a very robust
+that will give us a very robust
+comparison
+comparison
+uh between these ms and other stuff.
+uh between these ms and other stuff.
+That's going to be the goal. Welcome
+That's going to be the goal. Welcome
+YouTube folks. Welcome Twitch folks. So
+YouTube folks. Welcome Twitch folks. So
+should just be some chill dev, some
+should just be some chill dev, some
+chill
+chill
+experimenting. And uh yeah, this should
+experimenting. And uh yeah, this should
+put us in a pretty good spot for
+put us in a pretty good spot for
+tomorrow. Um because if we get all this
+tomorrow. Um because if we get all this
+done then I will be very well set up to
+done then I will be very well set up to
+do either experiment side stuff or like
+do either experiment side stuff or like
+new algorithm stuff. Usually I try to
+new algorithm stuff. Usually I try to
+make Saturday like a long like deep dive
+make Saturday like a long like deep dive
+algorithm day or whatever or deep dive
+algorithm day or whatever or deep dive
+edge day. So this should set us up
+edge day. So this should set us up
+pretty well for that. Um because there
+pretty well for that. Um because there
+is one bug right now that I'm pretty
+is one bug right now that I'm pretty
+sure exists in the experience buffer uh
+sure exists in the experience buffer uh
+that we're going to have to fix before
+that we're going to have to fix before
+we can do a ton of new stuff and this
+we can do a ton of new stuff and this
+should help with that.
+should help with that.
+Okay, so let's get started with
+Okay, so let's get started with
+it. I believe we have Enduro working.
+it. I believe we have Enduro working.
+Yes, this has normalized score. Uh the
+Yes, this has normalized score. Uh the
+one thing that I would like to do if I
+one thing that I would like to do if I
+could is reorder these so that they show
+could is reorder these so that they show
+up in a better
+up in a better
+order. Do you think reinforcement
+order. Do you think reinforcement
+learning will be as much useful
+learning will be as much useful
+efficient like other machine learning
+efficient like other machine learning
+techniques or can it surpass them a
+techniques or can it surpass them a
+different use cases for things? I think
+different use cases for things? I think
+it is very very likely that
+it is very very likely that
+reinforcement learning is going to be
+reinforcement learning is going to be
+essential for long-term AI progress.
+essential for long-term AI progress.
+Recent use of RL even on LLMs would
+Recent use of RL even on LLMs would
+suggest I'm right on that. Uh the thing
+suggest I'm right on that. Uh the thing
+that is yet to be determined is uh
+that is yet to be determined is uh
+whether we will need like RL of the type
+whether we will need like RL of the type
+that I'm doing completely separate from
+that I'm doing completely separate from
+LLMs. I still think it is very likely
+LLMs. I still think it is very likely
+that we will. And even if I'm wrong
+that we will. And even if I'm wrong
+there, I think that the type of work I'm
+there, I think that the type of work I'm
+doing now is a really really effective
+doing now is a really really effective
+way to develop new general purpose RL
+way to develop new general purpose RL
+techniques. Um, like I can basically do
+techniques. Um, like I can basically do
+experiments here that would otherwise
+experiments here that would otherwise
+require a thousandx the compute because
+require a thousandx the compute because
+of how fast everything is. It's also
+of how fast everything is. It's also
+really a great way to just get open
+really a great way to just get open
+source involvement, right? It's really
+source involvement, right? It's really
+easy for people to get involved with
+easy for people to get involved with
+Puffer doing it this
+way. Okay.
+Um, it goes it goes like this, right?
+Um, it goes it goes like this, right?
+So, what do we think? Probably
+So, what do we think? Probably
+normalized four is the most important
+metric. We do like maybe
+metric. We do like maybe
+this normalized score return
+this normalized score return
+length. I think that's good.
+So if I recompile
+this, we should see
+We should see uh stats
+cleanly. Pong doesn't report stats very
+cleanly. Pong doesn't report stats very
+frequently though. That's the other
+frequently though. That's the other
+thing I want to do is I want to change
+thing I want to do is I want to change
+it so we get like consistent
+it so we get like consistent
+printouts. I don't think I have to
+printouts. I don't think I have to
+change anything on the M side for that
+change anything on the M side for that
+though. I think that that's just I have
+though. I think that that's just I have
+to make it so that when you get stats to
+to make it so that when you get stats to
+the dashboard, they continue in place
+the dashboard, they continue in place
+there. Okay. Normalize force for return
+there. Okay. Normalize force for return
+length and then this N at the
+length and then this N at the
+bottom doesn't super matter,
+right? I could technically just make it
+right? I could technically just make it
+so that you have to have all these
+so that you have to have all these
+attributes, right?
+And then we don't need any of
+this. I think we'll think about that
+this. I think we'll think about that
+after though. I think we'll do it this
+after though. I think we'll do it this
+way first. We'll manually define all
+way first. We'll manually define all
+these different things and then uh later
+these different things and then uh later
+we'll see whether it makes sense to have
+we'll see whether it makes sense to have
+like a default log that just does all
+like a default log that just does all
+this for you. But I think that this will
+this for you. But I think that this will
+be good for now.
+So I think that the only thing that'll
+So I think that the only thing that'll
+be a little tricky with what I'm doing
+be a little tricky with what I'm doing
+right now, uh, there are a few
+right now, uh, there are a few
+environments where it's kind of tough to
+environments where it's kind of tough to
+think of a normalized score metric.
+think of a normalized score metric.
+Other than that, this should be pretty
+Other than that, this should be pretty
+straightforward. So plan is just to jam
+straightforward. So plan is just to jam
+on this. This will probably take me an
+on this. This will probably take me an
+hour or two uh, to get all the M's the
+hour or two uh, to get all the M's the
+way I like them. So happy to answer
+way I like them. So happy to answer
+random RL questions and stuff. In the
+random RL questions and stuff. In the
+meantime, we're really trying to start
+meantime, we're really trying to start
+scaling to more contributors as well. Um
+scaling to more contributors as well. Um
+I'm looking into acquiring much more
+I'm looking into acquiring much more
+hardware for essentially to give
+hardware for essentially to give
+contributors access to like real
+contributors access to like real
+training compute. Um but I do have to
+training compute. Um but I do have to
+wait for the tariff prices to come down
+wait for the tariff prices to come down
+a little bit
+first because the machines are expensive
+first because the machines are expensive
+right now.
+Way too many metrics in Enduro. I'd say
+Way too many metrics in Enduro. I'd say
+I'll chat with like the authors of all
+I'll chat with like the authors of all
+these ends about like which metrics are
+these ends about like which metrics are
+actually
+actually
+useful. There is such a thing as too
+useful. There is such a thing as too
+many
+many
+metrics. When you have stuff that's not
+metrics. When you have stuff that's not
+useful, it's uh if you have a metric
+useful, it's uh if you have a metric
+that you basically there's no point in
+that you basically there's no point in
+ever looking at, you're better off not
+ever looking at, you're better off not
+having it is what I would say.
+That's breakout.
+Cool.
+Um, does it make sense to call it
+Um, does it make sense to call it
+normalized score when it's not always
+normalized score when it's not always
+going to
+be? Because some of these things like
+be? Because some of these things like
+this one, right? This score metric is
+this one, right? This score metric is
+not actually what we're normalizing,
+not actually what we're normalizing,
+right? The actual metric that matters is
+right? The actual metric that matters is
+um like days completed or whatever.
+Is there a better thing we could call
+this? It's a little misleading, right,
+this? It's a little misleading, right,
+to call it normalized score if it's not
+to call it normalized score if it's not
+actually based on the score
+always. You know
+what? Let's see if dumb LLM can come up
+what? Let's see if dumb LLM can come up
+with random
+with random
+thing. I have
+an score in
+an score in
+RLM. I want to
+RLM. I want to
+define 01
+define 01
+normaliz often but not always.
+Don't
+want
+Perf stat is
+Nothing. Perf is good, but Perf is
+like, "What do we think about Perf?
+performance or just
+performance or just
+perf. I think that's better, right? Just
+perf. I think that's better, right? Just
+call it perf.
+I try not to spend too long on naming
+I try not to spend too long on naming
+things,
+things,
+but sometimes it's useful.
+What other
+ends?
+Okay, that will break if you make that
+Okay, that will break if you make that
+an int.
+I don't know what max score is in blast
+are five times player max
+lives. So we do
+lives. So we do
+uh
+Let's see what this does.
+What did I mess up?
+It should be
+perfect. I'm thinking what the hard
+perfect. I'm thinking what the hard
+environments are going to be for this. A
+environments are going to be for this. A
+lot of the ones that don't have like
+lot of the ones that don't have like
+clean score have um win rate or
+clean score have um win rate or
+something that we can use instead.
+There are a few like ourware I guess
+There are a few like ourware I guess
+where it's a little
+tricky. Not that hard though.
+So they should now have
+So they should now have
+per
+perfect. Yeah. So we can actually make
+perfect. Yeah. So we can actually make
+it so score doesn't have to be uh a
+it so score doesn't have to be uh a
+mandatory variable, right? We can make
+mandatory variable, right? We can make
+it so like if it's win rate, it can just
+it so like if it's win rate, it can just
+be win rate or
+whatever. But we still need two metrics,
+whatever. But we still need two metrics,
+right? Because one has to be
+normalized.
+Yeah, that's fine.
+Yeah, that's fine.
+So blaster
+So blaster
+breakout fix
+car. This does not have a binding
+car. This does not have a binding
+function.
+function.
+So,
+uh, I guess not all of them are bound
+uh, I guess not all of them are bound
+yet,
+right? Bed is uh working on that for us.
+Even stuff as simple as like partful can
+Even stuff as simple as like partful can
+be really useful frankly like it's just
+be really useful frankly like it's just
+like a classic task and now we have it.
+like a classic task and now we have it.
+So you know thanks bet for
+that. Ah so this here is not okay. I
+that. Ah so this here is not okay. I
+forgot that I actually do have to
+forgot that I actually do have to
+adjust if if we have Syon, I actually do
+adjust if if we have Syon, I actually do
+have to adjust
+this because um yeah, this log here.
+Syon will pick up changes and just redo
+Syon will pick up changes and just redo
+for us. That's
+nice. Perf score return and length.
+nice. Perf score return and length.
+Perfect.
+Oops. Uh, connect four.
+This does not have
+N. Think that does
+N. Think that does
+it. We have to add this to
+Syon. Then Syon just picks it up for
+us. We are getting rid of
+us. We are getting rid of
+Syon but that is working on that.
+Syon but that is working on that.
+The new binding system is like way
+The new binding system is like way
+easier than
+Syon. I don't hate Syon. It's like nice
+Syon. I don't hate Syon. It's like nice
+for what it is,
+but we kind of just have better
+but we kind of just have better
+now. I forgot to do anything with perk,
+now. I forgot to do anything with perk,
+didn't I?
+Wait,
+Wait,
+what?
+what?
+Uh oh.
+There we
+are. I don't like that it can be
+negative. Does that matter?
+It doesn't super matter,
+right? Kind of
+right? Kind of
+does actually.
+Oops.
+Uh, it's not Fab Zap. What am I
+doing? It should just be like
+Something like that.
+No, that not recompile or
+something. Oh, player win.
+There we
+are. So now per is a different
+are. So now per is a different
+number and we'll go
+number and we'll go
+up to
+one. Very nice.
+So then technically not everything has
+So then technically not everything has
+to have score right it can have a
+to have score right it can have a
+different
+metric. I can probably put bed on that.
+That would be
+That would be
+good. Okay.
+Um, any of these other ones? I think
+Um, any of these other ones? I think
+Pong would potentially have screwed this
+Pong would potentially have screwed this
+up, right?
+Yeah. Okay. So, I'm a little concerned
+Yeah. Okay. So, I'm a little concerned
+with
+punk because I think uh per is probably
+punk because I think uh per is probably
+going to be screwy
+going to be screwy
+here.
+here.
+Score. Yeah, this can be negative,
+Score. Yeah, this can be negative,
+right?
+So we should just do
+something like this,
+something like this,
+right? And then this will give you
+right? And then this will give you
+percentage of points one.
+long is just really long games. I guess
+long is just really long games. I guess
+takes a while to
+log. There you go.
+So, this should hit
+So, this should hit
+one. We're close to one. Yeah, there it
+one. We're close to one. Yeah, there it
+is. That's
+one. So, breakouts work. Um,
+one. So, breakouts work. Um,
+Blastar, I think Blastar works. Last bet
+Blastar, I think Blastar works. Last bet
+on that one. Purple
+on that one. Purple
+works. Purple
+work. That looks good, right?
+So, connect four, we just fixed
+So, connect four, we just fixed
+uh
+CPR. I haven't really played with this
+CPR. I haven't really played with this
+end yet. We got this one submitted in a
+end yet. We got this one submitted in a
+PR relatively
+recently. May as well fix it real quick.
+How many agents is it
+How many agents is it
+per? Is it like three agents per or
+per? Is it like three agents per or
+something
+awkward? Oh, it's eight agents,
+right? So, eight agents. We want
+right? So, eight agents. We want
+uh 4096 total. So, we want 2048 in here.
+uh 4096 total. So, we want 2048 in here.
+Uh, so divide by 4 is 256, I
+believe. Oh, but they put 12 agents in
+believe. Oh, but they put 12 agents in
+here. Is there a reason it needs to be
+here. Is there a reason it needs to be
+12? 12 is an awkward number. Can I just
+12? 12 is an awkward number. Can I just
+do
+eight? Okay. What's
+eight? Okay. What's
+wrong? Seed.
+Easy. Okay. So, this gets score and
+Easy. Okay. So, this gets score and
+moves or
+moves or
+whatever. We'll just check source.
+Uh, this is missing a bunch of stuff.
+Um, interest.
+This also needs n
+Okay. So then this
+Okay. So then this
+is n logs of
+i reward agents.
+Uh yeah, this is not how logging should
+work. Yeah, this is absolutely not how
+work. Yeah, this is absolutely not how
+logging should work.
+Let me see how logs is
+allocated. Logs
+Okay. Yeah, this is very
+screwy. This is a cool end though. So, I
+screwy. This is a cool end though. So, I
+would like to have this working.
+Oh, here it is. The agents. No, this is
+Oh, here it is. The agents. No, this is
+fine. We just have to They're just using
+fine. We just have to They're just using
+the log buffer wrong. Okay, that's
+the log buffer wrong. Okay, that's
+totally fine. That's a lot easier than
+totally fine. That's a lot easier than
+what I
+thought. It is allocated correctly. It's
+thought. It is allocated correctly. It's
+just getting used wrong. So, this is
+just getting used wrong. So, this is
+reset. Reset logs. That's fine.
+reset. Reset logs. That's fine.
+Uh reward agents
+near. This is fine. This is
+not. This is fine. This is fine.
+That's crazy that he got a seating issue
+That's crazy that he got a seating issue
+with the card.
+I guess the end doesn't reset or
+I guess the end doesn't reset or
+whatever. Oh, so he gives it reward when
+whatever. Oh, so he gives it reward when
+uh the agent gets
+uh the agent gets
+food
+because cuz the end never resets,
+because cuz the end never resets,
+right? Okay, hang on. That is
+different. How are we going to do that?
+because I can define a score and a
+because I can define a score and a
+reward with that. But how do we define
+reward with that. But how do we define
+perf? It's the same problem as Rword,
+perf? It's the same problem as Rword,
+right?
+right?
+You want like minimum time to get food,
+You want like minimum time to get food,
+but it's um
+That's slightly
+That's slightly
+obnoxious. I guess if we look at all the
+obnoxious. I guess if we look at all the
+ends that we have,
+right? So, blaster these ones you can
+right? So, blaster these ones you can
+just normalize reward go is win rate.
+just normalize reward go is win rate.
+Grid is win rate. Mo is win rate. Neural
+Grid is win rate. Mo is win rate. Neural
+MMO 3 has a rough max score. Hong has a
+MMO 3 has a rough max score. Hong has a
+max score. This one's not done. This
+max score. This one's not done. This
+one's not done. Owware is the same
+one's not done. Owware is the same
+problem as this
+problem as this
+one. Uh,
+one. Uh,
+Snake. Snake's kind of hard, but we can
+Snake. Snake's kind of hard, but we can
+kind of just arbitrarily define a max
+kind of just arbitrarily define a max
+score. Squared as a max score. This
+score. Squared as a max score. This
+one's not done. This one's not done.
+one's not done. This one's not done.
+This one has the win
+This one has the win
+rate. Uh, this one has the exact same
+rate. Uh, this one has the exact same
+problem and this one has So, okay. So,
+problem and this one has So, okay. So,
+the only one that we have, we have three
+the only one that we have, we have three
+problem M's and they all have the issue
+problem M's and they all have the issue
+that the reward is
+that the reward is
+basically go get the thing and how well
+basically go get the thing and how well
+you're doing is how quickly do you get
+you're doing is how quickly do you get
+the
+the
+thing, right?
+How do we handle
+that? I mean, one thing we could do is
+that? I mean, one thing we could do is
+just like
+estimate a minimum
+estimate a minimum
+time. That's not
+amazing. That would be the punt though,
+amazing. That would be the punt though,
+right? Is we just like guess a minimum
+right? Is we just like guess a minimum
+amount of time.
+How would I do this on like snake for
+instance? You really don't know what the
+instance? You really don't know what the
+max score is, right?
+I think we punt on it for now. We just
+I think we punt on it for now. We just
+like pick them. We just pick
+one. Okay. So, they were actually
+one. Okay. So, they were actually
+correct then in these the way that
+correct then in these the way that
+they're logging here.
+they're logging here.
+So
+So
+um then we
+um then we
+do add
+do add
+log and then this is also what add log
+All
+right.
+Okay. So now score is
+one and then perf will just
+be I guess one over the episode length
+be I guess one over the episode length
+is the really easy one, right?
+But that's going to be like a stupidly
+But that's going to be like a stupidly
+no low
+I could do it that way for now. To be
+I could do it that way for now. To be
+honest,
+I don't like it that way
+I don't like it that way
+though. What is a good score function?
+though. What is a good score function?
+Damn it.
+It could just be one minus a fraction of
+It could just be one minus a fraction of
+the episode length. That's better, isn't
+the episode length. That's better, isn't
+it?
+Yeah, let's do it that way.
+That's a pretty good one, right?
+Yeah, that's pretty good. That'll like
+Yeah, that's pretty good. That'll like
+produce a reasonable curve, I
+think. Let me try
+think. Let me try
+this. And uh we have to collect. Let's
+this. And uh we have to collect. Let's
+have Syon,
+right? Yeah, let's have Syon.
+Okay. And then this actually gets worse
+Okay. And then this actually gets worse
+over time, but it's because of uh the M
+over time, but it's because of uh the M
+dynamics. Well, I think this will work
+dynamics. Well, I think this will work
+generally and this should produce
+generally and this should produce
+something clean for like hardware and
+something clean for like hardware and
+other
+other
+stuff. Uh did we do go? I don't think we
+stuff. Uh did we do go? I don't think we
+did go yet correctly. We were really
+did go yet correctly. We were really
+close to doing go.
+Yeah. So, this wants we want to put
+Yeah. So, this wants we want to put
+this
+this
+here. Don't need win rate.
+And actually this fits perfectly.
+The heck happened here, man? Man,
+Um. Oh, this is just log buffer
+things.
+things.
+Yep. It's this
+This is kind of just doing
+This is kind of just doing
+like environment janitor work, but it's
+chill. And this actually like
+chill. And this actually like
+meaningfully improves the uh usability
+meaningfully improves the uh usability
+of puffer as
+of puffer as
+well. So, it's quite good.
+Is this not winning? Hang
+on. Well, we know it isn't winning
+on. Well, we know it isn't winning
+though, right?
+30% of
+30% of
+games. Oh, did go kind of just start
+games. Oh, did go kind of just start
+working. Yes, it
+working. Yes, it
+did.
+did.
+Cool. Good to know.
+uh grid. We have to come back
+to we have episode return episode
+to we have episode return episode
+length. We need
+score and we need
+um we need perf
+So perf is going to be radiant radiant
+victory. We'll do this in towers alive
+victory. We'll do this in towers alive
+or
+or
+whatever. And this is still Syon, I
+whatever. And this is still Syon, I
+believe.
+believe.
+So, this is going to need to have purple
+So, this is going to need to have purple
+and score
+added like
+so. Uh, no attribute per really.
+Oh, [ __ ] You put it in the wrong
+Oh, [ __ ] You put it in the wrong
+one. Go here.
+And now we can train
+Moa. Uh, we know what that is.
+This
+one. This should be good. This should be
+one. This should be good. This should be
+very good.
+It does annoy me that it takes so long
+It does annoy me that it takes so long
+to log, but it takes a while to finish
+to log, but it takes a while to finish
+the games, I
+believe.
+believe.
+Yep. So, here you
+Yep. So, here you
+are. That is win rate.
+are. That is win rate.
+This tower is
+This tower is
+alive and then episode return uh not
+alive and then episode return uh not
+being anything is kind of
+awkward. We'll have to fix that.
+Confused how
+Confused how
+this does stuff.
+Aggregate and
+clear. How does this aggregated stuff
+do do anything?
+Okay. Well, this will be part of the
+Okay. Well, this will be part of the
+binding change, I assume. We'll uh we'll
+binding change, I assume. We'll uh we'll
+leave it like this for
+leave it like this for
+now. Don't want to spend too much time
+now. Don't want to spend too much time
+on any one
+ends. Then neural MO 3. My
+favorite still has old. Oh, it has new
+favorite still has old. Oh, it has new
+login. We already I already did that.
+login. We already I already did that.
+Okay. So, this needs
+glo. So, return episode
+length score is min
+compro equals
+divided
+divided
+by Is there a max
+level
+Right. I guess we have
+tiers into
+levels. It should be
+levels. So, we'll do float and levels
+levels. So, we'll do float and levels
+like this.
+And we're not even really going to be
+And we're not even really going to be
+able to see this do much of anything
+able to see this do much of anything
+because
+because
+um it uh takes forever to
+train because it's
+train because it's
+hard. But we should at least be able to
+hard. But we should at least be able to
+see our logs.
+And hopefully they're
+correct. Oh, lovely. We don't get uh
+correct. Oh, lovely. We don't get uh
+agent steps
+now. Uh so we want two
+now. Uh so we want two
+ends. I should probably put a
+ends. I should probably put a
+note in fifth for now because of
+Uh, I'm not seeing my
+logs. I forgot to do this.
+Okay. So score shouldn't be one. Oh no,
+Okay. So score shouldn't be one. Oh no,
+it should be
+one. Yeah, that's
+one. Yeah, that's
+fine because min com prop is going to be
+fine because min com prop is going to be
+one and this will be
+one and this will be
+0.025. We're good with that.
+So that's neural m3. We already did
+So that's neural m3. We already did
+pong. Roboc's not done. Rocket lender is
+pong. Roboc's not done. Rocket lender is
+not done.
+Rareware.
+Rareware. This has return
+Rareware. This has return
+length curves.
+Okay.
+So this will work.
+So this will work.
+Hopefully there'll be
+something. And we also need to modify
+something. And we also need to modify
+Syon real quick.
+Yep.
+Okay. So perf will be
+uh curve could be
+uh curve could be
+already already good. So that's bad.
+Stay.
+Where did I decide to make
+score take up shell?
+place
+agent. I just have to figure out where
+agent. I just have to figure out where
+the delivery code is.
+What the heck is this? I'm
+sure. Oh, there we
+are. Should be something like this,
+are. Should be something like this,
+maybe.
+I actually think we will end up doing
+I actually think we will end up doing
+something with this end because if we
+something with this end because if we
+were to like jazz this up a little bit,
+were to like jazz this up a little bit,
+we could probably make like a decent
+we could probably make like a decent
+warehouse type simulator.
+Okay. So this is not logging the score
+Okay. So this is not logging the score
+correctly.
+There we are.
+reasonable
+reasonable
+snake. What's our current
+snake? This just has return length and
+snake? This just has return length and
+score. So, we'll do Oh, I guess I
+score. So, we'll do Oh, I guess I
+haven't updated my snake that because
+haven't updated my snake that because
+that was going to do
+that was going to do
+that. So, we'll just do this one for
+that. So, we'll just do this one for
+now.
+the minimum 150 and the
+score I can actually just
+score I can actually just
+do over 150. Was it min
+do over 150. Was it min
+one? Was it 1.0?
+by 15.
+I could also just do
+um like return over length or something
+um like return over length or something
+or score divide by length.
+That probably does something right.
+score. Almost done. Few more ends.
+I wonder if this starts going down over
+I wonder if this starts going down over
+time because
+like when the snakes get longer, do they
+like when the snakes get longer, do they
+just live for longer but not get any
+just live for longer but not get any
+food. I don't
+food. I don't
+know. We'll leave it like this for now.
+know. We'll leave it like this for now.
+And I guess we'll find out, won't
+we? Good first approximation at
+we? Good first approximation at
+least. I would like it if it were a
+least. I would like it if it were a
+higher metric by default,
+higher metric by default,
+but guess this is fine.
+Snake. Did we do squared
+already? Apparently
+not. I could have sworn that I'd fix
+this. Maybe not, though.
+Uh, this also doesn't have
+Uh, this also doesn't have
+per float
+per float
+per it's going to be the same as
+score. Reward is one, right?
+This is just got to be like a
+This is just got to be like a
+conditional.
+Oh, hold on.
+I'll uh I'll be back in a few minutes. I
+I'll uh I'll be back in a few minutes. I
+got to go check on something with the
+got to go check on something with the
+network.

@@ -1,0 +1,2173 @@
+Kind: captions
+Language: en
+Okay,
+let me go delete all the crap post that
+let me go delete all the crap post that
+this thing just automatically made for
+this thing just automatically made for
+me.
+My bad, guys. It's just like
+there.
+This should hopefully be good.
+I think it's just our wired internet
+I think it's just our wired internet
+just being crapped here. We'll try it on
+just being crapped here. We'll try it on
+Wi-Fi, which ironically should be more
+Wi-Fi, which ironically should be more
+stable.
+All right. So, we have our drone.h
+We should be able to get rid of all this
+We should be able to get rid of all this
+stuff.
+stuff.
+including
+the range.
+We're going to rename the MV, I guess to
+We're going to rename the MV, I guess to
+drone race.
+Make sure the stream is stable.
+Make sure the stream is stable.
+Looks good.
+The chat didn't die, did it?
+No, I think it's okay.
+No, I think it's okay.
+category does not seem to be persistent.
+category does not seem to be persistent.
+Lovely.
+Yeah, you're right. Let's see. This is
+Yeah, you're right. Let's see. This is
+why I don't do it cuz literally every
+why I don't do it cuz literally every
+time it does anything, I have to redo
+time it does anything, I have to redo
+it. But
+we'll do that.
+All right. Whatever.
+It should hopefully be stable now. I'm
+It should hopefully be stable now. I'm
+pretty sure it's just that we have like
+pretty sure it's just that we have like
+jank Ethernet cables, like jank
+jank Ethernet cables, like jank
+connections or jank something here.
+connections or jank something here.
+Whatever. I don't want to deal with it.
+Whatever. I don't want to deal with it.
+It should be good. We'll just do it on
+It should be good. We'll just do it on
+Wi-Fi. Should be good enough.
+Okay, so we need this random ring
+Okay, so we need this random ring
+function
+I must have gotten rid of. Let me go
+I must have gotten rid of. Let me go
+grab it.
+Oh yeah, star the puffer lip. Star the
+Oh yeah, star the puffer lip. Star the
+puffer if you haven't. It helps us out a
+puffer if you haven't. It helps us out a
+lot. It's free.
+I say we just put this into the um
+I say we just put this into the um
+drone lab, right?
+Oh, that actually already works. Cool.
+So, yeah. So, that wasn't that hard,
+So, yeah. So, that wasn't that hard,
+right?
+I don't know if it's actually using the
+I don't know if it's actually using the
+drone.
+Yeah, it's probably not using the drone
+Yeah, it's probably not using the drone
+though. It's just using these like
+though. It's just using these like
+random functions.
+random functions.
+So, let's fix that.
+Yeah. You see this has like position,
+Yeah. You see this has like position,
+previous position.
+previous position.
+So, what we're going to do is we'll just
+So, what we're going to do is we'll just
+do drone drone like this.
+And drone does have position, right?
+And drone does have position, right?
+Let's just check.
+So, this has position.
+What's it need previous position for?
+Oh, it does need previous position up.
+Oh, it does need previous position up.
+Okay, so we'll just do
+three previous position.
+Holy Yeah, there's going to have to be a
+Holy Yeah, there's going to have to be a
+lot of substitutions.
+What's going to happen though
+What's going to happen though
+eventually, right? We're going to get to
+eventually, right? We're going to get to
+a point where these look similar enough
+a point where these look similar enough
+that we can just make it like either one
+that we can just make it like either one
+end with configs
+end with configs
+or something.
+or something.
+We can kind of just train on a ton of
+We can kind of just train on a ton of
+different tasks. Like the RL is kind of
+different tasks. Like the RL is kind of
+good enough that if we just give it a
+good enough that if we just give it a
+lot of tasks for drones, as long as it's
+lot of tasks for drones, as long as it's
+fast and they're reasonably posed, it
+fast and they're reasonably posed, it
+should just work.
+should just work.
+The RL side's very good at this point.
+The RL side's very good at this point.
+It's mostly just about getting the Sims
+It's mostly just about getting the Sims
+uh to be built better and faster.
+We're uh planning on improving the
+We're uh planning on improving the
+physics.
+physics.
+Awesome.
+Awesome.
+So, my plan, Sam, you can tell me if you
+So, my plan, Sam, you can tell me if you
+think that this makes sense here. So,
+think that this makes sense here. So,
+we're going to want to do a lot of
+we're going to want to do a lot of
+different stuff with these drones to
+different stuff with these drones to
+test them out. We're gonna have to do
+test them out. We're gonna have to do
+like the ring racing task. We'll do
+like the ring racing task. We'll do
+swarming stuff. We'll do like obstacle
+swarming stuff. We'll do like obstacle
+avoidance. We can do tons of stuff. I'm
+avoidance. We can do tons of stuff. I'm
+gonna try to I don't want to modularize
+gonna try to I don't want to modularize
+stuff a whole bunch to the point that it
+stuff a whole bunch to the point that it
+becomes heavy. All I want to do is just
+becomes heavy. All I want to do is just
+take like the drone physics and all the
+take like the drone physics and all the
+parts about the drone control and then
+parts about the drone control and then
+separate those from the task specifics.
+separate those from the task specifics.
+So, we can just have a couple hundred
+So, we can just have a couple hundred
+line like drone.h with all the physics
+line like drone.h with all the physics
+or whatever. And then we can just
+or whatever. And then we can just
+include that in whatever other Sims we
+include that in whatever other Sims we
+want to build around it, right? Whatever
+want to build around it, right? Whatever
+other task, whatever other Sims. And
+other task, whatever other Sims. And
+maybe eventually we will converge on
+maybe eventually we will converge on
+like one set of observations or, you
+like one set of observations or, you
+know, maybe we'll find other ways to
+know, maybe we'll find other ways to
+unify things. But I'm not going to worry
+unify things. But I'm not going to worry
+about that too much initially. I just
+about that too much initially. I just
+want to make sure that we have one spot
+want to make sure that we have one spot
+for at least like the physics and such.
+for at least like the physics and such.
+Um, and I think that'll help us out
+Um, and I think that'll help us out
+quite a bit because then I'm going to
+quite a bit because then I'm going to
+start like I'm going to start
+start like I'm going to start
+introducing randomized versions of
+introducing randomized versions of
+these, right? Or like I'm going to add
+these, right? Or like I'm going to add
+randomization parameters.
+randomization parameters.
+So you can just say all right uh
+So you can just say all right uh
+whenever the drone moves, right? Let's
+whenever the drone moves, right? Let's
+just screw with the physics by a small
+just screw with the physics by a small
+delta.
+delta.
+And the idea is that if it can if it can
+And the idea is that if it can if it can
+behave under all sorts of different
+behave under all sorts of different
+small perturbations, it should just
+small perturbations, it should just
+behave well generally.
+behave well generally.
+We'll also do the same type of stuff for
+We'll also do the same type of stuff for
+like the drone size and so on and so
+like the drone size and so on and so
+forth.
+I'm going to try to do this without
+I'm going to try to do this without
+making it any heavier or any harder for
+making it any heavier or any harder for
+you guys to use.
+you guys to use.
+That's the goal.
+That's the goal.
+So I'm running uh research side support.
+Perfectly reasonable
+plot li. Yeah, we're just not going to
+plot li. Yeah, we're just not going to
+try to like worry about it too much
+try to like worry about it too much
+initially though, right? like
+initially though, right? like
+over modularizing is just the way that
+over modularizing is just the way that
+you break everything. I don't want to do
+you break everything. I don't want to do
+that. I just want to have the physics
+that. I just want to have the physics
+separated cleanly because of the
+separated cleanly because of the
+randomization work
+randomization work
+just so we're not like know copy pasting
+just so we're not like know copy pasting
+all the lines into the file and like
+all the lines into the file and like
+having two different versions of physics
+delay largely unnecessary. Uh I actually
+delay largely unnecessary. Uh I actually
+don't know about that. It depends on how
+don't know about that. It depends on how
+good of a controller you have.
+Like I think you still might need to do
+Like I think you still might need to do
+something with if it's like 50 ms delay
+something with if it's like 50 ms delay
+that might be a lot, right?
+If you get like 10 ms delay, I think we
+If you get like 10 ms delay, I think we
+should be good.
+should be good.
+I just don't know like with 50.
+I just don't know like with 50.
+Also, my mic is super loud. Hang on.
+Also, my mic is super loud. Hang on.
+Let's not clip. Let's not clip the mic
+Let's not clip. Let's not clip the mic
+too much.
+There we go.
+Yeah. Plus, this is kind of chill today.
+Yeah. Plus, this is kind of chill today.
+We kind of just get to like chill and
+We kind of just get to like chill and
+improve our own code.
+improve our own code.
+Just invest a little bit into the uh
+Just invest a little bit into the uh
+the core.
+transmitter is really good, but we need
+transmitter is really good, but we need
+to see.
+to see.
+Uh delay is like slightly inconvenient.
+Uh delay is like slightly inconvenient.
+But it's not that bad.
+I think that the best thing we can do is
+I think that the best thing we can do is
+in parallel if you guys get the drone
+in parallel if you guys get the drone
+flying and you can like run commands on
+flying and you can like run commands on
+it
+it
+then um
+then um
+and I can get the sim to be really
+and I can get the sim to be really
+robust.
+robust.
+We should be pretty pretty good.
+Oops.
+Welcome to all the YouTube folks, the
+Welcome to all the YouTube folks, the
+people who just got here. We're
+people who just got here. We're
+currently working on the uh well both of
+currently working on the uh well both of
+the drone environments.
+One of which is
+One of which is
+uh this warm sim right here and the
+uh this warm sim right here and the
+other of which is a racing environment
+other of which is a racing environment
+that looks like
+like this.
+like this.
+We're doing a little bit of work on just
+We're doing a little bit of work on just
+getting the code to be easier and
+getting the code to be easier and
+cleaner across both of these. And then
+cleaner across both of these. And then
+we're going to do some work on domain
+we're going to do some work on domain
+randomization that's going to make it a
+randomization that's going to make it a
+heck of a lot easier to make this work
+heck of a lot easier to make this work
+on a real drone.
+on a real drone.
+In fact, you know, one thing that I
+In fact, you know, one thing that I
+think is going to be really cool about
+think is going to be really cool about
+this is if I do this correctly, it
+this is if I do this correctly, it
+should work on like a ton of different
+should work on like a ton of different
+types of drones. Like we probably the
+types of drones. Like we probably the
+best case scenario, right, is that we'll
+best case scenario, right, is that we'll
+just be able to buy different drones and
+just be able to buy different drones and
+hook this up and not even really have to
+hook this up and not even really have to
+do any work specific to each drone.
+do any work specific to each drone.
+Are you planning to track the drone
+Are you planning to track the drone
+position back relative to the start
+position back relative to the start
+position? Yeah. So, for now,
+position? Yeah. So, for now,
+right for now, we're probably just going
+right for now, we're probably just going
+to do everything relative. Um, so we'll
+to do everything relative. Um, so we'll
+just see if we can like get it to fly
+just see if we can like get it to fly
+around in some patterns. We are going to
+around in some patterns. We are going to
+have to do perception for the real
+have to do perception for the real
+hardware at some point, but like it's
+hardware at some point, but like it's
+not going to be end to end RL division,
+not going to be end to end RL division,
+right? It's probably just going to be
+right? It's probably just going to be
+some sort of basic state estimation at
+some sort of basic state estimation at
+least to start.
+Welcome By, welcome Jason.
+I'm just it's worth spending some time
+I'm just it's worth spending some time
+cleaning this up because we're actually
+cleaning this up because we're actually
+going to use this for
+going to use this for
+quite a bit of stuff
+quite a bit of stuff
+and um
+and um
+I don't want to make like I don't want
+I don't want to make like I don't want
+this code to be a mess. Just causes us
+this code to be a mess. Just causes us
+problems.
+problems.
+To be fair, they submitted me Finn and
+To be fair, they submitted me Finn and
+Sam submitted me very clean code. Um, I
+Sam submitted me very clean code. Um, I
+kind of made a mess of it in the process
+kind of made a mess of it in the process
+of making it multi- aent, but like it
+of making it multi- aent, but like it
+should be very possible to keep it m
+should be very possible to keep it m
+like to make it multi- aent and just as
+like to make it multi- aent and just as
+simple as before, if not simpler
+Oh, that's so funny. Ghost uh ghost TTY
+Oh, that's so funny. Ghost uh ghost TTY
+renders it renders these arrows as like
+renders it renders these arrows as like
+the arrow character in the term. It's
+the arrow character in the term. It's
+funny.
+Okay, so this now works again.
+Conveniently, we have the pre-trained
+Conveniently, we have the pre-trained
+model loaded into C, so I can know
+model loaded into C, so I can know
+exactly if I break it. Right. As long as
+exactly if I break it. Right. As long as
+I don't modify ops, I shouldn't have to
+I don't modify ops, I shouldn't have to
+break it at all.
+break it at all.
+Let's take a look through here. We still
+Let's take a look through here. We still
+have 500 lines of stuff somehow. And a
+have 500 lines of stuff somehow. And a
+lot of this we should be able to
+a lot a lot of this we should be able to
+a lot a lot of this we should be able to
+kind of just stick into the main
+kind of just stick into the main
+uh the main thing.
+Let's do if we just assume we make the
+Let's do if we just assume we make the
+end logic multi- aent.
+end logic multi- aent.
+We assume we make it multi- aent by
+We assume we make it multi- aent by
+default.
+I think we should just assume we make it
+I think we should just assume we make it
+multi- aent by default, right?
+We'll separate out stuff like collision
+We'll separate out stuff like collision
+checking, right?
+checking, right?
+I am new. Are you writing an N?
+I am new. Are you writing an N?
+Uh, I'm editing an N.
+Uh, I'm editing an N.
+I'm definitely making changes to an N.
+I'm definitely making changes to an N.
+Drone racing ends and drone swarming
+Drone racing ends and drone swarming
+ends. Both of these.
+Oh, yeah. Also, for the new folks around
+Oh, yeah. Also, for the new folks around
+here, we do have there's like 25 plus
+here, we do have there's like 25 plus
+pages of uh reinforcement learning intro
+pages of uh reinforcement learning intro
+material that will go live as soon as
+material that will go live as soon as
+this hits 10K. So go ahead and follow
+this hits 10K. So go ahead and follow
+this on X if you want RL content and you
+this on X if you want RL content and you
+want that guide.
+Yeah, I think that if we just like
+if we assume it's multi- aent
+if we assume it's multi- aent
+then basically
+almost all this code should just be
+almost all this code should just be
+directly usable, right?
+directly usable, right?
+Pretty
+Pretty
+much the actual code here, this drone
+much the actual code here, this drone
+race code is just going to be like the
+race code is just going to be like the
+100 lines or whatever it is to wire it
+100 lines or whatever it is to wire it
+together.
+together.
+We can probably get most of this
+We can probably get most of this
+uh most of this code to be separated out
+uh most of this code to be separated out
+cleanly.
+Take a little bit of work, but we can do
+Take a little bit of work, but we can do
+it. And it's worth the it's worth doing
+it. And it's worth the it's worth doing
+the work.
+Let's like look for end in here. We
+Let's like look for end in here. We
+don't use the end until the out of
+don't use the end until the out of
+bounds checks at all.
+So we do OB check at the end.
+Then all of this logic down to here just
+Then all of this logic down to here just
+goes into a move function.
+So we can clamp the actions.
+Okay. And now this move drone
+The ring stuff is a bit more
+The ring stuff is a bit more
+complicated,
+but this as is should work, right?
+Did I mess up?
+I forgot the comma.
+Okay, so this still works. Yeah,
+this function is going into the drone
+this function is going into the drone
+level.
+We can probably get the ring logic to be
+We can probably get the ring logic to be
+standalone if we try.
+It's just the fact that that's hardcoded
+It's just the fact that that's hardcoded
+right now, right?
+Oh yeah, this is just like
+Oh yeah, this is just like
+jank, right?
+jank, right?
+Yeah, this is just jank the way this is
+Yeah, this is just jank the way this is
+written.
+Okay. So, this is now.
+Yeah. Pause and normal,
+Yeah. Pause and normal,
+right?
+Okay. Yeah, I didn't realize that this
+Okay. Yeah, I didn't realize that this
+was done this way.
+That's better. Let's see if I broke
+That's better. Let's see if I broke
+anything in the process of doing that.
+No, not at all. Okay, so that's like the
+No, not at all. Okay, so that's like the
+checks are actually very simple. It was
+checks are actually very simple. It was
+just really verbose because they didn't
+just really verbose because they didn't
+make a ring variable.
+So we can do
+valid. invalid.
+So, we can just make like a check ring
+So, we can just make like a check ring
+or whatever.
+ready to float.
+I see.
+I see.
+So all I have to do is I have to take
+So all I have to do is I have to take
+more of this logic and put it in there.
+more of this logic and put it in there.
+Okay.
+Okay.
+So like all this
+So like all this
+somehow
+goes like here.
+and then this we'll make this a float.
+and then this we'll make this a float.
+Okay.
+And
+return one
+and then what I'll do I see what we're
+and then what I'll do I see what we're
+going to do
+going to do
+so we'll here what we'll do is we'll do
+so we'll here what we'll do is we'll do
+float reward
+check ring
+check ring
+do r start ring
+okay and then like something like this
+okay and then like something like this
+so we'll do if reward
+so we'll do if reward
+Z
+is equal to
+the reward is less than This
+rewards greater than zero.
+We set the terminal. We add log
+We set the terminal. We add log
+like this.
+Okay.
+Okay.
+Something like this should be fine.
+Clarity.
+That's pretty clean.
+Red predefined range. This
+nonvoid function does not return a
+nonvoid function does not return a
+value.
+turn zero.
+And this still works.
+Didn't break anything.
+Now I think we know the uh the routine
+Now I think we know the uh the routine
+here, right? This just goes into drone
+here, right? This just goes into drone
+li now.
+We got 300 lines. I'm fine with the
+We got 300 lines. I'm fine with the
+drone li being a little longer if it's
+drone li being a little longer if it's
+going to include all the objects, right?
+going to include all the objects, right?
+Cuz we'll probably put like collision
+Cuz we'll probably put like collision
+obstacles in there. We can put like
+obstacles in there. We can put like
+sphere collision obstacles, right? So,
+sphere collision obstacles, right? So,
+it has to like route around an obstacle
+it has to like route around an obstacle
+field. We can do lots of stuff
+technically, right? We could do like,
+technically, right? We could do like,
+you know, like the Asteroids game. We
+you know, like the Asteroids game. We
+could do that with the drone. That'd be
+could do that with the drone. That'd be
+pretty cool.
+pretty cool.
+Actually, we should do that. Like I
+Actually, we should do that. Like I
+actually have um like asteroids thing
+actually have um like asteroids thing
+but with real drone physics.
+Be cool.
+Be cool.
+Okay. What else is in here?
+probably all this stuff about camera
+probably all this stuff about camera
+control
+I mean this is directly copy pasted
+I mean this is directly copy pasted
+right
+right
+just do this
+just do this
+it's literally the same thing.
+it's literally the same thing.
+We might want to do like separate stuff
+We might want to do like separate stuff
+later, right?
+But we'll for now we'll just put it into
+But we'll for now we'll just put it into
+drone lib.
+Oh, but we don't have the client
+Oh, but we don't have the client
+defined, so we can't actually do that.
+defined, so we can't actually do that.
+Yeah, actually that's a little less
+Yeah, actually that's a little less
+trivial,
+trivial,
+at least for now.
+at least for now.
+We've already made this a heck of a lot
+We've already made this a heck of a lot
+easier though.
+Let me just make the other file like the
+Let me just make the other file like the
+drone swarm work and then so we don't
+drone swarm work and then so we don't
+spend too long just refactoring right
+spend too long just refactoring right
+now. We'll do we'll start on a little
+now. We'll do we'll start on a little
+randomization type stuff.
+I should have gotten a policy in here,
+I should have gotten a policy in here,
+but it's okay.
+but it's okay.
+So we do drone swarm
+and where are the dynamics?
+Yeah, you see I have the exact exact
+Yeah, you see I have the exact exact
+same dynamics here.
+same dynamics here.
+It's a little strong.
+So idea here should be
+So idea here should be
+just do this
+move drone.
+Yeah. And then what I have to do is I
+Yeah. And then what I have to do is I
+have to copy. I have to be very careful
+have to copy. I have to be very careful
+with this actually. So this is what I'm
+with this actually. So this is what I'm
+going to do.
+Okay, so this still works. So now we
+Okay, so this still works. So now we
+have the movement function with all the
+have the movement function with all the
+physics.
+I'm going to do this. We'll do this for
+I'm going to do this. We'll do this for
+drone race even.
+So the things to randomize here, right?
+We want to randomize quite a bit of this
+We want to randomize quite a bit of this
+stuff. I'm trying to think what we want
+stuff. I'm trying to think what we want
+to randomize per episode versus what we
+to randomize per episode versus what we
+want to randomize per step.
+want to randomize per step.
+going to do a quick little brief
+going to do a quick little brief
+introduction to um
+I can do like a quick little
+I can do like a quick little
+introduction to domain randomization if
+introduction to domain randomization if
+folks are interested in that.
+folks are interested in that.
+So the paper to read for domain
+So the paper to read for domain
+randomization especially in control if
+randomization especially in control if
+you're interested
+you're interested
+it's this result.
+it's this result.
+I was at OpenAI when this work was being
+I was at OpenAI when this work was being
+done. I didn't interact a ton with the
+done. I didn't interact a ton with the
+robotics team except at lunch.
+robotics team except at lunch.
+Um but if you look at what this is, you
+Um but if you look at what this is, you
+see how they just have tons of different
+see how they just have tons of different
+versions of this. You don't just
+versions of this. You don't just
+randomize the color, you randomize the
+randomize the color, you randomize the
+physics, you randomize everything. And
+physics, you randomize everything. And
+the idea is that you can't exactly
+the idea is that you can't exactly
+simulate the real world,
+simulate the real world,
+right? You can do your best to try to
+right? You can do your best to try to
+simulate the real world exactly, but
+simulate the real world exactly, but
+you're going to fail. Now, what you
+you're going to fail. Now, what you
+might be able to do, right, is you might
+might be able to do, right, is you might
+be able to make a noisy sim where like
+be able to make a noisy sim where like
+the robot learns to behave in enough
+the robot learns to behave in enough
+different scenarios that it doesn't
+different scenarios that it doesn't
+really have to exactly match the real
+really have to exactly match the real
+world because it's going to just be
+world because it's going to just be
+robust enough anyways.
+robust enough anyways.
+Uh, this is a very very effective
+Uh, this is a very very effective
+technique. It's been used in tons and
+technique. It's been used in tons and
+tons of different areas.
+Actually, they tell you right here
+Actually, they tell you right here
+object dimensions,
+object dimensions,
+link masses, surface friction
+link masses, surface friction
+coefficients,
+coefficients,
+damping coefficients, actuator force
+damping coefficients, actuator force
+gain,
+gain,
+joint limits, gravity vector.
+These are actually very big
+These are actually very big
+randomizations.
+randomizations.
+Keep in mind like the RL wasn't as good
+Keep in mind like the RL wasn't as good
+back then, so they had to really crank
+back then, so they had to really crank
+this to make this thing work. can also
+this to make this thing work. can also
+like humanoid hands are not super easy
+like humanoid hands are not super easy
+either. It's like a pretty high degree
+either. It's like a pretty high degree
+of freedom problem.
+So actually I'd say most of the problem
+So actually I'd say most of the problem
+of humanoids is in the hands, not the
+of humanoids is in the hands, not the
+rest of the robot
+rest of the robot
+and more degrees of freedom in the hands
+and more degrees of freedom in the hands
+and the rest of the robot for most
+and the rest of the robot for most
+models.
+Okay.
+Okay.
+So knowing that
+I think we do a per episode
+I think we do a per episode
+randomization
+randomization
+it'll be easier and I think it'll cover
+it'll be easier and I think it'll cover
+pretty much the whole use case.
+We will see if I'm correct on that. But
+We will see if I'm correct on that. But
+I think it should cover just about the
+I think it should cover just about the
+whole use case.
+Do you recommend reinforcement learning?
+Do you recommend reinforcement learning?
+Is that the original book or is that a
+Is that the original book or is that a
+new book? Is that like the original
+new book? Is that like the original
+Sutton and Bardo book or is that a new
+Sutton and Bardo book or is that a new
+one?
+Yeah, this is the original book. So,
+Yeah, this is the original book. So,
+it really depends, Jason.
+it really depends, Jason.
+If you have a mathematically heavy
+If you have a mathematically heavy
+background and a weak programming
+background and a weak programming
+background, you might find that a decent
+background, you might find that a decent
+way to learn. The thing is it covers a
+way to learn. The thing is it covers a
+ton of mathematical background. Um,
+ton of mathematical background. Um,
+which is good,
+which is good,
+but at least the way that I've
+but at least the way that I've
+approached things, it's most of the math
+approached things, it's most of the math
+doesn't actually work. So, it's going to
+doesn't actually work. So, it's going to
+give you the impression that
+give you the impression that
+reinforcement learning is like this very
+reinforcement learning is like this very
+well theoretically justified, cleancut
+well theoretically justified, cleancut
+field, and it's really not. like none of
+field, and it's really not. like none of
+the math actually works.
+Where I've come from, I found it way
+Where I've come from, I found it way
+easier to just treat reinforcement
+easier to just treat reinforcement
+learning as an almost purely empirical
+learning as an almost purely empirical
+field, right? Like an almost purely
+field, right? Like an almost purely
+empirical field. Just completely ignore
+empirical field. Just completely ignore
+the MDP formalism of everything. Yeah,
+the MDP formalism of everything. Yeah,
+we still we still write some formulas,
+we still we still write some formulas,
+but they're models more than anything
+but they're models more than anything
+else, and they're like really bad models
+else, and they're like really bad models
+at the best of times.
+at the best of times.
+If you look at my quick start guide,
+If you look at my quick start guide,
+you're going to see the types of things
+you're going to see the types of things
+that I generally recommend to newcomers,
+that I generally recommend to newcomers,
+which are actually a lot more accessible
+which are actually a lot more accessible
+mathematically and are going to get you
+mathematically and are going to get you
+writing a lot more code on things that
+writing a lot more code on things that
+work very quickly. So, if you check my
+work very quickly. So, if you check my
+quick start guide, that's a good
+quick start guide, that's a good
+resource. You can you can decide from
+resource. You can you can decide from
+there what you think on the more formal
+there what you think on the more formal
+material. Also, probably within the next
+material. Also, probably within the next
+day or two, as soon as this hits 10K,
+day or two, as soon as this hits 10K,
+as soon as this number hits 10K, I'm
+as soon as this number hits 10K, I'm
+releasing my own guide, which is like 25
+releasing my own guide, which is like 25
+pages of material on uh programming, ML
+pages of material on uh programming, ML
+engineering, and then mostly the
+engineering, and then mostly the
+majority of the material is on how to
+majority of the material is on how to
+learn reinforcement learning. It's like
+learn reinforcement learning. It's like
+a very step-by-step guide on read this,
+a very step-by-step guide on read this,
+implement this, so on and so forth.
+I didn't miss any meetings today. I hope
+I didn't miss any meetings today. I hope
+right.
+right.
+No,
+it's funny.
+Hey Tyler,
+Hey Tyler,
+welcome.
+We are doing drone things today.
+We are doing drone things today.
+Oh yeah, I forget who it was, but there
+Oh yeah, I forget who it was, but there
+is a second um we've got like a second
+is a second um we've got like a second
+physicist around who's been watching
+physicist around who's been watching
+some of the streams.
+some of the streams.
+That was a cool thing.
+I say we just make all these things
+I say we just make all these things
+properties of the drone,
+properties of the drone,
+right? And we just make all these things
+right? And we just make all these things
+properties of the drone.
+We're not bothered as long as it works.
+We're not bothered as long as it works.
+I'm trying to make it also very simple
+I'm trying to make it also very simple
+as well.
+as well.
+We're going to make these properties of
+We're going to make these properties of
+the drone.
+We'll do like an init drone thing.
+Okay.
+Okay.
+And then we'll just do
+And then we'll just do
+float,
+domain randomization.
+And you know what we can even do? I'll
+And you know what we can even do? I'll
+tell you what. We
+know I don't want to leave these
+know I don't want to leave these
+constants in as the problem.
+Keep the unit comments. Oh yeah. Oops.
+Keep the unit comments. Oh yeah. Oops.
+My bad.
+Okay. Do we have like rand?
+Okay. Do we have like rand?
+Yeah. Rand F.
+Uh, float RNG equals
+D.
+I should probably do like base instead
+I should probably do like base instead
+of doing it this way. Yeah, let's do it
+of doing it this way. Yeah, let's do it
+this way.
+this way.
+Hang on.
+That way we don't drive you guys totally
+That way we don't drive you guys totally
+crazy.
+crazy.
+I just need to make sure I change the
+I just need to make sure I change the
+names of these because otherwise like
+names of these because otherwise like
+you know there's going something is
+you know there's going something is
+still going to be using the originals.
+Okay. So that domain randomizes the
+Okay. So that domain randomizes the
+entire the entire drone
+DT can stay the same.
+DT can stay the same.
+I think DT is going to need to get
+I think DT is going to need to get
+randomized, but
+DT might even need to get randomized
+DT might even need to get randomized
+every step, honestly,
+cuz you're not going to have precise
+cuz you're not going to have precise
+control intervals.
+control intervals.
+But we're going to just like start like
+But we're going to just like start like
+this.
+I mean once we get this hooked up
+I mean once we get this hooked up
+correctly it's actually running domain
+correctly it's actually running domain
+randomization experiments can be made
+randomization experiments can be made
+very very easy if you know how to do it
+very very easy if you know how to do it
+correctly. It's very hard if you don't
+Yeah. So here we have
+these norms.
+these norms.
+This should not break the policy though.
+This should not break the policy though.
+At least it won't break it when we set
+At least it won't break it when we set
+DR to zero. That's the goal. Like the
+DR to zero. That's the goal. Like the
+goal is that the policy shouldn't break
+goal is that the policy shouldn't break
+until we crank DR up
+until we crank DR up
+RPM.
+Well, that's a bit much, huh?
+Well, that's a bit much, huh?
+That's funny.
+All right, let's uh
+let's do 0.0F.
+Okay, so this is look with no domain
+Okay, so this is look with no domain
+randomization. It works perfectly. I
+randomization. It works perfectly. I
+suspect I just did it kind of stupidly.
+Yeah, see this is plus RNG.
+Yeah, see this is plus RNG.
+This should be 1.0F
+This should be 1.0F
+minus DR and 1.0F plus DR. And then it
+minus DR and 1.0F plus DR. And then it
+should be times RNG.
+I wanted to do 10% randomization not
+I wanted to do 10% randomization not
+not.1 flat randomization.
+Okay.
+Uhoh.
+Uhoh.
+My computer just froze.
+My computer just froze.
+That's weird.
+
+Kind: captions
+Language: en
+Okay,
+let me go delete all the crap post that
+let me go delete all the crap post that
+this thing just automatically made for
+this thing just automatically made for
+me.
+My bad, guys. It's just like
+there.
+This should hopefully be good.
+I think it's just our wired internet
+I think it's just our wired internet
+just being crapped here. We'll try it on
+just being crapped here. We'll try it on
+Wi-Fi, which ironically should be more
+Wi-Fi, which ironically should be more
+stable.
+All right. So, we have our drone.h
+We should be able to get rid of all this
+We should be able to get rid of all this
+stuff.
+stuff.
+including
+the range.
+We're going to rename the MV, I guess to
+We're going to rename the MV, I guess to
+drone race.
+Make sure the stream is stable.
+Make sure the stream is stable.
+Looks good.
+The chat didn't die, did it?
+No, I think it's okay.
+No, I think it's okay.
+category does not seem to be persistent.
+category does not seem to be persistent.
+Lovely.
+Yeah, you're right. Let's see. This is
+Yeah, you're right. Let's see. This is
+why I don't do it cuz literally every
+why I don't do it cuz literally every
+time it does anything, I have to redo
+time it does anything, I have to redo
+it. But
+we'll do that.
+All right. Whatever.
+It should hopefully be stable now. I'm
+It should hopefully be stable now. I'm
+pretty sure it's just that we have like
+pretty sure it's just that we have like
+jank Ethernet cables, like jank
+jank Ethernet cables, like jank
+connections or jank something here.
+connections or jank something here.
+Whatever. I don't want to deal with it.
+Whatever. I don't want to deal with it.
+It should be good. We'll just do it on
+It should be good. We'll just do it on
+Wi-Fi. Should be good enough.
+Okay, so we need this random ring
+Okay, so we need this random ring
+function
+I must have gotten rid of. Let me go
+I must have gotten rid of. Let me go
+grab it.
+Oh yeah, star the puffer lip. Star the
+Oh yeah, star the puffer lip. Star the
+puffer if you haven't. It helps us out a
+puffer if you haven't. It helps us out a
+lot. It's free.
+I say we just put this into the um
+I say we just put this into the um
+drone lab, right?
+Oh, that actually already works. Cool.
+So, yeah. So, that wasn't that hard,
+So, yeah. So, that wasn't that hard,
+right?
+I don't know if it's actually using the
+I don't know if it's actually using the
+drone.
+Yeah, it's probably not using the drone
+Yeah, it's probably not using the drone
+though. It's just using these like
+though. It's just using these like
+random functions.
+random functions.
+So, let's fix that.
+Yeah. You see this has like position,
+Yeah. You see this has like position,
+previous position.
+previous position.
+So, what we're going to do is we'll just
+So, what we're going to do is we'll just
+do drone drone like this.
+And drone does have position, right?
+And drone does have position, right?
+Let's just check.
+So, this has position.
+What's it need previous position for?
+Oh, it does need previous position up.
+Oh, it does need previous position up.
+Okay, so we'll just do
+three previous position.
+Holy Yeah, there's going to have to be a
+Holy Yeah, there's going to have to be a
+lot of substitutions.
+What's going to happen though
+What's going to happen though
+eventually, right? We're going to get to
+eventually, right? We're going to get to
+a point where these look similar enough
+a point where these look similar enough
+that we can just make it like either one
+that we can just make it like either one
+end with configs
+end with configs
+or something.
+or something.
+We can kind of just train on a ton of
+We can kind of just train on a ton of
+different tasks. Like the RL is kind of
+different tasks. Like the RL is kind of
+good enough that if we just give it a
+good enough that if we just give it a
+lot of tasks for drones, as long as it's
+lot of tasks for drones, as long as it's
+fast and they're reasonably posed, it
+fast and they're reasonably posed, it
+should just work.
+should just work.
+The RL side's very good at this point.
+The RL side's very good at this point.
+It's mostly just about getting the Sims
+It's mostly just about getting the Sims
+uh to be built better and faster.
+We're uh planning on improving the
+We're uh planning on improving the
+physics.
+physics.
+Awesome.
+Awesome.
+So, my plan, Sam, you can tell me if you
+So, my plan, Sam, you can tell me if you
+think that this makes sense here. So,
+think that this makes sense here. So,
+we're going to want to do a lot of
+we're going to want to do a lot of
+different stuff with these drones to
+different stuff with these drones to
+test them out. We're gonna have to do
+test them out. We're gonna have to do
+like the ring racing task. We'll do
+like the ring racing task. We'll do
+swarming stuff. We'll do like obstacle
+swarming stuff. We'll do like obstacle
+avoidance. We can do tons of stuff. I'm
+avoidance. We can do tons of stuff. I'm
+gonna try to I don't want to modularize
+gonna try to I don't want to modularize
+stuff a whole bunch to the point that it
+stuff a whole bunch to the point that it
+becomes heavy. All I want to do is just
+becomes heavy. All I want to do is just
+take like the drone physics and all the
+take like the drone physics and all the
+parts about the drone control and then
+parts about the drone control and then
+separate those from the task specifics.
+separate those from the task specifics.
+So, we can just have a couple hundred
+So, we can just have a couple hundred
+line like drone.h with all the physics
+line like drone.h with all the physics
+or whatever. And then we can just
+or whatever. And then we can just
+include that in whatever other Sims we
+include that in whatever other Sims we
+want to build around it, right? Whatever
+want to build around it, right? Whatever
+other task, whatever other Sims. And
+other task, whatever other Sims. And
+maybe eventually we will converge on
+maybe eventually we will converge on
+like one set of observations or, you
+like one set of observations or, you
+know, maybe we'll find other ways to
+know, maybe we'll find other ways to
+unify things. But I'm not going to worry
+unify things. But I'm not going to worry
+about that too much initially. I just
+about that too much initially. I just
+want to make sure that we have one spot
+want to make sure that we have one spot
+for at least like the physics and such.
+for at least like the physics and such.
+Um, and I think that'll help us out
+Um, and I think that'll help us out
+quite a bit because then I'm going to
+quite a bit because then I'm going to
+start like I'm going to start
+start like I'm going to start
+introducing randomized versions of
+introducing randomized versions of
+these, right? Or like I'm going to add
+these, right? Or like I'm going to add
+randomization parameters.
+randomization parameters.
+So you can just say all right uh
+So you can just say all right uh
+whenever the drone moves, right? Let's
+whenever the drone moves, right? Let's
+just screw with the physics by a small
+just screw with the physics by a small
+delta.
+delta.
+And the idea is that if it can if it can
+And the idea is that if it can if it can
+behave under all sorts of different
+behave under all sorts of different
+small perturbations, it should just
+small perturbations, it should just
+behave well generally.
+behave well generally.
+We'll also do the same type of stuff for
+We'll also do the same type of stuff for
+like the drone size and so on and so
+like the drone size and so on and so
+forth.
+I'm going to try to do this without
+I'm going to try to do this without
+making it any heavier or any harder for
+making it any heavier or any harder for
+you guys to use.
+you guys to use.
+That's the goal.
+That's the goal.
+So I'm running uh research side support.
+Perfectly reasonable
+plot li. Yeah, we're just not going to
+plot li. Yeah, we're just not going to
+try to like worry about it too much
+try to like worry about it too much
+initially though, right? like
+initially though, right? like
+over modularizing is just the way that
+over modularizing is just the way that
+you break everything. I don't want to do
+you break everything. I don't want to do
+that. I just want to have the physics
+that. I just want to have the physics
+separated cleanly because of the
+separated cleanly because of the
+randomization work
+randomization work
+just so we're not like know copy pasting
+just so we're not like know copy pasting
+all the lines into the file and like
+all the lines into the file and like
+having two different versions of physics
+delay largely unnecessary. Uh I actually
+delay largely unnecessary. Uh I actually
+don't know about that. It depends on how
+don't know about that. It depends on how
+good of a controller you have.
+Like I think you still might need to do
+Like I think you still might need to do
+something with if it's like 50 ms delay
+something with if it's like 50 ms delay
+that might be a lot, right?
+If you get like 10 ms delay, I think we
+If you get like 10 ms delay, I think we
+should be good.
+should be good.
+I just don't know like with 50.
+I just don't know like with 50.
+Also, my mic is super loud. Hang on.
+Also, my mic is super loud. Hang on.
+Let's not clip. Let's not clip the mic
+Let's not clip. Let's not clip the mic
+too much.
+There we go.
+Yeah. Plus, this is kind of chill today.
+Yeah. Plus, this is kind of chill today.
+We kind of just get to like chill and
+We kind of just get to like chill and
+improve our own code.
+improve our own code.
+Just invest a little bit into the uh
+Just invest a little bit into the uh
+the core.
+transmitter is really good, but we need
+transmitter is really good, but we need
+to see.
+to see.
+Uh delay is like slightly inconvenient.
+Uh delay is like slightly inconvenient.
+But it's not that bad.
+I think that the best thing we can do is
+I think that the best thing we can do is
+in parallel if you guys get the drone
+in parallel if you guys get the drone
+flying and you can like run commands on
+flying and you can like run commands on
+it
+it
+then um
+then um
+and I can get the sim to be really
+and I can get the sim to be really
+robust.
+robust.
+We should be pretty pretty good.
+Oops.
+Welcome to all the YouTube folks, the
+Welcome to all the YouTube folks, the
+people who just got here. We're
+people who just got here. We're
+currently working on the uh well both of
+currently working on the uh well both of
+the drone environments.
+One of which is
+One of which is
+uh this warm sim right here and the
+uh this warm sim right here and the
+other of which is a racing environment
+other of which is a racing environment
+that looks like
+like this.
+like this.
+We're doing a little bit of work on just
+We're doing a little bit of work on just
+getting the code to be easier and
+getting the code to be easier and
+cleaner across both of these. And then
+cleaner across both of these. And then
+we're going to do some work on domain
+we're going to do some work on domain
+randomization that's going to make it a
+randomization that's going to make it a
+heck of a lot easier to make this work
+heck of a lot easier to make this work
+on a real drone.
+on a real drone.
+In fact, you know, one thing that I
+In fact, you know, one thing that I
+think is going to be really cool about
+think is going to be really cool about
+this is if I do this correctly, it
+this is if I do this correctly, it
+should work on like a ton of different
+should work on like a ton of different
+types of drones. Like we probably the
+types of drones. Like we probably the
+best case scenario, right, is that we'll
+best case scenario, right, is that we'll
+just be able to buy different drones and
+just be able to buy different drones and
+hook this up and not even really have to
+hook this up and not even really have to
+do any work specific to each drone.
+do any work specific to each drone.
+Are you planning to track the drone
+Are you planning to track the drone
+position back relative to the start
+position back relative to the start
+position? Yeah. So, for now,
+position? Yeah. So, for now,
+right for now, we're probably just going
+right for now, we're probably just going
+to do everything relative. Um, so we'll
+to do everything relative. Um, so we'll
+just see if we can like get it to fly
+just see if we can like get it to fly
+around in some patterns. We are going to
+around in some patterns. We are going to
+have to do perception for the real
+have to do perception for the real
+hardware at some point, but like it's
+hardware at some point, but like it's
+not going to be end to end RL division,
+not going to be end to end RL division,
+right? It's probably just going to be
+right? It's probably just going to be
+some sort of basic state estimation at
+some sort of basic state estimation at
+least to start.
+Welcome By, welcome Jason.
+I'm just it's worth spending some time
+I'm just it's worth spending some time
+cleaning this up because we're actually
+cleaning this up because we're actually
+going to use this for
+going to use this for
+quite a bit of stuff
+quite a bit of stuff
+and um
+and um
+I don't want to make like I don't want
+I don't want to make like I don't want
+this code to be a mess. Just causes us
+this code to be a mess. Just causes us
+problems.
+problems.
+To be fair, they submitted me Finn and
+To be fair, they submitted me Finn and
+Sam submitted me very clean code. Um, I
+Sam submitted me very clean code. Um, I
+kind of made a mess of it in the process
+kind of made a mess of it in the process
+of making it multi- aent, but like it
+of making it multi- aent, but like it
+should be very possible to keep it m
+should be very possible to keep it m
+like to make it multi- aent and just as
+like to make it multi- aent and just as
+simple as before, if not simpler
+Oh, that's so funny. Ghost uh ghost TTY
+Oh, that's so funny. Ghost uh ghost TTY
+renders it renders these arrows as like
+renders it renders these arrows as like
+the arrow character in the term. It's
+the arrow character in the term. It's
+funny.
+Okay, so this now works again.
+Conveniently, we have the pre-trained
+Conveniently, we have the pre-trained
+model loaded into C, so I can know
+model loaded into C, so I can know
+exactly if I break it. Right. As long as
+exactly if I break it. Right. As long as
+I don't modify ops, I shouldn't have to
+I don't modify ops, I shouldn't have to
+break it at all.
+break it at all.
+Let's take a look through here. We still
+Let's take a look through here. We still
+have 500 lines of stuff somehow. And a
+have 500 lines of stuff somehow. And a
+lot of this we should be able to
+a lot a lot of this we should be able to
+a lot a lot of this we should be able to
+kind of just stick into the main
+kind of just stick into the main
+uh the main thing.
+Let's do if we just assume we make the
+Let's do if we just assume we make the
+end logic multi- aent.
+end logic multi- aent.
+We assume we make it multi- aent by
+We assume we make it multi- aent by
+default.
+I think we should just assume we make it
+I think we should just assume we make it
+multi- aent by default, right?
+We'll separate out stuff like collision
+We'll separate out stuff like collision
+checking, right?
+checking, right?
+I am new. Are you writing an N?
+I am new. Are you writing an N?
+Uh, I'm editing an N.
+Uh, I'm editing an N.
+I'm definitely making changes to an N.
+I'm definitely making changes to an N.
+Drone racing ends and drone swarming
+Drone racing ends and drone swarming
+ends. Both of these.
+Oh, yeah. Also, for the new folks around
+Oh, yeah. Also, for the new folks around
+here, we do have there's like 25 plus
+here, we do have there's like 25 plus
+pages of uh reinforcement learning intro
+pages of uh reinforcement learning intro
+material that will go live as soon as
+material that will go live as soon as
+this hits 10K. So go ahead and follow
+this hits 10K. So go ahead and follow
+this on X if you want RL content and you
+this on X if you want RL content and you
+want that guide.
+Yeah, I think that if we just like
+if we assume it's multi- aent
+if we assume it's multi- aent
+then basically
+almost all this code should just be
+almost all this code should just be
+directly usable, right?
+directly usable, right?
+Pretty
+Pretty
+much the actual code here, this drone
+much the actual code here, this drone
+race code is just going to be like the
+race code is just going to be like the
+100 lines or whatever it is to wire it
+100 lines or whatever it is to wire it
+together.
+together.
+We can probably get most of this
+We can probably get most of this
+uh most of this code to be separated out
+uh most of this code to be separated out
+cleanly.
+Take a little bit of work, but we can do
+Take a little bit of work, but we can do
+it. And it's worth the it's worth doing
+it. And it's worth the it's worth doing
+the work.
+Let's like look for end in here. We
+Let's like look for end in here. We
+don't use the end until the out of
+don't use the end until the out of
+bounds checks at all.
+So we do OB check at the end.
+Then all of this logic down to here just
+Then all of this logic down to here just
+goes into a move function.
+So we can clamp the actions.
+Okay. And now this move drone
+The ring stuff is a bit more
+The ring stuff is a bit more
+complicated,
+but this as is should work, right?
+Did I mess up?
+I forgot the comma.
+Okay, so this still works. Yeah,
+this function is going into the drone
+this function is going into the drone
+level.
+We can probably get the ring logic to be
+We can probably get the ring logic to be
+standalone if we try.
+It's just the fact that that's hardcoded
+It's just the fact that that's hardcoded
+right now, right?
+Oh yeah, this is just like
+Oh yeah, this is just like
+jank, right?
+jank, right?
+Yeah, this is just jank the way this is
+Yeah, this is just jank the way this is
+written.
+Okay. So, this is now.
+Yeah. Pause and normal,
+Yeah. Pause and normal,
+right?
+Okay. Yeah, I didn't realize that this
+Okay. Yeah, I didn't realize that this
+was done this way.
+That's better. Let's see if I broke
+That's better. Let's see if I broke
+anything in the process of doing that.
+No, not at all. Okay, so that's like the
+No, not at all. Okay, so that's like the
+checks are actually very simple. It was
+checks are actually very simple. It was
+just really verbose because they didn't
+just really verbose because they didn't
+make a ring variable.
+So we can do
+valid. invalid.
+So, we can just make like a check ring
+So, we can just make like a check ring
+or whatever.
+ready to float.
+I see.
+I see.
+So all I have to do is I have to take
+So all I have to do is I have to take
+more of this logic and put it in there.
+more of this logic and put it in there.
+Okay.
+Okay.
+So like all this
+So like all this
+somehow
+goes like here.
+and then this we'll make this a float.
+and then this we'll make this a float.
+Okay.
+And
+return one
+and then what I'll do I see what we're
+and then what I'll do I see what we're
+going to do
+going to do
+so we'll here what we'll do is we'll do
+so we'll here what we'll do is we'll do
+float reward
+check ring
+check ring
+do r start ring
+okay and then like something like this
+okay and then like something like this
+so we'll do if reward
+so we'll do if reward
+Z
+is equal to
+the reward is less than This
+rewards greater than zero.
+We set the terminal. We add log
+We set the terminal. We add log
+like this.
+Okay.
+Okay.
+Something like this should be fine.
+Clarity.
+That's pretty clean.
+Red predefined range. This
+nonvoid function does not return a
+nonvoid function does not return a
+value.
+turn zero.
+And this still works.
+Didn't break anything.
+Now I think we know the uh the routine
+Now I think we know the uh the routine
+here, right? This just goes into drone
+here, right? This just goes into drone
+li now.
+We got 300 lines. I'm fine with the
+We got 300 lines. I'm fine with the
+drone li being a little longer if it's
+drone li being a little longer if it's
+going to include all the objects, right?
+going to include all the objects, right?
+Cuz we'll probably put like collision
+Cuz we'll probably put like collision
+obstacles in there. We can put like
+obstacles in there. We can put like
+sphere collision obstacles, right? So,
+sphere collision obstacles, right? So,
+it has to like route around an obstacle
+it has to like route around an obstacle
+field. We can do lots of stuff
+technically, right? We could do like,
+technically, right? We could do like,
+you know, like the Asteroids game. We
+you know, like the Asteroids game. We
+could do that with the drone. That'd be
+could do that with the drone. That'd be
+pretty cool.
+pretty cool.
+Actually, we should do that. Like I
+Actually, we should do that. Like I
+actually have um like asteroids thing
+actually have um like asteroids thing
+but with real drone physics.
+Be cool.
+Be cool.
+Okay. What else is in here?
+probably all this stuff about camera
+probably all this stuff about camera
+control
+I mean this is directly copy pasted
+I mean this is directly copy pasted
+right
+right
+just do this
+just do this
+it's literally the same thing.
+it's literally the same thing.
+We might want to do like separate stuff
+We might want to do like separate stuff
+later, right?
+But we'll for now we'll just put it into
+But we'll for now we'll just put it into
+drone lib.
+Oh, but we don't have the client
+Oh, but we don't have the client
+defined, so we can't actually do that.
+defined, so we can't actually do that.
+Yeah, actually that's a little less
+Yeah, actually that's a little less
+trivial,
+trivial,
+at least for now.
+at least for now.
+We've already made this a heck of a lot
+We've already made this a heck of a lot
+easier though.
+Let me just make the other file like the
+Let me just make the other file like the
+drone swarm work and then so we don't
+drone swarm work and then so we don't
+spend too long just refactoring right
+spend too long just refactoring right
+now. We'll do we'll start on a little
+now. We'll do we'll start on a little
+randomization type stuff.
+I should have gotten a policy in here,
+I should have gotten a policy in here,
+but it's okay.
+but it's okay.
+So we do drone swarm
+and where are the dynamics?
+Yeah, you see I have the exact exact
+Yeah, you see I have the exact exact
+same dynamics here.
+same dynamics here.
+It's a little strong.
+So idea here should be
+So idea here should be
+just do this
+move drone.
+Yeah. And then what I have to do is I
+Yeah. And then what I have to do is I
+have to copy. I have to be very careful
+have to copy. I have to be very careful
+with this actually. So this is what I'm
+with this actually. So this is what I'm
+going to do.
+Okay, so this still works. So now we
+Okay, so this still works. So now we
+have the movement function with all the
+have the movement function with all the
+physics.
+I'm going to do this. We'll do this for
+I'm going to do this. We'll do this for
+drone race even.
+So the things to randomize here, right?
+We want to randomize quite a bit of this
+We want to randomize quite a bit of this
+stuff. I'm trying to think what we want
+stuff. I'm trying to think what we want
+to randomize per episode versus what we
+to randomize per episode versus what we
+want to randomize per step.
+want to randomize per step.
+going to do a quick little brief
+going to do a quick little brief
+introduction to um
+I can do like a quick little
+I can do like a quick little
+introduction to domain randomization if
+introduction to domain randomization if
+folks are interested in that.
+folks are interested in that.
+So the paper to read for domain
+So the paper to read for domain
+randomization especially in control if
+randomization especially in control if
+you're interested
+you're interested
+it's this result.
+it's this result.
+I was at OpenAI when this work was being
+I was at OpenAI when this work was being
+done. I didn't interact a ton with the
+done. I didn't interact a ton with the
+robotics team except at lunch.
+robotics team except at lunch.
+Um but if you look at what this is, you
+Um but if you look at what this is, you
+see how they just have tons of different
+see how they just have tons of different
+versions of this. You don't just
+versions of this. You don't just
+randomize the color, you randomize the
+randomize the color, you randomize the
+physics, you randomize everything. And
+physics, you randomize everything. And
+the idea is that you can't exactly
+the idea is that you can't exactly
+simulate the real world,
+simulate the real world,
+right? You can do your best to try to
+right? You can do your best to try to
+simulate the real world exactly, but
+simulate the real world exactly, but
+you're going to fail. Now, what you
+you're going to fail. Now, what you
+might be able to do, right, is you might
+might be able to do, right, is you might
+be able to make a noisy sim where like
+be able to make a noisy sim where like
+the robot learns to behave in enough
+the robot learns to behave in enough
+different scenarios that it doesn't
+different scenarios that it doesn't
+really have to exactly match the real
+really have to exactly match the real
+world because it's going to just be
+world because it's going to just be
+robust enough anyways.
+robust enough anyways.
+Uh, this is a very very effective
+Uh, this is a very very effective
+technique. It's been used in tons and
+technique. It's been used in tons and
+tons of different areas.
+Actually, they tell you right here
+Actually, they tell you right here
+object dimensions,
+object dimensions,
+link masses, surface friction
+link masses, surface friction
+coefficients,
+coefficients,
+damping coefficients, actuator force
+damping coefficients, actuator force
+gain,
+gain,
+joint limits, gravity vector.
+These are actually very big
+These are actually very big
+randomizations.
+randomizations.
+Keep in mind like the RL wasn't as good
+Keep in mind like the RL wasn't as good
+back then, so they had to really crank
+back then, so they had to really crank
+this to make this thing work. can also
+this to make this thing work. can also
+like humanoid hands are not super easy
+like humanoid hands are not super easy
+either. It's like a pretty high degree
+either. It's like a pretty high degree
+of freedom problem.
+So actually I'd say most of the problem
+So actually I'd say most of the problem
+of humanoids is in the hands, not the
+of humanoids is in the hands, not the
+rest of the robot
+rest of the robot
+and more degrees of freedom in the hands
+and more degrees of freedom in the hands
+and the rest of the robot for most
+and the rest of the robot for most
+models.
+Okay.
+Okay.
+So knowing that
+I think we do a per episode
+I think we do a per episode
+randomization
+randomization
+it'll be easier and I think it'll cover
+it'll be easier and I think it'll cover
+pretty much the whole use case.
+We will see if I'm correct on that. But
+We will see if I'm correct on that. But
+I think it should cover just about the
+I think it should cover just about the
+whole use case.
+Do you recommend reinforcement learning?
+Do you recommend reinforcement learning?
+Is that the original book or is that a
+Is that the original book or is that a
+new book? Is that like the original
+new book? Is that like the original
+Sutton and Bardo book or is that a new
+Sutton and Bardo book or is that a new
+one?
+Yeah, this is the original book. So,
+Yeah, this is the original book. So,
+it really depends, Jason.
+it really depends, Jason.
+If you have a mathematically heavy
+If you have a mathematically heavy
+background and a weak programming
+background and a weak programming
+background, you might find that a decent
+background, you might find that a decent
+way to learn. The thing is it covers a
+way to learn. The thing is it covers a
+ton of mathematical background. Um,
+ton of mathematical background. Um,
+which is good,
+which is good,
+but at least the way that I've
+but at least the way that I've
+approached things, it's most of the math
+approached things, it's most of the math
+doesn't actually work. So, it's going to
+doesn't actually work. So, it's going to
+give you the impression that
+give you the impression that
+reinforcement learning is like this very
+reinforcement learning is like this very
+well theoretically justified, cleancut
+well theoretically justified, cleancut
+field, and it's really not. like none of
+field, and it's really not. like none of
+the math actually works.
+Where I've come from, I found it way
+Where I've come from, I found it way
+easier to just treat reinforcement
+easier to just treat reinforcement
+learning as an almost purely empirical
+learning as an almost purely empirical
+field, right? Like an almost purely
+field, right? Like an almost purely
+empirical field. Just completely ignore
+empirical field. Just completely ignore
+the MDP formalism of everything. Yeah,
+the MDP formalism of everything. Yeah,
+we still we still write some formulas,
+we still we still write some formulas,
+but they're models more than anything
+but they're models more than anything
+else, and they're like really bad models
+else, and they're like really bad models
+at the best of times.
+at the best of times.
+If you look at my quick start guide,
+If you look at my quick start guide,
+you're going to see the types of things
+you're going to see the types of things
+that I generally recommend to newcomers,
+that I generally recommend to newcomers,
+which are actually a lot more accessible
+which are actually a lot more accessible
+mathematically and are going to get you
+mathematically and are going to get you
+writing a lot more code on things that
+writing a lot more code on things that
+work very quickly. So, if you check my
+work very quickly. So, if you check my
+quick start guide, that's a good
+quick start guide, that's a good
+resource. You can you can decide from
+resource. You can you can decide from
+there what you think on the more formal
+there what you think on the more formal
+material. Also, probably within the next
+material. Also, probably within the next
+day or two, as soon as this hits 10K,
+day or two, as soon as this hits 10K,
+as soon as this number hits 10K, I'm
+as soon as this number hits 10K, I'm
+releasing my own guide, which is like 25
+releasing my own guide, which is like 25
+pages of material on uh programming, ML
+pages of material on uh programming, ML
+engineering, and then mostly the
+engineering, and then mostly the
+majority of the material is on how to
+majority of the material is on how to
+learn reinforcement learning. It's like
+learn reinforcement learning. It's like
+a very step-by-step guide on read this,
+a very step-by-step guide on read this,
+implement this, so on and so forth.
+I didn't miss any meetings today. I hope
+I didn't miss any meetings today. I hope
+right.
+right.
+No,
+it's funny.
+Hey Tyler,
+Hey Tyler,
+welcome.
+We are doing drone things today.
+We are doing drone things today.
+Oh yeah, I forget who it was, but there
+Oh yeah, I forget who it was, but there
+is a second um we've got like a second
+is a second um we've got like a second
+physicist around who's been watching
+physicist around who's been watching
+some of the streams.
+some of the streams.
+That was a cool thing.
+I say we just make all these things
+I say we just make all these things
+properties of the drone,
+properties of the drone,
+right? And we just make all these things
+right? And we just make all these things
+properties of the drone.
+We're not bothered as long as it works.
+We're not bothered as long as it works.
+I'm trying to make it also very simple
+I'm trying to make it also very simple
+as well.
+as well.
+We're going to make these properties of
+We're going to make these properties of
+the drone.
+We'll do like an init drone thing.
+Okay.
+Okay.
+And then we'll just do
+And then we'll just do
+float,
+domain randomization.
+And you know what we can even do? I'll
+And you know what we can even do? I'll
+tell you what. We
+know I don't want to leave these
+know I don't want to leave these
+constants in as the problem.
+Keep the unit comments. Oh yeah. Oops.
+Keep the unit comments. Oh yeah. Oops.
+My bad.
+Okay. Do we have like rand?
+Okay. Do we have like rand?
+Yeah. Rand F.
+Uh, float RNG equals
+D.
+I should probably do like base instead
+I should probably do like base instead
+of doing it this way. Yeah, let's do it
+of doing it this way. Yeah, let's do it
+this way.
+this way.
+Hang on.
+That way we don't drive you guys totally
+That way we don't drive you guys totally
+crazy.
+crazy.
+I just need to make sure I change the
+I just need to make sure I change the
+names of these because otherwise like
+names of these because otherwise like
+you know there's going something is
+you know there's going something is
+still going to be using the originals.
+Okay. So that domain randomizes the
+Okay. So that domain randomizes the
+entire the entire drone
+DT can stay the same.
+DT can stay the same.
+I think DT is going to need to get
+I think DT is going to need to get
+randomized, but
+DT might even need to get randomized
+DT might even need to get randomized
+every step, honestly,
+cuz you're not going to have precise
+cuz you're not going to have precise
+control intervals.
+control intervals.
+But we're going to just like start like
+But we're going to just like start like
+this.
+I mean once we get this hooked up
+I mean once we get this hooked up
+correctly it's actually running domain
+correctly it's actually running domain
+randomization experiments can be made
+randomization experiments can be made
+very very easy if you know how to do it
+very very easy if you know how to do it
+correctly. It's very hard if you don't
+Yeah. So here we have
+these norms.
+these norms.
+This should not break the policy though.
+This should not break the policy though.
+At least it won't break it when we set
+At least it won't break it when we set
+DR to zero. That's the goal. Like the
+DR to zero. That's the goal. Like the
+goal is that the policy shouldn't break
+goal is that the policy shouldn't break
+until we crank DR up
+until we crank DR up
+RPM.
+Well, that's a bit much, huh?
+Well, that's a bit much, huh?
+That's funny.
+All right, let's uh
+let's do 0.0F.
+Okay, so this is look with no domain
+Okay, so this is look with no domain
+randomization. It works perfectly. I
+randomization. It works perfectly. I
+suspect I just did it kind of stupidly.
+Yeah, see this is plus RNG.
+Yeah, see this is plus RNG.
+This should be 1.0F
+This should be 1.0F
+minus DR and 1.0F plus DR. And then it
+minus DR and 1.0F plus DR. And then it
+should be times RNG.
+I wanted to do 10% randomization not
+I wanted to do 10% randomization not
+not.1 flat randomization.
+Okay.
+Uhoh.
+Uhoh.
+My computer just froze.
+My computer just froze.
+That's weird.
